@@ -1,16 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.universAAL.samples</groupId>
-		<artifactId>smp.pom</artifactId>
-		<version>1.0.0</version>
-		<relativePath>../pom/pom.xml</relativePath>
-	</parent>
+	
 	<packaging>bundle</packaging>
-	<artifactId>smp.heating</artifactId>
+	<groupId>org.universAAL.AALapplication</groupId>
+	<artifactId>heating</artifactId>
 	<name>BUNDLE HEATING</name>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<url />
 
 	<dependencies>
@@ -43,11 +39,54 @@
 			<artifactId>ont.weather</artifactId>
 			<version>0.2.0-SNAPSHOT</version>
 		</dependency>
+				
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.data.representation</artifactId>
+			<version>0.3.0-SNAPSHOT</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.context</artifactId>
+			<version>0.3.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.service</artifactId>
+			<version>0.3.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.lighting</artifactId>
+			<version>0.2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.phWorld</artifactId>
+			<version>0.2.0-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>3.8.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>org.osgi.core</artifactId>
+				<version>1.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>org.osgi.compendium</artifactId>
+				<version>1.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+		
+	
 
 	<build>
 		<plugins>
