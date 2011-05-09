@@ -1,1 +1,8 @@
 * text=auto !eol
+samples/heating/pom.xml -text
+samples/heating/src/main/java/org/universAAL/samples/heating/Activator.java -text
+samples/heating/src/main/java/org/universAAL/samples/heating/CSubscriber.java -text
+samples/heating/src/main/java/org/universAAL/samples/heating/Callee.java -text
+samples/heating/src/main/java/org/universAAL/samples/heating/ProvidedServiceTemp.java -text
+samples/heating/src/main/java/org/universAAL/samples/heating/ServiceDevice.java -text
+samples/heating/src/test/java/principal/ActivatorTest.java -text
