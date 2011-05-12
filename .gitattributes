@@ -6,3 +6,11 @@ samples/heating/src/main/java/org/universAAL/samples/heating/Callee.java -text
 samples/heating/src/main/java/org/universAAL/samples/heating/ProvidedServiceTemp.java -text
 samples/heating/src/main/java/org/universAAL/samples/heating/ServiceDevice.java -text
 samples/heating/src/test/java/principal/ActivatorTest.java -text
+samples/test.service.client/pom.xml -text
+samples/test.service.client/src/main/java/org/universAAL/AALapplication/testclient/Activator.java -text
+samples/test.service/pom.xml -text
+samples/test.service/src/main/java/org/universAAL/AALapplication/tstserv/Activator.java -text
+samples/test.service/src/main/java/org/universAAL/AALapplication/tstserv/CPublisher.java -text
+samples/test.service/src/main/java/org/universAAL/AALapplication/tstserv/CSubscriber.java -text
+samples/test.service/src/main/java/org/universAAL/AALapplication/tstserv/SCallee.java -text
+samples/test.service/src/main/java/org/universAAL/AALapplication/tstserv/SCalleeProvidedService.java -text
