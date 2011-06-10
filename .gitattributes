@@ -14,6 +14,14 @@ personal_safety/service/src/main/resources/messages/messages_DA.properties -text
 personal_safety/service/src/main/resources/messages/messages_EN.properties -text
 personal_safety/service/src/main/resources/messages/messages_ES.properties -text
 personal_safety/service/src/main/resources/messages/messages_IT.properties -text
+personal_safety/sms.sender/LICENSE -text
+personal_safety/sms.sender/NOTICE -text
+personal_safety/sms.sender/pom.xml -text
+personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/Activator.java -text
+personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/EnvioSMSService.java -text
+personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/SMSCallee.java -text
+personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/ServicioSMS.java -text
+personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/messageSender.java -text
 samples/heating/pom.xml -text
 samples/heating/src/main/java/org/universAAL/samples/heating/Activator.java -text
 samples/heating/src/main/java/org/universAAL/samples/heating/CSubscriber.java -text
