@@ -3,3 +3,5 @@ personal_safety/pom/*.settings
 personal_safety/service/*.classpath
 personal_safety/service/*.project
 personal_safety/service/*.settings
+pom/.project
+pom/.settings

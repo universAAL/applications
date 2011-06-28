@@ -22,6 +22,7 @@ personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/SMSCallee.java -text
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/ServicioSMS.java -text
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/messageSender.java -text
+pom/pom.xml -text
 samples/heating/pom.xml -text
 samples/heating/src/main/java/org/universAAL/samples/heating/Activator.java -text
 samples/heating/src/main/java/org/universAAL/samples/heating/CSubscriber.java -text
