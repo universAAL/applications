@@ -21,11 +21,26 @@
  */
 package org.universAAL.AALapplication.personal_safety.service;
 
+import java.util.Calendar;
+
 import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
+import org.universAAL.middleware.service.ServiceRequest;
+import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.AALapplication.personal_safety.sms.EnvioSMSService;
 
+/*
+import src.main.java.es.itaca.tsb.persona.riskstub.Activator;
+import src.main.java.es.itaca.tsb.persona.riskstub.Calendar;
+import src.main.java.es.itaca.tsb.persona.riskstub.EnvioSMSService;
+import src.main.java.es.itaca.tsb.persona.riskstub.ServiceRequest;
+import src.main.java.es.itaca.tsb.persona.riskstub.ServiceResponse;
+import src.main.java.es.itaca.tsb.persona.riskstub.String;
+*/
 
 /**
  * @author <a href="mailto:alfiva@itaca.upv.es">Alvaro Fides Valero</a>
@@ -41,21 +56,39 @@ public class SCaller {
     protected SCaller(BundleContext context) {
     	caller=new DefaultServiceCaller(context);
 	}
-
-    public boolean sendPanicButtonSMSText()
-	{
-    	//TODO Adapt SMS Service
-		return true;
-	}	
-    
-    public boolean sendRiskSMSText()
-	{
-    	//TODO Adapt SMS Service
-		return true;
-	}	
     
     public boolean startVideoCall(){
     	//TODO Adapt Videoconference Service
     	return true;
     }
+    private ServiceRequest sendSMS(String txt,String num){
+		ServiceRequest sendSMS = new ServiceRequest(new EnvioSMSService(null), null);
+		sendSMS.getRequestedService().addInstanceLevelRestriction(Restriction.getFixedValueRestriction(EnvioSMSService.PROP_MANDA_TEXTO,new String(txt)),new String[] { EnvioSMSService.PROP_MANDA_TEXTO });
+		sendSMS.getRequestedService().addInstanceLevelRestriction(Restriction.getFixedValueRestriction(EnvioSMSService.PROP_TIENE_NUMERO, new String(num)),new String[] { EnvioSMSService.PROP_TIENE_NUMERO });
+		return sendSMS;
+    }
+    
+    public boolean sendPanicButtonSMSText()
+	{
+    	log.debug("Calling sms service");
+    	String txt=Activator.getProperties().getProperty(Activator.TEXT, "PERSONA SMS Alert. Contact relative.");
+		String num=Activator.getProperties().getProperty(Activator.NUMBER, "123456789");
+		Calendar now = Calendar.getInstance();
+		ServiceResponse sr = caller.call(sendSMS(txt + "  ("
+				+ now.get(Calendar.HOUR_OF_DAY) + ":"
+				+ now.get(Calendar.MINUTE) + ")", num));
+		return sr.getCallStatus() == CallStatus.succeeded;
+	}	
+    
+    public boolean sendRiskSMSText()
+	{
+    	log.debug("Calling sms service");
+    	String txt=Activator.getProperties().getProperty(Activator.RISKTEXT, "PERSONA SMS Alert. Contact relative.");
+		String num=Activator.getProperties().getProperty(Activator.NUMBER, "123456789");
+		Calendar now = Calendar.getInstance();
+		ServiceResponse sr = caller.call(sendSMS(txt + "  ("
+				+ now.get(Calendar.HOUR_OF_DAY) + ":"
+				+ now.get(Calendar.MINUTE) + ")", num));
+		return sr.getCallStatus()==CallStatus.succeeded;
+	}	
 }
