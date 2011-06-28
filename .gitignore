@@ -3,5 +3,11 @@ personal_safety/pom/*.settings
 personal_safety/service/*.classpath
 personal_safety/service/*.project
 personal_safety/service/*.settings
+personal_safety/service/.classpath
+personal_safety/service/.project
+personal_safety/service/.settings
+personal_safety/service/personal_safety.service.launch
+personal_safety/service/rundir
+personal_safety/service/target
 pom/.project
 pom/.settings
