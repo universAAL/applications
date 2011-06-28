@@ -92,6 +92,16 @@
     </pluginRepository>
   </pluginRepositories>
 
+  <url>http://forge.universaal.org/gf/project/new_services/</url>
+  <issueManagement>
+  	<system>GForge - Tracker</system>
+  	<url>http://forge.universaal.org/gf/project/new_services/tracker/</url>
+  </issueManagement>
+  <scm>
+  	<connection>scm:svn:http://forge.universaal.org/svn/new_services</connection>
+  	<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services</developerConnection>
+  	<url>http://forge.universaal.org/gf/project/new_services/scmsvn/</url>
+  </scm>
   <organization>
 		<name>universAAL Consortium</name>
 		<url>http://www.universAAL.org/</url>
