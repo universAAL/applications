@@ -9,5 +9,6 @@ personal_safety/service/.settings
 personal_safety/service/personal_safety.service.launch
 personal_safety/service/rundir
 personal_safety/service/target
+personal_safety/sms.sender/target
 pom/.project
 pom/.settings
