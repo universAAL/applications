@@ -1,4 +1,5 @@
 * text=auto !eol
+health/pom/pom.xml -text
 personal_safety/pom/pom.xml -text
 personal_safety/service/LICENSE -text
 personal_safety/service/NOTICE -text

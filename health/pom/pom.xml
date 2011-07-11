@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../../pom</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+  <artifactId>health.pom</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Health Manager AAL Service</name>
+  <url>http://forge.universaal.org/wiki/new_services:Health_Management_universAAL_service</url>
+  <issueManagement>
+  	<system>GForge - Tracker</system>
+  	<url>http://a1gforge.igd.fraunhofer.de/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=233</url>
+  </issueManagement>
+  <inceptionYear>2010</inceptionYear>
+  <developers>
+  	<developer>
+  		<id>amedrano</id>
+  		<name>Alejandro Medrano</name>
+  		<email>amedrano@lst.tfo.upm.es</email>
+  		<organization>LST - UPM</organization>
+  		<organizationUrl>http://lst.tfo.upm.es/</organizationUrl>
+  		<roles>
+  			<role>developer</role>
+  			<role>responsible</role>
+  		</roles>
+  	</developer>
+  </developers>
+  <scm>
+  	<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/health</connection>
+  	<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/health</developerConnection>
+  	<url>http://forge.universaal.org/gf/project/new_services/scmsvn/?action=browse&path=%2Ftrunk%2Fhealth%2F</url>
+  </scm>
+</project>
