@@ -10,7 +10,14 @@
 	<artifactId>personal_safety.sms</artifactId>
 	<packaging>bundle</packaging>
 	<version>0.1.0-SNAPSHOT</version>
-
+	<name>SMS sender Service</name>
+	<description>service to send SMS to a given telephone number using esendex web service</description>
+	<licenses>
+		<license>
+		<name>Apache 2.0</name>
+		<url>http://www.apache.org/licenses/</url>
+		</license>
+	</licenses>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
