@@ -41,7 +41,7 @@ agenda/agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectio
 agenda/agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/ont/FilterParams.java -text
 agenda/agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/ont/TimeSearchType.java -text
 agenda/agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/ont/service/EventSelectionToolService.java -text
-health/pom/pom.xml -text
+health/pom/pom.xml -text svneol=unset#text/plain
 personal_safety/pom/pom.xml -text
 personal_safety/service/LICENSE -text
 personal_safety/service/NOTICE -text
