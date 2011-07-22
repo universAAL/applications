@@ -23,7 +23,6 @@
 			<artifactId>mw.data.representation</artifactId>
 			<version>0.3.0-SNAPSHOT</version>
 		</dependency>
-
 		<dependency>
 		  <groupId>org.universAAL.ontology</groupId>
 		  <artifactId>ont.profile</artifactId>
@@ -68,50 +67,15 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-Name>${pom.name}</Bundle-Name>
+						<Bundle-Name>${project.name}</Bundle-Name>
+<!--						<Bundle-Activator>${project.groupID}.${project.artifactId}.Activator</Bundle-Activator>-->
 						<Bundle-Activator>org.universAAL.AALapplication.personal_safety.service.Activator</Bundle-Activator>
-						<Bundle-Description>${pom.description}</Bundle-Description>
-						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Private-Package>org.universAAL.AALapplication.personal_safety.service</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name>Central Maven Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>apache-snapshots</id>
-			<name>Apache Snapshots</name>
-			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<updatePolicy>daily</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal</id>
-			<name>universAAL Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal-snapshots</id>
-			<name>universAAL Snapshot Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-	</repositories>
 </project>
