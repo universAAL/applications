@@ -38,8 +38,8 @@ import org.universAAL.middleware.output.OutputPublisher;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.ontology.profile.User;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+//import sun.audio.AudioPlayer;
+//import sun.audio.AudioStream;
 
 /**
  * @author <a href="mailto:alfiva@itaca.upv.es">Alvaro Fides Valero</a>
@@ -134,12 +134,12 @@ public class OPublisher extends OutputPublisher{
 					}
 				}
 				try {
-					AudioStream as=new AudioStream((audio!=null)?audio:getClass().getClassLoader().getResourceAsStream("warn.wav"));
-					AudioPlayer.player.start(as);
+					//AudioStream as=new AudioStream((audio!=null)?audio:getClass().getClassLoader().getResourceAsStream("warn.wav"));
+					//AudioPlayer.player.start(as);
 					Thread.sleep(3000);
-					AudioPlayer.player.stop(as);
-					as.close();
-					as=null;
+					//AudioPlayer.player.stop(as);
+					//as.close();
+					//as=null;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
