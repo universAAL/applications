@@ -20,7 +20,7 @@
 	</licenses>
   <issueManagement>
   	<system>GForge - Tracker</system>
-  	<url>http://a1gforge.igd.fraunhofer.de/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=233</url>
+  	<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=233</url>
   </issueManagement>
   <inceptionYear>2010</inceptionYear>
   <developers>
@@ -39,7 +39,6 @@
   <scm>
   	<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/personal_safety</connection>
   	<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/personal_safety</developerConnection>
-  	<url>http://a1gforge.igd.fraunhofer.de/gf/project/new_services/scmsvn/?action=browse&amp;path=%2Ftrunk%2Fpersonal_safety%2F</url>
   </scm>
   <modules>
   	<module>../service</module>
