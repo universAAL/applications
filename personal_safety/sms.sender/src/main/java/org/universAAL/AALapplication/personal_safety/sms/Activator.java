@@ -54,7 +54,7 @@ public class Activator implements BundleActivator {
     /** Arranca el bundle */
     public void start(BundleContext arg0) throws Exception {
 	contexto = arg0;
-	smsCall = new SMSCallee(contexto, ServicioSMS.profiles);
+	smsCall = new SMSCallee(contexto, ServicioSMS.getProfiles());
     }
 
     /** Para el bundle */
