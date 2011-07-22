@@ -143,4 +143,7 @@ public class ServicioSMS extends EnvioSMSService {
 	super(uri);
     }
 
+    static public ServiceProfile [] getProfiles(){
+    	return profiles;
+    }
 }
