@@ -45,7 +45,20 @@ health/health.ont/LICENSE -text
 health/health.ont/NOTICE -text
 health/health.ont/pom.xml -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/Activator.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/measurement/Measure.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/measurement/MultidimensionalMeasure.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/measurement/UnidimensionalMeasure.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/schedule/Event.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/schedule/Task.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/HealthyHabitsAdoption.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/MonitorizationMeasures.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/PhysicalActivity.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/PhysicalActivityPhase.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/QuitSmocking.java -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/Treatment.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/TreatmentDetails.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/TreatmentPlanning.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/UserHealthProfile.java -text
 health/pom/pom.xml -text svneol=unset#text/plain
 personal_safety/pom/pom.xml -text
 personal_safety/service/LICENSE -text

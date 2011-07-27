@@ -27,6 +27,24 @@ public class Activator implements BundleActivator{
 
 	public void start(BundleContext context) throws Exception {
 		Activator.context=context;
+		
+		Class.forName("org.universAAL.AALapplication.health.ont.measurement.Measure");
+		Class.forName("org.universAAL.AALapplication.health.ont.measurement.MultidimensionalMeasure");
+		Class.forName("org.universAAL.AALapplication.health.ont.measurement.UnidimensionalMeasure");
+		
+		Class.forName("org.universAAL.AALapplication.health.ont.schedule.Event");
+		Class.forName("org.universAAL.AALapplication.health.ont.schedule.Task");
+		
+		Class.forName("org.universAAL.AALapplication.health.ont.treatment.HealthyHabitsAdoption");
+		Class.forName("org.universAAL.AALapplication.health.ont.treatment.MonitorizationMeasures");
+		Class.forName("org.universAAL.AALapplication.health.ont.treatment.PhysicalActivity");
+		Class.forName("org.universAAL.AALapplication.health.ont.treatment.QuitSmocking");
+		Class.forName("org.universAAL.AALapplication.health.ont.treatment.Treatment");
+		Class.forName("org.universAAL.AALapplication.health.ont.treatment.Treatment");
+		Class.forName("org.universAAL.AALapplication.health.ont.treatment.TreatmentDetails");
+		Class.forName("org.universAAL.AALapplication.health.ont.treatment.TreatmentPlanning");
+		Class.forName("org.universAAL.AALapplication.health.ont.treatment.UserHealthProfile");
+		
 	}
 
 	public void stop(BundleContext arg0) throws Exception {
