@@ -1,17 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>health.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<version>0.1.0-SNAPSHOT</version>
 		<relativePath>../pom</relativePath>
 	</parent>
-	<modelVersion>4.0.0</modelVersion>
 
   <artifactId>health.ont</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <name>Health AAL service ontology</name>
   <description>the concepts for modeling health profile, treatments and motivational data for Health manager AAL service.</description>
   <packaging>bundle</packaging>
+  
+  <inceptionYear>2011</inceptionYear>  
+  <organization>
+  	<name>Universidad Politécnica de Madrid - UPM</name>
+  	<url>http://www.upm.es</url>
+  </organization>
+  <licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+  </licenses>
   
   <dependencies>
 		<dependency>
