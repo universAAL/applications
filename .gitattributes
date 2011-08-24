@@ -41,6 +41,13 @@ agenda/agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectio
 agenda/agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/ont/FilterParams.java -text
 agenda/agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/ont/TimeSearchType.java -text
 agenda/agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/ont/service/EventSelectionToolService.java -text
+health/healt.treat.logger/LICENSE -text
+health/healt.treat.logger/NOTICE -text
+health/healt.treat.logger/pom.xml -text
+health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerInterface.java -text
+health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentloggerServices.java -text
+health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/impl/ContextHistoryHTLImpl.java -text
+health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/osgi/Activator.java -text
 health/healt.treat.manager/LICENSE -text
 health/healt.treat.manager/NOTICE -text
 health/healt.treat.manager/pom.xml -text
