@@ -6,18 +6,14 @@
 		<relativePath>../pom</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-  <groupId>org.universAAL.AALapplication</groupId>
+
   <artifactId>health.ont</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <name>Health AAL service ontology</name>
   <description>the concepts for modeling health profile, treatments and motivational data for Health manager AAL service.</description>
   <packaging>bundle</packaging>
-    <dependencies>
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.core</artifactId>
-			<version>1.0.1</version>
-		</dependency>
+  
+  <dependencies>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation</artifactId>
@@ -33,7 +29,13 @@
 			<artifactId>ont.phWorld</artifactId>
 			<version>0.2.2-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.profile</artifactId>
+			<version>0.3.0-SNAPSHOT</version>
+		</dependency>
     </dependencies>
+    
     <build>
 		<plugins>
 			<plugin>
@@ -51,41 +53,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name>Central Maven Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>apache-snapshots</id>
-			<name>Apache Snapshots</name>
-			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<updatePolicy>daily</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal</id>
-			<name>universAAL Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal-snapshots</id>
-			<name>universAAL Snapshot Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-	</repositories>
+	
 </project>

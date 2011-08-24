@@ -20,12 +20,9 @@
 
 package org.universAAL.AALapplication.health.ont.schedule;
 
-import org.universAAL.AALapplication.health.ont.treatment.TreatmentDetails;
-import org.universAAL.AALapplication.health.ont.treatment.TreatmentPlanning;
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.Restriction;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universAAL.ontology.profile.UserProfile;
 
 public class Task extends ManagedIndividual {
 

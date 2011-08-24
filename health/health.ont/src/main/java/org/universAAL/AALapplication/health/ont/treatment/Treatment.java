@@ -24,7 +24,6 @@ import org.universAAL.middleware.owl.Restriction;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.profile.UserProfile;
 
-
 public class Treatment extends ManagedIndividual {
 	
 	public static final String TREATMENT_NAMESPACE = "http://ontology.universAAL.org/HealthManager.owl#";
