@@ -20,4 +20,9 @@
   	<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/health</connection>
   	<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/health</developerConnection>
   </scm>
+  <modules>
+  	<module>../health.ont</module>
+  	<module>../healt.treat.logger</module>
+  	<module>../healt.treat.manager</module>
+  </modules>
 </project>

@@ -5,10 +5,10 @@
     <groupId>org.universAAL.AALapplication</groupId>
     <version>0.1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>health.treat.manager</artifactId>
+  <artifactId>health.treat.loggger</artifactId>
   <version>0.1.0-SNAPSHOT</version>
-  <name>Health Treatment Manager</name>
-  <description>Enables adding, editing, listing and deleting Treatments that the assisted person must follow</description>
+  <name>Health Treatment Log</name>
+  <description>Enables Storage, and Listing of Treatments that the assisted person has done</description>
   <inceptionYear>2011</inceptionYear>  
   
   <licenses>
@@ -46,7 +46,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${pom.name}</Bundle-Name>
-						<Bundle-Activator>org.universAAL.AALapplication.health.treat.manager.osgi.Activator</Bundle-Activator>
+						<Bundle-Activator>org.universAAL.AALapplication.health.treat.logger.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${pom.description}</Bundle-Description>
 						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
 					</instructions>
