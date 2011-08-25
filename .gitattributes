@@ -89,6 +89,9 @@ personal_safety/service/src/main/resources/messages/messages_DA.properties -text
 personal_safety/service/src/main/resources/messages/messages_EN.properties -text
 personal_safety/service/src/main/resources/messages/messages_ES.properties -text
 personal_safety/service/src/main/resources/messages/messages_IT.properties -text
+personal_safety/smp.test-location.publisher/pom.xml -text
+personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/Activator.java -text
+personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/GUIPanel.java -text
 personal_safety/sms.sender/LICENSE -text
 personal_safety/sms.sender/NOTICE -text
 personal_safety/sms.sender/pom.xml -text

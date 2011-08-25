@@ -23,6 +23,10 @@ personal_safety/service/.settings
 personal_safety/service/personal_safety.service.launch
 personal_safety/service/rundir
 personal_safety/service/target
+personal_safety/smp.test-location.publisher/.classpath
+personal_safety/smp.test-location.publisher/.project
+personal_safety/smp.test-location.publisher/.settings
+personal_safety/smp.test-location.publisher/target
 personal_safety/sms.sender/.classpath
 personal_safety/sms.sender/.project
 personal_safety/sms.sender/.settings
