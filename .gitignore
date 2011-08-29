@@ -16,10 +16,6 @@ help_when_out/hwo.mobile/.classpath
 help_when_out/hwo.mobile/.project
 help_when_out/hwo.mobile/.settings
 help_when_out/hwo.mobile/target
-personal_safety/personal_safety.sw.panic/.classpath
-personal_safety/personal_safety.sw.panic/.project
-personal_safety/personal_safety.sw.panic/.settings
-personal_safety/personal_safety.sw.panic/target
 personal_safety/pom/*.project
 personal_safety/pom/*.settings
 personal_safety/service/*.classpath
@@ -39,5 +35,9 @@ personal_safety/sms.sender/.classpath
 personal_safety/sms.sender/.project
 personal_safety/sms.sender/.settings
 personal_safety/sms.sender/target
+personal_safety/sw.panic/.classpath
+personal_safety/sw.panic/.project
+personal_safety/sw.panic/.settings
+personal_safety/sw.panic/target
 pom/.project
 pom/.settings

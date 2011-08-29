@@ -82,9 +82,6 @@ help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/OPublis
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/SCallee.java -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_EN.properties -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_ES.properties -text
-personal_safety/personal_safety.sw.panic/pom.xml -text
-personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/SCallee.java -text
-personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/osgi/Activator.java -text
 personal_safety/pom/pom.xml -text
 personal_safety/service/LICENSE -text
 personal_safety/service/NOTICE -text
@@ -111,6 +108,11 @@ personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/SMSCallee.java -text
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/ServicioSMS.java -text
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/messageSender.java -text
+personal_safety/sw.panic/LICENSE -text
+personal_safety/sw.panic/NOTICE -text
+personal_safety/sw.panic/pom.xml -text
+personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/SCallee.java -text
+personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/osgi/Activator.java -text
 pom/pom.xml -text
 samples/heating/pom.xml -text
 samples/heating/src/main/java/org/universAAL/samples/heating/Activator.java -text
