@@ -12,6 +12,10 @@ health/health.ont/.settings
 health/health.ont/target
 health/pom/.project
 health/pom/.settings
+help_when_out/hwo.mobile/.classpath
+help_when_out/hwo.mobile/.project
+help_when_out/hwo.mobile/.settings
+help_when_out/hwo.mobile/target
 personal_safety/pom/*.project
 personal_safety/pom/*.settings
 personal_safety/service/*.classpath

@@ -74,6 +74,14 @@ health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatme
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/TreatmentPlanning.java -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/UserHealthProfile.java -text
 health/pom/pom.xml -text svneol=unset#text/plain
+help_when_out/hwo.mobile/pom.xml -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Activator.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/ISubscriber.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Messages.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/OPublisher.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/SCallee.java -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_EN.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_ES.properties -text
 personal_safety/pom/pom.xml -text
 personal_safety/service/LICENSE -text
 personal_safety/service/NOTICE -text
