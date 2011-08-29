@@ -84,6 +84,7 @@ help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/me
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_ES.properties -text
 personal_safety/personal_safety.sw.panic/pom.xml -text
 personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/SCallee.java -text
+personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/osgi/Activator.java -text
 personal_safety/pom/pom.xml -text
 personal_safety/service/LICENSE -text
 personal_safety/service/NOTICE -text
