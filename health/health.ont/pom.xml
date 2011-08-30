@@ -61,6 +61,7 @@
 						<Bundle-Activator>org.universAAL.AALapplication.health.ont.Activator</Bundle-Activator>
 						<Bundle-Description>${pom.description}</Bundle-Description>
 						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Export-Package>org.universAAL.AALapplication.health.ont.*</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
