@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Export-Package: org.universAAL.agenda.ont.service;uses:="org.universAA
+ L.middleware.owl,org.universAAL.agenda.ont,org.universAAL.middleware.
+ service.owl",org.universAAL.agenda.ont;uses:="org.universAAL.middlewa
+ re.rdf,org.universAAL.ontology.profile,org.universAAL.ontology.locati
+ on.address,org.universAAL.ontology.location.outdoor,org.universAAL.mi
+ ddleware.owl,javax.xml.datatype"
+Built-By: eandgrg
+Tool: Bnd-0.0.255
+Bundle-Name: Agenda AAL Service - Ontology
+Created-By: Apache Maven Bundle Plugin
+Bundle-Vendor: universAAL Consortium
+Build-Jdk: 1.6.0_10-rc2
+Bundle-Version: 0.1.1.SNAPSHOT
+Bnd-LastModified: 1314878395696
+Bundle-ManifestVersion: 2
+Import-Package: javax.xml.datatype,org.universAAL.agenda.ont,org.unive
+ rsAAL.agenda.ont.service,org.universAAL.middleware.owl,org.universAAL
+ .middleware.rdf,org.universAAL.middleware.service.owl,org.universAAL.
+ ontology.location.address,org.universAAL.ontology.location.outdoor,or
+ g.universAAL.ontology.profile
+Bundle-SymbolicName: agenda.ont
+Bundle-DocURL: http://www.universAAL.org/
+
