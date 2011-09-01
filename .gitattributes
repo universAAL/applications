@@ -26,6 +26,7 @@ agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/formsPrototypePropertie
 agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/formsPrototypes.properties -text
 agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/guiMessages_en_US.properties -text
 agenda/Configuration[!!-~]files/old_agendaDB_with_users.sql -text
+agenda/Configuration[!!-~]files/setup[!!-~]instructions.txt -text
 agenda/agenda.ont/.classpath -text
 agenda/agenda.ont/.project -text
 agenda/agenda.ont/.settings/org.eclipse.jdt.core.prefs -text
