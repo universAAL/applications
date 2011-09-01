@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Export-Package: org.universAAL.eventSelectionTool.ont.service;uses:="o
+ rg.universAAL.middleware.owl,org.universAAL.middleware.service.owl,or
+ g.universAAL.eventSelectionTool.ont",org.universAAL.eventSelectionToo
+ l.ont;uses:="org.universAAL.ontology.profile,org.universAAL.middlewar
+ e.rdf,org.universAAL.middleware.owl,org.universAAL.agenda.ont,org.uni
+ versAAL.ontology.location,javax.xml.datatype"
+Built-By: eandgrg
+Tool: Bnd-0.0.255
+Bundle-Name: Event Selection Tool Service Ontology
+Created-By: Apache Maven Bundle Plugin
+Bundle-Vendor: universAAL Consortium
+Bundle-Version: 0.1.0.SNAPSHOT
+Build-Jdk: 1.6.0_10-rc2
+Bnd-LastModified: 1314878412823
+Bundle-ManifestVersion: 2
+Import-Package: javax.xml.datatype,org.universAAL.agenda.ont,org.unive
+ rsAAL.eventSelectionTool.ont,org.universAAL.eventSelectionTool.ont.se
+ rvice,org.universAAL.middleware.owl,org.universAAL.middleware.rdf,org
+ .universAAL.middleware.service.owl,org.universAAL.ontology.location,o
+ rg.universAAL.ontology.profile
+Bundle-SymbolicName: eventSelection.ont
+Bundle-DocURL: http://www.universAAL.org/
+
