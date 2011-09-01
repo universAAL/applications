@@ -2,8 +2,6 @@ package org.universAAL.Application.personal_safety.sw.panic;
 
 import org.osgi.framework.BundleContext;
 import org.universAAL.Application.personal_safety.sw.panic.osgi.Activator;
-import org.universAAL.middleware.context.ContextEvent;
-import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -13,7 +11,6 @@ import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.profile.User;
-import org.universAAL.ontology.risk.PanicButton;
 
 public class SCallee extends ServiceCallee{
 	
@@ -21,7 +18,6 @@ public class SCallee extends ServiceCallee{
 	private static final String SERVICE_URI = MY_URI+"SW_BUTTON";
 	private static final String SERVICE_START_URI = MY_URI+"SW_BUTTON_PRESSED";
 	
-	private static PanicButton panic = new PanicButton(PanicButton.MY_URI+"SWPanic");
 	
 	private static final ServiceResponse failure = new ServiceResponse(
 			CallStatus.serviceSpecificFailure);
@@ -32,7 +28,7 @@ public class SCallee extends ServiceCallee{
 	
 	protected SCallee(BundleContext context, ServiceProfile[] realizedServices) {
 		super(context, realizedServices);
-		panic.setActivated(false);
+		
 	}
 
 	public void communicationChannelBroken() {
@@ -72,12 +68,9 @@ public class SCallee extends ServiceCallee{
 			return failure;
 		}else{
 			user=(User)inputUser;
-			panic.setPressedBy(user);
-			panic.setActivated(true);
+			Activator.opublisher.confirmPanic(user);
 		}
 		
-		ContextEvent panicCE = new ContextEvent(panic, PanicButton.PROP_ACTIVATED);
-		Activator.cpublisher.publish(panicCE);
 		return new ServiceResponse(CallStatus.succeeded);
 	}
 }
