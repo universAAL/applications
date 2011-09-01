@@ -10,7 +10,7 @@ Created-By: Apache Maven Bundle Plugin
 Bundle-Vendor: ITACA-UPV
 Build-Jdk: 1.6.0_25
 Bundle-Version: 0.0.1.SNAPSHOT
-Bnd-LastModified: 1313489099884
+Bnd-LastModified: 1314870604583
 Bundle-ManifestVersion: 2
 Bundle-Activator: org.universAAL.ontology.Activator
 Bundle-Description: Nutrition ontology used by the Nutritional Advisor
