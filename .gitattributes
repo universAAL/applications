@@ -2708,6 +2708,8 @@ personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_
 personal_safety/sw.panic/LICENSE -text
 personal_safety/sw.panic/NOTICE -text
 personal_safety/sw.panic/pom.xml -text
+personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/ISubscriber.java -text svneol=unset#text/plain
+personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/OPublisher.java -text svneol=unset#text/plain
 personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/SCallee.java -text
 personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/osgi/Activator.java -text
 pom/pom.xml -text
