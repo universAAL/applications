@@ -1,0 +1,6 @@
+###########################
+# Pax Runner Profile for  #
+# Apache Felix OBR  1.4.2 #
+###########################
+
+scan-bundle:mvn:org.apache.felix/org.apache.felix.bundlerepository/1.4.2
