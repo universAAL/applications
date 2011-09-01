@@ -1,0 +1,13 @@
+<<<<<<< .mine
+#Thu Sep 01 10:43:28 CEST 2011
+=======
+#Tue Aug 23 14:41:57 CEST 2011
+>>>>>>> .r762
+=\=\=\=\=\=\=
+<<<<<<<=.mine
+>>>>>>>=.r108
+eclipse.preferences.version=1
+org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.5
+org.eclipse.jdt.core.compiler.compliance=1.5
+org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
+org.eclipse.jdt.core.compiler.source=1.5

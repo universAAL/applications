@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+<!--tu sam dodao relativePath		-->
+		<relativePath>/new_services/pom.xml</relativePath>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.universAAL.AALapplication</groupId>
+	<artifactId>agenda.server</artifactId>
+	<packaging>bundle</packaging>
+	<name>Calendar/Persona Agenda Service Server</name>
+	<version>0.1.0-SNAPSHOT</version>
+	<description />
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+
+		</dependency>		
+		
+<!--		<dependency>-->
+<!--			<groupId>com.mysql.jdbc</groupId>-->
+<!--			<artifactId>Driver</artifactId>-->
+<!--			<version>5.1.17</version>-->
+<!--		</dependency>-->
+		<dependency>
+		
+		
+
+        <groupId>org.universAAL.middleware</groupId>
+
+        <artifactId>mw.bus.context</artifactId>
+
+        <version>0.3.0-SNAPSHOT</version>
+
+</dependency>
+
+<dependency>
+
+        <groupId>org.universAAL.middleware</groupId>
+
+        <artifactId>mw.bus.service</artifactId>
+
+        <version>0.3.0-SNAPSHOT</version>
+
+</dependency>
+
+<dependency>
+
+        <groupId>org.universAAL.middleware</groupId>
+
+        <artifactId>mw.bus.io</artifactId>
+
+        <version>0.3.0-SNAPSHOT</version>
+
+</dependency>
+		
+		<dependency>
+
+        <groupId>org.universAAL.middleware</groupId>
+
+        <artifactId>mw.data.representation</artifactId>
+
+        <version>0.3.0-SNAPSHOT</version>
+
+</dependency>
+
+<dependency>
+
+        <groupId>org.universAAL.ontology</groupId>
+
+        <artifactId>ont.phWorld</artifactId>
+
+        <version>0.2.2-SNAPSHOT</version>
+
+</dependency>
+
+
+
+<!--	///// PERSONA-->
+<!--		<dependency>-->
+<!--			<groupId>org.aal-persona.middleware</groupId>-->
+<!--			<artifactId>cdc.support</artifactId>-->
+<!--		</dependency>-->
+	<!--	///// PERSONA-->	
+	
+	
+	
+		<dependency>
+
+        <groupId>org.universAAL.ontology</groupId>
+
+        <artifactId>ont.profile</artifactId>
+
+        <version>0.3.0-SNAPSHOT</version>
+
+</dependency>
+
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>agenda.ont</artifactId>
+			<version>0.1.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+<!--		-->
+<!--		<dependency>-->
+<!--			<groupId>org.aal-persona.platform</groupId>-->
+<!--			<artifactId>casf.ont</artifactId>-->
+<!--			<version>0.2.0-SNAPSHOT</version>-->
+<!--		</dependency>-->
+		
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.17</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-api</artifactId>
+<!--tu sam dodao verziju -->
+			<version>1.6.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-service</artifactId>
+		<!--tu sam dodao verziju -->
+			<version>1.6.2</version>	
+		</dependency>
+	</dependencies>
+<!--	<parent>-->
+<!--		<groupId>org.aal-persona.service</groupId>-->
+<!--		<artifactId>agenda_reminder</artifactId>-->
+<!--		<version>1.0.0</version>-->
+<!--		<relativePath>../pom.xml</relativePath>-->
+<!--	</parent>-->
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<compilerArguments>
+						<bootclasspath>${java.home}\lib\rt.jar</bootclasspath>
+					</compilerArguments>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<inherited>false</inherited>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${pom.name}</Bundle-Name>
+						<Bundle-Description>${pom.description}</Bundle-Description>
+						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Bundle-Activator>org.universAAL.agenda.server.Activator</Bundle-Activator>
+						<Export-Package>org.universAAL.agenda.server</Export-Package>
+						<Private-Package>org.universAAL.agenda.server.unit_impl,
+							org.universAAL.agenda.server.database,org.universAAL.agenda.server.gui.wrapper</Private-Package>
+<!--						<Import-Package>-->
+<!--							com.mysql.jdbc-->
+<!--						</Import-Package>-->
+<!--						-->
+
+<!--IZBACENO:-->
+<!--						org.persona.middleware.*,-->
+<!--							org.persona.ontology.*,
+org.persona.platform.profiling.ontology,
+							org.persona.platform.casf.ontology.location,-->
+						
+						<Import-Package>org.universAAL.middleware.context,org.universAAL.middleware.context.owl, org.universAAL.middleware.input, org.universAAL.middleware.io.owl, org.universAAL.middleware.io.rdf, org.universAAL.middleware.output, org.universAAL.middleware.owl, org.universAAL.middleware.owl.supply, org.universAAL.middleware.rdf, org.universAAL.middleware.service, org.universAAL.middleware.service.owls.process, org.universAAL.middleware.service.owls.profile, org.universAAL.middleware.util, org.universAAL.ontology.profile,
+	org.universAAL.agenda.ont, org.universAAL.agenda.ont.service, org.universAAL.ontology.location.address, org.universAAL.ontology.location.outdoor,
+				
+						
+						java.sql.*, javax.swing,
+							org.osgi.service.*,  org.osgi.framework, javax.xml.*,
+
+							 com.mysql.jdbc, org.slf4j</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
