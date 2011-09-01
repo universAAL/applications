@@ -1,4 +1,5 @@
 * text=auto !eol
+agenda/Configuration[!!-~]files/old_agendaDB_with_users.sql -text
 agenda/agenda.ont/.classpath -text
 agenda/agenda.ont/.project -text
 agenda/agenda.ont/.settings/org.eclipse.jdt.core.prefs -text
