@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>personal_safety.pom</artifactId>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>org.universAAL.AALapplication.personal_safety.run.build</groupId>
+  <artifactId>deployment</artifactId>
+  <version>0.1.0</version>
+  <packaging>pom</packaging>
+  <description>Contains repository, deployment, and other info for all AALapplications</description>
+  <url>http://a1gforge.igd.fraunhofer.de/wiki/new_services:Personal_safety_universAAL_service/personal_safety.run</url>
+  <inceptionYear>2010</inceptionYear>
+  <organization>
+    <name>universAAL Consortium</name>
+    <url>http://www.universAAL.org/</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>amedrano</id>
+      <name>Alejandro Medrano</name>
+      <email>amedrano@lst.tfo.upm.es</email>
+      <organization>LST - UPM</organization>
+      <organizationUrl>http://lst.tfo.upm.es/</organizationUrl>
+      <roles>
+        <role>developer</role>
+        <role>responsible</role>
+      </roles>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/personal_safety/personal_safety.run</connection>
+    <developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/personal_safety/personal_safety.run</developerConnection>
+    <url>http://a1gforge.igd.fraunhofer.de/gf/project/new_services/scmsvn/?action=browse&amp;path=%2Ftrunk%2Fpersonal_safety%2F/personal_safety.run</url>
+  </scm>
+  <issueManagement>
+    <system>GForge - Tracker</system>
+    <url>http://a1gforge.igd.fraunhofer.de/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=233</url>
+  </issueManagement>
+  <distributionManagement>
+    <repository>
+      <id>releases</id>
+      <name>universAAL Releases</name>
+      <url>http://depot.universaal.org/nexus/content/repositories/releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>universAAL Snapshots</name>
+      <url>http://depot.universaal.org/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <properties>
+    <remoteOBR></remoteOBR>
+    <maven.compile.source>1.5</maven.compile.source>
+    <maven.compile.target>1.5</maven.compile.target>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>3.8.1</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.osgi.core</artifactId>
+        <version>1.0.1</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>org.osgi.compendium</artifactId>
+        <version>1.0.1</version>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>uaal</id>
+      <name>universAAL Repositories</name>
+      <url>http://depot.universaal.org/nexus/content/repositories/releases/</url>
+    </repository>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <id>uaal-snapshots</id>
+      <name>universAAL Snapshot Repositories</name>
+      <url>http://depot.universaal.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Central Maven Repository</name>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+      <id>apache-snapshots</id>
+      <name>Apache Snapshots</name>
+      <url>http://people.apache.org/repo/m2-snapshot-repository</url>
+    </repository>
+    <repository>
+      <id>iks-repository</id>
+      <name>ETH Zurich IKS Repository</name>
+      <url>http://www.flowsgi.inf.ethz.ch/repository/maven2</url>
+    </repository>
+    <repository>
+      <id>uaal-thirdparty</id>
+      <name>universAAL ThirdParty Repositories</name>
+      <url>http://depot.universaal.org/maven-repo/thirdparty/</url>
+    </repository>
+  </repositories>
+</project>
