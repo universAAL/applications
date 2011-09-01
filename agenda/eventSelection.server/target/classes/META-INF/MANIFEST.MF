@@ -1,0 +1,39 @@
+Manifest-Version: 1.0
+Export-Package: org.universAAL.eventSelectionTool.server;uses:="org.un
+ iversAAL.middleware.service,org.universAAL.middleware.owl,org.univers
+ AAL.middleware.context.owl,org.slf4j,org.universAAL.eventSelectionToo
+ l.ont,org.osgi.service.log,org.universAAL.middleware.service.owls.pro
+ cess,org.universAAL.middleware.rdf,org.universAAL.agenda.ont.service,
+ org.universAAL.middleware.service.owls.profile,org.universAAL.agenda.
+ ont,org.universAAL.eventSelectionTool.ont.service,org.universAAL.midd
+ leware.context,org.osgi.framework"
+Private-Package: org.universAAL.eventSelectionTool.database,org.univer
+ sAAL.eventSelectionTool.server.impl
+Built-By: eandgrg
+Tool: Bnd-0.0.255
+Bundle-Name: Event Server
+Created-By: Apache Maven Bundle Plugin
+Bundle-Vendor: universAAL Consortium
+Build-Jdk: 1.6.0_10-rc2
+Bundle-Version: 0.1.0.SNAPSHOT
+Bnd-LastModified: 1314878416883
+Bundle-ManifestVersion: 2
+Bundle-Activator: org.universAAL.eventSelectionTool.server.Activator
+Bundle-Description: A server based on the domain ontology of event ser
+ vices
+Import-Package: com.mysql.jdbc;version="5.1",javax.swing,javax.xml.dat
+ atype,org.osgi.framework;version="1.4",org.osgi.service.log;version="
+ 1.3",org.slf4j,org.universAAL.agenda.ont,org.universAAL.agenda.ont.se
+ rvice,org.universAAL.eventSelectionTool.ont,org.universAAL.eventSelec
+ tionTool.ont.service,org.universAAL.middleware.context,org.universAAL
+ .middleware.context.owl,org.universAAL.middleware.input,org.universAA
+ L.middleware.io.owl,org.universAAL.middleware.io.rdf,org.universAAL.m
+ iddleware.output,org.universAAL.middleware.owl,org.universAAL.middlew
+ are.owl.supply,org.universAAL.middleware.rdf,org.universAAL.middlewar
+ e.service,org.universAAL.middleware.service.owls.process,org.universA
+ AL.middleware.service.owls.profile,org.universAAL.middleware.util,org
+ .universAAL.ontology.location.address,org.universAAL.ontology.locatio
+ n.outdoor,org.universAAL.ontology.profile
+Bundle-SymbolicName: eventSelection.server
+Bundle-DocURL: http://www.universAAL.org/
+
