@@ -1,9 +1,0 @@
-install DB old_agendaDB_with_users.sql
-user: root
-pass: sc2011
-
-also make sure nothing is started on port 8080
-
-Copy confadmin dir to workspace\rundir (result:workspace\rundir\confadmin)
-
-Copy files from ui.handler.gui folder (from confadmin) to <root>\Users\<username>.
