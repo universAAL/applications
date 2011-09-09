@@ -2684,6 +2684,7 @@ personal_safety/pom/pom.xml -text
 personal_safety/run/Run.bat -text
 personal_safety/run/pax.configuration -text
 personal_safety/run/pom.xml -text
+personal_safety/run/runner/Rdebug.bat -text
 personal_safety/run/runner/RiskStub.properties -text
 personal_safety/run/runner/configurations/mw.bus.model/sodapop.key -text
 personal_safety/run/runner/configurations/services/org.ops4j.pax.logging.properties -text
