@@ -244,5 +244,6 @@
 	
 	<modules>
 		<module>../health/pom</module>
+		<module>../personal_safety/pom</module>
 	</modules>
 </project>
