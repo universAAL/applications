@@ -2265,7 +2265,6 @@ health/healt.treat.logger/LICENSE -text
 health/healt.treat.logger/NOTICE -text
 health/healt.treat.logger/pom.xml -text
 health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLogger.java -text
-health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerInterface.java -text
 health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerProvider.java -text
 health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerServices.java -text
 health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentloggerServices.java -text
