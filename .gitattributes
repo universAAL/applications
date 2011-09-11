@@ -2284,6 +2284,7 @@ health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/measure
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/measurement/UnidimensionalMeasure.java -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/schedule/Event.java -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/schedule/Task.java -text
+health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/services/HealthServices.java -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/HealthyHabitsAdoption.java -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/MonitorizationMeasures.java -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/PhysicalActivity.java -text
