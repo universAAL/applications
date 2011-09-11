@@ -2270,6 +2270,7 @@ health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/tre
 health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerServices.java -text
 health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentloggerServices.java -text
 health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/impl/ContextHistoryHTLImpl.java -text
+health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/impl/ContextHistoryTreatmentLogger.java -text
 health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/osgi/Activator.java -text
 health/healt.treat.manager/LICENSE -text
 health/healt.treat.manager/NOTICE -text
