@@ -41,8 +41,8 @@ public class MealCategory extends ManagedIndividual {
 	// the URI of each individual (the possible values of the enumeration), so
 	// they must follow the format for individual names: initial lower case,
 	// without spaces (probably all in lower case, but must be confirmed)
-	private static final String[] names = { "dessert", "drink", "firs_course",
-			"main course", "side dish", "starter", "breakfast", "snack" };
+	private static final String[] names = { "Breakfast", "Midmorning snack", "Lunch",
+			"Afternoon snack", "Dinner", "Afterdinner snack" };
 
 	// These are all the possible instances of your enumeration: the individuals
 	public static final MealCategory BREAKFAST 			= new MealCategory(VALUE_BREAKFAST, 0);
@@ -74,6 +74,7 @@ public class MealCategory extends ManagedIndividual {
 	// its inclusion is recommended. It returns the matching individual of the
 	// enumeration given its order (in the numeric constants)
 	public static MealCategory getMealCategoryByOrder(int order) {
+		order = order + 1;
 		switch (order) {
 		case VALUE_BREAKFAST:
 			return BREAKFAST;
@@ -88,6 +89,7 @@ public class MealCategory extends ManagedIndividual {
 		case VALUE_AFTERDINNER_SNACK:
 			return AFTERDINNER_SNACK;
 		default:
+			System.out.println("getMealCategoryByOrder return null para: "+order);
 			return null;
 		}
 	}
@@ -177,10 +179,12 @@ public class MealCategory extends ManagedIndividual {
 	}
 	
 	public static MealCategory getMealCategoryByValue(String value) {
-		if (value==null)
+		if (value==null) {
+			System.out.println("error in getMealCategoryByValue value=null");
 			return null;
+		}
 		for (int i=0; i<MealCategory.names.length; i++) {
-			if (MealCategory.names[i].compareTo(value)==0)
+			if (MealCategory.names[i].compareToIgnoreCase(value)==0)
 				return MealCategory.getMealCategoryByOrder(i);
 		}
 		return null;

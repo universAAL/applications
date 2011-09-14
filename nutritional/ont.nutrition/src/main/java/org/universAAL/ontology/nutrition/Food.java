@@ -137,12 +137,12 @@ public class Food extends ManagedIndividual {
 	}
 	
 	// FOOD SUBCATEGORY
-	public FoodSubCategory getFoodCategory() {
+	public FoodSubCategory getFoodSubCategory() {
 		FoodSubCategory v = (FoodSubCategory) props.get(P_FOODSUBCATEGORY);
 		return v;
 	}
 	
-	public void setFoodCategory(FoodCategory foodSubCategory) {
+	public void setFoodSubCategory(FoodSubCategory foodSubCategory) {
 		this.props.put(P_FOODSUBCATEGORY, foodSubCategory);
 	}
 }

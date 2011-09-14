@@ -91,12 +91,13 @@ public class Meal extends ManagedIndividual {
 	}
 	
 	// MEAL CATEGORY
-	public MealCategory getDishCategory() {
+	public MealCategory getMealCategory() {
 		MealCategory v = (MealCategory)props.get(P_MEAL_CATEGORY);
 		return v;
 	}
 	
 	public void setMealCategory(String value) {
+		System.out.println("Set mealCat: "+value);
 		this.props.put(P_MEAL_CATEGORY, MealCategory.getMealCategoryByValue(value));
 	}
 	
