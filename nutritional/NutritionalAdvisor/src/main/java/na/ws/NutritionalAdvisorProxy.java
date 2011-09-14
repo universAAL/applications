@@ -104,6 +104,18 @@ public class NutritionalAdvisorProxy implements na.ws.NutritionalAdvisor {
     return nutritionalAdvisor.getFoodsByCategory(foodCategoriesID, token);
   }
   
+  public na.miniDao.Food getFullFood(int foodID, java.lang.String token) throws java.rmi.RemoteException{
+    if (nutritionalAdvisor == null)
+      _initNutritionalAdvisorProxy();
+    return nutritionalAdvisor.getFullFood(foodID, token);
+  }
+  
+  public na.miniDao.full.FoodCategory[] getFullFoodCategories(java.lang.String token) throws java.rmi.RemoteException{
+    if (nutritionalAdvisor == null)
+      _initNutritionalAdvisorProxy();
+    return nutritionalAdvisor.getFullFoodCategories(token);
+  }
+  
   public na.miniDao.Advise[] getMyAdvises(java.lang.String token) throws java.rmi.RemoteException, na.ws.NutriSecurityException, na.ws.TokenExpiredException{
     if (nutritionalAdvisor == null)
       _initNutritionalAdvisorProxy();

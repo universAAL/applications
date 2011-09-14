@@ -5,11 +5,18 @@ import java.util.List;
 
 import na.miniDao.FoodItem;
 import na.miniDao.RecipeIngredient;
+import na.miniDao.full.FoodSubcategory;
+import na.oasisUtils.ami.AmiConnector;
+import na.oasisUtils.ami.NutritionalCache;
+import na.oasisUtils.trustedSecurityNetwork.TSFConnector;
+import na.utils.OASIS_ServiceUnavailable;
+import na.utils.ServiceInterface;
 import na.utils.Utils;
 
 import org.universAAL.ontology.nutrition.Dish;
 import org.universAAL.ontology.nutrition.Food;
 import org.universAAL.ontology.nutrition.FoodCategory;
+import org.universAAL.ontology.nutrition.FoodSubCategory;
 import org.universAAL.ontology.nutrition.Ingredient;
 import org.universAAL.ontology.nutrition.Meal;
 import org.universAAL.ontology.nutrition.MeasureUnit;
@@ -17,6 +24,24 @@ import org.universAAL.ontology.nutrition.MenuDay;
 import org.universAAL.ontology.nutrition.Recipe;
 import org.universAAL.ontology.nutrition.ShoppingList;
 
+/**
+ * A factory for creating Ontological objects.
+ * Currently supports:
+ * 		Recipes 		tested
+ * 		Ingredient 		tested
+ * 		Shopping List	tested
+ * 		Food 			tested
+ * 		FoodCategory 	tested
+ * 		FoodSubCategory tested
+ * 		Dish 			tested
+ * 		Meal 			tested
+ * 		MenuDay 		tested
+ * 		
+ * Missing:
+ * 		Exercise, questionnaire
+ * 		Advise, OtherCondition
+ * 		Tip
+ */
 public class OntoFactory {
 	
 	/**
@@ -86,12 +111,17 @@ public class OntoFactory {
 		MeasureUnit mu = MeasureUnit.getMeasureUnitByOrder(ref.getMeasUnitsID());
 		ing.setMeasureUnit(mu);
 		// FOOD
-		Food f = OntoFactory.getFood(null);
+		FoodItem fi = new FoodItem();
+		fi.setFoodID(ref.getFoodID());
+		fi.setFoodSubCategoryID(ref.getFoodSubCategoryID());
+		fi.setFoodCategoryID(ref.getFoodCategoryID());
+		Food f = OntoFactory.getFood(fi);
 		ing.setFood(f);
 		
 		return ing;
 	}
 	
+
 	public static Ingredient getIngredient(FoodItem ref) {
 		if (ref==null)
 			return null;
@@ -115,33 +145,153 @@ public class OntoFactory {
 		if (ref==null)
 			return null;
 		Food f = new Food();
-//		ref.get
-		// ID
-		f.setID(ref.getFoodID());
-		// NAME
-		f.setName(ref.getName());
-		// CARBOHYDRATES
-		f.setCarbohydrates(-1); //TODO
-		// FAT
-		f.setFat(-1);
-		// KCAL
-		f.setKilocalories(-1);
-		// FOOD SUBCATEGORY
-//		f.setFoodCategory(foodSubCategory); //TODO
-		// FOOD CATEGORY
-		
+		AmiConnector ami = AmiConnector.getAMI();
+		String[] input = {String.valueOf(ref.getFoodID()), TSFConnector.getInstance().getToken()};
+		try {
+			//TODO revisar
+			na.miniDao.Food food = (na.miniDao.Food)ami.invokeOperation(ServiceInterface.DOMAIN_Nutrition, ServiceInterface.OP_GetFullFood, input, false);
+			// ID
+			f.setID(ref.getFoodID());
+			// NAME
+			f.setName(food.getName());
+			// CARBOHYDRATES
+			f.setCarbohydrates(food.getCarbohydrates());
+			// FAT
+			f.setFat(food.getFat());
+			// KCAL
+			f.setKilocalories(food.getKCal());
+			// FOOD SubCATEGORY
+			f.setFoodSubCategory(OntoFactory.getFoodSubCategory(ref.getFoodSubCategoryID()));
+		} catch (OASIS_ServiceUnavailable e) {
+			Utils.println("Error en el servicio :(");
+			e.printStackTrace();
+		}
 		return f;
 	}
 	
-	public static FoodCategory getFoodCategory(na.miniDao.FoodCategory ref) {
-		if (ref==null)
-			return null;
-		FoodCategory fc = new FoodCategory();
-		// ID
-		fc.setID(ref.getID());
-		// NAME
-		fc.setName(ref.getDescription());
-		return fc;
+	public static FoodCategory getFoodCategory(int foodCateogoryID) {
+//		na.miniDao.FoodCategory ref = Cacher.get().getFoodCategory(foodCateogoryID); //crear clase que busca las categorias de una cache, si no esta la descarga
+//		if (ref==null)
+//			return null;
+//		FoodCategory fc = new FoodCategory();
+//		// ID
+//		fc.setID(ref.getID());
+//		// NAME
+//		fc.setName(ref.getDescription());
+//		return fc;
+		
+		NutritionalCache nc = new NutritionalCache();
+		Object o = nc.getCachedObject(nc.DATA_FOODCATEGORIES, nc.EXPIRE_DAILY);
+		na.miniDao.full.FoodCategory[] fc = null;
+		if (o!=null) {
+			fc = (na.miniDao.full.FoodCategory[]) o;
+			//find in cache
+			//find category
+			for (na.miniDao.full.FoodCategory cat : fc) {
+				if (cat!=null && cat.getID()== foodCateogoryID) {
+					FoodCategory ontoFood = new FoodCategory();
+					// ID
+					ontoFood.setID(cat.getID());
+					// NAME
+					ontoFood.setName(cat.getName());
+					return ontoFood;
+				}
+			}
+			Utils.println("Category not found ID in cache: "+foodCateogoryID);
+		} else {
+			AmiConnector ami = AmiConnector.getAMI();
+			String[] input = {TSFConnector.getInstance().getToken()};
+			try {
+				na.miniDao.full.FoodCategory[] categories = (na.miniDao.full.FoodCategory[])ami.invokeOperation(ServiceInterface.DOMAIN_Nutrition, ServiceInterface.OP_GetFullFoodCategories, input, false);
+				if (categories ==null) {
+					Utils.println("Found null categories :(");
+				} else {
+					System.out.println("foods loaded from WS");
+					nc.storeObject(categories, nc.DATA_FOODCATEGORIES);
+					
+					//find category
+					for (na.miniDao.full.FoodCategory cat : categories) {
+						if (cat!=null && cat.getID()== foodCateogoryID) {
+							FoodCategory ontoFood = new FoodCategory();
+							// ID
+							ontoFood.setID(cat.getID());
+							// NAME
+							ontoFood.setName(cat.getName());
+							return ontoFood;
+						}
+					}
+				}
+				Utils.println("Category not found ID: "+foodCateogoryID);
+			} catch (OASIS_ServiceUnavailable e) {
+				Utils.println("Error en el servicio :(");
+				e.printStackTrace();
+			} 
+		}
+		return null;
+	}
+	
+	public static FoodSubCategory getFoodSubCategory(int foodSubCateogoryID) {
+//		na.miniDao.FoodSubCategory ref; // = Cacher.get().getFoodCategory(foodSubCateogoryID); // crear clase que busca las categorias de una cache, si no esta la descarga
+//		if (ref==null)
+//			return null;
+//		FoodCategory fc = new FoodCategory();
+//		// ID
+//		fc.setID(ref.getID());
+//		// NAME
+//		fc.setName(ref.getDescription());
+//		return fc;
+//		return null;
+		NutritionalCache nc = new NutritionalCache();
+		Object o = nc.getCachedObject(nc.DATA_FOODCATEGORIES, nc.EXPIRE_DAILY);
+		na.miniDao.full.FoodCategory[] fc = null;
+		if (o!=null) {
+			fc = (na.miniDao.full.FoodCategory[]) o;
+			//find category in cache
+			for (na.miniDao.full.FoodCategory cat : fc) {
+				if (cat!=null && cat.getSubCategories()!=null && cat.getSubCategories().length>0) {
+					for (FoodSubcategory subCat : cat.getSubCategories()) {
+						if (subCat!=null && subCat.getID()==foodSubCateogoryID) {
+							FoodSubCategory ontoFood = new FoodSubCategory();
+							// ID
+							ontoFood.setID(subCat.getID());
+							// NAME
+							ontoFood.setName(subCat.getName());
+							return ontoFood;
+						}
+					}
+				}
+			}
+			Utils.println("SubCategory not found ID in cache: "+foodSubCateogoryID);
+		} else {
+			AmiConnector ami = AmiConnector.getAMI();
+			String[] input = {TSFConnector.getInstance().getToken()};
+			try {
+				na.miniDao.full.FoodCategory[] categories = (na.miniDao.full.FoodCategory[])ami.invokeOperation(ServiceInterface.DOMAIN_Nutrition, ServiceInterface.OP_GetFullFoodCategories, input, false);
+				System.out.println("foods loaded from WS");
+				nc.storeObject(categories, nc.DATA_FOODCATEGORIES);
+				
+				//find category
+				for (na.miniDao.full.FoodCategory cat : categories) {
+					if (cat!=null && cat.getSubCategories()!=null && cat.getSubCategories().length>0) {
+						for (FoodSubcategory subCat : cat.getSubCategories()) {
+							if (subCat!=null && subCat.getID()==foodSubCateogoryID) {
+								FoodSubCategory ontoFood = new FoodSubCategory();
+								// ID
+								ontoFood.setID(subCat.getID());
+								// NAME
+								ontoFood.setName(subCat.getName());
+								return ontoFood;
+							}
+						}
+					}
+				}
+				Utils.println("SubCategory not found ID: "+foodSubCateogoryID);
+			} catch (OASIS_ServiceUnavailable e) {
+				Utils.println("Error en el servicio :(");
+				e.printStackTrace();
+			} 
+		}
+		return null;
 	}
 	
 	public static Dish getDish(na.miniDao.Dish ref) {
@@ -173,6 +323,7 @@ public class OntoFactory {
 		// ID
 		m.setID(ref.getUsersMenuMealsID());
 		// MEAL CATEGORY
+		Utils.println("Looking for category: "+ref.getCategory()+"<");
 		m.setMealCategory(ref.getCategory());
 		// DISHES
 		if (ref.getDishes()!=null && ref.getDishes().length>0) {
@@ -234,8 +385,32 @@ public class OntoFactory {
 	 * AUXILIAR METHODS
 	 */
 
-	private static Recipe getRecipeFromID(int recipeID) {
-		//TODO
+	public static Recipe getRecipeFromID(int recipeID) {
+		AmiConnector ami = AmiConnector.getAMI();
+		String[] input = {TSFConnector.getInstance().getToken(), String.valueOf(recipeID)};
+		try {
+			na.miniDao.Recipe recipe = (na.miniDao.Recipe)ami.invokeOperation(ServiceInterface.DOMAIN_Nutrition, ServiceInterface.OP_GetUserRecipe, input, false);
+			return OntoFactory.getRecipe(recipe);
+		} catch (OASIS_ServiceUnavailable e) {
+			Utils.println("Error en el servicio :(");
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+
+	private static Food getFoodByID(int foodID) {
+//		AmiConnector ami = AmiConnector.getAMI();
+//		String[] input = {TSFConnector.getInstance().getToken(), String.valueOf(foodID)};
+//		try {
+//			na.miniDao.Recipe recipe = (na.miniDao.Recipe)ami.invokeOperation(ServiceInterface.DOMAIN_Nutrition, ServiceInterface.OP_GetFullFood, input, false);
+//			return OntoFactory.getFood(ref);
+//		} catch (OASIS_ServiceUnavailable e) {
+//			Utils.println("Error en el servicio :(");
+//			e.printStackTrace();
+//		}
+//
 		return null;
 	}
 }

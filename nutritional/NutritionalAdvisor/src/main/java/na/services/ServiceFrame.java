@@ -3,6 +3,7 @@ package na.services;
 
 import java.awt.GridBagLayout;
 
+import na.aItem.OntoFactoryTester;
 import na.oasisUtils.ami.AmiConnector;
 import na.oasisUtils.profile.ProfileConnector;
 import na.oasisUtils.trustedSecurityNetwork.Login;
@@ -16,12 +17,15 @@ import na.utils.ButtonLab;
 import na.utils.InitialSetup;
 import na.utils.LoginWindow;
 import na.utils.Setup;
+import na.utils.Utils;
 import na.utils.lang.Messages;
 import na.widgets.button.MainMenuButton;
 import na.widgets.label.AdaptiveLabel;
 import na.widgets.panel.AdaptivePanel;
 import na.widgets.panel.MainNavigationBar;
 import na.widgets.panel.StatusBar;
+import na.ws.NutriSecurityException;
+import na.ws.NutritionalAdvisorProxy;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,6 +36,7 @@ import java.awt.Insets;
 import java.awt.GridLayout;
 import java.awt.CardLayout;
 import java.net.URL;
+import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -74,57 +79,58 @@ public class ServiceFrame extends AdaptivePanel {
 	 * @param multitelService 
 	 */
 	protected ServiceFrame(BundleContext context, JFrame frame) {
-		{
-			/*
-			 * 1. Comprobar usuario uAAL
-			 * 2. Login to NutriWeb-Server
-			 * 3. Si login ok
-			 * 		comparar profile local con remoto
-			 * 		si no hay profile, es null o X, descargar profile remoto.
-			 */
-			this.frame = frame;
-			initBasicUIComponents();
-			boolean isAuthenticated = true;
-			
-			log.info("Authenticated: "+isAuthenticated);
-			// 1. uAAL authenticated?
-			if (isAuthenticated==true) {
-				String user =  InitialSetup.AMI_USERNAME_VALUE;; // get user from uAAL!
-				if (user!=null) {
-					log.info("User logged in: "+user);
-					Setup.AMI_UserName = user;
-					// 2. Setup NA DIR
-					InitialSetup.initNutriAdvisorFolder();
+		new OntoFactoryTester().test_ontoFactory();
 
-					Login login = new Login();
-					boolean login_succesful = login.logMeIn();
-					// 3. nutritional login
-					if (login_succesful == true) {
-						// 4. Start profile API and download profile
+		/*
+		 * 1. Comprobar usuario uAAL
+		 * 2. Login to NutriWeb-Server
+		 * 3. Si login ok
+		 * 		comparar profile local con remoto
+		 * 		si no hay profile, es null o X, descargar profile remoto.
+		 */
+		this.frame = frame;
+		initBasicUIComponents();
+		boolean isAuthenticated = true;
+		
+		log.info("Authenticated: "+isAuthenticated);
+		// 1. uAAL authenticated?
+		if (isAuthenticated==true) {
+			String user =  InitialSetup.AMI_USERNAME_VALUE;; // get user from uAAL!
+			if (user!=null) {
+				log.info("User logged in: "+user);
+				Setup.AMI_UserName = user;
+				// 2. Setup NA DIR
+				InitialSetup.initNutriAdvisorFolder();
+
+				Login login = new Login();
+				boolean login_succesful = login.logMeIn();
+				// 3. nutritional login
+				if (login_succesful == true) {
+					// 4. Start profile API and download profile
 //						if (Setup.download_profile_on_start()) {
 //							log.info("Profile: Download profile from server enabled");
-							ProfileConnector.getInstance().downloadProfileFromServer();
+						ProfileConnector.getInstance().downloadProfileFromServer();
 //						} else {
 //							log.info("Profile: Download profile from server disabled");
 //						}
-						
-						// 5. Last: show application
-						startApp(context);
-					} else {
-						log.fatal("Couldn't login :(");
-					}
+					
+					// 5. Last: show application
+					startApp(context);
 				} else {
-					// show message
-					log.warn("User not logged in, user is null");
+					log.fatal("Couldn't login :(");
 				}
 			} else {
 				// show message
-				log.warn("User nooot logged in");
-				this.loadLoginWindow();
+				log.warn("User not logged in, user is null");
 			}
-			
+		} else {
+			// show message
+			log.warn("User nooot logged in");
+			this.loadLoginWindow();
 		}
 	}
+
+	
 
 	private void startApp(BundleContext context) {
 		// 4. Scheduler
@@ -541,5 +547,7 @@ public class ServiceFrame extends AdaptivePanel {
 //    	this.canvas.add(login);
     	this.add(login);
     }
+    
+    
 
 }

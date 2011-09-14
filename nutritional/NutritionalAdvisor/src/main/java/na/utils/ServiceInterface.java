@@ -89,6 +89,8 @@ public interface ServiceInterface {
 	public static final String OP_GetAdvisePicture 				= "getAdvisePictureIdeal";
 	public static final String OP_GetTipPicture 				= "getTipPictureIdeal";
 	public static final String OP_GetLocalisedProfile			= "getMyLocalisedDataIdeal";
+	public static final String OP_GetFullFood 					= "getFullFood";
+	public static final String OP_GetFullFoodCategories			= "getFullFoodCategories";
 	
 	
 	// listado de operaciones, el nombre de la operacion con la implementacion de ITACA 

@@ -2408,6 +2408,8 @@ nutritional/NutritionalAdvisor/src/main/java/na/ServiceProvider.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/aItem/GetRecipeCallee.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/aItem/GetRecipeProvidedService.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/aItem/OntoFactory.java -text
+nutritional/NutritionalAdvisor/src/main/java/na/aItem/OntoFactoryTester.java -text
+nutritional/NutritionalAdvisor/src/main/java/na/aItem/Prueba.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/Advise.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/AdviseTime.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/AdviseTimeInfo.java -text
@@ -2415,6 +2417,7 @@ nutritional/NutritionalAdvisor/src/main/java/na/miniDao/Answer.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/DayMenu.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/Dish.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/Exercise.java -text
+nutritional/NutritionalAdvisor/src/main/java/na/miniDao/Food.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/FoodCategory.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/FoodItem.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/Meal.java -text
@@ -2427,6 +2430,8 @@ nutritional/NutritionalAdvisor/src/main/java/na/miniDao/Recipe.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/RecipeIngredient.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/ShoppingList.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/miniDao/Tip.java -text
+nutritional/NutritionalAdvisor/src/main/java/na/miniDao/full/FoodCategory.java -text
+nutritional/NutritionalAdvisor/src/main/java/na/miniDao/full/FoodSubcategory.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/oasisUtils/ami/AmiConnector.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/oasisUtils/ami/Base64.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/oasisUtils/ami/NutritionalCache.java -text
@@ -2612,6 +2617,7 @@ nutritional/NutritionalAdvisor/src/main/java/na/utils/SharedRecipes.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/Utils.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/boiler_pan_32.png -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/boiler_pan_32_chachi.png -text
+nutritional/NutritionalAdvisor/src/main/java/na/utils/cache/Cacher.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/cheff_32.png -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/error_icon.png -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/lang/Messages.java -text
