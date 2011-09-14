@@ -57,6 +57,8 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(final BundleContext context) throws Exception {
 		Utils.println("bundle starting");
+		String spaceConf = Constants.getSpaceConfRoot();
+//		Utils.println("Mi ruta es: "+spaceConf);
 		log = (LogService) context.getService(
 				context.getServiceReference(LogService.class.getName()));
 		Activator.serviceProvider = new ServiceProvider(context);

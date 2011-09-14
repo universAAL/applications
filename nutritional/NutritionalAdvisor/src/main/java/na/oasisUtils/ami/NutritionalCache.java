@@ -33,6 +33,8 @@ public class NutritionalCache {
 	protected final long		EXPIRE_WEEK_MENU			 	= 8 * HOUR;
 	protected final long		EXPIRE_SINGLE_RECIPE		 	= EXPIRE_TODAY_MENU;
 	protected final long		EXPIRE_MY_TIPS				 	= EXPIRE_TODAY_MENU;
+	// new
+	public final long		EXPIRE_DAILY 				= 18 * HOUR;
 	
 	public final String 	DATA_TODAY_MENU 				= ServiceInterface.CACHE_FOLDER + "todayMenu.data"; 
 	public final String 	DATA_TOMORROW_MENU 				= ServiceInterface.CACHE_FOLDER + "tomorrowMenu.data"; 
@@ -45,12 +47,14 @@ public class NutritionalCache {
 	protected final String 	DATA_ADVICE_Pictures			= ServiceInterface.CACHE_FOLDER + "advice_pic";
 	protected final String 	DATA_MY_TIPS					= ServiceInterface.CACHE_FOLDER + "myTips.data";
 	protected final String 	DATA_PENDING_QUESTIONNAIRES		= ServiceInterface.CACHE_FOLDER + "pendingQuestionnaires.data";
+	// new
+	public final String 	DATA_FOODCATEGORIES 				= "foodCategories.data";
 
 
 	protected Object getCachedObject(String source, long expiration, int expirationType) {
 		try {
 			// Read from disk using FileInputStream
-			FileInputStream f_in = new FileInputStream(source);
+			FileInputStream f_in = new FileInputStream(ServiceInterface.CACHE_FOLDER+"/"+source);
 			// Read object using ObjectInputStream
 			ObjectInputStream obj_in = new ObjectInputStream (f_in);
 			// Read an object
@@ -89,7 +93,7 @@ public class NutritionalCache {
 	}
 	
 
-	protected Object getCachedObject(String source, long expiration) {
+	public Object getCachedObject(String source, long expiration) {
 		return this.getCachedObject(source, expiration, EXPIRATION_TYPE_HOUR_BASED);
 	}
 	
@@ -125,11 +129,11 @@ public class NutritionalCache {
 	}
 	
 
-	protected void storeObject(Object menu, String file) {
+	public void storeObject(Object menu, String file) {
 		if (menu!=null) {
 			try {
 				// Write to disk with FileOutputStream
-				FileOutputStream f_out = new FileOutputStream(file);
+				FileOutputStream f_out = new FileOutputStream(ServiceInterface.CACHE_FOLDER+"/"+file);
 				// Write object with ObjectOutputStream
 				ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 				// Write object out to disk

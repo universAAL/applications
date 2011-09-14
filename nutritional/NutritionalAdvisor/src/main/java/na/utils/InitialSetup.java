@@ -27,7 +27,7 @@ public class InitialSetup {
 	private static final String WEB_SERVER_PORT_VALUE = "8080";
 	
 	protected static final String WEB_SERVER_SERVICE_ADDRESS_KEY = "web_server_service_address";
-	private static final String WEB_SERVER_SERVICE_ADDRESS_VALUE = "NutriAdvisorWS/NutritionalAdvisor";
+	private static final String WEB_SERVER_SERVICE_ADDRESS_VALUE = "NutriAdvisor_uAAL/NutritionalAdvisor";
 	
 	protected static final String MAXIMIZE_WINDOW_KEY = "maximize_window";
 	private static final String MAXIMIZE_WINDOW_VALUE = "false";
@@ -45,7 +45,7 @@ public class InitialSetup {
 	private static final String LANGUAGE_INTERFACE_VALUE = "EN";
 	
 	protected static final String AVOID_AMI_KEY = "avoid_ami";
-	private static final String AVOID_AMI_VALUE = "no";
+	private static final String AVOID_AMI_VALUE = "yes";
 	
 	protected static final String DOWNLOAD_PROFILE_ON_START = "download_profile_on_start";
 	private static final String DOWNLOAD_PROFILE_ON_START_VALUE = "yes";

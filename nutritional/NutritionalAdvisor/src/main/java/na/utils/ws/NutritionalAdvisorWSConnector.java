@@ -11,6 +11,7 @@ import na.ws.TokenExpiredException;
 import na.ws.Translation;
 import na.ws.UProperty;
 import na.utils.ServiceInterface;
+import na.utils.Utils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -93,12 +94,24 @@ public class NutritionalAdvisorWSConnector {
 //			return this.getMyToken((String)input[0], (String)input[1],  new Integer((String)input[2]));
 		} else if (operationName.compareTo(ServiceInterface.OP_GetLocalisedProfile) == 0) {
 			return this.getLocalisedData((String)input[0], (Translation)input[1]);
+		} else if (operationName.compareTo(ServiceInterface.OP_GetFullFoodCategories) == 0) {
+			return this.getFullFoodCategories((String)input[0]);
+		} else if (operationName.compareTo(ServiceInterface.OP_GetFullFood) == 0) {
+			return this.getFullFood(Integer.parseInt((String)input[0]), (String)input[1]);
 		} else{
 			log.error("NutritionalAdvisorWSConnector: Unknown operation: "+operationName);
 			return null;
 		}
 	}
 	
+	private Object getFullFood(int foodID, String token) throws RemoteException {
+		return nm.getFullFood(foodID, token);
+	}
+
+	private na.miniDao.full.FoodCategory[] getFullFoodCategories(String token) throws RemoteException {
+		return nm.getFullFoodCategories(token);
+	}
+
 	private UProperty getLocalisedData(String token, Translation data) throws NutriSecurityException, TokenExpiredException, RemoteException {
 		return nm.getMyLocalisedData(token, data);
 	}

@@ -6,14 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.universAAL.middleware.util.Constants;
 
 public class Setup {
 	private static Log log = LogFactory.getLog(Setup.class);
 	// default values
-	protected static final String DEFAULT_PATH_Nutritional_DESCRIPTOR = "NutritionalAdvisor";
+	protected static final String DEFAULT_PATH_Nutritional_DESCRIPTOR = Constants.getSpaceConfRoot() + "/NutritionalAdvisor";
 	private static final int DEFAULT_DOWNLOAD_ADVICES_EVERY_MINUTES = 60;
 	private static final int START_SCREENSAVER_DELAY_IN_SECONDS = 10;
 //	private static final String AMI_UserID = "itaca_01"; 

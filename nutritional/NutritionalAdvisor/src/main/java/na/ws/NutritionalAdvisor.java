@@ -18,6 +18,8 @@ public interface NutritionalAdvisor extends java.rmi.Remote {
     public na.miniDao.Recipe[] getFavouriteRecipes(java.lang.String token) throws java.rmi.RemoteException, na.ws.NutriSecurityException, na.ws.TokenExpiredException;
     public na.miniDao.FoodCategory[] getFoodCategories(java.lang.String token) throws java.rmi.RemoteException;
     public na.miniDao.FoodItem[] getFoodsByCategory(int foodCategoriesID, java.lang.String token) throws java.rmi.RemoteException;
+    public na.miniDao.Food getFullFood(int foodID, java.lang.String token) throws java.rmi.RemoteException;
+    public na.miniDao.full.FoodCategory[] getFullFoodCategories(java.lang.String token) throws java.rmi.RemoteException;
     public na.miniDao.Advise[] getMyAdvises(java.lang.String token) throws java.rmi.RemoteException, na.ws.NutriSecurityException, na.ws.TokenExpiredException;
     public na.ws.UProperty getMyLocalisedData(java.lang.String token, na.ws.Translation data) throws java.rmi.RemoteException, na.ws.NutriSecurityException, na.ws.TokenExpiredException;
     public na.miniDao.Tip[] getMyTips(java.lang.String token) throws java.rmi.RemoteException, na.ws.NutriSecurityException, na.ws.TokenExpiredException;

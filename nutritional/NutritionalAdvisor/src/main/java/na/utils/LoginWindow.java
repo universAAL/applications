@@ -1,6 +1,9 @@
 package na.utils;
 
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -8,10 +11,6 @@ import javax.swing.JButton;
 
 import na.widgets.label.AdaptiveLabel;
 import na.widgets.panel.AdaptivePanel;
-
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.net.URL;
 
 @SuppressWarnings("serial") 
 public class LoginWindow extends AdaptivePanel {

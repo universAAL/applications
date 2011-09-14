@@ -16,7 +16,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[28];
+        _operations = new org.apache.axis.description.OperationDesc[30];
         _initOperationDesc1();
         _initOperationDesc2();
         _initOperationDesc3();
@@ -243,6 +243,32 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("getFullFood");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "foodID"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "token"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        param.setOmittable(true);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://miniDao/", "food"));
+        oper.setReturnClass(na.miniDao.Food.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[10] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("getFullFoodCategories");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "token"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        param.setOmittable(true);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://full.miniDao/", "foodCategory"));
+        oper.setReturnClass(na.miniDao.full.FoodCategory[].class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[11] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getMyAdvises");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "token"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         param.setOmittable(true);
@@ -264,7 +290,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[10] = oper;
+        _operations[12] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getMyLocalisedData");
@@ -291,7 +317,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[11] = oper;
+        _operations[13] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getMyTips");
@@ -315,7 +341,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[12] = oper;
+        _operations[14] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getNextQuestion");
@@ -345,7 +371,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[13] = oper;
+        _operations[15] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getPendingQuestionnaires");
@@ -369,7 +395,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[14] = oper;
+        _operations[16] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getPreviousQuestion");
@@ -399,7 +425,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[15] = oper;
+        _operations[17] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getSmartCustomShoppingListDays");
@@ -424,7 +450,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "NutriSecurityException"), 
                       true
                      ));
-        _operations[16] = oper;
+        _operations[18] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getStartingQuestionnaire");
@@ -452,8 +478,13 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[17] = oper;
+        _operations[19] = oper;
 
+    }
+
+    private static void _initOperationDesc3(){
+        org.apache.axis.description.OperationDesc oper;
+        org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getThisWeekMenu");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "token"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
@@ -470,7 +501,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "NutriSecurityException"), 
                       true
                      ));
-        _operations[18] = oper;
+        _operations[20] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getTipPicture");
@@ -490,13 +521,8 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "NutriSecurityException"), 
                       true
                      ));
-        _operations[19] = oper;
+        _operations[21] = oper;
 
-    }
-
-    private static void _initOperationDesc3(){
-        org.apache.axis.description.OperationDesc oper;
-        org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getTodayMenu");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "token"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
@@ -519,7 +545,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[20] = oper;
+        _operations[22] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getToken");
@@ -542,7 +568,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "NutriSecurityException"), 
                       true
                      ));
-        _operations[21] = oper;
+        _operations[23] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getTomorrowMenu");
@@ -566,7 +592,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[22] = oper;
+        _operations[24] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getUserProfile");
@@ -592,7 +618,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[23] = oper;
+        _operations[25] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getUserRecipe");
@@ -606,7 +632,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
         oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
-        _operations[24] = oper;
+        _operations[26] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getWeeklyShoppingList");
@@ -630,7 +656,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[25] = oper;
+        _operations[27] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("isTokenValid");
@@ -642,7 +668,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
         oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
-        _operations[26] = oper;
+        _operations[28] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("setQuestionnaireAnswer");
@@ -673,7 +699,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
                       new javax.xml.namespace.QName("http://ws.na/", "TokenExpiredException"), 
                       true
                      ));
-        _operations[27] = oper;
+        _operations[29] = oper;
 
     }
 
@@ -706,6 +732,20 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
             java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
+            qName = new javax.xml.namespace.QName("http://full.miniDao/", "foodCategory");
+            cachedSerQNames.add(qName);
+            cls = na.miniDao.full.FoodCategory.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://full.miniDao/", "foodSubcategory");
+            cachedSerQNames.add(qName);
+            cls = na.miniDao.full.FoodSubcategory.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
             qName = new javax.xml.namespace.QName("http://miniDao/", "advise");
             cachedSerQNames.add(qName);
             cls = na.miniDao.Advise.class;
@@ -751,6 +791,13 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             qName = new javax.xml.namespace.QName("http://miniDao/", "exercise");
             cachedSerQNames.add(qName);
             cls = na.miniDao.Exercise.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://miniDao/", "food");
+            cachedSerQNames.add(qName);
+            cls = na.miniDao.Food.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -1363,12 +1410,80 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
 }
     }
 
-    public na.miniDao.Advise[] getMyAdvises(java.lang.String token) throws java.rmi.RemoteException, na.ws.NutriSecurityException, na.ws.TokenExpiredException {
+    public na.miniDao.Food getFullFood(int foodID, java.lang.String token) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
         _call.setOperation(_operations[10]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://ws.na/", "getFullFood"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(foodID), token});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (na.miniDao.Food) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (na.miniDao.Food) org.apache.axis.utils.JavaUtils.convert(_resp, na.miniDao.Food.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public na.miniDao.full.FoodCategory[] getFullFoodCategories(java.lang.String token) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[11]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://ws.na/", "getFullFoodCategories"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {token});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (na.miniDao.full.FoodCategory[]) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (na.miniDao.full.FoodCategory[]) org.apache.axis.utils.JavaUtils.convert(_resp, na.miniDao.full.FoodCategory[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public na.miniDao.Advise[] getMyAdvises(java.lang.String token) throws java.rmi.RemoteException, na.ws.NutriSecurityException, na.ws.TokenExpiredException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[12]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1413,7 +1528,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[11]);
+        _call.setOperation(_operations[13]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1458,7 +1573,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[12]);
+        _call.setOperation(_operations[14]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1503,7 +1618,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[13]);
+        _call.setOperation(_operations[15]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1548,7 +1663,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[14]);
+        _call.setOperation(_operations[16]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1593,7 +1708,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[15]);
+        _call.setOperation(_operations[17]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1638,7 +1753,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[16]);
+        _call.setOperation(_operations[18]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1680,7 +1795,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[17]);
+        _call.setOperation(_operations[19]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1725,7 +1840,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[18]);
+        _call.setOperation(_operations[20]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1767,7 +1882,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[19]);
+        _call.setOperation(_operations[21]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1809,7 +1924,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[20]);
+        _call.setOperation(_operations[22]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1854,7 +1969,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[21]);
+        _call.setOperation(_operations[23]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1896,7 +2011,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[22]);
+        _call.setOperation(_operations[24]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1941,7 +2056,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[23]);
+        _call.setOperation(_operations[25]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -1986,7 +2101,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[24]);
+        _call.setOperation(_operations[26]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -2020,7 +2135,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[25]);
+        _call.setOperation(_operations[27]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -2065,7 +2180,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[26]);
+        _call.setOperation(_operations[28]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -2099,7 +2214,7 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub i
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[27]);
+        _call.setOperation(_operations[29]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
