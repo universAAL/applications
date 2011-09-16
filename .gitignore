@@ -22,6 +22,10 @@ agenda/eventSelection.ont/.classpath
 agenda/eventSelection.ont/.project
 agenda/eventSelection.ont/.settings
 agenda/eventSelection.ont/target
+agenda/eventSelection.server/.classpath
+agenda/eventSelection.server/.project
+agenda/eventSelection.server/.settings
+agenda/eventSelection.server/target
 health/healt.treat.logger/.classpath
 health/healt.treat.logger/.project
 health/healt.treat.logger/.settings
