@@ -18,6 +18,10 @@ agenda/eventSelection.client/.classpath
 agenda/eventSelection.client/.project
 agenda/eventSelection.client/.settings
 agenda/eventSelection.client/target
+agenda/eventSelection.ont/.classpath
+agenda/eventSelection.ont/.project
+agenda/eventSelection.ont/.settings
+agenda/eventSelection.ont/target
 health/healt.treat.logger/.classpath
 health/healt.treat.logger/.project
 health/healt.treat.logger/.settings
