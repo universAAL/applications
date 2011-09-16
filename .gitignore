@@ -6,6 +6,10 @@ agenda/agenda.remote/.classpath
 agenda/agenda.remote/.project
 agenda/agenda.remote/.settings
 agenda/agenda.remote/target
+agenda/agenda.server/.classpath
+agenda/agenda.server/.project
+agenda/agenda.server/.settings
+agenda/agenda.server/target
 health/healt.treat.logger/.classpath
 health/healt.treat.logger/.project
 health/healt.treat.logger/.settings
