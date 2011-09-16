@@ -26,10 +26,6 @@ agenda/eventSelection.server/.classpath
 agenda/eventSelection.server/.project
 agenda/eventSelection.server/.settings
 agenda/eventSelection.server/target
-agenda/handler.web/.classpath
-agenda/handler.web/.project
-agenda/handler.web/.settings
-agenda/handler.web/target
 health/healt.treat.logger/.classpath
 health/healt.treat.logger/.project
 health/healt.treat.logger/.settings
