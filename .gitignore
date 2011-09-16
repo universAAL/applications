@@ -14,6 +14,10 @@ agenda/dm/.classpath
 agenda/dm/.project
 agenda/dm/.settings
 agenda/dm/target
+agenda/eventSelection.client/.classpath
+agenda/eventSelection.client/.project
+agenda/eventSelection.client/.settings
+agenda/eventSelection.client/target
 health/healt.treat.logger/.classpath
 health/healt.treat.logger/.project
 health/healt.treat.logger/.settings
