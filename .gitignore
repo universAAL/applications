@@ -10,6 +10,10 @@ agenda/agenda.server/.classpath
 agenda/agenda.server/.project
 agenda/agenda.server/.settings
 agenda/agenda.server/target
+agenda/dm/.classpath
+agenda/dm/.project
+agenda/dm/.settings
+agenda/dm/target
 health/healt.treat.logger/.classpath
 health/healt.treat.logger/.project
 health/healt.treat.logger/.settings
