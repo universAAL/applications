@@ -2,6 +2,10 @@ agenda/agenda.ont/.classpath
 agenda/agenda.ont/.project
 agenda/agenda.ont/.settings
 agenda/agenda.ont/target
+agenda/agenda.remote/.classpath
+agenda/agenda.remote/.project
+agenda/agenda.remote/.settings
+agenda/agenda.remote/target
 health/healt.treat.logger/.classpath
 health/healt.treat.logger/.project
 health/healt.treat.logger/.settings
