@@ -218,11 +218,6 @@ agenda/eventSelection.server/src/main/resources/org/universAAL/eventSelectionToo
 agenda/eventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_en.properties -text
 agenda/eventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_es.properties -text
 agenda/eventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_hr.properties -text
-agenda/handler.web/.classpath -text
-agenda/handler.web/.project -text
-agenda/handler.web/.settings/org.eclipse.jdt.core.prefs -text
-agenda/handler.web/.settings/org.eclipse.jdt.ui.prefs -text
-agenda/handler.web/.settings/org.maven.ide.eclipse.prefs -text
 agenda/handler.web/LICENSE-BSD-Dojo.txt -text
 agenda/handler.web/LICENSE-JGCL.txt -text
 agenda/handler.web/LICENSE-MIT11-Bouncycastle.txt -text
@@ -1168,7 +1163,6 @@ agenda/handler.web/src/main/resources/webhandler/img/bt_white3.gif -text
 agenda/handler.web/src/main/resources/webhandler/img/pers3mini.ico -text
 agenda/handler.web/src/main/resources/webhandler/img/persona_logo.jpg -text
 agenda/handler.web/src/main/resources/webhandler/img/universAAL_logo.jpg -text
-agenda/handler.web/target/ui.handler.web-0.1.5-SNAPSHOT.jar -text
 health/healt.treat.logger/LICENSE -text
 health/healt.treat.logger/NOTICE -text
 health/healt.treat.logger/pom.xml -text
