@@ -50,6 +50,7 @@ help_when_out/hwo.mobile/.settings
 help_when_out/hwo.mobile/target
 personal_safety/pom/*.project
 personal_safety/pom/*.settings
+personal_safety/pom/target
 personal_safety/run/.classpath
 personal_safety/run/.project
 personal_safety/run/.settings
