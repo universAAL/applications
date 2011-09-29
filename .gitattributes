@@ -1207,10 +1207,6 @@ help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/OPublis
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/SCallee.java -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_EN.properties -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_ES.properties -text
-nutritional/NutritionalAdvisor/.classpath -text
-nutritional/NutritionalAdvisor/.project -text
-nutritional/NutritionalAdvisor/.settings/org.eclipse.jdt.core.prefs -text
-nutritional/NutritionalAdvisor/.settings/org.maven.ide.eclipse.prefs -text
 nutritional/NutritionalAdvisor/LICENSE.txt -text
 nutritional/NutritionalAdvisor/NOTICE.txt -text
 nutritional/NutritionalAdvisor/Nutritional[!!-~]uiclient.launch -text
@@ -1566,8 +1562,6 @@ nutritional/NutritionalAdvisor/src/main/java/na/ws/Translation.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/ws/UProperty.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/ws/UPropertyValues.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/ws/UserNutritionalProfile.java -text
-nutritional/NutritionalAdvisor/target/classes/META-INF/MANIFEST.MF -text
-nutritional/NutritionalAdvisor/target/nutritional.uiclient-0.1.0-SNAPSHOT.jar -text
 nutritional/NutritionalAdvisor/uiclient.launch -text
 nutritional/ont.nutrition/.classpath -text
 nutritional/ont.nutrition/.project -text

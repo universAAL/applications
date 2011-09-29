@@ -48,6 +48,10 @@ help_when_out/hwo.mobile/.classpath
 help_when_out/hwo.mobile/.project
 help_when_out/hwo.mobile/.settings
 help_when_out/hwo.mobile/target
+nutritional/NutritionalAdvisor/.classpath
+nutritional/NutritionalAdvisor/.project
+nutritional/NutritionalAdvisor/.settings
+nutritional/NutritionalAdvisor/target
 personal_safety/pom/*.project
 personal_safety/pom/*.settings
 personal_safety/pom/target
