@@ -168,9 +168,9 @@
 				<inherited>false</inherited>
 				<configuration>
 					<instructions>
-						<Bundle-Name>${pom.name}</Bundle-Name>
-						<Bundle-Description>${pom.description}</Bundle-Description>
-						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Activator>org.universAAL.agenda.server.Activator</Bundle-Activator>
 						<Export-Package>org.universAAL.agenda.server</Export-Package>
 						<Private-Package>org.universAAL.agenda.server.unit_impl,

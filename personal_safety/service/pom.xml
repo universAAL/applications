@@ -73,6 +73,7 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Private-Package>org.universAAL.AALapplication.personal_safety.service</Private-Package>
+						<Private-Package>org.universAAL.AALapplication.personal_safety.service</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
