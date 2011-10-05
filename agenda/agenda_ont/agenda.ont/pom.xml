@@ -68,9 +68,9 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-Name>${pom.name}</Bundle-Name>
-						<Bundle-Description>${pom.description}</Bundle-Description>
-						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package>gr.anco.persona.agenda.ont, gr.anco.persona.agenda.ont.service</Export-Package>
 						<Import-Package>org.persona.middleware.*,org.persona.ontology.*,org.osgi.framework,javax.xml.*, org.persona.platform.profiling.ontology, org.persona.platform.casf.ontology.location</Import-Package>
 					</instructions>

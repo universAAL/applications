@@ -96,9 +96,9 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-Name>${pom.name}</Bundle-Name>
-						<Bundle-Description>${pom.description}</Bundle-Description>
-						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package>org.universAAL.eventSelectionTool.ont.*</Export-Package>
 						
 <!--							<Import-Package>org.persona.middleware.*,org.persona.ontology.*,org.osgi.framework,javax.xml.*,gr.anco.persona.agenda.ont,org.persona.platform.profiling.ontology,org.universAAL.ontology.profile</Import-Package>-->
