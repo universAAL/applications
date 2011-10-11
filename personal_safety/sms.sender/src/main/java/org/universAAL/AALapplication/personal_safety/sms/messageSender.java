@@ -96,11 +96,11 @@ public class messageSender {
 		    + URLEncoder.encode(Username, "UTF-8");
 	    data += "&" + URLEncoder.encode("password", "UTF-8") + "="
 		    + URLEncoder.encode(Password, "UTF-8");
-	    data += "&" + URLEncoder.encode("from", "UTF-8") + "="
+	    data += "&" + URLEncoder.encode("account", "UTF-8") + "="
 		    + URLEncoder.encode(Account, "UTF-8");
-	    data += "&" + URLEncoder.encode("to", "UTF-8") + "="
+	    data += "&" + URLEncoder.encode("recipient", "UTF-8") + "="
 		    + URLEncoder.encode(numero, "UTF-8");
-	    data += "&" + URLEncoder.encode("message", "UTF-8") + "="
+	    data += "&" + URLEncoder.encode("body", "UTF-8") + "="
 		    + URLEncoder.encode(texto, "UTF-8");
 
 	    log.info("Message built, Trying to send the message " + texto
