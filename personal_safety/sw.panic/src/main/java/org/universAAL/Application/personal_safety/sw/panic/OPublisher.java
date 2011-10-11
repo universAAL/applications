@@ -8,6 +8,7 @@ import org.universAAL.Application.personal_safety.sw.panic.osgi.Activator;
 import org.universAAL.middleware.io.owl.PrivacyLevel;
 import org.universAAL.middleware.io.rdf.Form;
 import org.universAAL.middleware.io.rdf.Label;
+import org.universAAL.middleware.io.rdf.SimpleOutput;
 import org.universAAL.middleware.io.rdf.Submit;
 import org.universAAL.middleware.output.OutputEvent;
 import org.universAAL.middleware.output.OutputPublisher;
@@ -33,9 +34,13 @@ public class OPublisher extends OutputPublisher{
 	}
 	
 	protected Form newComfimDialog() {
-		Form f = Form.newMessage("Comfirm Panic", "Do you really whant to send a panic alert?");
-		new Submit(f.getSubmits(), new Label("YES!", null), ISubscriber.PANICACTION);
-		new Submit(f.getSubmits(), new Label("NO", null), "nopanic");
+		//Form f = Form.newMessage("Comfirm Panic", "Do you really whant to send a panic alert?");
+		//f.setProperty(Form.LABEL_MESSAGE_KEEP, (Object) new Label("YES!",null));
+		Form f = Form.newDialog("Comfirm Panic", "");
+		new Submit(f.getSubmits(), new Label("YES!", (String) null), ISubscriber.PANICACTION);
+		new Submit(f.getSubmits(), new Label("NO", (String) null), "nopanic");
+		new SimpleOutput(f.getIOControls(), new Label("Do you really whant to send a panic alert?", ""),
+				null,"");
 		return f;
 	}
 
