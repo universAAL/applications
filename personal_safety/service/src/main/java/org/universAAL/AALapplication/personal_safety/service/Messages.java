@@ -30,8 +30,9 @@ import java.util.ResourceBundle;
  *
  */
 public class Messages {
-	private static final String BUNDLE_NAME = "messages.messages_"+Locale.getDefault().getLanguage().toUpperCase(); //$NON-NLS-1$
-
+	//private static final String BUNDLE_NAME = "messages.messages_"+Locale.getDefault().getLanguage().toUpperCase(); //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "messages.messages_"+System.getProperty("user.language","en").toUpperCase(); //$NON-NLS-1$
+	
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
 			.getBundle(BUNDLE_NAME);
 
