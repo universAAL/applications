@@ -40,11 +40,11 @@
   <scm>
     <connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/personal_safety/personal_safety.run</connection>
     <developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/personal_safety/personal_safety.run</developerConnection>
-    <url>http://a1gforge.igd.fraunhofer.de/gf/project/new_services/scmsvn/?action=browse&amp;path=%2Ftrunk%2Fpersonal_safety%2F/personal_safety.run</url>
+    <url>http://forge.universaal.org/gf/project/new_services/scmsvn/personal_safety.pom/personal_safety.run/</url>
   </scm>
   <issueManagement>
     <system>GForge - Tracker</system>
-    <url>http://a1gforge.igd.fraunhofer.de/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=233</url>
+    <url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=233</url>
   </issueManagement>
   <distributionManagement>
     <repository>
@@ -60,6 +60,7 @@
   </distributionManagement>
   <properties>
     <remoteOBR></remoteOBR>
+    <skipTests>false</skipTests>
     <maven.compile.source>1.5</maven.compile.source>
     <maven.compile.target>1.5</maven.compile.target>
   </properties>

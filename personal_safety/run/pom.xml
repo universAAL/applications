@@ -78,13 +78,13 @@
 	    <provision>mvn:org.universAAL.middleware/ui.dm.mobile@6</provision>
 <!-- 	    <provision>mvn:org.universAAL.context/ctxt.che/0.2.0-SNAPSHOT@6</provision> -->
 		<provision>wrap:mvn:org.universAAL.ui/ui.handler.gui.tableLayout@6</provision>
-		<provision>mvn:org.universAAL.ui/ui.handler.gui/0.1.1-SNAPSHOT@6@nostart</provision>
+		<provision>mvn:org.universAAL.ui/ui.handler.gui/0.1.1-SNAPSHOT-DEMO@6</provision>
 
 
 		<!-- Services -->
-		<provision>mvn:org.universAAL.AALapplication/personal_safety.sms@6@nostart</provision>
-		<provision>mvn:org.universAAL.AALapplication/personal_safety.service@7@nostart</provision>
-		<provision>mvn:org.universAAL.AALapplication/personal_safety.sw.panic@7@nostart</provision>
+		<provision>mvn:org.universAAL.AALapplication/personal_safety.sms@6</provision>
+		<provision>mvn:org.universAAL.AALapplication/personal_safety.service@7</provision>
+		<provision>mvn:org.universAAL.AALapplication/personal_safety.sw.panic@7</provision>
 		<provision>mvn:org.universAAL.samples/smp.test-location.publisher@7@nostart</provision>
 	  </provision>
         </configuration>	
