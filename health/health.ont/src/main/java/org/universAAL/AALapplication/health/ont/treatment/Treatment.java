@@ -19,6 +19,7 @@
  */
 package org.universAAL.AALapplication.health.ont.treatment;
 
+
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.Restriction;
 import org.universAAL.middleware.rdf.TypeMapper;
@@ -34,7 +35,7 @@ public class Treatment extends ManagedIndividual {
 	public static final String PROP_HAS_CAREGIVER;
 	
 	public static final String PROP_NAME;
-	public static final String PROP_COMPLETITION;
+	public static final String PROP_COMPLETENESS;
 
     
 	static {
@@ -45,7 +46,7 @@ public class Treatment extends ManagedIndividual {
 		PROP_HAS_CAREGIVER = TREATMENT_NAMESPACE + "hasCaregiver";
 		
 		PROP_NAME = TREATMENT_NAMESPACE + "name";
-		PROP_COMPLETITION = TREATMENT_NAMESPACE + "completition";
+		PROP_COMPLETENESS = TREATMENT_NAMESPACE + "completition";
 		
 		register(Treatment.class);
     }
@@ -61,7 +62,7 @@ public class Treatment extends ManagedIndividual {
 					
 		if (PROP_NAME.equals(propURI))
 			return Restriction.getAllValuesRestrictionWithCardinality(propURI, TypeMapper.getDatatypeURI(String.class), 1, 0);
-		if (PROP_NAME.equals(propURI))
+		if (PROP_COMPLETENESS.equals(propURI))
 			return Restriction.getAllValuesRestrictionWithCardinality(propURI, TypeMapper.getDatatypeURI(Integer.class), 1, 1);
 		
 		return ManagedIndividual.getClassRestrictionsOnProperty(propURI);
@@ -70,7 +71,7 @@ public class Treatment extends ManagedIndividual {
 	public static String[] getStandardPropertyURIs() {
         String[] inherited = ManagedIndividual.getStandardPropertyURIs();
         String[] proper = {PROP_HAS_TREATMENTDETAILS, PROP_HAS_TREATMENTPLANNING, PROP_HAS_CAREGIVER, 
-        				   PROP_NAME, PROP_COMPLETITION};
+        				   PROP_NAME, PROP_COMPLETENESS};
 		String[] merged = new String[inherited.length + proper.length];
 		System.arraycopy(inherited, 0, merged, 0, inherited.length);
 		System.arraycopy(proper, 0, merged, inherited.length, proper.length);
@@ -93,12 +94,28 @@ public class Treatment extends ManagedIndividual {
 		return true;
 	}
 
+	//Getters & setters
+	
+	public String getName(){
+		return (String) getProperty(PROP_NAME);
+	}
+	
+	public void setName(String name) {
+		setProperty(PROP_NAME, name);
+	}
+	
+	public void setCompletition(int completion){
+		setProperty(PROP_COMPLETENESS, completion);
+	}
+	public int getCompleteness(){
+		return (Integer) getProperty(PROP_COMPLETENESS);
+	}
 	//Constructors
 	
 	public Treatment() {
 		
 	}
-
+	
 	public Treatment(String uri) {
 		super(uri);
 	}
@@ -107,6 +124,10 @@ public class Treatment extends ManagedIndividual {
 		super(uriPrefix, numProps);
 	}
 
-
+	public Treatment(String assistedPerson, String name){
+		super(assistedPerson + "." + name);
+		this.setProperty(Treatment.PROP_NAME, name);
+		this.setProperty(Treatment.PROP_COMPLETENESS, 0);
+	}
 
 }
