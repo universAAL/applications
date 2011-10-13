@@ -4,8 +4,7 @@ import java.util.Hashtable;
 
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.lighting.LightSource;
-import org.universAAL.samples.lighting.server.ProvidedLightingService;
+
 
 
 
