@@ -1213,6 +1213,7 @@ long_term_behav/Long_term_behavioral_analyser/.settings/org.eclipse.jdt.core.pre
 long_term_behav/Long_term_behavioral_analyser/.settings/org.eclipse.m2e.core.prefs -text
 long_term_behav/Long_term_behavioral_analyser/pom.xml -text
 long_term_behav/Long_term_behavioral_analyser/src/main/java/principal/Activator.java -text
+long_term_behav/Long_term_behavioral_analyser/src/main/java/principal/ProvidedLTBAService.java -text
 long_term_behav/Long_term_behavioral_analyser/src/main/java/principal/ProvidedService.java -text
 long_term_behav/Long_term_behavioral_analyser/src/main/java/principal/SCallee.java -text
 long_term_behav/Long_term_behavioral_analyser/src/main/java/principal/SCalleeProvidedService.java -text
