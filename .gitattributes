@@ -1213,6 +1213,7 @@ long_term_behav/LTBA/.settings/org.eclipse.jdt.core.prefs -text
 long_term_behav/LTBA/.settings/org.eclipse.m2e.core.prefs -text
 long_term_behav/LTBA/pom.xml -text
 long_term_behav/LTBA/src/main/java/principal/Activator.java -text
+long_term_behav/LTBA/src/main/java/principal/Methods.java -text
 long_term_behav/LTBA/src/main/java/principal/ProvidedLTBAService.java -text
 long_term_behav/LTBA/src/main/java/principal/SCallee.java -text
 long_term_behav/LTBA/src/main/java/principal/SCalleeProvidedService.java -text
