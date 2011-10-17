@@ -23,9 +23,6 @@ public class Methods extends Service{
 
 	
 	
-	public static final ServiceProfile[] profiles = new ServiceProfile[1];
-	
-	private static Hashtable serverRestrictions = new Hashtable();
 	
 	static {
 		
