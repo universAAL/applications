@@ -1,7 +1,7 @@
 package principal;
 
 import java.util.Hashtable;
-
+import org.universAAL.ontology.drools.Rule;
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 
@@ -49,6 +49,16 @@ public class Methods extends Service{
 //				  
 
 		
+	}
+	
+	Rule addRule(Rule rule){
+		
+		String contains= rule.getBODY();
+		System.out.println("The following rule will be added"+contains);
+		
+		
+		
+		return rule;
 	}
 	
 	private Methods(String uri) {
