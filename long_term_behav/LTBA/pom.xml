@@ -26,9 +26,7 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.drools</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
-	
 		</dependency>
-	
 	</dependencies>
     <build>
 		<plugins>
@@ -42,7 +40,6 @@
 						<Bundle-Activator>principal.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						
 					</instructions>
 				</configuration>
 			</plugin>
