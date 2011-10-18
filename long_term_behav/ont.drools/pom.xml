@@ -3,9 +3,8 @@
   <groupId>org.universAAL.ontology</groupId>
   <artifactId>ont.drools</artifactId>
   <version>0.1.0</version>
-  <name/>
   <description>Drools ontology</description>
-  <packaging>bundle</packaging>
+  <packaging>jar</packaging>
     <dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
