@@ -26,14 +26,9 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.drools</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
-			
-		</dependency>
-		
-		
 	
-  
-  
-		
+		</dependency>
+	
 	</dependencies>
     <build>
 		<plugins>
