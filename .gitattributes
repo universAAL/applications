@@ -1229,6 +1229,7 @@ long_term_behav/Reasoner/.settings/org.eclipse.jdt.core.prefs -text
 long_term_behav/Reasoner/.settings/org.eclipse.m2e.core.prefs -text
 long_term_behav/Reasoner/pom.xml -text
 long_term_behav/Reasoner/src/main/java/principal/Activator.java -text
+long_term_behav/Reasoner/src/main/java/principal/Methods.java -text
 long_term_behav/Reasoner/src/main/java/principal/SCallee.java -text
 long_term_behav/Reasoner/src/main/java/principal/SCalleeProvidedService.java -text
 long_term_behav/Reasoner/src/main/java/principal/SCaller.java -text
