@@ -30,25 +30,7 @@ public class Methods extends Service{
 		
 		// we need to register all classes in the ontology for the serialization of the object
 				register(Methods.class);
-		
-	
-		//Add restrictions
-		
-				
-				
-				// Create the service-object for add a rule
-			//	Methods addRule = new Methods(SERVICE_ADD_RULE);
-				
-				
-				// We need an input parameter identical with the previous one
-			//	addRule.addFilteringInput();
-			
-		//Property path
-		
-		//Set cardinality
-		
-//		Add output
-//				  
+	  
 
 		
 	}
@@ -59,7 +41,7 @@ public class Methods extends Service{
 		System.out.println("The following rule will be added"+contains);
 		
 //		try{}
-//		cat
+//		catch
 		
 		if(rule.getBODY() == null){
 			System.out.println("Rule added");
