@@ -48,6 +48,14 @@ help_when_out/hwo.mobile/.classpath
 help_when_out/hwo.mobile/.project
 help_when_out/hwo.mobile/.settings
 help_when_out/hwo.mobile/target
+long_term_behav/LTBA/.classpath
+long_term_behav/LTBA/.project
+long_term_behav/LTBA/.settings
+long_term_behav/LTBA/target
+long_term_behav/Reasoner/.classpath
+long_term_behav/Reasoner/.project
+long_term_behav/Reasoner/.settings
+long_term_behav/Reasoner/target
 long_term_behav/ont.drools/.classpath
 long_term_behav/ont.drools/.project
 long_term_behav/ont.drools/.settings
@@ -56,6 +64,10 @@ nutritional/NutritionalAdvisor/.classpath
 nutritional/NutritionalAdvisor/.project
 nutritional/NutritionalAdvisor/.settings
 nutritional/NutritionalAdvisor/target
+nutritional/ont.nutrition/.classpath
+nutritional/ont.nutrition/.project
+nutritional/ont.nutrition/.settings
+nutritional/ont.nutrition/target
 personal_safety/pom/*.project
 personal_safety/pom/*.settings
 personal_safety/pom/target
