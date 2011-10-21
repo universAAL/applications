@@ -4,7 +4,7 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-//import org.universAAL.AALapplication.Reasoner;
+
 
 
 
@@ -25,15 +25,14 @@ public class SCaller extends ServiceCaller{
 		ServiceRequest req = new ServiceRequest(new ServiceReasoner(null), null);
 
 		// I configure the request for the call.
-//		req.addTypeFilter(new String[] { ServiceReasoner.PROPERTY_CONTROLS },
-//				TempSensor.MY_URI);
+		req.addTypeFilter(new String[] { ServiceReasoner.PROPERTY_CONTROLS }, ServiceReasoner.MY_URI);
 
 		// output_temp id of the uri.
 
-//		req.addRequiredOutput(ProvidedServiceTemp.SERVER_NAMESPACE
-//				+ "output_temp",
-//				new String[] { ServiceDevice.PROPERTY_CONTROLS,
-//						TempSensor.PROP_MEASURED_VALUE });
+		req.addRequiredOutput(SCalleeProvidedService.SERVER_NAMESPACE
+				+ "output_temp",
+				new String[] { ServiceReasoner.PROPERTY_CONTROLS,
+				ServiceReasoner.MY_URI });
 
 		// I call the service
 
