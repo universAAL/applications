@@ -10,6 +10,13 @@ public class Activator implements BundleActivator{
 	public void start(BundleContext context) throws Exception {
 		Activator.context=context;
 		caller=new SCaller(context);
+		
+		SCaller mySCaller = new SCaller(context);
+		
+		
+		
+		
+		
 	}
 
 	public void stop(BundleContext arg0) throws Exception {
