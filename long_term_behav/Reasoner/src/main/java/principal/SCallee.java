@@ -45,20 +45,23 @@ public class SCallee extends ServiceCallee{
 		}
 
 		// if the operation match with the service return a value.
-		if (operation.startsWith(SCalleeProvidedService.SERVICE_GET_VALUE)) {
-			return getValue();
+		if (operation.startsWith(SCalleeProvidedService.SERVICE_GET_ADD_RULE_VALUE)) {
+			return callAddRule();
 		} else {
 			response = new ServiceResponse(CallStatus.serviceSpecificFailure);
 			response.addOutput(new ProcessOutput(
 					ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
-					"Invlaid Operation!"));
+					"Invalid Operation!"));
 			return response;
 		}
 	}
 	
-	private ServiceResponse getValue() {
+
+	
+	private ServiceResponse callAddRule() {
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
-		sr.addOutput(new ProcessOutput(SCalleeProvidedService.OUTPUT_VALUE));
+		
+		sr.addOutput(new ProcessOutput(SCalleeProvidedService.OUTPUT_ADD_RULE_VALUE));
 		return sr;
 	}
 

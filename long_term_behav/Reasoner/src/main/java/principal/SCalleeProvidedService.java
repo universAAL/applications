@@ -24,10 +24,10 @@ public class SCalleeProvidedService extends ServiceReasoner {
 
 	public static final String MY_URI = SERVER_NAMESPACE + "ReasonerService";
 
-	public static final String SERVICE_GET_VALUE = SERVER_NAMESPACE
-			+ "getValue";
+	public static final String SERVICE_GET_ADD_RULE_VALUE = SERVER_NAMESPACE
+			+ "getAddRuleValue";
 
-	public static final String OUTPUT_VALUE = SERVER_NAMESPACE + "value";
+	public static final String OUTPUT_ADD_RULE_VALUE = SERVER_NAMESPACE + "addRuleValue";
 	
 	
 
@@ -58,12 +58,14 @@ public class SCalleeProvidedService extends ServiceReasoner {
 		// PropertyPath(String uri, boolean isXMLLiteral, String[] thePath)
 
 		// SERVICE_GET_VALUE=SERVER_NAMESPACE + "getValue"
-		SCalleeProvidedService getValue = new SCalleeProvidedService(
-				SERVICE_GET_VALUE);
+		SCalleeProvidedService getAddRuleValue = new SCalleeProvidedService(
+				SERVICE_GET_ADD_RULE_VALUE);
 		// We initialize the profile.
-		profiles[0] = getValue.getProfile();
+		profiles[0] = getAddRuleValue.getProfile();
+		
+		
 
-		ProcessOutput output = new ProcessOutput(OUTPUT_VALUE);
+		ProcessOutput output = new ProcessOutput(OUTPUT_ADD_RULE_VALUE);
 
 		// How it works output.setCardinality(,) ?
 		//				  
@@ -79,6 +81,8 @@ public class SCalleeProvidedService extends ServiceReasoner {
 
 		output.setCardinality(1, 1); // output config only 1 value.sometimes
 										// we'll put 1-100;
+		
+		
 
 		profiles[0].addOutput(output);
 		// I put the output and the path to the endpoint
