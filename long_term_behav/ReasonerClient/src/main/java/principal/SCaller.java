@@ -12,7 +12,7 @@ public class SCaller extends ServiceCaller{
 
 	private ServiceCaller caller; // to call a service
 	
-	protected SCaller(BundleContext context) {
+	protected SCaller(BundleContext context,ServiceRequest req) {
 		super(context);
 		// TODO Auto-generated constructor stub
 		
@@ -20,19 +20,7 @@ public class SCaller extends ServiceCaller{
 		
 		ServiceResponse sr;
 
-		// I create a object service request
-
-		ServiceRequest req = new ServiceRequest(new ServiceReasoner(null), null);
-
-		// I configure the request for the call.
-		req.addTypeFilter(new String[] { ServiceReasoner.PROPERTY_CONTROLS }, ServiceReasoner.MY_URI);
-
-		// output_temp id of the uri.
-
-		req.addRequiredOutput(SCalleeProvidedService.SERVER_NAMESPACE
-				+ "output_temp",
-				new String[] { ServiceReasoner.PROPERTY_CONTROLS,
-				ServiceReasoner.MY_URI });
+		
 
 		// I call the service
 
