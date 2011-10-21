@@ -61,7 +61,9 @@ public class SCallee extends ServiceCallee{
 	private ServiceResponse callAddRule() {
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		sr.addOutput(new ProcessOutput(SCalleeProvidedService.OUTPUT_ADD_RULE_VALUE));
+		
+		System.out.println("CALL SUCCEED---NOW IM ANSWERING");
+	//	sr.addOutput(new ProcessOutput(SCalleeProvidedService.OUTPUT_ADD_RULE_VALUE));
 		return sr;
 	}
 
