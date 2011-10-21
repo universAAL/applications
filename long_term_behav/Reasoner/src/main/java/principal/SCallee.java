@@ -1,10 +1,13 @@
 package principal;
 
 import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+
 
 public class SCallee extends ServiceCallee{
 
@@ -24,8 +27,39 @@ public class SCallee extends ServiceCallee{
 	}
 
 	public ServiceResponse handleCall(ServiceCall call) {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceResponse response;
+		if (call == null) {
+			response = new ServiceResponse(CallStatus.serviceSpecificFailure);
+			response.addOutput(new ProcessOutput(
+					ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR, "Null Call!"));
+			return response;
+		}
+
+		String operation = call.getProcessURI();
+		if (operation == null) {
+			response = new ServiceResponse(CallStatus.serviceSpecificFailure);
+			response.addOutput(new ProcessOutput(
+					ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
+					"Null Operation!"));
+			return response;
+		}
+
+		// if the operation match with the service return a value.
+		if (operation.startsWith(SCalleeProvidedService.SERVICE_GET_VALUE)) {
+			return getValue();
+		} else {
+			response = new ServiceResponse(CallStatus.serviceSpecificFailure);
+			response.addOutput(new ProcessOutput(
+					ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
+					"Invlaid Operation!"));
+			return response;
+		}
+	}
+	
+	private ServiceResponse getValue() {
+		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
+		sr.addOutput(new ProcessOutput(SCalleeProvidedService.OUTPUT_VALUE));
+		return sr;
 	}
 
 }
