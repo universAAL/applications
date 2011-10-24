@@ -24,12 +24,6 @@ import org.universAAL.middleware.io.rdf.Form;
  */
 public class TreatmentViewForm extends InputListener {
 
-	static String DialogID = "TreatmentViewForm";
-	
-	public TreatmentViewForm() {
-		super(DialogID);
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
 	 */

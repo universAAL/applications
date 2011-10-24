@@ -24,11 +24,6 @@ import org.universAAL.middleware.io.rdf.Form;
  */
 public class MessagesWriteForm extends InputListener {
 
-	static String DialogID = "MessagesWriteForm";
-	
-	public MessagesWriteForm() {
-		super(DialogID);
-	}
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
 	 */
@@ -43,7 +38,7 @@ public class MessagesWriteForm extends InputListener {
 	 */
 	@Override
 	public void handleEvent(InputEvent ie) {
-		// TODO Auto-generated method stub
+		super.handleEvent(ie);
 
 	}
 

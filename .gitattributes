@@ -1170,7 +1170,7 @@ health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/OPublisher.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/osgi/Activator.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/InputListener.java -text svneol=unset#text/plain
-health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/Main.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MainForm.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesForm.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesListForm.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesReadForm.java -text svneol=unset#text/plain

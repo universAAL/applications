@@ -15,6 +15,8 @@
  ******************************************************************************/
 package org.universAAL.AALapplication.health.manager;
 
+import java.util.Locale;
+
 import org.osgi.framework.BundleContext;
 import org.universAAL.ontology.profile.User;
 
@@ -50,6 +52,11 @@ public class HealthManager {
 
 	public User getUser() {
 		return user;
+	}
+
+	public static Locale getLanguage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
