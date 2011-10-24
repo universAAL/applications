@@ -1163,22 +1163,6 @@ agenda/handler.web/src/main/resources/webhandler/img/bt_white3.gif -text
 agenda/handler.web/src/main/resources/webhandler/img/pers3mini.ico -text
 agenda/handler.web/src/main/resources/webhandler/img/persona_logo.jpg -text
 agenda/handler.web/src/main/resources/webhandler/img/universAAL_logo.jpg -text
-health/healt.treat.logger/LICENSE -text
-health/healt.treat.logger/NOTICE -text
-health/healt.treat.logger/pom.xml -text
-health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLogger.java -text
-health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerProvider.java -text
-health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerServices.java -text
-health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/impl/ContextHistoryTreatmentLogger.java -text
-health/healt.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/osgi/Activator.java -text
-health/healt.treat.manager/LICENSE -text
-health/healt.treat.manager/NOTICE -text
-health/healt.treat.manager/pom.xml -text
-health/healt.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManager.java -text
-health/healt.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerProvider.java -text
-health/healt.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerServices.java -text
-health/healt.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/impl/JenaConverterTreatmentManager.java -text
-health/healt.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/osgi/Activator.java -text
 health/health.manager/LICENSE.txt -text svneol=unset#text/plain
 health/health.manager/pom.xml -text
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/HealthManager.java -text svneol=unset#text/plain
@@ -1218,6 +1202,22 @@ health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatme
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/TreatmentDetails.java -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/TreatmentPlanning.java -text
 health/health.ont/src/main/java/org/universAAL/AALapplication/health/ont/treatment/UserHealthProfile.java -text
+health/health.treat.logger/LICENSE -text
+health/health.treat.logger/NOTICE -text
+health/health.treat.logger/pom.xml -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLogger.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerProvider.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerServices.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/impl/ContextHistoryTreatmentLogger.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/osgi/Activator.java -text
+health/health.treat.manager/LICENSE -text
+health/health.treat.manager/NOTICE -text
+health/health.treat.manager/pom.xml -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManager.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerProvider.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerServices.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/impl/JenaConverterTreatmentManager.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/osgi/Activator.java -text
 health/pom/pom.xml -text svneol=unset#text/plain
 help_when_out/hwo.mobile/pom.xml -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Activator.java -text
