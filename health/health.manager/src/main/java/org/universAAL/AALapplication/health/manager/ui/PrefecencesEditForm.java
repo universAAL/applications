@@ -24,12 +24,6 @@ import org.universAAL.middleware.io.rdf.Form;
  */
 public class PrefecencesEditForm extends InputListener {
 
-	static String DialogID = "PreferencesEditForm";
-	
-	public PrefecencesEditForm() {
-		super(DialogID);
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
 	 */

@@ -25,10 +25,12 @@ import org.universAAL.middleware.io.rdf.Form;
  */
 public abstract class InputListener {
 	
-	InputListener(String DialogID){
+	protected void listenTo(String DialogID){
 		HealthManager.getInstance().getIsubcriber().registerUI(DialogID,this);
 	}
 	
 	abstract public Form getDialog();
-	abstract public void handleEvent(InputEvent ie);
+	public void handleEvent(InputEvent ie) {
+		HealthManager.getInstance().getIsubcriber().unresgisterUI(ie.getDialogID());
+	}
 }

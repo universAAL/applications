@@ -24,12 +24,6 @@ import org.universAAL.middleware.io.rdf.Form;
  */
 public class PreferencesAccessForm extends InputListener {
 
-	static String DialogID = "PreferencesAccessForm";
-	
-	public PreferencesAccessForm() {
-		super(DialogID);
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
 	 */
