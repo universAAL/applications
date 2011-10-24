@@ -1179,6 +1179,26 @@ health/healt.treat.manager/src/main/java/org/universAAL/AALapplication/health/tr
 health/healt.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerServices.java -text
 health/healt.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/impl/JenaConverterTreatmentManager.java -text
 health/healt.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/osgi/Activator.java -text
+health/health.manager/LICENSE.txt -text svneol=unset#text/plain
+health/health.manager/pom.xml -text
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/HealthManager.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ISubscriber.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/OPublisher.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/osgi/Activator.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/InputListener.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/Main.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesListForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesReadForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesWriteForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/PrefecencesEditForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/PreferencesAccessForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/PreferencesFrom.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentEditForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentFollowForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentNewForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
 health/health.ont/LICENSE -text
 health/health.ont/NOTICE -text
 health/health.ont/pom.xml -text
