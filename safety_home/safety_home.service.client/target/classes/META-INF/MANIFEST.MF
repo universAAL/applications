@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Export-Package: org.universAAL.AALapplication.safety_home.service.clie
+ nt;uses:="org.osgi.framework,org.slf4j,org.universAAL.middleware.serv
+ ice,org.universAAL.ontology.safetyDevices,org.universAAL.middleware.o
+ wl,org.universAAL.middleware.service.owl,org.universAAL.ontology.phTh
+ ing,org.universAAL.middleware.rdf,org.universAAL.middleware.context,o
+ rg.universAAL.middleware.util,javax.swing,javax.swing.border,javax.so
+ und.sampled";version="0.1.0.SNAPSHOT"
+Built-By: dimokas
+Tool: Bnd-1.43.0
+Bundle-Name: Safety at Home Client
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_27
+Bundle-Version: 0.1.0.SNAPSHOT
+Bnd-LastModified: 1319458708787
+Bundle-ManifestVersion: 2
+Bundle-Activator: org.universAAL.AALapplication.safety_home.service.cl
+ ient.Activator
+Bundle-Description: Safety at Home Client Service
+Import-Package: javax.sound.sampled,javax.swing,javax.swing.border,org
+ .osgi.framework;version="[1.3,2)",org.slf4j;version="[1.5,2)",org.uni
+ versAAL.middleware.context,org.universAAL.middleware.owl,org.universA
+ AL.middleware.rdf,org.universAAL.middleware.service,org.universAAL.mi
+ ddleware.service.owl,org.universAAL.middleware.util,org.universAAL.on
+ tology.phThing,org.universAAL.ontology.safetyDevices;version="[0.1,1)
+ "
+Bundle-SymbolicName: safety_home.service.client
+
