@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Export-Package: org.universAAL.AALapplication.food_shopping.service.se
+ rver;uses:="org.osgi.framework,org.slf4j,org.universAAL.middleware.se
+ rvice,org.universAAL.middleware.context.owl,org.universAAL.ontology.l
+ ocation,org.universAAL.middleware.service.owls.process,org.universAAL
+ .middleware.rdf,org.universAAL.middleware.service.owls.profile,org.un
+ iversAAL.middleware.context,org.universAAL.middleware.util,org.univer
+ sAAL.AALapplication.food_shopping.service.server.unit_impl,org.univer
+ sAAL.ontology.location.indoor,org.universAAL.ontology.foodDevices,org
+ .universAAL.middleware.owl";version="0.1.0.SNAPSHOT",org.universAAL.A
+ ALapplication.food_shopping.service.server.unit_impl;uses:="org.unive
+ rsAAL.AALapplication.food_shopping.service.server,org.universAAL.midd
+ leware.util,org.universAAL.ontology.foodDevices,org.slf4j";version="0
+ .1.0.SNAPSHOT"
+Built-By: dimokas
+Tool: Bnd-1.43.0
+Bundle-Name: Food Shopping Service
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_27
+Bundle-Version: 0.1.0.SNAPSHOT
+Bnd-LastModified: 1319553346091
+Bundle-ManifestVersion: 2
+Bundle-Activator: org.universAAL.AALapplication.food_shopping.service.
+ server.Activator
+Bundle-Description: Food Shopping Server Service
+Import-Package: org.osgi.framework;version="[1.3,2)",org.slf4j;version
+ ="[1.5,2)",org.universAAL.middleware.context,org.universAAL.middlewar
+ e.context.owl,org.universAAL.middleware.owl,org.universAAL.middleware
+ .rdf,org.universAAL.middleware.service,org.universAAL.middleware.serv
+ ice.owls.process,org.universAAL.middleware.service.owls.profile,org.u
+ niversAAL.middleware.util,org.universAAL.ontology.foodDevices;version
+ ="[0.1,1)",org.universAAL.ontology.location,org.universAAL.ontology.l
+ ocation.indoor
+Bundle-SymbolicName: food_shopping.service.server
+
