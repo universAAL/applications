@@ -22,7 +22,7 @@
   </scm>
   <modules>
   	<module>../health.ont</module>
-  	<module>../healt.treat.logger</module>
-  	<module>../healt.treat.manager</module>
+  	<module>../health.treat.logger</module>
+  	<module>../health.treat.manager</module>
   </modules>
 </project>
