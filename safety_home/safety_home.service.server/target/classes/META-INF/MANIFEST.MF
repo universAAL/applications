@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Export-Package: org.universAAL.AALapplication.safety_home.service.serv
+ er;uses:="org.osgi.framework,org.slf4j,org.universAAL.middleware.serv
+ ice,org.universAAL.ontology.safetyDevices,org.universAAL.middleware.c
+ ontext.owl,org.universAAL.ontology.location,org.universAAL.AALapplica
+ tion.safety_home.service.server.unit_impl,org.universAAL.middleware.s
+ ervice.owls.process,org.universAAL.middleware.rdf,org.universAAL.midd
+ leware.service.owls.profile,org.universAAL.middleware.context,org.uni
+ versAAL.middleware.util,org.universAAL.ontology.location.indoor,org.u
+ niversAAL.middleware.owl";version="0.1.0.SNAPSHOT",org.universAAL.AAL
+ application.safety_home.service.server.unit_impl;uses:="org.universAA
+ L.AALapplication.safety_home.service.server,org.universAAL.middleware
+ .util,org.slf4j";version="0.1.0.SNAPSHOT"
+Built-By: dimokas
+Tool: Bnd-1.43.0
+Bundle-Name: Safety at Home Service
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_27
+Bundle-Version: 0.1.0.SNAPSHOT
+Bnd-LastModified: 1319482478874
+Bundle-ManifestVersion: 2
+Bundle-Activator: org.universAAL.AALapplication.safety_home.service.se
+ rver.Activator
+Bundle-Description: Safety at Home Server Service
+Import-Package: org.osgi.framework;version="[1.3,2)",org.slf4j;version
+ ="[1.5,2)",org.universAAL.middleware.context,org.universAAL.middlewar
+ e.context.owl,org.universAAL.middleware.owl,org.universAAL.middleware
+ .rdf,org.universAAL.middleware.service,org.universAAL.middleware.serv
+ ice.owls.process,org.universAAL.middleware.service.owls.profile,org.u
+ niversAAL.middleware.util,org.universAAL.ontology.location,org.univer
+ sAAL.ontology.location.indoor,org.universAAL.ontology.safetyDevices;v
+ ersion="[0.1,1)"
+Bundle-SymbolicName: safety_home.service.server
+
