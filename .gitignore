@@ -60,6 +60,10 @@ long_term_behav/Reasoner/.classpath
 long_term_behav/Reasoner/.project
 long_term_behav/Reasoner/.settings
 long_term_behav/Reasoner/target
+long_term_behav/ReasonerClient/.classpath
+long_term_behav/ReasonerClient/.project
+long_term_behav/ReasonerClient/.settings
+long_term_behav/ReasonerClient/target
 long_term_behav/ont.drools/.classpath
 long_term_behav/ont.drools/.project
 long_term_behav/ont.drools/.settings

@@ -1305,15 +1305,9 @@ long_term_behav/Reasoner/src/main/java/principal/SCallee.java -text
 long_term_behav/Reasoner/src/main/java/principal/SCalleeProvidedService.java -text
 long_term_behav/Reasoner/src/main/java/principal/SCaller.java -text
 long_term_behav/Reasoner/src/main/java/principal/ServiceReasoner.java -text
-long_term_behav/ReasonerClient/.classpath -text
-long_term_behav/ReasonerClient/.project -text
-long_term_behav/ReasonerClient/.settings/org.eclipse.jdt.core.prefs -text
-long_term_behav/ReasonerClient/.settings/org.maven.ide.eclipse.prefs -text
 long_term_behav/ReasonerClient/pom.xml -text
 long_term_behav/ReasonerClient/src/main/java/principal/Activator.java -text
 long_term_behav/ReasonerClient/src/main/java/principal/SCaller.java -text
-long_term_behav/ReasonerClient/target/classes/principal/Activator.class -text
-long_term_behav/ReasonerClient/target/classes/principal/SCaller.class -text
 long_term_behav/ont.drools/pom.xml -text
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/Activator.java -text
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/Consequence.java -text
