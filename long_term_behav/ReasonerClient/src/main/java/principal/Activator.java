@@ -10,6 +10,9 @@ public class Activator implements BundleActivator{
 	public static SCaller caller=null;
 
 	public void start(BundleContext context) throws Exception {
+		
+		
+		
 		Activator.context=context;
 		caller=new SCaller(context, null);
 		
