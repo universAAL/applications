@@ -37,7 +37,7 @@ public class Activator implements BundleActivator{
 				new String[] { ServiceReasoner.PROPERTY_CONTROLS,
 				ServiceReasoner.MY_URI });
 		
-	//	DefaultServiceCaller.call(req);
+		caller.call(req);
 		
 		
 		
