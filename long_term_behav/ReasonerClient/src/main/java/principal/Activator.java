@@ -2,21 +2,22 @@ package principal;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.service.DefaultServiceCaller;
+import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 
 
 public class Activator implements BundleActivator{
-	public static BundleContext context=null;
-	public static SCaller caller=null;
+	
+	private ServiceCaller caller; // to call a service
 
 	public void start(BundleContext context) throws Exception {
 		
+	
 		
 		
-		Activator.context=context;
-		caller=new SCaller(context, null);
-		
-		SCaller mySCaller = new SCaller(context, null);
+		// I create a default caller and i pass him the actual context
+		caller = new DefaultServiceCaller(context);
 		
 		// I create a object service request
 
@@ -36,7 +37,7 @@ public class Activator implements BundleActivator{
 				new String[] { ServiceReasoner.PROPERTY_CONTROLS,
 				ServiceReasoner.MY_URI });
 		
-		mySCaller.call(req);
+	//	DefaultServiceCaller.call(req);
 		
 		
 		
