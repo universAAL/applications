@@ -41,6 +41,8 @@ public class MainForm extends InputListener {
 	static final LevelRating PRIORITY = LevelRating.low;
 	static final PrivacyLevel PRIVACY = PrivacyLevel.insensible;
 	
+	static String DIALOG_ID;
+	
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
 	 */
@@ -57,7 +59,8 @@ public class MainForm extends InputListener {
 		new SubdialogTrigger(f.getSubmits(), 
 				new Label(PREFERENCES_LABEL, PREFERENCES_ICON),
 				PREFERENCES_LABEL);
-		listenTo(f.getDialogID());
+		DIALOG_ID = f.getDialogID();
+		listenTo(DIALOG_ID);
 		// TODO add home submit
 		// TODO Welcome Pane in IOControls
 		return f;

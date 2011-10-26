@@ -22,16 +22,23 @@ import org.universAAL.middleware.io.rdf.Form;
  * @author amedrano
  *
  */
-public class MessagesListForm extends InputListener {
+public class MessagesListForm extends MessagesForm {
 
 	
+	private static final String LISTFORM_TITLE = "List of Messages";
+
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
 	 */
 	@Override
 	public Form getDialog() {
-		// TODO Create Form
-		return null;
+		Form f = Form.newSubdialog(LISTFORM_TITLE, MainForm.DIALOG_ID);
+		addSubdialogs(f.getSubmits());
+		/*
+		 *  TODO add Table of messages
+		 *  |read (Icon)| subject| from| date
+		 */
+		return f;
 	}
 
 	/* (non-Javadoc)
