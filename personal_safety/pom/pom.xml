@@ -43,5 +43,7 @@
   <modules>
   	<module>../service</module>
   	<module>../sms.sender</module>
+  	<module>../smp.test-location.publisher</module>
+  	<module>../sw.panic</module>
   </modules>
 </project>
