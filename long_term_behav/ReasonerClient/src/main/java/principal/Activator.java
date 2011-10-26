@@ -4,6 +4,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.service.ServiceRequest;
 
+
 public class Activator implements BundleActivator{
 	public static BundleContext context=null;
 	public static SCaller caller=null;
@@ -16,7 +17,11 @@ public class Activator implements BundleActivator{
 		
 		// I create a object service request
 
-		ServiceRequest req = new ServiceRequest(new ServiceReasoner(null), null);
+		ServiceRequest req = new ServiceRequest(ServiceReasoner.MY_URI );
+		
+		
+		
+			
 
 		// I configure the request for the call.
 		req.addTypeFilter(new String[] { ServiceReasoner.PROPERTY_CONTROLS }, ServiceReasoner.MY_URI);
