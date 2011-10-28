@@ -21,7 +21,7 @@ public class Activator implements BundleActivator{
 		
 		// I create a object service request
 
-		ServiceRequest req = new ServiceRequest(ServiceReasoner.MY_URI );
+		ServiceRequest req = new ServiceRequest(new ServiceReasoner(),null);
 		
 		
 		System.out.println("caller and request created.........");
