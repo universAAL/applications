@@ -19,12 +19,14 @@ public class Activator implements BundleActivator{
 		// I create a default caller and i pass him the actual context
 		caller = new DefaultServiceCaller(context);
 		
+		System.out.println("caller created.........");
+		
 		// I create a object service request
 
 		ServiceRequest req = new ServiceRequest(new ServiceReasoner(),null);
 		
 		
-		System.out.println("caller and request created.........");
+		System.out.println("request created.........");
 			
 
 		// I configure the request for the call.
