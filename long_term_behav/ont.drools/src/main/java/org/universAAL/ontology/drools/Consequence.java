@@ -1,3 +1,6 @@
+
+
+
 package org.universAAL.ontology.drools;
 
 import java.util.ArrayList;
