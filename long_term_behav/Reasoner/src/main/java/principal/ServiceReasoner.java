@@ -71,6 +71,10 @@ public class ServiceReasoner extends Service {
 		super(uri);
 	}
 
+	public ServiceReasoner() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
