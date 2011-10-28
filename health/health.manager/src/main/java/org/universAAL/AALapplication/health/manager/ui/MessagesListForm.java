@@ -38,6 +38,7 @@ public class MessagesListForm extends MessagesForm {
 		 *  TODO add Table of messages
 		 *  |read (Icon)| subject| from| date
 		 */
+		listenTo(f.getDialogID());
 		return f;
 	}
 
