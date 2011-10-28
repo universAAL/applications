@@ -9,7 +9,8 @@ import org.universAAL.middleware.service.ServiceResponse;
 
 
 public class SCaller extends ServiceCaller{
-
+    
+	
 	private ServiceCaller caller; // to call a service
 	
 	protected SCaller(BundleContext context,ServiceRequest req) {
