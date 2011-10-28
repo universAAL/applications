@@ -24,7 +24,7 @@ public class Activator implements BundleActivator{
 		ServiceRequest req = new ServiceRequest(ServiceReasoner.MY_URI );
 		
 		
-		
+		System.out.println("caller and request created.........");
 			
 
 		// I configure the request for the call.
@@ -36,6 +36,8 @@ public class Activator implements BundleActivator{
 				+ "output_temp",
 				new String[] { ServiceReasoner.PROPERTY_CONTROLS,
 				ServiceReasoner.MY_URI });
+		
+		System.out.println("CALLING.........");
 		
 		caller.call(req);
 		
