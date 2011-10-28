@@ -46,6 +46,9 @@ public class SCallee extends ServiceCallee{
 
 		// if the operation match with the service return a value.
 		if (operation.startsWith(SCalleeProvidedService.SERVICE_GET_ADD_RULE_VALUE)) {
+			
+			System.out.println("CALL RECEIVED....");
+			
 			return callAddRule();
 		} else {
 			response = new ServiceResponse(CallStatus.serviceSpecificFailure);
