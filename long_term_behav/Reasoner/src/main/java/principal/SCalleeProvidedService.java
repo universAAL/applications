@@ -3,7 +3,7 @@ package principal;
 import org.universAAL.middleware.owl.Restriction;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.drools.service.Service;
+
 
 
 
