@@ -288,6 +288,7 @@ public class Activator extends Thread implements BundleActivator {
 	 * Method for OSGi bundle: start this bundle.
 	 */
 	public void start(BundleContext context) throws Exception {
+	    Class.forName("com.mysql.jdbc.Driver");
 		Activator.context = context;
 		ServiceReference sref = context
 				.getServiceReference(MessageContentSerializer.class.getName());
