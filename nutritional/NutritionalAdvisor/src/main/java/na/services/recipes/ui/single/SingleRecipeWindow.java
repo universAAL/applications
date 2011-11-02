@@ -179,7 +179,7 @@ public class SingleRecipeWindow extends AdaptivePanel {
 	
 	private void butShareRecipeClicked(java.awt.event.ActionEvent evt, int recipeID, String course, String procedure){
 //		log.info("click!!!");
-		final int result = Utils.showPopUp(Messages.Recipes_Share_PopUp_Title, Messages.Recipes_Share_PopUp_Message , JOptionPane.YES_NO_OPTION);
+		final int result = Utils.showPopUp(Messages.Recipes_Share_PopUp_Title, Messages.Recipes_Share_PopUp_Message , JOptionPane.YES_NO_OPTION, this);
 		if (result == 0) {
 			try {
 				if (this.launcher.shareRecipe(recipeID, course, procedure)) {
@@ -199,7 +199,7 @@ public class SingleRecipeWindow extends AdaptivePanel {
 	}
 
 	private void butRemoveFromFavorites(java.awt.event.ActionEvent evt, final int recipeID, final String name) {
-		final int result = Utils.showPopUp(Messages.Recipes_RemoveFavourite_PopUp_Title, Messages.Recipes_RemoveFavourite_PopUp_Message , JOptionPane.YES_NO_OPTION);
+		final int result = Utils.showPopUp(Messages.Recipes_RemoveFavourite_PopUp_Title, Messages.Recipes_RemoveFavourite_PopUp_Message , JOptionPane.YES_NO_OPTION, this);
 		if (result == 0) {
 			try {
 				log.info("======> Removing recipe from favorites: " + recipeID);
@@ -224,7 +224,7 @@ public class SingleRecipeWindow extends AdaptivePanel {
 	}
 	
 	private void butAddToFavorites(java.awt.event.ActionEvent evt, int recipeID, String name) {
-		final int result = Utils.showPopUp(Messages.Recipes_AddFavourite_PopUp_Title, Messages.Recipes_AddFavourite_PopUp_Message , JOptionPane.YES_NO_OPTION);
+		final int result = Utils.showPopUp(Messages.Recipes_AddFavourite_PopUp_Title, Messages.Recipes_AddFavourite_PopUp_Message , JOptionPane.YES_NO_OPTION, this);
 		if (result == 0) {
 			try {
 				log.info("======> Adding recipe to favorites: " + recipeID);

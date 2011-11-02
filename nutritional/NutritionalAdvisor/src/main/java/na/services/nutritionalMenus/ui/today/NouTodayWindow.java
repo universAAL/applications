@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import na.miniDao.DayMenu;
 import na.miniDao.Dish;
@@ -922,9 +923,10 @@ public class NouTodayWindow extends AdaptivePanel {
 						this.listChangeMealButtons.get(loop).setVisible(false);
 					} else {
 						this.listChangeMealButtons.get(loop).setVisible(true);
+						final JPanel estePanel = this;
 						this.listChangeMealButtons.get(loop).addActionListener(new java.awt.event.ActionListener() {
 							public void actionPerformed(java.awt.event.ActionEvent evt) {
-								final int result = Utils.showPopUp(Messages.Menus_ChangeMeal_PopUp_Title, Messages.Menus_ChangeMeal_PopUp_Message, JOptionPane.YES_NO_OPTION);
+								final int result = Utils.showPopUp(Messages.Menus_ChangeMeal_PopUp_Title, Messages.Menus_ChangeMeal_PopUp_Message, JOptionPane.YES_NO_OPTION, estePanel);
 								if (result == 0) {
 									if (va==0)
 										butChangeTodayBreakfast(evt, isToday);

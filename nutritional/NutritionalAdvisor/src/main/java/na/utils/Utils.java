@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import na.miniDao.NutriCalendar;
+import na.services.recipes.ui.single.SingleRecipeWindow;
 import na.utils.lang.Messages;
 import na.widgets.button.AdaptiveButton;
 
@@ -433,17 +434,30 @@ public final class Utils {
 			    JOptionPane.ERROR_MESSAGE);
 	}
 	
-	public static int showPopUp(String title, String text, int type) {
+//	public static int showPopUp(String title, String text, int type) {
+//		int result = JOptionPane.showConfirmDialog(
+//                null,
+//                text,
+//                title,
+//                JOptionPane.YES_NO_OPTION
+//        );
+//		return result;
+//	}
+	
+	public static void println(String msg) {
+		System.out.println("Nutri: "+msg);
+	}
+
+	public static int showPopUp(String title,
+			String text, int yesNoOption,
+			JPanel parent) {
+		Utils.println("parent: "+parent.getName());
 		int result = JOptionPane.showConfirmDialog(
-                null,
+                parent,
                 text,
                 title,
                 JOptionPane.YES_NO_OPTION
         );
 		return result;
-	}
-	
-	public static void println(String msg) {
-		System.out.println("Nutri: "+msg);
 	}
 }

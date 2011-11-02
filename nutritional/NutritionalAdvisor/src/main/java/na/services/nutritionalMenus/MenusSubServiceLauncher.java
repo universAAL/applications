@@ -13,7 +13,6 @@ import na.services.nutritionalMenus.business.NewBusiness;
 import na.services.nutritionalMenus.ui.*;
 import na.services.nutritionalMenus.ui.tips.GlobalPanel;
 import na.services.nutritionalMenus.ui.today.NouTodayWindow;
-import na.services.nutritionalMenus.ui.today.OldTodayWindow;
 import na.services.nutritionalMenus.ui.week.WeeklyWindow;
 import na.utils.OASIS_ServiceUnavailable;
 import na.utils.PersistedImage;

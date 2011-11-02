@@ -7,6 +7,8 @@
 
 package na.ws;
 
+import na.utils.Setup;
+
 public class NutritionalAdvisorServiceLocator extends org.apache.axis.client.Service implements na.ws.NutritionalAdvisorService {
 
     public NutritionalAdvisorServiceLocator() {
@@ -22,7 +24,8 @@ public class NutritionalAdvisorServiceLocator extends org.apache.axis.client.Ser
     }
 
     // Use to get a proxy class for NutritionalAdvisorPort
-    private java.lang.String NutritionalAdvisorPort_address = "http://localhost:8080/NutriAdvisor_uAAL/NutritionalAdvisor";
+    private java.lang.String NutritionalAdvisorPort_address = Setup.getWebServiceAddress();
+//    private java.lang.String NutritionalAdvisorPort_address = "http://localhost:8080/NutriAdvisor_uAAL/NutritionalAdvisor";
 
     public java.lang.String getNutritionalAdvisorPortAddress() {
         return NutritionalAdvisorPort_address;
