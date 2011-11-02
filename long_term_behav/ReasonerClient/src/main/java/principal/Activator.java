@@ -5,7 +5,7 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
-
+import principal.SCaller;
 
 public class Activator implements BundleActivator{
 	
@@ -41,11 +41,14 @@ public class Activator implements BundleActivator{
 		
 		System.out.println("CALLING.........");
 		
-		caller.call(req);
+	principal.SCaller.ServiceCaller(context,req);
 		
 		
 		
 	}
+
+	
+	
 
 	public void stop(BundleContext arg0) throws Exception {
 		caller.close();
