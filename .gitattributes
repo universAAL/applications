@@ -1671,7 +1671,6 @@ nutritional/NutritionalAdvisor/src/main/java/na/ws/Translation.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/ws/UProperty.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/ws/UPropertyValues.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/ws/UserNutritionalProfile.java -text
-nutritional/NutritionalAdvisor/target/nutritional.uiclient-0.1.0-SNAPSHOT.jar -text
 nutritional/NutritionalAdvisor/uiclient.launch -text
 nutritional/ont.nutrition/pom.xml -text
 nutritional/ont.nutrition/src/main/java/org/universAAL/ontology/Activator.java -text
