@@ -79,7 +79,7 @@ public class ServiceFrame extends AdaptivePanel {
 	 * @param multitelService 
 	 */
 	protected ServiceFrame(BundleContext context, JFrame frame) {
-		new OntoFactoryTester().test_ontoFactory();
+//		new OntoFactoryTester().test_ontoFactory(); //runs tests on ontologies and calls exit(0) when done
 
 		/*
 		 * 1. Comprobar usuario uAAL
@@ -239,7 +239,9 @@ public class ServiceFrame extends AdaptivePanel {
 				        		gbc_1.gridx = 0;
 				        		gbc_1.gridy = 0;
 				        		navigationBar.add(label_1, gbc_1);
+//				        		ImageIcon myIcon = new ImageIcon(getClass().getResource("/na/utils/uAALimg/main.jpg"));
 				        nutritionalMenus_button = new na.widgets.button.MainMenuButton();
+//				        nutritionalMenus_button.setIcon();
 				        GridBagConstraints gbc_1_2 = new GridBagConstraints();
 				        gbc_1_2.fill = GridBagConstraints.BOTH;
 				        gbc_1_2.insets = new Insets(0, 0, 0, 5);
