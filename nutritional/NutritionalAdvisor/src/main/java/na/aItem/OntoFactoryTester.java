@@ -107,11 +107,11 @@ public class OntoFactoryTester {
 			DayMenu today =  ws.getTodayMenu(token);
 			MenuDay menu = OntoFactory.getMenuDay(today);
 			if (menu!=null) {
-				Utils.println("Found menu: "+menu.getID());
+				Utils.println("Found menu: "+menu.getID() + " for day: "+menu.getDayOfWeek().name());
 				for (Meal meal : menu.getMeals()) {
 					Utils.println(" meal: "+meal.getMealCategory().name());
 					for (Dish dish : meal.getDishes()) {
-						Utils.println("  dish: "+dish.getName());
+						Utils.println("  dish: "+ dish.getDishCategory().name() + " " +dish.getName());
 					}
 				}
 			} else {

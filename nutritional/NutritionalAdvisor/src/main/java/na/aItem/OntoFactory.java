@@ -27,15 +27,20 @@ import org.universAAL.ontology.nutrition.ShoppingList;
 /**
  * A factory for creating Ontological objects.
  * Currently supports:
- * 		Recipes 		tested
- * 		Ingredient 		tested
- * 		Shopping List	tested
- * 		Food 			tested
- * 		FoodCategory 	tested
- * 		FoodSubCategory tested
- * 		Dish 			tested
- * 		Meal 			tested
- * 		MenuDay 		tested
+ * 		-Recipes 		tested
+ * 		-Ingredient 	tested
+ * 		-Shopping List	tested
+ * 		-Food 			tested
+ * 		-FoodCategory 	tested
+ * 		-FoodSubCategory tested
+ * 		-Dish 			tested
+ * 		-Meal 			tested
+ * 		-MenuDay 		tested
+ * 		-DishCategory	tested (included in getDish)
+ * 		-MealCategory	tested (included in getMeal)
+ * 		-DayOfWeek		tested (included in getMenuDay)
+ * 		-MeasureUnit	tested (included in getShoppingList)
+ * 		
  * 		
  * Missing:
  * 		Exercise, questionnaire
