@@ -19,13 +19,13 @@ public class SCaller extends ServiceCaller{
 		
 		System.out.println("IM CALLING REASONER-ADDRULE");
 		
-		ServiceResponse sr;
+	//	ServiceResponse sr;
 
 		
 
 		// I call the service
 
-		sr = caller.call(req);
+		 caller.call(req);
 		
 		
 		
