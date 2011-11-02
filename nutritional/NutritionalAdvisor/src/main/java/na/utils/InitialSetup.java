@@ -21,7 +21,7 @@ public class InitialSetup {
 	private static final String NUTRITIONAL_FOLDER_VALUE = "NutritionalAdvisor";
 	
 	protected static final String WEB_SERVER_IP_ADDRESS_KEY = "web_server_ip_address";
-	private static final String WEB_SERVER_IP_ADDRESS_VALUE = "158.42.166.101"; 
+	private static final String WEB_SERVER_IP_ADDRESS_VALUE = "158.42.166.200"; 
 	
 	protected static final String WEB_SERVER_PORT_KEY = "web_server_port"; 
 	private static final String WEB_SERVER_PORT_VALUE = "8080";

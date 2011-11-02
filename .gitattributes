@@ -1545,7 +1545,6 @@ nutritional/NutritionalAdvisor/src/main/java/na/services/nutritionalMenus/ui/tip
 nutritional/NutritionalAdvisor/src/main/java/na/services/nutritionalMenus/ui/today/DishesComparator.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/services/nutritionalMenus/ui/today/IngredientsPanel.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/services/nutritionalMenus/ui/today/NouTodayWindow.java -text
-nutritional/NutritionalAdvisor/src/main/java/na/services/nutritionalMenus/ui/today/OldTodayWindow.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/services/nutritionalMenus/ui/today/SnacksPanel.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/services/nutritionalMenus/ui/week/CustomTable.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/services/nutritionalMenus/ui/week/InnerWeekPanel.java -text
@@ -1639,6 +1638,7 @@ nutritional/NutritionalAdvisor/src/main/java/na/utils/not_available.jpg -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/nutritional_logo.png -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/nutritional_logo_naranja.png -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/oasis.jpg -text
+nutritional/NutritionalAdvisor/src/main/java/na/utils/uAALimg/main.jpg -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/userNotLogged.jpg -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/ws/EnvironmentWSConnector.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/utils/ws/NutritionalAdvisorWSConnector.java -text

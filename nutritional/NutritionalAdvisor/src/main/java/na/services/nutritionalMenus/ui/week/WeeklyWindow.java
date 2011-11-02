@@ -19,7 +19,6 @@ import javax.swing.table.TableCellRenderer;
 import na.miniDao.DayMenu;
 import na.miniDao.Dish;
 import na.services.nutritionalMenus.ui.today.DishesComparator;
-import na.services.nutritionalMenus.ui.today.OldTodayWindow;
 import na.utils.lang.Messages;
 import na.utils.Utils;
 import na.widgets.panel.AdaptivePanel;

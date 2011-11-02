@@ -439,6 +439,7 @@ public class NutritionalAdvisorWSConnector {
 		} catch (RemoteException e) {
 			this.showConnectionError(e);
 		}
+		log.info("ha ocurrido un error al añadir a favoritos...");
 		return null;
 	}
 
