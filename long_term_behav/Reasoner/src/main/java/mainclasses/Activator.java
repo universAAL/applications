@@ -10,9 +10,9 @@ public class Activator implements BundleActivator{
 	public static SCaller scaller=null;
 
 	public void start(BundleContext context) throws Exception {
-		Activator.context=context;
-		scallee=new SCallee(context);
-		scaller=new SCaller(context);
+//		Activator.context=context;
+//		scallee=new SCallee(context);
+//		scaller=new SCaller(context);
 		
 		System.out.println("REASONER ACTIVE");
 		
