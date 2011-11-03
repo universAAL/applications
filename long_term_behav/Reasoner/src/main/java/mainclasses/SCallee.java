@@ -7,6 +7,7 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.drools.Rule;
 
 
 public class SCallee extends ServiceCallee{
@@ -64,8 +65,11 @@ public class SCallee extends ServiceCallee{
 	private ServiceResponse callAddRule() {
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		
 		System.out.println("CALL SUCCEED---NOW IM ANSWERING");
+		Rule rule_example = new Rule();
+		mainclasses.Methods.addRule(rule_example);
+		
+		
 	//	sr.addOutput(new ProcessOutput(SCalleeProvidedService.OUTPUT_ADD_RULE_VALUE));
 		return sr;
 	}
