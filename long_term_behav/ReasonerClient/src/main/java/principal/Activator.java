@@ -36,8 +36,7 @@ public class Activator implements BundleActivator{
 
 		req.addRequiredOutput(SCalleeProvidedService.SERVER_NAMESPACE
 				+ "output_temp",
-				new String[] { ServiceReasoner.PROPERTY_CONTROLS,
-				ServiceReasoner.MY_URI });
+				new String[] { ServiceReasoner.PROPERTY_CONTROLS});
 		
 	
 		System.out.println("IM CALLING REASONER-ADDRULE");
