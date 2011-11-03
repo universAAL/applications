@@ -16,9 +16,9 @@ public class Activator implements BundleActivator{
 		
 		System.out.println("REASONER ACTIVE");
 		
-	//	Rule miregla = new Rule();
+		Rule miregla = new Rule();
 		
-//		principal.Methods.addRule(miregla);
+		principal.Methods.addRule(miregla);
 		
 		
 		
