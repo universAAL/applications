@@ -39,9 +39,14 @@ public class Activator implements BundleActivator{
 				new String[] { ServiceReasoner.PROPERTY_CONTROLS,
 				ServiceReasoner.MY_URI });
 		
-		System.out.println("CALLING.........");
+	
+		System.out.println("IM CALLING REASONER-ADDRULE");
 		
-	principal.SCaller.ServiceCaller(context,req);
+		// I call the service
+
+		caller.call(req);
+		
+	
 		
 		
 		
