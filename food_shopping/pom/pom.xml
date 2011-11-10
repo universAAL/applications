@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <artifactId>new_services.pom</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <relativePath>../../pom</relativePath>
+  </parent>
+  <artifactId>food_shopping.pom</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Food Shopping AAL Service</name>
+  <url>http://forge.universaal.org/wiki/new_services:Food_Shopping_universAAL_service</url>
+  <licenses>
+	<license>
+	<name>Apache 2.0</name>
+	<url>http://www.apache.org/licenses/</url>
+	</license>
+  </licenses>
+  <issueManagement>
+  	<system>GForge - Tracker</system>
+  	<!--<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=</url>-->
+  </issueManagement>
+  <inceptionYear>2011</inceptionYear>
+  <scm>
+  	<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/food_shopping</connection>
+  	<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/food_shopping</developerConnection>
+  </scm>
+  <modules>
+  	<module>../ont.foodDevices</module>
+  	<module>../food_shopping.service.client</module>
+  	<module>../food_shopping.service.server</module>
+  </modules>
+</project>

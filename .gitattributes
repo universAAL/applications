@@ -1194,6 +1194,7 @@ food_shopping/food_shopping.service.server/.classpath -text
 food_shopping/food_shopping.service.server/.project -text
 food_shopping/food_shopping.service.server/.settings/org.eclipse.jdt.core.prefs -text
 food_shopping/food_shopping.service.server/.settings/org.eclipse.m2e.core.prefs -text
+food_shopping/food_shopping.service.server/README.txt -text
 food_shopping/food_shopping.service.server/foodShoppingServer.launch -text
 food_shopping/food_shopping.service.server/pom.xml -text
 food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALapplication/food_shopping/service/server/Activator.java -text
@@ -1227,6 +1228,9 @@ food_shopping/ont.foodDevices/target/classes/org/universAAL/ontology/foodDevices
 food_shopping/ont.foodDevices/target/classes/org/universAAL/ontology/foodDevices/FoodManagement.class -text
 food_shopping/ont.foodDevices/target/classes/org/universAAL/ontology/foodDevices/Refrigerator.class -text
 food_shopping/ont.foodDevices/target/ont.foodDevices-0.1.0-SNAPSHOT.jar -text
+food_shopping/pom/.project -text
+food_shopping/pom/.settings/org.eclipse.m2e.core.prefs -text
+food_shopping/pom/pom.xml -text
 health/health.manager/LICENSE.txt -text svneol=unset#text/plain
 health/health.manager/pom.xml -text
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/HealthManager.java -text svneol=unset#text/plain
