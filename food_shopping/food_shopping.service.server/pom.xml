@@ -1,8 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.universAAL.AALapplication</groupId>
+	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>0.1.0-SNAPSHOT</version>
+		<artifactId>food_shopping.pom</artifactId>
+		<relativePath>../pom</relativePath>
+	</parent>
   <artifactId>food_shopping.service.server</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
   <name>Food Shopping Service</name>
   <description>Food Shopping Server Service</description>
   <packaging>bundle</packaging>
@@ -34,7 +38,7 @@
 			<version>0.2.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
+			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>ont.foodDevices</artifactId>
 			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
@@ -56,42 +60,24 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<inherited>true</inherited>
+					<configuration>
+						<source>${maven.compile.source}</source>
+						<target>${maven.compile.target}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-bundle-plugin</artifactId>
+					<version>2.3.5</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name>Central Maven Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>apache-snapshots</id>
-			<name>Apache Snapshots</name>
-			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<updatePolicy>daily</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal</id>
-			<name>universAAL Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal-snapshots</id>
-			<name>universAAL Snapshot Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-	</repositories>
 </project>
