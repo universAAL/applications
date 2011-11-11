@@ -181,10 +181,10 @@ public class CSubscriber extends ContextSubscriber {
 	
 	private static class LocationRiskTask extends TimerTask{
 		public static User user;
-		public static String location;
+		//public static String location;
 		public LocationRiskTask(User usr,String loc){
 			user=usr;
-			location=loc;
+			//location=loc;
 		}
 		public void run() {
 			log.debug("Triggered risk situation");

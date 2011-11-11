@@ -119,6 +119,7 @@ public class OPublisher extends OutputPublisher{
 	}
 	
 	private static void playWarning(){
+/*
 		Calendar now=Calendar.getInstance();
 		if(8<now.get(Calendar.HOUR_OF_DAY) && now.get(Calendar.HOUR_OF_DAY)<23)
 		new Thread(){
@@ -142,10 +143,11 @@ public class OPublisher extends OutputPublisher{
 					//as=null;
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
+				}				
 			}
 		}.start();	
 		else
 			log.warn("Too late to play a sound");
-	}
+*/
+		}
 }
