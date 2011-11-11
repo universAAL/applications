@@ -260,5 +260,7 @@
 	<modules>
 		<module>../health/pom</module>
 		<module>../personal_safety/pom</module>
+		<module>../food_shopping/pom</module>
+		<module>../safety_home/pom</module>
 	</modules>
 </project>
