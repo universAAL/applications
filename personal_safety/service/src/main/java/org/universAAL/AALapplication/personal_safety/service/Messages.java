@@ -21,7 +21,6 @@
  */
 package org.universAAL.AALapplication.personal_safety.service;
 
-import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
