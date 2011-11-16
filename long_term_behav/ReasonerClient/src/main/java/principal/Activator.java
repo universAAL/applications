@@ -34,7 +34,7 @@ public class Activator implements BundleActivator{
 			
 
 		// I configure the request for the call.
-		req.addTypeFilter(new String[] { ServiceReasoner.PROPERTY_CONTROLS }, Rule.MY_URI);
+		//req.addTypeFilter(new String[] { ServiceReasoner.PROPERTY_CONTROLS }, Rule.MY_URI);
 
 		// output_temp id of the uri.
 
