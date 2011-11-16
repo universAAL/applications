@@ -1,11 +1,15 @@
 package principal;
 
+import mainclasses.SCalleeProvidedService;
+import mainclasses.SCaller;
+import mainclasses.ServiceReasoner;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
-import principal.SCaller;
+import org.universAAL.ontology.drools.Rule;
 
 public class Activator implements BundleActivator{
 	
@@ -30,7 +34,7 @@ public class Activator implements BundleActivator{
 			
 
 		// I configure the request for the call.
-		req.addTypeFilter(new String[] { ServiceReasoner.PROPERTY_CONTROLS }, ServiceReasoner.MY_URI);
+		req.addTypeFilter(new String[] { ServiceReasoner.PROPERTY_CONTROLS }, Rule.MY_URI);
 
 		// output_temp id of the uri.
 
