@@ -7,23 +7,15 @@ import org.universAAL.ontology.drools.Rule;
 import org.universAAL.ontology.drools.service.DroolsService;
 import org.universAAL.samples.service.utils.SimpleAdd;
 import org.universAAL.samples.service.utils.SimpleProfile;
-import org.universAAL.samples.service.utils.SimpleRequest;
-import org.universAAL.samples.service.utils.SimpleVariable;
-
-
-
-
-
 import java.util.Hashtable;
 
 public class SCalleeProvidedService extends DroolsService {
 
 	public SCalleeProvidedService(String uri) {
-		super();
-		// TODO Auto-generated constructor stub
+		super(uri);
 	}
 
-	public static ServiceProfile[] profiles;
+	public static ServiceProfile[] profiles=new ServiceProfile[1];
 	
 	private static Hashtable serverRestrictions = new Hashtable();
 
