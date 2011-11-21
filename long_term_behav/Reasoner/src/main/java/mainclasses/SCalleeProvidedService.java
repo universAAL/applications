@@ -95,6 +95,9 @@ public class SCalleeProvidedService extends DroolsService {
 		SimpleProfile prof=new SimpleProfile(new DroolsService());
 		prof.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(new Rule()), OUTPUT_ADD_RULE_VALUE);//Aqui lo que importa de new Rule() es el tipo, da igual la URI
 		profiles[0]=prof.getTheProfile();
+		
+		System.out.println("Profile created");
+		
 	
 	}
 
