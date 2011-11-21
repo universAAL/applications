@@ -92,7 +92,7 @@ public class SCalleeProvidedService extends DroolsService {
 //		// We are relating the output with the path. So we are saying that you
 //		// can find the output value in this path.
 		
-		SimpleProfile prof=new SimpleProfile(new DroolsService());
+		SimpleProfile prof=new SimpleProfile(new SCalleeProvidedService(SERVICE_GET_ADD_RULE_VALUE));
 		prof.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(new Rule()), OUTPUT_ADD_RULE_VALUE);//Aqui lo que importa de new Rule() es el tipo, da igual la URI
 		profiles[0]=prof.getTheProfile();
 		
