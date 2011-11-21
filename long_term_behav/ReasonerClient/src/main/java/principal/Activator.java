@@ -30,11 +30,7 @@ public class Activator implements BundleActivator{
 		System.out.println("request created.........");
 			
 
-		// I configure the request for the call.
-		//req.addTypeFilter(new String[] { ServiceReasoner.PROPERTY_CONTROLS }, Rule.MY_URI);
-
-		// output_temp id of the uri.
-
+		
 		req.addRequiredOutput(SCalleeProvidedService.SERVER_NAMESPACE
 				+ "output_temp",
 				new String[] { DroolsService.RULE});
