@@ -18,44 +18,15 @@ public class Activator implements BundleActivator{
 	public void start(BundleContext context) throws Exception {
 		
 	
-		
-//		String my_rule ="Rule";
-//		
-//		// I create a default caller and i pass him the actual context
-//		caller = new DefaultServiceCaller(context);
-//		
-//		System.out.println("caller created.........");
-//		
-//		// I create a object service request
-//
-//		ServiceRequest req = new ServiceRequest(new DroolsService(),null);
-//		
-//		
-//		System.out.println("request created.........");
-//			
-//        SimpleRequest set = new SimpleRequest(new DroolsService());
-//		
-//		
-//		
-//		
-//		set.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(my_rule));
-//		
-//		
-//		req.addRequiredOutput(SCalleeProvidedService.SERVER_NAMESPACE
-//				+ "output_temp",
-//				new String[] { DroolsService.RULE});
-//		
-//	
-//		System.out.println("IM CALLING REASONER-ADDRULE");
-//		
-//		// I call the service
-//
-//		caller.call(req);
-		
+	
 	
 		caller = new DefaultServiceCaller(context);
 		SimpleRequest add = new SimpleRequest(new DroolsService());
 		add.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(new Rule("http://ontology.universAAL.org/MyServer.owl#myRule")));
+		System.out.println("I'm calling");
+		
+		
+		
 		caller.call(add);
 	}
 
