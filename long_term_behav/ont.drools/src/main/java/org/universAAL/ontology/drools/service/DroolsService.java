@@ -10,52 +10,48 @@ import org.universAAL.ontology.drools.Fact;
 import org.universAAL.ontology.drools.FactProperty;
 import org.universAAL.ontology.drools.Rule;
 
-
-//If you are making a concept that does not inherit from any other you just extend ManagedIndividual
-//Otherwise you extend the concept class you inherit from
 public class DroolsService extends Service {
-  // Make sure you use the same namespace in all your domain ontology
-  // You can declare the namespace in your root concept and later reuse it in
-  // the rest of classes
-  public static final String MY_NAMESPACE;
-  // MY URI is the URI of this concept. It is mandatory for all.
-  public static final String MY_URI;
-  // Now declare ALL properties that this concept defines
-  public static final String FACT;
-  public static final String RULE;
-  public static final String CONSEQUENCE;
-  // In this static block you set the URIs of your concept and its properties
-  static {
-	// Namespaces must follow this format
+
+    public static final String MY_NAMESPACE;
+
+    public static final String MY_URI;
+    public static final String FACT;
+    public static final String RULE;
+    public static final String CONSEQUENCE;
+    public static Hashtable restrictions = new Hashtable();
+
+    static {
 	MY_NAMESPACE = "http://ontology.universAAL.org/Drools.Service.owl#";
-	// The URI of your concept, which is the same name than the class
 	MY_URI = FactProperty.MY_NAMESPACE + "DroolsService";
-	// Now declare the URIs of the properties. They must start with lower
-	// case.
-	FACT = Fact.MY_NAMESPACE + "hasFact";
-	RULE = Rule.MY_NAMESPACE + "hasRule";
-	CONSEQUENCE = Consequence.MY_NAMESPACE + "hasConsequence";
-//	CONTEXT_EVENT = 
-	
-	
-	// This line registers the ontology concept in the platform
-	register(FactProperty.class);
-  }
 
-  // In this method you must return the restrictions on the property you are
-  // asked for
-  public static Restriction getClassRestrictionsOnProperty(String propURI) {
-	// For each property you have declared, return the appropriate
-	// restrictions
-	
-	return ManagedIndividual.getClassRestrictionsOnProperty(propURI);
-	// In this case we have no parent concept so we use ManagedIndividual.
-	// If you inherited from other concept, then use it instead.
-  }
+	FACT = MY_NAMESPACE + "hasFact";
+	RULE = MY_NAMESPACE + "hasRule";
+	CONSEQUENCE = MY_NAMESPACE + "hasConsequence";
 
-  // This method is used by the system to handle the ontologies. It returns
-  // the URIs of all properties used in this concept.
-  public static String[] getStandardPropertyURIs() {
+	register(DroolsService.class);
+
+	addRestriction(Restriction.getAllValuesRestriction(FACT, Fact.MY_URI),
+		new String[] { FACT }, restrictions);
+	addRestriction(Restriction.getAllValuesRestriction(RULE, Rule.MY_URI),
+		new String[] { RULE }, restrictions);
+	addRestriction(Restriction.getAllValuesRestriction(CONSEQUENCE,
+		Consequence.MY_URI), new String[] { CONSEQUENCE }, restrictions);
+    }
+
+    // In this method you must return the restrictions on the property you are
+    // asked for
+    public static Restriction getClassRestrictionsOnProperty(String propURI) {
+	if (propURI == null)
+	    return null;
+	Object r = restrictions.get(propURI);
+	if (r instanceof Restriction)
+	    return (Restriction) r;
+	return Service.getClassRestrictionsOnProperty(propURI);
+    }
+
+    // This method is used by the system to handle the ontologies. It returns
+    // the URIs of all properties used in this concept.
+    public static String[] getStandardPropertyURIs() {
 	// First get property URIs of your parent concept (in this case we have
 	// none, so we use ManagedIndividual)
 	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
@@ -75,32 +71,37 @@ public class DroolsService extends Service {
 	// Now we have all the property URIs of the concept, both inherited and
 	// declared by it.
 	return toReturn;
-  }
+    }
 
-
-
-  public static String getRDFSComment() {
+    public static String getRDFSComment() {
 	return "A comment describing what this concept is used for";
-  }
+    }
 
-  public static String getRDFSLabel() {
+    public static String getRDFSLabel() {
 	return "Human readable ID for the concept. e.g: 'My Concept'";
-  }
+    }
 
-  // This method is used for serialization purposes, to restrict the amount of
-  // information to serialize when forwarding it among nodes.
-  // For each property you must return one of PROP_SERIALIZATION_FULL,
-  // REDUCED, OPTIONAL or UNDEFINED.
-  // Refer to their javadoc to see what they mean.
-  public int getPropSerializationType(String propURI) {
+    public DroolsService(String uri) {
+	super(uri);
+    }
+
+    // This method is used for serialization purposes, to restrict the amount of
+    // information to serialize when forwarding it among nodes.
+    // For each property you must return one of PROP_SERIALIZATION_FULL,
+    // REDUCED, OPTIONAL or UNDEFINED.
+    // Refer to their javadoc to see what they mean.
+    public int getPropSerializationType(String propURI) {
 	// In this case we serialize everything. It is up to you to define what
 	// is important to be serialized and what is expendable in your concept.
 	return PROP_SERIALIZATION_FULL;
-  }
+    }
 
-protected Hashtable getClassLevelRestrictions() {
-	// TODO Auto-generated method stub
-	return null;
-}
+    protected Hashtable getClassLevelRestrictions() {
+	return restrictions;
+    }
+
+    public boolean isWellFormed() {
+	return true;
+    }
 
 }
