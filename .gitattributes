@@ -1271,7 +1271,6 @@ long_term_behav/Reasoner/src/main/java/principal/ServiceReasoner.java -text
 long_term_behav/ReasonerClient/Ma.launch -text
 long_term_behav/ReasonerClient/pom.xml -text
 long_term_behav/ReasonerClient/src/main/java/principal/Activator.java -text
-long_term_behav/ReasonerClient/src/main/java/principal/SCaller.java -text
 long_term_behav/ont.drools/pom.xml -text
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/Activator.java -text
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/Consequence.java -text
