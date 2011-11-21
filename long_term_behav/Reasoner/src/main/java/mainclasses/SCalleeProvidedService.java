@@ -5,6 +5,9 @@ import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.drools.Rule;
 import org.universAAL.ontology.drools.service.DroolsService;
+import org.universAAL.samples.service.utils.SimpleAdd;
+import org.universAAL.samples.service.utils.SimpleRequest;
+import org.universAAL.samples.service.utils.SimpleVariable;
 
 
 
@@ -41,18 +44,12 @@ public class SCalleeProvidedService extends DroolsService {
 
 		// I'm going to create a serviceprovided that will give me the reasoner
 
+		String my_rule ="Rule";
 		// I register it.
-
+        
 		register(SCalleeProvidedService.class);
 
-		// difference with service ontology: now we can't just put device but a
-		// concrete one
-
-		// that is TempSensor.MY_URI instead of Device.MY_URI
-
-		// serverrestriction: this is just a hashtable it doesn't matter the
-		// name.
-		// it doesn’t matter the name as long as it’s a hashtable.
+	
 
 		// Before adding our own restrictions, we first "inherit" the restrictions defined by the superclass
 		addRestriction((Restriction)
@@ -62,36 +59,23 @@ public class SCalleeProvidedService extends DroolsService {
 		
 		//copia las restriciones del servicio a la lista serverrestrictions
 
-		// PropertyPath(String uri, boolean isXMLLiteral, String[] thePath)
-
-		// SERVICE_GET_VALUE=SERVER_NAMESPACE + "getValue"
+		SimpleRequest set = new SimpleRequest(new DroolsService());
+		
+		
+		
+		
+		set.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(my_rule));
+		
+		
 		SCalleeProvidedService getAddRuleValue = new SCalleeProvidedService(
 				SERVICE_GET_ADD_RULE_VALUE);
-		
-		SCalleeProvidedService.addInputWithAddEffect(MY_URI, Rule.MY_URI, 1, 1, DroolsService.RULE);
-		
-		
-	//	getAddRuleValue.myProfile.addAddEffect(new String[]{DroolsService.RULE}d)
 		
 		// We initialize the profile.
 		profiles[0] = getAddRuleValue.getProfile();
 		
+          
+		ProcessOutput output = new ProcessOutput(OUTPUT_ADD_RULE_VALUE);
 		
-
-		
-
-		// How it works output.setCardinality(,) ?
-		//				  
-		// We are defining the output data.
-		// setCardinality(max,min)
-		//				  
-		// Min: minimum number of numbers
-		// Max: maximum number of numbers.
-		//				  
-		// Example:
-		// (1,0) means that it's optional.
-		// (100,1) at least one value to one hundred
-
 		output.setCardinality(1, 1); // output config only 1 value.sometimes
 										// we'll put 1-100;
 		
@@ -101,7 +85,7 @@ public class SCalleeProvidedService extends DroolsService {
 		// I put the output and the path to the endpoint
 		// the path to get the output
 		profiles[0].addSimpleOutputBinding(output,
-				new String[] { SCalleeProvidedService.PROPERTY_CONTROLS });
+				new String[] { DroolsService.RULE});
 
 		// Why do we use the addOutputbinding?
 		// We are relating the output with the path. So we are saying that you
