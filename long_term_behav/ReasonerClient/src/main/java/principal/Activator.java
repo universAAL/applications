@@ -21,7 +21,7 @@ public class Activator implements BundleActivator{
 	
 	
 		caller = new DefaultServiceCaller(context);
-		SimpleRequest add = new SimpleRequest(new DroolsService());
+		SimpleRequest add = new SimpleRequest(new DroolsService(null));
 		add.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(new Rule("http://ontology.universAAL.org/MyServer.owl#myRule")));
 		System.out.println("I'm calling");
 		
