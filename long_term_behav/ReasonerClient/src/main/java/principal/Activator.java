@@ -1,15 +1,12 @@
 package principal;
-
+ 
 import mainclasses.SCalleeProvidedService;
-import mainclasses.SCaller;
-import mainclasses.ServiceReasoner;
-
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
-import org.universAAL.ontology.drools.Rule;
+import org.universAAL.ontology.drools.service.DroolsService;
 
 public class Activator implements BundleActivator{
 	
@@ -27,7 +24,7 @@ public class Activator implements BundleActivator{
 		
 		// I create a object service request
 
-		ServiceRequest req = new ServiceRequest(new ServiceReasoner(),null);
+		ServiceRequest req = new ServiceRequest(new DroolsService(),null);
 		
 		
 		System.out.println("request created.........");
@@ -40,7 +37,7 @@ public class Activator implements BundleActivator{
 
 		req.addRequiredOutput(SCalleeProvidedService.SERVER_NAMESPACE
 				+ "output_temp",
-				new String[] { ServiceReasoner.PROPERTY_CONTROLS});
+				new String[] { DroolsService.RULE});
 		
 	
 		System.out.println("IM CALLING REASONER-ADDRULE");
