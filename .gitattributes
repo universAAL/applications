@@ -1261,13 +1261,6 @@ long_term_behav/Reasoner/src/main/java/mainclasses/Methods.java -text
 long_term_behav/Reasoner/src/main/java/mainclasses/SCallee.java -text
 long_term_behav/Reasoner/src/main/java/mainclasses/SCalleeProvidedService.java -text
 long_term_behav/Reasoner/src/main/java/mainclasses/SCaller.java -text
-long_term_behav/Reasoner/src/main/java/mainclasses/ServiceReasoner.java -text
-long_term_behav/Reasoner/src/main/java/principal/Activator.java -text
-long_term_behav/Reasoner/src/main/java/principal/Methods.java -text
-long_term_behav/Reasoner/src/main/java/principal/SCallee.java -text
-long_term_behav/Reasoner/src/main/java/principal/SCalleeProvidedService.java -text
-long_term_behav/Reasoner/src/main/java/principal/SCaller.java -text
-long_term_behav/Reasoner/src/main/java/principal/ServiceReasoner.java -text
 long_term_behav/ReasonerClient/Ma.launch -text
 long_term_behav/ReasonerClient/pom.xml -text
 long_term_behav/ReasonerClient/src/main/java/principal/Activator.java -text
