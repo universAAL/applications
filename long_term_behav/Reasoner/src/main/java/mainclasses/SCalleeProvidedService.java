@@ -45,7 +45,7 @@ public class SCalleeProvidedService extends DroolsService {
 
 		// I'm going to create a serviceprovided that will give me the reasoner
 
-		String my_rule ="Rule";
+		
 		// I register it.
         
 		register(SCalleeProvidedService.class);
