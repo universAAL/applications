@@ -1204,6 +1204,11 @@ health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentForm.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentNewForm.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
+health/health.motivation/pom.xml -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/CSubscriber.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationManager.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SCaller.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
 health/health.ont/LICENSE -text
 health/health.ont/NOTICE -text
 health/health.ont/pom.xml -text
