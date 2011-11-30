@@ -7,7 +7,6 @@
     <relativePath>../pom</relativePath>
   </parent>
   <artifactId>health.treat.manager</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
   <name>Health Treatment Manager</name>
   <description>Enables adding, editing, listing and deleting Treatments that the assisted person must follow</description>
   <inceptionYear>2011</inceptionYear>  
@@ -24,17 +23,10 @@
   		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>health.ont</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
   </dependencies>
     
