@@ -40,32 +40,42 @@ public class Methods extends Service{
 		String contains= rule.getBODY();
 		System.out.println("The following rule will be added: And his body is:"+contains);
 		
-//		try{}
-//		catch
-		
-		if(rule.getBODY() != null){
-			System.out.println("Rule added");
+		try{
+			if(rule.getBODY() != null){
+				System.out.println("Rule added");
+				
+			}
+			
 			return true;
-		}else{
-			System.out.println("Error adding rule");
-			return false;
+			}
+        catch(Exception e){
+		
+				System.out.println("Error adding rule");
+				return false;
 		}
+		
 	}
 	
 	static boolean  removeRule(Rule rule){
 		
-		String vac1 ="";
-		rule.setBODY(vac1);
-
 		
+		rule.setBODY(null);
+        rule.setID(null);
+        
+        try{
+   		
 		if(rule.getBODY() == null){
 			System.out.println("Rule removed");
-			return true;
-		}else{
-			System.out.println("Error removing tool");
-			return false;
 		}
-		
+			return true;
+			
+        }
+			 catch(Exception e){
+					
+					System.out.println("Error removing rule");
+					return false;
+			}
+        
 	}
 		
 		static boolean  addFact(Fact fact){
