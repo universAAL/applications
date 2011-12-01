@@ -38,12 +38,12 @@ public class Methods extends Service{
 	static boolean  addRule(Rule rule){
 		
 		String contains= rule.getBODY();
-		System.out.println("The following rule will be added"+contains);
+		System.out.println("The following rule will be added: And his body is:"+contains);
 		
 //		try{}
 //		catch
 		
-		if(rule.getBODY() == null){
+		if(rule.getBODY() != null){
 			System.out.println("Rule added");
 			return true;
 		}else{
