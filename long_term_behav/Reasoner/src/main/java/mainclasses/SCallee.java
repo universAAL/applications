@@ -12,6 +12,10 @@ import org.universAAL.ontology.drools.Rule;
 
 public class SCallee extends ServiceCallee{
 
+	private static final Object value = null;
+
+
+
 	protected SCallee(BundleContext context, ServiceProfile[] realizedServices) {
 		super(context, realizedServices);
 		// TODO Auto-generated constructor stub
@@ -67,6 +71,13 @@ public class SCallee extends ServiceCallee{
 		
 		System.out.println("CALL SUCCEED---NOW IM ANSWERING");
 		Rule rule_example = new Rule();
+		rule_example.setBODY("A+B");
+		rule_example.setID("Rule1");
+		rule_example.setProperty("http://ontology.universAAL.org/Rulel", value);
+		
+		
+		
+		
 		mainclasses.Methods.addRule(rule_example);
 		
 		

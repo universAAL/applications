@@ -50,39 +50,7 @@ public class SCalleeProvidedService extends DroolsService {
 				new String[]{DroolsService.RULE},
 				serverRestrictions);
 		
-		//copia las restriciones del servicio a la lista serverrestrictions
 
-//		SimpleRequest set = new SimpleRequest(new DroolsService());
-//		
-//		
-//		
-//		
-//		set.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(my_rule));
-//		
-//		
-//		SCalleeProvidedService getAddRuleValue = new SCalleeProvidedService(
-//				SERVICE_GET_ADD_RULE_VALUE);
-//		
-//		// We initialize the profile.
-//		profiles[0] = getAddRuleValue.getProfile();
-//		
-//          
-//		ProcessOutput output = new ProcessOutput(OUTPUT_ADD_RULE_VALUE);
-//		
-//		output.setCardinality(1, 1); // output config only 1 value.sometimes
-//										// we'll put 1-100;
-//		
-//		
-//
-//		profiles[0].addOutput(output);
-//		// I put the output and the path to the endpoint
-//		// the path to get the output
-//		profiles[0].addSimpleOutputBinding(output,
-//				new String[] { DroolsService.RULE});
-//
-//		// Why do we use the addOutputbinding?
-//		// We are relating the output with the path. So we are saying that you
-//		// can find the output value in this path.
 		
 		SimpleProfile prof=new SimpleProfile(new SCalleeProvidedService(SERVICE_GET_ADD_RULE_VALUE));
 		prof.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(new Rule()), OUTPUT_ADD_RULE_VALUE);//Aqui lo que importa de new Rule() es el tipo, da igual la URI
