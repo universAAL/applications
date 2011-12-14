@@ -15,7 +15,7 @@ public class SCalleeProvidedService extends DroolsService {
 		super(uri);
 	}
 
-	public static ServiceProfile[] profiles=new ServiceProfile[1];
+	public static ServiceProfile[] profiles=new ServiceProfile[2];
 	
 	private static Hashtable serverRestrictions = new Hashtable();
 
@@ -27,6 +27,9 @@ public class SCalleeProvidedService extends DroolsService {
 			+ "getAddRuleValue";
 
 	public static final String OUTPUT_ADD_RULE_VALUE = SERVER_NAMESPACE + "addRuleValue";
+
+	private static final String SERVICE_START_UI = SERVER_NAMESPACE
+			+ "startUI";;
 	
 	
 
@@ -56,8 +59,11 @@ public class SCalleeProvidedService extends DroolsService {
 		prof.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(new Rule()), OUTPUT_ADD_RULE_VALUE);//Aqui lo que importa de new Rule() es el tipo, da igual la URI
 		profiles[0]=prof.getTheProfile();
 		
-		System.out.println("Profile created");
+		SimpleProfile prof2=new SimpleProfile(new SCalleeProvidedService(SERVICE_START_UI));
 		
+		
+		System.out.println("Profile created");
+		profiles[1]=prof2.getTheProfile();
 	
 	}
 
