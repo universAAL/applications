@@ -38,7 +38,7 @@ public class Methods extends Service{
 	static boolean  addRule(Rule rule){
 		
 		String contains= rule.getBODY();
-		System.out.println("The following rule will be added: And his body is:"+contains);
+		System.out.println("The following rule will be added: "+contains);
 		
 		try{
 			if(rule.getBODY() != null){
@@ -82,7 +82,7 @@ public class Methods extends Service{
 			
 		String contains= fact.getID();
 			
-			System.out.println("The following fact will be added"+contains);
+			System.out.println("The following fact will be added: "+contains);
 			
 			if(fact.getID() == null){
 				System.out.println("Fact added");
