@@ -1,18 +1,33 @@
 package mainclasses;
 
+import java.util.Locale;
+
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.universAAL.middleware.io.owl.PrivacyLevel;
+import org.universAAL.middleware.io.rdf.Form;
+import org.universAAL.middleware.output.OutputEvent;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
+import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.drools.Rule;
+import org.universAAL.ontology.profile.ElderlyUser;
+import org.universAAL.ontology.profile.User;
+
 
 
 public class SCallee extends ServiceCallee{
 
 	private static final Object value = null;
+	private static final ServiceResponse failure = new ServiceResponse(
+			CallStatus.serviceSpecificFailure);
+	private final static Logger log = LoggerFactory.getLogger(SCallee.class);
 
 
 
@@ -56,15 +71,50 @@ public class SCallee extends ServiceCallee{
 			
 			return callAddRule();
 		} else {
-			response = new ServiceResponse(CallStatus.serviceSpecificFailure);
-			response.addOutput(new ProcessOutput(
+		
+			if (operation.startsWith(SCalleeProvidedService.SERVICE_START_UI)) {
+			
+			System.out.println("startin ui....");
+			
+			Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
+			
+			
+				if ((inputUser == null) || !(inputUser instanceof User)) {
+					failure.addOutput(new ProcessOutput(
+					ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
+					"Invalid User Input!"));
+					log.debug("No user");
+					return failure;
+				} else {
+					inputUser = (User) inputUser;
+				}
+			
+				log.debug("Show dialog from call");
+			 
+			
+				Activator.oprovider.startMainDialog();
+			
+				ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
+				return sr;
+			
+			}	else {
+				response = new ServiceResponse(CallStatus.serviceSpecificFailure);
+				response.addOutput(new ProcessOutput(
 					ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
 					"Invalid Operation!"));
-			return response;
+				return response;
+			}
 		}
+		
+			
 	}
 	
-
+	public void showTestDialog(User user) {
+		log.debug("Show dialog from ltba");
+		Form f = Form.newDialog("LTBA", new Resource());
+		
+		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+	}
 	
 	private ServiceResponse callAddRule() {
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
