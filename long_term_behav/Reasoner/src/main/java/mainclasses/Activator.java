@@ -4,6 +4,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.ontology.drools.Rule;
 
+
 public class Activator implements BundleActivator{
 	public static BundleContext context=null;
 	public static SCallee scallee=null;
@@ -11,8 +12,8 @@ public class Activator implements BundleActivator{
 
 	public void start(BundleContext context) throws Exception {
 		Activator.context=context;
-		scallee=new SCallee(context);
-//		scaller=new SCaller(context);
+
+	//	scallee = new SCallee(Activator.context);
 		
 		System.out.println("REASONER ACTIVE");
 		
