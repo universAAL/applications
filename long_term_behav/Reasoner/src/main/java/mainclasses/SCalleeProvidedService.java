@@ -1,6 +1,7 @@
 package mainclasses;
 
 import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.drools.Rule;
@@ -28,8 +29,8 @@ public class SCalleeProvidedService extends DroolsService {
 
 	public static final String OUTPUT_ADD_RULE_VALUE = SERVER_NAMESPACE + "addRuleValue";
 
-	private static final String SERVICE_START_UI = SERVER_NAMESPACE
-			+ "startUI";;
+	public static final String SERVICE_START_UI = SERVER_NAMESPACE
+			+ "startUI";
 	
 	
 
@@ -59,11 +60,11 @@ public class SCalleeProvidedService extends DroolsService {
 		prof.putArgument(new String[] { DroolsService.RULE }, new SimpleAdd(new Rule()), OUTPUT_ADD_RULE_VALUE);//Aqui lo que importa de new Rule() es el tipo, da igual la URI
 		profiles[0]=prof.getTheProfile();
 		
-		SimpleProfile prof2=new SimpleProfile(new SCalleeProvidedService(SERVICE_START_UI));
+		
 		
 		
 		System.out.println("Profile created");
-		profiles[1]=prof2.getTheProfile();
+		profiles[1]=InitialServiceDialog.createInitialDialogProfile(MY_URI, "http://www.tsb.upv.es", "LTBA service", SERVICE_START_UI);
 	
 	}
 
