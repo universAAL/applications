@@ -39,7 +39,6 @@ public class ISubscriber extends InputSubscriber{
 
 	public void dialogAborted(String dialogID) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void handleInputEvent(InputEvent event) {
@@ -51,9 +50,11 @@ public class ISubscriber extends InputSubscriber{
 	
 	public void registerUI(String formID, InputListener listener) {
 		inputMapper.put(formID, listener);
+		addNewRegParams(formID);
 	}
 
 	public void unresgisterUI(String formID) {
 		inputMapper.remove(formID);
+		removeMatchingRegParams(formID);
 	}
 }
