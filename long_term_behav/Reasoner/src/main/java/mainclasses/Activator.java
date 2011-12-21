@@ -19,11 +19,11 @@ public class Activator implements BundleActivator{
 		
 		oprovider = new OutputProvider(Activator.context);
 		
-		System.out.println("REASONER ACTIVE");
+	//	System.out.println("REASONER ACTIVE");
 		
-		Rule miregla = new Rule();
+	//	Rule miregla = new Rule();
 		
-		mainclasses.Methods.addRule(miregla);
+	//	mainclasses.Methods.addRule(miregla);
 		
 		
 		
