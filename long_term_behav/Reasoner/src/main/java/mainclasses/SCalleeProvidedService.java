@@ -23,7 +23,8 @@ public class SCalleeProvidedService extends DroolsService {
 	public static final String SERVER_NAMESPACE = "http://ontology.tsbtecnologias.es/Reasoner.owl#";
 
 	public static final String MY_URI = SERVER_NAMESPACE + "ReasonerService";
-
+	
+	
 	public static final String SERVICE_GET_ADD_RULE_VALUE = SERVER_NAMESPACE
 			+ "getAddRuleValue";
 
@@ -65,7 +66,10 @@ public class SCalleeProvidedService extends DroolsService {
 		
 		System.out.println("Profile created");
 		profiles[1]=InitialServiceDialog.createInitialDialogProfile(MY_URI, "http://www.tsb.upv.es", "LTBA service", SERVICE_START_UI);
-	
+	  
+		
+		
+		
 	}
 
 
