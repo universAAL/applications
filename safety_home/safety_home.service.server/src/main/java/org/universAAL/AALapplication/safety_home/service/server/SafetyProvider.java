@@ -3,11 +3,11 @@ package org.universAAL.AALapplication.safety_home.service.server;
 import java.util.ArrayList;
 
 import org.osgi.framework.BundleContext;
-import org.universAAL.middleware.context.ContextEvent;
-import org.universAAL.middleware.context.ContextPublisher;
-import org.universAAL.middleware.context.DefaultContextPublisher;
-import org.universAAL.middleware.context.owl.ContextProvider;
-import org.universAAL.middleware.context.owl.ContextProviderType;
+//import org.universAAL.middleware.context.ContextEvent;
+//import org.universAAL.middleware.context.ContextPublisher;
+//import org.universAAL.middleware.context.DefaultContextPublisher;
+//import org.universAAL.middleware.context.owl.ContextProvider;
+//import org.universAAL.middleware.context.owl.ContextProviderType;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -15,6 +15,11 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.util.LogUtils;
 import org.universAAL.ontology.safetyDevices.Door;
+import org.universAAL.ontology.safetyDevices.Window;
+import org.universAAL.ontology.safetyDevices.LightSensor;
+import org.universAAL.ontology.safetyDevices.TemperatureSensor;
+import org.universAAL.ontology.safetyDevices.HumiditySensor;
+import org.universAAL.ontology.safetyDevices.MotionSensor;
 import org.universAAL.ontology.location.indoor.Room;
 import org.universAAL.ontology.phThing.Device;
 import org.universAAL.AALapplication.safety_home.service.server.unit_impl.DeviceStateListener;
@@ -33,14 +38,16 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 	}
 
 	private MyDevices theServer;
-	private ContextPublisher cp;
+	//private ContextPublisher cp;
 
 	SafetyProvider(BundleContext context) {
 		super(context, SafetyService.profiles);
+/*
 		ContextProvider info = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE
 						+ "SafetyContextProvider");
 		info.setType(ContextProviderType.controller);
 		cp = new DefaultContextPublisher(context, info);
+*/		
 		theServer = new MyDevices();
 		theServer.addListener(this);
 	}
@@ -89,16 +96,28 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 
 	// create a service response that including all available devices
 	private ServiceResponse getControlledDevices() {
-		// We assume that the Service-Call always succeeds because we only
-		// simulate the lights
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
-		// create a list including the available lights
 		int[] devices = theServer.getDeviceIDs();
 		
 		ArrayList al = new ArrayList(devices.length);
 		for (int i = 0; i < devices.length; i++){
 			if(i==0){
 				al.add(new Door(DEVICE_URI_PREFIX + devices[i]));
+			}
+			if(i==1){
+				al.add(new Window(DEVICE_URI_PREFIX + devices[i]));
+			}
+			if(i==2){
+				al.add(new LightSensor(DEVICE_URI_PREFIX + devices[i]));
+			}
+			if(i==3){
+				al.add(new TemperatureSensor(DEVICE_URI_PREFIX + devices[i]));
+			}
+			if(i==4){
+				al.add(new HumiditySensor(DEVICE_URI_PREFIX + devices[i]));
+			}
+			if(i==5){
+				al.add(new MotionSensor(DEVICE_URI_PREFIX + devices[i]));
 			}
 		}
 		// create and add a ProcessOutput-Event that binds the output URI to the
@@ -160,10 +179,14 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 		try {
 			// virtual unlock	
 			boolean res = true;
-			if (theServer.unlock(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length()))))
+			if (theServer.unlock(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length())))){
+				//deviceStateChanged(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length())), ""+theServer.getDeviceLocation(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length()))), true);
 				return new ServiceResponse(CallStatus.succeeded);
-			else
+			}
+			else{
+				//deviceStateChanged(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length())), ""+theServer.getDeviceLocation(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length()))), false);
 				return new ServiceResponse(CallStatus.serviceSpecificFailure);
+			}
 
 			// Living Lab unlock	
 /*			boolean res = true;
@@ -223,15 +246,16 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 	 * To demonstrate the functionality of the context bus we publish an event
 	 * for every time the value of a door is changed
 	 */
-	public void deviceStateChanged(int deviceID, String loc, boolean isOn) {
+	public void deviceStateChanged(int deviceID, String loc, boolean value) {
 		
 		Device device=null;
 		if(deviceID==0){
 			Door door = new Door(SafetyProvider.DEVICE_URI_PREFIX + deviceID);
 			device=(Device)door;
-			door.setDeviceLocation(new Room(SafetyProvider.LOCATION_URI_PREFIX
-					+ loc));
-			door.setStatus(isOn? 100 : 0);
+			door.setDeviceLocation(new Room(SafetyProvider.LOCATION_URI_PREFIX + loc));
+			door.setStatus(value? 100: 0);
+			//cp.publish(new ContextEvent(door, Door.PROP_DEVICE_STATUS));
+			
 /*
 			LogUtils
 				.logInfo(
@@ -241,9 +265,9 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 						new Object[] { "publishing a context event on the state of a Door!" },
 						null);
 */
-			// finally create an context event and publish it with the oven as
+			// finally create an context event and publish it with the door as
 			// subject and the property that changed as predicate
-			cp.publish(new ContextEvent(door, Door.PROP_DEVICE_STATUS));
+			//cp.publish(new ContextEvent(door, Door.PROP_DEVICE_STATUS));
 		}	
 	}
 }

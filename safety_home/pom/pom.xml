@@ -30,5 +30,11 @@
   	<module>../ont.safetyDevices</module>
   	<module>../safety_home.service.client</module>
   	<module>../safety_home.service.server</module>
+  	<module>../safety_home.service.smartCardProvider</module>
+  	<module>../safety_home.service.windowProvider</module>
+  	<module>../safety_home.service.lightSensorProvider</module>
+  	<module>../safety_home.service.temperatureSensorProvider</module>
+  	<module>../safety_home.service.humiditySensorProvider</module>
+  	<module>../safety_home.service.motionSensorProvider</module>
   </modules>
 </project>

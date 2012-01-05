@@ -8,6 +8,11 @@ import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.safetyDevices.Safety;
 import org.universAAL.ontology.safetyDevices.Door;
+import org.universAAL.ontology.safetyDevices.Window;
+import org.universAAL.ontology.safetyDevices.LightSensor;
+import org.universAAL.ontology.safetyDevices.TemperatureSensor;
+import org.universAAL.ontology.safetyDevices.HumiditySensor;
+import org.universAAL.ontology.safetyDevices.MotionSensor;
 import org.universAAL.ontology.location.Location;
 
 /**
@@ -55,6 +60,11 @@ public class SafetyService extends Safety {
 		
 		SafetyService getDeviceInfo = new SafetyService(SERVICE_GET_DEVICE_INFO);
 		getDeviceInfo.addFilteringInput(INPUT_DEVICE_URI, Door.MY_URI, 1, 1, ppControls);
+		getDeviceInfo.addFilteringInput(INPUT_DEVICE_URI, Window.MY_URI, 1, 1, ppControls);
+		getDeviceInfo.addFilteringInput(INPUT_DEVICE_URI, LightSensor.MY_URI, 1, 1, ppControls);
+		getDeviceInfo.addFilteringInput(INPUT_DEVICE_URI, TemperatureSensor.MY_URI, 1, 1, ppControls);
+		getDeviceInfo.addFilteringInput(INPUT_DEVICE_URI, HumiditySensor.MY_URI, 1, 1, ppControls);
+		getDeviceInfo.addFilteringInput(INPUT_DEVICE_URI, MotionSensor.MY_URI, 1, 1, ppControls);
 		getDeviceInfo.addOutput(OUTPUT_DEVICE_STATUS, TypeMapper.getDatatypeURI(Integer.class), 1, 1,
 				ppStatus);
 		getDeviceInfo.addOutput(OUTPUT_DEVICE_LOCATION,	Location.MY_URI, 1, 1,

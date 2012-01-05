@@ -1,0 +1,42 @@
+Manifest-Version: 1.0
+Export-Package: org.universAAL.AALapplication.db.manager.entities;uses
+ :="org.universAAL.AALapplication.db.utils.statements,org.universAAL.A
+ ALapplication.db.utils";version="0.1.0.SNAPSHOT",org.universAAL.AALap
+ plication.db.manager.entitymanagers;uses:="org.universAAL.AALapplicat
+ ion.db.utils.statements,org.universAAL.AALapplication.db.utils,org.un
+ iversAAL.AALapplication.db.manager.entities,org.universAAL.AALapplica
+ tion.db.utils.criteria";version="0.1.0.SNAPSHOT",org.universAAL.AALap
+ plication.db.utils;uses:="javax.sql,com.mysql.jdbc,org.universAAL.AAL
+ application.db.manager.entities";version="0.1.0.SNAPSHOT",org.univers
+ AAL.AALapplication.db.utils.criteria;uses:="org.universAAL.AALapplica
+ tion.db.utils";version="0.1.0.SNAPSHOT",org.universAAL.AALapplication
+ .db.utils.statements;uses:="org.universAAL.AALapplication.db.utils.cr
+ iteria,org.universAAL.AALapplication.db.utils";version="0.1.0.SNAPSHO
+ T",org.universAAL.AALapplication.safety_home.service.smartCardProvide
+ r;uses:="org.osgi.framework,org.universAAL.ontology.safetyDevices,org
+ .universAAL.middleware.context.owl,org.universAAL.ontology.location,o
+ rg.universAAL.middleware.rdf,org.universAAL.middleware.context,org.un
+ iversAAL.AALapplication.db.manager.entitymanagers,org.universAAL.AALa
+ pplication.db.utils,org.universAAL.ontology.location.indoor,org.unive
+ rsAAL.AALapplication.db.utils.criteria";version="0.1.0.SNAPSHOT"
+Built-By: dimokas
+Tool: Bnd-1.43.0
+Bundle-Name: Safety at Home Smart Card Provider
+Created-By: Apache Maven Bundle Plugin
+Bundle-Vendor: universAAL Consortium
+Build-Jdk: 1.6.0_27
+Bundle-Version: 0.1.0.SNAPSHOT
+Bnd-LastModified: 1325772938169
+Bundle-ManifestVersion: 2
+Bundle-Activator: org.universAAL.AALapplication.safety_home.service.sm
+ artCardProvider.Activator
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-Description: Safety at Home Smart Card Provider
+Import-Package: com.mysql.jdbc;version="[5.1,6)",javax.sql,org.osgi.fr
+ amework;version="[1.3,2)",org.universAAL.middleware.context,org.unive
+ rsAAL.middleware.context.owl,org.universAAL.middleware.rdf,org.univer
+ sAAL.ontology.location,org.universAAL.ontology.location.indoor,org.un
+ iversAAL.ontology.safetyDevices;version="[0.1,1)"
+Bundle-DocURL: http://www.universAAL.org/
+Bundle-SymbolicName: safety_home.service.smartCardProvider
+
