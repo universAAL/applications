@@ -31,7 +31,7 @@ public class SCalleeProvidedService extends DroolsService {
 	public static final String OUTPUT_ADD_RULE_VALUE = SERVER_NAMESPACE + "addRuleValue";
 
 	public static final String SERVICE_START_UI = SERVER_NAMESPACE
-			+ "startUI";
+			+ "UserInterface";
 	
 	
 

@@ -22,6 +22,8 @@ public class OutputProvider extends OutputPublisher {
 	
 	static final String OUTPUT_NAMESPACE = SCalleeProvidedService.SERVICE_START_UI+"OutputProvider#";
 	static final String SUBMISSION_ON = OUTPUT_NAMESPACE+"on";
+	static final String SUBMISSION_OFF = OUTPUT_NAMESPACE+"off";
+	static final String CONFIGURATION = OUTPUT_NAMESPACE+"Configuration";
 	static final ElderlyUser testUser = 
 		new ElderlyUser(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
 	//static InputConsumer inputConsumer;
@@ -44,7 +46,20 @@ public class OutputProvider extends OutputPublisher {
 		Form f = Form.newDialog("UI: LTBA", new Resource());
 		
 		
-		new Submit(f.getSubmits(), new Label("On", null), SUBMISSION_ON);
+		if(mainclasses.Methods.getltbaState()== true){
+			new Submit(f.getIOControls(), new Label("Off", null), SUBMISSION_ON);
+			new Submit(f.getIOControls(), new Label("Configuration", null), CONFIGURATION);
+		
+		
+		} else {
+			
+			
+			new Submit(f.getIOControls(), new Label("On", null), SUBMISSION_ON);
+			new Submit(f.getIOControls(), new Label("Configuration", null), CONFIGURATION);
+		}
+		
+		
+		
 		
 		
 		
