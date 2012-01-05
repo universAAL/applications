@@ -95,6 +95,20 @@ public class Methods extends Service{
 			
 		}	
 		
+		static void  onOff_ltba(Boolean state){
+							
+			mainclasses.Configuration.setState(state);
+				
+				
+		}
+		
+		
+		static boolean  getltbaState(){
+			
+			return mainclasses.Configuration.getState();
+		
+				
+		}	
 	
 	private Methods(String uri) {
 		super(uri);
