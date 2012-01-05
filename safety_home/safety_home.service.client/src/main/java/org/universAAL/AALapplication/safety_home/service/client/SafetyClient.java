@@ -18,6 +18,11 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.util.LogUtils;
 import org.universAAL.ontology.safetyDevices.Safety;
 import org.universAAL.ontology.safetyDevices.Door;
+import org.universAAL.ontology.safetyDevices.Window;
+import org.universAAL.ontology.safetyDevices.LightSensor;
+import org.universAAL.ontology.safetyDevices.TemperatureSensor;
+import org.universAAL.ontology.safetyDevices.HumiditySensor;
+import org.universAAL.ontology.safetyDevices.MotionSensor;
 
 
 /**
@@ -39,11 +44,31 @@ class SafetyClient extends ContextSubscriber {
     private static Vector values = new Vector(); 
     
 	private static ContextEventPattern[] getContextSubscriptionParams() {
-		ContextEventPattern cep = new ContextEventPattern();
-		cep.addRestriction(Restriction.getAllValuesRestriction(
+		ContextEventPattern cep1 = new ContextEventPattern();
+		cep1.addRestriction(Restriction.getAllValuesRestriction(
 				ContextEvent.PROP_RDF_SUBJECT, Door.MY_URI));
-		
-		return new ContextEventPattern[] { cep };
+
+		ContextEventPattern cep2 = new ContextEventPattern();
+		cep2.addRestriction(Restriction.getAllValuesRestriction(
+				ContextEvent.PROP_RDF_SUBJECT, Window.MY_URI));
+
+		ContextEventPattern cep3 = new ContextEventPattern();
+		cep3.addRestriction(Restriction.getAllValuesRestriction(
+				ContextEvent.PROP_RDF_SUBJECT, LightSensor.MY_URI));
+
+		ContextEventPattern cep4 = new ContextEventPattern();
+		cep4.addRestriction(Restriction.getAllValuesRestriction(
+				ContextEvent.PROP_RDF_SUBJECT, TemperatureSensor.MY_URI));
+
+		ContextEventPattern cep5 = new ContextEventPattern();
+		cep5.addRestriction(Restriction.getAllValuesRestriction(
+				ContextEvent.PROP_RDF_SUBJECT, HumiditySensor.MY_URI));
+
+		ContextEventPattern cep6 = new ContextEventPattern();
+		cep6.addRestriction(Restriction.getAllValuesRestriction(
+				ContextEvent.PROP_RDF_SUBJECT, MotionSensor.MY_URI));
+
+		return new ContextEventPattern[] { cep1, cep2, cep3, cep4, cep5, cep6 };
 	}
 
 	SafetyClient(BundleContext context) {
@@ -275,7 +300,57 @@ class SafetyClient extends ContextSubscriber {
 		}
 	}
 
-	public void handleContextEvent(ContextEvent event) {
+    public void whoIsKnocking(String person) {
+    	String tmp = person;
+    	SafetyUIClient.setKnockingPerson(person);
+    }
+	
+    public void windowStatus(int status) {
+    	SafetyUIClient.setWindowStatus(status);
+    }
+
+    public void lightStatus(int status) {
+    	SafetyUIClient.setLightStatus(status);
+    }
+
+    public void temperatureValue(float temperature) {
+    	SafetyUIClient.setTemperatureValue(temperature);
+    }
+
+    public void humidityValue(float humidity) {
+    	SafetyUIClient.setHumidityValue(humidity);
+    }
+
+    public void motionValue(double motion) {
+    	SafetyUIClient.setMotionValue(motion);
+    }
+
+    public void handleContextEvent(ContextEvent event) {
+
+		System.out.println("############### EVENT RECEIVED ###############");
+		System.out.println("Received context event:\n"+"    Subject     = "+
+				event.getSubjectURI()+"\n"+"    Subject type= "+
+				event.getSubjectTypeURI()+ "\n"+"    Predicate   = "+
+				event.getRDFPredicate()+"\n"+"    Object      = "+
+				event.getRDFObject()		
+		);
+		System.out.println("################################################");
+		if (((String)event.getSubjectTypeURI()).indexOf("Door")!=-1){
+			if (event.getRDFPredicate().indexOf("deviceRfid")!=-1){
+				whoIsKnocking((String)event.getRDFObject());
+			}
+		}
+		if (((String)event.getSubjectTypeURI()).indexOf("Window")!=-1)
+			windowStatus(((Integer)event.getRDFObject()).intValue());
+		if (((String)event.getSubjectTypeURI()).indexOf("Light")!=-1)
+			lightStatus(((Integer)event.getRDFObject()).intValue());
+		if (((String)event.getSubjectTypeURI()).indexOf("Temperature")!=-1)
+			temperatureValue(((Float)event.getRDFObject()).floatValue());
+		if (((String)event.getSubjectTypeURI()).indexOf("Humidity")!=-1)
+			humidityValue(((Float)event.getRDFObject()).floatValue());
+		if (((String)event.getSubjectTypeURI()).indexOf("Motion")!=-1)
+			motionValue(((Double)event.getRDFObject()).doubleValue());
+		
 /*
 		LogUtils.logInfo(Activator.logger, "SafetyConsumer",
 				"handleContextEvent", new Object[] {

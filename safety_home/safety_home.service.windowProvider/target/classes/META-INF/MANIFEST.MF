@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Export-Package: org.universAAL.AALapplication.safety_home.service.soap
+ Client;version="0.1.0.SNAPSHOT",org.universAAL.AALapplication.safety_
+ home.service.windowProvider;uses:="org.osgi.framework,org.universAAL.
+ middleware.rdf,org.universAAL.ontology.safetyDevices,org.universAAL.m
+ iddleware.context.owl,org.universAAL.AALapplication.safety_home.servi
+ ce.soapClient,org.universAAL.middleware.context,org.universAAL.ontolo
+ gy.location,org.universAAL.ontology.location.indoor";version="0.1.0.S
+ NAPSHOT"
+Built-By: dimokas
+Tool: Bnd-1.43.0
+Bundle-Name: Safety at Home Window Provider
+Created-By: Apache Maven Bundle Plugin
+Bundle-Vendor: universAAL Consortium
+Build-Jdk: 1.6.0_27
+Bundle-Version: 0.1.0.SNAPSHOT
+Bnd-LastModified: 1325772938554
+Bundle-ManifestVersion: 2
+Bundle-Activator: org.universAAL.AALapplication.safety_home.service.wi
+ ndowProvider.Activator
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-Description: Safety at Home Window Provider
+Import-Package: org.osgi.framework;version="[1.3,2)",org.universAAL.mi
+ ddleware.context,org.universAAL.middleware.context.owl,org.universAAL
+ .middleware.rdf,org.universAAL.ontology.location,org.universAAL.ontol
+ ogy.location.indoor,org.universAAL.ontology.safetyDevices;version="[0
+ .1,1)"
+Bundle-DocURL: http://www.universAAL.org/
+Bundle-SymbolicName: safety_home.service.windowProvider
+

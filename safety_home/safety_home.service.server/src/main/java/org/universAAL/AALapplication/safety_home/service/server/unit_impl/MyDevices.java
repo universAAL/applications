@@ -31,7 +31,8 @@ public class MyDevices {
 	}
 	
 	private Device[] myDeviceDB = new Device[] {
-			new Device("loc1", false)
+			new Device("loc1", false), new Device("loc2", false), new Device("loc3", false), 
+			new Device("loc4", false), new Device("loc5", false), new Device("loc6", false)
 	};
 	
 	private ArrayList listeners = new ArrayList();
