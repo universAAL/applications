@@ -7,6 +7,7 @@ import java.util.Locale;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.io.owl.PrivacyLevel;
 import org.universAAL.middleware.io.rdf.Form;
+import org.universAAL.middleware.io.rdf.InputField;
 import org.universAAL.middleware.io.rdf.Label;
 import org.universAAL.middleware.io.rdf.Submit;
 import org.universAAL.middleware.output.OutputEvent;
@@ -24,7 +25,7 @@ public class OutputProvider extends OutputPublisher {
 	static final String SUBMISSION_ON = OUTPUT_NAMESPACE+"on";
 	static final String SUBMISSION_OFF = OUTPUT_NAMESPACE+"off";
 	static final String CONFIGURATION = OUTPUT_NAMESPACE+"Configuration";
-	static final String CONFIGURATION_MENU = OUTPUT_NAMESPACE+"ConfigurationMenu";
+	
 	
 	static final ElderlyUser testUser = 
 		new ElderlyUser(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
@@ -49,15 +50,18 @@ public class OutputProvider extends OutputPublisher {
 		
 		
 		if(mainclasses.Methods.getltbaState()== true){
-			new Submit(f.getIOControls(), new Label("Off", null), SUBMISSION_ON);
+			new Submit(f.getIOControls(), new Label("Off (Service on)", null), SUBMISSION_ON);
 			new Submit(f.getIOControls(), new Label("Configuration", null), CONFIGURATION);
 		
 		
 		} else {
 			
 			
-			new Submit(f.getIOControls(), new Label("On", null), SUBMISSION_ON);
+			new Submit(f.getIOControls(), new Label("On (Service off)", null), SUBMISSION_ON);
 			new Submit(f.getIOControls(), new Label("Configuration", null), CONFIGURATION);
+			
+			
+			
 		}
 		
 		
