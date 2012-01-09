@@ -17,9 +17,9 @@ public class InputSubscriber {
 		
 		
 		  if (ie != null) {
-		   if (mainclasses.OutputProvider.CONFIGURATION.equals(ie.getSubmissionID()))
+		   if (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID()))
 			   
-			   mainclasses.OutputProvider.initMainDialog();
+			   mainclasses.OutputPublisher.initMainDialog();
 			   
 		   
 		    return;

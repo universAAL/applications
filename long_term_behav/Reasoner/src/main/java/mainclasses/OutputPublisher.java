@@ -11,7 +11,7 @@ import org.universAAL.middleware.io.rdf.InputField;
 import org.universAAL.middleware.io.rdf.Label;
 import org.universAAL.middleware.io.rdf.Submit;
 import org.universAAL.middleware.output.OutputEvent;
-import org.universAAL.middleware.output.OutputPublisher;
+
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.util.Constants;
@@ -19,7 +19,7 @@ import org.universAAL.ontology.profile.ElderlyUser;
 import org.universAAL.middleware.input.InputEvent;
 import org.universAAL.middleware.input.InputSubscriber;
 import org.universAAL.middleware.input.InputSubscriber;
-public class OutputProvider extends OutputPublisher {
+public class OutputPublisher  {
 	
 	static final String OUTPUT_NAMESPACE = SCalleeProvidedService.SERVICE_START_UI+"OutputProvider#";
 	static final String SUBMISSION_ON = OUTPUT_NAMESPACE+"on";
@@ -35,15 +35,16 @@ public class OutputProvider extends OutputPublisher {
 	
 	private Form mainDialog = null;
 	
-	protected OutputProvider(BundleContext context) {
-		super(context);
+
+
+
+	
+
+	
+	public OutputPublisher(BundleContext context) {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	
-
-	
 	public static Form initMainDialog(){
 		
 		Form f = Form.newDialog("UI: LTBA", new Resource());
@@ -55,31 +56,35 @@ public class OutputProvider extends OutputPublisher {
 			//quiero que cuando apreten el boton configuration les lleva a un menu de opciones.
 		
 		
-		} else if (){
-			
+				
 		}
 		else {
 			
 			
 			new Submit(f.getIOControls(), new Label("On (Service off)", null), SUBMISSION_ON);
 			new Submit(f.getIOControls(), new Label("Configuration", null), CONFIGURATION);
-			
-			
-			
+		
 		}
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		return f;
 	}
 
+     public  Form showConfigurationMenu(){
+		
+		Form f = Form.newDialog("UI: Configuration Menu", new Resource());
+		
+		
+	
+			new Submit(f.getIOControls(), new Label("Informe about visits", null), SUBMISSION_ON);
+	
+		return f;	
+	}
+	
+	
+	
+	
+	
 
-	@Override
 	public void communicationChannelBroken() {
 		// TODO Auto-generated method stub
 		
@@ -95,7 +100,7 @@ public class OutputProvider extends OutputPublisher {
 				LevelRating.middle, Locale.ENGLISH,
 				PrivacyLevel.insensible);
 		//inputConsumer.subscribe(mainDialog.getDialogID());
-		publish(out);
+	//	publish(out);
 		return mainDialog;
 		
 	}
