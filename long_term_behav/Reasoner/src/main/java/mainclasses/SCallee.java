@@ -92,7 +92,7 @@ public class SCallee extends ServiceCallee{
 				log.debug("Show dialog from call");
 			 
 			
-				Activator.oprovider.startMainDialog();
+				Activator.opublisher.startMainDialog();
 			
 				ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 				return sr;
