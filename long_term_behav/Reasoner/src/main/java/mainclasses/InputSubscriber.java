@@ -24,7 +24,7 @@ public class InputSubscriber {
 			   
 		   }
 			   
-		   else (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID())){
+		   else if (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID())){
 			   
 			   mainclasses.OutputPublisher.showConfigurationMenu();
 		   
