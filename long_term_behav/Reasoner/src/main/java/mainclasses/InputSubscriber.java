@@ -23,13 +23,13 @@ public class InputSubscriber {
 			   return;
 			   
 		   }
+			   
+		   else (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID())){
+			   
+			   mainclasses.OutputPublisher.showConfigurationMenu();
 		   
-//		   else (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID())){
-//			   
-//			   mainclasses.OutputPublisher.showConfigurationMenu();
-//		   
-//		    return;
-//		  }
+		    return;
+		  }
 		   // Cancel Dialog, go back to main dialog
 	
 		  }
