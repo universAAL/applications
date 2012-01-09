@@ -6,7 +6,7 @@ import org.universAAL.middleware.io.rdf.Label;
 import org.universAAL.middleware.io.rdf.Submit;
 import org.universAAL.middleware.rdf.Resource;
 
-public class InputProvider {
+public class InputSubscriber {
 
 	public void handleInputEvent(InputEvent ie) {
 		
