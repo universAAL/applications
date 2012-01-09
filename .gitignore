@@ -86,6 +86,14 @@ long_term_behav/ont.drools/.classpath
 long_term_behav/ont.drools/.project
 long_term_behav/ont.drools/.settings
 long_term_behav/ont.drools/target
+medication/medication_manager.service/*.iml
+medication/medication_manager.service/target
+medication/ont.medMgr/*.iml
+medication/ont.medMgr/target
+medication/pom/*.iml
+medication/test_medication_manager.service_callees/*.iml
+medication/test_medication_manager.service_callees/*.log
+medication/test_medication_manager.service_callees/target
 nutritional/NutritionalAdvisor/.classpath
 nutritional/NutritionalAdvisor/.project
 nutritional/NutritionalAdvisor/.settings
