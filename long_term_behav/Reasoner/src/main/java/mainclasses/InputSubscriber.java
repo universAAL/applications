@@ -14,12 +14,13 @@ public class InputSubscriber {
 	
 	public void handleInputEvent(InputEvent ie) {
 		
-		Form f = Form.newDialog("UI: LTBA_CONFIG", new Resource());
+		
 		
 		  if (ie != null) {
 		   if (mainclasses.OutputProvider.CONFIGURATION.equals(ie.getSubmissionID()))
 			   
-			   new Submit(f.getIOControls(), new Label("ConfigurationMenu", null),CONFIGURATION_MENU);
+			   mainclasses.OutputProvider.initMainDialog();
+			   
 		   
 		    return;
 		  }

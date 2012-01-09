@@ -52,9 +52,13 @@ public class OutputProvider extends OutputPublisher {
 		if(mainclasses.Methods.getltbaState()== true){
 			new Submit(f.getIOControls(), new Label("Off (Service on)", null), SUBMISSION_ON);
 			new Submit(f.getIOControls(), new Label("Configuration", null), CONFIGURATION);
+			//quiero que cuando apreten el boton configuration les lleva a un menu de opciones.
 		
 		
-		} else {
+		} else if (){
+			
+		}
+		else {
 			
 			
 			new Submit(f.getIOControls(), new Label("On (Service off)", null), SUBMISSION_ON);
