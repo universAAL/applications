@@ -24,6 +24,8 @@ public class OutputProvider extends OutputPublisher {
 	static final String SUBMISSION_ON = OUTPUT_NAMESPACE+"on";
 	static final String SUBMISSION_OFF = OUTPUT_NAMESPACE+"off";
 	static final String CONFIGURATION = OUTPUT_NAMESPACE+"Configuration";
+	static final String CONFIGURATION_MENU = OUTPUT_NAMESPACE+"ConfigurationMenu";
+	
 	static final ElderlyUser testUser = 
 		new ElderlyUser(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
 	//static InputConsumer inputConsumer;
