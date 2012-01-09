@@ -109,6 +109,13 @@ public class Methods extends Service{
 		
 				
 		}	
+		
+		static void  getNumberofVisits(){
+			
+			mainclasses.Configuration.getVisits();
+				
+				
+		}
 	
 	private Methods(String uri) {
 		super(uri);
