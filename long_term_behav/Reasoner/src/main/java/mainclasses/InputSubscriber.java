@@ -17,15 +17,22 @@ public class InputSubscriber {
 		
 		
 		  if (ie != null) {
-		   if (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID()))
-			   
+		   if (mainclasses.OutputPublisher.SUBMISSION_ON.equals(ie.getSubmissionID())){
+			     
 			   mainclasses.OutputPublisher.initMainDialog();
+			   return;
 			   
+		   }
 		   
-		    return;
-		  }
+//		   else (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID())){
+//			   
+//			   mainclasses.OutputPublisher.showConfigurationMenu();
+//		   
+//		    return;
+//		  }
 		   // Cancel Dialog, go back to main dialog
 	
-    }
+		  }
 }
 
+}
