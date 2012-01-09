@@ -69,7 +69,7 @@ public class OutputPublisher  {
 		return f;
 	}
 
-     public  Form showConfigurationMenu(){
+     public static Form showConfigurationMenu(){
 		
 		Form f = Form.newDialog("UI: Configuration Menu", new Resource());
 		
