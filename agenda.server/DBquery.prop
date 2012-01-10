@@ -1,0 +1,11 @@
+addUser = INSERT INTO agendaUniversAALDB.Users ('idUserType', 'Name', 'Surname', 'Address', 'idCity') VALUES (?, ?, ?, ?, ?);
+addUserType = INSERT INTO agendaUniversAALDB.UserType ('Description', 'OntologyURI') VALUES (?, ?);
+addRelationship = INSERT INTO agendaUniversAALDB.UsersRelationship ('idUser', 'idUserRelative') VALUES (?, ?);
+addCountry = INSERT INTO agendaUniversAALDB.Country ('CountyName') VALUES (?);
+addCity = INSERT INTO agendaUniversAALDB.City ('PostalCode', 'CityName', 'idCountry', 'idState') VALUES (?, ?, ?, ?);
+addState = INSERT INTO agendaUniversAALDB.State ('StateName') VALUES (?);
+addReminderType = addRelationship = INSERT INTO agendaUniversAALDB.ReminderType ('RTypeName') VALUES (?);
+addReminder = INSERT INTO agendaUniversAALDB.Reminder ('ReminderType', 'StartTime', 'RepeatInterval', 'RepeatTime', 'idEvent') VALUES (?,?,?,?,?);
+addReminderDeliverType = INSERT INTO agendauniversAALDB.ReminderDeliveryType ('idReminderType', 'idReminder') VALUES (?, ?);
+addEvent = INSERT INTO agendaUniversAALDB.Event ('Title', 'Description', 'StartTime', 'EndTime', 'Location',) VALUES (?,?,?,?,?);
+addSubscription = INSERT INTO agendaUniversAALDB.Subscription ('idUserSubscriber', 'idUserWhoS', 'idEvent', 'Confirmed') VALUES (?,?,?,?);
