@@ -9,7 +9,7 @@ import org.universAAL.middleware.rdf.Resource;
 
 public class InputSubscriber {
 	static final String INPUT_NAMESPACE = SCalleeProvidedService.SERVICE_START_UI+"InputSubscriber#";
-	static final String CONFIGURATION_MENU = INPUT_NAMESPACE+"ConfigurationMenu";
+	
 	
 	
 	public void handleInputEvent(InputEvent ie) {
