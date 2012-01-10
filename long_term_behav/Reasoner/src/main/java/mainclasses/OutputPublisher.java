@@ -78,7 +78,7 @@ public class OutputPublisher  {
 		
 		
 	
-			new Submit(f.getIOControls(), new Label("Informe about visits", null), SUBMISSION_ON);
+			new Submit(f.getIOControls(), new Label("Report about visits", null), SUBMISSION_ON);
 	
 		return f;	
 	}
