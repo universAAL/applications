@@ -14,7 +14,7 @@ public class Activator implements BundleActivator{
 	
 	public void start(BundleContext context) throws Exception {
 		Activator.context=context;
-
+        
 		scallee = new SCallee(Activator.context);
 		
 		opublisher = new OutputPublisher(Activator.context);
