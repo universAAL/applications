@@ -29,6 +29,7 @@ public class InputSubscriber {
 			   
 		   } else if (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID())){
 			   
+			   System.out.println("input subscriber calling menu");
 			   Activator.opublisher.showConfigurationMenu();
 		   
 		    return;
