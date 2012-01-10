@@ -114,3 +114,8 @@ agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/o
 agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/ont/FilterParams.java -text
 agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/ont/TimeSearchType.java -text
 agenda_ont/eventSelection.ont/src/main/java/gr/anco/persona/eventSelectionTool/ont/service/EventSelectionToolService.java -text
+agenda_uAAL_pom/.project -text
+agenda_uAAL_pom/.settings/org.maven.ide.eclipse.prefs -text
+agenda_uAAL_pom/desktop.ini -text
+agenda_uAAL_pom/launches/agenda_uAAL.launch -text
+agenda_uAAL_pom/pom.xml -text
