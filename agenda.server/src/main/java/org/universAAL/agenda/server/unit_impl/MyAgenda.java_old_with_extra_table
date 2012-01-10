@@ -1,0 +1,1056 @@
+package gr.anco.persona.agenda.server.unit_impl;
+
+import gr.anco.persona.agenda.ont.Calendar;
+import gr.anco.persona.agenda.ont.Event;
+import gr.anco.persona.agenda.ont.EventDetails;
+import gr.anco.persona.agenda.ont.Reminder;
+import gr.anco.persona.agenda.ont.ReminderType;
+import gr.anco.persona.agenda.ont.TimeInterval;
+import gr.anco.persona.agenda.server.Activator;
+import gr.anco.persona.agenda.server.database.AgendaDBInterface;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import org.osgi.service.log.LogService;
+import org.persona.middleware.TypeMapper;
+import org.persona.platform.casf.ontology.location.PhysicalAddress;
+import org.persona.platform.profiling.ontology.User;
+
+public class MyAgenda implements AgendaDBInterface {
+	private static final String DEFAULT_INTERMIDIATE_CALENDAR_NAME = "qwoeiptetfngbclvkjhsfdshf3284jhdf";
+	// private static final boolean DEBUG_DB = false;//Set to true to refill the
+	// DB every time (for debugging)
+	private String DB_URL;
+	private String DB_USER;
+	private String DB_PWD;
+
+	private Connection conn;
+	private Object theLock;
+
+	public static final boolean COMMIT = true;
+	public static final boolean DO_NOT_COMMIT = false;
+
+	public MyAgenda(String url, String user, String pwd) {
+		this.DB_URL = url;
+		this.DB_USER = user;
+		this.DB_PWD = pwd;
+		this.theLock = new Object();
+		connect();
+	}
+
+	public Object getLock() {
+		return theLock;
+	}
+
+	public void connect() {
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
+			initDB();
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_ERROR, "Exception trying to get connection to database: " + e);
+		}
+	}
+
+	private void initDB() throws SQLException {
+
+	}
+
+	public void disconnect() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			Activator.log.log(LogService.LOG_ERROR, "Exception trying to close connection to database: " + e);
+		}
+	}
+
+	/******************************
+	 * database queries
+	 ******************************/
+	/**
+	 * Return the URI of <i>all</i> {@link Calendar}s that are controlled by the
+	 * server
+	 * 
+	 * @return a String array
+	 */
+	// new version: using db
+	public String[] getCalURIs() {
+		String query = "select calendarID " + "from calendar";
+		ResultSet result;
+		try {
+			PreparedStatement getAllCalendars = conn.prepareStatement(query);
+			result = getAllCalendars.executeQuery();
+			List calendars = new ArrayList();
+			while (result.next()) {
+				calendars.add(Calendar.MY_URI + result.getString(1));
+			}
+
+			String[] ids = new String[calendars.size()];
+			for (int i = 0; i < calendars.size(); i++)
+				ids[i] = (String) calendars.get(i);
+			return ids;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new String[0];
+	}
+	
+	// new version: using db
+	public List/*<Calendar>*/ getCalendarsWithInfo() {
+		String query = "select calendarID, name " + "from calendar";
+		ResultSet result;
+		try {
+			PreparedStatement getAllCalendars = conn.prepareStatement(query);
+			result = getAllCalendars.executeQuery();
+			List calendars = new ArrayList();
+			Calendar c;
+			while (result.next()) {
+				String id = result.getString(1);
+				String name = result.getString(2);
+				c = new Calendar(Calendar.MY_URI+id, name);
+				calendars.add(c);
+			}
+			return calendars;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ArrayList(0);
+	}
+
+	// new version: using db
+	public Calendar[] getCalendars() {
+		String[] s = this.getCalURIs();
+		Calendar[] c = new Calendar[s.length];
+
+		for (int i = 0; i < s.length; ++i) {
+			c[i] = new Calendar(Calendar.MY_URI + s[i]);
+		}
+		return c;
+	}
+
+	/**
+	 * Returns the ID of <i>all</i> {@link Calendar}s that are controlled by the
+	 * server.
+	 * 
+	 * @return a String array
+	 */
+	// new version: using db
+	public String[] getCalIDs() {
+		String[] s = this.getCalURIs();
+		String[] ids = new String[s.length];
+		for (int i = 0; i < s.length; i++)
+			ids[i] = s[i].substring(Calendar.MY_URI.length());
+		return ids;
+	}
+
+	/**
+	 * Returns the name of the {@link Calendar} with the specific URI.
+	 * 
+	 * @param calendarURI
+	 *            a calendar URI
+	 * @return the name of the calendar
+	 */
+	public String getCalType(String calendarURI) {
+		return calendarURI.substring(Calendar.MY_URI.length());
+	}
+
+	// sql ckeck: ok
+	public boolean addCalendar(Calendar c, boolean commit) {
+		String query = "insert into calendar(name, owner) values (?, ?)";
+		String updateName = "UPDATE calendar SET name = ? WHERE name = '" + DEFAULT_INTERMIDIATE_CALENDAR_NAME + "'";
+		boolean updateCalendarName = false;
+		try {
+			conn.setAutoCommit(false);
+			PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			String name = c.getName();
+			if (name == null) {
+				name = DEFAULT_INTERMIDIATE_CALENDAR_NAME;
+				updateCalendarName = true;
+			}
+		
+			ps.setString(1, name);
+			if (c.getOwner() == null)
+				ps.setNull(2, Types.VARCHAR);
+			else
+				ps.setString(2, c.getOwner().getURI());
+			ps.executeUpdate();
+			
+			ResultSet key = ps.getGeneratedKeys();
+			if (updateCalendarName && (key.next())){
+				ps = conn.prepareStatement(updateName);
+				ps.setString(1, "calendar " + key.getInt(1));
+				System.out.println("QUERY: " + ps.toString());
+				int rows = ps.executeUpdate();
+				if (rows < 1) {
+					System.out.println("DEBUG: Calendar name has not been updated");
+				}
+			}
+			if (commit) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	// sql ckeck: ok
+	public boolean removeCalendar(Calendar c, boolean commit) {
+		String removeAssosiatedEvents = "DELETE FROM extendedEvent " +
+										"WHERE eventID IN " +
+										"	(SELECT ce.eventID " +
+										"		FROM calendar c, cal_events ce " +
+										"		WHERE c.calendarID=ce.calendarID AND c.name=? " +
+										"	) ";
+		String removeCalendar = "DELETE FROM calendar WHERE name=?";
+		
+		try {
+			conn.setAutoCommit(false);
+			PreparedStatement ps = conn.prepareStatement(removeAssosiatedEvents);
+			ps.setString(1, c.getName());
+			ps.executeUpdate();
+			
+			ps = conn.prepareStatement(removeCalendar);
+			ps.setString(1, c.getName());
+			int rows = ps.executeUpdate();
+			if (commit) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
+			if (rows == 0)
+				return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	// sql ckeck: ok
+	public List getAllEventCategories(boolean commit) {
+		List allCategories = new ArrayList();
+		String query = "SELECT distinct eCategory FROM extendedevent";
+		try {
+			conn.setAutoCommit(false);
+			PreparedStatement ps = conn.prepareStatement(query);
+			ResultSet result = ps.executeQuery();
+			while (result.next()) {
+				allCategories.add(result.getString(1));
+			}
+			if (commit) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ArrayList(0);
+		}
+		//Collections.sort(allCategories);
+		return allCategories;
+	}
+
+	/**
+	 * Returns the name of the owner ({@link User}) of the {@link Calendar}
+	 * which is stored in the <code>position</code>-th position of the server's
+	 * calendar database.
+	 * 
+	 * @param position
+	 *            the position of the calendar in server's calendar database
+	 * @return the calendar URI
+	 */
+	public String[] getCalNameAndOwner(String calendarURI) {
+		String query = "select owner from calendar where calendarID = ?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			int id = MyAgenda.extractIdFromURI(calendarURI);
+			if (id == -1)
+				throw new NumberFormatException();
+			ps.setInt(1, id);
+			ResultSet result = ps.executeQuery();
+
+			if (result.next()) {
+				String name = result.getString("name");
+				String owner = result.getString("owner");
+				return new String[] { name, owner };
+			}
+
+		} catch (NumberFormatException nfe) {
+			Activator.log.log(LogService.LOG_ERROR, nfe.getMessage());
+		} catch (SQLException e) {
+			Activator.log.log(LogService.LOG_ERROR, e.getMessage());
+		}
+
+		return null;
+	}
+
+	public static int extractIdFromURI(String calendarURI) {
+		int id = -1;
+		try {
+			id = new Integer(calendarURI.substring(Calendar.MY_URI.length())).intValue();
+		} catch (NumberFormatException nfe) {
+			return -1;
+		}
+		return id;
+	}
+
+	public static String convertXMLGregCalendar2String(XMLGregorianCalendar cal) {
+		if (cal == null)
+			return "";
+
+		StringBuffer sb = new StringBuffer(19);
+		sb.append(cal.getYear() + "-");
+		sb.append(cal.getMonth() + "-");
+		sb.append(cal.getDay() + " ");
+		sb.append(cal.getHour() + ":");
+		sb.append(cal.getMinute() + ":");
+		sb.append(cal.getSecond());
+
+		return sb.toString();
+	}
+
+	public static XMLGregorianCalendar convertSQLTimeStamp2XMLGregCalendar(java.sql.Timestamp timeStamp) {
+		if (timeStamp == null)
+			return null;
+
+		return TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(timeStamp.getYear(), timeStamp.getMonth(),
+				timeStamp.getDay(), timeStamp.getHours(), timeStamp.getMinutes(), timeStamp.getSeconds(), 0, 0);
+	}
+
+	// /INFO: check sql ok
+	public int addEventToCalendar(String calendarURI, Event event, boolean commit) {
+		boolean hasExistingEventID = false;
+		int eventId = 0; // foreign key: cal2event -> event
+		String addEvent;
+		if (event.getEventID() > 0) {
+			eventId = event.getEventID();
+			hasExistingEventID = true;
+			addEvent = "insert into extendedEvent(eCategory, ePlace, eSpokenLang, eStartTime, eDbStartTime, eEndTime, eDbEndTime, eDescription, "
+				+ "rMessage, rTime, rDbTime, rRepeatTime, rReminderType, "
+				+ "aCountryName1, aExtAddress, aLocality, aPostalCode, aRegion, aStreetName, aBuilding, isPersistent, eventID) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		} else {
+			addEvent = "insert into extendedEvent(eCategory, ePlace, eSpokenLang, eStartTime, eDbStartTime, eEndTime, eDbEndTime, eDescription, "
+				+ "rMessage, rTime, rDbTime, rRepeatTime, rReminderType, "
+				+ "aCountryName1, aExtAddress, aLocality, aPostalCode, aRegion, aStreetName, aBuilding, isPersistent) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		}
+		String addEvent2Calendar = "insert into cal_events(calendarID, eventID) values (?, ?)";
+
+		int calendarId = 0;
+		try {
+			calendarId = MyAgenda.extractIdFromURI(calendarURI);
+			if (calendarId == -1)
+				throw new Exception("Illegal calendar URI format: " + calendarURI);
+
+			// check for calendar existence
+			if (!calendarExists(calendarId)) {
+				throw new Exception("No such calendar in database: " + calendarURI);
+			}
+
+			PreparedStatement ps;
+			conn.setAutoCommit(false);
+
+			// add event 1-8
+			EventDetails ed = event.getEventDetails();
+			ps = conn.prepareStatement(addEvent, Statement.RETURN_GENERATED_KEYS);
+			if (ed != null) {
+				ps.setString(1, ed.getCategory());
+				ps.setString(2, ed.getPlaceName());
+				ps.setString(3, ed.getSpokenLanguage());
+				if (ed.getTimeInterval() != null) {
+					XMLGregorianCalendar start = ed.getTimeInterval().getStartTime();
+					if (start != null) {
+						long i = start.toGregorianCalendar().getTimeInMillis();
+						ps.setString(4, MyAgenda.convertXMLGregCalendar2String(start));
+						ps.setLong(5, i);
+					} else {
+						ps.setNull(4, java.sql.Types.DATE);
+						ps.setNull(5, java.sql.Types.BIGINT);
+					}
+					XMLGregorianCalendar end = ed.getTimeInterval().getEndTime();
+					if (end != null) {
+						long i = end.toGregorianCalendar().getTimeInMillis();
+						ps.setString(6, MyAgenda.convertXMLGregCalendar2String(end));
+						ps.setLong(7, i);
+					} else {
+						ps.setNull(6, java.sql.Types.DATE);
+						ps.setNull(7, java.sql.Types.BIGINT);
+					}
+				} else {
+					ps.setNull(4, java.sql.Types.DATE);
+					ps.setNull(5, java.sql.Types.BIGINT);
+					ps.setNull(6, java.sql.Types.DATE);
+					ps.setNull(7, java.sql.Types.BIGINT);
+				}
+				
+				ps.setString(8, ed.getDescription());
+			} else {
+				ps.setNull(1, java.sql.Types.VARCHAR);
+				ps.setNull(2, java.sql.Types.VARCHAR);
+				ps.setNull(3, java.sql.Types.VARCHAR);
+				ps.setNull(4, java.sql.Types.DATE);
+				ps.setNull(5, java.sql.Types.BIGINT);
+				ps.setNull(6, java.sql.Types.DATE);
+				ps.setNull(7, java.sql.Types.BIGINT);
+				ps.setNull(8, java.sql.Types.VARCHAR);
+			}
+
+			// add reminder 9-13
+			Reminder rem = event.getReminder();
+			if (rem != null) {
+				ps.setString(9, rem.getMessage());
+
+				XMLGregorianCalendar ccc = rem.getReminderTime();
+				long i = 0;
+				if (ccc != null) {
+					i = ccc.toGregorianCalendar().getTimeInMillis();
+					ps.setString(10, MyAgenda.convertXMLGregCalendar2String(rem.getReminderTime()));
+					ps.setLong(11, i);
+				} else {
+					ps.setNull(10, java.sql.Types.DATE);
+					ps.setNull(11, java.sql.Types.BIGINT);
+				}
+
+				ps.setInt(12, rem.getRepeatTime());
+				if (rem.getReminderType() == null) {
+					ps.setNull(13, java.sql.Types.SMALLINT);
+				} else {
+					ps.setShort(13, (short) rem.getReminderType().ord());
+				}
+			} else {
+				ps.setNull(9, java.sql.Types.VARCHAR);
+				ps.setNull(10, java.sql.Types.DATE);
+				ps.setNull(11, java.sql.Types.BIGINT);
+				ps.setNull(12, java.sql.Types.INTEGER);
+				ps.setNull(13, java.sql.Types.SMALLINT);
+			}
+
+			// add address 14 - 20
+			PhysicalAddress address = event.getEventDetails().getAddress();
+			if (address != null) {
+				String[] countryNames = address.getCountryName();
+				if (countryNames != null) {
+					ps.setString(14, address.getCountryName()[0]);
+				} else {
+					ps.setNull(14, java.sql.Types.VARCHAR);
+				}
+				ps.setString(15, address.getExtendedAddress());
+				ps.setString(16, address.getLocality());
+				ps.setString(17, address.getPostalCode());
+				ps.setString(18, address.getRegion());
+				if (address.getStreetAddress() == null) {
+					ps.setNull(19, java.sql.Types.VARCHAR);
+					ps.setNull(20, java.sql.Types.VARCHAR);
+				} else {
+					ps.setString(19, address.getStreetAddress().streetName);
+					ps.setString(20, address.getStreetAddress().buildingIdentifier);
+				}
+			} else {
+				ps.setNull(14, java.sql.Types.VARCHAR);
+				ps.setNull(15, java.sql.Types.VARCHAR);
+				ps.setNull(16, java.sql.Types.VARCHAR);
+				ps.setNull(17, java.sql.Types.VARCHAR);
+				ps.setNull(18, java.sql.Types.VARCHAR);
+				ps.setNull(19, java.sql.Types.VARCHAR);
+				ps.setNull(20, java.sql.Types.VARCHAR);
+			}
+			ps.setBoolean(21, event.isPersistent());
+			if (hasExistingEventID) {
+				ps.setInt(22, eventId);
+				ps.executeUpdate();
+			} else {
+				ps.executeUpdate();
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) 
+					eventId = rs.getInt(1);
+				else
+					throw new Exception("You cannot add the event to the calendar");
+			}
+
+			// add record to cal2event
+			ps = conn.prepareStatement(addEvent2Calendar);
+			ps.setInt(1, calendarId);
+			ps.setInt(2, eventId);
+			ps.executeUpdate();
+			if (commit) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
+		} catch (NumberFormatException nfe) {
+			Activator.log.log(LogService.LOG_ERROR, nfe.getMessage());
+			return -1;
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_ERROR, sqle.getMessage());
+			return -1;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_ERROR, e.getMessage());
+			return -1;
+		}
+
+		return eventId;
+	}
+
+	// INFO: check sql ok
+	public Event getEventFromCalendar(String calendarURI, int eventID, boolean commit) {
+		List event = getEvents(calendarURI, eventID, commit);
+		if (event.size() > 1) {
+			Activator.log.log(LogService.LOG_WARNING, "More than one events with the same id: " + eventID);
+		}
+		if (event.size() == 0)
+			return null;
+		return (Event) event.get(0);
+	}
+
+	// INFO: check sql ok
+	public List getAllEvents(String calendarURI, boolean commit) {
+		return getEvents(calendarURI, -1, commit);
+	}
+
+	// INFO: check sql ok
+	private List getEvents(String calendarURI, int eventID, boolean commit) {
+		List allEvents = new ArrayList();
+		String calendarCriteria = "";
+		String eventCriteria = "";
+		if (calendarURI != null) {
+			// get events from a specific calendars
+			calendarCriteria = " AND ce.calendarId = ? ";
+		}
+		if (eventID > 0) {
+			// get Specific event
+			eventCriteria = " AND ce.eventID = ? ";
+		}
+
+		String getEvents = "SELECT e.eventID, e.eCategory, e.ePlace, e.eSpokenLang, e.eDbStartTime, e.eDbEndTime, e.eDescription, "
+				+ "e.rMessage, e.rDbTime, e.rRepeatTime, e.rReminderType, "
+				+ "e.aCountryName1, e.aExtAddress, e.aLocality, e.aPostalCode, e.aRegion, e.aStreetName, e.aBuilding, e.isPersistent "
+				+ "FROM extendedEvent e, cal_events ce " + "WHERE ce.eventID = e.eventID" + calendarCriteria + eventCriteria;
+
+		try {
+			PreparedStatement ps;
+			ps = conn.prepareStatement(getEvents);
+			if (calendarURI != null) {
+				int calendarId = MyAgenda.extractIdFromURI(calendarURI);
+				if (calendarId == -1)
+					throw new Exception("Illegal calendar URI format: " + calendarURI);
+
+				// check for calendar existence
+				if (!calendarExists(calendarURI))
+					return new ArrayList(0);
+
+				ps.setInt(1, calendarId);
+			}
+			if (eventID > 0) {
+				if (calendarURI != null)
+					ps.setInt(2, eventID);
+				else
+					ps.setInt(1, eventID);
+			}
+			conn.setAutoCommit(false);
+			ResultSet result = ps.executeQuery();
+			if (commit) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
+
+			while (result.next()) {
+				int eID = result.getInt(1);
+				String eCategory = result.getString(2);
+				String ePlace = result.getString(3);
+				String eSL = result.getString(4);
+				long eStartTime = result.getLong(5);
+				long eEndTime = result.getLong(6);
+				String eDescription = result.getString(7);
+				String rMessage = result.getString(8);
+				long rTime = result.getLong(9);
+				int rRepeat = result.getInt(10);
+				int rType = result.getInt(11);
+				String aCountry = result.getString(12);
+				String aExtAddress = result.getString(13);
+				String aLocality = result.getString(14);
+				String aPostalCode = result.getString(15);
+				String aRegion = result.getString(16);
+				String aStreet = result.getString(17);
+				String aBuilding = result.getString(18);
+				boolean isPersistent = result.getBoolean(19);
+				Event e = new Event(Event.MY_URI + eID);
+				e.setEventID(eID);
+				e.setPersistent(isPersistent);
+				//cached value
+				e.setParentCalendar(new Calendar(calendarURI));
+
+				EventDetails ed = new EventDetails(EventDetails.MY_URI + eID);
+				boolean storeEDobject = false;
+				if (eCategory != null) {
+					ed.setCategory(eCategory);
+					storeEDobject = true;
+				}
+				if (eDescription != null) {
+					ed.setDescription(eDescription);
+					storeEDobject = true;
+				}
+				if (ePlace != null) {
+					ed.setPlaceName(ePlace);
+					storeEDobject = true;
+				}
+				if (eSL != null) {
+					ed.setSpokenLanguage(eSL);
+					storeEDobject = true;
+				}
+
+				TimeInterval ti = new TimeInterval(TimeInterval.MY_URI + eID);
+				boolean storeTIobject = false;
+				if (eStartTime != 0) {
+					GregorianCalendar gc = new GregorianCalendar();
+					gc.setTimeInMillis(eStartTime);
+					ti.setStartTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(gc));
+					storeTIobject = true;
+				}
+				if (eEndTime != 0) {
+					GregorianCalendar gc = new GregorianCalendar();
+					gc.setTimeInMillis(eEndTime);
+					ti.setEndTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(gc));
+					storeTIobject = true;
+				}
+				if (storeTIobject) {
+					ed.setTimeInterval(ti);
+					storeEDobject = true;
+				}
+
+				if (aLocality != null) {
+					PhysicalAddress address = new PhysicalAddress(PhysicalAddress.MY_URI + eID, aLocality, aStreet,
+							aBuilding);
+
+					address.setStreetAddress(aStreet, aBuilding);
+					address.setExtendedAddress(aExtAddress);
+					address.setPostalCode(aPostalCode);
+					address.setRegion(aRegion);
+					address.setCountryName(new String[] { aCountry });
+
+					ed.setAddress(address);
+				}
+
+				boolean storeReminderObject = false;
+				Reminder reminder = new Reminder(Reminder.MY_URI + eID);
+				if (rTime != 0) {
+					GregorianCalendar gc = new GregorianCalendar();
+					gc.setTimeInMillis(rTime);
+					reminder.setReminderTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(gc));
+					storeReminderObject = true;
+					reminder.setRepeatTime(rRepeat);
+					reminder.setReminderType(ReminderType.getReminderTypeByOrder(rType));
+				}
+				if (rMessage != null) {
+					reminder.setMessage(rMessage);
+					storeReminderObject = true;
+				}
+
+				if (storeEDobject) {
+					e.setEventDetails(ed);
+				}
+				if (storeReminderObject) {
+					e.setReminder(reminder);
+				}
+				allEvents.add(e);
+			}
+
+		} catch (NumberFormatException nfe) {
+			Activator.log.log(LogService.LOG_ERROR, nfe.getMessage());
+			return new ArrayList(0);
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_ERROR, sqle.getMessage());
+			return new ArrayList(0);
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_ERROR, e.getMessage());
+			return new ArrayList(0);
+		}
+		return allEvents;
+	}
+
+	// INFO: sql checked ok
+	public boolean removeEvent(String calendarURI, int eventID, boolean commit) {
+		String checkEventInCalendarExistance = "SELECT * FROM cal_events ce " + "WHERE ce.calendarID = ? AND ce.eventID = ?";
+		String removeEvent = "DELETE FROM extendedEvent WHERE eventID = ? AND isPersistent = 0";
+
+		try {
+			conn.setAutoCommit(false);
+			if (!calendarExists(calendarURI))
+				return false;
+
+			PreparedStatement ps = conn.prepareStatement(checkEventInCalendarExistance);
+			ps.setInt(1, extractIdFromURI(calendarURI));
+			ps.setInt(2, eventID);
+
+			ResultSet rs = ps.executeQuery();
+			if (!rs.next())
+				throw new Exception("Event does not belong to this calendar");
+
+			ps = conn.prepareStatement(removeEvent);
+			ps.setInt(1, eventID);
+			int eventDeleted = ps.executeUpdate();
+			if (eventDeleted == 0) {
+				throw new Exception("You can't delete this event");
+			}
+			if (commit) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
+			return true;
+
+		} catch (NumberFormatException nfe) {
+			Activator.log.log(LogService.LOG_ERROR, nfe.getMessage());
+			return false;
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_ERROR, sqle.getMessage());
+			return false;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_ERROR, e.getMessage());
+			return false;
+		}
+	}
+
+	// INFO: sql checked ok
+	public boolean updateEvent(String calendarURI, Event event, boolean commit) {
+		try {
+			boolean isRemoved = removeEvent(calendarURI, event.getEventID(), MyAgenda.DO_NOT_COMMIT);
+			int i = -1;
+			if (isRemoved)
+				i = addEventToCalendar(calendarURI, event, MyAgenda.DO_NOT_COMMIT);
+			else
+				return false;
+
+			if (i <= 0) {
+				return false;
+			}
+			if (commit)
+				conn.commit();
+			return true;
+
+		} catch (NumberFormatException nfe) {
+			Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+			return false;
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+			return false;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+			return false;
+		}
+	}
+
+	public boolean updateReminder(String calendarURI, int eventId, Reminder reminder, boolean commit) {
+		String checkEventInCalendarExistance = "SELECT * FROM cal_events ce " + "WHERE ce.calendarID = ? AND ce.eventID = ?";
+		String updateReminder = "UPDATE extendedEvent SET rMessage=?, rTime=?, rDbtime=?, rRepeatTime=?, rReminderType=?"
+				+ " WHERE eventId = " + eventId;
+
+		try {
+			conn.setAutoCommit(false);
+			if (!calendarExists(calendarURI))
+				return false;
+
+			PreparedStatement ps = conn.prepareStatement(checkEventInCalendarExistance);
+			ps.setInt(1, extractIdFromURI(calendarURI));
+			ps.setInt(2, eventId);
+
+			ResultSet rs = ps.executeQuery();
+			if (!rs.next())
+				throw new Exception("Event does not belong to this calendar");
+
+			ps = conn.prepareStatement(updateReminder);
+			ps.setString(1, reminder.getMessage());
+			ps.setString(2, convertXMLGregCalendar2String(reminder.getReminderTime()));
+			ps.setLong(3, reminder.getReminderTime().toGregorianCalendar().getTimeInMillis());
+			ps.setInt(4, reminder.getRepeatTime());
+			ps.setShort(5, (short) reminder.getReminderType().ord());
+			ps.executeUpdate();
+			if (commit) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
+			return true;
+
+		} catch (NumberFormatException nfe) {
+			Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+			return false;
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+			return false;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+			return false;
+		}
+	}
+
+	public boolean cancelReminder(String calendarURI, int eventId, boolean commit) {
+		String checkEventInCalendarExistance = "SELECT * FROM cal_events ce " + "WHERE ce.calendarID = ? AND ce.eventID = ?";
+		String cancelReminder = "UPDATE extendedEvent SET rTime=?, rDbtime=? " + " WHERE eventId = " + eventId;
+
+		try {
+			conn.setAutoCommit(false);
+			if (!calendarExists(calendarURI))
+				return false;
+
+			PreparedStatement ps = conn.prepareStatement(checkEventInCalendarExistance);
+			ps.setInt(1, extractIdFromURI(calendarURI));
+			ps.setInt(2, eventId);
+
+			ResultSet rs = ps.executeQuery();
+			if (!rs.next())
+				throw new Exception("Event does not belong to this calendar");
+
+			ps = conn.prepareStatement(cancelReminder);
+			ps.setNull(1, java.sql.Types.TIMESTAMP);
+			ps.setNull(2, java.sql.Types.BIGINT);
+			ps.executeUpdate();
+			if (commit) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
+			return true;
+
+		} catch (NumberFormatException nfe) {
+			Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+			return false;
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+			return false;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+			return false;
+		}
+
+	}
+
+	public boolean updateReminderType(String calendarURI, int eventId, ReminderType reminderType, boolean commit) {
+		String checkEventInCalendarExistance = "SELECT * FROM cal_events ce " + " WHERE ce.calendarID = ? AND ce.eventID = ?";
+		String updateReminder = "UPDATE extendedEvent SET rReminderType=? " + " WHERE eventId = " + eventId;
+
+		try {
+			conn.setAutoCommit(false);
+			if (!calendarExists(calendarURI))
+				return false;
+
+			PreparedStatement ps = conn.prepareStatement(checkEventInCalendarExistance);
+			ps.setInt(1, extractIdFromURI(calendarURI));
+			ps.setInt(2, eventId);
+
+			ResultSet rs = ps.executeQuery();
+			if (!rs.next())
+				throw new Exception("Event does not belong to this calendar");
+
+			ps = conn.prepareStatement(updateReminder);
+			ps.setShort(1, (short) reminderType.ord());
+			ps.executeUpdate();
+			if (commit) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
+			return true;
+
+		} catch (NumberFormatException nfe) {
+			Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+			return false;
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+			return false;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+			return false;
+		}
+	}
+
+	// INFO: sql checked ok
+	public boolean calendarExists(String calendarURI) {
+		String calendarExists = "select * from calendar where calendarID = ?";
+
+		try {
+			int calendarId = MyAgenda.extractIdFromURI(calendarURI);
+			if (calendarId == -1)
+				throw new Exception("Illegal calendar URI format: " + calendarURI);
+
+			// check for calendar existence
+			PreparedStatement ps = conn.prepareStatement(calendarExists, Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, calendarId);
+			ResultSet result = ps.executeQuery();
+			if (!result.first()) {
+				throw new Exception("No such calendar in database: " + calendarURI);
+			}
+		} catch (NumberFormatException nfe) {
+			Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+			return false;
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+			return false;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	public boolean calendarExists(int calendarId) {
+		String calendarExists = "select * from calendar where calendarID = ?";
+
+		try {
+			// check for calendar existence
+			PreparedStatement ps = conn.prepareStatement(calendarExists, Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, calendarId);
+			ResultSet result = ps.executeQuery();
+			if (!result.first()) {
+				throw new Exception("No calendar with id = (" + calendarId + ") in database");
+			}
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+			return false;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 
+	 * @param time
+	 *            in seconds
+	 * @return A <code>List</code> with eventIds (int values)
+	 */
+	public List getCurrentReminders(int time) {
+		List eventList = new ArrayList();
+		String query = "SELECT e.eventID " + " FROM extendedEvent e " + " WHERE e.rDbTime >= ? AND e.rDbTime < ?";
+
+		java.util.Calendar c = java.util.Calendar.getInstance();
+		long inMillis = c.getTimeInMillis();
+		long interval = time;
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setLong(1, inMillis);
+			System.out.println(inMillis);
+			System.out.println(new Date(inMillis));
+			System.out.println(inMillis + interval);
+			System.out.println(new Date(inMillis+interval));
+			ps.setLong(2, inMillis + interval);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				int i = rs.getInt(1);
+				if (i != 0)  { eventList.add(new Integer(i)); }
+			}
+			
+			System.out.println("Number of events: " + eventList.size());
+			return eventList;
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+			return null;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+			return null;
+		}
+	}
+
+	public Calendar getCalendarByName(String calendarName, boolean commit) {
+		String calendarExists = "select calendarID from calendar where name = ?";
+
+		try {
+			// check for calendar existence
+			PreparedStatement ps = conn.prepareStatement(calendarExists);
+			ps.setString(1, calendarName);
+			ResultSet result = ps.executeQuery();
+			if (result.first()) {
+				int id = result.getInt(1);
+				return new Calendar(Calendar.MY_URI + id);
+			} else {
+				throw new Exception("No calendar with name = (" + calendarName + ") in database");
+			}
+		} catch (SQLException sqle) {
+			Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+			return null;
+		} catch (Exception e) {
+			Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+			return null;
+		}
+	}
+
+	/*****************************
+	 * MAIN *
+	 *****************************/
+	public static void main(String[] str) {
+		MyAgenda db = new MyAgenda("jdbc:mysql://localhost/agenda_reminder", "root", "sc2011");
+		// String query = "select time from reminder";
+
+		List l = db.getCurrentReminders(60*60);
+		System.out.println(l);
+		String calendarURI = Calendar.MY_URI + 17;
+//		int i = MyAgenda.extractIdFromURI(calendarURI);
+//		// db.getAllEvents(calendarURI);
+//		System.out.println(i);
+//
+//		PhysicalAddress pa = new PhysicalAddress("Thessalia", "Kiprou 21", "b3");
+//		pa.setCountryName(new String[] { "Hellas", "Greece" });
+//		pa.setExtendedAddress("Neapoli");
+//		pa.setPostalCode("41 500");
+//		pa.setRegion("Nea politia");
+//
+//		Reminder rm = new Reminder(null);
+//		rm.setMessage("Hello worlds!");
+//		rm.setReminderType(ReminderType.visualMessage);
+//		rm.setRepeatTime(10); // after 10min
+//		rm.setReminderTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(2009, 3, 12, 15, 30, 0, 0, 2));
+//
+//		TimeInterval ti = new TimeInterval(null);
+//		ti.setStartTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(2009, 3, 12, 18, 00, 0, 0, 2));
+//		ti.setEndTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(2009, 3, 12, 21, 00, 0, 0, 2));
+//
+//		EventDetails ed = new EventDetails(null);
+//		ed.setCategory("Sports");
+//		ed.setPlaceName("Pale de spor");
+//		ed.setSpokenLanguage("GR");
+//		ed.setAddress(pa);
+//		ed.setTimeInterval(ti);
+//
+//		Event event = new Event(null);
+//		event.setEventDetails(ed);
+		// event.setReminder(rm);
+
+		// System.out.println(db.addEventToCalendar(calendarURI, event,
+		// MyAgenda.COMMIT));
+		// Event e = db.getEventFromCalendar(calendarURI, 41, MyAgenda.COMMIT);
+		// e.getEventDetails().setCategory("Aris magic");
+		 db.cancelReminder(calendarURI, 71, true);
+		// System.out.println(db.updateEvent(calendarURI, e, MyAgenda.COMMIT));
+//		System.out.println(db.updateReminderType(calendarURI, 41, ReminderType.blinkingLight, MyAgenda.COMMIT));
+		// System.out.println(db.removeEvent(calendarURI, 37, MyAgenda.COMMIT));
+		// System.out.println("Calendar: " + calendarURI);
+		// List events = db.getAllEvents(calendarURI);
+		// System.out.println("Number of events: " + events.size());
+		// //for (int i = 0; i < events.size(); ++i)
+		// //System.out.println(events.get(i));
+		//		
+		// System.out.println(db.getEventFromCalendar(calendarURI, 29));
+		// System.out.println(newEventId);
+
+	}
+
+
+}
