@@ -27,6 +27,7 @@ Configuration[!!-~]files/confadmin/ui.handler.gui/formsPrototypes.properties -te
 Configuration[!!-~]files/confadmin/ui.handler.gui/guiMessages_en_US.properties -text
 Configuration[!!-~]files/old_agendaDB_with_users.sql -text
 Configuration[!!-~]files/setup[!!-~]instructions.txt -text
+Prototype[!!-~]UC[!!-~]movie/agenda.wmv -text
 agenda.remote/LICENSE -text
 agenda.remote/NOTICE -text
 agenda.remote/bin/.project -text
