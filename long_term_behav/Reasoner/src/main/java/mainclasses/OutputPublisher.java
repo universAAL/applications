@@ -45,7 +45,7 @@ public class OutputPublisher  {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static Form initMainDialog(){
+	public  Form initMainDialog(){
 		
 		Form f = Form.newDialog("UI: LTBA", new Resource());
 		
@@ -69,7 +69,7 @@ public class OutputPublisher  {
 		return f;
 	}
 
-     public static Form showConfigurationMenu(){
+     public  Form showConfigurationMenu(){
 		
 		Form f = Form.newDialog("UI: Configuration Menu", new Resource());
 		
