@@ -19,14 +19,14 @@ public class InputSubscriber {
 		  if (ie != null) {
 		   if (mainclasses.OutputPublisher.SUBMISSION_ON.equals(ie.getSubmissionID())){
 			     
-			   mainclasses.OutputPublisher.initMainDialog();
+			   Activator.opublisher.initMainDialog();
 			   return;
 			   
 		   }
 			   
 		   else if (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID())){
 			   
-			   mainclasses.OutputPublisher.showConfigurationMenu();
+			   Activator.opublisher.showConfigurationMenu();
 		   
 		    return;
 		  }
