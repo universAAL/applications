@@ -74,7 +74,7 @@ public class SCallee extends ServiceCallee{
 		
 			if (operation.startsWith(SCalleeProvidedService.SERVICE_START_UI)) {
 			
-			System.out.println("startin ui....");
+			System.out.println("Startin UI....");
 			
 			Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
 			

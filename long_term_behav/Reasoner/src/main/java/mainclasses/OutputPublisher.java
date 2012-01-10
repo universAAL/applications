@@ -51,16 +51,19 @@ public class OutputPublisher  {
 		
 		
 		if(mainclasses.Methods.getltbaState()== true){
+			
+			System.out.println("The LTBA is on");
+			
 			new Submit(f.getIOControls(), new Label("Off (Service on)", null), SUBMISSION_ON);
 			new Submit(f.getIOControls(), new Label("Configuration", null), CONFIGURATION);
-			//quiero que cuando apreten el boton configuration les lleva a un menu de opciones.
+		
 		
 		
 				
 		}
 		else {
 			
-			
+			System.out.println("The LTBA is off");
 			new Submit(f.getIOControls(), new Label("On (Service off)", null), SUBMISSION_ON);
 			new Submit(f.getIOControls(), new Label("Configuration", null), CONFIGURATION);
 		
