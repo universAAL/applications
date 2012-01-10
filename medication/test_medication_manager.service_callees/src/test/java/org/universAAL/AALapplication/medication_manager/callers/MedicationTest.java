@@ -24,8 +24,6 @@ public final class MedicationTest extends IntegrationTest {
   public MedicationTest() {
     //super("../../pom/launches/LightingExample_Complete_0_3_2.launch");
     //setBundleConfLocation("../../../itests/rundir/confadmin");\
-    System.out.println("drun ta plias");
-
   }
 
   /**
@@ -104,7 +102,6 @@ public final class MedicationTest extends IntegrationTest {
   }
 
   public void testRequestDetails() {
-    System.out.println("uraaaaaaaaa");
     Log.info("TEST %s", MedicationTest.class, "**************** Entering test ***************");
     String[] userIDs = UserIDs.getAllIDs();
     for (int i = 0; i < userIDs.length; i++) {
@@ -124,7 +121,7 @@ public final class MedicationTest extends IntegrationTest {
     System.out.println("**************** START PRINTING SIDEEFFECT****************");
     for (int i = 0; i < sideeffect.size(); i++) {
       String se = (String) sideeffect.get(i);
-      Log.info("sideeffect %s", getClass(), se);
+      Log.info("%s", getClass(), se);
     }
 
     System.out.println("**************** END PRINTING SIDEEFFECT****************");
@@ -134,7 +131,7 @@ public final class MedicationTest extends IntegrationTest {
     System.out.println("**************** START PRINTING INCOMPLIANCE****************");
     for (int i = 0; i < incompliance.size(); i++) {
       String inc = (String) incompliance.get(i);
-      Log.info("incompliance %s", getClass(), inc);
+      Log.info("%s", getClass(), inc);
     }
 
     System.out.println("**************** END PRINTING SIDEEFFECT****************");

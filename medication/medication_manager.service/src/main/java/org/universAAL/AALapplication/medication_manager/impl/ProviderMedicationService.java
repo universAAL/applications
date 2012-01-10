@@ -24,10 +24,7 @@ public final class ProviderMedicationService extends Precaution {
   static final ServiceProfile[] profiles = new ServiceProfile[1];
 
   static {
-    // we need to register all classes in the ontology for the serialization
-    // of the object
-    // OntologyManagement.getInstance().register(new SimpleOntology(MY_URI,
-    // Lighting.MY_URI));
+
     OntologyManagement.getInstance().register(
         new SimpleOntology(MY_URI, Precaution.MY_URI,
             new ResourceFactoryImpl() {
@@ -38,15 +35,15 @@ public final class ProviderMedicationService extends Precaution {
               }
             }));
 
-    String[] ppSideeffect = new String[] { Precaution.SIDEEFFECT, Precaution.INCOMPLIANCE};
+    String[] ppPrecation = new String[] { Precaution.SIDEEFFECT, Precaution.INCOMPLIANCE};
 
-    ProviderMedicationService getSideeffect =
+    ProviderMedicationService getPrecation =
         new ProviderMedicationService(SERVICE_GET_PRECAUTION);
 
-    getSideeffect.addOutput(OUTPUT_PRECAUTION,
-        Precaution.MY_URI, 1, 1, ppSideeffect);
+    getPrecation.addOutput(OUTPUT_PRECAUTION,
+        Precaution.MY_URI, 1, 1, ppPrecation);
 
-    profiles[0] = getSideeffect.myProfile;
+    profiles[0] = getPrecation.myProfile;
 
   }
 
