@@ -171,3 +171,9 @@ dm/src/main/resources/org/universAAL/ui/dm/main_menu_en.txt -text
 dm/src/main/resources/org/universAAL/ui/dm/messages.properties -text
 dm/src/main/resources/org/universAAL/ui/dm/messages_de.properties -text
 dm/src/main/resources/org/universAAL/ui/dm/messages_en.properties -text
+eventSelection.client/LICENSE -text
+eventSelection.client/NOTICE -text
+eventSelection.client/pom.xml -text
+eventSelection.client/src/main/java/org/universAAL/eventSelectionTool/client/Activator.java -text
+eventSelection.client/src/main/java/org/universAAL/eventSelectionTool/client/EventSelectionToolConsumer.java -text
+eventSelection.client/src/main/java/org/universAAL/eventSelectionTool/client/EventSelectionToolConsumer_beforeGUI.backup -text
