@@ -177,3 +177,9 @@ eventSelection.client/pom.xml -text
 eventSelection.client/src/main/java/org/universAAL/eventSelectionTool/client/Activator.java -text
 eventSelection.client/src/main/java/org/universAAL/eventSelectionTool/client/EventSelectionToolConsumer.java -text
 eventSelection.client/src/main/java/org/universAAL/eventSelectionTool/client/EventSelectionToolConsumer_beforeGUI.backup -text
+eventSelection.ont/pom.xml -text
+eventSelection.ont/src/main/java/org/universAAL/eventSelectionTool/ont/EventComparator.java -text
+eventSelection.ont/src/main/java/org/universAAL/eventSelectionTool/ont/EventSelectionTool.java -text
+eventSelection.ont/src/main/java/org/universAAL/eventSelectionTool/ont/FilterParams.java -text
+eventSelection.ont/src/main/java/org/universAAL/eventSelectionTool/ont/TimeSearchType.java -text
+eventSelection.ont/src/main/java/org/universAAL/eventSelectionTool/ont/service/EventSelectionToolService.java -text
