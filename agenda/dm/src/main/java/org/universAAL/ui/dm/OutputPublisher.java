@@ -472,6 +472,9 @@ public class OutputPublisher extends
 					.getString("OutputPublisher.pendingDialogs"), null),
 					OPEN_DIALOGS_CALL);
 			new Submit(stdButtons, new Label(Activator
+				.getString("OutputPublisher.ucc"), null),
+				CALL_PREFIX+"#donothing");
+			new Submit(stdButtons, new Label(Activator
 					.getString("OutputPublisher.exit"), null), EXIT_CALL);
 			Activator.getInputSubscriber().subscribe(
 					stdButtons.getFormObject().getStandardButtonsDialogID());
@@ -907,15 +910,15 @@ public class OutputPublisher extends
 				.getString("OutputPublisher.personaMainMenu"));
 		Group main = f.getIOControls();
 		MainMenu.getMenuInstance(u).addMenuRepresentation(main);
-		Group g = new Group(main, new Label(Activator
-				.getString("OutputPublisher.search"), null), null, null, null);
-		Input in = new InputField(g, null, new PropertyPath(null, false,
-				new String[] { InputEvent.PROP_INPUT_SENTENCE }), Restriction
-				.getAllValuesRestrictionWithCardinality(
-						InputEvent.PROP_INPUT_SENTENCE, TypeMapper
-								.getDatatypeURI(String.class), 1, 1), null);
-		new Submit(g, new Label(Activator.getString("OutputPublisher.search"),
-				null), SEARCH_CALL).addMandatoryInput(in);
+//		Group g = new Group(main, new Label(Activator
+//				.getString("OutputPublisher.search"), null), null, null, null);
+//		Input in = new InputField(g, null, new PropertyPath(null, false,
+//				new String[] { InputEvent.PROP_INPUT_SENTENCE }), Restriction
+//				.getAllValuesRestrictionWithCardinality(
+//						InputEvent.PROP_INPUT_SENTENCE, TypeMapper
+//								.getDatatypeURI(String.class), 1, 1), null);
+//		new Submit(g, new Label(Activator.getString("OutputPublisher.search"),
+//				null), SEARCH_CALL).addMandatoryInput(in);
 		pushDialog(u, f);
 	}
 
