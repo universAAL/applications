@@ -17,17 +17,17 @@ public class InputSubscriber {
 		
 		
 	if (ie != null) {
-		   if (mainclasses.OutputPublisher.SUBMISSION_ON.equals(ie.getSubmissionID())){
+		   if (mainclasses.OutputProvider.SUBMISSION_ON.equals(ie.getSubmissionID())){
 			     
 			   Activator.opublisher.initMainDialog();
 			   return;
 			   
-		   } else if(mainclasses.OutputPublisher.SUBMISSION_OFF.equals(ie.getSubmissionID())){
+		   } else if(mainclasses.OutputProvider.SUBMISSION_OFF.equals(ie.getSubmissionID())){
 			     
 			   Activator.opublisher.initMainDialog();
 			   return;
 			   
-		   } else if (mainclasses.OutputPublisher.CONFIGURATION.equals(ie.getSubmissionID())){
+		   } else if (mainclasses.OutputProvider.CONFIGURATION.equals(ie.getSubmissionID())){
 			   
 			   System.out.println("input subscriber calling menu");
 			   Activator.opublisher.showConfigurationMenu();
