@@ -9,7 +9,7 @@ public class Activator implements BundleActivator{
 	public static BundleContext context=null;
 	public static SCallee scallee=null;
 	public static SCaller scaller=null;
-	public static OutputPublisher opublisher=null;
+	public static OutputProvider opublisher=null;
 	
 	
 	public void start(BundleContext context) throws Exception {
@@ -17,7 +17,7 @@ public class Activator implements BundleActivator{
         
 		scallee = new SCallee(Activator.context);
 		
-		opublisher = new OutputPublisher(Activator.context);
+		opublisher = new OutputProvider(Activator.context);
 		
 	//	System.out.println("REASONER ACTIVE");
 		

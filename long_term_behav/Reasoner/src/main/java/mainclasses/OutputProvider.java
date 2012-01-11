@@ -11,6 +11,7 @@ import org.universAAL.middleware.io.rdf.InputField;
 import org.universAAL.middleware.io.rdf.Label;
 import org.universAAL.middleware.io.rdf.Submit;
 import org.universAAL.middleware.output.OutputEvent;
+import org.universAAL.middleware.output.OutputPublisher;
 
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
@@ -19,8 +20,15 @@ import org.universAAL.ontology.profile.ElderlyUser;
 import org.universAAL.middleware.input.InputEvent;
 import org.universAAL.middleware.input.InputSubscriber;
 import org.universAAL.middleware.input.InputSubscriber;
-public class OutputPublisher  {
+public class OutputProvider extends OutputPublisher  {
 	
+	protected OutputProvider(BundleContext context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	static final String OUTPUT_NAMESPACE = SCalleeProvidedService.SERVICE_START_UI+"OutputProvider#";
 	static final String SUBMISSION_ON = OUTPUT_NAMESPACE+"on";
 	static final String SUBMISSION_OFF = OUTPUT_NAMESPACE+"off";
@@ -40,10 +48,7 @@ public class OutputPublisher  {
 
 	
 
-	
-	public OutputPublisher(BundleContext context) {
-		// TODO Auto-generated constructor stub
-	}
+
 
 	public  Form initMainDialog(){
 		
@@ -79,6 +84,7 @@ public class OutputPublisher  {
 		
 	
 			new Submit(f.getIOControls(), new Label("Report about visits", null), SUBMISSION_ON);
+			
 	
 		return f;	
 	}
@@ -103,10 +109,12 @@ public class OutputPublisher  {
 				LevelRating.middle, Locale.ENGLISH,
 				PrivacyLevel.insensible);
 		//inputConsumer.subscribe(mainDialog.getDialogID());
-	//	publish(out);
+		publish(out);
 		return mainDialog;
 		
 	}
+	
+	
 	
 	
 	
