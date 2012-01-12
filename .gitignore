@@ -91,9 +91,9 @@ medication/medication_manager.service/target
 medication/ont.medMgr/*.iml
 medication/ont.medMgr/target
 medication/pom/*.iml
-medication/test_medication_manager.service_callees/*.iml
-medication/test_medication_manager.service_callees/*.log
-medication/test_medication_manager.service_callees/target
+medication/test_medication_manager.service/*.iml
+medication/test_medication_manager.service/*.log
+medication/test_medication_manager.service/target
 nutritional/NutritionalAdvisor/.classpath
 nutritional/NutritionalAdvisor/.project
 nutritional/NutritionalAdvisor/.settings
