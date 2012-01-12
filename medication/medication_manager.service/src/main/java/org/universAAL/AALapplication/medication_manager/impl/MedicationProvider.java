@@ -1,6 +1,9 @@
 package org.universAAL.AALapplication.medication_manager.impl;
 
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.context.ContextBus;
+import org.universAAL.middleware.context.ContextEvent;
+import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -28,8 +31,9 @@ public final class MedicationProvider extends ServiceCallee {
   public MedicationProvider(ModuleContext context) {
     super(context, ProviderMedicationService.profiles);
 
-
     myPrecaution = new MyPrecautionDatabase();
+
+
   }
 
   public void communicationChannelBroken() {
