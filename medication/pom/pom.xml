@@ -84,6 +84,6 @@
   <modules>
     <module>../ont.medMgr</module>
     <module>../medication_manager.service</module>
-    <module>../test_medication_manager.service_callees</module>
+    <module>../test_medication_manager.service</module>
   </modules>
 </project>
