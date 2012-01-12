@@ -1299,10 +1299,10 @@ medication/ont.medMgr/src/main/java/org/universAAL/ontology/medMgr/UserIDs.java 
 medication/pom/pom.xml -text
 medication/test_medication_manager.service/artifact.composite -text
 medication/test_medication_manager.service/pom.xml -text
-medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/callers/impl/Activator.java -text
-medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/callers/impl/Log.java -text
-medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/callers/impl/MedicationConsumer.java -text
-medication/test_medication_manager.service/src/test/java/org/universAAL/AALapplication/medication_manager/callers/MedicationTest.java -text
+medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text
+medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Log.java -text
+medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationConsumer.java -text
+medication/test_medication_manager.service/src/test/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationTest.java -text
 nutritional/NutritionalAdvisor/LICENSE.txt -text
 nutritional/NutritionalAdvisor/NOTICE.txt -text
 nutritional/NutritionalAdvisor/Nutritional[!!-~]uiclient.launch -text

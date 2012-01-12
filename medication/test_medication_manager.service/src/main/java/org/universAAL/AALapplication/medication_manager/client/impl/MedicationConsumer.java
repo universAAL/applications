@@ -1,7 +1,6 @@
-package org.universAAL.AALapplication.medication_manager.callers.impl;
+package org.universAAL.AALapplication.medication_manager.client.impl;
 
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
