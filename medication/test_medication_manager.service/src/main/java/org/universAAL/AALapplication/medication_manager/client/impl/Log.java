@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.callers.impl;
+package org.universAAL.AALapplication.medication_manager.client.impl;
 
 import org.universAAL.middleware.container.utils.LogUtils;
 

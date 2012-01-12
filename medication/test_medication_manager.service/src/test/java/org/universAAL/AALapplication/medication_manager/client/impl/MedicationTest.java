@@ -1,11 +1,8 @@
-package org.universAAL.AALapplication.medication_manager.callers;
+package org.universAAL.AALapplication.medication_manager.client.impl;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.Constants;
 import org.springframework.util.Assert;
-import org.universAAL.AALapplication.medication_manager.callers.impl.Activator;
-import org.universAAL.AALapplication.medication_manager.callers.impl.Log;
-import org.universAAL.AALapplication.medication_manager.callers.impl.MedicationConsumer;
 import org.universAAL.itests.IntegrationTest;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.ontology.medMgr.Precaution;
