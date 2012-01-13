@@ -25,7 +25,7 @@ public class Activator implements BundleActivator {
     Log.info("Starting %s", getClass(), "Starting the Medication Service");
     new Thread() {
       public void run() {
-        new MedicationProvider(mc);
+        new PrecautionProvider(mc);
       }
     }.start();
 

@@ -15,19 +15,19 @@ import org.universAAL.ontology.medMgr.MedicationOntology;
 public class Activator implements BundleActivator {
 
   public static ModuleContext mc;
-	static BundleContext context = null;
+  static BundleContext context = null;
   MedicationOntology medicationOntology = new MedicationOntology();
 
-	public void start(BundleContext context) throws Exception {
-		Activator.context = context;
+  public void start(BundleContext context) throws Exception {
+    Activator.context = context;
     mc = uAALBundleContainer.THE_CONTAINER
-        		.registerModule(new Object[] { context });
+        .registerModule(new Object[]{context});
     Log.info("Registering %s", Activator.class, "The medication ontology");
     OntologyManagement.getInstance().register(medicationOntology);
-	}
+  }
 
-	public void stop(BundleContext arg0) throws Exception {
+  public void stop(BundleContext arg0) throws Exception {
     OntologyManagement.getInstance().unregister(medicationOntology);
-	}
+  }
 
 }

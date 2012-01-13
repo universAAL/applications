@@ -51,7 +51,7 @@ public final class MyPrecautionDatabase {
 
     precaution.setIncompliance(incomplianceList);
   }
-  
+
   public static Precaution getPrecaution(String userId) {
     return PRECAUTION_MAP.get(userId);
   }
