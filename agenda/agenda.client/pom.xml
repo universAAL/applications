@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>agenda.pom</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+		<relativePath>../pom</relativePath>
+	</parent>
+	<artifactId>agenda.client</artifactId>
+	<packaging>bundle</packaging>
+	<name>Agenda AAL Service Client</name>
+	<description>
+	Agenda Consumer, used by Agenda GUI
+	</description>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.data.representation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.phWorld</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.profile</artifactId>
+		</dependency>
+
+		<!--		<dependency>-->
+		<!--			<groupId>org.aal-persona.middleware</groupId>-->
+		<!--			<artifactId>cdc.support</artifactId>-->
+		<!--		</dependency>-->
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>agenda.ont</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-api</artifactId>
+			<version>1.6.2</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-service</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+	</dependencies>
+
+	<!--org.persona.platform.profiling.ontology,-->
+	<!--
+		org.persona.platform.casf.ontology.location,,org.persona.middleware.*,org.persona.ontology.*
+	-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Activator>org.universAAL.agenda.client.Activator</Bundle-Activator>
+						<Export-Package>org.universAAL.agenda.client</Export-Package>
+						<Import-Package>
+							javax.xml.datatype, org.osgi.service.log,
+							org.universAAL.ontology.location.address,
+							org.universAAL.ontology.location.outdoor
+							,javax.swing,org.osgi.framework,
+							org.universAAL.agenda.ont,
+							org.universAAL.agenda.ont.service,
+							org.slf4j,org.universAAL.middleware.context,
+							org.universAAL.middleware.owl, org.universAAL.middleware.rdf,
+							org.universAAL.middleware.service,
+							org.universAAL.middleware.service.owl,
+							org.universAAL.middleware.service.owls.process,
+							org.universAAL.ontology.profile</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
