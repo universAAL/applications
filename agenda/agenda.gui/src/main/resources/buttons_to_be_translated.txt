@@ -1,0 +1,24 @@
+#Icon's labels to be translated
+
+add
+back
+cancel
+clear #meaning to clear e.g. some text
+delete
+edit
+false
+next
+next month
+previous
+previous month
+yes
+no
+save
+set
+set reminder
+search
+select all
+select none
+true
+home # not like house, but like 'home page'
+week	

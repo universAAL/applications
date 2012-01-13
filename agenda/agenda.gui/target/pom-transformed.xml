@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>agenda.gui</artifactId>
+	<packaging>bundle</packaging>
+	<name>Calendar/Persona Agenda GUI</name>
+	<version>0.1.1-SNAPSHOT</version>
+	<description />
+	<dependencies>
+		<dependency>
+			<groupId>org.aal-persona.platform</groupId>
+			<artifactId>prof.ont</artifactId>
+			<version>0.3.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aal-persona.middleware</groupId>
+			<artifactId>middleware.upper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aal-persona.middleware</groupId>
+			<artifactId>sodapop.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aal-persona.middleware</groupId>
+			<artifactId>cdc.support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aal-persona.service</groupId>
+			<artifactId>eventSelection.client</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aal-persona.ont</groupId>
+			<artifactId>agenda.ont</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aal-persona.service</groupId>
+			<artifactId>agenda.client</artifactId>
+			<version>0.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aal-persona.ont</groupId>
+			<artifactId>eventSelection.ont</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-service</artifactId>
+		</dependency>
+	</dependencies>
+	<parent>
+		<groupId>org.aal-persona.service</groupId>
+		<artifactId>agenda_reminder</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${pom.name}</Bundle-Name>
+						<Bundle-Description>${pom.description}</Bundle-Description>
+						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Bundle-Activator>gr.anco.persona.agenda.gui.Activator</Bundle-Activator>
+						<Export-Package>gr.anco.persona.agenda.gui.wrappers,gr.anco.persona.agenda.gui</Export-Package>
+						<Private-Package>gr.anco.persona.agenda.gui.util,
+							gr.anco.persona.agenda.gui.impl,
+							gr.anco.persona.agenda.gui.components</Private-Package>
+						<Import-Package>org.osgi.framework,
+							org.persona.platform.profiling.ontology,
+							org.persona.platform.casf.ontology.location,
+							gr.anco.persona.eventSelectionTool.ont, javax.xml.datatype,
+							org.persona.middleware, gr.anco.persona.agenda.ont,
+							gr.anco.persona.agenda.client,
+							javax.swing.plaf, org.osgi.service.log, gr.anco.persona.agenda.client,
+							gr.anco.persona.eventSelectionTool.client, javax.swing,
+							javax.swing.border,
+							org.persona.ontology, javax.swing.text, gr.anco.persona.agenda.ont.service,
+							org.osgi.service.useradmin, org.persona.middleware.context,
+							org.persona.middleware.service,
+							org.persona.middleware.service.process,
+							org.persona.middleware.service.profile,
+							org.persona.ontology.expr,
+							org.persona.middleware.input
+						</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
