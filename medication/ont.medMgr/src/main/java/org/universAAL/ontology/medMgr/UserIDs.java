@@ -7,7 +7,7 @@ public final class UserIDs {
 
   private final static String PREFIX = "http://ontology.universAAL.org/uAAL.owl#theInvolvedHumanUser";
   private final static String[] USER_IDS = new String[5];
-  
+
   static {
     USER_IDS[0] = PREFIX + "#id1";
     USER_IDS[1] = PREFIX + "#id2";

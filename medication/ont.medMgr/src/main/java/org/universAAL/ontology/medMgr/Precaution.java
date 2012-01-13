@@ -35,12 +35,12 @@ public class Precaution extends Service {
   }
 
   public List getIncompliance() {
-      return (List) getProperty(INCOMPLIANCE);
-    }
+    return (List) getProperty(INCOMPLIANCE);
+  }
 
-    public void setIncompliance(List value) {
-      setProperty(INCOMPLIANCE, value);
-    }
+  public void setIncompliance(List value) {
+    setProperty(INCOMPLIANCE, value);
+  }
 
   public boolean isWellFormed() {
     return true;

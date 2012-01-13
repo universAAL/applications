@@ -1,9 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.impl;
 
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.context.ContextBus;
-import org.universAAL.middleware.context.ContextEvent;
-import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -15,7 +12,7 @@ import org.universAAL.ontology.medMgr.Precaution;
 /**
  * @author George Fournadjiev
  */
-public final class MedicationProvider extends ServiceCallee {
+public final class PrecautionProvider extends ServiceCallee {
 
   private final MyPrecautionDatabase myPrecaution;
 
@@ -28,12 +25,10 @@ public final class MedicationProvider extends ServiceCallee {
         ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR, "Invalid input!"));
   }
 
-  public MedicationProvider(ModuleContext context) {
-    super(context, ProviderMedicationService.profiles);
+  public PrecautionProvider(ModuleContext context) {
+    super(context, ProviderPrecautionService.profiles);
 
     myPrecaution = new MyPrecautionDatabase();
-
-
   }
 
   public void communicationChannelBroken() {
@@ -42,7 +37,7 @@ public final class MedicationProvider extends ServiceCallee {
 
   public ServiceResponse handleCall(ServiceCall call) {
     String processURI = call.getProcessURI();
-    
+
     Log.info("Received call %s", getClass(), processURI);
 
     Resource involvedUser = call.getInvolvedUser();
@@ -52,8 +47,8 @@ public final class MedicationProvider extends ServiceCallee {
     if (involvedUser == null) {
       return invalidInput;
     }
-    
-    if (processURI.startsWith(ProviderMedicationService.SERVICE_GET_PRECAUTION)) {
+
+    if (processURI.startsWith(ProviderPrecautionService.SERVICE_GET_PRECAUTION)) {
       return getSuccessfulServiceResponse(involvedUser);
     }
 
@@ -77,7 +72,7 @@ public final class MedicationProvider extends ServiceCallee {
       return invalidInput;
     }
 
-    response.addOutput(new ProcessOutput(ProviderMedicationService.OUTPUT_PRECAUTION, precaution));
+    response.addOutput(new ProcessOutput(ProviderPrecautionService.OUTPUT_PRECAUTION, precaution));
 
     return response;
   }
