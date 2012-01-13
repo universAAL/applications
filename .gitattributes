@@ -341,6 +341,7 @@ agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_hr.prope
 agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_it.properties -text
 agenda/agenda.ont/target/agenda.ont-0.1.1-SNAPSHOT.jar -text
 agenda/agenda.ont/target/agenda.ont-1.0.1-SNAPSHOT.jar -text
+agenda/agenda.pom/pom.xml -text
 agenda/dm/EXCEPTIONS-CONNECTOR-J -text
 agenda/dm/LICENSE-BSD-Jena.txt -text
 agenda/dm/LICENSE-CPL-JUnit.txt -text

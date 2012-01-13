@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../../pom</relativePath>
+	</parent>
+	<artifactId>agenda.pom</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Agenda AAL Service</name>
+	<description>Contains repository, deployment, and other info for Agenda AAL Application</description>
+	<url> http://forge.universaal.org/wiki/new_services:Agenda_universAAL_service</url>
+	<issueManagement>
+		<system>GForge - Tracker</system>
+		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=226</url>
+	</issueManagement>
+	<scm>
+		<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda</connection>
+		<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda</developerConnection>
+	</scm>
+	<modules>
+		<module>../agenda.ont</module>
+		<module>../agenda.server</module>
+		<module>../agenda.client</module>
+		<module>../agenda.gui</module>
+		<module>../agenda.remote</module>
+		<module>../agenda.eventSelection.ont</module>
+		<module>../agenda.eventSelection.server</module>
+		<module>../agenda.eventSelection.client</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.data.representation</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.bus.context</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.bus.service</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.bus.io</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.profile</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.phWorld</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<organization>
+		<name>universAAL Consortium</name>
+		<url>http://www.universAAL.org/</url>
+	</organization>
+</project>
