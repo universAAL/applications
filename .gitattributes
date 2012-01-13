@@ -27,7 +27,6 @@ agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/formsPrototypes.propert
 agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/guiMessages_en_US.properties -text
 agenda/Configuration[!!-~]files/old_agendaDB_with_users.sql -text
 agenda/Configuration[!!-~]files/setup[!!-~]instructions.txt -text
-agenda/Prototype[!!-~]UC[!!-~]movie/agenda.wmv -text
 agenda/dm/EXCEPTIONS-CONNECTOR-J -text
 agenda/dm/LICENSE-BSD-Jena.txt -text
 agenda/dm/LICENSE-CPL-JUnit.txt -text
