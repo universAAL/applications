@@ -425,6 +425,15 @@ agenda/agenda.server/target/agenda.server-0.1.0-SNAPSHOT.jar -text
 agenda/agenda.server/target/agenda.server-0.1.1-SNAPSHOT.jar -text
 agenda/agenda.server/target/agenda.server-0.1.2-SNAPSHOT.jar -text
 agenda/agenda.server/target/agenda.server-0.1.3-SNAPSHOT.jar -text
+agenda/agendaEventSelection.client/.settings/org.eclipse.jdt.core.prefs -text
+agenda/agendaEventSelection.client/.settings/org.maven.ide.eclipse.prefs -text
+agenda/agendaEventSelection.client/LICENSE -text
+agenda/agendaEventSelection.client/NOTICE -text
+agenda/agendaEventSelection.client/pom.xml -text
+agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/Activator.java -text
+agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer.java -text
+agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer_beforeGUI.backup -text
+agenda/agendaEventSelection.client/target/eventSelection.client-0.1.0-SNAPSHOT.jar -text
 agenda/dm/EXCEPTIONS-CONNECTOR-J -text
 agenda/dm/LICENSE-BSD-Jena.txt -text
 agenda/dm/LICENSE-CPL-JUnit.txt -text
