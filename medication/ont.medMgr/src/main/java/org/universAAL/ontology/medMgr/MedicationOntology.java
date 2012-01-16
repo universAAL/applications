@@ -31,5 +31,11 @@ public final class MedicationOntology extends Ontology {
     oci = createNewOntClassInfo(Precaution.MY_URI, factory, 0);
     oci.setResourceComment("The type of a Precaution");
     oci.setResourceLabel("Precaution");
+
+    // load MissedIntake
+    oci = createNewOntClassInfo(MissedIntake.MY_URI, factory, 1);
+    oci.setResourceComment("The type of a MissedIntake");
+    oci.setResourceLabel("MissedIntake");
+
   }
 }

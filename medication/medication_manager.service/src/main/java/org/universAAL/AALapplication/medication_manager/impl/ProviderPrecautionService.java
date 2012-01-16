@@ -12,14 +12,14 @@ import org.universAAL.ontology.medMgr.Precaution;
  */
 public final class ProviderPrecautionService extends Precaution {
 
-  public static final String MEDICATION_SERVER_NAMESPACE =
+  public static final String PRECAUTION_SERVER_NAMESPACE =
       "http://ontology.igd.fhg.de/PrecautionServer.owl#";
 
-  public static final String MY_URI = MEDICATION_SERVER_NAMESPACE + "PrecautionService";
+  public static final String MY_URI = PRECAUTION_SERVER_NAMESPACE + "PrecautionService";
 
-  public static final String SERVICE_GET_PRECAUTION = MEDICATION_SERVER_NAMESPACE + "getPrecaution";
+  public static final String SERVICE_GET_PRECAUTION = PRECAUTION_SERVER_NAMESPACE + "getPrecaution";
 
-  static final String OUTPUT_PRECAUTION = MEDICATION_SERVER_NAMESPACE + "precaution";
+  static final String OUTPUT_PRECAUTION = PRECAUTION_SERVER_NAMESPACE + "precaution";
 
   static final ServiceProfile[] profiles = new ServiceProfile[1];
 

@@ -84,7 +84,7 @@
             <Bundle-Name>${project.name}</Bundle-Name>
             <Bundle-Activator>org.universAAL.AALapplication.medication_manager.client.impl.Activator</Bundle-Activator>
             <Bundle-Description>${project.description}</Bundle-Description>
-            <Bundle-SymbolicName>${project.artifactId}111111</Bundle-SymbolicName>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Private-Package>org.universAAL.AALapplication.medication_manager.client.impl</Private-Package>
           </instructions>
         </configuration>

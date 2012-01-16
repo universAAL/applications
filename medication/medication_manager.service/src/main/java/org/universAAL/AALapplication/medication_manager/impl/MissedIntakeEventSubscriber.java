@@ -4,6 +4,10 @@ import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
+import org.universAAL.middleware.owl.Enumeration;
+import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.ontology.medMgr.MissedIntake;
+import org.universAAL.ontology.medMgr.Time;
 
 /**
  * @author George Fournadjiev
@@ -11,8 +15,20 @@ import org.universAAL.middleware.context.ContextSubscriber;
 public final class MissedIntakeEventSubscriber extends ContextSubscriber {
 
 
-  public MissedIntakeEventSubscriber(ModuleContext context, ContextEventPattern[] initialSubscriptions) {
-    super(context, initialSubscriptions);
+  private static ContextEventPattern[] getContextEventPatterns() {
+      ContextEventPattern cep = new ContextEventPattern();
+
+      MergedRestriction mr = MergedRestriction.getAllValuesRestrictionWithCardinality(
+          ContextEvent.PROP_RDF_SUBJECT, MissedIntake.MY_URI, 1, 1);
+
+      cep.addRestriction(mr);
+
+      return new ContextEventPattern[]{cep};
+
+    }
+
+  public MissedIntakeEventSubscriber(ModuleContext context) {
+    super(context, getContextEventPatterns());
   }
 
   public void communicationChannelBroken() {
@@ -20,6 +36,13 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
   }
 
   public void handleContextEvent(ContextEvent event) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    Log.info("Received event of type %s", getClass(), event.getType());
+
+    MissedIntake missedIntake = (MissedIntake) event.getRDFSubject();
+
+    Time time = missedIntake.getTime();
+
+    Log.info("Time %s", getClass(), time);
+
   }
 }

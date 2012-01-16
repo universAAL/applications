@@ -1575,7 +1575,7 @@ medication/test_medication_manager.service/pom.xml -text
 medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text
 medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Log.java -text
 medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationConsumer.java -text
-medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationContextProvider.java -text
+medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/MissedIntakeContextProvider.java -text
 medication/test_medication_manager.service/src/test/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationTest.java -text
 nutritional/NutritionalAdvisor/LICENSE.txt -text
 nutritional/NutritionalAdvisor/NOTICE.txt -text
