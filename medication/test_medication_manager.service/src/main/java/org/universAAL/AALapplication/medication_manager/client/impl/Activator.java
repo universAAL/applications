@@ -26,6 +26,7 @@ public class Activator implements BundleActivator {
     new Thread() {
       public void run() {
         new MedicationConsumer(mc);
+        new MissedIntakeContextProvider(mc);
       }
     }.start();
   }

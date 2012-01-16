@@ -6,6 +6,7 @@ import org.springframework.util.Assert;
 import org.universAAL.itests.IntegrationTest;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.ontology.medMgr.Precaution;
+import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.medMgr.UserIDs;
 
 import java.util.Dictionary;
@@ -109,6 +110,13 @@ public final class MedicationTest extends IntegrationTest {
       printPrecaution(precaution);
       System.out.println("*********END printing for USER ID : " + userID + " ***************");
     }
+    Log.info("TEST %s", MedicationTest.class, "**************** Leaving test ****************");
+  }
+
+  public void testPublishEvent() {
+    Log.info("TEST %s", MedicationTest.class, "**************** Entering test ***************");
+    Time time = new Time(2012, 13, 16, 52);
+    MissedIntakeContextProvider.publishEvent(time);
     Log.info("TEST %s", MedicationTest.class, "**************** Leaving test ****************");
   }
 

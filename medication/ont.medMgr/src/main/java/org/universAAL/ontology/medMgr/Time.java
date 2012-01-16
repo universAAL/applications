@@ -32,4 +32,14 @@ public final class Time {
   public int getMinutes() {
     return minutes;
   }
+
+  @Override
+  public String toString() {
+    return "Time{" +
+        "year=" + year +
+        ", day=" + day +
+        ", hour=" + hour +
+        ", minutes=" + minutes +
+        '}';
+  }
 }
