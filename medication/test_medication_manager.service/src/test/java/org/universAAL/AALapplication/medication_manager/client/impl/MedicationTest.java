@@ -116,7 +116,14 @@ public final class MedicationTest extends IntegrationTest {
   public void testPublishEvent() {
     Log.info("TEST %s", MedicationTest.class, "**************** Entering test ***************");
     Time time = new Time(2012, 13, 16, 52);
-    MissedIntakeContextProvider.publishEvent(time);
+    String[] userIDs = UserIDs.getAllIDs();
+    for (int i = 0; i < userIDs.length; i++) {
+      String userID = userIDs[i];
+      System.out.println("******************** START printing for USER ID : " + userID + " ****************************");
+      MissedIntakeContextProvider.publishEvent(time, userID);
+      System.out.println("*********END printing for USER ID : " + userID + " ***************");
+    }
+
     Log.info("TEST %s", MedicationTest.class, "**************** Leaving test ****************");
   }
 
