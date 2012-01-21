@@ -55,12 +55,9 @@ public final class CaregiverNotificationProvider extends ServiceCallee {
   private ServiceResponse getSuccessfulServiceResponse(Resource involvedUser) {
     String userId = involvedUser.getURI();
     Log.info("Successful Service Response for the user %s", getClass(), userId);
-    return getPrecaution(userId);
-  }
-
-  private ServiceResponse getPrecaution(String userId) {
     ServiceResponse response = new ServiceResponse(CallStatus.succeeded);
 
     return response;
   }
+
 }
