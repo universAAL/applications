@@ -11,6 +11,8 @@ public class MissedIntake extends Service {
 
   public static final String TIME = MedicationOntology.NAMESPACE + "time";
 
+  public static final String USER_ID = MedicationOntology.NAMESPACE + "userId";
+
   public MissedIntake() {
     super();
   }
@@ -37,6 +39,14 @@ public class MissedIntake extends Service {
 
   public void setTime(Time time) {
     props.put(TIME, time);
+  }
+
+  public String getUserId() {
+    return (String) props.get(USER_ID);
+  }
+
+  public void setUserId(String userId) {
+    props.put(USER_ID, userId);
   }
 
 

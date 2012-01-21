@@ -27,6 +27,7 @@ public class Activator implements BundleActivator {
       public void run() {
         new MedicationConsumer(mc);
         new MissedIntakeContextProvider(mc);
+        new CaregiverNotificationProvider(mc);
       }
     }.start();
   }

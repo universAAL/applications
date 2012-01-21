@@ -20,10 +20,10 @@ public final class MissedIntakeContextProvider {
   private static ContextPublisher contextPublisher;
 
   private static final String MISSED_INTAKE_SERVER_NAMESPACE =
-        "http://ontology.igd.fhg.de/MissedIntakeServer.owl#";
+      "http://ontology.igd.fhg.de/MissedIntakeServer.owl#";
 
   public static final String MY_URI = MISSED_INTAKE_SERVER_NAMESPACE + "MissedIntakeService";
-  
+
   private static final String MISSED_INTAKE_PROVIDER = MISSED_INTAKE_SERVER_NAMESPACE +
       "MissedIntakeContextProvider";
 
@@ -51,15 +51,16 @@ public final class MissedIntakeContextProvider {
   }
 
 
-  public static void publishEvent(Time time) {
+  public static void publishEvent(Time time, String userId) {
     MissedIntake missedIntake = new MissedIntake();
     missedIntake.setTime(time);
+    missedIntake.setUserId(userId);
     ContextEvent contextEvent = new ContextEvent(missedIntake, MissedIntake.TIME);
     contextPublisher.publish(contextEvent);
   }
 
   public String getClassURI() {
-      return MY_URI;
-    }
+    return MY_URI;
+  }
 
 }
