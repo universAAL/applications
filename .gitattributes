@@ -405,15 +405,12 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_es
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/main/resources/stable_agenda_db.sql -text
-agenda/agendaEventSelection.client/.settings/org.eclipse.jdt.core.prefs -text
-agenda/agendaEventSelection.client/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agendaEventSelection.client/LICENSE -text
 agenda/agendaEventSelection.client/NOTICE -text
 agenda/agendaEventSelection.client/pom.xml -text
 agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/Activator.java -text
 agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer.java -text
 agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer_beforeGUI.backup -text
-agenda/agendaEventSelection.client/target/eventSelection.client-0.1.0-SNAPSHOT.jar -text
 agenda/agendaEventSelection.ont/.settings/org.eclipse.jdt.core.prefs -text
 agenda/agendaEventSelection.ont/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agendaEventSelection.ont/pom.xml -text
