@@ -332,9 +332,6 @@ agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_es.prope
 agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_hr.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_it.properties -text
 agenda/agenda.pom/pom.xml -text
-agenda/agenda.remote/.settings/org.eclipse.jdt.core.prefs -text
-agenda/agenda.remote/.settings/org.eclipse.jdt.ui.prefs -text
-agenda/agenda.remote/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agenda.remote/LICENSE -text
 agenda/agenda.remote/NOTICE -text
 agenda/agenda.remote/bin/.project -text
@@ -369,7 +366,6 @@ agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_en
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_hr.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_it.properties -text
-agenda/agenda.remote/target/agenda.remote-0.0.2-SNAPSHOT.jar -text
 agenda/agenda.server/.settings/org.eclipse.jdt.core.prefs -text
 agenda/agenda.server/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agenda.server/DBquery.prop -text
