@@ -366,8 +366,6 @@ agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_en
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_hr.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_it.properties -text
-agenda/agenda.server/.settings/org.eclipse.jdt.core.prefs -text
-agenda/agenda.server/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agenda.server/DBquery.prop -text
 agenda/agenda.server/DBquery.properties -text
 agenda/agenda.server/LICENSE -text
@@ -407,10 +405,6 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_es
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/main/resources/stable_agenda_db.sql -text
-agenda/agenda.server/target/agenda.server-0.1.0-SNAPSHOT.jar -text
-agenda/agenda.server/target/agenda.server-0.1.1-SNAPSHOT.jar -text
-agenda/agenda.server/target/agenda.server-0.1.2-SNAPSHOT.jar -text
-agenda/agenda.server/target/agenda.server-0.1.3-SNAPSHOT.jar -text
 agenda/agendaEventSelection.client/.settings/org.eclipse.jdt.core.prefs -text
 agenda/agendaEventSelection.client/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agendaEventSelection.client/LICENSE -text
