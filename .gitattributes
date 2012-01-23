@@ -417,8 +417,6 @@ agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectio
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/FilterParams.java -text
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/TimeSearchType.java -text
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/service/EventSelectionToolService.java -text
-agenda/agendaEventSelection.server/.settings/org.eclipse.jdt.core.prefs -text
-agenda/agendaEventSelection.server/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agendaEventSelection.server/LICENSE -text
 agenda/agendaEventSelection.server/NOTICE -text
 agenda/agendaEventSelection.server/pom.xml -text
@@ -435,7 +433,6 @@ agenda/agendaEventSelection.server/src/main/resources/org/universAAL/eventSelect
 agenda/agendaEventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_en.properties -text
 agenda/agendaEventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_es.properties -text
 agenda/agendaEventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_hr.properties -text
-agenda/agendaEventSelection.server/target/eventSelection.server-0.1.0-SNAPSHOT.jar -text
 agenda/dm/EXCEPTIONS-CONNECTOR-J -text
 agenda/dm/LICENSE-BSD-Jena.txt -text
 agenda/dm/LICENSE-CPL-JUnit.txt -text
