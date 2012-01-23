@@ -27,8 +27,6 @@ agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/formsPrototypes.propert
 agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/guiMessages_en_US.properties -text
 agenda/Configuration[!!-~]files/old_agendaDB_with_users.sql -text
 agenda/Configuration[!!-~]files/setup[!!-~]instructions.txt -text
-agenda/agenda.client/.settings/org.eclipse.jdt.core.prefs -text
-agenda/agenda.client/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agenda.client/LICENSE -text
 agenda/agenda.client/NOTICE -text
 agenda/agenda.client/backup/AgendaConsumer_backup.java -text
