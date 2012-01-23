@@ -1,92 +1,105 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>new_services.pom</artifactId>
-    <groupId>org.universAAL.AALapplication</groupId>
-    <version>0.1.0-SNAPSHOT</version>
-    <relativePath>../../pom</relativePath>
-  </parent>
-  <artifactId>health.pom</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>Health Management AAL Service</name>
-  <url>http://forge.universaal.org/wiki/new_services:Health_Management_universAAL_service</url>
-  <issueManagement>
-  	<system>GForge - Tracker</system>
-  	<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=228</url>
-  </issueManagement>
-  <inceptionYear>2010</inceptionYear>
-  <scm>
-  	<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/health</connection>
-  	<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/health</developerConnection>
-  </scm>
-  <modules>
-  	<module>../health.ont</module>
-  	<module>../health.treat.logger</module>
-  	<module>../health.treat.manager</module>
-  	<module>../health.motivation</module>
-  </modules>
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>org.universAAL.middleware</groupId>
-  			<artifactId>mw.bus.context</artifactId>
-  			<version>0.3.0-SNAPSHOT</version>
-  		</dependency>
-  		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.data.representation</artifactId>
-			<version>0.3.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context</artifactId>
-			<version>0.3.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.service</artifactId>
-			<version>0.3.0-SNAPSHOT</version>
-		</dependency><dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.io</artifactId>
-			<version>0.3.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.context</groupId>
-			<artifactId>ctxt.che</artifactId>
-			<version>0.2.0-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency><dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.measurement</artifactId>
-			<version>0.2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.phWorld</artifactId>
-			<version>0.2.2-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.profile</artifactId>
-			<version>0.3.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>health.ont</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>health.treat.logger</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>health.treat.manager</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
-		</dependency>	
-  	</dependencies>
-  </dependencyManagement>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../../pom</relativePath>
+	</parent>
+
+	<artifactId>health.pom</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Health Management AAL Service</name>
+
+	<url>http://forge.universaal.org/wiki/new_services:Health_Management_universAAL_service</url>
+
+	<issueManagement>
+		<system>GForge - Tracker</system>
+		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=228</url>
+	</issueManagement>
+	<inceptionYear>2010</inceptionYear>
+
+	<!-- Remember to rename health.pom folder (and super pom module reference) -->
+
+	<scm>
+		<connection>${svn.base}/health/${pom.artifactId}</connection>
+		<developerConnection>${svn.base}/health/${pom.artifactId}</developerConnection>
+	</scm>
+
+	<modules>
+		<module>../health.ont</module>
+		<module>../health.treat.logger</module>
+		<module>../health.treat.manager</module>
+		<module>../health.motivation</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.bus.context</artifactId>
+				<version>0.3.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.data.representation</artifactId>
+				<version>0.3.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.bus.context</artifactId>
+				<version>0.3.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.bus.service</artifactId>
+				<version>0.3.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.bus.io</artifactId>
+				<version>0.3.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.context</groupId>
+				<artifactId>ctxt.che</artifactId>
+				<version>0.2.0-SNAPSHOT</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.measurement</artifactId>
+				<version>0.2.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.phWorld</artifactId>
+				<version>0.2.2-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.profile</artifactId>
+				<version>0.3.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>health.ont</artifactId>
+				<version>${pom.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>health.treat.logger</artifactId>
+				<version>${pom.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>health.treat.manager</artifactId>
+				<version>${pom.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
