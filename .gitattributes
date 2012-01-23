@@ -411,17 +411,12 @@ agenda/agendaEventSelection.client/pom.xml -text
 agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/Activator.java -text
 agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer.java -text
 agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer_beforeGUI.backup -text
-agenda/agendaEventSelection.ont/.settings/org.eclipse.jdt.core.prefs -text
-agenda/agendaEventSelection.ont/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agendaEventSelection.ont/pom.xml -text
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/EventComparator.java -text
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/EventSelectionTool.java -text
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/FilterParams.java -text
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/TimeSearchType.java -text
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/service/EventSelectionToolService.java -text
-agenda/agendaEventSelection.ont/target/agendaEventSelection.ont-1.0.1-SNAPSHOT.jar -text
-agenda/agendaEventSelection.ont/target/eventSelection.ont-0.1.0-SNAPSHOT.jar -text
-agenda/agendaEventSelection.ont/target/eventSelection.ont-0.1.1-SNAPSHOT.jar -text
 agenda/agendaEventSelection.server/.settings/org.eclipse.jdt.core.prefs -text
 agenda/agendaEventSelection.server/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agendaEventSelection.server/LICENSE -text
