@@ -34,8 +34,6 @@ agenda/agenda.client/backup/AgendaConsumer_beforeGui.backup -text
 agenda/agenda.client/pom.xml -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/Activator.java -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/AgendaConsumer.java -text
-agenda/agenda.gui/.settings/org.eclipse.jdt.core.prefs -text
-agenda/agenda.gui/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agenda.gui/LICENSE -text
 agenda/agenda.gui/NOTICE -text
 agenda/agenda.gui/pom.xml -text
@@ -315,7 +313,6 @@ agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_es.
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_hr.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_it.properties -text
 agenda/agenda.gui/src/test/resources/icon_danger_small.gif -text
-agenda/agenda.gui/target/pom-transformed.xml -text
 agenda/agenda.ont/.settings/org.eclipse.jdt.core.prefs -text
 agenda/agenda.ont/.settings/org.eclipse.jdt.ui.prefs -text
 agenda/agenda.ont/.settings/org.maven.ide.eclipse.prefs -text
