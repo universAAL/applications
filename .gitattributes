@@ -313,9 +313,6 @@ agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_es.
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_hr.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_it.properties -text
 agenda/agenda.gui/src/test/resources/icon_danger_small.gif -text
-agenda/agenda.ont/.settings/org.eclipse.jdt.core.prefs -text
-agenda/agenda.ont/.settings/org.eclipse.jdt.ui.prefs -text
-agenda/agenda.ont/.settings/org.maven.ide.eclipse.prefs -text
 agenda/agenda.ont/pom.xml -text
 agenda/agenda.ont/src/main/java/org/universAAL/agenda/ont/CEType.java -text
 agenda/agenda.ont/src/main/java/org/universAAL/agenda/ont/Calendar.java -text
@@ -334,8 +331,6 @@ agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_en.prope
 agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_es.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_hr.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_it.properties -text
-agenda/agenda.ont/target/agenda.ont-0.1.1-SNAPSHOT.jar -text
-agenda/agenda.ont/target/agenda.ont-1.0.1-SNAPSHOT.jar -text
 agenda/agenda.pom/pom.xml -text
 agenda/agenda.remote/.settings/org.eclipse.jdt.core.prefs -text
 agenda/agenda.remote/.settings/org.eclipse.jdt.ui.prefs -text
