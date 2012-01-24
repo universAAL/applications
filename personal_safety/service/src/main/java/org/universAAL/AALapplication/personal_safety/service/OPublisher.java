@@ -21,16 +21,13 @@
  */
 package org.universAAL.AALapplication.personal_safety.service;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Calendar;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.io.owl.PrivacyLevel;
 import org.universAAL.middleware.io.rdf.Form;
 import org.universAAL.middleware.output.OutputEvent;
@@ -50,7 +47,7 @@ public class OPublisher extends OutputPublisher{
 	private final static Logger log=LoggerFactory.getLogger(OPublisher.class);
 	protected static Timer responseWatch;
 	
-	protected OPublisher(BundleContext context) {
+	protected OPublisher(ModuleContext context) {
 		super(context);
 	}
 
@@ -63,10 +60,10 @@ public class OPublisher extends OutputPublisher{
 	{
 		log.debug("Show button screen - Start delay timer");
 		responseWatch=new Timer("Risk_ResponseTimer");
-		responseWatch.schedule(new ResponseDelayTask(user), Long.parseLong(Activator.getProperties().getProperty(Activator.DELAY,"1"))*60000);
-		Form f = Activator.gui.getUserStateForm();
+		responseWatch.schedule(new ResponseDelayTask(user), Long.parseLong(Main.getProperties().getProperty(Main.DELAY,"1"))*60000);
+		Form f = Main.gui.getUserStateForm();
 		OutputEvent oe = new OutputEvent(user,f,LevelRating.high,Locale.ENGLISH,PrivacyLevel.insensible);
-		Activator.rinput.subscribe(f.getDialogID());
+		Main.rinput.subscribe(f.getDialogID());
 		publish(oe);
 		playWarning();
 	}
@@ -74,9 +71,9 @@ public class OPublisher extends OutputPublisher{
 	public void showSMSForm(User user, boolean smsSuccess)
 	{
 		log.debug("Show SMS screen");
-		Form f = Activator.gui.getSMSForm(smsSuccess);
+		Form f = Main.gui.getSMSForm(smsSuccess);
 		OutputEvent oe = new OutputEvent(user,f,LevelRating.full,Locale.ENGLISH,PrivacyLevel.insensible);
-		Activator.rinput.subscribe(f.getDialogID());
+		Main.rinput.subscribe(f.getDialogID());
 		publish(oe);
 		playWarning();
 	}
@@ -84,18 +81,18 @@ public class OPublisher extends OutputPublisher{
 	public void showNoVCForm(User user)
 	{
 		log.debug("Show VC failed screen");
-		Form f = Activator.gui.getNoVCForm();
+		Form f = Main.gui.getNoVCForm();
 		OutputEvent oe = new OutputEvent(user,f,LevelRating.full,Locale.ENGLISH,PrivacyLevel.insensible);
-		Activator.rinput.subscribe(f.getDialogID());
+		Main.rinput.subscribe(f.getDialogID());
 		publish(oe);
 	}
 	
 	public void showBatteryForm(User user)
 	{
 		log.debug("Show Battery message");
-		Form f = Activator.gui.getBatteryForm();
+		Form f = Main.gui.getBatteryForm();
 		OutputEvent oe = new OutputEvent(user,f,LevelRating.middle,Locale.ENGLISH,PrivacyLevel.insensible);
-		Activator.rinput.subscribe(f.getDialogID());
+		Main.rinput.subscribe(f.getDialogID());
 		publish(oe);
 	}
 	
@@ -106,13 +103,13 @@ public class OPublisher extends OutputPublisher{
 		}
 		public void run() {
 			log.debug("Did not cancel risk situation");
-			if(Boolean.parseBoolean(Activator.getProperties().getProperty(Activator.SMSENABLE,"false"))){
-				boolean sent=Activator.rcaller.sendRiskSMSText();
-				Activator.routput.showSMSForm(user, sent);
+			if(Boolean.parseBoolean(Main.getProperties().getProperty(Main.SMSENABLE,"false"))){
+				boolean sent=Main.rcaller.sendRiskSMSText();
+				Main.routput.showSMSForm(user, sent);
 			}
-			if(Boolean.parseBoolean(Activator.getProperties().getProperty(Activator.VCENABLE,"false"))){
-				boolean call=Activator.rcaller.startVideoCall();
-				if(!call)Activator.routput.showNoVCForm(user);
+			if(Boolean.parseBoolean(Main.getProperties().getProperty(Main.VCENABLE,"false"))){
+				boolean call=Main.rcaller.startVideoCall();
+				if(!call)Main.routput.showNoVCForm(user);
 			}
 			OPublisher.responseWatch.cancel();
 		}

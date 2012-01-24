@@ -18,8 +18,8 @@ package org.universAAL.Application.personal_safety.sw.panic;
 
 import java.util.Locale;
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.Application.personal_safety.sw.panic.osgi.Activator;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.io.owl.PrivacyLevel;
 import org.universAAL.middleware.io.rdf.Form;
 import org.universAAL.middleware.io.rdf.Label;
@@ -32,7 +32,7 @@ import org.universAAL.middleware.rdf.Resource;
 
 public class OPublisher extends OutputPublisher{
 
-	public OPublisher(BundleContext context) {
+	public OPublisher(ModuleContext context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 	}

@@ -15,8 +15,8 @@
  ******************************************************************************/
 package org.universAAL.Application.personal_safety.sw.panic;
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.Application.personal_safety.sw.panic.osgi.Activator;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -37,11 +37,11 @@ public class SCallee extends ServiceCallee{
 	private static final ServiceResponse failure = new ServiceResponse(
 			CallStatus.serviceSpecificFailure);
 	
-	public SCallee(BundleContext context){
+	public SCallee(ModuleContext context){
 		super(context, getProfiles());
 	}
 	
-	protected SCallee(BundleContext context, ServiceProfile[] realizedServices) {
+	protected SCallee(ModuleContext context, ServiceProfile[] realizedServices) {
 		super(context, realizedServices);
 		
 	}

@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication.ps</groupId>
 		<artifactId>personal_safety.pom</artifactId>
-		<version>0.2.0-SNAPSHOT</version>
+		<version>0.1.0-SNAPSHOT</version>
 		<relativePath>../pom</relativePath>
 	</parent>
 
@@ -61,7 +61,7 @@
 	</build>
 	
 	<scm>
-		<connection>${svn.base}/personal_safety/${project.artifactId}</connection>
-		<developerConnection>${svn.base}/personal_safety/${project.artifactId}</developerConnection>
+		<connection>${svn.base}/personal_safety/${pom.artifactId}</connection>
+		<developerConnection>${svn.base}/personal_safety/${pom.artifactId}</developerConnection>
 	</scm>
 </project>

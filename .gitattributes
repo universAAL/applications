@@ -1963,9 +1963,11 @@ personal_safety/run/runner/run.bat -text
 personal_safety/service/LICENSE -text
 personal_safety/service/NOTICE -text
 personal_safety/service/pom.xml -text
-personal_safety/service/src/main/java/org/universAAL/AALapplication/personal_safety/service/Activator.java -text
+personal_safety/service/pom.xml.versionsBackup -text
+personal_safety/service/src/main/java/org/universAAL/AALapplication/personal_safety/osgi/Activator.java -text svneol=unset#text/plain
 personal_safety/service/src/main/java/org/universAAL/AALapplication/personal_safety/service/CSubscriber.java -text
 personal_safety/service/src/main/java/org/universAAL/AALapplication/personal_safety/service/ISubscriber.java -text
+personal_safety/service/src/main/java/org/universAAL/AALapplication/personal_safety/service/Main.java -text
 personal_safety/service/src/main/java/org/universAAL/AALapplication/personal_safety/service/Messages.java -text
 personal_safety/service/src/main/java/org/universAAL/AALapplication/personal_safety/service/OPublisher.java -text
 personal_safety/service/src/main/java/org/universAAL/AALapplication/personal_safety/service/RiskGUI.java -text
@@ -1975,6 +1977,7 @@ personal_safety/service/src/main/resources/messages/messages_EN.properties -text
 personal_safety/service/src/main/resources/messages/messages_ES.properties -text
 personal_safety/service/src/main/resources/messages/messages_IT.properties -text
 personal_safety/smp.test-location.publisher/pom.xml -text
+personal_safety/smp.test-location.publisher/pom.xml.versionsBackup -text
 personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/Activator.java -text
 personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/GUIPanel.java -text
 personal_safety/sms.sender/LICENSE -text
@@ -1983,7 +1986,7 @@ personal_safety/sms.sender/pom.xml -text
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/Activator.java -text
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/EnvioSMSService.java -text
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/SMSCallee.java -text
-personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/ServicioSMS.java -text
+personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/SMSService.java -text
 personal_safety/sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/messageSender.java -text
 personal_safety/sw.panic/LICENSE -text
 personal_safety/sw.panic/NOTICE -text
