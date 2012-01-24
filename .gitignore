@@ -91,6 +91,7 @@ personal_safety/run/target
 personal_safety/service/*.classpath
 personal_safety/service/*.project
 personal_safety/service/*.settings
+personal_safety/service/*.versionsBackup
 personal_safety/service/.classpath
 personal_safety/service/.project
 personal_safety/service/.settings
