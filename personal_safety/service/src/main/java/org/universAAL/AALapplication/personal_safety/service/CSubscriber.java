@@ -27,9 +27,9 @@ import java.util.Hashtable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
@@ -52,17 +52,17 @@ public class CSubscriber extends ContextSubscriber {
 	private static Timer roomWatch;
 	private static boolean roomTimerEnabled=false;//Preload to avoid reading props at every location event
 
-	protected CSubscriber(BundleContext context) {
+	protected CSubscriber(ModuleContext context) {
 		super(context, getPermanentSubscriptions());
-		Enumeration locs=Activator.getProperties().keys();
+		Enumeration locs=Main.getProperties().keys();
 		log.debug("Preloading location timers");
 		//Preloads to avoid reading props at every location event
-		roomTimerEnabled=Boolean.parseBoolean(Activator.getProperties().getProperty(Activator.RISKENABLE,"false"));
+		roomTimerEnabled=Boolean.parseBoolean(Main.getProperties().getProperty(Main.RISKENABLE,"false"));
 		if(roomTimerEnabled){
 			for (;locs.hasMoreElements();){
 				String locProp=(String)locs.nextElement();
 				if(locProp.startsWith("RISK.Room")){
-					locationTimes.put(locProp.split("@")[1], Activator.getProperties().getProperty(locProp).split(","));
+					locationTimes.put(locProp.split("@")[1], Main.getProperties().getProperty(locProp).split(","));
 				}
 			}
 			roomWatch=new Timer("Risk_LocationTimer");
@@ -138,16 +138,16 @@ public class CSubscriber extends ContextSubscriber {
 				if (user == null)
 					user = new User(
 							Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX
-							+ ((Activator.getProperties().getProperty(
-									Activator.USER, "Saied")).split("-")[0]
+							+ ((Main.getProperties().getProperty(
+									Main.USER, "Saied")).split("-")[0]
 									                                     .toLowerCase()));
-				if(Boolean.parseBoolean(Activator.getProperties().getProperty(Activator.SMSENABLE,"false"))){
-					boolean sent=Activator.rcaller.sendPanicButtonSMSText();
-					Activator.routput.showSMSForm(user, sent);
+				if(Boolean.parseBoolean(Main.getProperties().getProperty(Main.SMSENABLE,"false"))){
+					boolean sent=Main.rcaller.sendPanicButtonSMSText();
+					Main.routput.showSMSForm(user, sent);
 				}
-				if(Boolean.parseBoolean(Activator.getProperties().getProperty(Activator.VCENABLE,"false"))){
-					boolean call=Activator.rcaller.startVideoCall();
-					if(!call)Activator.routput.showNoVCForm(user);
+				if(Boolean.parseBoolean(Main.getProperties().getProperty(Main.VCENABLE,"false"))){
+					boolean call=Main.rcaller.startVideoCall();
+					if(!call)Main.routput.showNoVCForm(user);
 				}
 			}else{
 				log.error("Received an unhandled Panic Button event: {}",event);
@@ -165,7 +165,7 @@ public class CSubscriber extends ContextSubscriber {
 						if(System.currentTimeMillis()-time.longValue()>97200000){
 							User user = (User) ((PanicButton) event.getRDFSubject()).getPressedBy();
 							batteryTimes.put(uri, new Long(System.currentTimeMillis()));
-							Activator.routput.showBatteryForm(user);
+							Main.routput.showBatteryForm(user);
 						}
 					}else{
 						batteryTimes.put(uri, new Long(System.currentTimeMillis()));
@@ -188,7 +188,7 @@ public class CSubscriber extends ContextSubscriber {
 		}
 		public void run() {
 			log.debug("Triggered risk situation");
-			Activator.routput.showButtonScreenForm(user);
+			Main.routput.showButtonScreenForm(user);
 		}
 	}
 }

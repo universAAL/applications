@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.UIManager;
 
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
@@ -27,8 +27,10 @@ public class GUIPanel extends javax.swing.JFrame{
     private javax.swing.JTextField usrURI;
     // End of variables declaration
 	private DefaultContextPublisher cp;
+	// Pannel
+	static private GUIPanel panel;
 	
-	public GUIPanel(BundleContext context) {
+	public GUIPanel(ModuleContext context) {
 		// Start the context publisher
 		ContextProvider cpinfo = new ContextProvider("http://org.universAAL.ontology.location#IndoorLocationServer");
 		cpinfo.setType(ContextProviderType.gauge);
@@ -107,6 +109,15 @@ public class GUIPanel extends javax.swing.JFrame{
 			ContextEvent event = new ContextEvent(user, PhysicalThing.PROP_PHYSICAL_LOCATION);
 			cp.publish(event);
 		}
+	}
+
+	public static void start(ModuleContext context) {
+		panel=new GUIPanel(context);
+		panel.setVisible(true);		
+	}
+	
+	public static void stop (ModuleContext context) {
+		panel.dispose();
 	}
 
 }

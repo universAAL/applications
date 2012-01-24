@@ -4,9 +4,9 @@
 	Avanzadas - Grupo Tecnologias para la Salud y el 
 	Bienestar (TSB)
 	
-	Copyright 2008-2010 TSB-Tecnologías para la Salud y el Bienestar,
+	Copyright 2008-2010 TSB-Tecnologï¿½as para la Salud y el Bienestar,
 	http://www.tsbtecnologias.es
-	TSB Soluciones Tecnológicas para la Salud y el Bienestar S.A
+	TSB Soluciones Tecnolï¿½gicas para la Salud y el Bienestar S.A
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -44,7 +44,7 @@ import org.universAAL.middleware.service.owls.process.ProcessInput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 
 // Clase principal (hereda de la ontologia definida para el servicio)
-public class ServicioSMS extends EnvioSMSService {
+public class SMSService extends EnvioSMSService {
     // Atributos
     // URIs
 
@@ -75,12 +75,12 @@ public class ServicioSMS extends EnvioSMSService {
     // Restricciones (son las mismas que las de la ontologia de la que hereda)
     static {
 	// Registro del servicio
-	register(ServicioSMS.class);
+	register(SMSService.class);
 	// Propiedad MANDA_TEXTO
 	addRestriction(Restriction.getAllValuesRestriction(
 		EnvioSMSService.PROP_MANDA_TEXTO, TypeMapper
-			.getDatatypeURI(String.class)), // Vamos a añadir una
-							// restricción sobre la
+			.getDatatypeURI(String.class)), // Vamos a aï¿½adir una
+							// restricciï¿½n sobre la
 							// propiedad de
 							// reproducir el fichero
 							// de Audio, que es la
@@ -89,8 +89,8 @@ public class ServicioSMS extends EnvioSMSService {
 	// Propiedad MANDA_TIENE_NUMERO
 	addRestriction(Restriction.getAllValuesRestriction(
 		EnvioSMSService.PROP_TIENE_NUMERO, TypeMapper
-			.getDatatypeURI(String.class)), // Vamos a añadir una
-							// restricción sobre la
+			.getDatatypeURI(String.class)), // Vamos a aï¿½adir una
+							// restricciï¿½n sobre la
 							// propiedad de
 							// reproducir el fichero
 							// de Audio, que es la
@@ -105,7 +105,7 @@ public class ServicioSMS extends EnvioSMSService {
 
 	// Restriccion para la entrada
 	Restriction textomensajeRestr = Restriction.getFixedValueRestriction(
-		ServicioSMS.PROP_MANDA_TEXTO, EntradaTextoMensaje
+		SMSService.PROP_MANDA_TEXTO, EntradaTextoMensaje
 			.asVariableReference());
 	PropertyPath StringTextoPath = new PropertyPath(null, true,
 		new String[] { EnvioSMSService.PROP_MANDA_TEXTO });
@@ -120,26 +120,26 @@ public class ServicioSMS extends EnvioSMSService {
 	EntradaTextoTelefono.setCardinality(0, 1);
 	// Restriccion de la entrada
 	Restriction textonumeroRestr = Restriction.getFixedValueRestriction(
-		ServicioSMS.PROP_TIENE_NUMERO, EntradaTextoTelefono
+		SMSService.PROP_TIENE_NUMERO, EntradaTextoTelefono
 			.asVariableReference());
 	PropertyPath StringNumeroPath = new PropertyPath(null, true,
 		new String[] { EnvioSMSService.PROP_TIENE_NUMERO });
-	// Instanciación del servicio para crear el perfil
-	ServicioSMS mandaSMS = new ServicioSMS(SERVICE_MANDA_SMS);
+	// Instanciaciï¿½n del servicio para crear el perfil
+	SMSService mandaSMS = new SMSService(SERVICE_MANDA_SMS);
 	// Obtengo el perfil de mi servicio
 	profiles[0] = mandaSMS.getProfile();
-	// Añado la primera entrada con su restriccion y su path
+	// Aï¿½ado la primera entrada con su restriccion y su path
 	profiles[0].addInput(EntradaTextoMensaje);
 	mandaSMS.addInstanceLevelRestriction(textomensajeRestr, StringTextoPath
 		.getThePath());
-	// Añado la segunda entrada con su restriccion y su path
+	// Aï¿½ado la segunda entrada con su restriccion y su path
 	profiles[0].addInput(EntradaTextoTelefono);
 	mandaSMS.addInstanceLevelRestriction(textonumeroRestr, StringNumeroPath
 		.getThePath());
     }
 
     // Constructor
-    private ServicioSMS(String uri) {
+    private SMSService(String uri) {
 	super(uri);
     }
 

@@ -4,9 +4,9 @@
 	Avanzadas - Grupo Tecnologias para la Salud y el 
 	Bienestar (TSB)
 	
-	Copyright 2008-2010 TSB-Tecnologías para la Salud y el Bienestar,
+	Copyright 2008-2010 TSB-Tecnologï¿½as para la Salud y el Bienestar,
 	http://www.tsbtecnologias.es
-	TSB Soluciones Tecnológicas para la Salud y el Bienestar S.A
+	TSB Soluciones Tecnolï¿½gicas para la Salud y el Bienestar S.A
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -34,32 +34,30 @@
 // Paquete que contendra la clase
 package org.universAAL.AALapplication.personal_safety.sms;
 
-// Importamos los paquetes necesarios
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
-// Clase principal
+
 public class Activator implements BundleActivator {
 
-    // Atributos
-    /** Control del contexto */
-    private BundleContext contexto = null;
+    /** context */
+    private ModuleContext context = null;
 
-    /** Instancia del callee */
+    /** callee Instance */
     private SMSCallee smsCall = null;
 
-    // Constructor
-
-    // Metodos
-    /** Arranca el bundle */
+    /** {@inheritDoc} */
     public void start(BundleContext arg0) throws Exception {
-	contexto = arg0;
-	smsCall = new SMSCallee(contexto, ServicioSMS.getProfiles());
+	context = uAALBundleContainer.THE_CONTAINER
+			.registerModule(new BundleContext[] { arg0 });
+	smsCall = new SMSCallee(context, SMSService.getProfiles());
     }
 
-    /** Para el bundle */
+    /** {@inheritDoc} */
     public void stop(BundleContext arg0) throws Exception {
-	contexto = null;
+	context = null;
 	smsCall.close();
 	smsCall = null;
     }

@@ -16,8 +16,8 @@
 package org.universAAL.Application.personal_safety.sw.panic;
 
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.Application.personal_safety.sw.panic.osgi.Activator;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.input.InputEvent;
 import org.universAAL.middleware.input.InputSubscriber;
@@ -28,7 +28,7 @@ public class ISubscriber extends InputSubscriber{
 	
 	public static String PANICACTION = "panic";
 	static PanicButton panic = new PanicButton(PanicButton.MY_URI+"SWPanic");
-	public ISubscriber(BundleContext context) {
+	public ISubscriber(ModuleContext context) {
 		super(context);
 		panic.setActivated(false);
 	}

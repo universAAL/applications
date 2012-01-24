@@ -23,15 +23,15 @@ package org.universAAL.AALapplication.personal_safety.service;
 
 import java.util.Calendar;
 
-import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.AALapplication.personal_safety.sms.EnvioSMSService;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.Restriction;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.AALapplication.personal_safety.sms.EnvioSMSService;
 
 /*
 import src.main.java.es.itaca.tsb.persona.riskstub.Activator;
@@ -53,7 +53,7 @@ public class SCaller {
 	
 	private final static Logger log=LoggerFactory.getLogger(SCaller.class);
 	
-    protected SCaller(BundleContext context) {
+    protected SCaller(ModuleContext context) {
     	caller=new DefaultServiceCaller(context);
 	}
     
@@ -71,8 +71,8 @@ public class SCaller {
     public boolean sendPanicButtonSMSText()
 	{
     	log.debug("Calling sms service");
-    	String txt=Activator.getProperties().getProperty(Activator.TEXT, "PERSONA SMS Alert. Contact relative.");
-		String num=Activator.getProperties().getProperty(Activator.NUMBER, "123456789");
+    	String txt=Main.getProperties().getProperty(Main.TEXT, "PERSONA SMS Alert. Contact relative.");
+		String num=Main.getProperties().getProperty(Main.NUMBER, "123456789");
 		Calendar now = Calendar.getInstance();
 		ServiceResponse sr = caller.call(sendSMS(txt + "  ("
 				+ now.get(Calendar.HOUR_OF_DAY) + ":"
@@ -83,8 +83,8 @@ public class SCaller {
     public boolean sendRiskSMSText()
 	{
     	log.debug("Calling sms service");
-    	String txt=Activator.getProperties().getProperty(Activator.RISKTEXT, "PERSONA SMS Alert. Contact relative.");
-		String num=Activator.getProperties().getProperty(Activator.NUMBER, "123456789");
+    	String txt=Main.getProperties().getProperty(Main.RISKTEXT, "PERSONA SMS Alert. Contact relative.");
+		String num=Main.getProperties().getProperty(Main.NUMBER, "123456789");
 		Calendar now = Calendar.getInstance();
 		ServiceResponse sr = caller.call(sendSMS(txt + "  ("
 				+ now.get(Calendar.HOUR_OF_DAY) + ":"

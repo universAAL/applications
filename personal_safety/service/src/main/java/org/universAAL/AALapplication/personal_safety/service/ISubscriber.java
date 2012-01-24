@@ -21,12 +21,12 @@
  */
 package org.universAAL.AALapplication.personal_safety.service;
 
-import org.osgi.framework.BundleContext;
-import org.universAAL.middleware.input.InputSubscriber;
-import org.universAAL.middleware.input.InputEvent;
-import org.universAAL.ontology.profile.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.input.InputEvent;
+import org.universAAL.middleware.input.InputSubscriber;
+import org.universAAL.ontology.profile.User;
 
 /**
  * @author <a href="mailto:alfiva@itaca.upv.es">Alvaro Fides Valero</a>
@@ -36,7 +36,7 @@ public class ISubscriber extends InputSubscriber{
 	
 	private final static Logger log=LoggerFactory.getLogger(ISubscriber.class);
 	
-	protected ISubscriber(BundleContext context) {
+	protected ISubscriber(ModuleContext context) {
 		super(context);
 	}
 

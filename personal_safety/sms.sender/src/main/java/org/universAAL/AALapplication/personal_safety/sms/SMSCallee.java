@@ -4,9 +4,9 @@
 	Avanzadas - Grupo Tecnologias para la Salud y el 
 	Bienestar (TSB)
 	
-	Copyright 2008-2010 TSB-Tecnologías para la Salud y el Bienestar,
+	Copyright 2008-2010 TSB-Tecnologï¿½as para la Salud y el Bienestar,
 	http://www.tsbtecnologias.es
-	TSB Soluciones Tecnológicas para la Salud y el Bienestar S.A
+	TSB Soluciones Tecnolï¿½gicas para la Salud y el Bienestar S.A
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -23,7 +23,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
- * Service Callee del ServicioSMS. Clase que contiene el método llamado cuando se invoca un servicio desde el bus 
+ * Service Callee del ServicioSMS. Clase que contiene el mï¿½todo llamado cuando se invoca un servicio desde el bus 
  * de servicio
  * 
  * @author mllorente
@@ -35,9 +35,9 @@
 package org.universAAL.AALapplication.personal_safety.sms;
 
 // Importamos los paquetes necesarios
-import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -53,12 +53,12 @@ public class SMSCallee extends ServiceCallee {
     private messageSender send = null;
 
     // Constructor
-    protected SMSCallee(BundleContext context, ServiceProfile[] realizedServices) {
+    protected SMSCallee(ModuleContext context, ServiceProfile[] realizedServices) {
 	super(context, realizedServices);
     }
 
     // Metodos
-    /** Obligatorio de implementar. Sin interés (de momento) */
+    /** Obligatorio de implementar. Sin interï¿½s (de momento) */
     public void communicationChannelBroken() {
 	// TODO Auto-generated method stub
     }
@@ -85,16 +85,16 @@ public class SMSCallee extends ServiceCallee {
 	    return response;
 	}
 	// Si es la URI correspondiente a mi servicio
-	if (operation.startsWith(ServicioSMS.SERVICE_MANDA_SMS)) {
+	if (operation.startsWith(SMSService.SERVICE_MANDA_SMS)) {
 	    log.info("Service call received for sending a SMS");
 	    try {
 		// Llamo a un metodo externo que se encargara de realizar el
 		// envio SMS
 		return mandaSMS(
 			(String) call
-				.getInputValue(ServicioSMS.INPUT_TEXTO_MENSAJE),
+				.getInputValue(SMSService.INPUT_TEXTO_MENSAJE),
 			(String) call
-				.getInputValue(ServicioSMS.INPUT_TEXTO_TELEFONO));
+				.getInputValue(SMSService.INPUT_TEXTO_TELEFONO));
 	    } catch (Exception e) {
 		log.error("Exception trying to send message: {}", e.toString());
 		e.printStackTrace();
@@ -112,7 +112,7 @@ public class SMSCallee extends ServiceCallee {
     }
 
     /**
-     * Este método manda un SMS al número especificado (necesita recibir el
+     * Este mï¿½todo manda un SMS al nï¿½mero especificado (necesita recibir el
      * texto a enviar y el numero destino)
      */
     private ServiceResponse mandaSMS(String inputTextoMensaje,

@@ -26,17 +26,16 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.middleware.container.ModuleContext;
 
 /**
  * @author <a href="mailto:alfiva@itaca.upv.es">Alvaro Fides Valero</a>
  *
  */
-public class Activator implements BundleActivator{
-	public static BundleContext context=null;
+public class Main {
+	public static ModuleContext context=null;
 	
     public static SCaller rcaller=null;
     public static ISubscriber rinput=null;
@@ -61,11 +60,11 @@ public class Activator implements BundleActivator{
 			"RISK.Room@<URISuffixOfTheRoom>=00:<TimerMinutes>,<StartingHourOfPeriod>:<TimerMinutes>,... \n" +
 			"Example: RISK.Room@Bathroom=00:60,06:150,12:60";
 	
-	private final static Logger log=LoggerFactory.getLogger(Activator.class);
+	private final static Logger log=LoggerFactory.getLogger(Main.class);
 
-	public void start(BundleContext context) throws Exception {
+	public void start(ModuleContext context) throws Exception {
 		log.info("Starting Risk manager stub bundle");
-		Activator.context=context;
+		Main.context=context;
 		rcaller=new SCaller(context);
 		gui=new RiskGUI();
 		rinput=new ISubscriber(context);
@@ -74,7 +73,7 @@ public class Activator implements BundleActivator{
 		log.info("Started Risk manager stub bundle");
 	}
 
-	public void stop(BundleContext context) throws Exception {
+	public void stop(ModuleContext context) throws Exception {
 		log.info("Stopping riskstub bundle");
 		rinput.close();
 		routput.close();
