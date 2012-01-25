@@ -1,0 +1,137 @@
+#created on: 17-oct-2011
+package org.universAAL.AALApplication.health.motivation.treatment
+
+#list any import classes here. 
+import org.universAAL.AALapplication.health.ont.treatment.*;
+import org.universAAL.AALapplication.health.ont.schedule.*; 
+#declare any global variables here 
+
+
+#Whenever a treatment is detected a consent message is sent to the user
+rule "Treatment Detection" salience 100 no-loop
+	
+	when
+		detectedTreatment: Treatment(name != "")  //añadir message sent
+		
+	then 
+		TreatmentDetection.insertTreatment(detectedTreatment); //sólo válido para JUnit
+		HealthService.sendMessageToUser(detectedTreatment, "Treatment agreement message");//cambiar por clave cuando redacte el fichero de mensajes
+		System.out.println("Tratamiento " + detectedTreatment.getName()+ " detectado");//traza
+		
+end
+
+# When a treatment is NOT accepted by the user we change his/her motivation status to "PRECONTEMPLATION"
+rule "Treatment not accepted" salience 50 no-loop 
+
+	when 
+		treatment: Treatment(acceptance == false)//hay que añadir la condición del mensaje leído
+	then
+		treatment.setMotivationStatus(MotivationStatusType.precontemplation); 
+		MotivationStatusDetection.insertTreatmentByAcceptance(treatment); //sólo válido para JUnit
+		System.out.println("El tratamiento " + treatment.getName()+ "está pasando por acceptance false");//traza
+		System.out.println(treatment.getName() + " " + treatment.getMotivationStatusName());//traza
+	
+end
+
+# When a treatment is accepted by the user we change his/her motivation status to "CONTEMPLATION"
+
+rule "Treatment accepted" salience 50 
+
+	when 
+		treatment: Treatment(acceptance == true && motivationStatusName == "precontemplation")//sólo pasamos a contemplation cuando el estado anterior era precontemplation
+	then
+		treatment.setMotivationStatus(MotivationStatusType.contemplation); 
+		MotivationStatusDetection.insertTreatmentByAcceptance(treatment);//sólo válido para JUnit
+		System.out.println("El tratamiento " + treatment.getName()+ "está pasando por acceptance true");//traza
+		System.out.println(treatment.getName() + " " + treatment.getMotivationStatusName());//traza
+end
+
+
+
+#Whenever the assisted person starts the treatment, this rule changes it's motivation
+#status to "active"   
+
+rule "Change motivation status to active" salience 0
+
+	when
+		treatment: Treatment(motivationStatusName != "action" && completeness > 0 && completeness < 85) 
+	then
+		treatment.setMotivationStatus(MotivationStatusType.action);
+		System.out.println("Estoy cambiando a active el tratamiento " + treatment.getName() + " " + treatment.getMotivationStatusName());//traza
+		MotivationStatusDetection.insertTreatmentByCompletness(treatment);//sólo válido para JUnit
+end
+
+
+#Whenever the assisted person exceeds the 90% of the treatment, this rule changes it's 
+#motivation status to "maintenance"   
+
+
+rule "Change motivation status to maintenance" salience 0
+
+	when
+		treatment: Treatment(motivationStatusName != "maintenance" && completeness > 85 && completeness < 100) 
+	then
+		treatment.setMotivationStatus(MotivationStatusType.maintenance);
+		System.out.println("Estoy cambiando a maintenance el tratamiento " + treatment.getName() + " " + treatment.getMotivationStatusName());//traza
+		MotivationStatusDetection.insertTreatmentByCompletness(treatment);//sólo válido para JUnit
+end
+
+#Whenever the 100% completion of the treatment is reached, we send a message to the user
+#and erase the Treatment from the Drools working memory   
+rule "Ended treatment" salience 0
+
+	when
+		treatment: Treatment(completeness==100)
+	then
+		System.out.println("Estoy eliminando el tratamiento " + treatment.getName() + treatment.getMotivationStatusName());//traza
+		HealthService.sendMessageToUser(treatment, "Treatment ended message");//cambiar por clave cuando redacte el fichero de mensajes
+		retract(treatment);
+end
+
+rule "Treatment session performed"
+	
+	when
+		event: Event(performance == true) //cambiarlo más adelante sólo por la clase treatment, que no haga falta introducir los events en la working memory
+	then
+	//comprobar estrategia motivacion y enviar el mensaje correspondiente
+	
+	//aumentar la completitud por si cambia el estado de motivación
+	
+	Treatment associatedTreatment = (event.getAssociatedPlanning()).getAssociatedTreatment();
+	int $completion = associatedTreatment.getCompleteness();
+	int $updatedCompletion = $completion + 1;
+	associatedTreatment.setCompleteness($updatedCompletion);
+	update(associatedTreatment);
+	System.out.println("He detectado el evento");
+	System.out.println("Completitud del tratamiento: " + associatedTreatment.getName()+ " " + associatedTreatment.getCompleteness());
+	retract(event);
+			
+end
+
+/*
+rule "Treatment session performed"
+	
+	when
+		associatedTreatment: Treatment($event:treatmentEvents.contains(Event(performed==true))) 
+	then
+	//comprobar estrategia motivacion y enviar el mensaje correspondiente
+	
+	//aumentar la completitud por si cambia el estado de motivación
+	
+	//Treatment associatedTreatment = (event.getAssociatedPlanning()).getAssociatedTreatment();
+	int $completion = associatedTreatment.getCompleteness();
+	int $updatedCompletion = $completion + 1;
+	associatedTreatment.setCompleteness($updatedCompletion);
+	update(associatedTreatment);
+	System.out.println("He detectado el evento");
+	System.out.println("Completitud del tratamiento: " + associatedTreatment.getName()+ " " + associatedTreatment.getCompleteness());
+	retract(event);
+			
+end
+*/
+
+rule "Check treatment activation"
+when
+	treatment: Treatment() 
+then
+end

@@ -1445,9 +1445,20 @@ health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
 health/health.motivation/pom.xml -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/CSubscriber.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/Management/MessageManager.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/Management/MessageManagerTest.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/Management/MessageVariables.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationManager.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SCaller.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedule/ScheduleTreatment.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/treatment/HealthService.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/treatment/MotivationStatusDetection.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/treatment/TreatmentDetection.java -text
+health/health.motivation/src/main/resources/rules/AmbientContextRules.drl -text
+health/health.motivation/src/main/resources/rules/FeedbackRules.drl -text
+health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
+health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
 health/health.ont/LICENSE -text
 health/health.ont/NOTICE -text
 health/health.ont/pom.xml -text
