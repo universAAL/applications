@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011 Universidad Politécnica de Madrid
+ * Copyright 2011 Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package org.universAAL.AALapplication.health.manager;
 
 import java.util.TreeMap;
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.health.manager.ui.InputListener;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.input.InputEvent;
 import org.universAAL.middleware.input.InputSubscriber;
 
@@ -27,7 +27,7 @@ public class ISubscriber extends InputSubscriber{
 
 	private TreeMap<String, InputListener> inputMapper;
 	
-	protected ISubscriber(BundleContext context) {
+	protected ISubscriber(ModuleContext context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 	}

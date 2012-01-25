@@ -1,9 +1,9 @@
 /*	
 	Copyright 2010-2014 UPM http://www.upm.es
-	Universidad Politécnica de Madrdid
+	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -24,12 +24,12 @@ package org.universAAL.AALapplication.health.treat.logger.impl;
 
 import java.util.List;
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.health.ont.treatment.Treatment;
 import org.universAAL.AALapplication.health.ont.treatment.UserHealthProfile;
 import org.universAAL.AALapplication.health.treat.logger.TreatmentLogger;
 import org.universAAL.AALapplication.health.treat.logger.TreatmentLoggerServices;
 import org.universAAL.context.che.ontology.ContextHistoryService;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
@@ -75,7 +75,7 @@ public class ContextHistoryTreatmentLogger implements TreatmentLogger {
      * 
      * @param context
      */
-    public ContextHistoryTreatmentLogger(BundleContext context) {
+    public ContextHistoryTreatmentLogger(ModuleContext context) {
     	
     	// prepare for context publishing
     	ContextProvider info = new ContextProvider(
