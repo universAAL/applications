@@ -1,19 +1,19 @@
 package org.universAAL.AALApplication.health.motivation;
 
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
 
 public class CSubscriber extends ContextSubscriber{
 
-	protected CSubscriber(BundleContext context,
+	protected CSubscriber(ModuleContext context,
 			ContextEventPattern[] initialSubscriptions) {
 		super(context, initialSubscriptions);
 		// TODO Auto-generated constructor stub
 	}
 	
-	protected CSubscriber(BundleContext context) {
+	protected CSubscriber(ModuleContext context) {
 		super(context, getPermanentSubscriptions());
 		// TODO Auto-generated constructor stub
 	}

@@ -1,0 +1,21 @@
+#created on: 16-nov-2011
+package org.universAAL.AALApplication.health.motivation.schedule
+
+#list any import classes here.
+import org.universAAL.AALapplication.health.ont.treatment.*;
+import org.universAAL.AALApplicarion.health.motivation.schedule.ScheduleTreatmentTest;
+
+#declare any global variables here
+
+
+rule "Begin scheduling sessions"
+	when
+		treatment: Treatment(completeness<100) //the treatment is not complete
+		eval(treatment.hasEvents()==false) 
+		eval(treatment.hasTasks()==false) //and there aren't events or tasks scheduling it
+	then 
+		ScheduleTreatmentTest.insertDetectedTreatment(treatment); //sólo válido para el Junit
+	 	ScheduleTreatment.schedule(treatment);
+end
+
+
