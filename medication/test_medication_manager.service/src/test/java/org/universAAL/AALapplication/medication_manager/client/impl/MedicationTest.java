@@ -113,6 +113,14 @@ public final class MedicationTest extends IntegrationTest {
     Log.info("TEST %s", MedicationTest.class, "**************** Leaving test ****************");
   }
 
+  public void testRequestDetailsWithInvalidUserId() {
+    Log.info("TEST %s", MedicationTest.class, "**************** Entering test ***************");
+    String userID = "nonExisting";
+    Precaution precaution = MedicationConsumer.requestDetails(userID);
+    Assert.isNull(precaution, "The precaution must be null due to the invalid userId");
+    Log.info("TEST %s", MedicationTest.class, "**************** Leaving test ****************");
+  }
+
   public void testPublishEvent() {
     Log.info("TEST %s", MedicationTest.class, "**************** Entering test ***************");
     Time time = new Time(2012, 13, 16, 52);
