@@ -1,93 +1,49 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>personal_safety.pom</artifactId>
-		<groupId>org.universAAL.AALapplication.ps</groupId>
-		<version>0.1.0-SNAPSHOT</version>
+		<version>0.2.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-  <artifactId>personal_safety.run</artifactId>
-  <packaging>jar</packaging>  
+	<artifactId>personal_safety.run</artifactId>
+	<packaging>jar</packaging>
 
-  <build>
-    <plugins>  
-      <plugin>    
-        <groupId>org.ops4j</groupId>
-        <artifactId>maven-pax-plugin</artifactId>
-        <version>1.4</version>
-        <configuration>
-          <args>pax.configuration</args>
-          <runner>0.17.1</runner>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.ops4j</groupId>
+				<artifactId>maven-pax-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<args>pax.configuration</args>
+					<provision>
+						<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.io/1.0.0/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.service/1.0.0/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.context/1.0.0/composite</provision>
 
-          <provision>
-<!-- Libraries -->
-		<!-- felix -->
-	    <provision>mvn:org.apache.felix/org.apache.felix.log@1</provision>
-	    <provision>mvn:org.apache.felix/org.apache.felix.configadmin@1</provision>
-	    <provision>mvn:org.apache.felix/org.apache.felix.upnp.basedriver@1</provision>
-		<!-- DB & CHe -->
-<!-- 	    <provision>wrap:mvn:mysql/mysql-connector-java/5.1.6@2</provision> -->
-<!-- 	    <provision>wrap:mvn:com.thoughtworks.xstream/xstream/1.3.1@2</provision> -->
-<!-- 	    <provision>wrap:mvn:xpp3/xpp3_min/1.1.4c@2</provision> -->
-<!-- 	    <provision>wrap:mvn:com.hp.hpl.jena/jena/2.5.4</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.support/jena.osgi/0.3.0-SNAPSHOT@2</provision> -->
-<!-- 	    <provision>wrap:mvn:com.hp.hpl.jena/arq/2.5.0@2</provision> -->
-		<!-- mw -->
-	    <!--<provision>mvn:org.universAAL.middleware/mw.container.xfaces@2</provision>-->
-	    <!--<provision>mvn:org.universAAL.middleware/mw.container.osgi@2</provision>-->
-	    <provision>wrap:mvn:jp.go.ipa/jgcl/1.0@3</provision>
-	    <provision>wrap:mvn:java3d/vecmath/1.3.1@3</provision>
-	    <provision>wrap:mvn:org.bouncycastle/jce.jdk13/144@3</provision>
-	    <provision>wrap:mvn:java3d/j3d-core/1.3.1@3</provision>
-		<!-- pax -->
-	    <provision>mvn:org.ops4j.pax.logging/pax-logging-api@4</provision>
-	    <provision>mvn:org.ops4j.pax.logging/pax-logging-service@4</provision>
-	    <provision>wrap:mvn:org.ops4j.pax.confman/pax-confman-propsloader@4</provision>
+						<!-- Ontologies -->
+						<provision>scan-composite:mvn:org.universAAL.ontology/ont.phWorld/1.0.0/composite</provision>
+						<provision>mvn:org.universAAL.ontology/ont.profile/1.0.0</provision>
+						<provision>mvn:org.universAAL.ontology/ont.risk/1.0.0</provision>
 
-		<!-- MW -->
-	    <provision>mvn:org.universAAL.middleware/mw.acl.interfaces/0.3.0-SNAPSHOT@5</provision>
-	    <provision>mvn:org.universAAL.middleware/mw.acl.upnp/0.2.0-SNAPSHOT@5</provision>
-	    <provision>mvn:org.universAAL.middleware/mw.bus.model/0.3.0-SNAPSHOT@5</provision> 
-	    <provision>mvn:org.universAAL.middleware/mw.data.representation/0.3.0-SNAPSHOT@5</provision>
-	    <provision>mvn:org.universAAL.middleware/mw.data.serialization/0.3.0-SNAPSHOT@5</provision>
-	    <provision>mvn:org.universAAL.middleware/mw.bus.service/0.3.0-SNAPSHOT@5</provision>
-	    <provision>mvn:org.universAAL.middleware/mw.bus.context/0.3.0-SNAPSHOT@5</provision> 
-	    <provision>mvn:org.universAAL.middleware/mw.bus.io/0.3.0-SNAPSHOT@5</provision>  
-	     	    
-		<!-- Ontologies -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.av/0.2.0-SNAPSHOT@5</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.device.extra/0.1.0-SNAPSHOT@5</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.furniture/0.2.0-SNAPSHOT@5</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.hazard/0.1.0-SNAPSHOT@5</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.lighting/0.2.0-SNAPSHOT@5</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.measurement/0.2.0-SNAPSHOT@5</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.medication/0.2.0-SNAPSHOT@5</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.multimedia/0.1.0-SNAPSHOT@5</provision> -->
-	    <provision>mvn:org.universAAL.ontology/ont.phWorld/0.2.3-SNAPSHOT@5</provision>
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.powersocket/0.2.0-SNAPSHOT@5</provision> -->
-	    <provision>mvn:org.universAAL.ontology/ont.profile/0.3.0-SNAPSHOT@5</provision>
-	    <provision>mvn:org.universAAL.ontology/ont.risk/0.1.0-SNAPSHOT@5</provision>
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.water/0.1.0-SNAPSHOT@5</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.weather/0.2.0-SNAPSHOT@5</provision> -->
-<!-- 	    <provision>mvn:org.universAAL.ontology/ont.window/0.2.1-SNAPSHOT@5</provision> -->
+						<!-- Platform -->
+						<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che/1.0.0/composite</provision> -->
+						<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che.mobile/1.0.0/composite</provision> -->
+						<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.dm/1.0.0/composite</provision> -->
+						<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.0.0/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.0.0/composite</provision>
+						<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.0.0/composite</provision> -->
 
-		<!-- Platform -->
-<!-- 	    <provision>mvn:org.universAAL.context/ctxt.jena.converter/0.3.0-SNAPSHOT@6</provision> -->
-	    <!--<provision>mvn:org.universAAL.ui/ui.dm/0.2.0-SNAPSHOT@6</provision>-->
-	    <provision>mvn:org.universAAL.middleware/ui.dm.mobile@6</provision>
-<!-- 	    <provision>mvn:org.universAAL.context/ctxt.che/0.2.0-SNAPSHOT@6</provision> -->
-		<provision>wrap:mvn:org.universAAL.ui/ui.handler.gui.tableLayout@6</provision>
-		<provision>mvn:org.universAAL.ui/ui.handler.gui/0.1.1-SNAPSHOT-DEMO@6</provision>
-
-
-		<!-- Services -->
-		<provision>mvn:org.universAAL.AALapplication/personal_safety.sms@6</provision>
-		<provision>mvn:org.universAAL.AALapplication/personal_safety.service@7</provision>
-		<provision>mvn:org.universAAL.AALapplication/personal_safety.sw.panic@7</provision>
-		<provision>mvn:org.universAAL.samples/smp.test-location.publisher@7@nostart</provision>
-	  </provision>
-        </configuration>	
-      </plugin>    	
-    </plugins>
-  </build>
+						<!-- Services -->
+						<provision>mvn:org.universAAL.AALapplication/personal_safety.sms/${project.version}</provision>
+						<provision>mvn:org.universAAL.AALapplication/personal_safety.service/${project.version}@7</provision>
+						<provision>mvn:org.universAAL.AALapplication/personal_safety.sw.panic/${project.version}@7</provision>
+						<provision>mvn:org.universAAL.samples/smp.test-location.publisher/${project.version}@7@nostart</provision>
+					</provision>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

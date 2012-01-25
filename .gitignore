@@ -85,6 +85,7 @@ personal_safety/run/.classpath
 personal_safety/run/.project
 personal_safety/run/.settings
 personal_safety/run/runner/bundles
+personal_safety/run/runner/cache
 personal_safety/run/runner/felix/cache/runner
 personal_safety/run/runner/log
 personal_safety/run/target
