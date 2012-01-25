@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011 Universidad Politécnica de Madrid
+ * Copyright 2011 Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@ package org.universAAL.AALapplication.health.manager;
 
 import java.util.Locale;
 
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.ontology.profile.User;
 
 public class HealthManager {
 
 	private static HealthManager singleton;
-	private static BundleContext context;
+	private static ModuleContext context;
 	private ISubscriber isubcriber;
 	private OPublisher opublisher;	
 	private User user;
@@ -40,7 +40,7 @@ public class HealthManager {
 		return singleton;
 	}
 	
-	public static void setContext(BundleContext ctxt) {
+	public static void setContext(ModuleContext ctxt) {
 		context=ctxt;
 	}
 	public ISubscriber getIsubcriber() {

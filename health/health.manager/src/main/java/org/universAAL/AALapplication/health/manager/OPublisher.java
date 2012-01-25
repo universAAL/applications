@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011 Universidad Politécnica de Madrid
+ * Copyright 2011 Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 package org.universAAL.AALapplication.health.manager;
 
 
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.output.OutputPublisher;
 
 public class OPublisher extends OutputPublisher{
 
-	protected OPublisher(BundleContext context) {
+	protected OPublisher(ModuleContext context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 	}

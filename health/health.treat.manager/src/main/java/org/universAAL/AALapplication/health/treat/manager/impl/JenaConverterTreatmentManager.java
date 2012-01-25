@@ -1,9 +1,9 @@
 /*	
 	Copyright 2010-2014 UPM http://www.upm.es
-	Universidad Politécnica de Madrdid
+	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -24,9 +24,9 @@ package org.universAAL.AALapplication.health.treat.manager.impl;
 
 import java.util.List;
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.health.ont.treatment.Treatment;
 import org.universAAL.AALapplication.health.treat.manager.TreatmentManager;
+import org.universAAL.middleware.container.ModuleContext;
 
 /**
  * This class actually implements the 
@@ -43,7 +43,7 @@ public class JenaConverterTreatmentManager implements TreatmentManager {
      * 
      * @param context
      */
-	 public JenaConverterTreatmentManager(BundleContext context) {
+	 public JenaConverterTreatmentManager(ModuleContext context) {
 	 }
 	 
 		/**

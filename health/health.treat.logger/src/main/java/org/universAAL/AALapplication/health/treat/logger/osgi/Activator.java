@@ -1,9 +1,9 @@
 /*	
 	Copyright 2010-2014 UPM http://www.upm.es
-	Universidad Politécnica de Madrdid
+	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -25,6 +25,7 @@ package org.universAAL.AALapplication.health.treat.logger.osgi;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.health.treat.logger.TreatmentLoggerProvider;
+import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 /**
  * @author amedrano
@@ -40,7 +41,8 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext context) throws Exception {
 		Activator.context=context;
-		provider = new TreatmentLoggerProvider(context);
+		provider = new TreatmentLoggerProvider(uAALBundleContainer.THE_CONTAINER
+				.registerModule(new BundleContext[] { context }));
 	}
 
 	/* (non-Javadoc)

@@ -1,9 +1,9 @@
 /*	
 	Copyright 2010-2014 UPM http://www.upm.es
-	Universidad Politécnica de Madrdid
+	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -24,9 +24,9 @@ package org.universAAL.AALapplication.health.treat.logger;
 
 import java.util.List;
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.health.ont.treatment.Treatment;
 import org.universAAL.AALapplication.health.treat.logger.impl.ContextHistoryTreatmentLogger;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -58,7 +58,7 @@ public class TreatmentLoggerProvider extends ServiceCallee {
      * @param context
      * @param realizedServices
      */
-    protected TreatmentLoggerProvider(BundleContext context, ServiceProfile[] realizedServices) {
+    protected TreatmentLoggerProvider(ModuleContext context, ServiceProfile[] realizedServices) {
 		super(context, realizedServices);
     }
 	
@@ -67,7 +67,7 @@ public class TreatmentLoggerProvider extends ServiceCallee {
      * 
      * @param context
      */
-	public TreatmentLoggerProvider(BundleContext context) {
+	public TreatmentLoggerProvider(ModuleContext context) {
 		// as a service providing component, we have to extend ServiceCallee
     	// this in turn requires that we introduce which services we would like
     	// to provide to the universAAL-based AAL Space

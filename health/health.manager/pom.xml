@@ -13,28 +13,31 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>health.pom</artifactId>
-    <groupId>org.universAAL.AALapplication</groupId>
-    <version>0.1.0-SNAPSHOT</version>
-    <relativePath>../pom</relativePath>
-  </parent>
-  <artifactId>health.manager</artifactId>
-  <name>Health Manager</name>
-  <description>Main component for Health Management uAAL Service</description>
-  
-    <licenses>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>health.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>0.2.0-SNAPSHOT</version>
+		<relativePath>../pom/</relativePath>
+	</parent>
+
+	<artifactId>health.manager</artifactId>
+	<name>Health Manager</name>
+	<description>Main component for Health Management uAAL Service</description>
+
+	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 			<distribution>repo</distribution>
 		</license>
-  </licenses>
-  
-  <dependencies>
-  		<dependency>
+	</licenses>
+
+	<dependencies>
+		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
@@ -46,13 +49,13 @@
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>health.ont</artifactId>
 		</dependency>
-  		<dependency>
+		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.io</artifactId>
 		</dependency>
-</dependencies>
-    
-    <build>
+	</dependencies>
+
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
