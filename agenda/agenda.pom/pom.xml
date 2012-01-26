@@ -27,9 +27,9 @@
 		<module>../agenda.client</module>
 		<module>../agenda.gui</module>
 		<module>../agenda.remote</module>
-		<module>../agenda.eventSelection.ont</module>
-		<module>../agenda.eventSelection.server</module>
-		<module>../agenda.eventSelection.client</module>
+		<module>../agendaEventSelection.ont</module>
+		<module>../agendaEventSelection.server</module>
+		<module>../agendaEventSelection.client</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
