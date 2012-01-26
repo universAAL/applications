@@ -1,5 +1,6 @@
 package org.universAAL.agenda.server.unit_impl;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,7 +23,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.osgi.service.log.LogService;
 import org.universAAL.agenda.ont.*;
 import org.universAAL.agenda.server.Activator;
+import org.universAAL.agenda.server.AgendaProvider;
 import org.universAAL.agenda.server.database.AgendaDBInterface;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.util.Constants;
 import org.universAAL.ontology.profile.User;
@@ -62,6 +65,7 @@ public class MyAgenda implements AgendaDBInterface {
 	private Properties prop;
 
 	public MyAgenda(String url, String user, String pwd) {
+		File confHome = new File(new BundleConfigHome("agenda").getAbsolutePath());
 		this.DB_URL = url;
 		this.DB_USER = user;
 		this.DB_PWD = pwd;
@@ -73,7 +77,8 @@ public class MyAgenda implements AgendaDBInterface {
 		this.theLock = new Object();
 		prop = new Properties();
 		try {
-			prop.load(new FileInputStream("DBquery.properties"));
+			
+			prop.load(new FileInputStream(new File(confHome, "DBquery.properties")));
 			connect();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

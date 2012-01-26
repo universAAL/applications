@@ -4,9 +4,11 @@
 package org.universAAL.agenda.server;
 
 //j2se packages
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,6 +29,7 @@ import org.universAAL.agenda.server.gui.wrapper.WrapperActivator;
 import org.universAAL.agenda.server.unit_impl.AgendaStateListener;
 import org.universAAL.agenda.server.unit_impl.MyAgenda;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
@@ -47,6 +50,8 @@ import org.universAAL.ontology.profile.User;
  */
 public class AgendaProvider extends ServiceCallee implements
 		AgendaStateListener {
+	static final File confHome = new File(new BundleConfigHome("agenda")
+	.getAbsolutePath());
 	// static final String CAL_URI_PREFIX =
 	// ProvidedAgendaService.AGENDA_SERVER_NAMESPACE + "controlledAgenda";
 	// //TODO: change name
@@ -135,7 +140,10 @@ public class AgendaProvider extends ServiceCallee implements
 
 		// start the server
 		Properties prop = new Properties();
-		prop.load(new FileInputStream("credentials.properties"));
+mainLogger.info("agendaProvider reading credentials from confHome: "+confHome);
+		InputStream in = new FileInputStream(new File(confHome, "credentials.properties"));
+					prop.load(in);
+
 		theServer = new MyAgenda(
 				prop.getProperty("database"), prop.getProperty("username"), prop.getProperty("password")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		theScheduler = new Scheduler(theServer, this);

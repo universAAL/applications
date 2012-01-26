@@ -366,8 +366,6 @@ agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_en
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_hr.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_it.properties -text
-agenda/agenda.server/DBquery.prop -text
-agenda/agenda.server/DBquery.properties -text
 agenda/agenda.server/LICENSE -text
 agenda/agenda.server/NOTICE -text
 agenda/agenda.server/pom.xml -text
@@ -405,6 +403,8 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_es
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/main/resources/stable_agenda_db.sql -text
+agenda/agenda.server/src/test/resources/DBquery.prop -text
+agenda/agenda.server/src/test/resources/DBquery.properties -text
 agenda/agendaEventSelection.client/LICENSE -text
 agenda/agendaEventSelection.client/NOTICE -text
 agenda/agendaEventSelection.client/pom.xml -text
