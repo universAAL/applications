@@ -85,30 +85,30 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package> org.universAAL.agendaEventSelectionTool.client</Export-Package>
-						<Import-Package>org.universAAL.middleware.context,org.universAAL.middleware.context.owl,
-							org.universAAL.middleware.input,
-							org.universAAL.middleware.io.owl,
-							org.universAAL.middleware.io.rdf,
-							org.universAAL.middleware.output, org.universAAL.middleware.owl,
-							org.universAAL.middleware.owl.supply,
-							org.universAAL.middleware.rdf, org.universAAL.middleware.service,
-							org.universAAL.middleware.service.owl,
-							org.universAAL.middleware.service.owls.process,
-							org.universAAL.middleware.service.owls.profile,
-							org.universAAL.middleware.util, org.universAAL.ontology.profile,
-							org.universAAL.ontology.location.address,
-							org.universAAL.ontology.location.outdoor,
-
-							org.universAAL.agenda.ont,
-							org.universAAL.agenda.ont.service,
-							org.universAAL.agendaEventSelectionTool.ont,
-							org.universAAL.agendaEventSelectionTool.ont.service,
-
-							java.sql.*,
-							javax.swing,
-							org.osgi.service.*, org.osgi.framework, javax.xml.*,
-							com.mysql.jdbc,
-							org.slf4j</Import-Package>
+<!--						<Import-Package>org.universAAL.middleware.context,org.universAAL.middleware.context.owl,-->
+<!--							org.universAAL.middleware.input,-->
+<!--							org.universAAL.middleware.io.owl,-->
+<!--							org.universAAL.middleware.io.rdf,-->
+<!--							org.universAAL.middleware.output, org.universAAL.middleware.owl,-->
+<!--							org.universAAL.middleware.owl.supply,-->
+<!--							org.universAAL.middleware.rdf, org.universAAL.middleware.service,-->
+<!--							org.universAAL.middleware.service.owl,-->
+<!--							org.universAAL.middleware.service.owls.process,-->
+<!--							org.universAAL.middleware.service.owls.profile,-->
+<!--							org.universAAL.middleware.util, org.universAAL.ontology.profile,-->
+<!--							org.universAAL.ontology.location.address,-->
+<!--							org.universAAL.ontology.location.outdoor,-->
+<!---->
+<!--							org.universAAL.agenda.ont,-->
+<!--							org.universAAL.agenda.ont.service,-->
+<!--							org.universAAL.agendaEventSelectionTool.ont,-->
+<!--							org.universAAL.agendaEventSelectionTool.ont.service,-->
+<!---->
+<!--							java.sql.*,-->
+<!--							javax.swing,-->
+<!--							org.osgi.service.*, org.osgi.framework, javax.xml.*,-->
+<!--							com.mysql.jdbc,-->
+<!--							org.slf4j</Import-Package>-->
 					</instructions>
 				</configuration>
 			</plugin>
