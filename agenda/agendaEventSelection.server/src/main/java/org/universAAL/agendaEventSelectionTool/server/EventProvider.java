@@ -1,8 +1,10 @@
 package org.universAAL.agendaEventSelectionTool.server;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -14,6 +16,7 @@ import org.universAAL.agendaEventSelectionTool.ont.FilterParams;
 import org.universAAL.agendaEventSelectionTool.server.impl.EventSelectionListener;
 import org.universAAL.agendaEventSelectionTool.server.impl.MyEventSelectionTool;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
@@ -26,6 +29,9 @@ import org.universAAL.middleware.service.owls.process.ProcessOutput;
 
 public class EventProvider extends ServiceCallee implements
 		EventSelectionListener {
+	
+	private static File confHome = new File(new BundleConfigHome("agenda")
+	.getAbsolutePath());
 
 	private static final Logger mainLogger = LoggerFactory
 			.getLogger(EventProvider.class);
@@ -56,7 +62,9 @@ public class EventProvider extends ServiceCallee implements
 		mainLogger.info("Starting agendaEventSelectionTool.server");
 		// start the server
 		Properties prop = new Properties();
-		prop.load(new FileInputStream("credentials.properties"));
+		
+		InputStream in = new FileInputStream(new File(confHome, "credentials.properties"));
+		prop.load(in);
 		theServer = new MyEventSelectionTool(
 				prop.getProperty("database"), prop.getProperty("username"), prop.getProperty("password")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		// theServer.addListener(this);

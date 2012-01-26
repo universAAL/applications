@@ -429,10 +429,10 @@ agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelec
 agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/impl/MyEventSelectionTool.java -text
 agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/impl/MyEventSelectionTool.java.backup -text
 agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/impl/MyEventSelectionTool.java_11_5 -text
-agenda/agendaEventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_da.properties -text
-agenda/agendaEventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_en.properties -text
-agenda/agendaEventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_es.properties -text
-agenda/agendaEventSelection.server/src/main/resources/org/universAAL/eventSelectionTool/server/messages_hr.properties -text
+agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_da.properties -text
+agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_en.properties -text
+agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_es.properties -text
+agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_hr.properties -text
 agenda/dm/EXCEPTIONS-CONNECTOR-J -text
 agenda/dm/LICENSE-BSD-Jena.txt -text
 agenda/dm/LICENSE-CPL-JUnit.txt -text

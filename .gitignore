@@ -28,6 +28,10 @@ agenda/agendaEventSelection.ont/.classpath
 agenda/agendaEventSelection.ont/.project
 agenda/agendaEventSelection.ont/.settings
 agenda/agendaEventSelection.ont/target
+agenda/agendaEventSelection.server/.classpath
+agenda/agendaEventSelection.server/.project
+agenda/agendaEventSelection.server/.settings
+agenda/agendaEventSelection.server/target
 agenda/dm/.classpath
 agenda/dm/.project
 agenda/dm/.settings
