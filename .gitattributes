@@ -367,6 +367,10 @@ agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_hr.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_it.properties -text
 agenda/agenda.runner/Run.bat -text
+agenda/agenda.runner/dbSchemaRepository/AgendaUniversAAL.sql -text
+agenda/agenda.runner/dbSchemaRepository/AgendaUniversAAL_MySQL_WorkbenchModel.mwb -text
+agenda/agenda.runner/dbSchemaRepository/Er[!!-~]model.png -text
+agenda/agenda.runner/dbSchemaRepository/stable_agenda_db-oldFromPersona.sql -text
 agenda/agenda.runner/eclipse.launchers/runner-Remote-Debug.launch -text
 agenda/agenda.runner/eclipse.launchers/runner.install-run.launch -text
 agenda/agenda.runner/eclipse.launchers/runner.run.launch -text
@@ -375,6 +379,7 @@ agenda/agenda.runner/pom.xml -text
 agenda/agenda.runner/runner/configurations/README.txt -text
 agenda/agenda.runner/runner/configurations/agenda/DBquery.properties -text
 agenda/agenda.runner/runner/configurations/agenda/agenda.properties -text
+agenda/agenda.runner/runner/configurations/agenda/automatski[!!-~]izgenerirano[!!-~]agenda.properties -text
 agenda/agenda.runner/runner/configurations/agenda/credentials.properties -text
 agenda/agenda.runner/runner/configurations/ctxt.che/CHe.properties -text
 agenda/agenda.runner/runner/configurations/mw.bus.model/sodapop.key -text
@@ -443,7 +448,9 @@ agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendCo
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendEndEventTask.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendReminderTask.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendStartEventTask.java -text
-agenda/agenda.server/src/main/resources/credentials.txt -text
+agenda/agenda.server/src/main/resources/AgendaUniversAAL.sql -text
+agenda/agenda.server/src/main/resources/DBquery.properties -text
+agenda/agenda.server/src/main/resources/credentials.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_da.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_en.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_es.properties -text
@@ -454,7 +461,6 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_en
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_es.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
-agenda/agenda.server/src/main/resources/stable_agenda_db.sql -text
 agenda/agenda.server/src/test/resources/DBquery.prop -text
 agenda/agenda.server/src/test/resources/DBquery.properties -text
 agenda/agendaEventSelection.client/LICENSE -text

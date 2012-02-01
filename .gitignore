@@ -16,6 +16,15 @@ agenda/agenda.remote/.classpath
 agenda/agenda.remote/.project
 agenda/agenda.remote/.settings
 agenda/agenda.remote/target
+agenda/agenda.runner/.classpath
+agenda/agenda.runner/.project
+agenda/agenda.runner/.settings
+agenda/agenda.runner/runner/bundles
+agenda/agenda.runner/runner/cache
+agenda/agenda.runner/runner/felix/cache
+agenda/agenda.runner/runner/log
+agenda/agenda.runner/runner/org.apache.felix.main.Main
+agenda/agenda.runner/target
 agenda/agenda.server/.classpath
 agenda/agenda.server/.project
 agenda/agenda.server/.settings
