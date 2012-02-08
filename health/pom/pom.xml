@@ -31,7 +31,7 @@
 	</scm>
 
 	<modules>
-		<module>../health.ont</module>
+		<module>../ont.health</module>
 		<module>../health.treat.logger</module>
 		<module>../health.treat.manager</module>
 		<module>../health.motivation</module>
@@ -65,8 +65,8 @@
 				<version>1.0.0</version>
 			</dependency>
 			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
-				<artifactId>health.ont</artifactId>
+				<groupId>org.universaal.ontology.health</groupId>
+				<artifactId>ont.health</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
