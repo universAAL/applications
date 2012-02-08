@@ -8,7 +8,8 @@
 		<relativePath>../pom</relativePath>
 	</parent>
 
-	<artifactId>health.ont</artifactId>
+	<groupId>org.universaal.ontology.health</groupId>
+	<artifactId>ont.health</artifactId>
 	<packaging>bundle</packaging>
 
 	<name>Health AAL service ontology</name>

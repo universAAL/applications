@@ -46,8 +46,8 @@
 			<artifactId>org.osgi.compendium</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>health.ont</artifactId>
+			<groupId>org.universaal.ontology.health</groupId>
+			<artifactId>ont.health</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
