@@ -1,4 +1,4 @@
-scan-composite:mvn:org.universAAL.middleware/mw.bus.context/0.3.2-SNAPSHOT/composite
-scan-composite:mvn:org.universAAL.middleware/mw.bus.service/0.3.2-SNAPSHOT/composite
+scan-composite:mvn:org.universAAL.middleware/mw.bus.context/1.0.1-SNAPSHOT/composite
+scan-composite:mvn:org.universAAL.middleware/mw.bus.service/1.0.1-SNAPSHOT/composite
 scan-bundle:mvn:org.universAAL.AALapplication/ont.medMgr/0.1.0-SNAPSHOT
 scan-bundle:mvn:org.universAAL.AALapplication/medication_manager/0.3.2-SNAPSHOT/
