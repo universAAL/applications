@@ -2,6 +2,8 @@ package org.universAAL.ontology.medMgr;
 
 import org.universAAL.middleware.service.owl.Service;
 
+import java.util.Hashtable;
+
 /**
  * @author George Fournadjiev
  */
@@ -49,5 +51,7 @@ public class MissedIntake extends Service {
     props.put(USER_ID, userId);
   }
 
-
+  protected Hashtable getClassLevelRestrictions() {
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
 }

@@ -3,6 +3,7 @@ package org.universAAL.ontology.medMgr;
 
 import org.universAAL.middleware.service.owl.Service;
 
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -48,5 +49,9 @@ public class Precaution extends Service {
 
   public int getPropSerializationType(String propURI) {
     return PROP_SERIALIZATION_FULL;
+  }
+
+  protected Hashtable getClassLevelRestrictions() {
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 }

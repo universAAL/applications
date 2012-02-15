@@ -2,6 +2,8 @@ package org.universAAL.ontology.medMgr;
 
 import org.universAAL.middleware.service.owl.Service;
 
+import java.util.Hashtable;
+
 
 /**
  * @author George Fournadjiev
@@ -28,5 +30,9 @@ public class Medication extends Service {
 
   public boolean isWellFormed() {
     return true;
+  }
+
+  protected Hashtable getClassLevelRestrictions() {
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 }
