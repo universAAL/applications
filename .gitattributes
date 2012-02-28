@@ -1,32 +1,4 @@
 * text=auto !eol
-agenda/Configuration[!!-~]files/confadmin/mw.bus.model/sodapop.key -text svneol=unset#application/octet-stream
-agenda/Configuration[!!-~]files/confadmin/services/org.ops4j.pax.logging.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/main_menu.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/main_menu_Userkostas_en.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/main_menu_de.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/main_menu_nutritionist_en.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/main_menu_saied_en.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/main_menu_saied_hr.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/main_menu_tester_en.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/main_menu_tester_hr.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/messages.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/messages_de.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/messages_en.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm.mobile/messages_hr.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm/main_menu.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm/main_menu_de.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm/main_menu_en.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm/main_menu_nutritionist_en.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm/main_menu_saied_en.txt -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm/messages.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm/messages_de.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm/messages_en.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.dm/messages_hr.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/formsPrototypeProperties.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/formsPrototypes.properties -text
-agenda/Configuration[!!-~]files/confadmin/ui.handler.gui/guiMessages_en_US.properties -text
-agenda/Configuration[!!-~]files/old_agendaDB_with_users.sql -text
-agenda/Configuration[!!-~]files/setup[!!-~]instructions.txt -text
 agenda/agenda.client/LICENSE -text
 agenda/agenda.client/NOTICE -text
 agenda/agenda.client/backup/AgendaConsumer_backup.java -text
