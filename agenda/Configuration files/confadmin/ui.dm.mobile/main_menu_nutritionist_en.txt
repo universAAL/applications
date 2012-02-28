@@ -1,3 +1,0 @@
-/Agenda Web|http://www.tsb.upv.es|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
-
-/Profile Editor|http://www.spirit.gr|http://ontology.persona.upm.es/Profile.owl#ProfilingService

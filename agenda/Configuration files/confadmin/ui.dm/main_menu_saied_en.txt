@@ -1,3 +1,0 @@
-/Agenda|http://www.anco.gr|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
-
-/Profile Editor|http://www.spirit.gr|http://ontology.persona.upm.es/Profile.owl#ProfilingService
