@@ -41,14 +41,6 @@ agenda/agendaEventSelection.server/.classpath
 agenda/agendaEventSelection.server/.project
 agenda/agendaEventSelection.server/.settings
 agenda/agendaEventSelection.server/target
-agenda/dm/.classpath
-agenda/dm/.project
-agenda/dm/.settings
-agenda/dm/target
-agenda/handler.web/.classpath
-agenda/handler.web/.project
-agenda/handler.web/.settings
-agenda/handler.web/target
 food_shopping/food_shopping.service.client/.classpath
 food_shopping/food_shopping.service.client/.project
 food_shopping/food_shopping.service.client/.settings
