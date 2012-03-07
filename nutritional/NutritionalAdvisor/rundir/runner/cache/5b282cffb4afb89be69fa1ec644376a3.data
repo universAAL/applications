@@ -1,2 +1,0 @@
-#Redirect for Apache Felix OBR
-scan-composite:mvn:org.ops4j.pax.runner.profiles/felix.obr//composite

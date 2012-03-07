@@ -109,6 +109,10 @@ medication/test_medication_manager.service/target
 nutritional/NutritionalAdvisor/.classpath
 nutritional/NutritionalAdvisor/.project
 nutritional/NutritionalAdvisor/.settings
+nutritional/NutritionalAdvisor/NutritionalAdvisor/David_Shopland/images
+nutritional/NutritionalAdvisor/rundir/NutritionalAdvisor/David_Shopland/cache
+nutritional/NutritionalAdvisor/rundir/NutritionalAdvisor/David_Shopland/images
+nutritional/NutritionalAdvisor/rundir/runner
 nutritional/NutritionalAdvisor/target
 nutritional/ont.nutrition/.classpath
 nutritional/ont.nutrition/.project
