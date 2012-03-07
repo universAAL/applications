@@ -303,7 +303,6 @@ agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_en.prope
 agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_es.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_hr.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/agenda/ont/messages_it.properties -text
-agenda/agenda.pom/pom.xml -text
 agenda/agenda.remote/LICENSE -text
 agenda/agenda.remote/NOTICE -text
 agenda/agenda.remote/bin/.project -text
@@ -463,6 +462,7 @@ agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEvent
 agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_en.properties -text
 agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_es.properties -text
 agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_hr.properties -text
+agenda/pom/pom.xml -text
 food_shopping/README.txt -text
 food_shopping/food_shopping.service.client/pom.xml -text
 food_shopping/food_shopping.service.client/src/main/java/org/universAAL/AALapplication/food_shopping/service/client/Activator.java -text

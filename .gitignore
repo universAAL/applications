@@ -10,8 +10,6 @@ agenda/agenda.ont/.classpath
 agenda/agenda.ont/.project
 agenda/agenda.ont/.settings
 agenda/agenda.ont/target
-agenda/agenda.pom/.project
-agenda/agenda.pom/.settings
 agenda/agenda.remote/.classpath
 agenda/agenda.remote/.project
 agenda/agenda.remote/.settings
@@ -41,6 +39,8 @@ agenda/agendaEventSelection.server/.classpath
 agenda/agendaEventSelection.server/.project
 agenda/agendaEventSelection.server/.settings
 agenda/agendaEventSelection.server/target
+agenda/pom/.project
+agenda/pom/.settings
 food_shopping/food_shopping.service.client/.classpath
 food_shopping/food_shopping.service.client/.project
 food_shopping/food_shopping.service.client/.settings
