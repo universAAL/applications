@@ -13,7 +13,7 @@
 	<version>0.1.0-SNAPSHOT</version>
 	
 	<packaging>pom</packaging>
-	<name>Parent POM for all services</name>
+	<name>Parent POM for all AAL services</name>
 	<description>Contains repository, deployment, and other info for all AALapplications</description>
 
 	<modules>
@@ -22,6 +22,7 @@
 		<module>../food_shopping/pom</module>
 		<module>../safety_home/pom</module>
 		<module>../medication/pom</module>
+		<module>../agenda/pom</module>
 	</modules>
 	
 	<dependencyManagement>
