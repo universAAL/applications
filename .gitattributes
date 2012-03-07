@@ -381,6 +381,8 @@ agenda/agenda.runner/runner/configurations/ui.dm/main_menu_saied_hr.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_tester.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_tester_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_tester_es.txt -text
+agenda/agenda.runner/runner/configurations/ui.dm/messages_de.properties -text
+agenda/agenda.runner/runner/configurations/ui.dm/messages_en.properties -text
 agenda/agenda.runner/runner/configurations/ui.dm/messages_hr.properties -text
 agenda/agenda.runner/runner/configurations/ui.handler.gui/formsPrototypeProperties.properties -text
 agenda/agenda.runner/runner/configurations/ui.handler.gui/formsPrototypes.properties -text
