@@ -42,12 +42,6 @@
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation</artifactId>
 		</dependency>
-
-		<!--		<dependency>-->
-		<!--			<groupId>org.aal-persona.middleware</groupId>-->
-		<!--			<artifactId>cdc.support</artifactId>-->
-		<!--		</dependency>-->
-
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
@@ -61,7 +55,6 @@
 			<artifactId>pax-logging-api</artifactId>
 			<version>1.6.2</version>
 			<scope>provided</scope>
-
 		</dependency>
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>

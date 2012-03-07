@@ -446,6 +446,8 @@ agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectio
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/service/EventSelectionToolService.java -text
 agenda/agendaEventSelection.server/LICENSE -text
 agenda/agendaEventSelection.server/NOTICE -text
+agenda/agendaEventSelection.server/backup/MyEventSelectionTool.java.backup -text
+agenda/agendaEventSelection.server/backup/MyEventSelectionTool.java_11_5 -text
 agenda/agendaEventSelection.server/pom.xml -text
 agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/database/EventSelectionToolDBInterface.java -text
 agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/Activator.java -text
@@ -454,8 +456,6 @@ agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelec
 agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/ProvidedESTService.java -text
 agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/impl/EventSelectionListener.java -text
 agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/impl/MyEventSelectionTool.java -text
-agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/impl/MyEventSelectionTool.java.backup -text
-agenda/agendaEventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/impl/MyEventSelectionTool.java_11_5 -text
 agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_da.properties -text
 agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_en.properties -text
 agenda/agendaEventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_es.properties -text

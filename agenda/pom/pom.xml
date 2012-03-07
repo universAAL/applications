@@ -11,15 +11,21 @@
 	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Agenda AAL Service</name>
-	<description>Contains repository, deployment, and other info for Agenda AAL Application</description>
-	<url> http://forge.universaal.org/wiki/new_services:Agenda_universAAL_service</url>
+	<description>Contains repository, deployment, and other info for Agenda
+		AAL Application</description>
+	<url>
+		http://forge.universaal.org/wiki/new_services:Agenda_universAAL_service
+	</url>
 	<issueManagement>
 		<system>GForge - Tracker</system>
-		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=226</url>
+		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=226
+		</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda</connection>
-		<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda</developerConnection>
+		<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda
+		</connection>
+		<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda
+		</developerConnection>
 	</scm>
 	<modules>
 		<module>../agenda.ont</module>
@@ -63,10 +69,17 @@
 				<artifactId>ont.phWorld</artifactId>
 				<version>1.0.0</version>
 			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>agenda.ont</artifactId>
+				<version>1.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>agendaEventSelection.ont</artifactId>
+				<version>1.0.1-SNAPSHOT</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<organization>
-		<name>universAAL Consortium</name>
-		<url>http://www.universAAL.org/</url>
-	</organization>
+
 </project>

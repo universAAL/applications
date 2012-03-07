@@ -45,15 +45,9 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.phWorld</artifactId>
 		</dependency>
-		<!--		<dependency>-->
-		<!--			<groupId>org.aal-persona.middleware</groupId>-->
-		<!--			<artifactId>cdc.support</artifactId>-->
-		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.ont</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
