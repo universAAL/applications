@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>A.0.1-SNAPSHOT</version>
 		<relativePath>../pom</relativePath>
 	</parent>
 	<packaging>bundle</packaging>
-	<artifactId>agendaEventSelection.server</artifactId>
-	<name>Agenda AAL Service AgendaEventSelectionTool Server</name>
+	<artifactId>agenda.eventSelection.server</artifactId>
+	<name>Agenda AAL Service Event Selection Tool Server</name>
 	<description>A server based on the domain ontology of event services</description>
 	<dependencies>
 		<dependency>
@@ -44,19 +44,15 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.phWorld</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>agenda.ont</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>agendaEventSelection.ont</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>agenda.eventSelection.ont</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -111,8 +107,8 @@
 							org.universAAL.middleware.service.owls.process,
 							org.universAAL.middleware.service.owls.profile,
 
-							org.universAAL.agenda.ont,
-							org.universAAL.agenda.ont.service,
+							org.universAAL.ontology.agenda,
+							org.universAAL.ontology.agenda.service,
 							org.universAAL.agendaEventSelectionTool.ont,
 							org.universAAL.agendaEventSelectionTool.ont.service,
 

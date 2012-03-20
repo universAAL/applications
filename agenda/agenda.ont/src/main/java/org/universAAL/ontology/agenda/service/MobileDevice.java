@@ -1,4 +1,4 @@
-package org.universAAL.agenda.ont.service;
+package org.universAAL.ontology.agenda.service;
 
 //import org.universAAL.pmd.ont.DummyInputDevice;
 //import org.universAAL.pmd.ont.DummyOutputDevice;

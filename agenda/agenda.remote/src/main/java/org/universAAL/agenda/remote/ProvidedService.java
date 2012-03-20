@@ -23,7 +23,7 @@ package org.universAAL.agenda.remote;
 
 import java.util.Hashtable;
 
-import org.universAAL.agenda.ont.service.CalendarUIService;
+import org.universAAL.ontology.agenda.service.CalendarUIService;
 import org.universAAL.middleware.owl.Restriction;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;

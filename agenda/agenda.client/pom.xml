@@ -5,15 +5,13 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>A.0.1-SNAPSHOT</version>
 		<relativePath>../pom</relativePath>
 	</parent>
 	<artifactId>agenda.client</artifactId>
 	<packaging>bundle</packaging>
 	<name>Agenda AAL Service Client</name>
-	<description>
-	Agenda Consumer, used by Agenda GUI
-	</description>
+	<description>Agenda Consumer, used by Agenda GUI</description>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -51,16 +49,9 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
 		</dependency>
-
-		<!--		<dependency>-->
-		<!--			<groupId>org.aal-persona.middleware</groupId>-->
-		<!--			<artifactId>cdc.support</artifactId>-->
-		<!--		</dependency>-->
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>agenda.ont</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
@@ -74,11 +65,6 @@
 			<version>1.6.2</version>
 		</dependency>
 	</dependencies>
-
-	<!--org.persona.platform.profiling.ontology,-->
-	<!--
-		org.persona.platform.casf.ontology.location,,org.persona.middleware.*,org.persona.ontology.*
-	-->
 	<build>
 		<plugins>
 			<plugin>
@@ -92,19 +78,21 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Activator>org.universAAL.agenda.client.Activator</Bundle-Activator>
 						<Export-Package>org.universAAL.agenda.client</Export-Package>
-<!--						<Import-Package>-->
-<!--							javax.xml.datatype, org.osgi.service.log,-->
-<!--							org.universAAL.ontology.location.address,-->
-<!--							org.universAAL.ontology.location.outdoor-->
-<!--							,javax.swing,org.osgi.framework,-->
-<!--							org.universAAL.agenda.ont,-->
-<!--							org.universAAL.agenda.ont.service,-->
-<!--							org.slf4j,org.universAAL.middleware.context,-->
-<!--							org.universAAL.middleware.owl, org.universAAL.middleware.rdf,-->
-<!--							org.universAAL.middleware.service,-->
-<!--							org.universAAL.middleware.service.owl,-->
-<!--							org.universAAL.middleware.service.owls.process,-->
-<!--							org.universAAL.ontology.profile</Import-Package>-->
+						<!--						<Import-Package>-->
+						<!--							javax.xml.datatype, org.osgi.service.log,-->
+						<!--							org.universAAL.ontology.location.address,-->
+						<!--							org.universAAL.ontology.location.outdoor-->
+						<!--							,javax.swing,org.osgi.framework,-->
+						<!--							org.universAAL.agenda.ont,-->
+						<!--							org.universAAL.agenda.ont.service,-->
+						<!--							org.slf4j,org.universAAL.middleware.context,-->
+						<!--
+							org.universAAL.middleware.owl, org.universAAL.middleware.rdf,
+						-->
+						<!--							org.universAAL.middleware.service,-->
+						<!--							org.universAAL.middleware.service.owl,-->
+						<!--							org.universAAL.middleware.service.owls.process,-->
+						<!--							org.universAAL.ontology.profile</Import-Package>-->
 					</instructions>
 				</configuration>
 			</plugin>

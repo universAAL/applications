@@ -3,13 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.universAAL.AALapplication</groupId>
-		<artifactId>agenda.pom</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<groupId>org.universAAL.ontology</groupId>
+		<artifactId>ont.pom</artifactId>
+	    <version>1.0.0</version>
 		<relativePath>../pom</relativePath>
 	</parent>
 	<artifactId>agenda.ont</artifactId>
 	<packaging>bundle</packaging>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>Agenda AAL Service Ontology </name>
 	<description>Agenda AAL Service ontology</description>
 
@@ -45,6 +46,7 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
@@ -79,8 +81,8 @@
 						<Bundle-Name>${project.name}</Bundle-Name>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Export-Package>org.universAAL.agenda.ont,
-							org.universAAL.agenda.ont.service</Export-Package>
+						<Export-Package>org.universAAL.ontology.agenda,
+							org.universAAL.ontology.agenda.service</Export-Package>
 						<!--
 							<Import-Package>org.persona.middleware.*, org.persona.ontology.*,
 							org.osgi.framework,javax.xml.*,

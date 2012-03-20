@@ -27,9 +27,9 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.agenda.ont.Calendar;
-import org.universAAL.agenda.ont.Event;
-import org.universAAL.agenda.ont.service.CalendarAgenda;
+import org.universAAL.ontology.agenda.Calendar;
+import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agenda.service.CalendarAgenda;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.io.owl.Modality;
 import org.universAAL.middleware.owl.Restriction;

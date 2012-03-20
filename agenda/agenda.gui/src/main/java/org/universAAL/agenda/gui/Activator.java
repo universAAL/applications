@@ -13,46 +13,46 @@ import org.universAAL.ontology.profile.ElderlyUser;
 
 public class Activator implements BundleActivator {
 
-	public static String ICON_PATH_PREFIX = "/lang/icons_"
-			+ Locale.getDefault().getLanguage().toLowerCase();
-	static LogService log;
-	private static BundleContext CONTEXT;
-	public static final ElderlyUser testUser = new ElderlyUser(
-			Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
-	/**
-	 * {@link ModuleContext}
-	 */
-	private static ModuleContext mcontext;
+    public static String ICON_PATH_PREFIX = "/lang/icons_"
+	    + Locale.getDefault().getLanguage().toLowerCase();
+    static LogService log;
+    private static BundleContext CONTEXT;
+    public static final ElderlyUser testUser = new ElderlyUser(
+	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
 
-	/**
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
-	 *      )
-	 */
-	public void start(BundleContext context) throws Exception {
+    /**
+     * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
+     *      )
+     */
+    public void start(BundleContext context) throws Exception {
 
-		BundleContext[] bc = { context };
-		mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
-		System.out.println("Agenda GUI bundle started");
+	BundleContext[] bc = { context };
+	mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
+	System.out.println("Agenda GUI bundle started");
 
-		log = (LogService) context.getService(context
-				.getServiceReference(LogService.class.getName()));
-		CONTEXT = context;
-		new SimpleServiceCallee(mcontext);
+	log = (LogService) context.getService(context
+		.getServiceReference(LogService.class.getName()));
+	CONTEXT = context;
+	new SimpleServiceCallee(mcontext);
 
-		// uncomment the following line, if you want to start agenda gui
-		// automatically, and not through the universAAL Main Menu
+	// uncomment the following line, if you want to start agenda gui
+	// automatically, and not through the universAAL Main Menu
 
-		// new CalendarGUI(context);
-	}
+	// new CalendarGUI(context);
+    }
 
-	/**
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception {
-		System.out.println("Agenda GUI is stopped (v2)");
-	}
+    /**
+     * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     */
+    public void stop(BundleContext context) throws Exception {
+	System.out.println("Agenda GUI is stopped (v2)");
+    }
 
-	public static BundleContext getBundleContext() {
-		return CONTEXT;
-	}
+    public static BundleContext getBundleContext() {
+	return CONTEXT;
+    }
 }

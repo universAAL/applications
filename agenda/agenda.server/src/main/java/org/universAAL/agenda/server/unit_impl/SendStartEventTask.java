@@ -1,5 +1,5 @@
 package org.universAAL.agenda.server.unit_impl;
-import org.universAAL.agenda.ont.*;
+import org.universAAL.ontology.agenda.Event;
 
 public class SendStartEventTask extends SendContextEventTask {
 

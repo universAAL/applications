@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>A.0.1-SNAPSHOT</version>
 		<relativePath>../pom</relativePath>
 	</parent>
 	<packaging>bundle</packaging>
-	<artifactId>agendaEventSelection.client</artifactId>
-	<name>Agenda AAL Service AgendaEventSelectionTool Client</name>
-	<description>EventSelectionTool Client</description>
+	<artifactId>agenda.eventSelection.client</artifactId>
+	<name>Agenda AAL Service Event Selection Tool Client</name>
+	<description>Event SelectionTool Client</description>
 
 	<dependencies>
 		<dependency>
@@ -51,12 +51,12 @@
 			<artifactId>ont.profile</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>agenda.ont</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>agendaEventSelection.ont</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>agenda.eventSelection.ont</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>

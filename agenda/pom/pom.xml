@@ -5,37 +5,35 @@
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<version>0.1.0-SNAPSHOT</version>
-		<relativePath>../../pom</relativePath>
+		<relativePath>../new_services.pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>agenda.pom</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>A.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Agenda AAL Service</name>
-	<description>Contains repository, deployment, and other info for Agenda
-		AAL Application</description>
-	<url>
-		http://forge.universaal.org/wiki/new_services:Agenda_universAAL_service
-	</url>
+	<name>Agenda AAL Service Parent POM</name>
+	<description>Contains repository, deployment, and other info for Agenda	AAL Application</description>
+	<url>http://forge.universaal.org/wiki/new_services:Agenda_universAAL_service</url>
 	<issueManagement>
 		<system>GForge - Tracker</system>
 		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=226
 		</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda
-		</connection>
-		<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda
-		</developerConnection>
+		<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda</connection>
+		<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda</developerConnection>
 	</scm>
+	<properties>
+		<service.name.svn>agenda</service.name.svn>
+	</properties>
 	<modules>
-		<module>../agenda.ont</module>
+<!--		<module>../../ontology/agenda.ont</module>-->
+<!--		<module>../../ontology/agenda.eventSelection.ont</module>-->
 		<module>../agenda.server</module>
 		<module>../agenda.client</module>
 		<module>../agenda.gui</module>
 		<module>../agenda.remote</module>
-		<module>../agendaEventSelection.ont</module>
-		<module>../agendaEventSelection.server</module>
-		<module>../agendaEventSelection.client</module>
+		<module>../agenda.eventSelection.server</module>
+		<module>../agenda.eventSelection.client</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
@@ -70,16 +68,15 @@
 				<version>1.0.0</version>
 			</dependency>
 			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
+				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>agenda.ont</artifactId>
 				<version>1.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
-				<artifactId>agendaEventSelection.ont</artifactId>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>agenda.eventSelection.ont</artifactId>
 				<version>1.0.1-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 </project>

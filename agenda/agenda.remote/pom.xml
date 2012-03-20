@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>A.0.1-SNAPSHOT</version>
 		<relativePath>../pom</relativePath>
 	</parent>
 	<artifactId>agenda.remote</artifactId>
 	<packaging>bundle</packaging>
 	<name>Agenda AAL Service Remote</name>
-	<description>Agenda remote is used for generating form of web GUI,
+	<description>Agenda remote is used for generating form for web handler,
 	 handle events from Web Handler and to communicate with Agenda Server 
 	 Component. It provides a web interface for external users to view and insert 
 	 events in the Agenda</description>
@@ -44,12 +44,12 @@
 			<artifactId>ont.profile</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>agenda.ont</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>agendaEventSelection.ont</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>agenda.eventSelection.ont</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
