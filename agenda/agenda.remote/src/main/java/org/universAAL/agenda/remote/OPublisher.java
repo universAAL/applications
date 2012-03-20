@@ -24,7 +24,7 @@ package org.universAAL.agenda.remote;
 import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.agenda.ont.Calendar;
+import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.io.owl.PrivacyLevel;
 import org.universAAL.middleware.io.rdf.Form;

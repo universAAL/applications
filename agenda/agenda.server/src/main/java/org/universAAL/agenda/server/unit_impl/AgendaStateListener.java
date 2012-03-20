@@ -1,7 +1,7 @@
 package org.universAAL.agenda.server.unit_impl;
 
-import org.universAAL.agenda.ont.Calendar;
-import org.universAAL.agenda.ont.Event;
+import org.universAAL.ontology.agenda.Calendar;
+import org.universAAL.ontology.agenda.Event;
 
 /**
  * @author kagnantis

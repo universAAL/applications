@@ -1,13 +1,13 @@
-package org.universAAL.agenda.ont;
+package org.universAAL.ontology.agenda;
 
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class Messages {
-    private static final String BUNDLE_NAME = "org.universAAL.agenda.ont.messages_" + Locale.getDefault().getLanguage().toLowerCase(); //$NON-NLS-1$
+    private static final String BUNDLE_NAME = "org.universAAL.ontology.agenda.messages_" + Locale.getDefault().getLanguage().toLowerCase(); //$NON-NLS-1$
     // private static final String BUNDLE_NAME =
-    // "org.universAAL.agenda.ont.messages_en";
+    // "org.universAAL.ontology.agenda.messages_en";
 
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
 	    .getBundle(BUNDLE_NAME); // , Locale.ENGLISH);

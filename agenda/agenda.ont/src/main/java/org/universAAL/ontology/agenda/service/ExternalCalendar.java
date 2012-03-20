@@ -1,6 +1,6 @@
-package org.universAAL.agenda.ont.service;
+package org.universAAL.ontology.agenda.service;
 
-import org.universAAL.agenda.ont.Calendar;
+import org.universAAL.ontology.agenda.Calendar;
 
 /**
  * @author kagnantis

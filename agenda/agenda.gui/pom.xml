@@ -4,13 +4,12 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>A.0.1-SNAPSHOT</version>
 		<relativePath>../pom</relativePath>
 	</parent>
 	<artifactId>agenda.gui</artifactId>
 	<packaging>bundle</packaging>
 	<name>Agenda AAL Service GUI</name>
-	<version>1.0.1-SNAPSHOT</version>
 	<description>
 	Agenda GUI
 	</description>
@@ -52,31 +51,22 @@
 			<artifactId>ont.phWorld</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>agenda.ont</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
-
-		<!--		<dependency>-->
-		<!--			<groupId>org.universAAL.middleware</groupId>-->
-		<!--			<artifactId>cdc.support</artifactId>-->
-		<!--		</dependency>-->
-
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>agenda.eventSelection.ont</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.client</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>A.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>agendaEventSelection.client</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>agendaEventSelection.ont</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<artifactId>agenda.eventSelection.client</artifactId>
+			<version>A.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
@@ -114,37 +104,37 @@
 							</Import-Package>
 						-->
 
-<!--						<Import-Package>org.universAAL.middleware.context,-->
-<!--							org.universAAL.middleware.context.owl,-->
-<!--							org.universAAL.middleware.input,-->
-<!--							org.universAAL.middleware.io.owl,-->
-<!--							org.universAAL.middleware.io.rdf,-->
-<!--							org.universAAL.middleware.output,-->
-<!--							org.universAAL.middleware.owl,-->
-<!--							org.universAAL.middleware.owl.supply,-->
-<!--							org.universAAL.middleware.rdf,-->
-<!--							org.universAAL.middleware.service,-->
-<!--							org.universAAL.middleware.service.owl,-->
-<!--							org.universAAL.middleware.service.owls.process,-->
-<!--							org.universAAL.middleware.service.owls.profile,-->
-<!--							org.universAAL.middleware.util,-->
-<!--							org.universAAL.ontology.profile,-->
-<!--							org.universAAL.ontology.location.address,-->
-<!--							org.universAAL.ontology.location.outdoor,-->
+						<!--						<Import-Package>org.universAAL.middleware.context,-->
+						<!--							org.universAAL.middleware.context.owl,-->
+						<!--							org.universAAL.middleware.input,-->
+						<!--							org.universAAL.middleware.io.owl,-->
+						<!--							org.universAAL.middleware.io.rdf,-->
+						<!--							org.universAAL.middleware.output,-->
+						<!--							org.universAAL.middleware.owl,-->
+						<!--							org.universAAL.middleware.owl.supply,-->
+						<!--							org.universAAL.middleware.rdf,-->
+						<!--							org.universAAL.middleware.service,-->
+						<!--							org.universAAL.middleware.service.owl,-->
+						<!--							org.universAAL.middleware.service.owls.process,-->
+						<!--							org.universAAL.middleware.service.owls.profile,-->
+						<!--							org.universAAL.middleware.util,-->
+						<!--							org.universAAL.ontology.profile,-->
+						<!--							org.universAAL.ontology.location.address,-->
+						<!--							org.universAAL.ontology.location.outdoor,-->
 <!---->
-<!--							java.sql.*, javax.swing,-->
-<!--							org.osgi.service.*,-->
-<!--							org.osgi.framework,-->
-<!--							javax.xml.*,-->
+						<!--							java.sql.*, javax.swing,-->
+						<!--							org.osgi.service.*,-->
+						<!--							org.osgi.framework,-->
+						<!--							javax.xml.*,-->
 <!---->
-<!--							com.mysql.jdbc, org.slf4j,-->
-<!--							javax.swing.border, javax.swing.text,-->
-<!--							org.universAAL.agenda.client,-->
-<!--							org.universAAL.agenda.ont,-->
-<!--							org.universAAL.agenda.ont.service,-->
-<!--							org.universAAL.agendaEventSelectionTool.client,-->
-<!--							org.universAAL.agendaEventSelectionTool.ont-->
-<!--							</Import-Package>-->
+						<!--							com.mysql.jdbc, org.slf4j,-->
+						<!--							javax.swing.border, javax.swing.text,-->
+						<!--							org.universAAL.agenda.client,-->
+						<!--							org.universAAL.agenda.ont,-->
+						<!--							org.universAAL.agenda.ont.service,-->
+						<!--							org.universAAL.agendaEventSelectionTool.client,-->
+						<!--							org.universAAL.agendaEventSelectionTool.ont-->
+						<!--							</Import-Package>-->
 					</instructions>
 				</configuration>
 			</plugin>

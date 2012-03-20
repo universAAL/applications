@@ -9,33 +9,33 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 public class Activator implements BundleActivator {
 
-	private final static Logger log = LoggerFactory
-			.getLogger("agendaEventSelectionTool.client.Activator");
+    private final static Logger log = LoggerFactory
+	    .getLogger("agendaEventSelectionTool.client.Activator");
 
-	/**
-	 * {@link ModuleContext}
-	 */
-	private static ModuleContext mcontext;
-	private EventSelectionToolConsumer ec;
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
+    private EventSelectionToolConsumer ec;
 
-	/**
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext context) throws Exception {
-		BundleContext[] bc = { context };
-		mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
-		ec = new EventSelectionToolConsumer(mcontext);
-		log.info("EventSelectionToolConsumer client bundle has started... ");
-	}
+    /**
+     * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+     */
+    public void start(BundleContext context) throws Exception {
+	BundleContext[] bc = { context };
+	mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
+	ec = new EventSelectionToolConsumer(mcontext);
+	log.info("EventSelectionToolConsumer client bundle has started... ");
+    }
 
-	/**
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception {
-		log.info("EventSelectionToolConsumer client bundle has stopped... ");
-	}
+    /**
+     * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     */
+    public void stop(BundleContext context) throws Exception {
+	log.info("EventSelectionToolConsumer client bundle has stopped... ");
+    }
 
-	public EventSelectionToolConsumer getConsumer() {
-		return this.ec;
-	}
+    public EventSelectionToolConsumer getConsumer() {
+	return this.ec;
+    }
 }

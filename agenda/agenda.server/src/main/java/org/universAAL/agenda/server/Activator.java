@@ -8,41 +8,42 @@ import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 public class Activator implements BundleActivator {
-	// testing...
-	public static LogService log;
-	private static AgendaProvider provider = null;
-	/**
-	 * {@link ModuleContext}
-	 */
-	private static ModuleContext mcontext;
-	/**
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
-	 *      )
-	 */
-	public void start(BundleContext context) throws Exception {
+    // testing...
+    public static LogService log;
+    private static AgendaProvider provider = null;
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
 
-		log = (LogService) context.getService(context
-				.getServiceReference(LogService.class.getName()));
+    /**
+     * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
+     *      )
+     */
+    public void start(BundleContext context) throws Exception {
 
-		BundleContext[] bc = { context };
-		mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
-		
-		WrapperActivator.initiateInstance(mcontext);
+	log = (LogService) context.getService(context
+		.getServiceReference(LogService.class.getName()));
 
-		if (provider == null)
-			provider = new AgendaProvider(mcontext);
+	BundleContext[] bc = { context };
+	mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
 
-		System.out.println("Agenda server started!");
-	}
+	WrapperActivator.initiateInstance(mcontext);
 
-	/**
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception {
+	if (provider == null)
+	    provider = new AgendaProvider(mcontext);
 
-	}
+	System.out.println("Agenda server started!");
+    }
 
-	public static AgendaProvider getProvider() {
-		return Activator.provider;
-	}
+    /**
+     * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     */
+    public void stop(BundleContext context) throws Exception {
+
+    }
+
+    public static AgendaProvider getProvider() {
+	return Activator.provider;
+    }
 }

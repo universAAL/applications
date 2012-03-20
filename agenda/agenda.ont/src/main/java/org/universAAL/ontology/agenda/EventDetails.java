@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.universAAL.agenda.ont;
+package org.universAAL.ontology.agenda;
 
 import java.util.List;
 

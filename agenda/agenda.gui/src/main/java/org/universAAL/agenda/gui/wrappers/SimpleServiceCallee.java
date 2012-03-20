@@ -21,47 +21,47 @@ import org.universAAL.agenda.gui.CalendarGUI;
 
 public class SimpleServiceCallee extends ServiceCallee {
 
-	private ContextPublisher cp;
-	ModuleContext moduleContext;
-	private static final ServiceResponse failure = new ServiceResponse(
-			CallStatus.serviceSpecificFailure);
+    private ContextPublisher cp;
+    ModuleContext moduleContext;
+    private static final ServiceResponse failure = new ServiceResponse(
+	    CallStatus.serviceSpecificFailure);
 
-	public SimpleServiceCallee(ModuleContext mcontext) {
-		super(mcontext, ProvidedCalendarUIService.profiles);
-		moduleContext = mcontext;
+    public SimpleServiceCallee(ModuleContext mcontext) {
+	super(mcontext, ProvidedCalendarUIService.profiles);
+	moduleContext = mcontext;
 
+    }
+
+    public void communicationChannelBroken() {
+
+    }
+
+    public ServiceResponse handleCall(ServiceCall call) {
+	if (call == null)
+	    return null;
+
+	String operation = call.getProcessURI();
+	if (operation == null)
+	    return null;
+
+	if (operation.startsWith(ProvidedCalendarUIService.SERVICE_START_UI)) {
+	    return showCalendarUI(call.getInvolvedUser());
 	}
 
-	public void communicationChannelBroken() {
+	return null;
+    }
 
+    private ServiceResponse showCalendarUI(Resource resource) {
+	try {
+	    new CalendarGUI(Activator.getBundleContext());
+	    DefaultInputPublisher ip = new DefaultInputPublisher(moduleContext);
+
+	    // test the main menu
+	    ip.publish(new InputEvent(resource, null,
+		    InputEvent.uAAL_MAIN_MENU_REQUEST));
+	    return new ServiceResponse(CallStatus.succeeded);
+	} catch (Exception e) {
+	    return new ServiceResponse(CallStatus.serviceSpecificFailure);
 	}
-
-	public ServiceResponse handleCall(ServiceCall call) {
-		if (call == null)
-			return null;
-
-		String operation = call.getProcessURI();
-		if (operation == null)
-			return null;
-
-		if (operation.startsWith(ProvidedCalendarUIService.SERVICE_START_UI)) {
-			return showCalendarUI(call.getInvolvedUser());
-		}
-
-		return null;
-	}
-
-	private ServiceResponse showCalendarUI(Resource resource) {
-		try {
-			new CalendarGUI(Activator.getBundleContext());
-			DefaultInputPublisher ip = new DefaultInputPublisher(moduleContext);
-
-			// test the main menu
-			ip.publish(new InputEvent(resource, null,
-					InputEvent.uAAL_MAIN_MENU_REQUEST));
-			return new ServiceResponse(CallStatus.succeeded);
-		} catch (Exception e) {
-			return new ServiceResponse(CallStatus.serviceSpecificFailure);
-		}
-	}
+    }
 }

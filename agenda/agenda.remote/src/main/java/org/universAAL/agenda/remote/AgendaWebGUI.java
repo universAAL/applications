@@ -42,8 +42,8 @@ import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.util.Constants;
 import org.universAAL.ontology.profile.User;
-import org.universAAL.agenda.ont.Event;
-import org.universAAL.agenda.ont.Calendar;
+import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.agendaEventSelectionTool.ont.FilterParams;
 
 public class AgendaWebGUI {

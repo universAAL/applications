@@ -2,7 +2,7 @@ package org.universAAL.agenda.remote;
 
 import java.util.Comparator;
 
-import org.universAAL.agenda.ont.Event;
+import org.universAAL.ontology.agenda.Event;
 
 public class MyEventComparator implements Comparator<Event> {
 

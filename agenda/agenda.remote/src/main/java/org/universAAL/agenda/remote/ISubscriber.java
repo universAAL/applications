@@ -29,12 +29,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.agenda.ont.Calendar;
-import org.universAAL.agenda.ont.Event;
-import org.universAAL.agenda.ont.EventDetails;
-import org.universAAL.agenda.ont.Reminder;
-import org.universAAL.agenda.ont.ReminderType;
-import org.universAAL.agenda.ont.TimeInterval;
+import org.universAAL.ontology.agenda.Calendar;
+import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agenda.EventDetails;
+import org.universAAL.ontology.agenda.Reminder;
+import org.universAAL.ontology.agenda.ReminderType;
+import org.universAAL.ontology.agenda.TimeInterval;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.input.InputEvent;
 import org.universAAL.middleware.input.InputSubscriber;

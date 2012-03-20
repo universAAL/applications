@@ -3,14 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.universAAL.AALapplication</groupId>
-		<artifactId>agenda.pom</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<groupId>org.universAAL.ontology</groupId>
+		<artifactId>ont.pom</artifactId>
+		<version>1.0.0</version>
 		<relativePath>../pom</relativePath>
 	</parent>
-	<artifactId>agendaEventSelection.ont</artifactId>
+	<artifactId>agenda.eventSelection.ont</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
-	<name>Agenda AAL Service AgendaEventSelectionTool Ontology</name>
+	<name>Agenda AAL Service Event Selection Tool Ontology</name>
 	<description />
 	<dependencies>
 		<dependency>
@@ -36,6 +37,7 @@
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.io</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
@@ -46,8 +48,9 @@
 			<artifactId>ont.phWorld</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.AALapplication</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>agenda.ont</artifactId>
+				<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
@@ -83,10 +86,6 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package>org.universAAL.agendaEventSelectionTool.ont.*</Export-Package>
-						<!--
-							<Import-Package>org.persona.middleware.*,org.persona.ontology.*,org.osgi.framework,javax.xml.*,gr.anco.persona.agenda.ont,org.persona.platform.profiling.ontology,org.universAAL.ontology.profile</Import-Package>
-							<Import-Package>org.universAAL.ontology.profile</Import-Package>
-						-->
 					</instructions>
 				</configuration>
 			</plugin>

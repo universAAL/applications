@@ -1,4 +1,4 @@
-package org.universAAL.agenda.ont;
+package org.universAAL.ontology.agenda;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.Restriction;
@@ -14,8 +14,8 @@ public class Event extends ManagedIndividual {
     public static final String PROP_HAS_EVENT_DETAILS;
     public static final String PROP_ID;
     public static final String PROP_CE_TYPE; // because events are published on
-					     // context bus, we have to know for
-					     // what reason.
+    // context bus, we have to know for
+    // what reason.
     public static final String PROP_PERSISTENT;
     public static final String PROP_HAS_PARENT_CALENDAR;
     public static final String PROP_VISIBLE;
@@ -26,8 +26,8 @@ public class Event extends ManagedIndividual {
 	PROP_HAS_EVENT_DETAILS = Calendar.CALENDAR_NAMESPACE
 		+ "hasEventDetails";
 	PROP_ID = Calendar.CALENDAR_NAMESPACE + "id"; // in case event.id <= 0:
-						      // illegal state change to
-						      // a valid one
+	// illegal state change to
+	// a valid one
 	PROP_CE_TYPE = Calendar.CALENDAR_NAMESPACE + "ceType";
 	PROP_PERSISTENT = Calendar.CALENDAR_NAMESPACE + "isPersistent";
 	PROP_HAS_PARENT_CALENDAR = Calendar.CALENDAR_NAMESPACE + "hasBelongsTo";
