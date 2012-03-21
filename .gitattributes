@@ -6,6 +6,12 @@ agenda/agenda.client/backup/AgendaConsumer_beforeGui.backup -text
 agenda/agenda.client/pom.xml -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/Activator.java -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/AgendaConsumer.java -text
+agenda/agenda.eventSelection.client/LICENSE -text
+agenda/agenda.eventSelection.client/NOTICE -text
+agenda/agenda.eventSelection.client/pom.xml -text
+agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/Activator.java -text
+agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer.java -text
+agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer_beforeGUI.backup -text
 agenda/agenda.gui/LICENSE -text
 agenda/agenda.gui/NOTICE -text
 agenda/agenda.gui/pom.xml -text
@@ -435,12 +441,6 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/test/resources/DBquery.prop -text
 agenda/agenda.server/src/test/resources/DBquery.properties -text
-agenda/agendaEventSelection.client/LICENSE -text
-agenda/agendaEventSelection.client/NOTICE -text
-agenda/agendaEventSelection.client/pom.xml -text
-agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/Activator.java -text
-agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer.java -text
-agenda/agendaEventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer_beforeGUI.backup -text
 agenda/agendaEventSelection.ont/pom.xml -text
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/EventComparator.java -text
 agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/EventSelectionTool.java -text
