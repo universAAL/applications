@@ -12,6 +12,12 @@ agenda/agenda.eventSelection.client/pom.xml -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/Activator.java -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer.java -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer_beforeGUI.backup -text
+agenda/agenda.eventSelection.ont/pom.xml -text
+agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/EventComparator.java -text
+agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/EventSelectionTool.java -text
+agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/FilterParams.java -text
+agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/TimeSearchType.java -text
+agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/service/EventSelectionToolService.java -text
 agenda/agenda.gui/LICENSE -text
 agenda/agenda.gui/NOTICE -text
 agenda/agenda.gui/pom.xml -text
@@ -441,12 +447,6 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/test/resources/DBquery.prop -text
 agenda/agenda.server/src/test/resources/DBquery.properties -text
-agenda/agendaEventSelection.ont/pom.xml -text
-agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/EventComparator.java -text
-agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/EventSelectionTool.java -text
-agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/FilterParams.java -text
-agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/TimeSearchType.java -text
-agenda/agendaEventSelection.ont/src/main/java/org/universAAL/agendaEventSelectionTool/ont/service/EventSelectionToolService.java -text
 agenda/agendaEventSelection.server/LICENSE -text
 agenda/agendaEventSelection.server/NOTICE -text
 agenda/agendaEventSelection.server/backup/MyEventSelectionTool.java.backup -text
