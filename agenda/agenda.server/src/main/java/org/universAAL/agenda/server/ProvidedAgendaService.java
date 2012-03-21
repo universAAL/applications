@@ -76,7 +76,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	    + "getCalendarByOwner19";
 
     // define the uri of every input, which is needed from the service
-    // e.g. we we have to call serviceX with one or more arguments,
+    // e.g. we have to call serviceX with one or more arguments,
     // then we have to define one or more input_uri, respectively
     static final String INPUT_CALENDAR_NAME = AGENDA_SERVER_NAMESPACE
 	    + "iCalendarName";
@@ -156,24 +156,18 @@ public class ProvidedAgendaService extends CalendarAgenda {
 		.setParameterType(TypeMapper.getDatatypeURI(String.class));
 	inCalendarName.setCardinality(1, 1);
 
+	 // service has an output: the list of controlled calendars
 	ProcessOutput outCalList = new ProcessOutput(
-		OUTPUT_CONTROLLED_CALENDARS); // service has an output: the list
-					      // of controlled calendars
-	outCalList.setParameterType(Calendar.MY_URI); // output has a type:
-						      // Calendar
+		OUTPUT_CONTROLLED_CALENDARS);
+	
+	// output has a type: Calendar
+	outCalList.setParameterType(Calendar.MY_URI); 
 	outCalList.setCardinality(0, 1);
 
-	ProcessOutput outCalendar = new ProcessOutput(OUTPUT_CALENDAR); // service
-									// has
-									// an
-									// output:
-									// the
-									// list
-									// of
-									// controlled
-									// calendars
-	outCalendar.setParameterType(Calendar.MY_URI); // output has a type:
-						       // Calendar
+	// service has an output: the list of controlled calendar
+	ProcessOutput outCalendar = new ProcessOutput(OUTPUT_CALENDAR);
+	// output has a type: Calendar
+	outCalendar.setParameterType(Calendar.MY_URI); 
 	outCalendar.setCardinality(1, 1);
 
 	ProcessOutput outEventId = new ProcessOutput(OUTPUT_EVENT_ID);
@@ -500,8 +494,8 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	getCalendarsByOwner.addOutput(OUTPUT_CONTROLLED_CALENDARS,
 		Calendar.MY_URI, 1, 0, ppCalendar.getThePath());
 
-	profiles[17] = getCalendarsByOwner.myProfile; // initialize the service
-						      // profile
+	// initialize the service profile
+	profiles[17] = getCalendarsByOwner.myProfile; 
 	System.out.println("Profiles loaded...");
 
     }
