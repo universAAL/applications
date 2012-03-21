@@ -10,6 +10,10 @@ agenda/agenda.eventSelection.ont/.classpath
 agenda/agenda.eventSelection.ont/.project
 agenda/agenda.eventSelection.ont/.settings
 agenda/agenda.eventSelection.ont/target
+agenda/agenda.eventSelection.server/.classpath
+agenda/agenda.eventSelection.server/.project
+agenda/agenda.eventSelection.server/.settings
+agenda/agenda.eventSelection.server/target
 agenda/agenda.gui/.classpath
 agenda/agenda.gui/.project
 agenda/agenda.gui/.settings
@@ -35,10 +39,6 @@ agenda/agenda.server/.classpath
 agenda/agenda.server/.project
 agenda/agenda.server/.settings
 agenda/agenda.server/target
-agenda/agendaEventSelection.server/.classpath
-agenda/agendaEventSelection.server/.project
-agenda/agendaEventSelection.server/.settings
-agenda/agendaEventSelection.server/target
 agenda/pom/.project
 agenda/pom/.settings
 food_shopping/food_shopping.service.client/.classpath
