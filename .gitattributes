@@ -332,6 +332,7 @@ agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_en.
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_es.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_hr.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_it.properties -text
+agenda/agenda.pom/pom.xml -text
 agenda/agenda.remote/LICENSE -text
 agenda/agenda.remote/NOTICE -text
 agenda/agenda.remote/bin/.project -text
@@ -463,7 +464,6 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/test/resources/DBquery.prop -text
 agenda/agenda.server/src/test/resources/DBquery.properties -text
-agenda/pom/pom.xml -text
 food_shopping/README.txt -text
 food_shopping/food_shopping.service.client/pom.xml -text
 food_shopping/food_shopping.service.client/src/main/java/org/universAAL/AALapplication/food_shopping/service/client/Activator.java -text
