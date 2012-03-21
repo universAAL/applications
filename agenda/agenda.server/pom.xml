@@ -122,8 +122,8 @@
 
 							org.universAAL.ontology.profile,
 
-							org.universAAL.agenda.ont,
-							org.universAAL.agenda.ont.service,
+							org.universAAL.ontology.agenda, 
+							org.universAAL.ontology.agenda.service,
 
 							java.sql.*, javax.swing,
 							org.osgi.service.*, org.osgi.framework,

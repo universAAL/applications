@@ -26,8 +26,12 @@
 		<service.name.svn>agenda</service.name.svn>
 	</properties>
 	<modules>
-<!--		<module>../../ontology/agenda.ont</module>-->
-<!--		<module>../../ontology/agenda.eventSelection.ont</module>-->
+
+		<!--		<module>../../../../ontologies/trunk/agenda.ont</module>-->
+		<!--		<module>../../../../ontologies/trunk/agenda.eventSelection.ont</module>-->
+		<!--	after moving ontologies to ont trunk replace below 2 rows with the 2 from above-->
+		<module>../agenda.ont</module>
+		<module>../agenda.eventSelection.ont</module>
 		<module>../agenda.server</module>
 		<module>../agenda.client</module>
 		<module>../agenda.gui</module>
