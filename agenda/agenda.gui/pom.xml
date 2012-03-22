@@ -5,7 +5,7 @@
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
 		<version>A.0.1-SNAPSHOT</version>
-		<relativePath>../pom</relativePath>
+		<relativePath>../agenda.pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>agenda.gui</artifactId>
 	<packaging>bundle</packaging>
