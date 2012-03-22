@@ -25,9 +25,9 @@ import org.universAAL.agendaEventSelectionTool.ont.TimeSearchType;
 import org.universAAL.middleware.rdf.TypeMapper;
 
 public class MyEventSelectionTool implements EventSelectionToolDBInterface {
-    private String DB_URL;
-    private String DB_USER;
-    private String DB_PWD;
+    private static String DB_URL;
+    private static String DB_USER;
+    private static String DB_PWD;
     // private ArrayList listeners;
     private EventSelectionTool esTool;
 
@@ -35,9 +35,9 @@ public class MyEventSelectionTool implements EventSelectionToolDBInterface {
     private Object theLock;
 
     public MyEventSelectionTool(String url, String user, String pwd) {
-	this.DB_URL = url;
-	this.DB_USER = user;
-	this.DB_PWD = pwd;
+	DB_URL = url;
+	DB_USER = user;
+	DB_PWD = pwd;
 	this.theLock = new Object();
 	this.esTool = new EventSelectionTool(EventSelectionTool.MY_URI + "1");
 	connect();
@@ -436,7 +436,7 @@ public class MyEventSelectionTool implements EventSelectionToolDBInterface {
 
     public static void main(String[] str) {
 	MyEventSelectionTool db = new MyEventSelectionTool(
-		"jdbc:mysql://localhost/agenda_reminder", "root", "sc2011");
+		DB_URL, DB_USER, DB_PWD);
 	FilterParams fp = new FilterParams(FilterParams.MY_URI + "test");
 	List<Calendar> cals = new ArrayList<Calendar>();
 	cals.add(new Calendar(Calendar.MY_URI + 6));
