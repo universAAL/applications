@@ -78,10 +78,6 @@ public class MyAgenda implements AgendaDBInterface {
 	this.DB_USER = user;
 	this.DB_PWD = pwd;
 
-	// this.DB_URL =
-	// "jdbc:mysql://localhost/agendauniversaaldb?useUnicode=yes&characterEncoding=UTF-8";
-	// this.DB_USER = "root";
-	// this.DB_PWD = "sc2011";
 	this.theLock = new Object();
 	prop = new Properties();
 	try {
