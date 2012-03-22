@@ -144,7 +144,8 @@ public class AgendaWebGUI {
 			    .getString("AgendaWebGUI.9"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_YEAR }),
 		    null, null);
-	    for (int i = 2011; i < 2020; i++) {
+	    int currentYear= java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+	    for (int i = currentYear; i < currentYear +15; i++) {
 		yearselect.addChoiceItem(new ChoiceItem(Integer.toString(i),
 			(String) null, new Integer(i)));
 	    }
@@ -238,7 +239,7 @@ public class AgendaWebGUI {
 			    .getString("AgendaWebGUI.9"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_YEAR }),
 		    null, null);
-	    for (int i = 2011; i < 2020; i++) {
+	    for (int i = currentYear; i < currentYear+15; i++) {
 		remyearselect.addChoiceItem(new ChoiceItem(Integer.toString(i),
 			(String) null, new Integer(i)));
 	    }
