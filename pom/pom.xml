@@ -22,7 +22,7 @@
 		<module>../food_shopping/pom</module>
 		<module>../safety_home/pom</module>
 		<module>../medication/pom</module>
-		<module>../agenda/pom</module>
+		<module>../agenda/agenda.pom</module>
 	</modules>
 	
 	<dependencyManagement>
