@@ -25,11 +25,13 @@
 	<properties>
 		<service.name.svn>agenda</service.name.svn>
 	</properties>
+	<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	<modules>
-
-		<!--		<module>../../../../ontologies/trunk/agenda.ont</module>-->
-		<!--		<module>../../../../ontologies/trunk/agenda.eventSelection.ont</module>-->
-		<!--	after moving ontologies to ont trunk replace below 2 rows with the 2 from above-->
+		<!--<module>../../../../ontologies/trunk/agenda.ont</module>-->
+		<!--<module>../../../../ontologies/trunk/agenda.eventSelection.ont</module>	-->
+		<!--after moving ontologies to ont trunk replace below 2 rows with the 2
+			from above		-->
 		<module>../agenda.ont</module>
 		<module>../agenda.eventSelection.ont</module>
 		<module>../agenda.server</module>
