@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.universAAL</groupId>
 		<artifactId>uAAL.pom</artifactId>
-		<version>1.0.0</version>
+		<version>1.1.0</version>
 	</parent>
 	
 	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>new_services.pom</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>B.0</version>
 	
 	<packaging>pom</packaging>
 	<name>Parent POM for all AAL services</name>
@@ -30,21 +30,28 @@
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.pom</artifactId>
-				<version>1.0.0</version>
+				<version>1.1.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.pom</artifactId>
-				<version>1.0.0</version>
+				<version>1.1.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.context</groupId>
 				<artifactId>ctxt.pom</artifactId>
-				<version>1.0.0</version>
+				<version>1.1.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ui</groupId>
+  				<artifactId>ui.pom</artifactId>
+				<version>1.1.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -63,9 +70,9 @@
 	</repositories>
 
 	<scm>
-		<connection>${svn.base}/pom</connection>
-		<developerConnection>${svn.base}/pom</developerConnection>
-		<url>${svn.base.url}pom</url>
+		<connection>${svn.base}/${service.name.svn}/${project.artifactId}</connection>
+		<developerConnection>${svn.base}/${service.name.svn}/${project.artifactId}</developerConnection>
+		<url>${svn.base.url}${service.name.svn}%2F${project.artifactId}</url>
 	</scm>
 	
 	<properties>
@@ -73,7 +80,8 @@
 		<!-- Default configuration for compiler source and target JVM -->
 		<maven.compile.source>1.5</maven.compile.source>
 		<maven.compile.target>1.5</maven.compile.target>
-		<gforge.project.name>new_services</gforge.project.name>		
+		<gforge.project.name>new_services</gforge.project.name>
+		<service.name.svn></service.name.svn>
 	</properties>
 	
 </project>
