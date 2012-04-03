@@ -332,6 +332,7 @@ agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_en.
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_es.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_hr.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_it.properties -text
+agenda/agenda.pom/composite/pom.xml -text
 agenda/agenda.pom/pom.xml -text
 agenda/agenda.remote/LICENSE -text
 agenda/agenda.remote/NOTICE -text

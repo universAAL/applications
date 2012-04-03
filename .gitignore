@@ -24,6 +24,11 @@ agenda/agenda.ont/.settings
 agenda/agenda.ont/target
 agenda/agenda.pom/.project
 agenda/agenda.pom/.settings
+agenda/agenda.pom/composite/.classpath
+agenda/agenda.pom/composite/.project
+agenda/agenda.pom/composite/.settings
+agenda/agenda.pom/composite/target
+agenda/agenda.pom/target
 agenda/agenda.remote/.classpath
 agenda/agenda.remote/.project
 agenda/agenda.remote/.settings
