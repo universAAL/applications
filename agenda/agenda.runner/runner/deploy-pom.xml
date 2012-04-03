@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
   <name>Runner Folder</name>
   <properties>
-    <maven.test.skip>true</maven.test.skip>
+    <eclipsePluginsDir>f:\eclipse\eclipse-SDK-3.5.1-win32\plugins</eclipsePluginsDir>
   </properties>
   <repositories>
     <repository>

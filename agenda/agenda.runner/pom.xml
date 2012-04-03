@@ -41,15 +41,24 @@
 <!-- 		<provision>mvn:org.universAAL.samples/smp.heating/1.0.0</provision>-->
 	    
 <!--		RUN AGENDA	BEGIN -->
+		
+		
+		<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.0.0/composite</provision>
+		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.0.0/composite</provision>
+ 		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.0.0/composite</provision>
+			
+		<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/A.0.1-SNAPSHOT/composite</provision>
+		
+		<!-- Can be commented out thanks to composites: -->
+		<!--
 		<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.io/1.0.0/composite</provision>
 		<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.service/1.0.0/composite</provision>
 		<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.context/1.0.0/composite</provision>
-		<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.0.0/composite</provision>
+		
 		<provision>wrap:mvn:mysql/mysql-connector-java/5.1.17</provision>
 	    <provision>scan-composite:mvn:org.universAAL.ontology/ont.phWorld/1.0.0/composite</provision>
 	    <provision>mvn:org.universAAL.ontology/ont.profile/1.0.0</provision>
-	    <provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.0.0/composite</provision>
- 		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.0.0/composite</provision>
+	    
 	    
 	    <provision>mvn:org.universAAL.ontology/agenda.ont/1.0.1-SNAPSHOT</provision>
 	    <provision>mvn:org.universAAL.ontology/agenda.eventSelection.ont/1.0.1-SNAPSHOT</provision>
@@ -60,6 +69,7 @@
 		<provision>mvn:org.universAAL.AALapplication/agenda.remote/A.0.1-SNAPSHOT</provision>
 		<provision>mvn:org.universAAL.AALapplication/agenda.eventSelection.client/A.0.1-SNAPSHOT</provision>
 		<provision>mvn:org.universAAL.AALapplication/agenda.eventSelection.server/A.0.1-SNAPSHOT</provision>
+		-->
    		
  <!--		RUN AGENDA	END -->
 <!--    	-->
