@@ -4,7 +4,7 @@
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>new_services.pom</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <relativePath>../../pom</relativePath>
+    <relativePath>../../new_services.pom</relativePath>
   </parent>
   <artifactId>safety_home.pom</artifactId>
   <version>0.1.0-SNAPSHOT</version>
