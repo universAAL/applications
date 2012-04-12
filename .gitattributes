@@ -621,6 +621,7 @@ medication/test_medication_manager.service/src/main/java/org/universAAL/AALappli
 medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/MissedIntakeContextProvider.java -text
 medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/ProviderCaregiverNotficationService.java -text
 medication/test_medication_manager.service/src/test/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationTest.java -text
+new_services.pom/pom.xml -text
 nutritional/NutritionalAdvisor/LICENSE.txt -text
 nutritional/NutritionalAdvisor/NOTICE.txt -text
 nutritional/NutritionalAdvisor/Nutritional[!!-~]Launcher.launch -text

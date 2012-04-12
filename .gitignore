@@ -111,6 +111,8 @@ medication/pom/*.iml
 medication/test_medication_manager.service/*.iml
 medication/test_medication_manager.service/*.log
 medication/test_medication_manager.service/target
+new_services.pom/.project
+new_services.pom/.settings
 nutritional/NutritionalAdvisor/.classpath
 nutritional/NutritionalAdvisor/.project
 nutritional/NutritionalAdvisor/.settings
