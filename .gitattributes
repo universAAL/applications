@@ -1020,7 +1020,6 @@ personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safet
 personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/OPublisher.java -text svneol=unset#text/plain
 personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/SCallee.java -text
 personal_safety/sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/osgi/Activator.java -text
-pom/pom.xml -text
 safety_home/README.txt -text
 safety_home/ont.safetyDevices/pom.xml -text
 safety_home/ont.safetyDevices/src/main/java/org/universAAL/ontology/Activator.java -text
