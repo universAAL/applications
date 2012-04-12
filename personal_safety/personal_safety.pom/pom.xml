@@ -8,7 +8,6 @@
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 
-	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>personal_safety.pom</artifactId>
 	<version>0.2.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -17,10 +16,10 @@
 	<url>http://forge.universaal.org/wiki/new_services:Personal_safety_universAAL_service</url>
 
 	<modules>
-		<module>../service</module>
-		<module>../sms.sender</module>
+		<module>../personal_safety.service</module>
+		<module>../personal_safety.sms.sender</module>
 		<module>../smp.test-location.publisher</module>
-		<module>../sw.panic</module>
+		<module>../personal_safety.sw.panic</module>
 	</modules>
 
 	<dependencyManagement>
