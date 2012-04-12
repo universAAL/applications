@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath>../../new_services.pom</relativePath>
+	</parent>
+
+	<groupId>org.universAAL.AALapplication</groupId>
+	<artifactId>personal_safety.pom</artifactId>
+	<version>0.2.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Personal Safety AAL Service</name>
+	<url>http://forge.universaal.org/wiki/new_services:Personal_safety_universAAL_service</url>
+
+	<modules>
+		<module>../service</module>
+		<module>../sms.sender</module>
+		<module>../smp.test-location.publisher</module>
+		<module>../sw.panic</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.universAAL.middleware</groupId>
+				<artifactId>mw.pom</artifactId>
+				<version>1.0.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.pom</artifactId>
+				<version>1.0.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.risk</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>personal_safety.service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>personal_safety.sms</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>personal_safety.sw.panic</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>personal_safety.smp.test-location.publisher</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<licenses>
+		<license>
+			<name>Apache 2.0</name>
+			<url>http://www.apache.org/licenses/</url>
+		</license>
+	</licenses>
+
+	<issueManagement>
+		<system>GForge - Tracker</system>
+		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=233</url>
+	</issueManagement>
+
+	<inceptionYear>2010</inceptionYear>
+
+	<developers>
+		<developer>
+			<id>amedrano</id>
+			<name>Alejandro Medrano</name>
+			<email>amedrano@lst.tfo.upm.es</email>
+			<organization>LST - UPM</organization>
+			<organizationUrl>http://lst.tfo.upm.es/</organizationUrl>
+			<roles>
+				<role>developer</role>
+				<role>responsible</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>${svn.base}/personal_safety/pom</connection>
+		<developerConnection>${svn.base}/personal_safety/pom</developerConnection>
+	</scm>
+
+	<properties>
+		<maven.compile.source>1.3</maven.compile.source>
+		<maven.compile.target>1.3</maven.compile.target>
+	</properties>
+
+</project>

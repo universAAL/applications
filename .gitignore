@@ -127,6 +127,9 @@ nutritional/ont.nutrition/.classpath
 nutritional/ont.nutrition/.project
 nutritional/ont.nutrition/.settings
 nutritional/ont.nutrition/target
+personal_safety/personal_safety.pom/*.project
+personal_safety/personal_safety.pom/*.settings
+personal_safety/personal_safety.pom/target
 personal_safety/pom/*.project
 personal_safety/pom/*.settings
 personal_safety/pom/target

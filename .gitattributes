@@ -948,6 +948,7 @@ nutritional/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/MenuDa
 nutritional/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/NutritionService.java -text
 nutritional/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Recipe.java -text
 nutritional/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/ShoppingList.java -text
+personal_safety/personal_safety.pom/pom.xml -text
 personal_safety/pom/pom.xml -text
 personal_safety/run/Run.bat -text
 personal_safety/run/pax.configuration -text
