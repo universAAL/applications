@@ -25,33 +25,43 @@
 		<module>../agenda/agenda.pom</module>
 	</modules>
 	
+	<properties>
+		<remoteOBR />
+		<!-- Default configuration for compiler source and target JVM -->
+		<maven.compile.source>1.5</maven.compile.source>
+		<maven.compile.target>1.5</maven.compile.target>
+		<gforge.project.name>new_services</gforge.project.name>
+		<platform.version>1.1.0</platform.version>
+		<service.name.svn></service.name.svn>
+	</properties>
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.pom</artifactId>
-				<version>1.1.0</version>
+				<version>${platform.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.pom</artifactId>
-				<version>1.1.0</version>
+				<version>${platform.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.context</groupId>
 				<artifactId>ctxt.pom</artifactId>
-				<version>1.1.0</version>
+				<version>${platform.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.ui</groupId>
   				<artifactId>ui.pom</artifactId>
-				<version>1.1.0</version>
+				<version>${platform.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -74,15 +84,5 @@
 		<developerConnection>${svn.base}/${service.name.svn}/${project.artifactId}</developerConnection>
 		<url>${svn.base.url}${service.name.svn}%2F${project.artifactId}</url>
 	</scm>
-	
-	<properties>
-		<remoteOBR />
-		<!-- Default configuration for compiler source and target JVM -->
-		<maven.compile.source>1.5</maven.compile.source>
-		<maven.compile.target>1.5</maven.compile.target>
-		<gforge.project.name>new_services</gforge.project.name>
-		<platform.version>1.1.0</platform.version>
-		<service.name.svn></service.name.svn>
-	</properties>
 	
 </project>
