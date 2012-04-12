@@ -130,6 +130,14 @@ nutritional/ont.nutrition/target
 personal_safety/personal_safety.pom/*.project
 personal_safety/personal_safety.pom/*.settings
 personal_safety/personal_safety.pom/target
+personal_safety/personal_safety.run/.classpath
+personal_safety/personal_safety.run/.project
+personal_safety/personal_safety.run/.settings
+personal_safety/personal_safety.run/runner/bundles
+personal_safety/personal_safety.run/runner/cache
+personal_safety/personal_safety.run/runner/felix/cache/runner
+personal_safety/personal_safety.run/runner/log
+personal_safety/personal_safety.run/target
 personal_safety/pom/*.project
 personal_safety/pom/*.settings
 personal_safety/pom/target

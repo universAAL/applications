@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>personal_safety.pom</artifactId>
+		<version>0.2.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>personal_safety.run</artifactId>
+	<packaging>jar</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.ops4j</groupId>
+				<artifactId>maven-pax-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<args>pax.configuration</args>
+					<provision>
+						<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.io/1.0.0/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.service/1.0.0/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.context/1.0.0/composite</provision>
+
+						<!-- Ontologies -->
+						<provision>scan-composite:mvn:org.universAAL.ontology/ont.phWorld/1.0.0/composite</provision>
+						<provision>mvn:org.universAAL.ontology/ont.profile/1.0.0</provision>
+						<provision>mvn:org.universAAL.ontology/ont.risk/1.0.0</provision>
+
+						<!-- Platform -->
+						<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che/1.0.0/composite</provision> -->
+						<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che.mobile/1.0.0/composite</provision> -->
+						<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.dm/1.0.0/composite</provision> -->
+						<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.0.0/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.0.0/composite</provision>
+						<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.0.0/composite</provision> -->
+
+						<!-- Services -->
+						<provision>mvn:org.universAAL.AALapplication/personal_safety.sms/${project.version}</provision>
+						<provision>mvn:org.universAAL.AALapplication/personal_safety.service/${project.version}@7</provision>
+						<provision>mvn:org.universAAL.AALapplication/personal_safety.sw.panic/${project.version}@7</provision>
+						<provision>mvn:org.universAAL.samples/smp.test-location.publisher/${project.version}@7@nostart</provision>
+					</provision>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
