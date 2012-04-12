@@ -81,6 +81,7 @@
 		<maven.compile.source>1.5</maven.compile.source>
 		<maven.compile.target>1.5</maven.compile.target>
 		<gforge.project.name>new_services</gforge.project.name>
+		<platform.version>1.1.0</platform.version>
 		<service.name.svn></service.name.svn>
 	</properties>
 	
