@@ -521,6 +521,7 @@ health/health.motivation/src/main/resources/rules/AmbientContextRules.drl -text
 health/health.motivation/src/main/resources/rules/FeedbackRules.drl -text
 health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
 health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
+health/health.pom/pom.xml -text svneol=unset#text/plain
 health/health.treat.logger/LICENSE -text
 health/health.treat.logger/NOTICE -text
 health/health.treat.logger/pom.xml -text
