@@ -931,6 +931,15 @@ nutritional/NutritionalAdvisor/src/main/java/na/ws/Translation.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/ws/UProperty.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/ws/UPropertyValues.java -text
 nutritional/NutritionalAdvisor/src/main/java/na/ws/UserNutritionalProfile.java -text
+nutritional/nutritional.uiclient/launchers/uAAL[!!-~]basico.launch -text
+nutritional/nutritional.uiclient/pom.xml -text
+nutritional/nutritional.uiclient/src/main/java/na/Activator.java -text
+nutritional/nutritional.uiclient/src/main/java/na/CPublisher.java -text
+nutritional/nutritional.uiclient/src/main/java/na/CSubscriber.java -text
+nutritional/nutritional.uiclient/src/main/java/na/OPublisher.java -text
+nutritional/nutritional.uiclient/src/main/java/na/SCallee.java -text
+nutritional/nutritional.uiclient/src/main/java/na/SCalleeProvidedService.java -text
+nutritional/nutritional.uiclient/src/main/java/na/SCaller.java -text
 nutritional/ont.nutrition/pom.xml -text
 nutritional/ont.nutrition/src/main/java/org/universAAL/ontology/Activator.java -text
 nutritional/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/DayOfWeek.java -text
