@@ -121,6 +121,10 @@ nutritional/NutritionalAdvisor/rundir/NutritionalAdvisor/David_Shopland/cache
 nutritional/NutritionalAdvisor/rundir/NutritionalAdvisor/David_Shopland/images
 nutritional/NutritionalAdvisor/rundir/runner
 nutritional/NutritionalAdvisor/target
+nutritional/nutritional.ontology/.classpath
+nutritional/nutritional.ontology/.project
+nutritional/nutritional.ontology/.settings
+nutritional/nutritional.ontology/target
 nutritional/nutritional.uiclient/.classpath
 nutritional/nutritional.uiclient/.project
 nutritional/nutritional.uiclient/.settings
