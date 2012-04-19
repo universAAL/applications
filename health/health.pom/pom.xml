@@ -5,12 +5,12 @@
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>0.1.0-SNAPSHOT</version>
+		<version>B.0</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 
 	<artifactId>health.pom</artifactId>
-	<version>0.2.0-SNAPSHOT</version>
+	<version>B.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Health Management AAL Service</name>
@@ -31,10 +31,10 @@
 	</scm>
 
 	<modules>
-		<module>../ont.health</module>
-		<module>../health.treat.logger</module>
-		<module>../health.treat.manager</module>
-		<module>../health.motivation</module>
+<!-- 		<module>../ont.health</module> -->
+<!-- 		<module>../health.treat.logger</module> -->
+<!-- 		<module>../health.treat.manager</module> -->
+<!-- 		<module>../health.motivation</module> -->
 	</modules>
 
 	<dependencyManagement>
@@ -78,6 +78,11 @@
 				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>health.treat.manager</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universaal.ontology</groupId>
+				<artifactId>ont.health</artifactId>
+				<version>0.2.0-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
