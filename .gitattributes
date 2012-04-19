@@ -588,6 +588,24 @@ health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasure
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Signal.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/SingleValueMeasurement.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Unit.java -text svneol=unset#text/plain
+health/ont.message/LICENSE-2.0.txt -text
+health/ont.message/MessageOntology.di -text
+health/ont.message/MessageOntology.notation -text
+health/ont.message/MessageOntology.uml -text
+health/ont.message/pom.xml -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/Activator.java -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/MessageOntologyFactory.java -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/messageManagement/MessageManager.java -text
+health/ont.message/src/main/java/org/universaal/ontology/messageManagement/MessageManagerTest.java -text
+health/ont.message/src/main/java/org/universaal/ontology/messageManagement/MessageVariables.java -text
+health/ont.message/src/main/java/org/universaal/ontology/messageManagement/MotivationalMessagesDatabase.java -text
+health/ont.message/src/main/java/org/universaal/ontology/owl/Message.java -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/owl/MessageOntology.java -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/owl/MessageService.java -text
+health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessage.java -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageClassification.java -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
 help_when_out/hwo.mobile/pom.xml -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Activator.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/ISubscriber.java -text

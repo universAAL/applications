@@ -90,6 +90,10 @@ health/ont.healthmeasurement/.classpath
 health/ont.healthmeasurement/.project
 health/ont.healthmeasurement/.settings
 health/ont.healthmeasurement/target
+health/ont.message/.classpath
+health/ont.message/.project
+health/ont.message/.settings
+health/ont.message/target
 help_when_out/hwo.mobile/.classpath
 help_when_out/hwo.mobile/.project
 help_when_out/hwo.mobile/.settings
