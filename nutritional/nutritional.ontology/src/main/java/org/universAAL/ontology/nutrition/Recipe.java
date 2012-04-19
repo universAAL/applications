@@ -28,7 +28,7 @@ public class Recipe extends ManagedIndividual {
 	public static final String PROP_DISH_CATEGORY = NutritionOntology.NAMESPACE
 			+ "dish_category"; // Enum
 	public static final String PROP_INGREDIENTS = NutritionOntology.NAMESPACE
-			+ "ingrediendts"; //Ingredient
+			+ "ingredients"; //Ingredient
 	
 	public Recipe() {
 		super();

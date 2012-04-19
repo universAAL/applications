@@ -36,6 +36,8 @@ public class NutritionService extends Service {
 	public static final String MY_URI = NutritionOntology.NAMESPACE + "NutritionService";
 	public static final String PROP_GET_RECIPE = NutritionOntology.NAMESPACE + "getRecipe";
 	
+	public static final int Factory_NutritionService = 0;
+	
 	public NutritionService() {
 		super();
 	}
