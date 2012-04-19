@@ -46,7 +46,7 @@
 			<artifactId>org.osgi.compendium</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universaal.ontology</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.health</artifactId>
 		</dependency>
 	</dependencies>

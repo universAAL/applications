@@ -24,27 +24,7 @@
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.data.representation</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.bus.context</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.bus.io</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.bus.service</artifactId>
-			</dependency>
-			<dependency>
-           		<groupId>org.universAAL.ontology</groupId>
-           		<artifactId>ont.phWorld</artifactId>
-       		</dependency>						
-			<dependency>
-				<groupId>org.universAAL.ontology</groupId>
-				<artifactId>ont.profile</artifactId>
-			</dependency>
+			</dependency>	
     	</dependencies>
   	  <build>
 			<plugins>
