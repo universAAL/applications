@@ -58,7 +58,6 @@ public abstract class MotivationalMessage extends Message {
 	  this.setSender(sender);
 	  this.setReceiver(receiver);
 	  this.setRead(false); //until we confirm that the message has been read, we initialize it to false
-	  MessageManager.storeMotivationalMessage(this,file_rute); 
   }
   
   public MotivationalMessage(User sender, User receiver, MotivationalMessageClassification contextType, int depth, Treatment t, String mType, MotivationalStatusType mStatus, Questionnaire q, String file_rute){
@@ -71,7 +70,6 @@ public abstract class MotivationalMessage extends Message {
 	  this.setSender(sender);
 	  this.setReceiver(receiver);
 	  this.setRead(false); //until we confirm that the message has been read, we initialize it to false
-	  MessageManager.storeMotivationalMessage(this,file_rute); 
   }
   /*
   public MotivationalMessage(MotivationalMessageClassification contextType, int depth, MotivationalStatusType mStatus){
