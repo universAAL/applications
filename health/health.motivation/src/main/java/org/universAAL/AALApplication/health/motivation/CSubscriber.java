@@ -25,12 +25,10 @@ public class CSubscriber extends ContextSubscriber{
 
 	public void communicationChannelBroken() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void handleContextEvent(ContextEvent event) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
