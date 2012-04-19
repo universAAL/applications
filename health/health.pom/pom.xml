@@ -73,4 +73,12 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<repositories>
+        <repository>
+            <id>JBossRepo</id>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+    
 </project>
