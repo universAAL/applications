@@ -79,6 +79,10 @@ health/health.treat.manager/.classpath
 health/health.treat.manager/.project
 health/health.treat.manager/.settings
 health/health.treat.manager/target
+health/ont.healthmeasurement/.classpath
+health/ont.healthmeasurement/.project
+health/ont.healthmeasurement/.settings
+health/ont.healthmeasurement/target
 help_when_out/hwo.mobile/.classpath
 help_when_out/hwo.mobile/.project
 help_when_out/hwo.mobile/.settings
