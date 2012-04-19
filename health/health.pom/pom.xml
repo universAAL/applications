@@ -42,31 +42,6 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.pom</artifactId>
-				<version>1.0.0</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.ontology</groupId>
-				<artifactId>ont.pom</artifactId>
-				<version>1.0.0</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.context</groupId>
-				<artifactId>ctxt.che</artifactId>
-				<version>1.0.0</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.ontology</groupId>
-				<artifactId>ont.measurement</artifactId>
-				<version>1.0.0</version>
-			</dependency>
-			<dependency>
 				<groupId>org.universaal.ontology.health</groupId>
 				<artifactId>ont.health</artifactId>
 				<version>${project.version}</version>
