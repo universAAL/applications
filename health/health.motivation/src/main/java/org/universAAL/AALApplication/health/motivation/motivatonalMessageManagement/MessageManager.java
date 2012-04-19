@@ -41,26 +41,19 @@ public class MessageManager {
 
 	public MessageManager(Locale language) {
 
+		FileReader reader;
+
 		try {
-
+			
 			if (language.equals(Locale.ENGLISH)) {
-				MotivationalMessagesDatabase.getDBRute(EN);
-//				setEngMotMessageDB();
-//				FileReader reader = new FileReader(enMessagesDB);
-//				buildMapStructure(reader); //método que me devuelva esto mientras tanto
-				//EN ESTE PUNTO HABRÍA QUE IR AL PROPERTIES A CONSULTAR LA DIRECCIÓN
-				// DE LA BASE DE DATOS Y ELEGIR LA SUBCARPETA DEL INGLÉS
+				reader = new FileReader(MotivationalMessagesDatabase.getDBRute(EN));
 			}
-
 			else if (language.equals (SPANISH)) {
-				MotivationalMessagesDatabase.getDBRute(ES);
-//				setSpMotMessageDB();
-//				FileReader reader = new FileReader(spMessagesDB);
-//				buildMapStructure(reader);
-				//EN ESTE PUNTO HABRÍA QUE IR AL PROPERTIES A CONSULTAR LA DIRECCIÓN
-				// DE LA BASE DE DATOS Y ELEGIR LA SUBCARPETA DEL ESPAÑOL PARA CREAR EL FILEREADER
+				reader = new FileReader(MotivationalMessagesDatabase.getDBRute(ES));
 			}
-
+			
+			buildMapStructure(reader);
+		
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -75,11 +68,26 @@ public class MessageManager {
 	public void buildMapStructure(FileReader reader) {
 
 		try {
-
-			BufferedReader buffer = new BufferedReader(reader);
-			String linea;
-
-			String cols[];
+			CsvReader reader = new CsvReader(reader, ';');
+			reader.
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+//			BufferedReader buffer = new BufferedReader(reader);
+//			String linea;
+//
+//			String cols[];
 
 			while ((linea = buffer.readLine()) != null) {
 
@@ -332,9 +340,9 @@ public class MessageManager {
 	 */
 	
 	public static void sendMessageToUser(MotivationalMessage mm) {
-		// To do: utilizar el método/servicio que proporcione la plataforma
-		// para enviar al buzón de entrada del destinatario.
-		// Prestar atención a lo que devuelva (mensaje enviado, mensaje leído,
+		// To do: utilizar el mï¿½todo/servicio que proporcione la plataforma
+		// para enviar al buzï¿½n de entrada del destinatario.
+		// Prestar atenciï¿½n a lo que devuelva (mensaje enviado, mensaje leï¿½do,
 		// etc).
 	}
 
@@ -364,7 +372,7 @@ public class MessageManager {
 
 	public void setSpMotMessageDB() {
 		spMessagesDB = new File("");// especificar la ruta del fichero con los mensajes
-		// en español
+		// en espanol
 	}
 
 	/**
@@ -395,7 +403,7 @@ public class MessageManager {
 	 */
 	
 	public static void showMotivationalMessage(MotivationalMessage mm){
-		//TO DO: en la integración con la plataforma, dar el mm al servicio que corresponda
+		//TO DO: en la integracion con la plataforma, dar el mm al servicio que corresponda
 		//para que lo muestre.
 		
 		System.out.println(mm.getContent());
