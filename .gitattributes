@@ -1,1 +1,72 @@
 * text=auto !eol
+health/health.manager/LICENSE.txt -text svneol=unset#text/plain
+health/health.manager/pom.xml -text
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/HealthManager.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ISubscriber.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/OPublisher.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/osgi/Activator.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/InputListener.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MainForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesListForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesReadForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MessagesWriteForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/PrefecencesEditForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/PreferencesAccessForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/PreferencesFrom.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentEditForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentFollowForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentNewForm.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
+health/health.motivation/pom.xml -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/CSubscriber.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/Management/MessageManager.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/Management/MessageVariables.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationManager.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SCaller.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedule/ScheduleTreatment.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/treatment/HealthService.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/treatment/MotivationStatusDetection.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/treatment/TreatmentDetection.java -text
+health/health.motivation/src/main/resources/rules/AmbientContextRules.drl -text
+health/health.motivation/src/main/resources/rules/FeedbackRules.drl -text
+health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
+health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
+health/health.pom/pom.xml -text svneol=unset#text/plain
+health/health.treat.logger/LICENSE -text
+health/health.treat.logger/NOTICE -text
+health/health.treat.logger/pom.xml -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLogger.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerProvider.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerServices.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/impl/ContextHistoryTreatmentLogger.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/osgi/Activator.java -text
+health/health.treat.manager/LICENSE -text
+health/health.treat.manager/NOTICE -text
+health/health.treat.manager/pom.xml -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManager.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerProvider.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerServices.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/impl/JenaConverterTreatmentManager.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/osgi/Activator.java -text
+health/ont.health/LICENSE -text
+health/ont.health/NOTICE -text
+health/ont.health/pom.xml -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/Activator.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/measurement/Measure.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/measurement/MultidimensionalMeasure.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/measurement/UnidimensionalMeasure.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/schedule/Event.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/schedule/Task.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/services/HealthServices.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/treatment/HealthyHabitsAdoption.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/treatment/MonitorizationMeasures.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/treatment/PhysicalActivity.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/treatment/PhysicalActivityPhase.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/treatment/QuitSmocking.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/treatment/Treatment.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/treatment/TreatmentDetails.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/treatment/TreatmentPlanning.java -text
+health/ont.health/src/main/java/org/universAAL/AALapplication/health/ont/treatment/UserHealthProfile.java -text
