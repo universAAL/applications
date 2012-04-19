@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Copyright 2012 UPM, http://www.upm.es 
+ Universidad PolitÃ©cnica de Madrid
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+
+
 package org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement;
 
 import java.io.BufferedReader;
@@ -8,10 +26,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 import java.util.StringTokenizer;
-
 import org.apache.commons.collections.map.MultiKeyMap;
-import org.universAAL.AALApplication.health.motivation.motivationalmessages.MotivationalMessagesContent;
-import org.universaal.ontology.owl.MotivationalMessage;
+import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 
@@ -24,13 +40,12 @@ public class MessageManager {
 	private final int EN = 1;
 	private final int ES = 0;
 	
+	public String illness;
 	public String treatment_type;
-	public String message_context;
-	public String depth;
+	public String mot_status;
 	public String message_type;
-	public String motivational_status;
-	public String motivationalMessageContent;
-
+	public String message_content;
+	
 	static MultiKeyMap map = new MultiKeyMap(); // the map structure
 
 	/**
@@ -41,7 +56,7 @@ public class MessageManager {
 
 	public MessageManager(Locale language) {
 
-		FileReader reader;
+		FileReader reader = null;
 
 		try {
 			
@@ -65,63 +80,40 @@ public class MessageManager {
 	 * @param reader
 	 */
 
-	public void buildMapStructure(FileReader reader) {
+	public void buildMapStructure(FileReader freader) {
 
 		try {
-			CsvReader reader = new CsvReader(reader, ';');
-			reader.
-		
-		
 			
+			CsvReader reader = new CsvReader(freader, ';');
+			String line = reader.getRawRecord();
+			String[] columns = reader.getValues();
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-//			BufferedReader buffer = new BufferedReader(reader);
-//			String linea;
-//
-//			String cols[];
+			illness = columns[0];
+			treatment_type = columns[1];
+			mot_status = columns[2];
+			message_type = columns[3];
+			message_content = columns[4];
 
-			while ((linea = buffer.readLine()) != null) {
+			while (line != null) {
 
-				cols = linea.split(";"); // the data stored in a line is
-				// splitted up into 6 columns
-				treatment_type = cols[0];
-				motivational_status = cols[1];
-				message_context = cols[2];
-				depth = cols[3];
-				message_type = cols[4];
-				motivationalMessageContent = cols[5];
-
-				if (!map.containsKey(treatment_type, motivational_status,
-						message_context, depth, message_type)) {
+				if (!map.containsKey(illness,treatment_type, mot_status,
+					message_type)) {
 					// if the combination of keys has not been registered yet
 					ArrayList<String> mMessagesAssociated = new ArrayList<String>(); // a
-					mMessagesAssociated.add(motivationalMessageContent);
-					map.put(treatment_type, motivational_status,
-							message_context, depth, message_type,
-							mMessagesAssociated);
+					mMessagesAssociated.add(message_content);
+					map.put(illness,treatment_type, mot_status,
+							message_type,mMessagesAssociated);
 				} else { // if the combination of keys already exists
 					ArrayList<String> mMessagesAssociated = (ArrayList<String>) (map
-							.get(treatment_type, motivational_status,
-									message_context, depth, message_type));
-					mMessagesAssociated.add(motivationalMessageContent);
-					map.put(treatment_type, motivational_status,
-							message_context, depth, message_type,
-							mMessagesAssociated);
+							.get(illness,treatment_type, mot_status,message_type));
+					mMessagesAssociated.add(message_content);
+					map.put(illness,treatment_type, mot_status,
+							message_type,mMessagesAssociated);
 				}
 
 			} // At this point, the map structure is build
 
 			reader.close();
-
 		} catch (Exception e) {
 			System.out.println(e);
 		}
