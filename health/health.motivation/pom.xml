@@ -5,8 +5,8 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>health.pom</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
-		<relativePath>../pom/</relativePath>
+		<version>B.0.1-SNAPSHOT</version>
+		<relativePath>../health.pom/</relativePath>
 	</parent>
 
 	<artifactId>health.motivation</artifactId>
@@ -33,7 +33,7 @@
 			<artifactId>mw.bus.service</artifactId>
 		</dependency>
 		<dependency>
-        	<groupId>org.universaal.ontology</groupId>
+        	<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.health</artifactId>
         </dependency>
 		<dependency>
