@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>health.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>0.2.0-SNAPSHOT</version>
+		<version>B.0.1-SNAPSHOT</version>
 		<relativePath>../health.pom</relativePath>
 	</parent>
 
@@ -21,7 +21,7 @@
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universaal.ontology.health</groupId>
+			<groupId>org.universaal.ontology</groupId>
 			<artifactId>ont.health</artifactId>
 		</dependency>
 	</dependencies>
