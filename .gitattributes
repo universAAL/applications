@@ -601,10 +601,6 @@ health/ont.message/MessageOntology.uml -text
 health/ont.message/pom.xml -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/Activator.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/MessageOntologyFactory.java -text svneol=unset#application/octet-stream
-health/ont.message/src/main/java/org/universaal/ontology/messageManagement/MessageManager.java -text
-health/ont.message/src/main/java/org/universaal/ontology/messageManagement/MessageManagerTest.java -text
-health/ont.message/src/main/java/org/universaal/ontology/messageManagement/MessageVariables.java -text
-health/ont.message/src/main/java/org/universaal/ontology/messageManagement/MotivationalMessagesDatabase.java -text
 health/ont.message/src/main/java/org/universaal/ontology/owl/Message.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/owl/MessageOntology.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/owl/MessageService.java -text
