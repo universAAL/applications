@@ -512,6 +512,12 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/Management/MessageVariables.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationManager.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SCaller.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/MotivationalMessageContent.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentDetectionMessage.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageManager.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageManagerTest.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageVariables.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MotivationalMessagesDatabase.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedule/ScheduleTreatment.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/treatment/HealthService.java -text
