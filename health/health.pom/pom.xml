@@ -31,10 +31,12 @@
 	</scm>
 
 	<modules>
-<!-- 		<module>../ont.health</module> -->
+		<module>../ont.health</module>
+		<module>../ont.healthmeasurement</module>
+		<module>../ont.message</module>
 <!-- 		<module>../health.treat.logger</module> -->
 <!-- 		<module>../health.treat.manager</module> -->
-<!-- 		<module>../health.motivation</module> -->
+		<module>../health.motivation</module>
 	</modules>
 
 	<dependencyManagement>
@@ -82,6 +84,16 @@
 			<dependency>
 				<groupId>org.universaal.ontology</groupId>
 				<artifactId>ont.health</artifactId>
+				<version>1.1.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universaal.ontology</groupId>
+				<artifactId>ont.healthmeasurement</artifactId>
+				<version>1.1.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universaal.ontology</groupId>
+				<artifactId>ont.message</artifactId>
 				<version>0.2.0-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
