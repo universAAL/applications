@@ -47,7 +47,7 @@ public class NutritionFactory extends ResourceFactoryImpl {
 	 */
 
 	switch (factoryIndex) {
-	case 0:
+	case NutritionService.Factory_NutritionService:
 	    return new NutritionService(instanceURI);
 	}
 

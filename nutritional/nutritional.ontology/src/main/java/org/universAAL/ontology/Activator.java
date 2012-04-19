@@ -3,21 +3,7 @@ package org.universAAL.ontology;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
-import org.universAAL.ontology.nutrition.DayOfWeek;
-import org.universAAL.ontology.nutrition.Dish;
-import org.universAAL.ontology.nutrition.DishCategory;
-import org.universAAL.ontology.nutrition.Food;
-import org.universAAL.ontology.nutrition.FoodCategory;
-import org.universAAL.ontology.nutrition.FoodSubCategory;
-import org.universAAL.ontology.nutrition.Ingredient;
-import org.universAAL.ontology.nutrition.Meal;
-import org.universAAL.ontology.nutrition.MealCategory;
-import org.universAAL.ontology.nutrition.MeasureUnit;
-import org.universAAL.ontology.nutrition.MenuDay;
 import org.universAAL.ontology.nutrition.NutritionOntology;
-import org.universAAL.ontology.nutrition.NutritionService;
-import org.universAAL.ontology.nutrition.Recipe;
-import org.universAAL.ontology.nutrition.ShoppingList;
 
 //You need an Activator in your ontology bundle because it must be started...
 public class Activator implements BundleActivator {
@@ -27,12 +13,16 @@ public class Activator implements BundleActivator {
     NutritionOntology nutritionOntology = new NutritionOntology();
 
     public void start(BundleContext context) throws Exception {
-	Activator.context = context;
-	OntologyManagement.getInstance().register(nutritionOntology);
+    	System.out.println("Nutrition ontology starting");
+		Activator.context = context;
+		OntologyManagement.getInstance().register(nutritionOntology);
+	System.out.println("Nutrition ontology started");
     }
 
     public void stop(BundleContext arg0) throws Exception {
+    	System.out.println("Nutrition ontology bundle stopping");
 	OntologyManagement.getInstance().unregister(nutritionOntology);
+	System.out.println("Nutrition ontology bundle stopped");
     }
     
     /*

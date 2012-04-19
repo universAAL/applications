@@ -75,6 +75,78 @@ public final class NutritionOntology extends Ontology {
 				MeasureUnit.TABLESPOONS, MeasureUnit.TEASPOONS,
 				MeasureUnit.UNITS, MeasureUnit.HANDFULLS });
 
+		// load Food
+		oci = createNewAbstractOntClassInfo(Food.MY_URI);
+		oci.setResourceComment("Ingredient");
+		oci.setResourceLabel("Ingredient");
+		oci.addDatatypeProperty(Food.PROP_ID).setFunctional(); // Integer
+		oci.addDatatypeProperty(Food.PROP_CARBOHIDRATES).setFunctional(); // Double
+		oci.addDatatypeProperty(Food.PROP_FAT).setFunctional(); // Double
+		oci.addDatatypeProperty(Food.PROP_KILOCALORIES).setFunctional(); // Double
+		oci.addDatatypeProperty(Food.PROP_NAME).setFunctional(); // String
+		oci.addObjectProperty(Food.PROP_FOODSUBCATEGORY).setFunctional(); // FoodSubCategory
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(Food.PROP_ID,
+						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(
+						Food.PROP_CARBOHIDRATES,
+						TypeMapper.getDatatypeURI(Double.class), 0, 1));
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(Food.PROP_FAT,
+						TypeMapper.getDatatypeURI(Double.class), 0, 1));
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(Food.PROP_KILOCALORIES,
+						TypeMapper.getDatatypeURI(Double.class), 0, 1));
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(Food.PROP_NAME,
+						TypeMapper.getDatatypeURI(String.class), 1, 1));
+		oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+				Food.PROP_FOODSUBCATEGORY,
+				TypeMapper.getDatatypeURI(FoodSubCategory.MY_URI), 0, 1));
+		
+		// load Ingredient
+		oci = createNewAbstractOntClassInfo(Ingredient.MY_URI);
+		oci.setResourceComment("Ingredient");
+		oci.setResourceLabel("Ingredient");
+		oci.addDatatypeProperty(Ingredient.PROP_ID).setFunctional(); // Integer
+		oci.addDatatypeProperty(Ingredient.PROP_QUANTITY).setFunctional(); // String
+		oci.addObjectProperty(Ingredient.PROP_FOOD).setFunctional(); // Food
+		oci.addObjectProperty(Ingredient.PROP_MEASURE_UNIT).setFunctional(); // MeasureUnit
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(Ingredient.PROP_ID,
+						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(
+						Ingredient.PROP_QUANTITY,
+						TypeMapper.getDatatypeURI(String.class), 1, 1));
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(Ingredient.PROP_FOOD,
+						TypeMapper.getDatatypeURI(Food.MY_URI), 1, 1));
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(
+						Ingredient.PROP_MEASURE_UNIT,
+						TypeMapper.getDatatypeURI(MeasureUnit.MY_URI), 1, 1));
+
+
+		// load ShoppingList
+		oci = createNewAbstractOntClassInfo(ShoppingList.MY_URI);
+		oci.setResourceComment("Shopping list");
+		oci.setResourceLabel("ShoppingList");
+		oci.addDatatypeProperty(ShoppingList.PROP_ID).setFunctional(); // Integer
+		oci.addDatatypeProperty(ShoppingList.PROP_DATEINTERVAL).setFunctional(); // String
+		oci.addObjectProperty(ShoppingList.PROP_INGREDIENTS).setFunctional(); // Ingredient
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(ShoppingList.PROP_ID,
+						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(
+						ShoppingList.PROP_DATEINTERVAL,
+						TypeMapper.getDatatypeURI(String.class), 1, 1));
+		oci.addRestriction(MergedRestriction.getAllValuesRestriction( 
+				ShoppingList.PROP_INGREDIENTS, Ingredient.MY_URI));
+		
+		
 		// load Recipe
 		oci = createNewAbstractOntClassInfo(Recipe.MY_URI);
 		oci.setResourceComment("Single recipe");
@@ -92,6 +164,7 @@ public final class NutritionOntology extends Ontology {
 		oci.addRestriction(MergedRestriction
 				.getAllValuesRestrictionWithCardinality(Recipe.PROP_ID,
 						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
+		System.out.println("Recipe.PropIngredients: "+Recipe.PROP_INGREDIENTS+ "  Ingredient.MyUri: "+Ingredient.MY_URI);
 		oci.addRestriction(MergedRestriction.getAllValuesRestriction(
 				Recipe.PROP_INGREDIENTS, Ingredient.MY_URI));
 		oci.addRestriction(MergedRestriction
@@ -140,7 +213,7 @@ public final class NutritionOntology extends Ontology {
 				.getAllValuesRestrictionWithCardinality(
 						Dish.PROP_DISH_CATEGORY, DishCategory.MY_URI, 1, 1));
 		oci.addRestriction(MergedRestriction.getAllValuesRestriction(
-				Dish.PROP_RECIPE, Ingredient.MY_URI));
+				Dish.PROP_RECIPE, Recipe.MY_URI));
 
 		// load Meal
 		oci = createNewAbstractOntClassInfo(Meal.MY_URI);
@@ -174,79 +247,17 @@ public final class NutritionOntology extends Ontology {
 		oci.addRestriction(MergedRestriction.getAllValuesRestriction(
 				MenuDay.PROP_MEALS, Dish.MY_URI));
 
-		// load ShoppingList
-		oci = createNewAbstractOntClassInfo(ShoppingList.MY_URI);
-		oci.setResourceComment("Shopping list");
-		oci.setResourceLabel("ShoppingList");
-		oci.addDatatypeProperty(ShoppingList.PROP_ID).setFunctional(); // Integer
-		oci.addDatatypeProperty(ShoppingList.PROP_DATEINTERVAL).setFunctional(); // String
-		oci.addObjectProperty(ShoppingList.PROP_INGREDIENTS).setFunctional(); // Ingredient
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(ShoppingList.PROP_ID,
-						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(
-						ShoppingList.PROP_DATEINTERVAL,
-						TypeMapper.getDatatypeURI(String.class), 1, 1));
+		
+		// load Lighting
+		oci = createNewOntClassInfo(NutritionService.MY_URI, factory, NutritionService.Factory_NutritionService);
+		oci
+			.setResourceComment("The class of services controling light sources");
+		oci.setResourceLabel("Lighting");
+		oci.addSuperClass(Service.MY_URI);
+		oci.addObjectProperty(NutritionService.PROP_GET_RECIPE);
 		oci.addRestriction(MergedRestriction.getAllValuesRestriction(
-				ShoppingList.PROP_INGREDIENTS, Ingredient.MY_URI));
+				NutritionService.PROP_GET_RECIPE, NutritionService.MY_URI));
 
-		// load Ingredient
-		oci = createNewAbstractOntClassInfo(Ingredient.MY_URI);
-		oci.setResourceComment("Ingredient");
-		oci.setResourceLabel("Ingredient");
-		oci.addDatatypeProperty(Ingredient.PROP_ID).setFunctional(); // Integer
-		oci.addDatatypeProperty(Ingredient.PROP_QUANTITY).setFunctional(); // String
-		oci.addObjectProperty(Ingredient.PROP_FOOD).setFunctional(); // Food
-		oci.addObjectProperty(Ingredient.PROP_MEASURE_UNIT).setFunctional(); // MeasureUnit
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(Ingredient.PROP_ID,
-						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(
-						Ingredient.PROP_QUANTITY,
-						TypeMapper.getDatatypeURI(String.class), 1, 1));
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(Ingredient.PROP_FOOD,
-						TypeMapper.getDatatypeURI(Food.MY_URI), 1, 1));
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(
-						Ingredient.PROP_MEASURE_UNIT,
-						TypeMapper.getDatatypeURI(MeasureUnit.MY_URI), 1, 1));
-		
-	
-		// load Food
-		oci = createNewAbstractOntClassInfo(Food.MY_URI);
-		oci.setResourceComment("Ingredient");
-		oci.setResourceLabel("Ingredient");
-		oci.addDatatypeProperty(Food.PROP_ID).setFunctional(); // Integer
-		oci.addDatatypeProperty(Food.PROP_CARBOHIDRATES).setFunctional(); // Double
-		oci.addDatatypeProperty(Food.PROP_FAT).setFunctional(); // Double
-		oci.addDatatypeProperty(Food.PROP_KILOCALORIES).setFunctional(); // Double
-		oci.addDatatypeProperty(Food.PROP_NAME).setFunctional(); // String
-		oci.addObjectProperty(Food.PROP_FOODSUBCATEGORY).setFunctional(); // FoodSubCategory
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(Food.PROP_ID,
-						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(
-						Food.PROP_CARBOHIDRATES,
-						TypeMapper.getDatatypeURI(Double.class), 0, 1));
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(
-						Food.PROP_FAT,
-						TypeMapper.getDatatypeURI(Double.class), 0, 1));
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(
-						Food.PROP_KILOCALORIES,
-						TypeMapper.getDatatypeURI(Double.class), 0, 1));
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(
-						Food.PROP_NAME,
-						TypeMapper.getDatatypeURI(String.class), 1, 1));
-		oci.addRestriction(MergedRestriction
-				.getAllValuesRestrictionWithCardinality(Food.PROP_FOODSUBCATEGORY,
-						TypeMapper.getDatatypeURI(FoodSubCategory.MY_URI), 0, 1));
-		
+
 	}
 }
