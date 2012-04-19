@@ -42,11 +42,6 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.universaal.ontology.health</groupId>
-				<artifactId>ont.health</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>health.treat.logger</artifactId>
 				<version>${project.version}</version>
@@ -57,19 +52,19 @@
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.universaal.ontology</groupId>
+				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.health</artifactId>
 				<version>1.1.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>org.universaal.ontology</groupId>
+				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.healthmeasurement</artifactId>
 				<version>1.1.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
-				<groupId>org.universaal.ontology</groupId>
+				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.message</artifactId>
-				<version>0.2.0-SNAPSHOT</version>
+				<version>1.1.1-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
