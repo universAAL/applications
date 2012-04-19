@@ -12,7 +12,7 @@ public class MotivationalMessagesDatabase {
 	public static final int EN = 1;
 
 
-	public File getDBRute(int language){
+	public static File getDBRute(int language){
 		File file;
 		switch(language){
 		case ES:
