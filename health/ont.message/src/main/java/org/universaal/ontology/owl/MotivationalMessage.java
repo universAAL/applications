@@ -15,7 +15,7 @@
  ******************************************************************************/
 package org.universaal.ontology.owl;
 
-import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
+
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
