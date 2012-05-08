@@ -36,6 +36,11 @@ public class MotivationalQuestionnaire extends MotivationalMessage {
     super(uri);
   }
   
+  public MotivationalQuestionnaire(String illness, String treatmentType, MotivationalStatusType motStatus, Object content){
+	  
+  }
+  
+  /*
   public MotivationalQuestionnaire(User sender, User receiver, Questionnaire q, MotivationalStatusType ms, MotivationalMessageClassification mc,String mType, 
 		  int depth, Treatment t, String file_rute, Object content){
 	 // this.setTypeOfMessage("Questionnaire");
@@ -44,6 +49,12 @@ public class MotivationalQuestionnaire extends MotivationalMessage {
 	  
 	  this.setHasQuestionnaire(q);
 	  //this.setContent(q.getWrittenQuestionnaire(q));
+  }
+  */
+  
+  public MotivationalQuestionnaire(String illness, TreatmentTypeClassification ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, Questionnaire questionnaire){
+	  super(illness, ttype, motStatus, mtype, questionnaire);
+	  this.setHasQuestionnaire(questionnaire);
   }
   
   public String getClassURI() {
@@ -58,15 +69,15 @@ public class MotivationalQuestionnaire extends MotivationalMessage {
       && props.containsKey(PROP_HAS_QUESTIONNAIRE);
   }
 
-  public String getHasQuestionnaire() {
-    return (String)props.get(PROP_HAS_QUESTIONNAIRE);
-  }		
+  		
 
 //GETTERS & SETTERS
-  public void setHasQuestionnaire(Questionnaire newPropValue) {
-    if (newPropValue != null)
-      props.put(PROP_HAS_QUESTIONNAIRE, newPropValue);
+  public void setHasQuestionnaire(Questionnaire questionnaire) {
+    if (questionnaire != null)
+      props.put(PROP_HAS_QUESTIONNAIRE, questionnaire);
   }		
 
-  	
+  public Questionnaire getHasQuestionnaire() {
+	    return (Questionnaire)props.get(PROP_HAS_QUESTIONNAIRE);
+  }
 }

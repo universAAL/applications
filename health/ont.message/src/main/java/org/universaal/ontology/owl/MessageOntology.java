@@ -64,7 +64,12 @@ public final class MessageOntology extends Ontology {
     oci.toEnumeration(new ManagedIndividual[] {
        MotivationalMessageClassification.educational, MotivationalMessageClassification.reminder, MotivationalMessageClassification.reward, MotivationalMessageClassification.personalizedFeedback, MotivationalMessageClassification.test, MotivationalMessageClassification.inquiry, MotivationalMessageClassification.notification });
 
-
+    //load TreatmentTypeClassification
+    oci = createNewAbstractOntClassInfo(TreatmentTypeClassification.MY_URI);
+    oci.setResourceComment("");
+    oci.setResourceLabel("TreatmentTypeClassification");
+    oci.toEnumeration(new ManagedIndividual[] {
+    		TreatmentTypeClassification.all, TreatmentTypeClassification.takeMeasurement, TreatmentTypeClassification.physicalActivity, TreatmentTypeClassification.diet });
 
     // ******* Regular classes of the ontology ******* //
 
@@ -98,31 +103,26 @@ public final class MessageOntology extends Ontology {
     oci.setResourceLabel("MotivationalMessage");
     oci.addSuperClass(Message.MY_URI); 
     
-    oci.addObjectProperty(MotivationalMessage.PROP_ASSOCIATED_TREATMENT);
+    oci.addObjectProperty(MotivationalMessage.PROP_ILLNESS);
 //    oci.addRestriction(MergedRestriction.getCardinalityRestriction(MotivationalMessage.PROP_ASSOCIATED_TREATMENT, 1, 1));
     oci.addRestriction(MergedRestriction
-    	      .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_ASSOCIATED_TREATMENT, 
-    	    		  Treatment.MY_URI, 1, 1));
+    	      .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_ILLNESS, 
+    	    		  TypeMapper.getDatatypeURI(String.class), 1, 1));
     	      
-    oci.addDatatypeProperty(MotivationalMessage.PROP_CONTEXT);
+    oci.addDatatypeProperty(MotivationalMessage.PROP_MESSAGE_TYPE);
     oci.addRestriction(MergedRestriction
-      .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_CONTEXT, 
+      .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_MESSAGE_TYPE, 
       MotivationalMessageClassification.MY_URI, 1, 1));
     
-    oci.addDatatypeProperty(MotivationalMessage.PROP_TYPE_OF_MESSAGE);
+    oci.addDatatypeProperty(MotivationalMessage.PROP_TREATMENT_TYPE);
     oci.addRestriction(MergedRestriction
-    		.getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_TYPE_OF_MESSAGE, 
-    			      TypeMapper.getDatatypeURI(String.class), 1, 1));
+    		.getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_TREATMENT_TYPE, 
+    				TreatmentTypeClassification.MY_URI, 1, 1));
     
     oci.addDatatypeProperty(MotivationalMessage.PROP_MOTIVATIONAL_STATUS);
     oci.addRestriction(MergedRestriction
   	      .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_MOTIVATIONAL_STATUS, 
   	    		  MotivationalStatusType.MY_URI, 1, 1));
-    
-    oci.addDatatypeProperty(MotivationalMessage.PROP_DEPTH);
-    oci.addRestriction(MergedRestriction
-      .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_DEPTH, 
-      TypeMapper.getDatatypeURI(Integer.class), 1, 1));
     
     //load MotivationalQuestionnaire 
     oci = createNewOntClassInfo(MotivationalQuestionnaire.MY_URI, factory, 0);
@@ -136,7 +136,7 @@ public final class MessageOntology extends Ontology {
 
     
 
-    //load MotivationalPlainTextMessage 
+    //load MotivationalPlainMessage 
     oci = createNewOntClassInfo(MotivationalPlainMessage.MY_URI, factory, 2);
     oci.setResourceComment("");
     oci.setResourceLabel("MotivationalPlainMessage");
