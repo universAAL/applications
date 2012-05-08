@@ -31,10 +31,15 @@ public class MotivationalPlainMessage extends MotivationalMessage {
   public MotivationalPlainMessage (String uri) {
     super(uri);
   }
-  
+  /*
   public MotivationalPlainMessage(User sender, User receiver, MotivationalMessageClassification contextType, int depth, Treatment t, String mType, MotivationalStatusType mStatus, Object content, String file_rute){
 	  super(sender, receiver, contextType, depth, t, mType, mStatus, content, file_rute);
 	  //this.setTypeOfMessage("PlainMessage");
+  }
+  */
+  
+  public MotivationalPlainMessage(String illness, TreatmentTypeClassification ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, String message){
+	  super(illness, ttype, motStatus, mtype, message);
   }
   
   public String getClassURI() {
