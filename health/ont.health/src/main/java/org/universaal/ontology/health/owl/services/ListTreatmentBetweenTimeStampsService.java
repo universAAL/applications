@@ -1,7 +1,10 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es 
- Universidad Politécnica de Madrid
+ * Universidad Politécnica de Madrid
  * 
+ *	OCO Source Materials
+ *	� Copyright IBM Corp. 2011
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,6 +20,45 @@
 
 package org.universaal.ontology.health.owl.services;
 
+import org.universAAL.middleware.rdf.TypeMapper;
+import org.universAAL.ontology.profile.User;
+import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.Treatment;
+
 public class ListTreatmentBetweenTimeStampsService extends ListTreatmentService {
+
+	//NAMESPACE & PROPERTIES
+	public static final String MY_URI = HealthOntology.NAMESPACE
+			+ "ListTreatmentBetweenTimeStampsService";
+	
+	public static final String PROP_TIMESTAMP_FROM =  HealthOntology.NAMESPACE
+		+ "listsTreatmentsTimestampFrom";
+	public static final String PROP_TIMESTAMP_TO =  HealthOntology.NAMESPACE
+		+ "listsTreatmentsTimestampTo";
+
+	//CONSTRUCTOR	
+	public ListTreatmentBetweenTimeStampsService() {
+		super();
+    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+    			new String[] { PROP_ASSISTED_USER });
+    	addFilteringInput(INPUT_TIMESTAMP_FROM, TypeMapper.getDatatypeURI(Long.class), 1, 1, 
+    			new String[] { PROP_TIMESTAMP_FROM });
+    	addFilteringInput(INPUT_TIMESTAMP_TO, TypeMapper.getDatatypeURI(Long.class), 1, 1, 
+    			new String[] { PROP_TIMESTAMP_TO });
+    	addOutput(OUTPUT_TREATMENTS, Treatment.MY_URI, 0, -1, 
+    			new String[] { PROP_LISTS_TREATMENTS });
+	}		
+	
+	public String getClassURI() {
+		return MY_URI;
+	}
+
+	public int getPropSerializationType(String propURI) {
+		return PROP_SERIALIZATION_FULL;
+	}
+
+	public boolean isWellFormed() {
+		return true;
+	}
 
 }

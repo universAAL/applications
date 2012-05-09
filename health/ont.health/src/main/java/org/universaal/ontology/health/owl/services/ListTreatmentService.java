@@ -1,6 +1,9 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es 
- Universidad Politécnica de Madrid
+ * Universidad Politécnica de Madrid
+ * 
+ *	OCO Source Materials
+ *	� Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,23 +20,34 @@
 
 package org.universaal.ontology.health.owl.services;
 
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.Treatment;
 
 /**
- * 
  * @author amedrano
+ * @author roni
+ *
  * @navassoc - "lists" * Treatment
  */
 public class ListTreatmentService extends TreatmentManagementService {
 
-	
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
 			+ "ListTreatmentService";
 	
 	public static final String PROP_LISTS_TREATMENTS =  HealthOntology.NAMESPACE
-	+ "listsTreatments";
+		+ "listsTreatments";
 
+	//CONSTRUCTOR	
+	public ListTreatmentService() {
+		super();
+    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+    			new String[] { PROP_ASSISTED_USER });
+    	addOutput(OUTPUT_TREATMENTS, Treatment.MY_URI, 0, -1, 
+    			new String[] { PROP_LISTS_TREATMENTS });
+	}		
+	
 	public String getClassURI() {
 		return MY_URI;
 	}
