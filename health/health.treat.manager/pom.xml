@@ -21,7 +21,7 @@
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universaal.ontology</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.health</artifactId>
 		</dependency>
 	</dependencies>

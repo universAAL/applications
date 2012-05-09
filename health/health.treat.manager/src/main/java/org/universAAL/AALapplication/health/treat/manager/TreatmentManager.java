@@ -24,8 +24,7 @@ package org.universAAL.AALapplication.health.treat.manager;
 
 import java.util.List;
 
-import org.universAAL.AALapplication.health.ont.treatment.Treatment;
-import org.universAAL.ontology.profile.UserProfile;
+import org.universaal.ontology.health.owl.Treatment;
 
 /**
  * Interface for the treatment definition storage and retrieval.

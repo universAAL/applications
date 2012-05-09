@@ -3,7 +3,7 @@
 	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	ï¿½ Copyright IBM Corp. 2011
+	© Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -24,7 +24,7 @@ package org.universAAL.AALapplication.health.treat.manager.impl;
 
 import java.util.List;
 
-import org.universAAL.AALapplication.health.ont.treatment.Treatment;
+import org.universaal.ontology.health.owl.Treatment;
 import org.universAAL.AALapplication.health.treat.manager.TreatmentManager;
 import org.universAAL.middleware.container.ModuleContext;
 
