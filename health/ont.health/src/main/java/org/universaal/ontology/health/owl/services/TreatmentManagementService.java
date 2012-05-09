@@ -1,6 +1,9 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es 
- Universidad Politécnica de Madrid
+ * Universidad Politécnica de Madrid
+ * 
+ *	OCO Source Materials
+ *	� Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +27,10 @@ import org.universaal.ontology.health.owl.HealthOntology;
  * which consists of editing, creating and deleting a treatment.
  * Also, this service lists the treatments associated to the 
  * health profile of an assisted person.
+ * 
  * @author mdelafuente
+ * @author roni
+ * 
  * @navassoc - "manages" - Treatment
  */
 public class TreatmentManagementService extends HealthService{
@@ -36,7 +42,18 @@ public class TreatmentManagementService extends HealthService{
 	public static final String PROP_MANAGES_TREATMENT = HealthOntology.NAMESPACE
 	+ "managesTreatments";
 	
-	//CONSTRUCTORS
+	//INPUT PARAMETERS URI
+	public static final String INPUT_USER           = HealthOntology.NAMESPACE + "user";
+	public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "timestampFrom";
+	public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "timestampTo";
+	public static final String INPUT_TREATMENT      = HealthOntology.NAMESPACE + "treatment";
+	public static final String INPUT_OLD_TREATMENT  = HealthOntology.NAMESPACE + "oldTreatment";
+	public static final String INPUT_NEW_TREATMENT  = HealthOntology.NAMESPACE + "newTreatment";
+
+    //OUTPUT PARAMETERS URI    
+	public static final String OUTPUT_TREATMENTS = HealthOntology.NAMESPACE + "matchingTreatments";
+
+    //CONSTRUCTORS
 	public TreatmentManagementService() {
 		super();
 	}
