@@ -16,6 +16,7 @@
 package org.universaal.ontology.health.owl;
 
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 
 public abstract class HealthyHabitsAdoption extends Treatment {

@@ -15,45 +15,22 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universaal.ontology.health.owl;
+package org.universaal.ontology.health.owl.services;
 
-import org.universAAL.middleware.service.owl.Service;
+import org.universaal.ontology.health.owl.HealthOntology;
 
-public class PerformedSessionManagementService extends HealthService{
+public class EditTreatmentService extends TreatmentManagementService {
+
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
-	+ "SessionManagementService";
-
-	public static final String PROP_MANAGES_SESSION = HealthOntology.NAMESPACE
-	+ "managesSession";
-
-	public static final String PROP_LISTS_SESSIONS =  HealthOntology.NAMESPACE
-	+ "listsSessions";
-
-	//CONSTRUCTORS
-	public PerformedSessionManagementService() {
-		super();
-	}
-
-	public PerformedSessionManagementService(String uri) {
-		super(uri);
-	}
+			+ "EditTreatmentService";
 
 	public String getClassURI() {
 		return MY_URI;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
-	 * (java.lang.String)
-	 */
 	public int getPropSerializationType(String propURI) {
-		return PROP_MANAGES_SESSION.equals(propURI) ||
-		PROP_LISTS_SESSIONS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
-				.getPropSerializationType(propURI);
+		return PROP_SERIALIZATION_FULL;
 	}
 
 	public boolean isWellFormed() {

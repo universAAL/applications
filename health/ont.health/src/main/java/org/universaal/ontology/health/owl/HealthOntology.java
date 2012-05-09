@@ -19,6 +19,7 @@ package org.universaal.ontology.health.owl;
 
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.MergedRestriction;
@@ -31,11 +32,20 @@ import org.universAAL.middleware.service.owl.ServiceBusOntology;
 import org.universAAL.ontology.HealthProfileOntology;
 import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.location.LocationOntology;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.CaregiverProfile;
-import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.health.Illness;
 import org.universaal.ontology.health.HealthOntologyFactory;
+import org.universaal.ontology.health.owl.services.EditTreatmentService;
+import org.universaal.ontology.health.owl.services.HealthService;
+import org.universaal.ontology.health.owl.services.ListTreatmentBetweenTimeStampsService;
+import org.universaal.ontology.health.owl.services.ListTreatmentService;
+import org.universaal.ontology.health.owl.services.NewTreatmentService;
+import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
+import org.universaal.ontology.health.owl.services.PlannedSessionManagementService;
+import org.universaal.ontology.health.owl.services.RemoveTreatmentService;
+import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 import org.universaal.ontology.healthmeasurement.owl.BloodPressure;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurement;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
@@ -430,12 +440,23 @@ public final class HealthOntology extends Ontology {
     	      .getAllValuesRestriction(PROP_PRESCRIBES_TREATMENT, 
     	      Treatment.MY_URI));
     
-  //load HealthService
-    oci = createNewOntClassInfo(TreatmentManagementService.MY_URI, factory, 21);
+
+
+    /*
+     * Services
+     */
+
+    //load HealthService
+    oci = createNewOntClassInfo(HealthService.MY_URI, factory, 21);
     oci.setResourceComment("Description of the health service.");
     oci.setResourceLabel("HealthService");
     oci.addSuperClass(Service.MY_URI); 
-
+    
+    oci.addObjectProperty(HealthService.PROP_ASSISTED_USER);
+    oci.addRestriction(MergedRestriction
+    		.getAllValuesRestrictionWithCardinality(
+    				HealthService.PROP_ASSISTED_USER, AssistedPerson.MY_URI, 1, 1));
+    
     //load TreatmentManagementService
     oci = createNewOntClassInfo(TreatmentManagementService.MY_URI, factory, 18);
     oci.setResourceComment("Description of the treatment management service.");
@@ -447,9 +468,40 @@ public final class HealthOntology extends Ontology {
     oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
     		TreatmentManagementService.PROP_MANAGES_TREATMENT,  Treatment.MY_URI, 1,1));
     
-    oci.addObjectProperty(TreatmentManagementService.PROP_LISTS_TREATMENTS);
+    //load NewTreatment
+    oci = createNewOntClassInfo(NewTreatmentService.MY_URI, factory, 22);
+    oci.setResourceComment("Description of the adding treatment service.");
+    oci.setResourceLabel("NewTreatmentService");
+    oci.addSuperClass(TreatmentManagementService.MY_URI);
+    
+    //load EditTreatment
+    oci = createNewOntClassInfo(EditTreatmentService.MY_URI, factory, 23);
+    oci.setResourceComment("Description of the editing treatment service.");
+    oci.setResourceLabel("EditTreatmentService");
+    oci.addSuperClass(TreatmentManagementService.MY_URI);
+    
+    //load RemoveTreatment
+    oci = createNewOntClassInfo(RemoveTreatmentService.MY_URI, factory, 22);
+    oci.setResourceComment("Description of the removing treatment service.");
+    oci.setResourceLabel("NewTreatmentService");
+    oci.addSuperClass(TreatmentManagementService.MY_URI);
+    
+    
+    //load ListTreatment
+    oci = createNewOntClassInfo(ListTreatmentService.MY_URI, factory, 25);
+    oci.setResourceComment("Description of the treatment listing service.");
+    oci.setResourceLabel("ListTreatmentService");
+    oci.addSuperClass(TreatmentManagementService.MY_URI);
+    
+    oci.addObjectProperty(ListTreatmentService.PROP_LISTS_TREATMENTS);
     oci.addRestriction(MergedRestriction.getAllValuesRestriction(
-    		TreatmentManagementService.PROP_LISTS_TREATMENTS,  Treatment.MY_URI));
+    		ListTreatmentService.PROP_LISTS_TREATMENTS,  Treatment.MY_URI));
+    
+  //load ListTreatmentBetweenTimeStamps
+    oci = createNewOntClassInfo(ListTreatmentBetweenTimeStampsService.MY_URI, factory, 26);
+    oci.setResourceComment("Description of the treatment listing service.");
+    oci.setResourceLabel("ListTreatmentBetweenTimeStampsService");
+    oci.addSuperClass(ListTreatmentService.MY_URI);
     
     //load PlannedSessionManagementService
     
@@ -480,6 +532,8 @@ public final class HealthOntology extends Ontology {
     oci.addObjectProperty(PerformedSessionManagementService.PROP_LISTS_SESSIONS);
     oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
     		PerformedSessionManagementService.PROP_LISTS_SESSIONS, PlannedSession.MY_URI,1,1));  
+    
+    
     
   }
 }

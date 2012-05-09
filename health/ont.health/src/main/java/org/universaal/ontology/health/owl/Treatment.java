@@ -22,10 +22,10 @@ import java.util.List;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.health.Illness;
-import org.universaal.ontology.healthmeasurement.owl.HeartRate;
 
 public abstract class Treatment extends ManagedIndividual {
 	

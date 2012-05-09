@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.universAAL.middleware.owl.ManagedIndividual;
 
 public class TreatmentPlanning extends ManagedIndividual{

@@ -558,25 +558,30 @@ health/ont.health/src/main/java/org/universaal/ontology/health/owl/Caregiver.jav
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/DiastolicBloodPressureRequirement.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthOntology.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthProfile.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthyHabitsAdoption.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HeartRateRequirement.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/MeasurementRequirements.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/MotivationalStatusType.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/PerformedMeasurementSession.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/PerformedSession.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/PerformedSessionManagementService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/PhysicalActivity.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/PlannedSession.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/PlannedSessionManagementService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/ReposeHeartRateRequirement.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/StatusType.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/SystolicBloodPressureRequirement.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/TakeMeasurementActivity.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/Treatment.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/TreatmentManagementService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/TreatmentPlanning.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/WeightRequirement.java -text svneol=unset#application/octet-stream
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/EditTreatmentService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/HealthService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListTreatmentBetweenTimeStampsService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListTreatmentService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/NewTreatmentService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PerformedSessionManagementService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PlannedSessionManagementService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/RemoveTreatmentService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/TreatmentManagementService.java -text
 health/ont.healthmeasurement/HealthMeasurement.di -text
 health/ont.healthmeasurement/HealthMeasurement.notation -text
 health/ont.healthmeasurement/HealthMeasurement.uml -text svneol=unset#text/plain

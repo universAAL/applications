@@ -15,30 +15,24 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universaal.ontology.health.owl;
+package org.universaal.ontology.health.owl.services;
 
-import org.universAAL.middleware.service.owl.Service;
+import org.universaal.ontology.health.owl.HealthOntology;
 
-public class HealthService extends Service{
-	
+public class RemoveTreatmentService extends TreatmentManagementService {
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
-	+ "HealthService";
-	//CONSTRUCTORS
-	public HealthService() {
-		super();
-	}
-
-	public HealthService(String uri) {
-		super(uri);
-	}
+			+ "RemoveTreatmentService";
 
 	public String getClassURI() {
 		return MY_URI;
 	}
 
-	public boolean isWellFormed() {
-		  return true;
+	public int getPropSerializationType(String propURI) {
+		return PROP_SERIALIZATION_FULL;
 	}
 
+	public boolean isWellFormed() {
+		return true;
+	}
 }

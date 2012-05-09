@@ -15,13 +15,8 @@
  ******************************************************************************/
 package org.universaal.ontology.health.owl;
 
-import java.util.Hashtable;
-
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.service.owl.Service;
-import org.universAAL.ontology.phThing.Device;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 
 public class TakeMeasurementActivity extends Treatment {

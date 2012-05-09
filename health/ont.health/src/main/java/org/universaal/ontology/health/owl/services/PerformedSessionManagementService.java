@@ -15,60 +15,48 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universaal.ontology.health.owl;
+package org.universaal.ontology.health.owl.services;
 
-import org.universaal.ontology.healthmeasurement.owl.HealthMeasurement;
+import org.universaal.ontology.health.owl.HealthOntology;
 
-public class PerformedMeasurementSession extends PerformedSession{
-	
+public class PerformedSessionManagementService extends HealthService{
+	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
-	+ "PerformedMeasurementSession";
+	+ "SessionManagementService";
 
-	public static final String PROP_HAS_HEALTH_MEASUREMENT = HealthOntology.NAMESPACE
+	public static final String PROP_MANAGES_SESSION = HealthOntology.NAMESPACE
 	+ "managesSession";
 
-	public PerformedMeasurementSession () {
+	public static final String PROP_LISTS_SESSIONS =  HealthOntology.NAMESPACE
+	+ "listsSessions";
+
+	//CONSTRUCTORS
+	public PerformedSessionManagementService() {
 		super();
 	}
 
-	public PerformedMeasurementSession (String uri) {
+	public PerformedSessionManagementService(String uri) {
 		super(uri);
 	}
 
 	public String getClassURI() {
 		return MY_URI;
 	}
-	public int getPropSerializationType(String arg0) {
-		return PROP_SERIALIZATION_FULL;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
+	 * (java.lang.String)
+	 */
+	public int getPropSerializationType(String propURI) {
+		return PROP_MANAGES_SESSION.equals(propURI) ||
+		PROP_LISTS_SESSIONS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
+				.getPropSerializationType(propURI);
 	}
-	
+
 	public boolean isWellFormed() {
-		return true 
-	      && props.containsKey(PROP_HAS_HEALTH_MEASUREMENT);
-	  }
-	
-	//GETTERS & SETTERS
-	public HealthMeasurement getHealthMeasurement() {
-	    return (HealthMeasurement)props.get(PROP_HAS_HEALTH_MEASUREMENT);
-	  }		
-
-	  public void setName(HealthMeasurement hMeasurement) {
-	    if (hMeasurement != null)
-	      props.put(PROP_HAS_HEALTH_MEASUREMENT, hMeasurement);
-	  }		
-
-
-
-
-}	
-
-
-
-
-
-
-
-
-
-
-
+		return true;
+	}
+}

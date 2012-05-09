@@ -1,5 +1,6 @@
 /*******************************************************************************
- * Copyright 2012 UPM, http://www.upm.es - Universidad Politécnica de Madrid
+ * Copyright 2012 UPM, http://www.upm.es 
+ Universidad Politécnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universaal.ontology.health;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
-import org.universAAL.middleware.owl.OntologyManagement;
+package org.universaal.ontology.health.owl.services;
+
 import org.universaal.ontology.health.owl.HealthOntology;
 
-public class Activator implements BundleActivator {
+public class NewTreatmentService extends TreatmentManagementService {
 
-  static BundleContext context = null;
-  HealthOntology ontology = new HealthOntology();
+	//NAMESPACE & PROPERTIES
+		public static final String MY_URI = HealthOntology.NAMESPACE
+		+ "AddTreatmentService";
 
-  public void start(BundleContext context) throws Exception {
-    Activator.context = context;
-    OntologyManagement.getInstance().register(ontology);
-  }
+	public String getClassURI() {
+		return MY_URI;
+	}
+	
+	public int getPropSerializationType(String propURI) {
+		return PROP_SERIALIZATION_FULL;
+	}
 
-  public void stop(BundleContext arg0) throws Exception {
-    OntologyManagement.getInstance().unregister(ontology);
-  }
-}	
+	public boolean isWellFormed() {
+		return true;
+	}
+
+}

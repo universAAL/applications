@@ -15,9 +15,9 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universaal.ontology.health.owl;
+package org.universaal.ontology.health.owl.services;
 
-import org.universAAL.middleware.service.owl.Service;
+import org.universaal.ontology.health.owl.HealthOntology;
 
 /**
  * This class describes the planned session management service, 
