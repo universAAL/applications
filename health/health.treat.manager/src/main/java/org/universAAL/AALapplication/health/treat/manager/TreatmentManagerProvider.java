@@ -3,7 +3,7 @@
 	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	ï¿½ Copyright IBM Corp. 2011
+	© Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -24,7 +24,6 @@ package org.universAAL.AALapplication.health.treat.manager;
 
 import java.util.List;
 
-import org.universAAL.AALapplication.health.ont.treatment.Treatment;
 import org.universAAL.AALapplication.health.treat.manager.impl.JenaConverterTreatmentManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
@@ -33,6 +32,13 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universaal.ontology.health.owl.Treatment;
+import org.universaal.ontology.health.owl.services.EditTreatmentService;
+import org.universaal.ontology.health.owl.services.ListTreatmentBetweenTimeStampsService;
+import org.universaal.ontology.health.owl.services.ListTreatmentService;
+import org.universaal.ontology.health.owl.services.NewTreatmentService;
+import org.universaal.ontology.health.owl.services.RemoveTreatmentService;
+import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 /**
  * This class provides the treatment manager services.
@@ -43,6 +49,17 @@ public class TreatmentManagerProvider extends ServiceCallee {
 
 	// the actual treatment manager 
 	private TreatmentManager treatmentManager = null;
+	
+    static final ServiceProfile[] profiles = new ServiceProfile[5];
+	
+	// define profiles
+	static {
+    	profiles[0] = new NewTreatmentService().getProfile();		
+    	profiles[1] = new RemoveTreatmentService().getProfile();
+    	profiles[2] = new EditTreatmentService().getProfile();
+    	profiles[3] = new ListTreatmentService().getProfile();
+    	profiles[4] = new ListTreatmentBetweenTimeStampsService().getProfile();
+	}
 	
     // prepare a standard error message for later use
     private static final ServiceResponse invalidInput = new ServiceResponse(
@@ -68,10 +85,11 @@ public class TreatmentManagerProvider extends ServiceCallee {
      * @param context
      */
 	public TreatmentManagerProvider(ModuleContext context) {
+		
 		// as a service providing component, we have to extend ServiceCallee
     	// this in turn requires that we introduce which services we would like
     	// to provide to the universAAL-based AAL Space
-		super(context, TreatmentManagerServices.profiles);
+		super(context, profiles);
 
 		// the actual implementation of the treatment manager
 		treatmentManager = new JenaConverterTreatmentManager(context);
@@ -98,44 +116,44 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		if(operation == null)
 		    return null;
 
-		Object userInput = call.getInputValue(TreatmentManagerServices.INPUT_USER);
+		Object userInput = call.getInputValue(TreatmentManagementService.INPUT_USER);
 		if(userInput == null)
 		    return null;
 
-		if(operation.startsWith(TreatmentManagerServices.SERVICE_LIST_ALL_TREATMENTS))
+		if(operation.startsWith(ListTreatmentService.MY_URI))
 			return getAllTreatments(userInput.toString());
 
 		Object treatmentInput = call
-			.getInputValue(TreatmentManagerServices.INPUT_TREATMENT);
+			.getInputValue(TreatmentManagementService.INPUT_TREATMENT);
 
 		Object oldTreatmentInput = call
-			.getInputValue(TreatmentManagerServices.INPUT_OLD_TREATMENT);
+			.getInputValue(TreatmentManagementService.INPUT_OLD_TREATMENT);
 
 		Object newTreatmentInput = call
-			.getInputValue(TreatmentManagerServices.INPUT_NEW_TREATMENT);
+			.getInputValue(TreatmentManagementService.INPUT_NEW_TREATMENT);
 
 		Object timestampFromInput = call
-			.getInputValue(TreatmentManagerServices.INPUT_TIMESTAMP_FROM);
+			.getInputValue(TreatmentManagementService.INPUT_TIMESTAMP_FROM);
 
 		Object timestampToInput = call
-			.getInputValue(TreatmentManagerServices.INPUT_TIMESTAMP_TO);
+			.getInputValue(TreatmentManagementService.INPUT_TIMESTAMP_TO);
 
 		if(timestampFromInput != null && timestampToInput != null &&
-				operation.startsWith(TreatmentManagerServices.SERVICE_LIST_TREATMENTS_BETWEEN_TIMESTAMPS))
+				operation.startsWith(ListTreatmentBetweenTimeStampsService.MY_URI))
 		    return getTreatmentsBetweenTimestamps(
 		    		userInput.toString(), ((Long)timestampFromInput).longValue(), 
 		    		((Long)timestampToInput).longValue());
 
 		if(treatmentInput != null &&
-				operation.startsWith(TreatmentManagerServices.SERVICE_NEW_TREATMENT))
+				operation.startsWith(NewTreatmentService.MY_URI))
 		    return newTreatment(userInput.toString(), (Treatment)treatmentInput);
 		
 		if(treatmentInput != null &&
-				operation.startsWith(TreatmentManagerServices.SERVICE_DELETE_TREATMENT))
+				operation.startsWith(RemoveTreatmentService.MY_URI))
 		    return deleteTreatment(userInput.toString(), treatmentInput.toString());
 
 		if(oldTreatmentInput != null && newTreatmentInput != null &&
-				operation.startsWith(TreatmentManagerServices.SERVICE_EDIT_TREATMENT))
+				operation.startsWith(EditTreatmentService.MY_URI))
 		    return editTreatment(userInput.toString(), oldTreatmentInput.toString(),
 		    		(Treatment)newTreatmentInput);
 
@@ -153,7 +171,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		
 		List treatmentsList = treatmentManager.getAllTreatments(userURI);
 		sr.addOutput(new ProcessOutput(
-				TreatmentManagerServices.OUTPUT_TREATMENTS, treatmentsList));
+				TreatmentManagementService.OUTPUT_TREATMENTS, treatmentsList));
 		
 		return sr;		
 	}
@@ -173,7 +191,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		List treatmentsList = treatmentManager.getTreatmentsBetweenTimestamps(
 				userURI, timestampFrom, timestampTo);
 		sr.addOutput(new ProcessOutput(
-				TreatmentManagerServices.OUTPUT_TREATMENTS, treatmentsList));
+				TreatmentManagementService.OUTPUT_TREATMENTS, treatmentsList));
 		
 		return sr;
 	}
