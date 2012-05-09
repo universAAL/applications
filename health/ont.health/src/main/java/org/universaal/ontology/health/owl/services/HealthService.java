@@ -15,35 +15,31 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universaal.ontology.health.owl;
+package org.universaal.ontology.health.owl.services;
 
 import org.universAAL.middleware.service.owl.Service;
+import org.universaal.ontology.health.owl.HealthOntology;
 
 /**
- * This class describes the treatment management service, 
- * which consists of editing, creating and deleting a treatment.
- * Also, this service lists the treatments associated to the 
- * health profile of an assisted person.
- * @author mdelafuente
+ * 
+ * @author amedrano
+ * @navassoc - "assistedPerson" - AssistedPerson
  */
-
-public class TreatmentManagementService extends HealthService{
-
+public class HealthService extends Service{
+	
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
-	+ "TreatmentManagementService";
-
-	public static final String PROP_MANAGES_TREATMENT = HealthOntology.NAMESPACE
-	+ "managesTreatments";
-	public static final String PROP_LISTS_TREATMENTS =  HealthOntology.NAMESPACE
-	+ "listsTreatments";
+	+ "HealthService";
+	
+	public static final String PROP_ASSISTED_USER = HealthOntology.NAMESPACE
+			+"assistedPerson";
 	
 	//CONSTRUCTORS
-	public TreatmentManagementService() {
+	public HealthService() {
 		super();
 	}
 
-	public TreatmentManagementService(String uri) {
+	public HealthService(String uri) {
 		super(uri);
 	}
 
@@ -51,20 +47,8 @@ public class TreatmentManagementService extends HealthService{
 		return MY_URI;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
-	 * (java.lang.String)
-	 */
-	public int getPropSerializationType(String propURI) {
-		return  PROP_MANAGES_TREATMENT.equals(propURI) ||
-		PROP_LISTS_TREATMENTS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
-				.getPropSerializationType(propURI);
+	public boolean isWellFormed() {
+		  return true;
 	}
 
-	public boolean isWellFormed() {
-		return true;
-	}
 }
