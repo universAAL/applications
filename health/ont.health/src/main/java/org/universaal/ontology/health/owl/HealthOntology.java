@@ -39,12 +39,15 @@ import org.universAAL.ontology.profile.health.Illness;
 import org.universaal.ontology.health.HealthOntologyFactory;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
 import org.universaal.ontology.health.owl.services.HealthService;
+import org.universaal.ontology.health.owl.services.ListPerformedBetweenTimeStampsSessionService;
+import org.universaal.ontology.health.owl.services.ListPerformedSessionService;
 import org.universaal.ontology.health.owl.services.ListTreatmentBetweenTimeStampsService;
 import org.universaal.ontology.health.owl.services.ListTreatmentService;
 import org.universaal.ontology.health.owl.services.NewTreatmentService;
 import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universaal.ontology.health.owl.services.PlannedSessionManagementService;
 import org.universaal.ontology.health.owl.services.RemoveTreatmentService;
+import org.universaal.ontology.health.owl.services.SessionPerformedService;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 import org.universaal.ontology.healthmeasurement.owl.BloodPressure;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurement;
@@ -497,7 +500,7 @@ public final class HealthOntology extends Ontology {
     oci.addRestriction(MergedRestriction.getAllValuesRestriction(
     		ListTreatmentService.PROP_LISTS_TREATMENTS,  Treatment.MY_URI));
     
-  //load ListTreatmentBetweenTimeStamps
+    //load ListTreatmentBetweenTimeStamps
     oci = createNewOntClassInfo(ListTreatmentBetweenTimeStampsService.MY_URI, factory, 26);
     oci.setResourceComment("Description of the treatment listing service.");
     oci.setResourceLabel("ListTreatmentBetweenTimeStampsService");
@@ -533,7 +536,23 @@ public final class HealthOntology extends Ontology {
     oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
     		PerformedSessionManagementService.PROP_LISTS_SESSIONS, PlannedSession.MY_URI,1,1));  
     
+    // load ListPerformedSessionService
+    oci = createNewOntClassInfo(ListPerformedSessionService.MY_URI, factory, 27);
+    oci.setResourceComment("Service listing the performed sessions.");
+    oci.setResourceLabel("ListPerformedSessionService");
+    oci.addSuperClass(PerformedSessionManagementService.MY_URI);
     
+    // load ListPerformedBetweenTimeStampsSessionService
+    oci = createNewOntClassInfo(ListPerformedBetweenTimeStampsSessionService.MY_URI, factory, 28);
+    oci.setResourceComment("Service listing the performed sessions between 2 timestamps.");
+    oci.setResourceLabel("ListPerformedBetweenTimeStampsSessionService");
+    oci.addSuperClass(ListPerformedSessionService.MY_URI);
+    
+    // load SessionPerformedService
+    oci = createNewOntClassInfo(SessionPerformedService.MY_URI, factory, 29);
+    oci.setResourceComment("Service to add a performed sessions.");
+    oci.setResourceLabel("SessionPerformedService");
+    oci.addSuperClass(PerformedSessionManagementService.MY_URI);    
     
   }
 }

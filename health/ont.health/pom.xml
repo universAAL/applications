@@ -74,7 +74,8 @@
 							<Bundle-Activator>org.universaal.ontology.health.Activator</Bundle-Activator>
 							<Bundle-Description>${project.description}</Bundle-Description>
 							<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-							<Export-Package>org.universaal.ontology.health.owl.*</Export-Package>
+							<Export-Package>org.universaal.ontology.health.owl.*,
+							org.universaal.ontology.health.owl.services</Export-Package>
 							<Private-Package>org.universaal.ontology.health.*</Private-Package>							
 						</instructions>
 					</configuration>

@@ -4,7 +4,7 @@
  * 
  *	OCO Source Materials
  *	� Copyright IBM Corp. 2011
- *	 
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,31 +22,33 @@ package org.universaal.ontology.health.owl.services;
 
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.Treatment;
 
-public class NewTreatmentService extends TreatmentManagementService {
-
-	public NewTreatmentService(String uri) {
-		super(uri);
-	}
+/**
+ * @author amedrano
+ * @author roni
+ *
+ * @navassoc - "lists" * PerformedSession
+ */
+public class ListPerformedBetweenTimeStampsSessionService extends ListPerformedSessionService {
 
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
-		+ "AddTreatmentService";
+			+ "ListPerformedBetweenTimeStampsSessionService";
+	
 
 	//CONSTRUCTOR	
-	public NewTreatmentService() {
+	public ListPerformedBetweenTimeStampsSessionService() {
 		super();
-		addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+    	addFilteringInput( PROP_ASSISTED_USER , User.MY_URI, 1, 1, 
     			new String[] { PROP_ASSISTED_USER });
-    	addInputWithAddEffect(INPUT_TREATMENT, Treatment.MY_URI, 1, 1, 
-    			new String[] { PROP_MANAGES_TREATMENT });
+    	//addOutput(OUTPUT_TREATMENTS, Treatment.MY_URI, 0, -1, 
+    	//		new String[] { PROP_LISTS_PERFORMED_SESSION });
 	}		
 	
 	public String getClassURI() {
 		return MY_URI;
 	}
-	
+
 	public int getPropSerializationType(String propURI) {
 		return PROP_SERIALIZATION_FULL;
 	}
@@ -54,5 +56,4 @@ public class NewTreatmentService extends TreatmentManagementService {
 	public boolean isWellFormed() {
 		return true;
 	}
-
 }

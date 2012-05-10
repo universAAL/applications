@@ -36,12 +36,14 @@ import org.universaal.ontology.health.owl.TreatmentPlanning;
 import org.universaal.ontology.health.owl.WeightRequirement;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
 import org.universaal.ontology.health.owl.services.HealthService;
+import org.universaal.ontology.health.owl.services.ListPerformedSessionService;
 import org.universaal.ontology.health.owl.services.ListTreatmentBetweenTimeStampsService;
 import org.universaal.ontology.health.owl.services.ListTreatmentService;
 import org.universaal.ontology.health.owl.services.NewTreatmentService;
 import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universaal.ontology.health.owl.services.PlannedSessionManagementService;
 import org.universaal.ontology.health.owl.services.RemoveTreatmentService;
+import org.universaal.ontology.health.owl.services.SessionPerformedService;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 public class HealthOntologyFactory extends ResourceFactoryImpl {
@@ -95,15 +97,19 @@ public class HealthOntologyFactory extends ResourceFactoryImpl {
       case 21:
           return new HealthService(instanceURI);
       case 22:
-    	  return new NewTreatmentService();
+    	  return new NewTreatmentService(instanceURI);
       case 23:
-    	  return new EditTreatmentService();
+    	  return new EditTreatmentService(instanceURI);
       case 24:
-    	  return new RemoveTreatmentService();
+    	  return new RemoveTreatmentService(instanceURI);
       case 25:
-    	  return new ListTreatmentService();
+    	  return new ListTreatmentService(instanceURI);
       case 26:
-    	  return new ListTreatmentBetweenTimeStampsService();
+    	  return new ListTreatmentBetweenTimeStampsService(instanceURI);
+      case 27:
+    	  return new ListPerformedSessionService(instanceURI);
+      case 28:
+      	  return new SessionPerformedService(instanceURI);
 	}
 	return null;
   }
