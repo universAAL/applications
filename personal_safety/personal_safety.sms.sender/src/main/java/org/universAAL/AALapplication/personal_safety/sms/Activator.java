@@ -55,8 +55,8 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext arg0) throws Exception {
 		context = uAALBundleContainer.THE_CONTAINER
 				.registerModule(new BundleContext[] { arg0 });
-		smsCall = new SMSCallee(context, SMSService.getProfiles());
 		OntologyManagement.getInstance().register(new SMSOntology());
+		smsCall = new SMSCallee(context, SMSService.getProfiles());
 	}
 
 	/** {@inheritDoc} */

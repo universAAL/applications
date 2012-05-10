@@ -21,20 +21,34 @@ import org.universAAL.Application.personal_safety.sw.panic.OPublisher;
 import org.universAAL.Application.personal_safety.sw.panic.SCallee;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.context.ContextEvent;
+import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
+import org.universAAL.middleware.context.owl.ContextProvider;
+import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.ontology.profile.User;
 
 public class Activator implements BundleActivator{
 	public static ModuleContext context=null;
 	public static SCallee scallee=null;
 	public static ContextPublisher cpublisher=null;
 	public static OPublisher opublisher;
+	static ContextProvider cp;
 
 	public void start(BundleContext context) throws Exception {
 		Activator.context=uAALBundleContainer.THE_CONTAINER
 				.registerModule(new BundleContext[] { context });
 		scallee=new SCallee(Activator.context);
-		cpublisher=new DefaultContextPublisher(Activator.context,null);
+		ContextEventPattern cep = new ContextEventPattern();
+		cep.addRestriction(MergedRestriction
+				.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, User.MY_URI));
+		cp = new ContextProvider();
+		cp.setProvidedEvents(new ContextEventPattern[] {cep});
+		cp.setType(ContextProviderType.gauge);
+		
+		cpublisher=new DefaultContextPublisher(Activator.context,cp);
 		opublisher = new OPublisher(Activator.context); 
 	}
 

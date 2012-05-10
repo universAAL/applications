@@ -31,6 +31,7 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.risk.PanicButton;
 
@@ -41,15 +42,11 @@ public class OPublisher extends UICaller{
 	
 	public OPublisher(ModuleContext context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
-	public void communicationChannelBroken() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void communicationChannelBroken() {	}
 	
-	public void confirmPanic(Resource user) {
+	public void confirmPanic(AssistedPerson user) {
 		Form f = newComfimDialog();
 		sendUIRequest(new UIRequest(user, f, LevelRating.high, Locale.getDefault(), PrivacyLevel.insensible));
 	}
@@ -72,7 +69,7 @@ public class OPublisher extends UICaller{
 
 	public void handleUIResponse(UIResponse event) {
 		if (event.getSubmissionID().startsWith(PANICACTION)) {
-			panic.setPressedBy((User)event.getUser());
+			panic.setPressedBy((AssistedPerson) event.getUser());
 			panic.setActivated(true);
 			ContextEvent panicCE = new ContextEvent(panic, PanicButton.PROP_ACTIVATED);
 			Activator.cpublisher.publish(panicCE);
