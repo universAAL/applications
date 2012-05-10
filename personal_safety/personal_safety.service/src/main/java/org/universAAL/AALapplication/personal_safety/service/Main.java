@@ -38,7 +38,6 @@ public class Main {
 	public static ModuleContext context=null;
 	
     public static SCaller rcaller=null;
-    public static ISubscriber rinput=null;
 	public static OPublisher routput=null;
     public static CSubscriber csubscriber=null;
     public static RiskGUI gui=null;
@@ -67,7 +66,6 @@ public class Main {
 		Main.context=context;
 		rcaller=new SCaller(context);
 		gui=new RiskGUI();
-		rinput=new ISubscriber(context);
 		routput=new OPublisher(context);
 		csubscriber=new CSubscriber(context);
 		log.info("Started Risk manager stub bundle");
@@ -75,7 +73,6 @@ public class Main {
 
 	public void stop(ModuleContext context) throws Exception {
 		log.info("Stopping riskstub bundle");
-		rinput.close();
 		routput.close();
 		csubscriber.close();
 		log.info("Stopped riskstub Advisor bundle");

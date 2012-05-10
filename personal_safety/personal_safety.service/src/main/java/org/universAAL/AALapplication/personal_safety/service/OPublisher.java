@@ -28,10 +28,11 @@ import java.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.io.owl.PrivacyLevel;
-import org.universAAL.middleware.io.rdf.Form;
-import org.universAAL.middleware.output.OutputEvent;
-import org.universAAL.middleware.output.OutputPublisher;
+import org.universAAL.middleware.ui.UICaller;
+import org.universAAL.middleware.ui.UIRequest;
+import org.universAAL.middleware.ui.UIResponse;
+import org.universAAL.middleware.ui.owl.PrivacyLevel;
+import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.ontology.profile.User;
 
@@ -42,7 +43,7 @@ import org.universAAL.ontology.profile.User;
  * @author <a href="mailto:alfiva@itaca.upv.es">Alvaro Fides Valero</a>
  *
  */
-public class OPublisher extends OutputPublisher{
+public class OPublisher extends UICaller{
 	
 	private final static Logger log=LoggerFactory.getLogger(OPublisher.class);
 	protected static Timer responseWatch;
@@ -62,9 +63,8 @@ public class OPublisher extends OutputPublisher{
 		responseWatch=new Timer("Risk_ResponseTimer");
 		responseWatch.schedule(new ResponseDelayTask(user), Long.parseLong(Main.getProperties().getProperty(Main.DELAY,"1"))*60000);
 		Form f = Main.gui.getUserStateForm();
-		OutputEvent oe = new OutputEvent(user,f,LevelRating.high,Locale.ENGLISH,PrivacyLevel.insensible);
-		Main.rinput.subscribe(f.getDialogID());
-		publish(oe);
+		UIRequest oe = new UIRequest(user,f,LevelRating.high,Locale.ENGLISH,PrivacyLevel.insensible);
+		sendUIRequest(oe);
 		playWarning();
 	}
 	
@@ -72,9 +72,8 @@ public class OPublisher extends OutputPublisher{
 	{
 		log.debug("Show SMS screen");
 		Form f = Main.gui.getSMSForm(smsSuccess);
-		OutputEvent oe = new OutputEvent(user,f,LevelRating.full,Locale.ENGLISH,PrivacyLevel.insensible);
-		Main.rinput.subscribe(f.getDialogID());
-		publish(oe);
+		UIRequest oe = new UIRequest(user,f,LevelRating.full,Locale.ENGLISH,PrivacyLevel.insensible);
+		sendUIRequest(oe);
 		playWarning();
 	}
 	
@@ -82,18 +81,16 @@ public class OPublisher extends OutputPublisher{
 	{
 		log.debug("Show VC failed screen");
 		Form f = Main.gui.getNoVCForm();
-		OutputEvent oe = new OutputEvent(user,f,LevelRating.full,Locale.ENGLISH,PrivacyLevel.insensible);
-		Main.rinput.subscribe(f.getDialogID());
-		publish(oe);
+		UIRequest oe = new UIRequest(user,f,LevelRating.full,Locale.ENGLISH,PrivacyLevel.insensible);
+		sendUIRequest(oe);
 	}
 	
 	public void showBatteryForm(User user)
 	{
 		log.debug("Show Battery message");
 		Form f = Main.gui.getBatteryForm();
-		OutputEvent oe = new OutputEvent(user,f,LevelRating.middle,Locale.ENGLISH,PrivacyLevel.insensible);
-		Main.rinput.subscribe(f.getDialogID());
-		publish(oe);
+		UIRequest oe = new UIRequest(user,f,LevelRating.middle,Locale.ENGLISH,PrivacyLevel.insensible);
+		sendUIRequest(oe);
 	}
 	
 	private static class ResponseDelayTask extends TimerTask{
@@ -147,4 +144,28 @@ public class OPublisher extends OutputPublisher{
 			log.warn("Too late to play a sound");
 */
 		}
+
+	public void dialogAborted(String dialogID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void handleUIResponse(UIResponse event) {
+		User user=(User) event.getUser();
+		log.info("Received an Input Event from user {}", user.getURI());
+		String submit=event.getSubmissionID();
+
+		try{
+			if(submit.equals(RiskGUI.SUBMIT_HOME)){
+				log.debug("Input received was go Home");
+				//do nothing-> return to main menu
+			}else if(submit.equals(RiskGUI.SUBMIT_CANCEL)){
+				log.debug("Input received was Cancel (abort risk)");
+				OPublisher.responseWatch.cancel();
+			}
+		}catch(Exception e){
+			log.error("Error while processing the user input: {}",e);
+		}
+		
+	}
 }

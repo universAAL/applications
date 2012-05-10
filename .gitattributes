@@ -1330,7 +1330,6 @@ personal_safety/personal_safety.service/NOTICE -text
 personal_safety/personal_safety.service/pom.xml -text
 personal_safety/personal_safety.service/src/main/java/org/universAAL/AALapplication/personal_safety/osgi/Activator.java -text svneol=unset#text/plain
 personal_safety/personal_safety.service/src/main/java/org/universAAL/AALapplication/personal_safety/service/CSubscriber.java -text
-personal_safety/personal_safety.service/src/main/java/org/universAAL/AALapplication/personal_safety/service/ISubscriber.java -text
 personal_safety/personal_safety.service/src/main/java/org/universAAL/AALapplication/personal_safety/service/Main.java -text
 personal_safety/personal_safety.service/src/main/java/org/universAAL/AALapplication/personal_safety/service/Messages.java -text
 personal_safety/personal_safety.service/src/main/java/org/universAAL/AALapplication/personal_safety/service/OPublisher.java -text
@@ -1344,14 +1343,15 @@ personal_safety/personal_safety.sms.sender/LICENSE -text
 personal_safety/personal_safety.sms.sender/NOTICE -text
 personal_safety/personal_safety.sms.sender/pom.xml -text
 personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/Activator.java -text
-personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/EnvioSMSService.java -text
 personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/SMSCallee.java -text
-personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/SMSService.java -text
 personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/messageSender.java -text
+personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/owl/EnvioSMSService.java -text
+personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/owl/SMSOntFactory.java -text
+personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/owl/SMSOntology.java -text
+personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/owl/SMSService.java -text
 personal_safety/personal_safety.sw.panic/LICENSE -text
 personal_safety/personal_safety.sw.panic/NOTICE -text
 personal_safety/personal_safety.sw.panic/pom.xml -text
-personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/ISubscriber.java -text svneol=unset#text/plain
 personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/OPublisher.java -text svneol=unset#text/plain
 personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/SCallee.java -text
 personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/osgi/Activator.java -text

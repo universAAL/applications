@@ -23,19 +23,19 @@ package org.universAAL.AALapplication.personal_safety.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.middleware.io.rdf.Form;
-import org.universAAL.middleware.io.rdf.Group;
-import org.universAAL.middleware.io.rdf.Label;
-import org.universAAL.middleware.io.rdf.MediaObject;
-import org.universAAL.middleware.io.rdf.SimpleOutput;
-import org.universAAL.middleware.io.rdf.Submit;
+import org.universAAL.middleware.ui.rdf.Form;
+import org.universAAL.middleware.ui.rdf.Group;
+import org.universAAL.middleware.ui.rdf.Label;
+import org.universAAL.middleware.ui.rdf.MediaObject;
+import org.universAAL.middleware.ui.rdf.SimpleOutput;
+import org.universAAL.middleware.ui.rdf.Submit;
 
 /**
  * @author <a href="mailto:alfiva@itaca.upv.es">Alvaro Fides Valero</a>
  *
  */
 public class RiskGUI{
-	public static final String PERSONA_INPUT_NAMESPACE = org.universAAL.middleware.io.rdf.Input.RDF_NAMESPACE;//"http://ontology.aal-persona.org/Input.owl#"; //$NON-NLS-1$
+	public static final String PERSONA_INPUT_NAMESPACE = org.universAAL.middleware.ui.rdf.Input.RDF_NAMESPACE;//"http://ontology.aal-persona.org/Input.owl#"; //$NON-NLS-1$
 	public static final String SUBMIT_HOME = PERSONA_INPUT_NAMESPACE + "home"; //$NON-NLS-1$
 	public static final String SUBMIT_CANCEL = PERSONA_INPUT_NAMESPACE + "cancel"; //$NON-NLS-1$
 	public static final String BUTTON_TITLE = Messages.getString("RiskGUI.1"); //$NON-NLS-1$

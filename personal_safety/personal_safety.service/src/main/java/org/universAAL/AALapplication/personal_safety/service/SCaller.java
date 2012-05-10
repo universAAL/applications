@@ -25,9 +25,9 @@ import java.util.Calendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.AALapplication.personal_safety.sms.EnvioSMSService;
+import org.universAAL.AALapplication.personal_safety.sms.owl.EnvioSMSService;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
@@ -63,8 +63,8 @@ public class SCaller {
     }
     private ServiceRequest sendSMS(String txt,String num){
 		ServiceRequest sendSMS = new ServiceRequest(new EnvioSMSService(null), null);
-		sendSMS.getRequestedService().addInstanceLevelRestriction(Restriction.getFixedValueRestriction(EnvioSMSService.PROP_MANDA_TEXTO,new String(txt)),new String[] { EnvioSMSService.PROP_MANDA_TEXTO });
-		sendSMS.getRequestedService().addInstanceLevelRestriction(Restriction.getFixedValueRestriction(EnvioSMSService.PROP_TIENE_NUMERO, new String(num)),new String[] { EnvioSMSService.PROP_TIENE_NUMERO });
+		sendSMS.getRequestedService().addInstanceLevelRestriction(MergedRestriction.getFixedValueRestriction(EnvioSMSService.PROP_MANDA_TEXTO,new String(txt)),new String[] { EnvioSMSService.PROP_MANDA_TEXTO });
+		sendSMS.getRequestedService().addInstanceLevelRestriction(MergedRestriction.getFixedValueRestriction(EnvioSMSService.PROP_TIENE_NUMERO, new String(num)),new String[] { EnvioSMSService.PROP_TIENE_NUMERO });
 		return sendSMS;
     }
     
