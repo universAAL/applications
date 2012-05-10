@@ -28,13 +28,13 @@ import java.util.TimerTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
-import org.universAAL.middleware.owl.supply.LevelRating;
-import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.profile.AssistedPerson;
 
 //import sun.audio.AudioPlayer;
 //import sun.audio.AudioStream;
@@ -57,7 +57,7 @@ public class OPublisher extends UICaller{
 		
 	}
 	
-	public void showButtonScreenForm(User user)
+	public void showButtonScreenForm(AssistedPerson user)
 	{
 		log.debug("Show button screen - Start delay timer");
 		responseWatch=new Timer("Risk_ResponseTimer");
@@ -68,7 +68,7 @@ public class OPublisher extends UICaller{
 		playWarning();
 	}
 	
-	public void showSMSForm(User user, boolean smsSuccess)
+	public void showSMSForm(AssistedPerson user, boolean smsSuccess)
 	{
 		log.debug("Show SMS screen");
 		Form f = Main.gui.getSMSForm(smsSuccess);
@@ -77,7 +77,7 @@ public class OPublisher extends UICaller{
 		playWarning();
 	}
 	
-	public void showNoVCForm(User user)
+	public void showNoVCForm(AssistedPerson user)
 	{
 		log.debug("Show VC failed screen");
 		Form f = Main.gui.getNoVCForm();
@@ -85,7 +85,7 @@ public class OPublisher extends UICaller{
 		sendUIRequest(oe);
 	}
 	
-	public void showBatteryForm(User user)
+	public void showBatteryForm(AssistedPerson user)
 	{
 		log.debug("Show Battery message");
 		Form f = Main.gui.getBatteryForm();
@@ -94,8 +94,8 @@ public class OPublisher extends UICaller{
 	}
 	
 	private static class ResponseDelayTask extends TimerTask{
-		public static User user;
-		public ResponseDelayTask(User usr){
+		public static AssistedPerson user;
+		public ResponseDelayTask(AssistedPerson usr){
 			user=usr;
 		}
 		public void run() {
@@ -151,7 +151,7 @@ public class OPublisher extends UICaller{
 	}
 
 	public void handleUIResponse(UIResponse event) {
-		User user=(User) event.getUser();
+		AssistedPerson user=(AssistedPerson) event.getUser();
 		log.info("Received an Input Event from user {}", user.getURI());
 		String submit=event.getSubmissionID();
 

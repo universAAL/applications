@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>personal_safety.pom</artifactId>
-		<version>0.2.0-SNAPSHOT</version>
+		<version>B.0.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -19,26 +19,16 @@
 				<configuration>
 					<args>pax.configuration</args>
 					<provision>
-						<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.io/1.0.0/composite</provision>
-						<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.service/1.0.0/composite</provision>
-						<provision>scan-composite:mvn:org.universAAL.middleware/mw.bus.context/1.0.0/composite</provision>
-
-						<!-- Ontologies -->
-						<provision>scan-composite:mvn:org.universAAL.ontology/ont.phWorld/1.0.0/composite</provision>
-						<provision>mvn:org.universAAL.ontology/ont.profile/1.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.risk/1.0.0</provision>
+						<provision>scan-composite:mvn:org.universAAL.middleware/mw.composite/1.1.0/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.ontology/ont.composite/1.1.0/composite</provision>
 
 						<!-- Platform -->
-						<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che/1.0.0/composite</provision> -->
-						<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che.mobile/1.0.0/composite</provision> -->
-						<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.dm/1.0.0/composite</provision> -->
-						<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.0.0/composite</provision>
-						<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.0.0/composite</provision>
-						<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.0.0/composite</provision> -->
+						<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.1.0/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.1.0/composite</provision>
 
 						<!-- Services -->
-						<provision>mvn:org.universAAL.AALapplication/personal_safety.sms/${project.version}</provision>
-						<provision>mvn:org.universAAL.AALapplication/personal_safety.service/${project.version}@7</provision>
+						<provision>scan-composite:mvn:org.universAAL.AALapplication/personal_safety.service/${project.version}/composite</provision>
+<!-- 						<provision>mvn:org.universAAL.AALapplication/personal_safety.sms/${project.version}@7</provision> -->
 						<provision>mvn:org.universAAL.AALapplication/personal_safety.sw.panic/${project.version}@7</provision>
 						<provision>mvn:org.universAAL.samples/smp.test-location.publisher/${project.version}@7@nostart</provision>
 					</provision>

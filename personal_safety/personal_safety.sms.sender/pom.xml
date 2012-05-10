@@ -56,7 +56,8 @@
 						<Bundle-Activator>org.universAAL.AALapplication.personal_safety.sms.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Export-Package>org.universAAL.AALapplication.personal_safety.sms</Export-Package>
+						<Export-Package>org.universAAL.AALapplication.personal_safety.sms,
+						org.universAAL.AALapplication.personal_safety.sms.owl</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>

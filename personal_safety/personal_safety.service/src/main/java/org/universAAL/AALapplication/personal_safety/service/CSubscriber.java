@@ -37,6 +37,7 @@ import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.util.Constants;
 import org.universAAL.ontology.phThing.PhysicalThing;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.risk.PanicButton;
 import org.universAAL.ontology.location.*;
@@ -118,7 +119,7 @@ public class CSubscriber extends ContextSubscriber {
 					}
 				}
 
-				User user=(User)event.getRDFSubject();
+				AssistedPerson user=(AssistedPerson)event.getRDFSubject();
 				roomWatch.cancel();
 				long timetask=Long.parseLong(finaltime);
 				if(timetask!=0){
@@ -133,10 +134,10 @@ public class CSubscriber extends ContextSubscriber {
 
 		// Triggered by ceps[1] --- panic
 		else if (pred.equals(PanicButton.PROP_ACTIVATED)) {
-			User user = (User) ((PanicButton) event.getRDFSubject()).getPressedBy();
+			AssistedPerson user = (AssistedPerson) ((PanicButton) event.getRDFSubject()).getPressedBy();
 			if(((Boolean)event.getRDFObject()).booleanValue()){
 				if (user == null)
-					user = new User(
+					user = new AssistedPerson(
 							Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX
 							+ ((Main.getProperties().getProperty(
 									Main.USER, "Saied")).split("-")[0]
@@ -163,7 +164,7 @@ public class CSubscriber extends ContextSubscriber {
 					Long time=((Long)batteryTimes.get(uri));
 					if(time!=null){
 						if(System.currentTimeMillis()-time.longValue()>97200000){
-							User user = (User) ((PanicButton) event.getRDFSubject()).getPressedBy();
+							AssistedPerson user = (AssistedPerson) ((PanicButton) event.getRDFSubject()).getPressedBy();
 							batteryTimes.put(uri, new Long(System.currentTimeMillis()));
 							Main.routput.showBatteryForm(user);
 						}
@@ -180,9 +181,9 @@ public class CSubscriber extends ContextSubscriber {
 	}
 	
 	private static class LocationRiskTask extends TimerTask{
-		public static User user;
+		public static AssistedPerson user;
 		//public static String location;
-		public LocationRiskTask(User usr,String loc){
+		public LocationRiskTask(AssistedPerson usr,String loc){
 			user=usr;
 			//location=loc;
 		}
