@@ -17,7 +17,6 @@ package org.universAAL.Application.personal_safety.sw.panic.osgi;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.universAAL.Application.personal_safety.sw.panic.ISubscriber;
 import org.universAAL.Application.personal_safety.sw.panic.OPublisher;
 import org.universAAL.Application.personal_safety.sw.panic.SCallee;
 import org.universAAL.middleware.container.ModuleContext;
@@ -29,7 +28,6 @@ public class Activator implements BundleActivator{
 	public static ModuleContext context=null;
 	public static SCallee scallee=null;
 	public static ContextPublisher cpublisher=null;
-	public static ISubscriber isubscriber;
 	public static OPublisher opublisher;
 
 	public void start(BundleContext context) throws Exception {
@@ -37,7 +35,6 @@ public class Activator implements BundleActivator{
 				.registerModule(new BundleContext[] { context });
 		scallee=new SCallee(Activator.context);
 		cpublisher=new DefaultContextPublisher(Activator.context,null);
-		isubscriber = new ISubscriber(Activator.context);
 		opublisher = new OPublisher(Activator.context); 
 	}
 

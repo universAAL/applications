@@ -33,7 +33,7 @@ import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.util.Constants;
 import org.universAAL.ontology.phThing.PhysicalThing;
@@ -73,16 +73,16 @@ public class CSubscriber extends ContextSubscriber {
 		ContextEventPattern[] ceps = new ContextEventPattern[3];
 
 		ceps[0]=new ContextEventPattern();
-		ceps[0].addRestriction(Restriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, User.MY_URI));
-		ceps[0].addRestriction(Restriction.getFixedValueRestriction(ContextEvent.PROP_RDF_PREDICATE, PhysicalThing.PROP_PHYSICAL_LOCATION));
+		ceps[0].addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, User.MY_URI));
+		ceps[0].addRestriction(MergedRestriction.getFixedValueRestriction(ContextEvent.PROP_RDF_PREDICATE, PhysicalThing.PROP_PHYSICAL_LOCATION));
 		
 		ceps[1]=new ContextEventPattern();
-		ceps[1].addRestriction(Restriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, PanicButton.MY_URI));
-		ceps[1].addRestriction(Restriction.getFixedValueRestriction(ContextEvent.PROP_RDF_PREDICATE, PanicButton.PROP_ACTIVATED));
+		ceps[1].addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, PanicButton.MY_URI));
+		ceps[1].addRestriction(MergedRestriction.getFixedValueRestriction(ContextEvent.PROP_RDF_PREDICATE, PanicButton.PROP_ACTIVATED));
 
 		ceps[2]=new ContextEventPattern();
-		ceps[2].addRestriction(Restriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, PanicButton.MY_URI));
-		ceps[2].addRestriction(Restriction.getFixedValueRestriction(ContextEvent.PROP_RDF_PREDICATE, PanicButton.PROP_BATTERY_LEVEL));
+		ceps[2].addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, PanicButton.MY_URI));
+		ceps[2].addRestriction(MergedRestriction.getFixedValueRestriction(ContextEvent.PROP_RDF_PREDICATE, PanicButton.PROP_BATTERY_LEVEL));
 
 		return ceps;
 	}
