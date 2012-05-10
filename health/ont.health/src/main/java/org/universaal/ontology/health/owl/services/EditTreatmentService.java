@@ -3,7 +3,7 @@
  * Universidad PolitÃ©cnica de Madrid
  * 
  *	OCO Source Materials
- *	© Copyright IBM Corp. 2011
+ *	ï¿½ Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,10 @@ public class EditTreatmentService extends TreatmentManagementService {
     			new String[] { PROP_MANAGES_TREATMENT });
 	}		
 	
+	public EditTreatmentService(String instanceURI) {
+		super(instanceURI);
+	}
+
 	public String getClassURI() {
 		return MY_URI;
 	}

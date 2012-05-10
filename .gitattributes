@@ -588,12 +588,15 @@ health/ont.health/src/main/java/org/universaal/ontology/health/owl/TreatmentPlan
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/WeightRequirement.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/EditTreatmentService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/HealthService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListPerformedBetweenTimeStampsSessionService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListPerformedSessionService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListTreatmentBetweenTimeStampsService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListTreatmentService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/NewTreatmentService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PerformedSessionManagementService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PlannedSessionManagementService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/RemoveTreatmentService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/SessionPerformedService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/TreatmentManagementService.java -text
 health/ont.healthmeasurement/HealthMeasurement.di -text
 health/ont.healthmeasurement/HealthMeasurement.notation -text

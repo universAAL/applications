@@ -3,7 +3,7 @@
  * Universidad PolitÃ©cnica de Madrid
  * 
  *	OCO Source Materials
- *	© Copyright IBM Corp. 2011
+ *	ï¿½ Copyright IBM Corp. 2011
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,6 +49,10 @@ public class ListTreatmentBetweenTimeStampsService extends ListTreatmentService 
     			new String[] { PROP_LISTS_TREATMENTS });
 	}		
 	
+	public ListTreatmentBetweenTimeStampsService(String instanceURI) {
+		super(instanceURI);
+	}
+
 	public String getClassURI() {
 		return MY_URI;
 	}
