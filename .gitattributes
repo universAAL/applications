@@ -543,11 +543,6 @@ health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/t
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerProvider.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/impl/JenaConverterTreatmentManager.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/osgi/Activator.java -text
-health/ont.disease/.classpath -text svneol=unset#text/plain
-health/ont.disease/.project -text svneol=unset#text/plain
-health/ont.disease/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
-health/ont.disease/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
-health/ont.disease/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
 health/ont.disease/Disease.di -text
 health/ont.disease/Disease.notation -text
 health/ont.disease/Disease.uml -text svneol=unset#text/plain

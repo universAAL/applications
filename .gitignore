@@ -79,6 +79,10 @@ health/health.treat.manager/.classpath
 health/health.treat.manager/.project
 health/health.treat.manager/.settings
 health/health.treat.manager/target
+health/ont.disease/.classpath
+health/ont.disease/.project
+health/ont.disease/.settings
+health/ont.disease/target
 health/ont.health/*.classpath
 health/ont.health/*.project
 health/ont.health/*.settings
