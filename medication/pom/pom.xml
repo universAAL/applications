@@ -1,10 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
+  <!--<parent>
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>new_services.pom</artifactId>
     <version>0.1.0-SNAPSHOT</version>
+    <relativePath>../../new_services.pom</relativePath>
+  </parent>-->
+  <parent>
+    <artifactId>new_services.pom</artifactId>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <version>B.0</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   <artifactId>medication_manager.pom</artifactId>
@@ -22,7 +28,7 @@
     <dependency>
       <groupId>org.universAAL.support</groupId>
       <artifactId>itests</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.1.2-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -33,27 +39,27 @@
     <dependency>
       <groupId>org.universAAL.middleware</groupId>
       <artifactId>mw.data.representation</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.universAAL.middleware</groupId>
       <artifactId>mw.bus.context</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.universAAL.middleware</groupId>
       <artifactId>mw.bus.service</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.universAAL.middleware</groupId>
       <artifactId>mw.container.xfaces</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.1.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.universAAL.middleware</groupId>
       <artifactId>mw.container.osgi</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.1.1-SNAPSHOT</version>
     </dependency>
 
     <dependency>
@@ -68,6 +74,14 @@
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.12</version>
+          <configuration>
+            <skipTests>false</skipTests>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
         </plugin>
         <plugin>
@@ -78,6 +92,28 @@
             <source>1.5</source>
             <target>1.5</target>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.7</version>
+          <executions>
+            <execution>
+              <id>attach-composite</id>
+              <phase>package</phase>
+              <goals>
+                <goal>attach-artifact</goal>
+              </goals>
+              <configuration>
+                <artifacts>
+                  <artifact>
+                    <file>${basedir}/artifact.composite</file>
+                    <type>composite</type>
+                  </artifact>
+                </artifacts>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

@@ -38,7 +38,7 @@ public final class MyPrecautionDatabase {
       sideeffectList.add(sideeffect);
     }
 
-    precaution.setSideeffect(sideeffectList);
+    precaution.setSideeffect(sideeffectList.toString());
 
   }
 
