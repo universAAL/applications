@@ -11,7 +11,6 @@ import org.universAAL.ontology.medMgr.UserIDs;
 
 import java.util.Dictionary;
 import java.util.Enumeration;
-import java.util.List;
 
 /**
  * @author George Fournadjiev
@@ -123,7 +122,7 @@ public final class MedicationTest extends IntegrationTest {
 
   public void testPublishEvent() {
     Log.info("TEST %s", MedicationTest.class, "**************** Entering test ***************");
-    Time time = new Time(2012, 13, 16, 52);
+    Time time = new Time(2012, 5, 12, 16, 52);
     String[] userIDs = UserIDs.getAllIDs();
     for (int i = 0; i < userIDs.length; i++) {
       String userID = userIDs[i];
@@ -136,23 +135,20 @@ public final class MedicationTest extends IntegrationTest {
   }
 
   private void printPrecaution(Precaution precaution) {
-    List sideeffect = precaution.getSideeffect();
+    String sideeffect = precaution.getSideeffect();
 
     System.out.println("**************** START PRINTING SIDEEFFECT****************");
-    for (int i = 0; i < sideeffect.size(); i++) {
-      String se = (String) sideeffect.get(i);
-      Log.info("%s", getClass(), se);
-    }
+
+    Log.info("%s", getClass(), sideeffect);
 
     System.out.println("**************** END PRINTING SIDEEFFECT****************");
 
-    List incompliance = precaution.getIncompliance();
+    String incompliance = precaution.getIncompliance();
 
     System.out.println("**************** START PRINTING INCOMPLIANCE****************");
-    for (int i = 0; i < incompliance.size(); i++) {
-      String inc = (String) incompliance.get(i);
-      Log.info("%s", getClass(), inc);
-    }
+
+    Log.info("%s", getClass(), incompliance);
+
 
     System.out.println("**************** END PRINTING SIDEEFFECT****************");
   }

@@ -27,16 +27,16 @@ public class Precaution extends Service {
     return MY_URI;
   }
 
-  public List getSideeffect() {
-    return (List) getProperty(SIDEEFFECT);
+  public String getSideeffect() {
+    return (String) getProperty(SIDEEFFECT);
   }
 
-  public void setSideeffect(List value) {
+  public void setSideeffect(String value) {
     setProperty(SIDEEFFECT, value);
   }
 
-  public List getIncompliance() {
-    return (List) getProperty(INCOMPLIANCE);
+  public String getIncompliance() {
+    return (String) getProperty(INCOMPLIANCE);
   }
 
   public void setIncompliance(List value) {

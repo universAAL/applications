@@ -51,7 +51,4 @@ public class MissedIntake extends Service {
     props.put(USER_ID, userId);
   }
 
-  protected Hashtable getClassLevelRestrictions() {
-    throw new UnsupportedOperationException("Not implemented yet");
-  }
 }

@@ -665,6 +665,7 @@ medication/medication_manager.service/pom.xml -text
 medication/medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Activator.java -text
 medication/medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Log.java -text
 medication/medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MissedIntakeEventSubscriber.java -text
+medication/medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyDeviceUserMappingDatabase.java -text
 medication/medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyPrecautionDatabase.java -text
 medication/medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/PrecautionProvider.java -text
 medication/medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/ProviderPrecautionService.java -text
@@ -672,7 +673,11 @@ medication/ont.medMgr/pom.xml -text
 medication/ont.medMgr/src/main/java/org/universAAL/ontology/impl/Activator.java -text
 medication/ont.medMgr/src/main/java/org/universAAL/ontology/impl/Log.java -text
 medication/ont.medMgr/src/main/java/org/universAAL/ontology/impl/MedicationFactory.java -text
+medication/ont.medMgr/src/main/java/org/universAAL/ontology/medMgr/DeviceIDs.java -text
+medication/ont.medMgr/src/main/java/org/universAAL/ontology/medMgr/DispenserUpsideDown.java -text
+medication/ont.medMgr/src/main/java/org/universAAL/ontology/medMgr/DueIntake.java -text
 medication/ont.medMgr/src/main/java/org/universAAL/ontology/medMgr/Medication.java -text
+medication/ont.medMgr/src/main/java/org/universAAL/ontology/medMgr/MedicationException.java -text
 medication/ont.medMgr/src/main/java/org/universAAL/ontology/medMgr/MedicationOntology.java -text
 medication/ont.medMgr/src/main/java/org/universAAL/ontology/medMgr/MissedIntake.java -text
 medication/ont.medMgr/src/main/java/org/universAAL/ontology/medMgr/Precaution.java -text
