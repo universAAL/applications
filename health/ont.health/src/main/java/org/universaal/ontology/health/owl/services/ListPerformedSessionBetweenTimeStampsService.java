@@ -20,8 +20,10 @@
 
 package org.universaal.ontology.health.owl.services;
 
+import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.PerformedSession;
 
 /**
  * @author amedrano
@@ -29,22 +31,34 @@ import org.universaal.ontology.health.owl.HealthOntology;
  *
  * @navassoc - "lists" * PerformedSession
  */
-public class ListPerformedBetweenTimeStampsSessionService extends ListPerformedSessionService {
+public class ListPerformedSessionBetweenTimeStampsService extends ListPerformedSessionService {
 
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
-			+ "ListPerformedBetweenTimeStampsSessionService";
+			+ "ListPerformedSessionBetweenTimeStampsService";
 	
+	public static final String PROP_TIMESTAMP_FROM =  HealthOntology.NAMESPACE
+		+ "listsPerformedSessionsTimestampFrom";
+	public static final String PROP_TIMESTAMP_TO =  HealthOntology.NAMESPACE
+		+ "listsPerformedSessionsTimestampTo";
 
 	//CONSTRUCTOR	
-	public ListPerformedBetweenTimeStampsSessionService() {
+	public ListPerformedSessionBetweenTimeStampsService() {
 		super();
-    	addFilteringInput( PROP_ASSISTED_USER , User.MY_URI, 1, 1, 
+    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
     			new String[] { PROP_ASSISTED_USER });
-    	//addOutput(OUTPUT_TREATMENTS, Treatment.MY_URI, 0, -1, 
-    	//		new String[] { PROP_LISTS_PERFORMED_SESSION });
+    	addFilteringInput(INPUT_TIMESTAMP_FROM, TypeMapper.getDatatypeURI(Long.class), 1, 1, 
+    			new String[] { PROP_TIMESTAMP_FROM });
+    	addFilteringInput(INPUT_TIMESTAMP_TO, TypeMapper.getDatatypeURI(Long.class), 1, 1, 
+    			new String[] { PROP_TIMESTAMP_TO });
+    	addOutput(OUTPUT_PERFORMED_SESSIONS, PerformedSession.MY_URI, 0, -1, 
+    			new String[] { PROP_LISTS_PERFORMED_SESSIONS });
 	}		
 	
+	public ListPerformedSessionBetweenTimeStampsService(String instanceURI) {
+		super(instanceURI);
+	}
+
 	public String getClassURI() {
 		return MY_URI;
 	}

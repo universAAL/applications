@@ -1,7 +1,10 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es 
- Universidad Politécnica de Madrid
+ * Universidad Politécnica de Madrid
  * 
+ *	OCO Source Materials
+ *	� Copyright IBM Corp. 2011
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,8 +24,9 @@ import org.universAAL.middleware.service.owl.Service;
 import org.universaal.ontology.health.owl.HealthOntology;
 
 /**
- * 
  * @author amedrano
+ * @author roni
+ * 
  * @navassoc - "assistedPerson" - AssistedPerson
  */
 public class HealthService extends Service{
@@ -34,6 +38,11 @@ public class HealthService extends Service{
 	public static final String PROP_ASSISTED_USER = HealthOntology.NAMESPACE
 			+"assistedPerson";
 	
+	//INPUT PARAMETERS URI
+	public static final String INPUT_USER           = HealthOntology.NAMESPACE + "user";
+	public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "timestampFrom";
+	public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "timestampTo";
+
 	//CONSTRUCTORS
 	public HealthService() {
 		super();

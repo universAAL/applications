@@ -34,10 +34,10 @@ public class ListTreatmentService extends TreatmentManagementService {
 
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
-			+ "ListTreatmentService";
+	+ "ListTreatmentService";
 	
 	public static final String PROP_LISTS_TREATMENTS =  HealthOntology.NAMESPACE
-		+ "listsTreatments";
+	+ "listsTreatments";
 
 	//CONSTRUCTOR	
 	public ListTreatmentService() {

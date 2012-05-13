@@ -22,12 +22,11 @@ package org.universaal.ontology.health.owl.services;
 
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.PerformedSession;
 
 /**
  * @author amedrano
  * @author roni
- *
- * @navassoc - "lists" * PerformedSession
  */
 public class SessionPerformedService extends PerformedSessionManagementService {
 
@@ -35,11 +34,13 @@ public class SessionPerformedService extends PerformedSessionManagementService {
 	public static final String MY_URI = HealthOntology.NAMESPACE
 			+ "SessionPerformedService";
 	
-
-
 	//CONSTRUCTOR	
 	public SessionPerformedService() {
 		super();
+    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+    			new String[] { PROP_ASSISTED_USER });
+    	addInputWithAddEffect(INPUT_PERFORMED_SESSION, PerformedSession.MY_URI, 1, 1, 
+    			new String[] { PROP_MANAGES_SESSION });
 	}		
 	
 	public SessionPerformedService(String instanceURI) {

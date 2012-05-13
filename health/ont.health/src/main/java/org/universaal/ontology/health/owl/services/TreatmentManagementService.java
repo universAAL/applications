@@ -43,9 +43,6 @@ public class TreatmentManagementService extends HealthService{
 	+ "managesTreatments";
 	
 	//INPUT PARAMETERS URI
-	public static final String INPUT_USER           = HealthOntology.NAMESPACE + "user";
-	public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "timestampFrom";
-	public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "timestampTo";
 	public static final String INPUT_TREATMENT      = HealthOntology.NAMESPACE + "treatment";
 	public static final String INPUT_OLD_TREATMENT  = HealthOntology.NAMESPACE + "oldTreatment";
 	public static final String INPUT_NEW_TREATMENT  = HealthOntology.NAMESPACE + "newTreatment";

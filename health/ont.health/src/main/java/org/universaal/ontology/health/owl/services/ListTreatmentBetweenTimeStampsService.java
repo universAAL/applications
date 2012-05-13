@@ -25,6 +25,12 @@ import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.Treatment;
 
+/**
+ * @author amedrano
+ * @author roni
+ *
+ * @navassoc - "lists" * Treatment
+ */
 public class ListTreatmentBetweenTimeStampsService extends ListTreatmentService {
 
 	//NAMESPACE & PROPERTIES
@@ -64,5 +70,4 @@ public class ListTreatmentBetweenTimeStampsService extends ListTreatmentService 
 	public boolean isWellFormed() {
 		return true;
 	}
-
 }

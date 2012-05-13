@@ -1,7 +1,10 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es 
- Universidad Politécnica de Madrid
+ * Universidad Politécnica de Madrid
  * 
+ *	OCO Source Materials
+ *	� Copyright IBM Corp. 2011
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,7 +22,18 @@ package org.universaal.ontology.health.owl.services;
 
 import org.universaal.ontology.health.owl.HealthOntology;
 
+/**
+ * This class describes the performed session management service, which consists 
+ * of storing a performed session and listing the sessions associated to the 
+ * health profile performed by the assisted person.
+ * 
+ * @author mdelafuente
+ * @author roni
+ * 
+ * @navassoc - "manages" - PerformedSession
+ */
 public class PerformedSessionManagementService extends HealthService{
+	
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
 	+ "SessionManagementService";
@@ -27,9 +41,12 @@ public class PerformedSessionManagementService extends HealthService{
 	public static final String PROP_MANAGES_SESSION = HealthOntology.NAMESPACE
 	+ "managesSession";
 
-	public static final String PROP_LISTS_SESSIONS =  HealthOntology.NAMESPACE
-	+ "listsSessions";
+	//INPUT PARAMETERS URI
+	public static final String INPUT_PERFORMED_SESSION = HealthOntology.NAMESPACE + "performedSession";
 
+    //OUTPUT PARAMETERS URI    
+	public static final String OUTPUT_PERFORMED_SESSIONS = HealthOntology.NAMESPACE + "matchingPerformedSessions";
+	
 	//CONSTRUCTORS
 	public PerformedSessionManagementService() {
 		super();
@@ -52,7 +69,7 @@ public class PerformedSessionManagementService extends HealthService{
 	 */
 	public int getPropSerializationType(String propURI) {
 		return PROP_MANAGES_SESSION.equals(propURI) ||
-		PROP_LISTS_SESSIONS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
+		PROP_MANAGES_SESSION.equals(propURI) ? PROP_SERIALIZATION_FULL : super
 				.getPropSerializationType(propURI);
 	}
 

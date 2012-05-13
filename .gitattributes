@@ -583,7 +583,7 @@ health/ont.health/src/main/java/org/universaal/ontology/health/owl/TreatmentPlan
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/WeightRequirement.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/EditTreatmentService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/HealthService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListPerformedBetweenTimeStampsSessionService.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListPerformedSessionBetweenTimeStampsService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListPerformedSessionService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListTreatmentBetweenTimeStampsService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListTreatmentService.java -text
