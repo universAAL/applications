@@ -3,7 +3,7 @@
 	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	ï¿½ Copyright IBM Corp. 2011
+	© Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -20,12 +20,11 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
  */
-package org.universAAL.AALapplication.health.treat.logger;
+package org.universAAL.AALapplication.health.performedSession.manager;
 
 import java.util.List;
 
-import org.universAAL.AALapplication.health.ont.treatment.Treatment;
-import org.universAAL.AALapplication.health.treat.logger.impl.ContextHistoryTreatmentLogger;
+import org.universAAL.AALapplication.health.performedSession.manager.impl.ContextHistoryPerformedSessionManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -33,16 +32,30 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universaal.ontology.health.owl.PerformedSession;
+import org.universaal.ontology.health.owl.services.ListPerformedSessionBetweenTimeStampsService;
+import org.universaal.ontology.health.owl.services.ListPerformedSessionService;
+import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
+import org.universaal.ontology.health.owl.services.SessionPerformedService;
 
 /**
- * This class provides the treatment logger services.
+ * This class provides the performed sessions manager services.
  * 
  * @author roni
  */
-public class TreatmentLoggerProvider extends ServiceCallee {
+public class PerformedSessionManagerProvider extends ServiceCallee {
 
-	// the actual treatment logger 
-	private TreatmentLogger treatmentLogger = null;
+	// the actual performed session manager 
+	private PerformedSessionManager performedSessionManager = null;
+	
+	static final ServiceProfile[] profiles = new ServiceProfile[5];
+	
+	// define profiles
+	static {
+    	profiles[0] = new SessionPerformedService().getProfile();		
+    	profiles[1] = new ListPerformedSessionService().getProfile();
+    	profiles[2] = new ListPerformedSessionBetweenTimeStampsService().getProfile();
+	}
 	
     // prepare a standard error message for later use
     private static final ServiceResponse invalidInput = new ServiceResponse(
@@ -58,7 +71,7 @@ public class TreatmentLoggerProvider extends ServiceCallee {
      * @param context
      * @param realizedServices
      */
-    protected TreatmentLoggerProvider(ModuleContext context, ServiceProfile[] realizedServices) {
+    protected PerformedSessionManagerProvider(ModuleContext context, ServiceProfile[] realizedServices) {
 		super(context, realizedServices);
     }
 	
@@ -67,14 +80,15 @@ public class TreatmentLoggerProvider extends ServiceCallee {
      * 
      * @param context
      */
-	public TreatmentLoggerProvider(ModuleContext context) {
+	public PerformedSessionManagerProvider(ModuleContext context) {
+		
 		// as a service providing component, we have to extend ServiceCallee
     	// this in turn requires that we introduce which services we would like
     	// to provide to the universAAL-based AAL Space
-		super(context, TreatmentLoggerServices.profiles);
+		super(context, profiles);
 
-		// the actual implementation of the treatment logger
-		treatmentLogger = new ContextHistoryTreatmentLogger(context);
+		// the actual implementation of the performed session manager
+		performedSessionManager = new ContextHistoryPerformedSessionManager(context);
 	}
 
 	public void communicationChannelBroken() {
@@ -98,82 +112,82 @@ public class TreatmentLoggerProvider extends ServiceCallee {
 		if(operation == null)
 		    return null;
 
-		Object userInput = call.getInputValue(TreatmentLoggerServices.INPUT_USER);
+		Object userInput = call.getInputValue(PerformedSessionManagementService.INPUT_USER);
 		if(userInput == null)
 		    return null;
 
-		if(operation.startsWith(TreatmentLoggerServices.SERVICE_LIST_ALL_TREATMENT_LOG))
-			return getAllTreatmentLog(userInput.toString());
+		if(operation.startsWith(ListPerformedSessionService.MY_URI))
+			return getAllPerformedsessions(userInput.toString());
 
-		Object treatmentInput = call
-			.getInputValue(TreatmentLoggerServices.INPUT_TREATMENT);
+		Object performedSessionInput = call
+			.getInputValue(PerformedSessionManagementService.INPUT_PERFORMED_SESSION);
 
 		Object timestampFromInput = call
-			.getInputValue(TreatmentLoggerServices.INPUT_TIMESTAMP_FROM);
+			.getInputValue(PerformedSessionManagementService.INPUT_TIMESTAMP_FROM);
 
 		Object timestampToInput = call
-			.getInputValue(TreatmentLoggerServices.INPUT_TIMESTAMP_TO);
+			.getInputValue(PerformedSessionManagementService.INPUT_TIMESTAMP_TO);
 
 		if(timestampFromInput != null && timestampToInput != null &&
-				operation.startsWith(TreatmentLoggerServices.SERVICE_LIST_TREATMENT_LOG_BETWEEN_TIMESTAMPS))
-		    return getTreatmentLogBetweenTimestamps(
+				operation.startsWith(ListPerformedSessionBetweenTimeStampsService.MY_URI))
+		    return getPerformedSessionsBetweenTimestamps(
 		    		userInput.toString(), ((Long)timestampFromInput).longValue(), 
 		    		((Long)timestampToInput).longValue());
 
-		if(treatmentInput != null &&
-				operation.startsWith(TreatmentLoggerServices.SERVICE_TREATMENT_DONE))
-		    return treatmentDone(userInput.toString(), (Treatment)treatmentInput);
+		if(performedSessionInput != null &&
+				operation.startsWith(SessionPerformedService.MY_URI))
+		    return sessionPerformed(userInput.toString(), (PerformedSession)performedSessionInput);
 		
 		return null;
 	}
 	
 	/**
-	 * Creates a service response that including all the treatments that are
-	 * associated with the given user.
+	 * Creates a service response that including all the performed sessions that 
+	 * are associated with the given user.
 	 * 
 	 * @param userURI The URI of the user
 	 */
-	private ServiceResponse getAllTreatmentLog(String userURI) {
+	private ServiceResponse getAllPerformedsessions(String userURI) {
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		List treatmentsList = treatmentLogger.getAllTreatmentLog(userURI);
+		List performedSessionsList = performedSessionManager.getAllPerformedSessions(userURI);
 		sr.addOutput(new ProcessOutput(
-				TreatmentLoggerServices.OUTPUT_TREATMENTS, treatmentsList));
+				PerformedSessionManagementService.OUTPUT_PERFORMED_SESSIONS, performedSessionsList));
 		
 		return sr;		
 	}
 
 	/**
-	 * Creates a service response that including all the treatments that are
-	 * associated with the given user and are between the given timestamps.
+	 * Creates a service response that including all the performed sessions that 
+	 * are associated with the given user and are between the given timestamps.
 	 * 
 	 * @param userURI The URI of the user
      * @param timestampFrom The lower bound of the period
      * @param timestampTo The upper bound of the period
 	 */
-	private ServiceResponse getTreatmentLogBetweenTimestamps(
+	private ServiceResponse getPerformedSessionsBetweenTimestamps(
 			String userURI, long timestampFrom, long timestampTo) {
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		List treatmentsList = treatmentLogger.getTreatmentLogBetweenTimestamps(
-				userURI, timestampFrom, timestampTo);
+		List performedSessionsList = performedSessionManager.
+				getPerformedSessionsBetweenTimestamps(userURI, timestampFrom, timestampTo);
 		sr.addOutput(new ProcessOutput(
-				TreatmentLoggerServices.OUTPUT_TREATMENTS, treatmentsList));
+				PerformedSessionManagementService.OUTPUT_PERFORMED_SESSIONS, performedSessionsList));
 		
 		return sr;
 	}
 	
 	/**
-	 * Creates a service response for storing a treatment that was performed by 
+	 * Creates a service response for storing a session that was performed by 
 	 * the given user.
 	 * 
 	 * @param userURI The URI of the user 
-	 * @param treatment The treatment that was performed by the user
+	 * @param session The session that was performed by the user
 	 */
-	private ServiceResponse treatmentDone(String userURI, Treatment treatment) {
+	private ServiceResponse sessionPerformed(String userURI, PerformedSession session) {
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		treatmentLogger.treatmentDone(userURI, treatment);
+		performedSessionManager.sessionPerformed(userURI, session);
 		
 		return sr;
 	}
