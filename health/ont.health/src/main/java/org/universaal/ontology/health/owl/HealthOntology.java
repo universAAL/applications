@@ -39,7 +39,7 @@ import org.universAAL.ontology.profile.health.Illness;
 import org.universaal.ontology.health.HealthOntologyFactory;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
 import org.universaal.ontology.health.owl.services.HealthService;
-import org.universaal.ontology.health.owl.services.ListPerformedBetweenTimeStampsSessionService;
+import org.universaal.ontology.health.owl.services.ListPerformedSessionBetweenTimeStampsService;
 import org.universaal.ontology.health.owl.services.ListPerformedSessionService;
 import org.universaal.ontology.health.owl.services.ListTreatmentBetweenTimeStampsService;
 import org.universaal.ontology.health.owl.services.ListTreatmentService;
@@ -466,7 +466,6 @@ public final class HealthOntology extends Ontology {
     oci.setResourceLabel("TreatmentManagementService");
     oci.addSuperClass(HealthService.MY_URI); 
 
-    
     oci.addObjectProperty(TreatmentManagementService.PROP_MANAGES_TREATMENT);
     oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
     		TreatmentManagementService.PROP_MANAGES_TREATMENT,  Treatment.MY_URI, 1,1));
@@ -488,7 +487,6 @@ public final class HealthOntology extends Ontology {
     oci.setResourceComment("Description of the removing treatment service.");
     oci.setResourceLabel("NewTreatmentService");
     oci.addSuperClass(TreatmentManagementService.MY_URI);
-    
     
     //load ListTreatment
     oci = createNewOntClassInfo(ListTreatmentService.MY_URI, factory, 25);
@@ -522,7 +520,6 @@ public final class HealthOntology extends Ontology {
     		PlannedSessionManagementService.PROP_LISTS_SESSIONS, PlannedSession.MY_URI));    
     
     //load PerformedSessionManagementService
-    
     oci = createNewOntClassInfo(PerformedSessionManagementService.MY_URI, factory, 20);
     oci.setResourceComment("Description of the performed session management service.");
     oci.setResourceLabel("PerformedSessionManagementService");
@@ -532,18 +529,18 @@ public final class HealthOntology extends Ontology {
     oci.addRestriction(MergedRestriction.getAllValuesRestriction(
     		PerformedSessionManagementService.PROP_MANAGES_SESSION,  PlannedSession.MY_URI));
     
-    oci.addObjectProperty(PerformedSessionManagementService.PROP_LISTS_SESSIONS);
-    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
-    		PerformedSessionManagementService.PROP_LISTS_SESSIONS, PlannedSession.MY_URI,1,1));  
-    
     // load ListPerformedSessionService
     oci = createNewOntClassInfo(ListPerformedSessionService.MY_URI, factory, 27);
     oci.setResourceComment("Service listing the performed sessions.");
     oci.setResourceLabel("ListPerformedSessionService");
     oci.addSuperClass(PerformedSessionManagementService.MY_URI);
+
+    oci.addObjectProperty(ListPerformedSessionService.PROP_LISTS_PERFORMED_SESSIONS);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		ListPerformedSessionService.PROP_LISTS_PERFORMED_SESSIONS, PlannedSession.MY_URI,1,1));  
     
-    // load ListPerformedBetweenTimeStampsSessionService
-    oci = createNewOntClassInfo(ListPerformedBetweenTimeStampsSessionService.MY_URI, factory, 28);
+    // load ListPerformedSessionBetweenTimeStampsService
+    oci = createNewOntClassInfo(ListPerformedSessionBetweenTimeStampsService.MY_URI, factory, 28);
     oci.setResourceComment("Service listing the performed sessions between 2 timestamps.");
     oci.setResourceLabel("ListPerformedBetweenTimeStampsSessionService");
     oci.addSuperClass(ListPerformedSessionService.MY_URI);

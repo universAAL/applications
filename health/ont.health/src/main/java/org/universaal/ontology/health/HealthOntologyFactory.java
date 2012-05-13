@@ -36,6 +36,7 @@ import org.universaal.ontology.health.owl.TreatmentPlanning;
 import org.universaal.ontology.health.owl.WeightRequirement;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
 import org.universaal.ontology.health.owl.services.HealthService;
+import org.universaal.ontology.health.owl.services.ListPerformedSessionBetweenTimeStampsService;
 import org.universaal.ontology.health.owl.services.ListPerformedSessionService;
 import org.universaal.ontology.health.owl.services.ListTreatmentBetweenTimeStampsService;
 import org.universaal.ontology.health.owl.services.ListTreatmentService;
@@ -109,6 +110,8 @@ public class HealthOntologyFactory extends ResourceFactoryImpl {
       case 27:
     	  return new ListPerformedSessionService(instanceURI);
       case 28:
+    	  return new ListPerformedSessionBetweenTimeStampsService(instanceURI);
+      case 29:
       	  return new SessionPerformedService(instanceURI);
 	}
 	return null;
