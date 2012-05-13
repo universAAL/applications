@@ -531,11 +531,10 @@ health/health.pom/pom.xml -text svneol=unset#text/plain
 health/health.treat.logger/LICENSE -text
 health/health.treat.logger/NOTICE -text
 health/health.treat.logger/pom.xml -text
-health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLogger.java -text
-health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerProvider.java -text
-health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/TreatmentLoggerServices.java -text
-health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/impl/ContextHistoryTreatmentLogger.java -text
-health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/treat/logger/osgi/Activator.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/PerformedSessionManager.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/PerformedSessionManagerProvider.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/impl/ContextHistoryPerformedSessionManager.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/osgi/Activator.java -text
 health/health.treat.manager/LICENSE -text
 health/health.treat.manager/NOTICE -text
 health/health.treat.manager/pom.xml -text

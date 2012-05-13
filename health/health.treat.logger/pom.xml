@@ -8,10 +8,10 @@
 		<relativePath>../health.pom</relativePath>
 	</parent>
 
-	<artifactId>health.treat.logger</artifactId>
+	<artifactId>health.performedSession.manager</artifactId>
 
-	<name>Health Treatment Log</name>
-	<description>Enables Storage, and Listing of Treatments that the assisted person has done</description>
+	<name>Health Performed Session Mananger</name>
+	<description>Enables Storage, and Listing of sessions that the assisted person has performed</description>
 
 	<inceptionYear>2011</inceptionYear>
 
@@ -21,7 +21,7 @@
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universaal.ontology</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.health</artifactId>
 		</dependency>
 		<dependency>
@@ -39,7 +39,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
-						<Bundle-Activator>org.universAAL.AALapplication.health.treat.logger.osgi.Activator</Bundle-Activator>
+						<Bundle-Activator>org.universAAL.AALapplication.health.performedSession.manager.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 					</instructions>
