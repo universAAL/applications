@@ -659,6 +659,15 @@ long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/FactProp
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/Rule.java -text
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/service/DroolsService.java -text
 medication/README.txt -text
+medication/medication.manager.service/artifact.composite -text
+medication/medication.manager.service/pom.xml -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Activator.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Log.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MissedIntakeEventSubscriber.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyDeviceUserMappingDatabase.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyPrecautionDatabase.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/PrecautionProvider.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/ProviderPrecautionService.java -text
 medication/ont.medMgr/pom.xml -text
 medication/ont.medMgr/src/main/java/org/universAAL/ontology/impl/Activator.java -text
 medication/ont.medMgr/src/main/java/org/universAAL/ontology/impl/Log.java -text
