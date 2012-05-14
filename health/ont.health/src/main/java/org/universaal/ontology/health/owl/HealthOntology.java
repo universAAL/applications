@@ -34,7 +34,7 @@ import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
-import org.universAAL.ontology.profile.CaregiverProfile;
+import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.health.Illness;
 import org.universaal.ontology.health.HealthOntologyFactory;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
@@ -332,12 +332,6 @@ public final class HealthOntology extends Ontology {
     		.getAllValuesRestrictionWithCardinality(ReposeHeartRateRequirement.PROP_MAX_VALUE_ALLOWED, 
     				HeartRate.MY_URI, 1, 1));
 
-    //load Caregiver
-    oci = createNewOntClassInfo(Caregiver.MY_URI, factory, 8);
-    oci.setResourceComment("This class describes the caregiver who has set the treatment.");
-    oci.setResourceLabel("Caregiver");
-    oci.addSuperClass(CaregiverProfile.MY_URI);
-
     
     //load Treatment 
     oci = createNewAbstractOntClassInfo(Treatment.MY_URI);
@@ -426,6 +420,16 @@ public final class HealthOntology extends Ontology {
     oci.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(PhysicalActivity.PROP_HAS_ASSOCIATED_MEASUREMENT, 
       TakeMeasurementActivity.MY_URI, 1, 1));
+    
+    
+    // load HealthProfile
+    oci = createNewOntClassInfo(HealthProfile.MY_URI, factory, 12);  
+    oci.setResourceLabel("HealthProfile");
+    oci.setResourceComment("Health profile listing all treatments for an Assisted Person");
+    oci.addObjectProperty(HealthProfile.PROP_HAS_TREATMENT);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(HealthProfile.PROP_HAS_TREATMENT, Treatment.MY_URI, 0, -1));
+    oci.addObjectProperty(HealthProfile.PROP_IS_ASSIGNED_TO_AP);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(HealthProfile.PROP_IS_ASSIGNED_TO_AP, AssistedPerson.MY_URI, 1, 1));
     
     
     // extension for AssistedPersonProfile: an assisted person can contain a health profile, where treatments are specified.

@@ -17,35 +17,8 @@ package org.universaal.ontology.health;
 
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
-import org.universaal.ontology.health.owl.ActivityHeartRateRequirement;
-import org.universaal.ontology.health.owl.AssistedPersonWithHealthProfile;
-import org.universaal.ontology.health.owl.BloodPressureRequirement;
-import org.universaal.ontology.health.owl.Caregiver;
-import org.universaal.ontology.health.owl.DiastolicBloodPressureRequirement;
-import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.health.owl.HeartRateRequirement;
-import org.universaal.ontology.health.owl.MeasurementRequirements;
-import org.universaal.ontology.health.owl.PerformedMeasurementSession;
-import org.universaal.ontology.health.owl.PerformedSession;
-import org.universaal.ontology.health.owl.PhysicalActivity;
-import org.universaal.ontology.health.owl.PlannedSession;
-import org.universaal.ontology.health.owl.ReposeHeartRateRequirement;
-import org.universaal.ontology.health.owl.SystolicBloodPressureRequirement;
-import org.universaal.ontology.health.owl.TakeMeasurementActivity;
-import org.universaal.ontology.health.owl.TreatmentPlanning;
-import org.universaal.ontology.health.owl.WeightRequirement;
-import org.universaal.ontology.health.owl.services.EditTreatmentService;
-import org.universaal.ontology.health.owl.services.HealthService;
-import org.universaal.ontology.health.owl.services.ListPerformedSessionBetweenTimeStampsService;
-import org.universaal.ontology.health.owl.services.ListPerformedSessionService;
-import org.universaal.ontology.health.owl.services.ListTreatmentBetweenTimeStampsService;
-import org.universaal.ontology.health.owl.services.ListTreatmentService;
-import org.universaal.ontology.health.owl.services.NewTreatmentService;
-import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
-import org.universaal.ontology.health.owl.services.PlannedSessionManagementService;
-import org.universaal.ontology.health.owl.services.RemoveTreatmentService;
-import org.universaal.ontology.health.owl.services.SessionPerformedService;
-import org.universaal.ontology.health.owl.services.TreatmentManagementService;
+import org.universaal.ontology.health.owl.*;
+import org.universaal.ontology.health.owl.services.*;
 
 public class HealthOntologyFactory extends ResourceFactoryImpl {
 
@@ -68,13 +41,11 @@ public class HealthOntologyFactory extends ResourceFactoryImpl {
      case 6:
     	 //return new Privacy(instanceURI);
      case 7:
-    	 return new AssistedPersonWithHealthProfile(instanceURI);
+    	 //return new AssistedPersonWithHealthProfile(instanceURI);
      case 8:
 	    return new HeartRateRequirement(instanceURI);
      case 9:
 	    return new TakeMeasurementActivity(instanceURI);
-     case 10:
-	    return new Caregiver(instanceURI);
      case 11:
 	    return new TreatmentPlanning(instanceURI);
      case 12:

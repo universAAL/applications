@@ -559,9 +559,7 @@ health/ont.health/pom.xml -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/Activator.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/HealthOntologyFactory.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/ActivityHeartRateRequirement.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/AssistedPersonWithHealthProfile.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/BloodPressureRequirement.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/Caregiver.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/DiastolicBloodPressureRequirement.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthOntology.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthProfile.java -text svneol=unset#application/octet-stream

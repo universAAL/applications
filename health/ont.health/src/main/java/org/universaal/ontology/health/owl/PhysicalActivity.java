@@ -18,6 +18,7 @@ package org.universaal.ontology.health.owl;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.ontology.profile.AssistedPersonProfile;
+import org.universAAL.ontology.profile.Caregiver;
 
 public class PhysicalActivity extends HealthyHabitsAdoption {
   public static final String MY_URI = HealthOntology.NAMESPACE
