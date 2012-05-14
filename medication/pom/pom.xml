@@ -135,7 +135,7 @@
     <developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/medication</developerConnection>
   </scm>
   <modules>
-    <module>../ont.medMgr</module>
+    <module>../medication.manager.ont</module>
     <module>../medication.manager.service</module>
     <module>../test_medication_manager.service</module>
   </modules>
