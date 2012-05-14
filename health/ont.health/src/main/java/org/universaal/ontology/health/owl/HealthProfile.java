@@ -18,10 +18,10 @@ package org.universaal.ontology.health.owl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.SubProfile;
 
-public class HealthProfile extends ManagedIndividual{
+public class HealthProfile extends SubProfile{
 
 //NAMESPACE & PROPERTIES
   public static final String MY_URI = HealthOntology.NAMESPACE
@@ -121,10 +121,10 @@ public class HealthProfile extends ManagedIndividual{
   
  //OTHER METHODS
 	
-  public void assignHealthProfileToAP(AssistedPersonWithHealthProfile ap){
+  public void assignHealthProfileToAP(AssistedPerson ap){
 	  this.setAssignedAssistedPerson(ap);
 	  //The assisted person becomes an assisted person with a health profile
-	  AssistedPersonWithHealthProfile apwhp = new AssistedPersonWithHealthProfile(this);
+	  //AssistedPersonWithHealthProfile apwhp = new AssistedPersonWithHealthProfile(this);
 	  
   }
 }

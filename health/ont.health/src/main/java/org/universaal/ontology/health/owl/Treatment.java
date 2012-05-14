@@ -25,6 +25,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
+import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.health.Illness;
 
 public abstract class Treatment extends ManagedIndividual {
