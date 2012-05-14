@@ -118,6 +118,8 @@ long_term_behav/ont.drools/.classpath
 long_term_behav/ont.drools/.project
 long_term_behav/ont.drools/.settings
 long_term_behav/ont.drools/target
+medication/medication.manager.ont/*.iml
+medication/medication.manager.ont/target
 medication/medication.manager.service/*.iml
 medication/medication.manager.service/target
 medication/pom/*.iml
