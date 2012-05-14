@@ -137,6 +137,6 @@
   <modules>
     <module>../medication.manager.ont</module>
     <module>../medication.manager.service</module>
-    <module>../test_medication_manager.service</module>
+    <module>../medication.manager.integration.tests</module>
   </modules>
 </project>
