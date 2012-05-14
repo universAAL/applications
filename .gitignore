@@ -120,8 +120,6 @@ long_term_behav/ont.drools/.settings
 long_term_behav/ont.drools/target
 medication/medication.manager.service/*.iml
 medication/medication.manager.service/target
-medication/ont.medMgr/*.iml
-medication/ont.medMgr/target
 medication/pom/*.iml
 medication/test_medication_manager.service/*.iml
 medication/test_medication_manager.service/*.log
