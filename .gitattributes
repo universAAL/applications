@@ -673,6 +673,7 @@ medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/M
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Precaution.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Time.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/UserIDs.java -text
+medication/medication.manager.pom/pom.xml -text
 medication/medication.manager.service/artifact.composite -text
 medication/medication.manager.service/pom.xml -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Activator.java -text
