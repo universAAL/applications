@@ -8,6 +8,8 @@ import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.ontology.medMgr.Precaution;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.medMgr.UserIDs;
+import org.universAAL.AALapplication.medication_manager.simulation.MedicationConsumer;
+import org.universAAL.AALapplication.medication_manager.simulation.MissedIntakeContextProvider;
 
 import java.util.Dictionary;
 import java.util.Enumeration;

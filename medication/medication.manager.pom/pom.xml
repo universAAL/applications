@@ -1,20 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <!--<parent>
-    <groupId>org.universAAL.AALapplication</groupId>
-    <artifactId>new_services.pom</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-    <relativePath>../../new_services.pom</relativePath>
-  </parent>-->
   <parent>
     <artifactId>new_services.pom</artifactId>
     <groupId>org.universAAL.AALapplication</groupId>
     <version>B.0</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
-  <artifactId>medication_manager.pom</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <artifactId>medication.manager.pom</artifactId>
+  <version>B.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Medication Manager AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Medication_manager_universAAL_service</url>
@@ -87,10 +81,11 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.3.2</version>
           <inherited>true</inherited>
           <configuration>
-            <source>1.5</source>
-            <target>1.5</target>
+            <source>${maven.compile.source}</source>
+            <target>${maven.compile.target}</target>
           </configuration>
         </plugin>
         <plugin>
@@ -137,6 +132,7 @@
   <modules>
     <module>../medication.manager.ont</module>
     <module>../medication.manager.service</module>
+    <module>../medication.missing.services.simulation</module>
     <module>../medication.manager.integration.tests</module>
   </modules>
 </project>

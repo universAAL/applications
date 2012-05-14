@@ -5,15 +5,18 @@
 
 This folder contains the implementation
 of Medication Manager service. 
-The implementations contains two projects. 
+The implementations contains 4 projects. 
 
-1. medication_manager.service: This folder 
+1. medication.manager.service: This folder 
    contains the source code about the service 
    provider. 
 
-2. ont.medMgr: This folder contains
+2. medication.manager.ont: This folder contains
    the source code about the service ontology
    
-3. test_medication_manager.service_callees. This folder    
-	 contains the project that is used for integration tests only and
-	 its purpouse is to test medication_manager.service's ServiceCallees
+3. medication.missing.services.simulation. This folder is used for
+	 simulating missing UniversAAL service and their actions (like publishing events, 
+	 service callees, service callers and receiving events)
+	 
+4. medication.missing.services.simulation. This folder    
+	 contains the project that is used for integration tests

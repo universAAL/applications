@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
-    <artifactId>medication.manager.pom</artifactId>
     <version>B.0.1-SNAPSHOT</version>
+    <artifactId>medication.manager.pom</artifactId>
     <relativePath>../medication.manager.pom</relativePath>
   </parent>
-  <artifactId>medication.manager.service</artifactId>
-  <name>Medication Manager Service</name>
-  <description>Medication Manage Service</description>
+  <artifactId>medication.missing.services.simulation</artifactId>
+  <name>Missing UniversAAL Services simulation</name>
+  <description>Simulating missing real universAALservices evnts, calls, etc.</description>
   <packaging>bundle</packaging>
 
 
@@ -30,10 +30,11 @@
         <configuration>
           <instructions>
             <Bundle-Name>${project.name}</Bundle-Name>
-            <Bundle-Activator>org.universAAL.AALapplication.medication_manager.impl.Activator</Bundle-Activator>
+            <Bundle-Activator>org.universAAL.AALapplication.medication_manager.simulation.impl.Activator</Bundle-Activator>
             <Bundle-Description>${project.description}</Bundle-Description>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-            <Private-Package>org.universAAL.AALapplication.medication_manager.impl</Private-Package>
+            <Private-Package>org.universAAL.AALapplication.medication_manager.simulation.impl</Private-Package>
+            <Export-Package>org.universAAL.AALapplication.medication_manager.simulation</Export-Package>
           </instructions>
         </configuration>
       </plugin>

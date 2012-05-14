@@ -1,1 +1,2 @@
-scan-composite:mvn:org.universAAL.AALapplication/medication_manager/0.3.2-SNAPSHOT/composite
+scan-composite:mvn:org.universAAL.AALapplication/medication.manager.service/B.0.1-SNAPSHOT/composite
+scan-composite:mvn:org.universAAL.AALapplication/medication.missing.services.simulation/B.0.1-SNAPSHOT/composite

@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.client.impl;
+package org.universAAL.AALapplication.medication_manager.simulation;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
