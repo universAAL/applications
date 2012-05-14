@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.client.impl;
+package org.universAAL.AALapplication.medication_manager.simulation.impl;
 
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;

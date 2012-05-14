@@ -126,6 +126,7 @@ medication/medication.manager.ont/target
 medication/medication.manager.pom/*.iml
 medication/medication.manager.service/*.iml
 medication/medication.manager.service/target
+medication/medication.missing.services.simulation/*.iml
 new_services.pom/.project
 new_services.pom/.settings
 nutritional/NutritionalAdvisor/.classpath

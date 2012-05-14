@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.client.impl;
+package org.universAAL.AALapplication.medication_manager.simulation.impl;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.rdf.Resource;
@@ -7,6 +7,7 @@ import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
+
 
 /**
  * @author George Fournadjiev

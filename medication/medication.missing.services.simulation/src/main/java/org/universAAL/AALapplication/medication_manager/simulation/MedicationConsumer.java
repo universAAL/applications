@@ -1,5 +1,6 @@
-package org.universAAL.AALapplication.medication_manager.client.impl;
+package org.universAAL.AALapplication.medication_manager.simulation;
 
+import org.universAAL.AALapplication.medication_manager.simulation.impl.Log;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;

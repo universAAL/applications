@@ -3,23 +3,28 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
-    <version>0.1.0-SNAPSHOT</version>
-    <artifactId>medication_manager.pom</artifactId>
-    <relativePath>../pom</relativePath>
+    <version>B.0.1-SNAPSHOT</version>
+    <artifactId>medication.manager.pom</artifactId>
+    <relativePath>../medication.manager.pom</relativePath>
   </parent>
-  <artifactId>test_medication_manager_callees</artifactId>
-  <version>0.3.2-SNAPSHOT</version>
-  <name>Test Medication Manager Service callees</name>
-  <description>Test Medication Manager Service callees</description>
+  <artifactId>medication.manager.integration.tests</artifactId>
+  <name>Medication Manager Service integration tests</name>
+  <description>Medication Manager Service integration tests</description>
   <packaging>bundle</packaging>
 
 
   <dependencies>
 
     <dependency>
+      <groupId>org.universAAL.ontology</groupId>
+      <artifactId>medication.manager.ont</artifactId>
+      <version>1.1.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
-      <artifactId>ont.medMgr</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <artifactId>medication.missing.services.simulation</artifactId>
+      <version>B.0.1-SNAPSHOT</version>
     </dependency>
 
   </dependencies>

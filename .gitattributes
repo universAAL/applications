@@ -662,11 +662,7 @@ medication/README.txt -text
 medication/medication.manager.integration.tests/artifact.composite -text
 medication/medication.manager.integration.tests/pom.xml -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text
-medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/CaregiverNotificationProvider.java -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Log.java -text
-medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationConsumer.java -text
-medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/MissedIntakeContextProvider.java -text
-medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/ProviderCaregiverNotficationService.java -text
 medication/medication.manager.integration.tests/src/test/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationTest.java -text
 medication/medication.manager.ont/pom.xml -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/impl/Activator.java -text
@@ -692,6 +688,14 @@ medication/medication.manager.service/src/main/java/org/universAAL/AALapplicatio
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyPrecautionDatabase.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/PrecautionProvider.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/ProviderPrecautionService.java -text
+medication/medication.missing.services.simulation/artifact.composite -text
+medication/medication.missing.services.simulation/pom.xml -text
+medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/MedicationConsumer.java -text
+medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/MissedIntakeContextProvider.java -text
+medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/Activator.java -text
+medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/CaregiverNotificationProvider.java -text
+medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/Log.java -text
+medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/ProviderCaregiverNotficationService.java -text
 new_services.pom/pom.xml -text
 nutritional/NutritionalAdvisor/LICENSE.txt -text
 nutritional/NutritionalAdvisor/NOTICE.txt -text
