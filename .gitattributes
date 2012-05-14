@@ -682,7 +682,6 @@ medication/medication.manager.service/src/main/java/org/universAAL/AALapplicatio
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyPrecautionDatabase.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/PrecautionProvider.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/ProviderPrecautionService.java -text
-medication/pom/pom.xml -text
 medication/test_medication_manager.service/artifact.composite -text
 medication/test_medication_manager.service/pom.xml -text
 medication/test_medication_manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text
