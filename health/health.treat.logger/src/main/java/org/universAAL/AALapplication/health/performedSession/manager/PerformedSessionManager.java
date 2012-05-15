@@ -43,33 +43,40 @@ public interface PerformedSessionManager {
 
 	/**
 	 * Returns a {@java.util.List} of all the performed sessions that are 
-	 * associated to the given user.
+	 * associated to the given user and treatment.
 	 * 
 	 * @param userURI The URI of the user who performed the sessions
+	 * @param treatmentURI The URI of the associated treatment   
 	 * 
-	 * @return All the sessions that were performed by the user 
+	 * @return All the sessions that were performed by the user for the given
+	 * treatment
 	 */
-	public List getAllPerformedSessions(String userURI);
+	public List getAllPerformedSessions(String userURI, String treatmentURI);
 
 	/**
 	 * Returns a {@java.util.List} of all the performed sessions that are 
-	 * associated to the given user and are between the given timestamps.
+	 * associated to the given user and treatment and are between the given 
+	 * timestamps.
 	 * 
 	 * @param userURI The URI of the user who performed the sessions
+	 * @param treatmentURI The URI of the associated treatment   
      * @param timestampFrom The lower bound of the period
      * @param timestampTo The upper bound of the period
 	 * 
-	 * @return The sessions that were performed by the user in a specific 
-	 * period of time  
+	 * @return The sessions that were performed by the user for the given 
+	 * treatment in a specific period of time  
 	 */
 	public List getPerformedSessionsBetweenTimestamps(String userURI, 
-			long timestampFrom, long timestampTo);
+			String treatmentURI, long timestampFrom, long timestampTo);
 
 	/**
-	 * Stores the new session that was performed by the user.
+	 * Stores the new session that was performed by the user for the given
+	 * treatment.
 	 * 
 	 * @param userURI The URI of the user who performed this session
+	 * @param treatmentURI The URI of the associated treatment 
 	 * @param session The session that was performed by the user
 	 */
-	public void sessionPerformed(String userURI, PerformedSession session);
+	public void sessionPerformed(String userURI, String treatmentURI, 
+			PerformedSession session);
 }
