@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.universAAL.AALapplication.agenda.runner.build</groupId>
+  <artifactId>deployment</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Runner Folder</name>
+  <properties>
+    <eclipsePluginsDir>f:\eclipse\eclipse-SDK-3.5.1-win32\plugins</eclipsePluginsDir>
+  </properties>
+  <repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>uaal</id>
+      <name>universAAL Repositories</name>
+      <url>http://depot.universaal.org/maven-repo/releases/</url>
+    </repository>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <id>uaal-snapshots</id>
+      <name>universAAL Snapshot Repositories</name>
+      <url>http://depot.universaal.org/maven-repo/snapshots/</url>
+    </repository>
+    <repository>
+      <id>uaal-thirdparty</id>
+      <name>universAAL ThirdParty Repositories</name>
+      <url>http://depot.universaal.org/maven-repo/thirdparty/</url>
+    </repository>
+    <repository>
+      <id>iks-repository</id>
+      <name>Redirection</name>
+      <url>http://depot.universaal.org/maven-repo/thirdparty/</url>
+    </repository>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>central</id>
+      <name>Maven Repository Switchboard</name>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+  </repositories>
+</project>
