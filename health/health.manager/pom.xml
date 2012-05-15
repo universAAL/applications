@@ -49,6 +49,11 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.health</artifactId>
 		</dependency>
+		<dependency>
+        	<groupId>org.universAAL.middleware</groupId>
+        	<artifactId>mw.bus.io</artifactId>
+        	<version>1.0.1-SNAPSHOT</version>
+      	</dependency>
 	</dependencies>
 
 	<build>
