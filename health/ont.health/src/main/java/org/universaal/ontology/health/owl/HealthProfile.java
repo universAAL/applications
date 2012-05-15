@@ -1,5 +1,8 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es - Universidad Polit√©cnica de Madrid
+ *
+ * OCO Source Materials
+ * © Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,46 +26,50 @@ import org.universAAL.ontology.profile.SubProfile;
 
 public class HealthProfile extends SubProfile{
 
-//NAMESPACE & PROPERTIES
-  public static final String MY_URI = HealthOntology.NAMESPACE
-    + "HealthProfile";
-  public static final String PROP_HAS_TREATMENT = HealthOntology.NAMESPACE
-    + "hasTreatment";
-  public static final String PROP_IS_ASSIGNED_TO_AP = HealthOntology.NAMESPACE
-  + "isAssignedToAP";
+	//NAMESPACE & PROPERTIES
+	public static final String MY_URI = HealthOntology.NAMESPACE
+    	+ "HealthProfile";
+	public static final String PROP_HAS_TREATMENT = HealthOntology.NAMESPACE
+    	+ "hasTreatment";
+	public static final String PROP_IS_ASSIGNED_TO_AP = HealthOntology.NAMESPACE
+		+ "isAssignedToAP";
+	
+	//CONSTRUCTORS
+	public HealthProfile () {
+		super();
+	}
   
-//CONSTRUCTORS
-  public HealthProfile () {
-    super();
-  }
+	public HealthProfile (String uri) {
+		super(uri);
+	}
+	
+	public HealthProfile (Treatment t){
+		this.addTreatment(t);
+	}
   
-  public HealthProfile (String uri) {
-	  super(uri);
-  }
-  public HealthProfile (Treatment t){
-	  this.addTreatment(t);
-  }
-  
-  public HealthProfile (Treatment[] ts){
-	  this.setTreatments(ts);
-  }
-  /*
-  public HealthProfile (AssistedPersonWithHealthProfile apwhp, Treatment t){
-	  this.setAssignedAssistedPerson(apwhp);
-	  this.addTreatment(t);
-  }
+	public HealthProfile (Treatment[] ts){
+		this.setTreatments(ts);
+	}
+	
+	/*
+  	public HealthProfile (AssistedPersonWithHealthProfile apwhp, Treatment t){
+	  	this.setAssignedAssistedPerson(apwhp);
+	  	this.addTreatment(t);
+  	}
 
-  public HealthProfile (AssistedPersonWithHealthProfile apwhp, Treatment[] ts){
-	  this.setAssignedAssistedPerson(apwhp);
-	  this.setTreatments(ts);
-  }
-*/
-  public String getClassURI() {
-    return MY_URI;
-  }
-  public int getPropSerializationType(String arg0) {
-	return PROP_SERIALIZATION_FULL;
-  }
+  	public HealthProfile (AssistedPersonWithHealthProfile apwhp, Treatment[] ts){
+	  	this.setAssignedAssistedPerson(apwhp);
+	  	this.setTreatments(ts);
+  	}
+	*/
+	
+	public String getClassURI() {
+		return MY_URI;
+	}
+  
+	public int getPropSerializationType(String arg0) {
+		return PROP_SERIALIZATION_FULL;
+	}
 
   public boolean isWellFormed() {
 	return true 
@@ -70,8 +77,7 @@ public class HealthProfile extends SubProfile{
       && props.containsKey(PROP_IS_ASSIGNED_TO_AP);
   }
   
-//GETTERS & SETTERS
-
+  //GETTERS & SETTERS
   public AssistedPerson getAssignedAssistedPerson() {
 	  return (AssistedPerson)props.get(PROP_IS_ASSIGNED_TO_AP);
   }		
@@ -118,13 +124,58 @@ public class HealthProfile extends SubProfile{
 		}
 	}
 
+	/**
+	 * Deletes a treatment with the given URI from the list.
+	 *  
+	 * @param treatmentURI The URI of the treatment to be deleted
+	 * 
+	 * @return True if the treatment was found and deleted from the list, 
+	 * otherwise returns False 
+	 */
+	public boolean deleteTreatment(String treatmentURI) {
+		boolean found = false;
+		List list = new ArrayList();
+		Treatment[] treatments = getTreatments();
+		for(int i=0; i<treatments.length; i++) {
+			if(treatments[i].getURI().equals(treatmentURI)) {
+				found = true;	
+			} else {
+				list.add(treatments[i]);
+			}
+		}
+		props.put(PROP_HAS_TREATMENT, list);
+		return found;
+	}
+
+	/**
+	 * Replaces the given treatment with the treatment in the list with the same 
+	 * URI.
+	 *  
+	 * @param treatment The new treatment to be added to the list  
+	 * 
+	 * @return True if the treatment was found and replaced, otherwise returns 
+	 * False 
+	 */
+	public boolean editTreatment(Treatment treatment) {
+		boolean found = false;
+		List list = new ArrayList();
+		Treatment[] treatments = getTreatments();
+		for(int i=0; i<treatments.length; i++) {
+			if(treatments[i].getURI().equals(treatment.getURI())) {
+				found = true;	
+				list.add(treatment);
+			} else {
+				list.add(treatments[i]);
+			}
+		}
+		props.put(PROP_HAS_TREATMENT, list);
+		return found;
+	}
   
- //OTHER METHODS
-	
-  public void assignHealthProfileToAP(AssistedPerson ap){
-	  this.setAssignedAssistedPerson(ap);
-	  //The assisted person becomes an assisted person with a health profile
-	  //AssistedPersonWithHealthProfile apwhp = new AssistedPersonWithHealthProfile(this);
-	  
-  }
+	//OTHER METHODS
+	public void assignHealthProfileToAP(AssistedPerson ap){
+		this.setAssignedAssistedPerson(ap);
+		//The assisted person becomes an assisted person with a health profile
+		//AssistedPersonWithHealthProfile apwhp = new AssistedPersonWithHealthProfile(this);
+	}
 }
