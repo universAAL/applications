@@ -555,6 +555,7 @@ health/ont.health/HealthOntology.di -text
 health/ont.health/HealthOntology.notation -text
 health/ont.health/HealthOntology.uml -text svneol=unset#text/plain
 health/ont.health/LICENSE-2.0.txt -text
+health/ont.health/NOTICE -text
 health/ont.health/pom.xml -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/Activator.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/HealthOntologyFactory.java -text svneol=unset#application/octet-stream
