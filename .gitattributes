@@ -491,6 +491,7 @@ health/health.manager/pom.xml -text
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/HealthManager.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ISubscriber.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/OPublisher.java -text svneol=unset#text/plain
+health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ProfileServerManager.java -text
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/osgi/Activator.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/InputListener.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/MainForm.java -text svneol=unset#text/plain
