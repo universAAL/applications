@@ -35,16 +35,17 @@
 		<module>../ont.health</module>
 		<module>../ont.healthmeasurement</module>
 		<module>../ont.message</module>
-<!-- 		<module>../health.treat.logger</module> -->
-<!-- 		<module>../health.treat.manager</module> -->
-		<module>../health.motivation</module>
+		<module>../health.performedSession.manager</module>
+		<module>../health.treat.manager</module>
+		<!-- module>../health.motivation</module -->
+		<module>../health.manager</module>
 	</modules>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>
-				<artifactId>health.treat.logger</artifactId>
+				<artifactId>health.performedSession.manager</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
