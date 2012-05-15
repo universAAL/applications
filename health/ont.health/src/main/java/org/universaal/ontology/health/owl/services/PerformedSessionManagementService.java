@@ -42,6 +42,7 @@ public class PerformedSessionManagementService extends HealthService{
 	+ "managesSession";
 
 	//INPUT PARAMETERS URI
+	public static final String INPUT_TREATMENT         = HealthOntology.NAMESPACE + "treatment";
 	public static final String INPUT_PERFORMED_SESSION = HealthOntology.NAMESPACE + "performedSession";
 
     //OUTPUT PARAMETERS URI    

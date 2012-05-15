@@ -1,5 +1,8 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es - Universidad Polit√©cnica de Madrid
+ *
+ * OCO Source Materials
+ * © Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +18,8 @@
  ******************************************************************************/
 
 package org.universaal.ontology.health.owl;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.universAAL.middleware.owl.ManagedIndividual;
 
 public class PerformedSession extends ManagedIndividual{
@@ -45,6 +50,15 @@ public class PerformedSession extends ManagedIndividual{
 		  return PROP_SERIALIZATION_FULL;
 	  }
 
+	  public XMLGregorianCalendar getDate() {
+		  return (XMLGregorianCalendar)props.get(PROP_DATE);
+	  }		
+
+	  public void setDate(XMLGregorianCalendar date) {
+		  if(date != null)
+			  props.put(PROP_DATE, date);
+	  }		
+	  
 	  public boolean isWellFormed() {
 		return true
 		&& props.containsKey(PROP_DATE)
