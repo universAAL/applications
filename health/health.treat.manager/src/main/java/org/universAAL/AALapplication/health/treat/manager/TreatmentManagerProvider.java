@@ -24,7 +24,7 @@ package org.universAAL.AALapplication.health.treat.manager;
 
 import java.util.List;
 
-import org.universAAL.AALapplication.health.treat.manager.impl.JenaConverterTreatmentManager;
+import org.universAAL.AALapplication.health.treat.manager.impl.ProfileServerTreatmentManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -92,7 +92,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		super(context, profiles);
 
 		// the actual implementation of the treatment manager
-		treatmentManager = new JenaConverterTreatmentManager(context);
+		treatmentManager = new ProfileServerTreatmentManager(context);
 	}
 
 	public void communicationChannelBroken() {
@@ -167,6 +167,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	 * @param userURI The URI of the user
 	 */
 	private ServiceResponse getAllTreatments(String userURI) {
+		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
 		List treatmentsList = treatmentManager.getAllTreatments(userURI);
@@ -186,6 +187,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	 */
 	private ServiceResponse getTreatmentsBetweenTimestamps(
 			String userURI, long timestampFrom, long timestampTo) {
+		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
 		List treatmentsList = treatmentManager.getTreatmentsBetweenTimestamps(
@@ -203,6 +205,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	 * @param treatment The treatment to be added
 	 */
 	private ServiceResponse newTreatment(String userURI, Treatment treatment) {
+		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
 		treatmentManager.newTreatment(userURI, treatment);
@@ -217,6 +220,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	 * @param treatmentURI The treatment to be deleted
 	 */
 	private ServiceResponse deleteTreatment(String userURI, String treatmentURI) {
+		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
 		treatmentManager.deleteTreatment(userURI, treatmentURI);
@@ -233,6 +237,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	 */
 	private ServiceResponse editTreatment(
 			String userURI, String oldTreatmentURI, Treatment newTreatment) {
+		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
 		treatmentManager.editTreatment(userURI, oldTreatmentURI, newTreatment);

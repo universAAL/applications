@@ -41,15 +41,15 @@ import org.universaal.ontology.health.owl.Treatment;
 public interface TreatmentManager {
 
 	/**
-	 * Adds a new treatment definition to the user profile.
+	 * Adds a new treatment definition to the user health profile.
 	 * 
 	 * @param userURI The URI of the user
-	 * @param treatment The treatment to be added to the user profile
+	 * @param treatment The treatment to be added to the health profile
 	 */
 	public void newTreatment(String userURI, Treatment treatment);
 
 	/**
-	 * Deletes a treatment definition from the user profile.
+	 * Deletes a treatment definition from the user health profile.
 	 * 
 	 * @param userURI The URI of the user
 	 * @param treatmentURI The treatment to be deleted
@@ -57,35 +57,35 @@ public interface TreatmentManager {
 	public void deleteTreatment(String userURI, String treatmentURI);
 
 	/**
-	 * Edits a treatment in the user profile.
+	 * Edits a treatment in the user health profile.
 	 * 
 	 * @param userURI The URI of the user
-	 * @param oldTreatmentURI The URI of the treatment to be changed
+	 * @param treatmentURI The URI of the treatment to be changed
 	 * @param newTreatment The new treatment
 	 */
-	public void editTreatment(String userURI, String oldTreatmentURI, 
+	public void editTreatment(String userURI, String treatmentURI, 
 			Treatment newTreatment);
 
 	/**
-	 * Returns a {@java.util.List} of all the definition of the treatments that
-	 * are associated with the given user.
+	 * Returns a {java.util.List} of all the treatments that are associated with
+	 * the given user health profile.
 	 * 
 	 * @param userURI The URI of the user
 	 * 
-	 * @return All the treatment definitions that are associated with the user 
+	 * @return All the treatments that are associated with the user 
 	 */
 	public List getAllTreatments(String userURI);
 	
 	/**
-	 * Returns a {@java.util.List} of all the definition of the treatments that
-	 * are associated with the given user and are between the given timestamps.
+	 * Returns a {java.util.List} of all the treatments that are associated with 
+	 * the given user health profile and are between the given timestamps.
 	 * 
 	 * @param userURI The URI of the user
      * @param timestampFrom The lower bound of the period
      * @param timestampTo The upper bound of the period
 	 * 
-	 * @return All the treatment definitions that are associated with the user 
-	 * in a specific period of time
+	 * @return All the treatments that are associated with the user in a 
+	 * specific period of time
 	 */
 	public List getTreatmentsBetweenTimestamps(String userURI, 
 			long timestampFrom, long timestampTo);
