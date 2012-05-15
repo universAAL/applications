@@ -24,6 +24,11 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.health</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>health.manager</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

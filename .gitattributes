@@ -541,7 +541,7 @@ health/health.treat.manager/NOTICE -text
 health/health.treat.manager/pom.xml -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManager.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerProvider.java -text
-health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/impl/JenaConverterTreatmentManager.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/impl/ProfileServerTreatmentManager.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/osgi/Activator.java -text
 health/ont.disease/Disease.di -text
 health/ont.disease/Disease.notation -text
