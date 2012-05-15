@@ -25,8 +25,9 @@
 			<artifactId>ont.health</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.context</groupId>
-			<artifactId>ctxt.che</artifactId>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>health.manager</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 

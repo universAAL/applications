@@ -24,7 +24,7 @@ package org.universAAL.AALapplication.health.performedSession.manager;
 
 import java.util.List;
 
-import org.universAAL.AALapplication.health.performedSession.manager.impl.ContextHistoryPerformedSessionManager;
+import org.universAAL.AALapplication.health.performedSession.manager.impl.ProfileServerPerformedSessionManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -88,7 +88,7 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 		super(context, profiles);
 
 		// the actual implementation of the performed session manager
-		performedSessionManager = new ContextHistoryPerformedSessionManager(context);
+		performedSessionManager = new ProfileServerPerformedSessionManager(context);
 	}
 
 	public void communicationChannelBroken() {
@@ -116,8 +116,12 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 		if(userInput == null)
 		    return null;
 
+		Object treatmentInput = call.getInputValue(PerformedSessionManagementService.INPUT_TREATMENT);
+		if(treatmentInput == null)
+		    return null;
+
 		if(operation.startsWith(ListPerformedSessionService.MY_URI))
-			return getAllPerformedsessions(userInput.toString());
+			return getAllPerformedsessions(userInput.toString(), treatmentInput.toString());
 
 		Object performedSessionInput = call
 			.getInputValue(PerformedSessionManagementService.INPUT_PERFORMED_SESSION);
@@ -131,26 +135,31 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 		if(timestampFromInput != null && timestampToInput != null &&
 				operation.startsWith(ListPerformedSessionBetweenTimeStampsService.MY_URI))
 		    return getPerformedSessionsBetweenTimestamps(
-		    		userInput.toString(), ((Long)timestampFromInput).longValue(), 
+		    		userInput.toString(), treatmentInput.toString(), 
+		    		((Long)timestampFromInput).longValue(), 
 		    		((Long)timestampToInput).longValue());
 
 		if(performedSessionInput != null &&
 				operation.startsWith(SessionPerformedService.MY_URI))
-		    return sessionPerformed(userInput.toString(), (PerformedSession)performedSessionInput);
+		    return sessionPerformed(userInput.toString(), treatmentInput.toString(), 
+		    		(PerformedSession)performedSessionInput);
 		
 		return null;
 	}
 	
 	/**
 	 * Creates a service response that including all the performed sessions that 
-	 * are associated with the given user.
+	 * are associated with the given user and treatment.
 	 * 
 	 * @param userURI The URI of the user
+	 * @param treatmentURI The URI of the associated treatment   
 	 */
-	private ServiceResponse getAllPerformedsessions(String userURI) {
+	private ServiceResponse getAllPerformedsessions(String userURI, String treatmentURI) {
+		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		List performedSessionsList = performedSessionManager.getAllPerformedSessions(userURI);
+		List performedSessionsList = 
+			performedSessionManager.getAllPerformedSessions(userURI, treatmentURI);
 		sr.addOutput(new ProcessOutput(
 				PerformedSessionManagementService.OUTPUT_PERFORMED_SESSIONS, performedSessionsList));
 		
@@ -159,18 +168,21 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 
 	/**
 	 * Creates a service response that including all the performed sessions that 
-	 * are associated with the given user and are between the given timestamps.
+	 * are associated with the given user and treatment and are between the 
+	 * given timestamps.
 	 * 
 	 * @param userURI The URI of the user
+	 * @param treatmentURI The URI of the associated treatment   
      * @param timestampFrom The lower bound of the period
      * @param timestampTo The upper bound of the period
 	 */
 	private ServiceResponse getPerformedSessionsBetweenTimestamps(
-			String userURI, long timestampFrom, long timestampTo) {
+			String userURI, String treatmentURI, long timestampFrom, long timestampTo) {
+		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
 		List performedSessionsList = performedSessionManager.
-				getPerformedSessionsBetweenTimestamps(userURI, timestampFrom, timestampTo);
+				getPerformedSessionsBetweenTimestamps(userURI, treatmentURI, timestampFrom, timestampTo);
 		sr.addOutput(new ProcessOutput(
 				PerformedSessionManagementService.OUTPUT_PERFORMED_SESSIONS, performedSessionsList));
 		
@@ -179,15 +191,18 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 	
 	/**
 	 * Creates a service response for storing a session that was performed by 
-	 * the given user.
+	 * the given user for the given treatment.
 	 * 
 	 * @param userURI The URI of the user 
+	 * @param treatmentURI The URI of the associated treatment   
 	 * @param session The session that was performed by the user
 	 */
-	private ServiceResponse sessionPerformed(String userURI, PerformedSession session) {
+	private ServiceResponse sessionPerformed(String userURI, 
+			String treatmentURI, PerformedSession session) {
+		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		performedSessionManager.sessionPerformed(userURI, session);
+		performedSessionManager.sessionPerformed(userURI, treatmentURI, session);
 		
 		return sr;
 	}
