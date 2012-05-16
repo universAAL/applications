@@ -26,8 +26,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
-			<artifactId>health.manager</artifactId>
-			<version>${project.version}</version>
+			<artifactId>health.profile.manager</artifactId>
 		</dependency>
 	</dependencies>
 

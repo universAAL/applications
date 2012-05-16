@@ -84,6 +84,10 @@ public class HealthOntologyFactory extends ResourceFactoryImpl {
     	  return new ListPerformedSessionBetweenTimeStampsService(instanceURI);
       case 29:
       	  return new SessionPerformedService(instanceURI);
+      case 30:
+    	  return new GetProfileService(instanceURI);
+      case 31:
+    	  return new UpdateProfileService(instanceURI);
 	}
 	return null;
   }
