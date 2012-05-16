@@ -38,6 +38,7 @@ import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.health.Illness;
 import org.universaal.ontology.health.HealthOntologyFactory;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
+import org.universaal.ontology.health.owl.services.GetProfileService;
 import org.universaal.ontology.health.owl.services.HealthService;
 import org.universaal.ontology.health.owl.services.ListPerformedSessionBetweenTimeStampsService;
 import org.universaal.ontology.health.owl.services.ListPerformedSessionService;
@@ -46,9 +47,11 @@ import org.universaal.ontology.health.owl.services.ListTreatmentService;
 import org.universaal.ontology.health.owl.services.NewTreatmentService;
 import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universaal.ontology.health.owl.services.PlannedSessionManagementService;
+import org.universaal.ontology.health.owl.services.ProfileManagementService;
 import org.universaal.ontology.health.owl.services.RemoveTreatmentService;
 import org.universaal.ontology.health.owl.services.SessionPerformedService;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
+import org.universaal.ontology.health.owl.services.UpdateProfileService;
 import org.universaal.ontology.healthmeasurement.owl.BloodPressure;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurement;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
@@ -555,5 +558,22 @@ public final class HealthOntology extends Ontology {
     oci.setResourceLabel("SessionPerformedService");
     oci.addSuperClass(PerformedSessionManagementService.MY_URI);    
     
+    //load ProfileManagementService
+    oci = createNewAbstractOntClassInfo(ProfileManagementService.MY_URI);
+    oci.setResourceComment("Services to manage Health Profile.");
+    oci.setResourceLabel("HealthProfileManagementService");
+    oci.addSuperClass(HealthService.MY_URI);    
+    
+    //load GetProfileService
+    oci = createNewOntClassInfo(GetProfileService.MY_URI, factory, 30);
+    oci.setResourceComment("Service to get Health Profile.");
+    oci.setResourceLabel("GetProfileService");
+    oci.addSuperClass(ProfileManagementService.MY_URI);
+    
+    //load UpdateProfileService
+    oci = createNewOntClassInfo(UpdateProfileService.MY_URI, factory, 31);
+    oci.setResourceComment("Service to update Health Profile.");
+    oci.setResourceLabel("UpdateProfileService");
+    oci.addSuperClass(ProfileManagementService.MY_URI);
   }
 }

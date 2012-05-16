@@ -35,6 +35,7 @@
 		<module>../ont.health</module>
 		<module>../ont.healthmeasurement</module>
 		<module>../ont.message</module>
+		<module>../health.profile.manager</module>
 		<module>../health.treat.logger</module>
 		<module>../health.treat.manager</module>
 		<!-- module>../health.motivation</module -->
@@ -51,6 +52,11 @@
 			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>health.treat.manager</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>health.profile.manager</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

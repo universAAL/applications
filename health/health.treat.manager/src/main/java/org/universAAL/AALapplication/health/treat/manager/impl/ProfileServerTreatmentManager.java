@@ -25,7 +25,7 @@ package org.universAAL.AALapplication.health.treat.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.universAAL.AALapplication.health.manager.ProfileServerManager;
+import org.universAAL.AALApplication.health.profile.manager.ProfileServerManager;
 import org.universAAL.AALapplication.health.treat.manager.TreatmentManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;

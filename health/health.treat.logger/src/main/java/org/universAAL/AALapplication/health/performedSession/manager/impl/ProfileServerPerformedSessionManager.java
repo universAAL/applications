@@ -25,7 +25,7 @@ package org.universAAL.AALapplication.health.performedSession.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.universAAL.AALapplication.health.manager.ProfileServerManager;
+import org.universAAL.AALApplication.health.profile.manager.ProfileServerManager;
 import org.universAAL.AALapplication.health.performedSession.manager.PerformedSessionManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
