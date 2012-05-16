@@ -38,7 +38,7 @@ public class MotivationalPlainMessage extends MotivationalMessage {
   }
   */
   
-  public MotivationalPlainMessage(String illness, TreatmentTypeClassification ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, String message){
+  public MotivationalPlainMessage(String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, String message){
 	  super(illness, ttype, motStatus, mtype, message);
   }
   

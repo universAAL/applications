@@ -52,7 +52,7 @@ public class MotivationalQuestionnaire extends MotivationalMessage {
   }
   */
   
-  public MotivationalQuestionnaire(String illness, TreatmentTypeClassification ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, Questionnaire questionnaire){
+  public MotivationalQuestionnaire(String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, Questionnaire questionnaire){
 	  super(illness, ttype, motStatus, mtype, questionnaire);
 	  this.setHasQuestionnaire(questionnaire);
   }
