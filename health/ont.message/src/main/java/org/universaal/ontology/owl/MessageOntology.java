@@ -64,12 +64,6 @@ public final class MessageOntology extends Ontology {
     oci.toEnumeration(new ManagedIndividual[] {
        MotivationalMessageClassification.educational, MotivationalMessageClassification.reminder, MotivationalMessageClassification.reward, MotivationalMessageClassification.personalizedFeedback, MotivationalMessageClassification.test, MotivationalMessageClassification.inquiry, MotivationalMessageClassification.notification });
 
-    //load TreatmentTypeClassification
-    oci = createNewAbstractOntClassInfo(TreatmentTypeClassification.MY_URI);
-    oci.setResourceComment("");
-    oci.setResourceLabel("TreatmentTypeClassification");
-    oci.toEnumeration(new ManagedIndividual[] {
-    		TreatmentTypeClassification.all, TreatmentTypeClassification.takeMeasurement, TreatmentTypeClassification.physicalActivity, TreatmentTypeClassification.diet });
 
     // ******* Regular classes of the ontology ******* //
 
@@ -117,7 +111,7 @@ public final class MessageOntology extends Ontology {
     oci.addDatatypeProperty(MotivationalMessage.PROP_TREATMENT_TYPE);
     oci.addRestriction(MergedRestriction
     		.getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_TREATMENT_TYPE, 
-    				TreatmentTypeClassification.MY_URI, 1, 1));
+    				TypeMapper.getDatatypeURI(String.class), 1, 1));
     
     oci.addDatatypeProperty(MotivationalMessage.PROP_MOTIVATIONAL_STATUS);
     oci.addRestriction(MergedRestriction

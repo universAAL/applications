@@ -16,10 +16,7 @@
 package org.universaal.ontology.owl;
 
 
-import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.owl.TreatmentTypeClassification;
 
 
 
@@ -49,9 +46,9 @@ public abstract class MotivationalMessage extends Message {
     super(uri);
   }
   
-  public MotivationalMessage (String illness, TreatmentTypeClassification ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, Object content) {
+  public MotivationalMessage (String illness, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, Object content) {
 	  	this.setIllness(illness);
-	  	this.setTreatmentType(ttype);
+	  	this.setTreatmentType(treatmentType);
 	  	this.setMotivationalStatus(motStatus);
 	  	this.setMMessageType(mtype);
 	  	this.setContent(content);
@@ -126,11 +123,11 @@ public abstract class MotivationalMessage extends Message {
   }		
 
 
-  public TreatmentTypeClassification getTreatmentType() {
-    return (TreatmentTypeClassification)props.get(PROP_TREATMENT_TYPE);
+  public String getTreatmentType() {
+    return (String)props.get(PROP_TREATMENT_TYPE);
   }		
 
-  public void setTreatmentType(TreatmentTypeClassification ttype) {
+  public void setTreatmentType(String ttype) {
     if (ttype != null)
       props.put(PROP_TREATMENT_TYPE, ttype);
   }	
