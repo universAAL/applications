@@ -41,11 +41,26 @@ public class ListPerformedSessionBetweenTimeStampsService extends ListPerformedS
 		+ "listsPerformedSessionsTimestampFrom";
 	public static final String PROP_TIMESTAMP_TO =  HealthOntology.NAMESPACE
 		+ "listsPerformedSessionsTimestampTo";
+	
+	// I/O
+	
+	public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "psTimestampFrom";
+
+	public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "psTimestampTo";
 
 	//CONSTRUCTOR	
 	public ListPerformedSessionBetweenTimeStampsService() {
 		super();
-    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+		buildProfile();
+	}		
+	
+	public ListPerformedSessionBetweenTimeStampsService(String instanceURI) {
+		super(instanceURI);
+		buildProfile();
+	}
+
+	private void buildProfile() {
+		addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
     			new String[] { PROP_ASSISTED_USER });
     	addFilteringInput(INPUT_TIMESTAMP_FROM, TypeMapper.getDatatypeURI(Long.class), 1, 1, 
     			new String[] { PROP_TIMESTAMP_FROM });
@@ -53,12 +68,8 @@ public class ListPerformedSessionBetweenTimeStampsService extends ListPerformedS
     			new String[] { PROP_TIMESTAMP_TO });
     	addOutput(OUTPUT_PERFORMED_SESSIONS, PerformedSession.MY_URI, 0, -1, 
     			new String[] { PROP_LISTS_PERFORMED_SESSIONS });
-	}		
-	
-	public ListPerformedSessionBetweenTimeStampsService(String instanceURI) {
-		super(instanceURI);
 	}
-
+	
 	public String getClassURI() {
 		return MY_URI;
 	}

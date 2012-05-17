@@ -42,16 +42,21 @@ public class ListTreatmentService extends TreatmentManagementService {
 	//CONSTRUCTOR	
 	public ListTreatmentService() {
 		super();
-    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
-    			new String[] { PROP_ASSISTED_USER });
-    	addOutput(OUTPUT_TREATMENTS, Treatment.MY_URI, 0, -1, 
-    			new String[] { PROP_LISTS_TREATMENTS });
+		buildProfile();
 	}		
 	
 	public ListTreatmentService(String instanceURI) {
 		super(instanceURI);
+		buildProfile();
 	}
 
+	private void buildProfile() {
+		addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+    			new String[] { PROP_ASSISTED_USER });
+    	addOutput(OUTPUT_TREATMENTS, Treatment.MY_URI, 0, -1, 
+    			new String[] { PROP_LISTS_TREATMENTS });
+	}
+	
 	public String getClassURI() {
 		return MY_URI;
 	}

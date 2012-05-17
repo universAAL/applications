@@ -530,6 +530,7 @@ health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
 health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
 health/health.pom/pom.xml -text svneol=unset#text/plain
 health/health.profile.manager/pom.xml -text
+health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProvider.java -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ProfileServerManager.java -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ProjectActivator.java -text
 health/health.test.treatment.generator/pom.xml -text

@@ -60,14 +60,8 @@ public class HealthOntologyFactory extends ResourceFactoryImpl {
    	    return new ActivityHeartRateRequirement(instanceURI);
       case 17:
    	    return new ReposeHeartRateRequirement(instanceURI);
-      case 18:
-     	return new TreatmentManagementService(instanceURI);
-      case 19:
-       	return new PlannedSessionManagementService(instanceURI);
       case 20:
         return new PerformedSessionManagementService(instanceURI);
-      case 21:
-          return new HealthService(instanceURI);
       case 22:
     	  return new NewTreatmentService(instanceURI);
       case 23:

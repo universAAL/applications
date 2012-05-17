@@ -33,7 +33,7 @@ public class GetProfileService extends ProfileManagementService{
 	public static final String MY_URI = HealthOntology.NAMESPACE
 	+ "GetProfileService";
 
-	private void setProfile() {
+	private void buildProfile() {
 		addFilteringInput(INPUT_USER, AssistedPerson.MY_URI, 1, 1, new String[] {PROP_ASSISTED_USER});
 		addOutput(OUTPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
 	}
@@ -41,12 +41,12 @@ public class GetProfileService extends ProfileManagementService{
     //CONSTRUCTORS
 	public GetProfileService() {
 		super();
-		setProfile();
+		buildProfile();
 	}
 
 	public GetProfileService(String uri) {
 		super(uri);
-		setProfile();
+		buildProfile();
 	}
 
 	public String getClassURI() {

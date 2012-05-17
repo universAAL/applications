@@ -3,7 +3,7 @@
  * Universidad PolitÃ©cnica de Madrid
  * 
  *	OCO Source Materials
- *	© Copyright IBM Corp. 2011
+ *	ï¿½ Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import org.universaal.ontology.health.owl.HealthOntology;
  * 
  * @navassoc - "manages" - Treatment
  */
-public class TreatmentManagementService extends HealthService{
+public abstract class TreatmentManagementService extends HealthService{
 
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE

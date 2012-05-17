@@ -37,14 +37,19 @@ public class SessionPerformedService extends PerformedSessionManagementService {
 	//CONSTRUCTOR	
 	public SessionPerformedService() {
 		super();
-    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
-    			new String[] { PROP_ASSISTED_USER });
-    	addInputWithAddEffect(INPUT_PERFORMED_SESSION, PerformedSession.MY_URI, 1, 1, 
-    			new String[] { PROP_MANAGES_SESSION });
+		buildProfile();
 	}		
 	
 	public SessionPerformedService(String instanceURI) {
 		super(instanceURI);
+		buildProfile();
+	}
+	
+	private void buildProfile() {
+		addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+    			new String[] { PROP_ASSISTED_USER });
+    	addInputWithAddEffect(INPUT_PERFORMED_SESSION, PerformedSession.MY_URI, 1, 1, 
+    			new String[] { PROP_MANAGES_SESSION });
 	}
 
 	public String getClassURI() {

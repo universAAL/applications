@@ -33,14 +33,19 @@ public class RemoveTreatmentService extends TreatmentManagementService {
 	//CONSTRUCTOR	
 	public RemoveTreatmentService() {
 		super();
-    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
-    			new String[] { PROP_ASSISTED_USER });
-    	addInputWithRemoveEffect(INPUT_TREATMENT, Treatment.MY_URI, 1, 1, 
-    			new String[] { PROP_MANAGES_TREATMENT });
+		buildProfile();
 	}		
 	
 	public RemoveTreatmentService(String instanceURI) {
 		super(instanceURI);
+		buildProfile();
+	}
+	
+	private void buildProfile() {
+		addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+    			new String[] { PROP_ASSISTED_USER });
+    	addInputWithRemoveEffect(INPUT_TREATMENT, Treatment.MY_URI, 1, 1, 
+    			new String[] { PROP_MANAGES_TREATMENT });
 	}
 
 	public String getClassURI() {
