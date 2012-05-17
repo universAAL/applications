@@ -26,7 +26,7 @@ import org.universaal.ontology.health.owl.HealthOntology;
  * treatment planning.
  * @author mdelafuente
  */
-public class PlannedSessionManagementService extends HealthService{
+public abstract class PlannedSessionManagementService extends HealthService{
 	
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE

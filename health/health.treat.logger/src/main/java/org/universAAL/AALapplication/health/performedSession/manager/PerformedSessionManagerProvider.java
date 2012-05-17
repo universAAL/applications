@@ -127,10 +127,10 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 			.getInputValue(PerformedSessionManagementService.INPUT_PERFORMED_SESSION);
 
 		Object timestampFromInput = call
-			.getInputValue(PerformedSessionManagementService.INPUT_TIMESTAMP_FROM);
+			.getInputValue(ListPerformedSessionBetweenTimeStampsService.INPUT_TIMESTAMP_FROM);
 
 		Object timestampToInput = call
-			.getInputValue(PerformedSessionManagementService.INPUT_TIMESTAMP_TO);
+			.getInputValue(ListPerformedSessionBetweenTimeStampsService.INPUT_TIMESTAMP_TO);
 
 		if(timestampFromInput != null && timestampToInput != null &&
 				operation.startsWith(ListPerformedSessionBetweenTimeStampsService.MY_URI))

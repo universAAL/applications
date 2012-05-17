@@ -42,10 +42,23 @@ public class ListTreatmentBetweenTimeStampsService extends ListTreatmentService 
 	public static final String PROP_TIMESTAMP_TO =  HealthOntology.NAMESPACE
 		+ "listsTreatmentsTimestampTo";
 
+	public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "timestampFrom";
+
+	public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "timestampTo";
+
 	//CONSTRUCTOR	
 	public ListTreatmentBetweenTimeStampsService() {
 		super();
-    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+		buildProfile();
+	}		
+	
+	public ListTreatmentBetweenTimeStampsService(String instanceURI) {
+		super(instanceURI);
+		buildProfile();
+	}
+
+	private void buildProfile() {
+		addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
     			new String[] { PROP_ASSISTED_USER });
     	addFilteringInput(INPUT_TIMESTAMP_FROM, TypeMapper.getDatatypeURI(Long.class), 1, 1, 
     			new String[] { PROP_TIMESTAMP_FROM });
@@ -53,12 +66,8 @@ public class ListTreatmentBetweenTimeStampsService extends ListTreatmentService 
     			new String[] { PROP_TIMESTAMP_TO });
     	addOutput(OUTPUT_TREATMENTS, Treatment.MY_URI, 0, -1, 
     			new String[] { PROP_LISTS_TREATMENTS });
-	}		
-	
-	public ListTreatmentBetweenTimeStampsService(String instanceURI) {
-		super(instanceURI);
 	}
-
+	
 	public String getClassURI() {
 		return MY_URI;
 	}

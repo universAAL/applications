@@ -33,16 +33,21 @@ public class EditTreatmentService extends TreatmentManagementService {
 	//CONSTRUCTOR	
 	public EditTreatmentService() {
 		super();
+		buildProfile();
+	}		
+	
+	public EditTreatmentService(String instanceURI) {
+		super(instanceURI);
+		buildProfile();
+	}
+	
+	private void buildProfile() {
     	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
     			new String[] { PROP_ASSISTED_USER });
     	addInputWithChangeEffect(INPUT_OLD_TREATMENT, Treatment.MY_URI, 1, 1, 
     			new String[] { PROP_MANAGES_TREATMENT });
     	addInputWithAddEffect(INPUT_NEW_TREATMENT, Treatment.MY_URI, 1, 1, 
-    			new String[] { PROP_MANAGES_TREATMENT });
-	}		
-	
-	public EditTreatmentService(String instanceURI) {
-		super(instanceURI);
+    			new String[] { PROP_MANAGES_TREATMENT });		
 	}
 
 	public String getClassURI() {

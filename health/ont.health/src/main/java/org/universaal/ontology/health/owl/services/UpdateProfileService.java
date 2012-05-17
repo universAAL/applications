@@ -36,7 +36,7 @@ public class UpdateProfileService extends ProfileManagementService{
 	public static final String INPUT_OLD_PROFILE = HealthOntology.NAMESPACE +
 			"oldProfile";
 
-	private void setProfile() {
+	private void buildProfile() {
 		addFilteringInput(INPUT_USER, AssistedPerson.MY_URI, 1, 1, new String[] {PROP_ASSISTED_USER});
 		addFilteringInput(INPUT_OLD_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
 		addOutput(OUTPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
@@ -45,12 +45,12 @@ public class UpdateProfileService extends ProfileManagementService{
     //CONSTRUCTORS
 	public UpdateProfileService() {
 		super();
-		setProfile();
+		buildProfile();
 	}
 
 	public UpdateProfileService(String uri) {
 		super(uri);
-		setProfile();
+		buildProfile();
 	}
 
 	public String getClassURI() {

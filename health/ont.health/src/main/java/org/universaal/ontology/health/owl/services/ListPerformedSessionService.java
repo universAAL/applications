@@ -42,16 +42,21 @@ public class ListPerformedSessionService extends PerformedSessionManagementServi
 	//CONSTRUCTOR	
 	public ListPerformedSessionService() {
 		super();
-    	addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
-    			new String[] { PROP_ASSISTED_USER });
-    	addOutput(OUTPUT_PERFORMED_SESSIONS, PerformedSession.MY_URI, 0, -1, 
-    			new String[] { PROP_LISTS_PERFORMED_SESSIONS });
+		buildProfile();
 	}		
 	
 	public ListPerformedSessionService(String instanceURI) {
 		super(instanceURI);
+		buildProfile();
 	}
 
+	private  void buildProfile() {
+		addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+    			new String[] { PROP_ASSISTED_USER });
+    	addOutput(OUTPUT_PERFORMED_SESSIONS, PerformedSession.MY_URI, 0, -1, 
+    			new String[] { PROP_LISTS_PERFORMED_SESSIONS });
+	}
+	
 	public String getClassURI() {
 		return MY_URI;
 	}

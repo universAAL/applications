@@ -79,7 +79,7 @@ public class ProfileServerManager {
 	 * 
 	 * @return The health profile of the user
 	 */
-	protected HealthProfile getHealthProfile(String userURI) {
+	public HealthProfile getHealthProfile(String userURI) {
 
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
 		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, userURI);
@@ -128,7 +128,7 @@ public class ProfileServerManager {
 	 *  
 	 * @param healthProfile The updated health profile
 	 */
-	protected void updateHealthProfile(HealthProfile healthProfile) {
+	public void updateHealthProfile(HealthProfile healthProfile) {
 		
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
 		req.addAddEffect(new String[] { 

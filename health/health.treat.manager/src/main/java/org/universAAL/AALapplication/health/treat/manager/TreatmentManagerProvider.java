@@ -133,10 +133,10 @@ public class TreatmentManagerProvider extends ServiceCallee {
 			.getInputValue(TreatmentManagementService.INPUT_NEW_TREATMENT);
 
 		Object timestampFromInput = call
-			.getInputValue(TreatmentManagementService.INPUT_TIMESTAMP_FROM);
+			.getInputValue(ListTreatmentBetweenTimeStampsService.INPUT_TIMESTAMP_FROM);
 
 		Object timestampToInput = call
-			.getInputValue(TreatmentManagementService.INPUT_TIMESTAMP_TO);
+			.getInputValue(ListTreatmentBetweenTimeStampsService.INPUT_TIMESTAMP_TO);
 
 		if(timestampFromInput != null && timestampToInput != null &&
 				operation.startsWith(ListTreatmentBetweenTimeStampsService.MY_URI))

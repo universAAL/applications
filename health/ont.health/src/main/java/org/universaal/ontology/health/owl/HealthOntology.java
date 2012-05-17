@@ -457,7 +457,7 @@ public final class HealthOntology extends Ontology {
      */
 
     //load HealthService
-    oci = createNewOntClassInfo(HealthService.MY_URI, factory, 21);
+    oci = createNewAbstractOntClassInfo(HealthService.MY_URI);
     oci.setResourceComment("Description of the health service.");
     oci.setResourceLabel("HealthService");
     oci.addSuperClass(Service.MY_URI); 
@@ -468,7 +468,7 @@ public final class HealthOntology extends Ontology {
     				HealthService.PROP_ASSISTED_USER, AssistedPerson.MY_URI, 1, 1));
     
     //load TreatmentManagementService
-    oci = createNewOntClassInfo(TreatmentManagementService.MY_URI, factory, 18);
+    oci = createNewAbstractOntClassInfo(TreatmentManagementService.MY_URI);
     oci.setResourceComment("Description of the treatment management service.");
     oci.setResourceLabel("TreatmentManagementService");
     oci.addSuperClass(HealthService.MY_URI); 
@@ -513,7 +513,7 @@ public final class HealthOntology extends Ontology {
     
     //load PlannedSessionManagementService
     
-    oci = createNewOntClassInfo(PlannedSessionManagementService.MY_URI, factory, 19);
+    oci = createNewAbstractOntClassInfo(PlannedSessionManagementService.MY_URI);
     oci.setResourceComment("Description of the planned session management service.");
     oci.setResourceLabel("PlannedSessionManagementService");
     oci.addSuperClass(HealthService.MY_URI); 
@@ -527,7 +527,7 @@ public final class HealthOntology extends Ontology {
     		PlannedSessionManagementService.PROP_LISTS_SESSIONS, PlannedSession.MY_URI));    
     
     //load PerformedSessionManagementService
-    oci = createNewOntClassInfo(PerformedSessionManagementService.MY_URI, factory, 20);
+    oci = createNewAbstractOntClassInfo(PerformedSessionManagementService.MY_URI);
     oci.setResourceComment("Description of the performed session management service.");
     oci.setResourceLabel("PerformedSessionManagementService");
     oci.addSuperClass(HealthService.MY_URI); 
