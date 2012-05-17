@@ -7,9 +7,11 @@ import javax.swing.UIManager;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
+import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.util.Constants;
 import org.universAAL.ontology.location.indoor.Room;
 import org.universAAL.ontology.phThing.PhysicalThing;
@@ -34,6 +36,11 @@ public class GUIPanel extends javax.swing.JFrame{
 		// Start the context publisher
 		ContextProvider cpinfo = new ContextProvider("http://org.universAAL.ontology.location#IndoorLocationServer");
 		cpinfo.setType(ContextProviderType.gauge);
+		ContextEventPattern hasLocation = new ContextEventPattern();
+		hasLocation.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(ContextEvent.PROP_RDF_SUBJECT, User.MY_URI, 1, 1));
+		hasLocation.addRestriction(MergedRestriction.getFixedValueRestriction(ContextEvent.PROP_RDF_PREDICATE, PhysicalThing.PROP_PHYSICAL_LOCATION));
+		hasLocation.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(ContextEvent.PROP_RDF_OBJECT, Room.MY_URI, 1, 1));
+		cpinfo.setProvidedEvents(new ContextEventPattern[] { hasLocation});
 		cp = new DefaultContextPublisher(context, cpinfo);
     	try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
