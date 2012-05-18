@@ -1,12 +1,10 @@
 package org.universAAL.ontology.nutrition;
 
 import org.universAAL.middleware.owl.DataRepOntology;
-import org.universAAL.middleware.owl.IntRestriction;
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.OntClassInfoSetup;
 import org.universAAL.middleware.owl.Ontology;
-import org.universAAL.middleware.owl.TypeURI;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.Service;
@@ -20,7 +18,7 @@ import org.universAAL.ontology.NutritionFactory;
  */
 public final class NutritionOntology extends Ontology {
 
-	private static NutritionFactory factory = new NutritionFactory();;
+	private static NutritionFactory factory = new NutritionFactory();
 
 	public static final String NAMESPACE = "http://ontology.universAAL.org/Nutrition.owl#";
 
@@ -29,9 +27,10 @@ public final class NutritionOntology extends Ontology {
 	}
 
 	public void create() {
+		System.out.println("Nutri: Creating nutri ontology");
 		Resource r = getInfo();
 		r.setResourceComment("The ontology defining concepts about nutrition.");
-		r.setResourceLabel("Lighting");
+		r.setResourceLabel("Nutrition");
 
 		addImport(DataRepOntology.NAMESPACE);
 		addImport(ServiceBusOntology.NAMESPACE);
@@ -76,9 +75,10 @@ public final class NutritionOntology extends Ontology {
 				MeasureUnit.UNITS, MeasureUnit.HANDFULLS });
 
 		// load Food
-		oci = createNewAbstractOntClassInfo(Food.MY_URI);
+		oci = createNewOntClassInfo(Food.MY_URI, factory, NutritionFactory.FactoryIndex_Food);
 		oci.setResourceComment("Ingredient");
 		oci.setResourceLabel("Ingredient");
+		oci.addSuperClass(ManagedIndividual.MY_URI);
 		oci.addDatatypeProperty(Food.PROP_ID).setFunctional(); // Integer
 		oci.addDatatypeProperty(Food.PROP_CARBOHIDRATES).setFunctional(); // Double
 		oci.addDatatypeProperty(Food.PROP_FAT).setFunctional(); // Double
@@ -106,9 +106,10 @@ public final class NutritionOntology extends Ontology {
 				TypeMapper.getDatatypeURI(FoodSubCategory.MY_URI), 0, 1));
 		
 		// load Ingredient
-		oci = createNewAbstractOntClassInfo(Ingredient.MY_URI);
+		oci = createNewOntClassInfo(Ingredient.MY_URI, factory, NutritionFactory.FactoryIndex_Ingredient);
 		oci.setResourceComment("Ingredient");
 		oci.setResourceLabel("Ingredient");
+		oci.addSuperClass(ManagedIndividual.MY_URI);
 		oci.addDatatypeProperty(Ingredient.PROP_ID).setFunctional(); // Integer
 		oci.addDatatypeProperty(Ingredient.PROP_QUANTITY).setFunctional(); // String
 		oci.addObjectProperty(Ingredient.PROP_FOOD).setFunctional(); // Food
@@ -130,9 +131,10 @@ public final class NutritionOntology extends Ontology {
 
 
 		// load ShoppingList
-		oci = createNewAbstractOntClassInfo(ShoppingList.MY_URI);
+		oci = createNewOntClassInfo(ShoppingList.MY_URI, factory, NutritionFactory.FactoryIndex_ShoppingList);
 		oci.setResourceComment("Shopping list");
 		oci.setResourceLabel("ShoppingList");
+		oci.addSuperClass(ManagedIndividual.MY_URI);
 		oci.addDatatypeProperty(ShoppingList.PROP_ID).setFunctional(); // Integer
 		oci.addDatatypeProperty(ShoppingList.PROP_DATEINTERVAL).setFunctional(); // String
 		oci.addObjectProperty(ShoppingList.PROP_INGREDIENTS).setFunctional(); // Ingredient
@@ -148,9 +150,10 @@ public final class NutritionOntology extends Ontology {
 		
 		
 		// load Recipe
-		oci = createNewAbstractOntClassInfo(Recipe.MY_URI);
+		oci = createNewOntClassInfo(Recipe.MY_URI, factory, NutritionFactory.FactoryIndex_Recipe);
 		oci.setResourceComment("Single recipe");
 		oci.setResourceLabel("Recipe");
+		oci.addSuperClass(ManagedIndividual.MY_URI);
 		oci.addObjectProperty(Recipe.PROP_DISH_CATEGORY).setFunctional(); // DishCategory
 		oci.addDatatypeProperty(Recipe.PROP_ID).setFunctional(); // Integer
 		oci.addObjectProperty(Recipe.PROP_INGREDIENTS).setFunctional(); // Ingredient
@@ -164,7 +167,7 @@ public final class NutritionOntology extends Ontology {
 		oci.addRestriction(MergedRestriction
 				.getAllValuesRestrictionWithCardinality(Recipe.PROP_ID,
 						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
-		System.out.println("Recipe.PropIngredients: "+Recipe.PROP_INGREDIENTS+ "  Ingredient.MyUri: "+Ingredient.MY_URI);
+//		System.out.println("Recipe.PropIngredients: "+Recipe.PROP_INGREDIENTS+ "  Ingredient.MyUri: "+Ingredient.MY_URI);
 		oci.addRestriction(MergedRestriction.getAllValuesRestriction(
 				Recipe.PROP_INGREDIENTS, Ingredient.MY_URI));
 		oci.addRestriction(MergedRestriction
@@ -182,9 +185,10 @@ public final class NutritionOntology extends Ontology {
 						TypeMapper.getDatatypeURI(String.class), 0, 1));
 
 		// load Dish
-		oci = createNewAbstractOntClassInfo(Dish.MY_URI);
+		oci = createNewOntClassInfo(Dish.MY_URI, factory, NutritionFactory.FactoryIndex_Dish);
 		oci.setResourceComment("Single dish");
 		oci.setResourceLabel("Dish");
+		oci.addSuperClass(ManagedIndividual.MY_URI);
 		oci.addDatatypeProperty(Dish.PROP_ID).setFunctional(); // Integer
 		oci.addDatatypeProperty(Dish.PROP_NAME).setFunctional(); // String
 		oci.addDatatypeProperty(Dish.PROP_PICTURE).setFunctional(); // String
@@ -216,9 +220,10 @@ public final class NutritionOntology extends Ontology {
 				Dish.PROP_RECIPE, Recipe.MY_URI));
 
 		// load Meal
-		oci = createNewAbstractOntClassInfo(Meal.MY_URI);
+		oci = createNewOntClassInfo(Meal.MY_URI, factory, NutritionFactory.FactoryIndex_Meal);
 		oci.setResourceComment("Single meal");
 		oci.setResourceLabel("Meal");
+		oci.addSuperClass(ManagedIndividual.MY_URI);
 		oci.addDatatypeProperty(Meal.PROP_ID).setFunctional(); // Integer
 		oci.addObjectProperty(Meal.PROP_MEAL_CATEGORY).setFunctional(); // MealCategory
 		oci.addObjectProperty(Meal.PROP_DISHES).setFunctional(); // Dish
@@ -232,9 +237,10 @@ public final class NutritionOntology extends Ontology {
 				Meal.PROP_DISHES, Dish.MY_URI));
 
 		// load MenuDay
-		oci = createNewAbstractOntClassInfo(MenuDay.MY_URI);
+		oci = createNewOntClassInfo(MenuDay.MY_URI, factory, NutritionFactory.FactoryIndex_MenuDay);
 		oci.setResourceComment("Menu for a single day");
 		oci.setResourceLabel("MenuDay");
+		oci.addSuperClass(ManagedIndividual.MY_URI);
 		oci.addDatatypeProperty(MenuDay.PROP_ID).setFunctional(); // Integer
 		oci.addObjectProperty(MenuDay.PROP_DAYOFWEEK).setFunctional(); // DayOfWeek
 		oci.addObjectProperty(MenuDay.PROP_MEALS).setFunctional(); // Meal
@@ -248,16 +254,28 @@ public final class NutritionOntology extends Ontology {
 				MenuDay.PROP_MEALS, Dish.MY_URI));
 
 		
-		// load Lighting
-		oci = createNewOntClassInfo(NutritionService.MY_URI, factory, NutritionService.Factory_NutritionService);
+		/*
+		// load GetRecipeService
+		oci = createNewOntClassInfo(NutritionService.MY_URI, factory, NutritionFactory.FactoryIndex_NutritionService);
 		oci
-			.setResourceComment("The class of services controling light sources");
-		oci.setResourceLabel("Lighting");
+			.setResourceComment("The class of services controling nutrition services");
+		oci.setResourceLabel("Nutrition");
 		oci.addSuperClass(Service.MY_URI);
-		oci.addObjectProperty(NutritionService.PROP_GET_RECIPE);
+		oci.addObjectProperty(NutritionService.PROP_SERVICE_GET_RECIPE);
 		oci.addRestriction(MergedRestriction.getAllValuesRestriction(
-				NutritionService.PROP_GET_RECIPE, NutritionService.MY_URI));
+				NutritionService.PROP_SERVICE_GET_RECIPE, NutritionService.MY_URI));
+		*/
+		
+		// load NutritionService
+		oci = createNewOntClassInfo(NutritionService.MY_URI, factory, NutritionFactory.FactoryIndex_NutritionService);
+		oci
+			.setResourceComment("The class of services controling nutrition services");
+		oci.setResourceLabel("NutritionService");
+		oci.addSuperClass(Service.MY_URI);
+		oci.addObjectProperty(NutritionService.PROP_OBTAINS_RECIPE);
+		oci.addRestriction(MergedRestriction.getAllValuesRestriction(
+				NutritionService.PROP_OBTAINS_RECIPE, Recipe.MY_URI));
 
-
+		System.out.println("Nutri: ontology created");
 	}
 }
