@@ -25,10 +25,10 @@
   		<groupId>org.universAAL.middleware</groupId>
   		<artifactId>mw.container.osgi</artifactId>
   	</dependency>
-  	<dependency>
+  	<!-- <dependency>
   		<groupId>org.universAAL.ontology</groupId>
   		<artifactId>ont.phWorld</artifactId>
-  	</dependency>
+  	</dependency> -->
   </dependencies>
   <parent>
   	<groupId>org.universAAL.ontology</groupId>
