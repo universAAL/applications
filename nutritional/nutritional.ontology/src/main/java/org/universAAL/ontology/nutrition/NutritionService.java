@@ -20,7 +20,6 @@
 
 package org.universAAL.ontology.nutrition;
 
-import java.util.Hashtable;
 
 import org.universAAL.middleware.service.owl.Service;
 
@@ -34,9 +33,19 @@ import org.universAAL.middleware.service.owl.Service;
  */
 public class NutritionService extends Service {
 	public static final String MY_URI = NutritionOntology.NAMESPACE + "NutritionService";
-	public static final String PROP_GET_RECIPE = NutritionOntology.NAMESPACE + "getRecipe";
+	public static final String SERVICE_GET_RECIPE = NutritionOntology.NAMESPACE + "getRecipe";
+	public static final String SERVICE_GET_RECIPE_OUTPUT = NutritionOntology.NAMESPACE + "getRecipeOutput";
+	public static final String SERVICE_GET_RECIPE_INPUT = NutritionOntology.NAMESPACE + "recipeID";
 	
-	public static final int Factory_NutritionService = 0;
+	public static final String SERVICE_GET_MENUDAY = NutritionOntology.NAMESPACE + "getMenuDay";
+	public static final String SERVICE_GET_MENUDAY_OUTPUT = NutritionOntology.NAMESPACE + "getMenuDayOutput";
+	public static final String SERVICE_GET_MENUDAY_INPUT = NutritionOntology.NAMESPACE + "menuDayID";
+	
+	
+	public static final String PROP_OBTAINS_RECIPE = NutritionOntology.NAMESPACE
+		    + "obtainsRecipe";
+	public static final String PROP_OBTAINS_MENUDAY = NutritionOntology.NAMESPACE
+		    + "obtainsMenuDay";
 	
 	public NutritionService() {
 		super();
@@ -58,7 +67,7 @@ public class NutritionService extends Service {
 	 * (java.lang.String)
 	 */
 	public int getPropSerializationType(String propURI) {
-		return PROP_GET_RECIPE.equals(propURI) ? PROP_SERIALIZATION_FULL : super
+		return PROP_OBTAINS_RECIPE.equals(propURI) ? PROP_SERIALIZATION_FULL : super
 				.getPropSerializationType(propURI);
 	}
 

@@ -15,8 +15,9 @@ public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
     	System.out.println("Nutrition ontology starting");
 		Activator.context = context;
-		OntologyManagement.getInstance().register(nutritionOntology);
-	System.out.println("Nutrition ontology started");
+		boolean res = OntologyManagement.getInstance().register(nutritionOntology);
+		System.out.println("Nutri: ontology registered: "+res);
+		System.out.println("Nutrition ontology started");
     }
 
     public void stop(BundleContext arg0) throws Exception {

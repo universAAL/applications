@@ -8,7 +8,7 @@ import org.universAAL.middleware.owl.ManagedIndividual;
  * classes for uAAL. Usually it includes getters and setters for most of its
  * properties.
  * 
- * @author mtazari
+ * @author hecgamar
  * 
  */
 public class Recipe extends ManagedIndividual {
