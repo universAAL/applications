@@ -16,7 +16,11 @@
  	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
  	</properties>
   	<packaging>bundle</packaging>
-    	<dependencies>			
+    	<dependencies>
+			<dependency>
+				<groupId>org.universAAL.support</groupId>
+				<artifactId>itests</artifactId>
+			</dependency>
 			<dependency>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>org.osgi.core</artifactId>
@@ -53,6 +57,17 @@
 							<Export-Package>org.universaal.ontology.healthmeasurement.owl.*</Export-Package>
 							<Private-Package>org.universaal.ontology.healthmeasurement.*</Private-Package>							
 						</instructions>
+					</configuration>
+				</plugin>
+		      <plugin>
+					<groupId>org.universAAL.support</groupId>
+					<artifactId>uaal-maven-plugin</artifactId>
+			  </plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<configuration>
+						<skipAttach>false</skipAttach>
 					</configuration>
 				</plugin>
 			</plugins>

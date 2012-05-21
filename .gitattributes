@@ -619,6 +619,7 @@ health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasure
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Signal.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/SingleValueMeasurement.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Unit.java -text svneol=unset#text/plain
+health/ont.healthmeasurement/src/test/java/ont/healthmeasurement/tests/ArtifactTest.java -text
 health/ont.message/LICENSE-2.0.txt -text
 health/ont.message/MessageOntology.di -text
 health/ont.message/MessageOntology.notation -text
