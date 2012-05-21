@@ -27,7 +27,7 @@ import org.universaal.ontology.health.owl.Treatment;
  * @author mdelafuente
  *
  */
-public class TreatmentTest{
+public class TestTreatmentDetection{
 
 	private KnowledgeBase kbase;
 	private static StatefulKnowledgeSession ksession;

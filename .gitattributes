@@ -529,15 +529,14 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/MotivationalMessageContent.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentDetectionMessage.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageManager.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageManagerTest.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageServiceTools.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageVariables.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MotivationalMessagesDatabase.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
-health/health.motivation/src/main/resources/rules/AmbientContextRules.drl -text
-health/health.motivation/src/main/resources/rules/FeedbackRules.drl -text
-health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/MotivationStatusDetection.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/TreatmentDetection.java -text
 health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TreatmentTest.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentDetection.java -text
 health/health.pom/pom.xml -text svneol=unset#text/plain
 health/health.profile.manager/pom.xml -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProvider.java -text
