@@ -17,7 +17,23 @@
   	<properties>
   		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   	</properties>
-    	<dependencies>			
+  	
+<!--   	remove when ont.healthmenasurement is included in ont.pom -->
+  	<dependencyManagement>
+  		<dependencies>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.healthmeasurement</artifactId>
+				<version>1.1.1-SNAPSHOT</version>
+			</dependency>
+  		</dependencies>
+  	</dependencyManagement>
+  	
+    	<dependencies>
+			<dependency>
+				<groupId>org.universAAL.support</groupId>
+				<artifactId>itests</artifactId>
+			</dependency>	
 			<dependency>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>org.osgi.core</artifactId>
@@ -58,9 +74,7 @@
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.healthmeasurement</artifactId>
-				<version>1.1.1-SNAPSHOT</version>
 			</dependency>
-			
     	</dependencies>
   	  <build>
 			<plugins>
@@ -80,13 +94,17 @@
 						</instructions>
 					</configuration>
 				</plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <configuration>
-          <skipAttach>true</skipAttach>
-        </configuration>
-      </plugin>
+		      <plugin>
+					<groupId>org.universAAL.support</groupId>
+					<artifactId>uaal-maven-plugin</artifactId>
+			  </plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<configuration>
+						<skipAttach>false</skipAttach>
+					</configuration>
+				</plugin>
 			</plugins>
 		</build>
 </project>
