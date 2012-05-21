@@ -70,13 +70,13 @@ public class SimpleOutputPublisher extends OutputPublisher {
 	Group g = form.getIOControls();
 	// new InputField(g, new Label("", null),
 	// new PropertyPath(null, false, new String[]{CALENDAR_URI}),
-	// Restriction.getAllValuesRestrictionWithCardinality(
+	// MergedRestriction.getAllValuesRestrictionWithCardinality(
 	// CALENDAR_URI, TypeMapper.getDatatypeURI(String.class), 1, 1),
 	// calendarURI).setSecret();
 	//		
 	// new InputField(g, new Label("", null),
 	// new PropertyPath(null, false, new String[]{EVENT_ID}),
-	// Restriction.getAllValuesRestrictionWithCardinality(
+	// MergedRestriction.getAllValuesRestrictionWithCardinality(
 	// EVENT_ID, TypeMapper.getDatatypeURI(Integer.class), 1, 1), new
 	// Integer(eventID)).setSecret();
 

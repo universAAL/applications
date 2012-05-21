@@ -4,16 +4,12 @@ import org.universAAL.middleware.owl.ManagedIndividual;
 
 /**
  * @author kagnantis
- * 
+ * @author eandgrg
+ *
  */
 public class ReminderType extends ManagedIndividual {
-    public static final String MY_URI;
-
-    static {
-	MY_URI = Calendar.CALENDAR_NAMESPACE
-		+ Messages.getString("ReminderType.0"); //$NON-NLS-1$
-	register(ReminderType.class);
-    }
+    public static final String MY_URI= AgendaOntology.NAMESPACE
+	+ Messages.getString("ReminderType.0");
 
     public static final int NO_REMINDER = 0;
     public static final int BLINKING_LIGHT = 1;
@@ -27,27 +23,13 @@ public class ReminderType extends ManagedIndividual {
     };
 
     public static final ReminderType noReminder = new ReminderType(NO_REMINDER);
-
     public static final ReminderType blinkingLight = new ReminderType(
 	    BLINKING_LIGHT);
-    /*
-     * { public String toString(){ return "Blinking Light"; } };
-     */
     public static final ReminderType sound = new ReminderType(SOUND);
-    /*
-     * { public String toString(){ return "Sound Message"; } };
-     */
     public static final ReminderType visualMessage = new ReminderType(
 	    VISUAL_MESSAGE);
-    /*
-     * { public String toString(){ return "Visual Message"; } };
-     */
     public static final ReminderType voiceMessage = new ReminderType(
 	    VOICE_MESSAGE);
-
-    /*
-     * { public String toString(){ return "Voice Message"; } };
-     */
 
     /**
      * Returns the list of all class members guaranteeing that no other members
@@ -63,16 +45,16 @@ public class ReminderType extends ManagedIndividual {
      */
     public static ManagedIndividual getIndividualByURI(String instanceURI) {
 	return (instanceURI != null && instanceURI
-		.startsWith(Calendar.CALENDAR_NAMESPACE)) ? valueOf(instanceURI
-		.substring(Calendar.CALENDAR_NAMESPACE.length())) : null;
+		.startsWith(AgendaOntology.NAMESPACE)) ? valueOf(instanceURI
+		.substring(AgendaOntology.NAMESPACE.length())) : null;
     }
 
     public static final ReminderType valueOf(String name) {
 	if (name == null)
 	    return noReminder;
 
-	if (name.startsWith(Calendar.CALENDAR_NAMESPACE))
-	    name = name.substring(Calendar.CALENDAR_NAMESPACE.length());
+	if (name.startsWith(AgendaOntology.NAMESPACE))
+	    name = name.substring(AgendaOntology.NAMESPACE.length());
 
 	for (int i = NO_REMINDER; i <= VOICE_MESSAGE; ++i)
 	    if (names[i].equals(name))
@@ -115,7 +97,7 @@ public class ReminderType extends ManagedIndividual {
     private int order;
 
     private ReminderType(int order) {
-	super(Calendar.CALENDAR_NAMESPACE + names[order]);
+	super(AgendaOntology.NAMESPACE + names[order]);
 	this.order = order;
     }
 
@@ -123,6 +105,9 @@ public class ReminderType extends ManagedIndividual {
 	return names[this.order];
     }
 
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.rdf.Resource#toString()
+     */
     public String toString() {
 	return name().replace('_', ' ');
     }
@@ -134,12 +119,20 @@ public class ReminderType extends ManagedIndividual {
     public void setProperty(String propURI, Object o) {
 	// do nothing
     }
-
-    public static void main(String[] str) {
-	ManagedIndividual rt = new ReminderType(1);
-	ManagedIndividual[] all = ManagedIndividual.getEnumerationMembers();
-	for (int i = 0; i < all.length; ++i) {
-	    System.out.println(all[i].getURI());
-	}
+    
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
     }
+
+    // test worked before new dataRep (before 1.1.0 release)
+    // public static void main(String[] str) {
+    // ManagedIndividual rt = new ReminderType(1);
+    // ManagedIndividual[] all = ManagedIndividual.getEnumerationMembers();
+    // for (int i = 0; i < all.length; ++i) {
+    // System.out.println(all[i].getURI());
+    // }
+    // }
 }

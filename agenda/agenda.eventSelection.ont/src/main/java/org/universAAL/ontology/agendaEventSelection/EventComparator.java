@@ -1,4 +1,4 @@
-package org.universAAL.agendaEventSelectionTool.ont;
+package org.universAAL.ontology.agendaEventSelection;
 
 import java.util.ArrayList;
 import java.util.Collections;

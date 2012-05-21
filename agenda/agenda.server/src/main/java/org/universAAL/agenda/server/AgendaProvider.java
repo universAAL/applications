@@ -45,7 +45,7 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.util.Constants;
-import org.universAAL.ontology.profile.ElderlyUser;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -83,7 +83,7 @@ public class AgendaProvider extends ServiceCallee implements
     private static final ServiceResponse failure = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
-    static final ElderlyUser testUser = new ElderlyUser(
+    static final AssistedPerson testUser = new AssistedPerson(
 	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied"); //$NON-NLS-1$
 
     static {
@@ -868,7 +868,7 @@ public class AgendaProvider extends ServiceCallee implements
 
 	// TODO: find out why the exception is thrown
 	try {
-	    WrapperActivator.getOutputPublisher()
+	    WrapperActivator.getMyUICaller()
 		    .showReminderConfirmationDialog(message, c.getURI(),
 			    e.getEventID(), testUser);
 	} catch (Exception e1) {

@@ -38,6 +38,7 @@ import org.universAAL.ontology.profile.User;
 /**
  * Used to communicate with database.
  * 
+ * @author kagnantis
  * @author eandgrg
  * 
  */

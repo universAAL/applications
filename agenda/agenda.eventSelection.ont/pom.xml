@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>org.universAAL.ontology</groupId>
 		<artifactId>ont.pom</artifactId>
-		<version>1.0.0</version>
+		<version>1.1.0</version>
 		<relativePath>../pom</relativePath>
 	</parent>
 	<artifactId>agenda.eventSelection.ont</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>Agenda AAL Service Event Selection Tool Ontology</name>
 	<description />
@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>agenda.ont</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>1.1.1-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
 			<groupId>junit</groupId>
@@ -44,8 +44,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.io</artifactId>
-			<version>1.0.0</version>
+			<artifactId>mw.bus.ui</artifactId>
+<!--			<version>1.0.0</version>-->
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
@@ -109,7 +109,7 @@
 						<Bundle-Name>${project.name}</Bundle-Name>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Export-Package>org.universAAL.agendaEventSelectionTool.ont.*</Export-Package>
+						<Export-Package>org.universAAL.ontology.agendaEventSelection.*</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -205,7 +205,7 @@
 				<dependency>
 					<groupId>org.universAAL.middleware</groupId>
 					<artifactId>mw.acl.upnp</artifactId>
-					<version>1.0.0</version>
+					<version>1.1.0</version>
 				</dependency>
 				<dependency>
 					<groupId>org.apache.felix</groupId>

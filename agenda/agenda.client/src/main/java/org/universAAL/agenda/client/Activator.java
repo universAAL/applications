@@ -5,7 +5,11 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.log.LogService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
-
+/**
+ * 
+ * @author eandgrg
+ *
+ */
 public class Activator implements BundleActivator {
 
     static LogService log;

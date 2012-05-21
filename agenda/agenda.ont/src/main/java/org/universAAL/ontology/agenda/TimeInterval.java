@@ -4,65 +4,33 @@ import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.owl.Restriction;
-import org.universAAL.middleware.rdf.TypeMapper;
 
 /**
  * @author kagnantis
- * 
+ * @author eandgrg
+ *
  */
 public class TimeInterval extends ManagedIndividual {
-    public static final String MY_URI;
-    public static final String PROP_TIME_PERIOD;
-    public static final String PROP_START_TIME;
-    public static final String PROP_END_TIME;
+    public static final String MY_URI= AgendaOntology.NAMESPACE + "TimeInterval";
+    public static final String PROP_TIME_PERIOD = AgendaOntology.NAMESPACE + "timePeriod";
+    public static final String PROP_START_TIME = AgendaOntology.NAMESPACE + "startTime";
+    public static final String PROP_END_TIME= AgendaOntology.NAMESPACE + "endTime";
 
-    static {
-	MY_URI = Calendar.CALENDAR_NAMESPACE + "TimeInterval";
-	PROP_TIME_PERIOD = Calendar.CALENDAR_NAMESPACE + "timePeriod";
-	PROP_START_TIME = Calendar.CALENDAR_NAMESPACE + "startTime";
-	PROP_END_TIME = Calendar.CALENDAR_NAMESPACE + "endTime";
-	register(TimeInterval.class);
-    }
-
-    public static Restriction getClassRestrictionsOnProperty(String propURI) {
-	if (PROP_TIME_PERIOD.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(Duration.class), 1, 0);
-	if (PROP_START_TIME.equals(propURI))
-	    return Restriction
-		    .getAllValuesRestrictionWithCardinality(propURI, TypeMapper
-			    .getDatatypeURI(XMLGregorianCalendar.class), 1, 1);
-	if (PROP_END_TIME.equals(propURI))
-	    return Restriction
-		    .getAllValuesRestrictionWithCardinality(propURI, TypeMapper
-			    .getDatatypeURI(XMLGregorianCalendar.class), 1, 1);
-
-	return ManagedIndividual.getClassRestrictionsOnProperty(propURI);
-    }
-
-    public static String[] getStandardPropertyURIs() {
-	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
-	String[] toReturn = new String[inherited.length + 3];
-	int i = 0;
-	while (i < inherited.length) {
-	    toReturn[i] = inherited[i];
-	    i++;
-	}
-	toReturn[i++] = PROP_TIME_PERIOD;
-	toReturn[i++] = PROP_START_TIME;
-	toReturn[i++] = PROP_END_TIME;
-
-	return toReturn;
-    }
-
-    public static String getRDFSComment() {
-	return "The class of a time interval.";
-    }
-
-    public static String getRDFSLabel() {
-	return "Time interval";
-    }
+    //commented when transferring to new data rep (1.1.0)
+//    public static String[] getStandardPropertyURIs() {
+//	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
+//	String[] toReturn = new String[inherited.length + 3];
+//	int i = 0;
+//	while (i < inherited.length) {
+//	    toReturn[i] = inherited[i];
+//	    i++;
+//	}
+//	toReturn[i++] = PROP_TIME_PERIOD;
+//	toReturn[i++] = PROP_START_TIME;
+//	toReturn[i++] = PROP_END_TIME;
+//
+//	return toReturn;
+//    }
 
     public TimeInterval() {
 	super();
@@ -211,8 +179,18 @@ public class TimeInterval extends ManagedIndividual {
 	return s.toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.rdf.Resource#toString()
+     */
     public String toString() {
 	return this.toString("\n");
+    }
+    
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
     }
 
 }

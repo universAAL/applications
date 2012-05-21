@@ -29,6 +29,11 @@ import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.Reminder;
 import org.universAAL.ontology.agenda.ReminderType;
 
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ */
 public class Scheduler {
     public static final int DEFAULT_TRIGGER_TIMES = 3;
     public static final int DEFAULT_REPEAT_INTERVAL = 30 * 1000; // half-min

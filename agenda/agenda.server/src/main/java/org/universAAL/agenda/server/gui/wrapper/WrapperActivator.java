@@ -5,18 +5,19 @@ package org.universAAL.agenda.server.gui.wrapper;
 
 import org.universAAL.middleware.container.ModuleContext;
 
+
 /**
- * @author KAgnantis
+ * @author kagnantis
+ * @author eandgrg
  * 
  */
 public class WrapperActivator {
-    private static SimpleInputSubscriber inputSubscriber = null;
-    private static SimpleOutputPublisher outputPublisher = null;
+    private static MyUICaller myUICaller = null;
     private static WrapperActivator theInstance = null;
 
     private WrapperActivator(ModuleContext mcontext) {
-	inputSubscriber = new SimpleInputSubscriber(mcontext);
-	outputPublisher = new SimpleOutputPublisher(mcontext);
+	myUICaller = new MyUICaller(mcontext);
+	
     }
 
     public static WrapperActivator initiateInstance(ModuleContext mcontext) {
@@ -26,12 +27,10 @@ public class WrapperActivator {
 	return theInstance;
     }
 
-    public static SimpleInputSubscriber getInputSubscriber() {
-	return inputSubscriber;
+    public static MyUICaller getMyUICaller() {
+	return myUICaller;
     }
 
-    public static SimpleOutputPublisher getOutputPublisher() {
-	return outputPublisher;
-    }
+
 
 }

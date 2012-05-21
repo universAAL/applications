@@ -1,92 +1,46 @@
 package org.universAAL.ontology.agenda;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.owl.Restriction;
-import org.universAAL.middleware.rdf.TypeMapper;
 
 /**
  * @author kagnantis
- * 
+ * @author eandgrg
+ *
  */
 public class Event extends ManagedIndividual {
-    public static final String MY_URI;
-    public static final String PROP_HAS_REMINDER;
-    public static final String PROP_HAS_EVENT_DETAILS;
-    public static final String PROP_ID;
-    public static final String PROP_CE_TYPE; // because events are published on
-    // context bus, we have to know for
-    // what reason.
-    public static final String PROP_PERSISTENT;
-    public static final String PROP_HAS_PARENT_CALENDAR;
-    public static final String PROP_VISIBLE;
+    public static final String MY_URI = AgendaOntology.NAMESPACE + "event";
+    public static final String PROP_HAS_REMINDER= AgendaOntology.NAMESPACE + "hasReminder";
+    public static final String PROP_HAS_EVENT_DETAILS= AgendaOntology.NAMESPACE
+	+ "hasEventDetails";
+    
+ // in case event.id <= 0: illegal state change to a valid one
+    public static final String PROP_ID= AgendaOntology.NAMESPACE + "id"; 
+ // because events are published on context bus, we have to know for  what reason.
+    public static final String PROP_CE_TYPE= AgendaOntology.NAMESPACE + "ceType"; 
+    public static final String PROP_PERSISTENT= AgendaOntology.NAMESPACE + "isPersistent";;
+    public static final String PROP_HAS_PARENT_CALENDAR= AgendaOntology.NAMESPACE + "hasBelongsTo";
+    public static final String PROP_VISIBLE= AgendaOntology.NAMESPACE + "visible";
 
-    static {
-	MY_URI = Calendar.CALENDAR_NAMESPACE + "event";
-	PROP_HAS_REMINDER = Calendar.CALENDAR_NAMESPACE + "hasReminder";
-	PROP_HAS_EVENT_DETAILS = Calendar.CALENDAR_NAMESPACE
-		+ "hasEventDetails";
-	PROP_ID = Calendar.CALENDAR_NAMESPACE + "id"; // in case event.id <= 0:
-	// illegal state change to
-	// a valid one
-	PROP_CE_TYPE = Calendar.CALENDAR_NAMESPACE + "ceType";
-	PROP_PERSISTENT = Calendar.CALENDAR_NAMESPACE + "isPersistent";
-	PROP_HAS_PARENT_CALENDAR = Calendar.CALENDAR_NAMESPACE + "hasBelongsTo";
-	PROP_VISIBLE = Calendar.CALENDAR_NAMESPACE + "visible";
-	register(Event.class);
-    }
-
-    public static Restriction getClassRestrictionsOnProperty(String propURI) {
-	if (PROP_HAS_REMINDER.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    Reminder.MY_URI, 1, 0);
-	if (PROP_HAS_EVENT_DETAILS.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    EventDetails.MY_URI, 1, 0);
-	if (PROP_ID.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(Integer.class), 1, 1);
-	if (PROP_CE_TYPE.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    CEType.MY_URI, 1, 0);
-	if (PROP_PERSISTENT.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(Boolean.class), 1, 0);
-	if (PROP_VISIBLE.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(Boolean.class), 1, 0);
-	if (PROP_HAS_PARENT_CALENDAR.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    Calendar.MY_URI, 1, 0);
-
-	return ManagedIndividual.getClassRestrictionsOnProperty(propURI);
-    }
-
-    public static String[] getStandardPropertyURIs() {
-	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
-	String[] toReturn = new String[inherited.length + 7];
-	int i = 0;
-	while (i < inherited.length) {
-	    toReturn[i] = inherited[i];
-	    i++;
-	}
-	toReturn[i++] = PROP_HAS_REMINDER;
-	toReturn[i++] = PROP_HAS_EVENT_DETAILS;
-	toReturn[i++] = PROP_ID;
-	toReturn[i++] = PROP_CE_TYPE;
-	toReturn[i++] = PROP_PERSISTENT;
-	toReturn[i++] = PROP_VISIBLE;
-	toReturn[i++] = PROP_HAS_PARENT_CALENDAR;
-
-	return toReturn;
-    }
-
-    public static String getRDFSComment() {
-	return "The class of all events.";
-    }
-
-    public static String getRDFSLabel() {
-	return "Event";
-    }
+    
+    //commented when transferring to new data rep (1.1.0)
+//    public static String[] getStandardPropertyURIs() {
+//	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
+//	String[] toReturn = new String[inherited.length + 7];
+//	int i = 0;
+//	while (i < inherited.length) {
+//	    toReturn[i] = inherited[i];
+//	    i++;
+//	}
+//	toReturn[i++] = PROP_HAS_REMINDER;
+//	toReturn[i++] = PROP_HAS_EVENT_DETAILS;
+//	toReturn[i++] = PROP_ID;
+//	toReturn[i++] = PROP_CE_TYPE;
+//	toReturn[i++] = PROP_PERSISTENT;
+//	toReturn[i++] = PROP_VISIBLE;
+//	toReturn[i++] = PROP_HAS_PARENT_CALENDAR;
+//
+//	return toReturn;
+//    }
 
     public Event() {
 	super();
@@ -262,6 +216,13 @@ public class Event extends ManagedIndividual {
 	}
 
 	return s.toString();
+    }
+    
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
     }
 
 }

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>A.0.1-SNAPSHOT</version>
+		<version>B.0.1-SNAPSHOT</version>
 		<relativePath>../agenda.pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>agenda.client</artifactId>
@@ -32,10 +32,6 @@
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.io</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
@@ -145,7 +141,7 @@
 				<dependency>
 					<groupId>org.universAAL.middleware</groupId>
 					<artifactId>mw.acl.upnp</artifactId>
-					<version>1.0.0</version>
+					<version>1.1.0</version>
 				</dependency>
 				<dependency>
 					<groupId>org.apache.felix</groupId>

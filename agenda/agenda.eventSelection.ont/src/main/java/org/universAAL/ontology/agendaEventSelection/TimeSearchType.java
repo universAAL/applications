@@ -1,15 +1,10 @@
-package org.universAAL.agendaEventSelectionTool.ont;
+package org.universAAL.ontology.agendaEventSelection;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
 
 public class TimeSearchType extends ManagedIndividual {
-    public static final String MY_URI;
-
-    static {
-	MY_URI = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "TimeSearchType";
-	register(TimeSearchType.class);
-    }
+    public static final String MY_URI = AgendaEventSelectionOntology.NAMESPACE
+	    + "TimeSearchType";
 
     public static final int STARTS_BETWEEN = 0;
     public static final int ENDS_BETWEEN = 1;
@@ -61,9 +56,8 @@ public class TimeSearchType extends ManagedIndividual {
      */
     public static ManagedIndividual getIndividualByURI(String instanceURI) {
 	return (instanceURI != null && instanceURI
-		.startsWith(EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE)) ? valueOf(instanceURI
-		.substring(EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-			.length()))
+		.startsWith(AgendaEventSelectionOntology.NAMESPACE)) ? valueOf(instanceURI
+		.substring(AgendaEventSelectionOntology.NAMESPACE.length()))
 		: null;
     }
 
@@ -71,10 +65,9 @@ public class TimeSearchType extends ManagedIndividual {
 	if (name == null)
 	    return null;
 
-	if (name.startsWith(EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE))
-	    name = name
-		    .substring(EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-			    .length());
+	if (name.startsWith(AgendaEventSelectionOntology.NAMESPACE))
+	    name = name.substring(AgendaEventSelectionOntology.NAMESPACE
+		    .length());
 
 	for (int i = STARTS_BETWEEN; i <= ALL_CASES; ++i)
 	    if (names[i].equals(name))
@@ -104,18 +97,16 @@ public class TimeSearchType extends ManagedIndividual {
 	}
     }
 
-    public static String getRDFSComment() {
-	return "The type of temporal search.";
-    }
-
-    public static String getRDFSLabel() {
-	return "Temporal search type";
-    }
-
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType(java.lang.String)
+     */
     public int getPropSerializationType(String propURI) {
 	return PROP_SERIALIZATION_OPTIONAL;
     }
 
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#isWellFormed()
+     */
     public boolean isWellFormed() {
 	return true;
     }
@@ -123,7 +114,7 @@ public class TimeSearchType extends ManagedIndividual {
     private int order;
 
     private TimeSearchType(int order) {
-	super(EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE + names[order]);
+	super(AgendaEventSelectionOntology.NAMESPACE + names[order]);
 	this.order = order;
     }
 
@@ -137,6 +128,13 @@ public class TimeSearchType extends ManagedIndividual {
 
     public void setProperty(String propURI, Object o) {
 	// do nothing
+    }
+
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
     }
 
 }

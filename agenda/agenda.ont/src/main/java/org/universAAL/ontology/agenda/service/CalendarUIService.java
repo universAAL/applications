@@ -3,59 +3,20 @@
  */
 package org.universAAL.ontology.agenda.service;
 
-import java.util.Hashtable;
-
-import org.universAAL.middleware.owl.Restriction;
 import org.universAAL.middleware.service.owl.Service;
-import org.universAAL.ontology.agenda.Calendar;
+import org.universAAL.ontology.agenda.AgendaOntology;
 
 /**
  * @author kagnantis
- * 
+ * @author eandgrg
+ *
  */
 public class CalendarUIService extends Service {
-    public static final String MY_URI;
-    public static final String PROP_CONTROLS;
-
-    private static Hashtable calendarRestrictions = new Hashtable(1);
-    static {
-	MY_URI = Calendar.CALENDAR_NAMESPACE + "CalendarUIService";
-	PROP_CONTROLS = Calendar.CALENDAR_NAMESPACE + "controls";
-	register(CalendarUIService.class);
-
-	addRestriction(Restriction.getAllValuesRestriction(PROP_CONTROLS,
-		Calendar.MY_URI), new String[] { PROP_CONTROLS },
-		calendarRestrictions);
-    }
-
-    public static Restriction getClassRestrictionsOnProperty(String propURI) {
-	if (propURI == null)
-	    return null;
-	Object r = calendarRestrictions.get(propURI);
-	if (r instanceof Restriction)
-	    return (Restriction) r;
-	return Service.getClassRestrictionsOnProperty(propURI);
-    }
-
-    public static String getRDFSComment() {
-	return "The class of services controling the UI of Personal Agenda.";
-    }
-
-    public static String getRDFSLabel() {
-	return "Calendar/Agenda UI service";
-    }
+    public static final String MY_URI= AgendaOntology.NAMESPACE + "CalendarUIService";
+    public static final String PROP_CONTROLS= AgendaOntology.NAMESPACE + "controls";
 
     public CalendarUIService(String uri) {
 	super(uri);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.persona.ontology.Service#getClassLevelRestrictions()
-     */
-    protected Hashtable getClassLevelRestrictions() {
-	return calendarRestrictions;
     }
 
     /*
@@ -69,7 +30,17 @@ public class CalendarUIService extends Service {
 	return PROP_SERIALIZATION_FULL;
     }
 
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#isWellFormed()
+     */
     public boolean isWellFormed() {
 	return true;
+    }
+    
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
     }
 }

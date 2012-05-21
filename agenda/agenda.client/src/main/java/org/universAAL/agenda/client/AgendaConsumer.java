@@ -23,7 +23,7 @@ import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
@@ -43,50 +43,76 @@ import org.universAAL.ontology.profile.User;
 
 /**
  * @author kagnantis
- * 
  * @author eandgrg
  * 
  */
 public class AgendaConsumer extends ContextSubscriber {
+    
+    /**  */
     private static final String AGENDA_CLIENT_NAMESPACE = "http://ontology.universAAL.org/AgendaClient.owl#";
 
+    /**  */
     private static final String OUTPUT_LIST_OF_CALENDARS = AGENDA_CLIENT_NAMESPACE
 	    + "oListOfCalendars";
+    
+    /**  */
     private static final String OUTPUT_CALENDAR_EVENT_LIST = AGENDA_CLIENT_NAMESPACE
 	    + "oCalendarEventList";
+    
+    /**  */
     private static final String OUTPUT_ADDED_EVENT_ID = AGENDA_CLIENT_NAMESPACE
 	    + "oAddedEventId";
+    
+    /**  */
     private static final String OUTPUT_CALENDAR_EVENT = AGENDA_CLIENT_NAMESPACE
 	    + "oCalendarEvent";
+    
+    /**  */
     private static final String OUTPUT_EVENT_CATEGORIES = AGENDA_CLIENT_NAMESPACE
 	    + "oEventCategories";
+    
+    /**  */
     private static final String OUTPUT_CALENDAR = AGENDA_CLIENT_NAMESPACE
 	    + "oCalendar";
 
+    /**  */
     private static final Logger mainLogger = LoggerFactory
 	    .getLogger(AgendaConsumer.class);
 
+    /**
+     * 
+     *
+     * @return 
+     */
     private static ContextEventPattern[] getContextSubscriptionParams() {
 	// I am interested in all events with a calendars as subject
 	ContextEventPattern cep1 = new ContextEventPattern();
 	ContextEventPattern cep2 = new ContextEventPattern();
-	cep1.addRestriction(Restriction.getAllValuesRestriction(
+	cep1.addRestriction(MergedRestriction.getAllValuesRestriction(
 		ContextEvent.PROP_RDF_SUBJECT, Event.MY_URI));
-	cep2.addRestriction(Restriction.getAllValuesRestriction(
+	cep2.addRestriction(MergedRestriction.getAllValuesRestriction(
 		ContextEvent.PROP_RDF_SUBJECT, Calendar.MY_URI));
 	return new ContextEventPattern[] { cep1, cep2 };
     }
 
+    /**  */
     private ServiceCaller caller;
+    
+    /**  */
     private ModuleContext mcontext;
 
+    /**
+     * 
+     *
+     * @param mcontext 
+     */
     public AgendaConsumer(ModuleContext mcontext) {
 	super(mcontext, getContextSubscriptionParams());
 	this.mcontext = mcontext;
 	caller = new DefaultServiceCaller(mcontext);
 
 	// debugTest();
-	Event event = createEvent(13, 40, 00);
+	Event event = createEvent(2012, 5, 12, 13, 40, 00);
 	// Calendar c = getCalendarByNameAndOwnerService("my cal", new
 	// User(User.MY_URI + "kostas"));
 
@@ -95,6 +121,9 @@ public class AgendaConsumer extends ContextSubscriber {
 
     }
 
+    /**
+     * 
+     */
     public void debugTest() {
 
 	Calendar c = new Calendar();
@@ -128,6 +157,11 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @return 
+     */
     public List getAllCalendarsService() {
 	List allCalendars = new ArrayList();
 
@@ -170,6 +204,12 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param owner 
+     * @return 
+     */
     public List getCalendarsByOwnerService(User owner) {
 	List allCalendars = new ArrayList();
 
@@ -214,6 +254,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param c 
+     * @param owner 
+     * @return 
+     */
     public Calendar addNewCalendarService(Calendar c, User owner) {
 
 	long startTime = System.currentTimeMillis();
@@ -250,6 +297,12 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param c 
+     * @return 
+     */
     public boolean removeCalendarService(Calendar c) {
 
 	long startTime = System.currentTimeMillis();
@@ -275,6 +328,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param calendarName 
+     * @param owner 
+     * @return 
+     */
     public Calendar getCalendarByNameAndOwnerService(String calendarName,
 	    User owner) {
 
@@ -321,6 +381,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param c 
+     * @param eventId 
+     * @return 
+     */
     public Event getCalendarEventService(Calendar c, int eventId) {
 	Event event = null;
 
@@ -365,6 +432,11 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @return 
+     */
     public List getAllEventCategories() {
 	List allCategories = new ArrayList();
 
@@ -412,6 +484,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param c 
+     * @param eventId 
+     * @return 
+     */
     public boolean cancelReminderService(Calendar c, int eventId) {
 
 	long startTime = System.currentTimeMillis();
@@ -433,6 +512,14 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param c 
+     * @param eventId 
+     * @param event 
+     * @return 
+     */
     public boolean updateCalendarEventService(Calendar c, int eventId,
 	    Event event) {
 
@@ -462,6 +549,14 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param c 
+     * @param eventID 
+     * @param reminder 
+     * @return 
+     */
     public boolean setEventReminderService(Calendar c, int eventID,
 	    Reminder reminder) {
 
@@ -493,6 +588,14 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param c 
+     * @param eventID 
+     * @param reminderType 
+     * @return 
+     */
     public boolean setReminderTypeService(Calendar c, int eventID,
 	    ReminderType reminderType) {
 
@@ -524,6 +627,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local code
+    /**
+     * 
+     *
+     * @param c 
+     * @param eventId 
+     * @return 
+     */
     public boolean deleteCalendarEventService(Calendar c, int eventId) {
 	long startTime = System.currentTimeMillis();
 	caller = new DefaultServiceCaller(mcontext);
@@ -553,6 +663,12 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local coding
+    /**
+     * 
+     *
+     * @param c 
+     * @return 
+     */
     public List requestEventListService(Calendar c) {
 
 	long startTime = System.currentTimeMillis();
@@ -589,6 +705,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local coding
+    /**
+     * 
+     *
+     * @param c 
+     * @param event 
+     * @return 
+     */
     public int addEventToCalendarService(Calendar c, Event event) {
 
 	long startTime = System.currentTimeMillis();
@@ -634,6 +757,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just local coding
+    /**
+     * 
+     *
+     * @param c 
+     * @param eventList 
+     * @return 
+     */
     public boolean addCalendarEventListService(Calendar c, List eventList) {
 
 	long startTime = System.currentTimeMillis();
@@ -658,9 +788,14 @@ public class AgendaConsumer extends ContextSubscriber {
 	return false;
     }
 
-    /************************************************************************
+    /**
+     * **********************************************************************
      * REAL SERVICE CALLS *
-     ************************************************************************/
+     * **********************************************************************.
+     *
+     * @param calendarURI 
+     * @param events 
+     */
     // real calls
 
     /**
@@ -693,14 +828,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param c 
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service and retrieve <i>all</i> events (as a
      * {@link List}) of the calendar with the specified URI
      * <code>calendarURI</code>.
-     * 
-     * @param calendarURI
-     *            the URI of the calendar
-     * @return a service request for the specific service
      */
     private ServiceRequest getGetCalendarEventList(Calendar c) {
 	ServiceRequest getCalendarEventList = new ServiceRequest(
@@ -712,7 +846,7 @@ public class AgendaConsumer extends ContextSubscriber {
 	if (c == null) {
 	    c = new Calendar();
 	}
-	Restriction r = Restriction.getFixedValueRestriction(
+	MergedRestriction r = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, c);
 	getCalendarEventList.getRequestedService().addInstanceLevelRestriction(
 		r, new String[] { CalendarAgenda.PROP_CONTROLS });
@@ -726,15 +860,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param c 
+     * @param eventId the id of the event to be deleted
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service and get an event</code> from the calendar
      * with the specified URI <code>calendarURI</code>.
-     * 
-     * @param calendarURI
-     *            the URI of the calendar
-     * @param eventId
-     *            the id of the event to be deleted
-     * @return a service request for the specific service
      */
     private ServiceRequest getDeleteCalendarEvent(Calendar c, int eventId) {
 	ServiceRequest deleteCalendarEvent = new ServiceRequest(
@@ -744,10 +876,10 @@ public class AgendaConsumer extends ContextSubscriber {
 	    c = new Calendar();
 	}
 
-	// Restriction r1 =
-	// Restriction.getFixedValueRestriction(CalendarAgenda.PROP_CONTROLS,
+	// MergedRestriction r1 =
+	// MergedRestriction.getFixedValueRestriction(CalendarAgenda.PROP_CONTROLS,
 	// c);
-	Restriction r2 = Restriction.getFixedValueRestriction(Event.PROP_ID,
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
 		new Integer(eventId));
 
 	// deleteCalendarEvent.getRequestedService().addInstanceLevelRestriction(r1,
@@ -766,16 +898,14 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
-     * {@link CalendarAgenda} service and add an <code>
-	 * event</code> to the calendar
-     * with the specified URI <code>calendarURI</code>.
-     * 
-     * @param calendarURI
-     *            the URI of the calendar
-     * @param event
-     *            the event to be stored
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param c 
+     * @param event the event to be stored
      * @return a service request for the specific service
+     * {@link CalendarAgenda} service and add an <code>
+     * event</code> to the calendar
+     * with the specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getAddEventToCalendar(Calendar c, Event event) {
 	ServiceRequest addEventToCalendar = new ServiceRequest(
@@ -783,7 +913,7 @@ public class AgendaConsumer extends ContextSubscriber {
 	if (c == null) {
 	    c = new Calendar();
 	}
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, c);
 	addEventToCalendar.getRequestedService().addInstanceLevelRestriction(
 		r1, new String[] { CalendarAgenda.PROP_CONTROLS });
@@ -802,16 +932,14 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
-     * {@link CalendarAgenda} service and add an <code>
-	 * event</code> list to the
-     * calendar with the specified URI <code>calendarURI</code>.
-     * 
-     * @param calendarURI
-     *            the URI of the calendar
-     * @param eventList
-     *            the event list to be stored
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param c 
+     * @param eventList the event list to be stored
      * @return a service request for the specific service
+     * {@link CalendarAgenda} service and add an <code>
+     * event</code> list to the
+     * calendar with the specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getAddEventListToCalendar(Calendar c, List eventList) {
 	ServiceRequest addEventToCalendar = new ServiceRequest(
@@ -819,7 +947,7 @@ public class AgendaConsumer extends ContextSubscriber {
 	if (c == null) {
 	    c = new Calendar();
 	}
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, c);
 	addEventToCalendar.getRequestedService().addInstanceLevelRestriction(
 		r1, new String[] { CalendarAgenda.PROP_CONTROLS });
@@ -832,11 +960,11 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service and retrieve <i>all</i> {@link Calendar}
      * which are managed by he server.
-     * 
-     * @return a service request for the specific service
      */
     private ServiceRequest getAllCalendarsRequest() {
 	ServiceRequest listCalendars = new ServiceRequest(new CalendarAgenda(
@@ -852,17 +980,18 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param owner 
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service and retrieve <i>all</i> {@link Calendar}
      * which are managed by he server.
-     * 
-     * @return a service request for the specific service
      */
     private ServiceRequest getCalendarsByOwnerRequest(User owner) {
 	ServiceRequest listCalendars = new ServiceRequest(new CalendarAgenda(
 		null), null);
 
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		Calendar.PROP_HAS_OWNER, owner);
 	listCalendars.getRequestedService().addInstanceLevelRestriction(
 		r1,
@@ -876,21 +1005,21 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param calendar the new calendar
+     * @param eventId 
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service and create and store a new
      * {@link Calendar} with the specified URI <code>calendarURI</code>.
-     * 
-     * @param calendar
-     *            the new calendar
-     * @return a service request for the specific service
      */
     private ServiceRequest getGetCalendarEvent(Calendar calendar, int eventId) {
 	if (calendar == null) {
 	    calendar = new Calendar(null);
 	}
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, calendar);
-	Restriction r2 = Restriction.getFixedValueRestriction(Event.PROP_ID,
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
 		new Integer(eventId));
 
 	CalendarAgenda ca = new CalendarAgenda(null);
@@ -910,6 +1039,11 @@ public class AgendaConsumer extends ContextSubscriber {
 	return getCalendarEvent;
     }
 
+    /**
+     * 
+     *
+     * @return 
+     */
     private ServiceRequest getGetAllEventCategories() {
 	PropertyPath ppEventCategory = new PropertyPath(null, true,
 		new String[] { CalendarAgenda.PROP_CONTROLS,
@@ -925,11 +1059,18 @@ public class AgendaConsumer extends ContextSubscriber {
 	return getEventCategory;
     }
 
+    /**
+     * 
+     *
+     * @param calendar 
+     * @param eventId 
+     * @return 
+     */
     private ServiceRequest getCancelReminder(Calendar calendar, int eventId) {
 	if (calendar == null) {
 	    calendar = new Calendar(null);
 	}
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, calendar);
 
 	CalendarAgenda ca = new CalendarAgenda(null);
@@ -948,14 +1089,12 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
-     * {@link CalendarAgenda} service and create and store a new Calendar.
-     * 
-     * @param calendar
-     *            the calendar
-     * @param eventId
-     *            the id of the event to be retrieved
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param calendar the calendar
+     * @param owner 
      * @return a service request for the specific service
+     * {@link CalendarAgenda} service and create and store a new Calendar.
      */
     private ServiceRequest getAddNewCalendar(Calendar calendar, User owner) {
 	ServiceRequest addNewcalendar = new ServiceRequest(new CalendarAgenda(
@@ -976,15 +1115,12 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param calendar the calendar to be removed
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service and delete an existing calendar and all
      * events associated with it
-     * 
-     * @param calendar
-     *            the calendar to be removed
-     * @param eventId
-     *            the id of the event to be retrieved
-     * @return a service request for the specific service
      */
     private ServiceRequest getRemoveCalendar(Calendar calendar) {
 	ServiceRequest removeCalendar = new ServiceRequest(new CalendarAgenda(
@@ -992,7 +1128,7 @@ public class AgendaConsumer extends ContextSubscriber {
 
 	PropertyPath ppCalendar = new PropertyPath(null, true,
 		new String[] { CalendarAgenda.PROP_CONTROLS });
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, calendar);
 	removeCalendar.getRequestedService().addInstanceLevelRestriction(r1,
 		ppCalendar.getThePath());
@@ -1003,19 +1139,19 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param calendarName the name of calendar
+     * @param owner 
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service to get the URI of a calendar (wrapped in a
      * calendar object) given the name of it
-     * 
-     * @param calendarName
-     *            the name of calendar
-     * @return a service request for the specific service
      */
     private ServiceRequest getCalendarByNameAndOwner(String calendarName,
 	    User owner) {
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		Calendar.PROP_NAME, calendarName);
-	Restriction r2 = Restriction.getFixedValueRestriction(
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(
 		Calendar.PROP_HAS_OWNER, owner);
 	PropertyPath ppCalendarName = new PropertyPath(
 		null,
@@ -1038,15 +1174,14 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param calendar the calendar
+     * @param eventId the id of the event to be retrieved
+     * @param event 
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service and get an <code>event</code> from the
      * calendar with the specified URI <code>calendarURI</code>.
-     * 
-     * @param calendar
-     *            the calendar
-     * @param eventId
-     *            the id of the event to be retrieved
-     * @return a service request for the specific service
      */
     private ServiceRequest getUpdateCalendarEvent(Calendar calendar,
 	    int eventId, Event event) {
@@ -1056,9 +1191,9 @@ public class AgendaConsumer extends ContextSubscriber {
 	    calendar = new Calendar(null);
 	}
 	System.out.println(calendar.getURI());
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, calendar);
-	Restriction r2 = Restriction.getFixedValueRestriction(Event.PROP_ID,
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
 		new Integer(eventId));
 
 	PropertyPath pp = new PropertyPath(null, true, new String[] {
@@ -1075,15 +1210,14 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param c 
+     * @param eventId the id of the event to be retrieved
+     * @param reminder 
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service and get an event</code> from the calendar
      * with the specified URI <code>calendarURI</code>.
-     * 
-     * @param calendarURI
-     *            the URI of the calendar
-     * @param eventId
-     *            the id of the event to be retrieved
-     * @return a service request for the specific service
      */
     private ServiceRequest getSetEventReminder(Calendar c, int eventId,
 	    Reminder reminder) {
@@ -1092,9 +1226,9 @@ public class AgendaConsumer extends ContextSubscriber {
 	if (c == null) {
 	    c = new Calendar(null);
 	}
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, c);
-	Restriction r2 = Restriction.getFixedValueRestriction(Event.PROP_ID,
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
 		new Integer(eventId));
 
 	PropertyPath pp = new PropertyPath(null, true, new String[] {
@@ -1112,15 +1246,14 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use a
+     * Creates a {@link ServiceRequest} object in order to use a.
+     *
+     * @param c 
+     * @param eventId the id of the event to be retrieved
+     * @param reminderType 
+     * @return a service request for the specific service
      * {@link CalendarAgenda} service and get an event</code> from the calendar
      * with the specified URI <code>calendarURI</code>.
-     * 
-     * @param calendarURI
-     *            the URI of the calendar
-     * @param eventId
-     *            the id of the event to be retrieved
-     * @return a service request for the specific service
      */
     private ServiceRequest getSetReminderType(Calendar c, int eventId,
 	    ReminderType reminderType) {
@@ -1129,9 +1262,9 @@ public class AgendaConsumer extends ContextSubscriber {
 	if (c == null) {
 	    c = new Calendar(null);
 	}
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, c);
-	Restriction r2 = Restriction.getFixedValueRestriction(Event.PROP_ID,
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
 		new Integer(eventId));
 
 	PropertyPath pp = new PropertyPath(null, true, new String[] {
@@ -1148,6 +1281,13 @@ public class AgendaConsumer extends ContextSubscriber {
 	return getSetReminderType;
     }
 
+    /**
+     * 
+     *
+     * @param outputs 
+     * @param expectedOutput 
+     * @return 
+     */
     private Object getReturnValue(List outputs, String expectedOutput) {
 	Object returnValue = null;
 	int testCount = 0;
@@ -1178,7 +1318,18 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     // just a dummy method to create a simple event
-    private Event createEvent(int hour, int min, int seconds) {
+    /**
+     * 
+     *
+     * @param year 
+     * @param month 
+     * @param day 
+     * @param hour 
+     * @param min 
+     * @param seconds 
+     * @return 
+     */
+    private Event createEvent(int year, int month, int day, int hour, int min, int seconds) {
 	// start Event Details
 	EventDetails ed = new EventDetails();
 	ed.setCategory("No interest");
@@ -1198,7 +1349,7 @@ public class AgendaConsumer extends ContextSubscriber {
 	// pa.setProvince("Bilogora");
 	// pa.setState("Nea politia");
 	pa.setCityPlace(new CityPlace("Krapinska"));
-	pa.setCountry(new Country("Hrvatska"));
+	pa.setCountry(new Country("Croatia"));
 	pa.setCity(new City("Zagreb"));
 	pa.setCityQuarter(new CityQuarter("Tresnjevka"));
 	pa.setRegion(new Region("Sjeverozapadna"));
@@ -1207,10 +1358,10 @@ public class AgendaConsumer extends ContextSubscriber {
 	// end Event Details
 	// start Reminder
 	Reminder r = new Reminder();
-	r.setMessage("Probna poruka da vidimo jel radi.");
+	r.setMessage("Test message to see if it works.");
 	r
 		.setReminderTime(TypeMapper.getDataTypeFactory()
-			.newXMLGregorianCalendar(2009, 2, 20, hour, min,
+			.newXMLGregorianCalendar(day, month, day, hour, min,
 				seconds, 0, 2));
 	// // end Reminder
 
@@ -1230,12 +1381,9 @@ public class AgendaConsumer extends ContextSubscriber {
 	return event;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.persona.middleware.context.ContextSubscriber#handleContextEvent(org
-     * .persona.middleware.context.ContextEvent)
+
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.context.ContextSubscriber#handleContextEvent(org.universAAL.middleware.context.ContextEvent)
      */
     public void handleContextEvent(ContextEvent event) {
 	java.util.Calendar c = java.util.Calendar.getInstance();

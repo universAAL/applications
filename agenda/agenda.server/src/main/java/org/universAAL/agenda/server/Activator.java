@@ -7,6 +7,12 @@ import org.universAAL.agenda.server.gui.wrapper.WrapperActivator;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
+
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ */
 public class Activator implements BundleActivator {
     // testing...
     public static LogService log;

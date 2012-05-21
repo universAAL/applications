@@ -6,91 +6,43 @@ package org.universAAL.ontology.agenda;
 import java.util.List;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.owl.Restriction;
-import org.universAAL.middleware.rdf.TypeMapper;
-
 import org.universAAL.ontology.location.address.Address;
 
-//import org.universAAL.ontology.*;
 /**
  * @author kagnantis
- * 
+ * @author eandgrg
+ *
  */
 public class EventDetails extends ManagedIndividual {
-    public static final String MY_URI;
-    public static final String PROP_CATEGORY;
+    public static final String MY_URI= AgendaOntology.NAMESPACE + "EventDetails";;
+    public static final String PROP_CATEGORY= AgendaOntology.NAMESPACE + "category";
     // public static final String PROP_ID;
-    public static final String PROP_HAS_ADDRESS;
-    public static final String PROP_DESCRIPTION;
-    public static final String PROP_PLACE_NAME;
-    public static final String PROP_SPOKEN_LANGUAGE;
-    public static final String PROP_PARTICIPANTS;
-    public static final String PROP_HAS_VALID_PERIOD;
+    public static final String PROP_HAS_ADDRESS= AgendaOntology.NAMESPACE + "hasAddress";
+    public static final String PROP_DESCRIPTION= AgendaOntology.NAMESPACE + "description";
+    public static final String PROP_PLACE_NAME= AgendaOntology.NAMESPACE + "placeName";
+    public static final String PROP_SPOKEN_LANGUAGE= AgendaOntology.NAMESPACE + "spokenLanguage";
+    public static final String PROP_PARTICIPANTS = AgendaOntology.NAMESPACE + "participants";
+    public static final String PROP_HAS_VALID_PERIOD= AgendaOntology.NAMESPACE + "hasValidPeriod";
 
-    static {
-	MY_URI = Calendar.CALENDAR_NAMESPACE + "EventDetails";
-	PROP_CATEGORY = Calendar.CALENDAR_NAMESPACE + "category";
-	PROP_HAS_ADDRESS = Calendar.CALENDAR_NAMESPACE + "hasAddress";
-	PROP_DESCRIPTION = Calendar.CALENDAR_NAMESPACE + "description";
-	PROP_PLACE_NAME = Calendar.CALENDAR_NAMESPACE + "placeName";
-	PROP_SPOKEN_LANGUAGE = Calendar.CALENDAR_NAMESPACE + "spokenLanguage";
-	PROP_PARTICIPANTS = Calendar.CALENDAR_NAMESPACE + "participants";
-	PROP_HAS_VALID_PERIOD = Calendar.CALENDAR_NAMESPACE + "hasValidPeriod";
-	register(EventDetails.class);
-    }
-
-    public static Restriction getClassRestrictionsOnProperty(String propURI) {
-	if (PROP_CATEGORY.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(String.class), 1, 0);
-	if (PROP_HAS_ADDRESS.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    Address.MY_URI, 1, 1);
-	if (PROP_DESCRIPTION.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(String.class), 1, 0);
-	if (PROP_PLACE_NAME.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(String.class), 1, 0);
-	if (PROP_SPOKEN_LANGUAGE.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(String.class), 1, 0);
-	if (PROP_PARTICIPANTS.equals(propURI))
-	    return Restriction.getAllValuesRestriction(propURI, TypeMapper
-		    .getDatatypeURI(String.class));
-	if (PROP_HAS_VALID_PERIOD.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TimeInterval.MY_URI, 1, 0);
-
-	return ManagedIndividual.getClassRestrictionsOnProperty(propURI);
-    }
-
-    public static String[] getStandardPropertyURIs() {
-	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
-	String[] toReturn = new String[inherited.length + 7];
-	int i = 0;
-	while (i < inherited.length) {
-	    toReturn[i] = inherited[i];
-	    i++;
-	}
-	toReturn[i++] = PROP_CATEGORY;
-	toReturn[i++] = PROP_HAS_ADDRESS;
-	toReturn[i++] = PROP_DESCRIPTION;
-	toReturn[i++] = PROP_PLACE_NAME;
-	toReturn[i++] = PROP_SPOKEN_LANGUAGE;
-	toReturn[i++] = PROP_PARTICIPANTS;
-	toReturn[i++] = PROP_HAS_VALID_PERIOD;
-
-	return toReturn;
-    }
-
-    public static String getRDFSComment() {
-	return "The class of event details.";
-    }
-
-    public static String getRDFSLabel() {
-	return "Event details";
-    }
+    //commented when transferring to new data rep (1.1.0)
+//    public static String[] getStandardPropertyURIs() {
+//	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
+//	String[] toReturn = new String[inherited.length + 7];
+//	int i = 0;
+//	while (i < inherited.length) {
+//	    toReturn[i] = inherited[i];
+//	    i++;
+//	}
+//	toReturn[i++] = PROP_CATEGORY;
+//	toReturn[i++] = PROP_HAS_ADDRESS;
+//	toReturn[i++] = PROP_DESCRIPTION;
+//	toReturn[i++] = PROP_PLACE_NAME;
+//	toReturn[i++] = PROP_SPOKEN_LANGUAGE;
+//	toReturn[i++] = PROP_PARTICIPANTS;
+//	toReturn[i++] = PROP_HAS_VALID_PERIOD;
+//
+//	return toReturn;
+//    }
 
     public EventDetails() {
 	super();
@@ -292,8 +244,18 @@ public class EventDetails extends ManagedIndividual {
 	return s.toString();
     }
 
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.rdf.Resource#toString()
+     */
     public String toString() {
 	return this.toString("\n");
+    }
+    
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
     }
 
 }

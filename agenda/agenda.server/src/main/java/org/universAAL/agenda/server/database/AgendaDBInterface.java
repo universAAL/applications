@@ -8,6 +8,12 @@ import org.universAAL.ontology.agenda.Reminder;
 import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.ontology.profile.User;
 
+
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ */
 public interface AgendaDBInterface {
     Calendar[] getCalendars();
 

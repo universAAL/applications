@@ -1,6 +1,11 @@
 package org.universAAL.agenda.server.unit_impl;
 import org.universAAL.ontology.agenda.Event;
 
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ */
 public class SendStartEventTask extends SendContextEventTask {
 
 	public SendStartEventTask(AgendaStateListener listener, Event event, int repeatTime) {

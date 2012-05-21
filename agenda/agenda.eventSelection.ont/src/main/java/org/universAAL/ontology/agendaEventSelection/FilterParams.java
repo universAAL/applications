@@ -1,11 +1,11 @@
-package org.universAAL.agendaEventSelectionTool.ont;
+package org.universAAL.ontology.agendaEventSelection;
 
 //tu je dodan import iz agende.ont
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.location.Location;
 import org.universAAL.ontology.profile.UserProfile;
@@ -16,96 +16,24 @@ import org.universAAL.ontology.agenda.Event;
  * 
  */
 public class FilterParams extends ManagedIndividual {
-    public static final String MY_URI;
-    public static final String PROP_DT_BEGIN;
-    public static final String PROP_DT_END;
-    public static final String PROP_CATEGORY;
-    public static final String PROP_SPOKEN_LANGUAGE;
-    public static final String PROP_HAS_USER_PROFILE;
-    public static final String PROP_HAS_LOCATION;
-    public static final String PROP_DESCRIPTION;
-    public static final String PROP_HAS_SEARCH_TYPE;
-
-    static {
-	MY_URI = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "FilterParams";
-	PROP_DT_BEGIN = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "DTbegin";
-	PROP_DT_END = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "DTend";
-	PROP_CATEGORY = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "category";
-	PROP_SPOKEN_LANGUAGE = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "spokenLanguage";
-	PROP_HAS_USER_PROFILE = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "hasUserProfile";
-	PROP_HAS_LOCATION = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "hasLocation";
-	PROP_HAS_SEARCH_TYPE = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "hasSearchType";
-	PROP_DESCRIPTION = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE
-		+ "hasDescription";
-
-	register(FilterParams.class);
-    }
-
-    public static Restriction getClassRestrictionsOnProperty(String propURI) {
-	if (PROP_DT_BEGIN.equals(propURI))
-	    return Restriction
-		    .getAllValuesRestrictionWithCardinality(propURI, TypeMapper
-			    .getDatatypeURI(XMLGregorianCalendar.class), 1, 0);
-	if (PROP_DT_END.equals(propURI))
-	    return Restriction
-		    .getAllValuesRestrictionWithCardinality(propURI, TypeMapper
-			    .getDatatypeURI(XMLGregorianCalendar.class), 1, 0);
-	if (PROP_CATEGORY.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(String.class), 1, 0);
-	if (PROP_SPOKEN_LANGUAGE.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(String.class), 1, 0);
-	if (PROP_HAS_USER_PROFILE.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    UserProfile.MY_URI, 1, 0);
-	if (PROP_HAS_LOCATION.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    Location.MY_URI, 1, 0);
-	if (PROP_HAS_SEARCH_TYPE.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TimeSearchType.MY_URI, 1, 1);
-	if (PROP_DESCRIPTION.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(String.class), 1, 1);
-	return ManagedIndividual.getClassRestrictionsOnProperty(propURI);
-    }
-
-    public static String[] getStandardPropertyURIs() {
-	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
-	String[] toReturn = new String[inherited.length + 7];
-	int i = 0;
-	while (i < inherited.length) {
-	    toReturn[i] = inherited[i];
-	    i++;
-	}
-	toReturn[i++] = PROP_DT_BEGIN;
-	toReturn[i++] = PROP_DT_END;
-	toReturn[i++] = PROP_CATEGORY;
-	toReturn[i++] = PROP_SPOKEN_LANGUAGE;
-	toReturn[i++] = PROP_HAS_USER_PROFILE;
-	toReturn[i++] = PROP_HAS_LOCATION;
-	toReturn[i++] = PROP_DESCRIPTION;
-	toReturn[i++] = PROP_HAS_SEARCH_TYPE;
-
-	return toReturn;
-    }
-
-    public static String getRDFSComment() {
-	return "The class of all FilterParams.";
-    }
-
-    public static String getRDFSLabel() {
-	return "FilterParams";
-    }
+    public static final String MY_URI= AgendaEventSelectionOntology.NAMESPACE
+	+ "FilterParams";
+    public static final String PROP_DT_BEGIN= AgendaEventSelectionOntology.NAMESPACE
+	+ "DTbegin";
+    public static final String PROP_DT_END = AgendaEventSelectionOntology.NAMESPACE
+	+ "DTend";
+    public static final String PROP_CATEGORY= AgendaEventSelectionOntology.NAMESPACE
+	+ "category";
+    public static final String PROP_SPOKEN_LANGUAGE= AgendaEventSelectionOntology.NAMESPACE
+	+ "spokenLanguage";
+    public static final String PROP_HAS_USER_PROFILE= AgendaEventSelectionOntology.NAMESPACE
+	+ "hasUserProfile";
+    public static final String PROP_HAS_LOCATION= AgendaEventSelectionOntology.NAMESPACE
+	+ "hasLocation";
+    public static final String PROP_DESCRIPTION= AgendaEventSelectionOntology.NAMESPACE
+	+ "hasSearchType";
+    public static final String PROP_HAS_SEARCH_TYPE = AgendaEventSelectionOntology.NAMESPACE
+	+ "hasDescription";
 
     public FilterParams() {
 	super();
@@ -331,5 +259,12 @@ public class FilterParams extends ManagedIndividual {
 	}
 
 	return false;
+    }
+    
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
     }
 }

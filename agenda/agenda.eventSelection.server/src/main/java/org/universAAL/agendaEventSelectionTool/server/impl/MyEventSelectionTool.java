@@ -17,13 +17,17 @@ import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.ontology.agenda.TimeInterval;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.Calendar;
+import org.universAAL.ontology.agendaEventSelection.EventComparator;
+import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
+import org.universAAL.ontology.agendaEventSelection.FilterParams;
+import org.universAAL.ontology.agendaEventSelection.TimeSearchType;
 import org.universAAL.agendaEventSelectionTool.database.EventSelectionToolDBInterface;
-import org.universAAL.agendaEventSelectionTool.ont.EventComparator;
-import org.universAAL.agendaEventSelectionTool.ont.EventSelectionTool;
-import org.universAAL.agendaEventSelectionTool.ont.FilterParams;
-import org.universAAL.agendaEventSelectionTool.ont.TimeSearchType;
 import org.universAAL.middleware.rdf.TypeMapper;
-
+/**
+ * @author kagnantis
+ * @author eandgrg
+ *
+ */
 public class MyEventSelectionTool implements EventSelectionToolDBInterface {
     private static String DB_URL;
     private static String DB_USER;

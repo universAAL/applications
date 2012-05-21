@@ -9,15 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.service.CalendarAgenda;
-import org.universAAL.agendaEventSelectionTool.ont.EventSelectionTool;
-import org.universAAL.agendaEventSelectionTool.ont.FilterParams;
-import org.universAAL.agendaEventSelectionTool.ont.TimeSearchType;
-import org.universAAL.agendaEventSelectionTool.ont.service.EventSelectionToolService;
+import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
+import org.universAAL.ontology.agendaEventSelection.FilterParams;
+import org.universAAL.ontology.agendaEventSelection.TimeSearchType;
+import org.universAAL.ontology.agendaEventSelection.service.EventSelectionToolService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.CallStatus;
@@ -27,8 +27,14 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ * 
+ */
 public class EventSelectionToolConsumer extends ContextSubscriber {
-    private static final String EVENT_SELECTION_TOOL_SERVER_NAMESPACE = "http://ontology.persona.anco.gr/EventSelectionToolServer.owl#";
+    private static final String EVENT_SELECTION_TOOL_SERVER_NAMESPACE = "http://ontology.universaal.org/EventSelectionToolConsumer.owl#";
 
     private static final String OUTPUT_EVENT_LIST = EVENT_SELECTION_TOOL_SERVER_NAMESPACE
 	    + "eventList";
@@ -44,7 +50,7 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	// I am interested in all existing EventSelectionTool. Am I really? ->
 	// To be re-considered
 	ContextEventPattern cep = new ContextEventPattern();
-	cep.addRestriction(Restriction.getAllValuesRestriction(
+	cep.addRestriction(MergedRestriction.getAllValuesRestriction(
 		ContextEvent.PROP_RDF_SUBJECT, EventSelectionTool.MY_URI));
 
 	return new ContextEventPattern[] { cep };
@@ -185,7 +191,7 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
     private ServiceRequest requestEvents(FilterParams filterParams) {
 	EventSelectionToolService estService = new EventSelectionToolService(
 		null);
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		EventSelectionTool.PROP_HAS_FILTER_PARAMS, filterParams);
 
 	estService.addInstanceLevelRestriction(r1, new String[] {
@@ -307,10 +313,23 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	return returnValue;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @seeorg.universAAL.middleware.context.ContextSubscriber#
+     * communicationChannelBroken()
+     */
     public void communicationChannelBroken() {
 	// TODO Auto-generated method stub
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.context.ContextSubscriber#handleContextEvent
+     * (org.universAAL.middleware.context.ContextEvent)
+     */
     public void handleContextEvent(ContextEvent event) {
 	mainLogger.info("Received1 context event:\n" + "    Subject      = "
 		+ event.getSubjectURI() + "\n" + "    Subject type = "
