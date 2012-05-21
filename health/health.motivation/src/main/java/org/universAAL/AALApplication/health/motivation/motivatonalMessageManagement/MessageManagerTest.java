@@ -9,7 +9,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalPlainMessage;
-import org.universaal.ontology.health.owl.AssistedPersonProfile;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.TakeMeasurementActivity;
 
@@ -91,7 +90,7 @@ public class MessageManagerTest extends TestCase{
 	
 	
 	public static void main (String[] args){
-		
+		/*
 		manager = new MessageManager("english"); 
 		
 		AssistedPersonProfile peter = new AssistedPersonProfile("peter");
@@ -101,7 +100,7 @@ public class MessageManagerTest extends TestCase{
 			TakeMeasurementActivity tma = new TakeMeasurementActivity(peter, "Measure blood pressure", startDate);
 		
 		}catch (Exception e){}
-		
+		*/
 		/*
 		
 		MotivationalPlainTextMessage mm = new MotivationalMessage(MotivationalMessageClassification.notification, 

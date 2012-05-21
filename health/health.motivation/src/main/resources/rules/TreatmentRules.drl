@@ -4,23 +4,26 @@ package org.universAAL.AALApplication.health.motivation.treatment
 #list any import classes here. 
 import org.universAAL.AALapplication.health.ont.treatment.*;
 import org.universAAL.AALapplication.health.ont.schedule.*; 
+
 #declare any global variables here 
 
 
 #Whenever a treatment is detected a consent message is sent to the user
-rule "Treatment Detection" salience 100 no-loop
+rule "Treatment Detection" no-loop
 	
 	when
 		detectedTreatment: Treatment(name != "")  //añadir message sent
 		
 	then 
-		TreatmentDetection.insertTreatment(detectedTreatment); //sólo válido para JUnit
-		HealthService.sendMessageToUser(detectedTreatment, "Treatment agreement message");//cambiar por clave cuando redacte el fichero de mensajes
+		TreatmentDetection.insertDetectedTreatment(detectedTreatment); //sólo válido para JUnit
+		MessageManager.sendMessageToUser(HeartFailure.MY_URI, Treatment.MY_URI, 
+										MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry);
 		System.out.println("Tratamiento " + detectedTreatment.getName()+ " detectado");//traza
-		
+		//en esta regla debe probarse tanto la detección del tratamiento como que se ha enviado bien el mensaje
 end
 
 # When a treatment is NOT accepted by the user we change his/her motivation status to "PRECONTEMPLATION"
+/*
 rule "Treatment not accepted" salience 50 no-loop 
 
 	when 
@@ -130,8 +133,9 @@ rule "Treatment session performed"
 end
 */
 
+/*
 rule "Check treatment activation"
 when
 	treatment: Treatment() 
 then
-end
+end*/
