@@ -24,7 +24,7 @@ public final class MyPrecautionDatabase {
 
     for (int i = 0; i < ids.length; i++) {
       String id = ids[i];
-      Precaution precaution = new Precaution();
+      Precaution precaution = new Precaution(Precaution.MY_URI);
       addSideeffect(precaution, id);
       addIncompliance(precaution, id);
       PRECAUTION_MAP.put(id, precaution);
@@ -38,7 +38,7 @@ public final class MyPrecautionDatabase {
       sideeffectList.add(sideeffect);
     }
 
-    precaution.setSideeffect(sideeffectList.toString());
+    precaution.setSideEffect(sideeffectList.toString());
 
   }
 
@@ -49,7 +49,7 @@ public final class MyPrecautionDatabase {
       incomplianceList.add(incompliance);
     }
 
-    precaution.setIncompliance(incomplianceList);
+    precaution.setIncompliance(incomplianceList.toString());
   }
 
   public static Precaution getPrecaution(String userId) {

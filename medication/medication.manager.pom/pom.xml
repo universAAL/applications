@@ -55,6 +55,11 @@
       <artifactId>mw.container.osgi</artifactId>
       <version>1.1.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>org.universAAL.ontology</groupId>
+      <artifactId>ont.profile</artifactId>
+      <version>1.1.1-SNAPSHOT</version>
+    </dependency>
 
     <dependency>
       <groupId>junit</groupId>
@@ -71,7 +76,7 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.12</version>
           <configuration>
-            <skipTests>false</skipTests>
+            <skipTests>true</skipTests>
           </configuration>
         </plugin>
         <plugin>
@@ -132,7 +137,10 @@
   <modules>
     <module>../medication.manager.ont</module>
     <module>../medication.manager.service</module>
+    <module>../medication.manager.shell.commands</module>
     <module>../medication.missing.services.simulation</module>
+    <module>../medication.manager.ui</module>
     <module>../medication.manager.integration.tests</module>
+    <module>../medication.manager.ui.runner</module>
   </modules>
 </project>

@@ -11,6 +11,7 @@ import org.universAAL.middleware.owl.Enumeration;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.medMgr.MissedIntake;
 import org.universAAL.ontology.medMgr.Time;
+import org.universAAL.ontology.profile.User;
 
 /**
  * @author George Fournadjiev
@@ -51,10 +52,11 @@ public final class MissedIntakeContextProvider {
   }
 
 
-  public static void publishEvent(Time time, String userId) {
+  public static void missedIntakeTimeEvent(Time time, String userId) {
     MissedIntake missedIntake = new MissedIntake();
+    User user = new User(userId);
     missedIntake.setTime(time);
-    missedIntake.setUserId(userId);
+    missedIntake.setUser(user);
     ContextEvent contextEvent = new ContextEvent(missedIntake, MissedIntake.TIME);
     contextPublisher.publish(contextEvent);
   }

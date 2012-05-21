@@ -25,7 +25,7 @@ public final class CaregiverNotificationProvider extends ServiceCallee {
   }
 
   public CaregiverNotificationProvider(ModuleContext context) {
-    super(context, ProviderCaregiverNotficationService.profiles);
+    super(context, ProviderCaregiverNotificationService.profiles);
 
   }
 
@@ -46,7 +46,7 @@ public final class CaregiverNotificationProvider extends ServiceCallee {
       return invalidInput;
     }
 
-    if (processURI.startsWith(ProviderCaregiverNotficationService.SERVICE_NOTIFY)) {
+    if (processURI.startsWith(ProviderCaregiverNotificationService.SERVICE_NOTIFY)) {
       return getSuccessfulServiceResponse(involvedUser);
     }
 

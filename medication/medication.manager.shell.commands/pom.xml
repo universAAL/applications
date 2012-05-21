@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <version>B.0.1-SNAPSHOT</version>
+    <artifactId>medication.manager.pom</artifactId>
+    <relativePath>../medication.manager.pom</relativePath>
+  </parent>
+  <artifactId>medication.manager.shell.commands</artifactId>
+  <name>Medication Manager shell commands</name>
+  <description>Medication Manager shell commands</description>
+  <packaging>bundle</packaging>
+
+
+  <dependencies>
+    <dependency>
+      <groupId>org.universAAL.ontology</groupId>
+      <artifactId>medication.manager.ont</artifactId>
+      <version>1.1.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.gogo.shell</artifactId>
+      <version>0.10.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>medication.missing.services.simulation</artifactId>
+      <version>B.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-Activator>org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator
+            </Bundle-Activator>
+            <Bundle-Description>${project.description}</Bundle-Description>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Private-Package>org.universAAL.AALapplication.medication_manager.shell.commands.impl</Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.3.2</version>
+          <inherited>true</inherited>
+          <configuration>
+            <source>${maven.compile.source}</source>
+            <target>${maven.compile.target}</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.3.5</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

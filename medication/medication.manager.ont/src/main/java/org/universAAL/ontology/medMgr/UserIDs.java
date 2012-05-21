@@ -5,15 +5,15 @@ package org.universAAL.ontology.medMgr;
  */
 public final class UserIDs {
 
-  private final static String PREFIX = "http://ontology.universAAL.org/uAAL.owl#theInvolvedHumanUser";
+  private final static String PREFIX = "urn:org.universAAL.aal_space:test_env#";
   private final static String[] USER_IDS = new String[5];
 
   static {
-    USER_IDS[0] = PREFIX + "#id1";
-    USER_IDS[1] = PREFIX + "#id2";
-    USER_IDS[2] = PREFIX + "#id3";
-    USER_IDS[3] = PREFIX + "#id4";
-    USER_IDS[4] = PREFIX + "#id5";
+    USER_IDS[0] = PREFIX + "saied";
+    USER_IDS[1] = PREFIX + "alejandro";
+    USER_IDS[2] = PREFIX + "george";
+    USER_IDS[3] = PREFIX + "hector";
+    USER_IDS[4] = PREFIX + "venelin";
   }
 
 
@@ -23,5 +23,7 @@ public final class UserIDs {
     return res;
   }
 
-
+  public static String getSaiedUser() {
+    return PREFIX + "saied";
+  }
 }

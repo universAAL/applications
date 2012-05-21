@@ -27,6 +27,7 @@ public class Activator implements BundleActivator {
       public void run() {
         new PrecautionProvider(mc);
         new MissedIntakeEventSubscriber(mc);
+        new DueIntakeReminderEventSubscriber(mc);
       }
     }.start();
 

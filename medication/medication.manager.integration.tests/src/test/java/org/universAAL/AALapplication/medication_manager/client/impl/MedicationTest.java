@@ -129,7 +129,7 @@ public final class MedicationTest extends IntegrationTest {
     for (int i = 0; i < userIDs.length; i++) {
       String userID = userIDs[i];
       System.out.println("******************** START printing for USER ID : " + userID + " ****************************");
-      MissedIntakeContextProvider.publishEvent(time, userID);
+      MissedIntakeContextProvider.missedIntakeTimeEvent(time, userID);
       System.out.println("*********END printing for USER ID : " + userID + " ***************");
     }
 
@@ -137,7 +137,7 @@ public final class MedicationTest extends IntegrationTest {
   }
 
   private void printPrecaution(Precaution precaution) {
-    String sideeffect = precaution.getSideeffect();
+    String sideeffect = precaution.getSideEffect();
 
     System.out.println("**************** START PRINTING SIDEEFFECT****************");
 

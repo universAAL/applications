@@ -3,9 +3,6 @@ package org.universAAL.ontology.medMgr;
 
 import org.universAAL.middleware.service.owl.Service;
 
-import java.util.Hashtable;
-import java.util.List;
-
 /**
  * @author George Fournadjiev
  */
@@ -27,11 +24,11 @@ public class Precaution extends Service {
     return MY_URI;
   }
 
-  public String getSideeffect() {
+  public String getSideEffect() {
     return (String) getProperty(SIDEEFFECT);
   }
 
-  public void setSideeffect(String value) {
+  public void setSideEffect(String value) {
     setProperty(SIDEEFFECT, value);
   }
 
@@ -39,7 +36,7 @@ public class Precaution extends Service {
     return (String) getProperty(INCOMPLIANCE);
   }
 
-  public void setIncompliance(List value) {
+  public void setIncompliance(String value) {
     setProperty(INCOMPLIANCE, value);
   }
 
@@ -51,7 +48,4 @@ public class Precaution extends Service {
     return PROP_SERIALIZATION_FULL;
   }
 
-  protected Hashtable getClassLevelRestrictions() {
-    throw new UnsupportedOperationException("Not implemented yet");
-  }
 }
