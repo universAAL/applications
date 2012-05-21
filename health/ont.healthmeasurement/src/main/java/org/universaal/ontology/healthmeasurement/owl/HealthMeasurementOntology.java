@@ -81,7 +81,7 @@ public final class HealthMeasurementOntology extends Ontology {
   	    		User.MY_URI, 1, 1));
 
     oci_HealthMeasurement.addObjectProperty(HealthMeasurement.PROP_MEASURED_BY).setFunctional();
-    oci_HealthMeasurement.addRestriction(MergedRestriction.getCardinalityRestriction(HealthMeasurement.PROP_MEASURED_BY, 1, 1));
+    //oci_HealthMeasurement.addRestriction(MergedRestriction.getCardinalityRestriction(HealthMeasurement.PROP_MEASURED_BY, 1, 1));
     oci_HealthMeasurement.addRestriction(MergedRestriction
     	      .getAllValuesRestrictionWithCardinality(HealthMeasurement.PROP_MEASURED_BY, 
     	    		Device.MY_URI, 1, 1));
@@ -118,7 +118,7 @@ public final class HealthMeasurementOntology extends Ontology {
     
     
     oci_SingleValueMeasurement.addObjectProperty(MultiValueMeasurement.PROP_UNIT).setFunctional();
-    oci_SingleValueMeasurement.addRestriction(MergedRestriction.getCardinalityRestriction(MultiValueMeasurement.PROP_UNIT, 1, 1));
+    //oci_SingleValueMeasurement.addRestriction(MergedRestriction.getCardinalityRestriction(MultiValueMeasurement.PROP_UNIT, 1, 1));
     oci_SingleValueMeasurement.addRestriction(MergedRestriction
   	      .getAllValuesRestrictionWithCardinality(MultiValueMeasurement.PROP_UNIT, 
   	    		Unit.MY_URI, 1, 1));
