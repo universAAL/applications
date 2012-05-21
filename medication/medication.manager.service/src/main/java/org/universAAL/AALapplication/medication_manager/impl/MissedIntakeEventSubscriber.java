@@ -12,11 +12,14 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.medMgr.MissedIntake;
 import org.universAAL.ontology.medMgr.Time;
+import org.universAAL.ontology.profile.User;
 
 /**
  * @author George Fournadjiev
  */
 public final class MissedIntakeEventSubscriber extends ContextSubscriber {
+
+  private final ModuleContext moduleContext;
 
   private static ServiceCaller serviceCaller;
 
@@ -35,6 +38,7 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
   public MissedIntakeEventSubscriber(ModuleContext context) {
     super(context, getContextEventPatterns());
 
+    this.moduleContext = context;
     serviceCaller = new DefaultServiceCaller(context);
   }
 
@@ -51,13 +55,11 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
 
     Log.info("Time %s", getClass(), time);
 
-    String userId = missedIntake.getUserId();
+    User user = missedIntake.getUser();
 
-    Log.info("Calling the Caregiver Notification Service for the userId %s", getClass(), userId);
+    Log.info("Calling the Caregiver Notification Service for the userId %s", getClass(), user);
 
     ServiceRequest serviceRequest = new ServiceRequest(new MissedIntake(), null);
-
-    serviceRequest.setProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER, userId);
 
     ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
 

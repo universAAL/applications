@@ -6,12 +6,11 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.medMgr.MissedIntake;
-import org.universAAL.ontology.medMgr.Precaution;
 
 /**
  * @author George Fournadjiev
  */
-public final class ProviderCaregiverNotficationService extends Precaution {
+public final class ProviderCaregiverNotificationService extends MissedIntake {
 
   public static final String CAREGIVER_NOTIFICATION_SERVER_NAMESPACE =
       "http://ontology.igd.fhg.de/CaregiverNotificationServer.owl#";
@@ -34,14 +33,14 @@ public final class ProviderCaregiverNotficationService extends Precaution {
               @Override
               public Resource createInstance(String classURI,
                                              String instanceURI, int factoryIndex) {
-                return new ProviderCaregiverNotficationService(instanceURI);
+                return new ProviderCaregiverNotificationService(instanceURI);
               }
             }));
 
-    String[] ppMissedIntake = new String[]{MissedIntake.TIME, MissedIntake.USER_ID};
+    String[] ppMissedIntake = new String[]{MissedIntake.TIME, MissedIntake.USER};
 
-    ProviderCaregiverNotficationService notify =
-        new ProviderCaregiverNotficationService(SERVICE_NOTIFY);
+    ProviderCaregiverNotificationService notify =
+        new ProviderCaregiverNotificationService(SERVICE_NOTIFY);
 
     notify.addOutput(OUTPUT_NOTIFY,
         MissedIntake.MY_URI, 1, 1, ppMissedIntake);
@@ -50,14 +49,13 @@ public final class ProviderCaregiverNotficationService extends Precaution {
 
   }
 
-  private ProviderCaregiverNotficationService(String uri) {
+  private ProviderCaregiverNotificationService(String uri) {
     super(uri);
   }
 
   public String getClassURI() {
     return MY_URI;
   }
-
 
 }
 

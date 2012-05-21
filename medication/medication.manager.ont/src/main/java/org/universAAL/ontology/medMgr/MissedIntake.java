@@ -1,8 +1,7 @@
 package org.universAAL.ontology.medMgr;
 
 import org.universAAL.middleware.service.owl.Service;
-
-import java.util.Hashtable;
+import org.universAAL.ontology.profile.User;
 
 /**
  * @author George Fournadjiev
@@ -13,7 +12,7 @@ public class MissedIntake extends Service {
 
   public static final String TIME = MedicationOntology.NAMESPACE + "time";
 
-  public static final String USER_ID = MedicationOntology.NAMESPACE + "userId";
+  public static final String USER = MedicationOntology.NAMESPACE + "user";
 
   public MissedIntake() {
     super();
@@ -43,12 +42,12 @@ public class MissedIntake extends Service {
     props.put(TIME, time);
   }
 
-  public String getUserId() {
-    return (String) props.get(USER_ID);
+  public User getUser() {
+    return (User) props.get(USER);
   }
 
-  public void setUserId(String userId) {
-    props.put(USER_ID, userId);
+  public void setUser(User user) {
+    props.put(USER, user);
   }
 
 }

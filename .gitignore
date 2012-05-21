@@ -134,6 +134,9 @@ medication/medication.manager.ont/target
 medication/medication.manager.pom/*.iml
 medication/medication.manager.service/*.iml
 medication/medication.manager.service/target
+medication/medication.manager.shell.commands/*.iml
+medication/medication.manager.ui.runner/*.iml
+medication/medication.manager.ui/*.iml
 medication/medication.missing.services.simulation/*.iml
 new_services.pom/.project
 new_services.pom/.settings

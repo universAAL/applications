@@ -13,7 +13,7 @@ import org.universAAL.ontology.medMgr.Precaution;
 public final class ProviderPrecautionService extends Precaution {
 
   public static final String PRECAUTION_SERVER_NAMESPACE =
-      "http://ontology.igd.fhg.de/PrecautionServer.owl#";
+      "http://ontologies.universAAL.com/PrecautionServer.owl#";
 
   public static final String MY_URI = PRECAUTION_SERVER_NAMESPACE + "PrecautionService";
 
@@ -26,6 +26,8 @@ public final class ProviderPrecautionService extends Precaution {
   static {
 
     //Register
+
+    System.out.println("****************URAAAAAAAAAAAAAAAAAAAA");
 
     OntologyManagement.getInstance().register(
         new SimpleOntology(MY_URI, Precaution.MY_URI,

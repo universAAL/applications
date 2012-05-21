@@ -7,6 +7,7 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.ontology.impl.MedicationFactory;
+import org.universAAL.ontology.profile.User;
 
 /**
  * @author George Fournadjiev
@@ -84,12 +85,23 @@ public final class MedicationOntology extends Ontology {
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
             MissedIntake.TIME, Time.MY_URI, 1, 1));
-    oci.addDatatypeProperty(MissedIntake.USER_ID);
+    oci.addObjectProperty(MissedIntake.USER).setFunctional();
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            MissedIntake.USER_ID,
-            TypeMapper.getDatatypeURI(String.class), 0, 1));
+            MissedIntake.USER, User.MY_URI, 1, 1));
 
+    // load DueIntake
+    oci = createNewOntClassInfo(DueIntake.MY_URI, FACTORY, 3);
+    oci.setResourceComment("The type of a DueIntake");
+    oci.setResourceLabel("DueIntake");
+    oci.addDatatypeProperty(DueIntake.DEVICE_ID);
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            DueIntake.DEVICE_ID, TypeMapper.getDatatypeURI(String.class), 1, 1));
+    oci.addObjectProperty(DueIntake.USER).setFunctional();
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            DueIntake.USER, User.MY_URI, 1, 1));
 
   }
 }

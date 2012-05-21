@@ -8,6 +8,7 @@ import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.medMgr.Precaution;
+import org.universAAL.ontology.profile.User;
 
 import java.util.List;
 
@@ -30,9 +31,8 @@ public final class MedicationConsumer {
 
   public static Precaution requestDetails(String userID) {
 
-    ServiceRequest serviceRequest = new ServiceRequest(new Precaution(), null);
-
-    serviceRequest.setProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER, userID);
+    User user = new User(userID);
+    ServiceRequest serviceRequest = new ServiceRequest(new Precaution(), user);
 
     serviceRequest.addRequiredOutput(OUTPUT_PRECAUTION, new String[]{Precaution.SIDEEFFECT, Precaution.INCOMPLIANCE});
 
