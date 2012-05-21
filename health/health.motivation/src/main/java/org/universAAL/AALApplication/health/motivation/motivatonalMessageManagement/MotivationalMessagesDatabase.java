@@ -22,8 +22,8 @@ import java.io.File;
 
 public class MotivationalMessagesDatabase {
 
-	//Aqu� hay que pedirle al sistema, a partir de las properties
-	//que est�n en configuraci�n, que me de la ruta de la carpeta de los idiomas
+	//Aqui hay que pedirle al sistema, a partir de las properties
+	//que esta en configuracion, que me de la ruta de la carpeta de los idiomas
 
 
 	public static final int ES = 0;
@@ -36,7 +36,7 @@ public class MotivationalMessagesDatabase {
 		case ES:
 			return file = new File("G:\\motivationalMessages.csv");
 		case EN:
-			return file = new File("G:\\englishDBRute.csv");
+			return file = new File("C://universAAL/motivationalMessages/en_motivationalMessagesDB.csv");
 		default:
 			return null;
 

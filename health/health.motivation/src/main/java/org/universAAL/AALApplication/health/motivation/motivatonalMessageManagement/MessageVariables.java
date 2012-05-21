@@ -1,5 +1,6 @@
 package org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement;
 
+//llamar a un método que obtenga del sistema estas variables
 public class MessageVariables {
 	
 public static String[] replaceVariables(String[] variable){

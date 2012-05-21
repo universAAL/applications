@@ -18,24 +18,20 @@
 
 package org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 import java.util.StringTokenizer;
+
 import org.apache.commons.collections.map.MultiKeyMap;
 import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
-import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.TreatmentTypeClassification;
 
-
 import com.csvreader.CsvReader;
-import com.csvreader.CsvWriter;
 
 public class MessageManager {
 
@@ -46,7 +42,7 @@ public class MessageManager {
 	private final int EN = 1;
 	private final int ES = 0;
 	
-	public String illness;
+	public String disease;
 	public String treatment_type;
 	public String mot_status;
 	public String message_type;
@@ -95,7 +91,7 @@ public class MessageManager {
 			String line = reader.getRawRecord();
 			String[] columns = reader.getValues();
 			
-			illness = columns[0];
+			disease = columns[0];
 			treatment_type = columns[1];
 			mot_status = columns[2];
 			message_type = columns[3];
@@ -103,18 +99,18 @@ public class MessageManager {
 
 			while (line != null) {
 
-				if (!map.containsKey(illness,treatment_type, mot_status,
+				if (!map.containsKey(disease,treatment_type, mot_status,
 					message_type)) {
 					// if the combination of keys has not been registered yet
 					ArrayList<String> mMessagesAssociated = new ArrayList<String>(); // a
 					mMessagesAssociated.add(motivational_message_content);
-					map.put(illness,treatment_type, mot_status,
+					map.put(disease,treatment_type, mot_status,
 							message_type,mMessagesAssociated);
 				} else { // if the combination of keys already exists
 					ArrayList<String> mMessagesAssociated = (ArrayList<String>) (map
-							.get(illness,treatment_type, mot_status,message_type));
+							.get(disease,treatment_type, mot_status,message_type));
 					mMessagesAssociated.add(motivational_message_content);
-					map.put(illness,treatment_type, mot_status,
+					map.put(disease,treatment_type, mot_status,
 							message_type,mMessagesAssociated);
 				}
 
@@ -152,13 +148,13 @@ public class MessageManager {
 	 * @return motivational message content (MotivationalPlainMessage or MotivationalQuestionnaire).
 	 */
 
-	public Object getMotivationalMessageContent(String illness, TreatmentTypeClassification treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
+	public static Object getMotivationalMessageContent(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
 		
 		String tType = (String) treatmentType.toString();
 		String mStatus = (String) motStatus.toString();
 		String mType = (String) messageType.toString();
 		ArrayList<String> mMessageResults = (ArrayList<String>) map.get(
-				illness, tType, mStatus, mType);
+				disease, tType, mStatus, mType);
 
 		if (mMessageResults.size() > 1) { // there are several messages for the
 			// same combination of keys
@@ -341,15 +337,15 @@ public class MessageManager {
 	 * @param Motivational Message to be sent
 	 */
 	
-	public static void sendMessageToUser(String illness, TreatmentTypeClassification treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
+	public static void sendMessageToUser(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
 		// To do: utilizar el m�todo/servicio que proporcione la plataforma
 		// para enviar al buz�n de entrada del destinatario.
 		// Prestar atenci�n a lo que devuelva (mensaje enviado, mensaje le�do,
 		// etc).
 		
-		Object unprocessedContent = getMotivationalMessageContent(illness, treatmentType, motStatus, messageType);
+		Object unprocessedContent = getMotivationalMessageContent(disease, treatmentType, motStatus, messageType);
 		String processedMessage = decodeMessageContent(unprocessedContent);
-		MessageServiceGate.sendMessage(processedMessage);
+		MessageServiceTools.sendMessage(processedMessage);
 	}
 
 	/**
