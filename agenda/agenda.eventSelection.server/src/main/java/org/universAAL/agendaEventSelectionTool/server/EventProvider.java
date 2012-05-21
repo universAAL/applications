@@ -11,8 +11,6 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.agendaEventSelectionTool.ont.EventSelectionTool;
-import org.universAAL.agendaEventSelectionTool.ont.FilterParams;
 import org.universAAL.agendaEventSelectionTool.server.impl.EventSelectionListener;
 import org.universAAL.agendaEventSelectionTool.server.impl.MyEventSelectionTool;
 import org.universAAL.middleware.container.ModuleContext;
@@ -26,7 +24,13 @@ import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
-
+import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
+import org.universAAL.ontology.agendaEventSelection.FilterParams;
+/**
+ * @author kagnantis
+ * @author eandgrg
+ *
+ */
 public class EventProvider extends ServiceCallee implements
 	EventSelectionListener {
 
@@ -71,10 +75,9 @@ public class EventProvider extends ServiceCallee implements
 	// theServer.addListener(this);
     }
 
-    /**
-     * 
-     * @see org.universAAL.middleware.service.ServiceCallee#handleCall(org.persona.
-     *      middleware.service.ServiceCall)
+
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.service.ServiceCallee#handleCall(org.universAAL.middleware.service.ServiceCall)
      */
     public ServiceResponse handleCall(ServiceCall call) {
 	if (call == null)
@@ -235,6 +238,9 @@ public class EventProvider extends ServiceCallee implements
 	// TODO Auto-generated method stub
     }
 
+    /* (non-Javadoc)
+     * @see org.universAAL.agendaEventSelectionTool.server.impl.EventSelectionListener#eventSelectionChanged(org.universAAL.ontology.agendaEventSelection.EventSelectionTool, org.universAAL.ontology.agendaEventSelection.FilterParams)
+     */
     public void eventSelectionChanged(EventSelectionTool evTool,
 	    FilterParams filterParams) {
 	// TODO Auto-generated method stub

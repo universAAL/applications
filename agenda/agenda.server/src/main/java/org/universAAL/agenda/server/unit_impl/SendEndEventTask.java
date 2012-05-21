@@ -2,6 +2,11 @@ package org.universAAL.agenda.server.unit_impl;
 
 import org.universAAL.ontology.agenda.Event;
 
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ */
 public class SendEndEventTask extends SendContextEventTask {
 
     public SendEndEventTask(AgendaStateListener listener, Event event,

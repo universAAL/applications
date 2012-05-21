@@ -5,18 +5,27 @@ import java.util.Hashtable;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.service.CalendarAgenda;
-import org.universAAL.agendaEventSelectionTool.ont.EventSelectionTool;
-import org.universAAL.agendaEventSelectionTool.ont.FilterParams;
-import org.universAAL.agendaEventSelectionTool.ont.service.EventSelectionToolService;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
+import org.universAAL.ontology.agendaEventSelection.FilterParams;
+import org.universAAL.ontology.agendaEventSelection.service.EventSelectionToolService;
+import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.middleware.owl.OntologyManagement;
+import org.universAAL.middleware.owl.SimpleOntology;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
+import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.process.ProcessInput;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ */
 public class ProvidedESTService extends EventSelectionToolService {
     // define service namespace + class URI
-    public static final String EVENTSELECTIONTOOL_SERVER_NAMESPACE = "http://ontology.persona.anco.gr/EventSelectionToolServer.owl#";
+    public static final String EVENTSELECTIONTOOL_SERVER_NAMESPACE = "http://ontology.universaal.org/EventSelectionToolServer.owl#";
     public static final String MY_URI = EVENTSELECTIONTOOL_SERVER_NAMESPACE
 	    + "EventSelectionToolService";
 
@@ -43,17 +52,27 @@ public class ProvidedESTService extends EventSelectionToolService {
 	    + "eventList";
 
     private static final int PROVIDED_SERVICES = 4; // The number of provided
-						    // sub-services from main
-						    // service
+    // sub-services from main
+    // service
 
     static final ServiceProfile[] profiles = new ServiceProfile[PROVIDED_SERVICES];
     private static Hashtable serverEventSelctionToolRestrictions = new Hashtable();
 
     static {
-	register(ProvidedESTService.class);
+	OntologyManagement.getInstance().register(
+		new SimpleOntology(MY_URI, EventSelectionToolService.MY_URI,
+			new ResourceFactoryImpl() {
+			    @Override
+			    public Resource createInstance(String classURI,
+				    String instanceURI, int factoryIndex) {
+				return new ProvidedESTService(instanceURI);
+			    }
+			}));
+
 	// add restriction about what the service controls
-	addRestriction((Restriction) EventSelectionToolService
+	addRestriction((MergedRestriction) EventSelectionToolService
 		.getClassRestrictionsOnProperty(
+			EventSelectionToolService.MY_URI,
 			EventSelectionToolService.PROP_CONTROLS).copy(),
 		new String[] { EventSelectionToolService.PROP_CONTROLS },
 		serverEventSelctionToolRestrictions);
@@ -88,12 +107,14 @@ public class ProvidedESTService extends EventSelectionToolService {
 		EventSelectionToolService.PROP_CONTROLS,
 		EventSelectionTool.PROP_MAX_EVENT_NO };
 
-	Restriction resFilterParams = Restriction.getFixedValueRestriction(
-		EventSelectionTool.PROP_HAS_FILTER_PARAMS, inFilterParams
-			.asVariableReference());
-	Restriction resCalendar = Restriction.getFixedValueRestriction(
-		EventSelectionTool.PROP_HAS_CALENDARS, inCalendarList
-			.asVariableReference());
+	MergedRestriction resFilterParams = MergedRestriction
+		.getFixedValueRestriction(
+			EventSelectionTool.PROP_HAS_FILTER_PARAMS,
+			inFilterParams.asVariableReference());
+	MergedRestriction resCalendar = MergedRestriction
+		.getFixedValueRestriction(
+			EventSelectionTool.PROP_HAS_CALENDARS, inCalendarList
+				.asVariableReference());
 
 	/*******************************************************************************
 	 ** service 0: List<Event> requestEvent(FilterParams filterParams) **
@@ -103,7 +124,7 @@ public class ProvidedESTService extends EventSelectionToolService {
 	ProvidedESTService requestEvents = new ProvidedESTService(
 		SERVICE_REQUEST_EVENTS);
 	requestEvents.addInstanceLevelRestriction(
-		(Restriction) resFilterParams, ppFilterParams);
+		(MergedRestriction) resFilterParams, ppFilterParams);
 
 	profiles[0] = requestEvents.getProfile();
 	profiles[0].addInput(inFilterParams);

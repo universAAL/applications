@@ -6,7 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
-
+/***
+ * 
+ * @author eandgrg
+ *
+ */
 public class Activator implements BundleActivator {
 
     private final static Logger log = LoggerFactory

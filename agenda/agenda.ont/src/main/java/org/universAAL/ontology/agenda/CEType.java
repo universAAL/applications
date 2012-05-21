@@ -4,16 +4,12 @@ import org.universAAL.middleware.owl.ManagedIndividual;
 
 /**
  * @author kagnantis
- * 
+ * @author eandgrg
+ *
  */
 public class CEType extends ManagedIndividual {
-    public static final String MY_URI;
-
-    static {
-	MY_URI = Calendar.CALENDAR_NAMESPACE + "CEType";
-	register(CEType.class);
-    }
-
+    
+    public static final String MY_URI = AgendaOntology.NAMESPACE + "CEType";
     public static final int NEW_EVENT = 0;
     public static final int UPDATED_EVENT = 1;
     public static final int DELETED_EVENT = 2;
@@ -24,6 +20,7 @@ public class CEType extends ManagedIndividual {
 
     private static final String[] names = { "new", "updated", "deleted",
 	    "reminder", "started", "ended", "planned" };
+
 
     public static final CEType newEvent = new CEType(NEW_EVENT);
     public static final CEType updatedEvent = new CEType(UPDATED_EVENT);
@@ -36,6 +33,8 @@ public class CEType extends ManagedIndividual {
     /**
      * Returns the list of all class members guaranteeing that no other members
      * will be created after a call to this method.
+     *
+     * @return 
      */
     public static ManagedIndividual[] getEnumerationMembers() {
 	return new ManagedIndividual[] { newEvent, updatedEvent, deletedEvent,
@@ -44,19 +43,28 @@ public class CEType extends ManagedIndividual {
 
     /**
      * Returns the rating with the given URI.
+     *
+     * @param instanceURI 
+     * @return 
      */
     public static ManagedIndividual getIndividualByURI(String instanceURI) {
 	return (instanceURI != null && instanceURI
-		.startsWith(Calendar.CALENDAR_NAMESPACE)) ? valueOf(instanceURI
-		.substring(Calendar.CALENDAR_NAMESPACE.length())) : null;
+		.startsWith(AgendaOntology.NAMESPACE)) ? valueOf(instanceURI
+		.substring(AgendaOntology.NAMESPACE.length())) : null;
     }
 
+    /**
+     * 
+     *
+     * @param name 
+     * @return 
+     */
     public static final CEType valueOf(String name) {
 	if (name == null)
 	    return null;
 
-	if (name.startsWith(Calendar.CALENDAR_NAMESPACE))
-	    name = name.substring(Calendar.CALENDAR_NAMESPACE.length());
+	if (name.startsWith(AgendaOntology.NAMESPACE))
+	    name = name.substring(AgendaOntology.NAMESPACE.length());
 
 	for (int i = NEW_EVENT; i <= EVENT_PLANNED; ++i)
 	    if (names[i].equals(name))
@@ -65,6 +73,12 @@ public class CEType extends ManagedIndividual {
 	return null;
     }
 
+    /**
+     * 
+     *
+     * @param order 
+     * @return 
+     */
     public static CEType getReminderTypeByOrder(int order) {
 	switch (order) {
 	case NEW_EVENT:
@@ -86,38 +100,55 @@ public class CEType extends ManagedIndividual {
 	}
     }
 
-    public static String getRDFSComment() {
-	return "The type of the event when it is beeing published.";
-    }
-
-    public static String getRDFSLabel() {
-	return "Published Type";
-    }
-
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType(java.lang.String)
+     */
     public int getPropSerializationType(String propURI) {
 	return PROP_SERIALIZATION_OPTIONAL;
     }
 
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#isWellFormed()
+     */
     public boolean isWellFormed() {
 	return true;
     }
 
+    /**  */
     private int order;
 
+    /**
+     * 
+     *
+     * @param order 
+     */
     private CEType(int order) {
-	super(Calendar.CALENDAR_NAMESPACE + names[order]);
+	super(AgendaOntology.NAMESPACE + names[order]);
 	this.order = order;
     }
 
+    /**
+     * 
+     *
+     * @return 
+     */
     public String name() {
 	return names[this.order];
     }
 
+    /**
+     * 
+     *
+     * @return 
+     */
     public int ord() {
 	return this.order;
     }
 
-    public void setProperty(String propURI, Object o) {
-	// do nothing
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
     }
 }

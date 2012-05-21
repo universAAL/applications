@@ -6,66 +6,38 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.owl.Restriction;
-import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.profile.User;
 
 /**
  * @author kagnantis
+ * @author eandgrg
  * 
  */
 public class Calendar extends ManagedIndividual {
-    public static final String CALENDAR_NAMESPACE = "http://ontology.universAAL.org/PersonalAgenda.owl#";
-    public static final String MY_URI;
-    public static final String PROP_HAS_EVENT;
-    public static final String PROP_HAS_OWNER;
-    public static final String PROP_NAME;
+    public static final String MY_URI = AgendaOntology.NAMESPACE + "Calendar";
+    public static final String PROP_HAS_EVENT = AgendaOntology.NAMESPACE
+	    + "hasEvent";
+    public static final String PROP_HAS_OWNER = AgendaOntology.NAMESPACE
+	    + "hasOwner";
+    public static final String PROP_NAME = AgendaOntology.NAMESPACE + "name";
 
     // eventcounter
     private int eventCounter = 0;
 
-    static {
-	MY_URI = CALENDAR_NAMESPACE + "Calendar";
-	PROP_HAS_EVENT = CALENDAR_NAMESPACE + "hasEvent";
-	PROP_HAS_OWNER = CALENDAR_NAMESPACE + "hasOwner";
-	PROP_NAME = CALENDAR_NAMESPACE + "name";
-	register(Calendar.class);
-    }
-
-    public static Restriction getClassRestrictionsOnProperty(String propURI) {
-	if (PROP_HAS_EVENT.equals(propURI))
-	    return Restriction.getAllValuesRestriction(propURI, Event.MY_URI);
-	if (PROP_HAS_OWNER.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    User.MY_URI, 1, 1);
-	if (PROP_NAME.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(String.class), 1, 0);
-
-	return ManagedIndividual.getClassRestrictionsOnProperty(propURI);
-    }
-
-    public static String[] getStandardPropertyURIs() {
-	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
-	String[] toReturn = new String[inherited.length + 2];
-	int i = 0;
-	while (i < inherited.length) {
-	    toReturn[i] = inherited[i];
-	    i++;
-	}
-	toReturn[i++] = PROP_HAS_EVENT;
-	toReturn[i++] = PROP_HAS_OWNER;
-
-	return toReturn;
-    }
-
-    public static String getRDFSComment() {
-	return "The class of a calendar.";
-    }
-
-    public static String getRDFSLabel() {
-	return "Calendar";
-    }
+    // zakomentirano kod prijelaza na 1.1.0
+    // public static String[] getStandardPropertyURIs() {
+    // String[] inherited = ManagedIndividual.getStandardPropertyURIs();
+    // String[] toReturn = new String[inherited.length + 2];
+    // int i = 0;
+    // while (i < inherited.length) {
+    // toReturn[i] = inherited[i];
+    // i++;
+    // }
+    // toReturn[i++] = PROP_HAS_EVENT;
+    // toReturn[i++] = PROP_HAS_OWNER;
+    //
+    // return toReturn;
+    // }
 
     public Calendar(String uri) {
 	super(uri);
@@ -260,6 +232,15 @@ public class Calendar extends ManagedIndividual {
 	    return true;
 
 	return false;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
     }
 
 }

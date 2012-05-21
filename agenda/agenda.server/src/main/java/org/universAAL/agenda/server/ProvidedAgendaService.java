@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.universAAL.agenda.server;
 
 //j2se packages
@@ -15,9 +12,13 @@ import org.universAAL.ontology.agenda.EventDetails;
 import org.universAAL.ontology.agenda.Reminder;
 import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.ontology.agenda.service.CalendarAgenda;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.middleware.owl.OntologyManagement;
+import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.PropertyPath;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
+import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.process.ProcessInput;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
@@ -25,6 +26,7 @@ import org.universAAL.ontology.profile.User;
 
 /**
  * @author kagnantis
+ * @author eandgrg
  * 
  */
 public class ProvidedAgendaService extends CalendarAgenda {
@@ -35,7 +37,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 
     // define the uri for each service provided
     private static final int PROVIDED_SERVICES = 18; // The number of services
-						     // provided by this class
+    // provided by this class
     static final String SERVICE_GET_CALENDARS = AGENDA_SERVER_NAMESPACE
 	    + "getControlledCalendars1";
     static final String SERVICE_GET_CALENDAR_OWNER = AGENDA_SERVER_NAMESPACE
@@ -116,11 +118,21 @@ public class ProvidedAgendaService extends CalendarAgenda {
     private static Hashtable serverAgendaRestrictions = new Hashtable();
 
     static {
-	register(ProvidedAgendaService.class);
+	OntologyManagement.getInstance().register(
+		new SimpleOntology(MY_URI, CalendarAgenda.MY_URI,
+			new ResourceFactoryImpl() {
+			    @Override
+			    public Resource createInstance(String classURI,
+				    String instanceURI, int factoryIndex) {
+				return new ProvidedAgendaService(instanceURI);
+			    }
+			}));
+
 	// add restriction about what the service controls
-	addRestriction((Restriction) CalendarAgenda
-		.getClassRestrictionsOnProperty(CalendarAgenda.PROP_CONTROLS)
-		.copy(), new String[] { CalendarAgenda.PROP_CONTROLS },
+	addRestriction((MergedRestriction) CalendarAgenda
+		.getClassRestrictionsOnProperty(CalendarAgenda.MY_URI,
+			CalendarAgenda.PROP_CONTROLS).copy(),
+		new String[] { CalendarAgenda.PROP_CONTROLS },
 		serverAgendaRestrictions);
 
 	/**********************************************************************
@@ -156,18 +168,18 @@ public class ProvidedAgendaService extends CalendarAgenda {
 		.setParameterType(TypeMapper.getDatatypeURI(String.class));
 	inCalendarName.setCardinality(1, 1);
 
-	 // service has an output: the list of controlled calendars
+	// service has an output: the list of controlled calendars
 	ProcessOutput outCalList = new ProcessOutput(
 		OUTPUT_CONTROLLED_CALENDARS);
-	
+
 	// output has a type: Calendar
-	outCalList.setParameterType(Calendar.MY_URI); 
+	outCalList.setParameterType(Calendar.MY_URI);
 	outCalList.setCardinality(0, 1);
 
 	// service has an output: the list of controlled calendar
 	ProcessOutput outCalendar = new ProcessOutput(OUTPUT_CALENDAR);
 	// output has a type: Calendar
-	outCalendar.setParameterType(Calendar.MY_URI); 
+	outCalendar.setParameterType(Calendar.MY_URI);
 	outCalendar.setCardinality(1, 1);
 
 	ProcessOutput outEventId = new ProcessOutput(OUTPUT_EVENT_ID);
@@ -222,10 +234,12 @@ public class ProvidedAgendaService extends CalendarAgenda {
 			Calendar.PROP_HAS_EVENT, Event.PROP_HAS_EVENT_DETAILS,
 			EventDetails.PROP_CATEGORY });
 
-	Restriction resCalendar = Restriction.getFixedValueRestriction(
-		CalendarAgenda.PROP_CONTROLS, inCalendar.asVariableReference());
-	Restriction resEventID = Restriction.getFixedValueRestriction(
-		Event.PROP_ID, inEventId.asVariableReference());
+	MergedRestriction resCalendar = MergedRestriction
+		.getFixedValueRestriction(CalendarAgenda.PROP_CONTROLS,
+			inCalendar.asVariableReference());
+	MergedRestriction resEventID = MergedRestriction
+		.getFixedValueRestriction(Event.PROP_ID, inEventId
+			.asVariableReference());
 
 	/*********************************************
 	 * service 1: List<Calendar> getCalendars() *
@@ -233,9 +247,9 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	ProvidedAgendaService getCalendars = new ProvidedAgendaService(
 		SERVICE_GET_CALENDARS);
 	profiles[0] = getCalendars.getProfile(); // initialize the service
-						 // profile
+	// profile
 	profiles[0].addOutput(outCalList); // connect the service with the
-					   // output
+	// output
 	// Declares that the output parameter <i>output</i> will reflect the
 	// value of a property reachable by the given property path:
 	// CalendarAgenda.PROP_CONTROLS
@@ -325,8 +339,9 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	 *************************************************************/
 	ProvidedAgendaService getCalendarEvent = new ProvidedAgendaService(
 		SERVICE_GET_CALENDAR_EVENT);
-	getCalendarEvent.addInstanceLevelRestriction((Restriction) resCalendar
-		.copy(), ppCalendar.getThePath());
+	getCalendarEvent
+		.addInstanceLevelRestriction((MergedRestriction) resCalendar
+			.copy(), ppCalendar.getThePath());
 	getCalendarEvent.addInstanceLevelRestriction(resEventID, ppEventId
 		.getThePath());
 	profiles[6] = getCalendarEvent.getProfile();
@@ -355,7 +370,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	 ****************************************************************************/
 	ProvidedAgendaService updateEvent = new ProvidedAgendaService(
 		SERVICE_UPDATE_EVENT);
-	updateEvent.addInstanceLevelRestriction((Restriction) resCalendar
+	updateEvent.addInstanceLevelRestriction((MergedRestriction) resCalendar
 		.copy(), ppCalendar.getThePath());
 	updateEvent.addInstanceLevelRestriction(resEventID, ppEventId
 		.getThePath());
@@ -372,7 +387,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	 *******************************************************************/
 	ProvidedAgendaService deleteCalendarEvent = new ProvidedAgendaService(
 		SERVICE_DELETE_EVENT);
-	// deleteCalendarEvent.addInstanceLevelRestriction((Restriction)
+	// deleteCalendarEvent.addInstanceLevelRestriction((MergedRestriction)
 	// resCalendar.copy(), ppCalendar.getThePath());
 	deleteCalendarEvent.addInstanceLevelRestriction(resEventID, ppEventId
 		.getThePath());
@@ -387,8 +402,9 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	 ****************************************************************************************/
 	ProvidedAgendaService setEventReminder = new ProvidedAgendaService(
 		SERVICE_SET_REMINDER);
-	setEventReminder.addInstanceLevelRestriction((Restriction) resCalendar
-		.copy(), ppCalendar.getThePath());
+	setEventReminder
+		.addInstanceLevelRestriction((MergedRestriction) resCalendar
+			.copy(), ppCalendar.getThePath());
 	setEventReminder.addInstanceLevelRestriction(resEventID, ppEventId
 		.getThePath());
 	profiles[10] = setEventReminder.getProfile();
@@ -404,8 +420,9 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	 ****************************************************************************************************/
 	ProvidedAgendaService setReminderType = new ProvidedAgendaService(
 		SERVICE_SET_REMINDER_TYPE);
-	setReminderType.addInstanceLevelRestriction((Restriction) resCalendar
-		.copy(), ppCalendar.getThePath());
+	setReminderType
+		.addInstanceLevelRestriction((MergedRestriction) resCalendar
+			.copy(), ppCalendar.getThePath());
 	setReminderType.addInstanceLevelRestriction(resEventID, ppEventId
 		.getThePath());
 	profiles[11] = setReminderType.getProfile();
@@ -434,8 +451,9 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	 *******************************************************************/
 	ProvidedAgendaService cancelReminder = new ProvidedAgendaService(
 		SERVICE_CANCEL_REMINDER);
-	cancelReminder.addInstanceLevelRestriction((Restriction) resCalendar
-		.copy(), ppCalendar.getThePath());
+	cancelReminder
+		.addInstanceLevelRestriction((MergedRestriction) resCalendar
+			.copy(), ppCalendar.getThePath());
 	profiles[13] = cancelReminder.getProfile();
 	profiles[13].addInput(inCalendar);
 	profiles[13].addInput(inEvent);
@@ -448,9 +466,9 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	ProvidedAgendaService getAllCategories = new ProvidedAgendaService(
 		SERVICE_GET_ALL_CATEGORIES);
 	profiles[14] = getAllCategories.getProfile(); // initialize the service
-						      // profile
+	// profile
 	profiles[14].addOutput(outEventCategories); // connect the service with
-						    // the output
+	// the output
 	profiles[14].addSimpleOutputBinding(outEventCategories, ppEventCategory
 		.getThePath());
 
@@ -468,7 +486,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	getCalendarByName.addOutput(OUTPUT_CALENDAR, Calendar.MY_URI, 1, 1,
 		ppCalendar.getThePath());
 	profiles[15] = getCalendarByName.myProfile; // initialize the service
-						    // profile
+	// profile
 
 	/******************************************************
 	 * service 17: void removeCalendar(Calendar calendar) *
@@ -495,7 +513,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 		Calendar.MY_URI, 1, 0, ppCalendar.getThePath());
 
 	// initialize the service profile
-	profiles[17] = getCalendarsByOwner.myProfile; 
+	profiles[17] = getCalendarsByOwner.myProfile;
 	System.out.println("Profiles loaded...");
 
     }

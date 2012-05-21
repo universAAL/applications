@@ -2,8 +2,12 @@ package org.universAAL.agendaEventSelectionTool.database;
 
 import java.util.List;
 
-import org.universAAL.agendaEventSelectionTool.ont.FilterParams;
-
+import org.universAAL.ontology.agendaEventSelection.FilterParams;
+/**
+ * @author kagnantis
+ * @author eandgrg
+ *
+ */
 public interface EventSelectionToolDBInterface {
     List requestEvents(FilterParams filterParams);
 

@@ -4,6 +4,12 @@ import java.util.TimerTask;
 
 import org.universAAL.ontology.agenda.Event;
 
+
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ */
 public abstract class SendContextEventTask extends TimerTask {
     public final Event event;
     protected AgendaStateListener listener;

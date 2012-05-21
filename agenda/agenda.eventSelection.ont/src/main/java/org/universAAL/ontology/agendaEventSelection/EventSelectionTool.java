@@ -1,4 +1,4 @@
-package org.universAAL.agendaEventSelectionTool.ont;
+package org.universAAL.ontology.agendaEventSelection;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +11,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.rdf.TypeMapper;
 
 /**
@@ -19,60 +19,14 @@ import org.universAAL.middleware.rdf.TypeMapper;
  * 
  */
 public class EventSelectionTool extends ManagedIndividual {
-    public static final String EVENT_SELECTION_TOOL_NAMESPACE = "http://ontology.persona.anco.gr/EventSelectionTool.owl#";
-    public static final String MY_URI;
-    public static final String PROP_HAS_CALENDARS;
-    public static final String PROP_HAS_FILTER_PARAMS;
-    public static final String PROP_MAX_EVENT_NO;
+        public static final String MY_URI= AgendaEventSelectionOntology.NAMESPACE + "EventSelectionTool";
+    public static final String PROP_HAS_CALENDARS= AgendaEventSelectionOntology.NAMESPACE + "hasCalendar";
+    public static final String PROP_HAS_FILTER_PARAMS = AgendaEventSelectionOntology.NAMESPACE
+	+ "hasFilterParams";
+    public static final String PROP_MAX_EVENT_NO= AgendaEventSelectionOntology.NAMESPACE + "maxEventNo";
 
     private List cachedFilteredEvents = new ArrayList();// list of events
     private boolean cacheIsValid = false;
-
-    static {
-	MY_URI = EVENT_SELECTION_TOOL_NAMESPACE + "EventSelectionTool";
-	PROP_HAS_CALENDARS = EVENT_SELECTION_TOOL_NAMESPACE + "hasCalendar";
-	PROP_HAS_FILTER_PARAMS = EVENT_SELECTION_TOOL_NAMESPACE
-		+ "hasFilterParams";
-	PROP_MAX_EVENT_NO = EVENT_SELECTION_TOOL_NAMESPACE + "maxEventNo";
-	register(EventSelectionTool.class);
-    }
-
-    public static Restriction getClassRestrictionsOnProperty(String propURI) {
-	if (PROP_HAS_CALENDARS.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    Calendar.MY_URI, 2, 2);
-	if (PROP_HAS_FILTER_PARAMS.equals(propURI))
-	    return Restriction.getAllValuesRestriction(propURI,
-		    FilterParams.MY_URI);
-	if (PROP_MAX_EVENT_NO.equals(propURI))
-	    return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-		    TypeMapper.getDatatypeURI(Integer.class), 1, 0);
-
-	return ManagedIndividual.getClassRestrictionsOnProperty(propURI);
-    }
-
-    public static String[] getStandardPropertyURIs() {
-	String[] inherited = ManagedIndividual.getStandardPropertyURIs();
-	String[] toReturn = new String[inherited.length + 3];
-	int i = 0;
-	while (i < inherited.length) {
-	    toReturn[i] = inherited[i];
-	    i++;
-	}
-	toReturn[i++] = PROP_HAS_CALENDARS;
-	toReturn[i++] = PROP_HAS_FILTER_PARAMS;
-	toReturn[i++] = PROP_MAX_EVENT_NO;
-
-	return toReturn;
-    }
-
-    public static String getRDFSComment() {
-	return "The class of a EventSelectionTool.";
-    }
-
-    public static String getRDFSLabel() {
-	return "EventSelectionTool";
-    }
 
     public EventSelectionTool() {
 	super();
@@ -272,5 +226,11 @@ public class EventSelectionTool extends ManagedIndividual {
     public void clearPreviousData() {
 	setCalendars(new ArrayList());
     }
-
+    
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
+     */
+    public String getClassURI() {
+	return MY_URI;
+    }
 }

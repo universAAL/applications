@@ -6,6 +6,11 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ */
 public class TimerTaskCollection {
     Map eventReminders = new HashMap(5);
 

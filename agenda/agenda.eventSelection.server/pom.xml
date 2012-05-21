@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>A.0.1-SNAPSHOT</version>
+		<version>B.0.1-SNAPSHOT</version>
 		<relativePath>../agenda.pom/pom.xml</relativePath>
 	</parent>
 	<packaging>bundle</packaging>
@@ -109,8 +109,8 @@
 
 							org.universAAL.ontology.agenda,
 							org.universAAL.ontology.agenda.service,
-							org.universAAL.agendaEventSelectionTool.ont,
-							org.universAAL.agendaEventSelectionTool.ont.service,
+							org.universAAL.ontology.agendaEventSelection,
+							org.universAAL.ontology.agendaEventSelection.service,
 
 							java.sql.*,
 							org.osgi.framework,
