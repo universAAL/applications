@@ -35,6 +35,7 @@ import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
+import org.universAAL.ontology.profile.Profile;
 import org.universAAL.ontology.profile.health.Illness;
 import org.universaal.ontology.health.HealthOntologyFactory;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
@@ -82,9 +83,9 @@ public final class HealthOntology extends Ontology {
     addImport(DataRepOntology.NAMESPACE);
     addImport(ServiceBusOntology.NAMESPACE);
     addImport(LocationOntology.NAMESPACE);
-    addImport(HealthMeasurementOntology.NAMESPACE);
     addImport(ProfileOntology.NAMESPACE);
 	addImport(HealthProfileOntology.NAMESPACE);	
+    addImport(HealthMeasurementOntology.NAMESPACE);
    
 	OntClassInfoSetup oci;
 
@@ -124,7 +125,7 @@ public final class HealthOntology extends Ontology {
     		TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 1, 1));
     
     oci.addDatatypeProperty(PlannedSession.PROP_DURATION).setFunctional();
-    oci.addRestriction(MergedRestriction.getCardinalityRestriction(PlannedSession.PROP_DURATION, 1, 1));
+    //oci.addRestriction(MergedRestriction.getCardinalityRestriction(PlannedSession.PROP_DURATION, 1, 1));
     oci.addRestriction(MergedRestriction 
     		.getAllValuesRestrictionWithCardinality(PlannedSession.PROP_DURATION, 
     		TypeMapper.getDatatypeURI(Duration.class), 1, 1));
@@ -134,16 +135,20 @@ public final class HealthOntology extends Ontology {
       .getAllValuesRestrictionWithCardinality(PlannedSession.PROP_DETAILS, 
       TypeMapper.getDatatypeURI(String.class), 1, 1));
     
-    oci.addObjectProperty(PlannedSession.PROP_PERFORMED).setFunctional();
-    oci.addRestriction(MergedRestriction 
-    		.getAllValuesRestrictionWithCardinality(PlannedSession.PROP_PERFORMED, 
-    		PerformedSession.MY_URI, 0, 1));
+    OntClassInfoSetup oci2 = oci;
     
     //load PerformedSession
     oci = createNewOntClassInfo(PerformedSession.MY_URI, factory, 13);
     oci.setResourceComment("A performed session is a session that has been performed.");
     oci.setResourceLabel("PerformedSession");
     
+    //- property from planned session
+    oci2.addObjectProperty(PlannedSession.PROP_PERFORMED).setFunctional();
+    oci2.addRestriction(MergedRestriction 
+    		.getAllValuesRestrictionWithCardinality(PlannedSession.PROP_PERFORMED, 
+    		PerformedSession.MY_URI, 0, 1));    
+    
+    //- back to performedSession
     oci.addDatatypeProperty(PerformedSession.PROP_DATE).setFunctional();
     oci.addRestriction(MergedRestriction 
     		.getAllValuesRestrictionWithCardinality(PerformedSession.PROP_DATE, 
@@ -155,7 +160,7 @@ public final class HealthOntology extends Ontology {
     		TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 1, 1));
     
     oci.addDatatypeProperty(PerformedSession.PROP_DURATION).setFunctional();
-    oci.addRestriction(MergedRestriction.getCardinalityRestriction(PerformedSession.PROP_DURATION, 1, 1));
+    //oci.addRestriction(MergedRestriction.getCardinalityRestriction(PerformedSession.PROP_DURATION, 1, 1));
     oci.addRestriction(MergedRestriction 
     		.getAllValuesRestrictionWithCardinality(PerformedSession.PROP_DURATION, 
     		TypeMapper.getDatatypeURI(Duration.class), 1, 1));
@@ -357,6 +362,8 @@ public final class HealthOntology extends Ontology {
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_STATUS, 
       StatusType.MY_URI, 1, 1));
     
+    oci2 = extendExistingOntClassInfo(Illness.MY_URI);
+    
     oci.addObjectProperty(Treatment.PROP_ILLNESS).setFunctional();
     oci.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_ILLNESS, 
@@ -429,15 +436,17 @@ public final class HealthOntology extends Ontology {
     oci = createNewOntClassInfo(HealthProfile.MY_URI, factory, 12);  
     oci.setResourceLabel("HealthProfile");
     oci.setResourceComment("Health profile listing all treatments for an Assisted Person");
+    
     oci.addObjectProperty(HealthProfile.PROP_HAS_TREATMENT);
-    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(HealthProfile.PROP_HAS_TREATMENT, Treatment.MY_URI, 0, -1));
+    //oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(HealthProfile.PROP_HAS_TREATMENT, Treatment.MY_URI, 0, -1));
+    oci.addRestriction(MergedRestriction.getAllValuesRestriction(HealthProfile.PROP_HAS_TREATMENT, Treatment.MY_URI));
     oci.addObjectProperty(HealthProfile.PROP_IS_ASSIGNED_TO_AP);
     oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(HealthProfile.PROP_IS_ASSIGNED_TO_AP, AssistedPerson.MY_URI, 1, 1));
     
     
     // extension for AssistedPersonProfile: an assisted person can contain a health profile, where treatments are specified.
     oci=extendExistingOntClassInfo(AssistedPersonProfile.MY_URI);
-    oci.addObjectProperty(PROP_HAS_HEALTH_PROFILE);
+    oci.addObjectProperty(PROP_HAS_HEALTH_PROFILE).addSuperProperty(Profile.PROP_HAS_SUB_PROFILE);
     oci.addRestriction(MergedRestriction
     	      .getAllValuesRestrictionWithCardinality(PROP_HAS_HEALTH_PROFILE, 
     	      HealthProfile.MY_URI, 0, 1));//NO ES LA MÍA, TIENE QUE SER LA DE CARSTEN

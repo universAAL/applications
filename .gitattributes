@@ -617,6 +617,7 @@ health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/Remo
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/SessionPerformedService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/TreatmentManagementService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/UpdateProfileService.java -text
+health/ont.health/src/test/java/org/universaal/ontology/test/HealthOntologyTest.java -text
 health/ont.healthmeasurement/HealthMeasurement.di -text
 health/ont.healthmeasurement/HealthMeasurement.notation -text
 health/ont.healthmeasurement/HealthMeasurement.uml -text svneol=unset#text/plain
