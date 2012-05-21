@@ -128,7 +128,9 @@ long_term_behav/ont.drools/.settings
 long_term_behav/ont.drools/target
 medication/medication.manager.integration.tests/*.iml
 medication/medication.manager.integration.tests/*.log
+medication/medication.manager.integration.tests/target
 medication/medication.manager.ont/*.iml
+medication/medication.manager.ont/target
 medication/medication.manager.pom/*.idea
 medication/medication.manager.pom/*.iml
 medication/medication.manager.service/*.iml
@@ -144,6 +146,7 @@ medication/medication.manager.ui.runner/target
 medication/medication.manager.ui/*.iml
 medication/medication.manager.ui/target
 medication/medication.missing.services.simulation/*.iml
+medication/medication.missing.services.simulation/target
 new_services.pom/.project
 new_services.pom/.settings
 nutritional/NutritionalAdvisor/.classpath
