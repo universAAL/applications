@@ -26,7 +26,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
-import org.universAAL.ontology.profile.health.Illness;
 
 public abstract class Treatment extends ManagedIndividual {
 	
@@ -40,8 +39,8 @@ public abstract class Treatment extends ManagedIndividual {
     + "completeness";
   public static final String PROP_STATUS = HealthOntology.NAMESPACE
     + "status";
-  public static final String PROP_ILLNESS = HealthOntology.NAMESPACE
-  + "illness";
+ // public static final String PROP_DISEASE = HealthOntology.NAMESPACE
+  //+ "disease";
   public static final String PROP_HAS_TREATMENT_PLANNING = HealthOntology.NAMESPACE
     + "hasTreatmentPlanning";
   public static final String PROP_IS_PRESCRIBED_BY_CAREGIVER = HealthOntology.NAMESPACE
@@ -85,6 +84,14 @@ public abstract class Treatment extends ManagedIndividual {
 		this.setTreatmentPlanning(tp);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(tp.getStartDate()); // depending on the date, the treatment will be actived or planned
+	}
+  
+  public Treatment(String tname, String description){
+		//super(assistedPerson + "." + name);
+		this.setName(tname);
+		this.setCompleteness(0);
+		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
+		this.checkStatus(); // depending on the date, the treatment will be actived or planned
 	}
 
 
@@ -173,16 +180,16 @@ public abstract class Treatment extends ManagedIndividual {
     if (caregiver != null)
       props.put(PROP_IS_PRESCRIBED_BY_CAREGIVER, caregiver);
   }	
-  
+  /*
   public Illness getIllness() {
 	    return (Illness)props.get(PROP_ILLNESS);
 	  }		
 
-	  public void setIllness(Illness illness) {
-	    if (illness != null)
-	      props.put(PROP_ILLNESS, illness);
+	  public void setIllness(Disease disease) {
+	    if (disease != null)
+	      props.put(PROP_DISEASE, disease);
 	  }	
-
+*/
   /*
   public Privacy getPrivacy() {
     return (Privacy)props.get(PROP_HAS_PRIVACY);
@@ -256,7 +263,11 @@ public void checkStatus(XMLGregorianCalendar stDate){
 		this.setStatus(StatusType.planned);
 	}catch(Exception e){}
 }
-
+public void checkStatus(){
+		this.setStatus(StatusType.actived);
+		//si no se proporciona una fecha de inicio se toma la actual como inicio
+		//por tanto el tratamiento se activa automáticamente.
+}
 /**
  * This method checks if the start date of the treatment has passed or not, so as
  * to establish the treatment status (planned or actived)
