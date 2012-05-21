@@ -580,6 +580,7 @@ health/ont.health/src/main/java/org/universaal/ontology/health/HealthOntologyFac
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/ActivityHeartRateRequirement.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/BloodPressureRequirement.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/DiastolicBloodPressureRequirement.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/Diet.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthOntology.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthProfile.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthyHabitsAdoption.java -text svneol=unset#application/octet-stream

@@ -39,6 +39,10 @@ public abstract class HealthyHabitsAdoption extends Treatment {
   public HealthyHabitsAdoption (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, TreatmentPlanning tp){
 	  super(assistedPerson, caregiver, tname, tp, description);
   }
+  
+  public HealthyHabitsAdoption(String name, String description){
+	  super(name, description);
+  }
   public String getClassURI() {
     return MY_URI;
   }
