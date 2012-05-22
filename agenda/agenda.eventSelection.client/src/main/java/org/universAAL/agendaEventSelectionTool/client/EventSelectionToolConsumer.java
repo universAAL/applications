@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.service.CalendarAgenda;
@@ -14,6 +12,7 @@ import org.universAAL.ontology.agendaEventSelection.FilterParams;
 import org.universAAL.ontology.agendaEventSelection.TimeSearchType;
 import org.universAAL.ontology.agendaEventSelection.service.EventSelectionToolService;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
@@ -38,9 +37,12 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 
     private static final String OUTPUT_EVENT_LIST = EVENT_SELECTION_TOOL_SERVER_NAMESPACE
 	    + "eventList";
-    private static final Logger mainLogger = LoggerFactory
-	    .getLogger(EventSelectionToolConsumer.class);
     private ServiceCaller caller;
+
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
 
     /**
      * Returns an array of context event patterns, to be used for context event
@@ -60,6 +62,7 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 
     public EventSelectionToolConsumer(ModuleContext context) {
 	super(context, getContextSubscriptionParams());
+	mcontext = context;
 	caller = new DefaultServiceCaller(context);
 
 	FilterParams fp = new FilterParams(null);
@@ -79,45 +82,87 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	    long startTime = System.currentTimeMillis();
 	    sr = caller.call(requestEvents(fp));
 	    long endTime = System.currentTimeMillis();
-	    mainLogger.info("EST\tService called: \'request events\' ("
-		    + startTime + ")" + "\n"
-		    + "EST\tService returned: \'request events\' (" + endTime
-		    + ")" + "\n" + "EST\tTime delay: " + (endTime - startTime));
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getSelectedEventsService",
+			    new Object[] {
+				    "EventSelectionTool Service called: \'request events\' at startTime: ",
+				    startTime }, null);
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getSelectedEventsService",
+			    new Object[] {
+				    "EventSelectionTool Service returned: \'request events\' at endTime: ",
+				    endTime }, null);
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getSelectedEventsService",
+			    new Object[] {
+				    "EventSelectionTool Service \'request events\' time delay: ",
+				    endTime - startTime }, null);
 
 	} else {
 	    long startTime = System.currentTimeMillis();
 	    sr = caller.call(requestFromCalendarEvents(fp, calendarList));
 	    long endTime = System.currentTimeMillis();
-	    mainLogger
-		    .info("EST\tService called: \'request events from calendars\' ("
-			    + startTime
-			    + ")"
-			    + "\n"
-			    + "EST\tService returned: \'request events from calendars\' ("
-			    + endTime
-			    + ")"
-			    + "\n"
-			    + "EST\tTime delay: "
-			    + (endTime - startTime));
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getSelectedEventsService",
+			    new Object[] {
+				    "EventSelectionTool Service called: \'request events from calendars\' at startTime: ",
+				    startTime }, null);
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getSelectedEventsService",
+			    new Object[] {
+				    "EventSelectionTool Service returned: \'request events from calendars\' at endTime: ",
+				    endTime }, null);
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getSelectedEventsService",
+			    new Object[] {
+				    "EventSelectionTool Service \'request events from calendars\' time delay: ",
+				    endTime - startTime }, null);
 
 	}
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    List getEventList = (List) getReturnValue(sr.getOutputs(),
 		    OUTPUT_EVENT_LIST);
-	    mainLogger.info("getSelectedEventsService",
-		    "Filtered Events have been retreived");
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "getSelectedEventsService",
+		    new Object[] { "Filtered Events have been retreived!" },
+		    null);
 
 	    if ((getEventList == null) || (getEventList.size() == 0)) {
-		mainLogger
-			.info("getSelectedEventsService",
-				"Filtered Events have been retreived: No matching event.");
+		LogUtils
+			.logInfo(
+				mcontext,
+				this.getClass(),
+				"getSelectedEventsService",
+				new Object[] { "Filtered Events have been retreived: No matching event!" },
+				null);
+
 		return new ArrayList(0);
 	    }
 	    return getEventList;
 	}
 
-	mainLogger.debug(sr.getCallStatus().toString());
+	LogUtils.logInfo(mcontext, this.getClass(), "getSelectedEventsService",
+		new Object[] { "Service call status: ",
+			sr.getCallStatus().toString() }, null);
 	return new ArrayList(0);
     }
 
@@ -127,28 +172,57 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	ServiceResponse sr = caller.call(requestFromCalendarLimitedEvents((fp),
 		calendarList, maxEventNo));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("EST\tService called: \'get limited events\' ("
-		+ startTime + ")" + "\n"
-		+ "EST\tService returned: \'get limited events\' (" + endTime
-		+ ")" + "\n" + "EST\tTime delay: " + (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getSelectedLimitedEventsService",
+			new Object[] {
+				"EventSelectionTool Service called: \'get limited events\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getSelectedLimitedEventsService",
+			new Object[] {
+				"EventSelectionTool Service returned: \'get limited events\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getSelectedLimitedEventsService",
+			new Object[] {
+				"EventSelectionTool Service \'get limited events\' time delay: ",
+				endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    List getEventList = (List) getReturnValue(sr.getOutputs(),
 		    OUTPUT_EVENT_LIST);
-
-	    mainLogger.info("getSelectedLimitedEventsService",
-		    "Filtered Events have been retreived");
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "getSelectedLimitedEventsService",
+		    new Object[] { "Filtered Events have been retreived " },
+		    null);
 
 	    if ((getEventList == null) || (getEventList.size() == 0)) {
+		LogUtils
+			.logInfo(
+				mcontext,
+				this.getClass(),
+				"getSelectedLimitedEventsService",
+				new Object[] { "Filtered Events have been retreived: No matching event " },
+				null);
 
-		mainLogger
-			.info("getSelectedLimitedEventsService",
-				"Filtered Events have been retreived: No matching event.");
 		return new ArrayList(0);
 	    }
 	    return getEventList;
 	}
-	mainLogger.debug(sr.getCallStatus().toString());
+
+	LogUtils.logInfo(mcontext, this.getClass(),
+		"getSelectedLimitedEventsService",
+		new Object[] { "Service call status: ",
+			sr.getCallStatus().toString() }, null);
 	return new ArrayList(0);
     }
 
@@ -157,27 +231,56 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	ServiceResponse sr = caller.call(requestFollowingEvents(calendarList,
 		maxEventNo));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("EST\tService called: \'get present/future events\' ("
-		+ startTime + ")" + "\n"
-		+ "EST\tService returned: \'get present/future event\' ("
-		+ endTime + ")" + "\n" + "EST\tTime delay: "
-		+ (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getFollowingEventsService",
+			new Object[] {
+				"EventSelectionTool Service called: \'get present/future events\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getFollowingEventsService",
+			new Object[] {
+				"EventSelectionTool Service returned: \'get present/future events\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getFollowingEventsService",
+			new Object[] {
+				"EventSelectionTool Service \'get present/future events\' time delay: ",
+				endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    List getEventList = (List) getReturnValue(sr.getOutputs(),
 		    OUTPUT_EVENT_LIST);
-	    mainLogger.info("getFollowingEventsService",
-		    "Filtered Events have been retreived");
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "getFollowingEventsService",
+		    new Object[] { "Filtered Events have been retreived " },
+		    null);
 
 	    if ((getEventList == null) || (getEventList.size() == 0)) {
-		mainLogger
-			.info("getFollowingEventsService",
-				"Filtered Events have been retreived: No matching event.");
+		LogUtils
+			.logInfo(
+				mcontext,
+				this.getClass(),
+				"getFollowingEventsService",
+				new Object[] { "Filtered Events have been retreived: No matching event " },
+				null);
+
 		return new ArrayList(0);
 	    }
 	    return getEventList;
 	}
-	mainLogger.debug(sr.getCallStatus().toString());
+	LogUtils.logInfo(mcontext, this.getClass(),
+		"getFollowingEventsService",
+		new Object[] { "Service call status: ",
+			sr.getCallStatus().toString() }, null);
 	return new ArrayList(0);
     }
 
@@ -289,7 +392,9 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	int testCount = 0;
 
 	if (outputs == null) {
-	    mainLogger.info("EventSelectionToolConsumer: No info found!");
+
+	    LogUtils.logInfo(mcontext, this.getClass(), "getReturnValue",
+		    new Object[] { "No info found" }, null);
 	} else
 	    for (Iterator i = outputs.iterator(); i.hasNext();) {
 		ProcessOutput output = (ProcessOutput) i.next();
@@ -302,12 +407,16 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 					Resource.RDF_EMPTY_LIST))
 			    returnValue = new ArrayList(0);
 		    } else
-			mainLogger
-				.info("EventSelectionToolConsumer: redundant return value!");
+			LogUtils.logInfo(mcontext, this.getClass(),
+				"getReturnValue",
+				new Object[] { "Redundant return value!" },
+				null);
+
 		else
-		    mainLogger
-			    .info("EventSelectionToolConsumer - output ignored: "
-				    + output.getURI());
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getReturnValue", new Object[] { "Output ignored: "
+				    + output.getURI() }, null);
+
 	    }
 
 	return returnValue;
@@ -331,19 +440,28 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
      * (org.universAAL.middleware.context.ContextEvent)
      */
     public void handleContextEvent(ContextEvent event) {
-	mainLogger.info("Received1 context event:\n" + "    Subject      = "
-		+ event.getSubjectURI() + "\n" + "    Subject type = "
-		+ event.getSubjectTypeURI() + "\n" + "    Predicate    = "
-		+ event.getRDFPredicate() + "\n" + "    Object       = "
-		+ event.getRDFObject());
+	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
+		new Object[] { "Received context event. Subject = ",
+			event.getSubjectURI() }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
+		new Object[] { "Subject type = ", event.getSubjectTypeURI() },
+		null);
+	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
+		new Object[] { "Predicate = ", event.getRDFPredicate() }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
+		new Object[] { "Object= ", event.getRDFObject() }, null);
+
     }
 
     private void printEvents(List events) {
-	mainLogger.info("Events received& printed out!");
+	LogUtils.logInfo(mcontext, this.getClass(), "printEvents",
+		new Object[] { "Following events received: " }, null);
 
 	for (Iterator it = events.listIterator(); it.hasNext();) {
 	    Event e = (Event) it.next();
-	    mainLogger.info(">>> Client received event = " + e);
+	    LogUtils.logInfo(mcontext, this.getClass(), "printEvents",
+		    new Object[] { "received event = " + e }, null);
+
 	}
     }
 

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.universAAL.agenda.client;
 
 import java.util.ArrayList;
@@ -9,9 +6,6 @@ import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.osgi.service.log.LogService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.EventDetails;
@@ -20,6 +14,7 @@ import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.ontology.agenda.TimeInterval;
 import org.universAAL.ontology.agenda.service.CalendarAgenda;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
@@ -47,42 +42,25 @@ import org.universAAL.ontology.profile.User;
  * 
  */
 public class AgendaConsumer extends ContextSubscriber {
-    
-    /**  */
-    private static final String AGENDA_CLIENT_NAMESPACE = "http://ontology.universAAL.org/AgendaClient.owl#";
 
-    /**  */
+    private static final String AGENDA_CLIENT_NAMESPACE = "http://ontology.universAAL.org/AgendaClient.owl#";
     private static final String OUTPUT_LIST_OF_CALENDARS = AGENDA_CLIENT_NAMESPACE
 	    + "oListOfCalendars";
-    
-    /**  */
     private static final String OUTPUT_CALENDAR_EVENT_LIST = AGENDA_CLIENT_NAMESPACE
 	    + "oCalendarEventList";
-    
-    /**  */
     private static final String OUTPUT_ADDED_EVENT_ID = AGENDA_CLIENT_NAMESPACE
 	    + "oAddedEventId";
-    
-    /**  */
     private static final String OUTPUT_CALENDAR_EVENT = AGENDA_CLIENT_NAMESPACE
 	    + "oCalendarEvent";
-    
-    /**  */
     private static final String OUTPUT_EVENT_CATEGORIES = AGENDA_CLIENT_NAMESPACE
 	    + "oEventCategories";
-    
-    /**  */
     private static final String OUTPUT_CALENDAR = AGENDA_CLIENT_NAMESPACE
 	    + "oCalendar";
 
-    /**  */
-    private static final Logger mainLogger = LoggerFactory
-	    .getLogger(AgendaConsumer.class);
-
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return context subscription parameters
      */
     private static ContextEventPattern[] getContextSubscriptionParams() {
 	// I am interested in all events with a calendars as subject
@@ -97,14 +75,14 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**  */
     private ServiceCaller caller;
-    
+
     /**  */
     private ModuleContext mcontext;
 
     /**
      * 
-     *
-     * @param mcontext 
+     * 
+     * @param mcontext
      */
     public AgendaConsumer(ModuleContext mcontext) {
 	super(mcontext, getContextSubscriptionParams());
@@ -128,7 +106,7 @@ public class AgendaConsumer extends ContextSubscriber {
 
 	Calendar c = new Calendar();
 	c.setName("my cal");
-	c = addNewCalendarService(c, new User(User.MY_URI + "kostas"));
+	c = addNewCalendarService(c, new User(User.MY_URI + "SomeUserName"));
 	if (c == null) {
 	    System.out.println("No calendar:(");
 	    return;
@@ -159,8 +137,8 @@ public class AgendaConsumer extends ContextSubscriber {
     // just local code
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return
      */
     public List getAllCalendarsService() {
 	List allCalendars = new ArrayList();
@@ -168,10 +146,26 @@ public class AgendaConsumer extends ContextSubscriber {
 	long endTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getAllCalendarsRequest());
 	long startTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'get all Calendars\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'get all Calendars\' (" + endTime
-		+ ")" + "\n" + "Agenda\tTime delay: " + (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getAllCalendarsService",
+			new Object[] {
+				"Agenda Service called: \'get all Calendars\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getAllCalendarsService",
+			new Object[] {
+				"Agenda Service returned: \'get all Calendars\' at endTime: ",
+				endTime }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "getAllCalendarsService",
+		new Object[] {
+			"Agenda Service \'get all Calendars\' time delay: ",
+			endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -183,22 +177,35 @@ public class AgendaConsumer extends ContextSubscriber {
 		    allCalendars.add((Calendar) o);
 		}
 		if (o == null)
-		    Activator.log.log(LogService.LOG_INFO,
-			    "Calendar List was not retrieved");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "getAllCalendarsService",
+				    new Object[] { "Calendar List was not retrieved!" },
+				    null);
 		else
-		    Activator.log.log(LogService.LOG_INFO,
-			    "Calendar List was retrieved. Size = : "
-				    + allCalendars.size());
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getAllCalendarsService", new Object[] {
+				    "Calendar List was retrieved! Size = ",
+				    allCalendars.size() }, null);
+
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_INFO, " Exception: "
-			+ e.getMessage());
+		LogUtils
+			.logError(
+				mcontext,
+				this.getClass(),
+				"getAllCalendarsService",
+				new Object[] { "Exception while getting all calendars." },
+				e);
+
 		return null;
 	    }
 	} else {
-	    Activator.log.log(LogService.LOG_INFO,
-		    "Calendar list was not retrieved");
-	    Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus()
-		    .toString());
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "getAllCalendarsService", new Object[] {
+			    "Service call status: ",
+			    sr.getCallStatus().toString() }, null);
 	}
 	return allCalendars;
     }
@@ -206,9 +213,9 @@ public class AgendaConsumer extends ContextSubscriber {
     // just local code
     /**
      * 
-     *
-     * @param owner 
-     * @return 
+     * 
+     * @param owner
+     * @return
      */
     public List getCalendarsByOwnerService(User owner) {
 	List allCalendars = new ArrayList();
@@ -217,11 +224,30 @@ public class AgendaConsumer extends ContextSubscriber {
 	ServiceResponse sr = this.caller
 		.call(getCalendarsByOwnerRequest(owner));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'get calendars by owner\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'get calendars by owner\' ("
-		+ endTime + ")" + "\n" + "Agenda\tTime delay: "
-		+ (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarsByOwnerService",
+			new Object[] {
+				"Agenda Service called: \'get calendars by owner\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarsByOwnerService",
+			new Object[] {
+				"Agenda Service returned: \'get calendars by owner\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarsByOwnerService",
+			new Object[] {
+				"Agenda Service \'get calendars by owner\' time delay: ",
+				endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -233,22 +259,35 @@ public class AgendaConsumer extends ContextSubscriber {
 		    allCalendars.add((Calendar) o);
 		}
 		if (o == null)
-		    Activator.log.log(LogService.LOG_INFO,
-			    "Calendar List was not retrieved");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "getCalendarsByOwnerService",
+				    new Object[] { "Calendar List was not retrieved!" },
+				    null);
+
 		else
-		    Activator.log.log(LogService.LOG_INFO,
-			    "Calendar List was retrieved. Size = : "
-				    + allCalendars.size());
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarsByOwnerService", new Object[] {
+				    "Calendar List was retrieved! Size = ",
+				    allCalendars.size() }, null);
+
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_INFO, " Exception: "
-			+ e.getMessage());
+		LogUtils
+			.logError(
+				mcontext,
+				this.getClass(),
+				"getCalendarsByOwnerService",
+				new Object[] { "Exception while getting all calendars." },
+				e);
 		return null;
 	    }
 	} else {
-	    Activator.log.log(LogService.LOG_INFO,
-		    "Calendar list was not retrieved");
-	    Activator.log.log(LogService.LOG_INFO, sr.getCallStatus()
-		    .toString());
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "getCalendarsByOwnerService", new Object[] {
+			    "Service call status: ",
+			    sr.getCallStatus().toString() }, null);
 	}
 	return allCalendars;
     }
@@ -256,41 +295,72 @@ public class AgendaConsumer extends ContextSubscriber {
     // just local code
     /**
      * 
-     *
-     * @param c 
-     * @param owner 
-     * @return 
+     * 
+     * @param c
+     * @param owner
+     * @return
      */
     public Calendar addNewCalendarService(Calendar c, User owner) {
 
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getAddNewCalendar(c, owner));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'add new calendar\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'add new calendar\' (" + endTime
-		+ ")" + "\n" + "Agenda\tTime delay: " + (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addNewCalendarService",
+			new Object[] {
+				"Agenda Service called: \'get calendars by owner\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addNewCalendarService",
+			new Object[] {
+				"Agenda Service returned: \'get calendars by owner\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addNewCalendarService",
+			new Object[] {
+				"Agenda Service \'get calendars by owner\' time delay: ",
+				endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
 		Object o = getReturnValue(sr.getOutputs(), OUTPUT_CALENDAR);
 		if (o instanceof Calendar) {
-		    Activator.log
-			    .log(LogService.LOG_INFO, "Calendar was added");
+
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "addNewCalendarService",
+			    new Object[] { "Calendar was added!" }, null);
+
 		    return (Calendar) o;
 		} else {
-		    Activator.log
-			    .log(LogService.LOG_INFO,
-				    "Calendar may not have been added - Wrong service output");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "addNewCalendarService",
+				    new Object[] { "Calendar may not have been added - Wrong service output!" },
+				    null);
+
 		}
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_INFO, " Exception: "
-			+ e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"addNewCalendarService",
+			new Object[] { "Exception while adding calendar." }, e);
 	    }
 	} else {
-	    Activator.log.log(LogService.LOG_INFO, "Calendar was not added");
-	    Activator.log.log(LogService.LOG_INFO, sr.getCallStatus()
-		    .toString());
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "addNewCalendarService", new Object[] {
+			    "Calendar was not added! Service call status: ",
+			    sr.getCallStatus().toString() }, null);
+
 	}
 	return null;
 
@@ -299,41 +369,61 @@ public class AgendaConsumer extends ContextSubscriber {
     // just local code
     /**
      * 
-     *
-     * @param c 
-     * @return 
+     * 
+     * @param c
+     * @return
      */
     public boolean removeCalendarService(Calendar c) {
 
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getRemoveCalendar(c));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'remove calendar\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'remove calendar\' (" + endTime
-		+ ")" + "\n" + "Agenda\tTime delay: " + (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"removeCalendarService",
+			new Object[] {
+				"Agenda Service called: \'remove calendar\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"removeCalendarService",
+			new Object[] {
+				"Agenda Service returned: \'remove calendar\' at endTime: ",
+				endTime }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "removeCalendarService",
+		new Object[] {
+			"Agenda Service \'remove calendar\' time delay: ",
+			endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
-	    Activator.log.log(LogService.LOG_INFO,
-		    "Calendar -and its assosiated events- were removed");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "Calendar -and its assosiated events- were removed",
+			    new Object[] { "Calendar -and its assosiated events- were removed" },
+			    null);
+
 	    return true;
 	}
-
-	Activator.log.log(LogService.LOG_INFO, "Calendar was not removed");
-	Activator.log.log(LogService.LOG_INFO, sr.getCallStatus().toString());
-	// Activator.log.log(LogService.LOG_INFO,
-	// getReturnValue(sr.getOutputs(),
-	// ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR).toString());
+	LogUtils.logInfo(mcontext, this.getClass(), "removeCalendarService",
+		new Object[] {
+			"Calendar was not removed. Service call status: ",
+			sr.getCallStatus().toString() }, null);
 	return false;
     }
 
     // just local code
     /**
      * 
-     *
-     * @param calendarName 
-     * @param owner 
-     * @return 
+     * 
+     * @param calendarName
+     * @param owner
+     * @return
      */
     public Calendar getCalendarByNameAndOwnerService(String calendarName,
 	    User owner) {
@@ -342,17 +432,30 @@ public class AgendaConsumer extends ContextSubscriber {
 	ServiceResponse sr = this.caller.call(getCalendarByNameAndOwner(
 		calendarName, owner));
 	long endTime = System.currentTimeMillis();
-	mainLogger
-		.info("Agenda\tService called: \'get calendar by name and owner\' ("
-			+ startTime
-			+ ")"
-			+ "\n"
-			+ "Agenda\tService returned: \'get calendar by name and owner\' ("
-			+ endTime
-			+ ")"
-			+ "\n"
-			+ "Agenda\tTime delay: "
-			+ (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarByNameAndOwnerService",
+			new Object[] {
+				"Agenda Service called: \'get calendar by name and owner\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarByNameAndOwnerService",
+			new Object[] {
+				"Agenda Service returned: \'get calendar by name and owner\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarByNameAndOwnerService",
+			new Object[] {
+				"Agenda Service \'get calendar by name and owner\' time delay: ",
+				endTime - startTime }, null);
 
 	Calendar calendar = null;
 	if (sr.getCallStatus() == CallStatus.succeeded) {
@@ -361,21 +464,37 @@ public class AgendaConsumer extends ContextSubscriber {
 		if (o instanceof Calendar)
 		    calendar = (Calendar) o;
 		if (calendar == null)
-		    Activator.log.log(LogService.LOG_INFO,
-			    "Calendar URI was not retrieved");
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarByNameAndOwnerService",
+			    new Object[] { "Calendar URI was not retrieved" },
+			    null);
+
 		else
-		    Activator.log.log(LogService.LOG_INFO,
-			    "Calendar URI was retrieved: " + calendar.getURI());
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarByNameAndOwnerService", new Object[] {
+				    "Calendar URI was retrieved: ",
+				    calendar.getURI() }, null);
+
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_INFO, " Exception: "
-			+ e.getMessage());
+
+		LogUtils
+			.logError(
+				mcontext,
+				this.getClass(),
+				"getCalendarByNameAndOwnerService",
+				new Object[] { "Exception while getting calendar." },
+				e);
 		return null;
 	    }
 	} else {
-	    Activator.log
-		    .log(LogService.LOG_INFO, "Calendar was not retrieved");
-	    Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus()
-		    .toString());
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getCalendarByNameAndOwnerService",
+			    new Object[] {
+				    "Calendar was not retrieved. Service call status: ",
+				    sr.getCallStatus().toString() }, null);
 	}
 	return calendar;
     }
@@ -383,10 +502,10 @@ public class AgendaConsumer extends ContextSubscriber {
     // just local code
     /**
      * 
-     *
-     * @param c 
-     * @param eventId 
-     * @return 
+     * 
+     * @param c
+     * @param eventId
+     * @return
      */
     public Event getCalendarEventService(Calendar c, int eventId) {
 	Event event = null;
@@ -394,11 +513,26 @@ public class AgendaConsumer extends ContextSubscriber {
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getGetCalendarEvent(c, eventId));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'get calendar event\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'get calendar event\' ("
-		+ endTime + ")" + "\n" + "Agenda\tTime delay: "
-		+ (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarEventService",
+			new Object[] {
+				"Agenda Service called: \'get calendar event\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarEventService",
+			new Object[] {
+				"Agenda Service returned: \'get calendar event\' at endTime: ",
+				endTime }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "getCalendarEventService",
+		new Object[] {
+			"Agenda Service \'get calendar event\' time delay: ",
+			endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -409,24 +543,41 @@ public class AgendaConsumer extends ContextSubscriber {
 		else if (o instanceof List && !((List) o).isEmpty()
 			&& ((List) o).get(0) instanceof Event)
 		    event = (Event) ((List) o).get(0);
-		if (event == null)
-		    Activator.log.log(LogService.LOG_INFO, "Calendar: " + c
-			    + ": there is not any event with id " + eventId);
-		else
-		    Activator.log.log(LogService.LOG_INFO, "Calendar: " + c
-			    + ":\nEvent id info:\n\n" + o.toString());
-		Activator.log.log(LogService.LOG_INFO,
-			"Event has been retrieved");
+		if (event == null) {
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarEventService", new Object[] {
+				    "Calendar: ", c }, null);
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarEventService", new Object[] {
+				    "There is no event in calendar with id: ",
+				    eventId }, null);
+
+		} else {
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarEventService", new Object[] {
+				    "Calendar: ", c }, null);
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarEventService", new Object[] {
+				    "Event id info: ", o.toString() }, null);
+		}
+
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_INFO, " Exception: "
-			+ e.getMessage());
+
+		LogUtils
+			.logError(
+				mcontext,
+				this.getClass(),
+				"getCalendarEventService",
+				new Object[] { "Exception while getting calendar event." },
+				e);
+
 		return null;
 	    }
 	} else {
-	    Activator.log.log(LogService.LOG_INFO,
-		    "Event has not been retrieved");
-	    Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus()
-		    .toString());
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "getCalendarEventService", new Object[] {
+			    "Event has not been retrieved. Call status: ",
+			    sr.getCallStatus().toString() }, null);
 	}
 	return event;
     }
@@ -434,8 +585,8 @@ public class AgendaConsumer extends ContextSubscriber {
     // just local code
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return
      */
     public List getAllEventCategories() {
 	List allCategories = new ArrayList();
@@ -443,14 +594,30 @@ public class AgendaConsumer extends ContextSubscriber {
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getGetAllEventCategories());
 	long endTime = System.currentTimeMillis();
-	mainLogger
-		.info("Agenda\tService called: \'get all event categories\' ("
-			+ startTime
-			+ ")"
-			+ "\n"
-			+ "Agenda\tService returned: \'get all event categories\' ("
-			+ endTime + ")" + "\n" + "Agenda\tTime delay: "
-			+ (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getAllEventCategories",
+			new Object[] {
+				"Agenda Service called: \'get all event categories\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getAllEventCategories",
+			new Object[] {
+				"Agenda Service returned: \'get all event categories\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getAllEventCategories",
+			new Object[] {
+				"Agenda Service \'get all event categories\' time delay: ",
+				endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -462,23 +629,48 @@ public class AgendaConsumer extends ContextSubscriber {
 		    allCategories = (List) (List) o;
 
 		if (o == null)
-		    Activator.log.log(LogService.LOG_INFO,
-			    "There is not any stored event category");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "getAllEventCategories",
+				    new Object[] { "There is not any stored event category" },
+				    null);
+
 		else
-		    Activator.log.log(LogService.LOG_INFO,
-			    "There are stored event categories");
-		Activator.log.log(LogService.LOG_INFO,
-			"Categories were retrieved");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "getAllEventCategories",
+				    new Object[] { "There are stored event categories" },
+				    null);
+		LogUtils.logInfo(mcontext, this.getClass(),
+			"getAllEventCategories",
+			new Object[] { "Categories were retrieved" }, null);
+
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_INFO, " Exception: "
-			+ e.getMessage());
+
+		LogUtils
+			.logError(
+				mcontext,
+				this.getClass(),
+				"getAllEventCategories",
+				new Object[] { "Exception while getting all calendars." },
+				e);
+
 		return null;
 	    }
 	} else {
-	    Activator.log.log(LogService.LOG_INFO,
-		    "Event categories were not retrieved");
-	    Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus()
-		    .toString());
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getAllEventCategories",
+			    new Object[] {
+				    "Event categories were not retrieved. Call status: ",
+				    sr.getCallStatus().toString() }, null);
+
 	}
 	return allCategories;
     }
@@ -486,39 +678,60 @@ public class AgendaConsumer extends ContextSubscriber {
     // just local code
     /**
      * 
-     *
-     * @param c 
-     * @param eventId 
-     * @return 
+     * 
+     * @param c
+     * @param eventId
+     * @return
      */
     public boolean cancelReminderService(Calendar c, int eventId) {
 
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getCancelReminder(c, eventId));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'cancel reminder\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'cancel reminder\' (" + endTime
-		+ ")" + "\n" + "Agenda\tTime delay: " + (endTime - startTime));
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"cancelReminderService",
+			new Object[] {
+				"Agenda Service called: \'cancel reminder\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"cancelReminderService",
+			new Object[] {
+				"Agenda Service returned: \'cancel reminder\' at endTime: ",
+				endTime }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "cancelReminderService",
+		new Object[] {
+			"Agenda Service \'cancel reminder\' time delay: ",
+			endTime - startTime }, null);
 
 	if (!(sr.getCallStatus() == CallStatus.succeeded)) {
-	    Activator.log.log(LogService.LOG_INFO, "Reminder was canceled");
-	    Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus()
-		    .toString());
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "cancelReminderService", new Object[] {
+			    "Reminder was canceled. Service call status: ",
+			    sr.getCallStatus().toString() }, null);
+
 	    return false;
 	}
-	Activator.log.log(LogService.LOG_INFO, "Reminder was canceled");
+	LogUtils.logInfo(mcontext, this.getClass(), "cancelReminderService",
+		new Object[] { "Reminder was canceled" }, null);
+
 	return true;
     }
 
     // just local code
     /**
      * 
-     *
-     * @param c 
-     * @param eventId 
-     * @param event 
-     * @return 
+     * 
+     * @param c
+     * @param eventId
+     * @param event
+     * @return
      */
     public boolean updateCalendarEventService(Calendar c, int eventId,
 	    Event event) {
@@ -527,23 +740,52 @@ public class AgendaConsumer extends ContextSubscriber {
 	ServiceResponse sr = this.caller.call(getUpdateCalendarEvent(c,
 		eventId, event));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'update calendar event\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'update calendar event\' ("
-		+ endTime + ")" + "\n" + "Agenda\tTime delay: "
-		+ (endTime - startTime));
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"updateCalendarEventService",
+			new Object[] {
+				"Agenda Service called: \'update calendar event\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"updateCalendarEventService",
+			new Object[] {
+				"Agenda Service returned: \'update calendar event\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"updateCalendarEventService",
+			new Object[] {
+				"Agenda Service \'update calendar event\' time delay: ",
+				endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
-		Activator.log.log(LogService.LOG_INFO, "Event was updated");
+		LogUtils.logInfo(mcontext, this.getClass(),
+			"updateCalendarEventService",
+			new Object[] { "Event was updated" }, null);
+
 	    } catch (Exception e) {
-		System.out.println("Exception1: " + e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"updateCalendarEventService",
+			new Object[] { "Exception" }, e);
+
 		return false;
 	    }
 	    return true;
 	}
-	Activator.log.log(LogService.LOG_INFO, "Event was not updated");
-	Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus().toString());
+	LogUtils.logInfo(mcontext, this.getClass(),
+		"updateCalendarEventService", new Object[] {
+			"Event was not updated. Service call status: ",
+			sr.getCallStatus().toString() }, null);
+
 	return false;
 
     }
@@ -551,11 +793,11 @@ public class AgendaConsumer extends ContextSubscriber {
     // just local code
     /**
      * 
-     *
-     * @param c 
-     * @param eventID 
-     * @param reminder 
-     * @return 
+     * 
+     * @param c
+     * @param eventID
+     * @param reminder
+     * @return
      */
     public boolean setEventReminderService(Calendar c, int eventID,
 	    Reminder reminder) {
@@ -564,37 +806,64 @@ public class AgendaConsumer extends ContextSubscriber {
 	ServiceResponse sr = this.caller.call(getSetEventReminder(c, eventID,
 		reminder));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'set event reminder\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'set event reminder\' ("
-		+ endTime + ")" + "\n" + "Agenda\tTime delay: "
-		+ (endTime - startTime));
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"setEventReminderService",
+			new Object[] {
+				"Agenda Service called: \'set event reminder\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"setEventReminderService",
+			new Object[] {
+				"Agenda Service returned: \'set event reminder\' at endTime: ",
+				endTime }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "setEventReminderService",
+		new Object[] {
+			"Agenda Service \'set event reminder\' time delay: ",
+			endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
-		Activator.log.log(LogService.LOG_INFO,
-			"Event reminder has been set");
+		LogUtils.logInfo(mcontext, this.getClass(),
+			"setEventReminderService",
+			new Object[] { "Event reminder has been set" }, null);
+
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_DEBUG, "Exception: "
-			+ e.getMessage());
+
+		LogUtils.logError(mcontext, this.getClass(),
+			"setEventReminderService",
+			new Object[] { "Exception." }, e);
+
 		return false;
 	    }
 	    return true;
 	}
-	Activator.log.log(LogService.LOG_INFO,
-		"Event reminder has not been set");
-	Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus().toString());
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"setEventReminderService",
+			new Object[] {
+				"Event reminder has not been set. Service call status: ",
+				sr.getCallStatus().toString() }, null);
+
 	return false;
     }
 
     // just local code
     /**
      * 
-     *
-     * @param c 
-     * @param eventID 
-     * @param reminderType 
-     * @return 
+     * 
+     * @param c
+     * @param eventID
+     * @param reminderType
+     * @return
      */
     public boolean setReminderTypeService(Calendar c, int eventID,
 	    ReminderType reminderType) {
@@ -603,36 +872,61 @@ public class AgendaConsumer extends ContextSubscriber {
 	ServiceResponse sr = this.caller.call(getSetReminderType(c, eventID,
 		reminderType));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'set reminder type\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'set reminder type\' (" + endTime
-		+ ")" + "\n" + "Agenda\tTime delay: " + (endTime - startTime));
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"setReminderTypeService",
+			new Object[] {
+				"Agenda Service called: \'set reminder type\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"setReminderTypeService",
+			new Object[] {
+				"Agenda Service returned: \'set reminder type\' at endTime: ",
+				endTime }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "setReminderTypeService",
+		new Object[] {
+			"Agenda Service \'set reminder type\' time delay: ",
+			endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
-		Activator.log.log(LogService.LOG_INFO,
-			"Event reminder type has been set");
+		LogUtils.logInfo(mcontext, this.getClass(),
+			"setReminderTypeService",
+			new Object[] { "Event reminder type has been set" },
+			null);
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_DEBUG, "Exception: "
-			+ e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"setReminderTypeService",
+			new Object[] { "Exception ." }, e);
+
 		return false;
 	    }
 	    return true;
 	}
-
-	Activator.log.log(LogService.LOG_INFO,
-		"Event reminder type has not been set");
-	Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus().toString());
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"setReminderTypeService",
+			new Object[] {
+				"Event reminder type has not been set. Service call status: ",
+				sr.getCallStatus().toString() }, null);
 	return false;
     }
 
     // just local code
     /**
      * 
-     *
-     * @param c 
-     * @param eventId 
-     * @return 
+     * 
+     * @param c
+     * @param eventId
+     * @return
      */
     public boolean deleteCalendarEventService(Calendar c, int eventId) {
 	long startTime = System.currentTimeMillis();
@@ -641,65 +935,126 @@ public class AgendaConsumer extends ContextSubscriber {
 	ServiceResponse sr = caller.call(srq);
 
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Agenda\tService called: \'delete calendar event\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'delete calendar event\' ("
-		+ endTime + ")" + "\n" + "Agenda\tTime delay: "
-		+ (endTime - startTime));
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"deleteCalendarEventService",
+			new Object[] {
+				"Agenda Service called: \'delete calendar event\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"deleteCalendarEventService",
+			new Object[] {
+				"Agenda Service returned: \'delete calendar event\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"deleteCalendarEventService",
+			new Object[] {
+				"Agenda Service \'delete calendar event\' time delay: ",
+				endTime - startTime }, null);
+
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
-		Activator.log.log(LogService.LOG_INFO, "Event was deleted");
+		LogUtils.logInfo(mcontext, this.getClass(),
+			"deleteCalendarEventService",
+			new Object[] { "Event was deleted" }, null);
+
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_DEBUG, "Exception: "
-			+ e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"deleteCalendarEventService",
+			new Object[] { "Exception ." }, e);
+
 		return false;
 	    }
 	    return true;
 	}
-
-	Activator.log.log(LogService.LOG_INFO, "Event was not deleted");
-	Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus().toString());
+	LogUtils.logInfo(mcontext, this.getClass(),
+		"deleteCalendarEventService", new Object[] {
+			"Event was not deleted. Service call status: ",
+			sr.getCallStatus().toString() }, null);
 	return false;
     }
 
     // just local coding
     /**
      * 
-     *
-     * @param c 
-     * @return 
+     * 
+     * @param c
+     * @return
      */
     public List requestEventListService(Calendar c) {
 
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getGetCalendarEventList(c));
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Service called: \'get calendar event list\' ("
-		+ startTime + ")" + "\n"
-		+ "Service returned: \'get calendar event list\' (" + endTime
-		+ ")" + "\n" + "Time delay: " + (endTime - startTime));
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"requestEventListService",
+			new Object[] {
+				"Agenda Service called: \'get calendar event list\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"requestEventListService",
+			new Object[] {
+				"Agenda Service returned: \'get calendar event list\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"requestEventListService",
+			new Object[] {
+				"Agenda Service \'get calendar event list\' time delay: ",
+				endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
 		List events = (List) getReturnValue(sr.getOutputs(),
 			OUTPUT_CALENDAR_EVENT_LIST);
 		if (events == null || events.size() == 0) {
-		    Activator.log
-			    .log(LogService.LOG_INFO,
-				    "Event List has been retreived, but it's empty or NULL");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "requestEventListService",
+				    new Object[] { "Event List has been retreived, but it's empty or NULL" },
+				    null);
+
 		    return new ArrayList();
 		}
-		Activator.log.log(LogService.LOG_INFO,
-			"Event List was retreived");
+		LogUtils.logInfo(mcontext, this.getClass(),
+			"requestEventListService",
+			new Object[] { "Event List was retreived" }, null);
+
 		return events;
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_DEBUG, "Exception: "
-			+ e.getMessage());
+
+		LogUtils.logError(mcontext, this.getClass(),
+			"requestEventListService",
+			new Object[] { "Exception ." }, e);
+
 		return new ArrayList(0);
 	    }
 	}
-	Activator.log.log(LogService.LOG_INFO, "Event List was not retreived");
-	Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus().toString());
+	LogUtils.logInfo(mcontext, this.getClass(), "requestEventListService",
+		new Object[] {
+			"Event List was not retreived. Service call status: ",
+			sr.getCallStatus().toString() }, null);
+
 	return new ArrayList(0);
 
     }
@@ -707,10 +1062,10 @@ public class AgendaConsumer extends ContextSubscriber {
     // just local coding
     /**
      * 
-     *
-     * @param c 
-     * @param event 
-     * @return 
+     * 
+     * @param c
+     * @param event
+     * @return
      */
     public int addEventToCalendarService(Calendar c, Event event) {
 
@@ -719,10 +1074,31 @@ public class AgendaConsumer extends ContextSubscriber {
 	ServiceResponse sr = this.caller.call(getAddEventToCalendar(c, event));
 
 	long endTime = System.currentTimeMillis();
-	mainLogger.info("Service called: \'add event to calendar\' ("
-		+ startTime + ")" + "\n"
-		+ "Service returned: \'add event to calendar\' (" + endTime
-		+ ")" + "\n" + "Time delay: " + (endTime - startTime));
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addEventToCalendarService",
+			new Object[] {
+				"Agenda Service called: \'add event to calendar\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addEventToCalendarService",
+			new Object[] {
+				"Agenda Service returned: \'add event to calendar\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addEventToCalendarService",
+			new Object[] {
+				"Agenda Service \'add event to calendar\' time delay: ",
+				endTime - startTime }, null);
 
 	int eventId;
 	if (sr.getCallStatus() == CallStatus.succeeded) {
@@ -735,34 +1111,49 @@ public class AgendaConsumer extends ContextSubscriber {
 		    eventId = ((Integer) o).intValue();
 
 		if (eventId <= 0) {
-		    Activator.log
-			    .log(LogService.LOG_INFO,
-				    "Event was not added to calendar for unknown reason");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "addEventToCalendarService",
+				    new Object[] { "Event was not added to calendar for unknown reason" },
+				    null);
+
 		} else {
-		    Activator.log.log(LogService.LOG_INFO,
-			    "Event was added to calendar");
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "addEventToCalendarService",
+			    new Object[] { "Event was added to calendar" },
+			    null);
+
 		}
 		return eventId;
 	    } catch (Exception e) {
-		Activator.log.log(LogService.LOG_DEBUG, "Exception: "
-			+ e.getMessage());
+
+		LogUtils.logError(mcontext, this.getClass(),
+			"addEventToCalendarService",
+			new Object[] { "Exception." }, e);
+
 		return -1;
 	    }
 	}
-
-	Activator.log.log(LogService.LOG_INFO,
-		"Event was not added to calendar");
-	Activator.log.log(LogService.LOG_DEBUG, sr.getCallStatus().toString());
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addEventToCalendarService",
+			new Object[] {
+				"Event was not added to calendar. Service call status: ",
+				sr.getCallStatus().toString() }, null);
 	return -1;
     }
 
     // just local coding
     /**
      * 
-     *
-     * @param c 
-     * @param eventList 
-     * @return 
+     * 
+     * @param c
+     * @param eventList
+     * @return
      */
     public boolean addCalendarEventListService(Calendar c, List eventList) {
 
@@ -770,21 +1161,43 @@ public class AgendaConsumer extends ContextSubscriber {
 	ServiceResponse sr = caller
 		.call(getAddEventListToCalendar(c, eventList));
 	long endTime = System.currentTimeMillis();
-	mainLogger
-		.info("Service called: \'add event list to calendar\' ("
-			+ startTime + ")" + "\n"
-			+ "Service returned: \'add event list to calendar\' ("
-			+ endTime + ")" + "\n" + "Time delay: "
-			+ (endTime - startTime));
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addCalendarEventListService",
+			new Object[] {
+				"Agenda Service called: \'add event list to calendar\' at startTime: ",
+				startTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addCalendarEventListService",
+			new Object[] {
+				"Agenda Service returned: \'add event list to calendar\' at endTime: ",
+				endTime }, null);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"addCalendarEventListService",
+			new Object[] {
+				"Agenda Service \'add event list to calendar\' time delay: ",
+				endTime - startTime }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
-	    Activator.log.log(LogService.LOG_INFO,
-		    "Event List was added to calendar");
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "addCalendarEventListService",
+		    new Object[] { "Event List was added to calendar" }, null);
+
 	    return true;
 	}
+	LogUtils.logInfo(mcontext, this.getClass(),
+		"addCalendarEventListService",
+		new Object[] { "Event List was not added to calendar" }, null);
 
-	Activator.log.log(LogService.LOG_INFO,
-		"Event List was not added to calendar");
 	return false;
     }
 
@@ -792,9 +1205,9 @@ public class AgendaConsumer extends ContextSubscriber {
      * **********************************************************************
      * REAL SERVICE CALLS *
      * **********************************************************************.
-     *
-     * @param calendarURI 
-     * @param events 
+     * 
+     * @param calendarURI
+     * @param events
      */
     // real calls
 
@@ -808,11 +1221,16 @@ public class AgendaConsumer extends ContextSubscriber {
      *            a list of events
      */
     public void printEvents(String calendarURI, List events) {
-	Activator.log.log(LogService.LOG_INFO, "Calendar " + calendarURI
-		+ " has " + events.size() + " event(s) stored:");
+	LogUtils.logInfo(mcontext, this.getClass(), "printEvents",
+		new Object[] { "Calendar: ", calendarURI }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "printEvents",
+		new Object[] { "Number of events stored in Calendar is: ",
+			events.size() }, null);
 	for (Iterator it = events.listIterator(); it.hasNext();) {
 	    Event e = (Event) it.next();
-	    Activator.log.log(LogService.LOG_INFO, e.toString());
+	    LogUtils.logInfo(mcontext, this.getClass(), "printEvents",
+		    new Object[] { "Event: ", e.toString() }, null);
+
 	}
     }
 
@@ -829,12 +1247,11 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param c 
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and retrieve <i>all</i> events (as a
-     * {@link List}) of the calendar with the specified URI
-     * <code>calendarURI</code>.
+     * 
+     * @param c
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and retrieve <i>all</i> events (as a {@link List}) of the
+     *         calendar with the specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getGetCalendarEventList(Calendar c) {
 	ServiceRequest getCalendarEventList = new ServiceRequest(
@@ -861,12 +1278,13 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param c 
-     * @param eventId the id of the event to be deleted
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and get an event</code> from the calendar
-     * with the specified URI <code>calendarURI</code>.
+     * 
+     * @param c
+     * @param eventId
+     *            the id of the event to be deleted
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and get an event</code> from the calendar with the
+     *         specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getDeleteCalendarEvent(Calendar c, int eventId) {
 	ServiceRequest deleteCalendarEvent = new ServiceRequest(
@@ -879,8 +1297,8 @@ public class AgendaConsumer extends ContextSubscriber {
 	// MergedRestriction r1 =
 	// MergedRestriction.getFixedValueRestriction(CalendarAgenda.PROP_CONTROLS,
 	// c);
-	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
-		new Integer(eventId));
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(
+		Event.PROP_ID, new Integer(eventId));
 
 	// deleteCalendarEvent.getRequestedService().addInstanceLevelRestriction(r1,
 	// new String[] { CalendarAgenda.PROP_CONTROLS });
@@ -899,13 +1317,14 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param c 
-     * @param event the event to be stored
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and add an <code>
-     * event</code> to the calendar
-     * with the specified URI <code>calendarURI</code>.
+     * 
+     * @param c
+     * @param event
+     *            the event to be stored
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and add an <code>
+     * event</code> to the calendar with the
+     *         specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getAddEventToCalendar(Calendar c, Event event) {
 	ServiceRequest addEventToCalendar = new ServiceRequest(
@@ -933,13 +1352,14 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param c 
-     * @param eventList the event list to be stored
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and add an <code>
-     * event</code> list to the
-     * calendar with the specified URI <code>calendarURI</code>.
+     * 
+     * @param c
+     * @param eventList
+     *            the event list to be stored
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and add an <code>
+     * event</code> list to the calendar with the
+     *         specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getAddEventListToCalendar(Calendar c, List eventList) {
 	ServiceRequest addEventToCalendar = new ServiceRequest(
@@ -961,10 +1381,10 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and retrieve <i>all</i> {@link Calendar}
-     * which are managed by he server.
+     * 
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and retrieve <i>all</i> {@link Calendar} which are
+     *         managed by he server.
      */
     private ServiceRequest getAllCalendarsRequest() {
 	ServiceRequest listCalendars = new ServiceRequest(new CalendarAgenda(
@@ -981,11 +1401,11 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param owner 
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and retrieve <i>all</i> {@link Calendar}
-     * which are managed by he server.
+     * 
+     * @param owner
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and retrieve <i>all</i> {@link Calendar} which are
+     *         managed by he server.
      */
     private ServiceRequest getCalendarsByOwnerRequest(User owner) {
 	ServiceRequest listCalendars = new ServiceRequest(new CalendarAgenda(
@@ -1006,12 +1426,13 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param calendar the new calendar
-     * @param eventId 
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and create and store a new
-     * {@link Calendar} with the specified URI <code>calendarURI</code>.
+     * 
+     * @param calendar
+     *            the new calendar
+     * @param eventId
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and create and store a new {@link Calendar} with the
+     *         specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getGetCalendarEvent(Calendar calendar, int eventId) {
 	if (calendar == null) {
@@ -1019,8 +1440,8 @@ public class AgendaConsumer extends ContextSubscriber {
 	}
 	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, calendar);
-	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
-		new Integer(eventId));
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(
+		Event.PROP_ID, new Integer(eventId));
 
 	CalendarAgenda ca = new CalendarAgenda(null);
 	ca.addInstanceLevelRestriction(r1,
@@ -1041,8 +1462,8 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return
      */
     private ServiceRequest getGetAllEventCategories() {
 	PropertyPath ppEventCategory = new PropertyPath(null, true,
@@ -1061,10 +1482,10 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * 
-     *
-     * @param calendar 
-     * @param eventId 
-     * @return 
+     * 
+     * @param calendar
+     * @param eventId
+     * @return
      */
     private ServiceRequest getCancelReminder(Calendar calendar, int eventId) {
 	if (calendar == null) {
@@ -1090,11 +1511,12 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param calendar the calendar
-     * @param owner 
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and create and store a new Calendar.
+     * 
+     * @param calendar
+     *            the calendar
+     * @param owner
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and create and store a new Calendar.
      */
     private ServiceRequest getAddNewCalendar(Calendar calendar, User owner) {
 	ServiceRequest addNewcalendar = new ServiceRequest(new CalendarAgenda(
@@ -1116,11 +1538,12 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param calendar the calendar to be removed
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and delete an existing calendar and all
-     * events associated with it
+     * 
+     * @param calendar
+     *            the calendar to be removed
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and delete an existing calendar and all events associated
+     *         with it
      */
     private ServiceRequest getRemoveCalendar(Calendar calendar) {
 	ServiceRequest removeCalendar = new ServiceRequest(new CalendarAgenda(
@@ -1140,12 +1563,13 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param calendarName the name of calendar
-     * @param owner 
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service to get the URI of a calendar (wrapped in a
-     * calendar object) given the name of it
+     * 
+     * @param calendarName
+     *            the name of calendar
+     * @param owner
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service to get the URI of a calendar (wrapped in a calendar
+     *         object) given the name of it
      */
     private ServiceRequest getCalendarByNameAndOwner(String calendarName,
 	    User owner) {
@@ -1175,13 +1599,15 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param calendar the calendar
-     * @param eventId the id of the event to be retrieved
-     * @param event 
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and get an <code>event</code> from the
-     * calendar with the specified URI <code>calendarURI</code>.
+     * 
+     * @param calendar
+     *            the calendar
+     * @param eventId
+     *            the id of the event to be retrieved
+     * @param event
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and get an <code>event</code> from the calendar with the
+     *         specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getUpdateCalendarEvent(Calendar calendar,
 	    int eventId, Event event) {
@@ -1193,8 +1619,8 @@ public class AgendaConsumer extends ContextSubscriber {
 	System.out.println(calendar.getURI());
 	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, calendar);
-	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
-		new Integer(eventId));
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(
+		Event.PROP_ID, new Integer(eventId));
 
 	PropertyPath pp = new PropertyPath(null, true, new String[] {
 		CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT });
@@ -1211,13 +1637,14 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param c 
-     * @param eventId the id of the event to be retrieved
-     * @param reminder 
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and get an event</code> from the calendar
-     * with the specified URI <code>calendarURI</code>.
+     * 
+     * @param c
+     * @param eventId
+     *            the id of the event to be retrieved
+     * @param reminder
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and get an event</code> from the calendar with the
+     *         specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getSetEventReminder(Calendar c, int eventId,
 	    Reminder reminder) {
@@ -1228,8 +1655,8 @@ public class AgendaConsumer extends ContextSubscriber {
 	}
 	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, c);
-	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
-		new Integer(eventId));
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(
+		Event.PROP_ID, new Integer(eventId));
 
 	PropertyPath pp = new PropertyPath(null, true, new String[] {
 		CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT,
@@ -1247,13 +1674,14 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * Creates a {@link ServiceRequest} object in order to use a.
-     *
-     * @param c 
-     * @param eventId the id of the event to be retrieved
-     * @param reminderType 
-     * @return a service request for the specific service
-     * {@link CalendarAgenda} service and get an event</code> from the calendar
-     * with the specified URI <code>calendarURI</code>.
+     * 
+     * @param c
+     * @param eventId
+     *            the id of the event to be retrieved
+     * @param reminderType
+     * @return a service request for the specific service {@link CalendarAgenda}
+     *         service and get an event</code> from the calendar with the
+     *         specified URI <code>calendarURI</code>.
      */
     private ServiceRequest getSetReminderType(Calendar c, int eventId,
 	    ReminderType reminderType) {
@@ -1264,8 +1692,8 @@ public class AgendaConsumer extends ContextSubscriber {
 	}
 	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, c);
-	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
-		new Integer(eventId));
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(
+		Event.PROP_ID, new Integer(eventId));
 
 	PropertyPath pp = new PropertyPath(null, true, new String[] {
 		CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT,
@@ -1283,17 +1711,18 @@ public class AgendaConsumer extends ContextSubscriber {
 
     /**
      * 
-     *
-     * @param outputs 
-     * @param expectedOutput 
-     * @return 
+     * 
+     * @param outputs
+     * @param expectedOutput
+     * @return
      */
     private Object getReturnValue(List outputs, String expectedOutput) {
 	Object returnValue = null;
 	int testCount = 0;
 	if (outputs == null)
-	    Activator.log.log(LogService.LOG_INFO,
-		    "AgendaConsumer_backup: No info found!");
+	    LogUtils.logInfo(mcontext, this.getClass(), "getReturnValue",
+		    new Object[] { "No info found!" }, null);
+
 	else
 	    for (Iterator i = outputs.iterator(); i.hasNext();) {
 		testCount++;
@@ -1306,13 +1735,21 @@ public class AgendaConsumer extends ContextSubscriber {
 					Resource.RDF_EMPTY_LIST))
 			    returnValue = new ArrayList(0);
 		    } else
-			Activator.log
-				.log(LogService.LOG_INFO,
-					"AgendaConsumer_backup: redundant return value!");
+			LogUtils
+				.logInfo(
+					mcontext,
+					this.getClass(),
+					"getReturnValue",
+					new Object[] { "Redundant return value" },
+					null);
+
 		else
-		    Activator.log.log(LogService.LOG_INFO,
-			    "AgendaConsumer_backup - output ignored: "
-				    + output.getURI());
+		    LogUtils
+			    .logInfo(mcontext, this.getClass(),
+				    "getReturnValue",
+				    new Object[] { "output ignored: ",
+					    output.getURI() }, null);
+
 	    }
 	return returnValue;
     }
@@ -1320,16 +1757,17 @@ public class AgendaConsumer extends ContextSubscriber {
     // just a dummy method to create a simple event
     /**
      * 
-     *
-     * @param year 
-     * @param month 
-     * @param day 
-     * @param hour 
-     * @param min 
-     * @param seconds 
-     * @return 
+     * 
+     * @param year
+     * @param month
+     * @param day
+     * @param hour
+     * @param min
+     * @param seconds
+     * @return
      */
-    private Event createEvent(int year, int month, int day, int hour, int min, int seconds) {
+    private Event createEvent(int year, int month, int day, int hour, int min,
+	    int seconds) {
 	// start Event Details
 	EventDetails ed = new EventDetails();
 	ed.setCategory("No interest");
@@ -1359,10 +1797,9 @@ public class AgendaConsumer extends ContextSubscriber {
 	// start Reminder
 	Reminder r = new Reminder();
 	r.setMessage("Test message to see if it works.");
-	r
-		.setReminderTime(TypeMapper.getDataTypeFactory()
-			.newXMLGregorianCalendar(day, month, day, hour, min,
-				seconds, 0, 2));
+	r.setReminderTime(TypeMapper.getDataTypeFactory()
+		.newXMLGregorianCalendar(day, month, day, hour, min, seconds,
+			0, 2));
 	// // end Reminder
 
 	TimeInterval ti = new TimeInterval();
@@ -1381,31 +1818,35 @@ public class AgendaConsumer extends ContextSubscriber {
 	return event;
     }
 
-
-    /* (non-Javadoc)
-     * @see org.universAAL.middleware.context.ContextSubscriber#handleContextEvent(org.universAAL.middleware.context.ContextEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.context.ContextSubscriber#handleContextEvent
+     * (org.universAAL.middleware.context.ContextEvent)
      */
     public void handleContextEvent(ContextEvent event) {
 	java.util.Calendar c = java.util.Calendar.getInstance();
 	System.out.println(c.get(java.util.Calendar.HOUR_OF_DAY) + ":"
 		+ c.get(java.util.Calendar.MINUTE) + ":"
 		+ c.get(java.util.Calendar.SECOND));
-
-	Activator.log.log(LogService.LOG_INFO, "Received1 context event:\n"
-		+ "    Subject      = "
-		+ event.getSubjectURI()
-		+ "\n"
-		+ "    Subject type = "
-		+ event.getSubjectTypeURI()
-		+ "\n"
-		+ "    Predicate    = "
-		+ event.getRDFPredicate()
-		+ "\n"
-		+ "    Object       = OK\n"
-		+ "    Reason = "
-		+ ((Event) ((List) event.getRDFObject()).get(0)).getCEType()
-			.name() + "\n LIST SIZE = "
-		+ ((List) event.getRDFObject()).size());
+	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
+		new Object[] { "Received1 context event. Subject = ",
+			event.getSubjectURI() }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
+		new Object[] { "Subject type = ", event.getSubjectTypeURI() },
+		null);
+	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
+		new Object[] { "Predicate    = ", event.getRDFPredicate() },
+		null);
+	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
+		new Object[] {
+			"Object= OK Reason = ",
+			((Event) ((List) event.getRDFObject()).get(0))
+				.getCEType().name() }, null);
+	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
+		new Object[] { "List size = ",
+			((List) event.getRDFObject()).size() }, null);
 
 	// Event e = (Event)((List)event.getRDFObject()).get(0);
 	// if (e.getCEType() == CEType.reminder) {

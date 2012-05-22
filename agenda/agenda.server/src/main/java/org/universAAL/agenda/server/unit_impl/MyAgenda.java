@@ -20,17 +20,16 @@ import java.util.Properties;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.osgi.service.log.LogService;
-
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.EventDetails;
 import org.universAAL.ontology.agenda.Reminder;
 import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.ontology.agenda.TimeInterval;
-import org.universAAL.agenda.server.Activator;
 import org.universAAL.agenda.server.database.AgendaDBInterface;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.util.Constants;
 import org.universAAL.ontology.profile.User;
@@ -69,10 +68,15 @@ public class MyAgenda implements AgendaDBInterface {
     public static final int FAIL_EXITS = -2;
     public static final int FAIL_NOT_EXITS = -3;
     public static final int FAIL = -4;
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
 
     private Properties prop;
 
-    public MyAgenda(String url, String user, String pwd) {
+    public MyAgenda(ModuleContext mcontext, String url, String user, String pwd) {
+	MyAgenda.mcontext = mcontext;
 	File confHome = new File(new BundleConfigHome("agenda")
 		.getAbsolutePath());
 	this.DB_URL = url;
@@ -87,9 +91,22 @@ public class MyAgenda implements AgendaDBInterface {
 		    "DBquery.properties")));
 	    connect();
 	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "constructor",
+			    new Object[] { "Exception trying to obtain SQL queries from DBquery.properties!" },
+			    e);
+
 	} catch (IOException e) {
-	    e.printStackTrace();
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "constructor",
+			    new Object[] { "Exception trying to obtain SQL queries from DBquery.properties!" },
+			    e);
 	}
 
     }
@@ -109,8 +126,14 @@ public class MyAgenda implements AgendaDBInterface {
 	    conn.setAutoCommit(false);
 	    initDB();
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR,
-		    "Exception trying to get connection to database: " + e);
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "connect",
+			    new Object[] { "Exception trying to get connection to database." },
+			    e);
+
 	}
     }
 
@@ -125,8 +148,14 @@ public class MyAgenda implements AgendaDBInterface {
 	try {
 	    conn.close();
 	} catch (SQLException e) {
-	    Activator.log.log(LogService.LOG_ERROR,
-		    "Exception trying to close connection to database: " + e);
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "disconnect",
+			    new Object[] { "Exception trying to close connection to database!" },
+			    e);
+
 	}
     }
 
@@ -328,7 +357,9 @@ public class MyAgenda implements AgendaDBInterface {
 		conn.setAutoCommit(true);
 	    }
 	    if (rows == 0) {
-		Activator.log.log(LogService.LOG_INFO, "No such calendar");
+		LogUtils.logInfo(mcontext, this.getClass(), "removeCalendar",
+			new Object[] { "No such calendar" }, null);
+
 		return false;
 	    }
 	} catch (SQLException e) {
@@ -363,7 +394,13 @@ public class MyAgenda implements AgendaDBInterface {
 
 	    }
 	} catch (SQLException e) {
-	    e.printStackTrace();
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "getAllEventCategories",
+			    new Object[] { "Exception trying to close connection to database!" },
+			    e);
 	    return new ArrayList<String>(0);
 	}
 	// Collections.sort(allCategories);
@@ -399,9 +436,22 @@ public class MyAgenda implements AgendaDBInterface {
 	    }
 
 	} catch (NumberFormatException nfe) {
-	    Activator.log.log(LogService.LOG_ERROR, nfe.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "getCalNameAndOwner",
+			    new Object[] { "Exception trying to get calendar name and owner!" },
+			    nfe);
+
 	} catch (SQLException e) {
-	    Activator.log.log(LogService.LOG_ERROR, e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "getCalNameAndOwner",
+			    new Object[] { "Exception trying to get calendar name and owner!" },
+			    e);
 	}
 
 	return null;
@@ -592,13 +642,31 @@ public class MyAgenda implements AgendaDBInterface {
 
 	    conn.commit();
 	} catch (NumberFormatException nfe) {
-	    Activator.log.log(LogService.LOG_ERROR, nfe.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "addEventToCalendar",
+			    new Object[] { "Exception trying to add event to calendar!" },
+			    nfe);
 	    return -1;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_ERROR, sqle.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "addEventToCalendar",
+			    new Object[] { "Exception trying to add event to calendar!" },
+			    sqle);
 	    return -1;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR, e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "addEventToCalendar",
+			    new Object[] { "Exception trying to add event to calendar!" },
+			    e);
 	    return -1;
 	}
 	return eventId;
@@ -617,8 +685,10 @@ public class MyAgenda implements AgendaDBInterface {
 	    boolean commit) {
 	List<Event> event = getEvents(calendarURI, eventID, commit);
 	if (event.size() > 1) {
-	    Activator.log.log(LogService.LOG_WARNING,
-		    "More than one events with the same id: " + eventID);
+	    LogUtils.logWarn(mcontext, this.getClass(), "getEventFromCalendar",
+		    new Object[] { "More than one events with the same id!",
+			    eventID }, null);
+
 	}
 	if (event.size() == 0)
 	    return null;
@@ -755,13 +825,16 @@ public class MyAgenda implements AgendaDBInterface {
 	    return allEvents;
 
 	} catch (NumberFormatException nfe) {
-	    Activator.log.log(LogService.LOG_ERROR, nfe.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "getEvents",
+		    new Object[] { "Exception trying to get Events!" }, nfe);
 	    return new ArrayList<Event>(0);
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_ERROR, sqle.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "getEvents",
+		    new Object[] { "Exception trying to get Events!" }, sqle);
 	    return new ArrayList<Event>(0);
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR, e.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "getEvents",
+		    new Object[] { "Exception trying to get Events!" }, e);
 	    return new ArrayList<Event>(0);
 	}
 
@@ -802,13 +875,16 @@ public class MyAgenda implements AgendaDBInterface {
 	    return uri;
 
 	} catch (NumberFormatException nfe) {
-	    Activator.log.log(LogService.LOG_ERROR, nfe.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "removeEvent",
+		    new Object[] { "Exception trying to remove Event!" }, nfe);
 	    return null;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_ERROR, sqle.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "removeEvent",
+		    new Object[] { "Exception trying to remove Event!" }, sqle);
 	    return null;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR, e.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "removeEvent",
+		    new Object[] { "Exception trying to remove Event!" }, e);
 	    return null;
 	}
     }
@@ -910,13 +986,16 @@ public class MyAgenda implements AgendaDBInterface {
 
 	    return true;
 	} catch (NumberFormatException nfe) {
-	    Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "updateEvent",
+		    new Object[] { "Exception trying to update Event!" }, nfe);
 	    return false;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "updateEvent",
+		    new Object[] { "Exception trying to update Event!" }, sqle);
 	    return false;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "updateEvent",
+		    new Object[] { "Exception trying to update Event!" }, e);
 	    return false;
 	}
     }
@@ -950,13 +1029,18 @@ public class MyAgenda implements AgendaDBInterface {
 	    return rs.getInt(1);
 
 	} catch (NumberFormatException nfe) {
-	    Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "updateReminder",
+		    new Object[] { "Exception trying to update reminder!" },
+		    nfe);
 	    return 0;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "updateReminder",
+		    new Object[] { "Exception trying to update reminder!" },
+		    sqle);
 	    return 0;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "updateReminder",
+		    new Object[] { "Exception trying to update reminder!" }, e);
 	    return 0;
 	}
     }
@@ -983,13 +1067,18 @@ public class MyAgenda implements AgendaDBInterface {
 	    return true;
 
 	} catch (NumberFormatException nfe) {
-	    Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "cancelReminder",
+		    new Object[] { "Exception trying to cancel reminder!" },
+		    nfe);
 	    return false;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "cancelReminder",
+		    new Object[] { "Exception trying to cancel reminder!" },
+		    sqle);
 	    return false;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "cancelReminder",
+		    new Object[] { "Exception trying to cancel reminder!" }, e);
 	    return false;
 	}
 
@@ -1027,13 +1116,32 @@ public class MyAgenda implements AgendaDBInterface {
 	    return true;
 
 	} catch (NumberFormatException nfe) {
-	    Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "updateReminderType",
+			    new Object[] { "Exception trying to update reminder Type!" },
+			    nfe);
 	    return false;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "updateReminderType",
+			    new Object[] { "Exception trying to update reminder Type!" },
+			    sqle);
+	    ;
 	    return false;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "updateReminderType",
+			    new Object[] { "Exception trying to update reminder Type!" },
+			    e);
 	    return false;
 	}
     }
@@ -1063,13 +1171,31 @@ public class MyAgenda implements AgendaDBInterface {
 			+ calendarURI);
 	    }
 	} catch (NumberFormatException nfe) {
-	    Activator.log.log(LogService.LOG_WARNING, nfe.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "calendarExists",
+			    new Object[] { "Exception trying to check if calendar exists in DB!" },
+			    nfe);
 	    return false;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "calendarExists",
+			    new Object[] { "Exception trying to check if calendar exists in DB!" },
+			    sqle);
 	    return false;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "calendarExists",
+			    new Object[] { "Exception trying to check if calendar exists in DB!" },
+			    e);
 	    return false;
 	}
 	return true;
@@ -1095,10 +1221,23 @@ public class MyAgenda implements AgendaDBInterface {
 			+ ") in database");
 	    }
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "calendarExists",
+			    new Object[] { "Exception trying to check if calendar exists in DB!" },
+			    sqle);
+	    ;
 	    return false;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "calendarExists",
+			    new Object[] { "Exception trying to check if calendar exists in DB!" },
+			    e);
 	    return false;
 	}
 	return true;
@@ -1135,16 +1274,29 @@ public class MyAgenda implements AgendaDBInterface {
 		    eventList.add(new Integer(i));
 		}
 	    }
+	    LogUtils.logInfo(mcontext, this.getClass(), "getCurrentReminders",
+		    new Object[] {
+			    "Number of event with forthcomming reminders: ",
+			    eventList.size() }, null);
 
-	    Activator.log.log(LogService.LOG_INFO,
-		    "Number of event with forthcomming reminders: "
-			    + eventList.size());
 	    return eventList;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "getCurrentReminders",
+			    new Object[] { "Exception trying to get current reminders!" },
+			    sqle);
 	    return null;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "getCurrentReminders",
+			    new Object[] { "Exception trying to get current reminders!" },
+			    e);
 	    return null;
 	}
     }
@@ -1180,15 +1332,18 @@ public class MyAgenda implements AgendaDBInterface {
 		    eventList.add(new Integer(i));
 		}
 	    }
+	    LogUtils.logInfo(mcontext, this.getClass(), "getStartingEvents",
+		    new Object[] { "Number of forthcomming events: "
+			    + eventList.size() }, null);
 
-	    Activator.log.log(LogService.LOG_INFO,
-		    "Number of forthcomming events: " + eventList.size());
 	    return eventList;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "getStartingEvents",
+		    new Object[] { "Exception!" }, sqle);
 	    return null;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "getStartingEvents",
+		    new Object[] { "Exception!" }, e);
 	    return null;
 	}
     }
@@ -1224,15 +1379,18 @@ public class MyAgenda implements AgendaDBInterface {
 		    eventList.add(new Integer(i));
 		}
 	    }
+	    LogUtils.logInfo(mcontext, this.getClass(), "getEndingEvents",
+		    new Object[] { "Number of finishing events: "
+			    + eventList.size() }, null);
 
-	    Activator.log.log(LogService.LOG_INFO,
-		    "Number of finishing events: " + eventList.size());
 	    return eventList;
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "getEndingEvents",
+		    new Object[] { "Exception !" }, sqle);
 	    return null;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "getEndingEvents",
+		    new Object[] { "Exception !" }, e);
 	    return null;
 	}
     }
@@ -1263,77 +1421,82 @@ public class MyAgenda implements AgendaDBInterface {
 			+ ") in database");
 	    }
 	} catch (SQLException sqle) {
-	    Activator.log.log(LogService.LOG_WARNING, sqle.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(),
+		    "getCalendarByNameAndOwner",
+		    new Object[] { "Exception !" }, sqle);
 	    return null;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_WARNING, e.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(),
+		    "getCalendarByNameAndOwner",
+		    new Object[] { "Exception !" }, e);
 	    return null;
 	}
     }
 
-    /*****************************
-     * MAIN *
-     *****************************/
-    public static void main(String[] str) {
-	MyAgenda db = new MyAgenda("jdbc:mysql://localhost/universaaldb",
-		"root", "sc2011");
-	// String query = "select time from reminder";
+    // /*****************************
+    // * MAIN *
+    // *****************************/
+    // public static void main(String[] str) {
+    // MyAgenda db = new MyAgenda("jdbc:mysql://localhost/universaaldb",
+    // "agendauser", "pass");
+    // // String query = "select time from reminder";
+    //
+    // List<Integer> l = db.getCurrentReminders(60 * 60);
+    // System.out.println(l);
+    // String calendarURI = Calendar.MY_URI + 17;
 
-	List<Integer> l = db.getCurrentReminders(60 * 60);
-	System.out.println(l);
-	String calendarURI = Calendar.MY_URI + 17;
-	// int i = MyAgenda.extractIdFromURI(calendarURI);
-	// // db.getAllEvents(calendarURI);
-	// System.out.println(i);
-	//
-	// Address pa = new Address("Thessalia", "Kiprou 21", "b3");
-	// pa.setCountryName(new String[] { "Hellas", "Greece" });
-	// pa.setExtendedAddress("Neapoli");
-	// pa.setPostalCode("41 500");
-	// pa.setRegion("Nea politia");
-	//
-	// Reminder rm = new Reminder(null);
-	// rm.setMessage("Hello worlds!");
-	// rm.setReminderType(ReminderType.visualMessage);
-	// rm.setRepeatTime(10); // after 10min
-	// rm.setReminderTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(2009,
-	// 3, 12, 15, 30, 0, 0, 2));
-	//
-	// TimeInterval ti = new TimeInterval(null);
-	// ti.setStartTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(2009,
-	// 3, 12, 18, 00, 0, 0, 2));
-	// ti.setEndTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(2009,
-	// 3, 12, 21, 00, 0, 0, 2));
-	//
-	// EventDetails ed = new EventDetails(null);
-	// ed.setCategory("Sports");
-	// ed.setPlaceName("Pale de spor");
-	// ed.setSpokenLanguage("GR");
-	// ed.setAddress(pa);
-	// ed.setTimeInterval(ti);
-	//
-	// Event event = new Event(null);
-	// event.setEventDetails(ed);
-	// event.setReminder(rm);
+    // int i = MyAgenda.extractIdFromURI(calendarURI);
+    // // db.getAllEvents(calendarURI);
+    // System.out.println(i);
+    //
+    // Address pa = new Address("Thessalia", "Kiprou 21", "b3");
+    // pa.setCountryName(new String[] { "Hellas", "Greece" });
+    // pa.setExtendedAddress("Neapoli");
+    // pa.setPostalCode("41 500");
+    // pa.setRegion("Nea politia");
+    //
+    // Reminder rm = new Reminder(null);
+    // rm.setMessage("Hello worlds!");
+    // rm.setReminderType(ReminderType.visualMessage);
+    // rm.setRepeatTime(10); // after 10min
+    // rm.setReminderTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(2009,
+    // 3, 12, 15, 30, 0, 0, 2));
+    //
+    // TimeInterval ti = new TimeInterval(null);
+    // ti.setStartTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(2009,
+    // 3, 12, 18, 00, 0, 0, 2));
+    // ti.setEndTime(TypeMapper.getDataTypeFactory().newXMLGregorianCalendar(2009,
+    // 3, 12, 21, 00, 0, 0, 2));
+    //
+    // EventDetails ed = new EventDetails(null);
+    // ed.setCategory("Sports");
+    // ed.setPlaceName("Pale de spor");
+    // ed.setSpokenLanguage("GR");
+    // ed.setAddress(pa);
+    // ed.setTimeInterval(ti);
+    //
+    // Event event = new Event(null);
+    // event.setEventDetails(ed);
+    // event.setReminder(rm);
 
-	// System.out.println(db.addEventToCalendar(calendarURI, event,
-	// MyAgenda.COMMIT));
-	// Event e = db.getEventFromCalendar(calendarURI, 41, MyAgenda.COMMIT);
-	// e.getEventDetails().setCategory("Aris magic");
-	db.cancelReminder(calendarURI, 71, true);
-	// System.out.println(db.updateEvent(calendarURI, e, MyAgenda.COMMIT));
-	// System.out.println(db.updateReminderType(calendarURI, 41,
-	// ReminderType.blinkingLight, MyAgenda.COMMIT));
-	// System.out.println(db.removeEvent(calendarURI, 37, MyAgenda.COMMIT));
-	// System.out.println("Calendar: " + calendarURI);
-	// List events = db.getAllEvents(calendarURI);
-	// System.out.println("Number of events: " + events.size());
-	// //for (int i = 0; i < events.size(); ++i)
-	// //System.out.println(events.get(i));
-	//		
-	// System.out.println(db.getEventFromCalendar(calendarURI, 29));
-	// System.out.println(newEventId);
+    // System.out.println(db.addEventToCalendar(calendarURI, event,
+    // MyAgenda.COMMIT));
+    // Event e = db.getEventFromCalendar(calendarURI, 41, MyAgenda.COMMIT);
+    // e.getEventDetails().setCategory("Aris magic");
+    // db.cancelReminder(calendarURI, 71, true);
+    // System.out.println(db.updateEvent(calendarURI, e, MyAgenda.COMMIT));
+    // System.out.println(db.updateReminderType(calendarURI, 41,
+    // ReminderType.blinkingLight, MyAgenda.COMMIT));
+    // System.out.println(db.removeEvent(calendarURI, 37, MyAgenda.COMMIT));
+    // System.out.println("Calendar: " + calendarURI);
+    // List events = db.getAllEvents(calendarURI);
+    // System.out.println("Number of events: " + events.size());
+    // //for (int i = 0; i < events.size(); ++i)
+    // //System.out.println(events.get(i));
+    //		
+    // System.out.println(db.getEventFromCalendar(calendarURI, 29));
+    // System.out.println(newEventId);
 
-    }
+    // }
 
 }
