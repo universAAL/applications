@@ -1,0 +1,64 @@
+#created on: 21-mar-2012
+package action
+
+#list any import classes here.
+
+//expander customLanguage.dsl
+
+
+#declare any global variables here
+
+rule "" salience no-loop
+	
+	when
+	// 
+	then
+	//
+	//
+end
+rule "Familiarity situation with the treatment" salience no-loop
+	when
+	// haya comenzado el estado de action 
+	then
+	// enviar mensahe de refuerzo al usuario. 
+	// enviar un mensaje al usuario para averiguar si ya ha realizado antes el tratamiento
+	// a fin de adecuar los mensajes al usuario.
+end
+
+
+rule "" salience no-loop
+	
+	when
+	// 
+	then
+	// 
+end
+
+
+rule "Begin scheduling sessions"
+	when
+		//treatment planning ha sido asignado, junto a una recurrencia
+	then 
+		//se informa al usuario y se le pregunta si desea adaptarlo
+end
+
+rule "Session performed" salience no-loop
+	#include attributes such as "salience" here...
+	
+	when
+	// se detecte la primera sesión realizada 
+	then
+	//se almacena en un array de sesiones completadas
+	// aumenta una unidad la completitud del tratamiento.
+	//comenzaría el flujo de reglas de action porque cambiaríamos de status.
+end
+
+rule "Increase completeness" salience no-loop
+	#include attributes such as "salience" here...
+	
+	when
+	// se detecte una sessión realizada 
+	then
+	//se almacena en un array de sesiones completadas
+	// aumenta una unidad la completitud del tratamiento.
+end
