@@ -15,14 +15,6 @@ agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSele
 agenda/agenda.eventSelection.ont/LICENSE -text
 agenda/agenda.eventSelection.ont/NOTICE -text
 agenda/agenda.eventSelection.ont/pom.xml -text
-agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/AgendaEventSelectionOntology.java -text
-agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/AgendaEventSelectionOntologyFactory.java -text
-agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/EventComparator.java -text
-agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/EventSelectionTool.java -text
-agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/FilterParams.java -text
-agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/TimeSearchType.java -text
-agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/osgi/Activator.java -text
-agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/service/EventSelectionToolService.java -text
 agenda/agenda.eventSelection.server/LICENSE -text
 agenda/agenda.eventSelection.server/NOTICE -text
 agenda/agenda.eventSelection.server/backup/MyEventSelectionTool.java.backup -text
