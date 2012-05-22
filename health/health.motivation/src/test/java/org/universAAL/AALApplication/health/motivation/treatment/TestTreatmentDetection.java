@@ -4,6 +4,8 @@ package org.universAAL.AALApplication.health.motivation.treatment;
 import java.util.ArrayList;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
+
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.KnowledgeBuilder;
@@ -27,7 +29,7 @@ import org.universaal.ontology.health.owl.Treatment;
  * @author mdelafuente
  *
  */
-public class TestTreatmentDetection{
+public class TestTreatmentDetection extends TestCase{
 
 	private KnowledgeBase kbase;
 	private static StatefulKnowledgeSession ksession;
@@ -75,9 +77,9 @@ public class TestTreatmentDetection{
 	public void testTreatmentDetection(){
 
 		//load the facts
-		treatment1 = new Diet ("Dieta baja en grasa", "descripción"); //valid treatment
-		treatment2 = new Diet ("Dieta baja en sal", "descripción");//valid treatment
-		treatment3 = new Diet ("", "descripción");// invalid treatment		
+		treatment1 = new Diet ("Dieta baja en grasa", "descripciï¿½n"); //valid treatment
+		treatment2 = new Diet ("Dieta baja en sal", "descripciï¿½n");//valid treatment
+		treatment3 = new Diet ("", "descripciï¿½n");// invalid treatment		
 
 		//insert the facts in drools working memory
 		ksession.insert(treatment1);
