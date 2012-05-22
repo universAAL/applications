@@ -2,140 +2,138 @@
 package org.universAAL.AALApplication.health.motivation.treatment
 
 #list any import classes here. 
-import org.universAAL.AALapplication.health.ont.treatment.*;
-import org.universAAL.AALapplication.health.ont.schedule.*; 
-
+import org.universaal.ontology.health.owl.Treatment;
+//import org.universAAL.AALapplication.health.ont.treatment.*;
+//import org.universAAL.AALapplication.health.ont.schedule.*; 
 #declare any global variables here 
 
 
 #Whenever a treatment is detected a consent message is sent to the user
-rule "Treatment Detection" no-loop
+
+rule "Treatment Detection" salience no-loop
 	
 	when
-		detectedTreatment: Treatment(name != "")  //añadir message sent
-		
+		detectedTreatment: Treatment(name != "")  // A new treatment, with a name, is detected
 	then 
-		TreatmentDetection.insertDetectedTreatment(detectedTreatment); //sólo válido para JUnit
-		MessageManager.sendMessageToUser(HeartFailure.MY_URI, Treatment.MY_URI, 
-										MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry);
-		System.out.println("Tratamiento " + detectedTreatment.getName()+ " detectado");//traza
-		//en esta regla debe probarse tanto la detección del tratamiento como que se ha enviado bien el mensaje
-end
-
-# When a treatment is NOT accepted by the user we change his/her motivation status to "PRECONTEMPLATION"
-/*
-rule "Treatment not accepted" salience 50 no-loop 
-
-	when 
-		treatment: Treatment(acceptance == false)//hay que añadir la condición del mensaje leído
-	then
-		treatment.setMotivationStatus(MotivationStatusType.precontemplation); 
-		MotivationStatusDetection.insertTreatmentByAcceptance(treatment); //sólo válido para JUnit
-		System.out.println("El tratamiento " + treatment.getName()+ "está pasando por acceptance false");//traza
-		System.out.println(treatment.getName() + " " + treatment.getMotivationStatusName());//traza
-	
-end
-
-# When a treatment is accepted by the user we change his/her motivation status to "CONTEMPLATION"
-
-rule "Treatment accepted" salience 50 
-
-	when 
-		treatment: Treatment(acceptance == true && motivationStatusName == "precontemplation")//sólo pasamos a contemplation cuando el estado anterior era precontemplation
-	then
-		treatment.setMotivationStatus(MotivationStatusType.contemplation); 
-		MotivationStatusDetection.insertTreatmentByAcceptance(treatment);//sólo válido para JUnit
-		System.out.println("El tratamiento " + treatment.getName()+ "está pasando por acceptance true");//traza
-		System.out.println(treatment.getName() + " " + treatment.getMotivationStatusName());//traza
-end
+		MotivationalMessage mm = MessageManager.getMotivationalMessage();
+		MessageManager.sendMessageToUser();
+//se manda un mensaje al usuario para preguntarle si va a realizar el tratamiento
+		
+end 
 
 
-
-#Whenever the assisted person starts the treatment, this rule changes it's motivation
-#status to "active"   
-
-rule "Change motivation status to active" salience 0
-
+rule "Treatment performance agreement" salience no-loop
 	when
-		treatment: Treatment(motivationStatusName != "action" && completeness > 0 && completeness < 85) 
-	then
-		treatment.setMotivationStatus(MotivationStatusType.action);
-		System.out.println("Estoy cambiando a active el tratamiento " + treatment.getName() + " " + treatment.getMotivationStatusName());//traza
-		MotivationStatusDetection.insertTreatmentByCompletness(treatment);//sólo válido para JUnit
+		//reciba al answered message correspondiente al primer mensaje y la respuesta
+		//a la pregunta sea YES
+	
+	then 
+	//cambiar el estado motivacional del treatment a "contemplation" 
+	//se activan las reglas de contemplation	
+	//cálculo de la periodicidad con la que se mandarán los mensajes de refuerzo
+		
 end
 
-
-#Whenever the assisted person exceeds the 90% of the treatment, this rule changes it's 
-#motivation status to "maintenance"   
-
-
-rule "Change motivation status to maintenance" salience 0
-
+rule "Treatment performance disagreement" salience no-loop
 	when
-		treatment: Treatment(motivationStatusName != "maintenance" && completeness > 85 && completeness < 100) 
-	then
-		treatment.setMotivationStatus(MotivationStatusType.maintenance);
-		System.out.println("Estoy cambiando a maintenance el tratamiento " + treatment.getName() + " " + treatment.getMotivationStatusName());//traza
-		MotivationStatusDetection.insertTreatmentByCompletness(treatment);//sólo válido para JUnit
+		//reciba al answered message correspondiente al primer mensaje y la respuesta
+		//a la pregunta sea NO
+	
+	then 
+	//no hace falta cambiar el estado motivacional del treatment a "precontemplation", porque ya lo tiene por defecto.
+	//mensaje al usuario para averiguar la causa
+	//se activan las reglas de precontemplation 	
+		
 end
 
-#Whenever the 100% completion of the treatment is reached, we send a message to the user
-#and erase the Treatment from the Drools working memory   
-rule "Ended treatment" salience 0
-
+rule "First activity performed" salience no-loop
+	#include attributes such as "salience" here...
 	when
-		treatment: Treatment(completeness==100)
-	then
-		System.out.println("Estoy eliminando el tratamiento " + treatment.getName() + treatment.getMotivationStatusName());//traza
-		HealthService.sendMessageToUser(treatment, "Treatment ended message");//cambiar por clave cuando redacte el fichero de mensajes
-		retract(treatment);
+	//cuando se detecta que la primera tarea ha sido realizada (lo ha introducido el usuario o por los aparatos)
+	then 
+	//el estado del tratamiento cambia a action	
+	//se manda un mensaje de reward y feedback personalizado (si procede)
+	//se activan las reglas de action y se cancelan las de precontemplation
 end
 
-rule "Treatment session performed"
-	
+rule "Threshold of maintenance achieved" salience no-loop
 	when
-		event: Event(performance == true) //cambiarlo más adelante sólo por la clase treatment, que no haga falta introducir los events en la working memory
-	then
-	//comprobar estrategia motivacion y enviar el mensaje correspondiente
-	
-	//aumentar la completitud por si cambia el estado de motivación
-	
-	Treatment associatedTreatment = (event.getAssociatedPlanning()).getAssociatedTreatment();
-	int $completion = associatedTreatment.getCompleteness();
-	int $updatedCompletion = $completion + 1;
-	associatedTreatment.setCompleteness($updatedCompletion);
-	update(associatedTreatment);
-	System.out.println("He detectado el evento");
-	System.out.println("Completitud del tratamiento: " + associatedTreatment.getName()+ " " + associatedTreatment.getCompleteness());
-	retract(event);
-			
+	//cuando se sobrepase el umbral del 85% realizado (para tratamientos finitos) 
+	// o el umbral que estime el médico en el permanente (por defecto un año)
+	then 
+	//el estado del tratamiento cambia a maintenance
+	// se activan las reglas de action
 end
 
-/*
-rule "Treatment session performed"
-	
+rule "First activity never achieved" salience no-loop
 	when
-		associatedTreatment: Treatment($event:treatmentEvents.contains(Event(performed==true))) 
+	//cuando no se haya realizado la primera actividad en 3 oportunidades
 	then
-	//comprobar estrategia motivacion y enviar el mensaje correspondiente
-	
-	//aumentar la completitud por si cambia el estado de motivación
-	
-	//Treatment associatedTreatment = (event.getAssociatedPlanning()).getAssociatedTreatment();
-	int $completion = associatedTreatment.getCompleteness();
-	int $updatedCompletion = $completion + 1;
-	associatedTreatment.setCompleteness($updatedCompletion);
-	update(associatedTreatment);
-	System.out.println("He detectado el evento");
-	System.out.println("Completitud del tratamiento: " + associatedTreatment.getName()+ " " + associatedTreatment.getCompleteness());
-	retract(event);
-			
+	//se pasa del estado de contemplation a precontemplation 
+	// se activan las reglas de precontemplation
 end
-*/
 
-/*
-rule "Check treatment activation"
-when
-	treatment: Treatment() 
-then
-end*/
+rule "Non-fulfilment of action phase" salience no-loop
+	when
+	//cuando no se haya realizado tres de las sesiones establecidas
+	then
+	//se pasa del estado de action a contemplation y se toma la siguiente sesión como si fuera la primera 
+	// se activan las reglas de contemplation
+end
+
+rule "Non-fulfilment of maintenance phase" salience no-loop
+	when
+	//cuando no se haya realizado tres de las sesiones establecidas
+	then
+	//se pasa del estado de maintenance a action  
+	// se activan las reglas de action
+end
+
+rule "Change status to active" salience no-loop
+	//esta regla debería activarse cada 24h
+	when
+	// la fecha actual coincida con la de inicio de tratamiento
+	then
+	// cambia el estado del tratamiento a activo 
+end
+
+rule "Change status to finished" salience no-loop
+	when
+	// llegue la fecha de fin del tratamiento sea mayor o igual que la fecha actual
+	// y la completitud sea del 100%
+	then
+	// cambia el estado del tratamiento a terminado 
+end
+
+rule "Treatment prolonged automatically" salience no-loop
+	when
+	// llegue la fecha de fin del tratamiento 
+	// y la completitud sea del 90%
+	then
+	// prolongamos el tratamiento (aumenta la fecha de fin)
+	//avisamos al cargiver por si él no admite que se extienda en el tiempo (le pediríamos que lo cancelara)
+	//se lo decimos también al usuario.
+end
+
+rule "Treatment cancelled" salience no-loop
+	when
+	// el tratamiento se cancele 
+	then
+	// notificamos al usuario.
+end
+
+rule "Increase completeness" salience no-loop
+	when
+	// se detecte una sessión realizada 
+	then
+	//se almacena en un array de sesiones completadas
+	// aumenta una unidad la completitud del tratamiento.
+end
+
+rule "Treatment prolonged by caregiver" salience no-loop
+	when
+	// se detecte una ampliación del plazo para la realización de un treatment 
+	then
+	//se deben recalcular las sesiones totales, lo que influye en la unidad de completitud
+	//chequear las sesiones ya hechas y corregir la completitud.
+end

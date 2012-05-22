@@ -1,0 +1,132 @@
+#created on: 21-mar-2012
+package precontemplation
+
+#list any import classes here.
+#declare any global variables here
+
+//variable: ciclo de indagación, ciclo de motivación, ciclo de educación, ningún ciclo
+//variable (integer): feeling_threshold, ignorance_threshold, conviction. 
+
+
+rule "Beginning of cicle of invenstigation"
+	
+	when
+		//el paciente esté en estado precontemplation y aún no se hayan mandado mensajes de investigación
+		
+	then 
+		//notificar al paciente que, durante 10 DÍAS, se le mandarán unos mensajes que agradeceríamos que
+		//respondiera
+		//poner ciclo de indagación a true
+end
+
+rule "Send inquiry messages"
+	//mandar cada dos días
+	when
+		// paciente esté en estado de precontemplation, en la fase de indagación
+	then 
+		// mandar mensaje de investigación
+		
+end
+
+rule "Check inquiry results"
+	when
+		// cada vez que se reciba un answered message de un mensaje inquiry
+	then 
+		// el 60% de las respuestas es correcto (establecemos como correct answer aquella que 
+		// asociamos a un comportamiento de sentimiento
+		//aumentar el umbral de feeling en una unidad
+end
+
+rule "Send tests messages"
+//mandar cada dos días, alternado con inquiry messages para no sobrepasar los dos mensajes diarios
+	when
+		// paciente esté en estado de precontemplation, en la fase de indagación
+	then 
+		// mandar un test de conocimientos, en base a la enfermedad del paciente.
+end
+
+rule "Check test results"
+	when
+		// cada vez que se reciba un answered message de un mensaje test
+	then 
+		// el 60% de las respuestas es incorrecto 
+		//aumentar el umbral de ignorance en una unidad
+end
+
+rule "Set the cause"
+	when
+		// cuando hayan pasado 12 días (dos de margen por si se retrasan respondiendo algún test)
+		
+	then 
+		// si se han respondido al menos 3 mensajes y el umbral de ignorance es 3 o + --> causa=ignorancia (activar ciclo de educación)
+		// si se han respondido al menos 3 mensajes y el umbral de feeling es 3 o + --> causa=sentimiento (activar ciclo de motivación)
+		// si se han respondido los 10 mensajes y el umbral de ignorance y de feeling es 0 --> causa=convicción
+		// si no hay ningún mensaje respondido --> causa=convicción
+		// si se han respondido 2 o menos mensajes y el umbral feeling es 2 o 1 --> causa=sentimiento (activar ciclo de motivación)
+		// si se han respondido 2 o menos mensajes y el umbral ignorance es 2 o 1 --> causa=ignorancia (activar ciclo de educación)
+		// para el resto de casos--> causa=convicción
+		
+end
+
+rule "Message pending reminder"
+	when
+		// no se haya recibido las respuestas del usuario, se haya mandado el mensaje y sea una
+		// hora antes de que se acueste el usuario
+	then 
+		// enviar un mensaje al usuario con todos los mensajes que tiene pendientes de respuesta
+end
+
+rule "Conviction cause notification"
+	when
+		// se detecte que la causa de la no realización del tratamiento sea la conviction
+	then 
+		//notificar al caregiver de que el usuario no está por la labor de realizar el tratamiento,
+		//para que éste actúe en consecuencia (por ejemplo, cancelando el tratamiento o proponiendo otro distinto). 
+end
+
+rule "Educational cycle"
+//regla disparada cada dos días, durante 10 días, por las mañanas.
+	when
+	// causa de la no realización sea la ignorancia (educationalCycle = true)
+	then 
+	//mandar mensajes educativos al usuario sobre su enfermedad
+end
+
+rule "Predisposition to contemplation"
+	when
+	// se hayan mandado 2 o 4 mensajes educativos
+	// o se hayan mandado 2 o 4 mensajes motivadores
+	then 
+	//preguntar al usuario si pretende realizar el tratamiento
+end
+
+rule "Motivational cycle"
+//regla disparada cada dos días, durante 10 días, por las mañanas
+	when
+	// causa de la no realización sean los sentimientos (cicloMotivacional = true)
+	then 
+	// enviar mensajes motivadores al usuario para reforzar la esperanza y reforzar el positivismo.
+end
+
+rule "Predisposition to contemplation reminders"
+	when
+	//hayan pasado dos días despúes del fin del envío de los mensajes y durante 10 días, cada 3 días
+	then 
+	//preguntar al usuario si pretende realizar el tratamiento
+end
+
+rule "Precontemplation phase finished unsuccesfully"
+	when
+	// haya finalizado el periodo de precontemplation y el usuario siga en precontemplation 
+	then 
+	//notificar al caregiver de que el usuario no quiere realizar el tratamiento por la causa que sea (ignorancia o sentimiento),
+	//para que éste actúe en consecuencia (por ejemplo, cancelando el tratamiento o proponiendo otro distinto). 
+end
+
+rule "Precontemplation phase succesfully"
+	when
+	// haya finalizado el periodo de precontemplation y el usuario haya pasado a contemplation
+	then 
+	//notificar al caregiver de que la estrategia motivadora ha sido un éxito y el usuario ha decidido
+	//seguir el tratamiento.
+end

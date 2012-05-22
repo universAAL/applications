@@ -535,6 +535,11 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/MotivationStatusDetection.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/TreatmentDetection.java -text
+health/health.motivation/src/main/resources/rules/ActionRules.dslr -text
+health/health.motivation/src/main/resources/rules/ContemplationRules.drl -text
+health/health.motivation/src/main/resources/rules/MaintenanceRules.dslr -text
+health/health.motivation/src/main/resources/rules/PrecontemplationRules.drl -text
+health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
 health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentDetection.java -text
 health/health.pom/pom.xml -text svneol=unset#text/plain

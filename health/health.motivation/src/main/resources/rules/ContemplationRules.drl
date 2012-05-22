@@ -1,0 +1,115 @@
+#created on: 21-mar-2012
+package contemplation
+
+#list any import classes here.
+
+#declare any global variables here
+
+rule "Reinforce the decission"
+	//lanzar cada x días (previamente calculado)
+	when
+		// la fecha se acerque y hasta dos días antes y si hoy toca lanzar el mensaje...
+	then 
+		// mandar mensajes de ¿sabías qué...? (de los que todavía no se hayan mandado).
+		// mensajes sobre los beneficios que obtendrá por seguir el tratamiento.
+end
+
+rule "Schedule first session"
+	when
+		// cuando cambie el estado a contemplation || no se haya realizado la primera sesión (hay que recuperarla)
+	then 
+		// avisar al usuario de que se le ha planificado por defecto la primera sesión 
+		// y si le viene bien o quiere adecuarla a un momento que le venga mejor. 
+end
+
+rule "Re-schedule adjustment" salience no-loop
+	
+	when
+	// el usuario modifique la primera sesión  
+	then
+	// recalcula la frecuencia para el flujo de refuerzo. 
+end
+
+rule "Confirm first-session's planning"
+	
+	when
+		// estemos a dos días del tratamiento
+	then 
+		//Mesaje al usuario: ¿te viene bien el horario?
+end
+
+rule "Advice for first-session's performance" //¿descomponer en más reglas según el tratamiento?
+	
+	when
+		// estemos a dos días del tratamiento
+	then 
+		// si el tratamiento es physical activity --> enviar mensaje sobre cómo debe realizar el ejercicio y qué necesita para llevarlo a cabo.
+		// si el tratamiento es de medición --> enviar mensaje al usuario sobre cómo debe realizar la medida e información sobre lo que se va a medir
+		// si el tratamiento es de healthy habits --> enviar mensaje de información y consejos para logarlo.
+end
+
+rule "Remider of first session day"
+	
+	when
+		// sea un día antes de comenzar el tratamiento (justo 24h antes)
+	then 
+		//avisar al usuario para tenerlo todo preparado y la hora y sitio donde debe realizarlo (reminder) y darle ánimos
+		//proponerle un trigger de objeto (ya recibirá un reminder también) para que no se le olvide
+		//o se le facilite la acción (dependerá del tipo de tratamiento)
+end
+
+rule "Reminder of first session hour"
+	when
+		//quede una hora para empezar la sesión
+	then 
+		//se le manda un mensaje al usuario recordándoselo y dándole ánimos
+		
+end
+
+rule "First Session performed" salience no-loop
+	#include attributes such as "salience" here...
+	
+	when
+	// se detecte la primera sesión realizada 
+	then
+	//se almacena en un array de sesiones completadas
+	//aumenta una unidad la completitud del tratamiento (no hace falta ver qué sesión es la que se ha realizado)
+	//comenzaría el flujo de reglas de action porque cambiaríamos de status.
+end
+
+rule "Non-fullfilment of session" salience no-loop
+	
+	when
+	// se detecte que la primera sesión no ha sido realizada 
+	then
+	// comienza el flujo de indagación
+	// se introduce la sesión no realizada en un array de sesiones no realizadas
+	// se busca una nueva fecha para la realización de la tarea.
+end
+
+rule "3-times Non-fullfilment of session" salience no-loop
+	
+	when
+	// se detecte que la primera sesión no ha sido realizada en 3 ocasiones
+	//(chequear el número de elementos del array donde se almacenan las sesiones no realizadas).
+	then
+	// notificamos al caregiver
+	// descendemos el estado motivacional a precontemplation.
+end
+
+rule "Identify measurement" salience no-loop
+	
+	when
+	// se detecte que la primera sesión ha sido realizada 
+	then
+	// identificar el tipo de medida 
+end
+
+rule "Check measurement OK" salience no-loop
+	
+	when
+	// la medida detectada esté dentro de los límites de seguridad  
+	then
+	// mandar los resultados al caregiver
+	// y notificar al usuario. 
+end
