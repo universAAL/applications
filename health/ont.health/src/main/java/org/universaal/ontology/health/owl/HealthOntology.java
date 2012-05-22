@@ -361,10 +361,10 @@ public final class HealthOntology extends Ontology {
     oci.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_STATUS, 
       StatusType.MY_URI, 1, 1));
-    
+/*    
     oci2 = extendExistingOntClassInfo(Illness.MY_URI);
     
- /*   oci.addObjectProperty(Treatment.PROP_ILLNESS).setFunctional();
+   oci.addObjectProperty(Treatment.PROP_ILLNESS).setFunctional();
     oci.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_ILLNESS, 
       Illness.MY_URI, 1, 1));
