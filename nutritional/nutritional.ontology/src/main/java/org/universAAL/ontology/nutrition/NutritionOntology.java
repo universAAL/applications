@@ -56,6 +56,19 @@ public final class NutritionOntology extends Ontology {
 
 		OntClassInfoSetup oci;
 
+		
+		// load FoodSubCategory
+		oci = createNewOntClassInfo(FoodSubCategory.MY_URI, factory, NutritionFactory.FactoryIndex_FoodSubCategory);
+		oci.setResourceComment("Food Sub Cateogory");
+		oci.setResourceLabel("ShoppingList");
+		oci.addSuperClass(ManagedIndividual.MY_URI);
+		oci.addDatatypeProperty(FoodSubCategory.PROP_ID).setFunctional(); // Integer
+		oci.addDatatypeProperty(FoodSubCategory.PROP_NAME).setFunctional(); // String
+		oci.addObjectProperty(FoodSubCategory.PROP_FOODCATEGORY).setFunctional(); // String
+		oci.addRestriction(MergedRestriction
+				.getAllValuesRestrictionWithCardinality(FoodSubCategory.PROP_ID,
+						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
+		
 		// load Enum. DayOfWeek
 		oci = createNewAbstractOntClassInfo(DayOfWeek.MY_URI);
 		oci.setResourceComment("Enumarion for days of week");
@@ -251,7 +264,7 @@ public final class NutritionOntology extends Ontology {
 						TypeMapper.getDatatypeURI(Integer.class), 1, 1));
 		oci.addRestriction(MergedRestriction
 				.getAllValuesRestrictionWithCardinality(
-						Meal.PROP_MEAL_CATEGORY, DishCategory.MY_URI, 1, 1));
+						Meal.PROP_MEAL_CATEGORY, MealCategory.MY_URI, 1, 1));
 		oci.addRestriction(MergedRestriction.getAllValuesRestriction(
 				Meal.PROP_DISHES, Dish.MY_URI));
 

@@ -23,6 +23,8 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.ontology.nutrition.Dish;
 import org.universAAL.ontology.nutrition.Food;
+import org.universAAL.ontology.nutrition.FoodCategory;
+import org.universAAL.ontology.nutrition.FoodSubCategory;
 import org.universAAL.ontology.nutrition.Ingredient;
 import org.universAAL.ontology.nutrition.Meal;
 import org.universAAL.ontology.nutrition.MenuDay;
@@ -51,6 +53,8 @@ public class NutritionFactory extends ResourceFactoryImpl {
 	public static final int FactoryIndex_Ingredient = 5;
 	public static final int FactoryIndex_ShoppingList = 6;
 	public static final int FactoryIndex_Meal = 7;
+	public static final int FactoryIndex_FoodSubCategory = 8;
+	public static final int FactoryIndex_FoodCategory = 9;
 
 	public Resource createInstance(String classURI, String instanceURI,
 			int factoryIndex) {
@@ -96,6 +100,14 @@ public class NutritionFactory extends ResourceFactoryImpl {
 			System.out.println("index: " + factoryIndex
 					+ "Creating ontology instance for ShoppingList");
 			return new ShoppingList(instanceURI);
+		case NutritionFactory.FactoryIndex_FoodSubCategory:
+			System.out.println("index: " + factoryIndex
+					+ "Creating ontology instance for Foodsubacategory");
+			return new FoodSubCategory(instanceURI);
+		case NutritionFactory.FactoryIndex_FoodCategory:
+			System.out.println("index: " + factoryIndex
+					+ "Creating ontology instance for FoodCategory");
+			return new FoodCategory(instanceURI);
 		}
 		System.out.println("Could not create ontology instance for index: "
 				+ factoryIndex);
