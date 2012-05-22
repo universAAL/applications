@@ -29,7 +29,6 @@ import org.apache.commons.collections.map.MultiKeyMap;
 import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
-import org.universaal.ontology.owl.TreatmentTypeClassification;
 
 import com.csvreader.CsvReader;
 
@@ -354,7 +353,7 @@ public class MessageManager {
 	 * @param Motivational Message to be sent
 	 */
 	
-	public static void sendMessageToCaregiver(String illness, TreatmentTypeClassification treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
+	public static void sendMessageToCaregiver(String illness, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
 	//TO DO
 	}
 	

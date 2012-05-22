@@ -8,15 +8,18 @@ package action
 
 #declare any global variables here
 
-rule "" salience no-loop
+/*rule ""  no-loop
 	
 	when
 	// 
 	then
 	//
 	//
+	
+	
 end
-rule "Familiarity situation with the treatment" salience no-loop
+*/
+rule "Familiarity situation with the treatment" no-loop
 	when
 	// haya comenzado el estado de action 
 	then
@@ -25,7 +28,7 @@ rule "Familiarity situation with the treatment" salience no-loop
 	// a fin de adecuar los mensajes al usuario.
 end
 
-
+/*
 rule "" salience no-loop
 	
 	when
@@ -33,7 +36,7 @@ rule "" salience no-loop
 	then
 	// 
 end
-
+*/
 
 rule "Begin scheduling sessions"
 	when
@@ -42,22 +45,22 @@ rule "Begin scheduling sessions"
 		//se informa al usuario y se le pregunta si desea adaptarlo
 end
 
-rule "Session performed" salience no-loop
+rule "Session performed" no-loop
 	#include attributes such as "salience" here...
 	
 	when
-	// se detecte la primera sesión realizada 
+	// se detecte la primera sesiï¿½n realizada 
 	then
 	//se almacena en un array de sesiones completadas
 	// aumenta una unidad la completitud del tratamiento.
-	//comenzaría el flujo de reglas de action porque cambiaríamos de status.
+	//comenzarï¿½a el flujo de reglas de action porque cambiarï¿½amos de status.
 end
 
-rule "Increase completeness" salience no-loop
+rule "Increase completeness" no-loop
 	#include attributes such as "salience" here...
 	
 	when
-	// se detecte una sessión realizada 
+	// se detecte una sessiï¿½n realizada 
 	then
 	//se almacena en un array de sesiones completadas
 	// aumenta una unidad la completitud del tratamiento.

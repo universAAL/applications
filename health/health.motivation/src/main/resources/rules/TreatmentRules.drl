@@ -3,25 +3,29 @@ package org.universAAL.AALApplication.health.motivation.treatment
 
 #list any import classes here. 
 import org.universaal.ontology.health.owl.Treatment;
-//import org.universAAL.AALapplication.health.ont.treatment.*;
-//import org.universAAL.AALapplication.health.ont.schedule.*; 
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
+import org.universaal.ontology.owl.MotivationalMessageClassification;
+
 #declare any global variables here 
 
 
 #Whenever a treatment is detected a consent message is sent to the user
 
-rule "Treatment Detection" salience no-loop
+rule "Treatment Detection" no-loop 
 	
 	when
 		detectedTreatment: Treatment(name != "")  // A new treatment, with a name, is detected
 	then 
-		MotivationalMessage mm = MessageManager.getMotivationalMessage();
-		MessageManager.sendMessageToUser();
-//se manda un mensaje al usuario para preguntarle si va a realizar el tratamiento
+		TreatmentDetection.insertDetectedTreatment(detectedTreatment); //sÃ³lo vÃ¡lido para JUnit
+        MessageManager.sendMessageToUser(HeartFailure.MY_URI, Treatment.MY_URI,
+                                        MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry);
+        System.out.println("Tratamiento " + detectedTreatment.getName()+ " detectado");//traza
+        //en esta regla debe probarse tanto la detecciÃ³n del tratamiento como que se ha enviado bien el mensaje
+
 		
 end 
 
-
+/*
 rule "Treatment performance agreement" salience no-loop
 	when
 		//reciba al answered message correspondiente al primer mensaje y la respuesta
@@ -30,7 +34,7 @@ rule "Treatment performance agreement" salience no-loop
 	then 
 	//cambiar el estado motivacional del treatment a "contemplation" 
 	//se activan las reglas de contemplation	
-	//cálculo de la periodicidad con la que se mandarán los mensajes de refuerzo
+	//cï¿½lculo de la periodicidad con la que se mandarï¿½n los mensajes de refuerzo
 		
 end
 
@@ -59,7 +63,7 @@ end
 rule "Threshold of maintenance achieved" salience no-loop
 	when
 	//cuando se sobrepase el umbral del 85% realizado (para tratamientos finitos) 
-	// o el umbral que estime el médico en el permanente (por defecto un año)
+	// o el umbral que estime el mï¿½dico en el permanente (por defecto un aï¿½o)
 	then 
 	//el estado del tratamiento cambia a maintenance
 	// se activan las reglas de action
@@ -77,7 +81,7 @@ rule "Non-fulfilment of action phase" salience no-loop
 	when
 	//cuando no se haya realizado tres de las sesiones establecidas
 	then
-	//se pasa del estado de action a contemplation y se toma la siguiente sesión como si fuera la primera 
+	//se pasa del estado de action a contemplation y se toma la siguiente sesiï¿½n como si fuera la primera 
 	// se activan las reglas de contemplation
 end
 
@@ -90,7 +94,7 @@ rule "Non-fulfilment of maintenance phase" salience no-loop
 end
 
 rule "Change status to active" salience no-loop
-	//esta regla debería activarse cada 24h
+	//esta regla deberï¿½a activarse cada 24h
 	when
 	// la fecha actual coincida con la de inicio de tratamiento
 	then
@@ -111,8 +115,8 @@ rule "Treatment prolonged automatically" salience no-loop
 	// y la completitud sea del 90%
 	then
 	// prolongamos el tratamiento (aumenta la fecha de fin)
-	//avisamos al cargiver por si él no admite que se extienda en el tiempo (le pediríamos que lo cancelara)
-	//se lo decimos también al usuario.
+	//avisamos al cargiver por si ï¿½l no admite que se extienda en el tiempo (le pedirï¿½amos que lo cancelara)
+	//se lo decimos tambiï¿½n al usuario.
 end
 
 rule "Treatment cancelled" salience no-loop
@@ -124,7 +128,7 @@ end
 
 rule "Increase completeness" salience no-loop
 	when
-	// se detecte una sessión realizada 
+	// se detecte una sessiï¿½n realizada 
 	then
 	//se almacena en un array de sesiones completadas
 	// aumenta una unidad la completitud del tratamiento.
@@ -132,8 +136,9 @@ end
 
 rule "Treatment prolonged by caregiver" salience no-loop
 	when
-	// se detecte una ampliación del plazo para la realización de un treatment 
+	// se detecte una ampliaciï¿½n del plazo para la realizaciï¿½n de un treatment 
 	then
 	//se deben recalcular las sesiones totales, lo que influye en la unidad de completitud
 	//chequear las sesiones ya hechas y corregir la completitud.
 end
+*/
