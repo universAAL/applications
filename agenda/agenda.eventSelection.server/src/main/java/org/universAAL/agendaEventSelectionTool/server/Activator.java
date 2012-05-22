@@ -19,6 +19,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 /**
  * @author eandgrg
@@ -41,6 +42,14 @@ public class Activator implements BundleActivator {
 	BundleContext[] bc = { context };
 	mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
 	new EventProvider(mcontext);
+	
+	LogUtils
+	.logInfo(
+		mcontext,
+		this.getClass(),
+		"start",
+		new Object[] { "agendaEventSelectionTool.server bundle has started." },
+		null);
     }
 
     /*
@@ -50,5 +59,12 @@ public class Activator implements BundleActivator {
      * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
     public void stop(BundleContext context) throws Exception {
+	LogUtils
+	.logInfo(
+		mcontext,
+		this.getClass(),
+		"stop",
+		new Object[] { "agendaEventSelectionTool.server bundle has stopped." },
+		null);
     }
 }

@@ -1,9 +1,5 @@
 package org.universAAL.agenda.server;
 
-//j2se packages
-//IZMJENE:
-//	- dodano getThePath() kod svakog PropertyPath-a koji vraca String[]
-
 import java.util.Hashtable;
 
 import org.universAAL.ontology.agenda.Calendar;

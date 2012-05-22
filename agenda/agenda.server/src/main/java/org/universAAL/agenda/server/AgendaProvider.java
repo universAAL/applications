@@ -3,7 +3,6 @@
  */
 package org.universAAL.agenda.server;
 
-//j2se packages
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,9 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import org.osgi.service.log.LogService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.ontology.agenda.CEType;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
@@ -34,6 +30,7 @@ import org.universAAL.agenda.server.unit_impl.AgendaStateListener;
 import org.universAAL.agenda.server.unit_impl.MyAgenda;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
@@ -55,34 +52,53 @@ import org.universAAL.ontology.profile.User;
  */
 public class AgendaProvider extends ServiceCallee implements
 	AgendaStateListener {
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
+
+    /**  */
     static final File confHome = new File(new BundleConfigHome("agenda")
 	    .getAbsolutePath());
     // static final String CAL_URI_PREFIX =
     // ProvidedAgendaService.AGENDA_SERVER_NAMESPACE + "controlledAgenda";
     // //TODO: change name
+    /**  */
     static final String LOCATION_URI_PREFIX = "urn:aal_space:everywhere#"; //$NON-NLS-1$
-    static final Logger mainLogger = LoggerFactory
-	    .getLogger(AgendaProvider.class);
 
     private static final ServiceResponse invalidInput = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
     // private static final ServiceResponse settingFailed = new
     // ServiceResponse(CallStatus.serviceSpecificFailure);
+    /**  */
     private static final ServiceResponse deletingFailed = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
+
+    /**  */
     private static final ServiceResponse noSuchEvent = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
+
+    /**  */
     private static final ServiceResponse existingCalendar = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
+
+    /**  */
     private static final ServiceResponse noSuchEventOrCalendar = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
+
+    /**  */
     private static final ServiceResponse notExistingCalendar = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
+
+    /**  */
     private static final ServiceResponse notSpecifiedOwner = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
+
+    /**  */
     private static final ServiceResponse failure = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
+    /**  */
     static final AssistedPerson testUser = new AssistedPerson(
 	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied"); //$NON-NLS-1$
 
@@ -128,14 +144,26 @@ public class AgendaProvider extends ServiceCallee implements
 				.getString("AgendaProvider.YouMustSpecifyAnOwnerForTheCalendar"))); //$NON-NLS-1$
     }
 
+    /**  */
     private MyAgenda theServer;
+
+    /**  */
     private Scheduler theScheduler;
+
+    /**  */
     private ContextPublisher cp;
 
-    AgendaProvider(ModuleContext mcontext) throws FileNotFoundException,
+    /**
+     * 
+     * 
+     * @param mcontext
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    AgendaProvider(ModuleContext moduleContext) throws FileNotFoundException,
 	    IOException {
-	super(mcontext, ProvidedAgendaService.profiles);
-
+	super(moduleContext, ProvidedAgendaService.profiles);
+	mcontext = moduleContext;
 	// prepare for context publishing
 	ContextProvider info = new ContextProvider(
 		ProvidedAgendaService.AGENDA_SERVER_NAMESPACE
@@ -143,29 +171,39 @@ public class AgendaProvider extends ServiceCallee implements
 	info.setType(ContextProviderType.controller);
 	cp = new DefaultContextPublisher(mcontext, info);
 
-	// start the server
+	// load credentials from config folder
 	Properties prop = new Properties();
-	mainLogger.info("agendaProvider reading credentials from confHome: "
-		+ confHome);
+	LogUtils.logInfo(mcontext, this.getClass(), "constructor",
+		new Object[] {
+			"AgendaProvider reading credentials from confHome: ",
+			confHome }, null);
 	InputStream in = new FileInputStream(new File(confHome,
 		"credentials.properties"));
 	prop.load(in);
 
-	theServer = new MyAgenda(
+	// start the server
+	theServer = new MyAgenda(moduleContext,
 		prop.getProperty("database"), prop.getProperty("username"), prop.getProperty("password")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-	theScheduler = new Scheduler(theServer, this);
+	theScheduler = new Scheduler(theServer, this, mcontext);
     }
 
-    /**
-     * @see org.universAAL.middleware.service.ServiceCallee#communicationChannelBroken()
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.service.ServiceCallee#communicationChannelBroken
+     * ()
      */
     public void communicationChannelBroken() {
 
     }
 
-    /**
-     * @see org.universAAL.middleware.service.ServiceCallee#handleCall(org.universAAL.
-     *      middleware.service.ServiceCall)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.service.ServiceCallee#handleCall(org.universAAL
+     * .middleware.service.ServiceCall)
      */
     public ServiceResponse handleCall(ServiceCall call) {
 	if (call == null)
@@ -175,7 +213,9 @@ public class AgendaProvider extends ServiceCallee implements
 	if (operation == null)
 	    return null;
 
-	mainLogger.info("Agenda Service requested");
+	LogUtils.logInfo(mcontext, this.getClass(), "handleCall",
+		new Object[] { "AgendaProvider received service call." }, null);
+
 	if (operation.startsWith(ProvidedAgendaService.SERVICE_GET_CALENDARS)) {
 	    return getControlledCalendars();
 	}
@@ -206,7 +246,13 @@ public class AgendaProvider extends ServiceCallee implements
 		.startsWith(ProvidedAgendaService.SERVICE_GET_CALENDAR_BY_OWNER)) {
 	    if (inCalendarOwner == null || !(inCalendarOwner instanceof User))
 		return null;
-	    mainLogger.info("\"get calendars of a user\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Get calendars of a user" },
+			    null);
 	    return getControlledCalendars((User) inCalendarOwner);
 	}
 
@@ -219,8 +265,9 @@ public class AgendaProvider extends ServiceCallee implements
 	    if (inCalendarOwner != null && !(inCalendarOwner instanceof User)) {
 		return null;
 	    }
-
-	    mainLogger.info("\"add a new calendar\" service requested");
+	    LogUtils.logInfo(mcontext, this.getClass(), "handleCall",
+		    new Object[] { "Requested service: Add a new calendar" },
+		    null);
 	    return addNewCalendar((Calendar) inCalendar, (User) inCalendarOwner);
 	}
 
@@ -229,7 +276,13 @@ public class AgendaProvider extends ServiceCallee implements
 	    if (inCalendar == null)
 		return null;
 
-	    mainLogger.info("\"remove existing calendar\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Remove existing calendar" },
+			    null);
 	    return removeCalendar((Calendar) inCalendar);
 	}
 
@@ -238,8 +291,13 @@ public class AgendaProvider extends ServiceCallee implements
 		.startsWith(ProvidedAgendaService.SERVICE_GET_CALENDAR_EVENT_LIST)) {
 	    if (inCalendar == null)
 		return null;
-
-	    mainLogger.info("\"get calendar's event list\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Get calendar's event list" },
+			    null);
 	    return getCalendarEventList(((Calendar) inCalendar).getURI());
 	}
 
@@ -248,8 +306,13 @@ public class AgendaProvider extends ServiceCallee implements
 		.startsWith(ProvidedAgendaService.SERVICE_ADD_EVENT_TO_CALENDAR)) {
 	    if (inCalendar == null)
 		return null;
-
-	    mainLogger.info("\"add event to calendar\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Add event to calendar" },
+			    null);
 	    if (inEvent instanceof Event) {
 		return addEventToCalendar(((Calendar) inCalendar).getURI(),
 			(Event) inEvent);
@@ -265,8 +328,13 @@ public class AgendaProvider extends ServiceCallee implements
 	if (operation.startsWith(ProvidedAgendaService.SERVICE_ADD_EVENT_LIST)) {
 	    if ((inCalendar == null) || !(inEventList instanceof List))
 		return null;
-
-	    mainLogger.info("\"add event list to calendar\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Add event list to calendar" },
+			    null);
 	    if (inEvent instanceof List)
 		return addEventListToCalendar(((Calendar) inCalendar).getURI(),
 			(List) inEvent);
@@ -282,9 +350,13 @@ public class AgendaProvider extends ServiceCallee implements
 		.startsWith(ProvidedAgendaService.SERVICE_GET_CALENDAR_EVENT)) {
 	    if ((inCalendar == null) || !(inEventId instanceof Integer))
 		return null;
-
-	    mainLogger
-		    .info("\"retrieve an event from calendar\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Retrieve an event from calendar" },
+			    null);
 	    return getCalendarEvent(((Calendar) inCalendar).getURI(),
 		    ((Integer) inEventId).intValue());
 	}
@@ -294,9 +366,14 @@ public class AgendaProvider extends ServiceCallee implements
 	    if (!(inEventId instanceof Integer)) {
 		return null;
 	    }
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Delete an event from calendar" },
+			    null);
 
-	    mainLogger
-		    .info("\"delete an event from calendar\" service requested");
 	    return deleteCalendarEvent(((Integer) inEventId).intValue());
 	}
 
@@ -305,9 +382,13 @@ public class AgendaProvider extends ServiceCallee implements
 	    if ((inCalendar == null) || !(inEventId instanceof Integer)
 		    || (inEvent == null))
 		return null;
-
-	    mainLogger
-		    .info("\"update an event from calendar\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Update an event from calendar" },
+			    null);
 	    return updateCalendarEvent(((Calendar) inCalendar).getURI(),
 		    ((Integer) inEventId).intValue(), (Event) inEvent);
 	}
@@ -317,9 +398,13 @@ public class AgendaProvider extends ServiceCallee implements
 	    if ((inCalendar == null) || !(inEventId instanceof Integer)
 		    || (inEventReminder == null))
 		return null;
-
-	    mainLogger
-		    .info("\"set a reminder to an event from calendar\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Set a reminder to an event from calendar" },
+			    null);
 	    return setReminderToEvent(((Calendar) inCalendar).getURI(),
 		    ((Integer) inEventId).intValue(),
 		    (Reminder) inEventReminder);
@@ -331,9 +416,13 @@ public class AgendaProvider extends ServiceCallee implements
 	    if ((inCalendar == null) || !(inEventId instanceof Integer)
 		    || (inReminderType == null))
 		return null;
-
-	    mainLogger
-		    .info("\"set a reminder type to an event from calendar\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Set a reminder type to an event from calendar" },
+			    null);
 	    return setReminderTypeToEvent(((Calendar) inCalendar).getURI(),
 		    ((Integer) inEventId).intValue(),
 		    (ReminderType) inReminderType);
@@ -343,8 +432,13 @@ public class AgendaProvider extends ServiceCallee implements
 	if (operation.startsWith(ProvidedAgendaService.SERVICE_CANCEL_REMINDER)) {
 	    if ((inCalendar == null) || (inEvent == null))
 		return null;
-
-	    mainLogger.info("\"cancel reminder\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Cancel reminder" },
+			    null);
 	    return cancelReminder((Calendar) inCalendar, (Event) inEvent);
 	}
 
@@ -356,21 +450,25 @@ public class AgendaProvider extends ServiceCallee implements
 
 	    if (!(inCalendarOwner instanceof User))
 		return null;
-
-	    mainLogger
-		    .info("\"get Calendar URI by the name of it, and its owner\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Requested service: Get Calendar URI by its name, and its owner" },
+			    null);
 	    return getCalendarByName((String) inCalendarName,
 		    (User) inCalendarOwner);
 	}
 
 	return null;
-    }
+    }// end handleCall
 
     /**
-     * Adds a new {@Calendar} to user's database
+     * Adds a new {@Calendar} to user's database.
      * 
-     * @param calendarURI
-     *            a calendar URI
+     * @param calendar
+     * @param owner
      * @return a service response to the specific service
      */
     private ServiceResponse addNewCalendar(Calendar calendar, User owner) {
@@ -388,17 +486,16 @@ public class AgendaProvider extends ServiceCallee implements
 	} catch (InvalidParameterException ipe) {
 	    return notSpecifiedOwner;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR,
-		    "Exception: " + e.getMessage()); //$NON-NLS-1$
+	    LogUtils.logError(mcontext, this.getClass(), "addNewCalendar",
+		    new Object[] { "Exception while adding new calendar." }, e);
 	    return invalidInput;
 	}
     }
 
     /**
-     * Remove a {@Calendar} from user's database
+     * Remove a {@Calendar} from user's database.
      * 
-     * @param calendarURI
-     *            a calendar URI
+     * @param calendar
      * @return a service response to the specific service
      */
     private ServiceResponse removeCalendar(Calendar calendar) {
@@ -407,8 +504,8 @@ public class AgendaProvider extends ServiceCallee implements
 		    CallStatus.succeeded)
 		    : notExistingCalendar;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR,
-		    "Exception: " + e.getMessage()); //$NON-NLS-1$
+	    LogUtils.logError(mcontext, this.getClass(), "removeCalendar",
+		    new Object[] { "Exception while removing calendar." }, e);
 	    return invalidInput;
 	}
     }
@@ -416,8 +513,8 @@ public class AgendaProvider extends ServiceCallee implements
     /**
      * Cancels any previous defined reminder for the <code>event</event>.
      * 
-     * @param calendarURI
-     *            a calendar URI
+     * @param calendar
+     * @param event
      * @return a service response to the specific service
      */
     private ServiceResponse cancelReminder(Calendar calendar, Event event) {
@@ -427,12 +524,19 @@ public class AgendaProvider extends ServiceCallee implements
 	    }
 	    return noSuchEventOrCalendar;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR,
-		    "Exception: " + e.getMessage()); //$NON-NLS-1$
+	    LogUtils.logError(mcontext, this.getClass(), "cancelReminder",
+		    new Object[] { "Exception while canceling reminder." }, e);
 	    return invalidInput;
 	}
     }
 
+    /**
+     * 
+     * 
+     * @param calendarURI
+     * @param eventID
+     * @return
+     */
     public boolean cancelReminder(String calendarURI, int eventID) {
 	if (theServer.cancelReminder(calendarURI, eventID, MyAgenda.COMMIT)) {
 	    System.out.println("Cancel reminder: " + eventID); //$NON-NLS-1$
@@ -444,10 +548,11 @@ public class AgendaProvider extends ServiceCallee implements
 
     /**
      * Given the name of the calendar, it returns the URI, wrapped in a Calendar
-     * object
+     * object.
      * 
      * @param calendarName
      *            a calendar name
+     * @param owner
      * @return a service response to the specific service
      */
     private ServiceResponse getCalendarByName(String calendarName, User owner) {
@@ -463,8 +568,13 @@ public class AgendaProvider extends ServiceCallee implements
 	    }
 	    return noSuchEventOrCalendar;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR,
-		    "Exception: " + e.getMessage()); //$NON-NLS-1$
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "getCalendarByName",
+			    new Object[] { "Exception while getting calendar by name." },
+			    e);
 	    return invalidInput;
 	}
     }
@@ -489,8 +599,10 @@ public class AgendaProvider extends ServiceCallee implements
 		event = theServer.getEventFromCalendar(calendarURI, eventId,
 			MyAgenda.COMMIT);
 		if (event == null) {
-		    Activator.log.log(LogService.LOG_ERROR,
-			    "Error retrieving event: "); //$NON-NLS-1$
+		    LogUtils.logError(mcontext, this.getClass(),
+			    "addEventToCalendar",
+			    new Object[] { "Error while retrieving event." },
+			    null);
 		    throw new Exception();
 		}
 		// send a context event: new event
@@ -505,8 +617,13 @@ public class AgendaProvider extends ServiceCallee implements
 	    }
 	    return invalidInput;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR,
-		    "Exception: " + e.getMessage()); //$NON-NLS-1$
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "addEventToCalendar",
+			    new Object[] { "Exception while adding event to calendar." },
+			    e);
 	    return invalidInput;
 	}
     }
@@ -542,8 +659,13 @@ public class AgendaProvider extends ServiceCallee implements
 	    }
 	    return sr;
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR,
-		    "Exception: " + e.getMessage()); //$NON-NLS-1$
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "addEventListToCalendar",
+			    new Object[] { "Exception while adding event list to calendar." },
+			    e);
 	    return invalidInput;
 	}
     }
@@ -568,7 +690,13 @@ public class AgendaProvider extends ServiceCallee implements
 			    eventList));
 	    return sr;
 	} catch (Exception e) {
-	    System.out.println(e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "getCalendarEventList",
+			    new Object[] { "Exception while getting calendar event list." },
+			    e);
 	    return invalidInput;
 	}
     }
@@ -594,21 +722,21 @@ public class AgendaProvider extends ServiceCallee implements
 		    ProvidedAgendaService.OUTPUT_CALENDAR_EVENT, event));
 	    return sr;
 	} catch (Exception e) {
-	    System.out.println(e.getMessage());
+	    LogUtils.logError(mcontext, this.getClass(), "getCalendarEvent",
+		    new Object[] { "Exception while getting calendar event." },
+		    e);
 	    return invalidInput;
 	}
     }
 
     /**
-     * Deletes the event with the specified <code>eventId</code>, stored in the
-     * {@link Calendar} with the specified <code>calendarURI</code> and creates
-     * a {@link ServiceResponse}.
+     * Deletes the event with the specified <code>eventId</code>, stored in the.
      * 
-     * @param calendarURI
-     *            a calendar URI
      * @param eventId
      *            an event id; to delete the whole event
-     * @return a service response to the specific service
+     * @return a service response to the specific service {@link Calendar} with
+     *         the specified <code>calendarURI</code> and creates a
+     *         {@link ServiceResponse}.
      */
     private ServiceResponse deleteCalendarEvent(int eventId) {
 	try {
@@ -622,17 +750,23 @@ public class AgendaProvider extends ServiceCallee implements
 	    }
 	    return deletingFailed;
 	} catch (Exception e) {
-	    System.out.println(e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "deleteCalendarEvent",
+			    new Object[] { "Exception while deleting calendar event." },
+			    e);
 	    return invalidInput;
 	}
     }
 
     /**
      * Retrieves a {@link List} of the {@link Calendar}s which are controlled by
-     * the server to <code>ownerName</code> and creates a
-     * {@link ServiceResponse}
+     * the server to <code>ownerName</code> and creates a.
      * 
      * @return a service response to the specific service
+     *         {@link ServiceResponse}
      */
     private ServiceResponse getControlledCalendars() {
 	ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
@@ -645,7 +779,7 @@ public class AgendaProvider extends ServiceCallee implements
 
     /**
      * Retrieves a {@link List} of the {@link Calendar}s that belong to the
-     * specified to <code>owner</code> and creates a {@link ServiceResponse}
+     * specified to <code>owner</code> and creates a {@link ServiceResponse}.
      * 
      * @param owner
      *            the owner of the calendar
@@ -662,7 +796,7 @@ public class AgendaProvider extends ServiceCallee implements
 
     /**
      * Retrieves a {@link List} of all defined categories of the events stored
-     * in db
+     * in db.
      * 
      * @return a service response to the specific service
      */
@@ -678,9 +812,7 @@ public class AgendaProvider extends ServiceCallee implements
     }
 
     /**
-     * Updates the event with the specified <code>eventId</code>, stored in the
-     * {@link Calendar} with the specified <code>calendarURI</code> and creates
-     * a {@link ServiceResponse}.
+     * Updates the event with the specified <code>eventId</code>, stored in the.
      * 
      * @param calendarURI
      *            a calendar URI
@@ -688,7 +820,9 @@ public class AgendaProvider extends ServiceCallee implements
      *            the event id of the updated event
      * @param updatedEvent
      *            the updated event
-     * @return a service response to the specific service
+     * @return a service response to the specific service {@link Calendar} with
+     *         the specified <code>calendarURI</code> and creates a
+     *         {@link ServiceResponse}.
      */
     private ServiceResponse updateCalendarEvent(String calendarURI,
 	    int eventId, Event updatedEvent) {
@@ -708,7 +842,13 @@ public class AgendaProvider extends ServiceCallee implements
 		return noSuchEvent;
 	    }
 	} catch (Exception e) {
-	    System.out.println(e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "updateCalendarEvent",
+			    new Object[] { "Exception while updating calendar event." },
+			    e);
 	    return invalidInput;
 	}
     }
@@ -722,8 +862,7 @@ public class AgendaProvider extends ServiceCallee implements
      * 
      * @param calendarURI
      *            a calendar URI
-     * @param eventId
-     *            the event id of the event
+     * @param eventID
      * @param reminder
      *            the reminder to be added to the event
      * @return a service response to the specific service
@@ -740,7 +879,13 @@ public class AgendaProvider extends ServiceCallee implements
 	    }
 	    return noSuchEvent;
 	} catch (Exception e) {
-	    System.out.println(e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "setReminderToEvent",
+			    new Object[] { "Exception while adding reminder to an event." },
+			    e);
 	    return invalidInput;
 	}
     }
@@ -754,10 +899,8 @@ public class AgendaProvider extends ServiceCallee implements
      * 
      * @param calendarURI
      *            a calendar URI
-     * @param eventId
-     *            the event id of the event
-     * @param reminder
-     *            the reminder to be added to the event
+     * @param eventID
+     * @param reminderType
      * @return a service response to the specific service
      */
     private ServiceResponse setReminderTypeToEvent(String calendarURI,
@@ -772,33 +915,46 @@ public class AgendaProvider extends ServiceCallee implements
 	    }
 	    return noSuchEvent;
 	} catch (Exception e) {
-	    System.out.println(e.getMessage());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "setReminderTypeToEvent",
+			    new Object[] { "Exception while setting reminder type to an event." },
+			    e);
 	    return invalidInput;
 	}
     }
 
-    /*********************
-     * Context Events
-     *********************/
+    /**
+     * ******************* Context Events *******************.
+     * 
+     * @param calendar
+     * @param event
+     */
     public void eventAdded(Calendar calendar, Event event) {
-	Activator.log.log(LogService.LOG_INFO,
-		"AgendaProvider: publishing a context event (event added)"); //$NON-NLS-1$
-
 	event.setCEType(CEType.newEvent);
 	calendar.addEvent(event);
 	ContextEvent ce = new ContextEvent(calendar, Calendar.PROP_HAS_EVENT);
 	long startTime = System.currentTimeMillis();
 	cp.publish(ce);
-	mainLogger.info("Agenda\tContext Event sent: \'add calendar event\' ("
-		+ startTime + ")");
+
+	LogUtils.logInfo(mcontext, this.getClass(), "eventAdded", new Object[] {
+		"Context Event sent: \'add calendar event\' with startTime:",
+		startTime }, null);
+
 	// JOptionPane.showMessageDialog(null,
 	// "AgendaProvider: publishing a context event (event added)");
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.agenda.server.unit_impl.AgendaStateListener#eventDeleted
+     * (org.universAAL.ontology.agenda.Calendar, int)
+     */
     public void eventDeleted(Calendar calendar, int eventId) {
-	Activator.log.log(LogService.LOG_INFO,
-		"AgendaProvider: publishing a context event (event deleted)"); //$NON-NLS-1$
-
 	Event e = new Event(null);
 	e.setEventID(eventId);
 	e.setCEType(CEType.deletedEvent);
@@ -806,32 +962,57 @@ public class AgendaProvider extends ServiceCallee implements
 	ContextEvent ce = new ContextEvent(calendar, Calendar.PROP_HAS_EVENT);
 	long startTime = System.currentTimeMillis();
 	cp.publish(ce);
-	mainLogger
-		.info("Agenda\tContext Event sent: \'delete calendar event\' ("
-			+ startTime + ")");
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"eventDeleted",
+			new Object[] {
+				"Context Event sent: \'delete calendar event\' with startTime:",
+				startTime }, null);
+
 	// JOptionPane.showMessageDialog(null,
 	// "AgendaProvider: publishing a context event (event deleted)");
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.agenda.server.unit_impl.AgendaStateListener#eventUpdated
+     * (org.universAAL.ontology.agenda.Calendar,
+     * org.universAAL.ontology.agenda.Event)
+     */
     public void eventUpdated(Calendar calendar, Event e) {
-	Activator.log.log(LogService.LOG_INFO,
-		"AgendaProvider: publishing a context event (event updated)"); //$NON-NLS-1$
+
 	e.setCEType(CEType.updatedEvent);
 	calendar.addEvent(e);
 	ContextEvent ce = new ContextEvent(calendar, Calendar.PROP_HAS_EVENT);
 	long startTime = System.currentTimeMillis();
 	cp.publish(ce);
-	mainLogger
-		.info("Agenda\tContext Event sent: \'update calendar event\' ("
-			+ startTime + ")");
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"eventUpdated",
+			new Object[] {
+				"Context Event sent: \'update calendar event\' with startTime:",
+				startTime }, null);
 
 	// MessageDialog(null,
 	// "AgendaProvider: publishing a context event (event updated)");
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.agenda.server.unit_impl.AgendaStateListener#reminderTime
+     * (org.universAAL.ontology.agenda.Event)
+     */
     public void reminderTime(Event e) {
-	Activator.log.log(LogService.LOG_INFO,
-		"AgendaProvider: publishing a context event (event reminder)"); //$NON-NLS-1$
+
 	e.setCEType(CEType.reminder);
 	Calendar c = e.getParentCalendar();
 	c.addEvent(e);
@@ -839,9 +1020,15 @@ public class AgendaProvider extends ServiceCallee implements
 
 	long startTime = System.currentTimeMillis();
 	cp.publish(ce);
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"reminderTime",
+			new Object[] {
+				"Context Event sent: \'reminder triggered\' with startTime:",
+				startTime }, null);
 
-	mainLogger.info("Agenda\tContext Event sent: \'reminder triggered\' ("
-		+ startTime + ")");
 	// JOptionPane.showMessageDialog(null,
 	// "AgendaProvider: publishing a context event (event reminder)");
 	Reminder rem = e.getReminder();
@@ -868,49 +1055,78 @@ public class AgendaProvider extends ServiceCallee implements
 
 	// TODO: find out why the exception is thrown
 	try {
-	    WrapperActivator.getMyUICaller()
-		    .showReminderConfirmationDialog(message, c.getURI(),
-			    e.getEventID(), testUser);
+	    WrapperActivator.getMyUICaller().showReminderConfirmationDialog(
+		    message, c.getURI(), e.getEventID(), testUser);
 	} catch (Exception e1) {
-	    Activator.log.log(LogService.LOG_ERROR, Messages
-		    .getString("AgendaProvider.30")); //$NON-NLS-1$
-	    e1.printStackTrace();
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "reminderTime",
+			    new Object[] { "Exception while showing reminder confirmation dialog, via UI bus" },
+			    e1);
 	}
 
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.agenda.server.unit_impl.AgendaStateListener#startEventTime
+     * (org.universAAL.ontology.agenda.Event)
+     */
     public void startEventTime(Event e) {
-	Activator.log.log(LogService.LOG_INFO, Messages
-		.getString("AgendaProvider.31")); //$NON-NLS-1$
 	e.setCEType(CEType.startEvent);
 	Calendar c = e.getParentCalendar();
 	c.addEvent(e);
 	ContextEvent ce = new ContextEvent(c, Calendar.PROP_HAS_EVENT);
 	long startTime = System.currentTimeMillis();
 	cp.publish(ce);
-	mainLogger
-		.info("Agenda\tContext Event sent: \'calendar event started\' ("
-			+ startTime + ")");
+	LogUtils
+	.logInfo(
+		mcontext,
+		this.getClass(),
+		"startEventTime",
+		new Object[] {
+			"Context Event sent: \'calendar event started\' with startTime:",
+			startTime }, null);
+	
 	// JOptionPane.showMessageDialog(null,
 	// "AgendaProvider: publishing a context event (event started)");
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.agenda.server.unit_impl.AgendaStateListener#endEventTime
+     * (org.universAAL.ontology.agenda.Event)
+     */
     public void endEventTime(Event e) {
-	Activator.log.log(LogService.LOG_INFO, Messages
-		.getString("AgendaProvider.32")); //$NON-NLS-1$
 	e.setCEType(CEType.endEvent);
 	Calendar c = e.getParentCalendar();
 	c.addEvent(e);
 	ContextEvent ce = new ContextEvent(c, Calendar.PROP_HAS_EVENT);
 	long startTime = System.currentTimeMillis();
 	cp.publish(ce);
-	mainLogger
-		.info("Agenda\tContext Event sent: \'calendar event finished\' ("
-			+ startTime + ")");
+	LogUtils
+	.logInfo(
+		mcontext,
+		this.getClass(),
+		"endEventTime",
+		new Object[] {
+			"Context Event sent: \'calendar event ended\' with startTime:",
+			startTime }, null);
 	// JOptionPane.showMessageDialog(null,
 	// "AgendaProvider: publishing a context event (event ended)");
     }
 
+    /**
+     * 
+     * 
+     * @param str
+     */
     public static void main(String[] str) {
 	// JOptionPane.showMessageDialog(null,
 	// "AgendaProvider: publishing a context event (event ended)");
@@ -921,7 +1137,7 @@ public class AgendaProvider extends ServiceCallee implements
 	area.setEditable(true);
 	JScrollPane scrollpane = new JScrollPane(area);
 
-	Object[] array = { new JLabel(Messages.getString("AgendaProvider.34")), //$NON-NLS-1$
+	Object[] array = { new JLabel(Messages.getString("AgendaProvider.EnterSomeText")), //$NON-NLS-1$
 		scrollpane, };
 	JOptionPane.showConfirmDialog(null, array, Messages
 		.getString("AgendaProvider.Reminder"), JOptionPane.OK_OPTION); //$NON-NLS-1$

@@ -14,10 +14,10 @@
 	<description>Event SelectionTool Client</description>
 
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>junit</groupId>-->
+<!--			<artifactId>junit</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -34,10 +34,6 @@
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.universAAL.middleware</groupId>-->
-<!--			<artifactId>mw.bus.ui</artifactId>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation</artifactId>
@@ -58,17 +54,6 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>agenda.eventSelection.ont</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
-			<artifactId>pax-logging-api</artifactId>
-			<version>1.6.2</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
-			<artifactId>pax-logging-service</artifactId>
-			<version>1.6.2</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -86,12 +71,7 @@
 						<!--
 							<Import-Package>org.universAAL.middleware.context,org.universAAL.middleware.context.owl,
 						-->
-						<!--							org.universAAL.middleware.input,-->
-						<!--							org.universAAL.middleware.io.owl,-->
-						<!--							org.universAAL.middleware.io.rdf,-->
-						<!--
-							org.universAAL.middleware.output, org.universAAL.middleware.owl,
-						-->
+				
 						<!--							org.universAAL.middleware.owl.supply,-->
 						<!--
 							org.universAAL.middleware.rdf, org.universAAL.middleware.service,

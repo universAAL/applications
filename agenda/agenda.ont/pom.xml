@@ -5,8 +5,8 @@
 	<parent>
 		<groupId>org.universAAL.ontology</groupId>
 		<artifactId>ont.pom</artifactId>
-	    <version>1.1.0</version>
-	    <!--  
+		<version>1.1.0</version>
+		<!--  
 		<relativePath>../pom</relativePath>
 		-->
 	</parent>
@@ -19,10 +19,10 @@
 		<ignore.dep.conflict>true</ignore.dep.conflict>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>junit</groupId>-->
+		<!--			<artifactId>junit</artifactId>-->
+		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -39,12 +39,6 @@
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service</artifactId>
 		</dependency>
-        <!--
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.io</artifactId>
-		</dependency>
-        -->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation</artifactId>
@@ -52,27 +46,10 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
-<!--			<version>1.0.0</version>-->
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.phWorld</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
-			<artifactId>pax-logging-api</artifactId>
-			<version>1.6.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
-			<artifactId>pax-logging-service</artifactId>
-			<version>1.6.2</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>log4j</artifactId>
-					<groupId>log4j</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 	<build>
@@ -89,7 +66,7 @@
 							<goal>manifest</goal>
 						</goals>
 					</execution>
-				</executions>				
+				</executions>
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
@@ -97,12 +74,6 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package>org.universAAL.ontology.agenda,
 							org.universAAL.ontology.agenda.service</Export-Package>
-						<!--
-							<Import-Package>org.persona.middleware.*, org.persona.ontology.*,
-							org.osgi.framework,javax.xml.*,
-							org.persona.platform.profiling.ontology,
-							org.persona.platform.casf.ontology.location </Import-Package>
-						-->
 					</instructions>
 				</configuration>
 			</plugin>
@@ -148,7 +119,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>						
+			</plugin>
 		</plugins>
 	</build>
 
@@ -199,5 +170,5 @@
 				</dependency>
 			</dependencies>
 		</profile>
-	</profiles>	
+	</profiles>
 </project>

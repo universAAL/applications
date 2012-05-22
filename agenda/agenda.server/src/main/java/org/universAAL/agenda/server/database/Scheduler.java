@@ -12,8 +12,6 @@ import java.util.TimerTask;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.osgi.service.log.LogService;
-import org.universAAL.agenda.server.Activator;
 import org.universAAL.agenda.server.unit_impl.AgendaStateListener;
 import org.universAAL.agenda.server.unit_impl.CheckDatabaseTask;
 import org.universAAL.agenda.server.unit_impl.CheckEndingEventsTask;
@@ -24,6 +22,8 @@ import org.universAAL.agenda.server.unit_impl.SendContextEventTask;
 import org.universAAL.agenda.server.unit_impl.SendEndEventTask;
 import org.universAAL.agenda.server.unit_impl.SendReminderTask;
 import org.universAAL.agenda.server.unit_impl.SendStartEventTask;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.Reminder;
@@ -37,6 +37,11 @@ import org.universAAL.ontology.agenda.ReminderType;
 public class Scheduler {
     public static final int DEFAULT_TRIGGER_TIMES = 3;
     public static final int DEFAULT_REPEAT_INTERVAL = 30 * 1000; // half-min
+
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
     // (ten
     // minutes)
     // repeat
@@ -51,7 +56,9 @@ public class Scheduler {
 	    forthcomingEndEvents;
 
     public Scheduler(AgendaDBInterface dbServer,
-	    AgendaStateListener agendaListener) {
+	    AgendaStateListener agendaListener, ModuleContext moduleContext) {
+	mcontext = moduleContext;
+
 	this.dbServer = dbServer;
 	this.agendaListener = agendaListener;
 	this.forthcomingReminders = new HashMap();
@@ -115,8 +122,10 @@ public class Scheduler {
 				new TimerTaskEntry(tt, d));
 		    }
 		} catch (NullPointerException npe) {
-		    Activator.log.log(LogService.LOG_ERROR,
-			    "Event Reminder is null");
+		    LogUtils.logError(mcontext, this.getClass(),
+			    "addBatchReminders",
+			    new Object[] { "Event Reminder is null" }, npe);
+
 		}
 	    }
 	}
@@ -145,8 +154,10 @@ public class Scheduler {
 				new TimerTaskEntry(tt, d));
 		    }
 		} catch (NullPointerException npe) {
-		    Activator.log.log(LogService.LOG_ERROR,
-			    "Event Start time is null");
+		    LogUtils.logError(mcontext, this.getClass(),
+			    "addBatchStartEvents",
+			    new Object[] { "Event Start time is null" }, npe);
+
 		}
 	    }
 	}
@@ -175,8 +186,10 @@ public class Scheduler {
 				new TimerTaskEntry(tt, d));
 		    }
 		} catch (NullPointerException npe) {
-		    Activator.log.log(LogService.LOG_ERROR,
-			    "Event End time is null");
+		    LogUtils.logError(mcontext, this.getClass(),
+			    "addBatchEndEvents",
+			    new Object[] { "Event End time is null" }, npe);
+
 		}
 	    }
 	}
@@ -267,7 +280,8 @@ public class Scheduler {
 		}
 	    }
 	} catch (NullPointerException npe) {
-	    Activator.log.log(LogService.LOG_ERROR, "Event Reminder is null");
+	    LogUtils.logError(mcontext, this.getClass(), "updateReminderTask",
+		    new Object[] { "Event Reminder is null" }, npe);
 	}
     }
 
@@ -291,7 +305,9 @@ public class Scheduler {
 		}
 	    }
 	} catch (NullPointerException npe) {
-	    Activator.log.log(LogService.LOG_ERROR, "Event Reminder is null");
+	    LogUtils.logError(mcontext, this.getClass(), "updateReminderTask",
+		    new Object[] { "Event Reminder is null" }, npe);
+
 	}
     }
 

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.universAAL.agenda.server.gui.wrapper;
 
 import org.universAAL.middleware.container.ModuleContext;

@@ -2,9 +2,9 @@ package org.universAAL.agenda.server.gui.wrapper;
 
 import java.util.Locale;
 
-import org.osgi.service.log.LogService;
 import org.universAAL.agenda.server.Activator;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
@@ -18,7 +18,6 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.profile.User;
-
 
 /**
  * @author kagnantis
@@ -34,10 +33,16 @@ public class MyUICaller extends UICaller {
     static final String EVENT_ID = CALL_PREFIX + "#eventID"; //$NON-NLS-1$
 
     /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
+
+    /**
      * @param mcontext
      */
-    MyUICaller(ModuleContext mcontext) {
-	super(mcontext);
+    MyUICaller(ModuleContext moduleContext) {
+	super(moduleContext);
+	mcontext = moduleContext;
     }
 
     /*
@@ -54,9 +59,8 @@ public class MyUICaller extends UICaller {
 	System.out.println("Dialog ID: " + event.getDialogID());
 	String submissionID = event.getSubmissionID();
 	if (submissionID == null) {
-	    Activator.log
-		    .log(LogService.LOG_WARNING,
-			    "InputSubscriber@ui.dm - handleInputEvent: submission ID null!");
+	    LogUtils.logWarn(mcontext, this.getClass(), "handleUIResponse",
+		    new Object[] { "submission ID null" }, null);
 	    return;
 	}
 
@@ -78,7 +82,10 @@ public class MyUICaller extends UICaller {
 		Activator.getProvider().cancelReminder(calendarURI,
 			eventId.intValue());
 	    } catch (ClassCastException cce) {
-		Activator.log.log(LogService.LOG_ERROR, cce.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"handleUIResponse",
+			new Object[] { "Class cast exception." }, cce);
+
 	    }
 
 	    return;
@@ -89,13 +96,14 @@ public class MyUICaller extends UICaller {
     public void showReminderConfirmationDialog(String message,
 	    String calendarURI, int eventID, Resource user) {
 	if (user == null) {
-	    Activator.log
-		    .log(LogService.LOG_WARNING,
-			    "OutputPublisher@ui.dm - showMenu: no user profile specified!"); //$NON-NLS-1$
+	    LogUtils.logWarn(mcontext, this.getClass(),
+		    "showReminderConfirmationDialog",
+		    new Object[] { "no user profile specified." }, null);
 	    return;
 	} else {
-	    Activator.log.log(LogService.LOG_WARNING,
-		    "OutputPublisher@ui.dm - showMenu: time to go!"); //$NON-NLS-1$
+	    LogUtils.logWarn(mcontext, this.getClass(),
+		    "showReminderConfirmationDialog",
+		    new Object[] { "time to go." }, null);
 	}
 
 	Form form = Form.newMessage(Messages
