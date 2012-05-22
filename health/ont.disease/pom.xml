@@ -1,46 +1,59 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion> 
-  	<groupId>org.universaal.ontology.disease</groupId>
+  	
+  		<parent>
+    		<groupId>org.universAAL.ontology</groupId>
+    		<artifactId>ont.pom</artifactId>
+    		<version>1.1.1-SNAPSHOT</version>
+    		<relativePath>../pom/</relativePath>
+		</parent>
+  	
   	<artifactId>ont.disease</artifactId>
   	<version>1.1.1-SNAPSHOT</version>
-  	<name>Disease</name>
- 	<description>org.eclipse.uml2.uml.internal.impl.CommentImpl@ff7054 (body: null)</description>
+  	<name>Disease Ontology</name>
+ 	<description>No further description provided</description>
  	<properties>
  	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+ 	    <maven.compile.source>1.5</maven.compile.source>
+		<maven.compile.target>1.5</maven.compile.target>
  	</properties>
   	<packaging>bundle</packaging>
-    	<dependencies>			
+    	<dependencies>
+    	 <dependency>
+                <groupId>org.universAAL.support</groupId>
+                <artifactId>itests</artifactId>
+            </dependency>
+    				
 			<dependency>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>org.osgi.core</artifactId>
-				<version>1.0.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.data.representation</artifactId>
-				<version>1.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.bus.context</artifactId>
-				<version>1.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.bus.io</artifactId>
-				<version>1.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.bus.service</artifactId>
-				<version>1.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
            		<groupId>org.universAAL.ontology</groupId>
            		<artifactId>ont.phWorld</artifactId>
-				<version>1.0.1-SNAPSHOT</version>
        		</dependency>						
-		</dependencies>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.health</artifactId>
+				<version>1.1.1-SNAPSHOT</version>
+			</dependency>
+    	</dependencies>
   	  <build>
 			<plugins>
 				<plugin>
@@ -58,43 +71,17 @@
 						</instructions>
 					</configuration>
 				</plugin>
+				 <plugin>
+                    <groupId>org.universAAL.support</groupId>
+                    <artifactId>uaal-maven-plugin</artifactId>
+              </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <configuration>
+                        <skipAttach>false</skipAttach>
+                    </configuration>
+                </plugin>
 			</plugins>
 		</build>
-		<repositories>
-			<repository>
-				<id>central</id>
-				<name>Central Maven Repository</name>
-				<url>http://repo1.maven.org/maven2</url>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-			</repository>
-			<repository>
-				<id>apache-snapshots</id>
-				<name>Apache Snapshots</name>
-				<url>http://people.apache.org/repo/m2-snapshot-repository</url>
-				<releases>
-					<enabled>false</enabled>
-				</releases>
-				<snapshots>
-					<updatePolicy>daily</updatePolicy>
-				</snapshots>
-			</repository>
-			<repository>
-				<id>uaal</id>
-				<name>universAAL Repositories</name>
-				<url>http://depot.universaal.org/maven-repo/releases/</url>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-			</repository>
-			<repository>
-				<id>uaal-snapshots</id>
-				<name>universAAL Snapshot Repositories</name>
-				<url>http://depot.universaal.org/maven-repo/snapshots/</url>
-				<releases>
-					<enabled>false</enabled>
-				</releases>
-			</repository>
-		</repositories>
 </project>
