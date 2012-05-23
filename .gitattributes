@@ -1132,6 +1132,7 @@ nutritional/nutritional.democlient/.settings/org.eclipse.core.resources.prefs -t
 nutritional/nutritional.democlient/.settings/org.eclipse.jdt.core.prefs -text
 nutritional/nutritional.democlient/.settings/org.eclipse.m2e.core.prefs -text
 nutritional/nutritional.democlient/.settings/org.eclipse.pde.core.prefs -text
+nutritional/nutritional.democlient/README.txt -text
 nutritional/nutritional.democlient/pom.xml -text
 nutritional/nutritional.democlient/src/main/java/org/universaal/application/nutritional/democlient/ProjectActivator.java -text
 nutritional/nutritional.democlient/target/apidocs/allclasses-frame.html -text
