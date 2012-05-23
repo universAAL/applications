@@ -1,7 +1,8 @@
-package org.universAAL.agendaEventSelectionTool.client;
+package org.universAAL.agendaEventSelectionTool.client.osgi;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.agendaEventSelectionTool.client.EventSelectionToolConsumer;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.container.utils.LogUtils;

@@ -1,8 +1,10 @@
-/*
+/**
 	Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es
 	Instituto Tecnologico de Aplicaciones de Comunicacion 
 	Avanzadas - Grupo Tecnologias para la Salud y el 
 	Bienestar (TSB)
+	
+	2012 Ericsson Nikola Tesla d.d., www.ericsson.com/hr
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -31,8 +33,8 @@ import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.service.CalendarAgenda;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.io.owl.Modality;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.ui.owl.Modality;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
@@ -40,7 +42,7 @@ import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
-import org.universAAL.ontology.profile.ElderlyProfile;
+//import org.universAAL.ontology.profile.ElderlyProfile;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.UserProfile;
 import org.universAAL.ontology.profile.service.ProfilingService;
@@ -48,6 +50,7 @@ import org.universAAL.ontology.profile.service.ProfilingService;
 /**
  * 
  * @author alfiva
+ * @author eandgrg
  */
 public class SCaller {
     DefaultServiceCaller caller;
@@ -68,7 +71,7 @@ public class SCaller {
 
     private final static Logger log = LoggerFactory.getLogger(SCaller.class);
 
-    protected SCaller(ModuleContext mcontext) {
+    public SCaller(ModuleContext mcontext) {
 	caller = new DefaultServiceCaller(mcontext);
     }
 
@@ -95,60 +98,61 @@ public class SCaller {
 	return users;
     }
 
-    public Boolean getUserType(User user) {
-	User retUser = null;
-	log.info("Agenda Remote calls with getUserProfiles");
-	ServiceResponse sr = this.caller.call(getGetUser(user));
-	if (sr.getCallStatus() == CallStatus.succeeded) {
-	    try {
-		Object o = getReturnValue(sr.getOutputs(), OUTPUT_USER);
-		if (o instanceof User) {
-		    retUser = (User) o;
-		    UserProfile prof = ((User) o).getProfile();
-		    if (prof != null) {
-			if (prof instanceof ElderlyProfile) {
-			    if (((ElderlyProfile) prof)
-				    .getPersonalPreferenceProfile()
-				    .getXactionModality().equals(Modality.gui)) {
-				return new Boolean(true);
-			    } else {
-				return new Boolean(false);
-			    }
-			} else {
-			    log
-				    .error(
-					    "The user {} has no associated Elderly profile. Cannot determine type.",
-					    user.getURI());
-			    log
-				    .error(
-					    "The user {} hasProfile {}. Interpreting as Elder (TODO)",
-					    new Object[] {
-						    user.getURI(),
-						    prof
-							    .getProperty(Resource.PROP_RDF_TYPE) });
-			    return new Boolean(true);
-			}
-		    } else {
-			log
-				.error(
-					"The user {} has no associated profile. Cannot determine type.",
-					user.getURI());
-		    }
-		}
-		if (retUser == null)
-		    log
-			    .error("There is not any user with URI: ", user
-				    .getURI());
-	    } catch (Exception e) {
-		log.error("User corrupt!: " + e.getMessage());
-		return null;
-	    }
-	} else {
-	    log.error("Status of getUserProfiles() failed: {}", sr
-		    .getCallStatus());
-	}
-	return null;
-    }
+    //TODO commented when transfered to new prof ont (no ElderlyProfile)
+//    public Boolean getUserType(User user) {
+//	User retUser = null;
+//	log.info("Agenda Remote calls with getUserProfiles");
+//	ServiceResponse sr = this.caller.call(getGetUser(user));
+//	if (sr.getCallStatus() == CallStatus.succeeded) {
+//	    try {
+//		Object o = getReturnValue(sr.getOutputs(), OUTPUT_USER);
+//		if (o instanceof User) {
+//		    retUser = (User) o;
+//		    UserProfile prof = ((User) o).getProfile();
+//		    if (prof != null) {
+//			if (prof instanceof ElderlyProfile) {
+//			    if (((ElderlyProfile) prof)
+//				    .getPersonalPreferenceProfile()
+//				    .getXactionModality().equals(Modality.gui)) {
+//				return new Boolean(true);
+//			    } else {
+//				return new Boolean(false);
+//			    }
+//			} else {
+//			    log
+//				    .error(
+//					    "The user {} has no associated Elderly profile. Cannot determine type.",
+//					    user.getURI());
+//			    log
+//				    .error(
+//					    "The user {} hasProfile {}. Interpreting as Elder ()",
+//					    new Object[] {
+//						    user.getURI(),
+//						    prof
+//							    .getProperty(Resource.PROP_RDF_TYPE) });
+//			    return new Boolean(true);
+//			}
+//		    } else {
+//			log
+//				.error(
+//					"The user {} has no associated profile. Cannot determine type.",
+//					user.getURI());
+//		    }
+//		}
+//		if (retUser == null)
+//		    log
+//			    .error("There is not any user with URI: ", user
+//				    .getURI());
+//	    } catch (Exception e) {
+//		log.error("User corrupt!: " + e.getMessage());
+//		return null;
+//	    }
+//	} else {
+//	    log.error("Status of getUserProfiles() failed: {}", sr
+//		    .getCallStatus());
+//	}
+//	return null;
+//    }
 
     public List getCalendarsByOwnerService(User owner) {
 	List allCalendars = new ArrayList();
@@ -369,7 +373,7 @@ public class SCaller {
     private ServiceRequest getGetUser(User user) {
 	ServiceRequest getuser = new ServiceRequest(new ProfilingService(null),
 		null);
-	Restriction res = Restriction.getFixedValueRestriction(
+	MergedRestriction res = MergedRestriction.getFixedValueRestriction(
 		ProfilingService.PROP_CONTROLS, user);
 	getuser.getRequestedService().addInstanceLevelRestriction(res,
 		new String[] { ProfilingService.PROP_CONTROLS });
@@ -396,7 +400,7 @@ public class SCaller {
 	ServiceRequest listCalendars = new ServiceRequest(new CalendarAgenda(
 		null), null);
 
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		Calendar.PROP_HAS_OWNER, owner);
 	listCalendars.getRequestedService().addInstanceLevelRestriction(
 		r1,
@@ -415,7 +419,7 @@ public class SCaller {
 	if (c == null) {
 	    c = new Calendar();
 	}
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, c);
 	addEventToCalendar.getRequestedService().addInstanceLevelRestriction(
 		r1, new String[] { CalendarAgenda.PROP_CONTROLS });
@@ -435,9 +439,9 @@ public class SCaller {
 
     private ServiceRequest getCalendarByNameAndOwner(String calendarName,
 	    User owner) {
-	Restriction r1 = Restriction.getFixedValueRestriction(
+	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
 		Calendar.PROP_NAME, calendarName);
-	Restriction r2 = Restriction.getFixedValueRestriction(
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(
 		Calendar.PROP_HAS_OWNER, owner);
 	PropertyPath ppCalendarName = new PropertyPath(
 		null,
@@ -504,8 +508,8 @@ public class SCaller {
      * 
      * private ServiceRequest getEventsRequest(FilterParams params) { //
      * ServiceRequest listEvents = new ServiceRequest(new CalendarAgenda( //
-     * null), null); // // Restriction r1 =
-     * Restriction.getFixedValueRestriction( //
+     * null), null); // // MergedRestriction r1 =
+     * MergedRestriction.getFixedValueRestriction( //
      * EventSelectionTool.PROP_HAS_FILTER_PARAMS, params); //
      * listEvents.getRequestedService().addInstanceLevelRestriction( // r1, //
      * new String[] { // EventSelectionTool.PROP_HAS_FILTER_PARAMS});
@@ -562,7 +566,7 @@ public class SCaller {
 	if (c == null) {
 	    c = new Calendar();
 	}
-	Restriction r = Restriction.getFixedValueRestriction(
+	MergedRestriction r = MergedRestriction.getFixedValueRestriction(
 		CalendarAgenda.PROP_CONTROLS, c);
 	getCalendarEventList.getRequestedService().addInstanceLevelRestriction(
 		r, new String[] { CalendarAgenda.PROP_CONTROLS });
@@ -625,7 +629,7 @@ public class SCaller {
     // }
     //		
     //		
-    // Restriction r1 = Restriction.getFixedValueRestriction(
+    // MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
     // CalendarAgenda.PROP_CONTROLS, c);
     // deleteEvent.getRequestedService().addInstanceLevelRestriction(
     // r1, new String[] { CalendarAgenda.PROP_CONTROLS });
@@ -676,10 +680,10 @@ public class SCaller {
 	    c = new Calendar();
 	}
 
-	// Restriction r1 =
-	// Restriction.getFixedValueRestriction(CalendarAgenda.PROP_CONTROLS,
+	// MergedRestriction r1 =
+	// MergedRestriction.getFixedValueRestriction(CalendarAgenda.PROP_CONTROLS,
 	// c);
-	Restriction r2 = Restriction.getFixedValueRestriction(Event.PROP_ID,
+	MergedRestriction r2 = MergedRestriction.getFixedValueRestriction(Event.PROP_ID,
 		new Integer(eventId));
 
 	// deleteCalendarEvent.getRequestedService().addInstanceLevelRestriction(r1,

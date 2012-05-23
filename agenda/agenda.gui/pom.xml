@@ -4,24 +4,23 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>A.0.1-SNAPSHOT</version>
+		<version>B.0.1-SNAPSHOT</version>
 		<relativePath>../agenda.pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>agenda.gui</artifactId>
 	<packaging>bundle</packaging>
 	<name>Agenda AAL Service GUI</name>
-	<description>
-	Agenda GUI
-	</description>
+	<description>	Agenda GUI 	</description>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>junit</groupId>-->
+<!--			<artifactId>junit</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -37,10 +36,6 @@
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.io</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
@@ -61,23 +56,12 @@
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.client</artifactId>
-			<version>A.0.1-SNAPSHOT</version>
+			<version>B.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.eventSelection.client</artifactId>
-			<version>A.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
-			<artifactId>pax-logging-api</artifactId>
-			<version>1.6.2</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ops4j.pax.logging</groupId>
-			<artifactId>pax-logging-service</artifactId>
-			<version>1.6.2</version>
+			<version>B.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -92,7 +76,7 @@
 						<Bundle-Name>${project.name}</Bundle-Name>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Bundle-Activator>org.universAAL.agenda.gui.Activator</Bundle-Activator>
+						<Bundle-Activator>org.universAAL.agenda.gui.osgi.Activator</Bundle-Activator>
 						<Export-Package>org.universAAL.agenda.gui.wrappers,org.universAAL.agenda.gui</Export-Package>
 						<Private-Package>org.universAAL.agenda.gui.util,
 							org.universAAL.agenda.gui.impl,
@@ -133,7 +117,7 @@
 						<!--							org.universAAL.agenda.ont,-->
 						<!--							org.universAAL.agenda.ont.service,-->
 						<!--							org.universAAL.agendaEventSelectionTool.client,-->
-						<!--							org.universAAL.agendaEventSelectionTool.ont-->
+						<!--							org.universAAL.ontology.agendaEventSelection-->
 						<!--							</Import-Package>-->
 					</instructions>
 				</configuration>

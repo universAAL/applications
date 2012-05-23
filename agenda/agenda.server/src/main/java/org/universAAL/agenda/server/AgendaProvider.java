@@ -57,48 +57,39 @@ public class AgendaProvider extends ServiceCallee implements
      */
     private static ModuleContext mcontext;
 
-    /**  */
-    static final File confHome = new File(new BundleConfigHome("agenda")
+     static final File confHome = new File(new BundleConfigHome("agenda")
 	    .getAbsolutePath());
     // static final String CAL_URI_PREFIX =
     // ProvidedAgendaService.AGENDA_SERVER_NAMESPACE + "controlledAgenda";
     // //TODO: change name
-    /**  */
+   
     static final String LOCATION_URI_PREFIX = "urn:aal_space:everywhere#"; //$NON-NLS-1$
 
     private static final ServiceResponse invalidInput = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
     // private static final ServiceResponse settingFailed = new
     // ServiceResponse(CallStatus.serviceSpecificFailure);
-    /**  */
     private static final ServiceResponse deletingFailed = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
-    /**  */
     private static final ServiceResponse noSuchEvent = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
-    /**  */
     private static final ServiceResponse existingCalendar = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
-    /**  */
     private static final ServiceResponse noSuchEventOrCalendar = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
-    /**  */
     private static final ServiceResponse notExistingCalendar = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
-    /**  */
     private static final ServiceResponse notSpecifiedOwner = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
-    /**  */
     private static final ServiceResponse failure = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
-    /**  */
     static final AssistedPerson testUser = new AssistedPerson(
 	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied"); //$NON-NLS-1$
 
@@ -160,7 +151,7 @@ public class AgendaProvider extends ServiceCallee implements
      * @throws FileNotFoundException
      * @throws IOException
      */
-    AgendaProvider(ModuleContext moduleContext) throws FileNotFoundException,
+    public AgendaProvider(ModuleContext moduleContext) throws FileNotFoundException,
 	    IOException {
 	super(moduleContext, ProvidedAgendaService.profiles);
 	mcontext = moduleContext;

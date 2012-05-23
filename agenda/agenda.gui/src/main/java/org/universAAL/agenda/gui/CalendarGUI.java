@@ -2,6 +2,8 @@ package org.universAAL.agenda.gui;
 
 import org.universAAL.agenda.gui.impl.AgendaClientWrapper;
 import org.universAAL.agenda.gui.util.DateInstance;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 
@@ -19,9 +21,13 @@ import javax.swing.JPanel;
 import javax.swing.JWindow;
 
 import org.osgi.framework.BundleContext;
-import org.osgi.service.log.LogService;
 import org.universAAL.ontology.profile.User;
 
+/**
+ * @author kagnantis
+ * @author eandgrg
+ * 
+ */
 public class CalendarGUI extends JWindow {
 
     private static final long serialVersionUID = 1L;
@@ -35,27 +41,37 @@ public class CalendarGUI extends JWindow {
 	    eventSearchMainScreen, eventSearchNavScreen, eventHeader,
 	    calHeader, eventInfoMainScreen;
 
-    private org.universAAL.agenda.client.Activator agendaActivator;
-    private org.universAAL.agendaEventSelectionTool.client.Activator estActivator;
+    private org.universAAL.agenda.client.osgi.Activator agendaActivator;
+    private org.universAAL.agendaEventSelectionTool.client.osgi.Activator estActivator;
     private AgendaClientWrapper caller;
     private JPanel rootScreen;
     private List<Calendar> activeCalendars;
     private DateInstance selectedDate = null;
 
-    public CalendarGUI(BundleContext bc) {
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
+
+    public CalendarGUI(BundleContext bc, ModuleContext mcontext) {
+	this.mcontext = mcontext;
 	try {
-	    agendaActivator = new org.universAAL.agenda.client.Activator();
+	    agendaActivator = new org.universAAL.agenda.client.osgi.Activator();
 	    agendaActivator.start(bc);
-	    estActivator = new org.universAAL.agendaEventSelectionTool.client.Activator();
+	    estActivator = new org.universAAL.agendaEventSelectionTool.client.osgi.Activator();
 	    estActivator.start(bc);
 
 	    caller = new AgendaClientWrapper(agendaActivator
 		    .getAgendaConsumer(), estActivator.getConsumer());
 	} catch (Exception e) {
-	    Activator.log.log(LogService.LOG_ERROR, "Unable to start bundle: "
-		    + e.getMessage());
-	    Activator.log.log(LogService.LOG_ERROR,
-		    "User interface has no functionality");
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "constructor",
+			    new Object[] { "Unable to start bundle agenda.client or eventSelectionTool.client! User interface has no functionality!" },
+			    null);
+
 	}
 
 	f = new JFrame();
@@ -77,7 +93,9 @@ public class CalendarGUI extends JWindow {
 	createScreen();
 	showInitialScreen();
 	f.setAlwaysOnTop(true);
-	Activator.log.log(LogService.LOG_INFO, "Display Calendar...");
+
+	LogUtils.logInfo(mcontext, this.getClass(), "constructor",
+		new Object[] { "Agenda GUI is being displayed.." }, null);
 
     }
 
@@ -128,7 +146,8 @@ public class CalendarGUI extends JWindow {
 
     public List<Event> getEvents(int year, int month, int day) {
 	if (caller == null) {
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(), "getEvents",
+		    new Object[] { "Caller is not enabled" }, null);
 	    return new ArrayList<Event>();
 	}
 	return caller.getDateEvents(activeCalendars, year, month, day);
@@ -136,14 +155,16 @@ public class CalendarGUI extends JWindow {
 
     public void updateEvent(Event e) {
 	if (caller == null)
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(), "updateEvent",
+		    new Object[] { "Caller is not enabled" }, null);
 	else
 	    caller.updateEvent(e);
     }
 
     public int saveNewEvent(Calendar c, Event e) {
 	if (caller == null)
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(), "saveNewEvent",
+		    new Object[] { "Caller is not enabled" }, null);
 	else
 	    return caller.saveNewEvent(c, e);
 
@@ -152,7 +173,8 @@ public class CalendarGUI extends JWindow {
 
     public void removeEvent(Calendar c, int eventId) {
 	if (caller == null)
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(), "removeEvent",
+		    new Object[] { "Caller is not enabled" }, null);
 	else
 	    caller.removeEvent(c, eventId);
     }
@@ -177,7 +199,8 @@ public class CalendarGUI extends JWindow {
     public List<Event> getFilteredEvents(String category, String description,
 	    int year, int month, boolean notPastEvents, int eventMaxNo) {
 	if (caller == null) {
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(), "getFilteredEvents",
+		    new Object[] { "Caller is not enabled" }, null);
 	    return new ArrayList<Event>(0);
 	} else
 	    return caller.getFilteredEvents(activeCalendars, category,
@@ -186,7 +209,10 @@ public class CalendarGUI extends JWindow {
 
     public List<String> getAllEventCategories() {
 	if (caller == null) {
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(),
+		    "getAllEventCategories",
+		    new Object[] { "Caller is not enabled" }, null);
+
 	    return new ArrayList<String>(0);
 	} else
 	    return caller.getAllEventCategories();
@@ -194,7 +220,8 @@ public class CalendarGUI extends JWindow {
 
     public List<Calendar> getAllCalendars() {
 	if (caller == null) {
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(), "getAllCalendars",
+		    new Object[] { "Caller is not enabled" }, null);
 	    return new ArrayList<Calendar>(0);
 	} else
 	    return caller.getAllCalendars();
@@ -202,7 +229,8 @@ public class CalendarGUI extends JWindow {
 
     public List<Calendar> getCalendarsByOwner(User owner) {
 	if (caller == null) {
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(), "getCalendarsByOwner",
+		    new Object[] { "Caller is not enabled" }, null);
 	    return new ArrayList<Calendar>(0);
 	} else
 	    return caller.getCalendarsByOwner(owner);
@@ -210,7 +238,8 @@ public class CalendarGUI extends JWindow {
 
     public Calendar addNewCalendar(String name, User owner) {
 	if (caller == null) {
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(), "addNewCalendar",
+		    new Object[] { "Caller is not enabled" }, null);
 	    return null;
 	} else
 	    return caller.addNewCalendar(name, owner);
@@ -218,7 +247,8 @@ public class CalendarGUI extends JWindow {
 
     public boolean removeCalendar(Calendar cal) {
 	if (caller == null) {
-	    Activator.log.log(LogService.LOG_INFO, "Caller is not enabled");
+	    LogUtils.logInfo(mcontext, this.getClass(), "removeCalendar",
+		    new Object[] { "Caller is not enabled" }, null);
 	    return false;
 	} else
 	    return caller.removeCalendar(cal);

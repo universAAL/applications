@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.agendaEventSelectionTool.server.impl.EventSelectionListener;
 import org.universAAL.agendaEventSelectionTool.server.impl.MyEventSelectionTool;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
@@ -26,19 +25,21 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
 import org.universAAL.ontology.agendaEventSelection.FilterParams;
+
 /**
  * @author kagnantis
  * @author eandgrg
- *
+ * 
  */
 public class EventProvider extends ServiceCallee implements
 	EventSelectionListener {
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
 
     private static File confHome = new File(new BundleConfigHome("agenda")
 	    .getAbsolutePath());
-
-    private static final Logger mainLogger = LoggerFactory
-	    .getLogger(EventProvider.class);
 
     private static final ServiceResponse invalidInput = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
@@ -49,21 +50,20 @@ public class EventProvider extends ServiceCallee implements
     }
 
     private MyEventSelectionTool theServer;
-    private ContextPublisher cp;
 
-    EventProvider(ModuleContext mcontext) throws FileNotFoundException,
+    public EventProvider(ModuleContext mcontext) throws FileNotFoundException,
 	    IOException {
 
 	super(mcontext, ProvidedESTService.profiles);
-
+	EventProvider.mcontext = mcontext;
 	// prepare for context publishing
 	ContextProvider info = new ContextProvider(
 		ProvidedESTService.EVENTSELECTIONTOOL_SERVER_NAMESPACE
 			+ "EventSelectionToolContextProvider"); //$NON-NLS-1$
 	info.setType(ContextProviderType.controller);
-	cp = new DefaultContextPublisher(mcontext, info);
 
-	mainLogger.info("Starting agendaEventSelectionTool.server");
+	new DefaultContextPublisher(mcontext, info);
+
 	// start the server
 	Properties prop = new Properties();
 
@@ -75,9 +75,12 @@ public class EventProvider extends ServiceCallee implements
 	// theServer.addListener(this);
     }
 
-
-    /* (non-Javadoc)
-     * @see org.universAAL.middleware.service.ServiceCallee#handleCall(org.universAAL.middleware.service.ServiceCall)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.service.ServiceCallee#handleCall(org.universAAL
+     * .middleware.service.ServiceCall)
      */
     public ServiceResponse handleCall(ServiceCall call) {
 	if (call == null)
@@ -87,8 +90,6 @@ public class EventProvider extends ServiceCallee implements
 
 	if (operation == null)
 	    return null;
-
-	mainLogger.info("EventSelectionTool Service requested");
 
 	Object inCalendarList = call
 		.getInputValue(ProvidedESTService.INPUT_CALENDAR_LIST);
@@ -110,8 +111,14 @@ public class EventProvider extends ServiceCallee implements
 	    List temp = new ArrayList();
 	    temp.add(inCalendarList);
 
-	    mainLogger
-		    .info("\"get filter events from calendars\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "\"get filter events from calendars\" service requested." },
+			    null);
+
 	    return requestFromCalendarEvents((FilterParams) inFilterParams,
 		    temp);
 	}
@@ -125,8 +132,13 @@ public class EventProvider extends ServiceCallee implements
 	    // else is a lone object
 	    List temp = new ArrayList();
 	    temp.add(inCalendarList);
-	    mainLogger
-		    .info("\"get limited filter events from calendars\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "\"get limited filter events from calendars\" service requested." },
+			    null);
 	    return requestLimitedEvents((FilterParams) inFilterParams, temp,
 		    ((Integer) inMaxEventNo).intValue());
 	}
@@ -139,9 +151,13 @@ public class EventProvider extends ServiceCallee implements
 	    // else is a lone object
 	    List temp = new ArrayList();
 	    temp.add(inCalendarList);
-
-	    mainLogger
-		    .info("\"get current filter events from calendars\" service requested");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "\"get current filter events from calendars\" service requested." },
+			    null);
 	    return requestFollowingEvents(temp, ((Integer) inMaxEventNo)
 		    .intValue());
 	}
@@ -238,8 +254,14 @@ public class EventProvider extends ServiceCallee implements
 	// TODO Auto-generated method stub
     }
 
-    /* (non-Javadoc)
-     * @see org.universAAL.agendaEventSelectionTool.server.impl.EventSelectionListener#eventSelectionChanged(org.universAAL.ontology.agendaEventSelection.EventSelectionTool, org.universAAL.ontology.agendaEventSelection.FilterParams)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.agendaEventSelectionTool.server.impl.EventSelectionListener
+     * #eventSelectionChanged(org.universAAL.ontology.agendaEventSelection.
+     * EventSelectionTool,
+     * org.universAAL.ontology.agendaEventSelection.FilterParams)
      */
     public void eventSelectionChanged(EventSelectionTool evTool,
 	    FilterParams filterParams) {

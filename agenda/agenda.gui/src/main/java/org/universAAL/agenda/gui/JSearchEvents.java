@@ -28,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import org.universAAL.agenda.gui.components.ImagePanel;
+import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.DateUtilities;
 
 public class JSearchEvents extends JPanel implements PersonaWindow {

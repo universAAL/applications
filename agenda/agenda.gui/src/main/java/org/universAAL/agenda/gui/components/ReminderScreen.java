@@ -28,7 +28,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
-import org.universAAL.agenda.gui.Activator;
+import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.DateTimeInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;

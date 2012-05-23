@@ -3,9 +3,9 @@ package org.universAAL.agenda.gui.impl;
 import org.universAAL.agenda.client.AgendaConsumer;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agendaEventSelection.FilterParams;
+import org.universAAL.ontology.agendaEventSelection.TimeSearchType;
 import org.universAAL.agendaEventSelectionTool.client.EventSelectionToolConsumer;
-import org.universAAL.agendaEventSelectionTool.ont.FilterParams;
-import org.universAAL.agendaEventSelectionTool.ont.TimeSearchType;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;

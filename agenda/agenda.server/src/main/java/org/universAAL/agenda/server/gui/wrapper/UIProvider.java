@@ -2,7 +2,7 @@ package org.universAAL.agenda.server.gui.wrapper;
 
 import java.util.Locale;
 
-import org.universAAL.agenda.server.Activator;
+import org.universAAL.agenda.server.osgi.Activator;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.supply.LevelRating;
@@ -24,7 +24,7 @@ import org.universAAL.ontology.profile.User;
  * @author eandgrg
  * 
  */
-public class MyUICaller extends UICaller {
+public class UIProvider extends UICaller {
     public static final String ROOT_USER = User.MY_URI + "__rootUser__"; //$NON-NLS-1$
     private static String CALL_PREFIX = "urn:ui.dm:OutputPublisher"; //$NON-NLS-1$
     static final String TURN_OFF_REMINDER = CALL_PREFIX + "#turnOffReminder"; //$NON-NLS-1$
@@ -40,7 +40,7 @@ public class MyUICaller extends UICaller {
     /**
      * @param mcontext
      */
-    MyUICaller(ModuleContext moduleContext) {
+    UIProvider(ModuleContext moduleContext) {
 	super(moduleContext);
 	mcontext = moduleContext;
     }
@@ -79,7 +79,7 @@ public class MyUICaller extends UICaller {
 			.getProperty(CALENDAR_URI);
 		Integer eventId = (Integer) event.getSubmittedData()
 			.getProperty(EVENT_ID);
-		Activator.getProvider().cancelReminder(calendarURI,
+		Activator.getAgendaProvider().cancelReminder(calendarURI,
 			eventId.intValue());
 	    } catch (ClassCastException cce) {
 		LogUtils.logError(mcontext, this.getClass(),

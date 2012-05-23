@@ -9,11 +9,11 @@ import org.universAAL.middleware.container.ModuleContext;
  * 
  */
 public class WrapperActivator {
-    private static MyUICaller myUICaller = null;
+    private static UIProvider uIProvider = null;
     private static WrapperActivator theInstance = null;
 
     private WrapperActivator(ModuleContext mcontext) {
-	myUICaller = new MyUICaller(mcontext);
+	uIProvider = new UIProvider(mcontext);
 	
     }
 
@@ -24,8 +24,8 @@ public class WrapperActivator {
 	return theInstance;
     }
 
-    public static MyUICaller getMyUICaller() {
-	return myUICaller;
+    public static UIProvider getMyUICaller() {
+	return uIProvider;
     }
 
 

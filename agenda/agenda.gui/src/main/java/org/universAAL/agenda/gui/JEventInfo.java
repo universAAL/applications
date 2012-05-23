@@ -32,14 +32,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.middleware.rdf.TypeMapper;
 
-//SC2011 old adress used in persona platform:
-//import org.persona.platform.casf.ontology.location.PhysicalAddress;
-import org.universAAL.ontology.location.address.Address;
+import org.universAAL.ontology.location.address.PhysicalAddress;
 
 import org.universAAL.agenda.gui.components.DatePanel;
 import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.components.ReminderPanel;
 import org.universAAL.agenda.gui.components.ReminderScreen;
+import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateTimeInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
@@ -688,7 +687,7 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 
 	Event e = this.event;
 	Reminder rm;
-	Address ad;
+	PhysicalAddress ad;
 	EventDetails ed;
 	TimeInterval ti;
 
@@ -706,11 +705,11 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 	    ti = ed.getTimeInterval();
 	    ad = ed.getAddress();
 	    if (ad == null)
-		ad = new Address();
+		ad = new PhysicalAddress();
 	} else {
 	    ed = new EventDetails();
 	    ti = new TimeInterval();
-	    ad = new Address();
+	    ad = new PhysicalAddress();
 	}
 	if (ti == null) {
 	    ti = new TimeInterval();
@@ -860,7 +859,7 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 	rm.setTimesToBeTriggered(0);
 	rm.setMessage(Messages.getString("JEventInfo.Reminder")); //$NON-NLS-1$
 	rm.setReminderType(ReminderType.visualMessage);
-	Address ad = new Address();
+	PhysicalAddress ad = new PhysicalAddress();
 	EventDetails ed = new EventDetails();
 	ed.setSpokenLanguage(Locale.getDefault().getISO3Language());
 	TimeInterval ti = new TimeInterval();

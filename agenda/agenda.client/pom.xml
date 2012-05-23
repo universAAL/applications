@@ -61,7 +61,7 @@
 						<Bundle-Name>${project.name}</Bundle-Name>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Bundle-Activator>org.universAAL.agenda.client.Activator</Bundle-Activator>
+						<Bundle-Activator>org.universAAL.agenda.client.osgi.Activator</Bundle-Activator>
 						<Export-Package>org.universAAL.agenda.client</Export-Package>
 						<!--						<Import-Package>-->
 						<!--							javax.xml.datatype, org.osgi.service.log,-->

@@ -28,9 +28,14 @@ import javax.swing.JToolTip;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.agenda.gui.components.ImagePanel;
+import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
-
+/**
+ * 
+ * Class showing calendar month view.
+ *
+ */
 public class JCalendar implements PersonaWindow {
 
     private JPanel mainScreen;
@@ -116,7 +121,7 @@ public class JCalendar implements PersonaWindow {
 	daysOfTheWeekPanel.setBackground(Color.white);
 	JButton sun = new DecoratorButton(Messages.getString("JCalendar.Sun")); //$NON-NLS-1$
 	sun.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	sun.setBackground(new Color(0xb6d6fe));
+	sun.setBackground(new Color(0xb6d6fe)); //light blue
 	// sun.setForeground(new java.awt.Color(250, 104, 9));
 	sun.setForeground(new java.awt.Color(15, 68, 137));
 	JButton mon = new DecoratorButton(Messages.getString("JCalendar.Mon")); //$NON-NLS-1$

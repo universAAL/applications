@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import org.universAAL.agenda.gui.Activator;
 import org.universAAL.agenda.gui.EventInfoListener;
+import org.universAAL.agenda.gui.osgi.Activator;
 
 public class ReminderPanel extends JPanel {
     private static final long serialVersionUID = 7749867619210140899L;

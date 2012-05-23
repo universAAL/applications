@@ -6,7 +6,7 @@ package org.universAAL.ontology.agenda;
 import java.util.List;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.ontology.location.address.Address;
+import org.universAAL.ontology.location.address.PhysicalAddress;
 
 /**
  * @author kagnantis
@@ -52,7 +52,7 @@ public class EventDetails extends ManagedIndividual {
 	super(uri);
     }
 
-    public EventDetails(String uri, Address address) {
+    public EventDetails(String uri, PhysicalAddress address) {
 	super(uri);
 	if (address == null)
 	    throw new IllegalArgumentException();
@@ -63,11 +63,11 @@ public class EventDetails extends ManagedIndividual {
     /*
      * Address
      */
-    public Address getAddress() {
-	return (Address) props.get(PROP_HAS_ADDRESS);
+    public PhysicalAddress getAddress() {
+	return (PhysicalAddress) props.get(PROP_HAS_ADDRESS);
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(PhysicalAddress address) {
 	if (address == null)
 	    return;
 
@@ -190,8 +190,7 @@ public class EventDetails extends ManagedIndividual {
 	if (this.getParticipantList() != null)
 	    s.append("\tParticipants:\t" + this.getParticipantList().size()
 		    + fieldSeperator);
-	// PhysicalAddress smo svuda zamjenili sa Address
-	Address ad = this.getAddress();
+	PhysicalAddress ad = this.getAddress();
 
 	if (ad == null) {
 	    s.append("\tAddress:\t Not specified" + fieldSeperator);

@@ -31,7 +31,7 @@ import org.universAAL.ontology.agenda.service.CalendarAgenda;
 import org.universAAL.ontology.agenda.service.CalendarUIService;
 import org.universAAL.ontology.agenda.service.ExternalCalendar;
 import org.universAAL.ontology.location.LocationOntology;
-import org.universAAL.ontology.location.address.Address;
+import org.universAAL.ontology.location.address.PhysicalAddress;
 import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.UserProfile;
@@ -151,7 +151,7 @@ public final class AgendaOntology extends Ontology {
 				.getDatatypeURI(String.class), 0, 1));
 	oci.addRestriction(MergedRestriction
 		.getAllValuesRestrictionWithCardinality(
-			EventDetails.PROP_HAS_ADDRESS, Address.MY_URI, 1, 1));
+			EventDetails.PROP_HAS_ADDRESS, PhysicalAddress.MY_URI, 1, 1));
 	oci.addRestriction(MergedRestriction
 		.getAllValuesRestrictionWithCardinality(
 			EventDetails.PROP_DESCRIPTION, TypeMapper

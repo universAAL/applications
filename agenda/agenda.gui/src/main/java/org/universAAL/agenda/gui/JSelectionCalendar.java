@@ -33,6 +33,7 @@ import javax.swing.border.BevelBorder;
 
 import org.universAAL.ontology.profile.User;
 import org.universAAL.agenda.gui.components.ImagePanel;
+import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
 public class JSelectionCalendar implements PersonaWindow {

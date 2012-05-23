@@ -1,11 +1,16 @@
-package org.universAAL.agenda.server;
+package org.universAAL.agenda.gui.osgi;
+
+import java.util.Locale;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.universAAL.agenda.server.gui.wrapper.WrapperActivator;
+
+import org.universAAL.agenda.gui.wrappers.SimpleServiceCallee;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.container.utils.LogUtils;
+import org.universAAL.middleware.util.Constants;
+import org.universAAL.ontology.profile.User;
 
 /**
  * @author kagnantis
@@ -14,8 +19,13 @@ import org.universAAL.middleware.container.utils.LogUtils;
  */
 public class Activator implements BundleActivator {
 
-    /**  */
-    private static AgendaProvider provider = null;
+    public static String ICON_PATH_PREFIX = "/lang/icons_"
+	    + Locale.getDefault().getLanguage().toLowerCase();
+
+    private static BundleContext bcontext;
+
+    public static final User testUser = new User(
+	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
     /**
      * {@link ModuleContext}
      */
@@ -29,15 +39,20 @@ public class Activator implements BundleActivator {
      * )
      */
     public void start(BundleContext context) throws Exception {
+
 	BundleContext[] bc = { context };
 	mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
 
-	WrapperActivator.initiateInstance(mcontext);
+	bcontext = context;
+	new SimpleServiceCallee(mcontext);
 
-	if (provider == null)
-	    provider = new AgendaProvider(mcontext);
 	LogUtils.logInfo(mcontext, this.getClass(), "start",
-		new Object[] { "agenda.server bundle has started." }, null);
+		new Object[] { "agenda.gui bundle has started." }, null);
+
+	// uncomment the following line, if you want to start agenda gui
+	// automatically, and not through the universAAL Main Menu
+
+	// new CalendarGUI(context);
     }
 
     /*
@@ -48,7 +63,7 @@ public class Activator implements BundleActivator {
      */
     public void stop(BundleContext context) throws Exception {
 	LogUtils.logInfo(mcontext, this.getClass(), "stop",
-		new Object[] { "agenda.server bundle has stopped." }, null);
+		new Object[] { "agenda.gui bundle has stopped." }, null);
     }
 
     /**
@@ -56,7 +71,7 @@ public class Activator implements BundleActivator {
      * 
      * @return
      */
-    public static AgendaProvider getProvider() {
-	return Activator.provider;
+    public static BundleContext getBundleContext() {
+	return bcontext;
     }
 }
