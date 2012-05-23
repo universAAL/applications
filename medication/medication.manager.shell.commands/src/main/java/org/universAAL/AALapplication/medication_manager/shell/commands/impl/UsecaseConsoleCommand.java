@@ -1,8 +1,5 @@
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
-import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
-import org.universAAL.ontology.medMgr.UserIDs;
-
 /**
  * @author George Fournadjiev
  */
@@ -24,11 +21,25 @@ public final class UsecaseConsoleCommand extends ConsoleCommand {
   @Override
   public void execute(String... parameters) {
     if (parameters == null || parameters.length != 1) {
-      Log.info(COMMAND_INFO, getClass());
+      throw new MedicationManagerShellException(COMMAND_INFO);
     }
 
-    MedicationReminderContextProvider.dueIntakeReminderDeviceIdEvent(UserIDs.getSaiedUser(), "device 1");
+    int usecaseId = getUsecaseId(parameters[0]);
+    Usecase usecase = Usecase.getUsecase(usecaseId);
+    usecase.execute();
+  }
 
+  private int getUsecaseId(String parameter) {
+    try {
 
+      Integer usecaseId = Integer.valueOf(parameter);
+
+      return usecaseId;
+
+    } catch (NumberFormatException e) {
+
+      throw new MedicationManagerShellException("The command parameter must be number", e);
+
+    }
   }
 }

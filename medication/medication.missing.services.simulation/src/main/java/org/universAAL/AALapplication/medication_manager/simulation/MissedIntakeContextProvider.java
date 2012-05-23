@@ -52,9 +52,8 @@ public final class MissedIntakeContextProvider {
   }
 
 
-  public static void missedIntakeTimeEvent(Time time, String userId) {
+  public static void missedIntakeTimeEvent(Time time, User user) {
     MissedIntake missedIntake = new MissedIntake();
-    User user = new User(userId);
     missedIntake.setTime(time);
     missedIntake.setUser(user);
     ContextEvent contextEvent = new ContextEvent(missedIntake, MissedIntake.TIME);

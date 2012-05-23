@@ -17,7 +17,8 @@ public final class HelpConsoleCommand extends ConsoleCommand {
   @Override
   public void execute(String... parameters) {
     if (parameters != null && parameters.length > 0) {
-      Log.info("The help command doesn't expect any parameters", getClass());
+      throw new MedicationManagerShellException(
+          "The help command doesn't expect any parameters");
     }
 
     StringBuilder infoBuilder = new StringBuilder();

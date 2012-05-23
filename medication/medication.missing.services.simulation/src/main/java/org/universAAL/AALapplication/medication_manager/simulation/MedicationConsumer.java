@@ -29,9 +29,8 @@ public final class MedicationConsumer {
   }
 
 
-  public static Precaution requestDetails(String userID) {
+  public static Precaution requestDetails(User user) {
 
-    User user = new User(userID);
     ServiceRequest serviceRequest = new ServiceRequest(new Precaution(), user);
 
     serviceRequest.addRequiredOutput(OUTPUT_PRECAUTION, new String[]{Precaution.SIDEEFFECT, Precaution.INCOMPLIANCE});

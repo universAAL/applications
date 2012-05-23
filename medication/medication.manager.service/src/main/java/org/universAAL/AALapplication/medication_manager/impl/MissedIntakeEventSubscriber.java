@@ -59,13 +59,19 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
 
     Log.info("Calling the Caregiver Notification Service for the userId %s", getClass(), user);
 
-    ServiceRequest serviceRequest = new ServiceRequest(new MissedIntake(), null);
+    ServiceRequest serviceRequest = new ServiceRequest(new MissedIntake(), user);
 
     ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
 
     CallStatus callStatus = serviceResponse.getCallStatus();
 
-    Log.info("Caregiver Notification callStatus %s", getClass(), callStatus);
+    String msg;
+    if (callStatus.toString().contains("call_succeeded")) {
+      msg = "The Medication Manager service successfully notified the Caregiver Notification Service";
+    } else {
+      msg = "The Medication Manager service was unable notified the Caregiver Notification Service";
+    }
+    Log.info("Caregiver Notification callStatus %s\n" + msg, getClass(), callStatus);
 
   }
 }
