@@ -1,7 +1,8 @@
-package org.universAAL.agenda.client;
+package org.universAAL.agenda.client.osgi;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.agenda.client.AgendaConsumer;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.container.utils.LogUtils;

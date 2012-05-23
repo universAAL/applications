@@ -28,7 +28,7 @@ import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
-import org.universAAL.ontology.location.address.Address;
+import org.universAAL.ontology.location.address.PhysicalAddress;
 import org.universAAL.ontology.location.outdoor.City;
 import org.universAAL.ontology.location.outdoor.CityPlace;
 import org.universAAL.ontology.location.outdoor.CityQuarter;
@@ -1779,7 +1779,7 @@ public class AgendaConsumer extends ContextSubscriber {
 	// pa.setExtendedAddress("Neapoli");
 	// pa.setPostalCode("41 500");
 	// pa.setRegion("Nea politia");
-	Address pa = new Address();
+	PhysicalAddress pa = new PhysicalAddress();
 
 	// pa.setStreet("Krapinska");
 	// pa.setCountry("Hrvatska");

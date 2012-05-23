@@ -13,8 +13,8 @@ import javax.swing.*;
 
 /**
  * Class for creating analog clock with test main method.
+ * @see <a href="http://www.uta.fi/~jl/pguibook/examples/AnalogClock_Java/AnalogClock.java">online link</a>
  * 
- * @author agrguric
  */
 public class AnalogClock extends JComponent implements Runnable {
 

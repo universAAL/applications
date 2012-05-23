@@ -1,8 +1,11 @@
-/*
+/**
 	Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es
 	Instituto Tecnologico de Aplicaciones de Comunicacion 
 	Avanzadas - Grupo Tecnologias para la Salud y el 
 	Bienestar (TSB)
+	
+	
+	2012 Ericsson Nikola Tesla d.d., www.ericsson.com/hr
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -19,12 +22,17 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
  */
-package org.universAAL.agenda.remote;
+package org.universAAL.agenda.remote.osgi;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.agenda.remote.AgendaWebGUI;
+import org.universAAL.agenda.remote.SCallee;
+import org.universAAL.agenda.remote.SCaller;
+import org.universAAL.agenda.remote.UIProvider;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 public class Activator implements BundleActivator {
 
@@ -35,28 +43,44 @@ public class Activator implements BundleActivator {
     private static ModuleContext mcontext;
     public static SCallee guicallee = null;
     public static SCaller guicaller = null;
-    public static ISubscriber guiinput = null;
-    public static OPublisher guioutput = null;
-    public static AgendaWebGUI gui = null;
+    public static UIProvider uIProvider = null;
+    public static AgendaWebGUI webUI = null;
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
+     * )
+     */
     public void start(BundleContext arg0) throws Exception {
 	BundleContext[] bc = { arg0 };
 	mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
 	context = arg0;
-	gui = new AgendaWebGUI();
-	guioutput = new OPublisher(mcontext);
-	guiinput = new ISubscriber(mcontext);
+	webUI = new AgendaWebGUI();
+	uIProvider = new UIProvider(mcontext, webUI);
 	guicaller = new SCaller(mcontext);
 	guicallee = new SCallee(mcontext);
+
+	LogUtils.logInfo(mcontext, this.getClass(), "start",
+		new Object[] { "agenda.remote bundle has started." }, null);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     */
     public void stop(BundleContext arg0) throws Exception {
-	gui = null;
-	guioutput = null;
-	guiinput = null;
+	webUI = null;
+	uIProvider = null;
 	guicaller = null;
 	guicallee = null;
 	context = null;
+
+	LogUtils.logInfo(mcontext, this.getClass(), "stop",
+		new Object[] { "agenda.remote bundle has stopped." }, null);
     }
 
 }

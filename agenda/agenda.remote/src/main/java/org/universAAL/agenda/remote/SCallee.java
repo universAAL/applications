@@ -1,8 +1,10 @@
-/*
+/**
 	Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es
 	Instituto Tecnologico de Aplicaciones de Comunicacion 
 	Avanzadas - Grupo Tecnologias para la Salud y el 
 	Bienestar (TSB)
+	
+	2012 Ericsson Nikola Tesla d.d., www.ericsson.com/hr
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -23,6 +25,7 @@ package org.universAAL.agenda.remote;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.agenda.remote.osgi.Activator;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
@@ -35,6 +38,7 @@ import org.universAAL.ontology.profile.User;
 /**
  * 
  * @author alfiva
+ * @author eandgrg
  */
 public class SCallee extends ServiceCallee {
 
@@ -98,7 +102,7 @@ public class SCallee extends ServiceCallee {
     }
 
     public ServiceResponse showMainDialog(User user) {
-	Activator.guioutput.showMainScreen(user);// TODO
+	Activator.uIProvider.showMainScreen(user);// TODO
 	return new ServiceResponse(CallStatus.succeeded);
     }
 

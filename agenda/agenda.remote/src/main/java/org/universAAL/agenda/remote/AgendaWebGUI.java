@@ -1,9 +1,11 @@
-/*
-t	Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es
+/**
+	Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es
 	Instituto Tecnologico de Aplicaciones de Comunicacion 
 	Avanzadas - Grupo Tecnologias para la Salud y el 
 	Bienestar (TSB)
-	
+		
+	2012 Ericsson Nikola Tesla d.d., www.ericsson.com/hr
+		
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
 	
@@ -22,30 +24,36 @@ t	Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es
 package org.universAAL.agenda.remote;
 
 import java.util.Collections;
-
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.HashMap;
 
-import org.universAAL.middleware.io.rdf.ChoiceItem;
-import org.universAAL.middleware.io.rdf.Form;
-import org.universAAL.middleware.io.rdf.Group;
-import org.universAAL.middleware.io.rdf.InputField;
-import org.universAAL.middleware.io.rdf.Label;
-import org.universAAL.middleware.io.rdf.Range;
-import org.universAAL.middleware.io.rdf.Select1;
-import org.universAAL.middleware.io.rdf.SimpleOutput;
-import org.universAAL.middleware.io.rdf.Submit;
-import org.universAAL.middleware.io.rdf.TextArea;
-import org.universAAL.middleware.owl.OrderingRestriction;
+import org.universAAL.agenda.remote.osgi.Activator;
+import org.universAAL.middleware.owl.IntRestriction;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.middleware.ui.rdf.ChoiceItem;
+import org.universAAL.middleware.ui.rdf.Form;
+import org.universAAL.middleware.ui.rdf.Group;
+import org.universAAL.middleware.ui.rdf.InputField;
+import org.universAAL.middleware.ui.rdf.Label;
+import org.universAAL.middleware.ui.rdf.Range;
+import org.universAAL.middleware.ui.rdf.Select1;
+import org.universAAL.middleware.ui.rdf.SimpleOutput;
+import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.middleware.ui.rdf.TextArea;
 import org.universAAL.middleware.util.Constants;
-import org.universAAL.ontology.profile.User;
-import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.Calendar;
-import org.universAAL.agendaEventSelectionTool.ont.FilterParams;
-
+import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agendaEventSelection.FilterParams;
+import org.universAAL.ontology.profile.User;
+/**
+ * 
+ * @author alfiva
+ * @author eandgrg
+ *
+ */
 public class AgendaWebGUI {
 
     private static final String uAAL_NAMESPACE_PREFIX = "http://ontology.aal-uAAL.org/"; //$NON-NLS-1$
@@ -99,7 +107,7 @@ public class AgendaWebGUI {
 	    // Select Calendar control
 	    Select1 calselect = new Select1(
 		    controls,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.4"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_CALENDAR }),
 		    null, null);
@@ -112,7 +120,7 @@ public class AgendaWebGUI {
 
 	    // Select Start Date control
 	    Group dategroup = new Group(controls,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.5"), (String) null), null,
 		    null, (Resource) null);
 	    Group invisiblegroupdate = new Group(dategroup, null, null, null,
@@ -122,53 +130,53 @@ public class AgendaWebGUI {
 		    .getString("AgendaWebGUI.6"));
 	    // Day
 	    new Range(invisiblegroupdate,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.7"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_DAY }),
-		    OrderingRestriction.newOrderingRestriction(Integer
-			    .valueOf(31), Integer.valueOf(1), true, true,
-			    REF_DAY), new Integer(now
-			    .get(java.util.Calendar.DAY_OF_MONTH)));
+		    MergedRestriction.getAllValuesRestriction(REF_DAY,
+			    new IntRestriction(1, true, 31, true)),
+		    new Integer(now.get(java.util.Calendar.DAY_OF_MONTH)));
+
 	    // Month
 	    new Range(invisiblegroupdate,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.8"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_MONTH }),
-		    OrderingRestriction.newOrderingRestriction(Integer
-			    .valueOf(12), Integer.valueOf(1), true, true,
-			    REF_MONTH), new Integer(now
-			    .get(java.util.Calendar.MONTH) + 1));
+		    MergedRestriction.getAllValuesRestriction(REF_MONTH,
+			    new IntRestriction(1, true, 12, true)),
+		    new Integer(now.get(java.util.Calendar.MONTH) + 1));
+
 	    // Year
 	    Select1 yearselect = new Select1(invisiblegroupdate,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.9"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_YEAR }),
 		    null, null);
-	    int currentYear= java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-	    for (int i = currentYear; i < currentYear +15; i++) {
+	    int currentYear = java.util.Calendar.getInstance().get(
+		    java.util.Calendar.YEAR);
+	    for (int i = currentYear; i < currentYear + 15; i++) {
 		yearselect.addChoiceItem(new ChoiceItem(Integer.toString(i),
 			(String) null, new Integer(i)));
 	    }
 	    // Hour
-	    new Range(dategroup, new org.universAAL.middleware.io.rdf.Label(
+	    new Range(dategroup, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.10"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_HOUR }),
-		    OrderingRestriction.newOrderingRestriction(Integer
-			    .valueOf(23), Integer.valueOf(0), true, true,
-			    REF_HOUR), new Integer(now
-			    .get(java.util.Calendar.HOUR_OF_DAY)));
+		    MergedRestriction.getAllValuesRestriction(REF_HOUR,
+			    new IntRestriction(0, true, 23, true)),
+		    new Integer(now.get(java.util.Calendar.HOUR_OF_DAY)));
+
 	    // Minute
-	    new Range(dategroup, new org.universAAL.middleware.io.rdf.Label(
+	    new Range(dategroup, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.11"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_MIN }),
-		    OrderingRestriction.newOrderingRestriction(Integer
-			    .valueOf(59), Integer.valueOf(0), true, true,
-			    REF_MIN), new Integer(now
-			    .get(java.util.Calendar.MINUTE)));
+		    MergedRestriction.getAllValuesRestriction(REF_MIN,
+			    new IntRestriction(0, true, 59, true)),
+		    new Integer(now.get(java.util.Calendar.MINUTE)));
 
 	    // Input Info Control
 	    Group infogroup = new Group(controls,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.12"), (String) null),
 		    null, null, (Resource) null);
 	    Group invisiblegroup = new Group(infogroup, null, null, null,
@@ -191,7 +199,7 @@ public class AgendaWebGUI {
 
 	    // Reminder Group controls
 	    Group remindergroup = new Group(controls,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.17"), (String) null),
 		    null, null, (Resource) null);
 	    Group invisiblegroup2 = new Group(remindergroup, null, null, null,
@@ -206,7 +214,7 @@ public class AgendaWebGUI {
 		    new PropertyPath(null, false, new String[] { REF_REM_MSG }),
 		    null, "");
 	    Group remdategroup = new Group(invisiblegroup2,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.5"), (String) null), null,
 		    null, (Resource) null);
 	    Group remdateinvisiblegroup = new Group(remdategroup, null, null,
@@ -215,60 +223,59 @@ public class AgendaWebGUI {
 	    // Day
 	    new Range(
 		    remdateinvisiblegroup,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.7"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_DAY }),
-		    OrderingRestriction.newOrderingRestriction(Integer
-			    .valueOf(31), Integer.valueOf(1), true, true,
-			    REF_REM_DAY), new Integer(nowrem
-			    .get(java.util.Calendar.DAY_OF_MONTH)));
+		    MergedRestriction.getAllValuesRestriction(REF_REM_DAY,
+			    new IntRestriction(1, true, 31, true)),
+		    new Integer(nowrem.get(java.util.Calendar.DAY_OF_MONTH)));
+
 	    // Month
 	    new Range(remdateinvisiblegroup,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.8"), (String) null),
 		    new PropertyPath(null, false,
-			    new String[] { REF_REM_MONTH }),
-		    OrderingRestriction.newOrderingRestriction(Integer
-			    .valueOf(12), Integer.valueOf(1), true, true,
-			    REF_REM_MONTH), new Integer(nowrem
-			    .get(java.util.Calendar.MONTH) + 1));
+			    new String[] { REF_REM_MONTH }), MergedRestriction
+			    .getAllValuesRestriction(REF_REM_MONTH,
+				    new IntRestriction(1, true, 12, true)),
+		    new Integer(nowrem.get(java.util.Calendar.MONTH) + 1));
+
 	    // Year
 	    Select1 remyearselect = new Select1(
 		    remdateinvisiblegroup,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.9"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_YEAR }),
 		    null, null);
-	    for (int i = currentYear; i < currentYear+15; i++) {
+	    for (int i = currentYear; i < currentYear + 15; i++) {
 		remyearselect.addChoiceItem(new ChoiceItem(Integer.toString(i),
 			(String) null, new Integer(i)));
 	    }
 	    // Hour
 	    new Range(
 		    remdategroup,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.10"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_HOUR }),
-		    OrderingRestriction.newOrderingRestriction(Integer
-			    .valueOf(23), Integer.valueOf(0), true, true,
-			    REF_REM_HOUR), new Integer(nowrem
-			    .get(java.util.Calendar.HOUR_OF_DAY)));
+		    MergedRestriction.getAllValuesRestriction(REF_REM_HOUR,
+			    new IntRestriction(0, true, 23, true)),
+		    new Integer(nowrem.get(java.util.Calendar.HOUR_OF_DAY)));
+
 	    // Minute
 	    new Range(
 		    remdategroup,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.11"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_MIN }),
-		    OrderingRestriction.newOrderingRestriction(Integer
-			    .valueOf(59), Integer.valueOf(0), true, true,
-			    REF_REM_MIN), new Integer(nowrem
-			    .get(java.util.Calendar.MINUTE)));
+		    MergedRestriction.getAllValuesRestriction(REF_REM_MIN,
+			    new IntRestriction(0, true, 59, true)),
+		    new Integer(nowrem.get(java.util.Calendar.MINUTE)));
 
 	    Group remrepeatgroup = new Group(invisiblegroup2,
-		    new org.universAAL.middleware.io.rdf.Label("Repeat",
+		    new org.universAAL.middleware.ui.rdf.Label("Repeat",
 			    (String) null), null, null, (Resource) null);
 	    Select1 remrepeatselect = new Select1(remrepeatgroup,
-		    new org.universAAL.middleware.io.rdf.Label("Times    ",
+		    new org.universAAL.middleware.ui.rdf.Label("Times    ",
 			    (String) null), new PropertyPath(null, false,
 			    new String[] { REF_REM_REP }), null, null);
 	    for (int i = 1; i < 10; i++) {
@@ -276,7 +283,7 @@ public class AgendaWebGUI {
 			.toString(i), (String) null, new Integer(i)));
 	    }
 	    Select1 remintervalselect = new Select1(remrepeatgroup,
-		    new org.universAAL.middleware.io.rdf.Label(
+		    new org.universAAL.middleware.ui.rdf.Label(
 			    "Interval(min) ", (String) null), new PropertyPath(
 			    null, false, new String[] { REF_REM_INT }), null,
 		    null);
@@ -286,17 +293,18 @@ public class AgendaWebGUI {
 	    }
 
 	    // Submit
-	    new Submit(submits, new org.universAAL.middleware.io.rdf.Label(
+	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.24"), (String) null),
 		    "Events");
-	    new Submit(submits, new org.universAAL.middleware.io.rdf.Label(
+	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.20"), (String) null),
 		    "submit");
 
-	    // new Submit(submits, new org.universAAL.middleware.io.rdf.Label(
+	    // new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 	    // Messages.getString("AgendaWebGUI.28"), (String) null),
 	    // "google");
-	    new Submit(submits, new org.universAAL.middleware.io.rdf.Label(
+	    //FIXME removed when trasferring to UI Bus (no InputEvent.uAAL_MAIN_MENU_REQUEST) related to: UIProvider line 219
+	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.21"), (String) null),
 		    "home");
 	}
@@ -312,10 +320,10 @@ public class AgendaWebGUI {
 	new SimpleOutput(controls, null, null, msg);
 	new SimpleOutput(controls, null, null, Messages
 		.getString("AgendaWebGUI.22"));
-	new Submit(submits, new org.universAAL.middleware.io.rdf.Label(Messages
+	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
 		.getString("AgendaWebGUI.23"), (String) null), "add");
 	// new Submit(submits, new
-	// org.universAAL.middleware.io.rdf.Label(Messages
+	// org.universAAL.middleware.ui.rdf.Label(Messages
 	// .getString("AgendaWebGUI.21"), (String) null), "home");
 	return f;
     }
@@ -345,25 +353,23 @@ public class AgendaWebGUI {
 
 	Collections.sort(events, new MyEventComparator());
 
-	new Submit(submits, new org.universAAL.middleware.io.rdf.Label(Messages
+	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
 		.getString("AgendaWebGUI.26"), (String) null), "Event_editor");
 
 	// Pocetak stvaranja forme
 
 	Group eventsGroup = new Group(controls,
-		new org.universAAL.middleware.io.rdf.Label("Events",
+		new org.universAAL.middleware.ui.rdf.Label("Events",
 			(String) null), null, null, (Resource) null);
 	Group invisiblegroup = new Group(eventsGroup, null, null, null,
 		(Resource) null);
-
-	Submit submit;
 
 	for (int i = 0; i < events.size(); i++) {
 	    boolean remExists = false;
 	    Event event = new Event();
 	    event = (Event) events.get(i);
 	    Group eventG = new Group(invisiblegroup,
-		    new org.universAAL.middleware.io.rdf.Label("Event: "
+		    new org.universAAL.middleware.ui.rdf.Label("Event: "
 			    + event.getEventDetails().getTimeInterval()
 				    .getStartTime().getDay()
 			    + "/"
@@ -400,7 +406,7 @@ public class AgendaWebGUI {
 	    if (event.getReminder().getReminderTime() != null) {
 		remExists = true;
 		Group invisiblegroup2 = new Group(eventG,
-			new org.universAAL.middleware.io.rdf.Label("Reminder",
+			new org.universAAL.middleware.ui.rdf.Label("Reminder",
 				(String) null), null, null, (Resource) null);
 		new SimpleOutput(invisiblegroup2, null, null, "Message: "
 			+ event.getReminder().getMessage());
@@ -430,15 +436,12 @@ public class AgendaWebGUI {
 	    else
 		delG = invisiblegroup1;
 
-	    submit = new Submit(delG,
-		    new org.universAAL.middleware.io.rdf.Label(Messages
+	    Submit submit = new Submit(delG,
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.27"), (String) null),
 		    "delete" + i);
-
 	    map.put(i, event);
-
 	}
-
 	return f;
     }
 
@@ -456,7 +459,7 @@ public class AgendaWebGUI {
 	// Pocetak stvaranja forme
 
 	Group GoogleGroup = new Group(controls,
-		new org.universAAL.middleware.io.rdf.Label("Google",
+		new org.universAAL.middleware.ui.rdf.Label("Google",
 			(String) null), null, null, (Resource) null);
 	Group invisiblegroup = new Group(GoogleGroup, null, null, null,
 		(Resource) null);
@@ -468,24 +471,16 @@ public class AgendaWebGUI {
     }
 
     public String hour(int hour) {
-
 	if (hour < 10) {
-
 	    return ("0" + (new Integer(hour)).toString());
-	}
-
-	else
+	} else
 	    return ((new Integer(hour)).toString());
     }
 
     public String minute(int minute) {
-
 	if (minute < 10) {
-
 	    return ("0" + (new Integer(minute)).toString());
-	}
-
-	else
+	} else
 	    return ((new Integer(minute)).toString());
     }
 

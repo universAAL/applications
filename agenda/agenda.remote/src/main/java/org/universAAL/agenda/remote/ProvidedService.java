@@ -1,8 +1,10 @@
-/*
+/**
 	Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es
 	Instituto Tecnologico de Aplicaciones de Comunicacion 
 	Avanzadas - Grupo Tecnologias para la Salud y el 
 	Bienestar (TSB)
+	
+	2012 Ericsson Nikola Tesla d.d., www.ericsson.com/hr
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -24,10 +26,18 @@ package org.universAAL.agenda.remote;
 import java.util.Hashtable;
 
 import org.universAAL.ontology.agenda.service.CalendarUIService;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.middleware.owl.OntologyManagement;
+import org.universAAL.middleware.owl.SimpleOntology;
+import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-
+/**
+ * 
+ * @author alfiva
+ * @author eandgrg
+ */
 public class ProvidedService extends CalendarUIService {
     public static final String CALENDAR_UI_NAMESPACE = "http://ui.calendar.universAAL.org/CalendarUIService.owl#";
     public static final String MY_URI = CALENDAR_UI_NAMESPACE
@@ -45,10 +55,18 @@ public class ProvidedService extends CalendarUIService {
     private static Hashtable serverPEditorRestrictions = new Hashtable();
 
     static {
-	register(ProvidedService.class);
-
-	addRestriction(
-		(Restriction) CalendarUIService.getClassRestrictionsOnProperty(
+	OntologyManagement.getInstance().register(
+		new SimpleOntology(MY_URI, CalendarUIService.MY_URI,
+			new ResourceFactoryImpl() {
+			    @Override
+			    public Resource createInstance(String classURI,
+				    String instanceURI, int factoryIndex) {
+				return new ProvidedService(instanceURI);
+			    }
+			}));
+	
+		addRestriction(
+		(MergedRestriction) CalendarUIService.getClassRestrictionsOnProperty(CalendarUIService.MY_URI,
 			CalendarUIService.PROP_CONTROLS).copy(),
 		new String[] { CalendarUIService.PROP_CONTROLS },
 		serverPEditorRestrictions);

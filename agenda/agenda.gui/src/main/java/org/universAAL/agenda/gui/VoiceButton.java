@@ -6,6 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import org.universAAL.agenda.gui.osgi.Activator;
+
 public class VoiceButton extends JButton {
 
     private static final long serialVersionUID = 8230972694812926078L;

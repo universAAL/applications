@@ -15,6 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.universAAL.agenda.gui.osgi.Activator;
+/**
+ * @author kagnantis
+ * @author eandgrg
+ *
+ */
 class CalendarEntry extends JPanel {
 
     private static final ImageIcon CHECKED_ICON = new ImageIcon(
@@ -120,7 +126,7 @@ class CalendarEntry extends JPanel {
 
     public static void main(String[] str) {
 	JFrame frame = new JFrame();
-	frame.add(new CalendarEntry("Kostas", false));
+	frame.add(new CalendarEntry("SomeCalendar", false));
 	frame.pack();
 	frame.setVisible(true);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

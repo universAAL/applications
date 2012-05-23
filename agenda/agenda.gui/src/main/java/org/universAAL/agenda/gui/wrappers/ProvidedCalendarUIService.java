@@ -3,14 +3,17 @@
  */
 package org.universAAL.agenda.gui.wrappers;
 
-//j2se packages
 import org.universAAL.ontology.agenda.service.CalendarUIService;
 
 import java.util.Hashtable;
 
+import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.middleware.owl.OntologyManagement;
+import org.universAAL.middleware.owl.SimpleOntology;
 
 public class ProvidedCalendarUIService extends CalendarUIService {
     public static final String CALENDAR_UI_NAMESPACE = "http://ui.calendar.universAAL.org/CalendarUIService.owl#";
@@ -29,10 +32,21 @@ public class ProvidedCalendarUIService extends CalendarUIService {
     private static Hashtable serverPEditorRestrictions = new Hashtable();
 
     static {
-	register(ProvidedCalendarUIService.class);
+	
+	OntologyManagement.getInstance().register(
+		new SimpleOntology(MY_URI, CalendarUIService.MY_URI,
+			new ResourceFactoryImpl() {
+			    @Override
+			    public Resource createInstance(String classURI,
+				    String instanceURI, int factoryIndex) {
+				return new ProvidedCalendarUIService(instanceURI);
+			    }
+			}));
+	
+	
 
 	addRestriction(
-		(Restriction) CalendarUIService.getClassRestrictionsOnProperty(
+		(MergedRestriction) CalendarUIService.getClassRestrictionsOnProperty(CalendarUIService.MY_URI,
 			CalendarUIService.PROP_CONTROLS).copy(),
 		new String[] { CalendarUIService.PROP_CONTROLS },
 		serverPEditorRestrictions);
