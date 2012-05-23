@@ -10,6 +10,7 @@ import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.medMgr.UserIDs;
 import org.universAAL.AALapplication.medication_manager.simulation.MedicationConsumer;
 import org.universAAL.AALapplication.medication_manager.simulation.MissedIntakeContextProvider;
+import org.universAAL.ontology.profile.User;
 
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -102,9 +103,9 @@ public final class MedicationTest extends IntegrationTest {
 
   public void testRequestDetails() {
     Log.info("TEST %s", MedicationTest.class, "**************** Entering test ***************");
-    String[] userIDs = UserIDs.getAllIDs();
-    for (int i = 0; i < userIDs.length; i++) {
-      String userID = userIDs[i];
+    User[] allUsers = UserIDs.getAllUsers();
+    for (int i = 0; i < allUsers.length; i++) {
+      User userID = allUsers[i];
       Precaution precaution = MedicationConsumer.requestDetails(userID);
       Assert.notNull(precaution, "The precaution cannot be null");
       System.out.println("******************** START printing for USER ID : " + userID + " ****************************");
@@ -116,8 +117,8 @@ public final class MedicationTest extends IntegrationTest {
 
   public void testRequestDetailsWithInvalidUserId() {
     Log.info("TEST %s", MedicationTest.class, "**************** Entering test ***************");
-    String userID = "nonExisting";
-    Precaution precaution = MedicationConsumer.requestDetails(userID);
+    User user = new User("nonExisting");
+    Precaution precaution = MedicationConsumer.requestDetails(user);
     Assert.isNull(precaution, "The precaution must be null due to the invalid userId");
     Log.info("TEST %s", MedicationTest.class, "**************** Leaving test ****************");
   }
@@ -125,12 +126,12 @@ public final class MedicationTest extends IntegrationTest {
   public void testPublishEvent() {
     Log.info("TEST %s", MedicationTest.class, "**************** Entering test ***************");
     Time time = new Time(2012, 5, 12, 16, 52);
-    String[] userIDs = UserIDs.getAllIDs();
-    for (int i = 0; i < userIDs.length; i++) {
-      String userID = userIDs[i];
-      System.out.println("******************** START printing for USER ID : " + userID + " ****************************");
-      MissedIntakeContextProvider.missedIntakeTimeEvent(time, userID);
-      System.out.println("*********END printing for USER ID : " + userID + " ***************");
+    User[] allUsers = UserIDs.getAllUsers();
+    for (int i = 0; i < allUsers.length; i++) {
+      User user = allUsers[i];
+      System.out.println("******************** START printing for USER ID : " + user + " ****************************");
+      MissedIntakeContextProvider.missedIntakeTimeEvent(time, user);
+      System.out.println("*********END printing for USER ID : " + user + " ***************");
     }
 
     Log.info("TEST %s", MedicationTest.class, "**************** Leaving test ****************");

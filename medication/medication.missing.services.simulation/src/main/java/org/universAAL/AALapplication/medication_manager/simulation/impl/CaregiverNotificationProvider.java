@@ -7,6 +7,7 @@ import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
+import org.universAAL.ontology.profile.User;
 
 
 /**
@@ -38,7 +39,7 @@ public final class CaregiverNotificationProvider extends ServiceCallee {
 
     Log.info("Received call %s", getClass(), processURI);
 
-    Resource involvedUser = call.getInvolvedUser();
+    User involvedUser = (User) call.getInvolvedUser();
 
     Log.info("involvedUser %s", getClass(), involvedUser);
 
@@ -53,9 +54,9 @@ public final class CaregiverNotificationProvider extends ServiceCallee {
     return invalidInput;
   }
 
-  private ServiceResponse getSuccessfulServiceResponse(Resource involvedUser) {
+  private ServiceResponse getSuccessfulServiceResponse(User involvedUser) {
     String userId = involvedUser.getURI();
-    Log.info("Successful Service Response for the user %s", getClass(), userId);
+    Log.info("Successful Caregiver Notification Service Response for the user %s", getClass(), userId);
     ServiceResponse response = new ServiceResponse(CallStatus.succeeded);
 
     return response;

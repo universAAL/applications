@@ -8,6 +8,7 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.medMgr.Precaution;
+import org.universAAL.ontology.profile.User;
 
 /**
  * @author George Fournadjiev
@@ -40,7 +41,7 @@ public final class PrecautionProvider extends ServiceCallee {
 
     Log.info("Received call %s", getClass(), processURI);
 
-    Resource involvedUser = call.getInvolvedUser();
+    User involvedUser = (User) call.getInvolvedUser();
 
     Log.info("involvedUser %s", getClass(), involvedUser);
 
@@ -55,16 +56,15 @@ public final class PrecautionProvider extends ServiceCallee {
     return invalidInput;
   }
 
-  private ServiceResponse getSuccessfulServiceResponse(Resource involvedUser) {
-    String userId = involvedUser.getURI();
-    Log.info("Successful Service Response for the user %s", getClass(), userId);
-    return getPrecaution(userId);
+  private ServiceResponse getSuccessfulServiceResponse(User involvedUser) {
+    Log.info("Successful Service Response for the user %s", getClass(), involvedUser);
+    return getPrecaution(involvedUser);
   }
 
-  private ServiceResponse getPrecaution(String userId) {
+  private ServiceResponse getPrecaution(User user) {
     ServiceResponse response = new ServiceResponse(CallStatus.succeeded);
 
-    Precaution precaution = MyPrecautionDatabase.getPrecaution(userId);
+    Precaution precaution = MyPrecautionDatabase.getPrecaution(user);
 
     Log.info("Found the following precaution: %s", getClass(), precaution);
 

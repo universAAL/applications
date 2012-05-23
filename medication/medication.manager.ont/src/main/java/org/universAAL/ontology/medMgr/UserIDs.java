@@ -1,29 +1,31 @@
 package org.universAAL.ontology.medMgr;
 
+import org.universAAL.ontology.profile.User;
+
 /**
  * @author George Fournadjiev
  */
 public final class UserIDs {
 
   private final static String PREFIX = "urn:org.universAAL.aal_space:test_env#";
-  private final static String[] USER_IDS = new String[5];
+  private final static User[] USERS = new User[5];
 
   static {
-    USER_IDS[0] = PREFIX + "saied";
-    USER_IDS[1] = PREFIX + "alejandro";
-    USER_IDS[2] = PREFIX + "george";
-    USER_IDS[3] = PREFIX + "hector";
-    USER_IDS[4] = PREFIX + "venelin";
+    USERS[0] = new User(PREFIX + "saied");
+    USERS[1] = new User(PREFIX + "alejandro");
+    USERS[2] = new User(PREFIX + "george");
+    USERS[3] = new User(PREFIX + "hector");
+    USERS[4] = new User(PREFIX + "venelin");
   }
 
 
-  public static String[] getAllIDs() {
-    String[] res = new String[USER_IDS.length];
-    System.arraycopy(USER_IDS, 0, res, 0, USER_IDS.length);
+  public static User[] getAllUsers() {
+    User[] res = new User[USERS.length];
+    System.arraycopy(USERS, 0, res, 0, USERS.length);
     return res;
   }
 
-  public static String getSaiedUser() {
-    return PREFIX + "saied";
+  public static User getSaiedUser() {
+    return USERS[0];
   }
 }
