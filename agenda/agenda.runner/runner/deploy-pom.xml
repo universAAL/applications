@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.universAAL.AALapplication.agenda.runner.build</groupId>
   <artifactId>deployment</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>B.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Runner Folder</name>
   <properties>

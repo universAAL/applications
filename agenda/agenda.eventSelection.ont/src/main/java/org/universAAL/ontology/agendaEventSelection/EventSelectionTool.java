@@ -18,25 +18,52 @@ import org.universAAL.middleware.rdf.TypeMapper;
  * 
  */
 public class EventSelectionTool extends ManagedIndividual {
-        public static final String MY_URI= AgendaEventSelectionOntology.NAMESPACE + "EventSelectionTool";
-    public static final String PROP_HAS_CALENDARS= AgendaEventSelectionOntology.NAMESPACE + "hasCalendar";
-    public static final String PROP_HAS_FILTER_PARAMS = AgendaEventSelectionOntology.NAMESPACE
-	+ "hasFilterParams";
-    public static final String PROP_MAX_EVENT_NO= AgendaEventSelectionOntology.NAMESPACE + "maxEventNo";
 
+    /**  */
+    public static final String MY_URI = AgendaEventSelectionOntology.NAMESPACE
+	    + "EventSelectionTool";
+
+    /**  */
+    public static final String PROP_HAS_CALENDARS = AgendaEventSelectionOntology.NAMESPACE
+	    + "hasCalendar";
+
+    /**  */
+    public static final String PROP_HAS_FILTER_PARAMS = AgendaEventSelectionOntology.NAMESPACE
+	    + "hasFilterParams";
+
+    /**  */
+    public static final String PROP_MAX_EVENT_NO = AgendaEventSelectionOntology.NAMESPACE
+	    + "maxEventNo";
+
+    /**  */
     private List cachedFilteredEvents = new ArrayList();// list of events
+
+    /**  */
     private boolean cacheIsValid = false;
 
+    /**
+     * 
+     */
     public EventSelectionTool() {
 	super();
     }
 
+    /**
+     * 
+     * 
+     * @param uri
+     */
     public EventSelectionTool(String uri) {
 	super(uri);
     }
 
     /*
      * Calendar
+     */
+    /**
+     * 
+     * 
+     * @return
      */
     public List getCalendars() {
 	List calendars = (List) props.get(PROP_HAS_CALENDARS);
@@ -46,6 +73,11 @@ public class EventSelectionTool extends ManagedIndividual {
 	return new ArrayList(calendars);
     }
 
+    /**
+     * 
+     * 
+     * @param calendars
+     */
     public void setCalendars(List calendars) {
 	if (calendars != null) {
 	    clearCache();
@@ -53,6 +85,11 @@ public class EventSelectionTool extends ManagedIndividual {
 	}
     }
 
+    /**
+     * 
+     * 
+     * @param calendar
+     */
     public void addCalendar(Calendar calendar) {
 	List calendars = (List) props.get(PROP_HAS_CALENDARS);
 	if (calendars == null) {
@@ -68,6 +105,11 @@ public class EventSelectionTool extends ManagedIndividual {
     /*
      * FilterParams
      */
+    /**
+     * 
+     * 
+     * @param params
+     */
     public void setFilterParams(FilterParams params) {
 	if (params != null) {
 	    clearCache();
@@ -75,6 +117,11 @@ public class EventSelectionTool extends ManagedIndividual {
 	}
     }
 
+    /**
+     * 
+     * 
+     * @return
+     */
     public FilterParams getFilterParams() {
 	return (FilterParams) props.get(PROP_HAS_FILTER_PARAMS);
     }
@@ -82,16 +129,31 @@ public class EventSelectionTool extends ManagedIndividual {
     /*
      * Max number of returned events
      */
+    /**
+     * 
+     * 
+     * @param max
+     */
     public void setMaxEventNo(int max) {
 	clearCache();
 	props.put(PROP_MAX_EVENT_NO, new Integer(max));
     }
 
+    /**
+     * 
+     * 
+     * @return
+     */
     public int getMaxEventNo() {
 	return ((Integer) props.get(PROP_MAX_EVENT_NO)).intValue();
     }
 
     // returns a list of events
+    /**
+     * 
+     * 
+     * @return
+     */
     public List getFilteredEvents() {
 	if (cacheIsValid)
 	    return cachedFilteredEvents;
@@ -120,6 +182,12 @@ public class EventSelectionTool extends ManagedIndividual {
     }
 
     // returns an unsorted list of events
+    /**
+     * 
+     * 
+     * @param maxEventNo
+     * @return
+     */
     public List getLimitedFilteredEvents(int maxEventNo) {
 	if (cacheIsValid)
 	    return cachedFilteredEvents;
@@ -156,6 +224,12 @@ public class EventSelectionTool extends ManagedIndividual {
     }
 
     // returns a list of events
+    /**
+     * 
+     * 
+     * @param maxEventNo
+     * @return
+     */
     public List getFollowingEvents(int maxEventNo) {
 	if (cacheIsValid)
 	    return cachedFilteredEvents;
@@ -185,6 +259,11 @@ public class EventSelectionTool extends ManagedIndividual {
 	return eventsList.subList(0, maxEventNo);
     }
 
+    /**
+     * 
+     * 
+     * @return
+     */
     public static FilterParams buildCurrentTimeFilter() {
 	FilterParams fp = new FilterParams(null);
 	XMLGregorianCalendar now = TypeMapper.getDataTypeFactory()
@@ -195,9 +274,12 @@ public class EventSelectionTool extends ManagedIndividual {
 	return fp;
     }
 
-    /**
-     * @see org.universAAL.ontology.ManagedIndividual#getPropSerializationType(java.
-     *      lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
+     * (java.lang.String)
      */
     public int getPropSerializationType(String propURI) {
 	return PROP_SERIALIZATION_FULL;
@@ -206,27 +288,45 @@ public class EventSelectionTool extends ManagedIndividual {
     /*
      * Return either PROP_HAS_CALENDAR or PROP_HAS_FILTER_PARAMS property.
      */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.universAAL.middleware.owl.ManagedIndividual#isWellFormed()
+     */
     public boolean isWellFormed() {
 
 	return props.containsKey(PROP_HAS_CALENDARS)
 		|| props.containsKey(PROP_HAS_FILTER_PARAMS);
     }
 
+    /**
+     * 
+     */
     private void clearCache() {
 	cacheIsValid = false;
 	cachedFilteredEvents.clear();
     }
 
+    /**
+     * 
+     * 
+     * @param cachedEvents
+     */
     private void setCache(List cachedEvents) {
 	cachedFilteredEvents = new ArrayList(cachedEvents);
 	cacheIsValid = true;
     }
 
+    /**
+     * 
+     */
     public void clearPreviousData() {
 	setCalendars(new ArrayList());
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
      */
     public String getClassURI() {

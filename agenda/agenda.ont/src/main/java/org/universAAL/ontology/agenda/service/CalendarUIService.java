@@ -12,19 +12,25 @@ import org.universAAL.ontology.agenda.AgendaOntology;
  *
  */
 public class CalendarUIService extends Service {
+    
+    /**  */
     public static final String MY_URI= AgendaOntology.NAMESPACE + "CalendarUIService";
+    
+    /**  */
     public static final String PROP_CONTROLS= AgendaOntology.NAMESPACE + "controls";
 
+    /**
+     * 
+     *
+     * @param uri 
+     */
     public CalendarUIService(String uri) {
 	super(uri);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.persona.ontology.ManagedIndividual#getPropSerializationType(java.
-     * lang.String)
+
+    /* (non-Javadoc)
+     * @see org.universAAL.middleware.service.owl.Service#getPropSerializationType(java.lang.String)
      */
     public int getPropSerializationType(String propURI) {
 	return PROP_SERIALIZATION_FULL;

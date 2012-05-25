@@ -41,7 +41,7 @@ import org.universAAL.ontology.profile.User;
  * @author eandgrg
  * 
  */
-public class MyAgenda implements AgendaDBInterface {
+public class AgendaDB implements AgendaDBInterface {
     // private static final String DEFAULT_INTERMIDIATE_CALENDAR_NAME =
     // "qwoeiptetfngbclvkjhsfdshf3284jhdf";
     // private static final boolean DEBUG_DB = false;//Set to true to refill the
@@ -75,8 +75,8 @@ public class MyAgenda implements AgendaDBInterface {
 
     private Properties prop;
 
-    public MyAgenda(ModuleContext mcontext, String url, String user, String pwd) {
-	MyAgenda.mcontext = mcontext;
+    public AgendaDB(ModuleContext mcontext, String url, String user, String pwd) {
+	AgendaDB.mcontext = mcontext;
 	File confHome = new File(new BundleConfigHome("agenda")
 		.getAbsolutePath());
 	this.DB_URL = url;
@@ -422,7 +422,7 @@ public class MyAgenda implements AgendaDBInterface {
 		+ "c.idUser=u.idUser AND calendarID = ?";
 	try {
 	    PreparedStatement ps = conn.prepareStatement(query);
-	    int id = MyAgenda.extractIdFromURI(calendarURI);
+	    int id = AgendaDB.extractIdFromURI(calendarURI);
 	    if (id == -1)
 		throw new NumberFormatException();
 	    ps.setInt(1, id);
@@ -535,7 +535,7 @@ public class MyAgenda implements AgendaDBInterface {
 	try {
 	    ResultSet rs;
 
-	    calendarId = MyAgenda.extractIdFromURI(calendarURI);
+	    calendarId = AgendaDB.extractIdFromURI(calendarURI);
 	    if (calendarId == -1)
 		throw new Exception("Illegal calendar URI format: "
 			+ calendarURI);
@@ -737,7 +737,7 @@ public class MyAgenda implements AgendaDBInterface {
 	try {
 	    ps = conn.prepareStatement(query);
 	    if (calendarURI != null) {
-		int calendarId = MyAgenda.extractIdFromURI(calendarURI);
+		int calendarId = AgendaDB.extractIdFromURI(calendarURI);
 		if (calendarId == -1)
 		    throw new Exception("Illegal calendar URI format: "
 			    + calendarURI);
@@ -1156,7 +1156,7 @@ public class MyAgenda implements AgendaDBInterface {
 	String calendarExists = "select * from calendartype where idCalendar = ?";
 
 	try {
-	    int calendarId = MyAgenda.extractIdFromURI(calendarURI);
+	    int calendarId = AgendaDB.extractIdFromURI(calendarURI);
 	    if (calendarId == -1)
 		throw new Exception("Illegal calendar URI format: "
 			+ calendarURI);
@@ -1437,7 +1437,7 @@ public class MyAgenda implements AgendaDBInterface {
     // * MAIN *
     // *****************************/
     // public static void main(String[] str) {
-    // MyAgenda db = new MyAgenda("jdbc:mysql://localhost/universaaldb",
+    // AgendaDB db = new AgendaDB("jdbc:mysql://localhost/universaaldb",
     // "agendauser", "pass");
     // // String query = "select time from reminder";
     //
@@ -1445,7 +1445,7 @@ public class MyAgenda implements AgendaDBInterface {
     // System.out.println(l);
     // String calendarURI = Calendar.MY_URI + 17;
 
-    // int i = MyAgenda.extractIdFromURI(calendarURI);
+    // int i = AgendaDB.extractIdFromURI(calendarURI);
     // // db.getAllEvents(calendarURI);
     // System.out.println(i);
     //
@@ -1480,14 +1480,14 @@ public class MyAgenda implements AgendaDBInterface {
     // event.setReminder(rm);
 
     // System.out.println(db.addEventToCalendar(calendarURI, event,
-    // MyAgenda.COMMIT));
-    // Event e = db.getEventFromCalendar(calendarURI, 41, MyAgenda.COMMIT);
+    // AgendaDB.COMMIT));
+    // Event e = db.getEventFromCalendar(calendarURI, 41, AgendaDB.COMMIT);
     // e.getEventDetails().setCategory("Aris magic");
     // db.cancelReminder(calendarURI, 71, true);
-    // System.out.println(db.updateEvent(calendarURI, e, MyAgenda.COMMIT));
+    // System.out.println(db.updateEvent(calendarURI, e, AgendaDB.COMMIT));
     // System.out.println(db.updateReminderType(calendarURI, 41,
-    // ReminderType.blinkingLight, MyAgenda.COMMIT));
-    // System.out.println(db.removeEvent(calendarURI, 37, MyAgenda.COMMIT));
+    // ReminderType.blinkingLight, AgendaDB.COMMIT));
+    // System.out.println(db.removeEvent(calendarURI, 37, AgendaDB.COMMIT));
     // System.out.println("Calendar: " + calendarURI);
     // List events = db.getAllEvents(calendarURI);
     // System.out.println("Number of events: " + events.size());

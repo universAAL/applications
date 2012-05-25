@@ -17,7 +17,7 @@ import org.universAAL.agenda.server.unit_impl.CheckDatabaseTask;
 import org.universAAL.agenda.server.unit_impl.CheckEndingEventsTask;
 import org.universAAL.agenda.server.unit_impl.CheckReminderTask;
 import org.universAAL.agenda.server.unit_impl.CheckStartingEventsTask;
-import org.universAAL.agenda.server.unit_impl.MyAgenda;
+import org.universAAL.agenda.server.unit_impl.AgendaDB;
 import org.universAAL.agenda.server.unit_impl.SendContextEventTask;
 import org.universAAL.agenda.server.unit_impl.SendEndEventTask;
 import org.universAAL.agenda.server.unit_impl.SendReminderTask;
@@ -99,7 +99,7 @@ public class Scheduler {
 		    // sure. Otherwise updateReminderTask would have been called
 		    if (!(forthcomingReminders.containsKey((Integer) o))) {
 			Event e = dbServer.getEventFromCalendar(null,
-				((Integer) o).intValue(), MyAgenda.COMMIT);
+				((Integer) o).intValue(), AgendaDB.COMMIT);
 			SendContextEventTask tt;
 			Date d = e.getReminder().getReminderTime()
 				.toGregorianCalendar().getTime();
@@ -144,7 +144,7 @@ public class Scheduler {
 		    // sure. Otherwise updateReminderTask would have been called
 		    if (!(forthcomingStartEvents.containsKey((Integer) o))) {
 			Event e = dbServer.getEventFromCalendar(null,
-				((Integer) o).intValue(), MyAgenda.COMMIT);
+				((Integer) o).intValue(), AgendaDB.COMMIT);
 			SendContextEventTask tt;
 			Date d = e.getEventDetails().getTimeInterval()
 				.getStartTime().toGregorianCalendar().getTime();
@@ -176,7 +176,7 @@ public class Scheduler {
 		    // sure. Otherwise updateReminderTask would have been called
 		    if (!(forthcomingEndEvents.containsKey((Integer) o))) {
 			Event e = dbServer.getEventFromCalendar(null,
-				((Integer) o).intValue(), MyAgenda.COMMIT);
+				((Integer) o).intValue(), AgendaDB.COMMIT);
 			SendContextEventTask tt;
 			Date d = e.getEventDetails().getTimeInterval()
 				.getEndTime().toGregorianCalendar().getTime();
@@ -274,7 +274,7 @@ public class Scheduler {
 	    } else {
 		// retrieve it from database
 		Event e = dbServer.getEventFromCalendar(null, eventID,
-			MyAgenda.COMMIT);
+			AgendaDB.COMMIT);
 		if (e != null) {
 		    updateReminderTask(e);
 		}
@@ -299,7 +299,7 @@ public class Scheduler {
 	    } else {
 		// retrieve it from database
 		Event e = dbServer.getEventFromCalendar(null, eventID,
-			MyAgenda.COMMIT);
+			AgendaDB.COMMIT);
 		if (e != null) {
 		    updateReminderTask(e);
 		}

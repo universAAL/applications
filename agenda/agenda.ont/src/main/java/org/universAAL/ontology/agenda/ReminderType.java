@@ -5,11 +5,10 @@ import org.universAAL.middleware.owl.ManagedIndividual;
 /**
  * @author kagnantis
  * @author eandgrg
- *
+ * 
  */
 public class ReminderType extends ManagedIndividual {
-    public static final String MY_URI= AgendaOntology.NAMESPACE
-	+ Messages.getString("ReminderType.0");
+    public static final String MY_URI = AgendaOntology.NAMESPACE+"ReminderType";
 
     public static final int NO_REMINDER = 0;
     public static final int BLINKING_LIGHT = 1;
@@ -105,7 +104,9 @@ public class ReminderType extends ManagedIndividual {
 	return names[this.order];
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.universAAL.middleware.rdf.Resource#toString()
      */
     public String toString() {
@@ -119,8 +120,10 @@ public class ReminderType extends ManagedIndividual {
     public void setProperty(String propURI, Object o) {
 	// do nothing
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
      */
     public String getClassURI() {

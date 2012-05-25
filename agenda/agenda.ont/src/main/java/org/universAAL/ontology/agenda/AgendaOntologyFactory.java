@@ -23,12 +23,16 @@ import org.universAAL.ontology.agenda.service.CalendarUIService;
 /**
  * 
  * @author eandgrg
- *
+ * 
  */
 public class AgendaOntologyFactory extends ResourceFactoryImpl {
 
-    /* (non-Javadoc)
-     * @see org.universAAL.middleware.rdf.impl.ResourceFactoryImpl#createInstance(java.lang.String, java.lang.String, int)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.rdf.impl.ResourceFactoryImpl#createInstance
+     * (java.lang.String, java.lang.String, int)
      */
     public Resource createInstance(String classURI, String instanceURI,
 	    int factoryIndex) {
@@ -48,10 +52,11 @@ public class AgendaOntologyFactory extends ResourceFactoryImpl {
 	    return new CalendarAgenda(instanceURI);
 	case 6:
 	    return new CalendarUIService(instanceURI);
-	    // case 7:
-	    // return new MobileDevice(instanceURI);
+	case 7:
+	    return new ExternalCalendar(instanceURI);
+
 	    // case 8:
-	    // return new ExternalCalendar(instanceURI);
+	    // return new MobileDevice(instanceURI);
 	}
 	return null;
     }

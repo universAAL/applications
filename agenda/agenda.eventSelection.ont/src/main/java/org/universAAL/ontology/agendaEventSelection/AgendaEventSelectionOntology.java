@@ -31,6 +31,8 @@ import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
 
 import org.universAAL.ontology.ProfileOntology;
+
+import org.universAAL.ontology.agenda.AgendaOntology;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agendaEventSelection.service.EventSelectionToolService;
 import org.universAAL.ontology.location.Location;
@@ -43,7 +45,7 @@ import org.universAAL.ontology.profile.UserProfile;
 public final class AgendaEventSelectionOntology extends Ontology {
 
     private static AgendaEventSelectionOntologyFactory factory = new AgendaEventSelectionOntologyFactory();
-    public static final String NAMESPACE = "http://ontology.universaal.org/EventSelectionTool.owl#";
+    public static final String NAMESPACE = Resource.uAAL_NAMESPACE_PREFIX+"EventSelectionTool.owl#";
 
     public AgendaEventSelectionOntology() {
 	super(NAMESPACE);
@@ -58,6 +60,7 @@ public final class AgendaEventSelectionOntology extends Ontology {
 	addImport(ServiceBusOntology.NAMESPACE);
 	addImport(LocationOntology.NAMESPACE);
 	addImport(ProfileOntology.NAMESPACE);
+	addImport(AgendaOntology.NAMESPACE);
 
 	OntClassInfoSetup oci;
 
@@ -67,6 +70,7 @@ public final class AgendaEventSelectionOntology extends Ontology {
 	oci = createNewAbstractOntClassInfo(TimeSearchType.MY_URI);
 	oci.setResourceComment("The type of temporal search.");
 	oci.setResourceLabel("Temporal search type");
+	oci.addSuperClass(ManagedIndividual.MY_URI);
 	oci.toEnumeration(new ManagedIndividual[] {
 		TimeSearchType.startsBetween, TimeSearchType.endsBetween,
 		TimeSearchType.startsAndEndsBetween,
@@ -75,34 +79,12 @@ public final class AgendaEventSelectionOntology extends Ontology {
 		TimeSearchType.allCases });
 
 	// ******* Regular classes of the ontology ******* //
-
-	// load EventSelectionTool
-	oci = createNewOntClassInfo(EventSelectionTool.MY_URI, factory, 0);
-	oci.setResourceComment("The class of a EventSelectionTool.");
-	oci.setResourceLabel("EventSelectionTool");
-	oci.addObjectProperty(EventSelectionTool.PROP_HAS_CALENDARS)
-		.setFunctional();
-	oci.addObjectProperty(EventSelectionTool.PROP_HAS_FILTER_PARAMS)
-		.setFunctional();
-	oci.addDatatypeProperty(EventSelectionTool.PROP_MAX_EVENT_NO)
-		.setFunctional();
-	oci.addRestriction(MergedRestriction
-		.getAllValuesRestrictionWithCardinality(
-			EventSelectionTool.PROP_HAS_CALENDARS, Calendar.MY_URI,
-			2, 2));
-	oci
-		.addRestriction(MergedRestriction.getAllValuesRestriction(
-			EventSelectionTool.PROP_HAS_FILTER_PARAMS,
-			FilterParams.MY_URI));
-	oci.addRestriction(MergedRestriction
-		.getAllValuesRestrictionWithCardinality(
-			EventSelectionTool.PROP_MAX_EVENT_NO, TypeMapper
-				.getDatatypeURI(Integer.class), 0, 1));
-
+	
 	// load FilterParams
 	oci = createNewOntClassInfo(FilterParams.MY_URI, factory, 1);
 	oci.setResourceComment("The class of all FilterParams.");
 	oci.setResourceLabel("FilterParams");
+	oci.addSuperClass(ManagedIndividual.MY_URI);
 	oci.addDatatypeProperty(FilterParams.PROP_DT_BEGIN).setFunctional();
 	oci.addDatatypeProperty(FilterParams.PROP_DT_END).setFunctional();
 	oci.addDatatypeProperty(FilterParams.PROP_CATEGORY).setFunctional();
@@ -140,6 +122,35 @@ public final class AgendaEventSelectionOntology extends Ontology {
 		.getAllValuesRestrictionWithCardinality(
 			FilterParams.PROP_DESCRIPTION, TypeMapper
 			    .getDatatypeURI(String.class),1,1 ));
+
+	// load EventSelectionTool
+	oci = createNewOntClassInfo(EventSelectionTool.MY_URI, factory, 0);
+	oci.setResourceComment("The class of a EventSelectionTool.");
+	oci.setResourceLabel("EventSelectionTool");
+	oci.addSuperClass(ManagedIndividual.MY_URI);
+	oci.addObjectProperty(EventSelectionTool.PROP_HAS_CALENDARS)
+		.setFunctional();
+	oci.addObjectProperty(EventSelectionTool.PROP_HAS_FILTER_PARAMS)
+		.setFunctional();
+	oci.addDatatypeProperty(EventSelectionTool.PROP_MAX_EVENT_NO)
+		.setFunctional();
+	oci.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			EventSelectionTool.PROP_HAS_CALENDARS, Calendar.MY_URI,
+			2, 2));
+	//FilterParams have to be loaded before use
+	oci
+		.addRestriction(MergedRestriction.getAllValuesRestriction(
+			EventSelectionTool.PROP_HAS_FILTER_PARAMS,
+			FilterParams.MY_URI));
+	oci.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			EventSelectionTool.PROP_MAX_EVENT_NO, TypeMapper
+				.getDatatypeURI(Integer.class), 0, 1));
+
+	/*
+	 * Services
+	 */
 
 	// load EventSelectionToolService
 	oci = createNewOntClassInfo(EventSelectionToolService.MY_URI, factory, 2);

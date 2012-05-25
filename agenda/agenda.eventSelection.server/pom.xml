@@ -73,38 +73,41 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package> org.universAAL.agendaEventSelectionTool.server</Export-Package>
 						<Private-Package>org.universAAL.agendaEventSelectionTool.server.impl,
-							org.universAAL.agendaEventSelectionTool.database</Private-Package>
+							org.universAAL.agendaEventSelectionTool.database, org.universAAL.agendaEventSelectionTool.server.osgi</Private-Package>
 						<!--
 							although by default all packages should be automatically imported
 							(and added to MANIFEST) when not explicitly having Import-Package
-							section, this is for some not the case for com.mysql.jdbc in this
-							bundle
+							section, this is for some reason not the case for com.mysql.jdbc
+							in this bundle.
+							com.mysql.jdbc is forced to import package list while "*" ensures that all other packages are automatically included
 						-->
-						<Import-Package>
-							org.universAAL.agendaEventSelectionTool.server.osgi,
-							org.universAAL.middleware.container,
-							org.universAAL.middleware.container.osgi,
-							org.universAAL.middleware.container.osgi.util,
-							org.universAAL.middleware.container.utils,
-							org.universAAL.middleware.context,
-							org.universAAL.middleware.context.owl,
-							org.universAAL.middleware.owl,
-							org.universAAL.middleware.rdf,
-							org.universAAL.middleware.rdf.impl,
-							org.universAAL.middleware.service,
-							org.universAAL.middleware.service.owls.process,
-							org.universAAL.middleware.service.owls.profile,
-
-							org.universAAL.ontology.agenda,
-							org.universAAL.ontology.agenda.service,
-							org.universAAL.ontology.agendaEventSelection,
-							org.universAAL.ontology.agendaEventSelection.service,
-
-							java.sql.*,
-							org.osgi.framework,
-							com.mysql.jdbc,
-							javax.xml.datatype,
-							org.slf4j</Import-Package>
+					
+						<Import-Package>com.mysql.jdbc, * </Import-Package>
+						
+<!--						<Import-Package>-->
+<!--							org.universAAL.middleware.container,-->
+<!--							org.universAAL.middleware.container.osgi,-->
+<!--							org.universAAL.middleware.container.osgi.util,-->
+<!--							org.universAAL.middleware.container.utils,-->
+<!--							org.universAAL.middleware.context,-->
+<!--							org.universAAL.middleware.context.owl,-->
+<!--							org.universAAL.middleware.owl,-->
+<!--							org.universAAL.middleware.rdf,-->
+<!--							org.universAAL.middleware.rdf.impl,-->
+<!--							org.universAAL.middleware.service,-->
+<!--							org.universAAL.middleware.service.owls.process,-->
+<!--							org.universAAL.middleware.service.owls.profile,-->
+<!---->
+<!--							org.universAAL.ontology.agenda,-->
+<!--							org.universAAL.ontology.agenda.service,-->
+<!--							org.universAAL.ontology.agendaEventSelection,-->
+<!--							org.universAAL.ontology.agendaEventSelection.service,-->
+<!---->
+<!--							java.sql.*,-->
+<!--							org.osgi.framework,-->
+<!--							com.mysql.jdbc,-->
+<!--							javax.xml.datatype,-->
+<!--							org.slf4j</Import-Package>-->
 					</instructions>
 				</configuration>
 			</plugin>

@@ -14,10 +14,12 @@ import org.universAAL.agendaEventSelectionTool.server.impl.MyEventSelectionTool;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.container.utils.LogUtils;
-import org.universAAL.middleware.context.ContextPublisher;
+import org.universAAL.middleware.context.ContextEvent;
+import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -38,9 +40,11 @@ public class EventProvider extends ServiceCallee implements
      */
     private static ModuleContext mcontext;
 
+    /**  */
     private static File confHome = new File(new BundleConfigHome("agenda")
 	    .getAbsolutePath());
 
+    /**  */
     private static final ServiceResponse invalidInput = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
     static {
@@ -49,8 +53,29 @@ public class EventProvider extends ServiceCallee implements
 			.getString("EventProvider.InvalidInput"))); //$NON-NLS-1$
     }
 
+    /**  */
     private MyEventSelectionTool theServer;
 
+    /**
+     * Helper method to construct the ontological declaration of context events
+     * published by EventProvider.
+     */
+    private static ContextEventPattern[] getProvidedContextEvents() {
+
+	ContextEventPattern cep = new ContextEventPattern();
+	cep.addRestriction(MergedRestriction.getAllValuesRestriction(
+		ContextEvent.PROP_RDF_SUBJECT, EventSelectionTool.MY_URI));
+
+	return new ContextEventPattern[] { cep };
+    }
+
+    /**
+     * 
+     * 
+     * @param mcontext
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public EventProvider(ModuleContext mcontext) throws FileNotFoundException,
 	    IOException {
 
@@ -61,7 +86,7 @@ public class EventProvider extends ServiceCallee implements
 		ProvidedESTService.EVENTSELECTIONTOOL_SERVER_NAMESPACE
 			+ "EventSelectionToolContextProvider"); //$NON-NLS-1$
 	info.setType(ContextProviderType.controller);
-
+	info.setProvidedEvents(getProvidedContextEvents());
 	new DefaultContextPublisher(mcontext, info);
 
 	// start the server
@@ -169,8 +194,7 @@ public class EventProvider extends ServiceCallee implements
      * Filters all saved events using <code>FilterParam</code> and retrieves a
      * list with events that matched the criteria.
      * 
-     * @param FilterParams
-     *            an event selection filter
+     * @param filterParams
      * @return a service response to the specific service
      */
     private ServiceResponse requestEvents(FilterParams filterParams) {
@@ -188,10 +212,8 @@ public class EventProvider extends ServiceCallee implements
      * <code>FilterParam</code> and retrieves a list of events that match the
      * criteria.
      * 
-     * @param FilterParams
-     *            an event selection filter
-     * @param List
-     *            a list with calendars to be checked
+     * @param filterParams
+     * @param calendarList
      * @return a service response to the specific service
      */
     private ServiceResponse requestFromCalendarEvents(
@@ -210,11 +232,9 @@ public class EventProvider extends ServiceCallee implements
      * <code>FilterParam</code> and retrieves at most <i>maxNo</i> events that
      * match the criteria.
      * 
-     * @param FilterParams
-     *            an event selection filter
-     * @param List
-     *            a list with calendars to be checked
-     * @param int max number of returned events
+     * @param filterParams
+     * @param calendarList
+     * @param maxNo
      * @return a service response to the specific service
      */
     private ServiceResponse requestLimitedEvents(FilterParams filterParams,
@@ -232,9 +252,8 @@ public class EventProvider extends ServiceCallee implements
      * <code>Calendar</code>s of <code>List</code> <i>calendarList</i>, with
      * chronological order, starting with the most imminent.
      * 
-     * @param List
-     *            a list with calendars to be checked
-     * @param int max number of returned events
+     * @param calendarList
+     * @param maxNo
      * @return a service response to the specific service
      */
     private ServiceResponse requestFollowingEvents(List calendarList, int maxNo) {
@@ -246,9 +265,12 @@ public class EventProvider extends ServiceCallee implements
 	return sr;
     }
 
-    /**
+    /*
+     * (non-Javadoc)
      * 
-     * @see org.universAAL.middleware.service.ServiceCallee#communicationChannelBroken()
+     * @see
+     * org.universAAL.middleware.service.ServiceCallee#communicationChannelBroken
+     * ()
      */
     public void communicationChannelBroken() {
 	// TODO Auto-generated method stub
@@ -267,4 +289,5 @@ public class EventProvider extends ServiceCallee implements
 	    FilterParams filterParams) {
 	// TODO Auto-generated method stub
     }
+
 }

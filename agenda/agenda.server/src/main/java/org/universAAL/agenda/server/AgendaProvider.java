@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.universAAL.agenda.server;
 
 import java.io.File;
@@ -27,15 +24,17 @@ import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.agenda.server.database.Scheduler;
 import org.universAAL.agenda.server.gui.wrapper.WrapperActivator;
 import org.universAAL.agenda.server.unit_impl.AgendaStateListener;
-import org.universAAL.agenda.server.unit_impl.MyAgenda;
+import org.universAAL.agenda.server.unit_impl.AgendaDB;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
+import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -136,13 +135,29 @@ public class AgendaProvider extends ServiceCallee implements
     }
 
     /**  */
-    private MyAgenda theServer;
+    private AgendaDB theServer;
 
     /**  */
     private Scheduler theScheduler;
 
     /**  */
     private ContextPublisher cp;
+    
+    
+    /**
+     * Helper method to construct the ontological declaration of context events
+     * published by AgendaProvider.
+     */
+    private static ContextEventPattern[] getProvidedContextEvents(){
+	
+	ContextEventPattern cep1 = new ContextEventPattern();
+	ContextEventPattern cep2 = new ContextEventPattern();
+	cep1.addRestriction(MergedRestriction.getAllValuesRestriction(
+		ContextEvent.PROP_RDF_SUBJECT, Event.MY_URI));
+	cep2.addRestriction(MergedRestriction.getAllValuesRestriction(
+		ContextEvent.PROP_RDF_SUBJECT, Calendar.MY_URI));
+	return new ContextEventPattern[] { cep1, cep2 };
+    }
 
     /**
      * 
@@ -160,6 +175,9 @@ public class AgendaProvider extends ServiceCallee implements
 		ProvidedAgendaService.AGENDA_SERVER_NAMESPACE
 			+ "AgendaContextProvider"); //$NON-NLS-1$
 	info.setType(ContextProviderType.controller);
+	
+	//FIXME definirati
+	info.setProvidedEvents(getProvidedContextEvents());
 	cp = new DefaultContextPublisher(mcontext, info);
 
 	// load credentials from config folder
@@ -173,7 +191,7 @@ public class AgendaProvider extends ServiceCallee implements
 	prop.load(in);
 
 	// start the server
-	theServer = new MyAgenda(moduleContext,
+	theServer = new AgendaDB(moduleContext,
 		prop.getProperty("database"), prop.getProperty("username"), prop.getProperty("password")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	theScheduler = new Scheduler(theServer, this, mcontext);
     }
@@ -465,7 +483,7 @@ public class AgendaProvider extends ServiceCallee implements
     private ServiceResponse addNewCalendar(Calendar calendar, User owner) {
 	try {
 	    Calendar newC = theServer.addCalendar(calendar, owner,
-		    MyAgenda.COMMIT);
+		    AgendaDB.COMMIT);
 	    if (newC != null) {
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		sr.addOutput(new ProcessOutput(
@@ -491,7 +509,7 @@ public class AgendaProvider extends ServiceCallee implements
      */
     private ServiceResponse removeCalendar(Calendar calendar) {
 	try {
-	    return theServer.removeCalendar(calendar, MyAgenda.COMMIT) ? new ServiceResponse(
+	    return theServer.removeCalendar(calendar, AgendaDB.COMMIT) ? new ServiceResponse(
 		    CallStatus.succeeded)
 		    : notExistingCalendar;
 	} catch (Exception e) {
@@ -529,7 +547,7 @@ public class AgendaProvider extends ServiceCallee implements
      * @return
      */
     public boolean cancelReminder(String calendarURI, int eventID) {
-	if (theServer.cancelReminder(calendarURI, eventID, MyAgenda.COMMIT)) {
+	if (theServer.cancelReminder(calendarURI, eventID, AgendaDB.COMMIT)) {
 	    System.out.println("Cancel reminder: " + eventID); //$NON-NLS-1$
 	    theScheduler.removeReminderTask(eventID);
 	    return true;
@@ -549,7 +567,7 @@ public class AgendaProvider extends ServiceCallee implements
     private ServiceResponse getCalendarByName(String calendarName, User owner) {
 	try {
 	    Calendar calendar = theServer.getCalendarByNameAndOwner(
-		    calendarName, owner, MyAgenda.COMMIT);
+		    calendarName, owner, AgendaDB.COMMIT);
 	    if (calendar != null) {
 		System.out.println("Calendar URI: " + calendar.getURI()); //$NON-NLS-1$
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
@@ -585,10 +603,10 @@ public class AgendaProvider extends ServiceCallee implements
 	try {
 	    // INFO: db call
 	    int eventId = theServer.addEventToCalendar(calendarURI, event,
-		    MyAgenda.COMMIT);
+		    AgendaDB.COMMIT);
 	    if (eventId > 0) {
 		event = theServer.getEventFromCalendar(calendarURI, eventId,
-			MyAgenda.COMMIT);
+			AgendaDB.COMMIT);
 		if (event == null) {
 		    LogUtils.logError(mcontext, this.getClass(),
 			    "addEventToCalendar",
@@ -640,7 +658,7 @@ public class AgendaProvider extends ServiceCallee implements
 		    Event event = (Event) o;
 		    // INFO: db call
 		    int eventID = theServer.addEventToCalendar(calendarURI,
-			    event, MyAgenda.COMMIT);
+			    event, AgendaDB.COMMIT);
 		    if (eventID > 0) {
 			event.setEventID(eventID);
 			// theScheduler.updateReminderTask(event);
@@ -674,7 +692,7 @@ public class AgendaProvider extends ServiceCallee implements
 	try {
 	    // INFO: db call
 	    List<Event> eventList = theServer.getAllEvents(calendarURI,
-		    MyAgenda.COMMIT);
+		    AgendaDB.COMMIT);
 	    sr
 		    .addOutput(new ProcessOutput(
 			    ProvidedAgendaService.OUTPUT_CALENDAR_EVENT_LIST,
@@ -708,7 +726,7 @@ public class AgendaProvider extends ServiceCallee implements
 	try {
 	    // INFO: db call
 	    Event event = theServer.getEventFromCalendar(calendarURI, eventId,
-		    MyAgenda.COMMIT);
+		    AgendaDB.COMMIT);
 	    sr.addOutput(new ProcessOutput(
 		    ProvidedAgendaService.OUTPUT_CALENDAR_EVENT, event));
 	    return sr;
@@ -732,7 +750,7 @@ public class AgendaProvider extends ServiceCallee implements
     private ServiceResponse deleteCalendarEvent(int eventId) {
 	try {
 	    // INFO: db call
-	    String deleteOK = theServer.removeEvent(eventId, MyAgenda.COMMIT);
+	    String deleteOK = theServer.removeEvent(eventId, AgendaDB.COMMIT);
 	    if (deleteOK != null) {
 		theScheduler.removeReminderTask(eventId);
 		// send a context event: event deleted
@@ -793,7 +811,7 @@ public class AgendaProvider extends ServiceCallee implements
      */
     private ServiceResponse getAllEventCategories() {
 	ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
-	List categories = theServer.getAllEventCategories(MyAgenda.COMMIT);
+	List categories = theServer.getAllEventCategories(AgendaDB.COMMIT);
 	// dArrayList al = new ArrayList(calendars.length);
 	// for (int i = 0; i < calendars.length; i++)
 	// al.add(calendars[i]);
@@ -822,7 +840,7 @@ public class AgendaProvider extends ServiceCallee implements
 	    // INFO: db call
 	    updatedEvent.setEventID(eventId);
 	    boolean updated = theServer.updateEvent(calendarURI, updatedEvent,
-		    MyAgenda.COMMIT);
+		    AgendaDB.COMMIT);
 	    if (updated) {
 		// theScheduler.updateReminderTask(updatedEvent);
 		theScheduler.updateScheduler(updatedEvent);
@@ -863,7 +881,7 @@ public class AgendaProvider extends ServiceCallee implements
 	try {
 	    // INFO: db call
 	    int isSet = theServer.updateReminder(calendarURI, eventID,
-		    reminder, MyAgenda.COMMIT);
+		    reminder, AgendaDB.COMMIT);
 	    if (isSet != 0) {
 		theScheduler.updateReminderTask(eventID, reminder);
 		return new ServiceResponse(CallStatus.succeeded);
@@ -899,7 +917,7 @@ public class AgendaProvider extends ServiceCallee implements
 	try {
 	    // INFO db call
 	    boolean isSet = theServer.updateReminderType(calendarURI, eventID,
-		    reminderType, MyAgenda.COMMIT);
+		    reminderType, AgendaDB.COMMIT);
 	    if (isSet) {
 		theScheduler.updateReminderTask(eventID, reminderType);
 		return new ServiceResponse(CallStatus.succeeded);
