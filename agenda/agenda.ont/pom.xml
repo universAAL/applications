@@ -72,6 +72,7 @@
 						<Bundle-Name>${project.name}</Bundle-Name>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Activator>org.universAAL.ontology.agenda.osgi.Activator</Bundle-Activator>
 						<Export-Package>org.universAAL.ontology.agenda,
 							org.universAAL.ontology.agenda.service</Export-Package>
 					</instructions>

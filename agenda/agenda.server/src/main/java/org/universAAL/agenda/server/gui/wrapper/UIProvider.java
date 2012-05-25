@@ -53,7 +53,7 @@ public class UIProvider extends UICaller {
      * .middleware.ui.UIResponse)
      */
     public void handleUIResponse(UIResponse event) {
-	System.out.println(">>>got InputEvent in prof.server<<<");
+	System.out.println(">>>got UIResponse in AgendaServer.UIProvider<<<");
 	// removed when transferring from IO to UI Bus (InputEvent->UIResponse)
 	// if (event.hasDialogInput()) {
 	System.out.println("Dialog ID: " + event.getDialogID());

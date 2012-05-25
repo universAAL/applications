@@ -14,10 +14,10 @@
 	<description>Event SelectionTool Client</description>
 
 	<dependencies>
-<!--		<dependency>-->
-<!--			<groupId>junit</groupId>-->
-<!--			<artifactId>junit</artifactId>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>junit</groupId>-->
+		<!--			<artifactId>junit</artifactId>-->
+		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -67,11 +67,14 @@
 						<Bundle-Activator>org.universAAL.agendaEventSelectionTool.client.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Export-Package> org.universAAL.agendaEventSelectionTool.client</Export-Package>
+						
+<!--						both below packages are used in agenda gui-->
+						<Export-Package>org.universAAL.agendaEventSelectionTool.client,
+							org.universAAL.agendaEventSelectionTool.client.osgi</Export-Package>
 						<!--
 							<Import-Package>org.universAAL.middleware.context,org.universAAL.middleware.context.owl,
 						-->
-				
+
 						<!--							org.universAAL.middleware.owl.supply,-->
 						<!--
 							org.universAAL.middleware.rdf, org.universAAL.middleware.service,
@@ -100,7 +103,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<profiles>
 		<profile>
 			<id>uAAL-Runtime</id>
@@ -149,5 +152,5 @@
 			</dependencies>
 		</profile>
 	</profiles>
-		
+
 </project>

@@ -328,6 +328,7 @@ agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/CEType.java -text
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/Calendar.java -text
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/Event.java -text
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/EventDetails.java -text
+agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/ExternalCalendar.java -text
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/Messages.java -text
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/Reminder.java -text
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/ReminderType.java -text
@@ -335,8 +336,9 @@ agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/TimeInterval.java
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/osgi/Activator.java -text
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/service/CalendarAgenda.java -text
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/service/CalendarUIService.java -text
-agenda/agenda.ont/src/main/java/org/universAAL/ontology/agenda/service/ExternalCalendar.java -text
+agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_da.properties -text
+agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_de.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_en.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_es.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_hr.properties -text
@@ -458,12 +460,12 @@ agenda/agenda.server/src/main/java/org/universAAL/agenda/server/gui/wrapper/Mess
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/gui/wrapper/UIProvider.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/gui/wrapper/WrapperActivator.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/osgi/Activator.java -text
+agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/AgendaDB.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/AgendaStateListener.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/CheckDatabaseTask.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/CheckEndingEventsTask.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/CheckReminderTask.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/CheckStartingEventsTask.java -text
-agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/MyAgenda.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendContextEventTask.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendEndEventTask.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendReminderTask.java -text

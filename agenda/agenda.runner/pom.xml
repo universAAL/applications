@@ -5,7 +5,7 @@
   <groupId>org.universAAL.AALapplication</groupId>
   <artifactId>agenda.runner</artifactId>
   <packaging>jar</packaging>  
-  <version>1.0.1-SNAPSHOT</version>
+  <version>B.0.1-SNAPSHOT</version>
   <!-- version is here equal to the level of version of the middleware -->
   <name>Runner Folder</name>
 
@@ -20,12 +20,24 @@
           <provision>
           <!-- Explanation: -->
           <!-- <provision>{opt:wrap}:mvn:{groupId}/{artifactId}/{version}@{opt:#level | nostart | noupdate}</provision>-->
+         
+          <!--		RUN AGENDA	platform 1.1.0 compatible BEGIN -->
+
+	<provision>scan-composite:mvn:org.universAAL.ui/ui.dm/1.1.0/composite</provision>
+	<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.0/composite</provision>
+<!--		<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.1.0/composite</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.1.0/composite</provision>-->
+	<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.1.0/composite</provision>
+	<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/B.0.1-SNAPSHOT/composite</provision>
+
+
+<!--		RUN AGENDA	platform 1.1.0 compatible END -->
 	    
 <!--		RUN AGENDA	1.0.0 BEGIN -->
-		<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.0.0/composite</provision>
+<!--		<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.0.0/composite</provision>-->
 <!--		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.0.0/composite</provision>-->
-		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.0.0/composite</provision>
-		<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/A.0.1-SNAPSHOT/composite</provision>
+<!--		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.0.0/composite</provision>-->
+<!--		<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/A.0.1-SNAPSHOT/composite</provision>-->
 <!--		RUN AGENDA	1.0.0 END -->
  
 <!--RUN AGENDA	1.1.0 BEFORE COMPOSITES BEGIN -->

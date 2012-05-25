@@ -6,6 +6,10 @@ agenda/agenda.eventSelection.client/.classpath
 agenda/agenda.eventSelection.client/.project
 agenda/agenda.eventSelection.client/.settings
 agenda/agenda.eventSelection.client/target
+agenda/agenda.eventSelection.ont/.classpath
+agenda/agenda.eventSelection.ont/.project
+agenda/agenda.eventSelection.ont/.settings
+agenda/agenda.eventSelection.ont/target
 agenda/agenda.eventSelection.server/.classpath
 agenda/agenda.eventSelection.server/.project
 agenda/agenda.eventSelection.server/.settings

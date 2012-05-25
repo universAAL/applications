@@ -13,10 +13,10 @@
 	<name>Agenda AAL Service Client</name>
 	<description>Agenda Consumer, used by Agenda GUI</description>
 	<dependencies>
-<!--		<dependency>-->
-<!--			<groupId>junit</groupId>-->
-<!--			<artifactId>junit</artifactId>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>junit</groupId>-->
+		<!--			<artifactId>junit</artifactId>-->
+		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -62,22 +62,25 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Activator>org.universAAL.agenda.client.osgi.Activator</Bundle-Activator>
-						<Export-Package>org.universAAL.agenda.client</Export-Package>
-						<!--						<Import-Package>-->
-						<!--							javax.xml.datatype, org.osgi.service.log,-->
-						<!--							org.universAAL.ontology.location.address,-->
-						<!--							org.universAAL.ontology.location.outdoor-->
-						<!--							,javax.swing,org.osgi.framework,-->
-						<!--							org.universAAL.agenda.ont,-->
-						<!--							org.universAAL.agenda.ont.service,-->
-						<!--							org.slf4j,org.universAAL.middleware.context,-->
-						<!--
-							org.universAAL.middleware.owl, org.universAAL.middleware.rdf,
-						-->
-						<!--							org.universAAL.middleware.service,-->
-						<!--							org.universAAL.middleware.service.owl,-->
-						<!--							org.universAAL.middleware.service.owls.process,-->
-						<!--							org.universAAL.ontology.profile</Import-Package>-->
+						<Export-Package>org.universAAL.agenda.client, org.universAAL.agenda.client.osgi</Export-Package>
+<!--						<Import-Package>-->
+<!--							org.universAAL.agenda.client.osgi,-->
+<!--							javax.xml.datatype, -->
+<!--							org.osgi.service.log,-->
+<!--							org.universAAL.ontology.location.address,-->
+<!--							org.universAAL.ontology.location.outdoor-->
+<!--							javax.swing,org.osgi.framework,-->
+<!--							org.universAAL.agenda.ont,-->
+<!--							org.universAAL.agenda.ont.service,-->
+<!--							org.slf4j,org.universAAL.middleware.context,-->
+<!--							org.universAAL.middleware.owl, -->
+<!--							org.universAAL.middleware.rdf,-->
+<!--						-->
+<!--							org.universAAL.middleware.service,-->
+<!--							org.universAAL.middleware.service.owl,-->
+<!--							org.universAAL.middleware.service.owls.process,-->
+<!--							org.universAAL.ontology.profile-->
+<!--						</Import-Package>-->
 					</instructions>
 				</configuration>
 			</plugin>
@@ -136,5 +139,5 @@
 			</dependencies>
 		</profile>
 	</profiles>
-	
+
 </project>

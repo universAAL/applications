@@ -9,8 +9,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="2" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.server.Activator" 
-    project="agenda.server" file="/agenda.server/src/main/java/org/universAAL/agenda/server/Activator.java" 
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.server.osgi.Activatorvator" 
+    project="agenda.server" file="/agenda.server/src/main/java/org/universAAL/agenda/server/osgi/Activator.java" 
     binary="false">    
     <position x="543" y="37" width="168" height="163"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
@@ -90,7 +90,7 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="11" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.server.gui.wrapper.MyUICaller" 
+  <class id="11" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.server.gui.wrapper.UIProvider" 
     project="agenda.server" file="/agenda.server/src/main/java/org/universAAL/agenda/server/gui/wrapper/MyUICaller.java" 
     binary="false">    
     <position x="1572" y="328" width="-1" height="-1"/>    
@@ -126,7 +126,7 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="15" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.server.unit_impl.MyAgenda" 
+  <class id="15" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.server.unit_impl.AgendaDB" 
     project="agenda.server" file="/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/MyAgenda.java" 
     binary="false">    
     <position x="628" y="1697" width="-1" height="-1"/>    

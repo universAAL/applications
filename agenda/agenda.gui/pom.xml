@@ -11,16 +11,16 @@
 	<packaging>bundle</packaging>
 	<name>Agenda AAL Service GUI</name>
 	<description>	Agenda GUI 	</description>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>junit</groupId>-->
-<!--			<artifactId>junit</artifactId>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>junit</groupId>-->
+		<!--			<artifactId>junit</artifactId>-->
+		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -80,51 +80,38 @@
 						<Export-Package>org.universAAL.agenda.gui.wrappers,org.universAAL.agenda.gui</Export-Package>
 						<Private-Package>org.universAAL.agenda.gui.util,
 							org.universAAL.agenda.gui.impl,
-							org.universAAL.agenda.gui.components</Private-Package>
-
-						<!--
-							javax.xml.datatype, javax.swing.plaf, org.persona.ontology,
-							org.osgi.service.useradmin, org.persona.ontology.expr,
-							</Import-Package>
-						-->
-
-						<!--						<Import-Package>org.universAAL.middleware.context,-->
-						<!--							org.universAAL.middleware.context.owl,-->
-						<!--							org.universAAL.middleware.input,-->
-						<!--							org.universAAL.middleware.io.owl,-->
-						<!--							org.universAAL.middleware.io.rdf,-->
-						<!--							org.universAAL.middleware.output,-->
-						<!--							org.universAAL.middleware.owl,-->
-						<!--							org.universAAL.middleware.owl.supply,-->
-						<!--							org.universAAL.middleware.rdf,-->
-						<!--							org.universAAL.middleware.service,-->
-						<!--							org.universAAL.middleware.service.owl,-->
-						<!--							org.universAAL.middleware.service.owls.process,-->
-						<!--							org.universAAL.middleware.service.owls.profile,-->
-						<!--							org.universAAL.middleware.util,-->
-						<!--							org.universAAL.ontology.profile,-->
-						<!--							org.universAAL.ontology.location.address,-->
-						<!--							org.universAAL.ontology.location.outdoor,-->
-<!---->
-						<!--							java.sql.*, javax.swing,-->
-						<!--							org.osgi.service.*,-->
-						<!--							org.osgi.framework,-->
-						<!--							javax.xml.*,-->
-<!---->
-						<!--							com.mysql.jdbc, org.slf4j,-->
-						<!--							javax.swing.border, javax.swing.text,-->
-						<!--							org.universAAL.agenda.client,-->
-						<!--							org.universAAL.agenda.ont,-->
-						<!--							org.universAAL.agenda.ont.service,-->
-						<!--							org.universAAL.agendaEventSelectionTool.client,-->
-						<!--							org.universAAL.ontology.agendaEventSelection-->
-						<!--							</Import-Package>-->
+							org.universAAL.agenda.gui.components,
+							org.universAAL.agenda.gui.osgi</Private-Package>
+						<Import-Package>
+							org.universAAL.middleware.rdf,
+							org.universAAL.middleware.owl,
+							org.universAAL.middleware.rdf.impl,
+							org.universAAL.middleware.util,
+							org.universAAL.middleware.container,
+							org.universAAL.middleware.container.osgi,
+							org.universAAL.middleware.container.utils,
+							org.universAAL.middleware.context,
+							org.universAAL.middleware.service.owl,
+							org.universAAL.middleware.service.owls.profile,
+							org.universAAL.middleware.service,
+							org.universAAL.agenda.client,
+							org.universAAL.agenda.client.osgi,
+							org.universAAL.ontology.profile,
+							org.universAAL.ontology.agenda,
+							org.universAAL.ontology.agendaEventSelection,
+							org.universAAL.agendaEventSelectionTool.client,
+							org.universAAL.ontology.agenda.service,
+							org.universAAL.ontology.location.address,
+							javax.xml.datatype,
+							javax.swing,
+							org.osgi.framework,
+							*</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<profiles>
 		<profile>
 			<id>uAAL-Runtime</id>
@@ -172,6 +159,6 @@
 				</dependency>
 			</dependencies>
 		</profile>
-	</profiles>	
+	</profiles>
 
 </project>
