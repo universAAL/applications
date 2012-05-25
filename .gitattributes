@@ -551,6 +551,7 @@ health/health.profile.manager/pom.xml -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProvider.java -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ProfileServerManager.java -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ProjectActivator.java -text
+health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/ArtifactTest.java -text
 health/health.test.treatment.generator/pom.xml -text
 health/health.test.treatment.generator/src/main/java/health/test/treatment/generator/ProjectActivator.java -text
 health/health.test.treatment.generator/src/main/java/health/test/treatment/generator/TreatmentGenerator.java -text

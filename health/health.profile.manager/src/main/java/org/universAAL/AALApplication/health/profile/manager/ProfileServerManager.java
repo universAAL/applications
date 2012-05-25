@@ -35,9 +35,9 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.profile.Profilable;
 import org.universAAL.ontology.profile.Profile;
 import org.universAAL.ontology.profile.SubProfile;
-import org.universAAL.ontology.profile.health.HealthProfile;
 import org.universAAL.ontology.profile.service.ProfilingService;
 import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.HealthProfile;
 
 /**
  * This class provides useful methods for accessing the health profile by using 
@@ -96,12 +96,12 @@ public class ProfileServerManager {
 		    		LogUtils.logInfo(moduleContext, ProfileServerManager.class,
 		    				"getHealthProfile",
 		    				new Object[] { "there are no sub profiles" }, null);
-		    		return null;
+		    		return newHealthProfile(userURI);
 		    	}
 		    	Iterator iter = subProfiles.iterator();
 		    	while(iter.hasNext()) {
 		    		SubProfile subProfile = (SubProfile)iter.next();
-		    		if(subProfile.MY_URI.equals(HealthProfile.MY_URI)) {
+		    		if(subProfile.getClassURI().equals(HealthProfile.MY_URI)) {
 		    			return (HealthProfile)subProfile;
 		    		}
 		    	}
@@ -123,6 +123,23 @@ public class ProfileServerManager {
 		}
 	}
 	
+	private HealthProfile newHealthProfile(String userURI) {
+		HealthProfile hp = new HealthProfile();
+		ServiceRequest req = new ServiceRequest(new ProfilingService(null),
+				null);
+			req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, userURI);
+			req.addAddEffect(new String[] { ProfilingService.PROP_CONTROLS,
+				Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE },
+				hp);
+			ServiceResponse resp = caller.call(req);
+			if (resp.getCallStatus().equals(CallStatus.succeeded)) {
+				return hp;
+			}
+			else {
+				return null;
+			}	
+	}
+
 	/**
 	 * Updates the {org.universAAL.ontology.profile.health.HealthProfile}.
 	 *  
