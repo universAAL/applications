@@ -27,8 +27,8 @@ public abstract class MotivationalMessage extends Message {
   public static final String MY_URI = MessageOntology.NAMESPACE
     + "MotivationalMessage";
   
-  public static final String PROP_ILLNESS = MessageOntology.NAMESPACE
-		    + "illness";
+  public static final String PROP_DISEASE = MessageOntology.NAMESPACE
+		    + "disease";
   public static final String PROP_TREATMENT_TYPE = MessageOntology.NAMESPACE
     + "treatment_type";
   public static final String PROP_MOTIVATIONAL_STATUS = MessageOntology.NAMESPACE
@@ -46,9 +46,9 @@ public abstract class MotivationalMessage extends Message {
     super(uri);
   }
   
-  public MotivationalMessage (String illness, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, Object content) {
-	  	this.setIllness(illness);
-	  	this.setTreatmentType(treatmentType);
+  public MotivationalMessage (String diseaseURI, String treatmentTypeURI, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, Object content) {
+	  	this.setDiseaseURI(diseaseURI);
+	  	this.setTreatmentTypeURI(treatmentTypeURI);
 	  	this.setMotivationalStatus(motStatus);
 	  	this.setMMessageType(mtype);
 	  	this.setContent(content);
@@ -96,7 +96,7 @@ public abstract class MotivationalMessage extends Message {
 
   public boolean isWellFormed() {
 	return true 
-      && props.containsKey(PROP_ILLNESS)
+      && props.containsKey(PROP_DISEASE)
       && props.containsKey(PROP_MESSAGE_TYPE)
       && props.containsKey(PROP_MOTIVATIONAL_STATUS)
       && props.containsKey(PROP_TREATMENT_TYPE);
@@ -123,23 +123,23 @@ public abstract class MotivationalMessage extends Message {
   }		
 
 
-  public String getTreatmentType() {
+  public String getTreatmentTypeURI() {
     return (String)props.get(PROP_TREATMENT_TYPE);
   }		
 
-  public void setTreatmentType(String ttype) {
-    if (ttype != null)
-      props.put(PROP_TREATMENT_TYPE, ttype);
+  public void setTreatmentTypeURI(String ttype) {
+	  if (ttype != null)
+		  props.put(PROP_TREATMENT_TYPE, ttype);
   }	
-  
-  public String getIllness() {
-	    return (String)props.get(PROP_ILLNESS);
-	  }		
 
-	  public void setIllness(String illness) {
-	    if (illness != null)
-	      props.put(PROP_ILLNESS, illness);
-	  }	
+  public String getDiseaseURI() {
+	  return (String)props.get(PROP_DISEASE);
+  }		
+
+  public void setDiseaseURI(String illness) {
+	  if (illness != null)
+		  props.put(PROP_DISEASE, illness);
+  }	
 
   //OTHER METHODS
   
