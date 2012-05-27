@@ -1,0 +1,30 @@
+main       [2012-05-24 17:58:51,951] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/DataRepresentation.owl 
+main       [2012-05-24 17:58:57,926] INFO  - Cryptography utils initialized successfully! 
+main       [2012-05-24 17:58:58,004] INFO  - SodaPopImpl->init(): SodaPopPeer with ID '1377f927418@Marina-PC+7f9ff455' started! 
+main       [2012-05-24 17:58:58,646] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/ContextBus.owl 
+main       [2012-05-24 17:58:58,742] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/ServiceBus.owl 
+main       [2012-05-24 17:58:58,927] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/UIBus.owl 
+main       [2012-05-24 17:58:59,191] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/PhysicalWorld.owl 
+main       [2012-05-24 17:58:59,379] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.persona.ima.igd.fhg.de/Shape.owl 
+main       [2012-05-24 17:58:59,410] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/uAAL.owl 
+main       [2012-05-24 17:58:59,425] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/SpaceConfiguration.owl 
+main       [2012-05-24 17:58:59,503] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/Profile.owl 
+main       [2012-05-24 17:58:59,597] ERROR - OntologyManagement->register(): The ontology http://ontology.universAAL.org/Profile.owl is already registered; it can not be registered a second time. 
+main       [2012-05-24 17:58:59,847] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universaal.org/HealthMeasurement 
+main       [2012-05-24 17:59:00,003] DEBUG - OntologyManagement->register(): Registering ontology: http://health.ontology.universaal.org/HealthOntology 
+main       [2012-05-24 17:59:00,065] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universaal.org/QuestionnaireOntology 
+main       [2012-05-24 18:10:34,663] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/DataRepresentation.owl 
+main       [2012-05-24 18:10:37,054] INFO  - Cryptography utils initialized successfully! 
+main       [2012-05-24 18:10:37,095] INFO  - SodaPopImpl->init(): SodaPopPeer with ID '1377f9d29e4@Marina-PC+942c1e36' started! 
+main       [2012-05-24 18:10:37,361] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/ContextBus.owl 
+main       [2012-05-24 18:10:37,433] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/ServiceBus.owl 
+main       [2012-05-24 18:10:37,567] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/UIBus.owl 
+main       [2012-05-24 18:10:37,869] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/PhysicalWorld.owl 
+main       [2012-05-24 18:10:37,913] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.persona.ima.igd.fhg.de/Shape.owl 
+main       [2012-05-24 18:10:37,929] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/uAAL.owl 
+main       [2012-05-24 18:10:37,932] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/SpaceConfiguration.owl 
+main       [2012-05-24 18:10:37,978] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universAAL.org/Profile.owl 
+main       [2012-05-24 18:10:38,118] ERROR - OntologyManagement->register(): The ontology http://ontology.universAAL.org/Profile.owl is already registered; it can not be registered a second time. 
+main       [2012-05-24 18:10:38,299] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universaal.org/HealthMeasurement 
+main       [2012-05-24 18:10:38,479] DEBUG - OntologyManagement->register(): Registering ontology: http://health.ontology.universaal.org/HealthOntology 
+main       [2012-05-24 18:10:38,596] DEBUG - OntologyManagement->register(): Registering ontology: http://ontology.universaal.org/QuestionnaireOntology 

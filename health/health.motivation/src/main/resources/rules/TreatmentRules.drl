@@ -11,16 +11,16 @@ import org.universaal.ontology.owl.MotivationalMessageClassification;
 
 #Whenever a treatment is detected a consent message is sent to the user
 
-rule "Treatment Detection" no-loop 
+rule "Treatment Detection" no-loop  
 	
 	when
 		detectedTreatment: Treatment(name != "")  // A new treatment, with a name, is detected
 	then 
-		TreatmentDetection.insertDetectedTreatment(detectedTreatment); //sólo válido para JUnit
+		TreatmentDetection.insertDetectedTreatment(detectedTreatment); //solo valido para JUnit
         MessageManager.sendMessageToUser(HeartFailure.MY_URI, Treatment.MY_URI,
                                         MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry);
         System.out.println("Tratamiento " + detectedTreatment.getName()+ " detectado");//traza
-        //en esta regla debe probarse tanto la detección del tratamiento como que se ha enviado bien el mensaje
+        //en esta regla debe probarse tanto la deteccion del tratamiento como que se ha enviado bien el mensaje
 
 		
 end 
@@ -63,7 +63,7 @@ end
 rule "Threshold of maintenance achieved" salience no-loop
 	when
 	//cuando se sobrepase el umbral del 85% realizado (para tratamientos finitos) 
-	// o el umbral que estime el m�dico en el permanente (por defecto un a�o)
+	// o el umbral que estime el medico en el permanente (por defecto un a�o)
 	then 
 	//el estado del tratamiento cambia a maintenance
 	// se activan las reglas de action
