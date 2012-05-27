@@ -19,6 +19,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentDetection;
+import org.universAAL.itests.IntegrationTest;
 import org.universaal.ontology.health.owl.Diet;
 import org.universaal.ontology.health.owl.Treatment;
 
@@ -29,7 +30,7 @@ import org.universaal.ontology.health.owl.Treatment;
  * @author mdelafuente
  *
  */
-public class TestTreatmentDetection extends TestCase{
+public class TestTreatmentDetection extends IntegrationTest{
 
 	private KnowledgeBase kbase;
 	private static StatefulKnowledgeSession ksession;
@@ -43,7 +44,7 @@ public class TestTreatmentDetection extends TestCase{
 	 * @throws Exception 
 	 */
 	@Before
-	public void setUp() throws Exception{
+	public void onSetUp() throws Exception{
 		//load up the knowledge base
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 
@@ -64,7 +65,7 @@ public class TestTreatmentDetection extends TestCase{
 	}
 
 	@After
-	public void tearDown()
+	public void onTearDown()
 	{
 		ksession.dispose();
 	}
@@ -77,9 +78,9 @@ public class TestTreatmentDetection extends TestCase{
 	public void testTreatmentDetection(){
 
 		//load the facts
-		treatment1 = new Diet ("Dieta baja en grasa", "descripci�n"); //valid treatment
-		treatment2 = new Diet ("Dieta baja en sal", "descripci�n");//valid treatment
-		treatment3 = new Diet ("", "descripci�n");// invalid treatment		
+		treatment1 = new Diet ("Dieta baja en grasa", "descripcion"); //valid treatment
+		treatment2 = new Diet ("Dieta baja en sal", "descripcion");//valid treatment
+		treatment3 = new Diet ("", "descripcion");// invalid treatment		
 
 		//insert the facts in drools working memory
 		ksession.insert(treatment1);

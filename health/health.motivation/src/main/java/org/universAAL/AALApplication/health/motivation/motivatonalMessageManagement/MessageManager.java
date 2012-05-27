@@ -37,6 +37,8 @@ public class MessageManager {
 	public File enMessagesDB;
 	public File spMessagesDB; 
 	
+	private static boolean testInterface = true;
+	
 	public final Locale SPANISH = new Locale ("es", "ES");
 	private final int EN = 1;
 	private final int ES = 0;
@@ -344,7 +346,20 @@ public class MessageManager {
 		
 		Object unprocessedContent = getMotivationalMessageContent(disease, treatmentType, motStatus, messageType);
 		String processedMessage = decodeMessageContent(unprocessedContent);
-		MessageServiceTools.sendMessage(processedMessage);
+		if(testInterface){
+			MessageServiceTools.sendMessage(processedMessage);	
+		}
+		
+		
+		
+	}
+	
+	private void changeToPlatformInterface(){
+		testInterface=false;
+	}
+	
+	private void changeToTestInterface(){
+		testInterface=true;
 	}
 
 	/**
