@@ -19,29 +19,42 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
+import org.universaal.ontology.disease.owl.Disease;
 
-public class PhysicalActivity extends HealthyHabitsAdoption {
+public class MeasuredPhysicalActivity extends TakeMeasurementActivity {
   public static final String MY_URI = HealthOntology.NAMESPACE
     + "PhysicalActivity";
   public static final String PROP_HAS_ASSOCIATED_MEASUREMENT = HealthOntology.NAMESPACE
     + "hasAssociatedMeasurement";
 
-
-  public PhysicalActivity () {
-    super();
-  }
+  public MeasuredPhysicalActivity (){
+	  super();
+  } 
   
-  public PhysicalActivity (String uri) {
+  public MeasuredPhysicalActivity (String uri) {
     super(uri);
   }
 
-  public PhysicalActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt){
-	 super(assistedPerson, caregiver, tname, description, stDt);
-  } 
-  
-  public PhysicalActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, TreatmentPlanning tp){
-	  super(assistedPerson, caregiver, tname, description, tp);
+  public MeasuredPhysicalActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, Disease disease) {
+	    super(assistedPerson, caregiver, tname, description, stDt, disease);
   }
+  
+  public MeasuredPhysicalActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, Disease disease){
+	  super(assistedPerson, caregiver, tname, tp, description, disease);
+  }
+  public MeasuredPhysicalActivity (String tname, String description, Disease disease){
+	  super(tname, description, disease);
+  } 
+
+  public MeasuredPhysicalActivity (String tname, String description, XMLGregorianCalendar stDt, Disease disease){
+	  super(tname, description, stDt, disease);
+  }
+  
+  public MeasuredPhysicalActivity (String tname, String description, TreatmentPlanning tp, Disease disease){
+	  super(tname, description, tp, disease);
+  }
+
+  
   public String getClassURI() {
     return MY_URI;
   }

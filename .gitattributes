@@ -619,11 +619,11 @@ health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthOntolog
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthProfile.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthyHabitsAdoption.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/HeartRateRequirement.java -text svneol=unset#application/octet-stream
+health/ont.health/src/main/java/org/universaal/ontology/health/owl/MeasuredPhysicalActivity.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/MeasurementRequirements.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/MotivationalStatusType.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/PerformedMeasurementSession.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/PerformedSession.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/PhysicalActivity.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/PlannedSession.java -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/ReposeHeartRateRequirement.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/StatusType.java -text svneol=unset#application/octet-stream

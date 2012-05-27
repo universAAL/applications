@@ -19,6 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
+import org.universaal.ontology.disease.owl.Disease;
 
 public abstract class HealthyHabitsAdoption extends Treatment {
   public static final String MY_URI = HealthOntology.NAMESPACE
@@ -32,17 +33,27 @@ public abstract class HealthyHabitsAdoption extends Treatment {
   public HealthyHabitsAdoption (String uri) {
     super(uri);
   }
-  public HealthyHabitsAdoption (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt){
-	  super(assistedPerson, caregiver, tname, stDt, description);
+  
+  public HealthyHabitsAdoption (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, Disease disease ){
+	  super(assistedPerson, caregiver, tname,description, stDt, disease);
   }
   
-  public HealthyHabitsAdoption (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, TreatmentPlanning tp){
-	  super(assistedPerson, caregiver, tname, tp, description);
+  public HealthyHabitsAdoption (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, Disease disease){
+	  super(assistedPerson, caregiver, tname, tp, description, disease);
   }
   
-  public HealthyHabitsAdoption(String name, String description){
-	  super(name, description);
+  public HealthyHabitsAdoption(String tname, String description, Disease disease){
+	  super(tname, description, disease);
   }
+  
+  public HealthyHabitsAdoption (String tname, String description, XMLGregorianCalendar stDt, Disease disease){
+	  super(tname, description,stDt,disease);
+  }
+  
+  public HealthyHabitsAdoption(String tname, String description, TreatmentPlanning tp, Disease disease){
+	  super(tname, description, tp, disease);
+  }
+  
   public String getClassURI() {
     return MY_URI;
   }

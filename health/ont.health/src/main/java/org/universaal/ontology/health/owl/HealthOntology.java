@@ -37,6 +37,7 @@ import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.Profile;
 import org.universAAL.ontology.profile.health.Illness;
+import org.universaal.ontology.disease.owl.Disease;
 import org.universaal.ontology.health.HealthOntologyFactory;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
 import org.universaal.ontology.health.owl.services.GetProfileService;
@@ -363,12 +364,12 @@ public final class HealthOntology extends Ontology {
       StatusType.MY_URI, 1, 1));
 /*    
     oci2 = extendExistingOntClassInfo(Illness.MY_URI);
-    
-   oci.addObjectProperty(Treatment.PROP_ILLNESS).setFunctional();
+    */
+   oci.addObjectProperty(Treatment.PROP_IS_ASSOCIATED_TO_DISEASE).setFunctional();
     oci.addRestriction(MergedRestriction
-      .getAllValuesRestrictionWithCardinality(Treatment.PROP_ILLNESS, 
-      Illness.MY_URI, 1, 1));
-   */ 
+      .getAllValuesRestrictionWithCardinality(Treatment.PROP_IS_ASSOCIATED_TO_DISEASE, 
+      Disease.MY_URI, 1, 1));
+   
     oci.addObjectProperty(Treatment.PROP_HAS_TREATMENT_PLANNING).setFunctional();
     oci.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_HAS_TREATMENT_PLANNING, 
@@ -422,13 +423,13 @@ public final class HealthOntology extends Ontology {
     
     
     //load PhysicalActivity 
-    oci = createNewOntClassInfo(PhysicalActivity.MY_URI, factory, 1);
+    oci = createNewOntClassInfo(MeasuredPhysicalActivity.MY_URI, factory, 1);
     oci.setResourceComment("This concept describes a physical activity.");
-    oci.setResourceLabel("PhysicalActivity");
+    oci.setResourceLabel("MeasuredPhysicalActivity");
     oci.addSuperClass(HealthyHabitsAdoption.MY_URI); 
-    oci.addObjectProperty(PhysicalActivity.PROP_HAS_ASSOCIATED_MEASUREMENT).setFunctional();
+    oci.addObjectProperty(MeasuredPhysicalActivity.PROP_HAS_ASSOCIATED_MEASUREMENT).setFunctional();
     oci.addRestriction(MergedRestriction
-      .getAllValuesRestrictionWithCardinality(PhysicalActivity.PROP_HAS_ASSOCIATED_MEASUREMENT, 
+      .getAllValuesRestrictionWithCardinality(MeasuredPhysicalActivity.PROP_HAS_ASSOCIATED_MEASUREMENT, 
       TakeMeasurementActivity.MY_URI, 1, 1));
     
     
@@ -443,6 +444,10 @@ public final class HealthOntology extends Ontology {
     oci.addObjectProperty(HealthProfile.PROP_IS_ASSIGNED_TO_AP);
     oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(HealthProfile.PROP_IS_ASSIGNED_TO_AP, AssistedPerson.MY_URI, 1, 1));
     
+    //load Diet
+    oci = createNewOntClassInfo(Diet.MY_URI, factory, 32);  
+    oci.setResourceLabel("Diet");
+    oci.setResourceComment("");
     
     // extension for AssistedPersonProfile: an assisted person can contain a health profile, where treatments are specified.
     oci=extendExistingOntClassInfo(AssistedPersonProfile.MY_URI);
@@ -459,8 +464,6 @@ public final class HealthOntology extends Ontology {
     	      .getAllValuesRestriction(PROP_PRESCRIBES_TREATMENT, 
     	      Treatment.MY_URI));
     
-
-
     /*
      * Services
      */
