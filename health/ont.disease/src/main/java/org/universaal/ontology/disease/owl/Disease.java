@@ -4,7 +4,6 @@ import java.util.Hashtable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.universaal.ontology.health.owl.Treatment;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
 
@@ -30,8 +29,7 @@ public class Disease extends ManagedIndividual {
 	+ "diagnostic";
 	public static final String PROP_PRONOSTIC =  DiseaseOntology.NAMESPACE
 	+ "pronostic";
-	public static final String PROP_HAS_TREATMENT =  DiseaseOntology.NAMESPACE
-	+ "hasTreatment";
+	
 
   public Disease () {
     super();
@@ -59,7 +57,6 @@ public class Disease extends ManagedIndividual {
       && props.containsKey(PROP_CONTAGIOUS)
       && props.containsKey(PROP_DIAGNOSTIC)
       && props.containsKey(PROP_PRONOSTIC)
-      && props.containsKey(PROP_HAS_TREATMENT)
       ;
   }
   
@@ -177,48 +174,4 @@ public class Disease extends ManagedIndividual {
 		}
 	}  
 	
-	
-	public Treatment[] getTreatments() {
-
-		Object propList = props.get(PROP_HAS_TREATMENT);
-		if (propList instanceof List) {
-			return (Treatment[]) ((List) propList).toArray(new Treatment[0]);
-		} else {
-			List returnList = new ArrayList();
-			if (propList != null)
-				returnList.add((Treatment) propList);
-			return (Treatment[]) returnList.toArray(new Treatment[0]);
-		}  
-	}	
-
-	public void setTreatments(Treatment[] treatments) {
-		List propList = new ArrayList(treatments.length);
-		for (int i = 0; i < treatments.length; i++) {
-			propList.add(treatments[i]);
-		}
-		props.put(PROP_HAS_TREATMENT, propList);
-	}
-
-
-	
-	public void addTreatment(Treatment treatment) {
-		Object propList = props.get(PROP_HAS_TREATMENT);
-		if (propList instanceof List) {
-			List list = (List) propList;
-			list.add(treatment);
-			props.put(PROP_HAS_TREATMENT, list);
-		} else if (propList == null) {
-			props.put(PROP_HAS_TREATMENT, treatment);
-		} else {
-			List list = new ArrayList();
-			list.add((Sympthom) propList);
-			list.add(treatment);
-			props.put(PROP_HAS_TREATMENT, list);
-		}
-	}  
-  
-
-
-
-
 }

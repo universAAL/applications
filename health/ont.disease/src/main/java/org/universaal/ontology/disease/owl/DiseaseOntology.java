@@ -29,8 +29,6 @@ import org.universaal.ontology.ICD10Diseases.owl.Neoplasms;
 import org.universaal.ontology.ICD10Diseases.owl.NervousSystemDisease;
 import org.universaal.ontology.ICD10Diseases.owl.RespiratorySystemDisease;
 import org.universaal.ontology.disease.DiseaseFactory;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.Treatment;
 
 
 /**
@@ -52,7 +50,6 @@ public final class DiseaseOntology extends Ontology {
     addImport(DataRepOntology.NAMESPACE);
     addImport(ServiceBusOntology.NAMESPACE);
     addImport(LocationOntology.NAMESPACE);
-    addImport(HealthOntology.NAMESPACE);
 		
     
     OntClassInfoSetup oci_DiseaseSeverityStatus;
@@ -70,11 +67,11 @@ public final class DiseaseOntology extends Ontology {
 
  // load DiseaseTimeEvolvingStatus
     
-    oci_DiseaseTimeEvolvingStatus = createNewAbstractOntClassInfo(DiseaseSeverityStatus.MY_URI);
+    oci_DiseaseTimeEvolvingStatus = createNewAbstractOntClassInfo(DiseaseTimeEvolvingStatus.MY_URI);
     oci_DiseaseTimeEvolvingStatus.setResourceComment("This class defines the types of possible status stages of the disease: mild, seriously ill, chronic, critical, terminal.");
     oci_DiseaseTimeEvolvingStatus.setResourceLabel("StatusType");
     oci_DiseaseTimeEvolvingStatus.toEnumeration(new ManagedIndividual[] {
-    		DiseaseTimeEvolvingStatus.acute, DiseaseTimeEvolvingStatus.chronic });
+    		DiseaseTimeEvolvingStatus.acute, DiseaseTimeEvolvingStatus.chronic});
     
     
     // ******* Declaration of regular classes of the ontology ******* //
@@ -182,12 +179,6 @@ public final class DiseaseOntology extends Ontology {
     oci_Disease.addRestriction(MergedRestriction 
     		.getAllValuesRestrictionWithCardinality(Disease.PROP_CONTAGIOUS, 
     		TypeMapper.getDatatypeURI(Boolean.class), 1, 1));
-    
-    oci_Disease.addObjectProperty(Disease.PROP_HAS_TREATMENT);
-    oci_Disease.addRestriction(MergedRestriction
-      .getAllValuesRestrictionWithCardinality(Disease.PROP_HAS_TREATMENT, 
-      Treatment.MY_URI,1,1));
-    
     
     oci_CertainInfectiousParasiticDisease.setResourceComment("");
     oci_CertainInfectiousParasiticDisease.setResourceLabel("");
