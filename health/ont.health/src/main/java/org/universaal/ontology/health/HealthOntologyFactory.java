@@ -29,7 +29,7 @@ public class HealthOntologyFactory extends ResourceFactoryImpl {
      case 0:
 	    return new BloodPressureRequirement(instanceURI);
      case 1:
-	    return new PhysicalActivity(instanceURI);
+	    return new MeasuredPhysicalActivity(instanceURI);
      case 2:
 	    return new MeasurementRequirements(instanceURI);
      case 3:
@@ -82,6 +82,8 @@ public class HealthOntologyFactory extends ResourceFactoryImpl {
     	  return new GetProfileService(instanceURI);
       case 31:
     	  return new UpdateProfileService(instanceURI);
+      case 32:
+    	  return new Diet(instanceURI);
 	}
 	return null;
   }

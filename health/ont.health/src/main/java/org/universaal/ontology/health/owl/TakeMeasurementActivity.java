@@ -19,6 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
+import org.universaal.ontology.disease.owl.Disease;
 
 public class TakeMeasurementActivity extends Treatment {
 
@@ -36,12 +37,25 @@ public class TakeMeasurementActivity extends Treatment {
   public TakeMeasurementActivity (String uri) {
     super(uri);
   }
-  public TakeMeasurementActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt){
-	  super(assistedPerson, caregiver, tname, stDt, description);
+  
+  public TakeMeasurementActivity ( AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, Disease disease){
+	  super(assistedPerson, caregiver, tname, description, stDt, disease);
   }
   
-  public TakeMeasurementActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, TreatmentPlanning tp){
-	  super(assistedPerson, caregiver, tname, tp, description);
+  public TakeMeasurementActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, Disease disease){
+	  super(assistedPerson, caregiver, tname, tp, description, disease);
+  }
+  
+  public TakeMeasurementActivity (String tname, String description, Disease disease){
+	  super(tname, description,disease);
+  }
+  
+  public TakeMeasurementActivity(String tname, String description, XMLGregorianCalendar stDt, Disease disease){
+	  super(tname, description,stDt, disease);
+  }
+  
+  public TakeMeasurementActivity(String tname, String description, TreatmentPlanning tp, Disease disease){
+	  super(tname, description, tp, disease);
   }
   
   public String getClassURI() {

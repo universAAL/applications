@@ -26,6 +26,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
+import org.universaal.ontology.disease.owl.Disease;
 
 public abstract class Treatment extends ManagedIndividual {
 	
@@ -39,8 +40,7 @@ public abstract class Treatment extends ManagedIndividual {
     + "completeness";
   public static final String PROP_STATUS = HealthOntology.NAMESPACE
     + "status";
- // public static final String PROP_DISEASE = HealthOntology.NAMESPACE
-  //+ "disease";
+  
   public static final String PROP_HAS_TREATMENT_PLANNING = HealthOntology.NAMESPACE
     + "hasTreatmentPlanning";
   public static final String PROP_IS_PRESCRIBED_BY_CAREGIVER = HealthOntology.NAMESPACE
@@ -57,6 +57,9 @@ public abstract class Treatment extends ManagedIndividual {
   public static final String PROP_HAS_PERFORMED_SESSION = HealthOntology.NAMESPACE
   + "hasPerformedSession";
   
+  public static final String PROP_IS_ASSOCIATED_TO_DISEASE = HealthOntology.NAMESPACE
+  + "isAssociatedToADisease";
+  
 
 // CONSTRUCTORS
   public Treatment () {
@@ -67,16 +70,17 @@ public abstract class Treatment extends ManagedIndividual {
     super(uri);
   }
   
-  public Treatment(AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, XMLGregorianCalendar stDt, String description){
+  public Treatment(AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, Disease disease ){
 		//super(assistedPerson + "." + name);
 		this.setName(tname);
 		this.setCaregiver(caregiver);
 		this.setCompleteness(0);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(stDt); // depending on the date, the treatment will be actived or planned
+		this.setAssociatedDisease(disease);
 	}
   
-  public Treatment(AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description){
+  public Treatment(AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, Disease disease){
 		//super(assistedPerson + "." + name);
 		this.setName(tname);
 		this.setCaregiver(caregiver);
@@ -84,16 +88,36 @@ public abstract class Treatment extends ManagedIndividual {
 		this.setTreatmentPlanning(tp);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(tp.getStartDate()); // depending on the date, the treatment will be actived or planned
+		this.setAssociatedDisease(disease);
 	}
   
-  public Treatment(String tname, String description){
+  public Treatment(String tname, String description, Disease disease){
 		//super(assistedPerson + "." + name);
 		this.setName(tname);
 		this.setCompleteness(0);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(); // depending on the date, the treatment will be actived or planned
+		this.setAssociatedDisease(disease);
+	}
+  
+  public Treatment(String tname, String description, XMLGregorianCalendar stDt, Disease disease){
+		//super(assistedPerson + "." + name);
+		this.setName(tname);
+		this.setCompleteness(0);
+		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
+		this.checkStatus(stDt); // depending on the date, the treatment will be actived or planned
+		this.setAssociatedDisease(disease);
 	}
 
+  public Treatment(String tname, String description, TreatmentPlanning tp, Disease disease){
+		//super(assistedPerson + "." + name);
+		this.setName(tname);
+		this.setCompleteness(0);
+		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
+		this.checkStatus(); // depending on the date, the treatment will be actived or planned
+		this.setAssociatedDisease(disease);
+		this.setTreatmentPlanning(tp);
+	}
 
   public String getClassURI() {
     return MY_URI;
@@ -113,7 +137,8 @@ public abstract class Treatment extends ManagedIndividual {
       && props.containsKey(PROP_HAS_PRIVACY)
       && props.containsKey(PROP_DESCRIPTION)
       && props.containsKey(PROP_MEASUREMENT_REQUIREMENTS)
-      && props.containsKey(PROP_HAS_PERFORMED_SESSION);
+      && props.containsKey(PROP_HAS_PERFORMED_SESSION)
+      && props.containsKey(PROP_IS_ASSOCIATED_TO_DISEASE);
   }
 
  //GETTERS & SETTERS
@@ -180,16 +205,16 @@ public abstract class Treatment extends ManagedIndividual {
     if (caregiver != null)
       props.put(PROP_IS_PRESCRIBED_BY_CAREGIVER, caregiver);
   }	
-  /*
-  public Illness getIllness() {
-	    return (Illness)props.get(PROP_ILLNESS);
+  
+  public Disease getAssociatedDisease() {
+	    return (Disease)props.get(PROP_IS_ASSOCIATED_TO_DISEASE);
 	  }		
 
-	  public void setIllness(Disease disease) {
+	  public void setAssociatedDisease(Disease disease) {
 	    if (disease != null)
-	      props.put(PROP_DISEASE, disease);
+	      props.put(PROP_IS_ASSOCIATED_TO_DISEASE, disease);
 	  }	
-*/
+
   /*
   public Privacy getPrivacy() {
     return (Privacy)props.get(PROP_HAS_PRIVACY);
@@ -364,7 +389,6 @@ public void inicializateTP(XMLGregorianCalendar stDt, XMLGregorianCalendar endDt
 	this.setTreatmentPlanning(tp);
 	
 }
-
 
 public boolean hasMeasurementRequirements(){
 	if(getMeasurementRequirements()!=null)
