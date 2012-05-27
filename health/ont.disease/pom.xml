@@ -38,10 +38,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.bus.io</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.bus.service</artifactId>
 			</dependency>
 			<dependency>
