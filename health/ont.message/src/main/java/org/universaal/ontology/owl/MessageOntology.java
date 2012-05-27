@@ -27,8 +27,12 @@ import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.MessageOntologyFactory;
+import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.MeasurementRequirements;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
+import org.universaal.ontology.health.owl.WeightRequirement;
+import org.universaal.ontology.healthmeasurement.owl.PersonWeight;
 
 
 /**
@@ -51,6 +55,7 @@ public final class MessageOntology extends Ontology {
 	    addImport(PhThingOntology.NAMESPACE);
 		addImport(ServiceBusOntology.NAMESPACE);
 	    addImport(ProfileOntology.NAMESPACE);
+	    addImport(HealthOntology.NAMESPACE);
 		
     OntClassInfoSetup oci;
 
@@ -122,12 +127,19 @@ public final class MessageOntology extends Ontology {
     oci = createNewOntClassInfo(MotivationalQuestionnaire.MY_URI, factory, 0);
     oci.setResourceComment("");
     oci.setResourceLabel("MotivationalQuestionnaire");
-    oci.addSuperClass(MotivationalMessage.MY_URI); 
+    oci.addSuperClass(MotivationalMessage.MY_URI);
+    
+    oci.addDatatypeProperty(MotivationalQuestionnaire.PROP_CONTENT)
+    .addSuperProperty(MotivationalMessage.PROP_CONTENT);
+    oci.addRestriction(MergedRestriction
+    		.getAllValuesRestrictionWithCardinality(MotivationalQuestionnaire.PROP_CONTENT, 
+    				Questionnaire.MY_URI, 1, 1)); //un mensaje de cuestionario tiene como contenido un questionnaire
+    /*
     oci.addObjectProperty(MotivationalQuestionnaire.PROP_HAS_QUESTIONNAIRE).setFunctional();
     oci.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(MotivationalQuestionnaire.PROP_HAS_QUESTIONNAIRE, 
       Questionnaire.MY_URI, 1, 1));
-
+     */
     
 
     //load MotivationalPlainMessage 
@@ -135,6 +147,12 @@ public final class MessageOntology extends Ontology {
     oci.setResourceComment("");
     oci.setResourceLabel("MotivationalPlainMessage");
     oci.addSuperClass(MotivationalMessage.MY_URI); 
+    
+    oci.addDatatypeProperty(MotivationalPlainMessage.PROP_CONTENT)
+    .addSuperProperty(MotivationalMessage.PROP_CONTENT);
+    oci.addRestriction(MergedRestriction
+    		.getAllValuesRestrictionWithCardinality(MotivationalPlainMessage.PROP_CONTENT, 
+    				TypeMapper.getDatatypeURI(String.class), 1, 1)); //un mensaje plano tiene como contenido un String
 
 
     

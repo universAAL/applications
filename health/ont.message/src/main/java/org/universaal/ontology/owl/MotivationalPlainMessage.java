@@ -38,8 +38,8 @@ public class MotivationalPlainMessage extends MotivationalMessage {
   }
   */
   
-  public MotivationalPlainMessage(String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, String message){
-	  super(illness, ttype, motStatus, mtype, message);
+  public MotivationalPlainMessage(String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, String content){
+	  super(illness, ttype, motStatus, mtype, content);
   }
   
   public String getClassURI() {
@@ -51,6 +51,6 @@ public class MotivationalPlainMessage extends MotivationalMessage {
   }
 
   public boolean isWellFormed() {
-	return true ;
+	return true;
   }
 }

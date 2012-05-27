@@ -24,9 +24,9 @@ public class MotivationalQuestionnaire extends MotivationalMessage {
 //NAMESPACE & PROPERTIES
   public static final String MY_URI = MessageOntology.NAMESPACE
     + "MotivationalQuestionnaire";
-  public static final String PROP_HAS_QUESTIONNAIRE = MessageOntology.NAMESPACE
+  /*public static final String PROP_HAS_QUESTIONNAIRE = MessageOntology.NAMESPACE
     + "hasQuestionnaire";
-
+*/
 //CONSTRUCTORS
   public MotivationalQuestionnaire () {
     super();
@@ -54,7 +54,8 @@ public class MotivationalQuestionnaire extends MotivationalMessage {
   
   public MotivationalQuestionnaire(String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, Questionnaire questionnaire){
 	  super(illness, ttype, motStatus, mtype, questionnaire);
-	  this.setHasQuestionnaire(questionnaire);
+	  //this.setHasQuestionnaire(questionnaire);
+	  this.setContent(questionnaire);
   }
   
   public String getClassURI() {
@@ -66,12 +67,15 @@ public class MotivationalQuestionnaire extends MotivationalMessage {
 
   public boolean isWellFormed() {
 	return true 
-      && props.containsKey(PROP_HAS_QUESTIONNAIRE);
+      //&& props.containsKey(PROP_HAS_QUESTIONNAIRE)
+	;
   }
 
   		
 
 //GETTERS & SETTERS
+  
+  /*
   public void setHasQuestionnaire(Questionnaire questionnaire) {
     if (questionnaire != null)
       props.put(PROP_HAS_QUESTIONNAIRE, questionnaire);
@@ -80,4 +84,5 @@ public class MotivationalQuestionnaire extends MotivationalMessage {
   public Questionnaire getHasQuestionnaire() {
 	    return (Questionnaire)props.get(PROP_HAS_QUESTIONNAIRE);
   }
+*/
 }
