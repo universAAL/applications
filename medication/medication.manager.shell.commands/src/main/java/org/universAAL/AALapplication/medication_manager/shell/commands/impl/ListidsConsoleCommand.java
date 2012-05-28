@@ -22,11 +22,10 @@ public final class ListidsConsoleCommand extends ConsoleCommand {
           "The listids command doesn't expect any parameters");
     }
 
-    String[] descriptions = Usecase.getUsecaseDescriptions();
-    for (int i = 0; i < descriptions.length; i++) {
-      String desc = descriptions[i];
-      int usecaseId = i + 1;
-      printImplementedUsecaseId(usecaseId, desc);
+    Usecase[] usecases = Usecase.getUsecaseDescriptions();
+    for (int i = 0; i < usecases.length; i++) {
+      Usecase uc = usecases[i];
+      printImplementedUsecaseId(uc.getUsecaseId(), uc.getDescription());
     }
 
   }

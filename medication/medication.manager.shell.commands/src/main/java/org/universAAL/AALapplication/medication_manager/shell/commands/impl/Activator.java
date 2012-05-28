@@ -24,6 +24,8 @@ public class Activator implements BundleActivator {
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
+    Usecase.setModuleContext(mc);
+
     Hashtable props = new Hashtable();
     props.put(OSGI_COMMAND_SCOPE, MedicationConsoleCommands.COMMAND_PREFIX);
     props.put(OSGI_COMMAND_FUNCTION, new String[]{

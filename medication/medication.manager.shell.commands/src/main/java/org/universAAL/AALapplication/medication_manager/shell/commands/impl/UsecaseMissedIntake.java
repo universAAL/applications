@@ -10,14 +10,19 @@ import org.universAAL.ontology.profile.User;
  */
 public final class UsecaseMissedIntake extends Usecase {
 
-  private static final String USECASE = "UC12: Incompliancy identification - The service provides warnings " +
+  private static final String USECASE_TITLE = "UC12: Incompliancy identification";
+  private static final String USECASE = USECASE_TITLE + " - The service provides warnings " +
       "about side effects and possible incompliancy with some food and drinks, " +
       "so that the Nutrition Adviser Service compose a health menu";
+
+  public UsecaseMissedIntake(int usecaseId) {
+    super(usecaseId);
+  }
 
   @Override
   public void execute(String... parameters) {
     User saiedUser = UserIDs.getSaiedUser();
-    Log.info("Executing the UC04.1: Medicine intake control (pill dispenser) . The mocked user is : " +
+    Log.info("Executing the " + USECASE_TITLE + " . The mocked user is : " +
         saiedUser, getClass());
 
 

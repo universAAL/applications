@@ -27,8 +27,6 @@ public final class ProviderPrecautionService extends Precaution {
 
     //Register
 
-    System.out.println("****************URAAAAAAAAAAAAAAAAAAAA");
-
     OntologyManagement.getInstance().register(
         new SimpleOntology(MY_URI, Precaution.MY_URI,
             new ResourceFactoryImpl() {

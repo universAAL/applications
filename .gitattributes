@@ -757,8 +757,11 @@ medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapp
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/MedicationManagerShellException.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/Usecase.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecaseConsoleCommand.java -text
+medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecaseDispenserUpsideDown.java -text
+medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecaseMedicationReminder.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecaseMissedIntake.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecasePrecaution.java -text
+medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecaseRequestMedicationInfo.java -text
 medication/medication.manager.ui.runner/README.txt -text
 medication/medication.manager.ui.runner/Run.bat -text
 medication/medication.manager.ui.runner/pax.configuration -text
@@ -817,9 +820,13 @@ medication/medication.manager.ui.runner/runner/felix/system.properties -text
 medication/medication.manager.ui.runner/runner/remoteDebug.bat -text
 medication/medication.manager.ui.runner/runner/run.bat -text
 medication/medication.manager.ui/pom.xml -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/DispenserUpsideDownDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/ReminderDialog.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/RequestMedicationInfoDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Activator.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/DispenserUpsideDownDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/ReminderDialogProvider.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/RequestMedicationInfoDialogProvider.java -text
 medication/medication.missing.services.simulation/artifact.composite -text
 medication/medication.missing.services.simulation/pom.xml -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/MedicationConsumer.java -text
