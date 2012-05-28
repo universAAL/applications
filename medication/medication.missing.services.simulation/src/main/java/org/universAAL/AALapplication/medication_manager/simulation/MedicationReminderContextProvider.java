@@ -10,8 +10,6 @@ import org.universAAL.middleware.context.owl.ContextProviderType;
 import org.universAAL.middleware.owl.Enumeration;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.medMgr.DueIntake;
-import org.universAAL.ontology.medMgr.MissedIntake;
-import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
 /**

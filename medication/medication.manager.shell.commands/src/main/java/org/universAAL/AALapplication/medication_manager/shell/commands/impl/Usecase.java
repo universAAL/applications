@@ -1,5 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
+import org.universAAL.middleware.container.ModuleContext;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -9,12 +11,35 @@ import java.util.Map;
  */
 public abstract class Usecase {
 
+  private final int usecaseId;
+
+  public static ModuleContext moduleContext;
   private static ListidsConsoleCommand listidsConsoleCommand;
   private static final Map<Integer, Usecase> USECASE_MAP = new HashMap<Integer, Usecase>();
 
   static {
-    USECASE_MAP.put(1, new UsecasePrecaution());
-    USECASE_MAP.put(2, new UsecaseMissedIntake());
+    int id = 1;
+    USECASE_MAP.put(id, new UsecasePrecaution(id));
+    id++;
+    USECASE_MAP.put(id, new UsecaseMissedIntake(id));
+    id++;
+    USECASE_MAP.put(id, new UsecaseMedicationReminder(id));
+    id++;
+    USECASE_MAP.put(id, new UsecaseRequestMedicationInfo(id));
+    id++;
+    USECASE_MAP.put(id, new UsecaseDispenserUpsideDown(id));
+  }
+
+  protected Usecase(int usecaseId) {
+    this.usecaseId = usecaseId;
+  }
+
+  public int getUsecaseId() {
+    return usecaseId;
+  }
+
+  public static void setModuleContext(ModuleContext moduleContext) {
+    Usecase.moduleContext = moduleContext;
   }
 
   public static void setListidsConsoleCommand(ListidsConsoleCommand listidsConsoleCommand) {
@@ -38,17 +63,17 @@ public abstract class Usecase {
     return usecase;
   }
 
-  public static String[] getUsecaseDescriptions() {
-    String[] descriptions = new String[USECASE_MAP.size()];
+  public static Usecase[] getUsecaseDescriptions() {
+    Usecase[] usecases = new Usecase[USECASE_MAP.size()];
     Iterator<Usecase> iter = USECASE_MAP.values().iterator();
     int i = 0;
     while (iter.hasNext()) {
       Usecase next = iter.next();
-      descriptions[i] = next.getDescription();
+      usecases[i] = next;
       i++;
     }
 
-    return descriptions;
+    return usecases;
   }
 
 

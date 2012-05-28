@@ -10,13 +10,18 @@ import org.universAAL.ontology.profile.User;
  */
 public final class UsecasePrecaution extends Usecase {
 
-  private static final String USECASE = "UC04.1: Medicine intake control (pill dispenser) - The service " +
+  private static final String USECASE_TITLE = "UC04.1: Medicine intake control (pill dispenser)";
+  private static final String USECASE = USECASE_TITLE + " - The service " +
       "notifies a caregiver upon missed intake. Triggered by the proper event published by the dispenser";
+
+  public UsecasePrecaution(int usecaseId) {
+    super(usecaseId);
+  }
 
   @Override
   public void execute(String... parameters) {
     User saiedUser = UserIDs.getSaiedUser();
-    Log.info("Executing the UC12: Incompliancy identification. The mocked user is : " +
+    Log.info("Executing the " + USECASE_TITLE + ". The mocked user is : " +
         saiedUser, getClass());
 
 

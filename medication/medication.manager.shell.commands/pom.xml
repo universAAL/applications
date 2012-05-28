@@ -29,6 +29,11 @@
       <artifactId>medication.missing.services.simulation</artifactId>
       <version>B.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>medication.manager.ui</artifactId>
+      <version>B.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>

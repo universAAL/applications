@@ -14,9 +14,9 @@ import org.universAAL.middleware.ui.rdf.Submit;
 
 import java.util.Locale;
 
-public class ReminderDialog extends UICaller {
+public class DispenserUpsideDownDialog extends UICaller {
 
-  public ReminderDialog(ModuleContext context) {
+  public DispenserUpsideDownDialog(ModuleContext context) {
     super(context);
   }
 
@@ -36,7 +36,7 @@ public class ReminderDialog extends UICaller {
   public void showDialog(Resource inputUser) {
     Form f = Form.newDialog("Medication Manager UI", new Resource());
     //start of the form model
-    new SimpleOutput(f.getIOControls(), null, null, "Reminder!");
+    new SimpleOutput(f.getIOControls(), null, null, "Dispenser upside down!");
     //...
     new Submit(f.getSubmits(), new Label("Done", null), "doneForm");
     //stop of form model

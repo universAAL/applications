@@ -28,24 +28,24 @@ public final class Time extends Service {
   }
 
   public int getPropSerializationType(String propURI) {
-      return PROP_SERIALIZATION_FULL;
-    }
+    return PROP_SERIALIZATION_FULL;
+  }
 
-    public String getClassURI() {
-      return MY_URI;
-    }
+  public String getClassURI() {
+    return MY_URI;
+  }
 
-    public boolean isWellFormed() {
-      return true;
-    }
+  public boolean isWellFormed() {
+    return true;
+  }
 
   public int getYear() {
     return ((Integer) props.get(YEAR)).intValue();
   }
 
   public int getMonth() {
-      return ((Integer) props.get(MONTH)).intValue();
-    }
+    return ((Integer) props.get(MONTH)).intValue();
+  }
 
   public int getDay() {
     return ((Integer) props.get(DAY)).intValue();
@@ -64,8 +64,8 @@ public final class Time extends Service {
   }
 
   public void setMonth(int month) {
-      props.put(MONTH, Integer.valueOf(month));
-    }
+    props.put(MONTH, Integer.valueOf(month));
+  }
 
   public void setDay(int day) {
     props.put(DAY, Integer.valueOf(day));

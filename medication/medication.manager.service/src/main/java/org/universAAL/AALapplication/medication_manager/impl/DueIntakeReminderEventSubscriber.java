@@ -8,8 +8,6 @@ import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.ontology.medMgr.DueIntake;
-import org.universAAL.ontology.medMgr.MissedIntake;
-import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
 /**

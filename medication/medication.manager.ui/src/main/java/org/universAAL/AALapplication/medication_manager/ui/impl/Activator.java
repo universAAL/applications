@@ -7,26 +7,26 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 public class Activator implements BundleActivator {
 
-	static ModuleContext context;
-	public ReminderDialogProvider service;
+  static ModuleContext context;
+  public ReminderDialogProvider service;
 
-	public void start(BundleContext arg0) throws Exception {
-		context = uAALBundleContainer.THE_CONTAINER
-                .registerModule(new Object[] {arg0});
-		context.logDebug("Initialising Project", null);
+  public void start(BundleContext arg0) throws Exception {
+    context = uAALBundleContainer.THE_CONTAINER
+        .registerModule(new Object[]{arg0});
+    context.logDebug("Initialising Project", null);
 
-		/*
-		 * uAAL stuff
-		 */
-		service = new ReminderDialogProvider(context);
+    /*
+       * uAAL stuff
+       */
+    service = new ReminderDialogProvider(context);
 
-		context.logInfo("Project started", null);
-	}
+    context.logInfo("Project started", null);
+  }
 
 
-	public void stop(BundleContext arg0) throws Exception {
-		// TODO Auto-generated method stub
+  public void stop(BundleContext arg0) throws Exception {
+    // TODO Auto-generated method stub
 
-	}
+  }
 
 }
