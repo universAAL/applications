@@ -10,6 +10,10 @@ import org.universAAL.ontology.profile.User;
  */
 public final class UsecaseMissedIntake extends Usecase {
 
+  private static final String USECASE = "UC12: Incompliancy identification - The service provides warnings " +
+      "about side effects and possible incompliancy with some food and drinks, " +
+      "so that the Nutrition Adviser Service compose a health menu";
+
   @Override
   public void execute(String... parameters) {
     User saiedUser = UserIDs.getSaiedUser();
@@ -22,4 +26,8 @@ public final class UsecaseMissedIntake extends Usecase {
 
   }
 
+  @Override
+  public String getDescription() {
+    return USECASE;
+  }
 }

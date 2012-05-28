@@ -8,8 +8,9 @@ public final class UsecaseConsoleCommand extends ConsoleCommand {
   private static final String COMMAND_INFO =
       "The usecase command expects exactly one parameter usecase id";
 
-  public UsecaseConsoleCommand(String name, String description) {
+  public UsecaseConsoleCommand(String name, String description, ListidsConsoleCommand listidsCommand) {
     super(name, description);
+    Usecase.setListidsConsoleCommand(listidsCommand);
   }
 
   @Override

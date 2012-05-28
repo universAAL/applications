@@ -13,8 +13,9 @@ public final class MedicationConsoleCommands {
 
   static {
     CONSOLE_COMMANDS = new ConsoleCommand[3];
-    CONSOLE_COMMANDS[0] = createUseCaseCommand();
-    CONSOLE_COMMANDS[1] = createListidsCommand();
+    ListidsConsoleCommand listidsCommand = createListidsCommand();
+    CONSOLE_COMMANDS[0] = createUseCaseCommand(listidsCommand);
+    CONSOLE_COMMANDS[1] = listidsCommand;
     CONSOLE_COMMANDS[2] = createHelpCommand();
   }
 
@@ -25,19 +26,19 @@ public final class MedicationConsoleCommands {
     return new HelpConsoleCommand(name, description);
   }
 
-  private static ConsoleCommand createListidsCommand() {
+  private static ListidsConsoleCommand createListidsCommand() {
     String name = COMMAND_PREFIX + ':' + LISTIDS_COMMMAND;
     String description = "This command prints all available usecases ids";
 
     return new ListidsConsoleCommand(name, description);
   }
 
-  private static ConsoleCommand createUseCaseCommand() {
+  private static ConsoleCommand createUseCaseCommand(ListidsConsoleCommand listidsCommand) {
     String name = COMMAND_PREFIX + ':' + USECASE_COMMMAND;
     String description = "This command triggers the corresponding usecase wich id is provided as a parameter.\n\t" +
         "You can call " + COMMAND_PREFIX + ':' + LISTIDS_COMMMAND + " to see available usecases";
 
-    return new UsecaseConsoleCommand(name, description);
+    return new UsecaseConsoleCommand(name, description, listidsCommand);
   }
 
   public static synchronized ConsoleCommand[] getConsoleCommands() {
@@ -49,8 +50,8 @@ public final class MedicationConsoleCommands {
   }
 
   public static synchronized ConsoleCommand getListidsConsoleCommand() {
-      return CONSOLE_COMMANDS[1];
-    }
+    return CONSOLE_COMMANDS[1];
+  }
 
   public static synchronized ConsoleCommand getHelpConsoleCommand() {
     return CONSOLE_COMMANDS[2];

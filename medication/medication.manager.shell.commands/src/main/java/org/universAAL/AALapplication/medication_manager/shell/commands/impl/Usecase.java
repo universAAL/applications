@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -8,6 +9,7 @@ import java.util.Map;
  */
 public abstract class Usecase {
 
+  private static ListidsConsoleCommand listidsConsoleCommand;
   private static final Map<Integer, Usecase> USECASE_MAP = new HashMap<Integer, Usecase>();
 
   static {
@@ -15,7 +17,13 @@ public abstract class Usecase {
     USECASE_MAP.put(2, new UsecaseMissedIntake());
   }
 
+  public static void setListidsConsoleCommand(ListidsConsoleCommand listidsConsoleCommand) {
+    Usecase.listidsConsoleCommand = listidsConsoleCommand;
+  }
+
   public abstract void execute(String... parameters);
+
+  public abstract String getDescription();
 
   public static Usecase getUsecase(Integer usecaseId) {
     Usecase usecase = USECASE_MAP.get(usecaseId);
@@ -28,6 +36,19 @@ public abstract class Usecase {
     }
 
     return usecase;
+  }
+
+  public static String[] getUsecaseDescriptions() {
+    String[] descriptions = new String[USECASE_MAP.size()];
+    Iterator<Usecase> iter = USECASE_MAP.values().iterator();
+    int i = 0;
+    while (iter.hasNext()) {
+      Usecase next = iter.next();
+      descriptions[i] = next.getDescription();
+      i++;
+    }
+
+    return descriptions;
   }
 
 
