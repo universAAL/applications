@@ -10,6 +10,9 @@ import org.universAAL.ontology.profile.User;
  */
 public final class UsecasePrecaution extends Usecase {
 
+  private static final String USECASE = "UC04.1: Medicine intake control (pill dispenser) - The service " +
+      "notifies a caregiver upon missed intake. Triggered by the proper event published by the dispenser";
+
   @Override
   public void execute(String... parameters) {
     User saiedUser = UserIDs.getSaiedUser();
@@ -25,6 +28,11 @@ public final class UsecasePrecaution extends Usecase {
 
     printInfo(precaution);
 
+  }
+
+  @Override
+  public String getDescription() {
+    return USECASE;
   }
 
   private void printInfo(Precaution precaution) {

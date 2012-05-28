@@ -22,20 +22,13 @@ public final class ListidsConsoleCommand extends ConsoleCommand {
           "The listids command doesn't expect any parameters");
     }
 
-    printPrecautionUsecase();
-    printMissedIntakeUsecase();
-  }
+    String[] descriptions = Usecase.getUsecaseDescriptions();
+    for (int i = 0; i < descriptions.length; i++) {
+      String desc = descriptions[i];
+      int usecaseId = i + 1;
+      printImplementedUsecaseId(usecaseId, desc);
+    }
 
-  private void printMissedIntakeUsecase() {
-    int id = 2;
-    String usecase = "UC04.1: Medicine intake control (pill dispenser) ";
-    printImplementedUsecaseId(id, usecase);
-  }
-
-  private void printPrecautionUsecase() {
-    int id = 1;
-    String usecase = "UC12: Incompliancy identification";
-    printImplementedUsecaseId(id, usecase);
   }
 
   private void printImplementedUsecaseId(int id, String usecase) {
