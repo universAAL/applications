@@ -1,8 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
-import org.universAAL.AALapplication.medication_manager.ui.ReminderDialog;
-import org.universAAL.ontology.medMgr.UserIDs;
-import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.medMgr.MyDeviceUserMappingDatabase;
+import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
 
 /**
  * @author George Fournadjiev
@@ -20,15 +19,14 @@ public final class UsecaseMedicationReminder extends Usecase {
 
   @Override
   public void execute(String... parameters) {
-    User saiedUser = UserIDs.getSaiedUser();
-    Log.info("Executing the " + USECASE_TITLE + ". The mocked user is : " +
-        saiedUser, getClass());
+
+    String deviceId = MyDeviceUserMappingDatabase.getDeviceIdForSaiedUser();
+
+    Log.info("Executing the " + USECASE_TITLE + ". The deviceId is : " +
+        deviceId, getClass());
 
 
-    ReminderDialog reminderDialog =
-        new ReminderDialog(moduleContext);
-
-    reminderDialog.showDialog(saiedUser);
+    MedicationReminderContextProvider.dueIntakeReminderDeviceIdEvent(deviceId);
 
   }
 

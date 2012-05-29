@@ -732,6 +732,7 @@ medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/M
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MedicationException.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MedicationOntology.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MissedIntake.java -text
+medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MyDeviceUserMappingDatabase.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Precaution.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Time.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/UserIDs.java -text
@@ -742,7 +743,6 @@ medication/medication.manager.service/src/main/java/org/universAAL/AALapplicatio
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/DueIntakeReminderEventSubscriber.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Log.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MissedIntakeEventSubscriber.java -text
-medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyDeviceUserMappingDatabase.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyPrecautionDatabase.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/PrecautionProvider.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/ProviderPrecautionService.java -text

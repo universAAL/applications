@@ -11,7 +11,6 @@ public class DueIntake extends Service {
   public static final String MY_URI = MedicationOntology.NAMESPACE + "DueIntake";
 
   public static final String DEVICE_ID = MedicationOntology.NAMESPACE + "deviceId";
-  public static final String USER = MedicationOntology.NAMESPACE + "user";
 
   public DueIntake() {
     super();
@@ -39,14 +38,6 @@ public class DueIntake extends Service {
 
   public void setDeviceId(String deviceId) {
     props.put(DEVICE_ID, deviceId);
-  }
-
-  public User getUser() {
-    return (User) props.get(USER);
-  }
-
-  public void setUser(User user) {
-    props.put(USER, user);
   }
 
 }

@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.impl;
+package org.universAAL.ontology.medMgr;
 
 import org.universAAL.ontology.medMgr.DeviceIDs;
 import org.universAAL.ontology.medMgr.MedicationException;
@@ -14,12 +14,14 @@ import java.util.Map;
 public final class MyDeviceUserMappingDatabase {
 
   private static final Map<String, User> USER_DEVICE_MAPPING_MAP = new HashMap<String, User>();
+  private static final String DEVICE_ID_FOR_SAIED_USER;
 
   static {
-    fillMap();
+    DEVICE_ID_FOR_SAIED_USER = fillMapAndGetSaiedUserDeviceId();
   }
 
-  private static void fillMap() {
+  private static String fillMapAndGetSaiedUserDeviceId() {
+
     User[] allUsers = UserIDs.getAllUsers();
     String[] deviceIDs = DeviceIDs.getAllIDs();
 
@@ -31,11 +33,21 @@ public final class MyDeviceUserMappingDatabase {
       User user = allUsers[i];
       String deviceId = deviceIDs[i];
       USER_DEVICE_MAPPING_MAP.put(deviceId, user);
+      if (user.equals(UserIDs.getSaiedUser())) {
+        return deviceId;
+      }
     }
+
+    throw new MedicationException("The deviceId for the Saied user has not been found");
+
   }
 
-  public static User getUserId(String deviceId) {
+  public static User getUser(String deviceId) {
     return USER_DEVICE_MAPPING_MAP.get(deviceId);
+  }
+
+  public static String getDeviceIdForSaiedUser() {
+    return DEVICE_ID_FOR_SAIED_USER;
   }
 
 }
