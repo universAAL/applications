@@ -1,5 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 /**
  * @author George Fournadjiev
  */
@@ -22,9 +25,12 @@ public final class ListidsConsoleCommand extends ConsoleCommand {
           "The listids command doesn't expect any parameters");
     }
 
-    Usecase[] usecases = Usecase.getUsecaseDescriptions();
-    for (int i = 0; i < usecases.length; i++) {
-      Usecase uc = usecases[i];
+    Collection<Usecase> usecases = Usecase.getUsecaseMap();
+
+    Iterator<Usecase> iterator = usecases.iterator();
+
+    while (iterator.hasNext()) {
+      Usecase uc = iterator.next();
       printImplementedUsecaseId(uc.getUsecaseId(), uc.getDescription());
     }
 

@@ -10,9 +10,11 @@ import org.universAAL.ontology.profile.User;
  */
 public final class UsecasePrecaution extends Usecase {
 
-  private static final String USECASE_TITLE = "UC04.1: Medicine intake control (pill dispenser)";
-  private static final String USECASE = USECASE_TITLE + " - The service " +
-      "notifies a caregiver upon missed intake. Triggered by the proper event published by the dispenser";
+
+  private static final String USECASE_TITLE = "UC12: Incompliancy identification";
+    private static final String USECASE = USECASE_TITLE + " - The service provides warnings " +
+        "about side effects and possible incompliancy with some food and drinks, " +
+        "so that the Nutrition Adviser Service compose a health menu";
 
   public UsecasePrecaution(int usecaseId) {
     super(usecaseId);

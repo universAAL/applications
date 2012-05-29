@@ -10,7 +10,6 @@ public final class UsecaseConsoleCommand extends ConsoleCommand {
 
   public UsecaseConsoleCommand(String name, String description, ListidsConsoleCommand listidsCommand) {
     super(name, description);
-    Usecase.setListidsConsoleCommand(listidsCommand);
   }
 
   @Override
