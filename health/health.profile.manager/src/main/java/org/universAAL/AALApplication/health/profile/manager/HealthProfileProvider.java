@@ -23,7 +23,7 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.profile.health.HealthProfile;
+import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.services.GetProfileService;
 import org.universaal.ontology.health.owl.services.UpdateProfileService;
 
