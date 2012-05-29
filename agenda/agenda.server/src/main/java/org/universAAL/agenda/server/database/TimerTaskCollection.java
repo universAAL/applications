@@ -58,14 +58,14 @@ public class TimerTaskCollection {
 	try {
 	    Thread.sleep(1000 * 10);
 	} catch (Exception e) {
-	    System.out.println(e.getMessage());
+	    System.err.println(e.getMessage());
 	}
 	System.out.println("Canceling tt1...");
 	tt1.cancel();
 	try {
 	    Thread.sleep(1000 * 10);
 	} catch (Exception e) {
-	    System.out.println(e.getMessage());
+	    System.err.println(e.getMessage());
 	}
 	System.out.println("Canceling tt2...");
 	tt2.cancel();

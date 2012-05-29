@@ -122,9 +122,9 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 
 	headPanel.add(headerMessage);
 
-	// SC2011: breadcrumbs
+	//breadcrumbs
 	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >Home -> Event Info</font>");
+		"<html><font face=\"MyriadPro\" size=\"5\" >"+Messages.getString("JEventInfo.Breadcrumb.Home.EventInfo")+"</font>");
 	l.setBackground(Color.white);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -268,11 +268,11 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 	calendarCombo.setBackground(GuiConstants.textActiveBackground);
 	calendarCombo.setForeground(new Color(0x00c129));
 	calendarCombo.setOpaque(true);
-
+	
 	// 3. calendar panel
 	calPanel = new JPanel(new GridLayout(1, 1));
 	b = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
-		"Calendar" + //$NON-NLS-1$
+		Messages.getString("JEventInfo.Calendar") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
 	b.setTitleFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
 	b.setTitleColor(new Color(0x565656));

@@ -110,9 +110,9 @@ public class JEventList implements PersonaWindow {
 
 	headPanel.add(headerMessage);
 
-	// SC2011: breadcrumbs
+	//breadcrumbs
 	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >Home -> Event list</font>");
+		"<html><font face=\"MyriadPro\" size=\"5\" >"+Messages.getString("JEventInfo.Breadcrumb.Home.EventList")+"</font>");
 	l.setBackground(Color.white);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -437,7 +437,7 @@ public class JEventList implements PersonaWindow {
 	    moreInfo = new JLabel(Messages
 		    .getString("JEventList.ClickForMoreInfo")); //$NON-NLS-1$
 	    moreInfo.setFont(new Font("MyriadPro", Font.ITALIC, 25)); //$NON-NLS-1$
-	    moreInfo.setForeground(new java.awt.Color(100, 167, 127));
+	    moreInfo.setForeground(new java.awt.Color(255, 102, 127)); //orange
 
 	    setLayout(new BorderLayout());// GridLayout(1, 3));
 	    add(info, BorderLayout.WEST);

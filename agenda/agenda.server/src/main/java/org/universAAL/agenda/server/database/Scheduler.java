@@ -398,33 +398,50 @@ public class Scheduler {
     }
 
     public TimerTaskEntry removeReminderTask(int eventId) {
-	System.out.println("Remove event reminder: " + eventId);
 	TimerTaskEntry tte = (TimerTaskEntry) forthcomingReminders
 		.remove(new Integer(eventId));
+
+	LogUtils.logInfo(mcontext, this.getClass(), "removeReminderTask",
+		new Object[] { "Reminder with id: " + eventId + " removed." },
+		null);
+
 	if (tte != null) {
+	    LogUtils.logInfo(mcontext, this.getClass(), "removeReminderTask",
+		    new Object[] { "Reminder with id: " + eventId
+			    + " start cancelled." }, null);
 	    tte.tt.cancel();
 	}
 	return tte;
     }
 
     public TimerTaskEntry removeStartEventTask(int eventId) {
-	System.out.println("Remove start event task: " + eventId);
 	TimerTaskEntry tte = (TimerTaskEntry) forthcomingStartEvents
 		.remove(new Integer(eventId));
+	LogUtils
+		.logInfo(mcontext, this.getClass(), "removeStartEventTask",
+			new Object[] { "Start Event with id: " + eventId
+				+ " removed." }, null);
+
 	if (tte != null) {
-	    System.out.println("cancel start reminder: " + eventId);
 	    tte.tt.cancel();
+	    LogUtils.logInfo(mcontext, this.getClass(), "removeStartEventTask",
+		    new Object[] { "Reminder with id: " + eventId
+			    + " start cancelled." }, null);
 	}
 	return tte;
     }
 
     public TimerTaskEntry removeEndEventTask(int eventId) {
-	System.out.println("Remove end event task: " + eventId);
 	TimerTaskEntry tte = (TimerTaskEntry) forthcomingEndEvents
 		.remove(new Integer(eventId));
+	LogUtils.logInfo(mcontext, this.getClass(), "removeEndEventTask",
+		new Object[] { "End Event with id: " + eventId + " removed." },
+		null);
 	if (tte != null) {
-	    System.out.println("cancel end reminder: " + eventId);
 	    tte.tt.cancel();
+	    LogUtils.logInfo(mcontext, this.getClass(), "removeEndEventTask",
+		    new Object[] { "Reminder with id: " + eventId
+			    + " start cancelled." }, null);
 	}
 	return tte;
     }

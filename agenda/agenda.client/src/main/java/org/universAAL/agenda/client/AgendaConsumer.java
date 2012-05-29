@@ -100,7 +100,7 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * 
+     * Local method for testing.
      */
     public void debugTest() {
 
