@@ -10,6 +10,7 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.profile.User;
 
 public class ReminderDialogProvider extends ServiceCallee {
 
@@ -47,7 +48,7 @@ public class ReminderDialogProvider extends ServiceCallee {
   @Override
   public ServiceResponse handleCall(ServiceCall call) {
     Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
-    new ReminderDialog(this.ctxt).showDialog((Resource) inputUser);
+    new ReminderDialog(this.ctxt).showDialog((User)inputUser);
     return new ServiceResponse(CallStatus.succeeded);
   }
 
