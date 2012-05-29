@@ -62,7 +62,9 @@
 							<Bundle-Activator>org.universaal.ontology.disease.Activator</Bundle-Activator>
 							<Bundle-Description>${project.description}</Bundle-Description>
 							<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-							<Export-Package>org.universaal.ontology.disease.owl.*</Export-Package>
+							<Export-Package>org.universaal.ontology.disease.owl.*,
+							org.universaal.ontology.ICD10CirculatorySystemDiseases.owl,
+							org.universaal.ontology.ICD10Diseases.owl</Export-Package>
 							<Private-Package>org.universaal.ontology.disease.*</Private-Package>							
 						</instructions>
 					</configuration>
