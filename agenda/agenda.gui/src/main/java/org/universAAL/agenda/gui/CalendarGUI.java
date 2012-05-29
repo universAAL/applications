@@ -61,7 +61,7 @@ public class CalendarGUI extends JWindow {
 	    estActivator = new org.universAAL.agendaEventSelectionTool.client.osgi.Activator();
 	    estActivator.start(bc);
 
-	    caller = new AgendaClientWrapper(agendaActivator
+	    caller = new AgendaClientWrapper(mcontext, agendaActivator
 		    .getAgendaConsumer(), estActivator.getConsumer());
 	} catch (Exception e) {
 	    LogUtils
@@ -138,7 +138,8 @@ public class CalendarGUI extends JWindow {
     }
 
     public void showScreen(String screenName) {
-	System.out.println("Main");
+	LogUtils.logInfo(mcontext, this.getClass(), "showScreen",
+		new Object[] { "Show main screen." }, null);
 	CardLayout cl = (CardLayout) (rootScreen.getLayout());
 	cl.show(rootScreen, screenName);
 	rootScreen.updateUI();

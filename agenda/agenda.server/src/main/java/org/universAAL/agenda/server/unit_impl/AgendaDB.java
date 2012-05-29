@@ -46,35 +46,60 @@ public class AgendaDB implements AgendaDBInterface {
     // "qwoeiptetfngbclvkjhsfdshf3284jhdf";
     // private static final boolean DEBUG_DB = false;//Set to true to refill the
     // DB every time (for debugging)
-    /**
-     * Database URL
-     */
+    /** Database URL. */
     private String DB_URL;
-    /**
-     * Database Username
-     */
+    
+    /** Database Username. */
     private String DB_USER;
-    /**
-     * Database password
-     */
+    
+    /** Database password. */
     private String DB_PWD;
 
+    /**
+     * {@link Connection}
+     */
     private Connection conn;
+    
+    /**
+     * {@link Object}
+     */
     private Object theLock;
 
+    /**  */
     public static final boolean COMMIT = true;
+    
+    /**  */
     public static final boolean DO_NOT_COMMIT = false;
+    
+    /**  */
     public static final int SUCCESS = -1;
+    
+    /**  */
     public static final int FAIL_EXITS = -2;
+    
+    /**  */
     public static final int FAIL_NOT_EXITS = -3;
+    
+    /**  */
     public static final int FAIL = -4;
     /**
      * {@link ModuleContext}
      */
     private static ModuleContext mcontext;
 
+    /**
+     * {@link Properties}
+     */
     private Properties prop;
 
+    /**
+     * 
+     *
+     * @param mcontext 
+     * @param url 
+     * @param user 
+     * @param pwd 
+     */
     public AgendaDB(ModuleContext mcontext, String url, String user, String pwd) {
 	AgendaDB.mcontext = mcontext;
 	File confHome = new File(new BundleConfigHome("agenda")
@@ -111,6 +136,11 @@ public class AgendaDB implements AgendaDBInterface {
 
     }
 
+    /**
+     * 
+     *
+     * @return 
+     */
     public Object getLock() {
 	return theLock;
     }
@@ -137,6 +167,11 @@ public class AgendaDB implements AgendaDBInterface {
 	}
     }
 
+    /**
+     * 
+     *
+     * @throws SQLException 
+     */
     private void initDB() throws SQLException {
 
     }
@@ -159,17 +194,18 @@ public class AgendaDB implements AgendaDBInterface {
 	}
     }
 
-    /******************************
+    /*
+     * ****************************
      * database queries
-     ******************************/
+     * ****************************.
+     */
     /**
      * Return the URI of <i>all</i> {@link Calendar}s that are controlled by the
      * server
      * 
      * @return a String array
      */
-    // new version: using db
-    // IGOR
+    // new version: using unversAAL db
     public String[] getCalURIs() {
 	ResultSet result;
 	try {
@@ -186,7 +222,13 @@ public class AgendaDB implements AgendaDBInterface {
 		ids[i] = (String) calendars.get(i);
 	    return ids;
 	} catch (SQLException e) {
-	    e.printStackTrace();
+	    LogUtils
+	    .logError(
+		    mcontext,
+		    this.getClass(),
+		    "getCalURIs",
+		    new Object[] { "Exception while accessing DB for getting calendar URIs" },
+		    e);
 	}
 	return new String[0];
     }
@@ -214,7 +256,13 @@ public class AgendaDB implements AgendaDBInterface {
 	    }
 	    return calendars;
 	} catch (SQLException e) {
-	    e.printStackTrace();
+	    LogUtils
+	    .logError(
+		    mcontext,
+		    this.getClass(),
+		    "getCalendarsWithInfo",
+		    new Object[] { "Exception while accessing DB for getting calendars with info." },
+		    e);
 	}
 	return new ArrayList<Calendar>(0);
     }
@@ -246,14 +294,20 @@ public class AgendaDB implements AgendaDBInterface {
 
 	    return calendars;
 	} catch (SQLException e) {
-	    e.printStackTrace();
+	    LogUtils
+	    .logError(
+		    mcontext,
+		    this.getClass(),
+		    "getCalendarsWithInfo",
+		    new Object[] { "Exception while accessing DB for getting calendars with info for certain user." },
+		    e);
 	}
 	return new ArrayList<Calendar>(0);
     }
 
     /**
-     * Gets all calendars
-     * 
+     * Gets all calendars.
+     *
      * @return An array of calendars
      */
     public Calendar[] getCalendars() {
@@ -293,13 +347,13 @@ public class AgendaDB implements AgendaDBInterface {
     }
 
     /**
-     * Inserts a new calendar into database
-     * 
-     * @param c
-     *            An event's calendar
-     * @param owner
-     *            Owner of the calendar
+     * Inserts a new calendar into database.
+     *
+     * @param c An event's calendar
+     * @param owner Owner of the calendar
+     * @param commit yes or now to commit
      * @return A newly created calendar
+     * @throws InvalidParameterException 
      */
     public Calendar addCalendar(Calendar c, User owner, boolean commit)
 	    throws InvalidParameterException {
@@ -315,7 +369,13 @@ public class AgendaDB implements AgendaDBInterface {
 	    if (rs.next()) {
 		id = rs.getInt(1);
 	    } else {
-		System.out.println("No such user!");
+		    LogUtils
+		    .logWarn(
+			    mcontext,
+			    this.getClass(),
+			    "addCalendar",
+			    new Object[] { "No such user!" },
+			    null);
 		return null;
 	    }
 	    ps = conn.prepareStatement(prop.getProperty("addCalendar"));
@@ -325,9 +385,23 @@ public class AgendaDB implements AgendaDBInterface {
 	    c.setOwner(owner);
 	    if (commit)
 		conn.commit();
+	    LogUtils
+	    .logInfo(
+		    mcontext,
+		    this.getClass(),
+		    "addCalendar",
+		    new Object[] { "Calendar added." },
+		    null);
+	    
 	    return c;
 	} catch (SQLException e) {
-	    // e.printStackTrace();
+	    LogUtils
+	    .logError(
+		    mcontext,
+		    this.getClass(),
+		    "addCalendar",
+		    new Object[] { "Exception when adding calendar in MySQL." },
+		    e);
 	    return null;
 	}
     }
@@ -363,7 +437,13 @@ public class AgendaDB implements AgendaDBInterface {
 		return false;
 	    }
 	} catch (SQLException e) {
-	    // e.printStackTrace();
+	    LogUtils
+	    .logError(
+		    mcontext,
+		    this.getClass(),
+		    "removeCalendars",
+		    new Object[] { "Exception while removing Calendar from DB." },
+		    e);
 	    return false;
 	}
 	return true;
@@ -411,9 +491,8 @@ public class AgendaDB implements AgendaDBInterface {
      * Returns the name of the owner ({@link User}) of the {@link Calendar}
      * which is stored in the <code>position</code>-th position of the server's
      * calendar database.
-     * 
-     * @param position
-     *            the position of the calendar in server's calendar database
+     *
+     * @param calendarURI 
      * @return the calendar URI
      */
 
@@ -500,10 +579,10 @@ public class AgendaDB implements AgendaDBInterface {
 
     /**
      * Converts an SQLTimeStamp to XML Gregorian Calendar.
-     * 
-     * @param cal
+     *
+     * @param timeStamp 
      * @return XMLGregorianCalendar An XMLGregorianCalendar representation of
-     *         SQLTimeStamp.
+     * SQLTimeStamp.
      */
     public static XMLGregorianCalendar convertSQLTimeStamp2XMLGregCalendar(
 	    java.sql.Timestamp timeStamp) {
@@ -522,7 +601,10 @@ public class AgendaDB implements AgendaDBInterface {
 
     /**
      * Adds an event to database. If reminder exists, it is also added.
-     * 
+     *
+     * @param calendarURI 
+     * @param event 
+     * @param commit 
      * @return An Event ID, or -1 if adding fails
      */
     public int addEventToCalendar(String calendarURI, Event event,
@@ -673,12 +755,11 @@ public class AgendaDB implements AgendaDBInterface {
     }
 
     /**
-     * Gets all events from users calendar
-     * 
-     * @param calendarURI
-     *            A Calendar's URI
-     * @param eventID
-     *            An ID of an event
+     * Gets all events from users calendar.
+     *
+     * @param calendarURI A Calendar's URI
+     * @param eventID An ID of an event
+     * @param commit 
      * @return A newly created Event
      */
     public Event getEventFromCalendar(String calendarURI, int eventID,
@@ -696,16 +777,24 @@ public class AgendaDB implements AgendaDBInterface {
     }
 
     /**
-     * Gets all events from all calendars
-     * 
-     * @param calendarURI
-     *            A Calendar's URI
+     * Gets all events from all calendars.
+     *
+     * @param calendarURI A Calendar's URI
+     * @param commit 
      * @return List of events
      */
     public List<Event> getAllEvents(String calendarURI, boolean commit) {
 	return getEvents(calendarURI, -1, commit);
     }
 
+    /**
+     * 
+     *
+     * @param calendarURI 
+     * @param eventID 
+     * @param commit 
+     * @return 
+     */
     private List<Event> getEvents(String calendarURI, int eventID,
 	    boolean commit) {
 	List<Event> allEvents = new ArrayList<Event>();
@@ -841,10 +930,10 @@ public class AgendaDB implements AgendaDBInterface {
     }
 
     /**
-     * Removes an event from calendar
-     * 
-     * @param eventID
-     *            An ID of an event
+     * Removes an event from calendar.
+     *
+     * @param eventID An ID of an event
+     * @param commit 
      * @return A calendars URI, null otherwise
      */
     public String removeEvent(int eventID, boolean commit) {
@@ -891,7 +980,10 @@ public class AgendaDB implements AgendaDBInterface {
 
     /**
      * Updates an event and, if exists, its reminder.
-     * 
+     *
+     * @param calendarURI 
+     * @param event 
+     * @param commit 
      * @return true if an event is updated, otherwise false
      */
     public boolean updateEvent(String calendarURI, Event event, boolean commit) {
@@ -1002,7 +1094,11 @@ public class AgendaDB implements AgendaDBInterface {
 
     /**
      * Updates a reminder.
-     * 
+     *
+     * @param calendarURI 
+     * @param eventId 
+     * @param reminder 
+     * @param commit 
      * @return A reminders ID if succeeded, otherwise 0
      */
     public int updateReminder(String calendarURI, int eventId,
@@ -1046,8 +1142,11 @@ public class AgendaDB implements AgendaDBInterface {
     }
 
     /**
-     * Deletes a reminder.
-     * 
+     * Deletes/cancels a reminder.
+     *
+     * @param calendarURI 
+     * @param eventId 
+     * @param commit 
      * @return true if a reminder is deleted, otherwise false
      */
     public boolean cancelReminder(String calendarURI, int eventId,
@@ -1084,7 +1183,9 @@ public class AgendaDB implements AgendaDBInterface {
 
     }
 
-    // INFO: sql checked ok, ok
+    /* (non-Javadoc)
+     * @see org.universAAL.agenda.server.database.AgendaDBInterface#updateReminderType(java.lang.String, int, org.universAAL.ontology.agenda.ReminderType, boolean)
+     */
     public boolean updateReminderType(String calendarURI, int eventId,
 	    ReminderType reminderType, boolean commit) {
 	String updateReminder = "UPDATE reminder SET rReminderType=? "
@@ -1092,8 +1193,8 @@ public class AgendaDB implements AgendaDBInterface {
 
 	try {
 	    conn.setAutoCommit(false);
-	    // if (!calendarExists(calendarURI))
-	    // return false;
+	     if (!calendarExists(calendarURI))
+	     return false;
 
 	    // = conn.prepareStatement(checkEventInCalendarExistance);
 	    // ps.setInt(1, extractIdFromURI(calendarURI));
@@ -1303,10 +1404,9 @@ public class AgendaDB implements AgendaDBInterface {
 
     /**
      * Checks for events that are due to end in due time which is specified by
-     * argument <i>time</i>
-     * 
-     * @param time
-     *            defined interval in seconds
+     * argument <i>time</i>.
+     *
+     * @param time defined interval in seconds
      * @return A <code>List</code> with eventIds (int values)
      */
     public List<Integer> getStartingEvents(int time) {
@@ -1350,10 +1450,9 @@ public class AgendaDB implements AgendaDBInterface {
 
     /**
      * Checks for events that are due to start in due time which is specified by
-     * argument <i>time</i>
-     * 
-     * @param time
-     *            in seconds
+     * argument <i>time</i>.
+     *
+     * @param time in seconds
      * @return A <code>List</code> with eventIds (int values)
      */
     public List<Integer> getEndingEvents(int time) {

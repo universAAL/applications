@@ -56,7 +56,14 @@ public class UIProvider extends UICaller {
 	System.out.println(">>>got UIResponse in AgendaServer.UIProvider<<<");
 	// removed when transferring from IO to UI Bus (InputEvent->UIResponse)
 	// if (event.hasDialogInput()) {
-	System.out.println("Dialog ID: " + event.getDialogID());
+
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"handleUIResponse",
+			new Object[] { "AgendaServer.UIProvider received UIResponse with dialog id: "
+				+ event.getDialogID() }, null);
 	String submissionID = event.getSubmissionID();
 	if (submissionID == null) {
 	    LogUtils.logWarn(mcontext, this.getClass(), "handleUIResponse",
@@ -65,14 +72,25 @@ public class UIProvider extends UICaller {
 	}
 
 	if (SNOOZE_REMINDER.equals(submissionID)) {
-	    // get values and update profile
-	    System.out.println("Snooze reminder....");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleUIResponse",
+			    new Object[] { "AgendaServer.UIProvider received UIResponse: Snooze reminder. " },
+			    null);
 	    // do nothing
 	    return;
 	}
 
 	if (TURN_OFF_REMINDER.equals(submissionID)) {
-	    System.out.println("Turn off reminder...");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleUIResponse",
+			    new Object[] { "AgendaServer.UIProvider received UIResponse: Turn off reminder. " },
+			    null);
 	    // stopReminder
 	    try {
 		String calendarURI = (String) event.getSubmittedData()
@@ -101,9 +119,9 @@ public class UIProvider extends UICaller {
 		    new Object[] { "no user profile specified." }, null);
 	    return;
 	} else {
-	    LogUtils.logWarn(mcontext, this.getClass(),
+	    LogUtils.logInfo(mcontext, this.getClass(),
 		    "showReminderConfirmationDialog",
-		    new Object[] { "time to go." }, null);
+		    new Object[] { "Show reminder confirmation dialog." }, null);
 	}
 
 	Form form = Form.newMessage(Messages

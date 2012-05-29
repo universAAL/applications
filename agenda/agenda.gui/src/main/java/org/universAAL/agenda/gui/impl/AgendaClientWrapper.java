@@ -15,6 +15,8 @@ import java.util.TimeZone;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.profile.User;
 
@@ -27,6 +29,10 @@ public class AgendaClientWrapper {
     private static TimeZone tz;
     private static final boolean useDaylightSaving;
     private static final boolean VISIBLE_BY_DEFAULT = true;
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
 
     static {
 	tz = TimeZone.getDefault();
@@ -36,9 +42,11 @@ public class AgendaClientWrapper {
 
     }
 
-    public AgendaClientWrapper(AgendaConsumer ac, EventSelectionToolConsumer ec) {
+    public AgendaClientWrapper(ModuleContext moduleContext, AgendaConsumer ac,
+	    EventSelectionToolConsumer ec) {
 	this.ac = ac;
 	this.ec = ec;
+	mcontext = moduleContext;
     }
 
     // changed to comply with a list of calendars, not a single one
@@ -95,21 +103,27 @@ public class AgendaClientWrapper {
     }
 
     public void removeEvent(Calendar c, int eventId) {
-	System.out.println("removing event...");
+
 	boolean reply = ac.deleteCalendarEventService(c, eventId);
-	System.out.println("Event removed?: " + reply);
+	LogUtils.logInfo(mcontext, this.getClass(), "removeEvent",
+		new Object[] { "Event with id: " + eventId + " from Calendar: "
+			+ c.getName() + " remove status: " + reply }, null);
 
     }
 
     public List<String> getAllEventCategories() {
-	System.out.println("getting event categories...");
+
 	@SuppressWarnings("unchecked")
 	List<String> allEvents = (List<String>) ac.getAllEventCategories();
-	System.out.println("Event category list: " + allEvents.size());
+
+	LogUtils
+		.logInfo(mcontext, this.getClass(), "getAllEventCategories",
+			new Object[] { "Event category list size: "
+				+ allEvents.size() }, null);
+
 	return allEvents;
     }
 
-    // change to work with a list of calendars
     @SuppressWarnings("unchecked")
     public List<Event> getFilteredEvents(List<Calendar> calendars,
 	    String category, String description, int year, int month,
@@ -117,11 +131,17 @@ public class AgendaClientWrapper {
 	FilterParams filter = new FilterParams();
 	if ((category != null) && (category.length() != 0)) {
 	    filter.setCategory(category);
-	    System.out.println("category: " + category);
+	    LogUtils.logInfo(mcontext, this.getClass(), "getFilteredEvents",
+		    new Object[] { "Gets filtered events from category: "
+			    + category }, null);
+
 	}
 	if ((description != null) && (description.length() != 0)) {
 	    filter.setDescription(description);
-	    System.out.println("description: " + description);
+	    LogUtils.logInfo(mcontext, this.getClass(), "getFilteredEvents",
+		    new Object[] { "Gets filtered events with description: "
+			    + description }, null);
+
 	}
 	XMLGregorianCalendar calEnd = null;
 	XMLGregorianCalendar calStart = null;
@@ -187,49 +207,59 @@ public class AgendaClientWrapper {
     }
 
     public List<Calendar> getAllCalendars() {
-	System.out.println("getting all calendars ...");
+
 	@SuppressWarnings("unchecked")
 	List<Calendar> allCalendars = (List<Calendar>) ac
 		.getAllCalendarsService();
 	if (allCalendars == null) {
-	    System.out.println("Calendar list is empty (null value)");
+	    LogUtils.logInfo(mcontext, this.getClass(), "getAllCalendars",
+		    new Object[] { "Calendar list is empty." }, null);
 	    return new ArrayList<Calendar>(0);
 	}
-	System.out.println("Calendar list size: " + allCalendars.size());
+	LogUtils.logInfo(mcontext, this.getClass(), "getAllCalendars",
+		new Object[] { "Calendar list size: " + allCalendars.size() },
+		null);
 	return allCalendars;
     }
 
     public List<Calendar> getCalendarsByOwner(User owner) {
-	System.out.println("getting user's calendars ...");
 	@SuppressWarnings("unchecked")
 	List<Calendar> allCalendars = (List<Calendar>) ac
 		.getCalendarsByOwnerService(owner);
 	if (allCalendars == null) {
-	    System.out.println("Calendar list is empty (null value)");
+	    LogUtils.logInfo(mcontext, this.getClass(), "getCalendarsByOwner",
+		    new Object[] { "Calendar list is empty." }, null);
 	    return new ArrayList<Calendar>(0);
 	}
-	System.out.println("Calendar list size: " + allCalendars.size());
+	LogUtils.logInfo(mcontext, this.getClass(), "getCalendarsByOwner",
+		new Object[] { "Calendar list size: " + allCalendars.size() },
+		null);
 	return allCalendars;
     }
 
     public Calendar addNewCalendar(String name, User owner) {
-	System.out.println("adding new Calendar ...");
+
 	Calendar c = new Calendar();
 	c.setName(name);
 	c = ac.addNewCalendarService(c, owner);
-	System.out.println((c != null) ? "Calendar was added "
-		: "Calendar was not added");
+	if (c != null)
+	    LogUtils.logInfo(mcontext, this.getClass(), "addNewCalendar",
+		    new Object[] { "Calendar was added." }, null);
+	else
+	    LogUtils.logInfo(mcontext, this.getClass(), "addNewCalendar",
+		    new Object[] { "Calendar was not added." }, null);
 	return c;
     }
 
     public boolean removeCalendar(Calendar cal) {
-	System.out.println("removing Calendar ...");
 	Calendar c = new Calendar(cal.getURI());
 	c.setName(cal.getName());
 	c.setOwner(c.getOwner());
 	boolean succeeded = ac.removeCalendarService(c);
-	System.out.println(succeeded ? "Calendar was removed "
-		: "Calendar was not removed");
+	LogUtils
+		.logInfo(mcontext, this.getClass(), "removeCalendar",
+			new Object[] { "Calendar remove operation status: "
+				+ succeeded }, null);
 	return succeeded;
     }
 }

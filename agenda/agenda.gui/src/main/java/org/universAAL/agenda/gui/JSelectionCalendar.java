@@ -87,9 +87,9 @@ public class JSelectionCalendar implements PersonaWindow {
 
 	headPanel.add(headerMessage);
 
-	// SC2011: breadcrumbs
+	//breadcrumbs
 	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >Calendar selection</font></html>");
+		"<html><font face=\"MyriadPro\" size=\"5\" >"+Messages.getString("JEventInfo.Breadcrumb.Home.SearchEvents")+"</font></html>");
 	l.setBackground(Color.white);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));

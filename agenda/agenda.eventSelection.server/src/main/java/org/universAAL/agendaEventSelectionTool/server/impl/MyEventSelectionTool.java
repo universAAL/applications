@@ -22,6 +22,8 @@ import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
 import org.universAAL.ontology.agendaEventSelection.FilterParams;
 import org.universAAL.ontology.agendaEventSelection.TimeSearchType;
 import org.universAAL.agendaEventSelectionTool.database.EventSelectionToolDBInterface;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.TypeMapper;
 /**
  * @author kagnantis
@@ -37,8 +39,14 @@ public class MyEventSelectionTool implements EventSelectionToolDBInterface {
 
     private Connection conn;
     private Object theLock;
+    
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
 
-    public MyEventSelectionTool(String url, String user, String pwd) {
+    public MyEventSelectionTool(ModuleContext moduleContext, String url, String user, String pwd) {
+	mcontext=moduleContext;
 	DB_URL = url;
 	DB_USER = user;
 	DB_PWD = pwd;
@@ -57,9 +65,8 @@ public class MyEventSelectionTool implements EventSelectionToolDBInterface {
 	    conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
 	    initDB();
 	} catch (Exception e) {
-	    System.out
-		    .println("Exception trying to get connection to database: "
-			    + e);
+		LogUtils.logError(mcontext, this.getClass(), "connect",
+			    new Object[] { "Exception trying to get connection to database." }, e);
 	}
     }
 
@@ -71,9 +78,8 @@ public class MyEventSelectionTool implements EventSelectionToolDBInterface {
 	try {
 	    conn.close();
 	} catch (SQLException e) {
-	    System.out
-		    .println("Exception trying to close connection to database: "
-			    + e);
+		LogUtils.logError(mcontext, this.getClass(), "connect",
+			    new Object[] { "Exception trying to get connection to database." }, e);
 	}
     }
 
@@ -438,16 +444,16 @@ public class MyEventSelectionTool implements EventSelectionToolDBInterface {
 	}
     }
 
-    public static void main(String[] str) {
-	MyEventSelectionTool db = new MyEventSelectionTool(
-		DB_URL, DB_USER, DB_PWD);
-	FilterParams fp = new FilterParams(FilterParams.MY_URI + "test");
-	List<Calendar> cals = new ArrayList<Calendar>();
-	cals.add(new Calendar(Calendar.MY_URI + 6));
-	List<Event> eList = db.requestFollowingEvents(cals, 10);
-	for (Iterator<Event> it = eList.iterator(); it.hasNext();) {
-	    System.out.println("Hello: " + it.next());
-	}
-
-    }
+//    public static void main(String[] str) {
+//	MyEventSelectionTool db = new MyEventSelectionTool(
+//		DB_URL, DB_USER, DB_PWD);
+//	FilterParams fp = new FilterParams(FilterParams.MY_URI + "test");
+//	List<Calendar> cals = new ArrayList<Calendar>();
+//	cals.add(new Calendar(Calendar.MY_URI + 6));
+//	List<Event> eList = db.requestFollowingEvents(cals, 10);
+//	for (Iterator<Event> it = eList.iterator(); it.hasNext();) {
+//	    System.out.println("Hello: " + it.next());
+//	}
+//
+//    }
 }

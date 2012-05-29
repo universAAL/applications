@@ -540,15 +540,17 @@ public class AgendaProvider extends ServiceCallee implements
     }
 
     /**
+     * Cancel reminder
      * 
-     * 
-     * @param calendarURI
-     * @param eventID
-     * @return
+     * @param calendarURI calendar URI
+     * @param eventID event ID
+     * @return status if it is canceled or not
      */
     public boolean cancelReminder(String calendarURI, int eventID) {
 	if (theServer.cancelReminder(calendarURI, eventID, AgendaDB.COMMIT)) {
-	    System.out.println("Cancel reminder: " + eventID); //$NON-NLS-1$
+	    LogUtils.logInfo(mcontext, this.getClass(), "cancelReminder",
+		    new Object[] { "Cancel reminder: " +eventID },null);
+	    
 	    theScheduler.removeReminderTask(eventID);
 	    return true;
 	}
@@ -569,7 +571,7 @@ public class AgendaProvider extends ServiceCallee implements
 	    Calendar calendar = theServer.getCalendarByNameAndOwner(
 		    calendarName, owner, AgendaDB.COMMIT);
 	    if (calendar != null) {
-		System.out.println("Calendar URI: " + calendar.getURI()); //$NON-NLS-1$
+//		System.out.println("Calendar URI: " + calendar.getURI()); //$NON-NLS-1$
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		sr.addOutput(new ProcessOutput(
 			ProvidedAgendaService.OUTPUT_CALENDAR, calendar));

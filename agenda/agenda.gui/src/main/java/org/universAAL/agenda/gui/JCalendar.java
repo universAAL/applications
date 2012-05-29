@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -31,10 +32,11 @@ import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
+
 /**
  * 
  * Class showing calendar month view.
- *
+ * 
  */
 public class JCalendar implements PersonaWindow {
 
@@ -98,9 +100,9 @@ public class JCalendar implements PersonaWindow {
 
 	headPanel.add(headerMessage);
 
-	// SC2011: breadcrumbs
+	// breadcrumbs
 	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >Home</font></html>");
+		"<html><font face=\"MyriadPro\" size=\"5\" >" +Messages.getString("JCalendar.Breadcrumb.Home")+IconsHome.getIconsHomePath()+ "</font></html>");
 	l.setBackground(Color.white);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -121,7 +123,7 @@ public class JCalendar implements PersonaWindow {
 	daysOfTheWeekPanel.setBackground(Color.white);
 	JButton sun = new DecoratorButton(Messages.getString("JCalendar.Sun")); //$NON-NLS-1$
 	sun.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	sun.setBackground(new Color(0xb6d6fe)); //light blue
+	sun.setBackground(new Color(0xb6d6fe)); // light blue
 	// sun.setForeground(new java.awt.Color(250, 104, 9));
 	sun.setForeground(new java.awt.Color(15, 68, 137));
 	JButton mon = new DecoratorButton(Messages.getString("JCalendar.Mon")); //$NON-NLS-1$
@@ -210,6 +212,9 @@ public class JCalendar implements PersonaWindow {
     }
 
     public JPanel createNavScreen() {
+	// final ImageIcon next_icon = new ImageIcon(getClass().getResource(
+	//		Activator.ICON_PATH_PREFIX + "/nextMonthN.jpg")); //$NON-NLS-1$
+	//	
 	final ImageIcon next_icon = new ImageIcon(getClass().getResource(
 		Activator.ICON_PATH_PREFIX + "/nextMonthN.jpg")); //$NON-NLS-1$
 	final ImageIcon previous_icon = new ImageIcon(getClass().getResource(
@@ -218,6 +223,7 @@ public class JCalendar implements PersonaWindow {
 		Activator.ICON_PATH_PREFIX + "/back.jpg")); //$NON-NLS-1$
 	final ImageIcon dummy_icon = new ImageIcon(getClass().getResource(
 		Activator.ICON_PATH_PREFIX + "/home.jpg")); //$NON-NLS-1$
+
 	final ImageIcon search = new ImageIcon(getClass().getResource(
 		Activator.ICON_PATH_PREFIX + "/search.jpg")); //$NON-NLS-1$
 

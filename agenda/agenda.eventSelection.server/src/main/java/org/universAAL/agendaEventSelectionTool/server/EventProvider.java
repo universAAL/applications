@@ -95,7 +95,7 @@ public class EventProvider extends ServiceCallee implements
 	InputStream in = new FileInputStream(new File(confHome,
 		"credentials.properties"));
 	prop.load(in);
-	theServer = new MyEventSelectionTool(
+	theServer = new MyEventSelectionTool(mcontext,
 		prop.getProperty("database"), prop.getProperty("username"), prop.getProperty("password")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	// theServer.addListener(this);
     }

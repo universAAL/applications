@@ -21,7 +21,7 @@ public class Activator implements BundleActivator {
 
     public static String ICON_PATH_PREFIX = "/lang/icons_"
 	    + Locale.getDefault().getLanguage().toLowerCase();
-
+    
     private static BundleContext bcontext;
 
     public static final User testUser = new User(

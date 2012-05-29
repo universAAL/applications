@@ -44,6 +44,7 @@ import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
+import org.universAAL.middleware.ui.owl.Modality;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.ontology.profile.User;
@@ -75,6 +76,12 @@ public class UIProvider extends UICaller {
 	// Auto-generated method stub
     }
 
+    //FIXME finish this
+    public void forceWebHandlerShowMainMenu(){
+	
+	
+    }
+    
     /* (non-Javadoc)
      * @see org.universAAL.middleware.ui.UICaller#handleUIResponse(org.universAAL.middleware.ui.UIResponse)
      */
@@ -196,7 +203,7 @@ public class UIProvider extends UICaller {
 			    .error(
 				    "Error processing the event input: Probably a bad formatted date: {}",
 				    e);
-		    showMessageScreen(user, Messages.getString("ISubscriber3"));
+		    showMessageScreen(user, Messages.getString("UIProvider.3"));
 		} catch (NullPointerException e) {
 		    log
 			    .error(
@@ -229,6 +236,10 @@ public class UIProvider extends UICaller {
 //						  */,
 //			InputEvent.uAAL_MAIN_MENU_REQUEST);
 
+		//added when transferring to 1.1.0
+		forceWebHandlerShowMainMenu();
+		
+				
 		submit = null;
 	    }
 
@@ -274,7 +285,6 @@ public class UIProvider extends UICaller {
 
 	    else {
 		log.warn("We shouldnt have got here, with submit: ", submit);
-		// EXIT?
 		submit = null;
 	    }
 	} catch (Exception e) {
@@ -300,6 +310,8 @@ public class UIProvider extends UICaller {
 	Form f = webUI.getMainScreenMenuForm();
 	UIRequest oe = new UIRequest(user, f, LevelRating.middle,
 		Locale.ENGLISH, PrivacyLevel.insensible);
+	//force modality web
+	oe.setPresentationModality(Modality.web);
 	sendUIRequest(oe);
     }
 
@@ -309,7 +321,9 @@ public class UIProvider extends UICaller {
 			.getURI());
 	Form f = webUI.getMessageForm(msg);
 	UIRequest oe = new UIRequest(user, f, LevelRating.middle,
-		Locale.ENGLISH, PrivacyLevel.insensible);
+		Locale.getDefault(), PrivacyLevel.insensible);
+	//force modality web
+	oe.setPresentationModality(Modality.web);
 	sendUIRequest(oe);
     }
 
@@ -319,7 +333,9 @@ public class UIProvider extends UICaller {
 		.getURI());
 	Form f = webUI.getEventsForm(cal);
 	UIRequest oe = new UIRequest(user, f, LevelRating.middle,
-		Locale.ENGLISH, PrivacyLevel.insensible);
+		Locale.getDefault(), PrivacyLevel.insensible);
+	//force modality web
+	oe.setPresentationModality(Modality.web);
 	sendUIRequest(oe);
     }
 
@@ -329,7 +345,9 @@ public class UIProvider extends UICaller {
 		.getURI());
 	Form f = webUI.getGoogleForm(cal);
 	UIRequest oe = new UIRequest(user, f, LevelRating.middle,
-		Locale.ENGLISH, PrivacyLevel.insensible);
+		Locale.getDefault(), PrivacyLevel.insensible);
+	//force modality web
+	oe.setPresentationModality(Modality.web);
 	sendUIRequest(oe);
     }
 

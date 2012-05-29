@@ -1,2 +1,2 @@
 AgendaUniversAAL.sql is the DB to be put into MySQL
-credentials.properties and DBquery.properties are to be put into universAAL configurations folder..runner/configurations/agenda folder
+credentials.properties and DBquery.properties are to be put into agenda folder within universAAL configurations folder..runner/configurations/agenda
