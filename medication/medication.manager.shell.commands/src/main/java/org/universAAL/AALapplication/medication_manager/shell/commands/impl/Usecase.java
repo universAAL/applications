@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
 import org.universAAL.middleware.container.ModuleContext;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,20 +15,24 @@ public abstract class Usecase {
   private final int usecaseId;
 
   public static ModuleContext moduleContext;
-  private static ListidsConsoleCommand listidsConsoleCommand;
   private static final Map<Integer, Usecase> USECASE_MAP = new HashMap<Integer, Usecase>();
 
   static {
     int id = 1;
-    USECASE_MAP.put(id, new UsecasePrecaution(id));
+    UsecasePrecaution usecasePrecaution = new UsecasePrecaution(id);
+    USECASE_MAP.put(usecasePrecaution.getUsecaseId(), usecasePrecaution);
     id++;
-    USECASE_MAP.put(id, new UsecaseMissedIntake(id));
+    UsecaseMissedIntake usecaseMissedIntake = new UsecaseMissedIntake(id);
+    USECASE_MAP.put(usecaseMissedIntake.getUsecaseId(), usecaseMissedIntake);
     id++;
-    USECASE_MAP.put(id, new UsecaseMedicationReminder(id));
+    UsecaseMedicationReminder usecaseMedicationReminder = new UsecaseMedicationReminder(id);
+    USECASE_MAP.put(usecaseMedicationReminder.getUsecaseId(), usecaseMedicationReminder);
     id++;
-    USECASE_MAP.put(id, new UsecaseRequestMedicationInfo(id));
+    UsecaseRequestMedicationInfo usecaseRequestMedicationInfo = new UsecaseRequestMedicationInfo(id);
+    USECASE_MAP.put(usecaseRequestMedicationInfo.getUsecaseId(), usecaseRequestMedicationInfo);
     id++;
-    USECASE_MAP.put(id, new UsecaseDispenserUpsideDown(id));
+    UsecaseDispenserUpsideDown usecaseDispenserUpsideDown = new UsecaseDispenserUpsideDown(id);
+    USECASE_MAP.put(usecaseDispenserUpsideDown.getUsecaseId(), usecaseDispenserUpsideDown);
   }
 
   protected Usecase(int usecaseId) {
@@ -40,10 +45,6 @@ public abstract class Usecase {
 
   public static void setModuleContext(ModuleContext moduleContext) {
     Usecase.moduleContext = moduleContext;
-  }
-
-  public static void setListidsConsoleCommand(ListidsConsoleCommand listidsConsoleCommand) {
-    Usecase.listidsConsoleCommand = listidsConsoleCommand;
   }
 
   public abstract void execute(String... parameters);
@@ -63,18 +64,7 @@ public abstract class Usecase {
     return usecase;
   }
 
-  public static Usecase[] getUsecaseDescriptions() {
-    Usecase[] usecases = new Usecase[USECASE_MAP.size()];
-    Iterator<Usecase> iter = USECASE_MAP.values().iterator();
-    int i = 0;
-    while (iter.hasNext()) {
-      Usecase next = iter.next();
-      usecases[i] = next;
-      i++;
-    }
-
-    return usecases;
+  public static Collection<Usecase> getUsecaseMap() {
+    return USECASE_MAP.values();
   }
-
-
 }
