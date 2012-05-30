@@ -151,7 +151,7 @@ public class OPublisher extends UICaller{
 	}
 
 	public void handleUIResponse(UIResponse event) {
-		AssistedPerson user=(AssistedPerson) event.getUser();
+		AssistedPerson user= new AssistedPerson(event.getUser().getURI());
 		log.info("Received an Input Event from user {}", user.getURI());
 		String submit=event.getSubmissionID();
 

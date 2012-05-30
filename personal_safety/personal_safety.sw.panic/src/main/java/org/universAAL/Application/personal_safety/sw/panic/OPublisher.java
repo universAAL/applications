@@ -46,7 +46,7 @@ public class OPublisher extends UICaller{
 
 	public void communicationChannelBroken() {	}
 	
-	public void confirmPanic(AssistedPerson user) {
+	public void confirmPanic(Resource user) {
 		Form f = newComfimDialog();
 		sendUIRequest(new UIRequest(user, f, LevelRating.high, Locale.getDefault(), PrivacyLevel.insensible));
 	}
@@ -54,11 +54,11 @@ public class OPublisher extends UICaller{
 	protected Form newComfimDialog() {
 		//Form f = Form.newMessage("Comfirm Panic", "Do you really whant to send a panic alert?");
 		//f.setProperty(Form.LABEL_MESSAGE_KEEP, (Object) new Label("YES!",null));
-		Form f = Form.newDialog("Comfirm Panic", "");
+		Form f = Form.newDialog("Comfirm Panic", new Resource());
 		new Submit(f.getSubmits(), new Label("YES!", (String) null), PANICACTION);
 		new Submit(f.getSubmits(), new Label("NO", (String) null), "nopanic");
-		new SimpleOutput(f.getIOControls(), new Label("Do you really whant to send a panic alert?", ""),
-				null,"");
+		new SimpleOutput(f.getIOControls(), null,
+				null,"Do you really whant to send a panic alert?");
 		return f;
 	}
 
@@ -69,7 +69,7 @@ public class OPublisher extends UICaller{
 
 	public void handleUIResponse(UIResponse event) {
 		if (event.getSubmissionID().startsWith(PANICACTION)) {
-			panic.setPressedBy((AssistedPerson) event.getUser());
+			panic.setPressedBy(new AssistedPerson(event.getUser().getURI()));
 			panic.setActivated(true);
 			ContextEvent panicCE = new ContextEvent(panic, PanicButton.PROP_ACTIVATED);
 			Activator.cpublisher.publish(panicCE);

@@ -24,7 +24,7 @@
 
 						<!-- Platform -->
 						<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.1.0/composite</provision>
-						<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.1.0/composite</provision>
+						<provision>mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.2-SNAPSHOT</provision>
 
 						<!-- Services -->
 						<provision>scan-composite:mvn:org.universAAL.AALapplication/personal_safety.service/${project.version}/composite</provision>

@@ -17,6 +17,7 @@ package org.universAAL.Application.personal_safety.sw.panic;
 
 import org.universAAL.Application.personal_safety.sw.panic.osgi.Activator;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -25,7 +26,6 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.profile.AssistedPerson;
 
 public class SCallee extends ServiceCallee{
 	
@@ -76,13 +76,13 @@ public class SCallee extends ServiceCallee{
 	}
 	
 	private ServiceResponse panicButton(ServiceCall call) {
-		AssistedPerson user=null;
+		Resource user=null;
 		Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
 		/*if ((inputUser == null)||!(inputUser instanceof User)){
 			failure.addOutput(new ProcessOutput(ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,"Invalid User Input!"));
 			return failure;
 		}else{*/
-			user=(AssistedPerson)inputUser;
+			user=(Resource)inputUser;
 			Activator.opublisher.confirmPanic(user);
 		//}
 		
