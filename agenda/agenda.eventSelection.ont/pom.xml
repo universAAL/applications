@@ -69,15 +69,6 @@
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<extensions>true</extensions>
-				<executions>
-					<execution>
-						<id>bundle-manifest</id>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>manifest</goal>
-						</goals>
-					</execution>
-				</executions>				
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
@@ -88,6 +79,7 @@
 					</instructions>
 				</configuration>
 			</plugin>
+            
 			<!--			<plugin>-->
 			<!--				<groupId>org.apache.maven.plugins</groupId>-->
 			<!--				<artifactId>maven-compiler-plugin</artifactId>-->
@@ -97,99 +89,7 @@
 			<!--					</compilerArguments>-->
 			<!--				</configuration>-->
 			<!--			</plugin>-->
-			<plugin>
-				<groupId>org.universAAL.support</groupId>
-				<artifactId>uaal-maven-plugin</artifactId>
-				<version>1.1.0</version>
-				<executions>
-					<execution>
-						<id>CompositeMojo</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>composite</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>TestMojo</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>attach-composite</id>
-						<phase>package</phase>
-						<goals>
-							<goal>attach-artifact</goal>
-						</goals>
-						<configuration>
-							<artifacts>
-								<artifact>
-									<file>target/artifact.composite</file>
-									<type>composite</type>
-								</artifact>
-							</artifacts>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>					
+
 		</plugins>
-	</build>
-	
-	<profiles>
-		<profile>
-			<id>uAAL-Runtime</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.apache.felix</groupId>
-					<artifactId>org.osgi.compendium</artifactId>
-					<version>1.4.0</version>
-					<scope>provided</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.apache.felix</groupId>
-					<artifactId>org.apache.felix.log</artifactId>
-					<version>1.0.1</version>
-					<scope>provided</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.apache.felix</groupId>
-					<artifactId>org.apache.felix.configadmin</artifactId>
-					<version>1.2.4</version>
-					<scope>provided</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.apache.felix</groupId>
-					<artifactId>org.apache.felix.fileinstall</artifactId>
-					<version>3.1.10</version>
-					<scope>provided</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.ops4j.pax.confman</groupId>
-					<artifactId>pax-confman-propsloader</artifactId>
-					<version>0.2.2</version>
-					<scope>provided</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.universAAL.middleware</groupId>
-					<artifactId>mw.acl.upnp</artifactId>
-					<version>1.1.0</version>
-				</dependency>
-				<dependency>
-					<groupId>org.apache.felix</groupId>
-					<artifactId>org.apache.felix.upnp.basedriver</artifactId>
-					<version>0.8.0</version>
-					<scope>provided</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
- 	
+    </build>
 </project>
