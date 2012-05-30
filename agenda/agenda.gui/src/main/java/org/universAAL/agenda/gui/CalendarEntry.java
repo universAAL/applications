@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.universAAL.agenda.gui.osgi.Activator;
 /**
  * @author kagnantis
  * @author eandgrg
@@ -24,16 +23,16 @@ import org.universAAL.agenda.gui.osgi.Activator;
 class CalendarEntry extends JPanel {
 
     private static final ImageIcon CHECKED_ICON = new ImageIcon(
-	    CalendarEntry.class.getResource(Activator.ICON_PATH_PREFIX
+	    CalendarEntry.class.getResource(IconsHome.getIconsHomePath()
 		    + "/checked.jpg"));
     private static ImageIcon NOT_CHECKED_ICON = new ImageIcon(
-	    CalendarEntry.class.getResource(Activator.ICON_PATH_PREFIX
+	    CalendarEntry.class.getResource(IconsHome.getIconsHomePath()
 		    + "/unchecked.jpg"));
     private static final ImageIcon HOVER_CHECKED_ICON = new ImageIcon(
-	    CalendarEntry.class.getResource(Activator.ICON_PATH_PREFIX
+	    CalendarEntry.class.getResource(IconsHome.getIconsHomePath()
 		    + "/hover_checked.jpg"));
     private static ImageIcon HOVER_NOT_CHECKED_ICON = new ImageIcon(
-	    CalendarEntry.class.getResource(Activator.ICON_PATH_PREFIX
+	    CalendarEntry.class.getResource(IconsHome.getIconsHomePath()
 		    + "/hover_unchecked.jpg"));
 
     private final String calendarName;

@@ -73,7 +73,7 @@ public class JSelectionCalendar implements PersonaWindow {
 
     private JPanel createTitleScreen() {
 	ImageIcon persona_logo = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/month_header.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	updateTitleScreen();
@@ -101,15 +101,15 @@ public class JSelectionCalendar implements PersonaWindow {
 
     private JPanel createMainScreen() {
 	final ImageIcon selectAll_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/select_all.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/select_all.jpg")); //$NON-NLS-1$
 	final ImageIcon selectAllHover_icon = new ImageIcon(getClass()
 		.getResource(
-			Activator.ICON_PATH_PREFIX + "/select_all_hover.jpg")); //$NON-NLS-1$
+			IconsHome.getIconsHomePath() + "/select_all_hover.jpg")); //$NON-NLS-1$
 	final ImageIcon selectNone_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/select_none.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/select_none.jpg")); //$NON-NLS-1$
 	final ImageIcon selectNoneHover_icon = new ImageIcon(getClass()
 		.getResource(
-			Activator.ICON_PATH_PREFIX + "/select_none_hover.jpg")); //$NON-NLS-1$
+			IconsHome.getIconsHomePath() + "/select_none_hover.jpg")); //$NON-NLS-1$
 
 	updateCalendarsInScreen();
 
@@ -170,13 +170,13 @@ public class JSelectionCalendar implements PersonaWindow {
     public JPanel createNavScreen() {
 	JPanel nav = new JPanel();
 	ImageIcon add_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/add.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/add.jpg")); //$NON-NLS-1$
 	ImageIcon remove_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/delete.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/delete.jpg")); //$NON-NLS-1$
 	ImageIcon show_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/next.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/next.jpg")); //$NON-NLS-1$
 	ImageIcon exit_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/exit.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/exit.jpg")); //$NON-NLS-1$
 
 	JButton add = new JButton(add_icon);
 	add.setFocusPainted(false);
@@ -398,13 +398,13 @@ public class JSelectionCalendar implements PersonaWindow {
     class NewCalendarFrame extends JFrame {
 	private static final long serialVersionUID = 769864332762979644L;
 	final ImageIcon setIcon = new ImageIcon(NewCalendarFrame.class
-		.getResource(Activator.ICON_PATH_PREFIX + "/set.jpg")); //$NON-NLS-1$
+		.getResource(IconsHome.getIconsHomePath() + "/set.jpg")); //$NON-NLS-1$
 	final ImageIcon setHoverIcon = new ImageIcon(NewCalendarFrame.class
-		.getResource(Activator.ICON_PATH_PREFIX + "/set_hover.jpg")); //$NON-NLS-1$
+		.getResource(IconsHome.getIconsHomePath() + "/set_hover.jpg")); //$NON-NLS-1$
 	final ImageIcon cancelIcon = new ImageIcon(NewCalendarFrame.class
-		.getResource(Activator.ICON_PATH_PREFIX + "/cancel.jpg")); //$NON-NLS-1$
+		.getResource(IconsHome.getIconsHomePath() + "/cancel.jpg")); //$NON-NLS-1$
 	final ImageIcon cancelHoverIcon = new ImageIcon(NewCalendarFrame.class
-		.getResource(Activator.ICON_PATH_PREFIX + "/cancel_hover.jpg")); //$NON-NLS-1$
+		.getResource(IconsHome.getIconsHomePath() + "/cancel_hover.jpg")); //$NON-NLS-1$
 
 	private Set<String> existingCalendars;
 	private boolean isNameValid;
@@ -609,20 +609,20 @@ class DeleteConfirmationDialog extends JDialog {
     private final String infoText;
     private ImageIcon danger_icon = new ImageIcon(
 	    DeleteConfirmationDialog.class
-		    .getResource(Activator.ICON_PATH_PREFIX
+		    .getResource(IconsHome.getIconsHomePath()
 			    + "/icon_danger_small.jpg")); //$NON-NLS-1$
     private ImageIcon yesMiniIcon = new ImageIcon(
 	    DeleteConfirmationDialog.class
-		    .getResource(Activator.ICON_PATH_PREFIX + "/yes_mini.jpg")); //$NON-NLS-1$
+		    .getResource(IconsHome.getIconsHomePath() + "/yes_mini.jpg")); //$NON-NLS-1$
     private ImageIcon yesMiniHoverIcon = new ImageIcon(
 	    DeleteConfirmationDialog.class
-		    .getResource(Activator.ICON_PATH_PREFIX
+		    .getResource(IconsHome.getIconsHomePath()
 			    + "/yes_mini_hover.jpg")); //$NON-NLS-1$
     private ImageIcon noMiniIcon = new ImageIcon(DeleteConfirmationDialog.class
-	    .getResource(Activator.ICON_PATH_PREFIX + "/no_mini.jpg")); //$NON-NLS-1$
+	    .getResource(IconsHome.getIconsHomePath() + "/no_mini.jpg")); //$NON-NLS-1$
     private ImageIcon noMiniHoverIcon = new ImageIcon(
 	    DeleteConfirmationDialog.class
-		    .getResource(Activator.ICON_PATH_PREFIX
+		    .getResource(IconsHome.getIconsHomePath()
 			    + "/no_mini_hover.jpg")); //$NON-NLS-1$
     public static final int OK = 1;
     public static final int CANCEL = 0;

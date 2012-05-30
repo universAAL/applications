@@ -6,8 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-import org.universAAL.agenda.gui.osgi.Activator;
-
 public class VoiceButton extends JButton {
 
     private static final long serialVersionUID = 8230972694812926078L;
@@ -34,7 +32,7 @@ public class VoiceButton extends JButton {
 		+ "<font face=Myriad Pro size=4 color=#565656>Off</font></td></tr></table>";
 
 	ImageIcon voiceImage = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/sound.jpg"));
+		IconsHome.getIconsHomePath() + "/sound.jpg"));
 	setHorizontalTextPosition(SwingConstants.LEFT);
 	setText(voiceDate);
 	setIcon(voiceImage);
