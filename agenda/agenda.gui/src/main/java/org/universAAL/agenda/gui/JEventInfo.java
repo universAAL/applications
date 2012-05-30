@@ -38,7 +38,6 @@ import org.universAAL.agenda.gui.components.DatePanel;
 import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.components.ReminderPanel;
 import org.universAAL.agenda.gui.components.ReminderScreen;
-import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateTimeInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
@@ -62,15 +61,15 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
     private Event event;
     private JButton remove, save, mainb, back, voice;
     private final ImageIcon remove_icon = new ImageIcon(getClass().getResource(
-	    Activator.ICON_PATH_PREFIX + "/delete.jpg")); //$NON-NLS-1$
+	    IconsHome.getIconsHomePath() + "/delete.jpg")); //$NON-NLS-1$
     private final ImageIcon back_icon = new ImageIcon(getClass().getResource(
-	    Activator.ICON_PATH_PREFIX + "/back.jpg")); //$NON-NLS-1$
+	    IconsHome.getIconsHomePath() + "/back.jpg")); //$NON-NLS-1$
     private final ImageIcon save_icon = new ImageIcon(getClass().getResource(
-	    Activator.ICON_PATH_PREFIX + "/save.jpg")); //$NON-NLS-1$
+	    IconsHome.getIconsHomePath() + "/save.jpg")); //$NON-NLS-1$
     private final ImageIcon main_icon = new ImageIcon(getClass().getResource(
-	    Activator.ICON_PATH_PREFIX + "/main.jpg")); //$NON-NLS-1$
+	    IconsHome.getIconsHomePath() + "/main.jpg")); //$NON-NLS-1$
     private final ImageIcon edit_icon = new ImageIcon(getClass().getResource(
-	    Activator.ICON_PATH_PREFIX + "/edit.jpg")); //$NON-NLS-1$
+	    IconsHome.getIconsHomePath() + "/edit.jpg")); //$NON-NLS-1$
 
     // KS
     private JCalendar activeCalendarScreen = null;
@@ -108,7 +107,7 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 
     private JPanel createTitleScreen() {
 	ImageIcon persona_logo = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/month_header.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	updateTitleScreen();

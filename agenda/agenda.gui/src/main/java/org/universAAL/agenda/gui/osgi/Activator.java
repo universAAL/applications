@@ -1,7 +1,5 @@
 package org.universAAL.agenda.gui.osgi;
 
-import java.util.Locale;
-
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -18,9 +16,6 @@ import org.universAAL.ontology.profile.User;
  * 
  */
 public class Activator implements BundleActivator {
-
-    public static String ICON_PATH_PREFIX = "/lang/icons_"
-	    + Locale.getDefault().getLanguage().toLowerCase();
     
     private static BundleContext bcontext;
 

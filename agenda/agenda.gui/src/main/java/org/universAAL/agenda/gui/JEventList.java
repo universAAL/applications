@@ -25,7 +25,6 @@ import javax.swing.JPanel;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.agenda.gui.components.ImagePanel;
-import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 
@@ -96,7 +95,7 @@ public class JEventList implements PersonaWindow {
 
     private JPanel createTitleScreen() {
 	ImageIcon persona_logo = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/month_header.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	updateTitleScreen(-1, 2000, 0, 1);
@@ -131,13 +130,13 @@ public class JEventList implements PersonaWindow {
     public JPanel createNavScreen() {
 	JPanel nav = new JPanel();
 	ImageIcon add_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/add.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/add.jpg")); //$NON-NLS-1$
 	ImageIcon back_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/back.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/back.jpg")); //$NON-NLS-1$
 	ImageIcon next_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/next.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/next.jpg")); //$NON-NLS-1$
 	ImageIcon main_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/main.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/main.jpg")); //$NON-NLS-1$
 
 	JButton add = new JButton(add_icon);
 	add.setFocusPainted(false);

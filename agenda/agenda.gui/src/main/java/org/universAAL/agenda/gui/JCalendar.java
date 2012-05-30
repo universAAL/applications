@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,7 +28,6 @@ import javax.swing.JToolTip;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.agenda.gui.components.ImagePanel;
-import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 
@@ -84,7 +82,7 @@ public class JCalendar implements PersonaWindow {
 
     private JPanel createTitleScreen() {
 	ImageIcon uAAL_logo = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/month_header.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	String month = "May"; //$NON-NLS-1$
@@ -102,7 +100,7 @@ public class JCalendar implements PersonaWindow {
 
 	// breadcrumbs
 	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >" +Messages.getString("JCalendar.Breadcrumb.Home")+IconsHome.getIconsHomePath()+ "</font></html>");
+		"<html><font face=\"MyriadPro\" size=\"5\" >" +Messages.getString("JCalendar.Breadcrumb.Home")+ "</font></html>");
 	l.setBackground(Color.white);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -213,19 +211,19 @@ public class JCalendar implements PersonaWindow {
 
     public JPanel createNavScreen() {
 	// final ImageIcon next_icon = new ImageIcon(getClass().getResource(
-	//		Activator.ICON_PATH_PREFIX + "/nextMonthN.jpg")); //$NON-NLS-1$
+	//		IconsHome.getIconsHomePath() + "/nextMonthN.jpg")); //$NON-NLS-1$
 	//	
 	final ImageIcon next_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/nextMonthN.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/nextMonthN.jpg")); //$NON-NLS-1$
 	final ImageIcon previous_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/previousMonthN.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/previousMonthN.jpg")); //$NON-NLS-1$
 	final ImageIcon back_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/back.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/back.jpg")); //$NON-NLS-1$
 	final ImageIcon dummy_icon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/home.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/home.jpg")); //$NON-NLS-1$
 
 	final ImageIcon search = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/search.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/search.jpg")); //$NON-NLS-1$
 
 	final JButton next_month = new JButton(next_icon);
 

@@ -28,7 +28,6 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import org.universAAL.agenda.gui.components.ImagePanel;
-import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.DateUtilities;
 
 public class JSearchEvents extends JPanel implements PersonaWindow {
@@ -45,9 +44,9 @@ public class JSearchEvents extends JPanel implements PersonaWindow {
     private CalendarGUI parent;
     private JButton home, search, voice;
     private final ImageIcon search_icon = new ImageIcon(getClass().getResource(
-	    Activator.ICON_PATH_PREFIX + "/search.jpg")); //$NON-NLS-1$
+	    IconsHome.getIconsHomePath() + "/search.jpg")); //$NON-NLS-1$
     private final ImageIcon home_icon = new ImageIcon(getClass().getResource(
-	    Activator.ICON_PATH_PREFIX + "/main.jpg")); //$NON-NLS-1$
+	    IconsHome.getIconsHomePath() + "/main.jpg")); //$NON-NLS-1$
     private JTextField descTextField;
     private JComboBox monthCB, yearCB, rNoCB, categoryList;
     private JButton presentBut, limitBut;
@@ -55,9 +54,9 @@ public class JSearchEvents extends JPanel implements PersonaWindow {
     private JEventList eventScreen;
 
     private final ImageIcon trueIcon = new ImageIcon(getClass().getResource(
-	    Activator.ICON_PATH_PREFIX + "/yes_small.jpg")); //$NON-NLS-1$
+	    IconsHome.getIconsHomePath() + "/yes_small.jpg")); //$NON-NLS-1$
     private final ImageIcon falseIcon = new ImageIcon(getClass().getResource(
-	    Activator.ICON_PATH_PREFIX + "/no_small.jpg")); //$NON-NLS-1$
+	    IconsHome.getIconsHomePath() + "/no_small.jpg")); //$NON-NLS-1$
 
     public JSearchEvents(CalendarGUI parent, JEventList eventScreen) {
 	this.parent = parent;
@@ -81,7 +80,7 @@ public class JSearchEvents extends JPanel implements PersonaWindow {
 
     private JPanel createTitleScreen() {
 	ImageIcon persona_logo = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/month_header.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	updateTitle();

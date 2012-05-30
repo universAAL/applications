@@ -54,7 +54,7 @@ public class CalendarGUI extends JWindow {
     private static ModuleContext mcontext;
 
     public CalendarGUI(BundleContext bc, ModuleContext mcontext) {
-	this.mcontext = mcontext;
+	CalendarGUI.mcontext = mcontext;
 	try {
 	    agendaActivator = new org.universAAL.agenda.client.osgi.Activator();
 	    agendaActivator.start(bc);

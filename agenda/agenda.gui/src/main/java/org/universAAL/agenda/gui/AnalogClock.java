@@ -6,10 +6,20 @@ package org.universAAL.agenda.gui;
  * Jarkko Leponiemi 2003
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
+import java.awt.Stroke;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Calendar;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 /**
  * Class for creating analog clock with test main method.

@@ -28,7 +28,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
-import org.universAAL.agenda.gui.osgi.Activator;
+import org.universAAL.agenda.gui.IconsHome;
 import org.universAAL.agenda.gui.util.DateTimeInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;
@@ -55,16 +55,16 @@ public class ReminderScreen extends JPanel {
 
     private void initComponents() {
 	ImageIcon setRemSmallIcon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/set_reminder.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/set_reminder.jpg")); //$NON-NLS-1$
 	ImageIcon setCancelIcon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/cancel_reminder.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/cancel_reminder.jpg")); //$NON-NLS-1$
 	final ImageIcon closeIcon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/close_icon.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/close_icon.jpg")); //$NON-NLS-1$
 	final ImageIcon closeHoverIcon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/close_hover_icon.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/close_hover_icon.jpg")); //$NON-NLS-1$
 	final ImageIcon closePressedIcon = new ImageIcon(getClass()
 		.getResource(
-			Activator.ICON_PATH_PREFIX + "/close_pressed_icon.jpg")); //$NON-NLS-1$
+			IconsHome.getIconsHomePath() + "/close_pressed_icon.jpg")); //$NON-NLS-1$
 
 	this.setBackground(Color.white);
 	this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,

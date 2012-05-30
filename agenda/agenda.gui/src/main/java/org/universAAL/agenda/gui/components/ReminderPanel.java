@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import org.universAAL.agenda.gui.EventInfoListener;
-import org.universAAL.agenda.gui.osgi.Activator;
+import org.universAAL.agenda.gui.IconsHome;
 
 public class ReminderPanel extends JPanel {
     private static final long serialVersionUID = 7749867619210140899L;
@@ -31,11 +31,11 @@ public class ReminderPanel extends JPanel {
 
     private void initComponents() {
 	ImageIcon setRemIcon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/set_reminder_big.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/set_reminder_big.jpg")); //$NON-NLS-1$
 	ImageIcon setRemDisabledIcon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/set_reminder_big_inactive.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/set_reminder_big_inactive.jpg")); //$NON-NLS-1$
 	ImageIcon setRemHoverIcon = new ImageIcon(getClass().getResource(
-		Activator.ICON_PATH_PREFIX + "/set_reminder_hover.jpg")); //$NON-NLS-1$
+		IconsHome.getIconsHomePath() + "/set_reminder_hover.jpg")); //$NON-NLS-1$
 	Font mediumFont = new Font("MyriadPro", Font.PLAIN, 25); //$NON-NLS-1$
 	Font smallFont = new Font("MyriadPro", Font.PLAIN, 20); //$NON-NLS-1$
 	Font smallItalicsFont = new Font("MyriadPro", Font.ITALIC, 20); //$NON-NLS-1$

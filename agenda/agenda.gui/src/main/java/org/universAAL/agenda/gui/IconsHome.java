@@ -1,7 +1,7 @@
 package org.universAAL.agenda.gui;
 
-import java.io.File;
 import java.util.Locale;
+import org.universAAL.agenda.gui.osgi.Activator;
 
 /**
  * Singleton containg home path for icons.
@@ -18,13 +18,13 @@ public class IconsHome {
 	ICON_PATH_PREFIX = "/lang/icons_"
 		+ Locale.getDefault().getLanguage().toLowerCase();
 
-	File file = new File(ICON_PATH_PREFIX);
-
-	// if asked localization does not exist return english
-	if (!file.exists()) {
+	// if asked localization does not exist use english
+	if (Activator.getBundleContext().getBundle().getResource(ICON_PATH_PREFIX) == null) {
 	    ICON_PATH_PREFIX = "/lang/icons_en";
+	    System.err
+		    .println("Agenda.Gui.IconsHome file does not exists->use ENG");
 	} else {
-	    System.out.println("Agenda.Gui.IconsHome: " + ICON_PATH_PREFIX
+	    System.err.println("Agenda.Gui.IconsHome: " + ICON_PATH_PREFIX
 		    + " exists.");
 	}
 
