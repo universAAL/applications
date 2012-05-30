@@ -40,7 +40,7 @@
   <scm>
     <connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/personal_safety/pom/personal_safety.run</connection>
     <developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/personal_safety/pom/personal_safety.run</developerConnection>
-    <url>http://forge.universaal.org/gf/project/new_services/scmsvn/?path=%2Ftrunk%2F%2Fpersonal_safety.run/personal_safety.pom/personal_safety.run</url>
+    <url>http://forge.universaal.org/gf/project/new_services/scmsvn/personal_safety/personal_safety.pom/personal_safety.run</url>
   </scm>
   <issueManagement>
     <system>GForge - Tracker</system>
@@ -67,6 +67,10 @@
       <name>universAAL Snapshots</name>
       <url>http://depot.universaal.org/nexus/content/repositories/snapshots/</url>
     </snapshotRepository>
+    <site>
+      <id>depot.universaal.org</id>
+      <url>ftp://depot.universaal.org/www/Resources/maven-site/B.0.1-SNAPSHOT/new_services/personal_safety/personal_safety.pom/personal_safety.run</url>
+    </site>
   </distributionManagement>
   <properties>
     <platform.version>1.1.0</platform.version>
@@ -152,7 +156,7 @@
       <dependency>
         <groupId>org.universAAL.middleware</groupId>
         <artifactId>mw.bus.io</artifactId>
-        <version>1.1.0</version>
+        <version>1.0.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.middleware</groupId>

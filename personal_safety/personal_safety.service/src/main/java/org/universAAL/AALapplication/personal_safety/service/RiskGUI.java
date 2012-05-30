@@ -74,7 +74,7 @@ public class RiskGUI{
 		
 		new Submit(submits, new Label(HOME_SUBMIT,(String)null), SUBMIT_HOME);
 		
-		new MediaObject(controls,new Label(SMS_IMG_LABEL,imgroot + (sent?"enviarSMS.jpg":"smsNoEnviado.gif")),"image",imgroot + (sent?"enviarSMS.jpg":"smsNoEnviado.gif"));
+		new MediaObject(controls,new Label("",(String)null),"image",imgroot + (sent?"enviarSMS.jpg":"smsNoEnviado.gif"));
 		new SimpleOutput(controls,new Label("",(String)null), null, sent?SMS_TEXT:SMS_NO_TEXT);
 		
 		return f;

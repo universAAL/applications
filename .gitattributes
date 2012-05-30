@@ -1536,6 +1536,10 @@ personal_safety/personal_safety.run/runner/configurations/ui.dm/messages.propert
 personal_safety/personal_safety.run/runner/configurations/ui.dm/messages_de.properties -text
 personal_safety/personal_safety.run/runner/configurations/ui.dm/messages_en.properties -text
 personal_safety/personal_safety.run/runner/configurations/ui.dm/messages_es.properties -text
+personal_safety/personal_safety.run/runner/configurations/ui.handler.gui.swing/images/img/risk/ShinyButtonGreen5.jpg -text
+personal_safety/personal_safety.run/runner/configurations/ui.handler.gui.swing/images/img/risk/enviarSMS.jpg -text
+personal_safety/personal_safety.run/runner/configurations/ui.handler.gui.swing/images/img/risk/smsNoEnviado.gif -text
+personal_safety/personal_safety.run/runner/configurations/ui.handler.gui.swing/renderer.properties -text
 personal_safety/personal_safety.run/runner/configurations/ui.handler.gui/formsPrototypeProperties.properties -text
 personal_safety/personal_safety.run/runner/configurations/ui.handler.gui/formsPrototypes.properties -text
 personal_safety/personal_safety.run/runner/configurations/ui.handler.gui/guiMessages_en_US.properties -text
