@@ -40,14 +40,14 @@ public class ReminderDialog extends UICaller {
     if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
       System.out.println("close");
     } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
-      showRequestMedicationInfoDialog(input.getUser(), input.getDialogID());
+      showRequestMedicationInfoDialog(input.getUser());
     } else {
       System.out.println("unknown");
     }
 
   }
 
-  private void showRequestMedicationInfoDialog(Resource user, String dialogID) {
+  private void showRequestMedicationInfoDialog(Resource user) {
     System.out.println("info");
     RequestMedicationInfoDialog dialog = new RequestMedicationInfoDialog(moduleContext);
     dialog.showDialog((User) user);
