@@ -27,6 +27,10 @@ public class ArtifactTest extends IntegrationTest {
 
     private ServiceCaller caller;
     
+    public ArtifactTest() {
+        setIgnoreVersionMismatch(true);
+    }
+    
     public void onSetUp() {
     	logAllBundles();
     	
