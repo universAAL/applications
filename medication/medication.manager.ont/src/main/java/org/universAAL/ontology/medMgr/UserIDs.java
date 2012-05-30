@@ -8,7 +8,7 @@ import org.universAAL.ontology.profile.User;
 public final class UserIDs {
 
   private final static String PREFIX = "urn:org.universAAL.aal_space:test_env#";
-  private final static User[] USERS = new User[5];
+  private final static User[] USERS = new User[6];
 
   static {
     USERS[0] = new User(PREFIX + "saied");
@@ -16,6 +16,7 @@ public final class UserIDs {
     USERS[2] = new User(PREFIX + "george");
     USERS[3] = new User(PREFIX + "hector");
     USERS[4] = new User(PREFIX + "venelin");
+    USERS[5] = new User("saied");
   }
 
 
@@ -27,5 +28,9 @@ public final class UserIDs {
 
   public static User getSaiedUser() {
     return USERS[0];
+  }
+
+  public static User getSaied() {
+      return new User("saied");
   }
 }

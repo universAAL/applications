@@ -752,8 +752,10 @@ medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/D
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Medication.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MedicationException.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MedicationOntology.java -text
+medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MedicinesInfo.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MissedIntake.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MyDeviceUserMappingDatabase.java -text
+medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MyIntakeInfosDatabase.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Precaution.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Time.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/UserIDs.java -text
@@ -842,6 +844,7 @@ medication/medication.manager.ui.runner/runner/remoteDebug.bat -text
 medication/medication.manager.ui.runner/runner/run.bat -text
 medication/medication.manager.ui/pom.xml -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/DispenserUpsideDownDialog.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/MedicationInfoDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/ReminderDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/RequestMedicationInfoDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Activator.java -text

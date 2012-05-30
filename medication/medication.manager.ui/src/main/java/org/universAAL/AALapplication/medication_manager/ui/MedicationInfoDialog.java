@@ -11,22 +11,23 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.medMgr.MedicationException;
 import org.universAAL.ontology.medMgr.MedicinesInfo;
 import org.universAAL.ontology.medMgr.MyIntakeInfosDatabase;
 import org.universAAL.ontology.profile.User;
 
 import java.util.Locale;
 
-public class RequestMedicationInfoDialog extends UICaller {
+public class MedicationInfoDialog extends UICaller {
 
-  private final ModuleContext moduleContext;
+  private ModuleContext moduleContext;
 
   private static final String CLOSE_BUTTON = "closeButton";
-  private static final String INFO_BUTTON = "infoButton";
+  private static final String INFO_BUTTON = "reminderButton";
 
-  public RequestMedicationInfoDialog(ModuleContext context) {
+  public MedicationInfoDialog(ModuleContext context) {
     super(context);
-    this.moduleContext = context;
+    moduleContext = context;
   }
 
   @Override
@@ -39,31 +40,39 @@ public class RequestMedicationInfoDialog extends UICaller {
 
   @Override
   public void handleUIResponse(UIResponse input) {
-    User user = (User) input.getUser();
-    if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
-      ReminderDialog reminderDialog = new ReminderDialog(moduleContext);
-      reminderDialog.showDialog(user);
-    } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
-      MedicationInfoDialog medicationInfoDialog = new MedicationInfoDialog(moduleContext);
-      medicationInfoDialog.showDialog(user);
-    } else {
-      System.out.println("unknown");
-    }
+    //nothing to do here
+
   }
 
   public void showDialog(User inputUser) {
     Form f = Form.newDialog("Medication Manager UI", new Resource());
+
+
     //start of the form model
 
     MedicinesInfo intakeInfoForUser = MyIntakeInfosDatabase.getIntakeInfoForUser(inputUser);
+    if (intakeInfoForUser == null) {
+      throw new MedicationException("No information for the user: " + inputUser);
+    }
+    String medicationInfoMessage = getTitle() + intakeInfoForUser.getDetailsInfo();
 
-    new SimpleOutput(f.getIOControls(), null, null, intakeInfoForUser.getGeneralInfo());
+    new SimpleOutput(f.getIOControls(), null, null, medicationInfoMessage);
     //...
-    new Submit(f.getSubmits(), new Label("close", null), CLOSE_BUTTON);
-    new Submit(f.getSubmits(), new Label("info", null), INFO_BUTTON);
+    new Submit(f.getSubmits(), new Label("Close", null), CLOSE_BUTTON);
     //stop of form model
     UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
     this.sendUIRequest(req);
+  }
+
+  private String getTitle() {
+
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("         Intake info           ");
+    sb.append("\n\n");
+
+
+    return sb.toString();
 
   }
 
