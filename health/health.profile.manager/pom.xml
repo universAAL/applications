@@ -5,13 +5,12 @@
   <parent>
   	<groupId>org.universAAL.AALapplication</groupId>
   	<artifactId>health.pom</artifactId>
-  	<version>B.0.1-SNAPSHOT</version>
+  	<version>B.1.1-SNAPSHOT</version>
   	<relativePath>../health.pom</relativePath>
   </parent>
   
   <groupId>org.universAAL.AALApplication</groupId>
   <artifactId>health.profile.manager</artifactId>
-  <version>1.1.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   
@@ -19,6 +18,7 @@
   	<dependency>
   		<groupId>org.universAAL.support</groupId>
   		<artifactId>itests</artifactId>
+        <version>1.1.2-SNAPSHOT</version>
   	</dependency>  	
   	<dependency>
   		<groupId>org.universAAL.middleware</groupId>
@@ -58,6 +58,7 @@
 		      <plugin>
 		        <groupId>org.universAAL.support</groupId>
 		        <artifactId>uaal-maven-plugin</artifactId>
+                <version>1.1.2-SNAPSHOT</version>
 		      </plugin>
 		      <plugin>
 		        <groupId>org.codehaus.mojo</groupId>
