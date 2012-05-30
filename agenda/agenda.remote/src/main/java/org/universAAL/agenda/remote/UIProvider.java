@@ -60,8 +60,7 @@ public class UIProvider extends UICaller {
 
     private Hashtable<String, String> dialogs = new Hashtable<String, String>();
 
-    public static boolean BMIField = true;
-    
+
     private AgendaWebGUI webUI=null;
 
     public UIProvider(ModuleContext mcontext, AgendaWebGUI agendaWebUI) {
@@ -76,12 +75,7 @@ public class UIProvider extends UICaller {
 	// Auto-generated method stub
     }
 
-    //FIXME finish this
-    public void forceWebHandlerShowMainMenu(){
-	
-	
-    }
-    
+     
     /* (non-Javadoc)
      * @see org.universAAL.middleware.ui.UICaller#handleUIResponse(org.universAAL.middleware.ui.UIResponse)
      */
@@ -225,7 +219,7 @@ public class UIProvider extends UICaller {
 	    } 
 	    
 	   //FIXME commented when transferring to UI Bus (no InputEvent.uAAL_MAIN_MENU_REQUEST) related to: AgendaWebGUI line 305
-	    //check tip: if button is pressed but not handled result is return to main menu
+	    //check Alvaro tip: if button is pressed but not handled result is return to main menu
 	    else if (submit.equals("home")) {
 		log.debug("Processing Input: Home");
 //		event = new UIResponse(user, null/*
@@ -236,10 +230,7 @@ public class UIProvider extends UICaller {
 //						  */,
 //			InputEvent.uAAL_MAIN_MENU_REQUEST);
 
-		//added when transferring to 1.1.0
-		forceWebHandlerShowMainMenu();
-		
-				
+			
 		submit = null;
 	    }
 
