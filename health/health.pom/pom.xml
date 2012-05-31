@@ -5,12 +5,12 @@
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.1</version>
+		<version>B.0</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 
 	<artifactId>health.pom</artifactId>
-	<version>B.1.1-SNAPSHOT</version>
+	<version>B.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Health Management AAL Service</name>
