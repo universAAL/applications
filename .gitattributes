@@ -1231,6 +1231,16 @@ nutritional/nutritional.ontology/src/main/java/org/universAAL/ontology/nutrition
 nutritional/nutritional.ontology/src/main/java/org/universAAL/ontology/nutrition/NutritionService.java -text
 nutritional/nutritional.ontology/src/main/java/org/universAAL/ontology/nutrition/Recipe.java -text
 nutritional/nutritional.ontology/src/main/java/org/universAAL/ontology/nutrition/ShoppingList.java -text
+nutritional/nutritional.simulator/.classpath -text
+nutritional/nutritional.simulator/.project -text
+nutritional/nutritional.simulator/.settings/org.eclipse.core.resources.prefs -text
+nutritional/nutritional.simulator/.settings/org.eclipse.jdt.core.prefs -text
+nutritional/nutritional.simulator/.settings/org.eclipse.m2e.core.prefs -text
+nutritional/nutritional.simulator/.settings/org.eclipse.pde.core.prefs -text
+nutritional/nutritional.simulator/pom.xml -text
+nutritional/nutritional.simulator/src/main/java/org/universAAL/AALapplication/nutritional/simulator/ProjectActivator.java -text
+nutritional/nutritional.simulator/target/classes/META-INF/MANIFEST.MF -text
+nutritional/nutritional.simulator/target/classes/org/universAAL/AALapplication/nutritional/simulator/ProjectActivator.class -text
 nutritional/nutritional.uiclient/launchers/uAAL[!!-~]basico.launch -text
 nutritional/nutritional.uiclient/pom.xml -text
 nutritional/nutritional.uiclient/src/main/java/na/Activator.java -text

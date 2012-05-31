@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1338470632124
+Build-Jdk: 1.6.0_24
+Built-By: Administrador
+Bundle-Activator: org.universAAL.AALapplication.nutritional.simulator.Pr
+ ojectActivator
+Bundle-Description: Misc. and support uAAL Projects
+Bundle-DocURL: http://www.universAAL.org/
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: nutritional.simulator
+Bundle-SymbolicName: org.universAAL.AALapplication.nutritional.simulator
+Bundle-Vendor: universAAL Consortium
+Bundle-Version: 0.0.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.universAAL.AALapplication.nutritional.simulator;uses
+ :="org.universAAL.middleware.container,org.universAAL.middleware.contai
+ ner.osgi,org.osgi.framework";version="0.0.1.SNAPSHOT"
+Import-Package: org.osgi.framework;version="[1.3,2)",org.universAAL.midd
+ leware.container;version="[1.1,2)",org.universAAL.middleware.container.
+ osgi;version="[1.1,2)"
+Tool: Bnd-1.50.0
