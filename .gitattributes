@@ -1263,7 +1263,6 @@ nutritional/nutritional.simulator/src/main/java/na/miniDao/Recipe.java -text
 nutritional/nutritional.simulator/src/main/java/na/miniDao/RecipeIngredient.java -text
 nutritional/nutritional.simulator/src/main/java/na/miniDao/ShoppingList.java -text
 nutritional/nutritional.simulator/src/main/java/na/miniDao/Tip.java -text
-nutritional/nutritional.simulator/src/main/java/org/universAAL/AALapplication/nutritional/simulator/ProjectActivator.java -text
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetRecipe.java -text
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetRecipeCallee.java -text
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetTodayMenu.java -text
