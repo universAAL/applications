@@ -3,6 +3,7 @@ package org.universAAL.ontology.impl;
 
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.ontology.medMgr.DispenserUpsideDown;
 import org.universAAL.ontology.medMgr.DueIntake;
 import org.universAAL.ontology.medMgr.MissedIntake;
 import org.universAAL.ontology.medMgr.Precaution;
@@ -24,6 +25,8 @@ public final class MedicationFactory extends ResourceFactoryImpl {
       return new MissedIntake(instanceURI);
     } else if (factoryIndex == 3) {
       return new DueIntake(instanceURI);
+    } else if (factoryIndex == 4) {
+      return new DispenserUpsideDown(instanceURI);
     }
 
     return null;

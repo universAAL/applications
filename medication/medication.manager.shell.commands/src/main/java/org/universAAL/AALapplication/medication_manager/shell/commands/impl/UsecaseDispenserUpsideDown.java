@@ -1,8 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
-import org.universAAL.AALapplication.medication_manager.ui.DispenserUpsideDownDialog;
-import org.universAAL.ontology.medMgr.UserIDs;
-import org.universAAL.ontology.profile.User;
+import org.universAAL.AALapplication.medication_manager.simulation.DispenserUpsideDownContextProvider;
+import org.universAAL.ontology.medMgr.MyDeviceUserMappingDatabase;
 
 /**
  * @author George Fournadjiev
@@ -24,15 +23,12 @@ public final class UsecaseDispenserUpsideDown extends Usecase {
       throw new MedicationManagerShellException(NO_PARAMETERS_MESSAGE);
     }
 
-    User saiedUser = UserIDs.getSaiedUser();
-    Log.info("Executing the " + USECASE_TITLE + " .The mocked user is : " +
-        saiedUser, getClass());
+    String deviceId = MyDeviceUserMappingDatabase.getDeviceIdForSaiedUser();
 
-    DispenserUpsideDownDialog dispenserUpsideDownDialog =
-        new DispenserUpsideDownDialog(moduleContext);
+    Log.info("Executing the " + USECASE_TITLE + ". The deviceId is : " +
+        deviceId, getClass());
 
-    dispenserUpsideDownDialog.showDialog(saiedUser);
-
+    DispenserUpsideDownContextProvider.dispenserUpsideDownDeviceIdEvent(deviceId);
   }
 
   @Override
