@@ -1238,36 +1238,38 @@ nutritional/nutritional.simulator/.settings/org.eclipse.jdt.core.prefs -text
 nutritional/nutritional.simulator/.settings/org.eclipse.m2e.core.prefs -text
 nutritional/nutritional.simulator/.settings/org.eclipse.pde.core.prefs -text
 nutritional/nutritional.simulator/pom.xml -text
-nutritional/nutritional.simulator/src/main/java/basic/Activator.java -text
-nutritional/nutritional.simulator/src/main/java/cache/PersistentObject.java -text
-nutritional/nutritional.simulator/src/main/java/cache/SuperCache.java -text
+nutritional/nutritional.simulator/src/main/java/basic/Activator.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/cache/PersistentObject.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/cache/SuperCache.class -text svneol=unset#unset
 nutritional/nutritional.simulator/src/main/java/cache/menuDay_56 -text
 nutritional/nutritional.simulator/src/main/java/cache/recipe_30 -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Advise.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/AdviseTime.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/AdviseTimeInfo.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Answer.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/DayMenu.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Dish.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Exercise.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Food.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/FoodCategory.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/FoodItem.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Meal.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/NutriCalendar.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/NutriDate.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/OtherCondition.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Question.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Questionnaire.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Recipe.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/RecipeIngredient.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/ShoppingList.java -text
-nutritional/nutritional.simulator/src/main/java/na/miniDao/Tip.java -text
-nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetRecipe.java -text
-nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetRecipeCallee.java -text
-nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetTodayMenu.java -text
-nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetTodayMenuCallee.java -text
-nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/tests/OntoFactory.java -text
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Advise.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/AdviseTime.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/AdviseTimeInfo.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Answer.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/DayMenu.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Dish.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Exercise.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Food.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/FoodCategory.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/FoodItem.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Meal.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/NutriCalendar.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/NutriDate.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/OtherCondition.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Question.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Questionnaire.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Recipe.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/RecipeIngredient.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/ShoppingList.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/na/miniDao/Tip.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetRecipe$1.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetRecipe.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetRecipeCallee.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetTodayMenu$1.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetTodayMenu.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetTodayMenuCallee.class -text svneol=unset#unset
+nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/tests/OntoFactory.class -text svneol=unset#unset
 nutritional/nutritional.simulator/target/classes/META-INF/MANIFEST.MF -text
 nutritional/nutritional.simulator/target/classes/basic/Activator.class -text
 nutritional/nutritional.simulator/target/classes/cache/PersistentObject.class -text
@@ -1303,8 +1305,11 @@ nutritional/nutritional.simulator/target/classes/uAAL/simulation_services/Servic
 nutritional/nutritional.simulator/target/classes/uAAL/simulation_services/ServiceGetTodayMenuCallee.class -text
 nutritional/nutritional.simulator/target/classes/uAAL/simulation_services/tests/OntoFactory.class -text
 nutritional/nutritional.simulator/target/nutritional.simulator-0.0.1-SNAPSHOT.jar -text
+nutritional/nutritional.simulator/target/surefire/surefire1205182546864450905tmp -text
 nutritional/nutritional.simulator/target/surefire/surefire2354767728965848126tmp -text
+nutritional/nutritional.simulator/target/surefire/surefire5015198745203425637tmp -text
 nutritional/nutritional.simulator/target/surefire/surefire8865945215508989574tmp -text
+nutritional/nutritional.simulator/target/surefire/surefirebooter1742526270953064018.jar -text
 nutritional/nutritional.simulator/target/surefire/surefirebooter8160489758083378589.jar -text
 nutritional/nutritional.uiclient/launchers/uAAL[!!-~]basico.launch -text
 nutritional/nutritional.uiclient/pom.xml -text
