@@ -3,43 +3,59 @@
   <modelVersion>4.0.0</modelVersion>
     
   <parent>
-  	<groupId>org.universAAL.support</groupId>
-  	<artifactId>support.pom</artifactId>
-  	<version>1.1.0</version>
+  	<groupId>org.universAAL.AALapplication</groupId>
+  	<artifactId>new_services.pom</artifactId>
+  	<version>B.0</version>
+  	<relativePath>../../pom</relativePath>
   </parent>
   
-  <groupId>org.universAAL.AALapplication</groupId>
   <artifactId>nutritional.simulator</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   
   <dependencies>
-  	<dependency>
-  		<groupId>org.universAAL.middleware</groupId>
-  		<artifactId>mw.bus.context</artifactId>
-  	</dependency>   	
-  	<dependency>
-  		<groupId>org.universAAL.middleware</groupId>
-  		<artifactId>mw.bus.service</artifactId>
-  	</dependency>  	
-  	<dependency>
-  		<groupId>org.universAAL.middleware</groupId>
-  		<artifactId>mw.bus.ui</artifactId>
-  	</dependency> 
-  	<dependency>
-  		<groupId>org.universAAL.ontology</groupId>
-  		<artifactId>ont.phWorld</artifactId>
-  	</dependency>  	 	 	
-  	<dependency>
-  		<groupId>org.universAAL.middleware</groupId>
-  		<artifactId>mw.container.osgi</artifactId>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.apache.felix</groupId>
-  		<artifactId>org.osgi.core</artifactId>
-  	</dependency>
-  </dependencies>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.nutrition</artifactId>
+			<version>0.1.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.data.representation</artifactId>
+			<version>1.1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.service</artifactId>
+			<version>1.1.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+      <groupId>org.universAAL.support</groupId>
+      <artifactId>itests</artifactId>
+      <version>1.1.2-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.universAAL.middleware</groupId>
+      <artifactId>mw.container.xfaces</artifactId>
+      <version>1.1.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.universAAL.middleware</groupId>
+      <artifactId>mw.container.osgi</artifactId>
+      <version>1.1.1-SNAPSHOT</version>
+    </dependency>
+		
+    </dependencies>
   
   	<build>
 		<plugins>
@@ -49,8 +65,10 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-Activator>org.universAAL.AALapplication.nutritional.simulator.ProjectActivator</Bundle-Activator>
-						<Export-Package>org.universAAL.AALapplication.nutritional.simulator</Export-Package>
+						<Bundle-Name>${pom.name}</Bundle-Name>
+						<Bundle-Activator>basic.Activator</Bundle-Activator>
+						<Bundle-Description>${pom.description}</Bundle-Description>
+						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
 					</instructions>
 				</configuration>
 			</plugin>
