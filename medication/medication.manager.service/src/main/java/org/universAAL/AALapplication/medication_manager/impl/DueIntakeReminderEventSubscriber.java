@@ -8,6 +8,7 @@ import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.medMgr.DueIntake;
 import org.universAAL.ontology.medMgr.MyDeviceUserMappingDatabase;
+import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -44,18 +45,20 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
     DueIntake missedIntake = (DueIntake) event.getRDFSubject();
 
+    Time time = missedIntake.getTime();
+
+    Log.info("Time %s", getClass(), time);
+
     String deviceId = missedIntake.getDeviceId();
 
     Log.info("DeviceId %s", getClass(), deviceId);
 
     User user = MyDeviceUserMappingDatabase.getUser(deviceId);
 
-    Log.info("Calling the Caregiver Notification Service for the user %s", getClass(), user);
-
     ReminderDialog reminderDialog =
-            new ReminderDialog(moduleContext);
+        new ReminderDialog(moduleContext, time);
 
-        reminderDialog.showDialog(user);
+    reminderDialog.showDialog(user);
 
   }
 }

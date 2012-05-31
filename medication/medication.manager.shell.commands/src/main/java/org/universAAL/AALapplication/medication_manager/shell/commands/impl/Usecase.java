@@ -15,6 +15,7 @@ public abstract class Usecase {
   private final int usecaseId;
 
   public static ModuleContext moduleContext;
+  public static final String NO_PARAMETERS_MESSAGE = "This usecase doesn't expect parameters";
   private static final Map<Integer, Usecase> USECASE_MAP = new HashMap<Integer, Usecase>();
 
   static {
@@ -27,9 +28,6 @@ public abstract class Usecase {
     id++;
     UsecaseMedicationReminder usecaseMedicationReminder = new UsecaseMedicationReminder(id);
     USECASE_MAP.put(usecaseMedicationReminder.getUsecaseId(), usecaseMedicationReminder);
-    id++;
-    UsecaseRequestMedicationInfo usecaseRequestMedicationInfo = new UsecaseRequestMedicationInfo(id);
-    USECASE_MAP.put(usecaseRequestMedicationInfo.getUsecaseId(), usecaseRequestMedicationInfo);
     id++;
     UsecaseDispenserUpsideDown usecaseDispenserUpsideDown = new UsecaseDispenserUpsideDown(id);
     USECASE_MAP.put(usecaseDispenserUpsideDown.getUsecaseId(), usecaseDispenserUpsideDown);
@@ -57,7 +55,8 @@ public abstract class Usecase {
     if (usecase == null) {
       throw new MedicationManagerShellException(
           "Not found usecase implementation with the following id <" + usecaseId + ">." +
-              "\n\t\t You can execute the " + MedicationConsoleCommands.COMMAND_PREFIX + ':' + MedicationConsoleCommands.LISTIDS_COMMMAND +
+              "\n\t\t You can execute the " + MedicationConsoleCommands.COMMAND_PREFIX + ':' +
+              MedicationConsoleCommands.LISTIDS_COMMMAND +
               " command to see the implemented usecases with the corresponding ids");
     }
 

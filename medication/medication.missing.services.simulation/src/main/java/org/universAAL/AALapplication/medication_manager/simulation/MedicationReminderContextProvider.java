@@ -10,6 +10,7 @@ import org.universAAL.middleware.context.owl.ContextProviderType;
 import org.universAAL.middleware.owl.Enumeration;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.medMgr.DueIntake;
+import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -51,9 +52,10 @@ public final class MedicationReminderContextProvider {
   }
 
 
-  public static void dueIntakeReminderDeviceIdEvent(String deviceId) {
+  public static void dueIntakeReminderDeviceIdEvent(String deviceId, Time time) {
     DueIntake dueIntake = new DueIntake();
     dueIntake.setDeviceId(deviceId);
+    dueIntake.setTime(time);
     ContextEvent contextEvent = new ContextEvent(dueIntake, DueIntake.DEVICE_ID);
     contextPublisher.publish(contextEvent);
   }

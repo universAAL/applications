@@ -784,7 +784,6 @@ medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapp
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecaseMedicationReminder.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecaseMissedIntake.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecasePrecaution.java -text
-medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/UsecaseRequestMedicationInfo.java -text
 medication/medication.manager.ui.runner/README.txt -text
 medication/medication.manager.ui.runner/Run.bat -text
 medication/medication.manager.ui.runner/pax.configuration -text

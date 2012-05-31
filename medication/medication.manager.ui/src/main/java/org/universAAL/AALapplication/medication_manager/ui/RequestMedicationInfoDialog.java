@@ -13,20 +13,29 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.medMgr.MedicinesInfo;
 import org.universAAL.ontology.medMgr.MyIntakeInfosDatabase;
+import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
 import java.util.Locale;
 
 public class RequestMedicationInfoDialog extends UICaller {
 
+  private static final String EMPTY_STRING = "";
+  private static final Time ZERO_TIME_DUMMY = new Time(0, 0, 0, 0, 0);
   private final ModuleContext moduleContext;
+  private final Time time;
 
   private static final String CLOSE_BUTTON = "closeButton";
   private static final String INFO_BUTTON = "infoButton";
 
-  public RequestMedicationInfoDialog(ModuleContext context) {
+  public RequestMedicationInfoDialog(ModuleContext context, Time time) {
     super(context);
     this.moduleContext = context;
+    this.time = time;
+  }
+
+  public RequestMedicationInfoDialog(ModuleContext context) {
+    this(context, null);
   }
 
   @Override
@@ -41,10 +50,10 @@ public class RequestMedicationInfoDialog extends UICaller {
   public void handleUIResponse(UIResponse input) {
     User user = (User) input.getUser();
     if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
-      ReminderDialog reminderDialog = new ReminderDialog(moduleContext);
+      ReminderDialog reminderDialog = new ReminderDialog(moduleContext, time);
       reminderDialog.showDialog(user);
     } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
-      MedicationInfoDialog medicationInfoDialog = new MedicationInfoDialog(moduleContext);
+      MedicationInfoDialog medicationInfoDialog = new MedicationInfoDialog(moduleContext, time);
       medicationInfoDialog.showDialog(user);
     } else {
       System.out.println("unknown");
@@ -55,7 +64,12 @@ public class RequestMedicationInfoDialog extends UICaller {
     Form f = Form.newDialog("Medication Manager UI", new Resource());
     //start of the form model
 
-    MedicinesInfo intakeInfoForUser = MyIntakeInfosDatabase.getIntakeInfoForUser(inputUser);
+    MedicinesInfo intakeInfoForUser;
+    if (time != null) {
+      intakeInfoForUser = MyIntakeInfosDatabase.getIntakeInfoForUser(inputUser, time);
+    } else {
+      intakeInfoForUser = new MedicinesInfo(EMPTY_STRING, EMPTY_STRING, ZERO_TIME_DUMMY);
+    }
 
     new SimpleOutput(f.getIOControls(), null, null, intakeInfoForUser.getGeneralInfo());
     //...

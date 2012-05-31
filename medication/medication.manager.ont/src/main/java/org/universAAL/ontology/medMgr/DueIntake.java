@@ -1,7 +1,6 @@
 package org.universAAL.ontology.medMgr;
 
 import org.universAAL.middleware.service.owl.Service;
-import org.universAAL.ontology.profile.User;
 
 /**
  * @author George Fournadjiev
@@ -11,6 +10,7 @@ public class DueIntake extends Service {
   public static final String MY_URI = MedicationOntology.NAMESPACE + "DueIntake";
 
   public static final String DEVICE_ID = MedicationOntology.NAMESPACE + "deviceId";
+  public static final String TIME = MedicationOntology.NAMESPACE + "time";
 
   public DueIntake() {
     super();
@@ -38,6 +38,14 @@ public class DueIntake extends Service {
 
   public void setDeviceId(String deviceId) {
     props.put(DEVICE_ID, deviceId);
+  }
+
+  public Time getTime() {
+    return (Time) props.get(TIME);
+  }
+
+  public void setTime(Time time) {
+    props.put(TIME, time);
   }
 
 }

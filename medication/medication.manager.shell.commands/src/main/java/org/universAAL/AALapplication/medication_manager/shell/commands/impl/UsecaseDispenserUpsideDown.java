@@ -19,6 +19,11 @@ public final class UsecaseDispenserUpsideDown extends Usecase {
 
   @Override
   public void execute(String... parameters) {
+
+    if (parameters != null && parameters.length > 0) {
+      throw new MedicationManagerShellException(NO_PARAMETERS_MESSAGE);
+    }
+
     User saiedUser = UserIDs.getSaiedUser();
     Log.info("Executing the " + USECASE_TITLE + " .The mocked user is : " +
         saiedUser, getClass());

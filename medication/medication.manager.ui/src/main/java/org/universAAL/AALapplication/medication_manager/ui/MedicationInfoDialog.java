@@ -14,20 +14,23 @@ import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.medMgr.MedicationException;
 import org.universAAL.ontology.medMgr.MedicinesInfo;
 import org.universAAL.ontology.medMgr.MyIntakeInfosDatabase;
+import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
 import java.util.Locale;
 
 public class MedicationInfoDialog extends UICaller {
 
-  private ModuleContext moduleContext;
+  private final ModuleContext moduleContext;
+  private final Time time;
 
   private static final String CLOSE_BUTTON = "closeButton";
   private static final String INFO_BUTTON = "reminderButton";
 
-  public MedicationInfoDialog(ModuleContext context) {
+  public MedicationInfoDialog(ModuleContext context, Time time) {
     super(context);
     moduleContext = context;
+    this.time = time;
   }
 
   @Override
@@ -50,7 +53,7 @@ public class MedicationInfoDialog extends UICaller {
 
     //start of the form model
 
-    MedicinesInfo intakeInfoForUser = MyIntakeInfosDatabase.getIntakeInfoForUser(inputUser);
+    MedicinesInfo intakeInfoForUser = MyIntakeInfosDatabase.getIntakeInfoForUser(inputUser, time);
     if (intakeInfoForUser == null) {
       throw new MedicationException("No information for the user: " + inputUser);
     }

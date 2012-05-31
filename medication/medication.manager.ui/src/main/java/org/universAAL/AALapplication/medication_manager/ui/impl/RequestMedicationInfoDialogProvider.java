@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.ui.impl;
 
 import org.universAAL.AALapplication.medication_manager.ui.DispenserUpsideDownDialog;
+import org.universAAL.AALapplication.medication_manager.ui.RequestMedicationInfoDialog;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
@@ -10,6 +11,7 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.profile.User;
 
 public class RequestMedicationInfoDialogProvider extends ServiceCallee {
 
@@ -46,8 +48,8 @@ public class RequestMedicationInfoDialogProvider extends ServiceCallee {
 
   @Override
   public ServiceResponse handleCall(ServiceCall call) {
-    Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
-    new DispenserUpsideDownDialog(this.ctxt).showDialog((Resource) inputUser);
+    User inputUser = (User) call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
+    new RequestMedicationInfoDialog(this.ctxt).showDialog((inputUser));
     return new ServiceResponse(CallStatus.succeeded);
   }
 
