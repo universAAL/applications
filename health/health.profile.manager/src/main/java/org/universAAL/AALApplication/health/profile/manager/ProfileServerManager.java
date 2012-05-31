@@ -22,6 +22,7 @@
  */
 package org.universAAL.AALApplication.health.profile.manager;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -48,6 +49,8 @@ import org.universaal.ontology.health.owl.HealthProfile;
  * profiling service.
  * 
  * @author roni
+ * @author amedrano
+ *
  */
 public class ProfileServerManager {
 
@@ -148,7 +151,6 @@ public class ProfileServerManager {
 			ServiceResponse resp = caller.call(req);
 			if (resp.getCallStatus().equals(CallStatus.succeeded)) {
 				moduleContext.logDebug("Added new Health Profile", null);
-				System.out.println("Added Health Profile");
 				return hp;
 			}
 			else {
@@ -187,19 +189,25 @@ public class ProfileServerManager {
 			app.setSubProfile(healthProfile);
 		}
 		else {
-			List subprofiles = (List) subprf;
-			for (Iterator iterator = subprofiles.iterator(); iterator.hasNext();) {
-				Resource subP = (Resource) iterator.next();
-				if (subP.getURI().equals(HealthProfile.MY_URI)) {
-					hp = subP;
+			List<Resource> subprofiles;
+			try {
+				subprofiles = (List<Resource>) subprf;
+				for (Iterator iterator = subprofiles.iterator(); iterator.hasNext();) {
+					Resource subP = (Resource) iterator.next();
+					if (subP.getURI().equals(HealthProfile.MY_URI)) {
+						hp = subP;
+					}
 				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				subprofiles = new ArrayList<Resource>();
+				subprofiles.add((Resource) subprf);
 			}
 			subprofiles.remove(hp);
 			subprofiles.add(healthProfile);
 			app.setProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE, subprofiles);
-			}		
-		ServiceRequest req = new ServiceRequest(new ProfilingService(null),
-				null);
+		}		
+		ServiceRequest req = new ServiceRequest(new ProfilingService(null),	null);
 		req.addChangeEffect(new String[] { ProfilingService.PROP_CONTROLS,
 				Profilable.PROP_HAS_PROFILE }, app);
 		ServiceResponse resp = caller.call(req);
@@ -210,8 +218,7 @@ public class ProfileServerManager {
 	 * @return
 	 */
 	private AssistedPersonProfile getProfile(AssistedPerson assistedPerson) {
-		ServiceRequest req = new ServiceRequest(new ProfilingService(null),
-				null);
+		ServiceRequest req = new ServiceRequest(new ProfilingService(null),	null);
 		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, assistedPerson);
 		req.addRequiredOutput(ARG_OUT, new String[] {
 				ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE });
