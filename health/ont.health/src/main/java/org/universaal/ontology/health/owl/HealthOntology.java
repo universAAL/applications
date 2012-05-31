@@ -36,8 +36,6 @@ import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.Profile;
-import org.universAAL.ontology.profile.health.Illness;
-import org.universaal.ontology.disease.owl.Disease;
 import org.universaal.ontology.health.HealthOntologyFactory;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
 import org.universaal.ontology.health.owl.services.GetProfileService;
@@ -368,7 +366,7 @@ public final class HealthOntology extends Ontology {
    oci.addObjectProperty(Treatment.PROP_IS_ASSOCIATED_TO_DISEASE).setFunctional();
     oci.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_IS_ASSOCIATED_TO_DISEASE, 
-      Disease.MY_URI, 1, 1));
+    		  TypeMapper.getDatatypeURI(String.class), 1, 1));
    
     oci.addObjectProperty(Treatment.PROP_HAS_TREATMENT_PLANNING).setFunctional();
     oci.addRestriction(MergedRestriction

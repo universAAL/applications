@@ -18,8 +18,10 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentDetection;
 import org.universAAL.itests.IntegrationTest;
+import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
 import org.universaal.ontology.health.owl.Diet;
 import org.universaal.ontology.health.owl.Treatment;
 
@@ -62,12 +64,16 @@ public class TestTreatmentDetection extends IntegrationTest{
 		KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 		ksession = kbase.newStatefulKnowledgeSession();
+		
+		MessageManager.changeToTestInterface(); //para las pruebas, usamos la interfaz de pruebas
+		
 	}
 
 	@After
 	public void onTearDown()
 	{
 		ksession.dispose();
+		MessageManager.changeToPlatformInterface();//una vez terminado el test, pasamos a la interfaz de la plataforma, la real
 	}
 
 	/**
@@ -78,9 +84,9 @@ public class TestTreatmentDetection extends IntegrationTest{
 	public void testTreatmentDetection(){
 
 		//load the facts
-		treatment1 = new Diet ("Dieta baja en grasa", "descripcion"); //valid treatment
-		treatment2 = new Diet ("Dieta baja en sal", "descripcion");//valid treatment
-		treatment3 = new Diet ("", "descripcion");// invalid treatment		
+		treatment1 = new Diet ("Dieta baja en grasa", "descripcion", HeartFailure.MY_URI); //valid treatment
+		treatment2 = new Diet ("Dieta baja en sal", "descripcion", HeartFailure.MY_URI);//valid treatment
+		treatment3 = new Diet ("", "descripcion", HeartFailure.MY_URI);// invalid treatment	
 
 		//insert the facts in drools working memory
 		ksession.insert(treatment1);

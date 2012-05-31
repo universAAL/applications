@@ -12,8 +12,13 @@ import org.universaal.ontology.owl.SingleChoiceQuestion;
 
 public class TreatmentDetectionMessage extends MotivationalQuestionnaire implements MotivationalMessageContent{
 	
-	private String qWording = "$partOfDay $username! A new treatment, named $treatmentName" +
+	/*private String qWording = "$partOfDay $username! A new treatment, named $treatmentName" +
 	"has been asigned to you. This treatment consists of $treatmentDescription." +
+	"Do you plan to follow it?";
+	*/
+	// Para probar, de momento usamos un mensaje sin variables
+	private String qWording = "Hello Mary! A new treatment, named 'Low fat diet'" +
+	"has been asigned to you. This treatment consists of eating more vegetables and fruit and avoiding fatty meals." +
 	"Do you plan to follow it?";
 
 

@@ -35,23 +35,23 @@ public class MeasuredPhysicalActivity extends TakeMeasurementActivity {
     super(uri);
   }
 
-  public MeasuredPhysicalActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, Disease disease) {
-	    super(assistedPerson, caregiver, tname, description, stDt, disease);
+  public MeasuredPhysicalActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, String diseaseURI) {
+	    super(assistedPerson, caregiver, tname, description, stDt, diseaseURI);
   }
   
-  public MeasuredPhysicalActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, Disease disease){
-	  super(assistedPerson, caregiver, tname, tp, description, disease);
+  public MeasuredPhysicalActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, String diseaseURI){
+	  super(assistedPerson, caregiver, tname, tp, description, diseaseURI);
   }
-  public MeasuredPhysicalActivity (String tname, String description, Disease disease){
-	  super(tname, description, disease);
+  public MeasuredPhysicalActivity (String tname, String description, String diseaseURI){
+	  super(tname, description, diseaseURI);
   } 
 
-  public MeasuredPhysicalActivity (String tname, String description, XMLGregorianCalendar stDt, Disease disease){
-	  super(tname, description, stDt, disease);
+  public MeasuredPhysicalActivity (String tname, String description, XMLGregorianCalendar stDt, String diseaseURI){
+	  super(tname, description, stDt, diseaseURI);
   }
   
-  public MeasuredPhysicalActivity (String tname, String description, TreatmentPlanning tp, Disease disease){
-	  super(tname, description, tp, disease);
+  public MeasuredPhysicalActivity (String tname, String description, TreatmentPlanning tp, String diseaseURI){
+	  super(tname, description, tp, diseaseURI);
   }
 
   

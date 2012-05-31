@@ -28,7 +28,9 @@ import java.util.StringTokenizer;
 import org.apache.commons.collections.map.MultiKeyMap;
 import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
+import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
+import org.universaal.ontology.owl.Questionnaire;
 
 import com.csvreader.CsvReader;
 
@@ -37,7 +39,7 @@ public class MessageManager {
 	public File enMessagesDB;
 	public File spMessagesDB; 
 	
-	private static boolean testInterface = true;
+	private static boolean testInterface = false;
 	
 	public final Locale SPANISH = new Locale ("es", "ES");
 	private final int EN = 1;
@@ -345,20 +347,42 @@ public class MessageManager {
 		// etc).
 		
 		Object unprocessedContent = getMotivationalMessageContent(disease, treatmentType, motStatus, messageType);
-		String processedMessage = decodeMessageContent(unprocessedContent);
+		String processedMessage =""; 
+		String unprocessedQuestionnaire;
+		
+		MotivationalMessage processedMM;
+		
+		if(unprocessedContent instanceof String){
+			processedMessage = decodeMessageContent(unprocessedContent);
+			
+		}
+		else if(unprocessedContent instanceof Questionnaire){
+			unprocessedQuestionnaire = ((Questionnaire)(unprocessedContent)).questionnaireToString();
+			processedMessage = decodeMessageContent(unprocessedQuestionnaire);
+			
+		}
+		else{
+			//lanzar excepción
+		}
+		
 		if(testInterface){
-			MessageServiceTools.sendMessage(processedMessage);	
+			processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
+			MessageServiceTools.sendMessage(processedMM);	
+		}
+		else{
+			processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
+			//enviarlo a la interfaz real
 		}
 		
 		
 		
 	}
 	
-	private void changeToPlatformInterface(){
+	public static void changeToPlatformInterface(){
 		testInterface=false;
 	}
 	
-	private void changeToTestInterface(){
+	public static void changeToTestInterface(){
 		testInterface=true;
 	}
 

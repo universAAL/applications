@@ -20,7 +20,7 @@ import org.universaal.ontology.health.owl.MotivationalStatusType;
 
 
 
-public abstract class MotivationalMessage extends Message {
+public class MotivationalMessage extends Message {
   
 //NAMESPACE & PROPERTIES
 	
