@@ -99,9 +99,19 @@ public final class MedicationOntology extends Ontology {
         .getAllValuesRestrictionWithCardinality(
             DueIntake.DEVICE_ID, TypeMapper.getDatatypeURI(String.class), 1, 1));
     oci.addObjectProperty(DueIntake.TIME).setFunctional();
-        oci.addRestriction(MergedRestriction
-            .getAllValuesRestrictionWithCardinality(
-                DueIntake.TIME, Time.MY_URI, 1, 1));
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            DueIntake.TIME, Time.MY_URI, 1, 1));
+
+    // load DispenserUpsideDown
+    oci = createNewOntClassInfo(DispenserUpsideDown.MY_URI, FACTORY, 4);
+    oci.setResourceComment("The type of a DispenserUpsideDown");
+    oci.setResourceLabel("DispenserUpsideDown");
+    oci.addDatatypeProperty(DispenserUpsideDown.DEVICE_ID);
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            DispenserUpsideDown.DEVICE_ID, TypeMapper.getDatatypeURI(String.class), 1, 1));
+
 
   }
 }

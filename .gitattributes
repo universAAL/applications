@@ -763,6 +763,7 @@ medication/medication.manager.pom/pom.xml -text
 medication/medication.manager.service/artifact.composite -text
 medication/medication.manager.service/pom.xml -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Activator.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/DispenserUpsideDownEventSubscriber.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/DueIntakeReminderEventSubscriber.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Log.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MissedIntakeEventSubscriber.java -text
@@ -848,10 +849,12 @@ medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/med
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/RequestMedicationInfoDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Activator.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/DispenserUpsideDownDialogProvider.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Log.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/ReminderDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/RequestMedicationInfoDialogProvider.java -text
 medication/medication.missing.services.simulation/artifact.composite -text
 medication/medication.missing.services.simulation/pom.xml -text
+medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/DispenserUpsideDownContextProvider.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/MedicationConsumer.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/MedicationReminderContextProvider.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/MissedIntakeContextProvider.java -text

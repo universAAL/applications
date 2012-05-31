@@ -11,7 +11,6 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
-import org.universAAL.ontology.medMgr.MedicationException;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
@@ -85,7 +84,7 @@ public class ReminderDialog extends UICaller {
     this.sendUIRequest(req);
   }
 
-  private String getUserfriendlyName(User inputUser) {
+  public static String getUserfriendlyName(User inputUser) {
     String fullUserUriName = inputUser.toString();
     int index = fullUserUriName.lastIndexOf('#');
     String firstLetter = fullUserUriName.substring(index + 1).toUpperCase();

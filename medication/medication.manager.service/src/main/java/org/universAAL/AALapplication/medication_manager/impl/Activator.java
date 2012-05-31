@@ -28,6 +28,7 @@ public class Activator implements BundleActivator {
         new PrecautionProvider(mc);
         new MissedIntakeEventSubscriber(mc);
         new DueIntakeReminderEventSubscriber(mc);
+        new DispenserUpsideDownEventSubscriber(mc);
       }
     }.start();
 
