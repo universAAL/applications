@@ -8,12 +8,17 @@ import org.apache.felix.service.command.Descriptor;
 public class MedicationManagerCommands {
 
   @Descriptor("Trigger specific Medication Manager Use Case")
-  public void usecase(@Descriptor("the useCase id") String useCaseId) {
+  public void usecase(@Descriptor("parameters") String... parameters) {
 
-    Log.info("Executing medication:usecase command with the following useCaseId: %s", getClass(), useCaseId);
+    UsecaseConsoleCommand consoleCommand = (UsecaseConsoleCommand) MedicationConsoleCommands.getUsecaseConsoleCommand();
 
-    ConsoleCommand consoleCommand = MedicationConsoleCommands.getUsecaseConsoleCommand();
-    consoleCommand.execute(useCaseId);
+    if (parameters == null || parameters.length == 0) {
+      throw new MedicationManagerShellException(consoleCommand.getParametersInfo());
+    }
+
+    Log.info("Executing medication:usecase command with the following useCaseId: %s", getClass(), parameters[0]);
+
+    consoleCommand.execute(parameters);
   }
 
   @Descriptor("List all implemented Medication Manager Use Cases")

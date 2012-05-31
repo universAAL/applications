@@ -2,7 +2,6 @@ package org.universAAL.AALapplication.medication_manager.ui.impl;
 
 import org.universAAL.AALapplication.medication_manager.ui.ReminderDialog;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;

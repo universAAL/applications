@@ -12,9 +12,9 @@ public final class UsecasePrecaution extends Usecase {
 
 
   private static final String USECASE_TITLE = "UC12: Incompliancy identification";
-    private static final String USECASE = USECASE_TITLE + " - The service provides warnings " +
-        "about side effects and possible incompliancy with some food and drinks, " +
-        "so that the Nutrition Adviser Service compose a health menu";
+  private static final String USECASE = USECASE_TITLE + " - The service provides warnings " +
+      "about side effects and possible incompliancy with some food and drinks, " +
+      "so that the Nutrition Adviser Service compose a health menu";
 
   public UsecasePrecaution(int usecaseId) {
     super(usecaseId);
@@ -22,6 +22,11 @@ public final class UsecasePrecaution extends Usecase {
 
   @Override
   public void execute(String... parameters) {
+
+    if (parameters != null && parameters.length > 0) {
+      throw new MedicationManagerShellException(NO_PARAMETERS_MESSAGE);
+    }
+
     User saiedUser = UserIDs.getSaiedUser();
     Log.info("Executing the " + USECASE_TITLE + ". The mocked user is : " +
         saiedUser, getClass());

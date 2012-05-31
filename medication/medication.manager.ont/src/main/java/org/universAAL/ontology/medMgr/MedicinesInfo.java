@@ -7,10 +7,12 @@ public final class MedicinesInfo {
 
   private final String generalInfo;
   private final String detailsInfo;
+  private final Time time;
 
-  public MedicinesInfo(String generalInfo, String detailsInfo) {
+  public MedicinesInfo(String generalInfo, String detailsInfo, Time time) {
     this.generalInfo = generalInfo;
     this.detailsInfo = detailsInfo;
+    this.time = time;
   }
 
   public String getGeneralInfo() {
@@ -19,5 +21,9 @@ public final class MedicinesInfo {
 
   public String getDetailsInfo() {
     return detailsInfo;
+  }
+
+  public Time getTime() {
+    return time;
   }
 }

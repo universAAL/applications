@@ -98,6 +98,10 @@ public final class MedicationOntology extends Ontology {
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
             DueIntake.DEVICE_ID, TypeMapper.getDatatypeURI(String.class), 1, 1));
+    oci.addObjectProperty(DueIntake.TIME).setFunctional();
+        oci.addRestriction(MergedRestriction
+            .getAllValuesRestrictionWithCardinality(
+                DueIntake.TIME, Time.MY_URI, 1, 1));
 
   }
 }

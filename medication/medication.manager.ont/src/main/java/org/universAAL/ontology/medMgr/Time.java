@@ -94,4 +94,13 @@ public final class Time extends Service {
         ", minutes=" + minutes +
         '}';
   }
+
+  public String getDailyTextFormat() {
+    int minutes = getMinutes();
+    String minutesText = String.valueOf(minutes);
+    if (minutes == 0) {
+       minutesText = minutesText + '0';
+    }
+    return getHour() + ":" + minutesText;
+  }
 }
