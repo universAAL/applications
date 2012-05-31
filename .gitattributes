@@ -806,9 +806,11 @@ medication/medication.manager.ui.runner/runner/configurations/ctxt.che/store/val
 medication/medication.manager.ui.runner/runner/configurations/mw.bus.model/sodapop.key -text
 medication/medication.manager.ui.runner/runner/configurations/services/org.ops4j.pax.logging.properties -text
 medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_bg.txt -text
+medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_de.txt -text
 medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_en.txt -text
 medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_es.txt -text
 medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_saied_bg.txt -text
+medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_saied_de.txt -text
 medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_saied_en.txt -text
 medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_saied_es.txt -text
 medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/messages.properties -text
@@ -850,6 +852,8 @@ medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/med
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Activator.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/DispenserUpsideDownDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Log.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/MainMedicationManagerMenu.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/MedicationManagerServiceButtonProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/ReminderDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/RequestMedicationInfoDialogProvider.java -text
 medication/medication.missing.services.simulation/artifact.composite -text

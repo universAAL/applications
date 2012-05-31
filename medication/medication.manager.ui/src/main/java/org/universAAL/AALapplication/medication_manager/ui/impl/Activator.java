@@ -9,16 +9,15 @@ public class Activator implements BundleActivator {
 
   static ModuleContext context;
   public ReminderDialogProvider service;
+  public MedicationManagerServiceButtonProvider medicationManagerServiceButtonProvider;
 
   public void start(BundleContext arg0) throws Exception {
     context = uAALBundleContainer.THE_CONTAINER
         .registerModule(new Object[]{arg0});
     context.logDebug("Initialising Project", null);
 
-    /*
-       * uAAL stuff
-       */
     service = new ReminderDialogProvider(context);
+    medicationManagerServiceButtonProvider = new MedicationManagerServiceButtonProvider(context);
 
     context.logInfo("Project started", null);
   }
