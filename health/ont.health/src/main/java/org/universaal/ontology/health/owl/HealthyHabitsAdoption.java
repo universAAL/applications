@@ -34,24 +34,24 @@ public abstract class HealthyHabitsAdoption extends Treatment {
     super(uri);
   }
   
-  public HealthyHabitsAdoption (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, Disease disease ){
-	  super(assistedPerson, caregiver, tname,description, stDt, disease);
+  public HealthyHabitsAdoption (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, String diseaseURI ){
+	  super(assistedPerson, caregiver, tname,description, stDt, diseaseURI);
   }
   
-  public HealthyHabitsAdoption (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, Disease disease){
-	  super(assistedPerson, caregiver, tname, tp, description, disease);
+  public HealthyHabitsAdoption (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, String diseaseURI){
+	  super(assistedPerson, caregiver, tname, tp, description, diseaseURI);
   }
   
-  public HealthyHabitsAdoption(String tname, String description, Disease disease){
-	  super(tname, description, disease);
+  public HealthyHabitsAdoption(String tname, String description, String diseaseURI){
+	  super(tname, description, diseaseURI);
   }
   
-  public HealthyHabitsAdoption (String tname, String description, XMLGregorianCalendar stDt, Disease disease){
-	  super(tname, description,stDt,disease);
+  public HealthyHabitsAdoption (String tname, String description, XMLGregorianCalendar stDt, String diseaseURI){
+	  super(tname, description,stDt,diseaseURI);
   }
   
-  public HealthyHabitsAdoption(String tname, String description, TreatmentPlanning tp, Disease disease){
-	  super(tname, description, tp, disease);
+  public HealthyHabitsAdoption(String tname, String description, TreatmentPlanning tp, String diseaseURI){
+	  super(tname, description, tp, diseaseURI);
   }
   
   public String getClassURI() {

@@ -31,6 +31,8 @@ public class MessageOntologyFactory extends ResourceFactoryImpl {
 	    return new Message(instanceURI);
      case 2:
 	    return new MotivationalPlainMessage(instanceURI);
+     case 3:
+ 	    return new MotivationalMessage(instanceURI);
 	}
 	return null;
   }

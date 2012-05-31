@@ -18,25 +18,25 @@ public class Diet extends HealthyHabitsAdoption{
 		super(uri);
 	}
 
-	public Diet( AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, Disease disease){
-		super(assistedPerson, caregiver,tname, description, stDt, disease); 
+	public Diet( AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, String diseaseURI){
+		super(assistedPerson, caregiver,tname, description, stDt, diseaseURI); 
 	}
 
-	public Diet( AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, Disease disease){
-		super(assistedPerson, caregiver, tname, tp, description, disease);
+	public Diet( AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, String diseaseURI){
+		super(assistedPerson, caregiver, tname, tp, description, diseaseURI);
 	}
-	public Diet(String tname, String description, XMLGregorianCalendar stDt, Disease disease){
-		super(tname, description, stDt, disease);
+	public Diet(String tname, String description, XMLGregorianCalendar stDt, String diseaseURI){
+		super(tname, description, stDt, diseaseURI);
 	}
-	public Diet(String tname, String description, TreatmentPlanning tp, Disease disease){
-		super(tname, description, tp, disease);  
+	public Diet(String tname, String description, TreatmentPlanning tp, String diseaseURI){
+		super(tname, description, tp, diseaseURI);  
 	}
 
 
 
 
-	public Diet (String name, String description, Disease disease){
-		super(name, description, disease);
+	public Diet (String name, String description, String diseaseURI){
+		super(name, description, diseaseURI);
 	}
 
 	public String getClassURI() {

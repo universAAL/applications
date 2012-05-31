@@ -102,10 +102,10 @@ public final class MessageOntology extends Ontology {
     oci.setResourceLabel("MotivationalMessage");
     oci.addSuperClass(Message.MY_URI); 
     
-    oci.addObjectProperty(MotivationalMessage.PROP_ILLNESS);
+    oci.addObjectProperty(MotivationalMessage.PROP_DISEASE);
 //    oci.addRestriction(MergedRestriction.getCardinalityRestriction(MotivationalMessage.PROP_ASSOCIATED_TREATMENT, 1, 1));
     oci.addRestriction(MergedRestriction
-    	      .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_ILLNESS, 
+    	      .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_DISEASE, 
     	    		  TypeMapper.getDatatypeURI(String.class), 1, 1));
     	      
     oci.addDatatypeProperty(MotivationalMessage.PROP_MESSAGE_TYPE);
@@ -154,7 +154,6 @@ public final class MessageOntology extends Ontology {
     		.getAllValuesRestrictionWithCardinality(MotivationalPlainMessage.PROP_CONTENT, 
     				TypeMapper.getDatatypeURI(String.class), 1, 1)); //un mensaje plano tiene como contenido un String
 
-
-    
+ 
   }
 }

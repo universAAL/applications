@@ -38,24 +38,24 @@ public class TakeMeasurementActivity extends Treatment {
     super(uri);
   }
   
-  public TakeMeasurementActivity ( AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, Disease disease){
-	  super(assistedPerson, caregiver, tname, description, stDt, disease);
+  public TakeMeasurementActivity ( AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, String diseaseURI){
+	  super(assistedPerson, caregiver, tname, description, stDt, diseaseURI);
   }
   
-  public TakeMeasurementActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, Disease disease){
-	  super(assistedPerson, caregiver, tname, tp, description, disease);
+  public TakeMeasurementActivity (AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, String diseaseURI){
+	  super(assistedPerson, caregiver, tname, tp, description, diseaseURI);
   }
   
-  public TakeMeasurementActivity (String tname, String description, Disease disease){
-	  super(tname, description,disease);
+  public TakeMeasurementActivity (String tname, String description, String diseaseURI){
+	  super(tname, description,diseaseURI);
   }
   
-  public TakeMeasurementActivity(String tname, String description, XMLGregorianCalendar stDt, Disease disease){
-	  super(tname, description,stDt, disease);
+  public TakeMeasurementActivity(String tname, String description, XMLGregorianCalendar stDt, String diseaseURI){
+	  super(tname, description,stDt, diseaseURI);
   }
   
-  public TakeMeasurementActivity(String tname, String description, TreatmentPlanning tp, Disease disease){
-	  super(tname, description, tp, disease);
+  public TakeMeasurementActivity(String tname, String description, TreatmentPlanning tp, String diseaseURI){
+	  super(tname, description, tp, diseaseURI);
   }
   
   public String getClassURI() {

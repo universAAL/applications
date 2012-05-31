@@ -70,17 +70,17 @@ public abstract class Treatment extends ManagedIndividual {
     super(uri);
   }
   
-  public Treatment(AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, Disease disease ){
+  public Treatment(AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, String description, XMLGregorianCalendar stDt, String diseaseURI ){
 		//super(assistedPerson + "." + name);
 		this.setName(tname);
 		this.setCaregiver(caregiver);
 		this.setCompleteness(0);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(stDt); // depending on the date, the treatment will be actived or planned
-		this.setAssociatedDisease(disease);
+		this.setAssociatedDisease(diseaseURI);
 	}
   
-  public Treatment(AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, Disease disease){
+  public Treatment(AssistedPersonProfile assistedPerson, Caregiver caregiver, String tname, TreatmentPlanning tp, String description, String diseaseURI){
 		//super(assistedPerson + "." + name);
 		this.setName(tname);
 		this.setCaregiver(caregiver);
@@ -88,34 +88,34 @@ public abstract class Treatment extends ManagedIndividual {
 		this.setTreatmentPlanning(tp);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(tp.getStartDate()); // depending on the date, the treatment will be actived or planned
-		this.setAssociatedDisease(disease);
+		this.setAssociatedDisease(diseaseURI);
 	}
   
-  public Treatment(String tname, String description, Disease disease){
+  public Treatment(String tname, String description, String diseaseURI){
 		//super(assistedPerson + "." + name);
 		this.setName(tname);
 		this.setCompleteness(0);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(); // depending on the date, the treatment will be actived or planned
-		this.setAssociatedDisease(disease);
+		this.setAssociatedDisease(diseaseURI);
 	}
   
-  public Treatment(String tname, String description, XMLGregorianCalendar stDt, Disease disease){
+  public Treatment(String tname, String description, XMLGregorianCalendar stDt, String diseaseURI){
 		//super(assistedPerson + "." + name);
 		this.setName(tname);
 		this.setCompleteness(0);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(stDt); // depending on the date, the treatment will be actived or planned
-		this.setAssociatedDisease(disease);
+		this.setAssociatedDisease(diseaseURI);
 	}
 
-  public Treatment(String tname, String description, TreatmentPlanning tp, Disease disease){
+  public Treatment(String tname, String description, TreatmentPlanning tp, String diseaseURI){
 		//super(assistedPerson + "." + name);
 		this.setName(tname);
 		this.setCompleteness(0);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(); // depending on the date, the treatment will be actived or planned
-		this.setAssociatedDisease(disease);
+		this.setAssociatedDisease(diseaseURI);
 		this.setTreatmentPlanning(tp);
 	}
 
@@ -206,13 +206,13 @@ public abstract class Treatment extends ManagedIndividual {
       props.put(PROP_IS_PRESCRIBED_BY_CAREGIVER, caregiver);
   }	
   
-  public Disease getAssociatedDisease() {
-	    return (Disease)props.get(PROP_IS_ASSOCIATED_TO_DISEASE);
+  public String getAssociatedDiseaseURI() {
+	    return (String)props.get(PROP_IS_ASSOCIATED_TO_DISEASE);
 	  }		
 
-	  public void setAssociatedDisease(Disease disease) {
-	    if (disease != null)
-	      props.put(PROP_IS_ASSOCIATED_TO_DISEASE, disease);
+	  public void setAssociatedDisease(String diseaseURI) {
+	    if (diseaseURI != null)
+	      props.put(PROP_IS_ASSOCIATED_TO_DISEASE, diseaseURI);
 	  }	
 
   /*

@@ -10,23 +10,23 @@ public class MessageServiceTools {
  private User sender = getSender();
  private User receiver = getReceiver(); 
  
- public static ArrayList <String> sentMessages = new ArrayList <String>();
+ public static ArrayList <MotivationalMessage> sentMessages = new ArrayList <MotivationalMessage>();
 	
-	public static void sendMessage(String content){
+	public static void sendMessage(MotivationalMessage mm){
 		//con los servicios de la plataforma, enviar mensaje al destinatario
 		//con el contenido especificado.
 		
 		//para probar que funciona el envío de mensajes (eliminar de la funcionalidad final)
 		
-		insertSentMessage(content);
+		insertSentMessage(mm);
 		
 	}
 	
-	public static void insertSentMessage(String motivationalMessage){
+	public static void insertSentMessage(MotivationalMessage motivationalMessage){
 		sentMessages.add(motivationalMessage);
 	}
 	
-	public static ArrayList <String> getSentMessages(){
+	public static ArrayList <MotivationalMessage> getSentMessages(){
 		return sentMessages;
 	}
 	
