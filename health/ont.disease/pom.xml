@@ -44,7 +44,6 @@
            		<groupId>org.universAAL.ontology</groupId>
            		<artifactId>ont.phWorld</artifactId>
        		</dependency>						
-			</dependency>
     	</dependencies>
   	  <build>
 			<plugins>
