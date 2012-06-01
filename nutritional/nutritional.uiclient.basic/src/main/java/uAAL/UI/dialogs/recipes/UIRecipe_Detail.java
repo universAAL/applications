@@ -153,6 +153,10 @@ public class UIRecipe_Detail extends CustomUICaller {
 			TextArea ta = new TextArea(groupProcedure, new Label( "Procedure:", null),
 					 PROP_PATH_RECIPE_PROCEDURE, null, recipeProcedure);
 
+			if (recipe.getPicture()!= null && recipe.getPicture().length()>0) {
+				new MediaObject(f.getIOControls(), new Label("Image", null), "image/jpg", recipe.getPicture()); //
+			}
+			
 //			MediaObject img_picture = new
 //					 MediaObject(f.getIOControls(), new Label(
 //					 "Picture", null), "image", "img/nutritional/en/lunch.jpg");

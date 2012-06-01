@@ -88,11 +88,11 @@ public class UIMainProvider extends CustomUICaller {
 //		URL picURL = this.getClass().getResource("file://C:\\Projects\\UniversAAL\\Tools\\workspaces_3.7.1\\base\\rundir\\confadmin\\ui.handler.gui.swing\\resources\\recipe91.jpg");
 //		ImageIcon j = new ImageIcon(picURL);
 //		new MediaObject(f.getIOControls(), new Label("Image", null), "image/jpeg", "file://C:\\Projects\\UniversAAL\\Tools\\workspaces_3.7.1\\base\\rundir\\confadmin\\ui.handler.gui.swing\\resources\\recipe91.jpg"); //
-		new MediaObject(f.getIOControls(), new Label("Image", null), "image/jpeg", "recipe91.jpg"); //
+		new MediaObject(f.getIOControls(), new Label("Image", null), "image/png", "despacio.png"); //
 //		new MediaObject(f.getIOControls(),new Label("","recepie91.jpg"),null);
 		// add an exit button for quitting the dialog
-		TextArea ta = new TextArea(f.getIOControls(), new Label( "Title of textarea", null),
-				PROP_PATH_SCALE_VALUE	, null, "Some text inside the textarea");
+//		TextArea ta = new TextArea(f.getIOControls(), new Label( "Title of textarea", null),
+//				PROP_PATH_SCALE_VALUE	, null, "Some text inside the textarea");
 		
 		new Submit(f.getSubmits(), new Label("Menus", null), SUBMIT_MENUS);
 		new Submit(f.getSubmits(), new Label("Recipes", null), SUBMIT_RECIPES);

@@ -1245,6 +1245,8 @@ nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/menus/UIMen
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/profile/UIProfile.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/recipes/UIRecipe_Detail.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/recipes/UIRecipes.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/recipes/UIRecipesToday.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/recipes/UIRecipesTomorrow.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/shopping/UIShopping.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/services/MedicationConsumer.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/services/ServiceGetRecipe.java -text
