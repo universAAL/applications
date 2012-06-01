@@ -1,0 +1,24 @@
+-classpath
+'C:/Projects/UniversAAL/svn/new_services/trunk/nutritional/nutritional.simulator/target/classes;C:/Users/hecgamar/.m2/repository/org/universAAL/middleware/mw.container.osgi/1.1.1-SNAPSHOT/mw.container.osgi-1.1.1-SNAPSHOT.jar;C:/Users/hecgamar/.m2/repository/org/ops4j/pax/logging/pax-logging-api/1.6.2/pax-logging-api-1.6.2.jar;C:/Users/hecgamar/.m2/repository/org/bouncycastle/jce.jdk13/144/jce.jdk13-144.jar;C:/Users/hecgamar/.m2/repository/org/universAAL/middleware/mw.bus.model/1.1.0/mw.bus.model-1.1.0.jar;C:/Users/hecgamar/.m2/repository/org/universAAL/ontology/ont.nutrition/0.1.2-SNAPSHOT/ont.nutrition-0.1.2-SNAPSHOT.jar;C:/Users/hecgamar/.m2/repository/org/apache/felix/org.osgi.core/1.0.1/org.osgi.core-1.0.1.jar;C:/Users/hecgamar/.m2/repository/org/universAAL/middleware/mw.acl.interfaces/1.1.0/mw.acl.interfaces-1.1.0.jar;C:/Users/hecgamar/.m2/repository/org/universAAL/middleware/mw.bus.service/1.1.1-SNAPSHOT/mw.bus.service-1.1.1-SNAPSHOT.jar;C:/Users/hecgamar/.m2/repository/org/universAAL/middleware/mw.container.xfaces/1.1.1-SNAPSHOT/mw.container.xfaces-1.1.1-SNAPSHOT.jar;C:/Users/hecgamar/.m2/repository/org/ops4j/pax/logging/pax-logging-service/1.6.2/pax-logging-service-1.6.2.jar;C:/Users/hecgamar/.m2/repository/org/universAAL/middleware/mw.data.representation/1.1.1-SNAPSHOT/mw.data.representation-1.1.1-SNAPSHOT.jar'
+-encoding
+'Cp1252'
+-protected
+-sourcepath
+'C:/Projects/UniversAAL/svn/new_services/trunk/nutritional/nutritional.simulator/src/main/java;C:/Projects/UniversAAL/svn/new_services/trunk/nutritional/nutritional.simulator/src/main/javadoc'
+-author
+-bottom
+'Copyright &#169; 2012 <a href="http://www.universAAL.org/">universAAL Consortium</a>. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Projects/UniversAAL/svn/new_services/trunk/nutritional/nutritional.simulator/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'nutritional.simulator 0.0.1-SNAPSHOT API'
+-linkoffline
+'http://download.oracle.com/javase/1.5.0/docs/api' 'C:/Projects/UniversAAL/svn/new_services/trunk/nutritional/nutritional.simulator/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'nutritional.simulator 0.0.1-SNAPSHOT API'
