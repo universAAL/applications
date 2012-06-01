@@ -109,7 +109,7 @@ public class UIProfile extends CustomUICaller {
 			Utils.println("Time is: "+time);
 			String value = Messages.Profile_Prefer_Breakfast +" "+ time;
 			SimpleOutput label_description = new SimpleOutput(
-					mealtimes, new Label("Dish:", null), null,
+					mealtimes, new Label("Time:", null), null,
 					value);
 		} catch (Exception e) {
 			e.printStackTrace();

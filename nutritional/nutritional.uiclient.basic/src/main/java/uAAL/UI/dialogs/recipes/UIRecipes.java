@@ -20,6 +20,7 @@ import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.middleware.ui.rdf.TextArea;
 
 import uAAL.UI.dialogs.CustomUICaller;
+import uAAL.UI.dialogs.menus.UIMenusTomorrow;
 
 
 
@@ -49,9 +50,12 @@ public class UIRecipes extends CustomUICaller {
 
 	private Form mainDialog = null;
 	private CustomUICaller parentUICaller = null;
+	private ModuleContext myContext;
 
+	
 	public UIRecipes(ModuleContext context) {
 		super(context);
+		this.myContext = context;
 	}
 
 	public void handleUIResponse(UIResponse uir) {
@@ -66,12 +70,12 @@ public class UIRecipes extends CustomUICaller {
 
 			if (SUBMIT_TODAY.equals(uir.getSubmissionID())) {
 				Utils.println(window + " Mostrar ventana TODAY!!");
-				// this.startMenuMainDialog();
+				this.showTodayMainDialog(this);
 				return;
 			}
 			if (SUBMIT_TOMORROW.equals(uir.getSubmissionID())) {
 				Utils.println(window + " Mostrar ventana TOMORROW!!");
-				// this.startMenuMainDialog();
+				this.showTomorrwoMainDialog(this);
 				return;
 			}
 			if (SUBMIT_FAVOURITES.equals(uir.getSubmissionID())) {
@@ -81,6 +85,18 @@ public class UIRecipes extends CustomUICaller {
 			}
 		}
 		Utils.println(window + " Continues");
+	}
+	
+	public void showTodayMainDialog(CustomUICaller parentForm) {
+		Utils.println(window + " showTodayRecipesMainDialog");
+		UIRecipesToday menus = new UIRecipesToday(this.myContext);
+		menus.startMainDialog(this);
+	}
+	
+	public void showTomorrwoMainDialog(CustomUICaller parentForm) {
+		Utils.println(window + " showTomorrowRecipesMainDialog");
+		UIRecipesTomorrow menus = new UIRecipesTomorrow(this.myContext);
+		menus.startMainDialog(this);
 	}
 
 	public void startMainDialog(CustomUICaller parentForm) {
@@ -101,12 +117,15 @@ public class UIRecipes extends CustomUICaller {
 				"Menus del día:", null), PROP_PATH_SCALE_VALUE, null, null);
 		in.setAlertString("Expected: a number between 0 and 100!");
 
-		TextArea ta = new TextArea(f.getIOControls(), new Label(
-				"Recetitas buenas:", null), PROP_PATH_SCALE_VALUE, null, null);
-		ta.setAlertString("Aqui falta algo");
-		ta.setHelpString("Ayuda para el text");
-		SimpleOutput so = new SimpleOutput(f.getIOControls(), null, null,
-				"Recetas interesantes que estan muy buenas!");
+		SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null,
+				"Select what recipes are you interested in: Today, Tomorrow or Week");
+		
+//		TextArea ta = new TextArea(f.getIOControls(), new Label(
+//				"Recipes menu:", null), PROP_PATH_SCALE_VALUE, null, null);
+//		ta.setAlertString("Aqui falta algo");
+//		ta.setHelpString("Ayuda para el text");
+//		SimpleOutput so = new SimpleOutput(f.getIOControls(), null, null,
+//				"Recetas interesantes que estan muy buenas!");
 
 		// add an exit button for quitting the dialog
 		new Submit(f.getSubmits(), new Label("Today", null), SUBMIT_TODAY);
