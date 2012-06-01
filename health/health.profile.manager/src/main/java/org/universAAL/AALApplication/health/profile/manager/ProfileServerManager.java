@@ -1,19 +1,19 @@
 /*	
 	Copyright 2010-2014 UPM http://www.upm.es
 	Universidad Politï¿½cnica de Madrdid
-	
+
 	OCO Source Materials
 	© Copyright IBM Corp. 2011
-	
+
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
-	
+
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
 	You may obtain a copy of the License at
-	
+
 	  http://www.apache.org/licenses/LICENSE-2.0
-	
+
 	Unless required by applicable law or agreed to in writing, software
 	distributed under the License is distributed on an "AS IS" BASIS,
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,7 +37,7 @@ import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Profilable;
-import org.universAAL.ontology.profile.Profile;
+import org.universAAL.ontology.profile.SubProfile;
 import org.universAAL.ontology.profile.service.ProfilingService;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.HealthProfile;
@@ -54,30 +54,30 @@ import org.universaal.ontology.health.owl.HealthProfile;
  */
 public class ProfileServerManager {
 
-    protected static final String OUTPUT_SUB_PROFILE = HealthOntology.NAMESPACE + "subProfile";
+	protected static final String OUTPUT_SUB_PROFILE = HealthOntology.NAMESPACE + "subProfile";
 
 	private static final String ARG_OUT = HealthOntology.NAMESPACE + "argOut";;
-	
-    /**
-     * Needed for making service requests
-     */
-    protected ServiceCaller caller = null;
-    
-    protected ModuleContext moduleContext = null;
 
-    /**
-     * Constructor.
-     * 
-     * @param context
-     */
-	 public ProfileServerManager(ModuleContext context) {
-		 
-		 moduleContext = context;
-		 
-		 // the DefaultServiceCaller will be used to make ServiceRequest
-		 caller = new DefaultServiceCaller(context);
-	 }
-	 	
+	/**
+	 * Needed for making service requests
+	 */
+	protected ServiceCaller caller = null;
+
+	protected ModuleContext moduleContext = null;
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param context
+	 */
+	public ProfileServerManager(ModuleContext context) {
+
+		moduleContext = context;
+
+		// the DefaultServiceCaller will be used to make ServiceRequest
+		caller = new DefaultServiceCaller(context);
+	}
+
 	/**
 	 * Returns the {org.universAAL.ontology.profile.health.HealthProfile} of the
 	 * given user.
@@ -122,41 +122,46 @@ public class ProfileServerManager {
 			return null;
 		}
 	}
-	*/
-	 public HealthProfile getHealthProfile(String userURI) {
-		 AssistedPersonProfile app = getProfile(new AssistedPerson(userURI));
-			if( app != null) {
-				if (app.hasProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE)) {
-					return (HealthProfile) getReturnValue(
-							(List) app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE),
-							HealthProfile.MY_URI);
-				}else {
-					return new HealthProfile();
-				}
+	 */
+	public HealthProfile getHealthProfile(String userURI) {
+		AssistedPerson ap = new AssistedPerson(userURI);
+		AssistedPersonProfile app = getProfile(ap);
+		if( app != null) {
+			HealthProfile hp = getHealthProfile(app);
+			if (hp != null) {
+				return hp;
+			}else {
+				return newHealthProfile(ap);
 			}
-			else {
-				moduleContext.logError("No User Profile Found", null);
-				return null;
-			}
-	 }
-	 
-	private HealthProfile newHealthProfile(String userURI) {
+		}
+		else {
+			moduleContext.logError("No User Profile Found", null);
+			return null;
+		}
+	}
+
+	private HealthProfile newHealthProfile(AssistedPerson ap) {
 		HealthProfile hp = new HealthProfile();
+		hp.assignHealthProfileToAP(ap);
+		/*
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null),
 				null);
-			req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, userURI);
-			req.addAddEffect(new String[] { ProfilingService.PROP_CONTROLS,
+		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, ap);
+		req.addAddEffect(new String[] { ProfilingService.PROP_CONTROLS,
 				Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE },
 				hp);
-			ServiceResponse resp = caller.call(req);
-			if (resp.getCallStatus().equals(CallStatus.succeeded)) {
-				moduleContext.logDebug("Added new Health Profile", null);
-				return hp;
-			}
-			else {
-				moduleContext.logWarn("callstatus is not succeeded, subprofile not added", null);
-				return null;
-			}	
+		ServiceResponse resp = caller.call(req);
+		if (resp.getCallStatus().equals(CallStatus.succeeded)) {
+			moduleContext.logDebug("Added new Health Profile", null);
+			return hp;
+		}
+		else {
+			moduleContext.logWarn("callstatus is not succeeded, subprofile not added", null);
+			return null;
+		}
+		*/
+		moduleContext.logDebug("Created new Health Profile", null);
+		return hp;
 	}
 
 	/**
@@ -166,7 +171,7 @@ public class ProfileServerManager {
 	 */
 	/*
 	public void updateHealthProfile(HealthProfile healthProfile) {
-		
+
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
 		req.addAddEffect(new String[] { 
 				ProfilingService.PROP_CONTROLS, 
@@ -178,39 +183,43 @@ public class ProfileServerManager {
 			 moduleContext.logWarn("callstatus is not succeeded", null);
 		 }
 	}
-	*/
+	 */
 	public void updateHealthProfile(HealthProfile healthProfile) {
 		AssistedPersonProfile app = getProfile(healthProfile.getAssignedAssistedPerson());
-		Object subprf = app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE);
-		Resource hp = null;
+		if (app == null) {
+			moduleContext.logError("unable to retrieve AssistedPersonProfile", null);
+		}
 		
-		if (subprf == null
+		Object subprf = app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE);
+
+		if (!app.hasProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE)
+				|| subprf == null
 				|| subprf instanceof HealthProfile) {
-			app.setSubProfile(healthProfile);
+			moduleContext.logDebug("adding single Health Profile", null);
+			app.setProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE, healthProfile);
 		}
 		else {
+			moduleContext.logDebug("managing multiple sub profiles", null);
 			List<Resource> subprofiles;
-			try {
+			if (subprf instanceof List) {
 				subprofiles = (List<Resource>) subprf;
-				for (Iterator iterator = subprofiles.iterator(); iterator.hasNext();) {
-					Resource subP = (Resource) iterator.next();
-					if (subP.getURI().equals(HealthProfile.MY_URI)) {
-						hp = subP;
-					}
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
+				HealthProfile oldHP = getHealthProfile(app);
+				subprofiles.remove(oldHP);
+			}		
+			else {
 				subprofiles = new ArrayList<Resource>();
 				subprofiles.add((Resource) subprf);
 			}
-			subprofiles.remove(hp);
 			subprofiles.add(healthProfile);
 			app.setProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE, subprofiles);
-		}		
+		}
+		
+		moduleContext.logDebug("Performing update Profile", null);
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null),	null);
 		req.addChangeEffect(new String[] { ProfilingService.PROP_CONTROLS,
 				Profilable.PROP_HAS_PROFILE }, app);
 		ServiceResponse resp = caller.call(req);
+		moduleContext.logDebug("Updating HealthProfile: " + resp.getCallStatus().name(), null);
 	}
 	/**
 	 * Copied from org.universAAL.context.prof.serv.ArtifactIntegrationTest
@@ -218,8 +227,18 @@ public class ProfileServerManager {
 	 * @return
 	 */
 	private AssistedPersonProfile getProfile(AssistedPerson assistedPerson) {
+		AssistedPersonProfile app = new AssistedPersonProfile(assistedPerson.getURI()+ "prof");
+		assistedPerson.setProfile(app);
+		return getProfile(app);
+	}
+	/**
+	 * Copied from org.universAAL.context.prof.serv.ArtifactIntegrationTest
+	 * @param profile
+	 * @return
+	 */
+	private AssistedPersonProfile getProfile(AssistedPersonProfile app) {
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null),	null);
-		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, assistedPerson);
+		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE }, app);
 		req.addRequiredOutput(ARG_OUT, new String[] {
 				ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE });
 		ServiceResponse resp = caller.call(req);
@@ -246,5 +265,32 @@ public class ProfileServerManager {
 			}
 		}
 		return returnValue;
+	}
+
+	private HealthProfile getHealthProfile (AssistedPersonProfile app) {
+		Object supp = app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE);
+		if (supp != null) {
+			if (supp instanceof HealthProfile) {
+				return (HealthProfile) supp;
+			}
+			if (supp instanceof List) {
+				List<SubProfile> suppl = (List<SubProfile>) supp;
+				Iterator<SubProfile> it = suppl.iterator();
+				SubProfile su = it.next();
+				while (it.hasNext() 
+						&& !su.getClassURI().equals(HealthProfile.MY_URI)) {
+					su =  it.next();
+				}
+				if (su.getClassURI().equals(HealthProfile.MY_URI)) {
+					return (HealthProfile) su;
+				} 
+				else {
+					moduleContext.logError("No health profile found", null);
+					return null;
+				}
+			}
+		}
+		moduleContext.logError("no subprofiles found", null);
+		return null;
 	}
 }
