@@ -20,10 +20,10 @@ import java.util.TreeMap;
 
 import org.universAAL.AALapplication.health.manager.ui.InputListener;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.input.InputEvent;
-import org.universAAL.middleware.input.InputSubscriber;
+import org.universAAL.middleware.ui.UICaller;
+import org.universAAL.middleware.ui.UIResponse;
 
-public class ISubscriber extends InputSubscriber{
+public class ISubscriber extends UICaller{
 
 	private TreeMap<String, InputListener> inputMapper;
 	
@@ -40,21 +40,17 @@ public class ISubscriber extends InputSubscriber{
 	public void dialogAborted(String dialogID) {
 		// TODO Auto-generated method stub
 	}
-
-	public void handleInputEvent(InputEvent event) {
-		/*
-		 * Delegate Handlement to subscribed UI
-		 */
-		inputMapper.get(event.getDialogID()).handleEvent(event);
-	}
 	
 	public void registerUI(String formID, InputListener listener) {
 		inputMapper.put(formID, listener);
-		addNewRegParams(formID);
 	}
 
 	public void unresgisterUI(String formID) {
 		inputMapper.remove(formID);
-		removeMatchingRegParams(formID);
+	}
+
+	@Override
+	public void handleUIResponse(UIResponse event) {
+		inputMapper.get(event.getDialogID()).handleEvent(event);
 	}
 }

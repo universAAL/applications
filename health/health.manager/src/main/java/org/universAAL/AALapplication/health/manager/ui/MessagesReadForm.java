@@ -15,11 +15,10 @@
  ******************************************************************************/
 package org.universAAL.AALapplication.health.manager.ui;
 
-import org.universAAL.middleware.input.InputEvent;
-import org.universAAL.middleware.io.rdf.Form;
-import org.universAAL.middleware.io.rdf.InputField;
-import org.universAAL.middleware.io.rdf.Label;
-import org.universAAL.middleware.io.rdf.SimpleOutput;
+import org.universAAL.middleware.ui.UIResponse;
+import org.universAAL.middleware.ui.rdf.Form;
+import org.universAAL.middleware.ui.rdf.Label;
+import org.universAAL.middleware.ui.rdf.SimpleOutput;
 
 /**
  * @author amedrano
@@ -72,7 +71,7 @@ public class MessagesReadForm extends MessagesForm {
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#handleEvent(org.universAAL.middleware.input.InputEvent)
 	 */
 	@Override
-	public void handleEvent(InputEvent ie) {
+	public void handleEvent(UIResponse ie) {
 		super.handleEvent(ie);
 
 	}

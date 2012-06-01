@@ -16,8 +16,8 @@
 package org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.AALapplication.health.manager.HealthManager;
-import org.universAAL.middleware.input.InputEvent;
-import org.universAAL.middleware.io.rdf.Form;
+import org.universAAL.middleware.ui.UIResponse;
+import org.universAAL.middleware.ui.rdf.Form;
 
 /**
  * @author amedrano
@@ -30,7 +30,7 @@ public abstract class InputListener {
 	}
 	
 	abstract public Form getDialog();
-	public void handleEvent(InputEvent ie) {
+	public void handleEvent(UIResponse ie) {
 		HealthManager.getInstance().getIsubcriber().unresgisterUI(ie.getDialogID());
 	}
 }

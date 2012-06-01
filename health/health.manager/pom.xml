@@ -21,7 +21,7 @@
 		<artifactId>health.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<version>B.0.1-SNAPSHOT</version>
-		<relativePath>../pom/</relativePath>
+		<relativePath>../health.pom/</relativePath>
 	</parent>
 
 	<artifactId>health.manager</artifactId>
@@ -50,10 +50,9 @@
 			<artifactId>ont.health</artifactId>
 		</dependency>
 		<dependency>
-        	<groupId>org.universAAL.middleware</groupId>
-        	<artifactId>mw.bus.io</artifactId>
-        	<version>1.0.1-SNAPSHOT</version>
-      	</dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.ui</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
