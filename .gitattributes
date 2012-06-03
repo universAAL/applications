@@ -421,7 +421,10 @@ agenda/agenda.runner/runner/configurations/services/org.ops4j.pax.logging.proper
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_es.txt -text
+agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_gui_hr.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_hr.txt -text
+agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_nutritionist_hr.txt -text
+agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_remoteUser_hr.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_saied_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_saied_es.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_saied_hr.txt -text
@@ -436,7 +439,10 @@ agenda/agenda.runner/runner/configurations/ui.dm.mobile/messages_hr.properties -
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_es.txt -text
+agenda/agenda.runner/runner/configurations/ui.dm/main_menu_gui_hr.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_hr.txt -text
+agenda/agenda.runner/runner/configurations/ui.dm/main_menu_nutritionist_hr.txt -text
+agenda/agenda.runner/runner/configurations/ui.dm/main_menu_remoteUser_hr.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_saied.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_saied_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_saied_es.txt -text
