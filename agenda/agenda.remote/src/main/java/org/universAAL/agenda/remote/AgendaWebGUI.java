@@ -202,7 +202,7 @@ public class AgendaWebGUI {
 	    // ////////////////////////////////////
 	    // Reminder Group controls START
 	    // ////////////////////////////////////
-	    
+
 	    Group remindergroup = new Group(controls,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.17"), (String) null),
@@ -211,7 +211,7 @@ public class AgendaWebGUI {
 		    (Resource) null);
 
 	    // This group is for ordering inputs vertically
-	    //Message
+	    // Message
 	    new SimpleOutput(invisiblegroup2, null, null, Messages
 		    .getString("AgendaWebGUI.18"));
 	    new InputField(
@@ -296,6 +296,10 @@ public class AgendaWebGUI {
 			    "Interval(min) ", (String) null), new PropertyPath(
 			    null, false, new String[] { REF_REM_INT }), null,
 		    null);
+	    for (int i = 1; i <= 4; i++) {
+		remintervalselect.addChoiceItem(new ChoiceItem(Integer
+			.toString(i), (String) null, new Integer(i)));
+	    }
 	    for (int i = 5; i <= 60; i += 5) {
 		remintervalselect.addChoiceItem(new ChoiceItem(Integer
 			.toString(i), (String) null, new Integer(i)));
@@ -328,8 +332,8 @@ public class AgendaWebGUI {
     }
 
     public Form getMessageForm(String msg) {
-	Form f = Form.newDialog(Messages.getString("AgendaScreenTitle"),
-		(String) null);
+	Form f = Form.newDialog(Messages
+		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 
@@ -346,8 +350,8 @@ public class AgendaWebGUI {
 
     // SC2011 Events form
     public Form getEventsForm(Calendar cal) {
-	Form f = Form.newDialog(Messages.getString("AgendaScreenTitle"),
-		(String) null);
+	Form f = Form.newDialog(Messages
+		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 	map = new HashMap();
@@ -465,8 +469,8 @@ public class AgendaWebGUI {
     // SC2011 Events form
     public Form getGoogleForm(Calendar cal) {
 
-	Form f = Form.newDialog(Messages.getString("AgendaScreenTitle"),
-		(String) null);
+	Form f = Form.newDialog(Messages
+		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 
