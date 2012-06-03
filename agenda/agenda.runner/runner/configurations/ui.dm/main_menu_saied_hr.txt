@@ -1,3 +1,2 @@
-/Test Madrid|http://www.madrid_workshop.org|service_ont_URI
 /Agenda|http://www.anco.gr|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
-/Nutritional Advisor|http://www.tsb.upv.es|http://ontology.persona.ima.igd.fhg.de/Nutritional.owl#Nutritional
+/Main Menu saied hr|http://www.madrid_workshop.org|service_ont_URI
