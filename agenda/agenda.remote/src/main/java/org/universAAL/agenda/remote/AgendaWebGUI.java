@@ -48,18 +48,18 @@ import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agendaEventSelection.FilterParams;
 import org.universAAL.ontology.profile.User;
+
 /**
  * 
  * @author alfiva
  * @author eandgrg
- *
+ * 
  */
 public class AgendaWebGUI {
 
     private static final String uAAL_NAMESPACE_PREFIX = "http://ontology.aal-uAAL.org/"; //$NON-NLS-1$
     public static final String uAAL_INPUT_NAMESPACE = uAAL_NAMESPACE_PREFIX
 	    + "Input.owl#"; //$NON-NLS-1$
-    public static final String SCREEN_TITLE = "Agenda Event Editor";
     public static final String REF_CALENDAR = uAAL_INPUT_NAMESPACE + "calendar";
     public static final String REF_DAY = uAAL_INPUT_NAMESPACE + "day";
     public static final String REF_TYPE = uAAL_INPUT_NAMESPACE + "type";
@@ -82,7 +82,8 @@ public class AgendaWebGUI {
     public static HashMap<Integer, Event> map;
 
     public Form getMainScreenMenuForm() {
-	Form f = Form.newDialog(SCREEN_TITLE, (String) null);
+	Form f = Form.newDialog(Messages
+		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 
@@ -100,9 +101,10 @@ public class AgendaWebGUI {
 	} else {
 	    java.util.Calendar now = java.util.Calendar.getInstance();
 	    java.util.Calendar nowrem = java.util.Calendar.getInstance();
-	    now.add(java.util.Calendar.DAY_OF_YEAR, 1);
-	    nowrem.add(java.util.Calendar.DAY_OF_YEAR, 1);
-	    nowrem.add(java.util.Calendar.MINUTE, -15);
+	    now.add(java.util.Calendar.DAY_OF_YEAR, 0);
+	    nowrem.add(java.util.Calendar.DAY_OF_YEAR, 0);
+	    nowrem.add(java.util.Calendar.MONTH, 1);
+	    nowrem.add(java.util.Calendar.MINUTE, 4);
 
 	    // Select Calendar control
 	    Select1 calselect = new Select1(
@@ -197,14 +199,19 @@ public class AgendaWebGUI {
 		    new PropertyPath(null, false, new String[] { REF_DESC }),
 		    null, "");
 
-	    // Reminder Group controls
+	    // ////////////////////////////////////
+	    // Reminder Group controls START
+	    // ////////////////////////////////////
+	    
 	    Group remindergroup = new Group(controls,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.17"), (String) null),
 		    null, null, (Resource) null);
 	    Group invisiblegroup2 = new Group(remindergroup, null, null, null,
-		    (Resource) null);// This group is for ordering inputs
-	    // vertically
+		    (Resource) null);
+
+	    // This group is for ordering inputs vertically
+	    //Message
 	    new SimpleOutput(invisiblegroup2, null, null, Messages
 		    .getString("AgendaWebGUI.18"));
 	    new InputField(
@@ -238,7 +245,7 @@ public class AgendaWebGUI {
 			    new String[] { REF_REM_MONTH }), MergedRestriction
 			    .getAllValuesRestriction(REF_REM_MONTH,
 				    new IntRestriction(1, true, 12, true)),
-		    new Integer(nowrem.get(java.util.Calendar.MONTH) + 1));
+		    new Integer(nowrem.get(java.util.Calendar.MONTH)));
 
 	    // Year
 	    Select1 remyearselect = new Select1(
@@ -270,27 +277,33 @@ public class AgendaWebGUI {
 		    MergedRestriction.getAllValuesRestriction(REF_REM_MIN,
 			    new IntRestriction(0, true, 59, true)),
 		    new Integer(nowrem.get(java.util.Calendar.MINUTE)));
-
+	    // Repeat group
 	    Group remrepeatgroup = new Group(invisiblegroup2,
 		    new org.universAAL.middleware.ui.rdf.Label("Repeat",
 			    (String) null), null, null, (Resource) null);
+	    // Repeat group -> Times
 	    Select1 remrepeatselect = new Select1(remrepeatgroup,
-		    new org.universAAL.middleware.ui.rdf.Label("Times    ",
+		    new org.universAAL.middleware.ui.rdf.Label("Times",
 			    (String) null), new PropertyPath(null, false,
 			    new String[] { REF_REM_REP }), null, null);
-	    for (int i = 1; i < 10; i++) {
+	    for (int i = 1; i <= 5; i++) {
 		remrepeatselect.addChoiceItem(new ChoiceItem(Integer
 			.toString(i), (String) null, new Integer(i)));
 	    }
+	    // Repeat group -> Interval
 	    Select1 remintervalselect = new Select1(remrepeatgroup,
 		    new org.universAAL.middleware.ui.rdf.Label(
 			    "Interval(min) ", (String) null), new PropertyPath(
 			    null, false, new String[] { REF_REM_INT }), null,
 		    null);
-	    for (int i = 1; i < 60; i++) {
+	    for (int i = 5; i <= 60; i += 5) {
 		remintervalselect.addChoiceItem(new ChoiceItem(Integer
 			.toString(i), (String) null, new Integer(i)));
 	    }
+
+	    // ////////////////////////////////////
+	    // Reminder Group controls END
+	    // ////////////////////////////////////
 
 	    // Submit
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
@@ -303,7 +316,9 @@ public class AgendaWebGUI {
 	    // new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 	    // Messages.getString("AgendaWebGUI.28"), (String) null),
 	    // "google");
-	    //FIXME removed when trasferring to UI Bus (no InputEvent.uAAL_MAIN_MENU_REQUEST) related to: UIProvider line 219
+	    // FIXME removed when trasferring to UI Bus (no
+	    // InputEvent.uAAL_MAIN_MENU_REQUEST) related to: UIProvider line
+	    // 219
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.21"), (String) null),
 		    "home");
@@ -313,7 +328,8 @@ public class AgendaWebGUI {
     }
 
     public Form getMessageForm(String msg) {
-	Form f = Form.newDialog(SCREEN_TITLE, (String) null);
+	Form f = Form.newDialog(Messages.getString("AgendaScreenTitle"),
+		(String) null);
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 
@@ -330,7 +346,8 @@ public class AgendaWebGUI {
 
     // SC2011 Events form
     public Form getEventsForm(Calendar cal) {
-	Form f = Form.newDialog(SCREEN_TITLE, (String) null);
+	Form f = Form.newDialog(Messages.getString("AgendaScreenTitle"),
+		(String) null);
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 	map = new HashMap();
@@ -448,7 +465,8 @@ public class AgendaWebGUI {
     // SC2011 Events form
     public Form getGoogleForm(Calendar cal) {
 
-	Form f = Form.newDialog(SCREEN_TITLE, (String) null);
+	Form f = Form.newDialog(Messages.getString("AgendaScreenTitle"),
+		(String) null);
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 

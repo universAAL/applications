@@ -392,11 +392,8 @@ agenda/agenda.remote/src/main/java/org/universAAL/agenda/remote/SCaller.java -te
 agenda/agenda.remote/src/main/java/org/universAAL/agenda/remote/UIProvider.java -text
 agenda/agenda.remote/src/main/java/org/universAAL/agenda/remote/osgi/Activator.java -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages.properties -text
-agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_da.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_en.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es.properties -text
-agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_hr.properties -text
-agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_it.properties -text
 agenda/agenda.runner/Run.bat -text
 agenda/agenda.runner/dbSchemaRepository/AgendaUniversAAL.sql -text
 agenda/agenda.runner/dbSchemaRepository/AgendaUniversAAL_MySQL_WorkbenchModel.mwb -text
