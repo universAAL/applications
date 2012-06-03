@@ -425,11 +425,7 @@ agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_remoteUser_hr.
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_saied_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_saied_es.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_saied_hr.txt -text
-agenda/agenda.runner/runner/configurations/ui.dm.mobile/messages.properties -text
-agenda/agenda.runner/runner/configurations/ui.dm.mobile/messages_de.properties -text
-agenda/agenda.runner/runner/configurations/ui.dm.mobile/messages_en.properties -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/messages_es.properties -text
-agenda/agenda.runner/runner/configurations/ui.dm.mobile/messages_hr.properties -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_es.txt -text
