@@ -18,18 +18,17 @@
         <configuration>
           <args>pax.configuration</args>
           <provision>
-          <!-- Explanation: -->
+           <!-- Explanation: -->
           <!-- <provision>{opt:wrap}:mvn:{groupId}/{artifactId}/{version}@{opt:#level | nostart | noupdate}</provision>-->
-         
+          
+<!--IMPORTANT: For web handler random password is necessary!!!-->
+
           <!--		RUN AGENDA	platform 1.1.0 compatible BEGIN -->
-
-	<provision>scan-composite:mvn:org.universAAL.ui/ui.dm/1.1.0/composite</provision>
-	<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.0/composite</provision>
-<!--		<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.1.0/composite</provision>-->
-<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.1.0/composite</provision>-->
+	<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.1.0-2MODALITIES/composite</provision>
 	<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.1.0/composite</provision>
+<!--		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.2-110/composite</provision>-->
+	<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.1.0/composite</provision>
 	<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/B.0.1-SNAPSHOT/composite</provision>
-
 
 <!--		RUN AGENDA	platform 1.1.0 compatible END -->
 	    
@@ -37,7 +36,7 @@
 <!--		<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.0.0/composite</provision>-->
 <!--		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.0.0/composite</provision>-->
 <!--		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.0.0/composite</provision>-->
-<!--		<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/A.0.1-SNAPSHOT/composite</provision>-->
+<!--		<provision>scan-composite:mvn:org.universAAL.AALapplicaton/agenda.composite/A.0.1-SNAPSHOT/composite</provision>-->
 <!--		RUN AGENDA	1.0.0 END -->
  
 <!--RUN AGENDA	1.1.0 BEFORE COMPOSITES BEGIN -->
