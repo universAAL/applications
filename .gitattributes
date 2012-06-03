@@ -427,6 +427,7 @@ agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_nutritionist_h
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_remoteUser_hr.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_saied_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_saied_es.txt -text
+agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_saied_hr.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/messages.properties -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/messages_de.properties -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/messages_en.properties -text
