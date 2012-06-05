@@ -1,10 +1,6 @@
 package org.universAAL.AALApplication.health.profile.manager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.universAAL.itests.IntegrationTest;
-import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
@@ -15,9 +11,6 @@ import org.universAAL.ontology.profile.service.ProfilingService;
 import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.TakeMeasurementActivity;
 import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.services.GetProfileService;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 public class ArtifactTest extends IntegrationTest {
 
@@ -68,7 +61,6 @@ public class ArtifactTest extends IntegrationTest {
     	hp = psm.getHealthProfile(NAMESPACE+USER);
     	assertTrue(hp.getTreatments().length == 1);
 		assertTrue(hp.getTreatments()[0].getName().equals(treatmentName));
-
     }
     /*
     public void testGetProfileService() {
