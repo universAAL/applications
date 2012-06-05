@@ -141,7 +141,7 @@ public class ProfileServerManager {
 	}
 
 	private HealthProfile newHealthProfile(AssistedPerson ap) {
-		HealthProfile hp = new HealthProfile();
+		HealthProfile hp = new HealthProfile(ap.getURI()+"HealthSubprofile");
 		hp.assignHealthProfileToAP(ap);
 		/*
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null),
