@@ -36,6 +36,7 @@ import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.Profile;
+import org.universAAL.ontology.profile.SubProfile;
 import org.universaal.ontology.health.HealthOntologyFactory;
 import org.universaal.ontology.health.owl.services.EditTreatmentService;
 import org.universaal.ontology.health.owl.services.GetProfileService;
@@ -435,6 +436,7 @@ public final class HealthOntology extends Ontology {
     oci = createNewOntClassInfo(HealthProfile.MY_URI, factory, 12);  
     oci.setResourceLabel("HealthProfile");
     oci.setResourceComment("Health profile listing all treatments for an Assisted Person");
+    oci.addSuperClass(SubProfile.MY_URI);
     
     oci.addObjectProperty(HealthProfile.PROP_HAS_TREATMENT);
     //oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(HealthProfile.PROP_HAS_TREATMENT, Treatment.MY_URI, 0, -1));
