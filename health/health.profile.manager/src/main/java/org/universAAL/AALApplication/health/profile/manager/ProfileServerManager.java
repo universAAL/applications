@@ -188,6 +188,7 @@ public class ProfileServerManager {
 		AssistedPersonProfile app = getProfile(healthProfile.getAssignedAssistedPerson());
 		if (app == null) {
 			moduleContext.logError("unable to retrieve AssistedPersonProfile", null);
+			return;
 		}
 		
 		Object subprf = app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE);
@@ -197,6 +198,8 @@ public class ProfileServerManager {
 				|| subprf instanceof HealthProfile) {
 			moduleContext.logDebug("adding single Health Profile", null);
 			app.setProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE, healthProfile);
+			//moduleContext.logDebug("HP set to: " 
+			//		+ ((Resource) app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE)).getLocalName(), null);
 		}
 		else {
 			moduleContext.logDebug("managing multiple sub profiles", null);
