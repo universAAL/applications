@@ -395,10 +395,10 @@ agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages.pr
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_en.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es.properties -text
 agenda/agenda.runner/Run.bat -text
-agenda/agenda.runner/dbSchemaRepository/AgendaUniversAAL.sql -text
 agenda/agenda.runner/dbSchemaRepository/AgendaUniversAAL_MySQL_WorkbenchModel.mwb -text
 agenda/agenda.runner/dbSchemaRepository/Er[!!-~]model.png -text
 agenda/agenda.runner/dbSchemaRepository/stable_agenda_db-oldFromPersona.sql -text
+agenda/agenda.runner/dbSchemaRepository/universAALAgendaDBwithTestDataAndProcedures.sql -text
 agenda/agenda.runner/eclipse.launchers/runner-Remote-Debug.launch -text
 agenda/agenda.runner/eclipse.launchers/runner.install-run.launch -text
 agenda/agenda.runner/eclipse.launchers/runner.run.launch -text
