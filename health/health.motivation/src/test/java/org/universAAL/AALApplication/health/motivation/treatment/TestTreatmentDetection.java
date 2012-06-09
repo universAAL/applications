@@ -21,9 +21,20 @@ import org.junit.Test;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentDetection;
 import org.universAAL.itests.IntegrationTest;
+import org.universAAL.middleware.owl.DataRepOntology;
+import org.universAAL.middleware.owl.OntologyManagement;
+import org.universAAL.middleware.service.owl.ServiceBusOntology;
+import org.universAAL.middleware.ui.owl.UIBusOntology;
+import org.universAAL.ontology.ProfileOntology;
+import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.owl.Diet;
+import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.Treatment;
+import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
+import org.universaal.ontology.owl.MessageOntology;
+import org.universaal.ontology.owl.QuestionnaireOntology;
 
 /**
  * This test class checks if treatments are well detected, based on 
@@ -32,7 +43,7 @@ import org.universaal.ontology.health.owl.Treatment;
  * @author mdelafuente
  *
  */
-public class TestTreatmentDetection extends IntegrationTest{
+public class TestTreatmentDetection extends TestCase{
 
 	private KnowledgeBase kbase;
 	private static StatefulKnowledgeSession ksession;
@@ -46,7 +57,20 @@ public class TestTreatmentDetection extends IntegrationTest{
 	 * @throws Exception 
 	 */
 	@Before
-	public void onSetUp() throws Exception{
+	public void setUp() throws Exception{
+		OntologyManagement.getInstance().register(new DataRepOntology());
+		OntologyManagement.getInstance().register(new ServiceBusOntology());
+		OntologyManagement.getInstance().register(new UIBusOntology());
+		OntologyManagement.getInstance().register(new PhThingOntology());
+		OntologyManagement.getInstance().register(new ProfileOntology());//hay otra
+		OntologyManagement.getInstance().register(new QuestionnaireOntology());//hay otra
+		OntologyManagement.getInstance().register(new DiseaseOntology());
+		OntologyManagement.getInstance().register(new HealthMeasurementOntology());
+		OntologyManagement.getInstance().register(new HealthOntology());
+		OntologyManagement.getInstance().register(new MessageOntology());
+		
+		
+		
 		//load up the knowledge base
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 
@@ -70,7 +94,7 @@ public class TestTreatmentDetection extends IntegrationTest{
 	}
 
 	@After
-	public void onTearDown()
+	public void tearDown()
 	{
 		ksession.dispose();
 		MessageManager.changeToPlatformInterface();//una vez terminado el test, pasamos a la interfaz de la plataforma, la real
