@@ -553,11 +553,13 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationManager.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SCaller.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/MotivationalMessageContent.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/PlainMessageForTest.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentDetectionMessage.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageManager.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageServiceTools.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageVariables.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MotivationalMessagesDatabase.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/PruebaCSV.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/PruebaDeReflection.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/MotivationStatusDetection.java -text
@@ -568,7 +570,8 @@ health/health.motivation/src/main/resources/rules/MaintenanceRules.dslr -text
 health/health.motivation/src/main/resources/rules/PrecontemplationRules.drl -text
 health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
 health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/ArtifactTest.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestArtifact.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestMessageManageConcepts.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentDetection.java -text
 health/health.motivation/uAAL.log -text
 health/health.pom/pom.xml -text svneol=unset#text/plain

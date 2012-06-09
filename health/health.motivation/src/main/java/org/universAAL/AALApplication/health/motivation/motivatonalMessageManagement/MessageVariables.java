@@ -18,12 +18,15 @@ public static String[] replaceVariables(String[] variable){
 		else if(variable[i].equals("username"))
 			values[i] = "Pepe";
 			
-		else if(variable[i].equals("treatmentDefinition"))
+		else if(variable[i].equals("treatmentDescription"))
 			values[i] = "Definición del tratamiento";
 			
 		else if(variable[i].equals("treatmentPuropose"))
 			values[i] = "Propósito del tratamiento";
-			
+		else if(variable[i].equals("prueba"))
+			values[i] = "Marina para saber si esto funciona";	
+		else if(variable[i].equals("partOfDay"))
+			values[i] = "Morning";	
 		else{
 			System.out.println("Parámetro no definido");
 			values[i] = null;

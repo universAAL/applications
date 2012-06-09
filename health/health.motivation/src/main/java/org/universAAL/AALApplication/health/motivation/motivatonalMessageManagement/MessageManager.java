@@ -30,6 +30,7 @@ import org.universAAL.AALApplication.health.motivation.motivationalMessages.Moti
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
+import org.universaal.ontology.owl.Question;
 import org.universaal.ontology.owl.Questionnaire;
 
 import com.csvreader.CsvReader;
@@ -41,7 +42,7 @@ public class MessageManager {
 	
 	private static boolean testInterface = false;
 	
-	public final Locale SPANISH = new Locale ("es", "ES");
+	public static final Locale SPANISH = new Locale ("es", "ES");
 	private final int EN = 1;
 	private final int ES = 0;
 	
@@ -50,6 +51,9 @@ public class MessageManager {
 	public String mot_status;
 	public String message_type;
 	public String motivational_message_content;
+	
+	public static final String prefixForDisease = "http://health.ontology.universaal.org/Disease#";
+	public static final String prefixForTreatment = "http://health.ontology.universaal.org/HealthOntology#";
 	
 	static MultiKeyMap map = new MultiKeyMap(); // the map structure
 
@@ -65,14 +69,13 @@ public class MessageManager {
 		FileReader reader = null;
 
 		try {
-			
 			if (language.equals(Locale.ENGLISH)) {
 				reader = new FileReader(MotivationalMessagesDatabase.getDBRute(EN));
+				
 			}
 			else if (language.equals(SPANISH)) {
 				reader = new FileReader(MotivationalMessagesDatabase.getDBRute(ES));
 			}
-			
 			buildMapStructure(reader);
 		
 		} catch (Exception e) {
@@ -89,44 +92,44 @@ public class MessageManager {
 	public void buildMapStructure(FileReader freader) {
 
 		try {
-			
 			CsvReader reader = new CsvReader(freader, ';');
-			String line = reader.getRawRecord();
-			String[] columns = reader.getValues();
 			
-			disease = columns[0];
-			treatment_type = columns[1];
-			mot_status = columns[2];
-			message_type = columns[3];
-			motivational_message_content = columns[4];
-
-			while (line != null) {
-
+			if (reader.readHeaders()) {
+				String[] headers = reader.getHeaders(); //eliminamos los headers del almacenamiento
+			}
+			
+			while(reader.readRecord()){
+				String[] columns = reader.getValues(); // nos devuelve el valor de las columnas, de cada fila
+				
+				disease = columns[0];
+				treatment_type = columns[1];
+				mot_status = columns[2];
+				message_type = columns[3];
+				motivational_message_content = columns[4];
+				
 				if (!map.containsKey(disease,treatment_type, mot_status,
-					message_type)) {
-					// if the combination of keys has not been registered yet
-					ArrayList<String> mMessagesAssociated = new ArrayList<String>(); // a
-					mMessagesAssociated.add(motivational_message_content);
-					map.put(disease,treatment_type, mot_status,
-							message_type,mMessagesAssociated);
-				} else { // if the combination of keys already exists
-					ArrayList<String> mMessagesAssociated = (ArrayList<String>) (map
-							.get(disease,treatment_type, mot_status,message_type));
-					mMessagesAssociated.add(motivational_message_content);
-					map.put(disease,treatment_type, mot_status,
-							message_type,mMessagesAssociated);
-				}
-
-			} // At this point, the map structure is build
-
+						message_type)) {
+						// if the combination of keys has not been registered yet
+						System.out.println("Estoy guardando el registro en el mapa");
+						ArrayList<String> mMessagesAssociated = new ArrayList<String>(); //cada array guarda todos los mensajes que se encuentran para una misma combinación de keys.
+						mMessagesAssociated.add(motivational_message_content);
+						map.put(disease,treatment_type, mot_status,
+								message_type,mMessagesAssociated);
+					} else { // if the combination of keys already exists
+						ArrayList<String> mMessagesAssociated = (ArrayList<String>) (map
+								.get(disease,treatment_type, mot_status,message_type));
+						mMessagesAssociated.add(motivational_message_content);
+						map.put(disease,treatment_type, mot_status,
+								message_type,mMessagesAssociated);
+					}
+			}
+			// At this point, the map structure is build
 			reader.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 	
-	
-
 	/**
 	 * The following method finds all the motivational messages
 	 * related to a set of keys. That's the lines in the data base
@@ -153,11 +156,13 @@ public class MessageManager {
 
 	public static Object getMotivationalMessageContent(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
 		
-		String tType = (String) treatmentType.toString();
-		String mStatus = (String) motStatus.toString();
-		String mType = (String) messageType.toString();
+		String diseaseName = disease.replaceFirst(prefixForDisease, "");
+		String tType = treatmentType.replaceFirst(prefixForTreatment, "");
+		String mStatus = motStatus.getLocalName();
+		String mType = messageType.getLocalName();
+		
 		ArrayList<String> mMessageResults = (ArrayList<String>) map.get(
-				disease, tType, mStatus, mType);
+				diseaseName, tType, mStatus, mType);
 
 		if (mMessageResults.size() > 1) { // there are several messages for the
 			// same combination of keys
@@ -165,21 +170,28 @@ public class MessageManager {
 			int number = rndm.nextInt(mMessageResults.size()); // we get one of
 			// those messages randomly
 			try{
+				
 				Class <?> cName = Class.forName(mMessageResults.get(number));
-				Object content =( (MotivationalMessageContent) (cName.newInstance()) ).getContent();
-				return content;
-			}catch (Exception e){return null;}
-			
-		} else{
-//			
-			try{
-				Class <?> cName = Class.forName(mMessageResults.get(0));
-				Object content =((MotivationalMessageContent)(cName.newInstance())).getContent();
+				Object content =( (MotivationalMessageContent) (cName.newInstance()) ).getMessageContent();
 				return content;
 			}catch (Exception e){
+				System.out.println(mMessageResults.get(number));
+				return null;
+				}
+			
+		} else if(mMessageResults.size()==1){
+			try{
+				
+				Class <?> cName = Class.forName(mMessageResults.get(0));
+				Object content =((MotivationalMessageContent)(cName.newInstance())).getMessageContent();
+				System.out.println("Tipo de new instance: " + content.getClass());
+				return content;
+			}catch (Exception e){
+				System.out.println(e);
 				return null;
 			}
-			
+		}else{
+			return null;
 		}
 	}
 
@@ -254,86 +266,7 @@ public class MessageManager {
 		return processedContent;
 	}
 
-	/**
-	 * This method deletes a motivational message.
-	 * @param motivational message
-	 */
-/*
-	public static void deleteMotivationalMessage(MotivationalMessage mm) {
 
-		ArrayList<String> mMessagesResults = getMessageResults(mm);
-
-		if (mMessagesResults.size() > 1) { // there are several messages for the
-			// same combination of keys
-
-			File originalFile = new File(
-					"D://Trabajo/Servicio health/Motivational_messages/motivationalMessages.csv");
-			File tempFile = new File(
-					"D://Trabajo/Servicio health/Motivational_messages/motivationalMessagesTemp.csv");
-			try {
-				FileReader freader = new FileReader(originalFile);
-				FileWriter fwriter = new FileWriter(tempFile, true);
-
-				CsvReader reader = new CsvReader(freader, ';');
-				CsvWriter writer = new CsvWriter(fwriter, ';');
-
-				String lineToRemove = getLine(mm);
-				String currentLine;
-
-				while ((currentLine = reader.getRawRecord()) != null) {
-					// trim newline when comparing with lineToRemove
-					String trimmedLine = currentLine.trim();
-					if (trimmedLine.equals(lineToRemove))
-						continue;
-					writer.write(currentLine);
-				}
-
-				tempFile.renameTo(originalFile);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		} else{
-			// there is only one message with those keys
-			String typeOfTreatment = mm.getAssociatedTreatment().getClass().getName();
-			String motStatus = mm.getMotivationalStatus().toString();
-			String mContext = (mm.getContext()).toString();
-			String depth = ((Integer) mm.getDepth()).toString();
-			String typeOfMessage = mm.getTypeOfMessage();
-
-			map.remove(typeOfTreatment, motStatus, mContext,depth, typeOfMessage);
-		}
-	}*/
-
-	/**
-	 * The following method stores a motivational message in the specified csv
-	 * file
-	 * @param MotivationalMessage (the one that will be stored)
-	 * @param the rute that contains the file in which the message will be
-	 * stored.
-	 */
-/*
-	public static void storeMotivationalMessage(MotivationalMessage mm,
-			String file_rute) {
-		try {
-
-			File mmessageDB = new File(file_rute);
-			FileWriter fwriter = new FileWriter(mmessageDB, true);
-
-			CsvWriter writer = new CsvWriter(fwriter, ';');
-
-			writer.write(mm.getAssociatedTreatment().getClass().getName());
-			writer.write(mm.getMotivationalStatus().toString());
-			writer.write((mm.getContext()).toString());
-			writer.write(((Integer) mm.getDepth()).toString());
-			writer.write(mm.getTypeOfMessage());
-			writer.write(mm.getContent().toString());
-			writer.endRecord();
-			writer.close();
-
-		} catch (Exception e) {
-		}
-	}
-*/
 	/**
 	 * The following method sends a message to the user. The message is sent by
 	 * the platform or the caregiver
@@ -341,30 +274,36 @@ public class MessageManager {
 	 */
 	
 	public static void sendMessageToUser(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
-		// To do: utilizar el mï¿½todo/servicio que proporcione la plataforma
-		// para enviar al buzï¿½n de entrada del destinatario.
-		// Prestar atenciï¿½n a lo que devuelva (mensaje enviado, mensaje leï¿½do,
-		// etc).
-		
+
 		Object unprocessedContent = getMotivationalMessageContent(disease, treatmentType, motStatus, messageType);
 		String processedMessage =""; 
-		String unprocessedQuestionnaire;
+		String unprocessedQuestion;
+		Questionnaire processedQuestionnaire;
 		
 		MotivationalMessage processedMM;
 		
 		if(unprocessedContent instanceof String){
 			processedMessage = decodeMessageContent(unprocessedContent);
-			
 		}
 		else if(unprocessedContent instanceof Questionnaire){
-			unprocessedQuestionnaire = ((Questionnaire)(unprocessedContent)).questionnaireToString();
-			processedMessage = decodeMessageContent(unprocessedQuestionnaire);
+			//unprocessedQuestionnaire = ((Questionnaire)(unprocessedContent)).questionnaireToString();
 			
+			//en el cuestionario sólo tendremos posibles variables en los qwording de las preguntas
+			//así que los decodificamos y los volvemos a guardar
+			Question[] questions = ((Questionnaire)(unprocessedContent)).getQuestions();
+			for (int i = 0; i < questions.length; i++) {
+				unprocessedQuestion = questions[i].getQuestionWording();
+				processedMessage = decodeMessageContent(unprocessedQuestion);
+				questions[i].setQuestionWording(processedMessage);
+			}
+			((Questionnaire)(unprocessedContent)).setQuestions(questions);
+			processedQuestionnaire = ((Questionnaire)(unprocessedContent));
 		}
 		else{
 			//lanzar excepción
 		}
 		
+		//mandamos el mensaje motivacional completo al módulo de test o real (en éste se manda al usuario como caja negra).
 		if(testInterface){
 			processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
 			MessageServiceTools.sendMessage(processedMM);	
@@ -373,9 +312,6 @@ public class MessageManager {
 			processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
 			//enviarlo a la interfaz real
 		}
-		
-		
-		
 	}
 	
 	public static void changeToPlatformInterface(){
@@ -396,57 +332,4 @@ public class MessageManager {
 	//TO DO
 	}
 	
-	/**
-	 * The following method initializates the rute in which is the
-	 * csv file that contains the english motivational messages.
-	 */
-/*
-	public void setEngMotMessageDB() {
-		enMessagesDB = new File("G:\\motivationalMessages.csv");
-	}
-*/
-	/**
-	 * The following method initializates the rute in which is the
-	 * csv file that contains the spanish motivational messages.
-	 */
-/*
-	public void setSpMotMessageDB() {
-		spMessagesDB = new File("");// especificar la ruta del fichero con los mensajes
-		// en espanol
-	}
-*/
-	/**
-	 * The following method generates the line of the csv file associated
-	 * to a motivational message 
-	 * @param motivational message
-	 * @return the string containning the line associated to the 
-	 * motivational message in the csv file.
-	 */
-	/*
-	public static String getLine(MotivationalMessage mm) {
-		String typeOfTreatment = mm.getAssociatedTreatment().getClass()
-				.getName();
-		String motStatus = mm.getMotivationalStatus().toString();
-		String mContext = (mm.getContext()).toString();
-		String depth = ((Integer) mm.getDepth()).toString();
-		String typeOfMessage = mm.getTypeOfMessage();
-		Object messageContent = mm.getContent();
-
-		String line = typeOfTreatment + ";" + motStatus + ";" + mContext + ";"
-				+ depth + ";" + typeOfMessage + ";" + messageContent;
-		return line;
-	}
-*/
-	/**
-	 * The following method shows the message content.
-	 * @param motivational message
-	 */
-	/*
-	
-	public static void showMotivationalMessage(MotivationalMessage mm){
-		//TO DO: en la integracion con la plataforma, dar el mm al servicio que corresponda
-		//para que lo muestre.
-		
-		System.out.println(mm.getContent());
-	}*/
 }
