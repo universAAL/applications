@@ -1,0 +1,10 @@
+delete next 5 items (possibly refresh needed before that):
+
+runner/bundles
+runner/cache
+runner/felix/cache
+log
+deploy-pom.xml
+
+this clears cache and loads most recent files.
+Run: right click on runner.install-run.launch->Run As->runner.install-run

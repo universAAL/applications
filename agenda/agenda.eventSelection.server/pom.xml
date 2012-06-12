@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>agenda.pom</artifactId>
+		<version>B.0.1-SNAPSHOT</version>
+		<relativePath>../agenda.pom/pom.xml</relativePath>
+	</parent>
+	<packaging>bundle</packaging>
+	<artifactId>agenda.eventSelection.server</artifactId>
+	<name>Agenda AAL Service Event Selection Tool Server</name>
+	<description>A server based on the domain ontology of event services</description>
+	<dependencies>
+		<!--		<dependency>-->
+		<!--			<groupId>junit</groupId>-->
+		<!--			<artifactId>junit</artifactId>-->
+		<!--		</dependency>-->
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.data.representation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.profile</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>agenda.ont</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>agenda.eventSelection.ont</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.17</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Activator>org.universAAL.agendaEventSelectionTool.server.osgi.Activator</Bundle-Activator>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Export-Package> org.universAAL.agendaEventSelectionTool.server</Export-Package>
+						<Private-Package>org.universAAL.agendaEventSelectionTool.server.impl,
+							org.universAAL.agendaEventSelectionTool.database, org.universAAL.agendaEventSelectionTool.server.osgi</Private-Package>
+						<!--
+							although by default all packages should be automatically imported
+							(and added to MANIFEST) when not explicitly having Import-Package
+							section, this is for some reason not the case for com.mysql.jdbc
+							in this bundle.
+							com.mysql.jdbc is forced to import package list while "*" ensures that all other packages are automatically included
+						-->
+					
+						<Import-Package>com.mysql.jdbc, * </Import-Package>
+						
+<!--						<Import-Package>-->
+<!--							org.universAAL.middleware.container,-->
+<!--							org.universAAL.middleware.container.osgi,-->
+<!--							org.universAAL.middleware.container.osgi.util,-->
+<!--							org.universAAL.middleware.container.utils,-->
+<!--							org.universAAL.middleware.context,-->
+<!--							org.universAAL.middleware.context.owl,-->
+<!--							org.universAAL.middleware.owl,-->
+<!--							org.universAAL.middleware.rdf,-->
+<!--							org.universAAL.middleware.rdf.impl,-->
+<!--							org.universAAL.middleware.service,-->
+<!--							org.universAAL.middleware.service.owls.process,-->
+<!--							org.universAAL.middleware.service.owls.profile,-->
+<!---->
+<!--							org.universAAL.ontology.agenda,-->
+<!--							org.universAAL.ontology.agenda.service,-->
+<!--							org.universAAL.ontology.agendaEventSelection,-->
+<!--							org.universAAL.ontology.agendaEventSelection.service,-->
+<!---->
+<!--							java.sql.*,-->
+<!--							org.osgi.framework,-->
+<!--							com.mysql.jdbc,-->
+<!--							javax.xml.datatype,-->
+<!--							org.slf4j</Import-Package>-->
+					</instructions>
+				</configuration>
+			</plugin>
+			<!--			<plugin>-->
+			<!--				<groupId>org.apache.maven.plugins</groupId>-->
+			<!--				<artifactId>maven-compiler-plugin</artifactId>-->
+			<!--				<configuration>-->
+			<!--					<compilerArguments>-->
+			<!--						<bootclasspath>${java.home}\lib\rt.jar</bootclasspath>-->
+			<!--					</compilerArguments>-->
+			<!--				</configuration>-->
+			<!--			</plugin>-->
+		</plugins>
+	</build>
+</project>

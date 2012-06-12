@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.universAAL.AALapplication</groupId>
+  <artifactId>agenda.runner</artifactId>
+  <packaging>jar</packaging>  
+  <version>B.0.2-SNAPSHOT</version>
+  <!-- version is here equal to the level of version of the middleware -->
+  <name>Runner Folder</name>
+
+  <build>
+    <plugins>  
+      <plugin>    
+        <groupId>org.ops4j</groupId>
+        <artifactId>maven-pax-plugin</artifactId>
+        <version>1.4</version>
+        <configuration>
+          <args>pax.configuration</args>
+          <provision>
+			<!--ui.dm.mobile/1.1.3-SNAPSHOT/ has saied for Modality.gui and jack for Modality.web-->
+			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.1.3-SNAPSHOT/composite</provision> 
+			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.3/composite</provision>
+			<provision>mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.3-SNAPSHOT</provision>
+			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.1.0/composite</provision>
+			<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/B.0.1-SNAPSHOT/composite</provision>
+	 </provision>
+        </configuration>	
+      </plugin>    	
+    </plugins>
+  </build>
+</project>
