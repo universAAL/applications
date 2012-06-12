@@ -15,9 +15,7 @@
  ******************************************************************************/
 package org.universAAL.ontology.agendaEventSelection;
 
-//import net.fortuna.ical4j.model.Date;
 
-import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.middleware.owl.DataRepOntology;
