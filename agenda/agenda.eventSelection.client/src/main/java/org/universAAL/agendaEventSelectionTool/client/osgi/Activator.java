@@ -8,7 +8,6 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.container.utils.LogUtils;
 
 /**
- * *.
  * 
  * @author eandgrg
  */

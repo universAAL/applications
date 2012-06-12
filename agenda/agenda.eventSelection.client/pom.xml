@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>B.0.1-SNAPSHOT</version>
+		<version>B.0.2-SNAPSHOT</version>
 		<relativePath>../agenda.pom/pom.xml</relativePath>
 	</parent>
+
 	<packaging>bundle</packaging>
 	<artifactId>agenda.eventSelection.client</artifactId>
 	<name>Agenda AAL Service Event Selection Tool Client</name>
@@ -40,10 +42,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.phWorld</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
 		</dependency>
 		<dependency>
@@ -67,21 +65,11 @@
 						<Bundle-Activator>org.universAAL.agendaEventSelectionTool.client.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						
-<!--						both below packages are used in agenda gui-->
+
+						<!--both below packages are used in agenda gui-->
 						<Export-Package>org.universAAL.agendaEventSelectionTool.client,
 							org.universAAL.agendaEventSelectionTool.client.osgi</Export-Package>
-						<!--
-							<Import-Package>org.universAAL.middleware.context,org.universAAL.middleware.context.owl,
-						-->
-
-						<!--							org.universAAL.middleware.owl.supply,-->
-						<!--
-							org.universAAL.middleware.rdf, org.universAAL.middleware.service,
-						-->
-						<!--							org.universAAL.middleware.service.owl,-->
-						<!--							org.universAAL.middleware.service.owls.process,-->
-						<!--							org.universAAL.middleware.service.owls.profile,-->
+		
 						<!--
 							org.universAAL.middleware.util, org.universAAL.ontology.profile,
 						-->
@@ -95,7 +83,7 @@
 <!---->
 						<!--							java.sql.*,-->
 						<!--							javax.swing,-->
-						<!--							org.osgi.service.*, org.osgi.framework, javax.xml.*,-->
+						<!--							org.osgi.service.*, , .*,-->
 						<!--							com.mysql.jdbc,-->
 						<!--							org.slf4j</Import-Package>-->
 					</instructions>

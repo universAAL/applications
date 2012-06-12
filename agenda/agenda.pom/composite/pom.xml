@@ -6,11 +6,10 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>B.0.1-SNAPSHOT</version>
+		<version>B.0.2-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>agenda.composite</artifactId>
-	<version>B.0.1-SNAPSHOT</version>
 	<name>Agenda AAL Service Composite</name>
 	<description>Artifact responsible for generating composite file of Agenda AAL Service</description>
 	<url></url>
@@ -18,32 +17,32 @@
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.client</artifactId>
-			<version>B.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.server</artifactId>
-			<version>B.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.gui</artifactId>
-			<version>B.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.remote</artifactId>
-			<version>B.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.eventSelection.client</artifactId>
-			<version>B.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.eventSelection.server</artifactId>
-			<version>B.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 </project>
