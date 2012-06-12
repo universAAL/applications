@@ -403,6 +403,7 @@ agenda/agenda.runner/eclipse.launchers/runner-Remote-Debug.launch -text
 agenda/agenda.runner/eclipse.launchers/runner.install-run.launch -text
 agenda/agenda.runner/eclipse.launchers/runner.run.launch -text
 agenda/agenda.runner/pax.configuration -text
+agenda/agenda.runner/pom[!!-~]-[!!-~]old[!!-~](with[!!-~]everything).xml -text
 agenda/agenda.runner/pom.xml -text
 agenda/agenda.runner/runner/cleaning[!!-~]runner[!!-~]folder[!!-~]cache.txt -text
 agenda/agenda.runner/runner/configurations/README.txt -text
