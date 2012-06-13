@@ -31,15 +31,13 @@ public class Activator implements BundleActivator {
 	BundleContext[] bc = { context };
 	mcontext = uAALBundleContainer.THE_CONTAINER.registerModule(bc);
 	ac = new AgendaConsumer(mcontext);
-	
+
 	LogUtils.logInfo(mcontext, this.getClass(), "start",
-		    new Object[] { "Agenda client consumer started." }, null);
+		new Object[] { "Agenda client consumer started." }, null);
     }
 
     /**
-     * 
-     * 
-     * @return
+     * @return Agenda Consumer (agenda service caller) instance
      */
     public AgendaConsumer getAgendaConsumer() {
 	return this.ac;
@@ -53,6 +51,6 @@ public class Activator implements BundleActivator {
      */
     public void stop(BundleContext context) throws Exception {
 	LogUtils.logInfo(mcontext, this.getClass(), "stop",
-		    new Object[] { "Agenda client consumer stopped." }, null);
+		new Object[] { "Agenda client consumer stopped." }, null);
     }
 }
