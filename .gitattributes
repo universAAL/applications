@@ -1,8 +1,6 @@
 * text=auto !eol
 agenda/agenda.client/LICENSE -text
 agenda/agenda.client/NOTICE -text
-agenda/agenda.client/backup/AgendaConsumer_backup.java -text
-agenda/agenda.client/backup/AgendaConsumer_beforeGui.backup -text
 agenda/agenda.client/pom.xml -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/AgendaConsumer.java -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/ServiceRequestCreator.java -text
