@@ -5,6 +5,7 @@ agenda/agenda.client/backup/AgendaConsumer_backup.java -text
 agenda/agenda.client/backup/AgendaConsumer_beforeGui.backup -text
 agenda/agenda.client/pom.xml -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/AgendaConsumer.java -text
+agenda/agenda.client/src/main/java/org/universAAL/agenda/client/ServiceRequestCreator.java -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/osgi/Activator.java -text
 agenda/agenda.eventSelection.client/LICENSE -text
 agenda/agenda.eventSelection.client/NOTICE -text
