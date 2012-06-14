@@ -18,7 +18,6 @@ import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
-import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
 import org.universAAL.ontology.agendaEventSelection.FilterParams;
 import org.universAAL.ontology.agendaEventSelection.TimeSearchType;
@@ -32,10 +31,8 @@ import org.universAAL.ontology.agendaEventSelection.TimeSearchType;
  */
 public class EventSelectionToolConsumer extends ContextSubscriber {
 
-    /**  */
     public static final String EVENT_SELECTION_TOOL_SERVER_NAMESPACE = "http://ontology.universaal.org/EventSelectionToolConsumer.owl#";
 
-    /**  */
     public static final String OUTPUT_EVENT_LIST = EVENT_SELECTION_TOOL_SERVER_NAMESPACE
 	    + "eventList";
 
@@ -76,18 +73,24 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	mcontext = context;
 	caller = new DefaultServiceCaller(context);
 
+	// testGetEventsWithFilter()
+	estServiceRequestCreator = EventSelectionToolServiceRequestCreator
+		.getInstance();
+    }
+
+    /**
+     * test method
+     */
+    private void testGetEventsWithFilter() {
 	FilterParams fp = new FilterParams(null);
 	fp.setDTbegin(TypeMapper.getDataTypeFactory()
-		.newXMLGregorianCalendarDate(2009, 1 + 1, 27, 2));
+		.newXMLGregorianCalendarDate(20012, 1 + 1, 27, 2));
 	fp.setDTend(TypeMapper.getDataTypeFactory()
-		.newXMLGregorianCalendarDate(2009, 1 + 1, 27 + 1, 2));
+		.newXMLGregorianCalendarDate(20012, 1 + 1, 27 + 1, 2));
 	fp.setTimeSearchType(TimeSearchType.startsBetween);
 
 	// get all filter events from specific calendars
 	getSelectedEventsService(fp, null);
-
-	estServiceRequestCreator = EventSelectionToolServiceRequestCreator
-		.getInstance();
     }
 
     /**
