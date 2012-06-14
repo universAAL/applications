@@ -57,13 +57,10 @@ public class EventSelectionTool extends ManagedIndividual {
 	super(uri);
     }
 
-    /*
-     * Calendar
-     */
     /**
      * 
      * 
-     * @return
+     * @returnCalendar
      */
     public List getCalendars() {
 	List calendars = (List) props.get(PROP_HAS_CALENDARS);
@@ -102,13 +99,11 @@ public class EventSelectionTool extends ManagedIndividual {
 	props.put(PROP_HAS_CALENDARS, calendars);
     }
 
-    /*
-     * FilterParams
-     */
     /**
      * 
      * 
      * @param params
+     *            FilterParams
      */
     public void setFilterParams(FilterParams params) {
 	if (params != null) {
@@ -126,13 +121,11 @@ public class EventSelectionTool extends ManagedIndividual {
 	return (FilterParams) props.get(PROP_HAS_FILTER_PARAMS);
     }
 
-    /*
-     * Max number of returned events
-     */
     /**
      * 
      * 
      * @param max
+     *            Max number of returned events
      */
     public void setMaxEventNo(int max) {
 	clearCache();
@@ -142,17 +135,16 @@ public class EventSelectionTool extends ManagedIndividual {
     /**
      * 
      * 
-     * @return
+     * @return Max number of returned events
      */
     public int getMaxEventNo() {
 	return ((Integer) props.get(PROP_MAX_EVENT_NO)).intValue();
     }
 
-    // returns a list of events
     /**
      * 
      * 
-     * @return
+     * @return list of events
      */
     public List getFilteredEvents() {
 	if (cacheIsValid)
@@ -181,12 +173,11 @@ public class EventSelectionTool extends ManagedIndividual {
 	return eventsList;
     }
 
-    // returns an unsorted list of events
     /**
      * 
      * 
      * @param maxEventNo
-     * @return
+     * @return an unsorted list of events
      */
     public List getLimitedFilteredEvents(int maxEventNo) {
 	if (cacheIsValid)
@@ -223,12 +214,11 @@ public class EventSelectionTool extends ManagedIndividual {
 	return eventsList;
     }
 
-    // returns a list of events
     /**
      * 
      * 
      * @param maxEventNo
-     * @return
+     * @return a list of events
      */
     public List getFollowingEvents(int maxEventNo) {
 	if (cacheIsValid)

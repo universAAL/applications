@@ -13,39 +13,39 @@ import org.universAAL.ontology.agenda.Event;
  * 
  */
 public class FilterParams extends ManagedIndividual {
-    
+
     /**  */
     public static final String MY_URI = AgendaEventSelectionOntology.NAMESPACE
 	    + "FilterParams";
-    
+
     /**  */
     public static final String PROP_DT_BEGIN = AgendaEventSelectionOntology.NAMESPACE
 	    + "DTbegin";
-    
+
     /**  */
     public static final String PROP_DT_END = AgendaEventSelectionOntology.NAMESPACE
 	    + "DTend";
-    
+
     /**  */
     public static final String PROP_CATEGORY = AgendaEventSelectionOntology.NAMESPACE
 	    + "category";
-    
+
     /**  */
     public static final String PROP_SPOKEN_LANGUAGE = AgendaEventSelectionOntology.NAMESPACE
 	    + "spokenLanguage";
-    
+
     /**  */
     public static final String PROP_HAS_USER_PROFILE = AgendaEventSelectionOntology.NAMESPACE
 	    + "hasUserProfile";
-    
+
     /**  */
     public static final String PROP_HAS_LOCATION = AgendaEventSelectionOntology.NAMESPACE
 	    + "hasLocation";
-    
+
     /**  */
     public static final String PROP_DESCRIPTION = AgendaEventSelectionOntology.NAMESPACE
 	    + "hasSearchType";
-    
+
     /**  */
     public static final String PROP_HAS_SEARCH_TYPE = AgendaEventSelectionOntology.NAMESPACE
 	    + "hasDescription";
@@ -58,21 +58,18 @@ public class FilterParams extends ManagedIndividual {
     }
 
     /**
+     * Constructor
      * 
-     *
-     * @param uri 
+     * @param uri
      */
     public FilterParams(String uri) {
 	super(uri);
     }
 
-    /*
-     * DTbegin
-     */
     /**
+     * DTbegin
      * 
-     *
-     * @return 
+     * @return
      */
     public XMLGregorianCalendar getDTbegin() {
 	return (XMLGregorianCalendar) props.get(PROP_DT_BEGIN);
@@ -80,20 +77,17 @@ public class FilterParams extends ManagedIndividual {
 
     /**
      * 
-     *
-     * @param DTbegin 
+     * 
+     * @param DTbegin
      */
     public void setDTbegin(XMLGregorianCalendar DTbegin) {
 	props.put(PROP_DT_BEGIN, DTbegin);
     }
 
-    /*
-     * DTend
-     */
     /**
+     * DTend
      * 
-     *
-     * @return 
+     * @return
      */
     public XMLGregorianCalendar getDTend() {
 	return (XMLGregorianCalendar) props.get(PROP_DT_END);
@@ -101,20 +95,17 @@ public class FilterParams extends ManagedIndividual {
 
     /**
      * 
-     *
-     * @param DTend 
+     * 
+     * @param DTend
      */
     public void setDTend(XMLGregorianCalendar DTend) {
 	props.put(PROP_DT_END, DTend);
     }
 
-    /*
-     * Category
-     */
     /**
      * 
-     *
-     * @param category 
+     * 
+     * @param category
      */
     public void setCategory(String category) {
 	props.put(PROP_CATEGORY, category);
@@ -122,20 +113,17 @@ public class FilterParams extends ManagedIndividual {
 
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return category
      */
     public String getCategory() {
 	return (String) props.get(PROP_CATEGORY);
     }
 
-    /*
-     * Spoken Language
-     */
     /**
      * 
-     *
-     * @param spokenLang 
+     * 
+     * @param spokenLang
      */
     public void setSpokenLanguage(String spokenLang) {
 	props.put(PROP_SPOKEN_LANGUAGE, spokenLang);
@@ -143,20 +131,17 @@ public class FilterParams extends ManagedIndividual {
 
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return spoken language
      */
     public String getSpokenLanguage() {
 	return (String) props.get(PROP_SPOKEN_LANGUAGE);
     }
 
-    /*
-     * Description
-     */
     /**
      * 
-     *
-     * @param descriptionPattern 
+     * 
+     * @param descriptionPattern
      */
     public void setDescription(String descriptionPattern) {
 	props.put(PROP_DESCRIPTION, descriptionPattern);
@@ -164,20 +149,17 @@ public class FilterParams extends ManagedIndividual {
 
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return
      */
     public String getDescription() {
 	return (String) props.get(PROP_DESCRIPTION);
     }
 
-    /*
-     * User Profile
-     */
     /**
      * 
-     *
-     * @param userProfile 
+     * 
+     * @param userProfile
      */
     public void setUserProfile(UserProfile userProfile) {
 	props.put(PROP_CATEGORY, userProfile);
@@ -185,20 +167,17 @@ public class FilterParams extends ManagedIndividual {
 
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return
      */
     public UserProfile getUserProfile() {
 	return (UserProfile) props.get(PROP_HAS_USER_PROFILE);
     }
 
-    /*
-     * Location
-     */
     /**
      * 
-     *
-     * @param location 
+     * 
+     * @param location
      */
     public void setLocation(Location location) {
 	props.put(PROP_HAS_LOCATION, location);
@@ -206,20 +185,18 @@ public class FilterParams extends ManagedIndividual {
 
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return location
      */
     public Location getLocation() {
 	return (Location) props.get(PROP_HAS_LOCATION);
     }
 
-    /*
-     * Time SearchType
-     */
     /**
      * 
-     *
-     * @param tst 
+     * 
+     * @param tst
+     *            Time SearchType
      */
     public void setTimeSearchType(TimeSearchType tst) {
 	if (tst != null)
@@ -228,22 +205,27 @@ public class FilterParams extends ManagedIndividual {
 
     /**
      * 
-     *
-     * @return 
+     * 
+     * @return
      */
     public TimeSearchType getTimeSearchType() {
 	return (TimeSearchType) props.get(PROP_HAS_SEARCH_TYPE);
     }
 
-
-    /* (non-Javadoc)
-     * @see org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType(java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
+     * (java.lang.String)
      */
     public int getPropSerializationType(String propURI) {
 	return PROP_SERIALIZATION_FULL;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.universAAL.middleware.owl.ManagedIndividual#isWellFormed()
      */
     public boolean isWellFormed() {
@@ -251,13 +233,12 @@ public class FilterParams extends ManagedIndividual {
 	return true;
     }
 
-    // condition::Find if all of the FilterParams values match to
-    // Event.EventDetails parameters
     /**
+     * condition::Find if all of the FilterParams values match to
+     * Event.EventDetails parameters
      * 
-     *
-     * @param event 
-     * @return 
+     * @param event
+     * @return
      */
     public boolean matches(Event event) {
 	if (this.getCategory() != null) {
@@ -302,10 +283,10 @@ public class FilterParams extends ManagedIndividual {
 
     /**
      * 
-     *
-     * @param startEvent 
-     * @param endEvent 
-     * @return 
+     * 
+     * @param startEvent
+     * @param endEvent
+     * @return
      */
     private boolean isDateTimeValid(XMLGregorianCalendar startEvent,
 	    XMLGregorianCalendar endEvent) {
