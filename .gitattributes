@@ -7,7 +7,6 @@ agenda/agenda.client/src/main/java/org/universAAL/agenda/client/ServiceRequestCr
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/osgi/Activator.java -text
 agenda/agenda.eventSelection.client/LICENSE -text
 agenda/agenda.eventSelection.client/NOTICE -text
-agenda/agenda.eventSelection.client/backup_beforeGUI/EventSelectionToolConsumer_beforeGUI.backup -text
 agenda/agenda.eventSelection.client/pom.xml -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer.java -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolServiceRequestCreator.java -text
