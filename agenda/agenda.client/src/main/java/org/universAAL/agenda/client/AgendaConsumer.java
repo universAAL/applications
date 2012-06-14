@@ -36,6 +36,8 @@ import org.universAAL.ontology.location.outdoor.State;
 import org.universAAL.ontology.profile.User;
 
 /**
+ * Service caller towards agenda server.
+ * 
  * @author kagnantis
  * @author eandgrg
  * 
@@ -200,10 +202,11 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and returns
+     * all calendars with {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getAllCalendarsRequest()}
      * 
-     * @return list of calendars {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getAllCalendarsRequest()}
+     * @return list of calendars
      */
     public List getAllCalendarsService() {
 	List allCalendars = new ArrayList();
@@ -277,12 +280,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and returns
+     * all calendars for given user with {@link ServiceRequest} object created
+     * in {@link ServiceRequestCreator#getCalendarsByOwnerRequest()}
      * 
      * @param owner
      *            calendar owner
-     * @return list of calendars {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getCalendarsByOwnerRequest()}
+     * @return list of calendars
      */
     public List getCalendarsByOwnerService(User owner) {
 	List allCalendars = new ArrayList();
@@ -360,15 +364,16 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and adds
+     * given calendar to given user with {@link ServiceRequest} object created
+     * in {@link ServiceRequestCreator#getAddNewCalendarRequest()}
      * 
      * @param c
      *            calendar
      * @param owner
      *            calendar owner
      * @return calendar that was added or null if add operation failed
-     *         {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getAddNewCalendarRequest()}
+     * 
      */
     public Calendar addNewCalendarService(Calendar c, User owner) {
 
@@ -438,13 +443,14 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and removes
+     * a calendar with {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getRemoveCalendarRequest()}
      * 
      * @param c
      *            calendar
      * @return true if calendar was removed or false otherwise
-     *         {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getRemoveCalendarRequest()}
+     * 
      */
     public boolean removeCalendarService(Calendar c) {
 
@@ -492,14 +498,16 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and
+     * retrieves calendar with given name and owner with {@link ServiceRequest}
+     * object created in
+     * {@link ServiceRequestCreator#getGetCalendarByNameAndOwnerRequest()}
      * 
      * @param calendarName
      *            calendar name
      * @param owner
      *            calendar owner
-     * @return calendar {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getGetCalendarByNameAndOwnerRequest()}
+     * @return calendar
      */
     public Calendar getCalendarByNameAndOwnerService(String calendarName,
 	    User owner) {
@@ -576,13 +584,17 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and
+     * retrieves specific event from given calendar with {@link ServiceRequest}
+     * object created in
+     * {@link ServiceRequestCreator#getGetCalendarEventRequest()}
+     * 
      * 
      * @param c
+     *            calendar
      * @param eventId
-     * @return {@link Event} {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getGetCalendarEventRequest()}
-     *         {@link Calendar} {@link Event} id
+     *            event id
+     * @return Event
      */
     public Event getCalendarEventService(Calendar c, int eventId) {
 	Event event = null;
@@ -657,10 +669,11 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and
+     * retrieves all event categories with {@link ServiceRequest} object created
+     * in {@link ServiceRequestCreator#getGetAllEventCategoriesRequest()}
      * 
-     * @return list of calendars {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getGetAllEventCategoriesRequest()}
+     * @return list of calendars
      */
     public List getAllEventCategories() {
 	List allCategories = new ArrayList();
@@ -751,15 +764,16 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and cancels
+     * a reminder with {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getCancelReminderRequest()}
      * 
      * @param c
      *            calendar
      * @param eventId
      *            event id
      * @return true if reminder was canceled or false otherwise
-     *         {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getCancelReminderRequest()}
+     * 
      */
     public boolean cancelReminderService(Calendar c, int eventId) {
 
@@ -804,7 +818,9 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and updates
+     * a calendar event with {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getUpdateCalendarEventRequest()}
      * 
      * @param c
      *            calendar
@@ -813,8 +829,7 @@ public class AgendaConsumer extends ContextSubscriber {
      * @param event
      *            event
      * @return true if calendar event was updated or false otherwise
-     *         {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getUpdateCalendarEventRequest()}
+     * 
      */
     public boolean updateCalendarEventService(Calendar c, int eventId,
 	    Event event) {
@@ -874,7 +889,9 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) and sets
+     * event reminder with {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getSetEventReminderRequest()}
      * 
      * @param c
      *            calendar
@@ -883,8 +900,7 @@ public class AgendaConsumer extends ContextSubscriber {
      * @param reminder
      *            reminder
      * @return true if reminder was set or false otherwise
-     *         {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getSetEventReminderRequest()}
+     * 
      */
     public boolean setEventReminderService(Calendar c, int eventID,
 	    Reminder reminder) {
@@ -944,7 +960,9 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) with
+     * {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getSetReminderTypeRequest()}
      * 
      * @param c
      *            calendar
@@ -953,8 +971,7 @@ public class AgendaConsumer extends ContextSubscriber {
      * @param reminderType
      *            reminder type
      * @return true if calendar type was set of false otherwise
-     *         {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getSetReminderTypeRequest()}
+     * 
      */
     public boolean setReminderTypeService(Calendar c, int eventID,
 	    ReminderType reminderType) {
@@ -1012,15 +1029,16 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) with
+     * {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getDeleteCalendarEventRequest()}
      * 
      * @param c
      *            calendar
      * @param eventId
      *            event id
      * @return true if calendar event was deleted of false otherwise
-     *         {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getDeleteCalendarEventRequest()}
+     * 
      */
     public boolean deleteCalendarEventService(Calendar c, int eventId) {
 	long startTime = System.currentTimeMillis();
@@ -1079,13 +1097,13 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) with
+     * {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getGetCalendarEventListRequest()}
      * 
      * @param c
      *            calendar
-     * @return list of events belonging to a calendar {@link ServiceRequest}
-     *         object created in
-     *         {@link ServiceRequestCreator#getGetCalendarEventListRequest()}
+     * @return list of events belonging to a calendar
      */
     public List requestEventListService(Calendar c) {
 
@@ -1158,15 +1176,16 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) with
+     * {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getAddEventToCalendarRequest()}
      * 
      * @param c
      *            calendar
      * @param event
      *            event
-     * @return event id if the operation was sucessful or -1 otherwise
-     *         {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getAddEventToCalendarRequest()}
+     * @return event id if the operation was successful or -1 otherwise
+     * 
      */
     public int addEventToCalendarService(Calendar c, Event event) {
 
@@ -1250,15 +1269,16 @@ public class AgendaConsumer extends ContextSubscriber {
     }
 
     /**
-     * Sends a service call for agenda server (@see AgendaProvider) with.
+     * Sends a service call for agenda server (@see AgendaProvider) with
+     * {@link ServiceRequest} object created in
+     * {@link ServiceRequestCreator#getAddEventListToCalendarRequest()}
      * 
      * @param c
      *            calendar
      * @param eventList
      *            event list
-     * @return true if operation was sucessfull of false otherwise
-     *         {@link ServiceRequest} object created in
-     *         {@link ServiceRequestCreator#getAddEventListToCalendarRequest()}
+     * @return true if operation was successful of false otherwise
+     * 
      */
     public boolean addCalendarEventListService(Calendar c, List eventList) {
 

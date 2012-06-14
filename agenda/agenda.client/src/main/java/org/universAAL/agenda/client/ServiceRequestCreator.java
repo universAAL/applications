@@ -46,9 +46,9 @@ public class ServiceRequestCreator {
     /**
      * Creates a {@link ServiceRequest} object for getting all calendars.
      * 
-     * @return a {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and retrieve <i>all</i> {@link Calendar} which are
-     *         managed by the agenda server.
+     * @return a {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and retrieve <i>all</i>
+     *         {@link Calendar} which are managed by the agenda server.
      */
     protected ServiceRequest getAllCalendarsRequest() {
 	ServiceRequest listCalendars = new ServiceRequest(new CalendarAgenda(
@@ -66,9 +66,9 @@ public class ServiceRequestCreator {
      * 
      * @param owner
      *            owner of a calendar
-     * @return a {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and retrieve <i>all</i> {@link Calendar} which are
-     *         managed by the agenda server.
+     * @return a {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and retrieve <i>all</i>
+     *         {@link Calendar} which are managed by the agenda server.
      */
     protected ServiceRequest getCalendarsByOwnerRequest(User owner) {
 	ServiceRequest listCalendars = new ServiceRequest(new CalendarAgenda(
@@ -96,8 +96,9 @@ public class ServiceRequestCreator {
      *            the calendar
      * @param owner
      *            owner of a calendar
-     * @return a {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and create and store a new Calendar.
+     * @return a {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and create and store a new
+     *         Calendar.
      */
     protected ServiceRequest getAddNewCalendarRequest(Calendar calendar,
 	    User owner) {
@@ -125,9 +126,9 @@ public class ServiceRequestCreator {
      * 
      * @param calendar
      *            the calendar to be removed
-     * @return a {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and delete an existing calendar and all events associated
-     *         with it
+     * @return a {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and delete an existing calendar
+     *         and all events associated with it
      */
     protected ServiceRequest getRemoveCalendarRequest(Calendar calendar) {
 	ServiceRequest removeCalendar = new ServiceRequest(new CalendarAgenda(
@@ -152,9 +153,9 @@ public class ServiceRequestCreator {
      *            the name of calendar
      * @param owner
      *            owner of a calendar
-     * @return a {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service to get the URI of a calendar (wrapped in a calendar
-     *         object) given the name of it
+     * @return a {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service to get the URI of a calendar
+     *         (wrapped in a calendar object) given the name of it
      */
     protected ServiceRequest getGetCalendarByNameAndOwnerRequest(
 	    String calendarName, User owner) {
@@ -190,9 +191,9 @@ public class ServiceRequestCreator {
      *            the new calendar
      * @param eventId
      *            id of a event
-     * @return a {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and create and store a new {@link Calendar} with the
-     *         specified URI <code>calendarURI</code>.
+     * @return a {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and create and store a new
+     *         {@link Calendar} with the specified URI <code>calendarURI</code>.
      */
     protected ServiceRequest getGetCalendarEventRequest(Calendar calendar,
 	    int eventId) {
@@ -226,8 +227,8 @@ public class ServiceRequestCreator {
      * Creates a {@link ServiceRequest} object for obtaining all event
      * categories.
      * 
-     * @return a {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and obtain event categories
+     * @return a {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and obtain event categories
      */
     protected ServiceRequest getGetAllEventCategoriesRequest() {
 	PropertyPath ppEventCategory = new PropertyPath(null, true,
@@ -321,9 +322,11 @@ public class ServiceRequestCreator {
      * event.
      * 
      * @param c
+     *            calendar
      * @param eventId
      *            the id of the event to be retrieved
      * @param reminder
+     *            reminder
      * @return a {@link ServiceRequest} object for the specific service
      *         {@link CalendarAgenda} service and get an event</code> from the
      *         calendar with the specified URI <code>calendarURI</code>.
@@ -363,9 +366,9 @@ public class ServiceRequestCreator {
      *            the id of the event to be retrieved
      * @param reminderType
      *            type of a reminder {@link ReminderType}
-     * @return a {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and get an event</code> from the calendar with the
-     *         specified URI <code>calendarURI</code>.
+     * @return a {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and get an event</code> from the
+     *         calendar with the specified URI <code>calendarURI</code>.
      */
     protected ServiceRequest getSetReminderTypeRequest(Calendar c, int eventId,
 	    ReminderType reminderType) {
@@ -400,9 +403,9 @@ public class ServiceRequestCreator {
      *            calendar
      * @param eventId
      *            the id of the event to be deleted
-     * @return a {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and get an event</code> from the calendar with the
-     *         specified URI <code>calendarURI</code>.
+     * @return a {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and get an event</code> from the
+     *         calendar with the specified URI <code>calendarURI</code>.
      */
     protected ServiceRequest getDeleteCalendarEventRequest(Calendar c,
 	    int eventId) {
@@ -440,14 +443,15 @@ public class ServiceRequestCreator {
      * 
      * @param c
      *            calendar
-     * @return {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and retrieve <i>all</i> events (as a {@link List}) of the
-     *         calendar with the specified URI <code>calendarURI</code>.
+     * @return {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and retrieve <i>all</i> events (as
+     *         a {@link List}) of the calendar with the specified URI
+     *         <code>calendarURI</code>.
      */
     protected ServiceRequest getGetCalendarEventListRequest(Calendar c) {
 	ServiceRequest getCalendarEventList = new ServiceRequest(
 		new CalendarAgenda(null), null); // need a service from
-						 // Calendar/Agenda
+	// Calendar/Agenda
 	if (c == null) {
 	    c = new Calendar();
 	}
@@ -473,10 +477,10 @@ public class ServiceRequestCreator {
      *            calendar
      * @param event
      *            the event to be stored
-     * @return {@link ServiceRequest} object for the specific service {@link CalendarAgenda}
-     *         service and add an <code>
-     * event</code> to the calendar with the
-     *         specified URI <code>calendarURI</code>.
+     * @return {@link ServiceRequest} object for the specific service
+     *         {@link CalendarAgenda} service and add an <code>
+     * event</code> to the
+     *         calendar with the specified URI <code>calendarURI</code>.
      */
     protected ServiceRequest getAddEventToCalendarRequest(Calendar c,
 	    Event event) {

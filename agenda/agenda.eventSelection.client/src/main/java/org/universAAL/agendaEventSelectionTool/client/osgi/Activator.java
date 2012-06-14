@@ -59,7 +59,6 @@ public class Activator implements BundleActivator {
 
     /**
      * 
-     * 
      * @return EventSelectionToolConsumer
      */
     public EventSelectionToolConsumer getConsumer() {
