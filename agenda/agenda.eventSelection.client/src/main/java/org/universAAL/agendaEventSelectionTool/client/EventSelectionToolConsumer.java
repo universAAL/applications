@@ -4,13 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.universAAL.ontology.agenda.Calendar;
-import org.universAAL.ontology.agenda.Event;
-import org.universAAL.ontology.agenda.service.CalendarAgenda;
-import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
-import org.universAAL.ontology.agendaEventSelection.FilterParams;
-import org.universAAL.ontology.agendaEventSelection.TimeSearchType;
-import org.universAAL.ontology.agendaEventSelection.service.EventSelectionToolService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
@@ -25,18 +18,28 @@ import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
+import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
+import org.universAAL.ontology.agendaEventSelection.FilterParams;
+import org.universAAL.ontology.agendaEventSelection.TimeSearchType;
 
 /**
+ * Service caller towards agenda server. Service requests are for selecting
+ * different Events.
+ * 
  * @author kagnantis
  * @author eandgrg
- * 
- * 
  */
 public class EventSelectionToolConsumer extends ContextSubscriber {
-    private static final String EVENT_SELECTION_TOOL_SERVER_NAMESPACE = "http://ontology.universaal.org/EventSelectionToolConsumer.owl#";
 
-    private static final String OUTPUT_EVENT_LIST = EVENT_SELECTION_TOOL_SERVER_NAMESPACE
+    /**  */
+    public static final String EVENT_SELECTION_TOOL_SERVER_NAMESPACE = "http://ontology.universaal.org/EventSelectionToolConsumer.owl#";
+
+    /**  */
+    public static final String OUTPUT_EVENT_LIST = EVENT_SELECTION_TOOL_SERVER_NAMESPACE
 	    + "eventList";
+
+    /** {@link ServiceCaller} */
     private ServiceCaller caller;
 
     /**
@@ -44,9 +47,14 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
      */
     private static ModuleContext mcontext;
 
+    /** {@link EventSelectionToolServiceRequestCreator} */
+    private EventSelectionToolServiceRequestCreator estServiceRequestCreator = null;
+
     /**
      * Returns an array of context event patterns, to be used for context event
      * filtering.
+     * 
+     * @return ContextEventPattern
      */
     private static ContextEventPattern[] getContextSubscriptionParams() {
 	// I am interested in all existing EventSelectionTool. Am I really? ->
@@ -58,8 +66,11 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	return new ContextEventPattern[] { cep };
     }
 
-    // Construct
-
+    /**
+     * Constructor.
+     * 
+     * @param context
+     */
     public EventSelectionToolConsumer(ModuleContext context) {
 	super(context, getContextSubscriptionParams());
 	mcontext = context;
@@ -74,13 +85,28 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 
 	// get all filter events from specific calendars
 	getSelectedEventsService(fp, null);
+
+	estServiceRequestCreator = EventSelectionToolServiceRequestCreator
+		.getInstance();
     }
 
+    /**
+     * Sends a service call for agenda server (@see AgendaProvider) and obtains
+     * a list of events with {@link ServiceRequest} object created in
+     * {@link EventSelectionToolServiceRequestCreator#getEventsRequest()} that
+     * are filtered by {@link FilterParams}
+     * 
+     * @param fp
+     *            filter parameters
+     * @param calendarList
+     *            list of calendars
+     * @return list of events
+     */
     public List getSelectedEventsService(FilterParams fp, List calendarList) {
 	ServiceResponse sr;
 	if (calendarList == null || calendarList.size() == 0) {
 	    long startTime = System.currentTimeMillis();
-	    sr = caller.call(requestEvents(fp));
+	    sr = caller.call(estServiceRequestCreator.getEventsRequest(fp));
 	    long endTime = System.currentTimeMillis();
 	    LogUtils
 		    .logInfo(
@@ -109,7 +135,8 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 
 	} else {
 	    long startTime = System.currentTimeMillis();
-	    sr = caller.call(requestFromCalendarEvents(fp, calendarList));
+	    sr = caller.call(estServiceRequestCreator
+		    .getEventsFromCalendarsRequest(fp, calendarList));
 	    long endTime = System.currentTimeMillis();
 	    LogUtils
 		    .logInfo(
@@ -166,11 +193,26 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	return new ArrayList(0);
     }
 
+    /**
+     * Sends a service call for agenda server (@see AgendaProvider) and obtains
+     * a limited list of events with {@link ServiceRequest} object created in
+     * {@link EventSelectionToolServiceRequestCreator#getLimitedEventsFromCalendarsRequest()}
+     * that are filtered by {@link FilterParams}
+     * 
+     * @param fp
+     *            filter parameters
+     * @param calendarList
+     *            list of calendars
+     * @param maxEventNo
+     *            max event number
+     * @return list of events
+     */
     public List getSelectedLimitedEventsService(FilterParams fp,
 	    List calendarList, int maxEventNo) {
 	long startTime = System.currentTimeMillis();
-	ServiceResponse sr = caller.call(requestFromCalendarLimitedEvents((fp),
-		calendarList, maxEventNo));
+	ServiceResponse sr = caller.call(estServiceRequestCreator
+		.getLimitedEventsFromCalendarsRequest((fp), calendarList,
+			maxEventNo));
 	long endTime = System.currentTimeMillis();
 	LogUtils
 		.logInfo(
@@ -226,10 +268,21 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	return new ArrayList(0);
     }
 
+    /**
+     * Sends a service call for agenda server (@see AgendaProvider) and obtains
+     * a list of events with {@link ServiceRequest} object created in
+     * {@link EventSelectionToolServiceRequestCreator#getFollowingEventsFromCalendars()}
+     * 
+     * @param calendarList
+     *            list of calendars
+     * @param maxEventNo
+     *            max event number
+     * @return list of events
+     */
     public List getFollowingEventsService(List calendarList, int maxEventNo) {
 	long startTime = System.currentTimeMillis();
-	ServiceResponse sr = caller.call(requestFollowingEvents(calendarList,
-		maxEventNo));
+	ServiceResponse sr = caller.call(estServiceRequestCreator
+		.getFollowingEventsFromCalendars(calendarList, maxEventNo));
 	long endTime = System.currentTimeMillis();
 	LogUtils
 		.logInfo(
@@ -285,108 +338,17 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
     }
 
     /**
-     * Creates a {@link ServiceRequest} object in order to use an
-     * {@link EventSelectionToolService} service and retrieve <i>all</i>
-     * {@link EventList} which are managed by he server.
+     * Check all outputs for output that is equal to expected output and if it
+     * is found return it, otherwise return null Same as {@see
+     * AgendaConsumer#getReturnValue()}
      * 
-     * @return a service request for the specific service
+     * @param outputs
+     *            list of outputs
+     * @param expectedOutput
+     *            expected output
+     * @return output that is equal to expected output or null if that output is
+     *         not found
      */
-    private ServiceRequest requestEvents(FilterParams filterParams) {
-	EventSelectionToolService estService = new EventSelectionToolService(
-		null);
-	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
-		EventSelectionTool.PROP_HAS_FILTER_PARAMS, filterParams);
-
-	estService.addInstanceLevelRestriction(r1, new String[] {
-		EventSelectionToolService.PROP_CONTROLS,
-		EventSelectionTool.PROP_HAS_FILTER_PARAMS });
-
-	ServiceRequest listOfRequestedEvents = new ServiceRequest(estService,
-		null);
-
-	String[] ppEvent = new String[] { CalendarAgenda.PROP_CONTROLS,
-		Calendar.PROP_HAS_EVENT };
-	listOfRequestedEvents.addSimpleOutputBinding(new ProcessOutput(
-		OUTPUT_EVENT_LIST), ppEvent);
-
-	return listOfRequestedEvents;
-    }
-
-    private ServiceRequest requestFromCalendarEvents(FilterParams fp,
-	    List calList) {
-	ServiceRequest listOfRequestedEvents = new ServiceRequest(
-		new EventSelectionToolService(null), null);
-	String[] ppEvent = new String[] { CalendarAgenda.PROP_CONTROLS,
-		Calendar.PROP_HAS_EVENT };
-	String[] ppCalendar = new String[] {
-		EventSelectionToolService.PROP_CONTROLS,
-		EventSelectionTool.PROP_HAS_CALENDARS };
-	String[] ppFilterParams = new String[] {
-		EventSelectionToolService.PROP_CONTROLS,
-		EventSelectionTool.PROP_HAS_FILTER_PARAMS };
-	if (calList == null) {
-	    calList = new ArrayList(0);
-	}
-	listOfRequestedEvents.addChangeEffect(ppCalendar, calList);
-	listOfRequestedEvents.addChangeEffect(ppFilterParams, fp);
-	listOfRequestedEvents.addSimpleOutputBinding(new ProcessOutput(
-		OUTPUT_EVENT_LIST), ppEvent);
-
-	return listOfRequestedEvents;
-    }
-
-    private ServiceRequest requestFromCalendarLimitedEvents(FilterParams fp,
-	    List calList, int maxEventNo) {
-	ServiceRequest listOfRequestedEvents = new ServiceRequest(
-		new EventSelectionToolService(null), null);
-	String[] ppEvent = new String[] { CalendarAgenda.PROP_CONTROLS,
-		Calendar.PROP_HAS_EVENT };
-	String[] ppCalendar = new String[] {
-		EventSelectionToolService.PROP_CONTROLS,
-		EventSelectionTool.PROP_HAS_CALENDARS };
-	String[] ppFilterParams = new String[] {
-		EventSelectionToolService.PROP_CONTROLS,
-		EventSelectionTool.PROP_HAS_FILTER_PARAMS };
-	String[] ppMaxEventNo = new String[] {
-		EventSelectionToolService.PROP_CONTROLS,
-		EventSelectionTool.PROP_MAX_EVENT_NO };
-	if (calList == null) {
-	    calList = new ArrayList(0);
-	}
-	listOfRequestedEvents.addChangeEffect(ppCalendar, calList);
-	listOfRequestedEvents.addChangeEffect(ppFilterParams, fp);
-	listOfRequestedEvents.addChangeEffect(ppMaxEventNo, new Integer(
-		maxEventNo));
-	listOfRequestedEvents.addSimpleOutputBinding(new ProcessOutput(
-		OUTPUT_EVENT_LIST), ppEvent);
-
-	return listOfRequestedEvents;
-    }
-
-    private ServiceRequest requestFollowingEvents(List calList, int maxEventNo) {
-	ServiceRequest listOfRequestedEvents = new ServiceRequest(
-		new EventSelectionToolService(null), null);
-	String[] ppEvent = new String[] { CalendarAgenda.PROP_CONTROLS,
-		Calendar.PROP_HAS_EVENT };
-	String[] ppCalendar = new String[] {
-		EventSelectionToolService.PROP_CONTROLS,
-		EventSelectionTool.PROP_HAS_CALENDARS };
-	String[] ppMaxEventNo = new String[] {
-		EventSelectionToolService.PROP_CONTROLS,
-		EventSelectionTool.PROP_MAX_EVENT_NO };
-
-	if (calList == null) {
-	    calList = new ArrayList(0);
-	}
-	listOfRequestedEvents.addChangeEffect(ppCalendar, calList);
-	listOfRequestedEvents.addChangeEffect(ppMaxEventNo, new Integer(
-		maxEventNo));
-	listOfRequestedEvents.addSimpleOutputBinding(new ProcessOutput(
-		OUTPUT_EVENT_LIST), ppEvent);
-
-	return listOfRequestedEvents;
-    }
-
     private Object getReturnValue(List outputs, String expectedOutput) {
 	Object returnValue = null;
 	int testCount = 0;
@@ -425,7 +387,7 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
     /*
      * (non-Javadoc)
      * 
-     * @seeorg.universAAL.middleware.context.ContextSubscriber#
+     * @see org.universAAL.middleware.context.ContextSubscriber#
      * communicationChannelBroken()
      */
     public void communicationChannelBroken() {
@@ -451,18 +413,6 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
 	LogUtils.logInfo(mcontext, this.getClass(), "handleContextEvent",
 		new Object[] { "Object= ", event.getRDFObject() }, null);
 
-    }
-
-    private void printEvents(List events) {
-	LogUtils.logInfo(mcontext, this.getClass(), "printEvents",
-		new Object[] { "Following events received: " }, null);
-
-	for (Iterator it = events.listIterator(); it.hasNext();) {
-	    Event e = (Event) it.next();
-	    LogUtils.logInfo(mcontext, this.getClass(), "printEvents",
-		    new Object[] { "received event = " + e }, null);
-
-	}
     }
 
 }
