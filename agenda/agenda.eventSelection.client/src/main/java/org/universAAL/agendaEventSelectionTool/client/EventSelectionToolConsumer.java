@@ -84,9 +84,9 @@ public class EventSelectionToolConsumer extends ContextSubscriber {
     private void testGetEventsWithFilter() {
 	FilterParams fp = new FilterParams(null);
 	fp.setDTbegin(TypeMapper.getDataTypeFactory()
-		.newXMLGregorianCalendarDate(20012, 1 + 1, 27, 2));
+		.newXMLGregorianCalendarDate(2012, 1 + 1, 27, 2));
 	fp.setDTend(TypeMapper.getDataTypeFactory()
-		.newXMLGregorianCalendarDate(20012, 1 + 1, 27 + 1, 2));
+		.newXMLGregorianCalendarDate(2012, 1 + 1, 27 + 1, 2));
 	fp.setTimeSearchType(TimeSearchType.startsBetween);
 
 	// get all filter events from specific calendars
