@@ -29,22 +29,18 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.ontology.agenda.Calendar;
-import org.universAAL.ontology.agenda.Event;
-import org.universAAL.ontology.agenda.service.CalendarAgenda;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.ui.owl.Modality;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.rdf.PropertyPath;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
-//import org.universAAL.ontology.profile.ElderlyProfile;
+import org.universAAL.ontology.agenda.Calendar;
+import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agenda.service.CalendarAgenda;
 import org.universAAL.ontology.profile.User;
-import org.universAAL.ontology.profile.UserProfile;
 import org.universAAL.ontology.profile.service.ProfilingService;
 
 /**
@@ -154,6 +150,9 @@ public class SCaller {
 //	return null;
 //    }
 
+    /**
+     * 
+     */
     public List getCalendarsByOwnerService(User owner) {
 	List allCalendars = new ArrayList();
 	long startTime = System.currentTimeMillis();

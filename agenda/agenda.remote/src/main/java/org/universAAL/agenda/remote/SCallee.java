@@ -65,7 +65,7 @@ public class SCallee extends ServiceCallee {
 			    ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
 			    "Null call!?!"));
 	    log
-		    .warn("Nutritional Advisor could not execute the requested service: Null call!?!");
+		    .warn("Agenda remote could not execute the requested service: Null call!?!");
 	    return failure;
 	}
 
@@ -75,7 +75,7 @@ public class SCallee extends ServiceCallee {
 		    ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
 		    "Null operation!?!"));
 	    log
-		    .warn("Nutritional Advisor could not execute the requested service: Null operation!?!");
+		    .warn("Agenda remote could not execute the requested service: Null operation!?!");
 	    return failure;
 	}
 
@@ -87,7 +87,7 @@ public class SCallee extends ServiceCallee {
 			ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
 			"Invalid User Input!"));
 		log
-			.warn("Nutritional Advisor could not execute the requested service: Invalid User Input!");
+			.warn("Agenda remote could not execute the requested service: Invalid User Input!");
 		return failure;
 	    } else {
 		undefuser = (User) inputUser;
@@ -97,7 +97,7 @@ public class SCallee extends ServiceCallee {
 	    return showMainDialog(undefuser);
 	}
 	log
-		.warn("Nutritional Advisor could not execute the requested service: Unrecognized failure!");
+		.warn("Agenda remote could not execute the requested service: Unrecognized failure!");
 	return failure;
     }
 
