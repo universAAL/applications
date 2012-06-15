@@ -26,7 +26,11 @@ import java.util.Random;
 import java.util.StringTokenizer;
 
 import org.apache.commons.collections.map.MultiKeyMap;
+import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
 import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
+import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.Caregiver;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
@@ -40,8 +44,6 @@ public class MessageManager {
 	public File enMessagesDB;
 	public File spMessagesDB; 
 	
-	private static boolean testInterface = false;
-	
 	public static final Locale SPANISH = new Locale ("es", "ES");
 	private final int EN = 1;
 	private final int ES = 0;
@@ -52,6 +54,8 @@ public class MessageManager {
 	public String message_type;
 	public String motivational_message_content;
 	
+	public static SendMotivationMessageIface  mmSender;
+		
 	public static final String prefixForDisease = "http://health.ontology.universaal.org/Disease#";
 	public static final String prefixForTreatment = "http://health.ontology.universaal.org/HealthOntology#";
 	
@@ -67,6 +71,7 @@ public class MessageManager {
 	public MessageManager(Locale language) {
 
 		FileReader reader = null;
+		
 
 		try {
 			if (language.equals(Locale.ENGLISH)) {
@@ -130,22 +135,7 @@ public class MessageManager {
 		}
 	}
 	
-	/**
-	 * The following method finds all the motivational messages
-	 * related to a set of keys. That's the lines in the data base
-	 * which keys are equals. The same combination of keys can 
-	 * lead to different motivational messages. 
-	 * @param motivational message
-	 * @return messages's content
-	 */
-	/*
-	public static ArrayList<String> getMotMessageResults( ) {
-
-		ArrayList<String> mresults = (ArrayList<String>) map.get(
-				illness, treatmentType, motStatus, messageType);
-		return mresults;
-	}
-*/
+	
 	/**
 	 * This method returns the content of a motivational message (plain text
 	 * or questionnaire) from the file
@@ -245,7 +235,7 @@ public class MessageManager {
 	 * @return the message content with the variables replaced
 	 */
 
-	public static String decodeMessageContent(Object motMessageRawContent) {
+	public static String decodeMessageContent(Object motMessageRawContent) {//no debería ser tipo String?
 
 		String rawContent = motMessageRawContent.toString();
 		//String messageToBeRead = (String) getMotivationalMessageContent().toString();
@@ -273,9 +263,10 @@ public class MessageManager {
 	 * @param Motivational Message to be sent
 	 */
 	
-	public static void sendMessageToUser(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
+	public static MotivationalMessage getMessageToSendToUser(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
 
 		Object unprocessedContent = getMotivationalMessageContent(disease, treatmentType, motStatus, messageType);
+		
 		String processedMessage =""; 
 		String unprocessedQuestion;
 		Questionnaire processedQuestionnaire;
@@ -303,33 +294,29 @@ public class MessageManager {
 			//lanzar excepción
 		}
 		
+		
 		//mandamos el mensaje motivacional completo al módulo de test o real (en éste se manda al usuario como caja negra).
-		if(testInterface){
+		/*if(destinationUser instanceof AssistedPerson){
 			processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
 			MessageServiceTools.sendMessage(processedMM);	
 		}
-		else{
+		else if (destinationUser instanceof Caregiver){
 			processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
 			//enviarlo a la interfaz real
-		}
+		}*/
+		return processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
 	}
 	
-	public static void changeToPlatformInterface(){
-		testInterface=false;
+	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, AssistedPerson ap){
+		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType);
+		//falta escoger el método sendToAssistedPerson adecuado según la interfaz (real o imaginaria) en la que estemos.
 	}
 	
-	public static void changeToTestInterface(){
-		testInterface=true;
+	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, Caregiver caregiver){
+		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType);
 	}
 
-	/**
-	 * The following method sends a message to the caregiver. The message is
-	 * sent by the platform or the assisted person
-	 * @param Motivational Message to be sent
-	 */
 	
-	public static void sendMessageToCaregiver(String illness, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
-	//TO DO
-	}
+	
 	
 }

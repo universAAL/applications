@@ -123,7 +123,7 @@ rule "Precontemplation phase finished unsuccesfully"
 	//para que éste actúe en consecuencia (por ejemplo, cancelando el tratamiento o proponiendo otro distinto). 
 end
 
-rule "Precontemplation phase succesfully"
+rule "Precontemplation phase acsuccesfully"
 	when
 	// haya finalizado el periodo de precontemplation y el usuario haya pasado a contemplation
 	then 
