@@ -25,7 +25,7 @@ rule "Treatment Detection" no-loop
 		
 end 
 
-/*
+
 rule "Treatment performance agreement" salience no-loop
 	when
 		//reciba al answered message correspondiente al primer mensaje y la respuesta
@@ -141,4 +141,3 @@ rule "Treatment prolonged by caregiver" salience no-loop
 	//se deben recalcular las sesiones totales, lo que influye en la unidad de completitud
 	//chequear las sesiones ya hechas y corregir la completitud.
 end
-*/
