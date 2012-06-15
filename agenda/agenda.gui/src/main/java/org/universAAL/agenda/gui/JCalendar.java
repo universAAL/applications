@@ -5,9 +5,7 @@ import org.universAAL.ontology.agenda.EventDetails;
 import org.universAAL.ontology.agenda.TimeInterval;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -30,13 +28,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
+import org.universAAL.agenda.gui.util.GuiConstants;
 
 /**
  * 
  * Class showing calendar month view.
  * 
  */
-public class JCalendar implements PersonaWindow {
+public class JCalendar implements IPersonaWindow {
 
     private JPanel mainScreen;
     private JPanel navScreen;
@@ -89,22 +88,25 @@ public class JCalendar implements PersonaWindow {
 	String year = "2009"; //$NON-NLS-1$
 	updateTitle(month, year);
 
-	headerMessage.setForeground(Color.white);
-	headerMessage.setFont(new Font("MyriadPro", Font.PLAIN, 35)); //$NON-NLS-1$
+	headerMessage.setForeground(GuiConstants.headerMessageForeground);
+	headerMessage.setFont(GuiConstants.headerFont); //$NON-NLS-1$
 
 	JPanel headPanel = new ImagePanel(uAAL_logo.getImage());
 	headPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-	headPanel.setBackground(Color.white);
+	headPanel.setBackground(GuiConstants.headerPanelBackground);
 
 	headPanel.add(headerMessage);
 
 	// breadcrumbs
-	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >" +Messages.getString("JCalendar.Breadcrumb.Home")+ "</font></html>");
-	l.setBackground(Color.white);
+//	JLabel l = new JLabel("<html><font face=\"MyriadPro\" size=\"5\" >"
+//		+ Messages.getString("JCalendar.Breadcrumb.Home")
+//		+ "</font></html>");
+	JLabel l = new JLabel(Messages.getString("JCalendar.Breadcrumb.Home"));
+	l.setBackground(GuiConstants.breadcrumbsLabelColor);
+	l.setFont(GuiConstants.breadcrumbsLabelFont);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	whole.setBackground(Color.white);
+	whole.setBackground(GuiConstants.wholePanelBackground);
 	whole.add(headPanel);
 	whole.add(l);
 	return whole;
@@ -118,37 +120,43 @@ public class JCalendar implements PersonaWindow {
 	panel.setLayout(new BorderLayout());
 
 	daysOfTheWeekPanel = new JPanel(new GridLayout(1, 7));
-	daysOfTheWeekPanel.setBackground(Color.white);
+	daysOfTheWeekPanel.setBackground(GuiConstants.jCalendarWeekDaysPanelBackground);
 	JButton sun = new DecoratorButton(Messages.getString("JCalendar.Sun")); //$NON-NLS-1$
-	sun.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	sun.setBackground(new Color(0xb6d6fe)); // light blue
-	// sun.setForeground(new java.awt.Color(250, 104, 9));
-	sun.setForeground(new java.awt.Color(15, 68, 137));
+	sun.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
+	sun.setBackground(GuiConstants.jCalendarWeekDaysBackground); // light
+								     // blue
+	sun.setForeground(GuiConstants.jCalendarWeekDaysForeground);
+
 	JButton mon = new DecoratorButton(Messages.getString("JCalendar.Mon")); //$NON-NLS-1$
-	mon.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	// mon.setBackground(new Color(0xe3e594));6b91ac
-	mon.setBackground(new Color(0xb6d6fe));
-	mon.setForeground(new java.awt.Color(15, 68, 137));
+	mon.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
+	mon.setBackground(GuiConstants.jCalendarWeekDaysBackground);
+	mon.setForeground(GuiConstants.jCalendarWeekDaysForeground);
+
 	JButton tue = new DecoratorButton(Messages.getString("JCalendar.Tue")); //$NON-NLS-1$
-	tue.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	tue.setBackground(new Color(0xb6d6fe));
-	tue.setForeground(new java.awt.Color(15, 68, 137));
+	tue.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
+	tue.setBackground(GuiConstants.jCalendarWeekDaysBackground);
+	tue.setForeground(GuiConstants.jCalendarWeekDaysForeground);
+
 	JButton wed = new DecoratorButton(Messages.getString("JCalendar.Wed")); //$NON-NLS-1$
-	wed.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	wed.setBackground(new Color(0xb6d6fe));
-	wed.setForeground(new java.awt.Color(15, 68, 137));
+	wed.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
+	wed.setBackground(GuiConstants.jCalendarWeekDaysBackground);
+	wed.setForeground(GuiConstants.jCalendarWeekDaysForeground);
+
 	JButton thu = new DecoratorButton(Messages.getString("JCalendar.Thu")); //$NON-NLS-1$
-	thu.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	thu.setBackground(new Color(0xb6d6fe));
-	thu.setForeground(new java.awt.Color(15, 68, 137));
+	thu.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
+	thu.setBackground(GuiConstants.jCalendarWeekDaysBackground);
+	thu.setForeground(GuiConstants.jCalendarWeekDaysForeground);
+
 	JButton fri = new DecoratorButton(Messages.getString("JCalendar.Fri")); //$NON-NLS-1$
-	fri.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	fri.setBackground(new Color(0xb6d6fe));
-	fri.setForeground(new java.awt.Color(15, 68, 137));
+	fri.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
+	fri.setBackground(GuiConstants.jCalendarWeekDaysBackground);
+	fri.setForeground(GuiConstants.jCalendarWeekDaysForeground);
+
 	JButton sat = new DecoratorButton(Messages.getString("JCalendar.Sat")); //$NON-NLS-1$
-	sat.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	sat.setBackground(new Color(0xb6d6fe));
-	sat.setForeground(new java.awt.Color(15, 68, 137));
+	sat.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
+	sat.setBackground(GuiConstants.jCalendarWeekDaysBackground);
+	sat.setForeground(GuiConstants.jCalendarWeekDaysForeground);
+
 	JButton[] allDays = new JButton[] { sun, mon, tue, wed, thu, fri, sat };
 
 	// create panel week
@@ -160,7 +168,7 @@ public class JCalendar implements PersonaWindow {
 	}
 
 	dayPanel = new JPanel(new GridLayout(6, 7));
-	dayPanel.setBackground(Color.white);
+	dayPanel.setBackground(GuiConstants.jCalendarDayPanelBackground);
 	for (int y = 0; y < 6; ++y) {
 	    for (int x = 0; x < 7; ++x) {
 		int index = (y * 7) + x;
@@ -185,7 +193,7 @@ public class JCalendar implements PersonaWindow {
 	    weeks[i] = new DecoratorButton();
 	    weeks[i].setMargin(new Insets(0, 0, 0, 0));
 	    weeks[i].setFocusPainted(false);
-	    weeks[i].setForeground(new Color(100, 100, 100));
+	    weeks[i].setForeground(GuiConstants.jCalendarWeeksForeground);
 
 	    if (i != 0) {
 		weeks[i].setText("0" + (i + 1)); //$NON-NLS-1$
@@ -195,10 +203,13 @@ public class JCalendar implements PersonaWindow {
 	}
 
 	JPanel middle2 = new JPanel(new BorderLayout());
+	//button in left above corner where week numbers and days of the week meet
 	JButton empty = new DecoratorButton(" "); //$NON-NLS-1$
-	empty.setFont(new Font("MyriadPro", Font.PLAIN, 23)); //$NON-NLS-1$
-	empty.setBackground(Color.white);
-	empty.setForeground(new java.awt.Color(101, 104, 9));
+	//although font is not needed since there is no text, if font is not set then this button is too small
+	empty.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
+	//empty.setBackground(Color.white);
+	empty.setBackground(GuiConstants.wholePanelBackground);
+	//empty.setForeground(new java.awt.Color(101, 104, 9));
 
 	middle2.add(empty, BorderLayout.NORTH);
 	middle2.add(weekPanel, BorderLayout.CENTER);
@@ -210,9 +221,6 @@ public class JCalendar implements PersonaWindow {
     }
 
     public JPanel createNavScreen() {
-	// final ImageIcon next_icon = new ImageIcon(getClass().getResource(
-	//		IconsHome.getIconsHomePath() + "/nextMonthN.jpg")); //$NON-NLS-1$
-	//	
 	final ImageIcon next_icon = new ImageIcon(getClass().getResource(
 		IconsHome.getIconsHomePath() + "/nextMonthN.jpg")); //$NON-NLS-1$
 	final ImageIcon previous_icon = new ImageIcon(getClass().getResource(
@@ -221,7 +229,6 @@ public class JCalendar implements PersonaWindow {
 		IconsHome.getIconsHomePath() + "/back.jpg")); //$NON-NLS-1$
 	final ImageIcon dummy_icon = new ImageIcon(getClass().getResource(
 		IconsHome.getIconsHomePath() + "/home.jpg")); //$NON-NLS-1$
-
 	final ImageIcon search = new ImageIcon(getClass().getResource(
 		IconsHome.getIconsHomePath() + "/search.jpg")); //$NON-NLS-1$
 
@@ -281,13 +288,14 @@ public class JCalendar implements PersonaWindow {
 
 	// Create the right zone of buttons
 	JPanel main = new JPanel(new GridLayout(6, 1));
-	main.setBackground(Color.white);
+	main.setBackground(GuiConstants.jCalendarRightButtonsPanelBackground);
 
 	JButton dummyButton = new JButton(dummy_icon);
 	dummyButton.setVisible(false);
 
 	// the necessary buttons are included
-	// SC2011 dodan sat i zakomentirana linija:
+	
+	// before adding clock below line was used
 	// main.add(new JLabel()); //<<Create a void combined with
 	// nav.setLayout(new GridLayout(6, 1));
 
@@ -447,7 +455,7 @@ public class JCalendar implements PersonaWindow {
 	    if (allDays.contains(new Integer(counter)))
 		days[j].setHasStoredEvents(true);
 	    if ((counter == nowDay) && (nowMonth == month) && (nowYear == year)) {
-		days[j].setBackground(new Color(169, 224, 169));
+		days[j].setBackground(GuiConstants.jCalendarCurrentDayBackground);
 	    }
 
 	    ++counter;
@@ -502,9 +510,6 @@ public class JCalendar implements PersonaWindow {
     }
 
     class DecoratorButton extends JButton {
-	/**
-		 * 
-		 */
 	private static final long serialVersionUID = -8110894591349863950L;
 
 	public DecoratorButton(String text) {
@@ -514,11 +519,10 @@ public class JCalendar implements PersonaWindow {
 	}
 
 	public DecoratorButton() {
-	    Color line = new java.awt.Color(214, 215, 148);
-	    setForeground(new java.awt.Color(72, 142, 125));
-	    setBackground(new java.awt.Color(182, 214, 254));
+	    setForeground(GuiConstants.jDecoratorButtonForeground);
+	    setBackground(GuiConstants.jDecoratorButtonBackground);
 	    setOpaque(true);
-	    setBorder(BorderFactory.createLineBorder(line));
+	    setBorder(BorderFactory.createLineBorder(GuiConstants.jDecoratorButtonLine));
 	}
 
 	public void addMouseListener(MouseListener l) {
@@ -530,12 +534,6 @@ public class JCalendar implements PersonaWindow {
     }
 
     class JDateButton extends JButton implements ActionListener, MouseListener {
-	private final Font currentDateFont = new Font(
-		"MyriadPro", Font.PLAIN, 32); //$NON-NLS-1$
-	private final Font otherDateFont = new Font(
-		"MyriadPro", Font.ITALIC, 25); //$NON-NLS-1$
-	private final Color activeFGColor = new Color(15, 68, 137);
-	private final Color inactiveBGColor = new Color(240, 240, 240);
 	public static final int NO_DATE = 0;
 	public static final int WITH_DATE = 1;
 	// default date: 01/01/2000
@@ -545,12 +543,8 @@ public class JCalendar implements PersonaWindow {
 	private int numberOfDayEvents = 0;
 
 	private int status;
-	/**
-		 * 
-		 */
-	private static final long serialVersionUID = 6243426756268099696L;
-	private Color line = new Color(0xaabbaa);
 
+	private static final long serialVersionUID = 6243426756268099696L;
 	public JDateButton(String text, int status, boolean hasStoredEvents) {
 	    this(status, hasStoredEvents);
 	    setText(text);
@@ -558,9 +552,8 @@ public class JCalendar implements PersonaWindow {
 
 	public JToolTip createToolTip() {
 	    JToolTip tt = new JToolTip();
-	    tt.setBackground(new Color(250, 250, 180, 150));
-	    tt.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, new Color(
-		    0, 0, 0, 180)));
+	    tt.setBackground(GuiConstants.jDateTooltipBackground);
+	    tt.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, GuiConstants.jDateTooltipLineColor));
 	    tt.setComponent(this);
 	    return tt;
 	}
@@ -579,35 +572,35 @@ public class JCalendar implements PersonaWindow {
 
 	public JDateButton(int status, boolean hasStoredEvents) {
 	    this.status = status;
-	    setFont(currentDateFont);
-	    setForeground(activeFGColor);
+	    setFont(GuiConstants.jDateCurrentDateFont);
+	    setForeground(GuiConstants.jDateActiveFGColor);
 	    if (hasStoredEvents)
-		setBackground(Color.GREEN);
+		setBackground(GuiConstants.jDateHasStoredEventsBackground);//FIXME this is where green was?
 	    else
-		setBackground(Color.WHITE);
+		setBackground(GuiConstants.jDateOtherDaysBackground);
 	    setFocusable(false);
-	    setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, line));// BorderFactory.createLineBorder(line));
+	    setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, GuiConstants.jDateLineColor));// BorderFactory.createLineBorder(line));
 	    addActionListener(this);
 	    addMouseListener(this);
 	}
 
 	public void setHasStoredEvents(boolean hasStoredEvents) {
 	    if (hasStoredEvents)
-		setBackground(new Color(0xded6f1));
+		setBackground(GuiConstants.jDateHasStoredEventsBackground);
 	    else
-		setBackground(Color.white);
+		setBackground(GuiConstants.jDateOtherDaysBackground);
 	}
 
 	public void setStatus(int status) {
 	    this.status = status;
 	    if (this.status == NO_DATE) {
 		this.setEnabled(false);
-		this.setFont(otherDateFont);
-		this.setBackground(inactiveBGColor);
+		this.setFont(GuiConstants.jDateOtherDateFont);
+		this.setBackground(GuiConstants.jDateInactiveBGColor);
 	    } else {
 		this.setEnabled(true);
-		this.setFont(currentDateFont);
-		this.setBackground(Color.white);
+		this.setFont(GuiConstants.jDateCurrentDateFont);
+		this.setBackground(GuiConstants.jDateOtherDaysBackground);
 	    }
 	}
 
@@ -658,12 +651,12 @@ public class JCalendar implements PersonaWindow {
 
 	public void mouseEntered(MouseEvent e) {
 	    // this.setBackground(hoverFGColor);
-	    this.setForeground(Color.black);
+	    this.setForeground(GuiConstants.jDateMouseEnteredForeground);
 	}
 
 	public void mouseExited(MouseEvent e) {
-	    // this.setBackground(Color.white);
-	    this.setForeground(activeFGColor);
+	    // this.setBackground(GuiConstants.jDateOtherDaysBackground);
+	    this.setForeground(GuiConstants.jDateActiveFGColor);
 	}
 
 	public void mousePressed(MouseEvent e) {

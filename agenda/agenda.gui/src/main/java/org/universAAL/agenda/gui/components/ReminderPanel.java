@@ -17,14 +17,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import org.universAAL.agenda.gui.EventInfoListener;
+import org.universAAL.agenda.gui.IEventInfoListener;
 import org.universAAL.agenda.gui.IconsHome;
 
 public class ReminderPanel extends JPanel {
     private static final long serialVersionUID = 7749867619210140899L;
-    private EventInfoListener listener;
+    private IEventInfoListener listener;
 
-    public ReminderPanel(EventInfoListener listener) {
+    public ReminderPanel(IEventInfoListener listener) {
 	this.listener = listener;
 	initComponents();
     }

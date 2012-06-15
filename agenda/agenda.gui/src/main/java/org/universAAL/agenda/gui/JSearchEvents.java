@@ -30,7 +30,7 @@ import javax.swing.border.TitledBorder;
 import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.util.DateUtilities;
 
-public class JSearchEvents extends JPanel implements PersonaWindow {
+public class JSearchEvents extends JPanel implements IPersonaWindow {
     private static final long serialVersionUID = 1449159192602147400L;
     public static final String CARD_NAME = "JSearchEvents"; //$NON-NLS-1$
 

@@ -7,7 +7,6 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,8 +26,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
+import org.universAAL.agenda.gui.util.GuiConstants;
 
-public class JEventList implements PersonaWindow {
+public class JEventList implements IPersonaWindow {
     public static final String CARD_NAME = "JEventListCard"; //$NON-NLS-1$
 
     CalendarGUI parent;
@@ -50,11 +50,11 @@ public class JEventList implements PersonaWindow {
 	noEventPanel = new JPanel();
 
 	noEventPanel.setLayout(new GridLayout(4, 1));
-	noEventPanel.setBackground(Color.white);
+	noEventPanel.setBackground(GuiConstants.wholePanelBackground);
 	JLabel l = new JLabel("   " + //$NON-NLS-1$
 		Messages.getString("JEventList.NoEventIsStoredForThisDate")); //$NON-NLS-1$
-	l.setFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	l.setForeground(Color.gray);
+	l.setFont(GuiConstants.jEventListLabelFont); //$NON-NLS-1$
+	l.setForeground(GuiConstants.jEventListLabelColor);
 
 	noEventPanel.add(l);
     }
@@ -100,22 +100,22 @@ public class JEventList implements PersonaWindow {
 
 	updateTitleScreen(-1, 2000, 0, 1);
 
-	headerMessage.setForeground(Color.white);
-	headerMessage.setFont(new Font("MyriadPro", Font.PLAIN, 35)); //$NON-NLS-1$
+	headerMessage.setForeground(GuiConstants.headerMessageForeground);
+	headerMessage.setFont(GuiConstants.headerFont); //$NON-NLS-1$
 
 	JPanel headPanel = new ImagePanel(persona_logo.getImage()); // (persona_logo.getImage());
 	headPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-	headPanel.setBackground(Color.white);
+	headPanel.setBackground(GuiConstants.headerPanelBackground);
 
 	headPanel.add(headerMessage);
 
 	//breadcrumbs
 	JLabel l = new JLabel(
 		"<html><font face=\"MyriadPro\" size=\"5\" >"+Messages.getString("JEventInfo.Breadcrumb.Home.EventList")+"</font>");
-	l.setBackground(Color.white);
+	l.setBackground(GuiConstants.breadcrumbsLabelColor);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	whole.setBackground(Color.white);
+	whole.setBackground(GuiConstants.wholePanelBackground);
 	whole.add(headPanel);
 	whole.add(l);
 	return whole;
@@ -199,7 +199,7 @@ public class JEventList implements PersonaWindow {
 
 	// Create the right zone of buttons
 	nav.setLayout(new GridLayout(4, 1));
-	nav.setBackground(Color.white);
+	nav.setBackground(GuiConstants.wholePanelBackground);
 
 	// SC2011 dodan sat i zakomentirana linija
 	// nav.add(new JLabel()); //<<Create a void combined with
@@ -252,7 +252,7 @@ public class JEventList implements PersonaWindow {
 
 	JPanel middle = new JPanel();
 	middle.setLayout(new GridLayout(4, 1));
-	middle.setBackground(Color.white);
+	middle.setBackground(GuiConstants.wholePanelBackground);
 
 	int counter = 0;
 	for (Event event : events) {
@@ -264,7 +264,7 @@ public class JEventList implements PersonaWindow {
 									     // 2,...
 		middle = new JPanel();
 		middle.setLayout(new GridLayout(4, 1));
-		middle.setBackground(Color.white);
+		middle.setBackground(GuiConstants.wholePanelBackground);
 		incomplete = false;
 	    } else {
 		incomplete = true;
@@ -420,9 +420,9 @@ public class JEventList implements PersonaWindow {
 		    "&nbsp;&nbsp;&nbsp;&nbsp;" + //$NON-NLS-1$
 		    Messages.getString("JEventList.Place")); //$NON-NLS-1$
 	    info.setHorizontalAlignment(JLabel.CENTER);
-	    info.setFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	    info.setForeground(new java.awt.Color(0, 167, 127));
-	    info.setBackground(Color.white);
+	    info.setFont(GuiConstants.jEventListInfoAndDataFont); //$NON-NLS-1$
+	    info.setForeground(GuiConstants.jEventListInfoForeground);
+	    info.setBackground(GuiConstants.jEventListInfoBackground);
 	    info.setOpaque(true);
 
 	    String labelText = "<Html>" + type + "<br/>" //$NON-NLS-1$ //$NON-NLS-2$
@@ -430,20 +430,20 @@ public class JEventList implements PersonaWindow {
 		    + "&nbsp;&nbsp;<font size=\"5\" color=\"blue\">" + date + "</font><br/>" //$NON-NLS-1$ //$NON-NLS-2$
 		    + place + "</html>"; //$NON-NLS-1$
 	    data = new JLabel(labelText);
-	    data.setFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	    data.setForeground(new java.awt.Color(86, 86, 86));
+	    data.setFont(GuiConstants.jEventListInfoAndDataFont); //$NON-NLS-1$
+	    data.setForeground(GuiConstants.jEventListDataForeground);
 
 	    moreInfo = new JLabel(Messages
 		    .getString("JEventList.ClickForMoreInfo")); //$NON-NLS-1$
-	    moreInfo.setFont(new Font("MyriadPro", Font.ITALIC, 25)); //$NON-NLS-1$
-	    moreInfo.setForeground(new java.awt.Color(255, 102, 127)); //orange
+	    moreInfo.setFont(GuiConstants.jEventListMoreInfoFont); //$NON-NLS-1$
+	    moreInfo.setForeground(GuiConstants.jEventListMoreInfoForeground); //orange
 
 	    setLayout(new BorderLayout());// GridLayout(1, 3));
 	    add(info, BorderLayout.WEST);
 	    add(data, BorderLayout.CENTER);
 	    add(moreInfo, BorderLayout.EAST);
 
-	    setBackground(Color.white);
+	    setBackground(GuiConstants.wholePanelBackground);
 
 	    addMouseListener(new MouseAdapter() {
 		public void mouseEntered(MouseEvent e) {

@@ -2,7 +2,7 @@ package org.universAAL.agenda.gui;
 
 import javax.swing.JPanel;
 
-public interface PersonaWindow {
+public interface IPersonaWindow {
     public JPanel getMainScreenPanel();
 
     public JPanel getNavigationScreenPanel();

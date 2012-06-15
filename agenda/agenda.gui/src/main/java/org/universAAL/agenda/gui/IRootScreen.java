@@ -4,7 +4,11 @@ import org.universAAL.ontology.agenda.Event;
 
 import java.util.List;
 
-public interface RootScreen {
+/**
+ * currently not used
+ * 
+ */
+public interface IRootScreen {
     public void changeHeaderPanel(String headerPanelName);
 
     public void changeNavigationPanel(String navPanelName);

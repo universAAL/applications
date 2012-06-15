@@ -36,7 +36,7 @@ import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
-public class JSelectionCalendar implements PersonaWindow {
+public class JSelectionCalendar implements IPersonaWindow {
     public static final String CARD_NAME = "JCalendarSelectCard"; //$NON-NLS-1$
 
     CalendarGUI parent;

@@ -47,7 +47,9 @@ agenda/agenda.gui/pom.xml -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/AnalogClock.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/CalendarEntry.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/CalendarGUI.java -text
-agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/EventInfoListener.java -text
+agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/IEventInfoListener.java -text
+agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/IPersonaWindow.java -text
+agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/IRootScreen.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/IconsHome.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/JCalendar.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/JEventInfo.java -text
@@ -55,8 +57,6 @@ agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/JEventList.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/JSearchEvents.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/JSelectionCalendar.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/Messages.java -text
-agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/PersonaWindow.java -text
-agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/RootScreen.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/VoiceButton.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/components/DatePanel.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/components/DayTextField.java -text

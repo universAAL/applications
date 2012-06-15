@@ -7,9 +7,7 @@ import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.ontology.agenda.TimeInterval;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -43,7 +41,13 @@ import org.universAAL.agenda.gui.util.DateTimeInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
-public class JEventInfo implements PersonaWindow, EventInfoListener {
+/**
+ * 
+ * Event info view. When adding new Event. Has calendar selection, start and end
+ * dates, event type, description, place and reminder info sections
+ * 
+ */
+public class JEventInfo implements IPersonaWindow, IEventInfoListener {
     public static final String CARD_NAME = "JEventInfoCard"; //$NON-NLS-1$
     private static final int UPDATE_EVENT = 1;
     private static final int SAVE_NEW_EVENT = 2;
@@ -112,22 +116,24 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 
 	updateTitleScreen();
 
-	headerMessage.setForeground(Color.white);
-	headerMessage.setFont(new Font("MyriadPro", Font.PLAIN, 35)); //$NON-NLS-1$
+	headerMessage
+		.setForeground(GuiConstants.headerMessageForeground);
+	headerMessage.setFont(GuiConstants.headerFont); //$NON-NLS-1$
 
 	JPanel headPanel = new ImagePanel(persona_logo.getImage());
 	headPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-	headPanel.setBackground(Color.white);
+	headPanel.setBackground(GuiConstants.headerPanelBackground);
 
 	headPanel.add(headerMessage);
 
-	//breadcrumbs
-	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >"+Messages.getString("JEventInfo.Breadcrumb.Home.EventInfo")+"</font>");
-	l.setBackground(Color.white);
+	// breadcrumbs
+	JLabel l = new JLabel("<html><font face=\"MyriadPro\" size=\"5\" >"
+		+ Messages.getString("JEventInfo.Breadcrumb.Home.EventInfo")
+		+ "</font>");
+	l.setBackground(GuiConstants.breadcrumbsLabelColor);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	whole.setBackground(Color.white);
+	whole.setBackground(GuiConstants.wholePanelBackground);
 	whole.add(headPanel);
 	whole.add(l);
 	return whole;
@@ -184,24 +190,24 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 	JPanel main = mainScreen();
 
 	JPanel whole = new JPanel(new BorderLayout());
-	whole.setBackground(Color.white);
+	whole.setBackground(GuiConstants.wholePanelBackground);
 
 	JLabel dummy1 = new JLabel("dummyTextTextText"); //$NON-NLS-1$
-	dummy1.setBackground(Color.white);
-	dummy1.setForeground(Color.white);
+	dummy1.setBackground(GuiConstants.wholePanelBackground);
+	dummy1.setForeground(GuiConstants.wholePanelBackground);
 	dummy1.setOpaque(true);
 	JLabel dummy2 = new JLabel("dummyTextTextText"); //$NON-NLS-1$
-	dummy2.setBackground(Color.white);
+	dummy2.setBackground(GuiConstants.wholePanelBackground);
 	dummy2.setOpaque(true);
-	dummy2.setForeground(Color.white);
+	dummy2.setForeground(GuiConstants.wholePanelBackground);
 	JLabel dummy3 = new JLabel("dummyTextText"); //$NON-NLS-1$
-	dummy3.setBackground(Color.white);
+	dummy3.setBackground(GuiConstants.wholePanelBackground);
 	dummy3.setOpaque(true);
-	dummy3.setForeground(Color.white);
+	dummy3.setForeground(GuiConstants.wholePanelBackground);
 	JLabel dummy4 = new JLabel("dummyText"); //$NON-NLS-1$
-	dummy4.setBackground(Color.white);
+	dummy4.setBackground(GuiConstants.wholePanelBackground);
 	dummy4.setOpaque(true);
-	dummy4.setForeground(Color.white);
+	dummy4.setForeground(GuiConstants.wholePanelBackground);
 
 	whole.add(dummy1, BorderLayout.EAST);
 	whole.add(dummy2, BorderLayout.WEST);
@@ -215,14 +221,14 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 	GridBagLayout gl = new GridBagLayout();
 	GridBagConstraints gbc = new GridBagConstraints();
 	JPanel center = new JPanel(gl);
-	center.setBackground(Color.white);
+	center.setBackground(GuiConstants.wholePanelBackground);
 
 	// TYPE ELEMENTS
 	typeField = new JTextField();
-	typeField.setBackground(new Color(0xf1ee9d));
-	typeField.setForeground(new Color(0x00c129));
+	typeField.setBackground(GuiConstants.textActiveBackground);
+	typeField.setForeground(GuiConstants.textActiveForeground);
 	typeField.setHorizontalAlignment(JLabel.LEFT);
-	typeField.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
+	typeField.setFont(GuiConstants.mediumFont); //$NON-NLS-1$
 	typeField.setOpaque(true);
 	typeField.setEditable(isEditable);
 
@@ -231,16 +237,16 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 	TitledBorder b = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
 		Messages.getString("JEventInfo.EventType") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
-	b.setTitleFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	b.setTitleColor(new Color(0x565656));
+	b.setTitleFont(GuiConstants.jEventInfoSectionTitleFont); //$NON-NLS-1$
+	b.setTitleColor(GuiConstants.labelColor);
 	typePanel.setBorder(b);
-	typePanel.setBackground(Color.WHITE);
+	typePanel.setBackground(GuiConstants.wholePanelBackground);
 	typePanel.add(typeField);
 
 	// DATE ELEMENT
 	// 2. Date Panel
 	datePanel = new JPanel(new GridLayout(1, 2));
-	datePanel.setBackground(Color.white);
+	datePanel.setBackground(GuiConstants.wholePanelBackground);
 	// START DATE ELEMENT
 	startTimeP = new DatePanel(" " + //$NON-NLS-1$
 		Messages.getString("JEventInfo.StartDate") + //$NON-NLS-1$
@@ -265,26 +271,26 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 	updateCalendarComboBox(calList);
 	calendarCombo.setFont(GuiConstants.mediumFont);
 	calendarCombo.setBackground(GuiConstants.textActiveBackground);
-	calendarCombo.setForeground(new Color(0x00c129));
+	calendarCombo.setForeground(GuiConstants.textActiveForeground);
 	calendarCombo.setOpaque(true);
-	
+
 	// 3. calendar panel
 	calPanel = new JPanel(new GridLayout(1, 1));
 	b = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
 		Messages.getString("JEventInfo.Calendar") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
-	b.setTitleFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	b.setTitleColor(new Color(0x565656));
+	b.setTitleFont(GuiConstants.jEventInfoSectionTitleFont); //$NON-NLS-1$
+	b.setTitleColor(GuiConstants.labelColor);
 	calPanel.setBorder(b);
-	calPanel.setBackground(Color.WHITE);
+	calPanel.setBackground(GuiConstants.wholePanelBackground);
 	calPanel.add(calendarCombo);
 
 	// DESCRIPTION ELEMENT
 	descField = new JTextField();
 	descField.setHorizontalAlignment(JLabel.LEFT);
-	descField.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
-	descField.setBackground(new Color(0xf1ee9d));
-	descField.setForeground(new Color(0x00c129));
+	descField.setFont(GuiConstants.mediumFont); //$NON-NLS-1$
+	descField.setBackground(GuiConstants.textActiveBackground);
+	descField.setForeground(GuiConstants.textActiveForeground);
 	descField.setOpaque(true);
 	descField.setEditable(isEditable);
 
@@ -293,18 +299,18 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 	b = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
 		Messages.getString("JEventInfo.Description") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
-	b.setTitleFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	b.setTitleColor(new Color(0x565656));
+	b.setTitleFont(GuiConstants.jEventInfoSectionTitleFont); //$NON-NLS-1$
+	b.setTitleColor(GuiConstants.labelColor);
 	descPanel.setBorder(b);
-	descPanel.setBackground(Color.WHITE);
+	descPanel.setBackground(GuiConstants.wholePanelBackground);
 	descPanel.add(descField);
 
 	// PLACE ELEMENT
 	placeField = new JTextField();
 	placeField.setHorizontalAlignment(JLabel.LEFT);
-	placeField.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
-	placeField.setBackground(new Color(0xf1ee9d));
-	placeField.setForeground(new Color(0x00c129));
+	placeField.setFont(GuiConstants.mediumFont); //$NON-NLS-1$
+	placeField.setBackground(GuiConstants.textActiveBackground);
+	placeField.setForeground(GuiConstants.textActiveForeground);
 	placeField.setOpaque(true);
 	placeField.setEditable(isEditable);
 
@@ -313,11 +319,11 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 	b = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
 		Messages.getString("JEventInfo.Place") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
-	b.setTitleFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	b.setTitleColor(new Color(0x565656));
+	b.setTitleFont(GuiConstants.jEventInfoSectionTitleFont); //$NON-NLS-1$
+	b.setTitleColor(GuiConstants.labelColor);
 	b.setTitle(Messages.getString("JEventInfo.Place")); //$NON-NLS-1$
 	placePanel.setBorder(b);
-	placePanel.setBackground(Color.WHITE);
+	placePanel.setBackground(GuiConstants.wholePanelBackground);
 	placePanel.add(placeField);
 
 	// REMINDER ELEMENT
@@ -437,7 +443,7 @@ public class JEventInfo implements PersonaWindow, EventInfoListener {
 
 	// Create the right zone of buttons
 	JPanel home = new JPanel(new GridLayout(6, 1));
-	home.setBackground(Color.white);
+	home.setBackground(GuiConstants.wholePanelBackground);
 
 	// the necessary buttons are included
 	// SC2011 dodan sat i zakomentirana linija
