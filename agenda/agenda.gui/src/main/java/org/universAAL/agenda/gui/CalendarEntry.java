@@ -16,9 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
+ * Calendar view used in first screen where selecting adding/deleting calendars
+ * or selecting calendars to add/see their events.
+ * 
  * @author kagnantis
  * @author eandgrg
- *
+ * 
  */
 class CalendarEntry extends JPanel {
 

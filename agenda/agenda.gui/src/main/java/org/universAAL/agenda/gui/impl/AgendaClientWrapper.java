@@ -84,10 +84,8 @@ public class AgendaClientWrapper {
 
     // change to get an event
     public Event getEvent(int eventID) {
-	return ac.getCalendarEventService(
-		new org.universAAL.ontology.agenda.Calendar(
-			org.universAAL.ontology.agenda.Calendar.MY_URI
-				+ calendarNo), eventID);
+	return ac.getCalendarEventService(new Calendar(Calendar.MY_URI
+		+ calendarNo), eventID);
 	// return ac.getCalendarEventService(eventID);
     }
 
@@ -103,7 +101,6 @@ public class AgendaClientWrapper {
     }
 
     public void removeEvent(Calendar c, int eventId) {
-
 	boolean reply = ac.deleteCalendarEventService(c, eventId);
 	LogUtils.logInfo(mcontext, this.getClass(), "removeEvent",
 		new Object[] { "Event with id: " + eventId + " from Calendar: "
@@ -112,15 +109,12 @@ public class AgendaClientWrapper {
     }
 
     public List<String> getAllEventCategories() {
-
 	@SuppressWarnings("unchecked")
 	List<String> allEvents = (List<String>) ac.getAllEventCategories();
-
 	LogUtils
 		.logInfo(mcontext, this.getClass(), "getAllEventCategories",
 			new Object[] { "Event category list size: "
 				+ allEvents.size() }, null);
-
 	return allEvents;
     }
 
@@ -141,7 +135,6 @@ public class AgendaClientWrapper {
 	    LogUtils.logInfo(mcontext, this.getClass(), "getFilteredEvents",
 		    new Object[] { "Gets filtered events with description: "
 			    + description }, null);
-
 	}
 	XMLGregorianCalendar calEnd = null;
 	XMLGregorianCalendar calStart = null;
@@ -207,7 +200,6 @@ public class AgendaClientWrapper {
     }
 
     public List<Calendar> getAllCalendars() {
-
 	@SuppressWarnings("unchecked")
 	List<Calendar> allCalendars = (List<Calendar>) ac
 		.getAllCalendarsService();
@@ -237,8 +229,8 @@ public class AgendaClientWrapper {
 	return allCalendars;
     }
 
-    public Calendar addNewCalendar(String name, User owner) {
 
+    public Calendar addNewCalendar(String name, User owner) {
 	Calendar c = new Calendar();
 	c.setName(name);
 	c = ac.addNewCalendarService(c, owner);

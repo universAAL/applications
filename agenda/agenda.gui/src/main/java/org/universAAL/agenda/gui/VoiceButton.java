@@ -12,30 +12,43 @@ public class VoiceButton extends JButton {
 
     public VoiceButton() {
 	Calendar fecha = java.util.Calendar.getInstance();
-	String dia = String.valueOf(fecha.get(java.util.Calendar.DATE));
-	String mes = String.valueOf(fecha.get(java.util.Calendar.MONTH) + 1);
-	String anio = String.valueOf(fecha.get(java.util.Calendar.YEAR));
-	if (dia.length() < 2)
-	    dia = "0" + dia;
-	if (mes.length() < 2)
-	    mes = "0" + mes;
-	mes = monthChange(mes);// Change the month to letters
-	String voiceDate = "<html><table><tr><td> <font face=Myriad Pro size=7 color=#565656>"
-		+ dia
-		+ "</font>"
-		+ "</td><td><font face=Myriad Pro size=4 color=#565656>"
-		+ mes
-		+ "</font><br><font face=Myriad Pro size=3 color=#00a77f>"
-		+ ""
-		+ anio
-		+ "</font></td><tr><td><font face=Myriad Pro size=4 color=#00a77f>Sound</font></td><td>"
-		+ "<font face=Myriad Pro size=4 color=#565656>Off</font></td></tr></table>";
+	String day = String.valueOf(fecha.get(java.util.Calendar.DATE));
+	String month = String.valueOf(fecha.get(java.util.Calendar.MONTH) + 1);
+	String year = String.valueOf(fecha.get(java.util.Calendar.YEAR));
+	if (day.length() < 2)
+	    day = "0" + day;
+	if (month.length() < 2)
+	    month = "0" + month;
+	month = monthChange(month);// Change the month to letters
+	
 
-	ImageIcon voiceImage = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/sound.jpg"));
+	//date and month in 1st row, year in 2nd
+//	String voiceDate = "<html><table><tr><td> <font face=Myriad Pro size=7 color=#565656>"
+//		+ day 
+//		+ "</font></td><td><font face=Myriad Pro size=7 color=#565656>"
+//		+ month
+//		+ "</font><tr><font face=Myriad Pro size=14 color=#565656>"
+//		+ year + "</font></td></tr></table>";
+	
+	
+	String voiceDate = "<html><table><tr><td> <font face=Myriad Pro size=12 color=#565656>"
+		+ day 
+		+ "</font></td><td><font face=Myriad Pro size=5 color=#565656>"
+		+ month
+		+ "</font><br><font face=Myriad Pro size=5 color=#565656>"
+		+ year + "</font></td></table>";
+
+	// +
+	// "</font></td><tr><td><font face=Myriad Pro size=4 color=#00a77f>Sound</font></td><td>"
+	// +
+	// "<font face=Myriad Pro size=4 color=#565656>Off</font></td></tr></table>";
+	// removed sound icon
+	// ImageIcon voiceImage = new ImageIcon(getClass().getResource(
+	// IconsHome.getIconsHomePath() + "/sound.jpg"));
 	setHorizontalTextPosition(SwingConstants.LEFT);
 	setText(voiceDate);
-	setIcon(voiceImage);
+	// removed sound icon
+	// setIcon(voiceImage);
 	setFocusPainted(false);
 	setBorderPainted(false);
 	setContentAreaFilled(false);

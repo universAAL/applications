@@ -254,4 +254,5 @@ public class CalendarGUI extends JWindow {
 	} else
 	    return caller.removeCalendar(cal);
     }
+
 }

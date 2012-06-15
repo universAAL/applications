@@ -1,7 +1,5 @@
 package org.universAAL.agenda.gui.components;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -33,60 +31,58 @@ public class DatePanel extends JPanel {
 
     private void initComponents() {
 	GridBagLayout gb = new GridBagLayout();
-	Font smallFont = GuiConstants.smallFont;
-	Font mediumFont = GuiConstants.mediumFont;
 
 	dayL = new JLabel(
 		Messages.getString("DatePanel.Day"), SwingConstants.RIGHT); //$NON-NLS-1$
-	dayL.setFont(smallFont);
-	dayL.setForeground(Color.BLUE);
+	dayL.setFont(GuiConstants.smallFont);
+	dayL.setForeground(GuiConstants.datePanelNumbersForeground);
 	monthL = new JLabel(
 		Messages.getString("DatePanel.Month"), SwingConstants.RIGHT); //$NON-NLS-1$
-	monthL.setFont(smallFont);
-	monthL.setForeground(Color.BLUE);
+	monthL.setFont(GuiConstants.smallFont);
+	monthL.setForeground(GuiConstants.datePanelNumbersForeground);
 	yearL = new JLabel(
 		Messages.getString("DatePanel.Year"), SwingConstants.RIGHT); //$NON-NLS-1$
-	yearL.setFont(smallFont);
-	yearL.setForeground(Color.BLUE);
+	yearL.setFont(GuiConstants.smallFont);
+	yearL.setForeground(GuiConstants.datePanelNumbersForeground);
 	hourL = new JLabel(
 		Messages.getString("DatePanel.Hour"), SwingConstants.RIGHT); //$NON-NLS-1$
-	hourL.setFont(smallFont);
-	hourL.setForeground(Color.BLUE);
+	hourL.setFont(GuiConstants.smallFont);
+	hourL.setForeground(GuiConstants.datePanelNumbersForeground);
 	minuteL = new JLabel(
 		Messages.getString("DatePanel.Mins"), SwingConstants.RIGHT); //$NON-NLS-1$
-	minuteL.setFont(smallFont);
-	minuteL.setForeground(Color.BLUE);
+	minuteL.setFont(GuiConstants.smallFont);
+	minuteL.setForeground(GuiConstants.datePanelNumbersForeground);
 	dateL = new JLabel(Messages.getString("DatePanel.date") + //$NON-NLS-1$
 		":   ", SwingConstants.RIGHT); //$NON-NLS-1$
-	dateL.setFont(mediumFont);
+	dateL.setFont(GuiConstants.mediumFont);
 	timeL = new JLabel(Messages.getString("DatePanel.time") + //$NON-NLS-1$
 		":   ", SwingConstants.RIGHT); //$NON-NLS-1$
-	timeL.setFont(mediumFont);
+	timeL.setFont(GuiConstants.mediumFont);
 	dateSeperator1L = new JLabel("/"); //$NON-NLS-1$
-	dateSeperator1L.setFont(mediumFont);
+	dateSeperator1L.setFont(GuiConstants.mediumFont);
 	dateSeperator2L = new JLabel("/"); //$NON-NLS-1$
-	dateSeperator2L.setFont(mediumFont);
+	dateSeperator2L.setFont(GuiConstants.mediumFont);
 	timeSeperatorL = new JLabel(":"); //$NON-NLS-1$
-	timeSeperatorL.setFont(mediumFont);
+	timeSeperatorL.setFont(GuiConstants.mediumFont);
 
 	dayText = new DayTextField(2);
-	dayText.setFont(mediumFont);
+	dayText.setFont(GuiConstants.mediumFont);
 	dayText.setBackground(GuiConstants.textActiveBackground);
 	monthText = new MonthTextField(2);
-	monthText.setFont(mediumFont);
+	monthText.setFont(GuiConstants.mediumFont);
 	monthText.setBackground(GuiConstants.textActiveBackground);
 	yearText = new YearTextField(3);
-	yearText.setFont(mediumFont);
+	yearText.setFont(GuiConstants.mediumFont);
 	yearText.setBackground(GuiConstants.textActiveBackground);
 	hourText = new HourTextField(2);
-	hourText.setFont(mediumFont);
+	hourText.setFont(GuiConstants.mediumFont);
 	hourText.setBackground(GuiConstants.textActiveBackground);
 	minuteText = new MinuteTextField(2);
-	minuteText.setFont(mediumFont);
+	minuteText.setFont(GuiConstants.mediumFont);
 	minuteText.setBackground(GuiConstants.textActiveBackground);
 
 	main = this; // new JPanel();
-	main.setBackground(Color.white);
+	main.setBackground(GuiConstants.datePanelBackground);
 	main.setLayout(gb);
 
 	GridBagConstraints c = new GridBagConstraints();
@@ -201,8 +197,8 @@ public class DatePanel extends JPanel {
 	main.add(minuteText, c);
 
 	TitledBorder b = BorderFactory.createTitledBorder(this.title);
-	b.setTitleFont(mediumFont);
-	b.setTitleColor(new Color(0x565656));
+	b.setTitleFont(GuiConstants.mediumFont);
+	b.setTitleColor(GuiConstants.labelColor);
 	main.setBorder(b);
 	// this.setBackground(Color.white);
 	// this.add(main);
@@ -322,9 +318,9 @@ public class DatePanel extends JPanel {
 
     public static void main(String[] str) {
 	JFrame f = new JFrame();
-	f.setBackground(Color.white);
+	f.setBackground(GuiConstants.datePanelBackground);
 	JPanel p = new JPanel(new GridLayout(1, 2));
-	p.setBackground(Color.white);
+	p.setBackground(GuiConstants.datePanelBackground);
 	p.add(new DatePanel(" " + //$NON-NLS-1$
 		Messages.getString("DatePanel.StartDate") + //$NON-NLS-1$
 		" ")); //$NON-NLS-1$
