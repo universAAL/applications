@@ -19,6 +19,12 @@ import org.universAAL.agenda.gui.IEventInfoListener;
 import org.universAAL.agenda.gui.IconsHome;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
+/**
+ * 
+ * Reminder info panel with status (active/inactive), date, type, and a button
+ * to set reminder.
+ * 
+ */
 public class ReminderPanel extends JPanel {
     private static final long serialVersionUID = 7749867619210140899L;
     private IEventInfoListener listener;
@@ -31,11 +37,12 @@ public class ReminderPanel extends JPanel {
     private void initComponents() {
 	ImageIcon setRemIcon = new ImageIcon(getClass().getResource(
 		IconsHome.getIconsHomePath() + "/set_reminder_big.jpg")); //$NON-NLS-1$
-	ImageIcon setRemDisabledIcon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/set_reminder_big_inactive.jpg")); //$NON-NLS-1$
+	ImageIcon setRemDisabledIcon = new ImageIcon(getClass()
+		.getResource(
+			IconsHome.getIconsHomePath()
+				+ "/set_reminder_big_inactive.jpg")); //$NON-NLS-1$
 	ImageIcon setRemHoverIcon = new ImageIcon(getClass().getResource(
 		IconsHome.getIconsHomePath() + "/set_reminder_hover.jpg")); //$NON-NLS-1$
-
 
 	JPanel center = new JPanel(new GridLayout(3, 2));
 	center.setBackground(GuiConstants.wholePanelBackground);

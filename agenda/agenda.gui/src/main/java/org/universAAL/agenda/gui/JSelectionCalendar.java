@@ -285,13 +285,14 @@ public class JSelectionCalendar implements IPersonaWindow {
 
     private void showNewCalendarDialog() {
 	if (ff == null) {
-	    System.out
-		    .println("1. Number of calendars: " + this.nameToCalendar.keySet().size()); //$NON-NLS-1$
+//	    System.out
+//		    .println("1. Number of calendars: " + this.nameToCalendar.keySet().size()); //$NON-NLS-1$
 	    ff = new NewCalendarFrame(this.nameToCalendar.keySet());// (this.calendarNames);
 	} else {
-	    System.out
-		    .println("2. Number of calendars: " + this.nameToCalendar.keySet().size()); //$NON-NLS-1$
+//	    System.out
+//		    .println("2. Number of calendars: " + this.nameToCalendar.keySet().size()); //$NON-NLS-1$
 	    ff.setExistingCalendars(this.nameToCalendar.keySet());
+	    ff.setAlwaysOnTop(true);
 	    ff.setVisible(true);
 	}
     }
