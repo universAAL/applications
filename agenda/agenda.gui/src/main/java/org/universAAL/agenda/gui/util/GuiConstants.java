@@ -50,7 +50,7 @@ public class GuiConstants {
     public static final Color jCalendarWeekDaysForeground = new Color(15, 68,
 	    137);
     public static final Color jCalendarWeekDaysPanelBackground = Color.WHITE;
-    public static final Color jCalendarWeekDaysBackground = new Color(0xb6d6fe);
+    public static final Color jCalendarWeekDaysBackground = new Color(0xb6d6fe);//light blue
     public static final Color jCalendarDayPanelBackground = Color.WHITE;
     public static final Color jCalendarRightButtonsPanelBackground = Color.WHITE;
     public static final Color jCalendarCurrentDayBackground = new Color(169,
