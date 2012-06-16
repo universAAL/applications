@@ -110,27 +110,26 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
     }
 
     private JPanel createTitleScreen() {
-	ImageIcon persona_logo = new ImageIcon(getClass().getResource(
+	ImageIcon logo = new ImageIcon(getClass().getResource(
 		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	updateTitleScreen();
 
-	headerMessage
-		.setForeground(GuiConstants.headerMessageForeground);
+	headerMessage.setForeground(GuiConstants.headerMessageForeground);
 	headerMessage.setFont(GuiConstants.headerFont); //$NON-NLS-1$
 
-	JPanel headPanel = new ImagePanel(persona_logo.getImage());
+	JPanel headPanel = new ImagePanel(logo.getImage());
 	headPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 	headPanel.setBackground(GuiConstants.headerPanelBackground);
 
 	headPanel.add(headerMessage);
 
 	// breadcrumbs
-	JLabel l = new JLabel("<html><font face=\"MyriadPro\" size=\"5\" >"
-		+ Messages.getString("JEventInfo.Breadcrumb.Home.EventInfo")
-		+ "</font>");
+	JLabel l = new JLabel(Messages
+		.getString("JEventInfo.Breadcrumb.Home.EventInfo"));
 	l.setBackground(GuiConstants.breadcrumbsLabelColor);
+	l.setFont(GuiConstants.breadcrumbsLabelFont);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	whole.setBackground(GuiConstants.wholePanelBackground);

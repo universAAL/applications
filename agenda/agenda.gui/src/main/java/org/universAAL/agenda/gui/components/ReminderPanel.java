@@ -1,7 +1,5 @@
 package org.universAAL.agenda.gui.components;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -19,6 +17,7 @@ import javax.swing.border.TitledBorder;
 
 import org.universAAL.agenda.gui.IEventInfoListener;
 import org.universAAL.agenda.gui.IconsHome;
+import org.universAAL.agenda.gui.util.GuiConstants;
 
 public class ReminderPanel extends JPanel {
     private static final long serialVersionUID = 7749867619210140899L;
@@ -36,44 +35,40 @@ public class ReminderPanel extends JPanel {
 		IconsHome.getIconsHomePath() + "/set_reminder_big_inactive.jpg")); //$NON-NLS-1$
 	ImageIcon setRemHoverIcon = new ImageIcon(getClass().getResource(
 		IconsHome.getIconsHomePath() + "/set_reminder_hover.jpg")); //$NON-NLS-1$
-	Font mediumFont = new Font("MyriadPro", Font.PLAIN, 25); //$NON-NLS-1$
-	Font smallFont = new Font("MyriadPro", Font.PLAIN, 20); //$NON-NLS-1$
-	Font smallItalicsFont = new Font("MyriadPro", Font.ITALIC, 20); //$NON-NLS-1$
-	Color labelColor = new Color(0x565656);
-	Color textColor = new Color(0x00c129);
+
 
 	JPanel center = new JPanel(new GridLayout(3, 2));
-	center.setBackground(Color.WHITE);
+	center.setBackground(GuiConstants.wholePanelBackground);
 
 	JLabel remLabel = new JLabel(" " + //$NON-NLS-1$
 		Messages.getString("ReminderPanel.Reminder") + //$NON-NLS-1$
 		":         ", SwingConstants.LEFT); //$NON-NLS-1$
-	remLabel.setFont(smallFont);
-	remLabel.setForeground(labelColor);
+	remLabel.setFont(GuiConstants.reminderPanelLabelFont);
+	remLabel.setForeground(GuiConstants.labelColor);
 
 	JLabel dateLabel = new JLabel(" " + //$NON-NLS-1$
 		Messages.getString("ReminderPanel.Date") + //$NON-NLS-1$
 		":"); //$NON-NLS-1$
-	dateLabel.setFont(smallFont);
-	dateLabel.setForeground(labelColor);
+	dateLabel.setFont(GuiConstants.reminderPanelLabelFont);
+	dateLabel.setForeground(GuiConstants.labelColor);
 
 	JLabel typeLabel = new JLabel(" " + //$NON-NLS-1$
 		Messages.getString("ReminderPanel.Type") + //$NON-NLS-1$
 		":"); //$NON-NLS-1$
-	typeLabel.setFont(smallFont);
-	typeLabel.setForeground(labelColor);
+	typeLabel.setFont(GuiConstants.reminderPanelLabelFont);
+	typeLabel.setForeground(GuiConstants.labelColor);
 
 	remValue = new JLabel(Messages.getString("ReminderPanel.Active")); //$NON-NLS-1$
-	remValue.setFont(smallFont);
-	remValue.setForeground(textColor);
+	remValue.setFont(GuiConstants.reminderPanelLabelFont);
+	remValue.setForeground(GuiConstants.textActiveForeground);
 
 	dateValue = new JLabel("88:88 (20/88/2008)"); //$NON-NLS-1$
-	dateValue.setFont(smallItalicsFont);
-	dateValue.setForeground(textColor);
+	dateValue.setFont(GuiConstants.reminderPanelLabelFontItalic);
+	dateValue.setForeground(GuiConstants.textActiveForeground);
 
 	typeValue = new JLabel(Messages.getString("ReminderPanel.VisualAlarm")); //$NON-NLS-1$
-	typeValue.setFont(smallItalicsFont);
-	typeValue.setForeground(textColor);
+	typeValue.setFont(GuiConstants.reminderPanelLabelFontItalic);
+	typeValue.setForeground(GuiConstants.textActiveForeground);
 
 	center.add(remLabel);
 	center.add(remValue);
@@ -87,10 +82,10 @@ public class ReminderPanel extends JPanel {
 	TitledBorder b = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
 		Messages.getString("ReminderPanel.ReminderInfo") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
-	b.setTitleFont(mediumFont);
-	b.setTitleColor(new Color(0x565656));
+	b.setTitleFont(GuiConstants.reminderPanelTitleFont);
+	b.setTitleColor(GuiConstants.reminderPanelTitleColor);
 	this.setBorder(b);
-	this.setBackground(Color.WHITE);
+	this.setBackground(GuiConstants.wholePanelBackground);
 
 	gbc.gridx = 0;
 	gbc.gridy = 0;
@@ -160,7 +155,7 @@ public class ReminderPanel extends JPanel {
 
     public static void main(String[] str) {
 	JFrame f = new JFrame();
-	f.setBackground(Color.white);
+	f.setBackground(GuiConstants.wholePanelBackground);
 	f.add(new ReminderPanel(null));
 	f.pack();
 	f.setVisible(true);

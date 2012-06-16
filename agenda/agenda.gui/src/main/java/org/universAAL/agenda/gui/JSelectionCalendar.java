@@ -3,10 +3,8 @@ package org.universAAL.agenda.gui;
 import org.universAAL.ontology.agenda.Calendar;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -78,22 +76,23 @@ public class JSelectionCalendar implements IPersonaWindow {
 
 	updateTitleScreen();
 
-	headerMessage.setForeground(Color.white);
-	headerMessage.setFont(new Font("MyriadPro", Font.PLAIN, 35)); //$NON-NLS-1$
+	headerMessage.setForeground(GuiConstants.headerMessageForeground);
+	headerMessage.setFont(GuiConstants.headerFont); //$NON-NLS-1$
 
 	JPanel headPanel = new ImagePanel(persona_logo.getImage()); // (persona_logo.getImage());
 	headPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-	headPanel.setBackground(Color.white);
+	headPanel.setBackground(GuiConstants.headerPanelBackground);
 
 	headPanel.add(headerMessage);
 
-	//breadcrumbs
-	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >"+Messages.getString("JEventInfo.Breadcrumb.Home.SearchEvents")+"</font></html>");
-	l.setBackground(Color.white);
+	// breadcrumbs
+	JLabel l = new JLabel(Messages
+		.getString("JEventInfo.Breadcrumb.Home.SearchEvents"));
+	l.setBackground(GuiConstants.breadcrumbsLabelColor);
+	l.setFont(GuiConstants.breadcrumbsLabelFont);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	whole.setBackground(Color.white);
+	whole.setBackground(GuiConstants.wholePanelBackground);
 	whole.add(headPanel);
 	whole.add(l);
 	return whole;
@@ -107,9 +106,11 @@ public class JSelectionCalendar implements IPersonaWindow {
 			IconsHome.getIconsHomePath() + "/select_all_hover.jpg")); //$NON-NLS-1$
 	final ImageIcon selectNone_icon = new ImageIcon(getClass().getResource(
 		IconsHome.getIconsHomePath() + "/select_none.jpg")); //$NON-NLS-1$
-	final ImageIcon selectNoneHover_icon = new ImageIcon(getClass()
-		.getResource(
-			IconsHome.getIconsHomePath() + "/select_none_hover.jpg")); //$NON-NLS-1$
+	final ImageIcon selectNoneHover_icon = new ImageIcon(
+		getClass()
+			.getResource(
+				IconsHome.getIconsHomePath()
+					+ "/select_none_hover.jpg")); //$NON-NLS-1$
 
 	updateCalendarsInScreen();
 
@@ -121,14 +122,14 @@ public class JSelectionCalendar implements IPersonaWindow {
 		.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	mainSP.setBorder(null);
 	JPanel root = new JPanel(new BorderLayout());
-	root.setBackground(Color.white);
+	root.setBackground(GuiConstants.wholePanelBackground);
 
 	JPanel inter = new JPanel();
-	inter.setBackground(Color.WHITE);
+	inter.setBackground(GuiConstants.wholePanelBackground);
 	inter.add(mainSP);
 	root.add(inter, BorderLayout.CENTER);
 	JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-	footer.setBackground(Color.WHITE);
+	footer.setBackground(GuiConstants.wholePanelBackground);
 
 	JButton selectAll = new JButton(selectAll_icon);
 	selectAll.setFocusPainted(false);
@@ -222,7 +223,7 @@ public class JSelectionCalendar implements IPersonaWindow {
 
 	// Create the right zone of buttons
 	nav.setLayout(new GridLayout(6, 1));
-	nav.setBackground(Color.white);
+	nav.setBackground(GuiConstants.wholePanelBackground);
 
 	// SC2011 dodan sat i zakomentirana linija
 	// nav.add(new JLabel()); //<<Create a void combined with
@@ -374,7 +375,7 @@ public class JSelectionCalendar implements IPersonaWindow {
 	g.setVgap(3);
 	calendarPanel.removeAll();
 	calendarPanel.setLayout(g);
-	calendarPanel.setBackground(Color.white);
+	calendarPanel.setBackground(GuiConstants.wholePanelBackground);
 
 	if (calNo + 1 <= minCalPositions)
 	    calendarPanel.add(new JLabel());
@@ -385,7 +386,8 @@ public class JSelectionCalendar implements IPersonaWindow {
 	for (Calendar calendar : allCalendars) {
 	    CalendarEntry ce = new CalendarEntry(calendar.getName(), false);
 	    ce.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-		    Color.LIGHT_GRAY, null, null, null));
+		    GuiConstants.jSelectionCalendarBorderColor, null, null,
+		    null));
 	    calendarPanel.add(ce);
 	    calendarEntryList.add(ce);
 	    // calendarNames.add(calendar.getName().toLowerCase());
@@ -403,8 +405,9 @@ public class JSelectionCalendar implements IPersonaWindow {
 		.getResource(IconsHome.getIconsHomePath() + "/set_hover.jpg")); //$NON-NLS-1$
 	final ImageIcon cancelIcon = new ImageIcon(NewCalendarFrame.class
 		.getResource(IconsHome.getIconsHomePath() + "/cancel.jpg")); //$NON-NLS-1$
-	final ImageIcon cancelHoverIcon = new ImageIcon(NewCalendarFrame.class
-		.getResource(IconsHome.getIconsHomePath() + "/cancel_hover.jpg")); //$NON-NLS-1$
+	final ImageIcon cancelHoverIcon = new ImageIcon(
+		NewCalendarFrame.class.getResource(IconsHome.getIconsHomePath()
+			+ "/cancel_hover.jpg")); //$NON-NLS-1$
 
 	private Set<String> existingCalendars;
 	private boolean isNameValid;
@@ -436,13 +439,17 @@ public class JSelectionCalendar implements IPersonaWindow {
 
 	void initComponents() {
 	    this.setUndecorated(true);// << K.S.
-	    this.getRootPane().setBorder(GuiConstants.popupBorder);
+	    this
+		    .getRootPane()
+		    .setBorder(
+			    BorderFactory
+				    .createLineBorder(GuiConstants.jSelectionCalendarRootBorderColor));
 	    //this.setTitle(Messages.getString("JSelectionCalendar.CalendarName")); //$NON-NLS-1$
 
 	    this.setLayout(new BorderLayout());
 
 	    JPanel main = new JPanel(new GridLayout(3, 1));
-	    main.setBackground(Color.WHITE);
+	    main.setBackground(GuiConstants.wholePanelBackground);
 
 	    String message = Messages
 		    .getString("JSelectionCalendar.GiveANameForTheNewCalendar"); //$NON-NLS-1$
@@ -450,7 +457,7 @@ public class JSelectionCalendar implements IPersonaWindow {
 	    messageLabel.setFont(GuiConstants.mediumFont);
 
 	    JPanel center = new JPanel();
-	    center.setBackground(Color.WHITE);
+	    center.setBackground(GuiConstants.wholePanelBackground);
 
 	    JLabel nameL = new JLabel(Messages
 		    .getString("JSelectionCalendar.Name") + //$NON-NLS-1$
@@ -461,10 +468,11 @@ public class JSelectionCalendar implements IPersonaWindow {
 	    center.add(calendarName);
 
 	    JPanel south = new JPanel();
-	    south.setBackground(Color.white);
+	    south.setBackground(GuiConstants.wholePanelBackground);
 	    // south.setBorder(BorderFactory.createTitledBorder(""));
 	    causionLabel.setFont(GuiConstants.mediumFont);
-	    causionLabel.setForeground(Color.red);
+	    causionLabel
+		    .setForeground(GuiConstants.jSelectionCalendarCausionLabelRed);
 	    // causionLabel.setVisible(false);
 	    south.add(causionLabel);
 
@@ -505,11 +513,14 @@ public class JSelectionCalendar implements IPersonaWindow {
 	    });
 
 	    calendarName.setFont(GuiConstants.mediumFont);
-	    calendarName.setForeground(Color.blue);
+	    calendarName
+		    .setForeground(GuiConstants.jSelectionCalendarCalendarName);
 	    // at the beginning there is an invalid calendar name (empty string)
 	    causionLabel.setText(emptyName);
-	    causionLabel.setBackground(Color.green);
-	    calendarName.setBackground(new Color(0xffff64));
+	    causionLabel
+		    .setBackground(GuiConstants.jSelectionCalendarCausionLabelGreen);
+	    calendarName
+		    .setBackground(GuiConstants.jSelectionCalendarTextFieldBackground);
 
 	    calendarName.addKeyListener(new KeyAdapter() {
 		public void keyTyped(KeyEvent e) {
@@ -530,7 +541,7 @@ public class JSelectionCalendar implements IPersonaWindow {
 
 	    footer.add(okButton);
 	    footer.add(cancelButton);
-	    footer.setBackground(Color.white);
+	    footer.setBackground(GuiConstants.wholePanelBackground);
 
 	    this.add(main, BorderLayout.CENTER);
 	    this.add(footer, BorderLayout.EAST);
@@ -555,24 +566,29 @@ public class JSelectionCalendar implements IPersonaWindow {
 
 	void emptyCalendarName() {
 	    causionLabel.setText(emptyName);
-	    causionLabel.setBackground(Color.green);
-	    calendarName.setBackground(new Color(0xffff64));
+	    causionLabel
+		    .setBackground(GuiConstants.jSelectionCalendarCausionLabelGreen);
+	    calendarName
+		    .setBackground(GuiConstants.jSelectionCalendarTextFieldBackground);
 	    isValidName(false);
 	}
 
 	void invalidCalendarName() {
 	    // okButton.setEnabled(false);
 	    causionLabel.setText(collisionName);
-	    causionLabel.setBackground(Color.green);
-	    calendarName.setBackground(new Color(0xffff64));
+	    causionLabel
+		    .setBackground(GuiConstants.jSelectionCalendarCausionLabelGreen);
+	    calendarName
+		    .setBackground(GuiConstants.jSelectionCalendarTextFieldBackground);
 	    isValidName(false);
 	}
 
 	void validCalendarName(String name) {
 	    // okButton.setEnabled(true);
 	    causionLabel.setText(okMessage);
-	    causionLabel.setBackground(Color.red);
-	    calendarName.setBackground(Color.white);
+	    causionLabel
+		    .setBackground(GuiConstants.jSelectionCalendarCausionLabelRed);
+	    calendarName.setBackground(GuiConstants.wholePanelBackground);
 	    setCandidateCalendarName(name);
 	    isValidName(true);
 	}
@@ -608,22 +624,23 @@ class DeleteConfirmationDialog extends JDialog {
     private static final long serialVersionUID = -944973719622883424L;
     private final String infoText;
     private ImageIcon danger_icon = new ImageIcon(
-	    DeleteConfirmationDialog.class
-		    .getResource(IconsHome.getIconsHomePath()
-			    + "/icon_danger_small.jpg")); //$NON-NLS-1$
+	    DeleteConfirmationDialog.class.getResource(IconsHome
+		    .getIconsHomePath()
+		    + "/icon_danger_small.jpg")); //$NON-NLS-1$
     private ImageIcon yesMiniIcon = new ImageIcon(
-	    DeleteConfirmationDialog.class
-		    .getResource(IconsHome.getIconsHomePath() + "/yes_mini.jpg")); //$NON-NLS-1$
+	    DeleteConfirmationDialog.class.getResource(IconsHome
+		    .getIconsHomePath()
+		    + "/yes_mini.jpg")); //$NON-NLS-1$
     private ImageIcon yesMiniHoverIcon = new ImageIcon(
-	    DeleteConfirmationDialog.class
-		    .getResource(IconsHome.getIconsHomePath()
-			    + "/yes_mini_hover.jpg")); //$NON-NLS-1$
+	    DeleteConfirmationDialog.class.getResource(IconsHome
+		    .getIconsHomePath()
+		    + "/yes_mini_hover.jpg")); //$NON-NLS-1$
     private ImageIcon noMiniIcon = new ImageIcon(DeleteConfirmationDialog.class
 	    .getResource(IconsHome.getIconsHomePath() + "/no_mini.jpg")); //$NON-NLS-1$
     private ImageIcon noMiniHoverIcon = new ImageIcon(
-	    DeleteConfirmationDialog.class
-		    .getResource(IconsHome.getIconsHomePath()
-			    + "/no_mini_hover.jpg")); //$NON-NLS-1$
+	    DeleteConfirmationDialog.class.getResource(IconsHome
+		    .getIconsHomePath()
+		    + "/no_mini_hover.jpg")); //$NON-NLS-1$
     public static final int OK = 1;
     public static final int CANCEL = 0;
     private int buttonPressed;
@@ -663,23 +680,27 @@ class DeleteConfirmationDialog extends JDialog {
 
     private void initComponents() {
 	this.setUndecorated(true);// << K.S.
-	this.getRootPane().setBorder(GuiConstants.popupBorder);
+	this
+		.getRootPane()
+		.setBorder(
+			BorderFactory
+				.createLineBorder(GuiConstants.jSelectionCalendarRootBorderColor));
 
 	this.setModalityType(ModalityType.APPLICATION_MODAL);
-	this.setBackground(Color.white);
+	this.setBackground(GuiConstants.wholePanelBackground);
 	this.setLayout(new BorderLayout());
-	this.setBackground(Color.WHITE);
+	this.setBackground(GuiConstants.wholePanelBackground);
 
 	JPanel center = new JPanel();
-	center.setBackground(Color.WHITE);
+	center.setBackground(GuiConstants.wholePanelBackground);
 	JLabel info = new JLabel(infoText, SwingConstants.RIGHT);// ,
 	// danger_icon,
 	// SwingConstants.LEFT);
 	JLabel icon = new JLabel(danger_icon);
-	info.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
+	info.setFont(GuiConstants.mediumFont); //$NON-NLS-1$
 
 	JPanel footer = new JPanel();
-	footer.setBackground(Color.WHITE);
+	footer.setBackground(GuiConstants.wholePanelBackground);
 	final JButton yesButton = new JButton(yesMiniIcon);
 	yesButton.setFocusPainted(false);
 	yesButton.setBorderPainted(false);

@@ -28,6 +28,11 @@ import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
+/**
+ * 
+ * Event list view.
+ * 
+ */
 public class JEventList implements IPersonaWindow {
     public static final String CARD_NAME = "JEventListCard"; //$NON-NLS-1$
 
@@ -109,10 +114,11 @@ public class JEventList implements IPersonaWindow {
 
 	headPanel.add(headerMessage);
 
-	//breadcrumbs
-	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >"+Messages.getString("JEventInfo.Breadcrumb.Home.EventList")+"</font>");
+	// breadcrumbs
+	JLabel l = new JLabel(Messages
+		.getString("JEventInfo.Breadcrumb.Home.EventList"));
 	l.setBackground(GuiConstants.breadcrumbsLabelColor);
+	l.setFont(GuiConstants.breadcrumbsLabelFont);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	whole.setBackground(GuiConstants.wholePanelBackground);
@@ -261,7 +267,7 @@ public class JEventList implements IPersonaWindow {
 
 	    if (counter % 3 == 0) {
 		this.mainScreen.add(EVENT_TAB_NAME + (counter / 3), middle); // eventTab1,
-									     // 2,...
+		// 2,...
 		middle = new JPanel();
 		middle.setLayout(new GridLayout(4, 1));
 		middle.setBackground(GuiConstants.wholePanelBackground);
@@ -436,7 +442,7 @@ public class JEventList implements IPersonaWindow {
 	    moreInfo = new JLabel(Messages
 		    .getString("JEventList.ClickForMoreInfo")); //$NON-NLS-1$
 	    moreInfo.setFont(GuiConstants.jEventListMoreInfoFont); //$NON-NLS-1$
-	    moreInfo.setForeground(GuiConstants.jEventListMoreInfoForeground); //orange
+	    moreInfo.setForeground(GuiConstants.jEventListMoreInfoForeground); // orange
 
 	    setLayout(new BorderLayout());// GridLayout(1, 3));
 	    add(info, BorderLayout.WEST);

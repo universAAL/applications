@@ -1,7 +1,5 @@
 package org.universAAL.agenda.gui;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -14,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import org.universAAL.agenda.gui.util.GuiConstants;
 
 /**
  * Calendar view used in first screen where selecting adding/deleting calendars
@@ -70,17 +70,17 @@ class CalendarEntry extends JPanel {
     void updateGUI() {
 	if (isSelected) {
 	    this.selectButton.setIcon(CHECKED_ICON);
-	    this.textLabel.setForeground(new Color(0, 0, 0, 255));
+	    this.textLabel.setForeground(GuiConstants.calendarEntrySelectedForeground);
 	} else {
 	    this.selectButton.setIcon(NOT_CHECKED_ICON);
-	    this.textLabel.setForeground(new Color(0, 0, 0, 100));
+	    this.textLabel.setForeground(GuiConstants.calendarEntryNotSelectedForeground);
 	}
 
     }
 
     void initComponents() {
 	this.setLayout(new GridBagLayout());
-	this.setBackground(Color.white);
+	this.setBackground(GuiConstants.wholePanelBackground);
 	GridBagConstraints c = new GridBagConstraints();
 
 	c.fill = GridBagConstraints.HORIZONTAL;
@@ -88,7 +88,7 @@ class CalendarEntry extends JPanel {
 	c.gridy = 0;
 	c.weightx = 100.75;
 
-	textLabel.setFont(new Font("MyriadPro", Font.PLAIN, 25));
+	textLabel.setFont(GuiConstants.calendarEntryLabelFont);
 	this.add(textLabel, c);
 
 	selectButton.setFocusPainted(false);
