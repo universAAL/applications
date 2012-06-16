@@ -24,6 +24,8 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.ontology.profile.User;
 
 /**
+ * Main class of Agenda GUI.
+ * 
  * @author kagnantis
  * @author eandgrg
  * 

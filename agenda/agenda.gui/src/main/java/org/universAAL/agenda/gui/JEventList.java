@@ -250,7 +250,7 @@ public class JEventList implements IPersonaWindow {
 		++removed;
 	    }
 	}
-	System.out.println("Invisible events(2): " + removed); //$NON-NLS-1$
+	System.out.println("JEventList.updateMainScreen->Invisible events(2): " + removed); //$NON-NLS-1$
 	if (events == null || events.size() == 0) {
 	    this.mainScreen.add(EMPTY_TAB, noEventPanel());
 	    return;

@@ -31,6 +31,12 @@ import org.universAAL.agenda.gui.util.DateTimeInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
+/**
+ * 
+ * Set reminder: type, message, date, repeat times and interval.
+ *
+ */
+
 public class ReminderScreen extends JPanel {
     private static final long serialVersionUID = 507077964351420749L;
     private DatePanel remDate;
