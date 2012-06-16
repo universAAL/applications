@@ -31,7 +31,7 @@ public class VoiceButton extends JButton {
 //		+ year + "</font></td></tr></table>";
 	
 	
-	String voiceDate = "<html><table><tr><td> <font face=Myriad Pro size=12 color=#565656>"
+	String voiceDate = "<html><table><tr><td> <font face=Myriad Pro size=14 color=#565656>"
 		+ day 
 		+ "</font></td><td><font face=Myriad Pro size=5 color=#565656>"
 		+ month

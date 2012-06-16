@@ -3,9 +3,7 @@ package org.universAAL.agenda.gui;
 import org.universAAL.ontology.agenda.Event;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -29,12 +27,19 @@ import javax.swing.border.TitledBorder;
 
 import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.util.DateUtilities;
+import org.universAAL.agenda.gui.util.GuiConstants;
 
+/**
+ * 
+ * Search events view. Select month and year. Search by category. Search by
+ * description. Decide on showing only present and future events or all. Set
+ * maximum number of events.
+ * 
+ */
 public class JSearchEvents extends JPanel implements IPersonaWindow {
     private static final long serialVersionUID = 1449159192602147400L;
     public static final String CARD_NAME = "JSearchEvents"; //$NON-NLS-1$
 
-    private static final Color greenFont = new Color(0, 102, 102);
     public static final int MAIN_SCREEN = 1;
     public static final int NAVIGATION_SCREEN = 2;
     private static String[] resultsNumber = { "5", "10", "15", "20", "25+" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
@@ -85,22 +90,23 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 
 	updateTitle();
 
-	headerMessage.setForeground(Color.white);
-	headerMessage.setFont(new Font("MyriadPro", Font.PLAIN, 35)); //$NON-NLS-1$
+	headerMessage.setForeground(GuiConstants.headerMessageForeground);
+	headerMessage.setFont(GuiConstants.headerFont); //$NON-NLS-1$
 
 	JPanel headPanel = new ImagePanel(persona_logo.getImage()); // (persona_logo.getImage());
 	headPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-	headPanel.setBackground(Color.white);
+	headPanel.setBackground(GuiConstants.headerPanelBackground);
 
 	headPanel.add(headerMessage);
 
-	//breadcrumbs
-	JLabel l = new JLabel(
-		"<html><font face=\"MyriadPro\" size=\"5\" >"+Messages.getString("JEventInfo.Breadcrumb.Home.SearchEvents")+"</font></html>");
-	l.setBackground(Color.white);
+	// breadcrumbs
+	JLabel l = new JLabel(Messages
+		.getString("JEventInfo.Breadcrumb.Home.SearchEvents"));
+	l.setBackground(GuiConstants.breadcrumbsLabelColor);
+	l.setFont(GuiConstants.breadcrumbsLabelFont);
 
 	JPanel whole = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	whole.setBackground(Color.white);
+	whole.setBackground(GuiConstants.wholePanelBackground);
 	whole.add(headPanel);
 	whole.add(l);
 	return whole;
@@ -116,25 +122,25 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 
     public JPanel createMainScreen() {
 	JPanel main = new JPanel(new GridBagLayout());
-	main.setBackground(Color.WHITE);
+	main.setBackground(GuiConstants.wholePanelBackground);
 
 	// panel for category search
 	JPanel categoryP = new JPanel(new GridLayout(1, 1));
 	TitledBorder b = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
 		Messages.getString("JSearchEvents.SearchByCategory") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
-	b.setTitleFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	b.setTitleColor(new Color(0x565656));
+	b.setTitleFont(GuiConstants.jSearchEventsFont); //$NON-NLS-1$
+	b.setTitleColor(GuiConstants.jSearchEventsTitleColor);
 	categoryP.setBorder(b);
-	categoryP.setBackground(Color.WHITE);
+	categoryP.setBackground(GuiConstants.jSearchEventsPanelBackground);
 
 	List<String> allCategories = this.parent.getAllEventCategories();
 	allCategories.add(""); //$NON-NLS-1$
 	Collections.sort(allCategories);
 	categoryList = new JComboBox(allCategories.toArray());
-	categoryList.setFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	categoryList.setForeground(Color.BLUE);
-	categoryList.setBackground(Color.white);
+	categoryList.setFont(GuiConstants.jSearchEventsFont); //$NON-NLS-1$
+	categoryList.setForeground(GuiConstants.jSearchEventsBlueForeground);
+	categoryList.setBackground(GuiConstants.jSearchEventsBackground);
 	categoryList.setOpaque(true);
 	categoryList.setEditable(true);
 	categoryP.add(categoryList);
@@ -144,16 +150,16 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	TitledBorder b1 = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
 		Messages.getString("JSearchEvents.SearchByDescription") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
-	b1.setTitleFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	b1.setTitleColor(new Color(0x565656));
+	b1.setTitleFont(GuiConstants.jSearchEventsFont); //$NON-NLS-1$
+	b1.setTitleColor(GuiConstants.jSearchEventsTitleColor);
 	descriptionP.setBorder(b1);
-	descriptionP.setBackground(Color.WHITE);
+	descriptionP.setBackground(GuiConstants.jSearchEventsBackground);
 
 	descTextField = new JTextField(32);
 	descTextField.setHorizontalAlignment(JTextField.LEFT);
-	descTextField.setFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	descTextField.setForeground(greenFont);
-	descTextField.setBackground(Color.white);
+	descTextField.setFont(GuiConstants.jSearchEventsFont); //$NON-NLS-1$
+	descTextField.setForeground(GuiConstants.jSearchEventsGreenForeground);
+	descTextField.setBackground(GuiConstants.jSearchEventsBackground);
 	descTextField.setOpaque(true);
 	descTextField.setEnabled(true);
 	descriptionP.add(descTextField);
@@ -166,38 +172,38 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	TitledBorder b2 = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
 		Messages.getString("JSearchEvents.SearchByDescription") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
-	b2.setTitleFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	b2.setTitleColor(new Color(0x565656));
+	b2.setTitleFont(GuiConstants.jSearchEventsFont); //$NON-NLS-1$
+	b2.setTitleColor(GuiConstants.jSearchEventsTitleColor);
 	timeP.setBorder(b2);
-	timeP.setBackground(Color.WHITE);
+	timeP.setBackground(GuiConstants.jSearchEventsBackground);
 
 	JLabel monthL = new JLabel(Messages
 		.getString("JSearchEvents.PickAMonth") + //$NON-NLS-1$
 		":               "); //$NON-NLS-1$
 	monthL.setHorizontalAlignment(JLabel.RIGHT);
-	monthL.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
-	monthL.setForeground(Color.BLUE);
-	monthL.setBackground(Color.white);
+	monthL.setFont(GuiConstants.jSearchEventsLabelFont); //$NON-NLS-1$
+	monthL.setForeground(GuiConstants.jSearchEventsBlueForeground);
+	monthL.setBackground(GuiConstants.jSearchEventsBackground);
 	monthL.setOpaque(true);
 	JLabel yearL = new JLabel(
 		Messages.getString("JSearchEvents.PickAYear") + //$NON-NLS-1$
 			":             "); //$NON-NLS-1$
 	yearL.setHorizontalAlignment(JLabel.RIGHT);
-	yearL.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
-	yearL.setForeground(greenFont);
-	yearL.setBackground(Color.white);
+	yearL.setFont(GuiConstants.jSearchEventsLabelFont); //$NON-NLS-1$
+	yearL.setForeground(GuiConstants.jSearchEventsGreenForeground);
+	yearL.setBackground(GuiConstants.jSearchEventsBackground);
 	yearL.setOpaque(true);
 
 	yearCB = new JComboBox(buildYearSelectionCombo());
-	yearCB.setFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	yearCB.setForeground(Color.BLUE);
-	yearCB.setBackground(Color.white);
+	yearCB.setFont(GuiConstants.jSearchEventsFont); //$NON-NLS-1$
+	yearCB.setForeground(GuiConstants.jSearchEventsBlueForeground);
+	yearCB.setBackground(GuiConstants.jSearchEventsBackground);
 	yearCB.setOpaque(true);
 
 	monthCB = new JComboBox(DateUtilities.months);
-	monthCB.setFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	monthCB.setForeground(greenFont);
-	monthCB.setBackground(Color.white);
+	monthCB.setFont(GuiConstants.jSearchEventsFont); //$NON-NLS-1$
+	monthCB.setForeground(GuiConstants.jSearchEventsGreenForeground);
+	monthCB.setBackground(GuiConstants.jSearchEventsBackground);
 	monthCB.setOpaque(true);
 	monthCB.setEnabled(false);
 	yearCB.addItemListener(new ItemListener() {
@@ -216,7 +222,7 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	timeP.add(yearCB);
 	timeMainP.add(timeP, BorderLayout.NORTH);
 	JPanel empty = new JPanel();
-	empty.setBackground(Color.WHITE);
+	empty.setBackground(GuiConstants.jSearchEventsBackground);
 	timeMainP.add(empty, BorderLayout.CENTER);
 
 	// Miscellaneous options
@@ -224,10 +230,10 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	TitledBorder b4 = BorderFactory.createTitledBorder(" " + //$NON-NLS-1$
 		Messages.getString("JSearchEvents.MiscOptions") + //$NON-NLS-1$
 		" "); //$NON-NLS-1$
-	b4.setTitleFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	b4.setTitleColor(new Color(0x565656));
+	b4.setTitleFont(GuiConstants.jSearchEventsFont); //$NON-NLS-1$
+	b4.setTitleColor(GuiConstants.jSearchEventsTitleColor);
 	miscP.setBorder(b4);
-	miscP.setBackground(Color.WHITE);
+	miscP.setBackground(GuiConstants.jSearchEventsBackground);
 
 	JLabel onlyUpcomming = new JLabel(
 		"<html>" + //$NON-NLS-1$
@@ -235,9 +241,9 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 				.getString("JSearchEvents.ShoWOnlyPresentAndFurureEvents") + //$NON-NLS-1$
 			"</html>"); //$NON-NLS-1$
 	onlyUpcomming.setHorizontalAlignment(JLabel.LEFT);
-	onlyUpcomming.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
-	onlyUpcomming.setForeground(greenFont);
-	onlyUpcomming.setBackground(Color.white);
+	onlyUpcomming.setFont(GuiConstants.jSearchEventsLabelFont); //$NON-NLS-1$
+	onlyUpcomming.setForeground(GuiConstants.jSearchEventsGreenForeground);
+	onlyUpcomming.setBackground(GuiConstants.jSearchEventsBackground);
 	onlyUpcomming.setOpaque(true);
 
 	presentBut = new JButton(falseIcon);
@@ -258,17 +264,17 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 		Messages.getString("JSearchEvents.MaximumNumberOfEvents") + //$NON-NLS-1$
 		": <html>"); //$NON-NLS-1$
 	limitEvents.setHorizontalAlignment(JLabel.LEFT);
-	limitEvents.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
-	limitEvents.setForeground(greenFont);
-	limitEvents.setBackground(Color.white);
+	limitEvents.setFont(GuiConstants.jSearchEventsLabelFont); //$NON-NLS-1$
+	limitEvents.setForeground(GuiConstants.jSearchEventsGreenForeground);
+	limitEvents.setBackground(GuiConstants.jSearchEventsBackground);
 	limitEvents.setOpaque(true);
 
 	JPanel dummy1 = new JPanel(new BorderLayout());
 
 	rNoCB = new JComboBox(resultsNumber);
-	rNoCB.setFont(new Font("MyriadPro", Font.PLAIN, 25)); //$NON-NLS-1$
-	rNoCB.setForeground(Color.BLUE);
-	rNoCB.setBackground(Color.white);
+	rNoCB.setFont(GuiConstants.jSearchEventsFont); //$NON-NLS-1$
+	rNoCB.setForeground(GuiConstants.jSearchEventsBlueForeground);
+	rNoCB.setBackground(GuiConstants.jSearchEventsBackground);
 	rNoCB.setOpaque(true);
 	rNoCB.setVisible(false);
 
@@ -291,23 +297,23 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 
 	dummy1.add(rNoCB, BorderLayout.WEST);
 	JLabel dL3 = new JLabel(" "); //$NON-NLS-1$
-	dL3.setFont(new Font("MyriadPro", Font.PLAIN, 15)); //$NON-NLS-1$
+	dL3.setFont(GuiConstants.jSearchEventsDummyLabelFont); //$NON-NLS-1$
 	dummy1.add(dL3, BorderLayout.CENTER);
 	JLabel dL1 = new JLabel(" "); //$NON-NLS-1$
-	dL1.setFont(new Font("MyriadPro", Font.PLAIN, 15)); //$NON-NLS-1$
+	dL1.setFont(GuiConstants.jSearchEventsDummyLabelFont); //$NON-NLS-1$
 	JLabel dL2 = new JLabel(" "); //$NON-NLS-1$
-	dL2.setFont(new Font("MyriadPro", Font.PLAIN, 15)); //$NON-NLS-1$
+	dL2.setFont(GuiConstants.jSearchEventsDummyLabelFont); //$NON-NLS-1$
 	dummy1.add(dL1, BorderLayout.NORTH);
 	dummy1.add(dL2, BorderLayout.SOUTH);
-	dummy1.setBackground(Color.WHITE);
+	dummy1.setBackground(GuiConstants.jSearchEventsBackground);
 	JPanel dummy10 = new JPanel(new GridLayout(1, 2));
 	dummy10.add(presentBut);
 	dummy10.add(new JLabel("")); //$NON-NLS-1$
-	dummy10.setBackground(Color.WHITE);
+	dummy10.setBackground(GuiConstants.jSearchEventsBackground);
 	JPanel dummy11 = new JPanel(new GridLayout(1, 2));
 	dummy11.add(limitBut);
 	dummy11.add(dummy1);
-	dummy11.setBackground(Color.WHITE);
+	dummy11.setBackground(GuiConstants.jSearchEventsBackground);
 	miscP.add(onlyUpcomming);
 	miscP.add(dummy10);
 	miscP.add(limitEvents);
@@ -330,7 +336,7 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	main.add(miscP, gbc);
 
 	JPanel grigoro = new JPanel(new BorderLayout());
-	grigoro.setBackground(Color.white);
+	grigoro.setBackground(GuiConstants.jSearchEventsBackground);
 	JLabel adeio1 = new JLabel("    "); //$NON-NLS-1$
 	grigoro.add(adeio1, BorderLayout.CENTER);
 
@@ -346,8 +352,8 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	int numberOfNextYears = 5;
 	// TODO: possible property configured externally
 	int sumYears = numberOfNextYears + numberOfPreviousYears + 1; // +1:
-								      // current
-								      // year
+	// current
+	// year
 	String[] years = new String[sumYears + 1];// +1: all years
 	years[0] = "<html><i>" + //$NON-NLS-1$
 		Messages.getString("JSearchEvents.AllYears") + //$NON-NLS-1$
@@ -432,7 +438,7 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 
 	// Create the right zone of buttons
 	JPanel homeP = new JPanel(new GridLayout(6, 1));
-	homeP.setBackground(Color.white);
+	homeP.setBackground(GuiConstants.jSearchEventsBackground);
 
 	// SC2011 added analog clock
 	// homeP.add(new JLabel()); //<< Create a void combined with
@@ -444,9 +450,9 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	homeP.add(home);
 	homeP.add(search);
 	JLabel l1 = new JLabel(""); //$NON-NLS-1$
-	l1.setBackground(Color.WHITE);
+	l1.setBackground(GuiConstants.jSearchEventsBackground);
 	JLabel l2 = new JLabel(""); //$NON-NLS-1$
-	l1.setBackground(Color.WHITE);
+	l1.setBackground(GuiConstants.jSearchEventsBackground);
 	homeP.add(l1);
 	homeP.add(l2);
 	homeP.add(voice);

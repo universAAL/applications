@@ -2,8 +2,6 @@ package org.universAAL.agenda.gui.components;
 
 import org.universAAL.ontology.agenda.ReminderType;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -66,9 +64,9 @@ public class ReminderScreen extends JPanel {
 		.getResource(
 			IconsHome.getIconsHomePath() + "/close_pressed_icon.jpg")); //$NON-NLS-1$
 
-	this.setBackground(Color.white);
+	this.setBackground(GuiConstants.wholePanelBackground);
 	this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
-		Color.LIGHT_GRAY, null, null, null));
+		GuiConstants.reminderScreenBorderColor, null, null, null));
 	this.setLayout(new GridBagLayout());
 
 	remDate = new DatePanel(" " + //$NON-NLS-1$
@@ -98,9 +96,9 @@ public class ReminderScreen extends JPanel {
 	});
 
 	messageArea = new JTextArea(3, 25);
-	messageArea.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
-	messageArea.setBackground(new Color(0xf1ee9d));
-	messageArea.setForeground(new Color(0x00c129));
+	messageArea.setFont(GuiConstants.reminderScreenFont); //$NON-NLS-1$
+	messageArea.setBackground(GuiConstants.textActiveBackground);
+	messageArea.setForeground(GuiConstants.textActiveForeground);
 	messageArea.setOpaque(true);
 	messageArea.setEditable(true);
 
@@ -117,15 +115,15 @@ public class ReminderScreen extends JPanel {
 	b.setTitleFont(GuiConstants.mediumFont);
 	b.setTitleColor(GuiConstants.labelColor);
 	messagePanel.setBorder(b);
-	messagePanel.setBackground(Color.WHITE);
+	messagePanel.setBackground(GuiConstants.wholePanelBackground);
 	messagePanel.add(scroll);
 
 	// ////////////////
 	Object[] mi = ReminderType.getEnumerationMembers();
 	remTypeCombo = new JComboBox(mi);
-	remTypeCombo.setFont(new Font("MyriadPro", Font.PLAIN, 20)); //$NON-NLS-1$
-	remTypeCombo.setBackground(new Color(0xf1ee9d));
-	remTypeCombo.setForeground(new Color(0x00c129));
+	remTypeCombo.setFont(GuiConstants.reminderScreenFont); //$NON-NLS-1$
+	remTypeCombo.setBackground(GuiConstants.textActiveBackground);
+	remTypeCombo.setForeground(GuiConstants.textActiveForeground);
 	remTypeCombo.setOpaque(true);
 	remTypeCombo.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
@@ -147,7 +145,7 @@ public class ReminderScreen extends JPanel {
 	b.setTitleFont(GuiConstants.mediumFont);
 	b.setTitleColor(GuiConstants.labelColor);
 	typePanel.setBorder(b);
-	typePanel.setBackground(Color.WHITE);
+	typePanel.setBackground(GuiConstants.wholePanelBackground);
 	typePanel.add(remTypeCombo);
 
 	JButton setReminderB = new JButton(setRemSmallIcon);
@@ -187,7 +185,7 @@ public class ReminderScreen extends JPanel {
 
 	JPanel butttonPanel = new JPanel(new GridLayout(1, 2));
 
-	butttonPanel.setBackground(Color.WHITE);
+	butttonPanel.setBackground(GuiConstants.wholePanelBackground);
 	butttonPanel.add(setReminderB);
 	butttonPanel.add(cancelReminderB);
 
@@ -248,7 +246,7 @@ public class ReminderScreen extends JPanel {
 
     public static void main(String[] str) {
 	JFrame f = new JFrame();
-	f.setBackground(Color.white);
+	f.setBackground(GuiConstants.wholePanelBackground);
 	f.add(new ReminderScreen(null));
 	f.pack();
 	f.setVisible(true);
@@ -446,7 +444,7 @@ public class ReminderScreen extends JPanel {
 	    b.setTitleFont(GuiConstants.mediumFont);
 	    b.setTitleColor(GuiConstants.labelColor);
 	    this.setBorder(b);
-	    this.setBackground(Color.WHITE);
+	    this.setBackground(GuiConstants.wholePanelBackground);
 
 	    JLabel repeatLabel = new JLabel(Messages
 		    .getString("ReminderScreen.RepeatsTimes") + //$NON-NLS-1$

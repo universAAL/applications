@@ -2,13 +2,13 @@ package org.universAAL.agenda.gui;
 
 import org.universAAL.agenda.gui.impl.AgendaClientWrapper;
 import org.universAAL.agenda.gui.util.DateInstance;
+import org.universAAL.agenda.gui.util.GuiConstants;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -84,7 +84,7 @@ public class CalendarGUI extends JWindow {
 	f.setLocation((screen.width - window.width) / 2,
 		(screen.height - window.height) / 2);
 
-	f.setBackground(Color.white);
+	f.setBackground(GuiConstants.wholePanelBackground);
 	f.setAlwaysOnTop(true);
 	f.setVisible(true);
 
