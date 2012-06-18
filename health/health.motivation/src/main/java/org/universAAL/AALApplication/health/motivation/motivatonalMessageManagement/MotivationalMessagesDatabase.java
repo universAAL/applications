@@ -36,7 +36,8 @@ public class MotivationalMessagesDatabase {
 		case ES:
 			return file = new File("G:\\motivationalMessages.csv");
 		case EN:
-			return file = new File("C://universAAL/motivationalMessages/en_motivationalMessagesDB.csv");
+			//return file = new File("C://universAAL/motivationalMessages/en_motivationalMessagesDB.csv");
+			return file = new File("C://universAAL/motivationalMessages/test_MM.csv");
 		default:
 			return null;
 

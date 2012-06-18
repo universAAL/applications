@@ -550,9 +550,11 @@ health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
 health/health.motivation/pom.xml -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/CSubscriber.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/ClassesNeededRegistration.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/Motivation.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationInterface.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationManager.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationServiceRequirementsIface.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SCaller.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SendMotivationMessageIface.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/TestMotivation.java -text
@@ -567,6 +569,7 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/PruebaDeReflection.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/MotivationStatusDetection.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/RulesSupport.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/TreatmentDetection.java -text
 health/health.motivation/src/main/resources/rules/ActionRules.dslr -text
 health/health.motivation/src/main/resources/rules/ContemplationRules.drl -text
@@ -575,7 +578,14 @@ health/health.motivation/src/main/resources/rules/PrecontemplationRules.drl -tex
 health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
 health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/general/TestMessageManager.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/MessageVariablesForTesting.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/MessageWithVariables.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/MessageWithoutVariables.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestIfaceForMM.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestMessageManageConcepts.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestMessageManager.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestArtifact.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestIface.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestMessageManageConcepts.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentDetection.java -text
 health/health.motivation/uAAL.log -text

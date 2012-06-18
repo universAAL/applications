@@ -5,8 +5,23 @@ package org.universAAL.AALApplication.health.motivation.treatment
 import org.universaal.ontology.health.owl.Treatment;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
-
+import org.universaal.ontology.health.owl.MotivationalStatusType;
+import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.RulesSupport;
+import org.universaal.ontology.owl.*;
 #declare any global variables here 
+
+private String qWording = "Hello Mary! A new treatment, named 'Low fat diet'" +
+	"has been asigned to you. This treatment consists of eating more vegetables and fruit and avoiding fatty meals." +
+	"Do you plan to follow it?";
+
+
+private ChoiceLabel choice1 = new ChoiceLabel(Boolean.TRUE, "Yes");
+private ChoiceLabel choice2 = new ChoiceLabel(Boolean.FALSE, "No");
+private ChoiceLabel[] booleanChoices = {choice1,choice2};
+
+private SingleChoiceQuestion firstQuestion = new SingleChoiceQuestion(qWording,TypeMapper.getDatatypeURI(Boolean.class),booleanChoices);
+
 
 
 #Whenever a treatment is detected a consent message is sent to the user
@@ -16,28 +31,30 @@ rule "Treatment Detection" no-loop
 	when
 		detectedTreatment: Treatment(name != "")  // A new treatment, with a name, is detected
 	then 
-		TreatmentDetection.insertDetectedTreatment(detectedTreatment); //solo valido para JUnit
-        MessageManager.sendMessageToUser(HeartFailure.MY_URI, Treatment.MY_URI,
+		MessageVariables.addToMapOfVariables("treatmentName", detectedTreatment.getName());
+		MessageVariables.addToMapOfVariables("treatmentDescription", detectedTreatment.getDescription()());
+		
+        MessageManager.sendMessageToAssistedPerson(HeartFailure.MY_URI, Treatment.MY_URI,
                                         MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry);
+        RulesSupport.insertDetectedTreatment(detectedTreatment);
         System.out.println("Tratamiento " + detectedTreatment.getName()+ " detectado");//traza
         //en esta regla debe probarse tanto la deteccion del tratamiento como que se ha enviado bien el mensaje
-
-		
 end 
 
 
-rule "Treatment performance agreement" salience no-loop
+rule "Treatment performance agreement" no-loop
 	when
+		detectedTreatmentAnswer: Answer(isAssociatedToAQuestion.equals(firstQuestion))
+		&& detectedTreatmentAnswer(Boolean.TRUE);
 		//reciba al answered message correspondiente al primer mensaje y la respuesta
 		//a la pregunta sea YES
 	
 	then 
 	//cambiar el estado motivacional del treatment a "contemplation" 
 	//se activan las reglas de contemplation	
-	//c�lculo de la periodicidad con la que se mandar�n los mensajes de refuerzo
-		
+	(RulesSupport.getDetectedTreatments(0)).setMot		
 end
-
+/*
 rule "Treatment performance disagreement" salience no-loop
 	when
 		//reciba al answered message correspondiente al primer mensaje y la respuesta
@@ -141,3 +158,4 @@ rule "Treatment prolonged by caregiver" salience no-loop
 	//se deben recalcular las sesiones totales, lo que influye en la unidad de completitud
 	//chequear las sesiones ya hechas y corregir la completitud.
 end
+*/
