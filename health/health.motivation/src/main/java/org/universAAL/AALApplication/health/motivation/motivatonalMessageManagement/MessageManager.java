@@ -134,7 +134,7 @@ public class MessageManager {
 				if (!map.containsKey(disease,treatment_type, mot_status,
 						message_type)) {
 						// if the combination of keys has not been registered yet
-						ArrayList<String> mMessagesAssociated = new ArrayList<String>(); //cada array guarda todos los mensajes que se encuentran para una misma combinación de keys.
+						ArrayList<String> mMessagesAssociated = new ArrayList<String>(); //cada array guarda todos los mensajes que se encuentran para una misma combinaciï¿½n de keys.
 						mMessagesAssociated.add(motivational_message_content);
 						map.put(disease,treatment_type, mot_status,
 								message_type,mMessagesAssociated);
@@ -260,7 +260,7 @@ public class MessageManager {
 	 * @return the message content with the variables replaced
 	 */
 
-	public static String decodeMessageContent(Object motMessageRawContent) {//no debería ser tipo String?
+	public static String decodeMessageContent(Object motMessageRawContent) {//no deberï¿½a ser tipo String?
 
 		String rawContent = motMessageRawContent.toString();
 		//String messageToBeRead = (String) getMotivationalMessageContent().toString();
@@ -305,8 +305,8 @@ public class MessageManager {
 		else if(unprocessedContent instanceof Questionnaire){
 			//unprocessedQuestionnaire = ((Questionnaire)(unprocessedContent)).questionnaireToString();
 			
-			//en el cuestionario sólo tendremos posibles variables en los qwording de las preguntas
-			//así que los decodificamos y los volvemos a guardar
+			//en el cuestionario sï¿½lo tendremos posibles variables en los qwording de las preguntas
+			//asï¿½ que los decodificamos y los volvemos a guardar
 			Question[] questions = ((Questionnaire)(unprocessedContent)).getQuestions();
 			for (int i = 0; i < questions.length; i++) {
 				unprocessedQuestion = questions[i].getQuestionWording();
@@ -318,7 +318,7 @@ public class MessageManager {
 			return processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedQuestionnaire);
 		}
 		else{
-			//lanzar excepción
+			//lanzar excepciï¿½n
 			return null;
 		}
 		

@@ -587,6 +587,7 @@ health/health.motivation/src/test/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestArtifact.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestIface.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestMessageManageConcepts.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestMotivationalStatusChange.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentDetection.java -text
 health/health.motivation/uAAL.log -text
 health/health.pom/pom.xml -text svneol=unset#text/plain

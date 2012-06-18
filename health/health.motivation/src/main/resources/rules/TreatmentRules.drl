@@ -11,16 +11,15 @@ import org.universAAL.AALApplication.health.motivation.testSupportClasses.RulesS
 import org.universaal.ontology.owl.*;
 #declare any global variables here 
 
-private String qWording = "Hello Mary! A new treatment, named 'Low fat diet'" +
+public String qWording = "Hello Mary! A new treatment, named 'Low fat diet'" +
 	"has been asigned to you. This treatment consists of eating more vegetables and fruit and avoiding fatty meals." +
 	"Do you plan to follow it?";
 
+public ChoiceLabel choice1 = new ChoiceLabel(Boolean.TRUE, "Yes");
+public ChoiceLabel choice2 = new ChoiceLabel(Boolean.FALSE, "No");
+public ChoiceLabel[] booleanChoices = {choice1,choice2};
 
-private ChoiceLabel choice1 = new ChoiceLabel(Boolean.TRUE, "Yes");
-private ChoiceLabel choice2 = new ChoiceLabel(Boolean.FALSE, "No");
-private ChoiceLabel[] booleanChoices = {choice1,choice2};
-
-private SingleChoiceQuestion firstQuestion = new SingleChoiceQuestion(qWording,TypeMapper.getDatatypeURI(Boolean.class),booleanChoices);
+public SingleChoiceQuestion firstQuestion = new SingleChoiceQuestion(qWording,TypeMapper.getDatatypeURI(Boolean.class),booleanChoices);
 
 
 
@@ -51,8 +50,9 @@ rule "Treatment performance agreement" no-loop
 	
 	then 
 	//cambiar el estado motivacional del treatment a "contemplation" 
-	//se activan las reglas de contemplation	
-	(RulesSupport.getDetectedTreatments(0)).setMot		
+	//se activan las reglas de contemplation
+	ArrayList <Treatment> treatments = RulesSupport.getDetectedTreatments();	
+	(Treatment)(treatments.get(0)).setMotivationalStatusType(MotivationalStatusType.contemplation);		
 end
 /*
 rule "Treatment performance disagreement" salience no-loop
