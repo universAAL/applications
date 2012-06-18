@@ -16,6 +16,13 @@ public class GuiConstants {
     public static final Color textActiveForeground = new Color(0x00c129); // green
     public static final Color textInactiveBackground = Color.WHITE;
     public static final Color textInActiveForeground = textActiveForeground;
+    
+    public static final Font bigButtonsBigFont = new Font("MyriadPro",Font.ITALIC, 40);
+    public static final Font bigButtonsSmallFont = new Font("MyriadPro",Font.ITALIC, 25);
+    public static final Font mediumButtonsFont = new Font("MyriadPro",Font.ITALIC, 25);
+    public static final Font mediumButtonsSmallFont = new Font("MyriadPro",Font.ITALIC, 20);
+    public static final Font smallButtonsFont = new Font("MyriadPro",Font.ITALIC, 20);
+    
 
     public static final Color labelColor = new Color(0x565656); // dark grey
 

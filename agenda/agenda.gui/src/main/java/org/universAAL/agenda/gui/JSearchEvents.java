@@ -26,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import org.universAAL.agenda.gui.components.ImagePanel;
+import org.universAAL.agenda.gui.util.ButtonCreator;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
@@ -48,20 +49,21 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
     private JPanel titleScreen;
     private CalendarGUI parent;
     private JButton home, search, voice;
-    private final ImageIcon search_icon = new ImageIcon(getClass().getResource(
-	    IconsHome.getIconsHomePath() + "/search.jpg")); //$NON-NLS-1$
-    private final ImageIcon home_icon = new ImageIcon(getClass().getResource(
-	    IconsHome.getIconsHomePath() + "/main.jpg")); //$NON-NLS-1$
+
     private JTextField descTextField;
     private JComboBox monthCB, yearCB, rNoCB, categoryList;
     private JButton presentBut, limitBut;
     private JLabel headerMessage;
     private JEventList eventScreen;
 
-    private final ImageIcon trueIcon = new ImageIcon(getClass().getResource(
-	    IconsHome.getIconsHomePath() + "/yes_small.jpg")); //$NON-NLS-1$
-    private final ImageIcon falseIcon = new ImageIcon(getClass().getResource(
-	    IconsHome.getIconsHomePath() + "/no_small.jpg")); //$NON-NLS-1$
+    final ImageIcon bigIcon = new ImageIcon(getClass().getResource(
+	    "/icons/big_button.jpeg")); //$NON-NLS-1$
+    final ImageIcon smallIcon = new ImageIcon(getClass().getResource(
+	    "/icons/small_button.jpeg")); //$NON-NLS-1$
+    final ImageIcon smallPressedIcon = new ImageIcon(getClass().getResource(
+	    "/icons/small_button_pressed.jpeg")); //$NON-NLS-1$
+    final ImageIcon bigPressedIcon = new ImageIcon(getClass().getResource(
+	    "/icons/big_button_pressed.jpeg")); //$NON-NLS-1$
 
     public JSearchEvents(CalendarGUI parent, JEventList eventScreen) {
 	this.parent = parent;
@@ -85,7 +87,7 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 
     private JPanel createTitleScreen() {
 	ImageIcon persona_logo = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
+		"/icons/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	updateTitle();
@@ -246,16 +248,19 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	onlyUpcomming.setBackground(GuiConstants.jSearchEventsBackground);
 	onlyUpcomming.setOpaque(true);
 
-	presentBut = new JButton(falseIcon);
+	presentBut = ButtonCreator.createButton(smallIcon, Messages
+		.getString("JSearchEvents.No"), GuiConstants.smallButtonsFont);
 	presentBut.setFocusPainted(false);
 	presentBut.setBorderPainted(false);
 	presentBut.setContentAreaFilled(false);
+	presentBut.setPressedIcon(smallPressedIcon);
 	presentBut.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
-		if (presentBut.getIcon() == trueIcon) {
-		    presentBut.setIcon(falseIcon);
+		if (presentBut.getText().contentEquals(
+			Messages.getString("JSearchEvents.Yes"))) {
+		    presentBut.setText(Messages.getString("JSearchEvents.No"));
 		} else {
-		    presentBut.setIcon(trueIcon);
+		    presentBut.setText(Messages.getString("JSearchEvents.Yes"));
 		}
 	    }
 	});
@@ -278,18 +283,21 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	rNoCB.setOpaque(true);
 	rNoCB.setVisible(false);
 
-	limitBut = new JButton(falseIcon);
+	limitBut = ButtonCreator.createButton(smallIcon, Messages
+		.getString("JSearchEvents.No"), GuiConstants.smallButtonsFont);
 	limitBut.setFocusPainted(false);
 	limitBut.setBorderPainted(false);
 	limitBut.setContentAreaFilled(false);
+	limitBut.setPressedIcon(smallPressedIcon);
 	limitBut.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
-		if (limitBut.getIcon() == trueIcon) {
-		    limitBut.setIcon(falseIcon);
+		if (limitBut.getText().contentEquals(
+			Messages.getString("JSearchEvents.Yes"))) {
+		    limitBut.setText(Messages.getString("JSearchEvents.No"));
 		    rNoCB.setSelectedIndex(resultsNumber.length - 1);
 		    rNoCB.setVisible(false);
 		} else {
-		    limitBut.setIcon(trueIcon);
+		    limitBut.setText(Messages.getString("JSearchEvents.Yes"));
 		    rNoCB.setVisible(true);
 		}
 	    }
@@ -392,10 +400,12 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	}
 
 	boolean notPastEvents = false;
-	if (presentBut.getIcon() == trueIcon)
+	if (presentBut.getText().contentEquals(
+		Messages.getString("JSearchEvents.Yes")))
 	    notPastEvents = true;
 	int eventMaxNo = -1;
-	if (limitBut.getIcon() == trueIcon) {
+	if (limitBut.getText().contentEquals(
+		Messages.getString("JSearchEvents.Yes"))) {
 	    try {
 		eventMaxNo = Integer.valueOf((String) rNoCB.getSelectedItem())
 			.intValue();
@@ -408,10 +418,13 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
     }
 
     private JPanel createNavScreen() {
-	search = new JButton(search_icon);
+	search = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JSearchEvents.Search"),
+		GuiConstants.bigButtonsBigFont);
 	search.setFocusPainted(false);
 	search.setBorderPainted(false);
 	search.setContentAreaFilled(false);
+	search.setPressedIcon(bigPressedIcon);
 	search.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent a) {
 		List<Event> events = getFilteredEvents();
@@ -421,28 +434,29 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	    }
 	});
 
-	home = new JButton(home_icon);
+	home = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JSearchEvents.Home"),
+		GuiConstants.bigButtonsBigFont);
 	home
 		.setToolTipText(Messages
 			.getString("JSearchEvents.RemiveThisEvent")); //$NON-NLS-1$
 	home.setFocusPainted(false);
 	home.setBorderPainted(false);
 	home.setContentAreaFilled(false);
+	home.setPressedIcon(bigPressedIcon);
 	home.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent a) {
 		parent.showScreen(JCalendar.CARD_NAME);
 	    }
 	});
 
-	voice = new VoiceButton();
+	voice = new CurrentDateButton();
 
 	// Create the right zone of buttons
 	JPanel homeP = new JPanel(new GridLayout(6, 1));
 	homeP.setBackground(GuiConstants.jSearchEventsBackground);
 
-	// SC2011 added analog clock
-	// homeP.add(new JLabel()); //<< Create a void combined with
-	// nav.setLayout(new GridLayout(6, 1));
+	// before clock	// homeP.add(new JLabel()); //<< Create a void combined with
 
 	AnalogClock clock = new AnalogClock();
 	homeP.add(clock);
