@@ -29,7 +29,7 @@ import org.universaal.ontology.owl.SingleChoiceQuestion;
 
 public class TreatmentDetectionMessage extends MotivationalQuestionnaire implements MotivationalMessageContent{
 	
-	/*private String qWording = "$partOfDay $username! A new treatment, named $treatmentName" +
+	/*private String qWording = "$partOfDay $userName! A new treatment, named $treatmentName" +
 	"has been asigned to you. This treatment consists of $treatmentDescription." +
 	"Do you plan to follow it?";
 	*/

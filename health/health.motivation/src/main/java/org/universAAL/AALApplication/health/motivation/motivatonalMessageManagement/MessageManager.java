@@ -26,11 +26,11 @@ import java.util.Random;
 import java.util.StringTokenizer;
 
 import org.apache.commons.collections.map.MultiKeyMap;
+import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
 import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.Caregiver;
-import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
@@ -44,22 +44,27 @@ public class MessageManager {
 	public File enMessagesDB;
 	public File spMessagesDB; 
 	
-	public static final Locale SPANISH = new Locale ("es", "ES");
-	private final int EN = 1;
-	private final int ES = 0;
+
+	/*
+	private static final int EN = 1;
+	private static final int ES = 0;
+	*/
 	
-	public String disease;
-	public String treatment_type;
-	public String mot_status;
-	public String message_type;
-	public String motivational_message_content;
+	public static String disease;
+	public static String treatment_type;
+	public static String mot_status;
+	public static String message_type;
+	public static String motivational_message_content;
 	
-	public static SendMotivationMessageIface  mmSender;
-		
 	public static final String prefixForDisease = "http://health.ontology.universaal.org/Disease#";
 	public static final String prefixForTreatment = "http://health.ontology.universaal.org/HealthOntology#";
 	
-	static MultiKeyMap map = new MultiKeyMap(); // the map structure
+	public static MultiKeyMap map = new MultiKeyMap(); // the map structure
+	
+	
+	public static SendMotivationMessageIface  mmSender;
+	
+	public static Locale language;
 
 	/**
 	 * Class constructor. In this method, we will open and read the motivational
@@ -68,24 +73,20 @@ public class MessageManager {
 	 * @param language
 	 */
 
-	public MessageManager(Locale language) {
-
-		FileReader reader = null;
-		
-
-		try {
-			if (language.equals(Locale.ENGLISH)) {
-				reader = new FileReader(MotivationalMessagesDatabase.getDBRute(EN));
-				
-			}
-			else if (language.equals(SPANISH)) {
-				reader = new FileReader(MotivationalMessagesDatabase.getDBRute(ES));
-			}
-			buildMapStructure(reader);
-		
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+	public static void setMMSenderIface(SendMotivationMessageIface iface){
+		mmSender = iface; 
+	}
+	
+	public static SendMotivationMessageIface getMMSenderIface(){
+		return mmSender; 
+	}
+	
+	public static void setLanguage(Locale lan){
+		 language = lan; 
+	}
+	
+	public static Locale getLanguage(){
+		return language; 
 	}
 
 	/**
@@ -94,9 +95,27 @@ public class MessageManager {
 	 * @param reader
 	 */
 
-	public void buildMapStructure(FileReader freader) {
+	public static void buildMapStructure() {
 
+		FileReader freader;
+		
 		try {
+			
+			/*
+			if (language.equals(Locale.ENGLISH)) {
+				freader = new FileReader(MotivationalMessagesDatabase.getDBRute(EN));
+				
+			}
+			else if (language.equals(SPANISH)) {
+				freader = new FileReader(MotivationalMessagesDatabase.getDBRute(ES));
+			}
+			else{
+				freader=null;
+			}
+			*/
+			
+			freader = new FileReader(mmSender.getDBRoute(language));
+			
 			CsvReader reader = new CsvReader(freader, ';');
 			
 			if (reader.readHeaders()) {
@@ -115,7 +134,6 @@ public class MessageManager {
 				if (!map.containsKey(disease,treatment_type, mot_status,
 						message_type)) {
 						// if the combination of keys has not been registered yet
-						System.out.println("Estoy guardando el registro en el mapa");
 						ArrayList<String> mMessagesAssociated = new ArrayList<String>(); //cada array guarda todos los mensajes que se encuentran para una misma combinación de keys.
 						mMessagesAssociated.add(motivational_message_content);
 						map.put(disease,treatment_type, mot_status,
@@ -135,6 +153,15 @@ public class MessageManager {
 		}
 	}
 	
+	
+	public static void buildInitialMapOfVariables(){
+		MessageVariables.buildInitialMapOfVariables();
+		
+	}
+	
+	public static void addToMapOfVariables(String key, String value){
+		MessageVariables.addToMapOfVariables(key, value);
+	}
 	
 	/**
 	 * This method returns the content of a motivational message (plain text
@@ -171,10 +198,8 @@ public class MessageManager {
 			
 		} else if(mMessageResults.size()==1){
 			try{
-				
 				Class <?> cName = Class.forName(mMessageResults.get(0));
 				Object content =((MotivationalMessageContent)(cName.newInstance())).getMessageContent();
-				System.out.println("Tipo de new instance: " + content.getClass());
 				return content;
 			}catch (Exception e){
 				System.out.println(e);
@@ -275,6 +300,7 @@ public class MessageManager {
 		
 		if(unprocessedContent instanceof String){
 			processedMessage = decodeMessageContent(unprocessedContent);
+			return processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
 		}
 		else if(unprocessedContent instanceof Questionnaire){
 			//unprocessedQuestionnaire = ((Questionnaire)(unprocessedContent)).questionnaireToString();
@@ -289,34 +315,24 @@ public class MessageManager {
 			}
 			((Questionnaire)(unprocessedContent)).setQuestions(questions);
 			processedQuestionnaire = ((Questionnaire)(unprocessedContent));
+			return processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedQuestionnaire);
 		}
 		else{
 			//lanzar excepción
+			return null;
 		}
 		
 		
-		//mandamos el mensaje motivacional completo al módulo de test o real (en éste se manda al usuario como caja negra).
-		/*if(destinationUser instanceof AssistedPerson){
-			processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
-			MessageServiceTools.sendMessage(processedMM);	
-		}
-		else if (destinationUser instanceof Caregiver){
-			processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
-			//enviarlo a la interfaz real
-		}*/
-		return processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
 	}
 	
-	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, AssistedPerson ap){
+	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType){
 		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType);
-		//falta escoger el método sendToAssistedPerson adecuado según la interfaz (real o imaginaria) en la que estemos.
+		mmSender.sendMessageToAP(mm);
 	}
 	
-	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, Caregiver caregiver){
+	public static void sendMessageToCaregiver(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType){
 		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType);
+		mmSender.sendMessageToCaregiver(mm);
 	}
 
-	
-	
-	
 }
