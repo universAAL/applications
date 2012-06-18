@@ -26,6 +26,7 @@ import javax.swing.JToolTip;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.agenda.gui.components.ImagePanel;
+import org.universAAL.agenda.gui.util.ButtonCreator;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;
@@ -81,7 +82,7 @@ public class JCalendar implements IPersonaWindow {
 
     private JPanel createTitleScreen() {
 	ImageIcon uAAL_logo = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
+		"/icons/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	String month = "May"; //$NON-NLS-1$
@@ -98,9 +99,9 @@ public class JCalendar implements IPersonaWindow {
 	headPanel.add(headerMessage);
 
 	// breadcrumbs
-//	JLabel l = new JLabel("<html><font face=\"MyriadPro\" size=\"5\" >"
-//		+ Messages.getString("JCalendar.Breadcrumb.Home")
-//		+ "</font></html>");
+	// JLabel l = new JLabel("<html><font face=\"MyriadPro\" size=\"5\" >"
+	// + Messages.getString("JCalendar.Breadcrumb.Home")
+	// + "</font></html>");
 	JLabel l = new JLabel(Messages.getString("JCalendar.Breadcrumb.Home"));
 	l.setBackground(GuiConstants.breadcrumbsLabelColor);
 	l.setFont(GuiConstants.breadcrumbsLabelFont);
@@ -120,11 +121,12 @@ public class JCalendar implements IPersonaWindow {
 	panel.setLayout(new BorderLayout());
 
 	daysOfTheWeekPanel = new JPanel(new GridLayout(1, 7));
-	daysOfTheWeekPanel.setBackground(GuiConstants.jCalendarWeekDaysPanelBackground);
+	daysOfTheWeekPanel
+		.setBackground(GuiConstants.jCalendarWeekDaysPanelBackground);
 	JButton sun = new DecoratorButton(Messages.getString("JCalendar.Sun")); //$NON-NLS-1$
 	sun.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
 	sun.setBackground(GuiConstants.jCalendarWeekDaysBackground); // light
-								     // blue
+	// blue
 	sun.setForeground(GuiConstants.jCalendarWeekDaysForeground);
 
 	JButton mon = new DecoratorButton(Messages.getString("JCalendar.Mon")); //$NON-NLS-1$
@@ -203,13 +205,15 @@ public class JCalendar implements IPersonaWindow {
 	}
 
 	JPanel middle2 = new JPanel(new BorderLayout());
-	//button in left above corner where week numbers and days of the week meet
+	// button in left above corner where week numbers and days of the week
+	// meet
 	JButton empty = new DecoratorButton(" "); //$NON-NLS-1$
-	//although font is not needed since there is no text, if font is not set then this button is too small
+	// although font is not needed since there is no text, if font is not
+	// set then this button is too small
 	empty.setFont(GuiConstants.jCalendarWeekDaysFont); //$NON-NLS-1$
-	//empty.setBackground(Color.white);
+	// empty.setBackground(Color.white);
 	empty.setBackground(GuiConstants.wholePanelBackground);
-	//empty.setForeground(new java.awt.Color(101, 104, 9));
+	// empty.setForeground(new java.awt.Color(101, 104, 9));
 
 	middle2.add(empty, BorderLayout.NORTH);
 	middle2.add(weekPanel, BorderLayout.CENTER);
@@ -221,33 +225,33 @@ public class JCalendar implements IPersonaWindow {
     }
 
     public JPanel createNavScreen() {
-	final ImageIcon next_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/nextMonthN.jpg")); //$NON-NLS-1$
-	final ImageIcon previous_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/previousMonthN.jpg")); //$NON-NLS-1$
-	final ImageIcon back_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/back.jpg")); //$NON-NLS-1$
-	final ImageIcon dummy_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/home.jpg")); //$NON-NLS-1$
-	final ImageIcon search = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/search.jpg")); //$NON-NLS-1$
 
-	final JButton next_month = new JButton(next_icon);
+	final ImageIcon bigIcon = new ImageIcon(getClass().getResource(
+		"/icons/big_button.jpeg")); //$NON-NLS-1$
+	  final ImageIcon bigPressedIcon = new ImageIcon(getClass().getResource(
+	    "/icons/big_button_pressed.jpeg")); //$NON-NLS-1$
 
+	final JButton next_month = ButtonCreator.createButton(
+		bigIcon, Messages.getString("JCalendar.NextMonth"),
+		GuiConstants.bigButtonsSmallFont);
 	next_month.setFocusPainted(false);
 	next_month.setBorderPainted(false);
 	next_month.setContentAreaFilled(false);
+	next_month.setPressedIcon(bigPressedIcon);
 	next_month.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent evt) {
 		showNextMonth();
 		updateTitleWithCurrentDate();
 	    }
 	});
-
-	final JButton previous_month = new JButton(previous_icon);
+	
+	final JButton previous_month = ButtonCreator.createButton(
+		bigIcon, Messages.getString("JCalendar.PreviousMonth"),
+		GuiConstants.bigButtonsSmallFont);
 	previous_month.setFocusPainted(false);
 	previous_month.setBorderPainted(false);
 	previous_month.setContentAreaFilled(false);
+	previous_month.setPressedIcon(bigPressedIcon);
 	previous_month.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent evt) {
 		showPreviousMonth();
@@ -255,10 +259,13 @@ public class JCalendar implements IPersonaWindow {
 	    }
 	});
 
-	final JButton gohome = new JButton(back_icon);
+	final JButton gohome =ButtonCreator.createButton(
+		bigIcon, Messages.getString("JCalendar.Home"),
+		GuiConstants.bigButtonsBigFont); 
 	gohome.setFocusPainted(false);
 	gohome.setBorderPainted(false);
 	gohome.setContentAreaFilled(false);
+	gohome.setPressedIcon(bigPressedIcon);
 	gohome.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent evt) {
 		showCurrentMonth();
@@ -267,10 +274,13 @@ public class JCalendar implements IPersonaWindow {
 	    }
 	});
 
-	final JButton searchButton = new JButton(search);
+	final JButton searchButton =ButtonCreator.createButton(
+		bigIcon, Messages.getString("JCalendar.Search"),
+		GuiConstants.bigButtonsBigFont); 
 	searchButton.setFocusPainted(false);
 	searchButton.setBorderPainted(false);
 	searchButton.setContentAreaFilled(false);
+	searchButton.setPressedIcon(bigPressedIcon);
 	searchButton.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent evt) {
 		if (eventSearchScreen == null) {
@@ -284,17 +294,19 @@ public class JCalendar implements IPersonaWindow {
 	    }
 	});
 
-	final JButton voice = new VoiceButton();
+	final JButton voice = new CurrentDateButton();
 
 	// Create the right zone of buttons
 	JPanel main = new JPanel(new GridLayout(6, 1));
 	main.setBackground(GuiConstants.jCalendarRightButtonsPanelBackground);
 
-	JButton dummyButton = new JButton(dummy_icon);
+	JButton dummyButton =ButtonCreator.createButton(
+		bigIcon, " ",
+		GuiConstants.bigButtonsBigFont); 
 	dummyButton.setVisible(false);
 
 	// the necessary buttons are included
-	
+
 	// before adding clock below line was used
 	// main.add(new JLabel()); //<<Create a void combined with
 	// nav.setLayout(new GridLayout(6, 1));
@@ -455,7 +467,8 @@ public class JCalendar implements IPersonaWindow {
 	    if (allDays.contains(new Integer(counter)))
 		days[j].setHasStoredEvents(true);
 	    if ((counter == nowDay) && (nowMonth == month) && (nowYear == year)) {
-		days[j].setBackground(GuiConstants.jCalendarCurrentDayBackground);
+		days[j]
+			.setBackground(GuiConstants.jCalendarCurrentDayBackground);
 	    }
 
 	    ++counter;
@@ -522,7 +535,8 @@ public class JCalendar implements IPersonaWindow {
 	    setForeground(GuiConstants.jDecoratorButtonForeground);
 	    setBackground(GuiConstants.jDecoratorButtonBackground);
 	    setOpaque(true);
-	    setBorder(BorderFactory.createLineBorder(GuiConstants.jDecoratorButtonLine));
+	    setBorder(BorderFactory
+		    .createLineBorder(GuiConstants.jDecoratorButtonLine));
 	}
 
 	public void addMouseListener(MouseListener l) {
@@ -545,6 +559,7 @@ public class JCalendar implements IPersonaWindow {
 	private int status;
 
 	private static final long serialVersionUID = 6243426756268099696L;
+
 	public JDateButton(String text, int status, boolean hasStoredEvents) {
 	    this(status, hasStoredEvents);
 	    setText(text);
@@ -553,7 +568,8 @@ public class JCalendar implements IPersonaWindow {
 	public JToolTip createToolTip() {
 	    JToolTip tt = new JToolTip();
 	    tt.setBackground(GuiConstants.jDateTooltipBackground);
-	    tt.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, GuiConstants.jDateTooltipLineColor));
+	    tt.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3,
+		    GuiConstants.jDateTooltipLineColor));
 	    tt.setComponent(this);
 	    return tt;
 	}
@@ -575,11 +591,17 @@ public class JCalendar implements IPersonaWindow {
 	    setFont(GuiConstants.jDateCurrentDateFont);
 	    setForeground(GuiConstants.jDateActiveFGColor);
 	    if (hasStoredEvents)
-		setBackground(GuiConstants.jDateHasStoredEventsBackground);//FIXME this is where green was?
+		setBackground(GuiConstants.jDateHasStoredEventsBackground);// FIXME
+									   // this
+									   // is
+									   // where
+									   // green
+									   // was?
 	    else
 		setBackground(GuiConstants.jDateOtherDaysBackground);
 	    setFocusable(false);
-	    setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, GuiConstants.jDateLineColor));// BorderFactory.createLineBorder(line));
+	    setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1,
+		    GuiConstants.jDateLineColor));// BorderFactory.createLineBorder(line));
 	    addActionListener(this);
 	    addMouseListener(this);
 	}

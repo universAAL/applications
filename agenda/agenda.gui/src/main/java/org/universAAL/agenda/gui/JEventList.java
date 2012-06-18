@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.agenda.gui.components.ImagePanel;
+import org.universAAL.agenda.gui.util.ButtonCreator;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;
@@ -99,8 +100,8 @@ public class JEventList implements IPersonaWindow {
     }
 
     private JPanel createTitleScreen() {
-	ImageIcon persona_logo = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
+	ImageIcon project_logo = new ImageIcon(getClass().getResource(
+		"/icons/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	updateTitleScreen(-1, 2000, 0, 1);
@@ -108,7 +109,7 @@ public class JEventList implements IPersonaWindow {
 	headerMessage.setForeground(GuiConstants.headerMessageForeground);
 	headerMessage.setFont(GuiConstants.headerFont); //$NON-NLS-1$
 
-	JPanel headPanel = new ImagePanel(persona_logo.getImage()); // (persona_logo.getImage());
+	JPanel headPanel = new ImagePanel(project_logo.getImage()); // (persona_logo.getImage());
 	headPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 	headPanel.setBackground(GuiConstants.headerPanelBackground);
 
@@ -135,19 +136,18 @@ public class JEventList implements IPersonaWindow {
 
     public JPanel createNavScreen() {
 	JPanel nav = new JPanel();
-	ImageIcon add_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/add.jpg")); //$NON-NLS-1$
-	ImageIcon back_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/back.jpg")); //$NON-NLS-1$
-	ImageIcon next_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/next.jpg")); //$NON-NLS-1$
-	ImageIcon main_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/main.jpg")); //$NON-NLS-1$
 
-	JButton add = new JButton(add_icon);
+	final ImageIcon bigIcon = new ImageIcon(getClass().getResource(
+		"/icons/big_button.jpeg")); //$NON-NLS-1$
+	final ImageIcon bigPressedIcon = new ImageIcon(getClass().getResource(
+	    "/icons/big_button_pressed.jpeg")); //$NON-NLS-1$
+
+	JButton add = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JEventList.Add"), GuiConstants.bigButtonsBigFont);
 	add.setFocusPainted(false);
 	add.setBorderPainted(false);
 	add.setContentAreaFilled(false);
+	add.setPressedIcon(bigPressedIcon);
 	add.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		if (eventInfoScreen == null) {
@@ -160,10 +160,12 @@ public class JEventList implements IPersonaWindow {
 	    }
 	});
 
-	JButton back = new JButton(back_icon);
+	JButton back = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JEventList.Back"), GuiConstants.bigButtonsBigFont);
 	back.setFocusPainted(false);
 	back.setBorderPainted(false);
 	back.setContentAreaFilled(false);
+	back.setPressedIcon(bigPressedIcon);
 	back.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		activeCalendarScreen
@@ -174,13 +176,14 @@ public class JEventList implements IPersonaWindow {
 	    }
 	});
 
-	JButton next = new JButton(next_icon);
+	JButton next = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JEventList.Next"), GuiConstants.bigButtonsBigFont);
 	next.setFocusPainted(false);
 	next.setBorderPainted(false);
 	next.setContentAreaFilled(false);
+	next.setPressedIcon(bigPressedIcon);
 	next.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
-
 		CardLayout cl = (CardLayout) mainScreen.getLayout();
 		cl.previous(mainScreen);
 		System.out.println("Card changed: Next"); //$NON-NLS-1$
@@ -188,10 +191,12 @@ public class JEventList implements IPersonaWindow {
 	    }
 	});
 
-	JButton mainb = new JButton(main_icon);
+	JButton mainb = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JEventList.Main"), GuiConstants.bigButtonsBigFont);
 	mainb.setFocusPainted(false);
 	mainb.setBorderPainted(false);
 	mainb.setContentAreaFilled(false);
+	mainb.setPressedIcon(bigPressedIcon);
 	mainb.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		selectedDate = null;
@@ -201,13 +206,13 @@ public class JEventList implements IPersonaWindow {
 	    }
 	});
 
-	JButton voice = new VoiceButton();
+	JButton voice = new CurrentDateButton();
 
 	// Create the right zone of buttons
 	nav.setLayout(new GridLayout(4, 1));
 	nav.setBackground(GuiConstants.wholePanelBackground);
 
-	// SC2011 dodan sat i zakomentirana linija
+	// before clock was added
 	// nav.add(new JLabel()); //<<Create a void combined with
 	// nav.setLayout(new GridLayout(6, 1));
 
@@ -250,7 +255,8 @@ public class JEventList implements IPersonaWindow {
 		++removed;
 	    }
 	}
-	System.out.println("JEventList.updateMainScreen->Invisible events(2): " + removed); //$NON-NLS-1$
+	System.out
+		.println("JEventList.updateMainScreen->Invisible events(2): " + removed); //$NON-NLS-1$
 	if (events == null || events.size() == 0) {
 	    this.mainScreen.add(EMPTY_TAB, noEventPanel());
 	    return;
@@ -297,7 +303,7 @@ public class JEventList implements IPersonaWindow {
 	}
 	headerMessage
 		.setText("<html><font face=\"MyriadPro\" size=\"7\" color=\"white\">" + day //$NON-NLS-1$
-			+ "</font><font size=\"6\">" + DateUtilities.dayEnding("" + day) //$NON-NLS-1$ //$NON-NLS-2$
+			+ "</font><font size=\"6\">" + DateUtilities.forEnglishLangReturnDayEnding("" + day) //$NON-NLS-1$ //$NON-NLS-2$
 			+ "</font><font size=\"7\"> " + DateUtilities.months[month] + ", </font>" //$NON-NLS-1$ //$NON-NLS-2$
 			+ "<font size=\"6\" color=\"white\">" + year + "<p></font>" //$NON-NLS-1$ //$NON-NLS-2$
 			+ "<font size=\"5\" color=\"#2f594f\">" + eventDescription + "</font></html>"); //$NON-NLS-1$ //$NON-NLS-2$

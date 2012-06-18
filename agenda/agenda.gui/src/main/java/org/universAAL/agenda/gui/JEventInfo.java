@@ -36,6 +36,7 @@ import org.universAAL.agenda.gui.components.DatePanel;
 import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.components.ReminderPanel;
 import org.universAAL.agenda.gui.components.ReminderScreen;
+import org.universAAL.agenda.gui.util.ButtonCreator;
 import org.universAAL.agenda.gui.util.DateInstance;
 import org.universAAL.agenda.gui.util.DateTimeInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
@@ -64,16 +65,11 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
     private boolean isEditable = false;
     private Event event;
     private JButton remove, save, mainb, back, voice;
-    private final ImageIcon remove_icon = new ImageIcon(getClass().getResource(
-	    IconsHome.getIconsHomePath() + "/delete.jpg")); //$NON-NLS-1$
-    private final ImageIcon back_icon = new ImageIcon(getClass().getResource(
-	    IconsHome.getIconsHomePath() + "/back.jpg")); //$NON-NLS-1$
-    private final ImageIcon save_icon = new ImageIcon(getClass().getResource(
-	    IconsHome.getIconsHomePath() + "/save.jpg")); //$NON-NLS-1$
-    private final ImageIcon main_icon = new ImageIcon(getClass().getResource(
-	    IconsHome.getIconsHomePath() + "/main.jpg")); //$NON-NLS-1$
-    private final ImageIcon edit_icon = new ImageIcon(getClass().getResource(
-	    IconsHome.getIconsHomePath() + "/edit.jpg")); //$NON-NLS-1$
+
+    final ImageIcon bigIcon = new ImageIcon(getClass().getResource(
+	    "/icons/big_button.jpeg")); //$NON-NLS-1$
+    final ImageIcon bigPressedIcon = new ImageIcon(getClass().getResource(
+    "/icons/big_button_pressed.jpeg")); //$NON-NLS-1$
 
     // KS
     private JCalendar activeCalendarScreen = null;
@@ -111,7 +107,7 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 
     private JPanel createTitleScreen() {
 	ImageIcon logo = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
+		"/icons/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	updateTitleScreen();
@@ -148,7 +144,7 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 	} else {
 	    headerMessage
 		    .setText("<html><font face=\"MyriadPro\" size=\"7\" color=\"white\">" + date[2] //$NON-NLS-1$
-			    + "</font><font size=\"6\">" + DateUtilities.dayEnding("" + date[2]) //$NON-NLS-1$ //$NON-NLS-2$
+			    + "</font><font size=\"6\">" + DateUtilities.forEnglishLangReturnDayEnding("" + date[2]) //$NON-NLS-1$ //$NON-NLS-2$
 			    + "</font><font size=\"7\"> " + DateUtilities.months[date[1]] + ", </font>" //$NON-NLS-1$ //$NON-NLS-2$
 			    + "<font size=\"7\" color=\"white\">" + date[0] + "<p></font>" //$NON-NLS-1$ //$NON-NLS-2$
 			    + "<font size=\"6\" color=\"#2f594f\">" + //$NON-NLS-1$
@@ -361,10 +357,13 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
     }
 
     private JPanel createNavScreen() {
-	back = new JButton(back_icon);
+	back =ButtonCreator.createButton(
+		bigIcon, Messages.getString("JEventInfo.Back"),
+		GuiConstants.bigButtonsBigFont); 
 	back.setFocusPainted(false);
 	back.setBorderPainted(false);
 	back.setContentAreaFilled(false);
+	back.setPressedIcon(bigPressedIcon);
 	back.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent a) {
 
@@ -385,10 +384,13 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 	    }
 	});
 
-	save = new JButton(edit_icon);
+	save =ButtonCreator.createButton(
+		bigIcon, Messages.getString("JEventInfo.Edit"),
+		GuiConstants.bigButtonsBigFont); 
 	save.setFocusPainted(false);
 	save.setBorderPainted(false);
 	save.setContentAreaFilled(false);
+	save.setPressedIcon(bigPressedIcon);
 	save.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent a) {
 		closeReminderInfoScreen();
@@ -398,21 +400,24 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 		    // enable field to edit them
 		    // currentStatus = UPDATE_EVENT;
 		    storeCurrentValues();
-		    save.setIcon(save_icon);
+		    save.setText(Messages.getString("JEventInfo.Save"));
 		} else {
 		    // disable field and save new values
 		    updateOrSaveEvent();
-		    save.setIcon(edit_icon);
+		    save.setText(Messages.getString("JEventInfo.Edit"));
 		    currentStatus = UPDATE_EVENT;
 		}
 	    }
 	});
 
-	remove = new JButton(remove_icon);
+	remove =ButtonCreator.createButton(
+		bigIcon, Messages.getString("JEventInfo.Delete"),
+		GuiConstants.bigButtonsBigFont); 
 	remove.setToolTipText(Messages.getString("JEventInfo.RemoveThisEvent")); //$NON-NLS-1$
 	remove.setFocusPainted(false);
 	remove.setBorderPainted(false);
 	remove.setContentAreaFilled(false);
+	remove.setPressedIcon(bigPressedIcon);
 	remove.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent a) {
 		closeReminderInfoScreen();
@@ -425,10 +430,13 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 		parent.showScreen(JCalendar.CARD_NAME);
 	    }
 	});
-	mainb = new JButton(main_icon);
+	mainb =ButtonCreator.createButton(
+		bigIcon, Messages.getString("JEventInfo.Main"),
+		GuiConstants.bigButtonsBigFont);  
 	mainb.setFocusPainted(false);
 	mainb.setBorderPainted(false);
 	mainb.setContentAreaFilled(false);
+	mainb.setPressedIcon(bigPressedIcon);
 	mainb.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent a) {
 		activeCalendarScreen
@@ -438,14 +446,14 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 	    }
 	});
 
-	voice = new VoiceButton();
+	voice = new CurrentDateButton();
 
 	// Create the right zone of buttons
 	JPanel home = new JPanel(new GridLayout(6, 1));
 	home.setBackground(GuiConstants.wholePanelBackground);
 
 	// the necessary buttons are included
-	// SC2011 dodan sat i zakomentirana linija
+	// before clock added
 	// home.add(new JLabel()); //<<Create a void combined with
 	// nav.setLayout(new GridLayout(6, 1));
 
@@ -479,11 +487,10 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 	isEditable = editMode;
 	if (editMode) {
 	    // currentStatus = UPDATE_EVENT;
-	    save.setIcon(save_icon);
-
+	    save.setText(Messages.getString("JEventInfo.Save"));
 	} else {
 	    // currentStatus = SAVE_NEW_EVENT;
-	    save.setIcon(edit_icon);
+	    save.setText(Messages.getString("JEventInfo.Edit"));
 	}
 
 	// ks

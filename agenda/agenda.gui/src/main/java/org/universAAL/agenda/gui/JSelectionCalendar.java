@@ -32,6 +32,7 @@ import javax.swing.border.BevelBorder;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.osgi.Activator;
+import org.universAAL.agenda.gui.util.ButtonCreator;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
 public class JSelectionCalendar implements IPersonaWindow {
@@ -45,6 +46,15 @@ public class JSelectionCalendar implements IPersonaWindow {
     private JPanel calendarPanel;
     private Map<String, Calendar> nameToCalendar;
     private JCalendar myCalendar = null;
+
+    final ImageIcon mediumIcon = new ImageIcon(getClass().getResource(
+	    "/icons/medium_button.jpeg")); //$NON-NLS-1$
+    final ImageIcon bigIcon = new ImageIcon(getClass().getResource(
+	    "/icons/big_button.jpeg")); //$NON-NLS-1$
+    final ImageIcon mediumPressedIcon = new ImageIcon(getClass().getResource(
+	    "/icons/medium_button_pressed.jpeg")); //$NON-NLS-1$
+    final ImageIcon bigPressedIcon = new ImageIcon(getClass().getResource(
+	    "/icons/big_button_pressed.jpeg")); //$NON-NLS-1$
 
     public JSelectionCalendar(CalendarGUI parent) {
 	this.parent = parent;
@@ -71,7 +81,7 @@ public class JSelectionCalendar implements IPersonaWindow {
 
     private JPanel createTitleScreen() {
 	ImageIcon persona_logo = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/month_header.jpg")); //$NON-NLS-1$
+		"/icons/month_header.jpg")); //$NON-NLS-1$
 	headerMessage = new JLabel();
 
 	updateTitleScreen();
@@ -99,18 +109,6 @@ public class JSelectionCalendar implements IPersonaWindow {
     }
 
     private JPanel createMainScreen() {
-	final ImageIcon selectAll_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/select_all.jpg")); //$NON-NLS-1$
-	final ImageIcon selectAllHover_icon = new ImageIcon(getClass()
-		.getResource(
-			IconsHome.getIconsHomePath() + "/select_all_hover.jpg")); //$NON-NLS-1$
-	final ImageIcon selectNone_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/select_none.jpg")); //$NON-NLS-1$
-	final ImageIcon selectNoneHover_icon = new ImageIcon(
-		getClass()
-			.getResource(
-				IconsHome.getIconsHomePath()
-					+ "/select_none_hover.jpg")); //$NON-NLS-1$
 
 	updateCalendarsInScreen();
 
@@ -131,24 +129,26 @@ public class JSelectionCalendar implements IPersonaWindow {
 	JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	footer.setBackground(GuiConstants.wholePanelBackground);
 
-	JButton selectAll = new JButton(selectAll_icon);
+	JButton selectAll = ButtonCreator.createButton(mediumIcon, Messages
+		.getString("JSelectionCalendar.SelectAll"),
+		GuiConstants.mediumButtonsFont);
 	selectAll.setFocusPainted(false);
 	selectAll.setBorderPainted(false);
 	selectAll.setContentAreaFilled(false);
-
-	selectAll.setPressedIcon(selectAllHover_icon);
+	selectAll.setPressedIcon(mediumPressedIcon);
 	selectAll.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		selectCalendars(true);
 	    }
 	});
 
-	JButton selectNone = new JButton(selectNone_icon);
+	JButton selectNone = ButtonCreator.createButton(mediumIcon, Messages
+		.getString("JSelectionCalendar.SelectNone"),
+		GuiConstants.mediumButtonsFont);
 	selectNone.setFocusPainted(false);
 	selectNone.setBorderPainted(false);
 	selectNone.setContentAreaFilled(false);
-
-	selectNone.setPressedIcon(selectNoneHover_icon);
+	selectNone.setPressedIcon(mediumPressedIcon);
 	selectNone.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		selectCalendars(false);
@@ -170,62 +170,65 @@ public class JSelectionCalendar implements IPersonaWindow {
     // Select a calendar screen
     public JPanel createNavScreen() {
 	JPanel nav = new JPanel();
-	ImageIcon add_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/add.jpg")); //$NON-NLS-1$
-	ImageIcon remove_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/delete.jpg")); //$NON-NLS-1$
-	ImageIcon show_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/next.jpg")); //$NON-NLS-1$
-	ImageIcon exit_icon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/exit.jpg")); //$NON-NLS-1$
-
-	JButton add = new JButton(add_icon);
+	JButton add = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JSelectionCalendar.Add"),
+		GuiConstants.bigButtonsBigFont);
 	add.setFocusPainted(false);
 	add.setBorderPainted(false);
 	add.setContentAreaFilled(false);
+	add.setPressedIcon(bigPressedIcon);
 	add.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		showNewCalendarDialog();
 	    }
 	});
 
-	JButton remove = new JButton(remove_icon);
+	JButton remove = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JSelectionCalendar.Delete"),
+		GuiConstants.bigButtonsBigFont);
 	remove.setFocusPainted(false);
 	remove.setBorderPainted(false);
 	remove.setContentAreaFilled(false);
+	remove.setPressedIcon(bigPressedIcon);
 	remove.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		showDeleteConfirmationDialog();
 	    }
 	});
 
-	JButton show = new JButton(show_icon);
+	JButton show = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JSelectionCalendar.Next"),
+		GuiConstants.bigButtonsBigFont);
 	show.setFocusPainted(false);
 	show.setBorderPainted(false);
 	show.setContentAreaFilled(false);
+	show.setPressedIcon(bigPressedIcon);
 	show.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		proceedToCalendarView();
 	    }
 	});
 
-	JButton exitb = new JButton(exit_icon);
+	JButton exitb = ButtonCreator.createButton(bigIcon, Messages
+		.getString("JSelectionCalendar.Exit"),
+		GuiConstants.bigButtonsBigFont);
 	exitb.setFocusPainted(false);
 	exitb.setBorderPainted(false);
 	exitb.setContentAreaFilled(false);
+	exitb.setPressedIcon(bigPressedIcon);
 	exitb.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		closeCalendarGUI();
 	    }
 	});
 
-	JButton voice = new VoiceButton();
+	JButton voice = new CurrentDateButton();
 
 	// Create the right zone of buttons
 	nav.setLayout(new GridLayout(6, 1));
 	nav.setBackground(GuiConstants.wholePanelBackground);
 
-	// SC2011 dodan sat i zakomentirana linija
+	// from before clock was added
 	// nav.add(new JLabel()); //<<Create a void combined with
 	// nav.setLayout(new GridLayout(6, 1));
 
@@ -285,12 +288,12 @@ public class JSelectionCalendar implements IPersonaWindow {
 
     private void showNewCalendarDialog() {
 	if (ff == null) {
-//	    System.out
-//		    .println("1. Number of calendars: " + this.nameToCalendar.keySet().size()); //$NON-NLS-1$
+	    // System.out
+	    //		    .println("1. Number of calendars: " + this.nameToCalendar.keySet().size()); //$NON-NLS-1$
 	    ff = new NewCalendarFrame(this.nameToCalendar.keySet());// (this.calendarNames);
 	} else {
-//	    System.out
-//		    .println("2. Number of calendars: " + this.nameToCalendar.keySet().size()); //$NON-NLS-1$
+	    // System.out
+	    //		    .println("2. Number of calendars: " + this.nameToCalendar.keySet().size()); //$NON-NLS-1$
 	    ff.setExistingCalendars(this.nameToCalendar.keySet());
 	    ff.setAlwaysOnTop(true);
 	    ff.setVisible(true);
@@ -400,15 +403,11 @@ public class JSelectionCalendar implements IPersonaWindow {
 
     class NewCalendarFrame extends JFrame {
 	private static final long serialVersionUID = 769864332762979644L;
-	final ImageIcon setIcon = new ImageIcon(NewCalendarFrame.class
-		.getResource(IconsHome.getIconsHomePath() + "/set.jpg")); //$NON-NLS-1$
-	final ImageIcon setHoverIcon = new ImageIcon(NewCalendarFrame.class
-		.getResource(IconsHome.getIconsHomePath() + "/set_hover.jpg")); //$NON-NLS-1$
-	final ImageIcon cancelIcon = new ImageIcon(NewCalendarFrame.class
-		.getResource(IconsHome.getIconsHomePath() + "/cancel.jpg")); //$NON-NLS-1$
-	final ImageIcon cancelHoverIcon = new ImageIcon(
-		NewCalendarFrame.class.getResource(IconsHome.getIconsHomePath()
-			+ "/cancel_hover.jpg")); //$NON-NLS-1$
+
+	final ImageIcon mediumIcon = new ImageIcon(NewCalendarFrame.class.getResource(
+		    "/icons/medium_button.jpeg")); //$NON-NLS-1$
+	final ImageIcon mediumPressedIcon = new ImageIcon(NewCalendarFrame.class.getResource(
+	    "/icons/medium_button_pressed.jpeg")); //$NON-NLS-1$
 
 	private Set<String> existingCalendars;
 	private boolean isNameValid;
@@ -482,11 +481,15 @@ public class JSelectionCalendar implements IPersonaWindow {
 	    main.add(south);
 
 	    JPanel footer = new JPanel(new GridLayout(2, 1));
-	    final JButton okButton = new JButton(setIcon);
+	    final JButton okButton =ButtonCreator.createButton(
+			mediumIcon, Messages.getString("JSelectionCalendar.Button.Set"),
+			GuiConstants.mediumButtonsFont); 
+		
+		//new JButton(setIcon);
 	    okButton.setFocusPainted(false);
 	    okButton.setBorderPainted(false);
 	    okButton.setContentAreaFilled(false);
-	    okButton.setPressedIcon(setHoverIcon);
+	    okButton.setPressedIcon(mediumPressedIcon);
 	    okButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    if (hasValidName()) {
@@ -499,12 +502,15 @@ public class JSelectionCalendar implements IPersonaWindow {
 		}
 	    });
 
-	    final JButton cancelButton = new JButton(cancelIcon);
+	    final JButton cancelButton = ButtonCreator.createButton(
+			mediumIcon, Messages.getString("JSelectionCalendar.Button.Cancel"),
+			GuiConstants.mediumButtonsFont); 
+		//new JButton(cancelIcon);
 	    cancelButton.setFocusPainted(false);
 	    cancelButton.setBorderPainted(false);
 	    cancelButton.setContentAreaFilled(false);
-	    cancelButton.setPressedIcon(cancelHoverIcon);
-
+	   // cancelButton.setPressedIcon(cancelHoverIcon);
+	    cancelButton.setPressedIcon(mediumPressedIcon);	    
 	    cancelButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    calendarName.setText(""); // reset text //$NON-NLS-1$
@@ -625,24 +631,14 @@ class DeleteConfirmationDialog extends JDialog {
     private static final long serialVersionUID = -944973719622883424L;
     private final String infoText;
     private ImageIcon danger_icon = new ImageIcon(
-	    DeleteConfirmationDialog.class.getResource(IconsHome
-		    .getIconsHomePath()
-		    + "/icon_danger_small.jpg")); //$NON-NLS-1$
-    private ImageIcon yesMiniIcon = new ImageIcon(
-	    DeleteConfirmationDialog.class.getResource(IconsHome
-		    .getIconsHomePath()
-		    + "/yes_mini.jpg")); //$NON-NLS-1$
-    private ImageIcon yesMiniHoverIcon = new ImageIcon(
-	    DeleteConfirmationDialog.class.getResource(IconsHome
-		    .getIconsHomePath()
-		    + "/yes_mini_hover.jpg")); //$NON-NLS-1$
-    private ImageIcon noMiniIcon = new ImageIcon(DeleteConfirmationDialog.class
-	    .getResource(IconsHome.getIconsHomePath() + "/no_mini.jpg")); //$NON-NLS-1$
-    private ImageIcon noMiniHoverIcon = new ImageIcon(
-	    DeleteConfirmationDialog.class.getResource(IconsHome
-		    .getIconsHomePath()
-		    + "/no_mini_hover.jpg")); //$NON-NLS-1$
-    public static final int OK = 1;
+	    DeleteConfirmationDialog.class.getResource("/icons/icon_danger_small.jpg")); //$NON-NLS-1$
+    
+    private ImageIcon smallIcon = new ImageIcon(
+	    DeleteConfirmationDialog.class.getResource("/icons/small_button.jpeg")); //$NON-NLS-1$
+    private ImageIcon smallIconPressed = new ImageIcon(
+	    DeleteConfirmationDialog.class.getResource("/icons/small_button_pressed.jpeg")); //$NON-NLS-1$
+    
+     public static final int OK = 1;
     public static final int CANCEL = 0;
     private int buttonPressed;
 
@@ -702,11 +698,13 @@ class DeleteConfirmationDialog extends JDialog {
 
 	JPanel footer = new JPanel();
 	footer.setBackground(GuiConstants.wholePanelBackground);
-	final JButton yesButton = new JButton(yesMiniIcon);
+	final JButton yesButton =ButtonCreator.createButton(
+		smallIcon, Messages.getString("JSelectionCalendar.Button.Yes"),
+		GuiConstants.smallButtonsFont);
 	yesButton.setFocusPainted(false);
 	yesButton.setBorderPainted(false);
 	yesButton.setContentAreaFilled(false);
-	yesButton.setPressedIcon(yesMiniHoverIcon);
+	yesButton.setPressedIcon(smallIconPressed);
 	yesButton.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		buttonPressed = OK;
@@ -714,12 +712,13 @@ class DeleteConfirmationDialog extends JDialog {
 	    }
 	});
 
-	final JButton noButton = new JButton(noMiniIcon);
+	final JButton noButton = ButtonCreator.createButton(
+		smallIcon, Messages.getString("JSelectionCalendar.Button.No"),
+		GuiConstants.smallButtonsFont);
 	noButton.setFocusPainted(false);
 	noButton.setBorderPainted(false);
 	noButton.setContentAreaFilled(false);
-	noButton.setPressedIcon(noMiniHoverIcon);
-
+	noButton.setPressedIcon(smallIconPressed);
 	noButton.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		buttonPressed = CANCEL;

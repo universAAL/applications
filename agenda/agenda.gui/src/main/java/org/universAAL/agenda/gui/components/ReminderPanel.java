@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import org.universAAL.agenda.gui.IEventInfoListener;
-import org.universAAL.agenda.gui.IconsHome;
+import org.universAAL.agenda.gui.util.ButtonCreator;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
 /**
@@ -35,14 +35,15 @@ public class ReminderPanel extends JPanel {
     }
 
     private void initComponents() {
-	ImageIcon setRemIcon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/set_reminder_big.jpg")); //$NON-NLS-1$
-	ImageIcon setRemDisabledIcon = new ImageIcon(getClass()
-		.getResource(
-			IconsHome.getIconsHomePath()
-				+ "/set_reminder_big_inactive.jpg")); //$NON-NLS-1$
-	ImageIcon setRemHoverIcon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/set_reminder_hover.jpg")); //$NON-NLS-1$
+
+	final ImageIcon mediumPressedIcon = new ImageIcon(getClass()
+		.getResource("/icons/medium_button_pressed.jpeg")); //$NON-NLS-1$
+
+	final ImageIcon mediumIcon = new ImageIcon(getClass().getResource(
+		"/icons/medium_button.jpeg")); //$NON-NLS-1$
+
+	final ImageIcon mediumDisabledIcon = new ImageIcon(getClass()
+		.getResource("/icons/medium_button_grey.jpeg")); //$NON-NLS-1$
 
 	JPanel center = new JPanel(new GridLayout(3, 2));
 	center.setBackground(GuiConstants.wholePanelBackground);
@@ -102,13 +103,17 @@ public class ReminderPanel extends JPanel {
 	gbc.insets = new Insets(0, 20, 0, 0);
 	gbc.anchor = GridBagConstraints.PAGE_START;
 
-	setReminderB = new JButton(setRemIcon);
+	setReminderB = ButtonCreator.createButton(mediumIcon, Messages
+		.getString("ReminderPanel.SetReminder"),
+		GuiConstants.mediumButtonsSmallFont);
+
+	// new JButton(setRemIcon);
 	setReminderB.setFocusPainted(false);
 	setReminderB.setBorderPainted(false);
 	setReminderB.setContentAreaFilled(false);
-
-	setReminderB.setPressedIcon(setRemHoverIcon);
-	setReminderB.setDisabledIcon(setRemDisabledIcon);
+	setReminderB.setPressedIcon(mediumPressedIcon);
+	// setReminderB.setDisabledIcon(setRemDisabledIcon);
+	setReminderB.setDisabledIcon(mediumDisabledIcon);
 	setReminderB.addActionListener(this.listener);
 	this.add(setReminderB, gbc);
     }

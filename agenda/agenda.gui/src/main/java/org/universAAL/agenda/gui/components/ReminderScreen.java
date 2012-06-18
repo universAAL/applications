@@ -26,7 +26,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
-import org.universAAL.agenda.gui.IconsHome;
+import org.universAAL.agenda.gui.util.ButtonCreator;
 import org.universAAL.agenda.gui.util.DateTimeInstance;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;
@@ -34,7 +34,7 @@ import org.universAAL.agenda.gui.util.GuiConstants;
 /**
  * 
  * Set reminder: type, message, date, repeat times and interval.
- *
+ * 
  */
 
 public class ReminderScreen extends JPanel {
@@ -58,17 +58,16 @@ public class ReminderScreen extends JPanel {
     }
 
     private void initComponents() {
-	ImageIcon setRemSmallIcon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/set_reminder.jpg")); //$NON-NLS-1$
-	ImageIcon setCancelIcon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/cancel_reminder.jpg")); //$NON-NLS-1$
+	final ImageIcon mediumIcon = new ImageIcon(getClass().getResource(
+		"/icons/medium_button.jpeg")); //$NON-NLS-1$
+	final ImageIcon mediumPressedIcon = new ImageIcon(getClass()
+		.getResource("/icons/medium_button_pressed.jpeg")); //$NON-NLS-1$
 	final ImageIcon closeIcon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/close_icon.jpg")); //$NON-NLS-1$
+		"/icons/close_icon.jpg")); //$NON-NLS-1$
 	final ImageIcon closeHoverIcon = new ImageIcon(getClass().getResource(
-		IconsHome.getIconsHomePath() + "/close_hover_icon.jpg")); //$NON-NLS-1$
+		"/icons/close_hover_icon.jpg")); //$NON-NLS-1$
 	final ImageIcon closePressedIcon = new ImageIcon(getClass()
-		.getResource(
-			IconsHome.getIconsHomePath() + "/close_pressed_icon.jpg")); //$NON-NLS-1$
+		.getResource("/icons/close_pressed_icon.jpg")); //$NON-NLS-1$
 
 	this.setBackground(GuiConstants.wholePanelBackground);
 	this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,
@@ -83,7 +82,6 @@ public class ReminderScreen extends JPanel {
 	closeB.setFocusPainted(false);
 	closeB.setBorderPainted(false);
 	closeB.setContentAreaFilled(false);
-
 	closeB.setPressedIcon(closePressedIcon);
 	closeB.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
@@ -154,11 +152,13 @@ public class ReminderScreen extends JPanel {
 	typePanel.setBackground(GuiConstants.wholePanelBackground);
 	typePanel.add(remTypeCombo);
 
-	JButton setReminderB = new JButton(setRemSmallIcon);
+	JButton setReminderB = ButtonCreator.createButton(mediumIcon, Messages
+		.getString("ReminderScreen.Button.SetReminder"),
+		GuiConstants.mediumButtonsSmallFont);
 	setReminderB.setFocusPainted(false);
 	setReminderB.setBorderPainted(false);
 	setReminderB.setContentAreaFilled(false);
-
+	setReminderB.setPressedIcon(mediumPressedIcon);
 	// setReminderB.setPressedIcon(setRemHoverIcon);
 	setReminderB.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
@@ -177,11 +177,14 @@ public class ReminderScreen extends JPanel {
 	    }
 	});
 
-	JButton cancelReminderB = new JButton(setCancelIcon);
+	JButton cancelReminderB = ButtonCreator.createButton(mediumIcon,
+		Messages.getString("ReminderScreen.Button.CancelReminder"),
+		GuiConstants.mediumButtonsSmallFont);
+	// new JButton(setCancelIcon);
 	cancelReminderB.setFocusPainted(false);
 	cancelReminderB.setBorderPainted(false);
 	cancelReminderB.setContentAreaFilled(false);
-
+	cancelReminderB.setPressedIcon(mediumPressedIcon);
 	// cancelReminderB.setPressedIcon(setCancelHoverIcon);
 	cancelReminderB.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {

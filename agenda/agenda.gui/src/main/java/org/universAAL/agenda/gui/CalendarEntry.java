@@ -26,17 +26,13 @@ import org.universAAL.agenda.gui.util.GuiConstants;
 class CalendarEntry extends JPanel {
 
     private static final ImageIcon CHECKED_ICON = new ImageIcon(
-	    CalendarEntry.class.getResource(IconsHome.getIconsHomePath()
-		    + "/checked.jpg"));
+	    CalendarEntry.class.getResource("/icons/checked.jpg"));
     private static ImageIcon NOT_CHECKED_ICON = new ImageIcon(
-	    CalendarEntry.class.getResource(IconsHome.getIconsHomePath()
-		    + "/unchecked.jpg"));
+	    CalendarEntry.class.getResource("/icons/unchecked.jpg"));
     private static final ImageIcon HOVER_CHECKED_ICON = new ImageIcon(
-	    CalendarEntry.class.getResource(IconsHome.getIconsHomePath()
-		    + "/hover_checked.jpg"));
+	    CalendarEntry.class.getResource("/icons/checked_hover.jpg"));
     private static ImageIcon HOVER_NOT_CHECKED_ICON = new ImageIcon(
-	    CalendarEntry.class.getResource(IconsHome.getIconsHomePath()
-		    + "/hover_unchecked.jpg"));
+	    CalendarEntry.class.getResource("/icons/unchecked_hover.jpg"));
 
     private final String calendarName;
     private final JButton selectButton;
