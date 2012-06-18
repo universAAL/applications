@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title class="translation">WHEREIS_TITLE</title>
+        <style type="text/css">
+            @import "/helpwhenoutside/dojoroot/dijit/themes/soria/soria.css";
+        </style>
+        <script type="text/javascript" src="/helpwhenoutside/dojoroot/dojo/dojo.js.uncompressed.js" djConfig = "parseOnLoad: true">
+        </script>
+        <script id="googleMapScript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=" type="text/javascript">
+        </script>
+
+		<script type="text/javascript" src="/helpwhenoutside/mapdata.js">
+        </script>
+		<script type="text/javascript" src="/helpwhenoutside/mapframe.js">
+        </script>
+
+		<script type="text/javascript" src="/helpwhenoutside/mapcontroller.js">
+        </script>
+
+        <style>
+            /* NOTE: for a full screen layout, must set body size equal to the viewport. */
+            html, body, #main {
+                height: 100%;
+                width: 100%; 
+                margin: 0;
+                padding: 0;
+
+            }
+
+        </style>
+		
+		<script type="text/javascript" src="/helpwhenoutside/maputil.js">
+		</script>
+        <script type="text/javascript" src="/helpwhenoutside/whereis.js">
+        </script>
+
+        <script type="text/javascript">
+            
+            dojo.require("dojo.parser");
+            dojo.require("dijit.form.Button");
+            dojo.require("dijit.Dialog");
+			dojo.require("dijit.Tree");
+            dojo.require("dijit.form.TextBox");
+            dojo.require("dijit.form.ComboBox");
+            dojo.require("dijit.layout.ContentPane");
+            dojo.require("dijit.layout.BorderContainer");
+            dojo.require("dijit.layout.AccordionContainer");
+            dojo.require("dojo.data.ItemFileWriteStore");
+            dojo.addOnLoad(function(){
+                mapViewer = new org.persona.service.helpwhenoutside.Whereis();
+            });
+        </script>
+    </head>
+    <body class="soria" onunload="GUnload()">
+        <div id="main" dojoType="dijit.layout.BorderContainer" design="headline" splitter="true">
+            <div dojoType="dijit.layout.ContentPane" region="top" style="background-color:rgb(173,216,230)">
+                <h1 class="translation">HELP_WHEN_OUTSIDE_TITLE</h1>
+                <img src="/helpwhenoutside/universaal-logo.png" alt="PERSONA logo" width="230" height="59" style="float:right; margin:-81px 0px 0px 0px; height : 81px" /> 
+            </div>
+            <!-- top ContentPane -->
+            <div dojoType="dijit.layout.AccordionContainer" id="operationsContainer" duration="200" splitter="true" style="margin-right: 3px; width: 240px; height: 100%; overflow: hidden" region="left">
+                <div dojoType="dijit.layout.AccordionPane" selected="true" title="OPERATIONS_ACC_PANE" id="operationsPane">
+                    <div dojoType="dijit.form.Button" id="showSafeAreaButton">
+                        <img src="/helpwhenoutside/icons/safearea.png" height="48" width="48" />
+						<span id="showSafeAreaLabel" style="font-size:medium;" class="translation">SHOW_SAFE_AREA</span>
+                    </div>
+                    <!-- drawSafeAreaButton -->
+                    <div dojoType="dijit.form.Button" id="showHomeAreaButton">
+                        <img src="/helpwhenoutside/icons/homearea.png" height="48" width="48" />
+						<span id="showHomeAreaLabel" style="font-size:medium;" class="translation">SHOW_HOME_AREA</span>
+                    </div>
+                    <!-- drawHomeAreaButton -->
+
+                    <div dojoType="dijit.form.Button" id="showAgendaButton">
+                        <img src="/helpwhenoutside/icons/agenda_48.png" height="48" width="48" />
+						<span id="showAgendaLabel" style="font-size:medium;" class="translation">SHOW_AGENDA_EVENTS</span>
+                    </div>
+                    <!-- showAgendaButton -->
+                    <div dojoType="dijit.form.Button" id="showHistoryButton">
+                        <img src="/helpwhenoutside/icons/history_48.png" height="48" width="48" />
+						<span id="showHistoryLabel" style="font-size:medium;" class="translation">SHOW_HISTORY</span>
+                    </div>
+                    <!-- showHistoryButton -->
+                    <div dojoType="dijit.form.Button" id="resetTrailsButton" > 
+                        <img src="/helpwhenoutside/icons/resettrails_48.png" height="48" width="48" />
+						<span id="resetTrailsLabel" style="font-size:medium;" class="translation">RESET_TRAILS</span>
+                    </div>
+                    <!-- resetTrailsButton -->
+				
+
+                </div>
+                <!-- operationsPane -->
+                <div dojoType="dijit.layout.AccordionPane" selected="true" title="GLOBAL_OPTIONS_ACC_PANE" id="globalOptionsPane">
+                    <div id="globalOptions">
+                        <label for="changeThemeComboBox">
+                            <p>
+                                <h3 class="translation">CHANGE_THEME</h3>
+                            </p>
+                        </label>
+                        <select name="changeThemeComboBox" id="changeThemeComboBox" dojoType="dijit.form.ComboBox">
+                            <option>soria</option>
+							<option>tundra</option>
+                            <option>nihilo</option>
+                            <option>a11y</option>
+                        </select>
+						
+                    </div>
+                    <!-- poiOptions -->
+                </div>
+                <!-- globalOptions-->
+            </div>
+            <!-- Accordion Container left-->
+            <div dojoType="dijit.layout.ContentPane" region="center" style="height: 90%" id="centerMap">
+            </div>
+            <!-- ContentPane center-->
+            <div dojoType="dijit.layout.AccordionContainer" duration="200" splitter="true" style="width: 200px; height: 100%" region="right" id = "toolOptionsContainer">
+                <div dojoType="dijit.layout.AccordionPane" selected="true" title="INFORMATION_ACC_PANE" id="informationPane" >
+                	<div id="agendaEvents">	
+                	</div>
+                	<div id="historyEvents">	
+                	</div>
+					
+                </div>
+                <!-- Accordion Pane Information-->
+            </div>
+            <!-- Accordion Container right-->
+            </body>
+        </html>

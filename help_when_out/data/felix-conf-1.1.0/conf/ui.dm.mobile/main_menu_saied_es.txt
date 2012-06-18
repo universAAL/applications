@@ -1,0 +1,2 @@
+/Panic Button|http://www.tsb.upv.es|http://ontology.universAAL.org/hwo.owl#Panic
+/Guide Me|http://www.tsb.upv.es|http://ontology.universAAL.org/hwo.owl#GuideMe

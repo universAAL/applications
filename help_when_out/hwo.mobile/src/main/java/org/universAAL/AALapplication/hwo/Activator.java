@@ -1,120 +1,116 @@
 package org.universAAL.AALapplication.hwo;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+
+// TODO Create a listener to the context bus that receives events of management of POIs, safe Area, Home Location and alerts.
+
+
 import java.util.Properties;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceEvent;
-import org.osgi.framework.ServiceListener;
-import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceEvent; 
+import org.osgi.framework.ServiceListener; 
+import org.osgi.framework.ServiceReference; 
+
+import org.universAAL.android.felix.IContextStub;  
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.service.DefaultServiceCaller;
+import org.universAAL.ontology.profile.User;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.android.felix.IContextStub;
-import org.universAAL.middleware.util.Constants;
 
-import android.content.Context;
+import android.content.Context; 
 
-public class Activator implements BundleActivator, ServiceListener {
-    public static BundleContext context = null;
-    public static SCallee scallee = null;
-    public static ISubscriber isubscriber = null;
-    public static OPublisher opublisher = null;
-    public static Context activityHandle=null;
 
-    public static final String PROPS_FILE = "hwo.mobile.properties";
-    private static File confHome = new File(new File(Constants
-	    .getSpaceConfRoot()), "hwo.mobile");
-    public static final String TEXT = "SMS.text";
+public class Activator implements BundleActivator,ServiceListener {
+	public static BundleContext osgiContext=null; 
+	public static ModuleContext context=null;
+	public static Context activityHandle=null; //This will allow us to use Android context functions and services.
+	
+	public static SCallee scallee=null;
+	public static UImanager uimanager =null;
+	public static WanderingDetector wanderingdetector; // This has to be put in the servlet
+	public static HwoConsumer hwoconsumer =null;
+	public static DefaultServiceCaller caller; 
+	
+	public static final String PROPS_FILE = "hwo.mobile.properties";
+	public static final String TEXT = "SMS.text";
     public static final String NUMBER = "SMS.number";
     public static final String SMSENABLE = "SMS.enabled";
-
     public static final String GPSTO = "TAKE.destination";
     protected static Properties properties = new Properties();
 
     public static final String COMMENTS = "This file stores persistence info for the HwO Mobile Module.";
+    
+    public boolean  SMSSENT =false;
 
-    private final static Logger log = LoggerFactory.getLogger(Activator.class);
-
-    public void start(BundleContext context) throws Exception {
-	log.info("Starting Help when Outside Mobile Module");
-	Activator.context = context;
-	properties=loadProperties();
-	scallee = new SCallee(context);
-	isubscriber = new ISubscriber(context);
-	opublisher = new OPublisher(context);
 	
-	String filter = "(objectclass=" + IContextStub.class.getName() + ")";
-	context.addServiceListener(this, filter);
-	ServiceReference references[] = context.getServiceReferences(null, filter);
+	
+	
+	
+	private final static Logger log = LoggerFactory.getLogger(Activator.class);
+	
+	public void start(BundleContext bcontext) throws Exception { //When Hwo bundle is started
+		
+		log.info("Starting Help when Outside Mobile Module");
+		// properties=loadProperties();
+		Activator.osgiContext=bcontext;
+		Activator.context = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { bcontext }); //Conversion from Osgicontext to UAAL context
+		uimanager =new UImanager(context);
+		
+		scallee=new SCallee(context);
+		log.debug("ACT: SCallee started");
+		hwoconsumer=new HwoConsumer(context);
+		log.debug("ACT:  hwoconsumer created");	
+		caller=new DefaultServiceCaller(context); //SMS
+		log.debug("ACT:  caller created");
+		DataStorage dataStorage = DataStorage.getInstance();
+		log.debug("ACT: dataStorage created");
+		wanderingdetector = new WanderingDetector(5,5); // This has to be put in the servlet
+		log.debug("ACT: wandering created");
+		
+		log.info("ACT: All classes initialized");
+		
+		String filter = "(objectclass=" + IContextStub.class.getName() + ")"; 
+		bcontext.addServiceListener(this, filter);  //this only works if this class implements ServiceListener from Android
+		
+		
+	ServiceReference references[] = osgiContext.getServiceReferences(null, filter);  
 	for (int i = 0; references != null && i < references.length; i++)
-		this.serviceChanged(new ServiceEvent(ServiceEvent.REGISTERED, references[i]));
-	log.info("Started Help when Outside Mobile Module");
-    }
+			this.serviceChanged(new ServiceEvent(ServiceEvent.REGISTERED, references[i]));
+		log.info("ACT: Started Help when Outside Mobile Module");
+	   	scallee.Location(null); //desactivado GPS mientras pruebas con SMS
+		log.debug(" ACT: GPS thread launched");
+		hwoconsumer.startWanderingThread();
+		log.debug ("ACT: check GPS thread launched  ");
+		
+		
+		
+	}
+	
 
-    public void stop(BundleContext arg0) throws Exception {
-	log.info("Stopping Help when Outside Mobile Module");
+public void stop(BundleContext arg0) throws Exception {
+	log.info("ACT: Stopping Help when Outside Mobile Module");
 	scallee.close();
-	isubscriber.close();
-	opublisher.close();
-	log.info("Stopped Help when Outside Mobile Module");
+	uimanager.close();
+		
+	log.info("ACT: Stopped Help when Outside Mobile Module");
     }
 
-    private static synchronized void setProperties(Properties prop) {
-	try {
-	    FileOutputStream fileOutputStream = new FileOutputStream(new File(
-		    confHome, PROPS_FILE));
-	    BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
-		    fileOutputStream);
-	    prop.store(bufferedOutputStream, COMMENTS);
-	    bufferedOutputStream.close();
-	    fileOutputStream.close();
-	} catch (Exception e) {
-	    log.error("Could not set properties file: {}", e);
-	}
-    }
-
-    private static synchronized Properties loadProperties() {
-	Properties prop = new Properties();
-	try {
-	    prop = new Properties();
-	    InputStream in = new FileInputStream(new File(confHome, PROPS_FILE));
-	    prop.load(in);
-	    in.close();
-	} catch (java.io.FileNotFoundException e) {
-	    log.warn("Properties file does not exist; generating default...");
-
-	    prop.setProperty(TEXT, "Panic button pressed");
-	    prop.setProperty(NUMBER, "123456789");
-	    prop.setProperty(SMSENABLE, "false");
-
-	    prop.setProperty(GPSTO, "Rue Wiertz 60, 1047 Bruxelles, Belgique");
-	    setProperties(prop);
-	} catch (Exception e) {
-	    log.error("Could not access properties file: {}", e);
-	}
-	return prop;
-    }
-
-    public static synchronized Properties getProperties() {
-	return properties;
-    }
-
-    public void serviceChanged(ServiceEvent event) {
+public void serviceChanged(ServiceEvent event) {
 	switch (event.getType()) {
 	case ServiceEvent.REGISTERED:
 	case ServiceEvent.MODIFIED:
-		IContextStub stub = (IContextStub) context.getService(event.getServiceReference());
-		activityHandle=stub.getAndroidContext();
+		IContextStub stub = (IContextStub) osgiContext.getService(event.getServiceReference());
+		activityHandle=stub.getAndroidContext(); //getting Android context.
 		break;
 	case ServiceEvent.UNREGISTERING:
 		activityHandle = null;
 		break;
 	}		
-    }
+   }  
+	
 
 }

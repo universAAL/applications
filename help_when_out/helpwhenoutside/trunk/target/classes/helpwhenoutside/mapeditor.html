@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title class="translation">MAPEDITOR_TITLE</title>
+        <style type="text/css">
+            @import "/helpwhenoutside/dojoroot/dijit/themes/soria/soria.css";
+        </style>
+        <script type="text/javascript" src="/helpwhenoutside/dojoroot/dojo/dojo.js.uncompressed.js" djConfig = "parseOnLoad: true">
+        </script>
+		
+        <script type="text/javascript" src="/helpwhenoutside/mapdata.js">
+        </script>
+        <script type="text/javascript" src="/helpwhenoutside/mapframe.js">
+        </script>
+        <script type="text/javascript" src="/helpwhenoutside/mapcontroller.js">
+        </script>
+		
+	    <script id="googleMapScript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=" type="text/javascript">
+        </script>
+
+		
+        <style>
+            /* NOTE: for a full screen layout, must set body size equal to the viewport. */
+            html, body, #main {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            } 
+			.intervalButton {
+                background-image: url('/helpwhenoutside/icons/interval.png');
+                background-repeat: no-repeat;
+                width: 48px;
+                height: 48px;
+            }
+			.mapKeyButton {
+                background-image: url('/helpwhenoutside/icons/map.png');
+                background-repeat: no-repeat;
+                width: 48px;
+                height: 48px;
+            }
+			#personaLogo {
+				
+			}
+
+        </style>
+        <script type="text/javascript" src="/helpwhenoutside/maputil.js">
+        </script>
+        <script type="text/javascript" src="/helpwhenoutside/mapeditor.js">
+        </script>
+        <script type="text/javascript">
+            
+            dojo.require("dojo.parser");
+            dojo.require("dijit.form.Button");
+            dojo.require("dijit.Dialog");
+			dojo.require("dojo.string");
+            dojo.require("dijit.Tree");
+            dojo.require("dijit.form.TextBox");
+            dojo.require("dijit.form.ComboBox");
+            dojo.require("dijit.layout.ContentPane");
+            dojo.require("dijit.layout.BorderContainer");
+            dojo.require("dijit.layout.AccordionContainer");
+            dojo.require("dojo.data.ItemFileWriteStore");
+            dojo.require("dijit.form.NumberTextBox");
+            
+            dojo.addOnLoad(function(){
+                mapEditor = new org.persona.service.helpwhenoutside.MapEditor();
+            });
+        </script>
+    </head>
+    <body class="soria" onunload="GUnload()">
+        <div id="main" dojoType="dijit.layout.BorderContainer" design="headline" splitter="true">
+            <div dojoType="dijit.layout.ContentPane" region="top" style="background-color:rgb(173,216,230)">
+                <h1 class="translation">MAPEDITOR_H1</h1>
+<img src="/helpwhenoutside/universaal-logo.png" alt="PERSONA logo" width="230" height="59" style="float:right; margin:-81px 0px 0px 0px; height : 81px" /> 
+            </div><!-- top ContentPane -->
+            <div dojoType="dijit.Dialog" id="addPOIDialog" title="ADD_POINT_OF_INTEREST_DIALOG">
+                <table>
+                    <tr>
+                        <td>
+                            <label for="name" class="translation">ENTER_POI_NAME</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" name="poiName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button dojoType=dijit.form.Button type="submit" class="translation">OK</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- addPoiDialog -->
+            <div dojoType="dijit.layout.AccordionContainer" duration="200" splitter="true" style="margin-right: 3px; width: 240px; height: 100%; overflow: hidden" id="operationsContainer" region="left">
+                <div dojoType="dijit.layout.AccordionPane" selected="true" title="OPERATIONS_ACC_PANE" id="operationsPane">
+                    <div dojoType="dijit.form.Button" id="drawSafeAreaButton">
+                        <img src="/helpwhenoutside/icons/safearea.png" height="48" width="48" /><span style="font-size:medium;" class="translation">DRAW_SAFE_AREA</span>
+                    </div>
+                    <!-- drawSafeAreaButton -->
+				    <div dojoType="dijit.form.Button" id="drawHomeAreaButton">
+                        <img src="/helpwhenoutside/icons/homearea.png" height="48" width="48" /><span style="font-size:medium;" class="translation">DRAW_HOME_AREA</span>
+                    </div>
+                    <!-- drawHomeAreaButton -->
+                    <div dojoType="dijit.form.Button" id="addPOIButton">
+                        <img src="/helpwhenoutside/icons/poi.png" height="58" width="48" /><span style="font-size:medium" class="translation">ADD_EDIT_POI</span>
+                    </div>
+                    <!-- addPoiButton -->
+                    <div dojoType="dijit.form.Button" id="setHomePositionButton">
+                        <img src="/helpwhenoutside/icons/home_48.png" height="48" width="48" /><span style="font-size:medium" class="translation">SET_HOME_LOCATION</span>
+                    </div>
+                    <!-- setHomePositionpButton -->
+                    <div dojoType="dijit.form.Button" id="clearMapButton">
+                        <img src="/helpwhenoutside/icons/cancel_cc_48.png" height="48" width="48" /><span style="font-size:medium" class="translation">CLEAR_MAP</span>
+                    </div>
+                    <!-- clearMapButton -->
+                    <div dojoType="dijit.form.DropDownButton" id="historyIntervalButton" iconClass="intervalButton">
+                        <span style="font-size:medium" class="translation">HISTORY_INTERVAL</span>
+                        <div dojoType="dijit.TooltipDialog">
+                            <label for="historyIntervalTextBox" class="translation">INTERVAL_IN_SEC</label>
+                            <input dojoType="dijit.form.NumberTextBox" id="historyIntervalTextBox" name="historyIntervalTextBox" invalidMessage="Invalid amount. Please specify an integer">
+                            <br/>
+                            <button dojoType="dijit.form.Button" id="historyDialogOkButton" type="submit" class="translation">
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                    <!-- historyIntervalButton -->
+                    <div dojoType="dijit.form.DropDownButton" id="mapKeyButton" iconClass="mapKeyButton">
+                        <span style="font-size:medium" class="translation">MAP_PROVIDER_KEY</span>
+                        <div dojoType="dijit.TooltipDialog">
+                            <label for="mapKeyTextBox" class="translation">PASTE_MAP_KEY</label>
+                            <input dojoType="dijit.form.TextBox" id="mapKeyTextBox" name="mapKeyTextBox">
+                            <br/>
+                            <button dojoType="dijit.form.Button" id="mapKeyOkButton" type="submit" class="translation">
+                                OK
+                            </button>
+                        </div>
+                    </div>
+                    <!-- mapKeyButton -->
+                </div>
+                <!-- operationsPane -->
+                <div dojoType="dijit.layout.AccordionPane" selected="true" title="GLOBAL_OPTIONS_ACC_PANE" id="globalOptionsPane">
+                    <div id="globalOptions">
+                        <label for="changeThemeComboBox">
+                            <p>
+                                <h3 class="translation">CHANGE_THEME</h3>
+                            </p>
+                        </label>
+                        <select name="changeThemeComboBox" id="changeThemeComboBox" dojoType="dijit.form.ComboBox">
+                            <option>soria</option>
+							<option>tundra</option>
+                            <option>nihilo</option>
+                            <option>a11y</option>
+                        </select>	
+                    </div>
+                    <!-- poiOptions -->
+                </div>
+                <!-- globalOptions-->
+            </div>
+            <!-- Accordion Container left-->
+            <div dojoType="dijit.layout.ContentPane" region="center" style="height: 90%" id="centerMap">
+            </div>
+            <!-- ContentPane center-->
+            <div dojoType="dijit.layout.AccordionContainer" duration="200" splitter="true" style="width: 160px; height: 100%" region="right" id = "toolOptionsContainer">
+                <div dojoType="dijit.layout.AccordionPane" selected="true" title="TOOL_OPTIONS" id="toolOptionsPane">
+                    <div id="poiOptions">
+                        <p>
+                            <h3 style='margin-left: 2px' class="translation">POI_LIST_H3</h3>
+                        </p>
+                        <div>
+                        	<ul id="markersList">
+                        	</ul>
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <!-- poiOptions -->
+                </div>
+                <!-- toolOptionsPane-->
+                <div dojoType="dijit.layout.AccordionPane" selected="true" title="INFORMATION_ACC_PANE" id="informationPane">
+                </div id="commonInfoTools">
+               	<!-- Accordion Pane Information-->
+            </div>
+            <!-- Accordion Container right-->
+            </body>
+        </html>
