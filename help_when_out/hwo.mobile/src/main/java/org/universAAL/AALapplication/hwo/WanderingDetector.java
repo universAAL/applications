@@ -34,7 +34,7 @@ protected class RoutePoint {
 	private int routeIntersections;
 	private int lastSegmentIntersectionThreshold; 
 	private int  routeIntersectionsThreshold;
-	private final long POSITION_SAMPLING_MSECS=1000;  // time between checks on the user condition (in miliseconds)
+	private final long POSITION_SAMPLING_MSECS=60000;  // time between checks on the user condition (in miliseconds)
 	private final long ALERTS_OFF=1800000; // if an alert is sent, we deactivate it for this long 
 	
 	
