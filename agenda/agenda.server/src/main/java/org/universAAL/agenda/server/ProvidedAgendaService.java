@@ -32,7 +32,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	    + "AgendaService";
 
     // define the uri for each service provided
-    private static final int PROVIDED_SERVICES = 18; // The number of services
+    private static final int PROVIDED_SERVICES = 19; // The number of services
     // provided by this class
     static final String SERVICE_GET_CALENDARS = AGENDA_SERVER_NAMESPACE
 	    + "getControlledCalendars1";
@@ -72,6 +72,8 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	    + "startUserInterface18";
     static final String SERVICE_GET_CALENDAR_BY_OWNER = AGENDA_SERVER_NAMESPACE
 	    + "getCalendarByOwner19";
+    static final String SERVICE_GET_CALENDAR_OWNER_NAME = AGENDA_SERVER_NAMESPACE
+    + "getCalendarOwnerName20";
 
     // define the uri of every input, which is needed from the service
     // e.g. we have to call serviceX with one or more arguments,
@@ -109,10 +111,17 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	    + "oCalendarEvent";
     static final String OUTPUT_EVENT_CATEGORIES = AGENDA_SERVER_NAMESPACE
 	    + "oEventCategories";
+    
+    //NEW
+    static final String OUTPUT_CALENDAR_OWNER_NAME = AGENDA_SERVER_NAMESPACE
+    + "oCalendarOwnerName";
 
     static final ServiceProfile[] profiles = new ServiceProfile[PROVIDED_SERVICES];
     private static Hashtable serverAgendaRestrictions = new Hashtable();
-
+   
+    private ProvidedAgendaService(String uri) {
+	super(uri);
+    }
     static {
 	OntologyManagement.getInstance().register(
 		new SimpleOntology(MY_URI, CalendarAgenda.MY_URI,
@@ -124,7 +133,8 @@ public class ProvidedAgendaService extends CalendarAgenda {
 			    }
 			}));
 
-	// add restriction about what the service controls
+	// add restriction about what the service controls; 
+	//inherit restrictions from parent class
 	addRestriction((MergedRestriction) CalendarAgenda
 		.getClassRestrictionsOnProperty(CalendarAgenda.MY_URI,
 			CalendarAgenda.PROP_CONTROLS).copy(),
@@ -132,7 +142,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 		serverAgendaRestrictions);
 
 	/**********************************************************************
-	 * INPUT(S), OUTPUT(S), RESTRICTION(S), PROPERTY_PATH(S) DECLERATIONS *
+	 * INPUT(S), OUTPUT(S), RESTRICTION(S), PROPERTY_PATH(S) DECLARATIONS *
 	 **********************************************************************/
 	ProcessInput inCalendar = new ProcessInput(INPUT_CALENDAR);
 	inCalendar.setParameterType(Calendar.MY_URI);// (Calendar.MY_URI);
@@ -167,7 +177,6 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	// service has an output: the list of controlled calendars
 	ProcessOutput outCalList = new ProcessOutput(
 		OUTPUT_CONTROLLED_CALENDARS);
-
 	// output has a type: Calendar
 	outCalList.setParameterType(Calendar.MY_URI);
 	outCalList.setCardinality(0, 1);
@@ -185,7 +194,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	ProcessOutput outEvent = new ProcessOutput(OUTPUT_CALENDAR_EVENT);
 	outEvent.setParameterType(Event.MY_URI);
 	outEvent.setCardinality(1, 1);
-
+	
 	ProcessOutput outEventIdList = new ProcessOutput(
 		OUTPUT_CALENDAR_EVENT_ID_LIST);
 	outEventIdList.setParameterType(TypeMapper
@@ -510,11 +519,20 @@ public class ProvidedAgendaService extends CalendarAgenda {
 
 	// initialize the service profile
 	profiles[17] = getCalendarsByOwner.myProfile;
-	System.out.println("Profiles loaded...");
 
+	/***************************************************************************
+	 * service 19: String getCalendarOwnerName (String calendarName)
+	 ***************************************************************************/
+	ProvidedAgendaService getCalendarOwnerName = new ProvidedAgendaService(
+		SERVICE_GET_CALENDAR_OWNER_NAME);
+	getCalendarOwnerName.addFilteringInput(INPUT_CALENDAR_NAME, TypeMapper
+		.getDatatypeURI(String.class), 1, 1, ppCalendarName
+		.getThePath());
+	
+	getCalendarOwnerName.addOutput(OUTPUT_CALENDAR_OWNER_NAME, TypeMapper.getDatatypeURI(String.class), 1, 1,
+		ppCalendar.getThePath());
+	profiles[18] = getCalendarOwnerName.myProfile; // initialize the service
+	// profile
     }
-
-    private ProvidedAgendaService(String uri) {
-	super(uri);
-    }
+   
 }

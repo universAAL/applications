@@ -45,6 +45,9 @@ import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
 /**
+ * Receives service calls for Agenda server and obtaines requested informations
+ * from Agenda database.
+ * 
  * @author kagnantis
  * @author eandgrg
  * 
@@ -56,12 +59,12 @@ public class AgendaProvider extends ServiceCallee implements
      */
     private static ModuleContext mcontext;
 
-     static final File confHome = new File(new BundleConfigHome("agenda")
+    static final File confHome = new File(new BundleConfigHome("agenda")
 	    .getAbsolutePath());
     // static final String CAL_URI_PREFIX =
     // ProvidedAgendaService.AGENDA_SERVER_NAMESPACE + "controlledAgenda";
     // //TODO: change name
-   
+
     static final String LOCATION_URI_PREFIX = "urn:aal_space:everywhere#"; //$NON-NLS-1$
 
     private static final ServiceResponse invalidInput = new ServiceResponse(
@@ -88,9 +91,6 @@ public class AgendaProvider extends ServiceCallee implements
 
     private static final ServiceResponse failure = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
-
-    static final AssistedPerson testUser = new AssistedPerson(
-	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied"); //$NON-NLS-1$
 
     static {
 	invalidInput.addOutput(new ProcessOutput(
@@ -142,14 +142,13 @@ public class AgendaProvider extends ServiceCallee implements
 
     /**  */
     private ContextPublisher cp;
-    
-    
+
     /**
      * Helper method to construct the ontological declaration of context events
      * published by AgendaProvider.
      */
-    private static ContextEventPattern[] getProvidedContextEvents(){
-	
+    private static ContextEventPattern[] getProvidedContextEvents() {
+
 	ContextEventPattern cep1 = new ContextEventPattern();
 	ContextEventPattern cep2 = new ContextEventPattern();
 	cep1.addRestriction(MergedRestriction.getAllValuesRestriction(
@@ -166,8 +165,8 @@ public class AgendaProvider extends ServiceCallee implements
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public AgendaProvider(ModuleContext moduleContext) throws FileNotFoundException,
-	    IOException {
+    public AgendaProvider(ModuleContext moduleContext)
+	    throws FileNotFoundException, IOException {
 	super(moduleContext, ProvidedAgendaService.profiles);
 	mcontext = moduleContext;
 	// prepare for context publishing
@@ -175,8 +174,8 @@ public class AgendaProvider extends ServiceCallee implements
 		ProvidedAgendaService.AGENDA_SERVER_NAMESPACE
 			+ "AgendaContextProvider"); //$NON-NLS-1$
 	info.setType(ContextProviderType.controller);
-	
-	//FIXME definirati
+
+	// define ContextEventPattern of provided context events
 	info.setProvidedEvents(getProvidedContextEvents());
 	cp = new DefaultContextPublisher(mcontext, info);
 
@@ -191,7 +190,8 @@ public class AgendaProvider extends ServiceCallee implements
 	prop.load(in);
 
 	// start the server
-	theServer = new AgendaDB(moduleContext,
+	theServer = new AgendaDB(
+		moduleContext,
 		prop.getProperty("database"), prop.getProperty("username"), prop.getProperty("password")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	theScheduler = new Scheduler(theServer, this, mcontext);
     }
@@ -219,18 +219,34 @@ public class AgendaProvider extends ServiceCallee implements
 	    return null;
 
 	String operation = call.getProcessURI();
+
 	if (operation == null)
 	    return null;
 
 	LogUtils.logInfo(mcontext, this.getClass(), "handleCall",
-		new Object[] { "AgendaProvider received service call." }, null);
+		new Object[] { "AgendaProvider received service call. operation: " +operation}, null);
 
 	if (operation.startsWith(ProvidedAgendaService.SERVICE_GET_CALENDARS)) {
+	    LogUtils
+	    .logInfo(
+		    mcontext,
+		    this.getClass(),
+		    "handleCall",
+		    new Object[] { "Requested service: Get all calendars" },
+		    null);
 	    return getControlledCalendars();
 	}
 
+	
 	if (operation
 		.startsWith(ProvidedAgendaService.SERVICE_GET_ALL_CATEGORIES)) {
+	    LogUtils
+	    .logInfo(
+		    mcontext,
+		    this.getClass(),
+		    "handleCall",
+		    new Object[] { "Requested service: Get all categories" },
+		    null);
 	    return getAllEventCategories();
 	}
 
@@ -249,6 +265,22 @@ public class AgendaProvider extends ServiceCallee implements
 		.getInputValue(ProvidedAgendaService.INPUT_CALENDAR_NAME);
 	Object inCalendarOwner = call
 		.getInputValue(ProvidedAgendaService.INPUT_CALENDAR_OWNER);
+	
+
+	//TODO new
+	if (operation.startsWith(ProvidedAgendaService.SERVICE_GET_CALENDAR_OWNER_NAME)) {
+	    if (inCalendarName == null)
+		return null;
+	    LogUtils
+	    .logInfo(
+		    mcontext,
+		    this.getClass(),
+		    "handleCall",
+		    new Object[] { "Requested service: Get Calendar owner name for calendar name: " +inCalendarName},
+		    null);
+	       
+	    return getCalendarOwnerName((String) inCalendarName);
+	}
 
 	// 'get calendars of a user' service
 	if (operation
@@ -542,15 +574,17 @@ public class AgendaProvider extends ServiceCallee implements
     /**
      * Cancel reminder
      * 
-     * @param calendarURI calendar URI
-     * @param eventID event ID
+     * @param calendarURI
+     *            calendar URI
+     * @param eventID
+     *            event ID
      * @return status if it is canceled or not
      */
     public boolean cancelReminder(String calendarURI, int eventID) {
 	if (theServer.cancelReminder(calendarURI, eventID, AgendaDB.COMMIT)) {
 	    LogUtils.logInfo(mcontext, this.getClass(), "cancelReminder",
-		    new Object[] { "Cancel reminder: " +eventID },null);
-	    
+		    new Object[] { "Cancel reminder: " + eventID }, null);
+
 	    theScheduler.removeReminderTask(eventID);
 	    return true;
 	}
@@ -571,7 +605,7 @@ public class AgendaProvider extends ServiceCallee implements
 	    Calendar calendar = theServer.getCalendarByNameAndOwner(
 		    calendarName, owner, AgendaDB.COMMIT);
 	    if (calendar != null) {
-//		System.out.println("Calendar URI: " + calendar.getURI()); //$NON-NLS-1$
+		//		System.out.println("Calendar URI: " + calendar.getURI()); //$NON-NLS-1$
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		sr.addOutput(new ProcessOutput(
 			ProvidedAgendaService.OUTPUT_CALENDAR, calendar));
@@ -774,7 +808,7 @@ public class AgendaProvider extends ServiceCallee implements
 
     /**
      * Retrieves a {@link List} of the {@link Calendar}s which are controlled by
-     * the server to <code>ownerName</code> and creates a.
+     * the server to <code>ownerName</code> and creates a @link ServiceResponse}.
      * 
      * @return a service response to the specific service
      *         {@link ServiceResponse}
@@ -787,6 +821,8 @@ public class AgendaProvider extends ServiceCallee implements
 			.getCalendarsWithInfo()));
 	return sr;
     }
+    
+    
 
     /**
      * Retrieves a {@link List} of the {@link Calendar}s that belong to the
@@ -822,6 +858,26 @@ public class AgendaProvider extends ServiceCallee implements
 	return sr;
     }
 
+    //TODO new
+    /**
+     * Retrieves a owner username for a given calendar name
+     * 
+     * @return a service response to the specific service
+     */
+    private ServiceResponse getCalendarOwnerName( String calendarName) {
+	
+	    String ownerName = theServer.getCalendarOwnerName(
+		    calendarName);
+	    if (ownerName != null) {
+		
+		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
+		sr.addOutput(new ProcessOutput(
+			ProvidedAgendaService.OUTPUT_CALENDAR_OWNER_NAME, ownerName));
+		return sr;
+	    }
+	    else return new ServiceResponse(CallStatus.serviceSpecificFailure);
+
+    }
     /**
      * Updates the event with the specified <code>eventId</code>, stored in the.
      * 
@@ -1064,10 +1120,18 @@ public class AgendaProvider extends ServiceCallee implements
 	// "Reminder will be triggered again");
 	// }
 
-	// TODO: find out why the exception is thrown
+	//see in DB who should receive this reminder (who is the owner)
+	String calOwnerName = theServer.getCalendarOwnerName(e.getParentCalendar().toString());
+	LogUtils
+	    .logInfo(
+		    mcontext,
+		    this.getClass(),
+		    "reminderTime",
+		    new Object[] { "Reminder triggered for user: "+calOwnerName+" for calendar: "+e.getParentCalendar().toString()+" with message: "+message },
+		    null);
 	try {
 	    WrapperActivator.getMyUICaller().showReminderConfirmationDialog(
-		    message, c.getURI(), e.getEventID(), testUser);
+		    message, c.getURI(), e.getEventID(), new User (Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX+ calOwnerName));//TESTUSER WAS HERE
 	} catch (Exception e1) {
 	    LogUtils
 		    .logError(
@@ -1095,14 +1159,14 @@ public class AgendaProvider extends ServiceCallee implements
 	long startTime = System.currentTimeMillis();
 	cp.publish(ce);
 	LogUtils
-	.logInfo(
-		mcontext,
-		this.getClass(),
-		"startEventTime",
-		new Object[] {
-			"Context Event sent: \'calendar event started\' with startTime:",
-			startTime }, null);
-	
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"startEventTime",
+			new Object[] {
+				"Context Event sent: \'calendar event started\' with startTime:",
+				startTime }, null);
+
 	// JOptionPane.showMessageDialog(null,
 	// "AgendaProvider: publishing a context event (event started)");
     }
@@ -1122,13 +1186,13 @@ public class AgendaProvider extends ServiceCallee implements
 	long startTime = System.currentTimeMillis();
 	cp.publish(ce);
 	LogUtils
-	.logInfo(
-		mcontext,
-		this.getClass(),
-		"endEventTime",
-		new Object[] {
-			"Context Event sent: \'calendar event ended\' with startTime:",
-			startTime }, null);
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"endEventTime",
+			new Object[] {
+				"Context Event sent: \'calendar event ended\' with startTime:",
+				startTime }, null);
 	// JOptionPane.showMessageDialog(null,
 	// "AgendaProvider: publishing a context event (event ended)");
     }
@@ -1148,7 +1212,8 @@ public class AgendaProvider extends ServiceCallee implements
 	area.setEditable(true);
 	JScrollPane scrollpane = new JScrollPane(area);
 
-	Object[] array = { new JLabel(Messages.getString("AgendaProvider.EnterSomeText")), //$NON-NLS-1$
+	Object[] array = {
+		new JLabel(Messages.getString("AgendaProvider.EnterSomeText")), //$NON-NLS-1$
 		scrollpane, };
 	JOptionPane.showConfirmDialog(null, array, Messages
 		.getString("AgendaProvider.Reminder"), JOptionPane.OK_OPTION); //$NON-NLS-1$
