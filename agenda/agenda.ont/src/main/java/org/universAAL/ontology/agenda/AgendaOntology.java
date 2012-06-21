@@ -57,7 +57,7 @@ public final class AgendaOntology extends Ontology {
 	addImport(LocationOntology.NAMESPACE);
 	addImport(ProfileOntology.NAMESPACE);
 
-	OntClassInfoSetup oci;
+	OntClassInfoSetup oci, oci1;
 
 	// ******* Enumeration classes of the ontology ******* //
 
@@ -181,17 +181,15 @@ public final class AgendaOntology extends Ontology {
 			EventDetails.PROP_HAS_VALID_PERIOD,
 			TimeInterval.MY_URI, 0, 1));
 	
-	// load ExternalCalendar
-	oci = createNewOntClassInfo(ExternalCalendar.MY_URI, factory, 7);
-	oci.setResourceComment("The class of external calendar");
-	oci.setResourceLabel("ExternalCalendar");
-	oci.addSuperClass(ManagedIndividual.MY_URI);
+	
+	
 	
 	// load Calendar
-	oci = createNewOntClassInfo(Calendar.MY_URI, factory, 0);
-	oci.setResourceComment("The class of a calendar");
-	oci.setResourceLabel("Calendar");
-	oci.addSuperClass(ManagedIndividual.MY_URI);
+	oci1 = createNewOntClassInfo(Calendar.MY_URI, factory, 0);
+	oci1.setResourceComment("The class of a calendar");
+	oci1.setResourceLabel("Calendar");
+	oci1.addSuperClass(ManagedIndividual.MY_URI);
+	//continue later
 	
 	// load Event
 	oci = createNewOntClassInfo(Event.MY_URI, factory, 2);
@@ -233,18 +231,24 @@ public final class AgendaOntology extends Ontology {
 			Event.PROP_HAS_PARENT_CALENDAR, Calendar.MY_URI, 0, 1));
 	
 	//continue defining Calendar after it has been loaded before it is used in Event
+	//Event is used here so it should be defined before
+	oci1.addRestriction(MergedRestriction.getAllValuesRestriction(
+		Calendar.PROP_HAS_EVENT, Event.MY_URI));
+	oci1.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			Calendar.PROP_HAS_OWNER, User.MY_URI, 1, 1));
+	oci1.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(Calendar.PROP_NAME,
+			TypeMapper.getDatatypeURI(String.class), 0, 1));	
+	
+	// load ExternalCalendar
+	oci = createNewOntClassInfo(ExternalCalendar.MY_URI, factory, 7);
+	oci.setResourceComment("The class of external calendar");
+	oci.setResourceLabel("ExternalCalendar");
+	oci.addSuperClass(ManagedIndividual.MY_URI);
 	oci.addObjectProperty(Calendar.PROP_HAS_EVENT).setFunctional();
 	oci.addObjectProperty(Calendar.PROP_HAS_OWNER).setFunctional();
 	oci.addDatatypeProperty(Calendar.PROP_NAME).setFunctional();
-	//Event is used here so it should be defined before
-	oci.addRestriction(MergedRestriction.getAllValuesRestriction(
-		Calendar.PROP_HAS_EVENT, Event.MY_URI));
-	oci.addRestriction(MergedRestriction
-		.getAllValuesRestrictionWithCardinality(
-			Calendar.PROP_HAS_OWNER, User.MY_URI, 1, 1));
-	oci.addRestriction(MergedRestriction
-		.getAllValuesRestrictionWithCardinality(Calendar.PROP_NAME,
-			TypeMapper.getDatatypeURI(String.class), 0, 1));	
 	
 	
 
