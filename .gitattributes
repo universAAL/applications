@@ -239,11 +239,11 @@ agenda/agenda.runner/runner/remoteDebug.bat -text
 agenda/agenda.runner/runner/run.bat -text
 agenda/agenda.server/LICENSE -text
 agenda/agenda.server/NOTICE -text
-agenda/agenda.server/agenda.server.PNG -text
-agenda/agenda.server/agenda.server.ucls -text
 agenda/agenda.server/backup/MyAgenda.java_old_with_extra_table -text
 agenda/agenda.server/backup/SimpleInputSubscriber.java_beforeUIBus -text
 agenda/agenda.server/backup/SimpleOutputPublisher.java_beforeUIBus -text
+agenda/agenda.server/documentation/agenda.server.PNG -text
+agenda/agenda.server/documentation/agenda.server.ucls -text
 agenda/agenda.server/pom.xml -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/AgendaProvider.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/Messages.java -text
@@ -265,9 +265,7 @@ agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendCo
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendEndEventTask.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendReminderTask.java -text
 agenda/agenda.server/src/main/java/org/universAAL/agenda/server/unit_impl/SendStartEventTask.java -text
-agenda/agenda.server/src/main/resources/DBquery.properties -text
 agenda/agenda.server/src/main/resources/README -text
-agenda/agenda.server/src/main/resources/credentials.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_da.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_de.properties -text
@@ -284,7 +282,6 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_es
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_nl.properties -text
-agenda/agenda.server/src/main/resources/universAALAgendaDBwithTestDataAndProcedures.sql -text
 agenda/agenda.server/src/test/resources/DBquery.prop -text
 agenda/agenda.server/src/test/resources/DBquery.properties -text
 food_shopping/README.txt -text
