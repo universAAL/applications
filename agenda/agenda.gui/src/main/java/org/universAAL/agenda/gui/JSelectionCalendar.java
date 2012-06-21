@@ -31,7 +31,6 @@ import javax.swing.border.BevelBorder;
 
 import org.universAAL.ontology.profile.User;
 import org.universAAL.agenda.gui.components.ImagePanel;
-import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.agenda.gui.util.ButtonCreator;
 import org.universAAL.agenda.gui.util.GuiConstants;
 
@@ -46,6 +45,7 @@ public class JSelectionCalendar implements IPersonaWindow {
     private JPanel calendarPanel;
     private Map<String, Calendar> nameToCalendar;
     private JCalendar myCalendar = null;
+    private User loggedInUser=null;
 
     final ImageIcon mediumIcon = new ImageIcon(getClass().getResource(
 	    "/icons/medium_button.jpeg")); //$NON-NLS-1$
@@ -56,7 +56,8 @@ public class JSelectionCalendar implements IPersonaWindow {
     final ImageIcon bigPressedIcon = new ImageIcon(getClass().getResource(
 	    "/icons/big_button_pressed.jpeg")); //$NON-NLS-1$
 
-    public JSelectionCalendar(CalendarGUI parent) {
+    public JSelectionCalendar(CalendarGUI parent, User loggedInUser) {
+	this.loggedInUser=loggedInUser;
 	this.parent = parent;
 	this.calendarEntryList = new ArrayList<CalendarEntry>();
 	this.calendarPanel = new JPanel();
@@ -371,7 +372,7 @@ public class JSelectionCalendar implements IPersonaWindow {
     private void updateCalendarsInScreen() {
 
 	// get not all calendars, but the user's ones
-	List<Calendar> allCalendars = getCalendarsByOwner(Activator.testUser);
+	List<Calendar> allCalendars = getCalendarsByOwner(loggedInUser);
 	int calNo = allCalendars.size();
 	int minCalPositions = 7; // gui appearance issue
 	GridLayout g = new GridLayout((calNo + 1 > minCalPositions) ? calNo
@@ -494,7 +495,7 @@ public class JSelectionCalendar implements IPersonaWindow {
 		public void actionPerformed(ActionEvent e) {
 		    if (hasValidName()) {
 			saveNewCalendar(getCandidateCalendarName(),
-				Activator.testUser);
+				loggedInUser);
 			calendarName.setText(""); // reset text //$NON-NLS-1$
 			emptyCalendarName();
 			dispose();

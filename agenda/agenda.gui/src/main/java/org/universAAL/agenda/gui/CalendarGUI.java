@@ -49,13 +49,15 @@ public class CalendarGUI extends JWindow {
     private JPanel rootScreen;
     private List<Calendar> activeCalendars;
     private DateInstance selectedDate = null;
+  
 
     /**
      * {@link ModuleContext}
      */
     private static ModuleContext mcontext;
 
-    public CalendarGUI(BundleContext bc, ModuleContext mcontext) {
+    public CalendarGUI(BundleContext bc, ModuleContext mcontext, User loggedInUser) {
+	
 	CalendarGUI.mcontext = mcontext;
 	try {
 	    agendaActivator = new org.universAAL.agenda.client.osgi.Activator();
@@ -93,7 +95,7 @@ public class CalendarGUI extends JWindow {
 	f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 	createScreen();
-	showInitialScreen();
+	showInitialScreen(loggedInUser);
 	f.setAlwaysOnTop(true);
 
 	LogUtils.logInfo(mcontext, this.getClass(), "constructor",
@@ -110,9 +112,9 @@ public class CalendarGUI extends JWindow {
 	f.setVisible(true);
     }
 
-    private void showInitialScreen() {
+    private void showInitialScreen(User loggedInUser) {
 	setVisible(false);
-	new JSelectionCalendar(this);
+	new JSelectionCalendar(this, loggedInUser);
 	setAlwaysOnTop(true);
 
 	setVisible(true);
@@ -221,14 +223,14 @@ public class CalendarGUI extends JWindow {
 	    return caller.getAllEventCategories();
     }
 
-    public List<Calendar> getAllCalendars() {
-	if (caller == null) {
-	    LogUtils.logInfo(mcontext, this.getClass(), "getAllCalendars",
-		    new Object[] { "Caller is not enabled" }, null);
-	    return new ArrayList<Calendar>(0);
-	} else
-	    return caller.getAllCalendars();
-    }
+//    public List<Calendar> getAllCalendars() {
+//	if (caller == null) {
+//	    LogUtils.logInfo(mcontext, this.getClass(), "getAllCalendars",
+//		    new Object[] { "Caller is not enabled" }, null);
+//	    return new ArrayList<Calendar>(0);
+//	} else
+//	    return caller.getAllCalendars();
+//    }
 
     public List<Calendar> getCalendarsByOwner(User owner) {
 	if (caller == null) {
