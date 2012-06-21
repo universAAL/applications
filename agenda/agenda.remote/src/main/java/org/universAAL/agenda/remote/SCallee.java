@@ -94,15 +94,22 @@ public class SCallee extends ServiceCallee {
 	    }
 	    log.info("Addressed call was: {} ",
 		    ProvidedService.SERVICE_START_UI);
-	    return showMainDialog(undefuser);
+	    
+	    System.err.println("remote scallee ln 98 -Showing initial dialog for user: "+undefuser);
+	    
+	    return showInitialDialog(undefuser);
 	}
 	log
 		.warn("Agenda remote could not execute the requested service: Unrecognized failure!");
 	return failure;
     }
 
-    public ServiceResponse showMainDialog(User user) {
-	Activator.uIProvider.showMainScreen(user);// TODO
+    public ServiceResponse showInitialDialog(User user) {
+	// before adding screen for selecting the User (Assisted Person) to edit
+	// events for
+	// Activator.uIProvider.showMainScreen(user);
+
+	Activator.uIProvider.showInitialScreen(user);
 	return new ServiceResponse(CallStatus.succeeded);
     }
 

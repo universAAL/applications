@@ -41,8 +41,8 @@ public class Activator implements BundleActivator {
      * {@link ModuleContext}
      */
     private static ModuleContext mcontext;
-    public static SCallee guicallee = null;
-    public static SCaller guicaller = null;
+    public static SCallee sCallee = null;
+    public static SCaller sCaller = null;
     public static UIProvider uIProvider = null;
     public static AgendaWebGUI webUI = null;
 
@@ -59,8 +59,8 @@ public class Activator implements BundleActivator {
 	context = arg0;
 	webUI = new AgendaWebGUI();
 	uIProvider = new UIProvider(mcontext, webUI);
-	guicaller = new SCaller(mcontext);
-	guicallee = new SCallee(mcontext);
+	sCaller = new SCaller(mcontext);
+	sCallee = new SCallee(mcontext);
 
 	LogUtils.logInfo(mcontext, this.getClass(), "start",
 		new Object[] { "agenda.remote bundle has started." }, null);
@@ -75,8 +75,8 @@ public class Activator implements BundleActivator {
     public void stop(BundleContext arg0) throws Exception {
 	webUI = null;
 	uIProvider = null;
-	guicaller = null;
-	guicallee = null;
+	sCaller = null;
+	sCallee = null;
 	context = null;
 
 	LogUtils.logInfo(mcontext, this.getClass(), "stop",

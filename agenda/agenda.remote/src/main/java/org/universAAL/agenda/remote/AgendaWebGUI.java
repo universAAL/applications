@@ -25,8 +25,10 @@ package org.universAAL.agenda.remote;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.universAAL.agenda.remote.osgi.Activator;
 import org.universAAL.middleware.owl.IntRestriction;
@@ -43,7 +45,6 @@ import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.middleware.ui.rdf.TextArea;
-import org.universAAL.middleware.util.Constants;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agendaEventSelection.FilterParams;
@@ -79,25 +80,84 @@ public class AgendaWebGUI {
     public static final String REF_REM_MIN = uAAL_INPUT_NAMESPACE + "remmin";
     public static final String REF_REM_HOUR = uAAL_INPUT_NAMESPACE + "remhour";
 
+    public static final String REF_USER = uAAL_INPUT_NAMESPACE + "user";
+
     public static HashMap<Integer, Event> map;
 
-    public Form getMainScreenMenuForm() {
+    // TODO new june 2012
+    public Form getSelectUserMenuForm() {
 	Form f = Form.newDialog(Messages
 		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 
 	new SimpleOutput(controls, null, null, Messages
-		.getString("AgendaWebGUI.1"));
+		.getString("AgendaWebGUI.SelectUser"));
 
-	List calendars = Activator.guicaller
-		.getCalendarsByOwnerService(new User(
-			Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied"));
+	List calendars = Activator.sCaller.getAllCalendarsService();
+
+	if (calendars.isEmpty()) {
+	    new SimpleOutput(controls, null, null, Messages
+		    .getString("AgendaWebGUI.NoCalendarsFound"));
+	} else {
+
+	    Set<String> ownerNames = new HashSet<String>();
+
+	    Iterator iter = calendars.iterator();
+	    for (; iter.hasNext();) {
+		Calendar cal = (Calendar) iter.next();
+
+		String tempOwner = Activator.sCaller
+			.getCalendarOwnerNameService(cal.getName());
+
+		if (tempOwner != null && !ownerNames.contains(tempOwner)) {
+		    ownerNames.add(tempOwner);
+
+		}
+
+	    }
+
+	    // Select u control
+	    Select1 userSelect = new Select1(controls,
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
+			    .getString("AgendaWebGUI.User"), (String) null),
+		    new PropertyPath(null, false, new String[] { REF_USER }),
+		    null, null);
+
+	    Iterator iter2 = ownerNames.iterator();
+	    while (iter2.hasNext()) {
+		String owner = (String) iter2.next();
+
+		userSelect.addChoiceItem(new ChoiceItem(owner, null, owner));
+	    }
+	    // Submit
+	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
+		    Messages.getString("AgendaWebGUI.EditEvents"),
+		    (String) null), "editEventsForUser");
+	}
+
+	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
+		.getString("AgendaWebGUI.Home"), (String) null), "home");
+
+	return f;
+
+    }
+
+    public Form getMainScreenMenuForm(User calOwner) {
+	Form f = Form.newDialog(Messages
+		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
+	Group controls = f.getIOControls();
+	Group submits = f.getSubmits();
+
+	new SimpleOutput(controls, null, null, Messages
+		.getString("AgendaWebGUI.SelectCalendar"));
+
+	List calendars = Activator.sCaller.getCalendarsByOwnerService(calOwner);
 	// TODO Change this in the future for multiuser
 
 	if (calendars.isEmpty()) {
 	    new SimpleOutput(controls, null, null, Messages
-		    .getString("AgendaWebGUI.2"));
+		    .getString("AgendaWebGUI.NoCalendarsFound"));
 	} else {
 	    java.util.Calendar now = java.util.Calendar.getInstance();
 	    java.util.Calendar nowrem = java.util.Calendar.getInstance();
@@ -110,7 +170,7 @@ public class AgendaWebGUI {
 	    Select1 calselect = new Select1(
 		    controls,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.4"), (String) null),
+			    .getString("AgendaWebGUI.Calendar"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_CALENDAR }),
 		    null, null);
 	    Iterator iter = calendars.iterator();
@@ -123,17 +183,17 @@ public class AgendaWebGUI {
 	    // Select Start Date control
 	    Group dategroup = new Group(controls,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.5"), (String) null), null,
-		    null, (Resource) null);
+			    .getString("AgendaWebGUI.Date"), (String) null),
+		    null, null, (Resource) null);
 	    Group invisiblegroupdate = new Group(dategroup, null, null, null,
 		    (Resource) null);// This group is for ordering inputs
 	    // vertically
 	    new SimpleOutput(invisiblegroupdate, null, null, Messages
-		    .getString("AgendaWebGUI.6"));
+		    .getString("AgendaWebGUI.SelectDate"));
 	    // Day
 	    new Range(invisiblegroupdate,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.7"), (String) null),
+			    .getString("AgendaWebGUI.Day"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_DAY }),
 		    MergedRestriction.getAllValuesRestriction(REF_DAY,
 			    new IntRestriction(1, true, 31, true)),
@@ -142,7 +202,7 @@ public class AgendaWebGUI {
 	    // Month
 	    new Range(invisiblegroupdate,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.8"), (String) null),
+			    .getString("AgendaWebGUI.Month"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_MONTH }),
 		    MergedRestriction.getAllValuesRestriction(REF_MONTH,
 			    new IntRestriction(1, true, 12, true)),
@@ -151,7 +211,7 @@ public class AgendaWebGUI {
 	    // Year
 	    Select1 yearselect = new Select1(invisiblegroupdate,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.9"), (String) null),
+			    .getString("AgendaWebGUI.Year"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_YEAR }),
 		    null, null);
 	    int currentYear = java.util.Calendar.getInstance().get(
@@ -162,7 +222,7 @@ public class AgendaWebGUI {
 	    }
 	    // Hour
 	    new Range(dategroup, new org.universAAL.middleware.ui.rdf.Label(
-		    Messages.getString("AgendaWebGUI.10"), (String) null),
+		    Messages.getString("AgendaWebGUI.Hour"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_HOUR }),
 		    MergedRestriction.getAllValuesRestriction(REF_HOUR,
 			    new IntRestriction(0, true, 23, true)),
@@ -170,7 +230,7 @@ public class AgendaWebGUI {
 
 	    // Minute
 	    new Range(dategroup, new org.universAAL.middleware.ui.rdf.Label(
-		    Messages.getString("AgendaWebGUI.11"), (String) null),
+		    Messages.getString("AgendaWebGUI.Minute"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_MIN }),
 		    MergedRestriction.getAllValuesRestriction(REF_MIN,
 			    new IntRestriction(0, true, 59, true)),
@@ -179,23 +239,23 @@ public class AgendaWebGUI {
 	    // Input Info Control
 	    Group infogroup = new Group(controls,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.12"), (String) null),
+			    .getString("AgendaWebGUI.Event"), (String) null),
 		    null, null, (Resource) null);
 	    Group invisiblegroup = new Group(infogroup, null, null, null,
 		    (Resource) null);// This group is for ordering inputs
 	    // vertically
 	    new SimpleOutput(invisiblegroup, null, null, Messages
-		    .getString("AgendaWebGUI.13"));
+		    .getString("AgendaWebGUI.Details"));
 	    new InputField(invisiblegroup, new Label(Messages
-		    .getString("AgendaWebGUI.14"), (String) null),
+		    .getString("AgendaWebGUI.Type"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_TYPE }),
 		    null, "");
 	    new InputField(invisiblegroup, new Label(Messages
-		    .getString("AgendaWebGUI.15"), (String) null),
+		    .getString("AgendaWebGUI.Place"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_PLACE }),
 		    null, "");
 	    new TextArea(invisiblegroup, new Label(Messages
-		    .getString("AgendaWebGUI.16"), (String) null),
+		    .getString("AgendaWebGUI.Desc"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_DESC }),
 		    null, "");
 
@@ -203,9 +263,10 @@ public class AgendaWebGUI {
 	    // Reminder Group controls START
 	    // ////////////////////////////////////
 
-	    Group remindergroup = new Group(controls,
+	    Group remindergroup = new Group(
+		    controls,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.17"), (String) null),
+			    .getString("AgendaWebGUI.Reminder"), (String) null),
 		    null, null, (Resource) null);
 	    Group invisiblegroup2 = new Group(remindergroup, null, null, null,
 		    (Resource) null);
@@ -213,17 +274,17 @@ public class AgendaWebGUI {
 	    // This group is for ordering inputs vertically
 	    // Message
 	    new SimpleOutput(invisiblegroup2, null, null, Messages
-		    .getString("AgendaWebGUI.18"));
+		    .getString("AgendaWebGUI.InfoToSetReminder"));
 	    new InputField(
 		    invisiblegroup2,
-		    new Label(Messages.getString("AgendaWebGUI.19"),
+		    new Label(Messages.getString("AgendaWebGUI.Message"),
 			    (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_MSG }),
 		    null, "");
 	    Group remdategroup = new Group(invisiblegroup2,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.5"), (String) null), null,
-		    null, (Resource) null);
+			    .getString("AgendaWebGUI.Date"), (String) null),
+		    null, null, (Resource) null);
 	    Group remdateinvisiblegroup = new Group(remdategroup, null, null,
 		    null, (Resource) null);// This group is for ordering inputs
 	    // vertically
@@ -231,7 +292,7 @@ public class AgendaWebGUI {
 	    new Range(
 		    remdateinvisiblegroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.7"), (String) null),
+			    .getString("AgendaWebGUI.Day"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_DAY }),
 		    MergedRestriction.getAllValuesRestriction(REF_REM_DAY,
 			    new IntRestriction(1, true, 31, true)),
@@ -240,7 +301,7 @@ public class AgendaWebGUI {
 	    // Month
 	    new Range(remdateinvisiblegroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.8"), (String) null),
+			    .getString("AgendaWebGUI.Month"), (String) null),
 		    new PropertyPath(null, false,
 			    new String[] { REF_REM_MONTH }), MergedRestriction
 			    .getAllValuesRestriction(REF_REM_MONTH,
@@ -251,7 +312,7 @@ public class AgendaWebGUI {
 	    Select1 remyearselect = new Select1(
 		    remdateinvisiblegroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.9"), (String) null),
+			    .getString("AgendaWebGUI.Year"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_YEAR }),
 		    null, null);
 	    for (int i = currentYear; i < currentYear + 15; i++) {
@@ -262,7 +323,7 @@ public class AgendaWebGUI {
 	    new Range(
 		    remdategroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.10"), (String) null),
+			    .getString("AgendaWebGUI.Hour"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_HOUR }),
 		    MergedRestriction.getAllValuesRestriction(REF_REM_HOUR,
 			    new IntRestriction(0, true, 23, true)),
@@ -272,7 +333,7 @@ public class AgendaWebGUI {
 	    new Range(
 		    remdategroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.11"), (String) null),
+			    .getString("AgendaWebGUI.Minute"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_MIN }),
 		    MergedRestriction.getAllValuesRestriction(REF_REM_MIN,
 			    new IntRestriction(0, true, 59, true)),
@@ -291,11 +352,12 @@ public class AgendaWebGUI {
 			.toString(i), (String) null, new Integer(i)));
 	    }
 	    // Repeat group -> Interval
-	    Select1 remintervalselect = new Select1(remrepeatgroup,
-		    new org.universAAL.middleware.ui.rdf.Label(
-			    "Interval(min) ", (String) null), new PropertyPath(
-			    null, false, new String[] { REF_REM_INT }), null,
-		    null);
+	    Select1 remintervalselect = new Select1(
+		    remrepeatgroup,
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
+			    .getString("AgendaWebGUI.Interval"), (String) null),
+		    new PropertyPath(null, false, new String[] { REF_REM_INT }),
+		    null, null);
 	    for (int i = 1; i <= 4; i++) {
 		remintervalselect.addChoiceItem(new ChoiceItem(Integer
 			.toString(i), (String) null, new Integer(i)));
@@ -311,20 +373,21 @@ public class AgendaWebGUI {
 
 	    // Submit
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
-		    Messages.getString("AgendaWebGUI.24"), (String) null),
-		    "Events");
+		    Messages.getString("AgendaWebGUI.GetEventList"),
+		    (String) null), "get_event_list");
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
-		    Messages.getString("AgendaWebGUI.20"), (String) null),
+		    Messages.getString("AgendaWebGUI.Submit"), (String) null),
 		    "submit");
 
 	    // new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 	    // Messages.getString("AgendaWebGUI.28"), (String) null),
 	    // "google");
+
 	    // FIXME removed when trasferring to UI Bus (no
 	    // InputEvent.uAAL_MAIN_MENU_REQUEST) related to: UIProvider line
 	    // 219
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
-		    Messages.getString("AgendaWebGUI.21"), (String) null),
+		    Messages.getString("AgendaWebGUI.Home"), (String) null),
 		    "home");
 	}
 	return f;
@@ -339,43 +402,43 @@ public class AgendaWebGUI {
 
 	new SimpleOutput(controls, null, null, msg);
 	new SimpleOutput(controls, null, null, Messages
-		.getString("AgendaWebGUI.22"));
+		.getString("AgendaWebGUI.InfoAfterAddingEvent"));
 	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
-		.getString("AgendaWebGUI.23"), (String) null), "add");
+		.getString("AgendaWebGUI.AddNewEvent"), (String) null), "add");
 	// new Submit(submits, new
 	// org.universAAL.middleware.ui.rdf.Label(Messages
-	// .getString("AgendaWebGUI.21"), (String) null), "home");
+	// .getString("AgendaWebGUI.Interval"), (String) null), "home");
 	return f;
     }
 
     // SC2011 Events form
-    public Form getEventsForm(Calendar cal) {
+    public Form getEventsForm(User calOwner) {
 	Form f = Form.newDialog(Messages
 		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 	map = new HashMap();
 
-	// List calendars = Activator.guicaller
-	// .getCalendarsByOwnerService(new User(
-	// Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied"));
-	// //// TODO Change this in the future for multiuser
-	//
-	// if (calendars.isEmpty()) {
-	// new SimpleOutput(controls, null, null, Messages
-	// .getString("AgendaWebGUI.2"));
-	//	
-	// }
-
 	FilterParams params = new FilterParams();
-	List<Event> events = Activator.guicaller.requestEventListService(
-		new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied"),
-		cal);
+	List<Calendar> calendars = Activator.sCaller
+		.getCalendarsByOwnerService(calOwner);
+
+	List<Event> events = null;
+
+	Iterator iter = calendars.iterator();
+	for (; iter.hasNext();) {
+	    Calendar cal = (Calendar) iter.next();
+
+	    events.addAll(Activator.sCaller
+		    .requestEventListService(cal));
+
+	}
 
 	Collections.sort(events, new MyEventComparator());
 
 	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
-		.getString("AgendaWebGUI.26"), (String) null), "Event_editor");
+		.getString("AgendaWebGUI.EventEditor"), (String) null),
+		"Event_editor");
 
 	// Pocetak stvaranja forme
 
@@ -459,14 +522,14 @@ public class AgendaWebGUI {
 
 	    Submit submit = new Submit(delG,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.27"), (String) null),
+			    .getString("AgendaWebGUI.Delete"), (String) null),
 		    "delete" + i);
 	    map.put(i, event);
 	}
 	return f;
     }
 
-    // SC2011 Events form
+    // FIXME SC2011 Events form; never used
     public Form getGoogleForm(Calendar cal) {
 
 	Form f = Form.newDialog(Messages
@@ -475,10 +538,7 @@ public class AgendaWebGUI {
 	Group submits = f.getSubmits();
 
 	FilterParams params = new FilterParams();
-	List<Event> events = Activator.guicaller.requestEventListService(
-		new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied"),
-		cal);
-	// Pocetak stvaranja forme
+	List<Event> events = Activator.sCaller.requestEventListService(cal);
 
 	Group GoogleGroup = new Group(controls,
 		new org.universAAL.middleware.ui.rdf.Label("Google",
@@ -486,7 +546,7 @@ public class AgendaWebGUI {
 	Group invisiblegroup = new Group(GoogleGroup, null, null, null,
 		(Resource) null);
 
-	new SimpleOutput(invisiblegroup, null, null, "Evo igore to je to ");
+	new SimpleOutput(invisiblegroup, null, null, "Here this is it ");
 
 	return f;
 

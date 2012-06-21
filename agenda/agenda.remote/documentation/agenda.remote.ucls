@@ -1,9 +1,9 @@
 <class-diagram version="1.0.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.remote.UIProvider" 
-    project="agenda.remote" file="/agenda.remote/src/main/java/org/universAAL/agenda/remote/MyUICaller.java" 
+    project="agenda.remote" file="/agenda.remote/src/main/java/org/universAAL/agenda/remote/UIProvider.java" 
     binary="false">    
-    <position x="406" y="186" width="-1" height="-1"/>    
+    <position x="1048" y="339" width="-1" height="-1"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
@@ -11,7 +11,7 @@
   </class>  
   <class id="2" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.remote.SCaller" 
     project="agenda.remote" file="/agenda.remote/src/main/java/org/universAAL/agenda/remote/SCaller.java" binary="false">    
-    <position x="437" y="605" width="-1" height="-1"/>    
+    <position x="361" y="17" width="321" height="571"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
@@ -20,15 +20,15 @@
   <class id="3" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.remote.Messages" 
     project="agenda.remote" file="/agenda.remote/src/main/java/org/universAAL/agenda/remote/Messages.java" 
     binary="false">    
-    <position x="164" y="125" width="-1" height="-1"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+    <position x="362" y="609" width="171" height="129"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
   <class id="4" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.remote.SCallee" 
     project="agenda.remote" file="/agenda.remote/src/main/java/org/universAAL/agenda/remote/SCallee.java" binary="false">    
-    <position x="868" y="316" width="-1" height="-1"/>    
+    <position x="1048" y="96" width="-1" height="-1"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
@@ -37,7 +37,7 @@
   <class id="5" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.remote.AgendaWebGUI" 
     project="agenda.remote" file="/agenda.remote/src/main/java/org/universAAL/agenda/remote/AgendaWebGUI.java" 
     binary="false">    
-    <position x="726" y="688" width="-1" height="-1"/>    
+    <position x="807" y="490" width="-1" height="-1"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
@@ -46,7 +46,7 @@
   <class id="6" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.remote.MyEventComparator" 
     project="agenda.remote" file="/agenda.remote/src/main/java/org/universAAL/agenda/remote/MyEventComparator.java" 
     binary="false">    
-    <position x="146" y="250" width="-1" height="-1"/>    
+    <position x="621" y="657" width="-1" height="-1"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
@@ -55,16 +55,16 @@
   <class id="7" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.remote.ProvidedService" 
     project="agenda.remote" file="/agenda.remote/src/main/java/org/universAAL/agenda/remote/ProvidedService.java" 
     binary="false">    
-    <position x="155" y="467" width="-1" height="-1"/>    
+    <position x="1036" y="622" width="-1" height="-1"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="8" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.remote.osgi.Activatorvator" 
+  <class id="8" corner="BOTTOM_RIGHT" language="java" name="org.universAAL.agenda.remote.osgi.Activator" 
     project="agenda.remote" file="/agenda.remote/src/main/java/org/universAAL/agenda/remote/osgi/Activator.java" 
     binary="false">    
-    <position x="695" y="128" width="-1" height="-1"/>    
+    <position x="806" y="94" width="-1" height="-1"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
@@ -72,7 +72,7 @@
   </class>  
   <association id="9">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="10" name="guicallee"/>      
+      <attribute id="10" name="sCallee"/>      
       <multiplicity id="11" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
@@ -80,24 +80,32 @@
   </association>  
   <association id="12">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="13" name="gui"/>      
+      <attribute id="13" name="sCaller"/>      
       <multiplicity id="14" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="15">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="16" name="guicaller"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="18">    
+  <association id="15">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="19" name="myUICaller"/>      
+      <attribute id="16" name="webUI"/>      
+      <multiplicity id="17" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="18">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="19" name="webUI"/>      
       <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="22" name="uIProvider"/>      
+      <multiplicity id="23" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
