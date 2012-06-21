@@ -75,7 +75,6 @@ agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/util/DateTimeInstance.
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/util/DateUtilities.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/util/GuiConstants.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/util/Messages.java -text
-agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/util/TextDemo.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/util/TimeInstance.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/wrappers/ProvidedCalendarUIService.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/wrappers/SimpleServiceCallee.java -text
@@ -100,6 +99,7 @@ agenda/agenda.gui/src/main/resources/icons/unchecked_hover.jpg -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_da.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_de.properties -text
+agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_el_TODO.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_en.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_es.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_hr.properties -text

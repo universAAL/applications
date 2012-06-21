@@ -19,8 +19,6 @@ public class Activator implements BundleActivator {
     
     private static BundleContext bcontext;
 
-    public static final User testUser = new User(
-	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
     /**
      * {@link ModuleContext}
      */

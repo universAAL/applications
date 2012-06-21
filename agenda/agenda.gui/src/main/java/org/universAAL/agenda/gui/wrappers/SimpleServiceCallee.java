@@ -1,12 +1,11 @@
 package org.universAAL.agenda.gui.wrappers;
 
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.ontology.profile.User;
 import org.universAAL.agenda.gui.CalendarGUI;
 import org.universAAL.agenda.gui.osgi.Activator;
 
@@ -17,11 +16,8 @@ public class SimpleServiceCallee extends ServiceCallee {
 
     private static ModuleContext moduleContext;
 
-    private static final ServiceResponse failure = new ServiceResponse(
-	    CallStatus.serviceSpecificFailure);
-
     /**
-     * 
+     * Constructor
      * 
      * @param mcontext
      */
@@ -58,10 +54,11 @@ public class SimpleServiceCallee extends ServiceCallee {
 	    return null;
 
 	if (operation.startsWith(ProvidedCalendarUIService.SERVICE_START_UI)) {
-	    return showCalendarUI(call.getInvolvedUser());
-	}
+	    // e.g. call.getInvolvedUser: urn:org.universAAL.aal_space:test_env#saied
 
-	return null;
+	    return showCalendarUI((User) call.getInvolvedUser());
+	}
+	return new ServiceResponse(CallStatus.noMatchingServiceFound);
     }
 
     /**
@@ -70,9 +67,10 @@ public class SimpleServiceCallee extends ServiceCallee {
      * @param resource
      * @return
      */
-    private ServiceResponse showCalendarUI(Resource resource) {
+    private ServiceResponse showCalendarUI(User loggedInUser) {
 	try {
-	    new CalendarGUI(Activator.getBundleContext(), moduleContext);
+	    new CalendarGUI(Activator.getBundleContext(), moduleContext,
+		    loggedInUser);
 
 	    // FIXME removed when trasferring to UI Bus (no
 	    // InputEvent.uAAL_MAIN_MENU_REQUEST)
