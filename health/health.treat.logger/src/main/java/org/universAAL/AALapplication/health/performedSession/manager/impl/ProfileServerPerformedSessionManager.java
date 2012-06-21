@@ -29,7 +29,7 @@ import org.universAAL.AALApplication.health.profile.manager.ProfileServerManager
 import org.universAAL.AALapplication.health.performedSession.manager.PerformedSessionManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
-import org.universAAL.ontology.profile.health.HealthProfile;
+import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.PerformedSession;
 import org.universaal.ontology.health.owl.Treatment;
 
