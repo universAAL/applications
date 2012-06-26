@@ -870,7 +870,7 @@ public class AgendaDB implements AgendaDBInterface {
 	ResultSet rs;
 	PreparedStatement psr;
 	PreparedStatement ps;
-	String query = prop.getProperty("getEvent");
+	String query = prop.getProperty("getEventsFirstPartOfQuery");
 	boolean first = false;
 	if (calendarURI != null) {
 	    // get events from a specific calendars
@@ -1578,11 +1578,10 @@ public class AgendaDB implements AgendaDBInterface {
      */
     public Calendar getCalendarByNameAndOwner(String calendarName, User owner,
 	    boolean commit) {
-	String calendarExists = "SELECT c.idCalendar FROM calendartype c,users u "
-		+ "WHERE c.idUser=u.idUser AND description = ? AND username = ?";
 	try {
 	    // check for calendar existence
-	    PreparedStatement ps = conn.prepareStatement(calendarExists);
+	    PreparedStatement ps = conn.prepareStatement(prop
+		    .getProperty("calendarExists"));
 	    ps.setString(1, calendarName);
 	    ps.setString(2, owner.getURI().substring(owner.getURI().length()));
 	    ResultSet result = ps.executeQuery();
