@@ -152,9 +152,6 @@ agenda/agenda.pom/composite/pom.xml -text
 agenda/agenda.pom/pom.xml -text
 agenda/agenda.remote/LICENSE -text
 agenda/agenda.remote/NOTICE -text
-agenda/agenda.remote/bin/.project -text
-agenda/agenda.remote/bin/.settings/org.maven.ide.eclipse.prefs -text
-agenda/agenda.remote/bin/pom.xml -text
 agenda/agenda.remote/documentation/agenda.remote.PNG -text
 agenda/agenda.remote/documentation/agenda.remote.ucls -text
 agenda/agenda.remote/pom.xml -text
