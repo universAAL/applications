@@ -64,8 +64,8 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 
     private boolean isEditable = false;
     private Event event;
-    private JButton remove, save, mainb, back, voice;
-
+    private JButton remove, save, mainb, back;
+    
     final ImageIcon bigIcon = new ImageIcon(getClass().getResource(
 	    "/icons/big_button.jpeg")); //$NON-NLS-1$
     final ImageIcon bigPressedIcon = new ImageIcon(getClass().getResource(
@@ -446,8 +446,6 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 	    }
 	});
 
-	voice = new CurrentDateButton();
-
 	// Create the right zone of buttons
 	JPanel home = new JPanel(new GridLayout(6, 1));
 	home.setBackground(GuiConstants.wholePanelBackground);
@@ -458,13 +456,13 @@ public class JEventInfo implements IPersonaWindow, IEventInfoListener {
 	// nav.setLayout(new GridLayout(6, 1));
 
 	AnalogClock clock = new AnalogClock();
-	home.add(clock);
 
+	home.add(clock);
 	home.add(remove);
 	home.add(back);
 	home.add(save);
 	home.add(mainb);
-	home.add(voice);
+	home.add(CurrentDateAndDigitalClock.getDateAndDigitalClockPanel());
 
 	return home;
     }

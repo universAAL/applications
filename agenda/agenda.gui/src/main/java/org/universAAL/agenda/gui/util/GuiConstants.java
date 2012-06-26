@@ -23,6 +23,9 @@ public class GuiConstants {
     public static final Font mediumButtonsSmallFont = new Font("MyriadPro",Font.ITALIC, 20);
     public static final Font smallButtonsFont = new Font("MyriadPro",Font.ITALIC, 20);
     
+    
+    public static final Font digitalClockFont = new Font("MyriadPro",Font.PLAIN, 24);
+    public static final Color digitalClockColor = new Color(0x0000ff);
 
     public static final Color labelColor = new Color(0x565656); // dark grey
 

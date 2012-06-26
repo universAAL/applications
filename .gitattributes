@@ -45,7 +45,8 @@ agenda/agenda.gui/pom.xml -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/AnalogClock.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/CalendarEntry.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/CalendarGUI.java -text
-agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/CurrentDateButton.java -text
+agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/CurrentDateAndDigitalClock.java -text
+agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/DigitalClock.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/IEventInfoListener.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/IPersonaWindow.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/IRootScreen.java -text
