@@ -409,20 +409,46 @@ public class AgendaDB implements AgendaDBInterface {
 		    .getProperty("getUserID"));
 	    if (owner == null)
 		owner = c.getOwner();
-	    ps.setString(1, owner.getURI().substring(
-		    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX.length()));
+	    String ownerName = owner.getURI().substring(
+		    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX.length());
+	    ps.setString(1, ownerName);
 	    ResultSet rs = ps.executeQuery();
-	    int id;
+	    int idUser;
 	    if (rs.next()) {
-		id = rs.getInt(1);
+		idUser = rs.getInt(1);
 	    } else {
-		LogUtils.logWarn(mcontext, this.getClass(), "addCalendar",
-			new Object[] { "No such user!" }, null);
-		return null;
+
+		LogUtils.logInfo(mcontext, this.getClass(), "addCalendar",
+			new Object[] { "User: " + owner
+				+ " does not exist so it is added!" }, null);
+
+		ps = conn.prepareStatement(prop
+			.getProperty("addUserWithUserName"));
+		ps.setInt(1, 1); //type id of Assisted Person is 1
+		ps.setString(2, ownerName);
+		ps.executeUpdate();
+		
+		ps = conn.prepareStatement(prop
+			    .getProperty("getUserID"));
+		ps.setString(1, ownerName);
+		ResultSet rs1 = ps.executeQuery();
+		    if (rs1.next()) {
+			idUser = rs1.getInt(1);
+		    } else {
+		    LogUtils
+			    .logWarn(
+				    mcontext,
+				    this.getClass(),
+				    "addCalendar",
+				    new Object[] { "User: " +ownerName+ " was not correctly added" },
+				    null);
+		    return null;
+		}
+
 	    }
 	    ps = conn.prepareStatement(prop.getProperty("addCalendar"));
 	    ps.setString(1, c.getName());
-	    ps.setInt(2, id);
+	    ps.setInt(2, idUser);
 	    ps.executeUpdate();
 	    c.setOwner(owner);
 	    if (commit)
