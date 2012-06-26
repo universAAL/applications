@@ -188,8 +188,6 @@ agenda/agenda.runner/runner/configurations/README.txt -text
 agenda/agenda.runner/runner/configurations/ResourceServer/SomeServiceSpecificFolder/SomeServiceSpecificIcon.png -text
 agenda/agenda.runner/runner/configurations/ResourceServer/SomeServiceSpecificFolder/test.txt -text
 agenda/agenda.runner/runner/configurations/agenda/DBquery.properties -text
-agenda/agenda.runner/runner/configurations/agenda/agenda.properties -text
-agenda/agenda.runner/runner/configurations/agenda/automatski[!!-~]izgenerirano[!!-~]agenda.properties -text
 agenda/agenda.runner/runner/configurations/agenda/credentials.properties -text
 agenda/agenda.runner/runner/configurations/ctxt.che/CHe.properties -text
 agenda/agenda.runner/runner/configurations/mw.bus.model/sodapop.key -text
