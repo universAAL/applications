@@ -294,7 +294,7 @@ public class JCalendar implements IPersonaWindow {
 	    }
 	});
 
-	final JButton voice = new CurrentDateButton();
+	
 
 	// Create the right zone of buttons
 	JPanel main = new JPanel(new GridLayout(6, 1));
@@ -318,7 +318,7 @@ public class JCalendar implements IPersonaWindow {
 	main.add(previous_month);
 	main.add(searchButton);
 	main.add(gohome);
-	main.add(voice);
+	main.add(CurrentDateAndDigitalClock.getDateAndDigitalClockPanel());
 
 	return main;
     }

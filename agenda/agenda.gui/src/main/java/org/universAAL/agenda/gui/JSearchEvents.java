@@ -19,6 +19,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -48,7 +49,7 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
     private JPanel navScreen;
     private JPanel titleScreen;
     private CalendarGUI parent;
-    private JButton home, search, voice;
+    private JButton home, search;
 
     private JTextField descTextField;
     private JComboBox monthCB, yearCB, rNoCB, categoryList;
@@ -450,13 +451,12 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	    }
 	});
 
-	voice = new CurrentDateButton();
-
 	// Create the right zone of buttons
 	JPanel homeP = new JPanel(new GridLayout(6, 1));
 	homeP.setBackground(GuiConstants.jSearchEventsBackground);
 
-	// before clock	// homeP.add(new JLabel()); //<< Create a void combined with
+	// before clock // homeP.add(new JLabel()); //<< Create a void combined
+	// with
 
 	AnalogClock clock = new AnalogClock();
 	homeP.add(clock);
@@ -469,7 +469,7 @@ public class JSearchEvents extends JPanel implements IPersonaWindow {
 	l1.setBackground(GuiConstants.jSearchEventsBackground);
 	homeP.add(l1);
 	homeP.add(l2);
-	homeP.add(voice);
+	homeP.add(CurrentDateAndDigitalClock.getDateAndDigitalClockPanel());
 
 	return homeP;
     }

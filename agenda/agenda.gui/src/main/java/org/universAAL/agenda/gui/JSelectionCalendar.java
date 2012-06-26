@@ -223,8 +223,6 @@ public class JSelectionCalendar implements IPersonaWindow {
 	    }
 	});
 
-	JButton voice = new CurrentDateButton();
-
 	// Create the right zone of buttons
 	nav.setLayout(new GridLayout(6, 1));
 	nav.setBackground(GuiConstants.wholePanelBackground);
@@ -239,7 +237,7 @@ public class JSelectionCalendar implements IPersonaWindow {
 	nav.add(remove);
 	nav.add(show);
 	nav.add(exitb);
-	nav.add(voice);
+	nav.add(CurrentDateAndDigitalClock.getDateAndDigitalClockPanel());
 
 	return nav;
     }

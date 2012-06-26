@@ -206,8 +206,6 @@ public class JEventList implements IPersonaWindow {
 	    }
 	});
 
-	JButton voice = new CurrentDateButton();
-
 	// Create the right zone of buttons
 	nav.setLayout(new GridLayout(4, 1));
 	nav.setBackground(GuiConstants.wholePanelBackground);
@@ -221,7 +219,7 @@ public class JEventList implements IPersonaWindow {
 	nav.add(add);
 	// nav.add(next);
 	nav.add(mainb);
-	nav.add(voice);
+	nav.add(CurrentDateAndDigitalClock.getDateAndDigitalClockPanel());
 
 	return nav;
     }
