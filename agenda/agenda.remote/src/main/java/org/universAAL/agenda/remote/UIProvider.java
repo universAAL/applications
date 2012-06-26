@@ -44,7 +44,6 @@ import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
-import org.universAAL.middleware.ui.owl.Modality;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.util.Constants;
@@ -126,8 +125,11 @@ public class UIProvider extends UICaller {
 
 	    // SC2011 button Events, Event editor
 	    else if (submit.equals("get_event_list")) {
-		Calendar cal = (Calendar) uiresponse
-			.getUserInput(new String[] { AgendaWebGUI.REF_CALENDAR });
+		
+//		Calendar cal = (Calendar) uiresponse
+//			.getUserInput(new String[] { AgendaWebGUI.REF_CALENDAR });
+		
+		//show all events from currently selected AP
 		log.debug("Processing Input: Go to Events");
 		showEventsScreen(remoteLoggedUser, currentlySelectedCalOwner);
 		// takes events from specific calendar
