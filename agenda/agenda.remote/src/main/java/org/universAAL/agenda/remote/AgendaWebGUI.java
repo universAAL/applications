@@ -153,7 +153,6 @@ public class AgendaWebGUI {
 		.getString("AgendaWebGUI.SelectCalendar"));
 
 	List calendars = Activator.sCaller.getCalendarsByOwnerService(calOwner);
-	// TODO Change this in the future for multiuser
 
 	if (calendars.isEmpty()) {
 	    new SimpleOutput(controls, null, null, Messages
