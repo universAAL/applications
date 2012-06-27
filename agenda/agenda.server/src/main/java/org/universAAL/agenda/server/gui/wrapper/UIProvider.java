@@ -52,7 +52,7 @@ public class UIProvider extends UICaller {
      * org.universAAL.middleware.ui.UICaller#handleUIResponse(org.universAAL
      * .middleware.ui.UIResponse)
      */
-    public void handleUIResponse(UIResponse event) {
+    public void handleUIResponse(UIResponse uiResponse) {
 	System.out.println(">>>got UIResponse in AgendaServer.UIProvider<<<");
 	// removed when transferring from IO to UI Bus (InputEvent->UIResponse)
 	// if (event.hasDialogInput()) {
@@ -63,8 +63,8 @@ public class UIProvider extends UICaller {
 			this.getClass(),
 			"handleUIResponse",
 			new Object[] { "AgendaServer.UIProvider received UIResponse with dialog id: "
-				+ event.getDialogID() }, null);
-	String submissionID = event.getSubmissionID();
+				+ uiResponse.getDialogID() }, null);
+	String submissionID = uiResponse.getSubmissionID();
 	if (submissionID == null) {
 	    LogUtils.logWarn(mcontext, this.getClass(), "handleUIResponse",
 		    new Object[] { "submission ID null" }, null);
@@ -93,9 +93,9 @@ public class UIProvider extends UICaller {
 			    null);
 	    // stopReminder
 	    try {
-		String calendarURI = (String) event.getSubmittedData()
+		String calendarURI = (String) uiResponse.getSubmittedData()
 			.getProperty(CALENDAR_URI);
-		Integer eventId = (Integer) event.getSubmittedData()
+		Integer eventId = (Integer) uiResponse.getSubmittedData()
 			.getProperty(EVENT_ID);
 		Activator.getAgendaProvider().cancelReminder(calendarURI,
 			eventId.intValue());
