@@ -20,6 +20,14 @@ import org.universAAL.agenda.gui.util.DateTimeInstance;
 import org.universAAL.agenda.gui.util.GuiConstants;
 import org.universAAL.agenda.gui.util.TimeInstance;
 
+/**
+ * 
+ * Panel for date. Contains text fields for day, month, year in 2nd (1st row contains small labels describing what to write in the below fields) row and hour
+ * and minutes in 4th row (3rd row contains small labels describing what to write in the below fields). Containing Used twice in
+ * {@link org.universAAL.agenda.gui.JEventInfo} for start and end date and time
+ * sections.
+ * 
+ */
 public class DatePanel extends JPanel {
     private static final long serialVersionUID = 3762589404597728131L;
     private final String title;

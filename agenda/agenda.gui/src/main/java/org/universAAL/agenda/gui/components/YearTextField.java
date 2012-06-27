@@ -6,7 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
-
+/**
+ * Field for year text. Used in {@link DatePanel}
+ * 
+ */
 public class YearTextField extends JTextField implements KeyListener,
 	FocusListener {
     private static final long serialVersionUID = -6722036237870255921L;

@@ -6,7 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
-
+/**
+ * Field for hour text. Used in {@link DatePanel}
+ * 
+ */
 public class HourTextField extends JTextField implements KeyListener,
 	FocusListener {
     private static final long serialVersionUID = -5454892563175504145L;

@@ -6,7 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
-
+/**
+ * Field for month text. Used in {@link DatePanel}
+ * 
+ */
 public class MonthTextField extends JTextField implements KeyListener,
 	FocusListener {
     private static final long serialVersionUID = -6504288830505628300L;

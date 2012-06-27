@@ -7,6 +7,11 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * Used for loading image. Used for header image and logo.
+ *
+ */
 public class ImagePanel extends JPanel {
     private static final long serialVersionUID = -5946348562781265321L;
     private Image img;

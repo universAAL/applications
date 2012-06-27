@@ -7,6 +7,10 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JTextField;
 
+/**
+ * Field for day text. Used in {@link DatePanel}
+ * 
+ */
 public class DayTextField extends JTextField implements KeyListener,
 	FocusListener {
     private static final long serialVersionUID = 61026534178080087L;
