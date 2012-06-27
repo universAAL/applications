@@ -22,7 +22,7 @@ import org.universAAL.agenda.gui.util.GuiConstants;
 /**
  * 
  * Reminder info panel with status (active/inactive), date, type, and a button
- * to set reminder.
+ * to set reminder. Used at the bottom of {@link org.universAAL.agenda.gui.JEventInfo} 
  * 
  */
 public class ReminderPanel extends JPanel {
