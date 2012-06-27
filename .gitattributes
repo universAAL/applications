@@ -231,9 +231,6 @@ agenda/agenda.runner/runner/remoteDebug.bat -text
 agenda/agenda.runner/runner/run.bat -text
 agenda/agenda.server/LICENSE -text
 agenda/agenda.server/NOTICE -text
-agenda/agenda.server/backup/MyAgenda.java_old_with_extra_table -text
-agenda/agenda.server/backup/SimpleInputSubscriber.java_beforeUIBus -text
-agenda/agenda.server/backup/SimpleOutputPublisher.java_beforeUIBus -text
 agenda/agenda.server/documentation/agenda.server.PNG -text
 agenda/agenda.server/documentation/agenda.server.ucls -text
 agenda/agenda.server/pom.xml -text
@@ -276,8 +273,6 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_es
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_nl.properties -text
-agenda/agenda.server/src/test/resources/DBquery.prop -text
-agenda/agenda.server/src/test/resources/DBquery.properties -text
 food_shopping/README.txt -text
 food_shopping/food_shopping.service.client/pom.xml -text
 food_shopping/food_shopping.service.client/src/main/java/org/universAAL/AALapplication/food_shopping/service/client/Activator.java -text
