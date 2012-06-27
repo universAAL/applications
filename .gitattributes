@@ -100,7 +100,7 @@ agenda/agenda.gui/src/main/resources/icons/unchecked_hover.jpg -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_da.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_de.properties -text
-agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_el_TODO.properties -text
+agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_el.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_en.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_es.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messages_hr.properties -text
@@ -109,7 +109,7 @@ agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/components/messag
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/messages.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/messages_da.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/messages_de.properties -text
-agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/messages_el_TODO.properties -text
+agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/messages_el.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/messages_en.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/messages_es.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/messages_hr.properties -text
