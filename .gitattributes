@@ -261,6 +261,7 @@ agenda/agenda.server/src/main/resources/README -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_da.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_de.properties -text
+agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_el.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_en.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_es.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper/messages_hr.properties -text
@@ -269,6 +270,7 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/gui/wrapper
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_da.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_de.properties -text
+agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_el.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_en.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_es.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr.properties -text
