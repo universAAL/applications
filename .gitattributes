@@ -167,6 +167,7 @@ agenda/agenda.remote/src/main/java/org/universAAL/agenda/remote/SCaller.java -te
 agenda/agenda.remote/src/main/java/org/universAAL/agenda/remote/UIProvider.java -text
 agenda/agenda.remote/src/main/java/org/universAAL/agenda/remote/osgi/Activator.java -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages.properties -text
+agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_el.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_en.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es.properties -text
 agenda/agenda.runner/Run.bat -text
