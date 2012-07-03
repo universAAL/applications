@@ -345,11 +345,6 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_nl.properties -text
 food_shopping/README.txt -text
-food_shopping/ont.foodDevices/pom.xml -text
-food_shopping/ont.foodDevices/src/main/java/org/universAAL/ontology/Activator.java -text
-food_shopping/ont.foodDevices/src/main/java/org/universAAL/ontology/foodDevices/FoodItem.java -text
-food_shopping/ont.foodDevices/src/main/java/org/universAAL/ontology/foodDevices/FoodManagement.java -text
-food_shopping/ont.foodDevices/src/main/java/org/universAAL/ontology/foodDevices/Refrigerator.java -text
 food_shopping/pom/pom.xml -text
 health/health.manager/LICENSE.txt -text svneol=unset#text/plain
 health/health.manager/pom.xml -text
