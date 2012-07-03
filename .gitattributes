@@ -1,4 +1,39 @@
 * text=auto !eol
+aal_eficiency/AALfficiency.test/.classpath -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/.project -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/pom.xml -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/src/main/java/org/universAAL/AALfficiencyTest/AAlfficiencyTest.java -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/src/main/java/org/universAAL/AALfficiencyTest/Activator.java -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/AALfficiency.test-0.1.0-SNAPSHOT-javadoc.jar -text
+aal_eficiency/AALfficiency.test/target/AALfficiency.test-0.1.0-SNAPSHOT-sources.jar -text
+aal_eficiency/AALfficiency.test/target/AALfficiency.test-0.1.0-SNAPSHOT.jar -text
+aal_eficiency/AALfficiency.test/target/apidocs/allclasses-frame.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/allclasses-noframe.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/constant-values.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/deprecated-list.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/help-doc.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/index-all.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/index.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/org/universAAL/AALfficiencyTest/AAlfficiencyTest.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/org/universAAL/AALfficiencyTest/Activator.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/org/universAAL/AALfficiencyTest/class-use/AAlfficiencyTest.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/org/universAAL/AALfficiencyTest/class-use/Activator.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/org/universAAL/AALfficiencyTest/package-frame.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/org/universAAL/AALfficiencyTest/package-summary.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/org/universAAL/AALfficiencyTest/package-tree.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/org/universAAL/AALfficiencyTest/package-use.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/overview-tree.html -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/apidocs/package-list -text
+aal_eficiency/AALfficiency.test/target/apidocs/resources/inherit.gif -text
+aal_eficiency/AALfficiency.test/target/apidocs/stylesheet.css -text
+aal_eficiency/AALfficiency.test/target/classes/META-INF/MANIFEST.MF -text
+aal_eficiency/AALfficiency.test/target/classes/org/universAAL/AALfficiencyTest/AAlfficiencyTest.class -text
+aal_eficiency/AALfficiency.test/target/classes/org/universAAL/AALfficiencyTest/Activator.class -text
+aal_eficiency/AALfficiency.test/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.test/target/javadoc-bundle-options/package-list -text
 aal_eficiency/AALfficiencyService/.classpath -text svneol=unset#text/plain
 aal_eficiency/AALfficiencyService/.project -text svneol=unset#text/plain
 aal_eficiency/AALfficiencyService/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
