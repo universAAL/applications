@@ -46,10 +46,6 @@ agenda/agenda.server/.classpath
 agenda/agenda.server/.project
 agenda/agenda.server/.settings
 agenda/agenda.server/target
-food_shopping/food_shopping.service.server/.classpath
-food_shopping/food_shopping.service.server/.project
-food_shopping/food_shopping.service.server/.settings
-food_shopping/food_shopping.service.server/target
 food_shopping/ont.foodDevices/.classpath
 food_shopping/ont.foodDevices/.project
 food_shopping/ont.foodDevices/.settings
