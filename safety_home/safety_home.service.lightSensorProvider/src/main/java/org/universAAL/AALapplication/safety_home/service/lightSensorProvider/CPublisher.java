@@ -1,7 +1,7 @@
 package org.universAAL.AALapplication.safety_home.service.lightSensorProvider;
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.safety_home.service.lightSensorSoapClient.SOAPClient;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
@@ -20,16 +20,27 @@ public class CPublisher extends ContextPublisher{
 	
 	private ContextPublisher cp;
 	
-	protected CPublisher(BundleContext context, ContextProvider providerInfo) {
+	public CPublisher(ModuleContext context, ContextProvider providerInfo) {
 		super(context, providerInfo);
 	}
-	
-	protected CPublisher(BundleContext context) {
+
+	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
 			ContextProvider info = new ContextProvider(SAFETY_LIGHT_PROVIDER_NAMESPACE + "LightContextProvider");
 			info.setType(ContextProviderType.controller);
 			cp = new DefaultContextPublisher(context, info);
+			invoke();
+		}
+		catch (InterruptedException e){
+			e.printStackTrace();
+		}
+	}
+
+	public CPublisher(ModuleContext context, ContextProvider providerInfo, ContextPublisher cp) {
+		super(context, providerInfo);
+		try{
+			this.cp = cp;
 			invoke();
 		}
 		catch (InterruptedException e){

@@ -1,7 +1,7 @@
 package org.universAAL.AALapplication.safety_home.service.windowProvider;
 
-import org.osgi.framework.BundleContext;
-import org.universAAL.AALapplication.safety_home.service.soapClient.SOAPClient;
+import org.universAAL.AALapplication.safety_home.service.windowSoapClient.SOAPClient;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
@@ -19,12 +19,14 @@ public class CPublisher extends ContextPublisher{
 	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
 	
 	private ContextPublisher cp;
+	private int previousState = -1;
+	private int state = 0;
 	
-	protected CPublisher(BundleContext context, ContextProvider providerInfo) {
+	protected CPublisher(ModuleContext context, ContextProvider providerInfo) {
 		super(context, providerInfo);
 	}
 	
-	protected CPublisher(BundleContext context) {
+	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
 			ContextProvider info = new ContextProvider(SAFETY_WINDOW_PROVIDER_NAMESPACE + "WindowContextProvider");
@@ -37,29 +39,50 @@ public class CPublisher extends ContextPublisher{
 		}
 	}
 
+	public CPublisher(ModuleContext context, ContextProvider providerInfo, ContextPublisher cp) {
+		super(context, providerInfo);
+		try{
+			this.cp = cp;
+			invoke();
+		}
+		catch (InterruptedException e){
+			e.printStackTrace();
+		}
+	}
+	
 	public void invoke() throws InterruptedException{
-		//getUsers();
 		while (true){
-			Thread.sleep(30000);
+			Thread.sleep(11000);
 			publishWindowStatus(0);
 		}
 	}
 	
 	private void publishWindowStatus(int deviceID){
 		Device device=null;
-		if(deviceID==0){
-			Window window = new Window(CPublisher.DEVICE_URI_PREFIX + deviceID);
-			device=(Device)window;
-			window.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "window"));
-			if (SOAPClient.isWindowClosed())
-				window.setSensorStatus(new Integer(0));
-			else
-				window.setSensorStatus(new Integer(100));
-			
-			System.out.println("############### PUBLISHING EVENT ###############");
-			cp.publish(new ContextEvent(window, Window.PROP_SENSOR_STATUS));
-			System.out.println("################################################");
-		}
+		
+		//System.out.println("previous state="+previousState);
+		//System.out.println("state="+state);
+		//if (previousState != state){
+			if(deviceID==0){
+				Window window = new Window(CPublisher.DEVICE_URI_PREFIX + deviceID);
+				device=(Device)window;
+				window.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "window"));
+				if (SOAPClient.isWindowClosed()){
+					window.setSensorStatus(new Integer(0));
+					state = 0;
+				}
+				else{
+					window.setSensorStatus(new Integer(100));
+					state = 1;
+				}
+				if (previousState != state){
+					System.out.println("############### PUBLISHING EVENT ###############");
+					cp.publish(new ContextEvent(window, Window.PROP_SENSOR_STATUS));
+					System.out.println("################################################");
+					this.previousState = state;
+				}
+			}
+		//}
 	}
 
 	

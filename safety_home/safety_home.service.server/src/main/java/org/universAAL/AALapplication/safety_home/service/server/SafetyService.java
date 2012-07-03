@@ -3,10 +3,14 @@ package org.universAAL.AALapplication.safety_home.service.server;
 import java.util.Hashtable;
 
 import org.universAAL.middleware.owl.Enumeration;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.middleware.owl.OntologyManagement;
+import org.universAAL.middleware.owl.SimpleOntology;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
+import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.safetyDevices.Safety;
+import org.universAAL.ontology.safetyDevices.SafetyManagement;
 import org.universAAL.ontology.safetyDevices.Door;
 import org.universAAL.ontology.safetyDevices.Window;
 import org.universAAL.ontology.safetyDevices.LightSensor;
@@ -20,7 +24,7 @@ import org.universAAL.ontology.location.Location;
  *
  */
 
-public class SafetyService extends Safety {
+public class SafetyService extends SafetyManagement {
 	
 	// All the static Strings are used to unique identify special functions and objects
 	public static final String SAFETY_SERVER_NAMESPACE = "http://ontology.universaal.org/SafetyServer.owl#";
@@ -41,15 +45,25 @@ public class SafetyService extends Safety {
 	private static Hashtable serverSafetyRestrictions = new Hashtable();
 	
 	static {
-		register(SafetyService.class);
-		String[] ppControls = new String[] {Safety.PROP_CONTROLS};
-		String[] ppStatus = new String[] {Safety.PROP_CONTROLS, Door.PROP_DEVICE_STATUS};
+		OntologyManagement.getInstance().register(
+				new SimpleOntology(MY_URI, SafetyManagement.MY_URI,
+					new ResourceFactoryImpl() {
+					    @Override
+					    public Resource createInstance(String classURI,
+						    String instanceURI, int factoryIndex) {
+						return new SafetyService(instanceURI);
+					    }
+					}));
 		
-		addRestriction((Restriction)
-				Safety.getClassRestrictionsOnProperty(Safety.PROP_CONTROLS).copy(),
+		
+		String[] ppControls = new String[] {SafetyManagement.PROP_CONTROLS};
+		String[] ppStatus = new String[] {SafetyManagement.PROP_CONTROLS, Door.PROP_DEVICE_STATUS};
+		
+		addRestriction((MergedRestriction)
+				SafetyManagement.getClassRestrictionsOnProperty(SafetyManagement.MY_URI, SafetyManagement.PROP_CONTROLS).copy(),
 				ppControls, serverSafetyRestrictions);
 		addRestriction(
-				Restriction.getAllValuesRestrictionWithCardinality(Door.PROP_DEVICE_STATUS,
+				MergedRestriction.getAllValuesRestrictionWithCardinality(Door.PROP_DEVICE_STATUS,
 						new Enumeration(new Integer[] {new Integer(0), new Integer(100)}), 1, 1),
 				ppStatus,serverSafetyRestrictions);
 
@@ -68,7 +82,7 @@ public class SafetyService extends Safety {
 		getDeviceInfo.addOutput(OUTPUT_DEVICE_STATUS, TypeMapper.getDatatypeURI(Integer.class), 1, 1,
 				ppStatus);
 		getDeviceInfo.addOutput(OUTPUT_DEVICE_LOCATION,	Location.MY_URI, 1, 1,
-				new String[] {Safety.PROP_CONTROLS, Door.PROP_DEVICE_LOCATION});
+				new String[] {SafetyManagement.PROP_CONTROLS, Door.PROP_PHYSICAL_LOCATION});
 		profiles[1] = getDeviceInfo.myProfile;
 		
 		SafetyService lock = new SafetyService(SERVICE_LOCK);

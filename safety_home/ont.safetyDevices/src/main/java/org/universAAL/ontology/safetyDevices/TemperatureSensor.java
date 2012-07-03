@@ -1,8 +1,6 @@
 package org.universAAL.ontology.safetyDevices;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.owl.OrderingRestriction;
-import org.universAAL.middleware.owl.Restriction;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.location.Location;
 import org.universAAL.ontology.phThing.Device;
@@ -14,48 +12,11 @@ import org.universAAL.ontology.phThing.Device;
  * Window Ontology
  */
 public class TemperatureSensor extends Device {
-	public static final String SAFETY_NAMESPACE = "http://ontology.universaal.org/Safety.owl#";
-	public static final String MY_URI; 
-	public static final String PROP_DEVICE_LOCATION;
-	public static final String PROP_DEVICE_STATUS;
-	public static final String PROP_TEMPERATURE;
+	public static final String MY_URI = SafetyOntology.NAMESPACE + "Temperature"; 
+	//public static final String PROP_DEVICE_LOCATION;
+	public static final String PROP_DEVICE_STATUS = SafetyOntology.NAMESPACE + "deviceStatus";
+	public static final String PROP_TEMPERATURE = SafetyOntology.NAMESPACE + "homeTemperature";
 	
-	static{
-		MY_URI = SAFETY_NAMESPACE + "Temperature";
-		PROP_DEVICE_LOCATION = SAFETY_NAMESPACE + "deviceLocation";		
-		PROP_DEVICE_STATUS = SAFETY_NAMESPACE + "deviceStatus";
-		PROP_TEMPERATURE = SAFETY_NAMESPACE + "homeTemperature";		
-		register(TemperatureSensor.class);		
-	}
-	
-	public static Restriction getClassRestrictionsOnProperty(String propURI) {
-		if (PROP_TEMPERATURE.equals(propURI))
-			return Restriction.getCardinalityRestriction(propURI, 1, 1);		
-		if (PROP_DEVICE_LOCATION.equals(propURI))
-			return Restriction.getAllValuesRestrictionWithCardinality(propURI,
-					Location.MY_URI, 1, 1);
-		if (PROP_DEVICE_STATUS.equals(propURI))
-			return OrderingRestriction.newOrderingRestriction(new Integer(100),
-				    new Integer(0), true, true, Restriction
-					    .getAllValuesRestrictionWithCardinality(propURI,
-						    TypeMapper.getDatatypeURI(Integer.class),
-						    1, 1));
-
-		return ManagedIndividual.getClassRestrictionsOnProperty(propURI);
-	}
-
-	public static String[] getStandardPropertyURIs() {
-		return new String[] {PROP_DEVICE_LOCATION, PROP_DEVICE_STATUS, PROP_TEMPERATURE};
-	}
-	
-	public static String getRDFSComment() {
-		return "A temperature sensor";
-	}
-	
-	public static String getRDFSLabel() {
-		return "Temperature";
-	}
-		
 	public TemperatureSensor(){
 		super();
 	}
@@ -64,13 +25,29 @@ public class TemperatureSensor extends Device {
 		super(uri);				
 	}
 		
+    public String getClassURI() {
+    	return MY_URI;
+    }
+	
+	public static String[] getStandardPropertyURIs() {
+		return new String[] {PROP_PHYSICAL_LOCATION, PROP_DEVICE_STATUS, PROP_TEMPERATURE};
+	}
+/*	
+	public static String getRDFSComment() {
+		return "A temperature sensor";
+	}
+	
+	public static String getRDFSLabel() {
+		return "Temperature";
+	}
+*/		
 	public TemperatureSensor(String uri, Location loc) {
 		super(uri);
 		if (loc == null)
 			   throw new IllegalArgumentException();
 	
 		props.put(PROP_DEVICE_STATUS, new Integer(0));
-		props.put(PROP_DEVICE_LOCATION, loc);
+		props.put(PROP_PHYSICAL_LOCATION, loc);
 	}
 
 	public TemperatureSensor(String uri, Location loc, float temperature) {
@@ -79,7 +56,7 @@ public class TemperatureSensor extends Device {
 			   throw new IllegalArgumentException();
 	
 		props.put(PROP_DEVICE_STATUS, new Integer(0));
-		props.put(PROP_DEVICE_LOCATION, loc);
+		props.put(PROP_PHYSICAL_LOCATION, loc);
 		props.put(PROP_TEMPERATURE, new Float(temperature));
 	}
 
@@ -89,7 +66,7 @@ public class TemperatureSensor extends Device {
     }
 	
 	public Location getDeviceLocation() {
-		return (Location) props.get(PROP_DEVICE_LOCATION);
+		return (Location) props.get(PROP_PHYSICAL_LOCATION);
 	}
 	public void setStatus(int state) {
 		if (state > -1 && state < 101)
@@ -107,17 +84,19 @@ public class TemperatureSensor extends Device {
 
 	public void setDeviceLocation(Location l) {
 		if (l != null)
-		    props.put(PROP_DEVICE_LOCATION, l);
+		    props.put(PROP_PHYSICAL_LOCATION, l);
     }
 	
 	public int getPropSerializationType(String propURI) {
-		return (PROP_DEVICE_LOCATION.equals(propURI)) ? PROP_SERIALIZATION_REDUCED
-			: PROP_SERIALIZATION_FULL;
+		return PROP_SERIALIZATION_FULL;
+		//return (PROP_PHYSICAL_LOCATION.equals(propURI)) ? PROP_SERIALIZATION_REDUCED
+		//	: PROP_SERIALIZATION_FULL;
 	}
 		
 	public boolean isWellFormed() {
-		return props.containsKey(PROP_DEVICE_STATUS)
-		&& props.containsKey(PROP_DEVICE_LOCATION);
+		return true;
+		//return props.containsKey(PROP_DEVICE_STATUS)
+		//&& props.containsKey(PROP_PHYSICAL_LOCATION);
 	}
 	
 	

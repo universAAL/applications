@@ -80,6 +80,41 @@ public class UserManager extends EntityManager{
         return result;
 	}
 
+	public Vector getUserBySmartCard(String tagUid, Vector columns, Vector criteria) throws SQLException {
+        Vector result = new Vector();
+
+        if (columns.size() == 0){
+            columns.add(new Column("users","*"));
+            columns.add(new Column("role","name"));
+            //columns.add(new Column("smartcard","shortdescription"));            
+        }
+        //System.out.println("************************************************");
+        //System.out.println("tag uid="+tagUid);
+        //System.out.println("************************************************");
+        SelectStatement ss = new SelectStatement("users",con);
+        ss.addJoinTable("users_to_role");
+        ss.addJoinCondition(new Column("users","users_id"),new Column("users_to_role","users_id"));
+        ss.addJoinTable("role");
+        ss.addJoinCondition(new Column("role","role_id"),new Column("users_to_role","role_id"));
+        ss.addJoinTable("device_to_users_to_smartcard");
+        ss.addJoinCondition(new Column("users","users_id"),new Column("device_to_users_to_smartcard","users_id"));
+        ss.addJoinTable("smartcard");
+        ss.addJoinCondition(new Column("smartcard","smartcard_id"),new Column("device_to_users_to_smartcard","smartcard_id"));
+        
+        if (criteria == null) criteria = new Vector();
+        StringCriterion ac = new StringCriterion(new Column("smartcard","shortdescription"), new Value(tagUid), Criterion.EQUAL);
+        criteria.add(ac);
+
+        ResultSet rs = ss.execute(columns, criteria);
+        while (rs.next()){
+            ResultRow rr = new ResultRow(rs);
+            result.add(rr);
+        }
+        rs.close();
+        
+        return result;
+	}
+
 	public Vector getUserBySmartCard(long smartcard_id, Vector columns, Vector criteria) throws SQLException {
         Vector result = new Vector();
 

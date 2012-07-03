@@ -5,23 +5,24 @@ import org.universAAL.ontology.phThing.Device;
 import java.util.List;
 import java.util.Vector;
 
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
-import org.universAAL.middleware.owl.Restriction;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.middleware.util.LogUtils;
-import org.universAAL.ontology.safetyDevices.Safety;
+import org.universAAL.ontology.safetyDevices.SafetyManagement;
 import org.universAAL.ontology.safetyDevices.Door;
 import org.universAAL.ontology.safetyDevices.Window;
 import org.universAAL.ontology.safetyDevices.LightSensor;
 import org.universAAL.ontology.safetyDevices.TemperatureSensor;
 import org.universAAL.ontology.safetyDevices.HumiditySensor;
+import org.universAAL.ontology.safetyDevices.SmokeSensor;
 import org.universAAL.ontology.safetyDevices.MotionSensor;
 
 
@@ -45,36 +46,39 @@ class SafetyClient extends ContextSubscriber {
     
 	private static ContextEventPattern[] getContextSubscriptionParams() {
 		ContextEventPattern cep1 = new ContextEventPattern();
-		cep1.addRestriction(Restriction.getAllValuesRestriction(
+		cep1.addRestriction(MergedRestriction.getAllValuesRestriction(
 				ContextEvent.PROP_RDF_SUBJECT, Door.MY_URI));
 
 		ContextEventPattern cep2 = new ContextEventPattern();
-		cep2.addRestriction(Restriction.getAllValuesRestriction(
+		cep2.addRestriction(MergedRestriction.getAllValuesRestriction(
 				ContextEvent.PROP_RDF_SUBJECT, Window.MY_URI));
 
 		ContextEventPattern cep3 = new ContextEventPattern();
-		cep3.addRestriction(Restriction.getAllValuesRestriction(
+		cep3.addRestriction(MergedRestriction.getAllValuesRestriction(
 				ContextEvent.PROP_RDF_SUBJECT, LightSensor.MY_URI));
 
 		ContextEventPattern cep4 = new ContextEventPattern();
-		cep4.addRestriction(Restriction.getAllValuesRestriction(
+		cep4.addRestriction(MergedRestriction.getAllValuesRestriction(
 				ContextEvent.PROP_RDF_SUBJECT, TemperatureSensor.MY_URI));
 
 		ContextEventPattern cep5 = new ContextEventPattern();
-		cep5.addRestriction(Restriction.getAllValuesRestriction(
+		cep5.addRestriction(MergedRestriction.getAllValuesRestriction(
 				ContextEvent.PROP_RDF_SUBJECT, HumiditySensor.MY_URI));
 
 		ContextEventPattern cep6 = new ContextEventPattern();
-		cep6.addRestriction(Restriction.getAllValuesRestriction(
+		cep6.addRestriction(MergedRestriction.getAllValuesRestriction(
 				ContextEvent.PROP_RDF_SUBJECT, MotionSensor.MY_URI));
 
-		return new ContextEventPattern[] { cep1, cep2, cep3, cep4, cep5, cep6 };
+		ContextEventPattern cep7 = new ContextEventPattern();
+		cep7.addRestriction(MergedRestriction.getAllValuesRestriction(
+				ContextEvent.PROP_RDF_SUBJECT, SmokeSensor.MY_URI));
+
+		return new ContextEventPattern[] { cep1, cep2, cep3, cep4, cep5, cep6, cep7 };
 	}
 
-	SafetyClient(BundleContext context) {
+	SafetyClient(ModuleContext context) {
 		// the constructor register us to the bus
 		super(context, getContextSubscriptionParams());
-
 		caller = new DefaultServiceCaller(context);
 		new SafetyUIClient(getControlledDevices());
 	}
@@ -84,59 +88,54 @@ class SafetyClient extends ContextSubscriber {
 	/*****************************************************************/
 
 	private static ServiceRequest lockRequest(String deviceURI) {
-		ServiceRequest turnOff = new ServiceRequest(new Safety(), null);
+		ServiceRequest turnOff = new ServiceRequest(new SafetyManagement(), null);
 
-		turnOff.addValueFilter(new String[] { Safety.PROP_CONTROLS }, new Door(deviceURI));
-		turnOff.addChangeEffect(new String[] { Safety.PROP_CONTROLS,
+		turnOff.addValueFilter(new String[] { SafetyManagement.PROP_CONTROLS }, new Door(deviceURI));
+		turnOff.addChangeEffect(new String[] { SafetyManagement.PROP_CONTROLS,
 				Door.PROP_DEVICE_STATUS }, new Integer(0));
 		return turnOff;
 	}
 
 	private static ServiceRequest unlockRequest(String deviceURI) {
-		ServiceRequest turnOn = new ServiceRequest(new Safety(), null);
+		ServiceRequest turnOn = new ServiceRequest(new SafetyManagement(), null);
 
-		turnOn.addValueFilter(new String[] { Safety.PROP_CONTROLS }, new Door(deviceURI));
-		turnOn.addChangeEffect(new String[] { Safety.PROP_CONTROLS,Door.PROP_DEVICE_STATUS },
+		turnOn.addValueFilter(new String[] { SafetyManagement.PROP_CONTROLS }, new Door(deviceURI));
+		turnOn.addChangeEffect(new String[] { SafetyManagement.PROP_CONTROLS,Door.PROP_DEVICE_STATUS },
 				new Integer(100));
 		return turnOn;
 	}
 	
 	private static ServiceRequest openRequest(String deviceURI) {
-		ServiceRequest open = new ServiceRequest(new Safety(), null);
+		ServiceRequest open = new ServiceRequest(new SafetyManagement(), null);
 
-		open.addValueFilter(new String[] { Safety.PROP_CONTROLS }, new Door(deviceURI));
-		open.addChangeEffect(new String[] { Safety.PROP_CONTROLS,Door.PROP_DEVICE_STATUS },	new Integer(101));
+		open.addValueFilter(new String[] { SafetyManagement.PROP_CONTROLS }, new Door(deviceURI));
+		open.addChangeEffect(new String[] { SafetyManagement.PROP_CONTROLS,Door.PROP_DEVICE_STATUS },	new Integer(101));
 		return open;
 	}
 
 	private static ServiceRequest closeRequest(String deviceURI) {
-		ServiceRequest close = new ServiceRequest(new Safety(), null);
+		ServiceRequest close = new ServiceRequest(new SafetyManagement(), null);
 
-		close.addValueFilter(new String[] { Safety.PROP_CONTROLS }, new Door(deviceURI));
-		close.addChangeEffect(new String[] { Safety.PROP_CONTROLS,Door.PROP_DEVICE_STATUS }, new Integer(-1));
+		close.addValueFilter(new String[] { SafetyManagement.PROP_CONTROLS }, new Door(deviceURI));
+		close.addChangeEffect(new String[] { SafetyManagement.PROP_CONTROLS,Door.PROP_DEVICE_STATUS }, new Integer(-1));
 		return close;
 	}
 
     private static ServiceRequest getDeviceInfoRequest(String deviceURI) {
-    	// Instantiate a ServiceRequest upon the Service Ontology we used
-		ServiceRequest getInfo = new ServiceRequest(new Safety(), null);
-		// We add an input. It´s a filtering input: The device we want to know the info from
-		getInfo.addValueFilter(new String[] { Safety.PROP_CONTROLS },new Door(deviceURI));
-		// We request the output that states the type. We will reference it as
-		// OUTPUT_TO_PUT_TYPE
+		ServiceRequest getInfo = new ServiceRequest(new SafetyManagement(), null);
+		getInfo.addValueFilter(new String[] { SafetyManagement.PROP_CONTROLS },new Door(deviceURI));
 		getInfo.addRequiredOutput(OUTPUT_DEVICE_STATUS, new String[] {
-				Safety.PROP_CONTROLS, Door.PROP_DEVICE_STATUS });
-
+				SafetyManagement.PROP_CONTROLS, Door.PROP_DEVICE_STATUS });
 		getInfo.addRequiredOutput(OUTPUT_DEVICE_LOCATION, new String[] {
-				Safety.PROP_CONTROLS, Door.PROP_DEVICE_LOCATION });
+				SafetyManagement.PROP_CONTROLS, Door.PROP_PHYSICAL_LOCATION });
 	
 		return getInfo;
     }
 	
 	public static ServiceRequest getAllDevicesRequest() {
-		ServiceRequest getAllDevices = new ServiceRequest(new Safety(),	null);
+		ServiceRequest getAllDevices = new ServiceRequest(new SafetyManagement(),	null);
 		// In this case, we do not intend to change anything but only retrieve some info
-		getAllDevices.addRequiredOutput(OUTPUT_LIST_OF_DEVICES,	new String[] { Safety.PROP_CONTROLS });
+		getAllDevices.addRequiredOutput(OUTPUT_LIST_OF_DEVICES,	new String[] { SafetyManagement.PROP_CONTROLS });
 
 		return getAllDevices;
 	}
@@ -325,6 +324,10 @@ class SafetyClient extends ContextSubscriber {
     	SafetyUIClient.setMotionValue(motion);
     }
 
+    public void smokeValue(boolean smoke) {
+    	SafetyUIClient.setSmokeValue(smoke);
+    }
+
     public void handleContextEvent(ContextEvent event) {
 
 		System.out.println("############### EVENT RECEIVED ###############");
@@ -350,16 +353,8 @@ class SafetyClient extends ContextSubscriber {
 			humidityValue(((Float)event.getRDFObject()).floatValue());
 		if (((String)event.getSubjectTypeURI()).indexOf("Motion")!=-1)
 			motionValue(((Double)event.getRDFObject()).doubleValue());
-		
-/*
-		LogUtils.logInfo(Activator.logger, "SafetyConsumer",
-				"handleContextEvent", new Object[] {
-						"Received context event:\n", "    Subject     = ",
-						event.getSubjectURI(), "\n", "    Subject type= ",
-						event.getSubjectTypeURI(), "\n", "    Predicate   = ",
-						event.getRDFPredicate(), "\n", "    Object      = ",
-						event.getRDFObject() }, null);
-*/
+		if (((String)event.getSubjectTypeURI()).indexOf("Smoke")!=-1)
+			smokeValue(((Boolean)event.getRDFObject()).booleanValue());
 	}
 
 	public void communicationChannelBroken() {

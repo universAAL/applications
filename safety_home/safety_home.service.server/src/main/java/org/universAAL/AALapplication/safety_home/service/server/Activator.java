@@ -3,9 +3,8 @@ package org.universAAL.AALapplication.safety_home.service.server;
 //import org.apache.log4j.Logger;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.universAAL.middleware.util.LogUtils;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 /**
  * @author dimokas
@@ -13,25 +12,23 @@ import org.universAAL.middleware.util.LogUtils;
  */
 public class Activator implements BundleActivator {
 	
-	//public static Logger logger = LoggerFactory.getLogger(Activator.class);
+    private SafetyProvider provider = null;
+    public static ModuleContext mc;
 	
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-	 */
 	public void start(final BundleContext context) throws Exception {
+		mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { context });
 		System.out.println("Safety at Home Service started ...");
 		new Thread() {
 			public void run() {
-				new SafetyProvider(context);
+				provider = new SafetyProvider(mc);
 			}
 		}.start();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
 	public void stop(BundleContext context) throws Exception {
+		if (provider != null) {
+		    provider.close();
+		    provider = null;
+		}
 	}
 }

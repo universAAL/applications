@@ -53,7 +53,7 @@ public class SOAPClient {
 	    	  if (input.indexOf("<return>")!=-1){
 	    		  res = input.substring(input.indexOf("<return>")+8,input.indexOf("</return>"));
 	    		  temp = Float.parseFloat(res);
-	    		  System.out.println(res+"\n");
+	    		  //System.out.println(res+"\n");
 	    	  }
 	    	  System.out.println(input);
 	      }
