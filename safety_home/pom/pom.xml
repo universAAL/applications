@@ -7,7 +7,7 @@
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   <artifactId>safety_home.pom</artifactId>
-  <version>0.1.0-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Safety Home AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Safety_Home_universAAL_service</url>
@@ -36,5 +36,6 @@
   	<module>../safety_home.service.temperatureSensorProvider</module>
   	<module>../safety_home.service.humiditySensorProvider</module>
   	<module>../safety_home.service.motionSensorProvider</module>
+  	<module>../safety_home.service.smokeDetectionProvider</module>
   </modules>
 </project>

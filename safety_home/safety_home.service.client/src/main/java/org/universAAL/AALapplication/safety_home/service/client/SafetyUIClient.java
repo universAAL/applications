@@ -14,8 +14,11 @@ import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 
 import org.universAAL.ontology.safetyDevices.Door;
@@ -33,7 +36,10 @@ enum SoundEffect {
 	   CLOSE("/sounds/door_close.wav"),     
 	   LOCK("/sounds/door_lock.wav"),
 	   UNLOCK("/sounds/door_unlock.wav"),
-	   DOORBELL("/sounds/door_bell.wav");
+	   DOORBELL("/sounds/door_bell.wav"),
+	   SMOKE("/sounds/smoke_detection.wav"),
+	   MOTION("/sounds/motion_detection.wav"),
+	   WINDOW("/sounds/window_open.wav");
 	   
 	   // Nested class for specifying volume
 	   public static enum Volume {
@@ -100,9 +106,17 @@ public class SafetyUIClient extends javax.swing.JPanel {
     private static javax.swing.JLabel jLabel19;
     private static javax.swing.JLabel jLabel20;
     private static javax.swing.JLabel jLabel21;
+   
+    private static int motionWarnings = 0;
+    private static int smokeWarnings = 0;
     
     // create the GUI
 	public void start(Device[] d) {
+		//try{
+		//	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		//}
+		//catch(Exception e){}
+		
 		frame = new JFrame();
 		javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
 		javax.swing.JPanel downPanel = new javax.swing.JPanel();
@@ -140,8 +154,10 @@ public class SafetyUIClient extends javax.swing.JPanel {
 		frame.setVisible(true);
 	}
 
+	private static Device dev;
 	private MyJPanel createPanel(final Device device) {
 		
+		this.dev = device;
 		MyJPanel jPanel1 = new MyJPanel(device);
 		javax.swing.JPanel topPanel = new javax.swing.JPanel();
 		javax.swing.JPanel centerPanel = new javax.swing.JPanel();
@@ -358,7 +374,7 @@ public class SafetyUIClient extends javax.swing.JPanel {
 			
 			jLabel16 = new javax.swing.JLabel();
 			jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-			jLabel16.setText("\n\n Available soon.");
+			jLabel16.setText("\n\n Temperature sensor is active.");
 			jLabel16.setFont(new Font(Font.SANS_SERIF,Font.ITALIC,14));
 			jLabel16.setForeground(Color.BLUE);
 			
@@ -390,7 +406,7 @@ public class SafetyUIClient extends javax.swing.JPanel {
 			
 			jLabel21 = new javax.swing.JLabel();
 			jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-			jLabel21.setText("\n\n Available soon.");
+			jLabel21.setText("\n\n Humidity sensor is active.");
 			jLabel21.setFont(new Font(Font.SANS_SERIF,Font.ITALIC,14));
 			jLabel21.setForeground(Color.BLUE);
 			
@@ -513,6 +529,23 @@ public class SafetyUIClient extends javax.swing.JPanel {
 		}
 	}
 
+	private static void OpenAction(Device device) {
+		String uri = device.getURI();
+		boolean open = SafetyClient.open(uri);
+		if (open) {
+			SoundEffect.OPEN.play();
+			for (int i = 0; i < myPanels.length; i++) {
+				MyJPanel pan = myPanels[i];
+
+				if (pan.getDevice().equals(device)) {
+					System.out.println("checking " + pan.getDevice().getURI()
+							+ " with " + device.getURI());
+					pan.setText("\n\n The Door is open");
+				}
+			}
+		}
+	}
+
 	private void CloseActionPerformed(java.awt.event.ActionEvent evt, Device device) {
 		String uri = device.getURI();
 		boolean close = SafetyClient.close(uri);
@@ -531,6 +564,24 @@ public class SafetyUIClient extends javax.swing.JPanel {
 	}
 
 	private void OnActionPerformed(java.awt.event.ActionEvent evt, Device device) {
+		String uri = device.getURI();
+		boolean open = SafetyClient.unlock(uri);
+		if (open) {
+			SoundEffect.UNLOCK.play();
+			for (int i = 0; i < myPanels.length; i++) {
+				MyJPanel pan = myPanels[i];
+
+				if (pan.getDevice().equals(device)) {
+					System.out.println("checking " + pan.getDevice().getURI()
+							+ " with " + device.getURI());
+					pan.setText("\n\n The Door is unlocked");
+
+				}
+			}
+		}
+	}
+
+	private static void OnAction(Device device) {
 		String uri = device.getURI();
 		boolean open = SafetyClient.unlock(uri);
 		if (open) {
@@ -591,31 +642,53 @@ public class SafetyUIClient extends javax.swing.JPanel {
 	}
 
 	public static void setKnockingPerson(String person) {
-//		String uri = device.getURI();
-		person = person.replaceAll(" ", "_");
-		//for (int i = 0; i < myPanels.length; i++) {
+	  try{	
+		String uri = dev.getURI();
+		if (person.indexOf("Unknown Person")!=-1){
+			person = person.replaceAll(" ", "_");
 			MyJPanel pan = myPanels[0];
 			jLabel5.setIcon(new ImageIcon((java.net.URL)SafetyUIClient.class.getResource("/images/"+person+".jpg")));
 			SoundEffect.DOORBELL.play();
 			pan.setText("\n\n " + person.replaceAll("_", " ") + " is knocking on the door." + "\n ");
-		//}
+		}
+		else{
+			String newperson = person.replaceAll(" ", "_");
+			newperson = newperson.substring(newperson.indexOf(":")+2,newperson.length());
+			MyJPanel pan = myPanels[0];
+			jLabel5.setIcon(new ImageIcon((java.net.URL)SafetyUIClient.class.getResource("/images/"+newperson+".jpg")));
+			SoundEffect.DOORBELL.play();
+			pan.setText("\n\n " + newperson.replaceAll("_", " ") + " is knocking on the door." + "\n ");
+			if (person.indexOf("Formal Caregiver")!=-1){
+	    		// Unlock the door
+	    		OnAction(dev);
+	    		Thread.sleep(10*1000);
+	    		// Open the door
+	    		OpenAction(dev);
+			}
+		}
+	  }
+	  catch (Exception e) {e.printStackTrace();}
 	}
 
 	public static void setWindowStatus(int state) {
-//		String uri = device.getURI();
-		//for (int i = 0; i < myPanels.length; i++) {
-			MyJPanel pan = myPanels[1];
-			if (state==0){
-				jLabel10.setIcon(new ImageIcon((java.net.URL)SafetyUIClient.class.getResource("/images/closed_window_small.jpg")));
-				//SoundEffect.DOORBELL.play();
-				pan.setText("\n\n The window is closed." + "\n ");
-			}
-			if (state==100){
-				jLabel10.setIcon(new ImageIcon((java.net.URL)SafetyUIClient.class.getResource("/images/opened_window_small.jpg")));
-				//SoundEffect.DOORBELL.play();
-				pan.setText("\n\n The window is opened." + "\n ");
-			}
-		//}
+		MyJPanel pan = myPanels[1];
+		if (state==0){
+			jLabel10.setIcon(new ImageIcon((java.net.URL)SafetyUIClient.class.getResource("/images/closed_window_small.jpg")));
+			pan.setText("\n\n The window is closed." + "\n ");
+		}
+		if (state==100){
+			ImageIcon windowIcon = new ImageIcon((java.net.URL)SafetyUIClient.class.getResource("/images/window_open.jpg"));
+			SoundEffect.WINDOW.play();
+			JOptionPane pane = new JOptionPane();
+			pane.setMessage("Window is open");
+			pane.setMessageType(JOptionPane.WARNING_MESSAGE);
+			pane.setIcon(windowIcon);
+			JDialog d = pane.createDialog(null, "Window");
+			d.setVisible(true);
+			
+			jLabel10.setIcon(new ImageIcon((java.net.URL)SafetyUIClient.class.getResource("/images/opened_window_small.jpg")));
+			pan.setText("\n\n The window is opened." + "\n ");
+		}
 	}
 
 	public static void setLightStatus(int state) {
@@ -649,7 +722,77 @@ public class SafetyUIClient extends javax.swing.JPanel {
 		long min = tmp / 60;
 		long sec = tmp % 60;
 		String val = "" + motion;
+		
+		if (motion < 120000.0 && (motionWarnings == 0)){
+			ImageIcon motionIcon = new ImageIcon((java.net.URL)SafetyUIClient.class.getResource("/images/motion_detection.jpg"));
+			SoundEffect.MOTION.play();
+			
+			JOptionPane pane = new JOptionPane();
+			pane.setMessage("Motion Detection");
+			pane.setMessageType(JOptionPane.WARNING_MESSAGE);
+			pane.setIcon(motionIcon);
+		    JDialog d = pane.createDialog(null, "Motion");
+		    d.setVisible(true);
+			//JOptionPane.showMessageDialog(null, "Motion Detection", "Motion", JOptionPane.WARNING_MESSAGE, motionIcon);
+			
+			int selection = getSelection(pane);
+		    switch (selection) {
+		    case JOptionPane.OK_OPTION:
+		    	motionWarnings = 1;
+		    	break;
+		    default:
+		    	System.out.println("Others");
+		    }
+
+		}
+		else if (motion > 120000)
+			motionWarnings = 0;
 		pan.setText("\n Motion detected before \n" + hours + "hours " + min + "min. " + sec + "sec." + "\n ");
+		pan.setText(hours + "hours " + min + "min. " + sec + "sec." + "\n ");
 	}
 
+	public static void setSmokeValue(boolean smoke) {
+		if (smokeWarnings < 3){
+			ImageIcon smokeIcon = new ImageIcon((java.net.URL)SafetyUIClient.class.getResource("/images/smoke.jpg"));
+			SoundEffect.SMOKE.play();
+			JOptionPane pane = new JOptionPane();
+			pane.setMessage("Smoke Detection");
+			pane.setMessageType(JOptionPane.WARNING_MESSAGE);
+			pane.setIcon(smokeIcon);
+		    JDialog d = pane.createDialog(null, "Smoke");
+		    d.setVisible(true);
+			//pane.showMessageDialog(null, "Smoke Detection", "Smoke", JOptionPane.WARNING_MESSAGE, smokeIcon);
+			
+			int selection = getSelection(pane);
+		    switch (selection) {
+		    case JOptionPane.OK_OPTION:
+		    	smokeWarnings++;
+		    	break;
+		    default:
+		    	System.out.println("Others");
+		    }
+		}
+	}
+	public static int getSelection(JOptionPane optionPane) {
+	    int returnValue = JOptionPane.CLOSED_OPTION;
+
+	    Object selectedValue = optionPane.getValue();
+	    if (selectedValue != null) {
+	      Object options[] = optionPane.getOptions();
+	      if (options == null) {
+	        if (selectedValue instanceof Integer) {
+	          returnValue = ((Integer) selectedValue).intValue();
+	        }
+	      } else {
+	        for (int i = 0, n = options.length; i < n; i++) {
+	          if (options[i].equals(selectedValue)) {
+	            returnValue = i;
+	            break; // out of for loop
+	          }
+	        }
+	      }
+	    }
+	    return returnValue;
+	}
+	
 }

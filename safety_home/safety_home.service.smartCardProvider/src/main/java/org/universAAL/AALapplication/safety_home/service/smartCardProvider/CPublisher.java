@@ -3,9 +3,9 @@ package org.universAAL.AALapplication.safety_home.service.smartCardProvider;
 /* More on how to use this class at: 
  * http://forge.universaal.org/wiki/support:Developer_Handbook_6#Publishing_context_events */
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.db.manager.entitymanagers.UserManager;
 import org.universAAL.AALapplication.db.utils.Value;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
@@ -15,6 +15,12 @@ import org.universAAL.ontology.location.indoor.Room;
 import org.universAAL.ontology.phThing.Device;
 import org.universAAL.ontology.safetyDevices.Door;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.sql.*;
 import javax.sql.*;
 import java.util.Vector;
@@ -24,6 +30,7 @@ import org.universAAL.AALapplication.db.utils.Column;
 import org.universAAL.AALapplication.db.utils.ConnectionManager;
 import org.universAAL.AALapplication.db.utils.ResultRow;
 import org.universAAL.AALapplication.db.utils.Value;
+import java.net.*;
 
 
 public class CPublisher extends ContextPublisher{
@@ -39,11 +46,11 @@ public class CPublisher extends ContextPublisher{
 	private Vector userDetails;
 	private String user;
 	
-	protected CPublisher(BundleContext context, ContextProvider providerInfo) {
+	protected CPublisher(ModuleContext context, ContextProvider providerInfo) {
 		super(context, providerInfo);
 	}
 	
-	protected CPublisher(BundleContext context) {
+	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
 			ContextProvider info = new ContextProvider(SAFETY_CARD_PROVIDER_NAMESPACE + "SmartCardContextProvider");
@@ -56,15 +63,30 @@ public class CPublisher extends ContextPublisher{
 		}
 	}
 	
+	public CPublisher(ModuleContext context, ContextProvider providerInfo, ContextPublisher cp) {
+		super(context, providerInfo);
+		try{
+			this.cp = cp;
+			invoke();
+		}
+		catch (InterruptedException e){
+			e.printStackTrace();
+		}
+	}
+	
 	public void invoke() throws InterruptedException{
-		//getUsers();
+		getUserByRFidTag();
+	}
+
+/*	
+	public void invoke() throws InterruptedException{
 		while (true){
 			Thread.sleep(15*60000);
 			getRandomUser();
 			publishDoorBell(0);
 		}
 	}
-	
+*/
 	private void publishDoorBell(int deviceID){
 		Device device=null;
 		if(deviceID==0){
@@ -84,6 +106,56 @@ public class CPublisher extends ContextPublisher{
 		return ( lb+ (int)( Math.random()*d)) ;		
 	}
 	
+	public void getUserByRFidTag(){
+		
+        Socket kkSocket = null;
+        PrintWriter out = null;
+        BufferedReader in = null;
+        Connection con = null;
+        
+        try {
+            kkSocket = new Socket("160.40.60.229", 4444);
+            out = new PrintWriter(kkSocket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
+        } catch (UnknownHostException e) {
+            System.err.println("Don't know about host: 160.40.60.229");
+            System.exit(1);
+        } catch (IOException e) {
+            System.err.println("Couldn't get I/O for the connection to: 160.40.60.229");
+            System.exit(1);
+        }
+
+        try{
+        	String fromServer;
+			con = ConnectionManager.getConnection();
+        	System.out.println("Starting Client ...");
+        	while ((fromServer = in.readLine()) != null) {
+        		System.out.println("Server: " + fromServer);
+        		if (fromServer.indexOf("Tag ID:")!=-1){
+        			this.populateUserBySmartCard(con, fromServer.substring(fromServer.indexOf(":")+2,fromServer.length()));
+        			if (this.userDetails.size()>0){
+        				ResultRow rr = (ResultRow)this.userDetails.get(0);
+        				System.out.println(rr.getStringValue(new Column("users","firstname")) + "\t" + rr.getStringValue(new Column("users","lastname"))+"\t"+rr.getStringValue(new Column("role","name"))+"\t"+rr.getStringValue(new Column("smartcard","shortdescription")));
+        				this.user = rr.getStringValue(new Column("role","name")) + ": " + rr.getStringValue(new Column("users","firstname")) + " " + rr.getStringValue(new Column("users","lastname"));
+        			}
+        			else
+        				this.user = "Unknown Person";
+        			publishDoorBell(0);
+        		}
+        		if (fromServer.equals("Bye"))
+        			break;
+        	}
+
+        	out.close();
+        	in.close();
+        	kkSocket.close();
+		} 
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		finally{ ConnectionManager.returnConnection(con); }
+	}
+
 	public void getRandomUser(){
    		Connection con = null;
 		try{
@@ -130,6 +202,14 @@ public class CPublisher extends ContextPublisher{
 		 ArithmeticCriterion ac = new ArithmeticCriterion(new Column("device_to_users_to_smartcard","device_id"), new Value(1), Criterion.EQUAL);
 		 criteria.add(ac);
 		 this.userDetails = um.getUserBySmartCard(smartcard_id, new Vector(), criteria);
+	}
+
+	private void populateUserBySmartCard(Connection con, String tagUid) throws SQLException{
+		 UserManager um = new UserManager(con);
+		 Vector criteria = new Vector();
+		 ArithmeticCriterion ac = new ArithmeticCriterion(new Column("device_to_users_to_smartcard","device_id"), new Value(1), Criterion.EQUAL);
+		 criteria.add(ac);
+		 this.userDetails = um.getUserBySmartCard(tagUid, new Vector(), criteria);
 	}
 
 	private static ContextProvider getProviderInfo() {

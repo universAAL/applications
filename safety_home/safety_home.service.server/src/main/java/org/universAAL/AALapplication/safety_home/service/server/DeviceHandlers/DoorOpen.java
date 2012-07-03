@@ -1,14 +1,13 @@
 package org.universAAL.AALapplication.safety_home.service.server.DeviceHandlers;
 
-//import jcontrol.framework.webservices.transport.http.exceptions.HTTPException;
+import jcontrol.framework.webservices.transport.http.exceptions.HTTPException;
 
-//import org.askit.domotics.devices.DomoticsException;
-//import org.askit.domotics.groups.KeyMatic;
-//import org.askit.domotics.groups.PilotSite;
+import org.askit.domotics.devices.DomoticsException;
+import org.askit.domotics.groups.KeyMatic;
+import org.askit.domotics.groups.PilotSite;
 
 public class DoorOpen {
 
-/*
 	private PilotSite d;
 	private KeyMatic k;
 	
@@ -25,7 +24,10 @@ public class DoorOpen {
             System.out.println("d.getHS485().isDoorLocked()="+d.getHS485().isDoorLocked());
             System.out.println("d.getHS485().isDoorOpened()="+d.getHS485().isDoorOpened());
 		} 
-		catch (DomoticsException e) { e.printStackTrace(); return false; }
+		catch (DomoticsException e) { 
+			//e.printStackTrace(); 
+			return false; 
+		}
 		System.out.println("finished!");
 		return true;
 	}
@@ -35,5 +37,5 @@ public class DoorOpen {
 		DoorOpen door = new DoorOpen();
 		door.open();
 	}
-*/
+
 }

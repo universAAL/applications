@@ -1,7 +1,7 @@
 package org.universAAL.AALapplication.safety_home.service.humiditySensorProvider;
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.safety_home.service.humiditySensorSoapClient.SOAPClient;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
@@ -20,11 +20,11 @@ public class CPublisher extends ContextPublisher{
 	
 	private ContextPublisher cp;
 	
-	protected CPublisher(BundleContext context, ContextProvider providerInfo) {
+	protected CPublisher(ModuleContext context, ContextProvider providerInfo) {
 		super(context, providerInfo);
 	}
 	
-	protected CPublisher(BundleContext context) {
+	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
 			ContextProvider info = new ContextProvider(SAFETY_HUMIDITY_PROVIDER_NAMESPACE + "HumidityContextProvider");
@@ -37,10 +37,21 @@ public class CPublisher extends ContextPublisher{
 		}
 	}
 
+	public CPublisher(ModuleContext context, ContextProvider providerInfo, ContextPublisher cp) {
+		super(context, providerInfo);
+		try{
+			this.cp = cp;
+			invoke();
+		}
+		catch (InterruptedException e){
+			e.printStackTrace();
+		}
+	}
+	
 	public void invoke() throws InterruptedException{
 		//getUsers();
 		while (true){
-			Thread.sleep(60000);
+			Thread.sleep(115000);
 			publishHumidity(0);
 		}
 	}

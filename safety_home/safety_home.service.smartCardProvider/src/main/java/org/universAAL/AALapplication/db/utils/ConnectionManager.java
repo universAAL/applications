@@ -6,19 +6,20 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.universAAL.AALapplication.db.config.Configuration;
+
 //import org.apache.commons.dbcp.cpdsadapter.DriverAdapterCPDS;
 //import org.apache.commons.dbcp.datasources.SharedPoolDataSource;
 
 public class ConnectionManager extends ClassLoader {
 
 	private static DataSource ds = null;
+	private final static String dbDriver = Configuration.get("dbDriver");
+	private final static String dbUrl = Configuration.get("dbUrl");
+	private final static String dbUser = Configuration.get("dbUser");
+	private final static String dbPassword = Configuration.get("dbPassword");
 
-	private final static String dbDriver = "com.mysql.jdbc.Driver";
-	private final static String dbUrl ="jdbc:mysql://localhost/safety_home";
-	private final static String dbUser = "root";
-	private final static String dbPassword = "deskati1!";
 	
-
 	public static synchronized Connection getConnection() throws SQLException {
 		com.mysql.jdbc.Driver d = new com.mysql.jdbc.Driver(); 
 		Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);

@@ -1,30 +1,30 @@
 Manifest-Version: 1.0
-Export-Package: org.universAAL.AALapplication.safety_home.service.temp
- eratureSensorProvider;uses:="org.osgi.framework,org.universAAL.AALapp
- lication.safety_home.service.temperatureSensorSoapClient,org.universA
- AL.middleware.rdf,org.universAAL.ontology.safetyDevices,org.universAA
- L.middleware.context.owl,org.universAAL.middleware.context,org.univer
- sAAL.ontology.location,org.universAAL.ontology.location.indoor";versi
- on="0.1.0.SNAPSHOT",org.universAAL.AALapplication.safety_home.service
- .temperatureSensorSoapClient;version="0.1.0.SNAPSHOT"
-Built-By: dimokas
-Tool: Bnd-1.43.0
-Bundle-Name: Safety at Home Temperature Sensor Provider
-Created-By: Apache Maven Bundle Plugin
-Bundle-Vendor: universAAL Consortium
+Bnd-LastModified: 1341320617140
 Build-Jdk: 1.6.0_27
-Bundle-Version: 0.1.0.SNAPSHOT
-Bnd-LastModified: 1325772939131
-Bundle-ManifestVersion: 2
-Bundle-Activator: org.universAAL.AALapplication.safety_home.service.te
- mperatureSensorProvider.Activator
-Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Built-By: dimokas
+Bundle-Activator: org.universAAL.AALapplication.safety_home.service.temp
+ eratureSensorProvider.Activator
 Bundle-Description: Safety at Home Temperature Sensor Provider
-Import-Package: org.osgi.framework;version="[1.3,2)",org.universAAL.mi
- ddleware.context,org.universAAL.middleware.context.owl,org.universAAL
- .middleware.rdf,org.universAAL.ontology.location,org.universAAL.ontol
- ogy.location.indoor,org.universAAL.ontology.safetyDevices;version="[0
- .1,1)"
-Bundle-DocURL: http://www.universAAL.org/
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Safety at Home Temperature Sensor Provider
 Bundle-SymbolicName: safety_home.service.temperatureSensorProvider
-
+Bundle-Version: 1.0.3.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.universAAL.AALapplication.safety_home.service.temper
+ atureSensorProvider;uses:="org.universAAL.middleware.container,org.osgi
+ .framework,org.universAAL.middleware.container.osgi,org.universAAL.AALa
+ pplication.safety_home.service.temperatureSensorSoapClient,org.universA
+ AL.middleware.rdf,org.universAAL.ontology.safetyDevices,org.universAAL.
+ middleware.context.owl,org.universAAL.middleware.context,org.universAAL
+ .ontology.location,org.universAAL.ontology.location.indoor";version="1.
+ 0.3.SNAPSHOT",org.universAAL.AALapplication.safety_home.service.tempera
+ tureSensorSoapClient;version="1.0.3.SNAPSHOT"
+Import-Package: org.osgi.framework;version="[1.3,2)",org.universAAL.midd
+ leware.container;version="[1.1,2)",org.universAAL.middleware.container.
+ osgi;version="[1.1,2)",org.universAAL.middleware.context;version="[1.1,
+ 2)",org.universAAL.middleware.context.owl;version="[1.1,2)",org.univers
+ AAL.middleware.rdf;version="[1.1,2)",org.universAAL.ontology.location;v
+ ersion="[1.1,2)",org.universAAL.ontology.location.indoor;version="[1.1,
+ 2)",org.universAAL.ontology.safetyDevices;version="[1.0,2)"
+Tool: Bnd-1.50.0

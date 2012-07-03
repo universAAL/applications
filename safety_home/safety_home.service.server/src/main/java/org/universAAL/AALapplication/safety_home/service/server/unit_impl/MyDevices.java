@@ -4,8 +4,8 @@ package org.universAAL.AALapplication.safety_home.service.server.unit_impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-//import org.universAAL.AALapplication.safety_home.service.server.DeviceHandlers.DoorLockUnlock;
-//import org.universAAL.AALapplication.safety_home.service.server.DeviceHandlers.DoorOpen;
+import org.universAAL.AALapplication.safety_home.service.server.DeviceHandlers.DoorLockUnlock;
+import org.universAAL.AALapplication.safety_home.service.server.DeviceHandlers.DoorOpen;
 
 /**
  * @author dimokas
@@ -130,7 +130,7 @@ public class MyDevices {
 
 
 	/* Living Lab Door Management */
-/*
+
 	public boolean unlock() {
 
 		DoorLockUnlock door = new DoorLockUnlock();
@@ -148,23 +148,6 @@ public class MyDevices {
 		DoorOpen door = new DoorOpen();
 		return door.open();
 	}
-*/
+
 	/* End of Living Lab Door Management */
-
-	
-/*
-	public boolean unlock() {
-
-		PilotSite d = new PilotSite();
-		KeyMatic k = d.getKeyMatic();
-				
-		System.out.print("Run keymatic unlock...");
-		try {
-			k.unlock();
-		} 
-		catch (DomoticsException e) { e.printStackTrace(); return false; }
-		System.out.println("finished!");
-		return true;
-	}
-*/
 }

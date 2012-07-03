@@ -46,7 +46,7 @@ public class SOAPClient {
 	      while ((input = br.readLine())!=null){
 	    	  if (input.indexOf("<return>")!=-1){
 	    		  res = input.substring(input.indexOf("<return>")+8,input.indexOf("</return>"));
-	    		  System.out.println(res+"\n");
+	    		  //System.out.println(res+"\n");
 	    	  }
 	    	  System.out.println(input);
 	      }
