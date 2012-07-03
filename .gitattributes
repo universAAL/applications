@@ -345,11 +345,6 @@ agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_hr
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_it.properties -text
 agenda/agenda.server/src/main/resources/org/universAAL/agenda/server/messages_nl.properties -text
 food_shopping/README.txt -text
-food_shopping/food_shopping.service.client/pom.xml -text
-food_shopping/food_shopping.service.client/src/main/java/org/universAAL/AALapplication/food_shopping/service/client/Activator.java -text
-food_shopping/food_shopping.service.client/src/main/java/org/universAAL/AALapplication/food_shopping/service/client/FoodManagementClient.java -text
-food_shopping/food_shopping.service.client/src/main/java/org/universAAL/AALapplication/food_shopping/service/client/FoodManagementUIClient.java -text
-food_shopping/food_shopping.service.client/src/main/java/org/universAAL/AALapplication/food_shopping/service/client/utils/GridLayout2.java -text
 food_shopping/food_shopping.service.server/README.txt -text
 food_shopping/food_shopping.service.server/foodShoppingServer.launch -text
 food_shopping/food_shopping.service.server/pom.xml -text
