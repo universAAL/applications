@@ -4090,7 +4090,6 @@ safety_home/ont.safetyDevices/src/main/java/org/universAAL/ontology/safetyDevice
 safety_home/ont.safetyDevices/src/main/java/org/universAAL/ontology/safetyDevices/HumiditySensor.java -text
 safety_home/ont.safetyDevices/src/main/java/org/universAAL/ontology/safetyDevices/LightSensor.java -text
 safety_home/ont.safetyDevices/src/main/java/org/universAAL/ontology/safetyDevices/MotionSensor.java -text
-safety_home/ont.safetyDevices/src/main/java/org/universAAL/ontology/safetyDevices/Safety.java -text
 safety_home/ont.safetyDevices/src/main/java/org/universAAL/ontology/safetyDevices/SafetyManagement.java -text
 safety_home/ont.safetyDevices/src/main/java/org/universAAL/ontology/safetyDevices/SafetyOntology.java -text
 safety_home/ont.safetyDevices/src/main/java/org/universAAL/ontology/safetyDevices/SmokeSensor.java -text
