@@ -32,7 +32,7 @@ public class Configuration {
 			//properties.load(new FileInputStream(CONFIGURATION_FILE));
 			//String curDir = System.getProperty("user.dir");
 			//System.out.println("*** "+curDir);
-			properties.load(new FileInputStream(new File("safety_home.properties")));
+			properties.load(new FileInputStream(new File("./services/safety_home/safety_home.properties")));
             System.out.println("properties initialized ok");
 			
 		} catch (FileNotFoundException e) {
