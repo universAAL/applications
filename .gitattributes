@@ -2863,11 +2863,9 @@ help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Coordin
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/DataStorage.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/HwoConsumer.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/HwoNamespace.java -text
-help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/ISubscriber.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Line2D.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Line2DDouble.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Messages.java -text
-help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/OPublisher.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/POI.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/POI_UAAL.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/SCallee.java -text
