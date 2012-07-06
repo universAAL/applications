@@ -30,9 +30,10 @@ public class Configuration {
 			properties = new Properties();
 
 			//properties.load(new FileInputStream(CONFIGURATION_FILE));
-			//String curDir = System.getProperty("user.dir");
-			//System.out.println("*** "+curDir);
-			properties.load(new FileInputStream(new File("../../trunk/food_shopping/utils/app.properties")));
+			String curDir = System.getProperty("user.dir");
+			System.out.println("*** "+curDir);
+		//	properties.load(new FileInputStream(new File("../../trunk/food_shopping/utils/app.properties")));
+			properties.load(new FileInputStream(new File("app.properties")));
             System.out.println("properties initialized ok");
 			
 		} catch (FileNotFoundException e) {
