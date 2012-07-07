@@ -13,28 +13,52 @@ import org.apache.commons.logging.LogFactory;
 
 public class InitialSetup {
 	
+	//Configuration Extractor: Define the usecase configuration
+	//$$ucconfig $ucname "Nutritional Advisor" $versionnr "0.0.1-SNAPSHOT" $author "Gema"
+	//$$uid 2746ed89-2f27-45a2-bc0b-45fadeaf8491	
 	private static Log log = LogFactory.getLog(InitialSetup.class);
+	
 	private static final String OASIS_PATH_KEY = "oasis_path";
 	private static final String OASIS_PATH_VALUE = "C:\\OASIS\\";
 	
 	private static final String NUTRITIONAL_FOLDER_KEY = "nutritional_folder";
 	private static final String NUTRITIONAL_FOLDER_VALUE = "NutritionalAdvisor";
 	
+	//Configuration Extractor: Define a new panel
+	//the following variables will be located in this panel
+	//$$panel $caption "Server configuration" 
+	
+	//Configuration Extractor: Define a new variable
+	//$$variable $name web_server_ip_address $type String $label "IP:" $hover "Insert the IP of your Nutritional Advisor web server."
 	protected static final String WEB_SERVER_IP_ADDRESS_KEY = "web_server_ip_address";
 	private static final String WEB_SERVER_IP_ADDRESS_VALUE = "158.42.166.200"; 
 	
+	//Configuration Extractor: Define a new variable
+	//$$variable $name web_server_port $type int $label "Port:" $hover "Insert the Port of your Nutritional Advisor web server."
 	protected static final String WEB_SERVER_PORT_KEY = "web_server_port"; 
 	private static final String WEB_SERVER_PORT_VALUE = "8080";
 	
+	//Configuration Extractor: Define a new variable
+	//$$variable $name web_server_service_address $type String $label "Service Address:" $hover "Insert the web service address of your Nutritional Advisor."
 	protected static final String WEB_SERVER_SERVICE_ADDRESS_KEY = "web_server_service_address";
 	private static final String WEB_SERVER_SERVICE_ADDRESS_VALUE = "NutriAdvisor_uAAL/NutritionalAdvisor";
 	
+	//Configuration Extractor: Define a new panel
+	//the following variables will be located in this panel
+	//$$panel $caption "End user preferences for Nutritional Advisor" 
+	
+	//Configuration Extractor: Define a new variable
+	//$$variable $name maximize_window $type String $label "Fullscreen:" $hover "Should the Nutritional Advisor start in fullscreen. [true|false]"
 	protected static final String MAXIMIZE_WINDOW_KEY = "maximize_window";
 	private static final String MAXIMIZE_WINDOW_VALUE = "false";
 	
+	//Configuration Extractor: Define a new variable
+	//$$variable $name screensaver_enabled $type String $label "Enable Screensaver:" $hover "Activate screensaver for Nutritional Advisor. [true|false]"
 	protected static final String SCREENSAVER_ENABLED_KEY = "screensaver_enabled";
 	private static final String SCREENSAVER_ENABLED_VALUE = "true";
 
+	//Configuration Extractor: Define a new variable
+	//$$variable $name screensaver_delay_second $type String $label "Set screensaver delay:" $hover "Please set the screensaver delay in seconds."
 	protected static final String SCREENSAVER_DELAY_SECONDS_KEY = "screensaver_delay_second";
 	private static final String SCREENSAVER_DELAY_SECONDS_VALUE = "90";
 	
