@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.food_shopping.service.db.config;
 
 import org.universAAL.AALapplication.food_shopping.service.db.config.FileLoader;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import java.lang.System;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,10 +31,17 @@ public class Configuration {
 			properties = new Properties();
 
 			//properties.load(new FileInputStream(CONFIGURATION_FILE));
-			String curDir = System.getProperty("user.dir");
+		    String curDir = System.getProperty("user.dir");
 			System.out.println("*** "+curDir);
 		//	properties.load(new FileInputStream(new File("../../trunk/food_shopping/utils/app.properties")));
-			properties.load(new FileInputStream(new File("./services/food_shopping/food_shopping.properties")));
+		
+			
+			File confHome = new File(new BundleConfigHome("food_shopping").getAbsolutePath());
+			System.out.println("*** "+confHome.getAbsolutePath());
+	        properties.load(new FileInputStream(new File(confHome,"food_shopping.properties")));
+			
+			
+//			properties.load(new FileInputStream(new File("./services/food_shopping/food_shopping.properties")));
             System.out.println("properties initialized ok");
 			
 		} catch (FileNotFoundException e) {
