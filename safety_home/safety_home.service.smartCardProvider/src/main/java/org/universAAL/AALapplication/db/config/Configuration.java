@@ -1,6 +1,8 @@
 package org.universAAL.AALapplication.db.config;
 
 import org.universAAL.AALapplication.db.config.FileLoader;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
+
 import java.lang.System;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,10 +31,12 @@ public class Configuration {
 			System.out.println("try to initialize configuration");
 			properties = new Properties();
 
-			//properties.load(new FileInputStream(CONFIGURATION_FILE));
-			//String curDir = System.getProperty("user.dir");
-			//System.out.println("*** "+curDir);
-			properties.load(new FileInputStream(new File("./services/safety_home/safety_home.properties")));
+		    String curDir = System.getProperty("user.dir");
+			System.out.println("*** "+curDir);
+			
+			File confHome = new File(new BundleConfigHome("safety_home").getAbsolutePath());
+			System.out.println("*** "+confHome.getAbsolutePath());
+	        properties.load(new FileInputStream(new File(confHome,"safety_home.properties")));
             System.out.println("properties initialized ok");
 			
 		} catch (FileNotFoundException e) {
