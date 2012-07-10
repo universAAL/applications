@@ -41,7 +41,7 @@ public final class MyIntakeInfosDatabase {
     Map<Time, MedicinesInfo> timeMedicinesInfoMap = getTimeMedicinesInfoMap(detailedInfo);
 
     USER_INTAKE_INFO.put(UserIDs.getSaied(), timeMedicinesInfoMap);
-
+    USER_INTAKE_INFO.put(UserIDs.getSaiedUser(), timeMedicinesInfoMap);
   }
 
   private static Map<Time, MedicinesInfo> getTimeMedicinesInfoMap(String detailedInfo) {
@@ -84,7 +84,9 @@ public final class MyIntakeInfosDatabase {
 
   public static MedicinesInfo getIntakeInfoForUser(User user, Time time) {
     Map<Time, MedicinesInfo> timeMedicinesInfoMap = USER_INTAKE_INFO.get(user);
-
+    if (timeMedicinesInfoMap == null) {
+        throw new MedicationException("The is no entry for that user: " + user);
+      }
     return timeMedicinesInfoMap.get(time);
   }
 
