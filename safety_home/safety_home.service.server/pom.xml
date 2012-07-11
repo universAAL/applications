@@ -8,9 +8,7 @@
   	<relativePath>../pom/</relativePath>
   </parent>
   
-  <groupId>org.universAAL.AALapplication</groupId>
   <artifactId>safety_home.service.server</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
   <name>Safety at Home Service</name>
   <description>Safety at Home Server Service</description>
   <packaging>bundle</packaging>
@@ -26,37 +24,30 @@
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
-			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.model</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.container.xfaces</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>  
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.container.osgi</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
@@ -125,6 +116,8 @@
 						<Bundle-Activator>org.universAAL.AALapplication.safety_home.service.server.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Export-Package>org.universAAL.AALapplication.safety_home.service.server</Export-Package>
+            			<Private-Package>org.universAAL.AALapplication</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>

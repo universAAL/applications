@@ -330,14 +330,14 @@ class SafetyClient extends ContextSubscriber {
 
     public void handleContextEvent(ContextEvent event) {
 
-		System.out.println("############### EVENT RECEIVED ###############");
+/*		System.out.println("############### EVENT RECEIVED ###############");
 		System.out.println("Received context event:\n"+"    Subject     = "+
 				event.getSubjectURI()+"\n"+"    Subject type= "+
 				event.getSubjectTypeURI()+ "\n"+"    Predicate   = "+
 				event.getRDFPredicate()+"\n"+"    Object      = "+
 				event.getRDFObject()		
 		);
-		System.out.println("################################################");
+		System.out.println("################################################");*/
 		if (((String)event.getSubjectTypeURI()).indexOf("Door")!=-1){
 			if (event.getRDFPredicate().indexOf("deviceRfid")!=-1){
 				whoIsKnocking((String)event.getRDFObject());

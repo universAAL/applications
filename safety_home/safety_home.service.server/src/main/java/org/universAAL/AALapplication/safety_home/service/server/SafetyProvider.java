@@ -144,7 +144,7 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 		this.smartCardInfo.setType(ContextProviderType.controller);
 		this.smartCardInfo.setProvidedEvents(providedEvents(theServer));
 		this.smartCardPublisher = new DefaultContextPublisher(context, this.smartCardInfo);
-		//this.smartCardModule();
+		this.smartCardModule();
 
 		// start smoke detection context publisher 
 		this.smokeDetectionInfo = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE + "SmokeDetectionContextProvider");

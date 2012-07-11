@@ -80,7 +80,8 @@ public class SmokeSensor extends Device {
 	
 	public boolean getSmoke() {
 		Boolean i = (Boolean) props.get(PROP_SMOKE);
-		return (i == true) ? true : false;
+	//	return (i == true) ? true : false;
+		return (i.booleanValue() == true) ? true : false;
     }
 
 	public void setDeviceLocation(Location l) {
