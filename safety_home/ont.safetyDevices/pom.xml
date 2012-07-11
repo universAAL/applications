@@ -5,7 +5,6 @@
   	<groupId>org.universAAL.ontology</groupId>
   	<artifactId>ont.pom</artifactId>
   	<version>1.1.0</version>
-  	<relativePath>../pom/</relativePath>
   </parent>
  
   <groupId>org.universAAL.AALapplication</groupId>
@@ -36,8 +35,7 @@
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.bus.context</artifactId>
-				<version>1.1.0</version>
-			</dependency>
+				</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.bus.service</artifactId>
@@ -81,6 +79,8 @@
 						<Bundle-Activator>org.universAAL.ontology.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Export-Package>org.universAAL.ontology.safetyDevices</Export-Package>
+            			<Private-Package>org.universAAL.ontology</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
