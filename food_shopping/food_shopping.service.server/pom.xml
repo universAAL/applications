@@ -74,6 +74,10 @@
 						<Bundle-Activator>org.universAAL.AALapplication.food_shopping.service.server.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Export-Package>
+						org.universAAL.AALapplication.food_shopping.service.server, org.universAAL.AALapplication.food_shopping.service.db.config, 
+						org.universAAL.AALapplication.food_shopping.service.db.manager.entities, org.universAAL.AALapplication.food_shopping.service.db.manager.entitymanagers, org.universAAL.AALapplication.food_shopping.service.db.utils.criteria, 
+						org.universAAL.AALapplication.food_shopping.service.db.utils.statements, org.universAAL.AALapplication.food_shopping.service.RFidProvider, org.universAAL.AALapplication.food_shopping.service.unit_impl</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>

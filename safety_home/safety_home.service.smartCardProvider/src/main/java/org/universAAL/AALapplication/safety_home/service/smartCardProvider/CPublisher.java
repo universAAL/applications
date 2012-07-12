@@ -70,7 +70,7 @@ public class CPublisher extends ContextPublisher{
 			invoke();
 		}
 		catch (InterruptedException e){
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	
@@ -112,48 +112,53 @@ public class CPublisher extends ContextPublisher{
         PrintWriter out = null;
         BufferedReader in = null;
         Connection con = null;
+        int error = 0;
         
         try {
             kkSocket = new Socket("160.40.60.229", 4444);
             out = new PrintWriter(kkSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
         } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: 160.40.60.229");
-            System.exit(1);
+        	error = 1;
+            //System.err.println("Don't know about host: 160.40.60.229");
+            //System.exit(1);
         } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to: 160.40.60.229");
-            System.exit(1);
+        	error = 1;
+            //System.err.println("Couldn't get I/O for the connection to: 160.40.60.229");
+            //System.exit(1);
         }
 
-        try{
-        	String fromServer;
-			con = ConnectionManager.getConnection();
-        	System.out.println("Starting Client ...");
-        	while ((fromServer = in.readLine()) != null) {
-        		System.out.println("Server: " + fromServer);
-        		if (fromServer.indexOf("Tag ID:")!=-1){
-        			this.populateUserBySmartCard(con, fromServer.substring(fromServer.indexOf(":")+2,fromServer.length()));
-        			if (this.userDetails.size()>0){
-        				ResultRow rr = (ResultRow)this.userDetails.get(0);
-        				System.out.println(rr.getStringValue(new Column("users","firstname")) + "\t" + rr.getStringValue(new Column("users","lastname"))+"\t"+rr.getStringValue(new Column("role","name"))+"\t"+rr.getStringValue(new Column("smartcard","shortdescription")));
-        				this.user = rr.getStringValue(new Column("role","name")) + ": " + rr.getStringValue(new Column("users","firstname")) + " " + rr.getStringValue(new Column("users","lastname"));
-        			}
-        			else
-        				this.user = "Unknown Person";
-        			publishDoorBell(0);
-        		}
-        		if (fromServer.equals("Bye"))
-        			break;
-        	}
-
-        	out.close();
-        	in.close();
-        	kkSocket.close();
-		} 
-		catch (Exception e){
-			e.printStackTrace();
-		}
-		finally{ ConnectionManager.returnConnection(con); }
+        if (error==0){
+	        try{
+	        	String fromServer;
+				con = ConnectionManager.getConnection();
+	        	System.out.println("Starting Client ...");
+	        	while ((fromServer = in.readLine()) != null) {
+	        		System.out.println("Server: " + fromServer);
+	        		if (fromServer.indexOf("Tag ID:")!=-1){
+	        			this.populateUserBySmartCard(con, fromServer.substring(fromServer.indexOf(":")+2,fromServer.length()));
+	        			if (this.userDetails.size()>0){
+	        				ResultRow rr = (ResultRow)this.userDetails.get(0);
+	        				System.out.println(rr.getStringValue(new Column("users","firstname")) + "\t" + rr.getStringValue(new Column("users","lastname"))+"\t"+rr.getStringValue(new Column("role","name"))+"\t"+rr.getStringValue(new Column("smartcard","shortdescription")));
+	        				this.user = rr.getStringValue(new Column("role","name")) + ": " + rr.getStringValue(new Column("users","firstname")) + " " + rr.getStringValue(new Column("users","lastname"));
+	        			}
+	        			else
+	        				this.user = "Unknown Person";
+	        			publishDoorBell(0);
+	        		}
+	        		if (fromServer.equals("Bye"))
+	        			break;
+	        	}
+	
+	        	out.close();
+	        	in.close();
+	        	kkSocket.close();
+			} 
+			catch (Exception e){
+				e.printStackTrace();
+			}
+			finally{ ConnectionManager.returnConnection(con); }
+        }
 	}
 
 	public void getRandomUser(){

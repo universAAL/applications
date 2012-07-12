@@ -83,7 +83,7 @@ public class FoodItem extends ManagedIndividual {
 			   throw new IllegalArgumentException();
 			
 		props.put(PROP_NAME, new String(name));
-		props.put(PROP_QUANTITY, new Double(quantity));
+		props.put(PROP_QUANTITY, new Double(""+quantity));
 		props.put(PROP_SIZE, new String(size));
 		props.put(PROP_COMPANY, new String(company));
 		props.put(PROP_CODE, new Integer(code));
@@ -95,7 +95,7 @@ public class FoodItem extends ManagedIndividual {
 			   throw new IllegalArgumentException();
 			
 		props.put(PROP_NAME, new String(name));
-		props.put(PROP_QUANTITY, new Double(quantity));
+		props.put(PROP_QUANTITY, new Double(""+quantity));
 		props.put(PROP_SIZE, new String(size));
 		props.put(PROP_COMPANY, new String(company));
 		props.put(PROP_CODE, new Integer(code));
@@ -108,7 +108,7 @@ public class FoodItem extends ManagedIndividual {
 			   throw new IllegalArgumentException();
 			
 		props.put(PROP_NAME, new String(name));
-		props.put(PROP_QUANTITY, new Double(quantity));
+		props.put(PROP_QUANTITY, new Double(""+quantity));
 		props.put(PROP_SIZE, new String(size));
 		props.put(PROP_COMPANY, new String(company));
 		props.put(PROP_TAGID, new String(tagID));
@@ -122,7 +122,7 @@ public class FoodItem extends ManagedIndividual {
 			   throw new IllegalArgumentException();
 			
 		props.put(PROP_NAME, new String(name));
-		props.put(PROP_QUANTITY, new Double(quantity));
+		props.put(PROP_QUANTITY, new Double(""+quantity));
 		props.put(PROP_SIZE, new String(size));
 		props.put(PROP_COMPANY, new String(company));
 		props.put(PROP_CODE, new Integer(code));
