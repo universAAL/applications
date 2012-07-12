@@ -156,7 +156,7 @@ public class FoodManagementProvider extends ServiceCallee implements DeviceState
 		info.setType(ContextProviderType.controller);
 		info.setProvidedEvents(providedEvents(theServer));
 		cp = new DefaultContextPublisher(context, info);
-		//this.rfidReaderModule();
+		this.rfidReaderModule();
 		// initialize the helper class that will save the available devices (their number is defined in MyDevices)
 		theServer.addListener(this);
 	}

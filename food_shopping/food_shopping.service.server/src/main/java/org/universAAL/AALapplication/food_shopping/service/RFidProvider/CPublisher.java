@@ -144,9 +144,9 @@ public class CPublisher{
 				Thread.sleep(10*1000);
 			}
         } catch (Exception e) {
-            System.err.println("Couldn't get I/O for the connection to: 160.40.60.210");
-            e.printStackTrace();
-            System.exit(1);
+            //System.err.println("Couldn't get I/O for the connection to: 160.40.60.210");
+            //e.printStackTrace();
+            //System.exit(1);
         }
         finally{ ConnectionManager.returnConnection(con); }
         

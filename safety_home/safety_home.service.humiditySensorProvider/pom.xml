@@ -59,8 +59,7 @@
 						<Bundle-Activator>org.universAAL.AALapplication.safety_home.service.humiditySensorProvider.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Export-Package>org.universAAL.AALapplication.safety_home.service.humiditySensorProvider</Export-Package>
-            			<Private-Package>org.universAAL.AALapplication</Private-Package>
+						<Export-Package>org.universAAL.AALapplication.safety_home.service.humiditySensorProvider, org.universAAL.AALapplication.safety_home.service.humiditySensorSoapClient</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>

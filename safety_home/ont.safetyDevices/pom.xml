@@ -25,13 +25,11 @@
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
-			<version>1.0.1</version>
-		</dependency>
+			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.data.representation</artifactId>
-				<version>1.1.0</version>
-			</dependency>
+				</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.bus.context</artifactId>
@@ -39,33 +37,27 @@
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.bus.service</artifactId>
-				<version>1.1.0</version>
-			</dependency>
+				</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.bus.model</artifactId>
-				<version>1.1.0</version>
-			</dependency>
+				</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.container.xfaces</artifactId>
-				<version>1.1.0</version>
-			</dependency>
+				</dependency>
 			<dependency>  
 				<groupId>org.universAAL.middleware</groupId>
 				<artifactId>mw.container.osgi</artifactId>
-				<version>1.1.0</version>
-			</dependency>
+				</dependency>
 			<dependency>
            		<groupId>org.universAAL.ontology</groupId>
            		<artifactId>ont.phWorld</artifactId>
-				<version>1.1.0</version>
-       		</dependency>		
+				</dependency>		
 			<dependency>
            		<groupId>org.universAAL.ontology</groupId>
            		<artifactId>ont.profile</artifactId>
-				<version>1.1.0</version>
-       		</dependency>						
+				</dependency>						
 	</dependencies>
     <build>
 		<plugins>
