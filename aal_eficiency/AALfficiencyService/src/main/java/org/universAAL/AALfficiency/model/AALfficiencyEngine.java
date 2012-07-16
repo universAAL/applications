@@ -90,12 +90,13 @@ public class AALfficiencyEngine {
 		ArrayList advices = new ArrayList(chs.length);
 		for (int i=0;i<chs.length;i++){
 			Advice a = new Advice(ADVICE_URI+i, chs[i].getType(), chs[i].getText());
+			advices.add(a);
 		}
 				
 		// create and add a ProcessOutput-Event that binds the output URI to the
 		// created list of lamps
 		sr.addOutput(new ProcessOutput(
-			ProvidedAALfficiencyService.OUTPUT_ADVICES, chs));
+			ProvidedAALfficiencyService.OUTPUT_ADVICES, advices));
 		System.out.print("AALfficiency Service returning Advices");
 		return sr;
 	}

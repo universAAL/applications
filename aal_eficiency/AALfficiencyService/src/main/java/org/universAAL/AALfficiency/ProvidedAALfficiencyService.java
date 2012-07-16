@@ -30,8 +30,6 @@ public class ProvidedAALfficiencyService extends Aalfficiency{
  	public static final String SERVICE_GET_ADVICES = NAMESPACE+"getAdvices";
  	public static final String OUTPUT_ADVICES = NAMESPACE+"Advices";
  	
- 	
- 	
  	static final ServiceProfile[] profiles = new ServiceProfile[3];
  	
  	static{
