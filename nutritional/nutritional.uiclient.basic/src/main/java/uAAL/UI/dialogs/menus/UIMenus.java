@@ -52,6 +52,7 @@ public class UIMenus extends CustomUICaller {
 	static final String SUBMIT_TIPS = MY_UI_NAMESPACE + "tips";
 	static final String SUBMIT_SEE_DETAILS = MY_UI_NAMESPACE + "seeDetails@";
 	static final String SUBMIT_ChangeMeal = MY_UI_NAMESPACE + "changeMeal";
+	static final String SUBMIT_ACTIONS = MY_UI_NAMESPACE + "actions"; 
 
 	
 	static final String USER_INPUT_SELECTED_RECIPE = MY_UI_NAMESPACE
@@ -93,7 +94,8 @@ public class UIMenus extends CustomUICaller {
 				new Label("Recipes", null), PROP_PATH_SELECTED_RECIPE, null, null);
 		Submit but_seeDetails = new Submit(groupActions,
 				new Label("See Recipe", null),
-				SUBMIT_SEE_DETAILS);
+				SUBMIT_ACTIONS);
+		//		SUBMIT_SEE_DETAILS);
 		
 		DayMenu dayMenu = this.getMenu();
 		if (dayMenu != null) {
@@ -140,6 +142,7 @@ public class UIMenus extends CustomUICaller {
 								new Submit(groupDish,
 										new Label("See Recipe", null),
 										SUBMIT_SEE_DETAILS+dish.getRecipeID());
+								System.out.println("recipe ID ............................................." + dish.getRecipeID());
 							}
 //							Submit but_changeMeal = new Submit(groupDish,
 //									new Label("Change meal", null),
@@ -227,6 +230,13 @@ public class UIMenus extends CustomUICaller {
 				Utils.println(window + " Mostrar ventana detalle receta!!");
 				Utils.println("Encuentro un ide de receta: "+idReceta);
 				this.showRecipeDetailDialog(idReceta);
+				return;
+			}
+			if ((uir.getSubmissionID()).startsWith(SUBMIT_ACTIONS)) {
+				Integer idRecipe = (Integer) uir.getUserInput(PROP_PATH_SELECTED_RECIPE.getThePath());
+				Utils.println(window + " Mostrar ventana detalle receta!!");
+				Utils.println("Encuentro un ide de receta: "+idRecipe);
+				this.showRecipeDetailDialog(idRecipe.intValue());
 				return;
 			}
 		}
