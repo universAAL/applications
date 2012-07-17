@@ -2874,8 +2874,11 @@ help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/UImanag
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/WanderingDetector.java -text
 help_when_out/hwo.mobile/src/main/resources/android/handler/enviarSMS.jpg -text
 help_when_out/hwo.mobile/src/main/resources/android/handler/smsNoEnviado.gif -text
-help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_EN.properties -text
-help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_ES.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_en.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_en_US.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es_ES.properties -text
 long_term_behav/Drools[!!-~]Reasoner[!!-~]QuickGuide[!!-~]v1.docx -text
 long_term_behav/drools.reasoner/LTBA_Publisher_B.0.1_OSGI_enterprise.launch -text
 long_term_behav/drools.reasoner/META-INF/persistence.xml -text
