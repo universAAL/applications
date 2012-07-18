@@ -2880,6 +2880,8 @@ help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/me
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es.properties -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es_ES.properties -text
 long_term_behav/Drools[!!-~]Reasoner[!!-~]QuickGuide[!!-~]v1.docx -text
+long_term_behav/drools.reasoner/DroolsSafetyHome.launch -text
+long_term_behav/drools.reasoner/Drools_basic_step_by_step.launch -text
 long_term_behav/drools.reasoner/LTBA_Publisher_B.0.1_OSGI_enterprise.launch -text
 long_term_behav/drools.reasoner/META-INF/persistence.xml -text
 long_term_behav/drools.reasoner/OSGi_Enterprise.launch -text
