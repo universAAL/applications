@@ -1,9 +1,5 @@
 package org.universAAL.drools.test;
 
-import org.universAAL.drools.engine.RulesEngine;
-
-import junit.framework.TestCase;
-
 public class RulesEngineTest{
 		
 	public void testCreation(){

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.pde.ui.EquinoxLauncher">
+<booleanAttribute key="append.args" value="true"/>
+<booleanAttribute key="automaticAdd" value="false"/>
+<booleanAttribute key="automaticValidate" value="false"/>
+<stringAttribute key="bootstrap" value=""/>
+<stringAttribute key="checked" value="[NONE]"/>
+<booleanAttribute key="clearConfig" value="false"/>
+<stringAttribute key="configLocation" value="${workspace_loc}/rundir/drools.reasoner"/>
+<booleanAttribute key="default_auto_start" value="true"/>
+<intAttribute key="default_start_level" value="20"/>
+<booleanAttribute key="includeOptional" value="false"/>
+<stringAttribute key="org.eclipse.debug.core.source_locator_id" value="org.eclipse.pde.ui.launcher.PDESourceLookupDirector"/>
+<stringAttribute key="org.eclipse.debug.core.source_locator_memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;sourceLookupDirector&gt;&#13;&#10;&lt;sourceContainers duplicates=&quot;false&quot;&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;javaProject name=&amp;quot;ma.Reasoner&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.jdt.launching.sourceContainer.javaProject&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;default/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.default&quot;/&gt;&#13;&#10;&lt;/sourceContainers&gt;&#13;&#10;&lt;/sourceLookupDirector&gt;&#13;&#10;"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -console&#13;&#10;&#13;&#10;--sp=sun.nio.cs,com.sun.mirror.apt,com.sun.mirror.declaration,com.sun.mirror.type,com.sun.mirror.util&#13;&#10;&#13;&#10;-console --obrRepositories=http://depot.universaal.org/nexus/content/repositories/snapshots/repository.xml,http://depot.universaal.org/nexus/content/repositories/releases/repository.xml,http://bundles.osgi.org/obr/browse?_xml=1&amp;amp;cmd=repository --org.ops4j.pax.url.mvn.repositories=+http://depot.universaal.org/nexus/content/groups/public,http://depot.universaal.org/nexus/content/repositories/snapshots@snapshots@noreleases --log=DEBUG"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Declipse.ignoreApp=true -Dosgi.noShutdown=true -Dorg.universAAL.middleware.peer.member_of=urn:org.universAAL.aal_space:test_env -Dbundles.configuration.location=${workspace_loc}/rundir/confadmin"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc}/rundir/drools.reasoner"/>
+<stringAttribute key="org.ops4j.pax.cursor.logLevel" value="INFO"/>
+<booleanAttribute key="org.ops4j.pax.cursor.overwrite" value="false"/>
+<booleanAttribute key="org.ops4j.pax.cursor.overwriteSystemBundles" value="false"/>
+<booleanAttribute key="org.ops4j.pax.cursor.overwriteUserBundles" value="false"/>
+<mapAttribute key="org.ops4j.pax.cursor.provisionItems">
+<mapEntry key="wrap:mvn:org.universAAL.control.safetyDevices/control.safetyDevices/5.0" value="true@true@5@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.profile/1.1.0" value="true@true@6@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.phWorld" value="true@true@6@true"/>
+<mapEntry key="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4" value="true@true@2@false"/>
+<mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.com.thoughtworks.xstream-1.3.1.jar" value="true@true@1@false"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.container.osgi/1.1.0" value="true@true@2@true"/>
+<mapEntry key="wrap:mvn:jp.go.ipa/jgcl/1.0" value="true@true@2@false"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/safety_home.service.smartCardProvider/1.0.3-SNAPSHOT" value="true@true@8@true"/>
+<mapEntry key="mvn:org.universaal.ontology/ont.activityhub" value="false@true@7@true"/>
+<mapEntry key="mvn:droolstest/droolstest/1" value="false@true@2@true"/>
+<mapEntry key="mvn:org.drools/drools-core/5.3.0.Final" value="true@true@1@true"/>
+<mapEntry key="wrap:mvn:mysql/mysql-connector-java/5.1.18" value="true@true@2@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/safety_home.service.windowProvider/1.0.3-SNAPSHOT" value="true@true@8@true"/>
+<mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.org.antlr-3.1.3.jar" value="true@true@1@false"/>
+<mapEntry key="wrap:mvn:java3d/vecmath/1.3.1" value="true@true@2@false"/>
+<mapEntry key="wrap:mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2" value="true@true@3@false"/>
+<mapEntry key="mvn:javax.xml.bind/jaxb-api-osgi/2.2.1" value="true@true@1@false"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.phWorld/1.1.0" value="true@true@6@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/safety_home.service.server/1.0.3-SNAPSHOT" value="true@true@8@true"/>
+<mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.org.xmlpull-1.1.4.c.jar" value="true@true@1@false"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.data.serialization/1.1.0" value="true@true@4@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.bus.model/1.1.0" value="true@true@3@true"/>
+<mapEntry key="mvn:org.drools/drools-compiler/5.3.0.Final" value="true@true@1@false"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/safety_home.service.motionSensorProvider/1.0.3-SNAPSHOT" value="true@true@8@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/safety_home.service.humiditySensorProvider/1.0.3-SNAPSHOT" value="true@true@8@true"/>
+<mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.org.codehaus.janino-2.5.15.jar" value="true@true@1@false"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.profile.health/1.1.0" value="true@true@6@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/safety_home.service.lightSensorProvider/1.0.3-SNAPSHOT" value="true@true@8@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.acl.interfaces/1.1.0" value="true@true@2@true"/>
+<mapEntry key="wrap:mvn:org.ops4j.pax.logging/pax-logging-api/1.6.2" value="true@true@2@false"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.data.representation/1.1.0" value="true@true@4@true"/>
+<mapEntry key="wrap:mvn:org.bouncycastle/jce.jdk13/144" value="true@true@2@false"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.profile/1.0.2-SNAPSHOT" value="false@true@7@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/drools.reasoner" value="true@false@8@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.bus.context/1.1.0" value="true@true@5@true"/>
+<mapEntry key="mvn:org.universaal.aalapplication/drools.caller.test" value="true@false@8@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/safety_home.service.client/1.0.3-SNAPSHOT" value="true@true@8@true"/>
+<mapEntry key="wrap:mvn:java3d/j3d-core/1.3.1" value="true@true@2@false"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.drools/0.1.1-SNAPSHOT" value="true@true@7@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/safety_home.service.temperatureSensorProvider/1.0.3-SNAPSHOT" value="true@true@8@true"/>
+<mapEntry key="mvn:org.drools/knowledge-api/5.3.0.Final" value="true@true@1@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.profile.userid/1.1.0" value="true@true@6@true"/>
+<mapEntry key="wrap:mvn:org.ops4j.pax.logging/pax-logging-service/1.6.2" value="true@true@3@false"/>
+<mapEntry key="mvn:javax.xml.bind/jaxb-osgi/2.2.1" value="true@true@1@false"/>
+<mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.javax.xml.stream-1.0.1.jar" value="true@true@1@false"/>
+<mapEntry key="wrap:mvn:org.osgi/osgi_R4_compendium/1.0" value="true@true@2@false"/>
+<mapEntry key="mvn:org.universaal.ontology/ont.lighting" value="false@true@7@true"/>
+<mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/mvel2-2.1.0.drools4.jar" value="true@true@1@false"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/ont.safetyDevices" value="true@true@6@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.profile.uipreferences/1.1.0" value="true@true@6@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.impairment/1.1.0" value="true@true@6@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.container.xfaces" value="true@true@2@false"/>
+<mapEntry key="mvn:org.universaal.aalapplication/drools.publisher.test" value="false@false@8@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/safety_home.service.smokeDetectionProvider/1.0.3-SNAPSHOT" value="true@true@8@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.bus.service/1.1.0" value="true@true@5@true"/>
+</mapAttribute>
+<listAttribute key="org.ops4j.pax.cursor.runArguments">
+<listEntry value="--overwrite=false"/>
+<listEntry value="--overwriteUserBundles=false"/>
+<listEntry value="--overwriteSystemBundles=false"/>
+<listEntry value="--log=INFO"/>
+<listEntry value="wrap:mvn:org.universAAL.control.safetyDevices/control.safetyDevices/5.0@5@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.profile/1.1.0@6@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.phWorld@6@update"/>
+<listEntry value="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4@2"/>
+<listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.com.thoughtworks.xstream-1.3.1.jar@1"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.container.osgi/1.1.0@2@update"/>
+<listEntry value="wrap:mvn:jp.go.ipa/jgcl/1.0@2"/>
+<listEntry value="mvn:org.universAAL.AALapplication/safety_home.service.smartCardProvider/1.0.3-SNAPSHOT@8@update"/>
+<listEntry value="mvn:org.drools/drools-core/5.3.0.Final@1@update"/>
+<listEntry value="mvn:org.universAAL.AALapplication/safety_home.service.windowProvider/1.0.3-SNAPSHOT@8@update"/>
+<listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.org.antlr-3.1.3.jar@1"/>
+<listEntry value="wrap:mvn:java3d/vecmath/1.3.1@2"/>
+<listEntry value="wrap:mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2@3"/>
+<listEntry value="mvn:javax.xml.bind/jaxb-api-osgi/2.2.1@1"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.phWorld/1.1.0@6@update"/>
+<listEntry value="mvn:org.universAAL.AALapplication/safety_home.service.server/1.0.3-SNAPSHOT@8@update"/>
+<listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.org.xmlpull-1.1.4.c.jar@1"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.data.serialization/1.1.0@4@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.bus.model/1.1.0@3@update"/>
+<listEntry value="mvn:org.drools/drools-compiler/5.3.0.Final@1"/>
+<listEntry value="mvn:org.universAAL.AALapplication/safety_home.service.motionSensorProvider/1.0.3-SNAPSHOT@8@update"/>
+<listEntry value="mvn:org.universAAL.AALapplication/safety_home.service.humiditySensorProvider/1.0.3-SNAPSHOT@8@update"/>
+<listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.org.codehaus.janino-2.5.15.jar@1"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.profile.health/1.1.0@6@update"/>
+<listEntry value="mvn:org.universAAL.AALapplication/safety_home.service.lightSensorProvider/1.0.3-SNAPSHOT@8@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.acl.interfaces/1.1.0@2@update"/>
+<listEntry value="wrap:mvn:org.ops4j.pax.logging/pax-logging-api/1.6.2@2"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.data.representation/1.1.0@4@update"/>
+<listEntry value="wrap:mvn:org.bouncycastle/jce.jdk13/144@2"/>
+<listEntry value="mvn:org.universAAL.AALapplication/drools.reasoner@8@nostart@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.bus.context/1.1.0@5@update"/>
+<listEntry value="mvn:org.universaal.aalapplication/drools.caller.test@8@nostart@update"/>
+<listEntry value="mvn:org.universAAL.AALapplication/safety_home.service.client/1.0.3-SNAPSHOT@8@update"/>
+<listEntry value="wrap:mvn:java3d/j3d-core/1.3.1@2"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.drools/0.1.1-SNAPSHOT@7@update"/>
+<listEntry value="mvn:org.universAAL.AALapplication/safety_home.service.temperatureSensorProvider/1.0.3-SNAPSHOT@8@update"/>
+<listEntry value="mvn:org.drools/knowledge-api/5.3.0.Final@1@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.profile.userid/1.1.0@6@update"/>
+<listEntry value="wrap:mvn:org.ops4j.pax.logging/pax-logging-service/1.6.2@3"/>
+<listEntry value="mvn:javax.xml.bind/jaxb-osgi/2.2.1@1"/>
+<listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.javax.xml.stream-1.0.1.jar@1"/>
+<listEntry value="wrap:mvn:org.osgi/osgi_R4_compendium/1.0@2"/>
+<listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/mvel2-2.1.0.drools4.jar@1"/>
+<listEntry value="mvn:org.universAAL.AALapplication/ont.safetyDevices@6@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.profile.uipreferences/1.1.0@6@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.impairment/1.1.0@6@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.container.xfaces@2"/>
+<listEntry value="mvn:org.universAAL.AALapplication/safety_home.service.smokeDetectionProvider/1.0.3-SNAPSHOT@8@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.bus.service/1.1.0@5@update"/>
+<listEntry value="wrap:mvn:mysql/mysql-connector-java/5.1.18@2@update"/>
+</listAttribute>
+<stringAttribute key="osgi_framework_id" value="--platform=felix --version=2.0.1"/>
+<stringAttribute key="pde.version" value="3.3"/>
+<booleanAttribute key="show_selected_only" value="false"/>
+<booleanAttribute key="tracing" value="false"/>
+<booleanAttribute key="useDefaultConfigArea" value="false"/>
+</launchConfiguration>

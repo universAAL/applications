@@ -36,11 +36,13 @@ import org.universAAL.middleware.context.owl.ContextProviderType;
 import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
+import org.universAAL.ontology.phThing.Sensor;
+
+import com.mysql.jdbc.log.Log;
 
 //import bitronix.tm.TransactionManagerServices;
 //import bitronix.tm.resource.jdbc.PoolingDataSource;
 //import bitronix.tm.utils.ClassLoaderUtils;
-
 
 //import org.dynamicjava.osgi.dynamic_jpa.DynamicJpaConstants;
 //import org.dynamicjava.osgi.service_binding_utils.OsgiServiceBinder;
@@ -62,15 +64,13 @@ public final class RulesEngine {
 	private static ModuleContext rulesEngineModuleContext = null;
 	private static RulesEngine INSTANCE;
 	private static final UUID uuid = UUID.randomUUID();
-	
 
-//    private PoolingDataSource dataSource;
-//    private EntityManagerFactory emf;
-//    private Environment env;        
-//    private static final Class[] parameters = new Class[]{URL.class};
-//    Messages messages;
-    
-    
+	// private PoolingDataSource dataSource;
+	// private EntityManagerFactory emf;
+	// private Environment env;
+	// private static final Class[] parameters = new Class[]{URL.class};
+	// Messages messages;
+
 	/**
 	 * Private constructor. Needs a BundleContext for accessing the resources
 	 * embedded in the bundle.
@@ -142,8 +142,8 @@ public final class RulesEngine {
 	 * @throws Exception
 	 */
 	private void initializeDrools() throws Exception {
-//		//Brand new
-//		setUpPersistence();
+		// //Brand new
+		// setUpPersistence();
 		try {
 			kbase = loadKnowledgeBaseFromPackages();
 		} catch (final Throwable e) {
@@ -151,22 +151,22 @@ public final class RulesEngine {
 			throw new Exception(
 					"Errors found during the creation of the Knowledge Base", e);
 		}
-		
+
 		ksession = kbase.newStatefulKnowledgeSession();
-//		//Brand new
-//		initKnowledgeSession();
-        Runnable runnable = new Runnable() {
-            public void run() {
-                try {
-                    // run forever
-                    ksession.fireUntilHalt();
-                } catch ( ConsequenceException e ) {
-                    throw e;
-                }
-            }
-        };
-        Thread thread = new Thread(runnable); // In java 6 use Executors instead
-        thread.start();
+		// //Brand new
+		// initKnowledgeSession();
+		Runnable runnable = new Runnable() {
+			public void run() {
+				try {
+					// run forever
+					ksession.fireUntilHalt();
+				} catch (ConsequenceException e) {
+					throw e;
+				}
+			}
+		};
+		Thread thread = new Thread(runnable); // In java 6 use Executors instead
+		thread.start();
 		/**
 		 * I've discovered it's not a good idea using "entry-points" if it isn't
 		 * completely needed
@@ -242,10 +242,19 @@ public final class RulesEngine {
 	 *            ContextEvent to be inserted.
 	 */
 	public void insertContextEvent(Object event) {
-		ksession.insert(event);
-//		ksession.fireAllRules();
+		if (event instanceof ContextEvent) {
+			if (((ContextEvent) event).getRDFSubject() instanceof Sensor) {
+				ksession.insert(event);
+			} else {
+				System.out
+						.println("[DROOLS REASONER]The received event is not an instance of PhThng.Sensor - IGNORED");
+			}
+		} else {
+			System.out
+					.println("[DROOLS REASONER]The received event is not an instance of ContextEvent - IGNORED");
+		}
+		// ksession.fireAllRules();
 	}
-	
 
 	/**
 	 * Check if the rules engine was created correctly. TODO Must be improved to
@@ -305,9 +314,9 @@ public final class RulesEngine {
 			throw new Exception(
 					"keys and value arrays must be of the same length");
 		}
-//		LogUtils.logInfo(rulesEngineModuleContext, RulesEngine.class,
-//				"publishConsequence",
-//				new String[] { "Publishing a consequence." }, null);
+		// LogUtils.logInfo(rulesEngineModuleContext, RulesEngine.class,
+		// "publishConsequence",
+		// new String[] { "Publishing a consequence." }, null);
 		ContextPublisher cp;
 		ContextProvider info = new ContextProvider();
 		ArrayList<ConsequenceProperty> properties = new ArrayList<ConsequenceProperty>();
@@ -317,13 +326,17 @@ public final class RulesEngine {
 		// Consequence cons = new Consequence();
 
 		for (int i = 0; i < keys.length; i++) {
-			//System.out.println("[PUBLISHING_CONSEQUENCE]Adding key" + keys[i]+ "...and value..." + values[i]);
+			// System.out.println("[PUBLISHING_CONSEQUENCE]Adding key" +
+			// keys[i]+ "...and value..." + values[i]);
 			properties.add(new ConsequenceProperty(
-					"http://www.tsbtecnologias.es/ConsequenceProperty.owl#ReasonerConsequence" + i, keys[i], values[i]));
-			cons.addProperty("http://www.tsbtecnologias.es/Property.owl#ReasonerConsequence"+ i, keys[i],
-					values[i]);
+					"http://www.tsbtecnologias.es/ConsequenceProperty.owl#ReasonerConsequence"
+							+ i, keys[i], values[i]));
+			cons.addProperty(
+					"http://www.tsbtecnologias.es/Property.owl#ReasonerConsequence"
+							+ i, keys[i], values[i]);
 		}
-		info = new ContextProvider("http://www.tsbtecnologias.es/ContextProvider.owl#ReasonerNotifier");
+		info = new ContextProvider(
+				"http://www.tsbtecnologias.es/ContextProvider.owl#ReasonerNotifier");
 
 		info.setType(ContextProviderType.reasoner);
 		info
@@ -339,152 +352,156 @@ public final class RulesEngine {
 
 		dr.setProperty(DroolsReasoning.PROP_PRODUCES_CONSEQUENCES, cons);
 		cp.publish(new ContextEvent(dr,
-		DroolsReasoning.PROP_PRODUCES_CONSEQUENCES));
+				DroolsReasoning.PROP_PRODUCES_CONSEQUENCES));
 	}
-	
-	public static long getNumberOfElementsInWorkingMemory(){
+
+	public static long getNumberOfElementsInWorkingMemory() {
 		return ksession.getFactCount();
 	}
-	
-	public static Collection<FactHandle> getElementsInWorkingMemory(){				
-		return ksession.getFactHandles();		
+
+	public static Collection<FactHandle> getElementsInWorkingMemory() {
+		return ksession.getFactHandles();
 	}
-	
-	public static void startRulesEngine(){
+
+	public static void startRulesEngine() {
 		System.out.println("Rules engine started from method!!!");
 	}
-	
-	public static void stopRulesEngine(){
+
+	public static void stopRulesEngine() {
 		System.out.println("Rules engine stopped from method!!!");
 	}
 
-//    private void setUpPersistence() {
-//
-//        dataSource = new PoolingDataSource();
-//        dataSource.setUniqueName("jdbc/testDatasource");
-//        dataSource.setMaxPoolSize(5);
-//        dataSource.setAllowLocalTransactions(true);
-//        try {
-//			System.out.println(rulesEngineBundleContext.getBundle().getResource("persistence.xml").getContent().toString());
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-//        FileReader entrada1=null;
-//        StringBuffer str1=new StringBuffer();
-//        try  {
-//           entrada1=new FileReader(rulesEngineBundleContext.getBundle().getResource("persistence.xml").toExternalForm());
-//           int c;
-//           while((c=entrada1.read())!=-1){
-//               str1.append((char)c);
-//           }
-//      }catch (IOException ex) {ex.printStackTrace();}
-//      System.out.println(str1);
-//        
-//        ClassLoader tccl = Thread.currentThread().getContextClassLoader();
-//        Thread.currentThread().setContextClassLoader(MysqlXADataSource.class.getClassLoader());
-//        try {
-//			ClassLoaderUtils.loadClass("com.mysql.jdbc.jdbc2.optional.MysqlXADataSource");
-//		} catch (ClassNotFoundException e) {
-//			System.out.println("No se encuentra");
-//			e.printStackTrace();
-//		}
-//        
-//        dataSource.setClassName("com.mysql.jdbc.jdbc2.optional.MysqlXADataSource");
-//        dataSource.setMaxPoolSize(3);
-//        dataSource.getDriverProperties().put("user", "root");
-//        dataSource.getDriverProperties().put("password", "Soluciones_TSB");
-//        dataSource.getDriverProperties().put("databaseName", "uaal_ltba");
-//        dataSource.getDriverProperties().put("serverName", "localhost");
-//        
-//        
-//        dataSource.init();
-//        
-//        FileReader entrada=null;
-//        StringBuffer str=new StringBuffer();
-//        try  {
-//           entrada=new FileReader("C:\\Desarrollo\\universAAL\\svn\\new_services\\sandboxes\\mllorente\\drools.reasoner\\META-INF\\persistence.xml");
-//           int c;
-//           while((c=entrada.read())!=-1){
-//               str.append((char)c);
-//           }
-//      }catch (IOException ex) {ex.printStackTrace();}
-//      System.out.println(str);
-//        
-//        
-//        Properties prop = System.getProperties();
-//        //prop.setProperty("java.class.path", prop.getProperty("java.class.path", null));
-//        
-//        System.out.println(prop.getProperty("java.class.path", null));
-//        try {
-//			addFile("C:\\Desarrollo\\universAAL\\svn\\new_services\\sandboxes\\mllorente\\drools.reasoner\\META-INF");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		   try {
-//				addFile("C:\\Desarrollo\\universAAL\\svn\\new_services\\sandboxes\\mllorente\\drools.reasoner\\META-INF\\persistence.xml");
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			
-//			
-//
-//        
-//			
-//			
-//        
-//        //Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
-//        
-//        System.out.println(prop.getProperty("java.class.path", null));
-//        
-//        
-//        env = KnowledgeBaseFactory.newEnvironment();
-//        emf = Persistence.createEntityManagerFactory("o");
-//        env.set(EnvironmentName.ENTITY_MANAGER_FACTORY, emf);
-//        env.set(EnvironmentName.TRANSACTION_MANAGER, TransactionManagerServices.getTransactionManager());
-//        Thread.currentThread().setContextClassLoader(tccl);
-//    }
-//    
-//    private void initKnowledgeSession(){
-//    	
-//    	try{
-//    	ksession = JPAKnowledgeService.loadStatefulKnowledgeSession(1, kbase,
-//				null, env);
-//    	}catch (Exception e) {
-//			System.out.println("No KnowledgeSession previously created. Creating one from scratch.");
-//			ksession = kbase.newStatefulKnowledgeSession();
-//		}
-//    	    	
-//    }
-//    
-//    public static void addFile(String s) throws IOException {
-//    	   File f = new File(s);
-//    	   addFile(f);
-//    	}//end method
-//
-//    	public static void addFile(File f) throws IOException {
-//    	   addURL(f.toURL());
-//    	}//end method
-//
-//
-//    	public static void addURL(URL u) throws IOException {
-//
-//    	  URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-//    	  Class sysclass = URLClassLoader.class;
-//
-//    	  try {
-//    	     Method method = sysclass.getDeclaredMethod("addURL", parameters);
-//    	     method.setAccessible(true);
-//    	     method.invoke(sysloader, new Object[]{u});
-//    	  } catch (Throwable t) {
-//    	     t.printStackTrace();
-//    	     throw new IOException("Error, could not add URL to system classloader");
-//    	  }//end try catch
-//
-//    	   }//end method
-//	
-    	
-    	
+	// private void setUpPersistence() {
+	//
+	// dataSource = new PoolingDataSource();
+	// dataSource.setUniqueName("jdbc/testDatasource");
+	// dataSource.setMaxPoolSize(5);
+	// dataSource.setAllowLocalTransactions(true);
+	// try {
+	// System.out.println(rulesEngineBundleContext.getBundle().getResource("persistence.xml").getContent().toString());
+	// } catch (IOException e1) {
+	// e1.printStackTrace();
+	// }
+	// FileReader entrada1=null;
+	// StringBuffer str1=new StringBuffer();
+	// try {
+	// entrada1=new
+	// FileReader(rulesEngineBundleContext.getBundle().getResource("persistence.xml").toExternalForm());
+	// int c;
+	// while((c=entrada1.read())!=-1){
+	// str1.append((char)c);
+	// }
+	// }catch (IOException ex) {ex.printStackTrace();}
+	// System.out.println(str1);
+	//        
+	// ClassLoader tccl = Thread.currentThread().getContextClassLoader();
+	// Thread.currentThread().setContextClassLoader(MysqlXADataSource.class.getClassLoader());
+	// try {
+	// ClassLoaderUtils.loadClass("com.mysql.jdbc.jdbc2.optional.MysqlXADataSource");
+	// } catch (ClassNotFoundException e) {
+	// System.out.println("No se encuentra");
+	// e.printStackTrace();
+	// }
+	//        
+	// dataSource.setClassName("com.mysql.jdbc.jdbc2.optional.MysqlXADataSource");
+	// dataSource.setMaxPoolSize(3);
+	// dataSource.getDriverProperties().put("user", "root");
+	// dataSource.getDriverProperties().put("password", "Soluciones_TSB");
+	// dataSource.getDriverProperties().put("databaseName", "uaal_ltba");
+	// dataSource.getDriverProperties().put("serverName", "localhost");
+	//        
+	//        
+	// dataSource.init();
+	//        
+	// FileReader entrada=null;
+	// StringBuffer str=new StringBuffer();
+	// try {
+	// entrada=new
+	// FileReader("C:\\Desarrollo\\universAAL\\svn\\new_services\\sandboxes\\mllorente\\drools.reasoner\\META-INF\\persistence.xml");
+	// int c;
+	// while((c=entrada.read())!=-1){
+	// str.append((char)c);
+	// }
+	// }catch (IOException ex) {ex.printStackTrace();}
+	// System.out.println(str);
+	//        
+	//        
+	// Properties prop = System.getProperties();
+	// //prop.setProperty("java.class.path", prop.getProperty("java.class.path",
+	// null));
+	//        
+	// System.out.println(prop.getProperty("java.class.path", null));
+	// try {
+	// addFile("C:\\Desarrollo\\universAAL\\svn\\new_services\\sandboxes\\mllorente\\drools.reasoner\\META-INF");
+	// } catch (IOException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// try {
+	// addFile("C:\\Desarrollo\\universAAL\\svn\\new_services\\sandboxes\\mllorente\\drools.reasoner\\META-INF\\persistence.xml");
+	// } catch (IOException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	//			
+	//			
+	//			
+	//
+	//        
+	//			
+	//			
+	//        
+	// //Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+	//        
+	// System.out.println(prop.getProperty("java.class.path", null));
+	//        
+	//        
+	// env = KnowledgeBaseFactory.newEnvironment();
+	// emf = Persistence.createEntityManagerFactory("o");
+	// env.set(EnvironmentName.ENTITY_MANAGER_FACTORY, emf);
+	// env.set(EnvironmentName.TRANSACTION_MANAGER,
+	// TransactionManagerServices.getTransactionManager());
+	// Thread.currentThread().setContextClassLoader(tccl);
+	// }
+	//    
+	// private void initKnowledgeSession(){
+	//    	
+	// try{
+	// ksession = JPAKnowledgeService.loadStatefulKnowledgeSession(1, kbase,
+	// null, env);
+	// }catch (Exception e) {
+	// System.out.println("No KnowledgeSession previously created. Creating one from scratch.");
+	// ksession = kbase.newStatefulKnowledgeSession();
+	// }
+	//    	    	
+	// }
+	//    
+	// public static void addFile(String s) throws IOException {
+	// File f = new File(s);
+	// addFile(f);
+	// }//end method
+	//
+	// public static void addFile(File f) throws IOException {
+	// addURL(f.toURL());
+	// }//end method
+	//
+	//
+	// public static void addURL(URL u) throws IOException {
+	//
+	// URLClassLoader sysloader = (URLClassLoader)
+	// ClassLoader.getSystemClassLoader();
+	// Class sysclass = URLClassLoader.class;
+	//
+	// try {
+	// Method method = sysclass.getDeclaredMethod("addURL", parameters);
+	// method.setAccessible(true);
+	// method.invoke(sysloader, new Object[]{u});
+	// } catch (Throwable t) {
+	// t.printStackTrace();
+	// throw new IOException("Error, could not add URL to system classloader");
+	// }//end try catch
+	//
+	// }//end method
+	//	
+
 }
