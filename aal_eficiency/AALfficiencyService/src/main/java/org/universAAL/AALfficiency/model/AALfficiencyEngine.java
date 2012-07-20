@@ -50,7 +50,7 @@ public class AALfficiencyEngine {
 		sc.setTodayElectricityScore(this.score.getTodayElectricScore());
 		sc.setTodayActivityScore(this.score.getTodayActivityScore());
 		sc.setTotalElectricityScore(this.score.getTotalElectricScore());
-		sc.setTotalActivityScore(this.score.getTodayActivityScore());
+		sc.setTotalActivityScore(this.score.getTotalActivityScore());
 				
 		// create and add a ProcessOutput-Event that binds the output URI to the
 		// created list of lamps
@@ -63,6 +63,8 @@ public class AALfficiencyEngine {
 
 	public ServiceResponse getChallenges(){
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
+		
+		System.out.print("Returning Challenges");
 		
 		//create the AALfficiencyChallenges
 		ChallengeModel[] chs = this.challenges.getChallenges();
@@ -85,6 +87,8 @@ public class AALfficiencyEngine {
 	public ServiceResponse getAdvices(){
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
+		
+		System.out.print("Returning Advices");
 		//create the AALfficiencyChallenges
 		AdviceModel[] chs = this.advices.getAdvices();
 		ArrayList advices = new ArrayList(chs.length);
