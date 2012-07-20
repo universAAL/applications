@@ -18,7 +18,12 @@ public class Activator implements BundleActivator {
 	Activator.osgiContext = bcontext;
 	Activator.context = uAALBundleContainer.THE_CONTAINER
 		.registerModule(new Object[] { bcontext });
-		scallee=new AALfficiencyProvider(context);
+		//scallee=new AALfficiencyProvider(context);
+		new Thread() {
+		    public void run() {
+			new AALfficiencyProvider(context);
+		    }
+		}.start();
 
     }
 
