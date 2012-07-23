@@ -23,6 +23,8 @@ import org.universaal.ontology.owl.Questionnaire4TreatmentStrategy;
 import org.universaal.ontology.owl.Answer;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
 import org.universaal.ontology.health.owl.StatusType;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.PerformedSessionsSupport;
+import org.universaal.ontology.health.owl.WeightMeasurementTreatment;
 
 #declare any global variables here 
 global SingleChoiceQuestion agreementQuestion;
@@ -121,7 +123,7 @@ rule "Change to precontemplation phase from contemplation phase"  no-loop
 	//cuando no se haya realizado la primera actividad en 3 oportunidades
 		treatment: Treatment(motivationalStatus == MotivationalStatusType.contemplation)
 	 	eval(PerformedSessionsSupport.mapOfPSSupport.containsKey(treatment))
-	 	eval( PerformedSessionsSupport.mapOfPSSupport.get(treatment).getNumberOfConsecutiveNonPerformedSessionsCont()== PerformedSessionsSupport.numberOfNonPerformanceAllowed)
+	 	eval( PerformedSessionsSupport.mapOfPSSupport[treatment].getNumberOfConsecutiveNonPerformedSessionsCont()== PerformedSessionsSupport.numberOfNonPerformanceAllowed)
 	then
 		treatment.setMotivationalStatus(MotivationalStatusType.precontemplation);
 		MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
