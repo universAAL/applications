@@ -3,12 +3,12 @@
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>new_services.pom</artifactId>
-    <version>B.1</version>
+    <version>B.0</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   
   <artifactId>safety_home.pom</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>B.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Safety Home AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Safety_Home_universAAL_service</url>
@@ -32,8 +32,6 @@
   </scm>
   <modules>
   	<module>../ont.safetyDevices</module>
-  	<module>../safety_home.service.client</module>
-  	<module>../safety_home.service.server</module>
   	<module>../safety_home.service.smartCardProvider</module>
   	<module>../safety_home.service.windowProvider</module>
   	<module>../safety_home.service.lightSensorProvider</module>
@@ -41,6 +39,8 @@
   	<module>../safety_home.service.humiditySensorProvider</module>
   	<module>../safety_home.service.motionSensorProvider</module>
   	<module>../safety_home.service.smokeDetectionProvider</module>
+  	<module>../safety_home.service.client</module>
+  	<module>../safety_home.service.server</module>
   </modules>
 
 </project>
