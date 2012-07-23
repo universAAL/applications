@@ -13,35 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.ontology.osgi;
+package org.universAAL.ontology;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
+
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.uAALModuleActivator;
 import org.universAAL.middleware.owl.OntologyManagement;
-import org.universAAL.ontology.AgendaOntology;
+import org.universAAL.ontology.agenda.AgendaOntology;
 
 /**
  * 
  * @author eandgrg
  *
  */
-public class Activator implements BundleActivator {
+public class AgendaActivator implements uAALModuleActivator {
 
-  static BundleContext context = null;
   AgendaOntology ontology = new AgendaOntology();
 
   /* (non-Javadoc)
    * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
    */
-  public void start(BundleContext context) throws Exception {
-    Activator.context = context;
+  public void start(ModuleContext context) throws Exception {
     OntologyManagement.getInstance().register(ontology);
   }
 
   /* (non-Javadoc)
    * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
    */
-  public void stop(BundleContext arg0) throws Exception {
+  public void stop(ModuleContext arg0) throws Exception {
     OntologyManagement.getInstance().unregister(ontology);
   }
 }	

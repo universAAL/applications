@@ -28,7 +28,8 @@ import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
 
-import org.universAAL.ontology.ProfileOntology;
+import org.universAAL.ontology.AgendaEventSelectionOntologyFactory;
+import org.universAAL.ontology.profile.ProfileOntology;
 
 import org.universAAL.ontology.agenda.AgendaOntology;
 import org.universAAL.ontology.agenda.Calendar;
