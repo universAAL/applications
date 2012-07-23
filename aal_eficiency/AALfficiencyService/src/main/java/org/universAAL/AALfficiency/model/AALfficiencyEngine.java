@@ -9,20 +9,6 @@ import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.aalfficiency.*;
 
 public class AALfficiencyEngine {
-	
-	private AALfficiencyAdvicesModel advices = new AALfficiencyAdvicesModel(new AdviceModel[]{
-			new AdviceModel("Electricity","Remember to turn off the lifghts when leaving a room"),
-			new AdviceModel("Electricity","Don't let turn on devices you're not using"),
-			new AdviceModel("Activity","Walking 30 minuts a day will help you keep healthy")});
-	
-	private AALfficiencyScoreModel score=new AALfficiencyScoreModel(157,24,95,13,62,9);
-	
-	private AALfficiencyChallengesModel challenges = new AALfficiencyChallengesModel(new ChallengeModel[]{
-			new ChallengeModel("Electricity","15%","Reduce a 15% consumption on ligthing"),
-			new ChallengeModel("Electricity","20%","Reduce a 20% consumption on big consumptions"),
-			new ChallengeModel("Activity","1000/500","Walk 1000 steps a day and burn 500 Kcal"),
-			}); 
-	
 	static final String SCORE_URI = ProvidedAALfficiencyService.NAMESPACE
 		    + "scores";
 	static final String CHALLENGES_URI = ProvidedAALfficiencyService.NAMESPACE
@@ -33,6 +19,21 @@ public class AALfficiencyEngine {
 		    + "advices";
 	static final String ADVICE_URI = ProvidedAALfficiencyService.NAMESPACE
 		    + "advice";
+	
+	private AALfficiencyAdvicesModel advices = new AALfficiencyAdvicesModel(new AdviceModel[]{
+			new AdviceModel(ADVICES_URI+"0","Electricity","Remember to turn off the lifghts when leaving a room"),
+			new AdviceModel(ADVICES_URI+"1","Electricity","Don't let turn on devices you're not using"),
+			new AdviceModel(ADVICES_URI+"2","Activity","Walking 30 minuts a day will help you keep healthy")});
+	
+	private AALfficiencyScoreModel score=new AALfficiencyScoreModel(157,24,95,13,62,9);
+	
+	private AALfficiencyChallengesModel challenges = new AALfficiencyChallengesModel(new ChallengeModel[]{
+			new ChallengeModel("Electricity","15%","Reduce a 15% consumption on ligthing"),
+			new ChallengeModel("Electricity","20%","Reduce a 20% consumption on big consumptions"),
+			new ChallengeModel("Activity","1000/500","Walk 1000 steps a day and burn 500 Kcal"),
+			}); 
+	
+	
 	    	
 	public AALfficiencyEngine() {
 	}
@@ -87,13 +88,12 @@ public class AALfficiencyEngine {
 	public ServiceResponse getAdvices(){
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		
 		System.out.print("Returning Advices");
 		//create the AALfficiencyChallenges
-		AdviceModel[] chs = this.advices.getAdvices();
-		ArrayList advices = new ArrayList(chs.length);
-		for (int i=0;i<chs.length;i++){
-			Advice a = new Advice(ADVICE_URI+i, chs[i].getType(), chs[i].getText());
+		AdviceModel[] adv = this.advices.getAdvices();
+		ArrayList advices = new ArrayList(adv.length);
+		for (int i=0;i<adv.length;i++){
+			Advice a = new Advice(adv[i].getURI(), adv[i].getType(), adv[i].getText());
 			advices.add(a);
 		}
 				
@@ -102,6 +102,30 @@ public class AALfficiencyEngine {
 		sr.addOutput(new ProcessOutput(
 			ProvidedAALfficiencyService.OUTPUT_ADVICES, advices));
 		System.out.print("AALfficiency Service returning Advices");
+		return sr;
+	}
+	
+	public ServiceResponse getAdviceInfo(String adviceURI){
+		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
+		
+		System.out.print("Returning Advice Info");
+		//create the AALfficiencyChallenges
+		AdviceModel[] chs = this.advices.getAdvices();
+		Advice a = new Advice();
+		ArrayList advices = new ArrayList(chs.length);
+		for (int i=0;i<chs.length;i++){
+			if (chs[i].getURI().compareTo(adviceURI)==0){
+				sr.addOutput(new ProcessOutput(
+						ProvidedAALfficiencyService.OUTPUT_ADVICE_TEXT, chs[i].getText()));
+				sr.addOutput(new ProcessOutput(
+						ProvidedAALfficiencyService.OUTPUT_ADVICE_TYPE, chs[i].getType()));
+				break;
+			}
+		}
+				
+		// create and add a ProcessOutput-Event that binds the output URI to the
+		// created list of lamps
+		System.out.print("AALfficiency Service returning Advice Info");
 		return sr;
 	}
 	

@@ -6,6 +6,7 @@ package org.universAAL.AALfficiency;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.aalfficiency.*;
@@ -29,8 +30,13 @@ public class ProvidedAALfficiencyService extends Aalfficiency{
  	//Advices Managing
  	public static final String SERVICE_GET_ADVICES = NAMESPACE+"getAdvices";
  	public static final String OUTPUT_ADVICES = NAMESPACE+"Advices";
+ 	public static final String SERVICE_GET_ADVICE_INFO = NAMESPACE+"getAdviceInfo";
+ 	public static final String INPUT_ADVICE_URI = NAMESPACE + "AdviceURI";
+ 	public static final String OUTPUT_ADVICE_TYPE = NAMESPACE+"AdviceType";
+ 	public static final String OUTPUT_ADVICE_TEXT = NAMESPACE+"AdviceText";
  	
- 	static final ServiceProfile[] profiles = new ServiceProfile[3];
+ 	
+ 	static final ServiceProfile[] profiles = new ServiceProfile[4];
  	
  	static{
  		OntologyManagement.getInstance().register(
@@ -56,7 +62,14 @@ public class ProvidedAALfficiencyService extends Aalfficiency{
  		getAdvices.addOutput(OUTPUT_ADVICES, AalfficiencyAdvices.MY_URI, 1, 1, new String[]{Aalfficiency.PROP_HAS_ADVICES});
  		profiles[2] = getAdvices.myProfile;
  		
- 	}
+ 		ProvidedAALfficiencyService getAdviceInfo = new ProvidedAALfficiencyService(
+ 	 			SERVICE_GET_ADVICE_INFO);
+ 	 		getAdviceInfo.addFilteringInput(INPUT_ADVICE_URI, Advice.MY_URI, 1, 1,
+ 	 				 new String[]{Aalfficiency.PROP_HAS_ADVICES, AalfficiencyAdvices.PROP_HAS_ADVICES});
+ 	 		getAdviceInfo.addOutput(OUTPUT_ADVICE_TYPE, Advice.MY_URI, 1, 1, new String[] 
+ 	 						{ Aalfficiency.PROP_HAS_ADVICES, AalfficiencyAdvices.PROP_HAS_ADVICES});
+ 	 		profiles[3] = getAdviceInfo.myProfile;
+ 		 	}
  	
  	public ProvidedAALfficiencyService(String instanceURI) {
 		super(instanceURI);
