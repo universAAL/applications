@@ -1,4 +1,4 @@
-package org.universAAL.ontology.agenda;
+package org.universAAL.ontology;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
 

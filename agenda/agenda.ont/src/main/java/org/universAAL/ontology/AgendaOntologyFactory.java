@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.ontology.agenda;
+package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
-import org.universAAL.ontology.agenda.service.CalendarAgenda;
-import org.universAAL.ontology.agenda.service.CalendarUIService;
+import org.universAAL.ontology.service.CalendarAgenda;
+import org.universAAL.ontology.service.CalendarUIService;
 
 /**
  * 
