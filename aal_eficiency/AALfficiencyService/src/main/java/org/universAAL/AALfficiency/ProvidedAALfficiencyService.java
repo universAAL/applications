@@ -65,9 +65,9 @@ public class ProvidedAALfficiencyService extends Aalfficiency{
  		ProvidedAALfficiencyService getAdviceInfo = new ProvidedAALfficiencyService(
  	 			SERVICE_GET_ADVICE_INFO);
  	 		getAdviceInfo.addFilteringInput(INPUT_ADVICE_URI, Advice.MY_URI, 1, 1,
- 	 				 new String[]{Aalfficiency.PROP_HAS_ADVICES, AalfficiencyAdvices.PROP_HAS_ADVICES});
+ 	 				 new String[]{Aalfficiency.PROP_HAS_ADVICES, AalfficiencyAdvices.PROP_HAS_ADVICES,Advice.MY_URI});
  	 		getAdviceInfo.addOutput(OUTPUT_ADVICE_TYPE, Advice.MY_URI, 1, 1, new String[] 
- 	 						{ Aalfficiency.PROP_HAS_ADVICES, AalfficiencyAdvices.PROP_HAS_ADVICES});
+ 	 						{ Aalfficiency.PROP_HAS_ADVICES, AalfficiencyAdvices.PROP_HAS_ADVICES,Advice.MY_URI});
  	 		profiles[3] = getAdviceInfo.myProfile;
  		 	}
  	
