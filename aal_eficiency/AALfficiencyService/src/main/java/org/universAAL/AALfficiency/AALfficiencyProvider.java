@@ -47,6 +47,8 @@ public class AALfficiencyProvider extends ServiceCallee {
 			return null;
 		} else {
 			String operation = call.getProcessURI();
+			Object input = call
+					.getInputValue(ProvidedAALfficiencyService.INPUT_ADVICE_URI);
 			if (operation == null) {
 				return null;
 			} else if (operation
@@ -60,6 +62,10 @@ public class AALfficiencyProvider extends ServiceCallee {
 			else if (operation
 					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_SCORE)) {
 				return engine.getScore();
+			}
+			else if (operation
+					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ADVICE_INFO)) {
+				return engine.getAdviceInfo(input.toString());
 			}
 			}
 	return null;
