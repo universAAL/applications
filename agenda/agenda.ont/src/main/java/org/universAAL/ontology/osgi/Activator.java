@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.ontology.agenda.osgi;
+package org.universAAL.ontology.osgi;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
-import org.universAAL.ontology.agenda.AgendaOntology;
+import org.universAAL.ontology.AgendaOntology;
 
 /**
  * 

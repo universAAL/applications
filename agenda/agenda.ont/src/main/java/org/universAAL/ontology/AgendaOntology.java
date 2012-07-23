@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.ontology.agenda;
+package org.universAAL.ontology;
 
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -27,13 +27,13 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
-import org.universAAL.ontology.agenda.service.CalendarAgenda;
-import org.universAAL.ontology.agenda.service.CalendarUIService;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.location.address.PhysicalAddress;
-import org.universAAL.ontology.ProfileOntology;
+import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.UserProfile;
+import org.universAAL.ontology.service.CalendarAgenda;
+import org.universAAL.ontology.service.CalendarUIService;
 
 /**
  * @author eandgrg
