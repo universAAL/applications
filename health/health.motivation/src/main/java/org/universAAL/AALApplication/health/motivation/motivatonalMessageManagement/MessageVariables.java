@@ -1,12 +1,14 @@
 package org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement;
 
-import org.apache.commons.collections.map.MultiKeyMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 
 //llamar a un método que obtenga del sistema estas variables
 public class MessageVariables {
 	
-	public static MultiKeyMap mapOfVariables = new MultiKeyMap();
+	public static Map<String, String> mapOfVariables = new TreeMap<String, String>();
 	
 	public static MotivationServiceRequirementsIface requirements;
 	
@@ -19,11 +21,17 @@ public class MessageVariables {
 		String username = requirements.getAssistedPersonName();
 		mapOfVariables.put("userName", username);
 		
-		String caregivername = requirements.getCaregiverName();
+		String caregivername = requirements.getCaregiverName(requirements.getAssistedPerson());
 		mapOfVariables.put("caregiverName", caregivername);
 		
 		String partOfDay = requirements.getPartOfDay();
 		mapOfVariables.put("partOfDay", partOfDay);
+		
+		String apGenderArticle = requirements.getAPGenderArticle();
+		mapOfVariables.put("userGender", apGenderArticle);
+		
+		String apPosesiveGenderArticle = requirements.getAPPosesiveGenderArticle();
+		mapOfVariables.put("userPosesiveGender", apPosesiveGenderArticle);
 	}
 	
 	public static void addToMapOfVariables(String key, String value){

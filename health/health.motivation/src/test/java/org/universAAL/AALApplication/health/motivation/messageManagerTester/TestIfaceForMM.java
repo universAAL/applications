@@ -20,41 +20,25 @@ import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.QuestionnaireOntology;
+import org.universaal.ontology.owl.QuestionnaireStrategyOntology;
 
-public class TestIfaceForMM implements SendMotivationMessageIface, ClassesNeededRegistration, MotivationServiceRequirementsIface{
+public class TestIfaceForMM implements SendMotivationMessageIface, MotivationServiceRequirementsIface{
 
 	
-	public File getDBRoute(Locale language) {
-		File file = new File("C://universAAL/motivationalMessages/test_MM.csv"); //fichero de prueba para probar MessageManager
-		return file;
-	}
+	public static ArrayList <MotivationalMessage> motivationalMessagesSentToAP = new ArrayList <MotivationalMessage>();
+	public static ArrayList <MotivationalMessage> motivationalMessagesSentToCaregiver = new ArrayList <MotivationalMessage>();
 
-	public ArrayList<MotivationalMessage> getMMsentToAP() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public ArrayList<MotivationalMessage> getMMsentToCaregiver() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	public void sendMessageToAP(MotivationalMessage mm) {
-		// TODO Auto-generated method stub
-		
-	}
+	public static final Locale SPANISH = new Locale ("es", "ES");
 
-	public void sendMessageToCaregiver(MotivationalMessage mm) {
-		// TODO Auto-generated method stub
-		
-	}
+	public static void registerClassesNeeded() {
 
-	public void registerClassesNeeded() {
-		
 		OntologyManagement.getInstance().register(new DataRepOntology());
 		OntologyManagement.getInstance().register(new ServiceBusOntology());
 		OntologyManagement.getInstance().register(new UIBusOntology());
@@ -62,32 +46,80 @@ public class TestIfaceForMM implements SendMotivationMessageIface, ClassesNeeded
 		OntologyManagement.getInstance().register(new ShapeOntology());
 		OntologyManagement.getInstance().register(new PhThingOntology());
 		OntologyManagement.getInstance().register(new SpaceOntology());
-		OntologyManagement.getInstance().register(new ProfileOntology());//hay otra
-		OntologyManagement.getInstance().register(new QuestionnaireOntology());//hay otra
+		OntologyManagement.getInstance().register(new ProfileOntology());
+		OntologyManagement.getInstance().register(new QuestionnaireOntology());
 		OntologyManagement.getInstance().register(new DiseaseOntology());
 		OntologyManagement.getInstance().register(new HealthMeasurementOntology());
 		OntologyManagement.getInstance().register(new HealthOntology());
 		OntologyManagement.getInstance().register(new MessageOntology());
-		
-		
-		
+		OntologyManagement.getInstance().register(new QuestionnaireStrategyOntology());
 	}
 
-	public String getAssistedPersonName() {
-		return "Peter";
+	
+	public File getDBRoute(Locale language) {
+
+		File file;
+
+		if (language.equals(SPANISH))
+			return file = new File("");
+		else if (language.equals(Locale.ENGLISH))
+			return file = new File("C://universAAL/motivationalMessages/test_MM.csv");
+		else
+			return null;
 	}
 
-	public String getCaregiverName() {
-		return null;
+	public void sendMessageToAP(MotivationalMessage mm, Treatment t) {
+		motivationalMessagesSentToAP.add(mm);
 	}
+
+	public void sendMessageToCaregiver(MotivationalMessage mm, Treatment t) {
+		motivationalMessagesSentToCaregiver.add(mm);
+	}
+
 
 	public HealthProfile getHealthProfile(User u) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	public ArrayList<MotivationalMessage> getMMsentToAP() {
+		return motivationalMessagesSentToAP;
+	}
+
+	public ArrayList<MotivationalMessage> getMMsentToCaregiver() {
+		return motivationalMessagesSentToCaregiver;
+	}
+
+	public void fillVariablesContent(){
+
+	}
+
+	public String getAssistedPersonName() {
+		return "Peter";
+	}
+
+	public String getCaregiverName(User assistedPerson) {
+		return "Andrea";
+	}
+
 	public String getPartOfDay() {
 		return "morning";
 	}
+
+	public User getAssistedPerson() {
+		User ap = new User("peter");
+		return ap;
+	}
+
+
+	public String getAPGenderArticle() {
+		return "him";
+	}
+
+
+	public String getAPPosesiveGenderArticle() {
+		return "his";
+	}
+	
 
 }

@@ -10,9 +10,9 @@ import org.universaal.ontology.owl.MotivationalMessage;
 public interface SendMotivationMessageIface {
 	
 	public File getDBRoute(Locale language);
-	public void sendMessageToAP (MotivationalMessage mm);
+	public void sendMessageToAP (MotivationalMessage mm, Treatment t);
 	public ArrayList <MotivationalMessage> getMMsentToAP(); 
-	public void sendMessageToCaregiver (MotivationalMessage mm);
+	public void sendMessageToCaregiver (MotivationalMessage mm, Treatment t);
 	public ArrayList <MotivationalMessage> getMMsentToCaregiver(); 
 
 }

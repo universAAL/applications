@@ -2,18 +2,529 @@
 package org.universAAL.AALApplication.health.motivation.schedule
 
 #list any import classes here.
-import org.universAAL.AALapplication.health.ont.treatment.*;
-import org.universAAL.AALApplicarion.health.motivation.schedule.ScheduleTreatmentTest;
-
+import org.universaal.ontology.health.owl.*;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification;
+import org.universAAL.AALApplication.health.motivation.schedulingTools.TreatmentPlanningToiCal;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification.ByMeasurement;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification.ByRecurrence;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification.ByDuration;
 #declare any global variables here
 
-/*
-rule "" salience no-loop
+rule "Increase treatment completenss"
+	when
+		ps: PerformedSession(isValid == Boolean.TRUE) // cuando se detecte una planned session válida (ha tenido que pasar antes por las reglas de Schedule, para determinar esto)
+	then
+		Treatment t = ps.getAssociatedTreatment(); //este método no le tengo, le tengo que crear
+		t.addPerformedSession(ps); //añadimos la performed session al treatment.
+		float currentCompleteness = t.getCompleteness();
+		t.setCompleteness(t.getCompletenessUnit() + currentCompleteness);
+end
+
+rule "Is there a session to perform today?"
+	timer (3s 4m)
 	
+	when
+	
+	then
+	
+end
+
+rule "Type of treatment declaration"
+	when
+		treatment: Treatment(treatmentPlanning != null)
+		eval(!TreatmentTypeClassification.hasTTC(treatment))
+	then
+		TreatmentTypeClassification ttc = new TreatmentTypeClassification(treatment);
+		insert (ttc);
+end
+
+#----------------TREATMENT CLASSIFICATION ATTENDING TO MEASUREMENT-------------------------
+
+rule "No-measurement-assigned treatment type" no-loop
+	when   
+		ttc: TreatmentTypeClassification(associatedTreatment != null && tmeasure == null)
+		eval(ttc.getAssociatedTreatment().hasMeasurementRequirements()== false)
+	then
+		ttc.setTreatmentByMeasurement(ByMeasurement.WITHOUT_MEASUREMENT);
+		update (ttc);
+end
+
+rule "Measurement-assigned treatment type" no-loop
+	when
+		ttc: TreatmentTypeClassification(associatedTreatment != null && tmeasure == null) 
+		eval(ttc.getAssociatedTreatment().hasMeasurementRequirements()== true)
+	then
+		ttc.setTreatmentByMeasurement(ByMeasurement.WITH_MEASUREMENT);
+		update (ttc);
+end
+
+#----------------TREATMENT SPECIFITY-------------------------
+
+rule "Fixed treatment" no-loop
+	when
+		ttc: TreatmentTypeClassification(associatedTreatment != null && trecur == null) // aún no se ha definido la clasificación por recurrencia
+		eval(SchedulingTools.isDayDefined());
+		eval(SchedulingTools.isHourDefined());
+	then
+		ttc.setTreatmentByRecurrence(ByRecurrence.FIXED);
+		update (ttc);
+end
+
+rule "Flexible-defined treatment" no-loop
+	when
+		ttc: TreatmentTypeClassification(associatedTreatment != null && trecur == null) // aún no se ha definido la clasificación por recurrencia
+		eval(SchedulingTools.isDayDefined());
+		eval(!SchedulingTools.isHourDefined());		
+	then
+		ttc.setTreatmentByRecurrence(ByRecurrence.FLEXIBLE_DEFINED);
+		update (ttc);
+end
+
+rule "Flexible-custom treatment" no-loop
+	when
+		ttc: TreatmentTypeClassification(associatedTreatment != null && trecur == null) // aún no se ha definido la clasificación por recurrencia
+		eval(!SchedulingTools.isDayDefined());
+		eval(!SchedulingTools.isHourDefined());	
+	then
+		ttc.setTreatmentByRecurrence(ByRecurrence.FLEXIBLE_CUSTOM);
+		update (ttc);	
+end
+
+#----------------TREATMENT DURATION-------------------------
+rule "Establish short term treatment" no-loop // menos de un mes
+	when
+		ttc: TreatmentTypeClassification(associatedTreatment != null && tdur == null)
+		//eval ( (shortTermTreatment.getTreatmentPlanning()).getEndDate() - (shortTermTreatment.getTreatmentPlanning()).getStartDate() <= 30 )
+		eval(SchedulingTools.isLessThanAMonth(associatedTreatment))
+	then
+		ttc.setTreatmentByDuration(ByDuration.SHORT_TERM);
+		update (ttc);	
+end
+
+rule "Establish medium term treatment" no-loop // menos de seis meses
+	when
+		ttc: TreatmentTypeClassification(associatedTreatment != null && tdur == null)
+		eval(SchedulingTools.isLess6Months())
+	then
+		ttc.setTreatmentByDuration(ByDuration.MEDIUM_TERM);
+		update (ttc);
+end
+
+rule "Establish long term treatment" no-loop // más de seis meses y hasta un año
+	when
+		ttc: TreatmentTypeClassification(associatedTreatment != null && tdur == null)
+		eval(SchedulingTools.isLessAYear())
+	then
+		ttc.setTreatmentByDuration(ByDuration.LONG_TERM);
+		update (ttc);
+end
+
+
+rule "Establish fromNowOn treatment" no-loop // más de un año o sin fecha de fin definida
+	when
+		ttc: TreatmentTypeClassification(associatedTreatment != null && tdur == null)
+		eval(SchedullingTools(!isEndDateDefined))// fecha de fin no definida
+	then
+		ttc.setTreatmentByDuration(ByDuration.FROM_NOW_ON);
+		// el tratamiento tendrá una duración por defecto a 18 meses, que es cuando se revisará el caso 
+		// con el médico y se continuará en fase permanente de mantenimiento.
+		update (ttc);
+		
+end
+
+#----------------SESSION PLANNING-----------------------------
+
+rule "Set planned sessions for fixed treatments" no-loop
+	when
+		treatment: Treatment()
+		eval(mapOfTreatmentTypes.get(treatment).getTreatmentByRecurrence() == ByRecurrence.FIXED)
+		eval(TreatmentTypeClassification.hasValidTTC(treatment)) //tiene completada la clasificación del tratamiento
+	then
+		SchedulingTools.setListOfSessions(treatment);
+end 
+/*
+rule "First session for flexible treatments - once a day" no-loop // incluimos en este grupo los tratamientos definidos flexibles y los indefinidos
+// estamos haciendo referencia a los tratamientos que tienen una realización al día
+	when
+		treatment: Treatment(treatmentPlanning != null && motivationalStatus == MotivationalStatusType.contemplation )
+		definedFlexibleTreatment
+		// la recurrencia no especifica el momento del día
+	then
+	// se establece la primera sesión para dentro de tres días, o sea, planned session con fecha para dentro de 3 días
+	// es decir, elegimos el día
+	// el momento en el que se realizará lo especificamos para 3 horas después de que el paciente se levante
+	// (dato que habrá que recoger del historial del paciente) 
+end
+
+rule "First session for flexible treatments - several times a day" no-loop // incluimos en este grupo los tratamientos definidos flexibles y los indefinidos
+// estamos haciendo referencia a los tratamientos que tienen más de una realización al día
+	when
+		treatment: Treatment(treatmentPlanning != null && motivationalStatus == MotivationalStatusType.contemplation )
+		definedFlexibleTreatment
+		// la recurrencia sí hace referencia al número de veces al día que debe realizarse
+	then
+	// se establece la primera sesión para dentro de tres días, o sea, planned session con fecha para dentro de 3 días
+	// es decir, elegimos el día
+	// el momento en el que se realizará lo especificamos en base a la recurrencia establecida y el rango
+	// de horario que tenga el paciente (dato que habrá que recoger del historial del paciente, diferencia entre levantarse y acostarse)
+	// máximo, cinco veces al día
+end
+
+rule "Re-schedule adjustment for flexible treatments" no-loop
+	when
+	// el usuario haya decidido otra fecha de inicio de tratamiento 
+	// o sea, cuando recibamos la respuesta a una pregunta de cambio de fecha
+	then
+	// establecer esa fecha como la de la primera sesión
+	// y mandar un mensaje para avisarle de que se le recordará la primera sesión
+end
+
+rule "Fill calendar for undefined treatments"  no-loop
+	when
+		treatment: Treatment(treatmentPlanning != null)
+		undefinedTreatment
+		//se haya definido la primera sesión (hay una planned session)
+	then
+	//crear eventos (planned sessions) hasta la fecha de fin, teniendo en cuenta
+	// el día que se estableció la primera sesión, en base a la siguiente recurrencia: 
+	// 1 y 2 mes: 1 vez a la semana
+	// 3-6 mes: 2 veces a la semana
+	// 7-12 mes: 3 veces a la semana
+	// 13-18 mes: 4 veces a la semana	
+end
+*/
+
+#----------------COMPLETENESS UNIT-----------------------------------
+
+rule "Set completeness unit" no-loop
+	when
+		treatment: Treatment(completenessUnit == 0)// aún no se haya establecido la unidad de completitud
+		eval(SchedulingTools.hasAssociatedListOfSessions()) // ya se ha establecido una lista de sesiones
+	then
+		DateList sessions = SchedulingTools.getPlannedSessions(treatment);
+		treatment.setCompletenessUnit(calculateUnitOfCompleteness(sessions));
+end
+
+#----------------PERFORMED SESSION MEASURABLE TREATMENTS-----------------------------------
+
+rule "Measure for 4-5 times a day performance" no-loop //4 a 5 veces al día
+	when
+	// el tratamieno lleve asociado medida y ésta sea automática
+	// y hayamos recibido le medida dentro de los quince primeros minutos
+	then
+	// la sesión se considerará realizada 
+end
+
+rule "Measure for 4-5 times a day no performance" no-loop //4 a 5 veces al día
+	when
+	// el tratamieno lleve asociado medida y ésta sea automática
+	// y NO hayamos recibido le medida dentro de los quince primeros minutos
+	then
+	// alarma para que el usuario realice la acción 
+end
+
+rule "Measure for 4-5 times a day NOT performed" no-loop //4 a 5 veces al día
+	when
+	// el tratamieno lleve asociado medida y ésta sea automática
+	// y hayamos recibido le medida dentro de la primera media hora
+	// quince primeros minutos + otros 15 de alarma
+	then
+	// la sesión se considerará NO realizada 
+end
+
+rule "Measure for 2-3 times a day performance" no-loop
+	when
+	// el tratamieno lleve asociado medida y ésta sea automática
+	// y hayamos recibido le medida dentro de la primera media hora
+	then
+	// la sesión se considerará realizada 
+end
+
+rule "Measure for 2-3 times a day no performance" no-loop 
+	when
+	// el tratamieno lleve asociado medida y ésta sea automática
+	// y NO hayamos recibido le medida dentro de la primera media hora
+	then
+	// alarma para que el usuario realice la acción 
+end
+
+rule "Measure for 2-3 times a day NOT performed" no-loop 
+	when
+	// el tratamieno lleve asociado medida y ésta sea automática
+	// y NO hayamos recibido le medida dentro de la primera hora
+	then
+	// la sesión se considerará NO realizada 
+end
+
+rule "Measure once a day performance" no-loop
+	when
+	// el tratamiento lleve asociado una medida
+	// hemos recibido la medida en un margen de una hora
+	then
+	// la sesión se considerará como realizada
+end
+
+rule "Measure once a day no performance" no-loop
+	when
+	// el tratamiento lleve asociado una medida
+	// NO hemos recibido la medida en un margen de una hora 
+	then
+	// alarma para que el usuario realice la acción o introduzca la medida
+end
+
+rule "Measure once a day not performed" no-loop
+	when
+	// el tratamiento lleve asociado una medida
+	// NO hemos recibido la medida en un margen de dos horas 
+	then
+	// la sesión se considerará como NO realizada
+end
+
+rule "Lost measurement" no-loop
+	when
+	// se detecte una performed sesión y no podemos asignarla a ninguna sesión
+	// porque no cumple ninguno de los rangos anteriores
+	then
+	// almacenarla dentro de un array de sesiones perdidas
+end
+
+#----------------PERFORMED SESSION NON-MEASURABLE TREATMENTS-----------------------------------
+
+rule "Performed Session out of day" no-loop
+	when
+		ps: PerformedSession()
+		eval(!SchedulingTools.isThereASessionToday(treatment))
+	then
+		SessionsPerformance.addOutOfDateSession(ps);
+		//enviar mensaje al usuario
+end
+
+rule "Session performed in right interval of time" no-loop
+	
+	timer(5m) // esta regla se lanza cada 5 minutos
+	
+	when
+		treatment: Treatment(treatmentPlanning != null)
+		eval(SchedulingTools.isNowInPerformingInterval(treatment) || SchedulingTools.isNowInExtraInterval(treatment))
+	// y recibo una performed session en el intervalo correcto...
+	then
+		//sesión realizada: la ps se pone como válida
+		// se aumenta la completitud del tratamiento
+end
+
+
+rule "Session not performed in performing interval" no-loop
+	when
+		// si no he recibido una performed session en el intervalo de performing interval
+		// y no he mandado mensaje al usuario
+	then
+	//mandar mensaje al usuario para que haga la sesión o introduzca la medida.
+	//
+end
+
+
+
+
+
+rule "4-5 times a day performance" no-loop //4 a 5 veces al día
+	when
+		ps: PerformedSession( t: associatedTreatment)
+		// hay que relacionarla con su treatment: Treatment()
+		eval(SchedulingTools.isThereASessionToday(SchedulingTools.getPlannedSessions(t) ))
+		eval(SchedulingTools.treatmentPerformed4To5ADay(treatment))
+		eval(SchedulingTools.sessionPerformedAfter15minutes(treatment, ps) )// y hayamos recibido le medida dentro de los quince primeros minutos
+	then
+		ps.setIsValid(true); // la sesión se da por realizada 
+		SessionPerformance.addPerformedSession(ps);
+end
+
+rule "Measure for 4-5 times a day no performance" no-loop //4 a 5 veces al día
+	when
+		t : Treatment( treatmentPlanning.( sd : startDate, ed : endDate ))
+		not PerformedSession( )
+		now > 
+		eval(SchedulingTools.isThereASessionToday(SchedulingTools.getPlannedSessions(treatment) ))
+		// hay que relacionarla con su treatment: Treatment()
+		eval(mapOfTreatmentTypes.get(treatment).getTreatmentByMeasurement() == ByMeasurement.WITHOUT_MEASUREMENT)
+		eval(SchedulingTools.treatmentPerformed4To5ADay(treatment))
+		eval(!SchedulingTools.sessionPerformedAfter15minutes(treatment, ps) )// y NO hayamos recibido le medida dentro de los quince primeros minutos
+		// el tratamieno no lleve asociado medida y ésta sea automática
+		// y NO hayamos recibido le medida dentro de los quince primeros minutos
+	then
+	// alarma para que el usuario introduzca la medida o ejecute la acción (mensaje o sonido)?
+end
+
+rule "Measure for 4-5 times a day NOT performed" no-loop //4 a 5 veces al día
+	when
+		// hay que relacionarla con su treatment: Treatment()
+		eval(SchedulingTools.isThereASessionToday(SchedulingTools.getPlannedSessions(treatment) ))
+		eval(mapOfTreatmentTypes.get(treatment).getTreatmentByMeasurement() == ByMeasurement.WITHOUT_MEASUREMENT)
+		eval(SchedulingTools.treatmentPerformed4To5ADay(treatment))
+		eval(!SchedulingTools.sessionPerformedAfter30minutes(treatment, ps) )
+	// y no hayamos recibido le medida dentro de la primera media hora
+	// quince primeros minutos + otros 15 de alarma (total 30 minutos)
+	then
+		SessionPerformance.addNotPerformedSession(Date d); // la sesión se considerará NO realizada 
+end
+
+rule "Measure for 2-3 times a day performance" no-loop
+	when
+	// y hayamos recibido le medida dentro de la primera media hora
+	then
+	// la sesión se considerará realizada 
+end
+
+rule "Measure for 2-3 times a day no performance" no-loop 
+	when
+	// el tratamieno lleve asociado medida y ésta sea automática
+	// y NO hayamos recibido le medida dentro de la primera media hora
+	then
+	// alarma para que el usuario realice la acción 
+end
+
+rule "Measure for 2-3 times a day NOT performed" no-loop 
+	when
+	// el tratamieno lleve asociado medida y ésta sea automática
+	// y NO hayamos recibido le medida dentro de la primera hora
+	then
+	// la sesión se considerará NO realizada 
+end
+
+rule "Measure once a day performance" no-loop
+	when
+		ps: PerformedSession()
+		eval(SchedulingTools.isThereASessionToday(SchedulingTools.getPlannedSessions(treatment) ))
+		eval(SchedulingTools.treatmentPerformedOnceADay(treatment))
+		eval(SchedulingTools.sessionPerformedAfter1Hour(treatment, ps) )
+	// el tratamiento lleve asociado una medida
+	// hemos recibido la medida en un margen de una hora
+	then
+		ps.setIsValid(true); // la sesión se da por realizada 
+		SessionPerformance.addPerformedSession(ps);// la sesión se considerará como realizada
+		update(ps);
+end
+
+rule "Measure once a day no performance" no-loop
+	when
+	//el tratamiento lo saco de la lista de tratamientos detectados?
+	// el tratamiento lleve asociado una medida
+	// NO hemos recibido la medida en un margen de una hora 
+	then
+	// alarma para que el usuario realice la acción o introduzca la medida
+end
+
+rule "Once a day for healthy habits treatment performance" no-loop
+	when
+	// el tratamiento no lleve asociado una medida
+	// sea de tipo healthy habits
+	then
+	// se preguntará al usuario si la ha realizado
+end
+
+rule "Once a day for healthy habits treatment not performed" no-loop
+	when
+	// la respuesta a la pregunta anterior sea no
+	then
+	// se archivará la planned sessión en array de sesiones no realizadas
+end
+
+rule "Once a day for healthy habits treatment performed" no-loop
+	when
+	// la respuesta al mensaje anterior sea sí
+	then
+	// se archivará en el array de sesiones realizadas
+end
+
+rule "Not in time measurement"
+	when
+	// la medida se detecte, hoy haya sesión, pero no esté dentro de los rangos establecidos
+	then
+	// se mete dentro de array de sessiones perdidas
+end
+
+rule "Check performance at the end of the day"
+	when
+	// hoy tocase medida y no se haya recibido nada a última hora
+	then
+	// preguntar al usuario si lo hizo y en caso afirmativo preguntar cuando
+end
+
+rule "Find lost session"
+	when
+	 // la respuesta al mensaje anterior sea sí y haya un tiempo asociado
+	then
+	// buscar la sesión en el array de sesiones perdidas
+	// introducirlo en el array de sesiones realizadas
+	// cambiar el parámetro validez a válido
+	// aumentar la completitud del tratamiento
+end
+
+#----------------REMINDERS-----------------------------------
+#----------------FEEDBACK/evolution-----------------------------------
+#----------------reward----------------------------------
+rule "" no-loop
 	when
 	// 
 	then
 	//
 	//
 end
-*/
+
+rule "" no-loop
+	when
+	// 
+	then
+	//
+	//
+end
+
+rule "" no-loop
+	when
+	// 
+	then
+	//
+	//
+end
+
+rule "" no-loop
+	when
+	// 
+	then
+	//
+	//
+end
+
+rule "" no-loop
+	when
+	// 
+	then
+	//
+	//
+end
+
+rule "" no-loop
+	when
+	// 
+	then
+	//
+	//
+end
+
+
+rule "" no-loop
+	when
+	// 
+	then
+	//
+	//
+end
+
+rule "" no-loop
+	when
+	// 
+	then
+	//
+	//
+end
+
+

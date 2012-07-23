@@ -35,6 +35,8 @@ public class MotivationalMessage extends Message {
     + "motivationalStatus";
   public static final String PROP_MESSAGE_TYPE = MessageOntology.NAMESPACE
 		    + "messageType";
+  public static final String PROP_MESSAGE_SUBTYPE = MessageOntology.NAMESPACE
+  + "messageSubtype";
   
 //CONSTRUCTORS
   
@@ -46,11 +48,12 @@ public class MotivationalMessage extends Message {
     super(uri);
   }
   
-  public MotivationalMessage (String diseaseURI, String treatmentTypeURI, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, Object content) {
+  public MotivationalMessage (String diseaseURI, String treatmentTypeURI, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, MotivationalMessageSubclassification msubtype, Object content) {
 	  	this.setDiseaseURI(diseaseURI);
 	  	this.setTreatmentTypeURI(treatmentTypeURI);
 	  	this.setMotivationalStatus(motStatus);
 	  	this.setMMessageType(mtype);
+	  	this.setMMessageSubtype(msubtype);
 	  	this.setContent(content);
 }
   
@@ -98,8 +101,11 @@ public class MotivationalMessage extends Message {
 	return true 
       && props.containsKey(PROP_DISEASE)
       && props.containsKey(PROP_MESSAGE_TYPE)
+      && props.containsKey(PROP_MESSAGE_SUBTYPE)
       && props.containsKey(PROP_MOTIVATIONAL_STATUS)
-      && props.containsKey(PROP_TREATMENT_TYPE);
+      && props.containsKey(PROP_TREATMENT_TYPE)
+      
+      ;
   }
 
   
@@ -121,6 +127,15 @@ public class MotivationalMessage extends Message {
     if (mmc != null)
       props.put(PROP_MESSAGE_TYPE, mmc);
   }		
+
+  public MotivationalMessageSubclassification getMMessageSubtype() {
+	    return (MotivationalMessageSubclassification)props.get(PROP_MESSAGE_SUBTYPE);
+	  }		
+
+	  public void setMMessageSubtype(MotivationalMessageSubclassification mmsc) {
+	    if (mmsc != null)
+	      props.put(PROP_MESSAGE_SUBTYPE, mmsc);
+	  }		
 
 
   public String getTreatmentTypeURI() {

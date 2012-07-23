@@ -6,110 +6,142 @@ package contemplation
 #declare any global variables here
 
 rule "Reinforce the decission"
-	//lanzar cada x dï¿½as (previamente calculado)
 	when
-		// la fecha se acerque y hasta dos dï¿½as antes y si hoy toca lanzar el mensaje...
+		// El usuario haya pasado a contemplation
 	then 
-		// mandar mensajes de ï¿½sabï¿½as quï¿½...? (de los que todavï¿½a no se hayan mandado).
-		// mensajes sobre los beneficios que obtendrï¿½ por seguir el tratamiento.
+		// Enviamos un mensaje al usuario para felicitarle por su decisión y 
+		// le comentamos los beneficios que obtendrá por seguir el tratamiento.
 end
 
-rule "Schedule first session"
+rule "Schedule first session for flexible treatments"
 	when
-		// cuando cambie el estado a contemplation || no se haya realizado la primera sesiï¿½n (hay que recuperarla)
+		// el tratamiento sea flexible y las reglas de schedule hayan 
+		// acordado la fecha de la primera realización
 	then 
-		// avisar al usuario de que se le ha planificado por defecto la primera sesiï¿½n 
-		// y si le viene bien o quiere adecuarla a un momento que le venga mejor. 
+		// enviar un mensaje al usuario con una propuesta sobre
+		// la realización de la primera sesión 
+		// mensaje con preguntas condicionales, así que si no le viene
+		// bien, debe introducir la fecha que más le convenga, pero pidiéndole
+		// que por favor no se demore mucho más de lo que indicaba la fecha propuesta
 end
 
-rule "Re-schedule adjustment" no-loop
-	
+
+rule "Re-schedule fixed treatment planning"
 	when
-	// el usuario modifique la primera sesiï¿½n  
+	//Cuando el tratamiento tenga sesiones planificadas y haya sesiones que no hayan sido realizadas 
+	then 
+	//Establecer la próxima sesión como la primera y alargar la fecha de fin añadiendo el número de sesiones no realizadas al calendario. Notificar al usuario de cuándo tendrá lugar la primera sesión. 
+	//Avisar al caregiver para que indique o no si vale la reestructuración
+end
+
+rule "First session explanation"
+	when
+		// hoy tengo que enviar mensaje de explicación
+	then 
+		//Mesaje al usuario explicando la primera sesión, cómo tiene que hacer las cosas, dónde, qué necesita
+		//preguntar si le quedan dudas -- conditional questions  
+end
+
+rule "Contact caregiver because of doubts"
+	when
+	// no se hayan podido responder las dudas al usuario
 	then
-	// recalcula la frecuencia para el flujo de refuerzo. 
+	// contactar al caregiver para que las resuelva
 end
 
-rule "Confirm first-session's planning"
-	
+rule "Advice for first-session's performance" 
 	when
-		// estemos a dos dï¿½as del tratamiento
+		// toque mandar un mensaje de consejo
 	then 
-		//Mesaje al usuario: ï¿½te viene bien el horario?
+	// mandar un mensaje al usuario sobre consejos para su sesión
 end
 
-rule "Advice for first-session's performance" //ï¿½descomponer en mï¿½s reglas segï¿½n el tratamiento?
+rule "Remider of first session"
 	
 	when
-		// estemos a dos dï¿½as del tratamiento
+		// sea un día antes de comenzar el tratamiento 
 	then 
-		// si el tratamiento es physical activity --> enviar mensaje sobre cï¿½mo debe realizar el ejercicio y quï¿½ necesita para llevarlo a cabo.
-		// si el tratamiento es de mediciï¿½n --> enviar mensaje al usuario sobre cï¿½mo debe realizar la medida e informaciï¿½n sobre lo que se va a medir
-		// si el tratamiento es de healthy habits --> enviar mensaje de informaciï¿½n y consejos para logarlo.
-end
-
-rule "Remider of first session day"
-	
-	when
-		// sea un dï¿½a antes de comenzar el tratamiento (justo 24h antes)
-	then 
-		//avisar al usuario para tenerlo todo preparado y la hora y sitio donde debe realizarlo (reminder) y darle ï¿½nimos
-		//proponerle un trigger de objeto (ya recibirï¿½ un reminder tambiï¿½n) para que no se le olvide
-		//o se le facilite la acciï¿½n (dependerï¿½ del tipo de tratamiento)
+		//avisar al usuario para tenerlo todo preparado y decirle a qué hora tiene que hacerlo
 end
 
 rule "Reminder of first session hour"
 	when
-		//quede una hora para empezar la sesiï¿½n
+		//quede una hora para empezar la sesión
 	then 
-		//se le manda un mensaje al usuario recordï¿½ndoselo y dï¿½ndole ï¿½nimos
+		//se le manda un mensaje al usuario recordándoselo y dándole ánimos
 		
 end
 
 rule "First Session performed"  no-loop
-	#include attributes such as "salience" here...
 	
 	when
-	// se detecte la primera sesiï¿½n realizada 
+	// se detecte la primera sesión haya sido realizada 
 	then
-	//se almacena en un array de sesiones completadas
-	//aumenta una unidad la completitud del tratamiento (no hace falta ver quï¿½ sesiï¿½n es la que se ha realizado)
-	//comenzarï¿½a el flujo de reglas de action porque cambiarï¿½amos de status.
+	//se almacena en un array de sesiones completadas (add Performed Session a treatment también).
+	//aumenta una unidad la completitud del tratamiento
 end
 
-rule "Non-fullfilment of session"  no-loop
+rule "Non-fullfilment of first session (first time)"  no-loop
 	
 	when
-	// se detecte que la primera sesiï¿½n no ha sido realizada 
+	// se detecte que la primera sesión no haya sido realizada 
 	then
-	// comienza el flujo de indagaciï¿½n
-	// se introduce la sesiï¿½n no realizada en un array de sesiones no realizadas
-	// se busca una nueva fecha para la realizaciï¿½n de la tarea.
+	// Enviar al usuario un cuestionario condicional para averiguar causa si la causa fue la destreza.
+	//Se introduce la sesión en array de sesiones no realizadas
+
 end
 
-rule "3-times Non-fullfilment of session"  no-loop
+rule "The cause was an oversight"  no-loop
 	
 	when
-	// se detecte que la primera sesiï¿½n no ha sido realizada en 3 ocasiones
-	//(chequear el nï¿½mero de elementos del array donde se almacenan las sesiones no realizadas).
+	// las respuestas al mensaje anterior indiquen que la causa no fue la destreza
 	then
-	// notificamos al caregiver
-	// descendemos el estado motivacional a precontemplation.
+	//Causa fue el olvido 
+	//Enviar al usuario un mensaje para reforzar la memoria (trigger visual o asociación).
+	//Planificación de la siguiente sesión (día siguiente si el tratamiento es flexible) 
+
 end
 
-rule "Identify measurement"  no-loop
+rule "The cause was the lack of (destreza) "  no-loop
 	
 	when
-	// se detecte que la primera sesiï¿½n ha sido realizada 
+	// las respuestas al mensaje anterior indiquen que la causa fue la destreza
 	then
-	// identificar el tipo de medida 
+	//Enviar al usuario un mensaje para solventar la destreza.
+	//Planificación de la siguiente sesión (día siguiente si el tratamiento es flexible) 
+
 end
 
-rule "Check measurement OK" no-loop
+rule "Non-fullfilment of first session (second time)"  no-loop
 	
 	when
-	// la medida detectada estï¿½ dentro de los lï¿½mites de seguridad  
+	// se detecte que la primera sesión no haya sido realizada por segunda vez
 	then
-	// mandar los resultados al caregiver
-	// y notificar al usuario. 
+	// Enviar al usuario un cuestionario condicional para averiguar causa si la causa fue el sentimiento.
+	//Se introduce la sesión en array de sesiones no realizadas
+
+end
+
+rule "The cause was a feeling"  no-loop
+	when
+	// las respuestas al mensaje anterior indiquen que la causa fue un temor, un sentimiento
+	then
+	//Enviar al usuario un mensaje para solventar el problema.
+	//Planificación de la siguiente sesión (día siguiente si el tratamiento es flexible) 
+end
+
+rule "Non-fullfilment of first session (third time)"  no-loop
+	
+	when
+	// se detecte que la primera sesión no haya sido realizada por tercera vez
+	then
+	// Cambio de estado.
+	// Notificar al caregiver
+end
+
+rule "Confirmation of first session performance"
+	when
+	// Hoy tocase hacer la sesión y el tratamiento no lleva asociado medida
+	then
+	// preguntar al usuario si hizo la sesión
 end

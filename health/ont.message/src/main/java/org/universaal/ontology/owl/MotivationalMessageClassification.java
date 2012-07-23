@@ -28,9 +28,10 @@ public class MotivationalMessageClassification extends ManagedIndividual {
   public static final int TEST = 4;
   public static final int INQUIRY = 5;
   public static final int NOTIFICATION= 6;
+  public static final int EMOTION= 7;
 
   private static final String[] names = {
-    "educational","reminder","reward","personalizedFeedback", "test", "inquiry", "notification" };
+    "educational","reminder","reward","personalizedFeedback", "test", "inquiry", "notification", "emotion" };
 
   public static final MotivationalMessageClassification educational = new MotivationalMessageClassification(EDUCATIONAL);
   public static final MotivationalMessageClassification reminder = new MotivationalMessageClassification(REMINDER);
@@ -39,6 +40,7 @@ public class MotivationalMessageClassification extends ManagedIndividual {
   public static final MotivationalMessageClassification test = new MotivationalMessageClassification(TEST);
   public static final MotivationalMessageClassification inquiry = new MotivationalMessageClassification(INQUIRY);
   public static final MotivationalMessageClassification notification = new MotivationalMessageClassification(NOTIFICATION);
+  public static final MotivationalMessageClassification emotion = new MotivationalMessageClassification(EMOTION);
   
 
   private int order;
@@ -84,6 +86,8 @@ public class MotivationalMessageClassification extends ManagedIndividual {
           return inquiry;
       case NOTIFICATION:
           return notification;
+      case EMOTION:
+          return emotion;
     default:
       return null;    }
   }
@@ -95,7 +99,7 @@ public class MotivationalMessageClassification extends ManagedIndividual {
 	if (name.startsWith(MessageOntology.NAMESPACE))
 	    name = name.substring(MessageOntology.NAMESPACE.length());
 
-	for (int i = EDUCATIONAL; i <= NOTIFICATION; i++)
+	for (int i = EDUCATIONAL; i <= EMOTION; i++)
 	    if (names[i].equals(name))
 		return getMotivationalMessageClassificationByOrder(i);
 

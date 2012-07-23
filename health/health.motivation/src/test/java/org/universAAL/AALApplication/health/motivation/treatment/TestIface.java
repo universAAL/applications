@@ -2,13 +2,17 @@ package org.universAAL.AALApplication.health.motivation.treatment;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import junit.framework.TestCase;
 
+import org.drools.lang.DRLParser.decl_field_initialization_return;
 import org.universAAL.AALApplication.health.motivation.ClassesNeededRegistration;
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.DetectedTreatments;
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
@@ -22,21 +26,25 @@ import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
+import org.universaal.ontology.owl.MotivationalPlainMessage;
+import org.universaal.ontology.owl.MotivationalQuestionnaire;
+import org.universaal.ontology.owl.Questionnaire;
 import org.universaal.ontology.owl.QuestionnaireOntology;
+import org.universaal.ontology.owl.QuestionnaireStrategyOntology;
 
-public class TestIface extends TestCase implements SendMotivationMessageIface, ClassesNeededRegistration, MotivationServiceRequirementsIface {
+public class TestIface implements SendMotivationMessageIface, MotivationServiceRequirementsIface {
 
 	public static ArrayList <MotivationalMessage> motivationalMessagesSentToAP = new ArrayList <MotivationalMessage>();
 	public static ArrayList <MotivationalMessage> motivationalMessagesSentToCaregiver = new ArrayList <MotivationalMessage>();
 
-	
-	
 	public static final Locale SPANISH = new Locale ("es", "ES");
-	
-	public void registerClassesNeeded() {
+
+	public static void registerClassesNeeded() {
+
 		OntologyManagement.getInstance().register(new DataRepOntology());
 		OntologyManagement.getInstance().register(new ServiceBusOntology());
 		OntologyManagement.getInstance().register(new UIBusOntology());
@@ -44,18 +52,19 @@ public class TestIface extends TestCase implements SendMotivationMessageIface, C
 		OntologyManagement.getInstance().register(new ShapeOntology());
 		OntologyManagement.getInstance().register(new PhThingOntology());
 		OntologyManagement.getInstance().register(new SpaceOntology());
-		OntologyManagement.getInstance().register(new ProfileOntology());//hay otra
-		OntologyManagement.getInstance().register(new QuestionnaireOntology());//hay otra
+		OntologyManagement.getInstance().register(new ProfileOntology());
+		OntologyManagement.getInstance().register(new QuestionnaireOntology());
 		OntologyManagement.getInstance().register(new DiseaseOntology());
 		OntologyManagement.getInstance().register(new HealthMeasurementOntology());
 		OntologyManagement.getInstance().register(new HealthOntology());
 		OntologyManagement.getInstance().register(new MessageOntology());
+		OntologyManagement.getInstance().register(new QuestionnaireStrategyOntology());
 	}
 
 	public File getDBRoute(Locale language) {
-		
+
 		File file;
-		
+
 		if (language.equals(SPANISH))
 			return file = new File("");
 		else if (language.equals(Locale.ENGLISH))
@@ -63,15 +72,75 @@ public class TestIface extends TestCase implements SendMotivationMessageIface, C
 		else
 			return null;
 	}
+
+	public static boolean sentToAPContainsQuestionnaire(String questionnaireName){
+		
+		for (int i=0;i<motivationalMessagesSentToAP.size();i++){
+			
+			Object mm = motivationalMessagesSentToAP.get(i).getContent();
+			
+			if( mm instanceof Questionnaire){
+				Questionnaire q = (Questionnaire)mm;
+				if(q.getName().equals(questionnaireName))
+					return true;
+			}
+		}
+		return false;
+	}
 	
-	public void sendMessageToAP(MotivationalMessage mm) {
+public static boolean sentToCaregiverContainsQuestionnaire(String questionnaireName){
+		
+		for (int i=0;i<motivationalMessagesSentToCaregiver.size();i++){
+			
+			Object mm = motivationalMessagesSentToCaregiver.get(i).getContent();
+			
+			if( mm instanceof Questionnaire){
+				Questionnaire q = (Questionnaire)mm;
+				if(q.getName().equals(questionnaireName))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean sentToAPContainsPlainMessage(String plainMessageContent){
+		
+		for (int i=0;i<motivationalMessagesSentToAP.size();i++){
+
+			Object mm = motivationalMessagesSentToAP.get(i).getContent();
+
+			if( mm instanceof String){
+				String content = (String) mm;
+				if(content.equals(plainMessageContent))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+public static boolean sentToCaregiverContainsPlainMessage(String plainMessageContent){
+		
+		for (int i=0;i<motivationalMessagesSentToCaregiver.size();i++){
+
+			Object mm = motivationalMessagesSentToCaregiver.get(i).getContent();
+
+			if( mm instanceof String){
+				String content = (String) mm;
+				if(content.equals(plainMessageContent))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	public void sendMessageToAP(MotivationalMessage mm, Treatment t) {
 		motivationalMessagesSentToAP.add(mm);
+		
 	}
 
-	public void sendMessageToCaregiver(MotivationalMessage mm) {
+	public void sendMessageToCaregiver(MotivationalMessage mm, Treatment t) {
 		motivationalMessagesSentToCaregiver.add(mm);
 	}
-
 
 	public HealthProfile getHealthProfile(User u) {
 		// TODO Auto-generated method stub
@@ -87,29 +156,111 @@ public class TestIface extends TestCase implements SendMotivationMessageIface, C
 	}
 
 	public void fillVariablesContent(){
-		
+
 	}
 
 	public String getAssistedPersonName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Peter";
 	}
 
 	public String getCaregiverName(User assistedPerson) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getCaregiverName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Andrea";
 	}
 
 	public String getPartOfDay() {
-		// TODO Auto-generated method stub
-		return null;
+		return "morning";
+	}
+
+	public User getAssistedPerson() {
+		User ap = new User("Peter");
+		return ap;
+	}
+
+
+	public String getAPGenderArticle() {
+		return "him";
+	}
+
+	public String getAPPosesiveGenderArticle() {
+		return "his";
 	}
 	
-
 	
+	//---------------------DARIO---------------------------------------
+
+/*
+ * 
+ * public static String convertToCalendarToString(GregorianCalendar cal){
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		int month = cal.get(Calendar.MONTH) + 1;
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int minutes = cal.get(Calendar.MINUTE);
+		int secs = cal.get(Calendar.SECOND);
+		
+		String s = "" + cal.get(Calendar.YEAR) +
+		(month < 9? "0" + month : month)
+		+ (day < 9? "0" + day : day) +"T"+ 
+		(hour < 9? "0" + hour : hour)
+		+ (minutes < 9? "0" + minutes : minutes)
+		+ (secs < 9? "0" + secs : secs);
+
+		return s;
+	}
+
+	public static GregorianCalendar getLastPreviousMonday(GregorianCalendar cal) throws Exception{
+		GregorianCalendar retCalendar = (GregorianCalendar) cal.clone();
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		switch(day){
+		case Calendar.MONDAY:
+			retCalendar.add(Calendar.DAY_OF_WEEK, -7);
+			return retCalendar;
+		case Calendar.TUESDAY:
+			retCalendar.add(Calendar.DAY_OF_WEEK, -1);
+			return retCalendar;
+		case Calendar.WEDNESDAY:
+			retCalendar.add(Calendar.DAY_OF_WEEK, -2);
+			return retCalendar;
+		case Calendar.THURSDAY:
+			retCalendar.add(Calendar.DAY_OF_WEEK, -3);
+			return retCalendar;
+		case Calendar.FRIDAY:
+			retCalendar.add(Calendar.DAY_OF_WEEK, -4);
+			return retCalendar;
+		case Calendar.SATURDAY:
+			retCalendar.add(Calendar.DAY_OF_WEEK, -5);
+			return retCalendar;
+		case Calendar.SUNDAY:
+			retCalendar.add(Calendar.DAY_OF_WEEK, -6);
+			return retCalendar;
+		default:
+			throw new Exception("Somehting really strange happened!!");
+		}
+	}
+	
+	
+	public static String convertDayOfWeekToICALString(GregorianCalendar cal) throws Exception{
+		int day = cal.get(Calendar.DAY_OF_WEEK);
+		switch(day){
+		case Calendar.MONDAY:
+			return "MO";
+		case Calendar.TUESDAY:
+			return "TU";
+		case Calendar.WEDNESDAY:
+			return "WE";
+		case Calendar.THURSDAY:
+			return "TH";
+		case Calendar.FRIDAY:
+			return "FR";
+		case Calendar.SATURDAY:
+			return "SA";
+		case Calendar.SUNDAY:
+			return "SU";
+		default:
+			throw new Exception("Somehting really strange happened!!");
+		}
+	}
+
+ * 
+ * 
+ * */
 }

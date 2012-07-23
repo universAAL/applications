@@ -38,8 +38,8 @@ public class MotivationalPlainMessage extends MotivationalMessage {
   }
   */
   
-  public MotivationalPlainMessage(String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, String content){
-	  super(illness, ttype, motStatus, mtype, content);
+  public MotivationalPlainMessage(String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, MotivationalMessageSubclassification msubtype, String content){
+	  super(illness, ttype, motStatus, mtype, msubtype, content);
   }
   
   public String getClassURI() {

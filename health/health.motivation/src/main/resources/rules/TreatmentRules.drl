@@ -3,159 +3,218 @@ package org.universAAL.AALApplication.health.motivation.treatment
 
 #list any import classes here. 
 import org.universaal.ontology.health.owl.Treatment;
+import org.universaal.ontology.health.owl.PerformedSession;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
+import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universAAL.AALApplication.health.motivation.testSupportClasses.RulesSupport;
-import org.universaal.ontology.owl.*;
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.PerformedSessionsSupport;
+import org.universaal.ontology.owl.ChoiceLabel;
+import org.universaal.ontology.owl.MotivationalMessageClassification;
+import org.universaal.ontology.owl.MotivationalMessageSubclassification;
+import org.universaal.ontology.owl.MotivationalQuestionnaire;
+import org.universaal.ontology.owl.Questionnaire;
+import org.universaal.ontology.owl.SingleChoiceQuestion;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.DetectedTreatments;
+import org.universaal.ontology.owl.AnsweredQuestionnaire;
+import org.universaal.ontology.owl.Questionnaire4TreatmentStrategy;
+import org.universaal.ontology.owl.Answer;
+import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
+import org.universaal.ontology.health.owl.StatusType;
+
 #declare any global variables here 
-
-public String qWording = "Hello Mary! A new treatment, named 'Low fat diet'" +
-	"has been asigned to you. This treatment consists of eating more vegetables and fruit and avoiding fatty meals." +
-	"Do you plan to follow it?";
-
-public ChoiceLabel choice1 = new ChoiceLabel(Boolean.TRUE, "Yes");
-public ChoiceLabel choice2 = new ChoiceLabel(Boolean.FALSE, "No");
-public ChoiceLabel[] booleanChoices = {choice1,choice2};
-
-public SingleChoiceQuestion firstQuestion = new SingleChoiceQuestion(qWording,TypeMapper.getDatatypeURI(Boolean.class),booleanChoices);
-
-
+global SingleChoiceQuestion agreementQuestion;
+global MotivationalQuestionnaire firstQuestionnaire;
+	
 
 #Whenever a treatment is detected a consent message is sent to the user
-
 rule "Treatment Detection" no-loop  
 	
 	when
-		detectedTreatment: Treatment(name != "")  // A new treatment, with a name, is detected
+		detectedTreatment: Treatment(name != "") # A new treatment, with a name, is detected
+		eval(!DetectedTreatments.containsTreatment(detectedTreatment))
 	then 
 		MessageVariables.addToMapOfVariables("treatmentName", detectedTreatment.getName());
-		MessageVariables.addToMapOfVariables("treatmentDescription", detectedTreatment.getDescription()());
+		MessageVariables.addToMapOfVariables("treatmentDescription", detectedTreatment.getDescription());
 		
         MessageManager.sendMessageToAssistedPerson(HeartFailure.MY_URI, Treatment.MY_URI,
-                                        MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry);
-        RulesSupport.insertDetectedTreatment(detectedTreatment);
-        System.out.println("Tratamiento " + detectedTreatment.getName()+ " detectado");//traza
-        //en esta regla debe probarse tanto la deteccion del tratamiento como que se ha enviado bien el mensaje
+                                        MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry, MotivationalMessageSubclassification.treatment_agreement, detectedTreatment);
+        
+        DetectedTreatments.insertDetectedTreatment(detectedTreatment);
+        System.out.println("Treatment " + detectedTreatment.getName()+ " detected."); //trace
 end 
 
-
-rule "Treatment performance agreement" no-loop
+rule "Change to contemplation phase - Treatment performance agreement" no-loop
 	when
-		detectedTreatmentAnswer: Answer(isAssociatedToAQuestion.equals(firstQuestion))
-		&& detectedTreatmentAnswer(Boolean.TRUE);
-		//reciba al answered message correspondiente al primer mensaje y la respuesta
-		//a la pregunta sea YES
-	
-	then 
-	//cambiar el estado motivacional del treatment a "contemplation" 
-	//se activan las reglas de contemplation
-	ArrayList <Treatment> treatments = RulesSupport.getDetectedTreatments();	
-	(Treatment)(treatments.get(0)).setMotivationalStatusType(MotivationalStatusType.contemplation);		
-end
-/*
-rule "Treatment performance disagreement" salience no-loop
-	when
-		//reciba al answered message correspondiente al primer mensaje y la respuesta
-		//a la pregunta sea NO
-	
-	then 
-	//no hace falta cambiar el estado motivacional del treatment a "precontemplation", porque ya lo tiene por defecto.
-	//mensaje al usuario para averiguar la causa
-	//se activan las reglas de precontemplation 	
+		#When the aswered questionnaire to the first question is received
+		detectedAnsweredQuestionnaire: AnsweredQuestionnaire(questionnaire:associatedQuestionnaire  == firstQuestionnaire)// esto va a fallar, mejor nombre
+		AnsweredQuestionnaire(answers[0].answerContent == TRUE )
+		eval(questionnaire instanceof Questionnaire4TreatmentStrategy)
+	then  
+	 	Treatment t = ((Questionnaire4TreatmentStrategy)questionnaire).getAssociatedTreatment();
+	 	t.setMotivationalStatus(MotivationalStatusType.contemplation); #the motivational status of the treatment is changed to contemplation 
+	 	
+	 	#A message is sent to the caregiver to notify him/her that the user agrees to follow the treatment
+	 	MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI,
+                                        MotivationalStatusType.precontemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_agreement, t);
 		
+		System.out.println("Motivational status of assisted person changed to contemplation, froma precontemplation"); #trace
+		
+		//¿tengo que volver a insertar el tratamiento (actualizarlo) o no hace falta?
 end
 
-rule "First activity performed" salience no-loop
-	#include attributes such as "salience" here...
+
+// rule "Change to contemplation phase - Agreement due to motivartional cycles"
+
+rule "Stay in precontemplation phase - Treatment performance disagreement" no-loop
 	when
-	//cuando se detecta que la primera tarea ha sido realizada (lo ha introducido el usuario o por los aparatos)
+		detectedAnsweredQuestionnaire: AnsweredQuestionnaire(questionnaire:associatedQuestionnaire  == firstQuestionnaire)
+		AnsweredQuestionnaire(answers[0].answerContent == Boolean.FALSE )
+		eval(questionnaire instanceof Questionnaire4TreatmentStrategy)
 	then 
-	//el estado del tratamiento cambia a action	
-	//se manda un mensaje de reward y feedback personalizado (si procede)
-	//se activan las reglas de action y se cancelan las de precontemplation
+		Treatment t = ((Questionnaire4TreatmentStrategy)questionnaire).getAssociatedTreatment();
+	 	t.setMotivationalStatus(MotivationalStatusType.contemplation); #the motivational status of the treatment is changed to contemplation 
+	 	
+	 	MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI,
+                                        MotivationalStatusType.precontemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_disagreement, t);
+		
+	 	System.out.println("Motivational status of assisted person still remains in precontemplation."); #trace
+	
 end
 
-rule "Threshold of maintenance achieved" salience no-loop
+rule "Change to action phase from contemplation phase" no-loop
 	when
-	//cuando se sobrepase el umbral del 85% realizado (para tratamientos finitos) 
-	// o el umbral que estime el medico en el permanente (por defecto un aï¿½o)
+	//cuando se detecta que la primera tarea ha sido realizada
+		treatment: Treatment(completeness !=0)
+		eval (treatment.getCompleteness()== treatment.getCompletenessUnit())
 	then 
-	//el estado del tratamiento cambia a maintenance
-	// se activan las reglas de action
+		treatment.setMotivationalStatus(MotivationalStatusType.action); # el estado del tratamiento cambia a action
+		
+		MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
+		
+		MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI,
+                                        MotivationalStatusType.contemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_agreement, treatment);
+		
+		System.out.println("Assisted person changed her/his motivational status to contemplation."); #trace
 end
 
-rule "First activity never achieved" salience no-loop
+rule "Change to maintenance phase from action phase"  no-loop
+	when
+		treatment:  Treatment(completeness > 85) # when the 85% threshold is passed
+		eval(treatment.getMotivationalStatus() == MotivationalStatusType.action) # and we come from the action phase
+	then 
+		treatment.setMotivationalStatus(MotivationalStatusType.maintenance); # treatment motivational status changes to maintenance
+		
+		MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
+		
+		MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI,
+                                        MotivationalStatusType.action, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_agreement, treatment);
+		
+		System.out.println("Assisted person changed her/his motivational status to maintenance."); #trace
+end
+
+/*
+rule "Change to precontemplation phase from contemplation phase"  no-loop
 	when
 	//cuando no se haya realizado la primera actividad en 3 oportunidades
+		treatment: Treatment(motivationalStatus == MotivationalStatusType.contemplation)
+	 	eval(PerformedSessionsSupport.mapOfPSSupport.containsKey(treatment))
+	 	eval( (PerformedSessionsSupport)(PerformedSessionsSupport.mapOfPSSupport.get(treatment)).getNumberOfConsecutiveNonPerformedSessionsCont()== PerformedSessionsSupport.numberOfNonPerformanceAllowed)
 	then
-	//se pasa del estado de contemplation a precontemplation 
-	// se activan las reglas de precontemplation
+		treatment.setMotivationalStatus(MotivationalStatusType.precontemplation);
+		MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
+		MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.contemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_disagreement);
 end
 
-rule "Non-fulfilment of action phase" salience no-loop
+
+rule "Change to contemplation phase from action phase"  no-loop
 	when
 	//cuando no se haya realizado tres de las sesiones establecidas
+		treatment: Treatment(motivationalStatus == MotivationalStatusType.action)
+		eval (PerformedSessionsSupport.getNumberOfActionNonPerformedSessions()==numberOfNonPerformanceAllowed)
+	 
 	then
 	//se pasa del estado de action a contemplation y se toma la siguiente sesiï¿½n como si fuera la primera 
 	// se activan las reglas de contemplation
+	treatment.setMotivationalStatus(MotivationalStatusType.contemplation);
+	MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
+	
+	MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.action, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_disagreement);
+		 
 end
 
-rule "Non-fulfilment of maintenance phase" salience no-loop
+rule "Change to action phase from maintenance phase"  no-loop
 	when
-	//cuando no se haya realizado tres de las sesiones establecidas
+	//cuando no se haya realizado cinco de las sesiones establecidas
+		treatment: Treatment(motivationalStatus == MotivationalStatusType.maintenance)
+		eval (PerformedSessionsSupport.getNumberOfActionNonPerformedSessions()== PerformedSessionsSupport.numberOfNonPerformanceAllowedMaintenance)
 	then
-	//se pasa del estado de maintenance a action  
-	// se activan las reglas de action
+	//se pasa del estado de maintenance a action, en su parte de rutina
+	treatment.setMotivationalStatus(MotivationalStatusType.action);   
+	treatment.setCompleteness(70.0);
+	MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
+	MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.maintenance, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_disagreement);
 end
 
-rule "Change status to active" salience no-loop
-	//esta regla deberï¿½a activarse cada 24h
+*/
+
+rule "Change status to active" no-loop
+	timer (cron: 0 0 0 * * ?) //esta regla se activa cada 24h, a las 0:00
 	when
-	// la fecha actual coincida con la de inicio de tratamiento
+		treatment: Treatment(status == StatusType.planned)// la fecha actual coincida con la de inicio de tratamiento
+		eval(SchedulingTools.treatmentStartsToday)
 	then
-	// cambia el estado del tratamiento a activo 
+		treatment.setStatus(StatusType.actived)// cambia el estado del tratamiento a activo 
 end
 
-rule "Change status to finished" salience no-loop
+
+rule "Change status to finished"  no-loop
 	when
+		treatment: Treatment(completeness == 100)
+		eval(SchedulingTools.treatmentEndsToday(treatment) || SchedulingTools.treatmentEndsAfterToday(treatment))	
 	// llegue la fecha de fin del tratamiento sea mayor o igual que la fecha actual
 	// y la completitud sea del 100%
 	then
-	// cambia el estado del tratamiento a terminado 
+		treatment.setStatus(StatusType.finished);// cambia el estado del tratamiento a terminado
+		
+		MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
+		 
+		MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.maintenance, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_status_finished);
+		MessageManager.sentMessageToAP(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.maintenance, MotivationalMessageClassification.reward, MotivationalMessageSubclassification.treatment_status_finished);
+		retract(treatment); //eliminamos el tratamiento de la working memory
+		//hay que sacarlo también de los tratamientos detectados para poder volver a utilizar ese nombre
 end
 
-rule "Treatment prolonged automatically" salience no-loop
+
+rule "Treatment prolonged inquiry" no-loop
+	timer (cron: 0 0 0 * * ?) //esta regla se activa cada 24h, a las 0:00
 	when
+		treatment: Treatment(motivationalStatus == MotivationalStatusType.maintenance && completeness != 100 )
+		eval(SchedulingTools.treatmentEndedBeforeToday()) // el tratamiento ya ha terminado y no ha sido completado
 	// llegue la fecha de fin del tratamiento 
-	// y la completitud sea del 90%
+	// y la completitud no sea del 100%
 	then
-	// prolongamos el tratamiento (aumenta la fecha de fin)
-	//avisamos al cargiver por si ï¿½l no admite que se extienda en el tiempo (le pedirï¿½amos que lo cancelara)
-	//se lo decimos tambiï¿½n al usuario.
+		MessageVariables.addToMapOfVariables("treatmentCompleteness", treatment.getCompleteness());
+	
+		MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.maintenance, MotivationalMessageClassification.inquiry, MotivationalMessageSubclassification.treatment_status_prolonged);
+	//notificamos al caregiver de que no ha terminado el tratamiento
+	// y que si quiere prolongarlo.  
 end
 
-rule "Treatment cancelled" salience no-loop
+rule "Treatment cancelled" no-loop
 	when
-	// el tratamiento se cancele 
+		treatment: Treatment(status == StatusType.cancelled) // el tratamiento se cancele (sólo puede hacerlo el caregiver)
 	then
-	// notificamos al usuario.
+		// notificamos al usuario.
+		retract(treatment); //eliminamos el tratamiento de la working memory
 end
 
-rule "Increase completeness" salience no-loop
+rule "Treatment prolonged" no-loop
 	when
-	// se detecte una sessiï¿½n realizada 
+		// se detecte un treatment prolongado
+		// y no se haya enviado un mensaje correspondiente al usuario 
 	then
-	//se almacena en un array de sesiones completadas
-	// aumenta una unidad la completitud del tratamiento.
+	// notificar al usuario
 end
-
-rule "Treatment prolonged by caregiver" salience no-loop
-	when
-	// se detecte una ampliaciï¿½n del plazo para la realizaciï¿½n de un treatment 
-	then
-	//se deben recalcular las sesiones totales, lo que influye en la unidad de completitud
-	//chequear las sesiones ya hechas y corregir la completitud.
-end
-*/

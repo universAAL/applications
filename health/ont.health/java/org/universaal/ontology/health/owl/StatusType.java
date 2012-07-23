@@ -25,14 +25,16 @@ public class StatusType extends ManagedIndividual {
   public static final int ACTIVED = 1;
   public static final int FINISHED = 2;
   public static final int CANCELLED = 3;
-
+  public static final int PROLONGED = 4;
+  
   private static final String[] names = {
-    "planned","actived","finished","cancelled" };
+    "planned","actived","finished","cancelled", "prolonged" };
 
   public static final StatusType planned = new StatusType(PLANNED);
   public static final StatusType actived = new StatusType(ACTIVED);
   public static final StatusType finished = new StatusType(FINISHED);
   public static final StatusType cancelled = new StatusType(CANCELLED);
+  public static final StatusType prolonged = new StatusType(PROLONGED);
 
   private int order;
 
@@ -71,6 +73,8 @@ public class StatusType extends ManagedIndividual {
         return finished;
       case CANCELLED:
         return cancelled;
+      case PROLONGED:
+          return prolonged;
     default:
       return null;    }
   }
@@ -82,7 +86,7 @@ public class StatusType extends ManagedIndividual {
 	if (name.startsWith(HealthOntology.NAMESPACE))
 	    name = name.substring(HealthOntology.NAMESPACE.length());
 
-	for (int i = PLANNED; i <= CANCELLED; i++)
+	for (int i = PLANNED; i <= PROLONGED; i++)
 	    if (names[i].equals(name))
 		return getStatusTypeByOrder(i);
 

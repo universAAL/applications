@@ -15,6 +15,8 @@
  ******************************************************************************/
 package org.universaal.ontology.owl;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.MergedRestriction;
@@ -55,7 +57,6 @@ public final class MessageOntology extends Ontology {
 	    addImport(PhThingOntology.NAMESPACE);
 		addImport(ServiceBusOntology.NAMESPACE);
 	    addImport(ProfileOntology.NAMESPACE);
-	    addImport(HealthOntology.NAMESPACE);
 		
     OntClassInfoSetup oci;
 
@@ -67,9 +68,26 @@ public final class MessageOntology extends Ontology {
     oci.setResourceComment("");
     oci.setResourceLabel("MotivationalMessageClassification");
     oci.toEnumeration(new ManagedIndividual[] {
-       MotivationalMessageClassification.educational, MotivationalMessageClassification.reminder, MotivationalMessageClassification.reward, MotivationalMessageClassification.personalizedFeedback, MotivationalMessageClassification.test, MotivationalMessageClassification.inquiry, MotivationalMessageClassification.notification });
+       MotivationalMessageClassification.educational, MotivationalMessageClassification.reminder, MotivationalMessageClassification.reward, MotivationalMessageClassification.personalizedFeedback, MotivationalMessageClassification.test, MotivationalMessageClassification.inquiry, MotivationalMessageClassification.notification, 
+       MotivationalMessageClassification.emotion});
 
-
+    // load MotivationalMessageSubclassification
+    oci = createNewAbstractOntClassInfo(MotivationalMessageSubclassification.MY_URI);
+    oci.setResourceComment("");
+    oci.setResourceLabel("MotivationalMessageSubclassification");
+    oci.toEnumeration(new ManagedIndividual[] {
+    		MotivationalMessageSubclassification.academic, MotivationalMessageSubclassification.advice, MotivationalMessageSubclassification.benefit,MotivationalMessageSubclassification.curiosity, MotivationalMessageSubclassification.explanation,
+    		MotivationalMessageSubclassification.session_recognition, MotivationalMessageSubclassification.treatment_performance_recognition, MotivationalMessageSubclassification.agreement,
+    		MotivationalMessageSubclassification.academic_knowledge,MotivationalMessageSubclassification.personal_knowledge,MotivationalMessageSubclassification.solution,
+    		MotivationalMessageSubclassification.session_performance_reminder, MotivationalMessageSubclassification.session_performance_alert, MotivationalMessageSubclassification.treatment_needs, MotivationalMessageSubclassification.agreement_pendant,
+    		MotivationalMessageSubclassification.unusual_measurement,MotivationalMessageSubclassification.abandonment,MotivationalMessageSubclassification.treatment_management,MotivationalMessageSubclassification.treatment_performance_agreement,
+    		MotivationalMessageSubclassification.session, MotivationalMessageSubclassification.evolution,
+    		MotivationalMessageSubclassification.session_interest, MotivationalMessageSubclassification.treatment_interest, MotivationalMessageSubclassification.beginer_interest, MotivationalMessageSubclassification.familiar_interest, 
+    		MotivationalMessageSubclassification.non_performance_cause, MotivationalMessageSubclassification.session_agreement, MotivationalMessageSubclassification.treatment_agreement, MotivationalMessageSubclassification.agreement_proposal, MotivationalMessageSubclassification.session_performance,
+    		MotivationalMessageSubclassification.vs_fear, MotivationalMessageSubclassification.vs_despair, MotivationalMessageSubclassification.vs_frustration, MotivationalMessageSubclassification.vs_lack_of_hability,
+    		MotivationalMessageSubclassification.treatment_performance_disagreement, MotivationalMessageSubclassification.treatment_status_cancelled, MotivationalMessageSubclassification.treatment_status_finished, MotivationalMessageSubclassification.treatment_status_prolonged
+    });
+    
     // ******* Regular classes of the ontology ******* //
 
   //load Message 
@@ -96,6 +114,11 @@ public final class MessageOntology extends Ontology {
       .getAllValuesRestrictionWithCardinality(Message.PROP_RECEIVER, 
      User.MY_URI, 1, 1));
     
+    oci.addObjectProperty(Message.PROP_SENT_DATE).setFunctional();
+    oci.addRestriction(MergedRestriction
+      .getAllValuesRestrictionWithCardinality(Message.PROP_SENT_DATE, 
+    		  TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 1, 1));
+    
     //load MotivationalMessage 
     oci = createNewOntClassInfo(MotivationalMessage.MY_URI, factory, 3);
     oci.setResourceComment("");
@@ -112,6 +135,11 @@ public final class MessageOntology extends Ontology {
     oci.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_MESSAGE_TYPE, 
       MotivationalMessageClassification.MY_URI, 1, 1));
+    
+    oci.addDatatypeProperty(MotivationalMessage.PROP_MESSAGE_SUBTYPE);
+    oci.addRestriction(MergedRestriction
+      .getAllValuesRestrictionWithCardinality(MotivationalMessage.PROP_MESSAGE_SUBTYPE, 
+      MotivationalMessageSubclassification.MY_URI, 1, 1));
     
     oci.addDatatypeProperty(MotivationalMessage.PROP_TREATMENT_TYPE);
     oci.addRestriction(MergedRestriction

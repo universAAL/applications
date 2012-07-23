@@ -11,20 +11,170 @@ package maintenance
 
 
 
-rule "Your First Rule"
+rule "Back to action"
 	
 	when
-		#conditions
+		//el número de sesiones consecutivas no realizadas sea de 5
 	then 
-		#actions
+		//se vuelve a la fase de acción
 		
 end
 
-rule "Your Second Rule"
-	#include attributes such as "salience" here...
+rule "Reminders alert option"
+	
 	when
-		#conditions
+		//la completitud sea del 86%
 	then 
-		#actions
+		//avisar al usuario de que ya no se le enviarán reminders de notificación 
+		// para que realice sus tareas, pero que puede mantenerlos activos si lo desea
+end
+
+#small goals
+rule "Next goal"
+	
+	when
+		//se complete un gol
+	then 
+		//se propondrá el siguiente gol al paciente
+end
+
+#Session performance confirmation
+
+rule "Session performance confirmation for non measured treatments"
+	when
+	// hoy toque preguntar si se han realizado las sesiones
+	then
+	// preguntar al usuario si ha realizado las últimas sesiones
+end
+
+rule "Session performance confirmation for non automatic measured treatments"
+	when
+	// hoy toque realizar la sesión
+	// y haya pasado el tiempo estimado para que el usuario la haya realizado
+	// pero no hemos recibido la medida
+	then
+	// pedir al usuario que introduzca la medida
+end
+
+
+rule "Session feedback"
+	
+	when
+		//si hoy toca mandar un mensaje de feedback
+	then 
+		//mandamos un mensaje de feedback grupal
 		
+end
+
+rule "Evolution"
+	
+	when
+		//si toca mandar un mensaje de evolución
+	then 
+		//mandamos un mensaje de evolución
+		
+end
+
+rule "Interest"
+	
+	when
+		//toque mandar un mensaje de interés
+	then 
+		// mandar mensaje de interés		
+end
+
+rule "Evolution realization investigation"
+	
+	when
+		//hoy toque mandar un mensaje de este tipo
+	then 
+		//preguntaremos al usuario si es capaz de hacer cosas que antes no podía
+		
+end
+
+#Detección de infracciones
+
+rule "No performance of session"
+	
+	when
+		//no haya realizado el tratamiento una vez
+	then 
+		//preguntar motivo
+		
+end
+
+rule "No performance: oversight"  no-loop 
+	
+	when
+	// La causa para no realizar el tratamiento fue un olvido
+	then
+	// Enviar consejo para no olvidarse de la próxima sesión
+	// y proponer una nueva fecha para realizar el tratamiento
+	// Tipo de paciente: olvidadizo +1
+end
+
+rule "No performance: difficulty"  no-loop  
+	
+	when
+	// La causa para no realizar el tratamiento fue la dificultad que entrañaba
+	then
+	// Enviar un mensaje para solventar esta dificultad
+	// y proponer una nueva fecha para realizar el tratamiento
+	// Tipo de paciente: obtuso +1
+end
+
+rule "No performance: apathy"  no-loop 
+	
+	when
+	// La causa para no realizar el tratamiento fue el desinterés
+	then
+	// Enviar un mensaje para motivar con los beneficios del tratamiento a su autor
+	// y proponer una nueva fecha para realizar el tratamiento
+	// Tipo de paciente: desmotivado +1
+end
+
+rule "No performance: missunderstood"  no-loop 
+	
+	when
+	// El usuario hizo el tratamiento pero fuera del plazo y 
+	// está dentro del array de sesiones descartadas.
+	then
+	// Pedimos perdón al usuario y aumentamos la completitud del tratamiento
+end
+
+rule "No performance: other"  no-loop 
+	
+	when
+	// El usuario no hizo el tratamiento por otro motivo 
+	then
+	// Enviar este motivo al caregiver para que pueda subsanarlo
+end
+
+rule "No performance: liar"  no-loop 
+	
+	when
+	// El usuario dice que hizo el tratamiento pero fuera del plazo pero 
+	// no está dentro del array de sesiones descartadas.
+	then
+	// Pedimos disculpas al usuario pero como no hemos encontrado su sesión
+	// acordamos nueva fecha para realizarlo
+	// Tipo de paciente: desmotivado +1
+end
+
+rule "Reinforce memory"  no-loop
+	
+	when
+	// El paciente no haya realizado la sesión
+	// el nivel de olvidadizo sea 1 o + 
+	then
+	// activar de nuevo los reminders
+end
+
+rule "Reinforce motivation"  no-loop
+	
+	when
+	// El paciente no haya realizado la sesión
+	// el nivel de desmotivación sea 1 o + 
+	then
+	// Enviar mensaje motivador para que siga adelante.
 end

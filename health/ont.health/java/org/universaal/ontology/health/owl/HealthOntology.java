@@ -88,7 +88,7 @@ public final class HealthOntology extends Ontology {
     addImport(HealthMeasurementOntology.NAMESPACE);
    
 	OntClassInfoSetup oci;
-
+	OntClassInfoSetup oci_treatment;
 
     // ******* Enumeration classes of the ontology ******* //
 
@@ -97,7 +97,7 @@ public final class HealthOntology extends Ontology {
     oci.setResourceComment("This class defines the types of possible status of the treatment: planned, actived, finished or cancelled.");
     oci.setResourceLabel("StatusType");
     oci.toEnumeration(new ManagedIndividual[] {
-       StatusType.planned, StatusType.actived, StatusType.finished, StatusType.cancelled });
+       StatusType.planned, StatusType.actived, StatusType.finished, StatusType.cancelled, StatusType.prolonged });
 
     // load MotivationalStatusType
     oci = createNewAbstractOntClassInfo(MotivationalStatusType.MY_URI);
@@ -149,21 +149,26 @@ public final class HealthOntology extends Ontology {
     		PerformedSession.MY_URI, 0, 1));    
     
     //- back to performedSession
-    oci.addDatatypeProperty(PerformedSession.PROP_DATE).setFunctional();
+    /*oci.addDatatypeProperty(PerformedSession.PROP_DATE).setFunctional();
     oci.addRestriction(MergedRestriction 
     		.getAllValuesRestrictionWithCardinality(PerformedSession.PROP_DATE, 
     		TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 1, 1));
-    
+    */
     oci.addDatatypeProperty(PerformedSession.PROP_START_TIME).setFunctional();
     oci.addRestriction(MergedRestriction 
     		.getAllValuesRestrictionWithCardinality(PerformedSession.PROP_START_TIME, 
     		TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 1, 1));
     
-    oci.addDatatypeProperty(PerformedSession.PROP_DURATION).setFunctional();
+    oci.addDatatypeProperty(PerformedSession.PROP_END_TIME).setFunctional();
     //oci.addRestriction(MergedRestriction.getCardinalityRestriction(PerformedSession.PROP_DURATION, 1, 1));
     oci.addRestriction(MergedRestriction 
-    		.getAllValuesRestrictionWithCardinality(PerformedSession.PROP_DURATION, 
-    		TypeMapper.getDatatypeURI(Duration.class), 1, 1));
+    		.getAllValuesRestrictionWithCardinality(PerformedSession.PROP_END_TIME, 
+    		TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 1, 1));
+    
+    oci.addDatatypeProperty(PerformedSession.PROP_IS_VALID).setFunctional();
+    oci.addRestriction(MergedRestriction 
+    		.getAllValuesRestrictionWithCardinality(PerformedSession.PROP_IS_VALID, 
+    		TypeMapper.getDatatypeURI(Boolean.class), 1, 1));
     
   //load TreatmentPlanning 
     oci = createNewOntClassInfo(TreatmentPlanning.MY_URI, factory, 9);
@@ -342,45 +347,45 @@ public final class HealthOntology extends Ontology {
 
     
     //load Treatment 
-    oci = createNewAbstractOntClassInfo(Treatment.MY_URI);
-    oci.setResourceComment("This class describes the concept of treatment, that is the set of activities that an assisted person is suggested to do.");
-    oci.setResourceLabel("Treatment");
-    oci.addSuperClass(ManagedIndividual.MY_URI); 
+    oci_treatment = createNewAbstractOntClassInfo(Treatment.MY_URI);
+    oci_treatment.setResourceComment("This class describes the concept of treatment, that is the set of activities that an assisted person is suggested to do.");
+    oci_treatment.setResourceLabel("Treatment");
+    oci_treatment.addSuperClass(ManagedIndividual.MY_URI); 
     
-    oci.addDatatypeProperty(Treatment.PROP_NAME);
-    oci.addRestriction(MergedRestriction
+    oci_treatment.addDatatypeProperty(Treatment.PROP_NAME);
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_NAME, 
       TypeMapper.getDatatypeURI(String.class), 1, 1));
     
-    oci.addDatatypeProperty(Treatment.PROP_COMPLETENESS);
-    oci.addRestriction(MergedRestriction
+    oci_treatment.addDatatypeProperty(Treatment.PROP_COMPLETENESS);
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_COMPLETENESS, 
       TypeMapper.getDatatypeURI(Float.class), 1, 1));
     
-    oci.addDatatypeProperty(Treatment.PROP_STATUS);
-    oci.addRestriction(MergedRestriction
+    oci_treatment.addDatatypeProperty(Treatment.PROP_STATUS);
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_STATUS, 
       StatusType.MY_URI, 1, 1));
 /*    
     oci2 = extendExistingOntClassInfo(Illness.MY_URI);
     */
-   oci.addObjectProperty(Treatment.PROP_IS_ASSOCIATED_TO_DISEASE).setFunctional();
-    oci.addRestriction(MergedRestriction
+   oci_treatment.addObjectProperty(Treatment.PROP_IS_ASSOCIATED_TO_DISEASE).setFunctional();
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_IS_ASSOCIATED_TO_DISEASE, 
     		  TypeMapper.getDatatypeURI(String.class), 1, 1));
    
-    oci.addObjectProperty(Treatment.PROP_HAS_TREATMENT_PLANNING).setFunctional();
-    oci.addRestriction(MergedRestriction
+    oci_treatment.addObjectProperty(Treatment.PROP_HAS_TREATMENT_PLANNING).setFunctional();
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_HAS_TREATMENT_PLANNING, 
       TreatmentPlanning.MY_URI, 1, 1));
     
-    oci.addObjectProperty(Treatment.PROP_IS_PRESCRIBED_BY_CAREGIVER).setFunctional();
-    oci.addRestriction(MergedRestriction
+    oci_treatment.addObjectProperty(Treatment.PROP_IS_PRESCRIBED_BY_CAREGIVER).setFunctional();
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_IS_PRESCRIBED_BY_CAREGIVER, 
     		  Caregiver.MY_URI, 1, 1));
     
-    oci.addDatatypeProperty(Treatment.PROP_MOTIVATIONAL_STATUS);
-    oci.addRestriction(MergedRestriction
+    oci_treatment.addDatatypeProperty(Treatment.PROP_MOTIVATIONAL_STATUS);
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_MOTIVATIONAL_STATUS, 
       MotivationalStatusType.MY_URI, 1, 1));
     /*
@@ -389,18 +394,18 @@ public final class HealthOntology extends Ontology {
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_HAS_PRIVACY, 
       Privacy.MY_URI, 1, 1));
     */
-    oci.addDatatypeProperty(Treatment.PROP_DESCRIPTION);
-    oci.addRestriction(MergedRestriction
+    oci_treatment.addDatatypeProperty(Treatment.PROP_DESCRIPTION);
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_DESCRIPTION, 
       TypeMapper.getDatatypeURI(String.class), 1, 1));
     
-    oci.addObjectProperty(Treatment.PROP_MEASUREMENT_REQUIREMENTS);
-    oci.addRestriction(MergedRestriction
+    oci_treatment.addObjectProperty(Treatment.PROP_MEASUREMENT_REQUIREMENTS);
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestrictionWithCardinality(Treatment.PROP_MEASUREMENT_REQUIREMENTS, 
       MeasurementRequirements.MY_URI, 0, 1));
     
-    oci.addObjectProperty(Treatment.PROP_HAS_PERFORMED_SESSION);
-    oci.addRestriction(MergedRestriction
+    oci_treatment.addObjectProperty(Treatment.PROP_HAS_PERFORMED_SESSION);
+    oci_treatment.addRestriction(MergedRestriction
       .getAllValuesRestriction(Treatment.PROP_HAS_PERFORMED_SESSION, 
       PerformedSession.MY_URI));
     
@@ -408,7 +413,13 @@ public final class HealthOntology extends Ontology {
     oci = createNewAbstractOntClassInfo(HealthyHabitsAdoption.MY_URI);
     oci.setResourceComment("This concept describes all the activities that can be considered as healthy habits");
     oci.setResourceLabel("HealthyHabitsAdoption");
-    oci.addSuperClass(Treatment.MY_URI); 
+    oci.addSuperClass(Treatment.MY_URI);
+    
+    // load Walking 
+    oci = createNewOntClassInfo(Walking.MY_URI, factory, 34);
+    oci.setResourceComment("This concept describes all the activities that can be considered as healthy habits");
+    oci.setResourceLabel("Walking");
+    oci.addSuperClass(HealthyHabitsAdoption.MY_URI);
     
     //load TakeMeasurementActivity 
     oci = createNewOntClassInfo(TakeMeasurementActivity.MY_URI, factory, 7);
@@ -447,6 +458,11 @@ public final class HealthOntology extends Ontology {
     //load Diet
     oci = createNewOntClassInfo(Diet.MY_URI, factory, 32);  
     oci.setResourceLabel("Diet");
+    oci.setResourceComment("");
+    
+    //load WeightMeasurementTreatment
+    oci = createNewOntClassInfo(WeightMeasurementTreatment.MY_URI, factory, 33);  
+    oci.setResourceLabel("WeightMeasurementTreatment");
     oci.setResourceComment("");
     
     // extension for AssistedPersonProfile: an assisted person can contain a health profile, where treatments are specified.
