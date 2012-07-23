@@ -82,17 +82,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<repositories>
-		<repository>
-			<id>uaal</id>
-			<name>universAAL Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
 	<scm>
 		<connection>${svn.base}/${service.name.svn}/${project.artifactId}</connection>
 		<developerConnection>${svn.base}/${service.name.svn}/${project.artifactId}</developerConnection>
@@ -118,5 +107,52 @@
 		</plugins>
 	</pluginManagement>
 	</build>
+	
+	<repositories>
+		<repository>
+			<id>uaal</id>
+			<name>universAAL Repositories</name>
+			<url>http://depot.universaal.org/maven-repo/releases/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>uaal-snapshots</id>
+			<name>universAAL Snapshot Repositories</name>
+			<url>http://depot.universaal.org/maven-repo/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>uaal-thirdparty</id>
+			<name>universAAL ThirdParty Repositories</name>
+			<url>http://depot.universaal.org/maven-repo/thirdparty/</url>
+		</repository>
+		<repository>
+			<id>uaal-thirdparty-snapshots</id>
+			<name>universAAL ThirdParty Repositories</name>
+			<url>http://depot.universaal.org/maven-repo/thirdparty-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>uaal-wp4-private</id>
+			<name>WP4 services private repo</name>
+			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+	</repositories>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>uaal-wp4-private</id>
+			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4/</url>
+		</snapshotRepository>
+	</distributionManagement>
 	
 </project>
