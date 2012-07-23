@@ -660,6 +660,7 @@ health/health.motivation/src/test/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/general/TestSolution.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestIfaceForMM.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestMessageManager.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/scheduleRules/TestTreatmentTypeClassification.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestArtifact.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestIface.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestMotivationalStatusChange.java -text

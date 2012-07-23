@@ -10,6 +10,7 @@ import org.universAAL.AALApplication.health.motivation.testSupportClasses.Treatm
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification.ByDuration;
 #declare any global variables here
 
+/*
 rule "Increase treatment completenss"
 	when
 		ps: PerformedSession(isValid == Boolean.TRUE) // cuando se detecte una planned session válida (ha tenido que pasar antes por las reglas de Schedule, para determinar esto)
@@ -19,17 +20,9 @@ rule "Increase treatment completenss"
 		float currentCompleteness = t.getCompleteness();
 		t.setCompleteness(t.getCompletenessUnit() + currentCompleteness);
 end
-
-rule "Is there a session to perform today?"
-	timer (3s 4m)
-	
-	when
-	
-	then
-	
-end
-
-rule "Type of treatment declaration"
+*/
+/*
+rule "Type of treatment declaration" no-loop
 	when
 		treatment: Treatment(treatmentPlanning != null)
 		eval(!TreatmentTypeClassification.hasTTC(treatment))
@@ -37,9 +30,10 @@ rule "Type of treatment declaration"
 		TreatmentTypeClassification ttc = new TreatmentTypeClassification(treatment);
 		insert (ttc);
 end
-
+*/
 #----------------TREATMENT CLASSIFICATION ATTENDING TO MEASUREMENT-------------------------
 
+/*
 rule "No-measurement-assigned treatment type" no-loop
 	when   
 		ttc: TreatmentTypeClassification(associatedTreatment != null && tmeasure == null)
@@ -142,6 +136,7 @@ rule "Set planned sessions for fixed treatments" no-loop
 	then
 		SchedulingTools.setListOfSessions(treatment);
 end 
+*/
 /*
 rule "First session for flexible treatments - once a day" no-loop // incluimos en este grupo los tratamientos definidos flexibles y los indefinidos
 // estamos haciendo referencia a los tratamientos que tienen una realización al día
@@ -195,7 +190,7 @@ end
 */
 
 #----------------COMPLETENESS UNIT-----------------------------------
-
+/*
 rule "Set completeness unit" no-loop
 	when
 		treatment: Treatment(completenessUnit == 0)// aún no se haya establecido la unidad de completitud
@@ -318,8 +313,7 @@ rule "Session not performed in performing interval" no-loop
 		// si no he recibido una performed session en el intervalo de performing interval
 		// y no he mandado mensaje al usuario
 	then
-	//mandar mensaje al usuario para que haga la sesión o introduzca la medida.
-	//
+	//mandar mensaje al usuario para que haga la sesión o introduzca la medida.	//
 end
 
 
@@ -469,62 +463,4 @@ rule "" no-loop
 	//
 	//
 end
-
-rule "" no-loop
-	when
-	// 
-	then
-	//
-	//
-end
-
-rule "" no-loop
-	when
-	// 
-	then
-	//
-	//
-end
-
-rule "" no-loop
-	when
-	// 
-	then
-	//
-	//
-end
-
-rule "" no-loop
-	when
-	// 
-	then
-	//
-	//
-end
-
-rule "" no-loop
-	when
-	// 
-	then
-	//
-	//
-end
-
-
-rule "" no-loop
-	when
-	// 
-	then
-	//
-	//
-end
-
-rule "" no-loop
-	when
-	// 
-	then
-	//
-	//
-end
-
-
+*/
