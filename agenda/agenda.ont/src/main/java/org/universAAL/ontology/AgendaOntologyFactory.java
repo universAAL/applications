@@ -17,8 +17,14 @@ package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
-import org.universAAL.ontology.service.CalendarAgenda;
-import org.universAAL.ontology.service.CalendarUIService;
+import org.universAAL.ontology.agenda.Calendar;
+import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agenda.EventDetails;
+import org.universAAL.ontology.agenda.ExternalCalendar;
+import org.universAAL.ontology.agenda.Reminder;
+import org.universAAL.ontology.agenda.TimeInterval;
+import org.universAAL.ontology.agenda.service.CalendarAgenda;
+import org.universAAL.ontology.agenda.service.CalendarUIService;
 
 /**
  * 

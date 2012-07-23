@@ -1,4 +1,4 @@
-package org.universAAL.ontology;
+package org.universAAL.ontology.agenda;
 
 import java.util.Locale;
 import java.util.MissingResourceException;

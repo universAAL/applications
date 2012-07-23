@@ -2,50 +2,61 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
 	<parent>
 		<groupId>org.universAAL.ontology</groupId>
 		<artifactId>ont.pom</artifactId>
-		<version>1.1.0</version>
-		<!--  
-		<relativePath>../pom</relativePath>
-		-->
+		<version>1.2.0</version>
+		<relativePath>../ont.pom</relativePath>
 	</parent>
-	
-	<artifactId>agenda.ont</artifactId>
+	<artifactId>ont.agenda</artifactId>
+	<version>1.2.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
-	<version>1.1.1-SNAPSHOT</version>
-	
 	<name>Agenda AAL Service Ontology </name>
+	<description>Ontology for main Agenda and Reminders AAL service concepts</description>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Export-Package>org.universAAL.ontology.agenda,
+							org.universAAL.ontology.agenda.service</Export-Package>
+						<Private-Package>org.universAAL.ontology;-split-package:=first</Private-Package>
+					</instructions>
+				</configuration>
+			</plugin>
 
-	<properties>
-		<ignore.dep.conflict>true</ignore.dep.conflict>
-	</properties>
-	
+		</plugins>
+	</build>
 	<dependencies>
+		<dependency>
+			<groupId>org.universAAL.support</groupId>
+			<artifactId>itests</artifactId>
+		</dependency>
 		<!--		<dependency>-->
-		<!--			<groupId>junit</groupId>-->
-		<!--			<artifactId>junit</artifactId>-->
+		<!--			<groupId>org.apache.felix</groupId>-->
+		<!--			<artifactId>org.osgi.core</artifactId>-->
 		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.apache.felix</groupId>-->
+		<!--			<artifactId>org.osgi.compendium</artifactId>-->
+		<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.universAAL.middleware</groupId>-->
+<!--			<artifactId>mw.bus.context.core</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.service.core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.service</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.data.representation</artifactId>
+			<artifactId>mw.data.representation.core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
@@ -56,25 +67,4 @@
 			<artifactId>ont.phWorld</artifactId>
 		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-		
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-Name>${project.name}</Bundle-Name>
-						<Bundle-Description>${project.description}</Bundle-Description>
-						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Bundle-Activator>org.universAAL.ontology.agenda.osgi.Activator</Bundle-Activator>
-						<Export-Package>org.universAAL.ontology.agenda,
-							org.universAAL.ontology.agenda.service</Export-Package>
-					</instructions>
-				</configuration>
-			</plugin>
-			
-		</plugins>
-	</build>
 </project>

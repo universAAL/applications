@@ -1,10 +1,10 @@
 /**
  * 
  */
-package org.universAAL.ontology.service;
+package org.universAAL.ontology.agenda.service;
 
 import org.universAAL.middleware.service.owl.Service;
-import org.universAAL.ontology.AgendaOntology;
+import org.universAAL.ontology.agenda.AgendaOntology;
 
 /**
  * @author kagnantis

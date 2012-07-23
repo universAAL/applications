@@ -4,9 +4,9 @@ import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
+import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.location.Location;
 import org.universAAL.ontology.profile.UserProfile;
-import org.universAAL.ontology.agenda.Event;
 
 /**
  * @author kagnadis
