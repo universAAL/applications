@@ -6,7 +6,7 @@ import java.io.*;
 public class SOAPClient {
 
   public final static String DEFAULT_SERVER 
-   = "http://160.40.60.234:11223/S300/smokeSensor";
+   = "http://160.40.60.234:11223/0-CO/gasSensor";
   public final static String SOAP_ACTION 
    = "";
 
@@ -38,9 +38,10 @@ public class SOAPClient {
 	      wout.write("'http://www.domologic.com/webservices'>\r\n");  
 	      wout.write("<soapenv:Header/>\r\n");
 	      wout.write("<soapenv:Body>\r\n");
-	      wout.write("<web:getSmoke>\r\n");
+	      wout.write("<web:isGasDetected>\r\n");
 	      wout.write("<index>0</index>\r\n");
-	      wout.write("</web:getSmoke>\r\n");
+	      wout.write("<gasType>0</gasType>\r\n");
+	      wout.write("</web:isGasDetected>\r\n");
 	      wout.write("</soapenv:Body>\r\n");
 	      wout.write("</soapenv:Envelope>\r\n");
 	      wout.flush();
@@ -52,18 +53,15 @@ public class SOAPClient {
 	      while ((input = br.readLine())!=null){
 	    	  if (input.indexOf("<return>")!=-1){
 	    		  res = input.substring(input.indexOf("<return>")+8,input.indexOf("</return>"));
-	    		  temp = Integer.parseInt(res);
-	    		  //System.out.println(res+"\n");
 	    	  }
 	    	  System.out.println(input);
 	      }
-	      if (temp==1)
+	      if (res.equals("true"))
 	    	  return true;
 	      else
 	    	  return false;
 	  }
 	  catch (IOException e) {
-		  //System.err.println(e);
 		  temp = randint(0,1);
 		  return true;
 	  }	  
