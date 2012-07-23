@@ -623,38 +623,50 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SCaller.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SendMotivationMessageIface.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/TestMotivation.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APAgreeToFollowTreatmentNotification.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APBackToActionNotification.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APBackToContemplationNotification.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APBackToPrecontemplationNotification.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APBeganTreatmentNotification.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APDisagreeToFollowTreatmentNotification.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APEndedTreatmentRewardMessage.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APEndedTreatmentWrightlyNotification.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APReachMaintenancePhaseNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/MotivationalMessageContent.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/PlainMessageForTest.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentDetectionMessage.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentExtensionInquiryToCaregiver.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageManager.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageServiceTools.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageVariables.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MotivationalMessagesDatabase.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/PruebaCSV.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/PruebaDeReflection.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/MotivationStatusDetection.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/RulesSupport.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/TreatmentDetection.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/SchedulingMessagesSent.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/SchedulingTools.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/SessionPerformance.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/TreatmentPlanningToiCal.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/TreatmentWithPendingSessions.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/DetectedTreatments.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/PerformedSessionsSupport.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/Solution.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/TreatmentTypeClassification.java -text
 health/health.motivation/src/main/resources/rules/ActionRules.dslr -text
 health/health.motivation/src/main/resources/rules/ContemplationRules.drl -text
 health/health.motivation/src/main/resources/rules/MaintenanceRules.dslr -text
 health/health.motivation/src/main/resources/rules/PrecontemplationRules.drl -text
 health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
 health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/general/TestMessageManager.java -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/MessageVariablesForTesting.java -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/MessageWithVariables.java -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/MessageWithoutVariables.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/general/TestSchedulingTools.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/general/TestSolution.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestIfaceForMM.java -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestMessageManageConcepts.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestMessageManager.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestArtifact.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestIface.java -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestMessageManageConcepts.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestMotivationalStatusChange.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentCompleteness.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentDetection.java -text
-health/health.motivation/uAAL.log -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/useCases/TestToday.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/useCases/TestWalkingTreatment.java -text
 health/health.pom/pom.xml -text svneol=unset#text/plain
 health/health.profile.manager/pom.xml -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProvider.java -text
@@ -712,45 +724,47 @@ health/ont.health/HealthOntology.notation -text
 health/ont.health/HealthOntology.uml -text svneol=unset#text/plain
 health/ont.health/LICENSE-2.0.txt -text
 health/ont.health/NOTICE -text
+health/ont.health/java/org/universaal/ontology/health/Activator.java -text
+health/ont.health/java/org/universaal/ontology/health/HealthOntologyFactory.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/ActivityHeartRateRequirement.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/BloodPressureRequirement.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/DiastolicBloodPressureRequirement.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/Diet.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/HealthOntology.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/HealthProfile.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/HealthyHabitsAdoption.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/HeartRateRequirement.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/MeasuredPhysicalActivity.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/MeasurementRequirements.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/MotivationalStatusType.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/PerformedMeasurementSession.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/PerformedSession.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/PlannedSession.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/ReposeHeartRateRequirement.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/StatusType.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/SystolicBloodPressureRequirement.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/TakeMeasurementActivity.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/Treatment.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/TreatmentPlanning.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/Walking.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/WeightMeasurementTreatment.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/WeightRequirement.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/EditTreatmentService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/GetProfileService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/HealthService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/ListPerformedSessionBetweenTimeStampsService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/ListPerformedSessionService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/ListTreatmentBetweenTimeStampsService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/ListTreatmentService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/NewTreatmentService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/PerformedSessionManagementService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/PlannedSessionManagementService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/ProfileManagementService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/RemoveTreatmentService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/SessionPerformedService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/TreatmentManagementService.java -text
+health/ont.health/java/org/universaal/ontology/health/owl/services/UpdateProfileService.java -text
 health/ont.health/pom.xml -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/Activator.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/HealthOntologyFactory.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/ActivityHeartRateRequirement.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/BloodPressureRequirement.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/DiastolicBloodPressureRequirement.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/Diet.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthOntology.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthProfile.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthyHabitsAdoption.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/HeartRateRequirement.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/MeasuredPhysicalActivity.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/MeasurementRequirements.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/MotivationalStatusType.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/PerformedMeasurementSession.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/PerformedSession.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/PlannedSession.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/ReposeHeartRateRequirement.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/StatusType.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/SystolicBloodPressureRequirement.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/TakeMeasurementActivity.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/Treatment.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/TreatmentPlanning.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/WeightRequirement.java -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/EditTreatmentService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/GetProfileService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/HealthService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListPerformedSessionBetweenTimeStampsService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListPerformedSessionService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListTreatmentBetweenTimeStampsService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ListTreatmentService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/NewTreatmentService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PerformedSessionManagementService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PlannedSessionManagementService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ProfileManagementService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/RemoveTreatmentService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/SessionPerformedService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/TreatmentManagementService.java -text
-health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/UpdateProfileService.java -text
 health/ont.health/src/test/java/org/universaal/ontology/test/HealthOntologyTest.java -text
 health/ont.healthmeasurement/HealthMeasurement.di -text
 health/ont.healthmeasurement/HealthMeasurement.notation -text
@@ -782,6 +796,7 @@ health/ont.message/src/main/java/org/universaal/ontology/owl/MessageOntology.jav
 health/ont.message/src/main/java/org/universaal/ontology/owl/MessageService.java -text
 health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessage.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageClassification.java -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageSubclassification.java -text
 health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
 help_when_out/Info/Testing[!!-~]the[!!-~]Application.docx -text

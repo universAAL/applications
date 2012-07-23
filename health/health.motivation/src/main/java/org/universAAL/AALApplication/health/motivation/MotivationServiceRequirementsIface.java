@@ -11,9 +11,12 @@ import org.universaal.ontology.owl.MotivationalMessageClassification;
 public interface MotivationServiceRequirementsIface {
 	
 	public String getAssistedPersonName();
-	public String getCaregiverName();
+	public String getCaregiverName(User ap);
 	public HealthProfile getHealthProfile(User u);
 	public String getPartOfDay();
+	public User getAssistedPerson();
+	public String getAPGenderArticle();
+	public String getAPPosesiveGenderArticle();
 	
 	
 

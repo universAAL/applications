@@ -60,6 +60,8 @@ public abstract class Treatment extends ManagedIndividual {
   public static final String PROP_IS_ASSOCIATED_TO_DISEASE = HealthOntology.NAMESPACE
   + "isAssociatedToADisease";
   
+  
+  public float completenessUnit = 0;
 
 // CONSTRUCTORS
   public Treatment () {
@@ -94,6 +96,7 @@ public abstract class Treatment extends ManagedIndividual {
   public Treatment(String tname, String description, String diseaseURI){
 		//super(assistedPerson + "." + name);
 		this.setName(tname);
+		this.setDescription(description);
 		this.setCompleteness(0);
 		this.setMotivationalStatus(MotivationalStatusType.precontemplation); //until the treatment is not accepted by the user, it remains in precontemplation status
 		this.checkStatus(); // depending on the date, the treatment will be actived or planned
@@ -396,4 +399,13 @@ public boolean hasMeasurementRequirements(){
 	else
 		return false;
 }
+
+public void setCompletenessUnit(float unit){
+	completenessUnit=unit;
+}
+
+public float getCompletenessUnit(){
+	return completenessUnit;
+}
+
 }

@@ -84,6 +84,10 @@ public class HealthOntologyFactory extends ResourceFactoryImpl {
     	  return new UpdateProfileService(instanceURI);
       case 32:
     	  return new Diet(instanceURI);
+      case 33:
+    	  return new WeightMeasurementTreatment(instanceURI);
+      case 34:
+    	  return new Walking(instanceURI);
 	}
 	return null;
   }

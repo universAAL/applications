@@ -16,6 +16,8 @@
 package org.universaal.ontology.owl;
 
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.ontology.profile.User;
 
@@ -31,6 +33,8 @@ public class Message extends ManagedIndividual {
     + "read";
   public static final String PROP_RECEIVER = MessageOntology.NAMESPACE
     + "receiver";
+  public static final String PROP_SENT_DATE = MessageOntology.NAMESPACE
+  + "sentDate";
 
 //CONSTRUCTORS
   public Message () {
@@ -57,7 +61,8 @@ public class Message extends ManagedIndividual {
       && props.containsKey(PROP_SENDER)
       && props.containsKey(PROP_CONTENT)
       && props.containsKey(PROP_READ)
-      && props.containsKey(PROP_RECEIVER);
+      && props.containsKey(PROP_RECEIVER)
+      && props.containsKey(PROP_SENT_DATE);
   }
 
   //GETTERS & SETTERS
@@ -95,5 +100,15 @@ public class Message extends ManagedIndividual {
 
   public void setRead(boolean isRead) {
       props.put(PROP_READ, new Boolean(isRead));
-  }		
+  }	
+  
+  public XMLGregorianCalendar getSentDate() {
+	    return (XMLGregorianCalendar)props.get(PROP_CONTENT);
+	  }		
+
+  public void setSentDate(XMLGregorianCalendar sentDate) {
+	    if (sentDate != null)
+	      props.put(PROP_CONTENT, sentDate);
+	}		
+
 }

@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.StringTokenizer;
 
@@ -32,8 +33,10 @@ import org.universAAL.AALApplication.health.motivation.motivationalMessages.Moti
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.Caregiver;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
+import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
+import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.Question;
 import org.universaal.ontology.owl.Questionnaire;
 
@@ -48,12 +51,13 @@ public class MessageManager {
 	/*
 	private static final int EN = 1;
 	private static final int ES = 0;
-	*/
+	*/  
 	
 	public static String disease;
 	public static String treatment_type;
 	public static String mot_status;
 	public static String message_type;
+	public static String message_subtype;
 	public static String motivational_message_content;
 	
 	public static final String prefixForDisease = "http://health.ontology.universaal.org/Disease#";
@@ -129,21 +133,22 @@ public class MessageManager {
 				treatment_type = columns[1];
 				mot_status = columns[2];
 				message_type = columns[3];
-				motivational_message_content = columns[4];
+				message_subtype = columns[4];
+				motivational_message_content = columns[5];
 				
 				if (!map.containsKey(disease,treatment_type, mot_status,
-						message_type)) {
+						message_type, message_subtype)) {
 						// if the combination of keys has not been registered yet
 						ArrayList<String> mMessagesAssociated = new ArrayList<String>(); //cada array guarda todos los mensajes que se encuentran para una misma combinaci�n de keys.
 						mMessagesAssociated.add(motivational_message_content);
 						map.put(disease,treatment_type, mot_status,
-								message_type,mMessagesAssociated);
+								message_type,message_subtype, mMessagesAssociated);
 					} else { // if the combination of keys already exists
 						ArrayList<String> mMessagesAssociated = (ArrayList<String>) (map
 								.get(disease,treatment_type, mot_status,message_type));
 						mMessagesAssociated.add(motivational_message_content);
 						map.put(disease,treatment_type, mot_status,
-								message_type,mMessagesAssociated);
+								message_type,message_subtype, mMessagesAssociated);
 					}
 			}
 			// At this point, the map structure is build
@@ -171,15 +176,16 @@ public class MessageManager {
 	 * @return motivational message content (MotivationalPlainMessage or MotivationalQuestionnaire).
 	 */
 
-	public static Object getMotivationalMessageContent(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
+	public static Object getMotivationalMessageContent(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, MotivationalMessageSubclassification messageSubType) {
 		
 		String diseaseName = disease.replaceFirst(prefixForDisease, "");
 		String tType = treatmentType.replaceFirst(prefixForTreatment, "");
 		String mStatus = motStatus.getLocalName();
 		String mType = messageType.getLocalName();
+		String mSubType = messageSubType.getLocalName();
 		
 		ArrayList<String> mMessageResults = (ArrayList<String>) map.get(
-				diseaseName, tType, mStatus, mType);
+				diseaseName, tType, mStatus, mType, mSubType);
 
 		if (mMessageResults.size() > 1) { // there are several messages for the
 			// same combination of keys
@@ -288,19 +294,19 @@ public class MessageManager {
 	 * @param Motivational Message to be sent
 	 */
 	
-	public static MotivationalMessage getMessageToSendToUser(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
+	public static MotivationalMessage getMessageToSendToUser(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, MotivationalMessageSubclassification messageSubType) {
 
-		Object unprocessedContent = getMotivationalMessageContent(disease, treatmentType, motStatus, messageType);
+		Object unprocessedContent = getMotivationalMessageContent(disease, treatmentType, motStatus, messageType, messageSubType);
 		
 		String processedMessage =""; 
-		String unprocessedQuestion;
-		Questionnaire processedQuestionnaire;
+		String unprocessedQuestion="";
+		Questionnaire processedQuestionnaire=null;
 		
 		MotivationalMessage processedMM;
 		
 		if(unprocessedContent instanceof String){
 			processedMessage = decodeMessageContent(unprocessedContent);
-			return processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedMessage);
+			return processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType,messageSubType ,processedMessage);
 		}
 		else if(unprocessedContent instanceof Questionnaire){
 			//unprocessedQuestionnaire = ((Questionnaire)(unprocessedContent)).questionnaireToString();
@@ -315,24 +321,24 @@ public class MessageManager {
 			}
 			((Questionnaire)(unprocessedContent)).setQuestions(questions);
 			processedQuestionnaire = ((Questionnaire)(unprocessedContent));
-			return processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, processedQuestionnaire);
+			return processedMM = new MotivationalMessage(disease, treatmentType,motStatus, messageType, messageSubType, processedQuestionnaire);
 		}
 		else{
-			//lanzar excepci�n
+			//lanzar excepcion
 			return null;
 		}
 		
 		
 	}
 	
-	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType){
-		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType);
-		mmSender.sendMessageToAP(mm);
+	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType,MotivationalMessageSubclassification messageSubType, Treatment t){
+		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType, messageSubType);
+		mmSender.sendMessageToAP(mm, t);
 	}
 	
-	public static void sendMessageToCaregiver(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType){
-		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType);
-		mmSender.sendMessageToCaregiver(mm);
+	public static void sendMessageToCaregiver(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, MotivationalMessageSubclassification messageSubType, Treatment t){
+		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType, messageSubType);
+		mmSender.sendMessageToCaregiver(mm, t);
 	}
 
 }
