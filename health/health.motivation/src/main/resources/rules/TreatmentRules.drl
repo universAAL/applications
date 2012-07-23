@@ -49,9 +49,9 @@ end
 rule "Change to contemplation phase - Treatment performance agreement" no-loop
 	when
 		#When the aswered questionnaire to the first question is received
-		detectedAnsweredQuestionnaire: AnsweredQuestionnaire(questionnaire:associatedQuestionnaire  == firstQuestionnaire)// esto va a fallar, mejor nombre
-		AnsweredQuestionnaire(answers[0].answerContent == TRUE )
+		detectedAnsweredQuestionnaire: AnsweredQuestionnaire(questionnaire : associatedQuestionnaire, answers != null, answers.length > 0,  answers[0].answerContent == true)
 		eval(questionnaire instanceof Questionnaire4TreatmentStrategy)
+		eval(questionnaire.getName() == (((Questionnaire)firstQuestionnaire.getContent()).getName()) )// esto va a fallar, mejor nombre
 	then  
 	 	Treatment t = ((Questionnaire4TreatmentStrategy)questionnaire).getAssociatedTreatment();
 	 	t.setMotivationalStatus(MotivationalStatusType.contemplation); #the motivational status of the treatment is changed to contemplation 
@@ -115,20 +115,20 @@ rule "Change to maintenance phase from action phase"  no-loop
 		System.out.println("Assisted person changed her/his motivational status to maintenance."); #trace
 end
 
-/*
+
 rule "Change to precontemplation phase from contemplation phase"  no-loop
 	when
 	//cuando no se haya realizado la primera actividad en 3 oportunidades
 		treatment: Treatment(motivationalStatus == MotivationalStatusType.contemplation)
 	 	eval(PerformedSessionsSupport.mapOfPSSupport.containsKey(treatment))
-	 	eval( (PerformedSessionsSupport)(PerformedSessionsSupport.mapOfPSSupport.get(treatment)).getNumberOfConsecutiveNonPerformedSessionsCont()== PerformedSessionsSupport.numberOfNonPerformanceAllowed)
+	 	eval( PerformedSessionsSupport.mapOfPSSupport.get(treatment).getNumberOfConsecutiveNonPerformedSessionsCont()== PerformedSessionsSupport.numberOfNonPerformanceAllowed)
 	then
 		treatment.setMotivationalStatus(MotivationalStatusType.precontemplation);
 		MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
-		MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.contemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_disagreement);
+		MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.contemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_disagreement, treatment);
 end
 
-
+/*
 rule "Change to contemplation phase from action phase"  no-loop
 	when
 	//cuando no se haya realizado tres de las sesiones establecidas
@@ -159,6 +159,7 @@ rule "Change to action phase from maintenance phase"  no-loop
 end
 
 */
+/*
 
 rule "Change status to active" no-loop
 	timer (cron: 0 0 0 * * ?) //esta regla se activa cada 24h, a las 0:00
@@ -218,3 +219,4 @@ rule "Treatment prolonged" no-loop
 	then
 	// notificar al usuario
 end
+*/

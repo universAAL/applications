@@ -122,7 +122,6 @@ public class TestMotivationalStatusChange extends TestIface{
 					" about his/her predisposition to follow the treatment.", agreementQuestion); 
 
 		 firstQuestionnaire = new MotivationalQuestionnaire(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry, MotivationalMessageSubclassification.treatment_agreement,  questionnaire);	
-		
 		//load the facts
 		 
 		WeightRequirement wr = new WeightRequirement(85, 60);
@@ -234,7 +233,7 @@ public Treatment generateTreatment4Test() throws Exception{
 	
 	// Probar los métodos al contrario: en sentido descendente:
 	
-	/*
+	
 	@Test
 	public void testChangeToPrecontemplationFromContemplation(){
 		
@@ -255,7 +254,7 @@ public Treatment generateTreatment4Test() throws Exception{
 		Assert.assertEquals(true, wmt1.getMotivationalStatus()== MotivationalStatusType.precontemplation);
 		Assert.assertEquals(true, TestIface.sentToCaregiverContainsPlainMessage(contentExpected));
 	}
-	
+	/*
 	@Test
 	public void testChangeToContemplationFromAction(){
 		
@@ -298,7 +297,7 @@ public Treatment generateTreatment4Test() throws Exception{
 		Assert.assertEquals(true, TestIface.sentToCaregiverContainsPlainMessage(contentExpected));
 	}
 	*/
-	
+	/*
 	@Test
 	public void testTreatmentActivation(){
 		
@@ -322,5 +321,5 @@ public Treatment generateTreatment4Test() throws Exception{
 		
 	}
 	
-	
+	*/
 }
