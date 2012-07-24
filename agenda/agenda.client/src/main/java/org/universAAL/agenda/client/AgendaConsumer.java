@@ -130,9 +130,9 @@ public class AgendaConsumer extends ContextSubscriber {
 	System.out.println("Owner: " + c.getOwner().getURI());
 
 	// get all calendars for user
-	List l = getCalendarsByOwnerService(user);
+	List<Calendar> l = getCalendarsByOwnerService(user);
 	System.out.println("Number of user's calendars: " + l.size());
-	for (Iterator it = l.iterator(); it.hasNext();) {
+	for (Iterator<Calendar> it = l.iterator(); it.hasNext();) {
 	    System.out.println(((Calendar) it.next()).getName());
 	}
 
@@ -208,8 +208,8 @@ public class AgendaConsumer extends ContextSubscriber {
      * 
      * @return list of calendars
      */
-    public List getAllCalendarsService() {
-	List allCalendars = new ArrayList();
+    public List<Calendar> getAllCalendarsService() {
+	List <Calendar> allCalendars = new ArrayList<Calendar>();
 
 	long endTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(serviceRequestCreator
@@ -288,8 +288,8 @@ public class AgendaConsumer extends ContextSubscriber {
      *            calendar owner
      * @return list of calendars
      */
-    public List getCalendarsByOwnerService(User owner) {
-	List allCalendars = new ArrayList();
+    public List<Calendar> getCalendarsByOwnerService(User owner) {
+	List<Calendar> allCalendars = new ArrayList<Calendar>();
 
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(serviceRequestCreator
@@ -675,8 +675,8 @@ public class AgendaConsumer extends ContextSubscriber {
      * 
      * @return list of calendars
      */
-    public List getAllEventCategories() {
-	List allCategories = new ArrayList();
+    public List<String> getAllEventCategories() {
+	List<String> allCategories = new ArrayList<String>();
 
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(serviceRequestCreator

@@ -8,3 +8,5 @@ deploy-pom.xml
 
 this clears cache and loads most recent files.
 Run: right click on runner.install-run.launch->Run As->runner.install-run
+
+if there is an error while deleting probably java.exe process is running so shut it down manually

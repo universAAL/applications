@@ -39,7 +39,8 @@ public class DigitalClock extends JLabel {
     }
 
     protected DigitalClock() {
-	this("hh:mm:ss a", 1000);
+	this("HH:mm:ss", 1000);
+	//this("hh:mm:ss a", 1000); //for e.g. 03:04:34 PM 
     }
     
 //    private static DigitalClock instance=null;

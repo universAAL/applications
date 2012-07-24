@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>B.0.2-SNAPSHOT</version>
+		<version>C.0.1-SNAPSHOT</version>
 		<relativePath>../agenda.pom/pom.xml</relativePath>
 	</parent>
 
@@ -30,15 +30,15 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context</artifactId>
+			<artifactId>mw.bus.context.osgi</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.service</artifactId>
+			<artifactId>mw.bus.service.osgi</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.data.representation</artifactId>
+			<artifactId>mw.data.representation.osgi</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
@@ -46,11 +46,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>agenda.ont</artifactId>
+			<artifactId>ont.agenda</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>agenda.eventSelection.ont</artifactId>
+			<artifactId>ont.agendaEventSelection</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
