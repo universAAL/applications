@@ -1,7 +1,7 @@
 package org.universAAL.AALApplication.health.motivation.testSupportClasses;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 
 import org.universaal.ontology.health.owl.Treatment;
@@ -15,7 +15,7 @@ public class TreatmentTypeClassification {
 	 * A treatment will be from_now_on if it lasts more than 18 months.
 	 */
 	
-	public static Map<Treatment, TreatmentTypeClassification> mapOfTreatmentTypes = new TreeMap<Treatment, TreatmentTypeClassification>();
+	public static Map<Treatment, TreatmentTypeClassification> mapOfTreatmentTypes = new HashMap<Treatment, TreatmentTypeClassification>();
 	// utiliza put y get
 	
 	private Treatment associatedTreatment;

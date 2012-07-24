@@ -6,12 +6,16 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import javax.xml.datatype.DatatypeConstants;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import junit.framework.TestCase;
 
 import org.drools.lang.DRLParser.decl_field_initialization_return;
 import org.universAAL.AALApplication.health.motivation.ClassesNeededRegistration;
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
+import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.DetectedTreatments;
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.OntologyManagement;
@@ -132,10 +136,70 @@ public static boolean sentToCaregiverContainsPlainMessage(String plainMessageCon
 		}
 		return false;
 	}
+	 
+public static boolean questionnaireSentToAPSince(String questionnaireName, XMLGregorianCalendar sinceTime) throws Exception{
 	
-	public void sendMessageToAP(MotivationalMessage mm, Treatment t) {
-		motivationalMessagesSentToAP.add(mm);
+	XMLGregorianCalendar now = SchedulingTools.getNow();
+	
+	if(!sentToAPContainsQuestionnaire(questionnaireName))
+		return false;
+	
+	else{
 		
+		for (int i=0;i<motivationalMessagesSentToAP.size();i++){
+			
+			Object mm = motivationalMessagesSentToAP.get(i).getContent();
+			MotivationalMessage motmes = motivationalMessagesSentToAP.get(i);
+			XMLGregorianCalendar sentDate = motmes.getSentDate();
+			
+			if( mm instanceof Questionnaire){
+				Questionnaire q = (Questionnaire)mm;
+				if(q.getName().equals(questionnaireName))// el cuestionario está en los mensajes enviados al AP
+					if(sentDate.compare(sinceTime) == DatatypeConstants.GREATER && sentDate.compare(now)== DatatypeConstants.LESSER )
+						return true;
+			}
+		}
+		return false;
+	}
+	
+}
+
+
+public static boolean messageSentToAPSince(String plainMessageContent, XMLGregorianCalendar sinceTime) throws Exception{
+	
+	XMLGregorianCalendar now = SchedulingTools.getNow();
+	
+	if(!sentToAPContainsPlainMessage(plainMessageContent))
+		return false;
+	
+	else{
+		
+		for (int i=0;i<motivationalMessagesSentToAP.size();i++){
+			
+			Object mm = motivationalMessagesSentToAP.get(i).getContent();
+			MotivationalMessage motmes = motivationalMessagesSentToAP.get(i);
+			XMLGregorianCalendar sentDate = motmes.getSentDate();
+			
+			if( mm instanceof String){
+				String content = (String) mm;
+				if(content.equals(plainMessageContent))// el cuestionario está en los mensajes enviados al AP
+					if(sentDate.compare(sinceTime) == DatatypeConstants.GREATER && sentDate.compare(now)== DatatypeConstants.LESSER )
+						return true;
+			}
+		}
+		return false;
+	}
+	
+}
+
+
+	public void sendMessageToAP(MotivationalMessage mm, Treatment t){
+		try {
+		mm.setSentDate(SchedulingTools.getNow()); // le añadimos la fecha de envío
+		motivationalMessagesSentToAP.add(mm);
+		} catch (Exception e){
+			
+		}
 	}
 
 	public void sendMessageToCaregiver(MotivationalMessage mm, Treatment t) {

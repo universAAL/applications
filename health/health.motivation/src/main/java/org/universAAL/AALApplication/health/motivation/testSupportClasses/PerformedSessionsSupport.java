@@ -1,6 +1,7 @@
 package org.universAAL.AALApplication.health.motivation.testSupportClasses;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,6 +12,7 @@ public class PerformedSessionsSupport {
 
 	public ArrayList <PerformedSession> validPerformedSessions; //sesiones realizadas dentro del intervalo correcto
 	public ArrayList <PerformedSession> invalidPerformedSessions; // sesiones realizadas fuera del intervalo
+	public ArrayList <PerformedSession> nonPerformedSessions;
 
 	public int numberOfConsecutiveNonPerformedSessionsCont; 
 	public int numberOfConsecutiveNonPerformedSessionsAct; 
@@ -18,7 +20,7 @@ public class PerformedSessionsSupport {
 	
 	private Treatment associatedTreatment;
 	
-	public static Map<Treatment, PerformedSessionsSupport> mapOfPSSupport = new TreeMap<Treatment, PerformedSessionsSupport>();
+	public static Map<Treatment, PerformedSessionsSupport> mapOfPSSupport = new HashMap<Treatment, PerformedSessionsSupport>();
 	
 	public static final int numberOfNonPerformanceAllowed = 3;
 	public static final int numberOfNonPerformanceAllowedMaintenance = 5;

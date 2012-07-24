@@ -8,10 +8,13 @@ import org.universAAL.AALApplication.health.motivation.schedulingTools.Treatment
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification.ByMeasurement;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification.ByRecurrence;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification.ByDuration;
+import org.universAAL.AALApplication.health.motivation.schedulingTools.Treatment4Rules;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.SessionNotPerformed;
+
 #declare any global variables here
 
 /*
-rule "Increase treatment completenss"
+rule "Increase treatment completenss" // depende del estado motivacional en el que nos encontremos para mandar un mensaje u otro al AP
 	when
 		ps: PerformedSession(isValid == Boolean.TRUE) // cuando se detecte una planned session válida (ha tenido que pasar antes por las reglas de Schedule, para determinar esto)
 	then
@@ -293,32 +296,55 @@ rule "Performed Session out of day" no-loop
 		SessionsPerformance.addOutOfDateSession(ps);
 		//enviar mensaje al usuario
 end
-
+*/
 rule "Session performed in right interval of time" no-loop
 	
-	timer(5m) // esta regla se lanza cada 5 minutos
+	// esta regla se lanza cada 5 minutos
 	
 	when
-		treatment: Treatment(treatmentPlanning != null)
-		eval(SchedulingTools.isNowInPerformingInterval(treatment) || SchedulingTools.isNowInExtraInterval(treatment))
+		treatment: Treatment4Rules(lss:lastSessionStart, lse:lastSessionEnd, lsewei:lastSessionWithExtraInterval, n:now) // no coge los getters
+		eval( (n >= lse && n <= lsewei) || (n >= lss && n <= lse)) // ahora esta dentro del performing interval
+		ps: PerformedSession(associatedTreatment == treatment)
 	// y recibo una performed session en el intervalo correcto...
 	then
-		//sesión realizada: la ps se pone como válida
-		// se aumenta la completitud del tratamiento
+		ps.setIsValid(true)//sesión realizada: la ps se pone como válida y se añade en un array de sesiones realizadas
+		PerformedSessionsSupport.insertValidPerformedSession;		
 end
 
-
-rule "Session not performed in performing interval" no-loop
+rule "Session not performed in performing interval" 
+// esta regla se lanza cada 5 minutos
 	when
+		treatment: Treatment4Rules(lss:lastSessionStart, lse:lastSessionEnd, lsewei:lastSessionWithExtraInterval, n:now) // no coge los getters
+		eval(n >= lse && n <= lsewei) // ahora esta dentro del performing interval
+		not PerformedSession(associatedTreatment == treatment)// no se ha recibido una PS que tenga nuestro tratamiento asociado
+		eval(!TestIface.messageSentToAPSince("", treatment.getLastSessionEnd()))
 		// si no he recibido una performed session en el intervalo de performing interval
 		// y no he mandado mensaje al usuario
 	then
-	//mandar mensaje al usuario para que haga la sesión o introduzca la medida.	//
+	//mandar mensaje al usuario para que haga la sesión o introduzca la medida.	Sólo válido para action...
+		MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
+		
+        MessageManager.sendMessageToAssistedPerson(HeartFailure.MY_URI, Treatment.MY_URI,
+                                        MotivationalStatusType.action, MotivationalMessageClassification.reminder, MotivationalMessageSubclassification.session_performance_alert, treatment);
+        System.out.println("Assisted person notified of not received performed session");
 end
 
+rule "Session not performed in extra interval" 
+// esta regla se lanza cada 5 minutos
+	when
+		treatment: Treatment4Rules(lss:lastSessionStart, lse:lastSessionEnd, lsewei:lastSessionWithExtraInterval, n:now) // no coge los getters
+		eval(n >lsewei) // ahora esta dentro del performing interval
+		not PerformedSession(associatedTreatment == treatment)// no se ha recibido una PS que tenga nuestro tratamiento asociado
+	then
+		//la sesión no se ha realizado.
+		SessionNotPerformed snp = new SessionNotPerformed(lss,treatment);
+		insert(snp);
+		//introducir un objeto de una clase en la wm para avisar que la sesión no se ha hecho
+		//tendrá que eliminarse en la regla que se active del fichero correspondiente.
+        System.out.println("Assisted person hasn't performed last session");
+end
 
-
-
+/*
 
 rule "4-5 times a day performance" no-loop //4 a 5 veces al día
 	when

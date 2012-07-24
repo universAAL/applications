@@ -636,6 +636,7 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APEndedTreatmentWrightlyNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APReachMaintenancePhaseNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/MotivationalMessageContent.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/SessionPerformanceNotReceivedActionAlertNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentDetectionMessage.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentExtensionInquiryToCaregiver.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageManager.java -text
@@ -647,10 +648,12 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/SchedulingMessagesSent.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/SchedulingTools.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/SessionPerformance.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/Treatment4Rules.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/TreatmentPlanningToiCal.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/TreatmentWithPendingSessions.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/DetectedTreatments.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/PerformedSessionsSupport.java -text
+health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/SessionNotPerformed.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/Solution.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/TreatmentTypeClassification.java -text
 health/health.motivation/src/main/resources/rules/ActionRules.dslr -text
@@ -661,6 +664,7 @@ health/health.motivation/src/main/resources/rules/ScheduleRules.drl -text
 health/health.motivation/src/main/resources/rules/TreatmentRules.drl -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/general/TestSchedulingTools.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/general/TestSolution.java -text
+health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/general/TestTreatment4Rules.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestIfaceForMM.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/messageManagerTester/TestMessageManager.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/scheduleRules/TestTreatmentTypeClassification.java -text
