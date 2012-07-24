@@ -117,7 +117,7 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 		this.context = context;
 		theServer = new MyDevices();
 		theServer.addListener(this);
-
+/*
 		// start humidity context publisher 
 		this.humidityInfo = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE + "HumidityContextProvider");
 		this.humidityInfo.setType(ContextProviderType.controller);
@@ -166,9 +166,9 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 		this.windowInfo.setProvidedEvents(providedEvents(theServer));
 		this.windowPublisher = new DefaultContextPublisher(context, this.windowInfo);
 		this.windowModule();
-
+*/
 	}
-
+/*
 	public void humidityModule() {
 		new Thread() {
 			public void run() {
@@ -231,7 +231,7 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 			}
 		}.start();
 	}
-	
+*/	
 	public ServiceResponse handleCall(ServiceCall call) {
 		if (call == null)
 			return null;

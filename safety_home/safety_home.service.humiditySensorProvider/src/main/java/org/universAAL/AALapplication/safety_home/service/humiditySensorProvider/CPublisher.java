@@ -29,11 +29,19 @@ public class CPublisher extends ContextPublisher{
 	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
-			ContextEventPattern cep5 = new ContextEventPattern();
-			cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,HumiditySensor.MY_URI));
+			cp = new DefaultContextPublisher(context, getProviderInfo());
+			invoke();
+		}
+		catch (InterruptedException e){
+			e.printStackTrace();
+		}
+	}
+/*
+	protected CPublisher(ModuleContext context) {
+		super(context, getProviderInfo());
+		try{
 			ContextProvider info = new ContextProvider(SAFETY_HUMIDITY_PROVIDER_NAMESPACE + "HumidityContextProvider");
 			info.setType(ContextProviderType.controller);
-			info.setProvidedEvents(new ContextEventPattern[]{cep5});
 			cp = new DefaultContextPublisher(context, info);
 			invoke();
 		}
@@ -41,7 +49,7 @@ public class CPublisher extends ContextPublisher{
 			e.printStackTrace();
 		}
 	}
-
+*/
 	public CPublisher(ModuleContext context, ContextProvider providerInfo, ContextPublisher cp) {
 		super(context, providerInfo);
 		try{
@@ -75,15 +83,14 @@ public class CPublisher extends ContextPublisher{
 		}
 	}
 
-	
-	private static ContextProvider getProviderInfo() {
-		ContextEventPattern cep5 = new ContextEventPattern();
-		cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,HumiditySensor.MY_URI));
-		ContextProvider info = new ContextProvider(SAFETY_HUMIDITY_PROVIDER_NAMESPACE + "HumidityContextProvider");
-		info.setType(ContextProviderType.controller);
-		info.setProvidedEvents(new ContextEventPattern[]{cep5});
+	 private static ContextProvider getProviderInfo() {
+		  ContextEventPattern cep5 = new ContextEventPattern();
+		  cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,HumiditySensor.MY_URI));
+		  ContextProvider info = new ContextProvider(SAFETY_HUMIDITY_PROVIDER_NAMESPACE + "HumidityContextProvider");
+		  info.setType(ContextProviderType.controller);
+		  info.setProvidedEvents(new ContextEventPattern[]{cep5});
 
-		return info;	
+		  return info;
 	}
 
 	public void communicationChannelBroken() {

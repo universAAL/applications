@@ -32,17 +32,7 @@ public class CPublisher extends ContextPublisher{
 	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
-			/*ContextProvider info = new ContextProvider(SAFETY_WINDOW_PROVIDER_NAMESPACE + "WindowContextProvider");
-			info.setType(ContextProviderType.controller);
-			cp = new DefaultContextPublisher(context, info);
-			invoke();*/
-			
-			ContextEventPattern cep5 = new ContextEventPattern();
-			cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,Window.MY_URI));
-			ContextProvider info = new ContextProvider(SAFETY_WINDOW_PROVIDER_NAMESPACE + "WindowContextProvider");
-			info.setType(ContextProviderType.controller);
-			info.setProvidedEvents(new ContextEventPattern[]{cep5});
-			cp = new DefaultContextPublisher(context, info);
+			cp = new DefaultContextPublisher(context, getProviderInfo());
 			invoke();
 		}
 		catch (InterruptedException e){
@@ -96,15 +86,13 @@ public class CPublisher extends ContextPublisher{
 		//}
 	}
 
-	
-	private static ContextProvider getProviderInfo() {
-		ContextEventPattern cep5 = new ContextEventPattern();
-		cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,Window.MY_URI));
-		ContextProvider info = new ContextProvider(SAFETY_WINDOW_PROVIDER_NAMESPACE + "WindowContextProvider");
-		info.setType(ContextProviderType.controller);
-		info.setProvidedEvents(new ContextEventPattern[]{cep5});
-
-		return info;	
+	 private static ContextProvider getProviderInfo() {
+		 ContextEventPattern cep2 = new ContextEventPattern();
+		 cep2.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, Window.MY_URI));
+		 ContextProvider info = new ContextProvider(SAFETY_WINDOW_PROVIDER_NAMESPACE + "WindowContextProvider");
+		 info.setType(ContextProviderType.controller);
+		 info.setProvidedEvents(new ContextEventPattern[]{cep2});
+		 return info;
 	}
 
 	public void communicationChannelBroken() {

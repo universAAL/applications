@@ -31,24 +31,14 @@ public class CPublisher extends ContextPublisher{
 	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
-			/*ContextProvider info = new ContextProvider(SAFETY_SMOKE_PROVIDER_NAMESPACE + "SmokeContextProvider");
-			info.setType(ContextProviderType.controller);
-			cp = new DefaultContextPublisher(context, info);
-			invoke();*/
-			
-			ContextEventPattern cep5 = new ContextEventPattern();
-			cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,SmokeSensor.MY_URI));
-			ContextProvider info = new ContextProvider(SAFETY_SMOKE_PROVIDER_NAMESPACE + "SmokeContextProvider");
-			info.setType(ContextProviderType.controller);
-			info.setProvidedEvents(new ContextEventPattern[]{cep5});
-			cp = new DefaultContextPublisher(context, info);
+			cp = new DefaultContextPublisher(context, getProviderInfo());
 			invoke();
 		}
 		catch (InterruptedException e){
 			e.printStackTrace();
 		}
 	}
-
+	
 	public CPublisher(ModuleContext context, ContextProvider providerInfo, ContextPublisher cp) {
 		super(context, providerInfo);
 		try{
@@ -84,15 +74,14 @@ public class CPublisher extends ContextPublisher{
 	}
 
 	
-	private static ContextProvider getProviderInfo() {
-		ContextEventPattern cep5 = new ContextEventPattern();
-		cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,SmokeSensor.MY_URI));
-		ContextProvider info = new ContextProvider(SAFETY_SMOKE_PROVIDER_NAMESPACE + "SmokeContextProvider");
-		info.setType(ContextProviderType.controller);
-		info.setProvidedEvents(new ContextEventPattern[]{cep5});
+	 private static ContextProvider getProviderInfo() {
+		 ContextEventPattern cep7 = new ContextEventPattern();
+		 cep7.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, SmokeSensor.MY_URI));
+		 ContextProvider info = new ContextProvider(SAFETY_SMOKE_PROVIDER_NAMESPACE + "SmokeContextProvider");
+		 info.setType(ContextProviderType.controller);
+		 info.setProvidedEvents(new ContextEventPattern[]{cep7});
 
-		return info;	
-		
+		 return info;
 	}
 
 	public void communicationChannelBroken() {

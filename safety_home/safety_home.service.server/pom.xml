@@ -54,6 +54,7 @@
 			<artifactId>ont.safetyDevices</artifactId>
 			<version>1.0.3-SNAPSHOT</version>
 		</dependency>
+<!-- 		
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>safety_home.service.humiditySensorProvider</artifactId>
@@ -89,12 +90,14 @@
 			<artifactId>safety_home.service.windowProvider</artifactId>
 			<version>1.0.3-SNAPSHOT</version>
 		</dependency>
+-->
 		<dependency>
 			<groupId>org.universAAL.control.safetyDevices</groupId>
 			<artifactId>control.safetyDevices</artifactId>
 			<version>5.0</version>
 		</dependency>
 	</dependencies>
+	
     <build>
 		<plugins>
 			<plugin>
@@ -107,17 +110,7 @@
 						<Bundle-Activator>org.universAAL.AALapplication.safety_home.service.server.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-<!-- 						<Export-Package>
-						org.universAAL.AALapplication.safety_home.service.humiditySensorProvider, org.universAAL.AALapplication.safety_home.service.humiditySensorSoapClient, 
-						org.universAAL.AALapplication.safety_home.service.lightSensorProvider, org.universAAL.AALapplication.safety_home.service.lightSensorSoapClient, 
-						org.universAAL.AALapplication.safety_home.service.motionSensorProvider, org.universAAL.AALapplication.safety_home.service.motionSensorSoapClient, 
-						org.universAAL.AALapplication.safety_home.service.smartCardProvider, org.universAAL.AALapplication.db.*, 
-						org.universAAL.AALapplication.safety_home.service.smokeDetectionProvider, org.universAAL.AALapplication.safety_home.service.smokeDetectionSoapClient, 
-						org.universAAL.AALapplication.safety_home.service.temperatureSensorProvider, org.universAAL.AALapplication.safety_home.service.temperatureSensorSoapClient, 
-						org.universAAL.AALapplication.safety_home.service.windowProvider, org.universAAL.AALapplication.safety_home.service.windowSoapClient
-						</Export-Package>  -->
 						<Export-Package>org.universAAL.AALapplication.safety_home.service.server, org.universAAL.AALapplication.safety.service.server.DeviceHandlers</Export-Package>
-						<!--  , org.universAAL.AALapplication.safety_home.server.unit_impl --> 
 					</instructions>
 				</configuration>
 			</plugin>
@@ -160,4 +153,5 @@
 				</releases>
 			</repository>
 		</repositories>
+		<version>1.1.0</version>
 </project>

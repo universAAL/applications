@@ -30,17 +30,7 @@ public class CPublisher extends ContextPublisher{
 	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
-/*			ContextProvider info = new ContextProvider(SAFETY_LIGHT_PROVIDER_NAMESPACE + "LightContextProvider");
-			info.setType(ContextProviderType.controller);
-			cp = new DefaultContextPublisher(context, info);
-			invoke();*/
-			
-			ContextEventPattern cep5 = new ContextEventPattern();
-			cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,LightSensor.MY_URI));
-			ContextProvider info = new ContextProvider(SAFETY_LIGHT_PROVIDER_NAMESPACE + "LightContextProvider");
-			info.setType(ContextProviderType.controller);
-			info.setProvidedEvents(new ContextEventPattern[]{cep5});
-			cp = new DefaultContextPublisher(context, info);
+			cp = new DefaultContextPublisher(context, getProviderInfo());
 			invoke();
 		}
 		catch (InterruptedException e){
@@ -86,13 +76,13 @@ public class CPublisher extends ContextPublisher{
 
 	
 	private static ContextProvider getProviderInfo() {
-		ContextEventPattern cep5 = new ContextEventPattern();
-		cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,LightSensor.MY_URI));
+		ContextEventPattern cep3 = new ContextEventPattern();
+		cep3.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, LightSensor.MY_URI));
 		ContextProvider info = new ContextProvider(SAFETY_LIGHT_PROVIDER_NAMESPACE + "LightContextProvider");
 		info.setType(ContextProviderType.controller);
-		info.setProvidedEvents(new ContextEventPattern[]{cep5});
+		info.setProvidedEvents(new ContextEventPattern[]{cep3});
 
-		return info;	
+		return info;
 	}
 
 	public void communicationChannelBroken() {
