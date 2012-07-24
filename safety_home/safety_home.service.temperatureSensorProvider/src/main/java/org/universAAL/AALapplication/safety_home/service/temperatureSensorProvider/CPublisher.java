@@ -31,16 +31,7 @@ public class CPublisher extends ContextPublisher{
 	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
-			/*ContextProvider info = new ContextProvider(SAFETY_TEMPERATURE_PROVIDER_NAMESPACE + "TemperatureContextProvider");
-			info.setType(ContextProviderType.controller);
-			cp = new DefaultContextPublisher(context, info);
-			invoke();*/
-			ContextEventPattern cep5 = new ContextEventPattern();
-			cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,TemperatureSensor.MY_URI));
-			ContextProvider info = new ContextProvider(SAFETY_TEMPERATURE_PROVIDER_NAMESPACE + "TemperatureContextProvider");
-			info.setType(ContextProviderType.controller);
-			info.setProvidedEvents(new ContextEventPattern[]{cep5});
-			cp = new DefaultContextPublisher(context, info);
+			cp = new DefaultContextPublisher(context, getProviderInfo());
 			invoke();
 		}
 		catch (InterruptedException e){
@@ -81,15 +72,14 @@ public class CPublisher extends ContextPublisher{
 		}
 	}
 
-	
 	private static ContextProvider getProviderInfo() {
-		ContextEventPattern cep5 = new ContextEventPattern();
-		cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,TemperatureSensor.MY_URI));
+		ContextEventPattern cep4 = new ContextEventPattern();
+		cep4.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, TemperatureSensor.MY_URI));
 		ContextProvider info = new ContextProvider(SAFETY_TEMPERATURE_PROVIDER_NAMESPACE + "TemperatureContextProvider");
 		info.setType(ContextProviderType.controller);
-		info.setProvidedEvents(new ContextEventPattern[]{cep5});
+		info.setProvidedEvents(new ContextEventPattern[]{cep4});
 
-		return info;	
+		return info;
 	}
 
 	public void communicationChannelBroken() {
