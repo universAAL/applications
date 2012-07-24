@@ -262,6 +262,7 @@ agenda/agenda.runner/runner/configurations/ResourceServer/SomeServiceSpecificFol
 agenda/agenda.runner/runner/configurations/agenda/DBquery.properties -text
 agenda/agenda.runner/runner/configurations/agenda/credentials.properties -text
 agenda/agenda.runner/runner/configurations/ctxt.che/CHe.properties -text
+agenda/agenda.runner/runner/configurations/mw.bus.model.osgi/sodapop.key -text
 agenda/agenda.runner/runner/configurations/services/org.ops4j.pax.logging.properties -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_bob_hr.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm.mobile/main_menu_gui_hr.txt -text
