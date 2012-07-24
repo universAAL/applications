@@ -3,12 +3,15 @@ package org.universAAL.AALapplication.safety_home.service.windowProvider;
 import org.universAAL.AALapplication.safety_home.service.windowSoapClient.SOAPClient;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
+import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.location.indoor.Room;
 import org.universAAL.ontology.phThing.Device;
+import org.universAAL.ontology.safetyDevices.HumiditySensor;
 import org.universAAL.ontology.safetyDevices.Window;
 
 public class CPublisher extends ContextPublisher{
@@ -29,8 +32,16 @@ public class CPublisher extends ContextPublisher{
 	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
+			/*ContextProvider info = new ContextProvider(SAFETY_WINDOW_PROVIDER_NAMESPACE + "WindowContextProvider");
+			info.setType(ContextProviderType.controller);
+			cp = new DefaultContextPublisher(context, info);
+			invoke();*/
+			
+			ContextEventPattern cep5 = new ContextEventPattern();
+			cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,Window.MY_URI));
 			ContextProvider info = new ContextProvider(SAFETY_WINDOW_PROVIDER_NAMESPACE + "WindowContextProvider");
 			info.setType(ContextProviderType.controller);
+			info.setProvidedEvents(new ContextEventPattern[]{cep5});
 			cp = new DefaultContextPublisher(context, info);
 			invoke();
 		}
@@ -87,8 +98,13 @@ public class CPublisher extends ContextPublisher{
 
 	
 	private static ContextProvider getProviderInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		ContextEventPattern cep5 = new ContextEventPattern();
+		cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,Window.MY_URI));
+		ContextProvider info = new ContextProvider(SAFETY_WINDOW_PROVIDER_NAMESPACE + "WindowContextProvider");
+		info.setType(ContextProviderType.controller);
+		info.setProvidedEvents(new ContextEventPattern[]{cep5});
+
+		return info;	
 	}
 
 	public void communicationChannelBroken() {
