@@ -5,13 +5,12 @@
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-<!--		B.0 version has all platform dependencies 1.1.0 (B.1 has platform components 1.1.1-SNAPSHOT)-->
-		<version>B.0</version>
+		<version>C.0</version>
 		<relativePath>../new_services.pom/pom.xml</relativePath>
 	</parent>
 	
 	<artifactId>agenda.pom</artifactId>
-	<version>B.0.2-SNAPSHOT</version>
+	<version>C.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
 	<name>Agenda AAL Service Parent POM</name>
@@ -57,13 +56,13 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
-				<artifactId>agenda.ont</artifactId>
-				<version>1.1.1-SNAPSHOT</version>
+				<artifactId>ont.agenda</artifactId>
+				<version>1.2.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
-				<artifactId>agenda.eventSelection.ont</artifactId>
-				<version>1.1.1-SNAPSHOT</version>
+				<artifactId>ont.agendaEventSelection</artifactId>
+				<version>1.2.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>

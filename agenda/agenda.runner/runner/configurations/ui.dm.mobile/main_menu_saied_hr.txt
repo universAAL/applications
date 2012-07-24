@@ -1,2 +1,2 @@
-main_menu_saied_hr.txt/Agenda|http://www.anco.gr|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
+/Agenda|http://www.anco.gr|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
 /Main Menu saied hr|http://www.madrid_workshop.org|service_ont_URI

@@ -9,7 +9,7 @@ public class Messages {
     // private static final String BUNDLE_NAME =
     // "org.universAAL.ontology.messages_en";
 
-    private static final String BUNDLE_NAME = "org.universAAL.ontology.messages";
+    private static final String BUNDLE_NAME = "org.universAAL.ontology.agenda.messages";
     
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
 	    .getBundle(BUNDLE_NAME,  Locale.getDefault()); 
