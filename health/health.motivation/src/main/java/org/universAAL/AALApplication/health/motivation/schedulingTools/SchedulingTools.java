@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import net.fortuna.ical4j.model.Date;
@@ -30,6 +31,13 @@ import org.universaal.ontology.health.owl.TreatmentPlanning;
 public class SchedulingTools {
 
 	public static Map<Treatment, DateList> mapOfListDates = new TreeMap<Treatment, DateList>();
+	
+	public static XMLGregorianCalendar getNow() throws Exception{
+		GregorianCalendar gc = new GregorianCalendar();
+		DatatypeFactory dtf = DatatypeFactory.newInstance();
+		XMLGregorianCalendar now = dtf.newXMLGregorianCalendar(gc);
+		return now;
+	}
 	
 	
 	//-----------------------------------------------
@@ -122,12 +130,16 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 		Calendar nowCal = Calendar.getInstance(); //now
 		DateTime now = new DateTime(nowCal.getTime());
 		
-		for (int i=0;i<allSessions.size();i++){
+		for (int i=0;i<(allSessions.size()-1);i++){
 			DateTime sessionDate = (DateTime)allSessions.get(i);
 			DateTime nextDate = (DateTime)allSessions.get(i+1);
 			if(now.after(sessionDate)&& now.before(nextDate)){
 				return (DateTime)allSessions.get(i);
 			}
+		// para el último elemento, hacemos la comprobación aislada para evitar el erroy de indexoutofbounds:
+			int lastIndex = allSessions.size();
+			if(now.before((DateTime)allSessions.get(lastIndex)))
+				return (DateTime)allSessions.get(lastIndex);
 		}
 		return null;
 	}
@@ -136,18 +148,25 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 	public static boolean isNowInPerformingInterval(Treatment t) throws Exception{
 		//ver la última sesión
 		DateTime lastSession = getLastPlannedSession(t);
-		
-		VEvent session = tpToEvent(t).getOccurrence(lastSession);
-		// sacar el momento de finalización
-		DtEnd sessionEnd = session.getEndDate();
-		// compararla con ahora: si estoy después del rango, false
-		Calendar nowCal = Calendar.getInstance(); //now
-		DateTime now = new DateTime(nowCal.getTime());
-		
-		if(now.after(sessionEnd.getDate()))
+		if (lastSession == null)
 			return false;
-		else
+		
+		VEvent session = tpToEvent(t);
+		// sacar el momento de finalización
+		int duration = (int) (session.getEndDate().getDate().getTime() - session.getStartDate().getDate().getTime());
+		
+		Calendar startTime = Calendar.getInstance();
+		startTime.setTimeInMillis(lastSession.getTime());
+		Calendar endTime = Calendar.getInstance();
+		endTime.setTimeInMillis(lastSession.getTime());
+		endTime.add(Calendar.MILLISECOND, duration);
+		
+		Calendar nowCal = Calendar.getInstance(); //now
+		
+		if((nowCal.compareTo(startTime)>=0) && (nowCal.compareTo(endTime)<= 0))
 			return true;
+		else
+			return false;
 		// si estoy dentro, true
 	}
 	
