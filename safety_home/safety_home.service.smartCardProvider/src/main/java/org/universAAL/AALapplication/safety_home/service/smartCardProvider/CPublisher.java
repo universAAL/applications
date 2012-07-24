@@ -7,13 +7,16 @@ import org.universAAL.AALapplication.db.manager.entitymanagers.UserManager;
 import org.universAAL.AALapplication.db.utils.Value;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
+import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.location.indoor.Room;
 import org.universAAL.ontology.phThing.Device;
 import org.universAAL.ontology.safetyDevices.Door;
+import org.universAAL.ontology.safetyDevices.HumiditySensor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,8 +56,15 @@ public class CPublisher extends ContextPublisher{
 	protected CPublisher(ModuleContext context) {
 		super(context, getProviderInfo());
 		try{
+/*			ContextProvider info = new ContextProvider(SAFETY_CARD_PROVIDER_NAMESPACE + "SmartCardContextProvider");
+			info.setType(ContextProviderType.controller);
+			cp = new DefaultContextPublisher(context, info);
+			invoke();*/
+			ContextEventPattern cep5 = new ContextEventPattern();
+			cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,Door.MY_URI));
 			ContextProvider info = new ContextProvider(SAFETY_CARD_PROVIDER_NAMESPACE + "SmartCardContextProvider");
 			info.setType(ContextProviderType.controller);
+			info.setProvidedEvents(new ContextEventPattern[]{cep5});
 			cp = new DefaultContextPublisher(context, info);
 			invoke();
 		}
@@ -218,8 +228,13 @@ public class CPublisher extends ContextPublisher{
 	}
 
 	private static ContextProvider getProviderInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		ContextEventPattern cep5 = new ContextEventPattern();
+		cep5.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,Door.MY_URI));
+		ContextProvider info = new ContextProvider(SAFETY_CARD_PROVIDER_NAMESPACE + "SmartCardContextProvider");
+		info.setType(ContextProviderType.controller);
+		info.setProvidedEvents(new ContextEventPattern[]{cep5});
+
+		return info;	
 	}
 
 	public void communicationChannelBroken() {
