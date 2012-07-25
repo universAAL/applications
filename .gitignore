@@ -94,6 +94,10 @@ health/ont.message/.classpath
 health/ont.message/.project
 health/ont.message/.settings
 health/ont.message/target
+health/ont.questionnaireStrategy/.classpath
+health/ont.questionnaireStrategy/.project
+health/ont.questionnaireStrategy/.settings
+health/ont.questionnaireStrategy/target
 help_when_out/hwo.mobile/.classpath
 help_when_out/hwo.mobile/.project
 help_when_out/hwo.mobile/.settings
