@@ -83,7 +83,7 @@ public class SchedulingTools {
 		nowCal.set(Calendar.MINUTE, 0);
 		nowCal.set(Calendar.SECOND, 0);
 		
-		Date today = new Date(nowCal.getTime()); // sólo sale la fecha, no el instante
+		Date today = new Date(nowCal.getTime()); // sï¿½lo sale la fecha, no el instante
 		Date treatmentEndDate = getTreatmentEndDate(t);
 		
 		if(treatmentEndDate.compareTo(today)>0)
@@ -100,7 +100,7 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 		nowCal.set(Calendar.MINUTE, 0);
 		nowCal.set(Calendar.SECOND, 0);
 		
-		Date today = new Date(nowCal.getTime()); // sólo sale la fecha, no el instante
+		Date today = new Date(nowCal.getTime()); // sï¿½lo sale la fecha, no el instante
 		Date treatmentEndDate = getTreatmentEndDate(t);
 		
 		if(treatmentEndDate.compareTo(today)<0)
@@ -114,7 +114,7 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 		int lastDateIndex = sessions.size() - 1 ;
 		Date lastDateAux = (Date)sessions.get(lastDateIndex);
 		
-		//queremos devolver sólo la fecha, no la hora
+		//queremos devolver sï¿½lo la fecha, no la hora
 		Calendar calFinal = Calendar.getInstance();
 		calFinal.setTime(lastDateAux);
 		Date lastDate = new Date (calFinal.getTime());
@@ -130,29 +130,29 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 		Calendar nowCal = Calendar.getInstance(); //now
 		DateTime now = new DateTime(nowCal.getTime());
 		
-		for (int i=0;i<(allSessions.size()-1);i++){
+		DateTime lastEvent = (DateTime)allSessions.get(0);
+		if(now.before(lastEvent))
+			return null;
+		
+		for (int i=1; i < allSessions.size(); i++){
 			DateTime sessionDate = (DateTime)allSessions.get(i);
-			DateTime nextDate = (DateTime)allSessions.get(i+1);
-			if(now.after(sessionDate)&& now.before(nextDate)){
-				return (DateTime)allSessions.get(i);
+			if(now.before(sessionDate))
+				return lastEvent;
+			else lastEvent = (DateTime)allSessions.get(i); 
+			
 			}
-		// para el último elemento, hacemos la comprobación aislada para evitar el erroy de indexoutofbounds:
-			int lastIndex = allSessions.size();
-			if(now.before((DateTime)allSessions.get(lastIndex)))
-				return (DateTime)allSessions.get(lastIndex);
-		}
-		return null;
+		return lastEvent;
 	}
 
 
 	public static boolean isNowInPerformingInterval(Treatment t) throws Exception{
-		//ver la última sesión
+		//ver la ï¿½ltima sesiï¿½n
 		DateTime lastSession = getLastPlannedSession(t);
 		if (lastSession == null)
 			return false;
 		
 		VEvent session = tpToEvent(t);
-		// sacar el momento de finalización
+		// sacar el momento de finalizaciï¿½n
 		int duration = (int) (session.getEndDate().getDate().getTime() - session.getStartDate().getDate().getTime());
 		
 		Calendar startTime = Calendar.getInstance();
@@ -171,11 +171,11 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 	}
 	
 	public static boolean isNowInExtraInterval(Treatment t) throws Exception{
-		//ver la última sesión
+		//ver la ï¿½ltima sesiï¿½n
 		DateTime lastSession = getLastPlannedSession(t);
 
 		VEvent session = tpToEvent(t).getOccurrence(lastSession);
-		// sacar el momento de finalización
+		// sacar el momento de finalizaciï¿½n
 		DtEnd sessionEnd = session.getEndDate();
 		DtStart sessionStart = session.getStartDate();
 		
@@ -196,11 +196,11 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 	}
 	
 	public boolean isMomentInPerformingInterval(DateTime moment, Treatment t) throws Exception{
-		//ver la última sesión
+		//ver la ï¿½ltima sesiï¿½n
 		DateTime lastSession = getLastPlannedSession(t);
 		
 		VEvent session = tpToEvent(t).getOccurrence(lastSession);
-		// sacar el momento de finalización
+		// sacar el momento de finalizaciï¿½n
 		DtEnd sessionEnd = session.getEndDate();
 		
 		if(moment.after(sessionEnd.getDate()))
@@ -211,11 +211,11 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 	}
 	
 	public boolean isMomentInExtraInterval(DateTime moment, Treatment t) throws Exception{
-		//ver la última sesión
+		//ver la ï¿½ltima sesiï¿½n
 		DateTime lastSession = getLastPlannedSession(t);
 
 		VEvent session = tpToEvent(t).getOccurrence(lastSession);
-		// sacar el momento de finalización
+		// sacar el momento de finalizaciï¿½n
 		DtEnd sessionEnd = session.getEndDate();
 		DtStart sessionStart = session.getStartDate();
 		
@@ -252,7 +252,7 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 		
 		Date lastSession = getLastPlannedSession(aTreatment);
 		VEvent session = tpToEvent(aTreatment).getOccurrence(lastSession);
-		// compararla con ahora: si estoy después del rango, false
+		// compararla con ahora: si estoy despuï¿½s del rango, false
 		Calendar nowCal = Calendar.getInstance(); //now
 		DateTime now = new DateTime(nowCal.getTime());
 		
@@ -315,15 +315,21 @@ public static boolean treatmentEndedBeforeToday(Treatment t) throws Exception{
 	 * @throws Exception 
 	 */
 	public static DateList getPlannedSessions (Treatment t) throws Exception{
+		DateList returnList = new DateList();
+
 		VEvent event = tpToEvent(t);
+		
+		returnList.add(event.getStartDate().getDate());
+		
 		String recurrence = event.getProperty(Property.RRULE).getValue();
 		Recur recur = new Recur(recurrence);
-		DateTime seed = new DateTime (event.getStartDate().getDate()); //seed refers to the first ocurrence of the event
+		DateTime seed = new DateTime (event.getStartDate().getDate()); //seed refers to the first occurrence of the event
 		
 		// The list of dates is a date-time list.
-		DateList plannedSessions = recur.getDates(seed, recur.getUntil(), Value.DATE_TIME);
+		DateList recurrentSessions = recur.getDates(seed, recur.getUntil(), Value.DATE_TIME);
+		returnList.addAll(recurrentSessions);
 		
-		return plannedSessions;
+		return returnList;
 	}
 	
 	

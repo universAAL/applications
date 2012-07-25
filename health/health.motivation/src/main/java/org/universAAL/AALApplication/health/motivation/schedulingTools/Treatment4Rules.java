@@ -16,94 +16,111 @@ import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.TreatmentPlanning;
 import org.universaal.ontology.health.owl.Walking;
 
+/**
+ * An extension of the Treatment that adds methods used for rules.
+ * @author mdelafuente
+ *
+ */
 public class Treatment4Rules extends Treatment{
-	
+
 	public Treatment4Rules(String tName, String tDescription, TreatmentPlanning tp, String diseaseURI){
 		super(tName,tDescription,tp, diseaseURI);
 	}
-	
-	
+
+	public Treatment4Rules(Treatment t){
+		super(t.getName(), t.getDescription(), t.getTreatmentPlanning(), t.getAssociatedDiseaseURI());
+	}
+
+	/**
+	 * returns the current timestamp as {@link XMLGregorianCalendar}
+	 * @return
+	 * @throws Exception
+	 */
 	public XMLGregorianCalendar getNow() throws Exception{
 		GregorianCalendar gc = new GregorianCalendar();
 		DatatypeFactory dtf = DatatypeFactory.newInstance();
 		XMLGregorianCalendar now = dtf.newXMLGregorianCalendar(gc);
 		return now;
 	}
-	
-	public void setNow(){
-	}
-	
-	public XMLGregorianCalendar getLastSessionStart(Treatment t) throws Exception{
+
+	//	/**
+	//	 * Not implemented.
+	//	 */
+	//	public void setNow(XMLGregorianCalendar time){
+	//		throw new UnsupportedOperationException("Set NOW does not mean anything !");
+	//	}
+
+	/**
+	 * Gives the start time and date of the last session of this treatment according to the plan.
+	 * @return the start time of the last planned session, null if no planned session is available.
+	 */
+	public XMLGregorianCalendar getLastSessionStart() throws Exception{
+
+		DateTime lastSession = SchedulingTools.getLastPlannedSession(this);
 		
-		DateTime lastSession = SchedulingTools.getLastPlannedSession(t);
-		
-		Calendar lsStartTime = Calendar.getInstance();
-		lsStartTime.setTimeInMillis(lastSession.getTime());
+		if(lastSession == null)
+			return null;
 		
 		GregorianCalendar gc = new GregorianCalendar();
-		gc.setTimeInMillis(lsStartTime.getTimeInMillis());
+		gc.setTimeInMillis(lastSession.getTime());
 		
 		DatatypeFactory dtf = DatatypeFactory.newInstance();
 		XMLGregorianCalendar lss = dtf.newXMLGregorianCalendar(gc);
-		
+
 		return lss;
-			
-		}
-	
-	public void setLastSessionStart(){
 	}
-	
-	public XMLGregorianCalendar getLastSessionEnd(Treatment t) throws Exception{
+
+	/**
+	 * Returns the last session end time, null if no last session.
+	 * @return
+	 * @throws Exception
+	 */
+	public XMLGregorianCalendar getLastSessionEnd() throws Exception{
+
+		DateTime lastSession = SchedulingTools.getLastPlannedSession(this);
+		if(lastSession == null)
+			return null;
 		
-		DateTime lastSession = SchedulingTools.getLastPlannedSession(t);
-		VEvent session = SchedulingTools.tpToEvent(t);
-		
-		// sacar el momento de finalización
+		VEvent session = SchedulingTools.tpToEvent(this);
+
+		// sacar el momento de finalizaciï¿½n
 		int duration = (int) (session.getEndDate().getDate().getTime() - session.getStartDate().getDate().getTime());
-		
+
 		Calendar lsEndDate = Calendar.getInstance();
 		lsEndDate.setTimeInMillis(lastSession.getTime());
 		lsEndDate.add(Calendar.MILLISECOND, duration);
-		
+
 		GregorianCalendar gc = new GregorianCalendar();
 		gc.setTimeInMillis(lsEndDate.getTimeInMillis());
-		
+
 		DatatypeFactory dtf = DatatypeFactory.newInstance();
 		XMLGregorianCalendar lse = dtf.newXMLGregorianCalendar(gc);
-		
+
 		return lse;
-		
 	}
-	
-	public void setLastSessionEnd(){
-		
-	}
-	
-	public XMLGregorianCalendar getLastSessionEndWithExtraTime(Treatment t) throws Exception{
-		
-		DateTime lastSession = SchedulingTools.getLastPlannedSession(t);
-		VEvent session = SchedulingTools.tpToEvent(t);
+
+
+	public XMLGregorianCalendar getLastSessionEndWithExtraTime() throws Exception{
+
+		DateTime lastSession = SchedulingTools.getLastPlannedSession(this);
+		VEvent session = SchedulingTools.tpToEvent(this);
 		
 		int sessionDuration = (int) (session.getEndDate().getDate().getTime() - session.getStartDate().getDate().getTime());
 		int courtesy = sessionDuration/2; 
 		int extraTime = sessionDuration + courtesy;
-		
+
 		Calendar lsEndDateWithExtraTime = Calendar.getInstance();
 		lsEndDateWithExtraTime.setTimeInMillis(lastSession.getTime());
 		lsEndDateWithExtraTime.add(Calendar.MILLISECOND, (sessionDuration + extraTime));
-		
+
 		GregorianCalendar gc = new GregorianCalendar();
 		gc.setTimeInMillis(lsEndDateWithExtraTime.getTimeInMillis());
-		
+
 		DatatypeFactory dtf = DatatypeFactory.newInstance();
 		XMLGregorianCalendar lse = dtf.newXMLGregorianCalendar(gc);
-		
+
 		return lse;
 	}
 	
-	public void setLastSessionEndWithExtraTime(){
-		
-	}
-
 }
 

@@ -4,7 +4,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.datatype.DatatypeConstants.Field;
+
+import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,40 +32,120 @@ public class TestTreatment4Rules extends TestIface{
 		registerClassesNeeded();
 	}
 	
-	public Treatment4Rules generateTreatment4Test() throws Exception{
+	public Treatment4Rules generateTreatment4Test(int offsetPastMinutes, int startDaysAgo, int endsInDays) throws Exception{
 
-		GregorianCalendar startDate = new GregorianCalendar();
+		GregorianCalendar startTime = new GregorianCalendar();
+		GregorianCalendar endTime = new GregorianCalendar();
 		GregorianCalendar endDate = new GregorianCalendar();
 
-		startDate.add(Calendar.DAY_OF_YEAR, -1); //comenzó hace 10 días
-		endDate.add(Calendar.DAY_OF_YEAR, -1); // terminó en 10 días
+		startTime.add(Calendar.DAY_OF_YEAR, -startDaysAgo);
+		startTime.add(Calendar.MINUTE, -offsetPastMinutes);
+		endTime.add(Calendar.DAY_OF_YEAR, -startDaysAgo);
+		endTime.add(Calendar.MINUTE, (60-offsetPastMinutes));
 
-		XMLGregorianCalendar firstEventStartDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(startDate);
-		XMLGregorianCalendar firstEventEndDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(endDate);
+		endDate.add(Calendar.DAY_OF_YEAR, endsInDays);
 
-		firstEventStartDate.setTime(20, 0, 0);
-		firstEventEndDate.setTime(20, 30, 0);
+		XMLGregorianCalendar firstEventStartDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(startTime);
+		XMLGregorianCalendar firstEventEndDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(endTime);
 
-		String recurrence = "FREQ=WEEKLY;BYDAY=SU;UNTIL=20121122T235959"; // cambiar el día manualmente
+		String recurrence = "FREQ=WEEKLY;UNTIL="+convertToCalendarToString(endDate); // las sesiones serï¿½n los lunes, miï¿½rcoles y viernes hasta fin de aï¿½o, en total, 4 meses de tratamiento.
 		String description = "These treatment sessions consists of walking 30 minutes at a moderate step";
 
 		TreatmentPlanning tp = new TreatmentPlanning(firstEventStartDate, firstEventEndDate, recurrence, description);
-		Treatment4Rules wt = new Treatment4Rules("Walking", "walking three times a week for four months", tp, HeartFailure.MY_URI);
+		Walking wt = new Walking("Walking", "walking three times a week for four months", tp, HeartFailure.MY_URI);
 
-		return wt;
+		return new Treatment4Rules(wt);
+	}
+	
+	public static String convertToCalendarToString(GregorianCalendar cal){
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		int month = cal.get(Calendar.MONTH) + 1;
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int minutes = cal.get(Calendar.MINUTE);
+		int secs = cal.get(Calendar.SECOND);
+
+		String s = "" + cal.get(Calendar.YEAR) +
+		(month < 9? "0" + month : month)
+		+ (day < 9? "0" + day : day) +"T"+ 
+		(hour < 9? "0" + hour : hour)
+		+ (minutes < 9? "0" + minutes : minutes)
+		+ (secs < 9? "0" + secs : secs);
+
+		return s;
 	}
 
 	@Test
 	public void testNow() throws Exception{
-		Treatment4Rules t4r = generateTreatment4Test();
-		System.out.println("Now" + t4r.getNow());
+		Treatment4Rules t4r = generateTreatment4Test(0, 10, 10);
+		
+		long now1 = t4r.getNow().toGregorianCalendar().getTimeInMillis();
+		
+		GregorianCalendar gc = new GregorianCalendar();
+		DatatypeFactory dtf = DatatypeFactory.newInstance();
+		XMLGregorianCalendar now = dtf.newXMLGregorianCalendar(gc);
+		long now2 = now.toGregorianCalendar().getTimeInMillis();
+		
+		Assert.assertTrue(now1-now2 < 500);
 	}
 
 	@Test
 	public void testgetLastSessionStart() throws Exception{
-		Treatment4Rules t4r = generateTreatment4Test();
-		XMLGregorianCalendar fecha = t4r.getLastSessionStart(t4r);
-		System.out.println("Last session start:" + t4r.getLastSessionStart(t4r));
+		Treatment4Rules t4r = generateTreatment4Test(30, 7, 14);
+		XMLGregorianCalendar fecha = t4r.getLastSessionStart();
+		
+		long now = Calendar.getInstance().getTimeInMillis();
+		long lastSession = fecha.toGregorianCalendar().getTimeInMillis();
+		
+		Assert.assertTrue(now -lastSession <  60*60*1000);
+	}
+	
+	@Test
+	public void testgetLastSessionStartFuture() throws Exception{
+		Treatment4Rules t4r = generateTreatment4Test(-100, 7, 14);
+		XMLGregorianCalendar fecha = t4r.getLastSessionStart();
+		
+		long now = Calendar.getInstance().getTimeInMillis();
+		long lastSession = fecha.toGregorianCalendar().getTimeInMillis();
+		
+		Assert.assertTrue(now - lastSession >  6*24*60*60*1000);
+		Assert.assertTrue(now - lastSession <  8*24*60*60*1000);
+	}
+	
+	@Test
+	public void testgetLastSessionStartNo() throws Exception{
+		Treatment4Rules t4r = generateTreatment4Test(-100, -3, 30);
+		XMLGregorianCalendar fecha = t4r.getLastSessionStart();
+		Assert.assertNull(fecha);
+	}
+	
+	@Test
+	public void testgetLastSessionEnd() throws Exception{
+		Treatment4Rules t4r = generateTreatment4Test(30, 7, 14);
+		XMLGregorianCalendar fecha = t4r.getLastSessionEnd();
+		
+		long now = Calendar.getInstance().getTimeInMillis();
+		long lastSessionEnd = fecha.toGregorianCalendar().getTimeInMillis();
+		
+		Assert.assertTrue(lastSessionEnd - now <  40*60*1000);
 	}
 
+	@Test
+	public void testgetLastSessionEndNo() throws Exception{
+		Treatment4Rules t4r = generateTreatment4Test(-100, -3, 30);
+		XMLGregorianCalendar fecha = t4r.getLastSessionEnd();
+		Assert.assertNull(fecha);
+	}
+	
+	@Test
+	public void testgetLastSessionEndExtraTime() throws Exception{
+		Treatment4Rules t4r = generateTreatment4Test(30, 7, 14);
+		XMLGregorianCalendar fecha = t4r.getLastSessionEndWithExtraTime();
+		
+		long now = Calendar.getInstance().getTimeInMillis();
+		long lastSessionEnd = fecha.toGregorianCalendar().getTimeInMillis();
+		System.out.println(fecha);
+		
+		Assert.assertTrue(lastSessionEnd - now >  119*60*1000);
+		Assert.assertTrue(lastSessionEnd - now <  121*60*1000);
+	}
 }
