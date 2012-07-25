@@ -10,10 +10,12 @@ import org.universAAL.middleware.ui.owl.UIBusOntology;
 import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
+import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universaal.ontology.owl.MessageOntology;
@@ -81,6 +83,21 @@ public class TestMotivation extends TestCase implements MotivationInterface {
 			MotivationalMessageClassification messageType) {
 		MessageManager.getMessageToSendToUser(illness, treatmentType, motStatus, messageType);
 		
+	}
+
+	public User getAssistedPerson() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public User getCaregiver(User assistedPerson) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public HealthProfile getHealthProfile(User u) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
