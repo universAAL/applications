@@ -4,21 +4,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import junit.framework.Assert;
 
-import net.fortuna.ical4j.model.DateList;
-import net.fortuna.ical4j.model.DateTime;
-import net.fortuna.ical4j.model.Dur;
-import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.parameter.Value;
-import net.fortuna.ical4j.model.property.DtEnd;
-import net.fortuna.ical4j.model.property.DtStart;
-
-import org.drools.FactHandle;
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.KnowledgeBuilder;
@@ -36,20 +26,10 @@ import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagem
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
 import org.universAAL.AALApplication.health.motivation.treatment.TestIface;
-import org.universAAL.middleware.rdf.TypeMapper;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.TreatmentPlanning;
 import org.universaal.ontology.health.owl.Walking;
-import org.universaal.ontology.health.owl.WeightMeasurementTreatment;
-import org.universaal.ontology.health.owl.WeightRequirement;
-import org.universaal.ontology.owl.ChoiceLabel;
-import org.universaal.ontology.owl.MotivationalMessageClassification;
-import org.universaal.ontology.owl.MotivationalMessageSubclassification;
-import org.universaal.ontology.owl.MotivationalQuestionnaire;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.SingleChoiceQuestion;
 
 public class TestSchedulingTools  extends TestIface{
 
@@ -90,7 +70,7 @@ public class TestSchedulingTools  extends TestIface{
 		GregorianCalendar endTime = new GregorianCalendar();
 		GregorianCalendar endDate = new GregorianCalendar();
 
-		startTime.add(Calendar.DAY_OF_YEAR, -10); //comienzo hace 10 días
+		startTime.add(Calendar.DAY_OF_YEAR, -10); //comienzo hace 10 dï¿½as
 		startTime.add(Calendar.MINUTE, -30);
 		endTime.add(Calendar.DAY_OF_YEAR, -10);
 		endTime.add(Calendar.MINUTE, (60-30));
@@ -100,7 +80,7 @@ public class TestSchedulingTools  extends TestIface{
 		XMLGregorianCalendar firstEventStartDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(startTime);
 		XMLGregorianCalendar firstEventEndDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(endTime);
 
-		String recurrence = "FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL="+convertToCalendarToString(endDate); // las sesiones serán los lunes, miércoles y viernes hasta fin de año, en total, 4 meses de tratamiento.
+		String recurrence = "FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL="+convertToCalendarToString(endDate); // las sesiones serï¿½n los lunes, miï¿½rcoles y viernes hasta fin de aï¿½o, en total, 4 meses de tratamiento.
 		String description = "These treatment sessions consists of walking 30 minutes at a moderate step";
 
 		TreatmentPlanning tp = new TreatmentPlanning(firstEventStartDate, firstEventEndDate, recurrence, description);
@@ -140,7 +120,7 @@ public class TestSchedulingTools  extends TestIface{
 		GregorianCalendar endTime = new GregorianCalendar();
 		GregorianCalendar endDate = new GregorianCalendar();
 
-		startTime.add(Calendar.DAY_OF_YEAR, -10); //comienzo hace 10 días
+		startTime.add(Calendar.DAY_OF_YEAR, -10); //comienzo hace 10 dï¿½as
 		startTime.add(Calendar.MINUTE, -offsetPastMinutes);
 		endTime.add(Calendar.DAY_OF_YEAR, -10);
 		endTime.add(Calendar.MINUTE, (60-offsetPastMinutes));
@@ -150,7 +130,7 @@ public class TestSchedulingTools  extends TestIface{
 		XMLGregorianCalendar firstEventStartDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(startTime);
 		XMLGregorianCalendar firstEventEndDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(endTime);
 
-		String recurrence = "FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL="+convertToCalendarToString(endDate); // las sesiones serán los lunes, miércoles y viernes hasta fin de año, en total, 4 meses de tratamiento.
+		String recurrence = "FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL="+convertToCalendarToString(endDate); // las sesiones serï¿½n los lunes, miï¿½rcoles y viernes hasta fin de aï¿½o, en total, 4 meses de tratamiento.
 		String description = "These treatment sessions consists of walking 30 minutes at a moderate step";
 
 		TreatmentPlanning tp = new TreatmentPlanning(firstEventStartDate, firstEventEndDate, recurrence, description);
@@ -164,8 +144,8 @@ public class TestSchedulingTools  extends TestIface{
 		GregorianCalendar startDate = new GregorianCalendar();
 		GregorianCalendar endDate = new GregorianCalendar();
 
-		startDate.add(Calendar.DAY_OF_YEAR, -1); //comenzó hace 10 días
-		endDate.add(Calendar.DAY_OF_YEAR, -1); // terminó en 10 días
+		startDate.add(Calendar.DAY_OF_YEAR, -1); //comenzï¿½ hace 10 dï¿½as
+		endDate.add(Calendar.DAY_OF_YEAR, -1); // terminï¿½ en 10 dï¿½as
 
 		XMLGregorianCalendar firstEventStartDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(startDate);
 		XMLGregorianCalendar firstEventEndDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(endDate);
@@ -173,7 +153,7 @@ public class TestSchedulingTools  extends TestIface{
 		firstEventStartDate.setTime(20, 0, 0);
 		firstEventEndDate.setTime(20, 30, 0);
 
-		String recurrence = "FREQ=WEEKLY;BYDAY=SU;UNTIL=20120722T235959"; // cambiar el día manualmente
+		String recurrence = "FREQ=WEEKLY;BYDAY=SU;UNTIL=20120722T235959"; // cambiar el dï¿½a manualmente
 		String description = "These treatment sessions consists of walking 30 minutes at a moderate step";
 
 		TreatmentPlanning tp = new TreatmentPlanning(firstEventStartDate, firstEventEndDate, recurrence, description);
@@ -214,11 +194,11 @@ public class TestSchedulingTools  extends TestIface{
 		for(int i=0;i<sessionDatesAndTimes.size();i++){
 			DateTime fecha = (DateTime) sessionDatesAndTimes.get(i);
 
-			System.out.println("Fecha sesión: " + fecha + "\n" );
-			System.out.println("Hora fin próxima sesión: " + event.getEndDate().getValue() + "\n");
+			System.out.println("Fecha sesiï¿½n: " + fecha + "\n" );
+			System.out.println("Hora fin prï¿½xima sesiï¿½n: " + event.getEndDate().getValue() + "\n");
 		}
 
-		System.out.println("Fecha de la última sesión: " + SchedulingTools.getLastPlannedSession(t));
+		System.out.println("Fecha de la ï¿½ltima sesiï¿½n: " + SchedulingTools.getLastPlannedSession(t));
 
 		boolean inPerformingInterval = SchedulingTools.isNowInPerformingInterval(t);
 
@@ -234,7 +214,7 @@ public class TestSchedulingTools  extends TestIface{
 		DtStart start = event.getStartDate();
 		DtEnd end = event.getEndDate();
 		Dur duration = new Dur(start.getDate(), end.getDate());
-		System.out.println("Duración: " + duration.getMinutes());
+		System.out.println("Duraciï¿½n: " + duration.getMinutes());
 
 	}
 	 */

@@ -1,12 +1,8 @@
 package org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement;
 
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.StringTokenizer;
-
 import org.apache.commons.collections.map.MultiKeyMap;
 import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
 import org.universAAL.middleware.owl.DataRepOntology;
@@ -21,7 +17,6 @@ import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.MeasuredPhysicalActivity;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
@@ -58,7 +53,7 @@ public class PruebaCSV {
 				String[] headers = reader.getHeaders(); 
 				System.out.println("Header: " + headers[0]);
 				System.out.println("Header: " + headers[1]);
-				System.out.println("Tamaño de Headers: " + headers.length);
+				System.out.println("Tamaï¿½o de Headers: " + headers.length);
 			}
 			while(reader.readRecord()){
 				//String valCol1 = reader.getRawRecord();
@@ -71,7 +66,7 @@ public class PruebaCSV {
 				System.out.println("Valor: " + cols[0]);
 				System.out.println("Valor: " + cols[1]);
 				System.out.println("Valor: " + cols[2]);
-				System.out.println("Número de cols: " + cols.length);
+				System.out.println("Nï¿½mero de cols: " + cols.length);
 			
 				System.out.println("Otra vuelta");
 			}
@@ -141,7 +136,7 @@ public class PruebaCSV {
 			
 			// At this point, the map structure is build
 			
-			/*System.out.println("tamaño del mapa" + map.size());
+			/*System.out.println("tamaï¿½o del mapa" + map.size());
 			ArrayList<String> resultados = (ArrayList<String>) map.get("HeartFailure", "Treatment", "precontemplation", "inquiry");
 			System.out.println("Contenido: " + resultados.get(0));
 			*/
@@ -154,8 +149,8 @@ public class PruebaCSV {
 	
 public static Object getMotivationalMessageContent(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType) {
 		
-		System.out.println("He entrado en el método que lee el contenido");
-		System.out.println("tamaño del mapa" + map.size());
+		System.out.println("He entrado en el mï¿½todo que lee el contenido");
+		System.out.println("tamaï¿½o del mapa" + map.size());
 	
 		String diseaseName = disease.replaceFirst(prefixForDisease, "");
 		String tType = treatmentType.replaceFirst(prefixForTreatment, "");
@@ -167,10 +162,10 @@ public static Object getMotivationalMessageContent(String disease, String treatm
 		ArrayList<String> mMessageResults = (ArrayList<String>) map.get(
 				diseaseName, tType, mStatus, mType);
 		//ArrayList<String> mMessageResults = (ArrayList<String>) map.get("HeartFailure", "Treatment", "precontemplation", "inquiry");
-		System.out.println("Tamaño de los resultados: " + mMessageResults.size());
+		System.out.println("Tamaï¿½o de los resultados: " + mMessageResults.size());
 		if (mMessageResults.size() > 1) { // there are several messages for the
 			// same combination of keys
-			System.out.println("Hay más de un resultado");
+			System.out.println("Hay mï¿½s de un resultado");
 			Random rndm = new Random();
 			int number = rndm.nextInt(mMessageResults.size()); // we get one of
 			// those messages randomly
@@ -188,7 +183,7 @@ public static Object getMotivationalMessageContent(String disease, String treatm
 			
 		} else if(mMessageResults.size()==1){
 //			
-			System.out.println("Sólo hay un resultado");
+			System.out.println("Sï¿½lo hay un resultado");
 			System.out.println(mMessageResults.get(0));
 			
 			try{
