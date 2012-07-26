@@ -16,6 +16,7 @@
 		<relativePath>../health.pom/</relativePath>
 	</parent>
 	
+	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.message</artifactId>
 	<version>1.1.1-SNAPSHOT</version>
 	<name>MessageOntology</name>
