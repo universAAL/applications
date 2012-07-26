@@ -15,6 +15,7 @@
 		<relativePath>../health.pom/</relativePath>
 	</parent>
 	
+	<groupId>org.universAAL.ontology</groupId>
   	<artifactId>ont.health</artifactId>
   	<version>1.1.1-SNAPSHOT</version>
   	<name>HealthOntology</name>
