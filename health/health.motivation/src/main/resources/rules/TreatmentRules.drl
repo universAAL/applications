@@ -51,7 +51,7 @@ end
 rule "Change to contemplation phase - Treatment performance agreement" no-loop
 	when
 		#When the aswered questionnaire to the first question is received
-		detectedAnsweredQuestionnaire: AnsweredQuestionnaire(questionnaire : associatedQuestionnaire, answers != null, answers.length > 0,  answers[0].answerContent == true)
+		detectedAnsweredQuestionnaire: AnsweredQuestionnaire(questionnaire : associatedQuestionnaire, answers != null, answers.length > 0,  ((Boolean)answers[0].answerContent) == true)
 		eval(questionnaire instanceof Questionnaire4TreatmentStrategy)
 		eval(questionnaire.getName() == (((Questionnaire)firstQuestionnaire.getContent()).getName()) )// esto va a fallar, mejor nombre
 	then  

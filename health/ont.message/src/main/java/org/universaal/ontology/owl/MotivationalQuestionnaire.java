@@ -16,6 +16,7 @@
 package org.universaal.ontology.owl;
 
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.questionnaire.Questionnaire;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
 

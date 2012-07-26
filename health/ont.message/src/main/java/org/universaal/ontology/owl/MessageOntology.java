@@ -28,6 +28,7 @@ import org.universAAL.middleware.service.owl.ServiceBusOntology;
 import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.questionnaire.Questionnaire;
 import org.universaal.ontology.MessageOntologyFactory;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.MeasurementRequirements;
