@@ -1,10 +1,7 @@
 package org.universaal.ontology.owl;
 
-import org.universaal.ontology.owl.Answer;
-import org.universaal.ontology.owl.AnsweredQuestionnaire;
-import org.universaal.ontology.owl.Question;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.QuestionnaireOntology;
+
+import org.universAAL.ontology.questionnaire.*;
 import org.universaal.ontology.owl.QuestionnaireStrategyOntology;
 import org.universaal.ontology.health.owl.Treatment;
 

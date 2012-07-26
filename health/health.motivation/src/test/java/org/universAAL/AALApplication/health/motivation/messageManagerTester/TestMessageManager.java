@@ -29,15 +29,10 @@ import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
-import org.universaal.ontology.owl.ChoiceLabel;
-import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
-import org.universaal.ontology.owl.Question;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.QuestionnaireOntology;
-import org.universaal.ontology.owl.SingleChoiceQuestion;
+import org.universAAL.ontology.questionnaire.*;
 
 public class TestMessageManager extends TestIfaceForMM{
 
@@ -61,7 +56,7 @@ public class TestMessageManager extends TestIfaceForMM{
 	}
 
 	
-	//Prueba que se construye un mapa del mismo tamaño que el número de mensajes almacenados en la base de datos de prueba
+	//Prueba que se construye un mapa del mismo tamaï¿½o que el nï¿½mero de mensajes almacenados en la base de datos de prueba
 	@Test
 	public void testBuildMapStructureMethod(){
 		
@@ -80,7 +75,7 @@ public class TestMessageManager extends TestIfaceForMM{
 	
 	
 	@Test
-	//Aquí probamos tanto que hace bien la búsqueda en el mapa como el Java reflection
+	//Aquï¿½ probamos tanto que hace bien la bï¿½squeda en el mapa como el Java reflection
 	public void testGetMessageContentMethod(){
 		
 		Object content1 = MessageManager.getMotivationalMessageContent(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry, MotivationalMessageSubclassification.treatment_agreement);

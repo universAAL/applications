@@ -19,15 +19,12 @@ import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
-import org.universaal.ontology.owl.ChoiceLabel;
 import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.QuestionnaireOntology;
-import org.universaal.ontology.owl.SingleChoiceQuestion;
+import org.universAAL.ontology.questionnaire.*;
 
 public class TreatmentDetectionMessage extends MotivationalQuestionnaire implements MotivationalMessageContent{
 	
@@ -39,7 +36,7 @@ public class TreatmentDetectionMessage extends MotivationalQuestionnaire impleme
 	private ChoiceLabel[] booleanChoices = {choice1,choice2};
 
 	private SingleChoiceQuestion question = new SingleChoiceQuestion(qWording,TypeMapper.getDatatypeURI(Boolean.class),booleanChoices);
-	private Questionnaire questionnaire = new Questionnaire ("First inquiry", 
+	private Questionnaire questionnaire = new org.universAAL.ontology.questionnaire.Questionnaire("First inquiry", 
 			"This message will be displayed whenever a new treatment is detected, to ask the user" + 
 			" about his/her predisposition to follow the treatment.", question); 
 
