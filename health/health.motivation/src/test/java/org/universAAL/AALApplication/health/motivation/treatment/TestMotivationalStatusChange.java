@@ -158,7 +158,7 @@ public Treatment generateTreatment4Test() throws Exception{
 		return wt;
 	}
 	
-/*
+
 	@Test
 	// El primer tratamiento va a ser aceptado.
 	public void testChangeToContemplationFromPrecontemplation(){
@@ -174,7 +174,7 @@ public Treatment generateTreatment4Test() throws Exception{
 		
 		System.out.println("User agreed to follow treatment: " + wmt1.getName() + ", so motivational status is now contemplation");
 	}
-	*/
+	
 	/*
 	@Test
 	// El segundo tratamiento va a ser rechazado.
@@ -226,7 +226,7 @@ public Treatment generateTreatment4Test() throws Exception{
 	}
 	
 	// Probar los m�todos al contrario: en sentido descendente:
-	
+	/*
 	
 	@Test
 	public void testChangeToPrecontemplationFromContemplation(){
@@ -247,7 +247,7 @@ public Treatment generateTreatment4Test() throws Exception{
 		
 		Assert.assertEquals(true, wmt1.getMotivationalStatus()== MotivationalStatusType.precontemplation);
 		Assert.assertEquals(true, TestIface.sentToCaregiverContainsPlainMessage(contentExpected));
-	}
+	}*/
 	/*
 	@Test
 	public void testChangeToContemplationFromAction(){

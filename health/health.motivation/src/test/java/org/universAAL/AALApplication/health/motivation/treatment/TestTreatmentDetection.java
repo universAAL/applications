@@ -111,7 +111,7 @@ public class TestTreatmentDetection extends TestIface{
 						"This message will be displayed whenever a new treatment is detected, to ask the user" + 
 						" about his/her predisposition to follow the treatment.", agreementQuestion); 
 
-			 firstQuestionnaire = new MotivationalQuestionnaire(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry, MotivationalMessageSubclassification.treatment_agreement,  questionnaire);	
+			 firstQuestionnaire = new MotivationalQuestionnaire(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry, MotivationalMessageSubclassification.treatment_agreement, questionnaire);
 					
 			// load global variables
 			ksession.setGlobal("agreementQuestion",agreementQuestion);
