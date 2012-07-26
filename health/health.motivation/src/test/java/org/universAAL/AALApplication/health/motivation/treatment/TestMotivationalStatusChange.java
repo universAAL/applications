@@ -41,16 +41,10 @@ import org.universaal.ontology.health.owl.TreatmentPlanning;
 import org.universaal.ontology.health.owl.Walking;
 import org.universaal.ontology.health.owl.WeightMeasurementTreatment;
 import org.universaal.ontology.health.owl.WeightRequirement;
-import org.universaal.ontology.owl.Answer;
-import org.universaal.ontology.owl.AnsweredQuestionnaire;
-import org.universaal.ontology.owl.ChoiceLabel;
-import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.Questionnaire4TreatmentStrategy;
-import org.universaal.ontology.owl.SingleChoiceQuestion;
+import org.universAAL.ontology.questionnaire.*;
 
 public class TestMotivationalStatusChange extends TestIface{
 
@@ -146,8 +140,8 @@ public Treatment generateTreatment4Test() throws Exception{
 		GregorianCalendar startDate = new GregorianCalendar();
 		GregorianCalendar endDate = new GregorianCalendar();
 		
-		startDate.add(Calendar.DAY_OF_YEAR, -10); //comienzo hace 10 días
-		endDate.add(Calendar.DAY_OF_YEAR, -10); // terminará en 10 días
+		startDate.add(Calendar.DAY_OF_YEAR, -10); //comienzo hace 10 dï¿½as
+		endDate.add(Calendar.DAY_OF_YEAR, -10); // terminarï¿½ en 10 dï¿½as
 		
 		XMLGregorianCalendar firstEventStartDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(startDate);
 		XMLGregorianCalendar firstEventEndDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(endDate);
@@ -155,7 +149,7 @@ public Treatment generateTreatment4Test() throws Exception{
 		firstEventStartDate.setTime(20, 0, 0);
 		firstEventEndDate.setTime(20, 30, 0);
 		
-		String recurrence = "FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20121231T235959"; // las sesiones serán los lunes, miércoles y viernes hasta fin de año, en total, 4 meses de tratamiento.
+		String recurrence = "FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20121231T235959"; // las sesiones serï¿½n los lunes, miï¿½rcoles y viernes hasta fin de aï¿½o, en total, 4 meses de tratamiento.
 		String description = "These treatment sessions consists of walking 30 minutes at a moderate step";
 		
 		TreatmentPlanning tp = new TreatmentPlanning(firstEventStartDate, firstEventEndDate, recurrence, description);
@@ -231,7 +225,7 @@ public Treatment generateTreatment4Test() throws Exception{
 		Assert.assertEquals(true, TestIface.sentToCaregiverContainsPlainMessage(contentExpected));
 	}
 	
-	// Probar los métodos al contrario: en sentido descendente:
+	// Probar los mï¿½todos al contrario: en sentido descendente:
 	
 	
 	@Test

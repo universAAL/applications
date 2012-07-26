@@ -29,14 +29,11 @@ import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
 import org.universaal.ontology.health.owl.Diet;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.owl.ChoiceLabel;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
-import org.universaal.ontology.owl.Question;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.SingleChoiceQuestion;
+import org.universAAL.ontology.questionnaire.*;
 
 /**
  * This test class checks if treatments are well detected, based on 

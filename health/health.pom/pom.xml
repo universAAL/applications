@@ -74,6 +74,21 @@
 				<artifactId>ont.message</artifactId>
 				<version>1.1.1-SNAPSHOT</version>
 			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.questionnaire</artifactId>
+				<version>1.2.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.disease</artifactId>
+				<version>1.1.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.questionnaireStrategy</artifactId>
+				<version>1.1.1-SNAPSHOT</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	
