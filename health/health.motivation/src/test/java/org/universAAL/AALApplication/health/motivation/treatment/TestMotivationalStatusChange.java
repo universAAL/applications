@@ -24,11 +24,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
-import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
-import org.universAAL.AALApplication.health.motivation.testSupportClasses.DetectedTreatments;
-import org.universAAL.AALApplication.health.motivation.testSupportClasses.PerformedSessionsSupport;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
@@ -44,6 +41,7 @@ import org.universaal.ontology.health.owl.WeightRequirement;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
+import org.universaal.ontology.owl.Questionnaire4TreatmentStrategy;
 import org.universAAL.ontology.questionnaire.*;
 
 public class TestMotivationalStatusChange extends TestIface{

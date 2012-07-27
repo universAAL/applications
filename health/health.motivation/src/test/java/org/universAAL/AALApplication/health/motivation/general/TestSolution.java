@@ -15,20 +15,20 @@ import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.questionnaire.Answer;
+import org.universAAL.ontology.questionnaire.AnsweredQuestionnaire;
+import org.universAAL.ontology.questionnaire.ChoiceLabel;
+import org.universAAL.ontology.questionnaire.Question;
+import org.universAAL.ontology.questionnaire.Questionnaire;
+import org.universAAL.ontology.questionnaire.QuestionnaireOntology;
+import org.universAAL.ontology.questionnaire.SingleChoiceQuestion;
 import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
-import org.universaal.ontology.owl.Answer;
-import org.universaal.ontology.owl.AnsweredQuestionnaire;
-import org.universaal.ontology.owl.ChoiceLabel;
 import org.universaal.ontology.owl.MessageOntology;
-import org.universaal.ontology.owl.Question;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.QuestionnaireOntology;
-import org.universaal.ontology.owl.SingleChoiceQuestion;
 
 public class TestSolution implements MotivationInterface{
 
