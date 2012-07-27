@@ -146,6 +146,14 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
+		<repository>
+			<id>uaal-wp4-release</id>
+			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-release/</url>
+			<name>WP4 Services Release repo</name>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 	
 	<distributionManagement>
@@ -153,6 +161,10 @@
 			<id>uaal-wp4-private</id>
 			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4/</url>
 		</snapshotRepository>
+		<repository>
+			<id>uaal-wp4-release</id>
+			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-release/</url>
+		</repository>
 	</distributionManagement>
 	
 </project>
