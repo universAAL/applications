@@ -1,6 +1,5 @@
 package org.universAAL.AALApplication.health.motivation.testSupportClasses;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import org.universAAL.AALApplication.health.motivation.MotivationInterface;
@@ -22,7 +21,7 @@ public class Solution  implements MotivationInterface{
 		
 		Question[] questions = q.getQuestions();
 		
-		User caregiver =  getCaregiver(getAssistedPerson());// pedirlo en el método molón de la interfaz
+		User caregiver =  getCaregiver(getAssistedPerson());// pedirlo en el mï¿½todo molï¿½n de la interfaz
 		
 		ArrayList <Answer> answers = new ArrayList <Answer>();
 		
@@ -41,7 +40,7 @@ public class Solution  implements MotivationInterface{
 				for (int j=0;j<correctAnswersContent.length;j++){
 					System.out.println("Contenidos de las soluciones correctas: " + questions[i].getQuestionWording());
 					System.out.println(correctAnswersContent[j]);
-					System.out.println("Tamaño del array de respuestas: " + correctAnswersContent.length);
+					System.out.println("Tamaï¿½o del array de respuestas: " + correctAnswersContent.length);
 					
 				}
 				

@@ -119,9 +119,9 @@ public class ProfileServerPerformedSessionManager extends ProfileServerManager
 					for(int i=0; i<performedSessions.length; i++) {
 						if((timestampTo == -1 && timestampFrom == -1) || 
 								((timestampFrom != -1 && 
-										performedSessions[i].getDate().getMillisecond() >= timestampFrom) &&
+										performedSessions[i].getSessionStartTime().getMillisecond() >= timestampFrom) &&
 								(timestampTo != -1 && 
-										performedSessions[i].getDate().getMillisecond() <= timestampTo))) {
+										performedSessions[i].getSessionStartTime().getMillisecond() <= timestampTo))) {
 							list.add(performedSessions[i]);
 						}
 					}
