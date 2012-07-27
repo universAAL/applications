@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -32,7 +33,7 @@ public class SchedulingTools {
 
 	public static Map<Treatment, DateList> mapOfListDates = new TreeMap<Treatment, DateList>();
 	
-	public static XMLGregorianCalendar getNow() throws Exception{
+	public static XMLGregorianCalendar getNow() throws DatatypeConfigurationException {
 		GregorianCalendar gc = new GregorianCalendar();
 		DatatypeFactory dtf = DatatypeFactory.newInstance();
 		XMLGregorianCalendar now = dtf.newXMLGregorianCalendar(gc);

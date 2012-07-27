@@ -15,6 +15,13 @@ import org.drools.builder.KnowledgeBuilderError;
 import org.drools.builder.KnowledgeBuilderErrors;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
+import org.drools.event.rule.ActivationCancelledEvent;
+import org.drools.event.rule.ActivationCreatedEvent;
+import org.drools.event.rule.AfterActivationFiredEvent;
+import org.drools.event.rule.AgendaEventListener;
+import org.drools.event.rule.AgendaGroupPoppedEvent;
+import org.drools.event.rule.AgendaGroupPushedEvent;
+import org.drools.event.rule.BeforeActivationFiredEvent;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.junit.After;
@@ -72,6 +79,7 @@ public class TestTreatmentDetection extends TestIface{
 	public void setUp() throws Exception{
 		registerClassesNeeded();
 
+		TestIface.resetMessagesSent();
 		//load up the knowledge base
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 		kbuilder.add(ResourceFactory.newClassPathResource("rules/TreatmentRules.drl"), ResourceType.DRL);
@@ -121,7 +129,27 @@ public class TestTreatmentDetection extends TestIface{
 		ksession.insert(treatment1);
 		ksession.insert(treatment2);
 		ksession.insert(treatment3);
-
+		ksession.addEventListener(new AgendaEventListener() {
+			
+			public void beforeActivationFired(BeforeActivationFiredEvent arg0) {
+			}
+			
+			public void agendaGroupPushed(AgendaGroupPushedEvent arg0) {
+			}
+			
+			public void agendaGroupPopped(AgendaGroupPoppedEvent arg0) {
+			}
+			
+			public void afterActivationFired(AfterActivationFiredEvent arg0) {
+				System.out.println("RULE ACTIVATED !!! "+arg0.getActivation().getRule().getName());
+			}
+			
+			public void activationCreated(ActivationCreatedEvent arg0) {
+			}
+			
+			public void activationCancelled(ActivationCancelledEvent arg0) {
+			}
+		});
 		//fire the rules
 		ksession.fireAllRules();	
 	}
@@ -129,31 +157,16 @@ public class TestTreatmentDetection extends TestIface{
 	@After
 	public void tearDown()
 	{
-		//ksession.dispose();
+		TestIface.resetMessagesSent();
 	}
 
 	@Test
 	public void testCorrectNumberOfMessagesSent(){
 		Assert.assertEquals(true, TestIface.motivationalMessagesSentToAP.size()==2);
-		System.out.println("Number of sent messages correct.");
-	}
-
-	@Test
-	public void testCorrectMMSent() throws Exception{
 
 		String qNameExpected = "First inquiry"; 
 		Assert.assertEquals(true, TestIface.sentToAPContainsQuestionnaire(qNameExpected));
-
-	}
-
-	/**
-	 * This method checks that the valid treatments (t1 and t2) have been well detected.
-	 * Invalid treatments (t3) should have not been detected 
-	 */
-
-	@Test
-	public void testCorrectTreatmentDetection(){
-
+		
 		ArrayList <Treatment> detectedTreatments = DetectedTreatments.getDetectedTreatments();
 
 		Assert.assertEquals(true, detectedTreatments.size()==2); 
@@ -161,8 +174,6 @@ public class TestTreatmentDetection extends TestIface{
 		Assert.assertEquals(true, detectedTreatments.contains(treatment1));
 		Assert.assertEquals(true, detectedTreatments.contains(treatment2));
 		Assert.assertEquals(false, detectedTreatments.contains(treatment3));
-
-		System.out.println("Treatments well detected.");
 	}
 
 
