@@ -65,22 +65,17 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 		OntologyManagement.getInstance().register(new QuestionnaireStrategyOntology());
 	}
 
-	public String getDBRoute(Locale language) {
-
-		if (language.equals(SPANISH))
-			return null;
-		else if (language.equals(Locale.ENGLISH))
-			return "en_motivationalMessagesDB.csv";
-		else
-			return null;
+	public static void resetMessagesSent(){
+		motivationalMessagesSentToAP.clear();
+		motivationalMessagesSentToCaregiver.clear();
 	}
 
 	public static boolean sentToAPContainsQuestionnaire(String questionnaireName){
-		
-		for (int i=0;i<motivationalMessagesSentToAP.size();i++){
-			
+
+		for (int i=0; i<motivationalMessagesSentToAP.size(); i++){
+
 			Object mm = motivationalMessagesSentToAP.get(i).getContent();
-			
+
 			if( mm instanceof Questionnaire){
 				Questionnaire q = (Questionnaire)mm;
 				if(q.getName().equals(questionnaireName))
@@ -89,13 +84,13 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 		}
 		return false;
 	}
-	
-public static boolean sentToCaregiverContainsQuestionnaire(String questionnaireName){
-		
+
+	public static boolean sentToCaregiverContainsQuestionnaire(String questionnaireName){
+
 		for (int i=0;i<motivationalMessagesSentToCaregiver.size();i++){
-			
+
 			Object mm = motivationalMessagesSentToCaregiver.get(i).getContent();
-			
+
 			if( mm instanceof Questionnaire){
 				Questionnaire q = (Questionnaire)mm;
 				if(q.getName().equals(questionnaireName))
@@ -104,11 +99,9 @@ public static boolean sentToCaregiverContainsQuestionnaire(String questionnaireN
 		}
 		return false;
 	}
-	
+
 	public static boolean sentToAPContainsPlainMessage(String plainMessageContent){
-		
 		for (int i=0;i<motivationalMessagesSentToAP.size();i++){
-
 			Object mm = motivationalMessagesSentToAP.get(i).getContent();
 
 			if( mm instanceof String){
@@ -119,9 +112,9 @@ public static boolean sentToCaregiverContainsQuestionnaire(String questionnaireN
 		}
 		return false;
 	}
-	
-public static boolean sentToCaregiverContainsPlainMessage(String plainMessageContent){
-		
+
+	public static boolean sentToCaregiverContainsPlainMessage(String plainMessageContent){
+
 		for (int i=0;i<motivationalMessagesSentToCaregiver.size();i++){
 
 			Object mm = motivationalMessagesSentToCaregiver.get(i).getContent();
@@ -134,73 +127,70 @@ public static boolean sentToCaregiverContainsPlainMessage(String plainMessageCon
 		}
 		return false;
 	}
-	 
-public static boolean questionnaireSentToAPSince(String questionnaireName, XMLGregorianCalendar sinceTime) throws Exception{
-	
-	XMLGregorianCalendar now = SchedulingTools.getNow();
-	
-	if(!sentToAPContainsQuestionnaire(questionnaireName))
-		return false;
-	
-	else{
-		
-		for (int i=0;i<motivationalMessagesSentToAP.size();i++){
-			
-			Object mm = motivationalMessagesSentToAP.get(i).getContent();
-			MotivationalMessage motmes = motivationalMessagesSentToAP.get(i);
-			XMLGregorianCalendar sentDate = motmes.getSentDate();
-			
-			if( mm instanceof Questionnaire){
-				Questionnaire q = (Questionnaire)mm;
-				if(q.getName().equals(questionnaireName))// el cuestionario est� en los mensajes enviados al AP
-					if(sentDate.compare(sinceTime) == DatatypeConstants.GREATER && sentDate.compare(now)== DatatypeConstants.LESSER )
-						return true;
+
+	public static boolean questionnaireSentToAPSince(String questionnaireName, XMLGregorianCalendar sinceTime) throws Exception{
+
+		XMLGregorianCalendar now = SchedulingTools.getNow();
+
+		if(!sentToAPContainsQuestionnaire(questionnaireName))
+			return false;
+
+		else{
+
+			for (int i=0;i<motivationalMessagesSentToAP.size();i++){
+
+				Object mm = motivationalMessagesSentToAP.get(i).getContent();
+				MotivationalMessage motmes = motivationalMessagesSentToAP.get(i);
+				XMLGregorianCalendar sentDate = motmes.getSentDate();
+
+				if( mm instanceof Questionnaire){
+					Questionnaire q = (Questionnaire)mm;
+					if(q.getName().equals(questionnaireName))// el cuestionario est� en los mensajes enviados al AP
+						if(sentDate.compare(sinceTime) == DatatypeConstants.GREATER && sentDate.compare(now)== DatatypeConstants.LESSER )
+							return true;
+				}
 			}
+			return false;
 		}
-		return false;
+
 	}
-	
-}
 
 
-public static boolean messageSentToAPSince(String plainMessageContent, XMLGregorianCalendar sinceTime) throws Exception{
-	
-	XMLGregorianCalendar now = SchedulingTools.getNow();
-	
-	if(!sentToAPContainsPlainMessage(plainMessageContent))
-		return false;
-	
-	else{
-		
-		for (int i=0;i<motivationalMessagesSentToAP.size();i++){
-			
-			Object mm = motivationalMessagesSentToAP.get(i).getContent();
-			MotivationalMessage motmes = motivationalMessagesSentToAP.get(i);
-			XMLGregorianCalendar sentDate = motmes.getSentDate();
-			
-			if( mm instanceof String){
-				String content = (String) mm;
-				if(content.equals(plainMessageContent))// el cuestionario est� en los mensajes enviados al AP
-					if(sentDate.compare(sinceTime) == DatatypeConstants.GREATER && sentDate.compare(now)== DatatypeConstants.LESSER )
-						return true;
+	public static boolean messageSentToAPSince(String plainMessageContent, XMLGregorianCalendar sinceTime) throws Exception{
+
+		XMLGregorianCalendar now = SchedulingTools.getNow();
+
+		if(!sentToAPContainsPlainMessage(plainMessageContent))
+			return false;
+
+		else{
+
+			for (int i=0;i<motivationalMessagesSentToAP.size();i++){
+
+				Object mm = motivationalMessagesSentToAP.get(i).getContent();
+				MotivationalMessage motmes = motivationalMessagesSentToAP.get(i);
+				XMLGregorianCalendar sentDate = motmes.getSentDate();
+
+				if( mm instanceof String){
+					String content = (String) mm;
+					if(content.equals(plainMessageContent))// el cuestionario est� en los mensajes enviados al AP
+						if(sentDate.compare(sinceTime) == DatatypeConstants.GREATER && sentDate.compare(now)== DatatypeConstants.LESSER )
+							return true;
+				}
 			}
+			return false;
 		}
-		return false;
+
 	}
-	
-}
 
 
-	public void sendMessageToAP(MotivationalMessage mm, Treatment t){
-		try {
-		mm.setSentDate(SchedulingTools.getNow()); // le a�adimos la fecha de env�o
+	public void sendMessageToAP(MotivationalMessage mm, Treatment t) {
+		System.out.println("Message sent to assisted person type "+mm.getMMessageType().toString()+" subtype "+mm.getMMessageSubtype());
 		motivationalMessagesSentToAP.add(mm);
-		} catch (Exception e){
-			
-		}
 	}
 
-	public void sendMessageToCaregiver(MotivationalMessage mm, Treatment t) {
+	public void sendMessageToCaregiver(MotivationalMessage mm, Treatment t)  {
+		System.out.println("Message sent to caregiver type "+mm.getMMessageType().toString()+" subtype "+mm.getMMessageSubtype());
 		motivationalMessagesSentToCaregiver.add(mm);
 	}
 
@@ -246,19 +236,19 @@ public static boolean messageSentToAPSince(String plainMessageContent, XMLGregor
 	public String getAPPosesiveGenderArticle() {
 		return "his";
 	}
-	
-	
+
+
 	//---------------------DARIO---------------------------------------
 
-/*
- * 
- * public static String convertToCalendarToString(GregorianCalendar cal){
+	/*
+	 * 
+	 * public static String convertToCalendarToString(GregorianCalendar cal){
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		int month = cal.get(Calendar.MONTH) + 1;
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		int minutes = cal.get(Calendar.MINUTE);
 		int secs = cal.get(Calendar.SECOND);
-		
+
 		String s = "" + cal.get(Calendar.YEAR) +
 		(month < 9? "0" + month : month)
 		+ (day < 9? "0" + day : day) +"T"+ 
@@ -298,8 +288,8 @@ public static boolean messageSentToAPSince(String plainMessageContent, XMLGregor
 			throw new Exception("Somehting really strange happened!!");
 		}
 	}
-	
-	
+
+
 	public static String convertDayOfWeekToICALString(GregorianCalendar cal) throws Exception{
 		int day = cal.get(Calendar.DAY_OF_WEEK);
 		switch(day){
@@ -322,7 +312,7 @@ public static boolean messageSentToAPSince(String plainMessageContent, XMLGregor
 		}
 	}
 
- * 
- * 
- * */
+	 * 
+	 * 
+	 * */
 }

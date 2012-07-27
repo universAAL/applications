@@ -22,15 +22,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 import java.util.StringTokenizer;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+
 import org.apache.commons.collections.map.MultiKeyMap;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
 import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
+import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
 import org.universAAL.ontology.questionnaire.Question;
 import org.universAAL.ontology.questionnaire.Questionnaire;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
@@ -100,8 +104,14 @@ public class MessageManager {
 	 */
 
 	public static void buildMapStructure() throws IOException {
-		String messagesDB = mmSender.getDBRoute(language);
-		InputStreamReader in = new InputStreamReader(MessageManager.class.getResourceAsStream(messagesDB));
+		map.clear();
+
+		InputStream is = MessageManager.class.getResourceAsStream("/messagesDB/en_motivationalMessagesDB.csv");
+		if(is == null)
+			throw new IOException("Cannot read en_motivationalMessagesDB.csv");
+		
+		InputStreamReader in = new InputStreamReader(is);
+		
 		BufferedReader freader = new BufferedReader(in);
 
 		CsvReader reader = new CsvReader(freader, ';');
@@ -312,13 +322,15 @@ public class MessageManager {
 
 	}
 
-	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType,MotivationalMessageSubclassification messageSubType, Treatment t){
+	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType,MotivationalMessageSubclassification messageSubType, Treatment t) throws DatatypeConfigurationException{
 		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType, messageSubType);
+		mm.setSentDate(SchedulingTools.getNow());
 		mmSender.sendMessageToAP(mm, t);
 	}
 
-	public static void sendMessageToCaregiver(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, MotivationalMessageSubclassification messageSubType, Treatment t){
+	public static void sendMessageToCaregiver(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, MotivationalMessageSubclassification messageSubType, Treatment t) throws DatatypeConfigurationException{
 		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType, messageSubType);
+		mm.setSentDate(SchedulingTools.getNow());
 		mmSender.sendMessageToCaregiver(mm, t);
 	}
 

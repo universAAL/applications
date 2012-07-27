@@ -77,6 +77,8 @@ public class TestMotivationalStatusChange extends TestIface{
 	public void setUp() throws Exception{
 		
 		registerClassesNeeded();
+		
+		TestIface.resetMessagesSent();
 		ap = this.getAssistedPerson(); 		
 		//load up the knowledge base
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
