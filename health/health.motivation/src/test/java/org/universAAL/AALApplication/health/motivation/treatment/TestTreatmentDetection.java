@@ -1,6 +1,8 @@
 package org.universAAL.AALApplication.health.motivation.treatment;
 
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -51,77 +53,77 @@ public class TestTreatmentDetection extends TestIface{
 
 	private SendMotivationMessageIface iTestTreatment = this;
 	private MotivationServiceRequirementsIface iTestTreatmentForMMVariables = this;
-	
+
 
 	// Agreement questionnaire sent to the assisted person
 	private String qWording = "Good $partOfDay $userName! A new treatment, named $treatmentName has been asigned to you. This treatment consists of $treatmentDescription. Do you plan to follow it?";
-			
+
 	private ChoiceLabel choice1;
 	private ChoiceLabel choice2;
 	private ChoiceLabel[] booleanChoices;
 
 	private SingleChoiceQuestion agreementQuestion;
-	
+
 	private Questionnaire questionnaire;
 	private MotivationalQuestionnaire firstQuestionnaire;
-				
-	
+
+
 	@Before
 	public void setUp() throws Exception{
-			
 		registerClassesNeeded();
 
-			//load up the knowledge base
-			KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-			kbuilder.add(ResourceFactory.newClassPathResource("rules/TreatmentRules.drl"), ResourceType.DRL);
-			KnowledgeBuilderErrors errors = kbuilder.getErrors();
-			if (errors.size() > 0) {
-				for (KnowledgeBuilderError error: errors) {
-					System.err.println(error);
-				}
-				throw new IllegalArgumentException("Could not parse knowledge.");
+		//load up the knowledge base
+		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		kbuilder.add(ResourceFactory.newClassPathResource("rules/TreatmentRules.drl"), ResourceType.DRL);
+		
+		KnowledgeBuilderErrors errors = kbuilder.getErrors();
+		if (errors.size() > 0) {
+			for (KnowledgeBuilderError error: errors) {
+				System.err.println(error);
 			}
-			KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
-			kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
-			ksession = kbase.newStatefulKnowledgeSession();
+			throw new IllegalArgumentException("Could not parse knowledge");
+		}
+		KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+		ksession = kbase.newStatefulKnowledgeSession();
 
-			MessageManager.setLanguage(Locale.ENGLISH);
-			MessageManager.setMMSenderIface(iTestTreatment); //para las pruebas, usamos la interfaz de pruebas
-			MessageManager.buildMapStructure();
-			MessageVariables.setMotivationServiceRequirementsIface(iTestTreatmentForMMVariables);
-			MessageManager.buildInitialMapOfVariables();
+		MessageManager.setLanguage(Locale.ENGLISH);
+		MessageManager.setMMSenderIface(iTestTreatment); //para las pruebas, usamos la interfaz de pruebas
+		MessageManager.buildMapStructure();
+		MessageVariables.setMotivationServiceRequirementsIface(iTestTreatmentForMMVariables);
+		MessageManager.buildInitialMapOfVariables();
 
-			//load the facts
-			treatment1 = new Diet ("Low fat diet", "eating less fatty", HeartFailure.MY_URI); //valid treatment
-			treatment2 = new Diet ("Low salt diet", "eating less salty", HeartFailure.MY_URI);//valid treatment
-			treatment3 = new Diet ("", "treatment 3 description", HeartFailure.MY_URI);// invalid treatment
+		//load the facts
+		treatment1 = new Diet ("Low fat diet", "eating less fatty", HeartFailure.MY_URI); //valid treatment
+		treatment2 = new Diet ("Low salt diet", "eating less salty", HeartFailure.MY_URI);//valid treatment
+		treatment3 = new Diet ("", "treatment 3 description", HeartFailure.MY_URI);// invalid treatment
 
-			// Agreement questionnaire sent to the assisted person
+		// Agreement questionnaire sent to the assisted person
 
-			choice1 = new ChoiceLabel(Boolean.TRUE, "Yes");
-			choice2 = new ChoiceLabel(Boolean.FALSE, "No");
-			booleanChoices = new ChoiceLabel[2];
-			booleanChoices[0]=choice1;
-			booleanChoices[1]=choice2;
-			agreementQuestion = new SingleChoiceQuestion(qWording,TypeMapper.getDatatypeURI(Boolean.class),booleanChoices);
+		choice1 = new ChoiceLabel(Boolean.TRUE, "Yes");
+		choice2 = new ChoiceLabel(Boolean.FALSE, "No");
+		booleanChoices = new ChoiceLabel[2];
+		booleanChoices[0]=choice1;
+		booleanChoices[1]=choice2;
+		agreementQuestion = new SingleChoiceQuestion(qWording,TypeMapper.getDatatypeURI(Boolean.class),booleanChoices);
 
-			questionnaire = new Questionnaire ("First inquiry", 
-						"This message will be displayed whenever a new treatment is detected, to ask the user" + 
-						" about his/her predisposition to follow the treatment.", agreementQuestion); 
+		questionnaire = new Questionnaire ("First inquiry", 
+				"This message will be displayed whenever a new treatment is detected, to ask the user" + 
+				" about his/her predisposition to follow the treatment.", agreementQuestion); 
 
-			 firstQuestionnaire = new MotivationalQuestionnaire(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry, MotivationalMessageSubclassification.treatment_agreement, questionnaire);
-					
-			// load global variables
-			ksession.setGlobal("agreementQuestion",agreementQuestion);
-			ksession.setGlobal("firstQuestionnaire",firstQuestionnaire);
-			
-			//insert the facts in drools working memory
-			ksession.insert(treatment1);
-			ksession.insert(treatment2);
-			ksession.insert(treatment3);
+		firstQuestionnaire = new MotivationalQuestionnaire(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.inquiry, MotivationalMessageSubclassification.treatment_agreement, questionnaire);
 
-			//fire the rules
-			ksession.fireAllRules();	
+		// load global variables
+		ksession.setGlobal("agreementQuestion",agreementQuestion);
+		ksession.setGlobal("firstQuestionnaire",firstQuestionnaire);
+
+		//insert the facts in drools working memory
+		ksession.insert(treatment1);
+		ksession.insert(treatment2);
+		ksession.insert(treatment3);
+
+		//fire the rules
+		ksession.fireAllRules();	
 	}
 
 	@After
@@ -138,17 +140,17 @@ public class TestTreatmentDetection extends TestIface{
 
 	@Test
 	public void testCorrectMMSent() throws Exception{
-		
+
 		String qNameExpected = "First inquiry"; 
 		Assert.assertEquals(true, TestIface.sentToAPContainsQuestionnaire(qNameExpected));
-		
-}
+
+	}
 
 	/**
 	 * This method checks that the valid treatments (t1 and t2) have been well detected.
 	 * Invalid treatments (t3) should have not been detected 
 	 */
-	
+
 	@Test
 	public void testCorrectTreatmentDetection(){
 

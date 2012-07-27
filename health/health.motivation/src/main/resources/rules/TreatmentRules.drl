@@ -11,7 +11,7 @@ import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.PerformedSessionsSupport;
-import org.universAAL.ontology.questionnaire.owl.ChoiceLabel;
+import org.universAAL.ontology.questionnaire.ChoiceLabel;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
@@ -20,7 +20,7 @@ import org.universAAL.ontology.questionnaire.SingleChoiceQuestion;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.DetectedTreatments;
 import org.universAAL.ontology.questionnaire.AnsweredQuestionnaire;
 import org.universaal.ontology.owl.Questionnaire4TreatmentStrategy;
-import org.universaal.ontology.owl.Answer;
+import org.universAAL.ontology.questionnaire.Answer;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
 import org.universaal.ontology.health.owl.StatusType;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.PerformedSessionsSupport;
@@ -51,7 +51,10 @@ end
 rule "Change to contemplation phase - Treatment performance agreement" no-loop
 	when
 		#When the aswered questionnaire to the first question is received
-		detectedAnsweredQuestionnaire: AnsweredQuestionnaire(questionnaire : associatedQuestionnaire, answers != null, answers.length > 0,  ((Boolean)answers[0].answerContent) == true)
+		detectedAnsweredQuestionnaire: AnsweredQuestionnaire(questionnaire : associatedQuestionnaire, ans : answers != null, answers.length > 0)
+		eval(ans[0].getAnswerContent() != null)
+		eval(ans[0].getAnswerContent().length >0)
+		eval((Boolean)(ans[0].getAnswerContent()[0]) == true)
 		eval(questionnaire instanceof Questionnaire4TreatmentStrategy)
 		eval(questionnaire.getName() == (((Questionnaire)firstQuestionnaire.getContent()).getName()) )// esto va a fallar, mejor nombre
 	then  
@@ -64,7 +67,7 @@ rule "Change to contemplation phase - Treatment performance agreement" no-loop
 		
 		System.out.println("Motivational status of assisted person changed to contemplation, froma precontemplation"); #trace
 		
-		//¿tengo que volver a insertar el tratamiento (actualizarlo) o no hace falta?
+		//ï¿½tengo que volver a insertar el tratamiento (actualizarlo) o no hace falta?
 end
 
 
@@ -187,7 +190,7 @@ rule "Change status to finished"  no-loop
 		MessageManager.sendMessageToCaregiver(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.maintenance, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_status_finished);
 		MessageManager.sentMessageToAP(HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.maintenance, MotivationalMessageClassification.reward, MotivationalMessageSubclassification.treatment_status_finished);
 		retract(treatment); //eliminamos el tratamiento de la working memory
-		//hay que sacarlo también de los tratamientos detectados para poder volver a utilizar ese nombre
+		//hay que sacarlo tambiï¿½n de los tratamientos detectados para poder volver a utilizar ese nombre
 end
 
 
@@ -208,7 +211,7 @@ end
 
 rule "Treatment cancelled" no-loop
 	when
-		treatment: Treatment(status == StatusType.cancelled) // el tratamiento se cancele (sólo puede hacerlo el caregiver)
+		treatment: Treatment(status == StatusType.cancelled) // el tratamiento se cancele (sï¿½lo puede hacerlo el caregiver)
 	then
 		// notificamos al usuario.
 		retract(treatment); //eliminamos el tratamiento de la working memory
