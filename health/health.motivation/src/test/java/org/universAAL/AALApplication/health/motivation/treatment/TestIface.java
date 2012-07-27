@@ -65,14 +65,12 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 		OntologyManagement.getInstance().register(new QuestionnaireStrategyOntology());
 	}
 
-	public File getDBRoute(Locale language) {
-
-		File file;
+	public String getDBRoute(Locale language) {
 
 		if (language.equals(SPANISH))
-			return file = new File("");
+			return null;
 		else if (language.equals(Locale.ENGLISH))
-			return file = new File("C://universAAL/motivationalMessages/en_motivationalMessagesDB.csv");
+			return "en_motivationalMessagesDB.csv";
 		else
 			return null;
 	}
@@ -154,7 +152,7 @@ public static boolean questionnaireSentToAPSince(String questionnaireName, XMLGr
 			
 			if( mm instanceof Questionnaire){
 				Questionnaire q = (Questionnaire)mm;
-				if(q.getName().equals(questionnaireName))// el cuestionario está en los mensajes enviados al AP
+				if(q.getName().equals(questionnaireName))// el cuestionario estï¿½ en los mensajes enviados al AP
 					if(sentDate.compare(sinceTime) == DatatypeConstants.GREATER && sentDate.compare(now)== DatatypeConstants.LESSER )
 						return true;
 			}
@@ -182,7 +180,7 @@ public static boolean messageSentToAPSince(String plainMessageContent, XMLGregor
 			
 			if( mm instanceof String){
 				String content = (String) mm;
-				if(content.equals(plainMessageContent))// el cuestionario está en los mensajes enviados al AP
+				if(content.equals(plainMessageContent))// el cuestionario estï¿½ en los mensajes enviados al AP
 					if(sentDate.compare(sinceTime) == DatatypeConstants.GREATER && sentDate.compare(now)== DatatypeConstants.LESSER )
 						return true;
 			}
@@ -195,7 +193,7 @@ public static boolean messageSentToAPSince(String plainMessageContent, XMLGregor
 
 	public void sendMessageToAP(MotivationalMessage mm, Treatment t){
 		try {
-		mm.setSentDate(SchedulingTools.getNow()); // le añadimos la fecha de envío
+		mm.setSentDate(SchedulingTools.getNow()); // le aï¿½adimos la fecha de envï¿½o
 		motivationalMessagesSentToAP.add(mm);
 		} catch (Exception e){
 			
