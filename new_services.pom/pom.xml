@@ -154,6 +154,14 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>uaal-wp4-thridparty</id>
+			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-thirdparty/</url>
+			<name>WP4 Services Release repo</name>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 	
 	<distributionManagement>
