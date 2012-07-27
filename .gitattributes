@@ -625,7 +625,6 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationServiceRequirementsIface.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SCaller.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/SendMotivationMessageIface.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/TestMotivation.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APAgreeToFollowTreatmentNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APBackToActionNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APBackToContemplationNotification.java -text
