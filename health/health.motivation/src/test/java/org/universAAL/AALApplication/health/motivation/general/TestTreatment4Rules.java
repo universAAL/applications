@@ -4,10 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.datatype.DatatypeConstants.Field;
-
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -17,7 +14,6 @@ import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIfac
 import org.universAAL.AALApplication.health.motivation.schedulingTools.Treatment4Rules;
 import org.universAAL.AALApplication.health.motivation.treatment.TestIface;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.TreatmentPlanning;
 import org.universaal.ontology.health.owl.Walking;
 

@@ -22,16 +22,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 import java.util.StringTokenizer;
 
 import org.apache.commons.collections.map.MultiKeyMap;
-import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
 import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
-import org.universAAL.ontology.profile.AssistedPerson;
-import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.questionnaire.Question;
 import org.universAAL.ontology.questionnaire.Questionnaire;
 import org.universaal.ontology.health.owl.MotivationalStatusType;

@@ -1,9 +1,6 @@
 package org.universAAL.AALApplication.health.motivation.messageManagerTester;
 
 import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
-
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -11,23 +8,11 @@ import org.junit.Test;
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
-import org.universAAL.AALApplication.health.motivation.treatment.TestIface;
-import org.universAAL.middleware.owl.DataRepOntology;
-import org.universAAL.middleware.owl.OntologyManagement;
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universAAL.middleware.service.owl.ServiceBusOntology;
-import org.universAAL.middleware.ui.owl.UIBusOntology;
-import org.universAAL.ontology.ProfileOntology;
-import org.universAAL.ontology.location.LocationOntology;
-import org.universAAL.ontology.phThing.PhThingOntology;
-import org.universAAL.ontology.shape.ShapeOntology;
-import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.disease.owl.DiseaseOntology;
-import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
