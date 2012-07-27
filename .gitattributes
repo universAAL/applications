@@ -655,6 +655,7 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/SessionNotPerformed.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/Solution.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/TreatmentTypeClassification.java -text
+health/health.motivation/src/main/resources/en_motivationalMessagesDB.csv -text
 health/health.motivation/src/main/resources/rules/ActionRules.dslr -text
 health/health.motivation/src/main/resources/rules/ContemplationRules.drl -text
 health/health.motivation/src/main/resources/rules/MaintenanceRules.dslr -text
