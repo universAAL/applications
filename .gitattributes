@@ -673,8 +673,6 @@ health/health.motivation/src/test/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestMotivationalStatusChange.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentCompleteness.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentDetection.java -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/useCases/TestToday.java -text
-health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/useCases/TestWalkingTreatment.java -text
 health/health.pom/pom.xml -text svneol=unset#text/plain
 health/health.profile.manager/pom.xml -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProvider.java -text

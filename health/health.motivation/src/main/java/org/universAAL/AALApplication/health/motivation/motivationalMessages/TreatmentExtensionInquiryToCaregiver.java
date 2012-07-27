@@ -1,18 +1,18 @@
 package org.universAAL.AALApplication.health.motivation.motivationalMessages;
 
 import org.universAAL.middleware.rdf.TypeMapper;
+import org.universAAL.ontology.questionnaire.ChoiceLabel;
+import org.universAAL.ontology.questionnaire.ConditionalQuestion;
+import org.universAAL.ontology.questionnaire.Question;
+import org.universAAL.ontology.questionnaire.Questionnaire;
+import org.universAAL.ontology.questionnaire.SingleChoiceQuestion;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.owl.ChoiceLabel;
-import org.universaal.ontology.owl.ConditionalQuestion;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
-import org.universaal.ontology.owl.Question;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.SingleChoiceQuestion;
 
 public class TreatmentExtensionInquiryToCaregiver implements MotivationalMessageContent{
 

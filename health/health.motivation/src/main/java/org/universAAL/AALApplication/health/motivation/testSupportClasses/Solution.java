@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import org.universAAL.AALApplication.health.motivation.MotivationInterface;
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.questionnaire.Answer;
+import org.universAAL.ontology.questionnaire.AnsweredQuestionnaire;
+import org.universAAL.ontology.questionnaire.Question;
+import org.universAAL.ontology.questionnaire.Questionnaire;
 import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.owl.Answer;
-import org.universaal.ontology.owl.AnsweredQuestionnaire;
-import org.universaal.ontology.owl.Question;
-import org.universaal.ontology.owl.Questionnaire;
 
 
 public class Solution  implements MotivationInterface{

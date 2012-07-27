@@ -2,7 +2,6 @@ package org.universAAL.AALApplication.health.motivation;
 
 import java.util.Locale;
 
-import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
@@ -11,6 +10,7 @@ import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.questionnaire.QuestionnaireOntology;
 import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
@@ -21,8 +21,7 @@ import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
-import org.universaal.ontology.owl.QuestionnaireOntology;
-
+import org.universAAL.AALApplication.health.motivation.MotivationInterface;
 import junit.framework.TestCase;
 
 public class TestMotivation extends TestCase implements MotivationInterface {
@@ -74,14 +73,14 @@ public class TestMotivation extends TestCase implements MotivationInterface {
 	public void sendMessageToAssistedPerson(String illness,
 			String treatmentType, MotivationalStatusType motStatus,
 			MotivationalMessageClassification messageType) {
-		MessageManager.getMessageToSendToUser(illness, treatmentType, motStatus, messageType);
+		//MessageManager.getMessageToSendToUser(illness, treatmentType, motStatus, messageType);
 		
 	}
 
 	public void sendMessageToCaregiver(String illness, String treatmentType,
 			MotivationalStatusType motStatus,
 			MotivationalMessageClassification messageType) {
-		MessageManager.getMessageToSendToUser(illness, treatmentType, motStatus, messageType);
+		/*MessageManager.getMessageToSendToUser(illness, treatmentType, motStatus, messageType);*/
 		
 	}
 

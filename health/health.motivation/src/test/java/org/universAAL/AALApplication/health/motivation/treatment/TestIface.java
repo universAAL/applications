@@ -26,6 +26,8 @@ import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.health.HealthProfile;
+import org.universAAL.ontology.questionnaire.Questionnaire;
+import org.universAAL.ontology.questionnaire.QuestionnaireOntology;
 import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
@@ -36,8 +38,6 @@ import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalPlainMessage;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.QuestionnaireOntology;
 import org.universaal.ontology.owl.QuestionnaireStrategyOntology;
 
 public class TestIface implements SendMotivationMessageIface, MotivationServiceRequirementsIface {

@@ -32,13 +32,13 @@ import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIfac
 import org.universAAL.AALApplication.health.motivation.motivationalMessages.MotivationalMessageContent;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.Caregiver;
+import org.universAAL.ontology.questionnaire.Question;
+import org.universAAL.ontology.questionnaire.Questionnaire;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
-import org.universaal.ontology.owl.Question;
-import org.universaal.ontology.owl.Questionnaire;
 
 import com.csvreader.CsvReader;
 

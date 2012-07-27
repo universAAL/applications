@@ -12,6 +12,8 @@ import org.universAAL.middleware.ui.owl.UIBusOntology;
 import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
+import org.universAAL.ontology.questionnaire.Questionnaire;
+import org.universAAL.ontology.questionnaire.QuestionnaireOntology;
 import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
@@ -22,8 +24,6 @@ import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
-import org.universaal.ontology.owl.Questionnaire;
-import org.universaal.ontology.owl.QuestionnaireOntology;
 
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;

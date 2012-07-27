@@ -101,9 +101,6 @@ public class MotivationalMessageSubclassification extends ManagedIndividual {
   public static final MotivationalMessageSubclassification treatment_management = new MotivationalMessageSubclassification(TREATMENT_MANAGEMENT);
   public static final MotivationalMessageSubclassification treatment_performance_agreement = new MotivationalMessageSubclassification(TREATMENT_PERFORMANCE_AGREEMENT);
   public static final MotivationalMessageSubclassification treatment_performance_disagreement = new MotivationalMessageSubclassification(TREATMENT_PERFORMANCE_DISAGREEMENT);
-  public static final MotivationalMessageSubclassification treatment_status_cancelled = new MotivationalMessageSubclassification( TREATMENT_STATUS_CANCELLED);
-  public static final MotivationalMessageSubclassification treatment_status_finished = new MotivationalMessageSubclassification( TREATMENT_STATUS_FINISHED);
-  public static final MotivationalMessageSubclassification treatment_status_prolonged = new MotivationalMessageSubclassification( TREATMENT_STATUS_PROLONGED);
   
   
   public static final MotivationalMessageSubclassification session = new MotivationalMessageSubclassification(SESSION);
@@ -123,6 +120,11 @@ public class MotivationalMessageSubclassification extends ManagedIndividual {
   public static final MotivationalMessageSubclassification vs_despair = new MotivationalMessageSubclassification(VS_DESPAIR);
   public static final MotivationalMessageSubclassification vs_frustration = new MotivationalMessageSubclassification(VS_FRUSTRATION);
   public static final MotivationalMessageSubclassification vs_lack_of_hability = new MotivationalMessageSubclassification(VS_LACK_OF_HABILITY);
+  
+  
+  public static final MotivationalMessageSubclassification treatment_status_cancelled = new MotivationalMessageSubclassification( TREATMENT_STATUS_CANCELLED);
+  public static final MotivationalMessageSubclassification treatment_status_finished = new MotivationalMessageSubclassification( TREATMENT_STATUS_FINISHED);
+  public static final MotivationalMessageSubclassification treatment_status_prolonged = new MotivationalMessageSubclassification( TREATMENT_STATUS_PROLONGED);
   
 
   private int order;
