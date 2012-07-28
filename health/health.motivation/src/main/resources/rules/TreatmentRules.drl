@@ -48,14 +48,6 @@ rule "Treatment Detection" no-loop
         System.out.println("Treatment " + detectedTreatment.getName()+ " detected."); //trace
 end 
 
-rule "Five seconds rule"
-timer(int:0s 5s)
-when
-eval(true)
-then
-System.out.println("Soy una regla que se activa cada 5s");
-end
-
 rule "Change to contemplation phase - Treatment performance agreement" no-loop
 	when
 		#When the aswered questionnaire to the first question is received
