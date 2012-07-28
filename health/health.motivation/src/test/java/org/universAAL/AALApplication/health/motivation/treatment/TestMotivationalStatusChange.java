@@ -1,5 +1,6 @@
 package org.universAAL.AALApplication.health.motivation.treatment;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -82,7 +83,8 @@ public class TestMotivationalStatusChange extends TestIface{
 		ap = this.getAssistedPerson(); 		
 		//load up the knowledge base
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-		kbuilder.add(ResourceFactory.newClassPathResource("rules/TreatmentRules.drl"), ResourceType.DRL);
+		InputStream is = getClass().getResourceAsStream("/rules/TreatmentRules.drl");
+		kbuilder.add(ResourceFactory.newInputStreamResource(is), ResourceType.DRL);
 		KnowledgeBuilderErrors errors = kbuilder.getErrors();
 		if (errors.size() > 0) {
 			for (KnowledgeBuilderError error: errors) {
