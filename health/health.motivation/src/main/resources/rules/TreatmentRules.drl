@@ -55,6 +55,7 @@ eval(true)
 then
 System.out.println("Soy una regla que se activa cada 5s");
 end
+
 rule "Change to contemplation phase - Treatment performance agreement" no-loop
 	when
 		#When the aswered questionnaire to the first question is received
@@ -79,7 +80,7 @@ end
 
 
 // rule "Change to contemplation phase - Agreement due to motivartional cycles"
-
+/*
 rule "Stay in precontemplation phase - Treatment performance disagreement" no-loop
 	when
 		detectedAnsweredQuestionnaire: AnsweredQuestionnaire(questionnaire:associatedQuestionnaire  == firstQuestionnaire)
@@ -95,7 +96,7 @@ rule "Stay in precontemplation phase - Treatment performance disagreement" no-lo
 	 	System.out.println("Motivational status of assisted person still remains in precontemplation."); #trace
 	
 end
-
+*/
 rule "Change to action phase from contemplation phase" no-loop
 	when
 	//cuando se detecta que la primera tarea ha sido realizada
