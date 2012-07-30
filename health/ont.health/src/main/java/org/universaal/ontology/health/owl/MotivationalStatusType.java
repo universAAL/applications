@@ -25,14 +25,16 @@ public class MotivationalStatusType extends ManagedIndividual {
   public static final int CONTEMPLATION = 1;
   public static final int ACTION = 2;
   public static final int MAINTENANCE = 3;
+  public static final int UNDEFINED = 4;
 
   private static final String[] names = {
-    "precontemplation","contemplation","action","maintenance" };
+    "precontemplation","contemplation","action","maintenance", "undefined" };
 
   public static final MotivationalStatusType precontemplation = new MotivationalStatusType(PRECONTEMPLATION);
   public static final MotivationalStatusType contemplation = new MotivationalStatusType(CONTEMPLATION);
   public static final MotivationalStatusType action = new MotivationalStatusType(ACTION);
   public static final MotivationalStatusType maintenance = new MotivationalStatusType(MAINTENANCE);
+  public static final MotivationalStatusType undefined = new MotivationalStatusType(UNDEFINED);
 
   private int order;
 
@@ -71,6 +73,8 @@ public class MotivationalStatusType extends ManagedIndividual {
         return action;
       case MAINTENANCE:
         return maintenance;
+      case UNDEFINED:
+          return undefined;
     default:
       return null;    }
   }
@@ -82,7 +86,7 @@ public class MotivationalStatusType extends ManagedIndividual {
 	if (name.startsWith(HealthOntology.NAMESPACE))
 	    name = name.substring(HealthOntology.NAMESPACE.length());
 
-	for (int i = PRECONTEMPLATION; i <= MAINTENANCE; i++)
+	for (int i = PRECONTEMPLATION; i <= UNDEFINED; i++)
 	    if (names[i].equals(name))
 		return getMotivationalStatusTypeByOrder(i);
 

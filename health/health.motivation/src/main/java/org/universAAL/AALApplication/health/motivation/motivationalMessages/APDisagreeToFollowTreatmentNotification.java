@@ -10,11 +10,13 @@ import org.universaal.ontology.owl.MotivationalPlainMessage;
 
 public class APDisagreeToFollowTreatmentNotification implements MotivationalMessageContent{
 
-	String content = "Good $partOfDay $caregiverName! $userName has disagreeded to follow the treatment $treatmentName."+
+	String content = "Good $partOfDay $caregiverName. $userName has disagreeded to follow the treatment $treatmentName."+
 	" The system will try to find out the reason why $userName refuses to perform the treatment and will try to convince $userGender to change this attitude." + 
 	" If any updates they will be sent to you.";
 
-MotivationalPlainMessage treatmentPerformanceDisagreementNotificationToCaregiver = new MotivationalPlainMessage (HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_disagreement, content);
+	String name ="Message sent to caregiver when AP disagrees to follow her/his treatment";
+	
+	MotivationalPlainMessage treatmentPerformanceDisagreementNotificationToCaregiver = new MotivationalPlainMessage (name, HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_disagreement, content);
 
 public Object getMessageContent() {
 return treatmentPerformanceDisagreementNotificationToCaregiver.getContent();

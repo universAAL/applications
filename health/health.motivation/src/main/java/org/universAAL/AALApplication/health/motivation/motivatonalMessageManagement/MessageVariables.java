@@ -32,6 +32,12 @@ public class MessageVariables {
 		
 		String apPosesiveGenderArticle = requirements.getAPPosesiveGenderArticle();
 		mapOfVariables.put("userPosesiveGender", apPosesiveGenderArticle);
+		
+		String caregiverGenderArticle = requirements.getCaregiverGenderArticle();
+		mapOfVariables.put("caregiverGender", caregiverGenderArticle);
+		
+		String caregiverPosesiveGenderArticle = requirements.getCaregiverPosesiveGenderArticle();
+		mapOfVariables.put("caregiverPosesiveGender", caregiverPosesiveGenderArticle);
 	}
 	
 	public static void addToMapOfVariables(String key, String value){

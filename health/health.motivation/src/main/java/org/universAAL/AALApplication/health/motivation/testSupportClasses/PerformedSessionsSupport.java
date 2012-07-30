@@ -42,9 +42,23 @@ public class PerformedSessionsSupport {
 		mapOfPSSupport.put(t,pss);
 	}
 	
+	// Constructor para los tests, borrar cuando se arregle lo otro:
+	
+	public PerformedSessionsSupport(Treatment t, int cnpsCont, int cnpsAction, int cnpsMan){
+		this.validPerformedSessions  = new ArrayList <PerformedSession>();
+		this.invalidPerformedSessions = new ArrayList <PerformedSession>(); 
+		
+		this.setNumberOfConsecutiveNonPerformedSessionsAct(cnpsAction);
+		this.setNumberOfConsecutiveNonPerformedSessionsCont(cnpsCont);
+		this.setNumberOfConsecutiveNonPerformedSessionsMan(cnpsMan);
+		
+		this.setAssociatedTreatment(t);
+		mapOfPSSupport.put(t,this);
+	}
+	
+	
 	public void setAssociatedTreatment(Treatment t){
 		associatedTreatment=t;
-		
 	}
 	
 	public Treatment getAssociatedTreatment (){

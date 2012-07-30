@@ -117,9 +117,9 @@ public class Treatment4Rules extends Treatment{
 		gc.setTimeInMillis(lsEndDateWithExtraTime.getTimeInMillis());
 
 		DatatypeFactory dtf = DatatypeFactory.newInstance();
-		XMLGregorianCalendar lse = dtf.newXMLGregorianCalendar(gc);
+		XMLGregorianCalendar lsewei = dtf.newXMLGregorianCalendar(gc);
 
-		return lse;
+		return lsewei;
 	}
 	
 }

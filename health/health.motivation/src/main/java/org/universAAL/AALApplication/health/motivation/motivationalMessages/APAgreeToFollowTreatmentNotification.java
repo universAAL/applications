@@ -16,7 +16,8 @@ public class APAgreeToFollowTreatmentNotification implements MotivationalMessage
 	String content = "Good $partOfDay $caregiverName! $userName has agreeded to follow the treatment $treatmentName."+
 			" You'll be notified whether the first session will be performed or not by $userName.";
 
-	MotivationalPlainMessage treatmentPerformanceAgreementNotificationToCaregiver = new MotivationalPlainMessage (HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_agreement, content);
+	String name = "Message sent to caregiver when AP agrees to follow the treatment";
+	MotivationalPlainMessage treatmentPerformanceAgreementNotificationToCaregiver = new MotivationalPlainMessage (name, HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.precontemplation, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_agreement, content);
 	
 	public Object getMessageContent() {
 		return treatmentPerformanceAgreementNotificationToCaregiver.getContent();

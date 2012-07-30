@@ -103,12 +103,12 @@ public class Message extends ManagedIndividual {
   }	
   
   public XMLGregorianCalendar getSentDate() {
-	    return (XMLGregorianCalendar)props.get(PROP_CONTENT);
+	    return (XMLGregorianCalendar)props.get(PROP_SENT_DATE);
 	  }		
 
   public void setSentDate(XMLGregorianCalendar sentDate) {
 	    if (sentDate != null)
-	      props.put(PROP_CONTENT, sentDate);
+	      props.put(PROP_SENT_DATE, sentDate);
 	}		
 
 }

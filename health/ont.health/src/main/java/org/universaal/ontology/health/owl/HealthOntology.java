@@ -104,7 +104,7 @@ public final class HealthOntology extends Ontology {
     oci.setResourceComment("This class defines the types of motivational status of the treatment: precontemplation, contemplation, action or maintenance.");
     oci.setResourceLabel("MotivationalStatusType");
     oci.toEnumeration(new ManagedIndividual[] {
-       MotivationalStatusType.precontemplation, MotivationalStatusType.contemplation, MotivationalStatusType.action, MotivationalStatusType.maintenance });
+       MotivationalStatusType.precontemplation, MotivationalStatusType.contemplation, MotivationalStatusType.action, MotivationalStatusType.maintenance, MotivationalStatusType.undefined });
 
 
     // ******* Regular classes of the ontology ******* //
