@@ -318,8 +318,6 @@ public class MessageManager {
 			//lanzar excepcion
 			return null;
 		}
-
-
 	}
 
 	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType,MotivationalMessageSubclassification messageSubType, Treatment t) throws DatatypeConfigurationException{

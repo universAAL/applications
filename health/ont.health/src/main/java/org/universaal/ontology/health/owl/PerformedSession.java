@@ -113,7 +113,7 @@ public class PerformedSession extends ManagedIndividual{
 
 	  public void setAssociatedTreatment(Treatment t) {
 		  if(t != null)
-			  props.put(PROP_END_TIME, t);
+			  props.put(PROP_HAS_ASSOCIATED_TREATMENT, t);
 	  }		
 	  
 	  public boolean isWellFormed() {

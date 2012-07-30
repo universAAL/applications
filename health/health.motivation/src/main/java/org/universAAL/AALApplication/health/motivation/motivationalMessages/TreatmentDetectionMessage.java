@@ -30,7 +30,6 @@ public class TreatmentDetectionMessage extends MotivationalQuestionnaire impleme
 	
 	private String qWording = "Good $partOfDay $userName! A new treatment, named $treatmentName has been asigned to you. This treatment consists of $treatmentDescription. Do you plan to follow it?";
 
-
 	private ChoiceLabel choice1 = new ChoiceLabel(Boolean.TRUE, "Yes");
 	private ChoiceLabel choice2 = new ChoiceLabel(Boolean.FALSE, "No");
 	private ChoiceLabel[] booleanChoices = {choice1,choice2};

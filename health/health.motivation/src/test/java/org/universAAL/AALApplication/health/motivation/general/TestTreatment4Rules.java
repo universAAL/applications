@@ -1,8 +1,11 @@
 package org.universAAL.AALApplication.health.motivation.general;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
+import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import junit.framework.Assert;
@@ -11,21 +14,35 @@ import org.junit.Before;
 import org.junit.Test;
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.Treatment4Rules;
 import org.universAAL.AALApplication.health.motivation.treatment.TestIface;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universaal.ontology.health.owl.MotivationalStatusType;
+import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.TreatmentPlanning;
 import org.universaal.ontology.health.owl.Walking;
+import org.universaal.ontology.owl.MotivationalMessageClassification;
+import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 
 public class TestTreatment4Rules extends TestIface{
 	
 	private SendMotivationMessageIface iTestTreatment = this;
 	private MotivationServiceRequirementsIface iTestStatusForMMVariables = this;
-	
+	User ap; 
 
 	@Before
-	public void setUp(){
+	public void setUp() throws Exception{
 		registerClassesNeeded();
+		TestIface.resetMessagesSent();
+		ap = this.getAssistedPerson(); 
+		MessageManager.setLanguage(Locale.ENGLISH);
+		MessageManager.setMMSenderIface(iTestTreatment); //para las pruebas, usamos la interfaz de pruebas
+		MessageManager.buildMapStructure();
+		MessageVariables.setMotivationServiceRequirementsIface(iTestStatusForMMVariables);
+		MessageManager.buildInitialMapOfVariables();
 	}
 	
 	public Treatment4Rules generateTreatment4Test(int offsetPastMinutes, int startDaysAgo, int endsInDays) throws Exception{
@@ -70,6 +87,7 @@ public class TestTreatment4Rules extends TestIface{
 		return s;
 	}
 
+	
 	@Test
 	public void testNow() throws Exception{
 		Treatment4Rules t4r = generateTreatment4Test(0, 10, 10);
@@ -134,7 +152,7 @@ public class TestTreatment4Rules extends TestIface{
 	
 	@Test
 	public void testgetLastSessionEndExtraTime() throws Exception{
-		Treatment4Rules t4r = generateTreatment4Test(30, 7, 14);
+		Treatment4Rules t4r = generateTreatment4Test(30, 7, 14); 
 		XMLGregorianCalendar fecha = t4r.getLastSessionEndWithExtraTime();
 		
 		long now = Calendar.getInstance().getTimeInMillis();
@@ -144,4 +162,5 @@ public class TestTreatment4Rules extends TestIface{
 		Assert.assertTrue(lastSessionEnd - now >  119*60*1000);
 		Assert.assertTrue(lastSessionEnd - now <  121*60*1000);
 	}
+	
 }

@@ -36,4 +36,8 @@ public class DetectedTreatments {
 		return false;
 	}
 	
+	public static void deleteTreatmentFromDetectedTreatments(Treatment t){
+		detectedTreatments.remove(t);
+	}
+	
 }

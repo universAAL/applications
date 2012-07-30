@@ -38,6 +38,9 @@ public class MotivationalMessage extends Message {
 	public static final String PROP_MESSAGE_SUBTYPE = MessageOntology.NAMESPACE
 	+ "messageSubtype";
 
+	public static final String PROP_NAME = MessageOntology.NAMESPACE
+	  + "name";
+	
 	//CONSTRUCTORS
 
 	public MotivationalMessage () {
@@ -57,6 +60,19 @@ public class MotivationalMessage extends Message {
 		this.setContent(content);
 	}
 
+	public MotivationalMessage (String name, String diseaseURI, String treatmentTypeURI, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, MotivationalMessageSubclassification msubtype, Object content) {
+		this.setMotivationalPlainMessageName(name);
+		this.setDiseaseURI(diseaseURI);
+		this.setTreatmentTypeURI(treatmentTypeURI);
+		this.setMotivationalStatus(motStatus);
+		this.setMMessageType(mtype);
+		this.setMMessageSubtype(msubtype);
+		this.setContent(content);
+	}
+
+	
+	
+	
 	public String getClassURI() {
 		return MY_URI;
 	}
@@ -123,6 +139,14 @@ public class MotivationalMessage extends Message {
 			props.put(PROP_DISEASE, illness);
 	}	
 
+	 public String getMotivationalPlainMessageName() {
+			return (String)props.get(PROP_NAME);
+		}		
+
+		public void setMotivationalPlainMessageName(String name) {
+			if (name != null)
+				props.put(PROP_NAME, name);
+		}	
 	//OTHER METHODS
 
 }

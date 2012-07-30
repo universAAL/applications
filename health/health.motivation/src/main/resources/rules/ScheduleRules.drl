@@ -10,20 +10,95 @@ import org.universAAL.AALApplication.health.motivation.testSupportClasses.Treatm
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification.ByDuration;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.Treatment4Rules;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.SessionNotPerformed;
+import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
+import net.fortuna.ical4j.model.DateList;
+import javax.xml.datatype.XMLGregorianCalendar;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.PerformedSessionsSupport;
+import org.universAAL.AALApplication.health.motivation.testSupportClasses.SessionNotPerformed;
+import org.universAAL.AALApplication.health.motivation.treatment.TestIface;
+import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universaal.ontology.owl.MotivationalMessageClassification;
+import org.universaal.ontology.owl.MotivationalMessageSubclassification;
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 
 #declare any global variables here
 
-/*
-rule "Increase treatment completenss" // depende del estado motivacional en el que nos encontremos para mandar un mensaje u otro al AP
+
+rule "Set completeness unit" no-loop
 	when
-		ps: PerformedSession(isValid == Boolean.TRUE) // cuando se detecte una planned session v�lida (ha tenido que pasar antes por las reglas de Schedule, para determinar esto)
+		treatment: Treatment(completenessUnit == 0)// aun no se haya establecido la unidad de completitud
 	then
-		Treatment t = ps.getAssociatedTreatment(); //este m�todo no le tengo, le tengo que crear
-		t.addPerformedSession(ps); //a�adimos la performed session al treatment.
-		float currentCompleteness = t.getCompleteness();
-		t.setCompleteness(t.getCompletenessUnit() + currentCompleteness);
+		DateList sessions = SchedulingTools.getPlannedSessions(treatment);
+		treatment.setCompletenessUnit(SchedulingTools.calculateUnitOfCompleteness(sessions));
+		update(treatment);
 end
-*/
+
+rule "Session performed in right interval of time" no-loop
+	
+	// esta regla se lanza cada 5 minutos
+	when
+		treatment: Treatment4Rules(lss:lastSessionStart, lse:lastSessionEnd, lsewei:lastSessionEndWithExtraTime, n:now) // no coge los getters
+		eval( (n.compare(lse)>= 0 && n.compare(lsewei) <= 0) || (n.compare(lss)>= 0 && n.compare(lse) <= 0)) // ahora esta dentro del performing interval
+		ps: PerformedSession(associatedTreatment == treatment, start:sessionStartTime)
+		eval( (start.compare(lss) >= 0 && start.compare(lse) <= 0) || (start.compare(lse) >= 0 && start.compare(lsewei) <= 0))
+	// y recibo una performed session en el intervalo correcto...
+	then
+		ps.setIsValid(true);//sesion realizada: la ps se pone como vaida y se anade en un array de sesiones realizadas
+		treatment.addPerformedSession(ps);
+		#PerformedSessionsSupport.insertValidPerformedSession;		
+		update(ps);
+end
+
+rule "Session not performed in extra interval" 
+// esta regla se lanza cada 5 minutos
+	when
+		treatment: Treatment4Rules(lss:lastSessionStart, lse:lastSessionEnd, lsewei:lastSessionEndWithExtraTime, n:now) // no coge los getters
+		eval(n.compare(lsewei) >= 0) // ahora esta fuera del extra interval
+		not PerformedSession(associatedTreatment == treatment)// no se ha recibido una PS que tenga nuestro tratamiento asociado
+	then
+		//la sesion no se ha realizado.
+		SessionNotPerformed snp = new SessionNotPerformed(lss,treatment);
+		System.out.println("Assisted person hasn't performed last session");
+		insert(snp);
+		//introducir un objeto de una clase en la wm para avisar que la sesion no se ha hecho
+		//tendria que eliminarse en la regla que se active del fichero correspondiente.
+end
+
+#replicar para los dos estados motivacionales que faltan la siguiente regla:
+
+
+rule "Session not performed in performing interval in action phase" 
+// esta regla se lanza cada 5 minutos
+	when
+		treatment: Treatment4Rules(lss:lastSessionStart, lse:lastSessionEnd, lsewei:lastSessionEndWithExtraTime, n:now) // no coge los getters
+		eval(n.compare(lse) >= 0 && n.compare(lsewei) <= 0) // ahora esta dentro del performing interval
+		not PerformedSession(associatedTreatment == treatment)// no se ha recibido una PS que tenga nuestro tratamiento asociado
+		#eval(!TestIface.messageSentToAPSince("Alert message when planned session performance not received",treatment.getLastSessionEnd()))
+		eval(!TestIface.messageSentToAPSince(HeartFailure.MY_URI, 
+											Treatment.MY_URI,
+                                        	MotivationalStatusType.action, 
+                                        	MotivationalMessageClassification.reminder, 
+                                        	MotivationalMessageSubclassification.session_performance_alert, 
+        	                               	treatment, 
+                                        	treatment.getLastSessionEnd()))
+		// si no he recibido una performed session en el intervalo de performing interval
+		// y no he mandado mensaje al usuario
+	then
+	//mandar mensaje al usuario para que haga la sesion o introduzca la medida.	
+		MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
+		
+        MessageManager.sendMessageToAssistedPerson(HeartFailure.MY_URI, 
+        								Treatment.MY_URI,
+                                        MotivationalStatusType.action, 
+                                        MotivationalMessageClassification.reminder, 
+                                        MotivationalMessageSubclassification.session_performance_alert, 
+                                        treatment);
+        System.out.println("Assisted person notified of not received performed session");
+end
+
+
+
 /*
 rule "Type of treatment declaration" no-loop
 	when
@@ -194,14 +269,7 @@ end
 
 #----------------COMPLETENESS UNIT-----------------------------------
 /*
-rule "Set completeness unit" no-loop
-	when
-		treatment: Treatment(completenessUnit == 0)// a�n no se haya establecido la unidad de completitud
-		eval(SchedulingTools.hasAssociatedListOfSessions()) // ya se ha establecido una lista de sesiones
-	then
-		DateList sessions = SchedulingTools.getPlannedSessions(treatment);
-		treatment.setCompletenessUnit(calculateUnitOfCompleteness(sessions));
-end
+
 
 #----------------PERFORMED SESSION MEASURABLE TREATMENTS-----------------------------------
 
@@ -297,62 +365,18 @@ rule "Performed Session out of day" no-loop
 		//enviar mensaje al usuario
 end
 */
-rule "Session performed in right interval of time" no-loop
-	
-	// esta regla se lanza cada 5 minutos
-	
-	when
-		treatment: Treatment4Rules(lss:lastSessionStart, lse:lastSessionEnd, lsewei:lastSessionWithExtraInterval, n:now) // no coge los getters
-		eval( (n >= lse && n <= lsewei) || (n >= lss && n <= lse)) // ahora esta dentro del performing interval
-		ps: PerformedSession(associatedTreatment == treatment)
-	// y recibo una performed session en el intervalo correcto...
-	then
-		ps.setIsValid(true)//sesi�n realizada: la ps se pone como v�lida y se a�ade en un array de sesiones realizadas
-		PerformedSessionsSupport.insertValidPerformedSession;		
-end
 
-rule "Session not performed in performing interval" 
-// esta regla se lanza cada 5 minutos
-	when
-		treatment: Treatment4Rules(lss:lastSessionStart, lse:lastSessionEnd, lsewei:lastSessionWithExtraInterval, n:now) // no coge los getters
-		eval(n >= lse && n <= lsewei) // ahora esta dentro del performing interval
-		not PerformedSession(associatedTreatment == treatment)// no se ha recibido una PS que tenga nuestro tratamiento asociado
-		eval(!TestIface.messageSentToAPSince(HeartFailure.MY_URI, 
-											Treatment.MY_URI,
-                                        	MotivationalStatusType.action, 
-                                        	MotivationalMessageClassification.reminder, 
-                                        	MotivationalMessageSubclassification.session_performance_alert, 
-                                        	treatment, 
-                                        	treatment.getLastSessionEnd()))
-		// si no he recibido una performed session en el intervalo de performing interval
-		// y no he mandado mensaje al usuario
-	then
-	//mandar mensaje al usuario para que haga la sesi�n o introduzca la medida.	S�lo v�lido para action...
-		MessageVariables.addToMapOfVariables("treatmentName", treatment.getName());
-		
-        MessageManager.sendMessageToAssistedPerson(HeartFailure.MY_URI, 
-        								Treatment.MY_URI,
-                                        MotivationalStatusType.action, 
-                                        MotivationalMessageClassification.reminder, 
-                                        MotivationalMessageSubclassification.session_performance_alert, 
-                                        treatment);
-        System.out.println("Assisted person notified of not received performed session");
-end
 
-rule "Session not performed in extra interval" 
-// esta regla se lanza cada 5 minutos
-	when
-		treatment: Treatment4Rules(lss:lastSessionStart, lse:lastSessionEnd, lsewei:lastSessionWithExtraInterval, n:now) // no coge los getters
-		eval(n >lsewei) // ahora esta dentro del performing interval
-		not PerformedSession(associatedTreatment == treatment)// no se ha recibido una PS que tenga nuestro tratamiento asociado
-	then
-		//la sesi�n no se ha realizado.
-		SessionNotPerformed snp = new SessionNotPerformed(lss,treatment);
-		insert(snp);
-		//introducir un objeto de una clase en la wm para avisar que la sesi�n no se ha hecho
-		//tendr� que eliminarse en la regla que se active del fichero correspondiente.
-        System.out.println("Assisted person hasn't performed last session");
-end
+
+/*
+
+
+
+*/
+
+
+
+
 
 /*
 

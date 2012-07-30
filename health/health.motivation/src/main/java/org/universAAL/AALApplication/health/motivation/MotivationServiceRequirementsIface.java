@@ -17,6 +17,8 @@ public interface MotivationServiceRequirementsIface {
 	public User getAssistedPerson();
 	public String getAPGenderArticle();
 	public String getAPPosesiveGenderArticle();
+	public String getCaregiverGenderArticle();
+	public String getCaregiverPosesiveGenderArticle();
 	
 	
 

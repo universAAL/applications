@@ -22,6 +22,8 @@ import org.universaal.ontology.health.owl.Treatment;
 public class MotivationalPlainMessage extends MotivationalMessage {
   public static final String MY_URI = MessageOntology.NAMESPACE
     + "MotivationalTextMessage";
+  
+  
 
 //CONSTRUCTORS
   public MotivationalPlainMessage () {
@@ -38,8 +40,9 @@ public class MotivationalPlainMessage extends MotivationalMessage {
   }
   */
   
-  public MotivationalPlainMessage(String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, MotivationalMessageSubclassification msubtype, String content){
-	  super(illness, ttype, motStatus, mtype, msubtype, content);
+  public MotivationalPlainMessage(String name, String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, MotivationalMessageSubclassification msubtype, String content){
+	  super(name, illness, ttype, motStatus, mtype, msubtype, content);
+	  
   }
   
   public String getClassURI() {
@@ -53,4 +56,7 @@ public class MotivationalPlainMessage extends MotivationalMessage {
   public boolean isWellFormed() {
 	return true;
   }
+
+ 	
+
 }

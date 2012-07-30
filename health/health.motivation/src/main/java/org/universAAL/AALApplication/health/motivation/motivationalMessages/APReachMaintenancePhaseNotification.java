@@ -12,7 +12,8 @@ public class APReachMaintenancePhaseNotification implements MotivationalMessageC
 
 	String content = "Good $partOfDay $caregiverName! $userName has performed the 85% of the treament $treatmentName.";
 
-	MotivationalPlainMessage treatmentMaintenancePhaseReachedNotificationToCaregiver = new MotivationalPlainMessage (HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.action, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_agreement, content);
+	String name = "Message sent to caregiver when AP reaches the maintenance phase";
+	MotivationalPlainMessage treatmentMaintenancePhaseReachedNotificationToCaregiver = new MotivationalPlainMessage (name, HeartFailure.MY_URI, Treatment.MY_URI, MotivationalStatusType.action, MotivationalMessageClassification.notification, MotivationalMessageSubclassification.treatment_performance_agreement, content);
 
 	
 	public Object getMessageContent() {

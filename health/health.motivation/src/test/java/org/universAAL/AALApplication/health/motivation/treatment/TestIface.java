@@ -15,6 +15,8 @@ import org.drools.lang.DRLParser.decl_field_initialization_return;
 import org.universAAL.AALApplication.health.motivation.ClassesNeededRegistration;
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
+import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.DetectedTreatments;
 import org.universAAL.middleware.owl.DataRepOntology;
@@ -32,10 +34,13 @@ import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
+import org.universaal.ontology.owl.MotivationalMessageClassification;
+import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.MotivationalPlainMessage;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
 import org.universaal.ontology.owl.QuestionnaireStrategyOntology;
@@ -113,14 +118,29 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 		return false;
 	}
 
+	/*
+	public static boolean sentToAPContainsPlainMessage(String plainMessageName){
+		ArrayList <MotivationalMessage> prueba = motivationalMessagesSentToAP; 
+		for (int i=0;i<motivationalMessagesSentToAP.size();i++){
+			Object mm = motivationalMessagesSentToAP.get(i).getContent();
+
+			if( mm instanceof String){ // si el contenido es tipo String entonces estamos ante un PlainMessge
+				String name = motivationalMessagesSentToAP.get(i).getMotivationalPlainMessageName();
+				if(name.equals(plainMessageName))
+					return true;
+			}
+		}
+		return false;
+	}
+	*/
 	public static boolean sentToCaregiverContainsPlainMessage(String plainMessageContent){
 
 		for (int i=0;i<motivationalMessagesSentToCaregiver.size();i++){
 
-			Object mm = motivationalMessagesSentToCaregiver.get(i).getContent();
+			Object mmc = motivationalMessagesSentToCaregiver.get(i).getContent();
 
-			if( mm instanceof String){
-				String content = (String) mm;
+			if( mmc instanceof String){
+				String content = (String) mmc;
 				if(content.equals(plainMessageContent))
 					return true;
 			}
@@ -156,8 +176,12 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 	}
 
 
-	public static boolean messageSentToAPSince(String plainMessageContent, XMLGregorianCalendar sinceTime) throws Exception{
+	public static boolean messageSentToAPSince(String diseaseURI, String treatmentURI, MotivationalStatusType mst, MotivationalMessageClassification mmc, MotivationalMessageSubclassification mmsc, Treatment t, XMLGregorianCalendar sinceTime) throws Exception{
 
+		MessageVariables.addToMapOfVariables("treatmentName", t.getName());
+		
+		MotivationalMessage mm = MessageManager.getMessageToSendToUser(diseaseURI, treatmentURI, mst, mmc, mmsc);
+		String plainMessageContent = (String) mm.getContent();
 		XMLGregorianCalendar now = SchedulingTools.getNow();
 
 		if(!sentToAPContainsPlainMessage(plainMessageContent))
@@ -167,12 +191,12 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 
 			for (int i=0;i<motivationalMessagesSentToAP.size();i++){
 
-				Object mm = motivationalMessagesSentToAP.get(i).getContent();
+				Object mmContent = motivationalMessagesSentToAP.get(i).getContent();
 				MotivationalMessage motmes = motivationalMessagesSentToAP.get(i);
 				XMLGregorianCalendar sentDate = motmes.getSentDate();
 
-				if( mm instanceof String){
-					String content = (String) mm;
+				if( mmContent instanceof String){
+					String content = (String) mmContent;
 					if(content.equals(plainMessageContent))// el cuestionario est� en los mensajes enviados al AP
 						if(sentDate.compare(sinceTime) == DatatypeConstants.GREATER && sentDate.compare(now)== DatatypeConstants.LESSER )
 							return true;
@@ -180,7 +204,6 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 			}
 			return false;
 		}
-
 	}
 
 
@@ -235,6 +258,14 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 
 	public String getAPPosesiveGenderArticle() {
 		return "his";
+	}
+
+	public String getCaregiverGenderArticle() {
+		return "her";
+	}
+
+	public String getCaregiverPosesiveGenderArticle() {
+		return "her";
 	}
 
 
