@@ -633,10 +633,8 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APDisagreeToFollowTreatmentNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APEndedTreatmentRewardMessage.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APEndedTreatmentRightlyNotification.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APEndedTreatmentWrightlyNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/APReachMaintenancePhaseNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/MotivationalMessageContent.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/SessionPerformanceNotReceivedActionAlertNotification.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/SessionPerformanceNotReceivedActionAlertReminder.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentCancelledNotificationPrecont.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentDetectionMessage.java -text
@@ -660,7 +658,6 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/TreatmentTypeClassification.java -text
 health/health.motivation/src/main/resources/messagesDB/en_motivationalMessagesDB.csv -text
 health/health.motivation/src/main/resources/rules/ActionRules.drl -text
-health/health.motivation/src/main/resources/rules/ActionRules.dslr -text
 health/health.motivation/src/main/resources/rules/ContemplationRules.drl -text
 health/health.motivation/src/main/resources/rules/MaintenanceRules.dslr -text
 health/health.motivation/src/main/resources/rules/PrecontemplationRules.drl -text
