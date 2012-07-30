@@ -195,7 +195,7 @@ public class TestScheduleRules extends TestIface{
 
 	}
 	
-	/*
+	
 	@Test
 	//de momento la comprobación es sólo visual
 	public void testSessionNotPerformed() throws Exception{
@@ -204,9 +204,9 @@ public class TestScheduleRules extends TestIface{
 		GregorianCalendar endTime = new GregorianCalendar();
 		GregorianCalendar endDate = new GregorianCalendar();
 
-		startTime.add(Calendar.DAY_OF_YEAR, 3);
+		startTime.add(Calendar.DAY_OF_YEAR, -3);
 		startTime.add(Calendar.MINUTE, -155);
-		endTime.add(Calendar.DAY_OF_YEAR, 3);
+		endTime.add(Calendar.DAY_OF_YEAR, -3);
 		endTime.add(Calendar.MINUTE, (-95)); // estamos mas alla del intervalo extra
 
 		endDate.add(Calendar.DAY_OF_YEAR, 5);
@@ -225,11 +225,11 @@ public class TestScheduleRules extends TestIface{
 		System.out.println("Ahora: " + t4r2.getNow());
 		System.out.println("LSEWEI: " + t4r2.getLastSessionEndWithExtraTime());
 		
-		//ksession.insert(t4r2); //no introducimos ps
-		//ksession.fireAllRules();
+		ksession.insert(t4r2); //no introducimos ps
+		ksession.fireAllRules();
 	
 	}
-	*/
+	
 	
 	@Test
 	public void testAlertMessageInExtraInterval() throws DatatypeConfigurationException{
@@ -237,9 +237,9 @@ public class TestScheduleRules extends TestIface{
 		GregorianCalendar endTime = new GregorianCalendar();
 		GregorianCalendar endDate = new GregorianCalendar();
 
-		startTime.add(Calendar.DAY_OF_YEAR, 3);
+		startTime.add(Calendar.DAY_OF_YEAR, -3);
 		startTime.add(Calendar.MINUTE, -65);
-		endTime.add(Calendar.DAY_OF_YEAR, 3);
+		endTime.add(Calendar.DAY_OF_YEAR, -3);
 		endTime.add(Calendar.MINUTE, (-5)); // estamos en el intervalo extra
 
 		endDate.add(Calendar.DAY_OF_YEAR, 5);
@@ -255,7 +255,7 @@ public class TestScheduleRules extends TestIface{
 		Treatment4Rules t4r4 = new Treatment4Rules(wt);
 		
 		
-		//ksession.insert(t4r4); //no introducimos ps
-		//ksession.fireAllRules();
+		ksession.insert(t4r4); //no introducimos ps
+		ksession.fireAllRules();
 	}
 }
