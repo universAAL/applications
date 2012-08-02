@@ -2969,6 +2969,7 @@ long_term_behav/drools.reasoner/src/main/resources/persistence.xml -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerAuxClasses.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerRaw.drl -text
+long_term_behav/ltba.ui/pom.xml -text
 long_term_behav/ont.drools/pom.xml -text
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/Activator.java -text
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/Consequence.java -text
