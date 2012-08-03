@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>B.0</version>
+	</parent>
+	<groupId>org.universAAL.AALapplication</groupId>
+	<artifactId>drools.pom</artifactId>
+	<version>B.0.1</version>
+	<packaging>pom</packaging>
+	<name>The Drools Reasoner POM file</name>
+	<description>The Drools Reasoner POM file</description>
+	<modules>
+		<module>../ont.drools</module>
+		<module>../drools.reasoner</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<artifactId>ont.drools</artifactId>
+				<groupId>org.universaal.ontology</groupId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+</project>
