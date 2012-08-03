@@ -192,7 +192,7 @@ public class SCaller {
 		if (o instanceof String) {
 		    calOwnerName = (String) o;
 		    log.info("Calendar owner: " + calOwnerName
-			    + "sucessfully retrieved for calendar: "
+			    + " sucessfully retrieved for calendar: "
 			    + calendarName);
 		}
 		if (o == null)
