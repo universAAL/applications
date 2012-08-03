@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>B.0</version>
+	</parent>
+	<groupId>org.universAAL.AALapplication</groupId>
+	<artifactId>ltba.pom</artifactId>
+	<version>B.0.1</version>
+	<packaging>pom</packaging>
+	<name>POM file for LTBA project</name>
+	<description>POM file for LTBA project</description>
+	<modules>
+		<module>../ltba.ont</module>
+		<module>../ltba.manager</module>
+		<module>../ltba.publisher</module>
+		<module>../ltba.ui</module>
+	</modules>
+	<dependencyManagement>
+	<dependencies>
+			<dependency>
+			<groupId>org.universaal.middleware</groupId>
+			<artifactId>mw.data.representation</artifactId>			
+		</dependency>
+		<dependency>
+			<groupId>org.universaal.middleware</groupId>
+			<artifactId>mw.bus.service</artifactId>
+		</dependency>
+		<dependency>
+			<artifactId>ont.drools</artifactId>
+			<groupId>org.universaal.ontology</groupId>
+			<version>B.0.1</version>
+		</dependency>
+		<dependency>
+			<artifactId>drools.reasoner</artifactId>
+			<groupId>org.universaal.aalapplication</groupId>
+			<version>B.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.activityhub</artifactId>
+			<version>0.0.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.ltba</artifactId>
+			<version>B.0.1</version>
+		</dependency>
+	</dependencies>
+	</dependencyManagement>
+</project>
