@@ -2961,6 +2961,7 @@ long_term_behav/drools.reasoner/Drools_basic_step_by_step.launch -text
 long_term_behav/drools.reasoner/LTBA_Publisher_B.0.1_OSGI_enterprise.launch -text
 long_term_behav/drools.reasoner/META-INF/persistence.xml -text
 long_term_behav/drools.reasoner/OSGi_Enterprise.launch -text
+long_term_behav/drools.reasoner/artifact.composite -text
 long_term_behav/drools.reasoner/persistence.xml -text
 long_term_behav/drools.reasoner/pom.xml -text
 long_term_behav/drools.reasoner/src/main/resources/META-INF/persistence.xml -text
