@@ -10,8 +10,7 @@
 	<artifactId>ltba.ui</artifactId>
 	<version>B.0.1</version>
 	<packaging>bundle</packaging>
-	<name>Drools user interface.</name>
-	<description>The rules engine service user interface.</description>
+	<name>LTBA user interface.</name>
 	<dependencies>
 		<dependency>
 			<artifactId>ont.drools</artifactId>
@@ -49,6 +48,7 @@
 			<version>1.1.0</version>
 		</dependency>
 	</dependencies>
+	<description>The LTBA service user interface.</description>
 	<build>
 		<plugins>
 			<plugin>
