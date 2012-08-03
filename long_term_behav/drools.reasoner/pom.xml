@@ -9,8 +9,8 @@
 	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>drools.reasoner</artifactId>
 	<version>B.0.1</version>
-	<name />
-	<description />
+	<name >Drools reasoner</name>
+	<description >The Drools based reasoner</description>
 	<packaging>bundle</packaging>
 	<dependencies>
 		<dependency>
