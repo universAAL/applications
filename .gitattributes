@@ -2983,6 +2983,7 @@ long_term_behav/ltba.publisher/OSGi_Enterprise_LTBA.launch -text
 long_term_behav/ltba.publisher/pom.xml -text
 long_term_behav/ltba.ui/artifact.composite -text
 long_term_behav/ltba.ui/pom.xml -text
+long_term_behav/ont.drools/artifact.composite -text
 long_term_behav/ont.drools/pom.xml -text
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/Activator.java -text
 long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/Consequence.java -text
