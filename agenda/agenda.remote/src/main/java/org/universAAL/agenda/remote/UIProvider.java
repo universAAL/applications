@@ -111,8 +111,8 @@ public class UIProvider extends UICaller {
 	    // 305
 	    // check Alvaro tip: if button is pressed but not handled result is
 	    // return to main menu
-	    else if (submit.equals("home")) {
-		log.debug("Processing Input: Home");
+	    else if (submit.equals("agenda_home")) {
+		log.debug("Processing Input: Agenda Home");
 		// event = new UIResponse(user, null/*
 		// * newPLocation(
 		// * MiddlewareConstants .
@@ -120,6 +120,7 @@ public class UIProvider extends UICaller {
 		// * +"Internet")
 		// */,
 		// InputEvent.uAAL_MAIN_MENU_REQUEST);
+		showInitialScreen(remoteLoggedUser);	
 		submit = null;
 	    }
 
