@@ -131,18 +131,19 @@ public class AgendaWebGUI {
 
 		userSelect.addChoiceItem(new ChoiceItem(owner, null, owner));
 	    }
-	    // Submit
-	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
-		    Messages.getString("AgendaWebGUI.EditEvents"),
-		    (String) null), "editEventsForUser");
+	   
 	    
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.GetEventList"),
 		    (String) null), "get_event_list");
+	    // Submit
+	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
+		    Messages.getString("AgendaWebGUI.EditEvents"),
+		    (String) null), "editEventsForUser");
 	}	
 
 	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
-		.getString("AgendaWebGUI.Home"), (String) null), "home");
+		.getString("AgendaWebGUI.Home"), (String) null), "agenda_home");
 
 	return f;
 
@@ -392,7 +393,7 @@ public class AgendaWebGUI {
 	    // 219
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.Home"), (String) null),
-		    "home");
+		    "agenda_home");
 	}
 	return f;
 
@@ -409,9 +410,8 @@ public class AgendaWebGUI {
 		.getString("AgendaWebGUI.InfoAfterAddingEvent"));
 	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
 		.getString("AgendaWebGUI.AddNewEvent"), (String) null), "add");
-	// new Submit(submits, new
-	// org.universAAL.middleware.ui.rdf.Label(Messages
-	// .getString("AgendaWebGUI.Interval"), (String) null), "home");
+	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
+		.getString("AgendaWebGUI.Home"), (String) null), "agenda_home");
 	return f;
     }
 
@@ -451,7 +451,7 @@ public class AgendaWebGUI {
 		"Event_editor");
 	
 	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
-		.getString("AgendaWebGUI.Home"), (String) null), "home");
+		.getString("AgendaWebGUI.Home"), (String) null), "agenda_home");
 
 	// create Form
 	Group eventsGroup = new Group(controls,
