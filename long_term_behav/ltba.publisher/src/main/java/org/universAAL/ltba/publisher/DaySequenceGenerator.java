@@ -20,7 +20,7 @@ import org.universAAL.middleware.container.ModuleContext;
  */
 public class DaySequenceGenerator {
 
-	private Calendar cal;
+	private Calendar cal = Calendar.getInstance();;
 	private ModuleContext context;
 	private ActivityLogger alDemo;
 

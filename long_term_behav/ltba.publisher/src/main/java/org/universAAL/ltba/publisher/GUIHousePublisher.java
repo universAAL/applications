@@ -92,6 +92,8 @@ public class GUIHousePublisher extends JFrame {
 
 	public static void init(BundleContext ctx) {
 
+		context = ctx;
+
 		mc = uAALBundleContainer.THE_CONTAINER
 				.registerModule(new Object[] { context });
 
@@ -121,8 +123,6 @@ public class GUIHousePublisher extends JFrame {
 		initTimers();
 		initButtonListener();
 		initGUIElements();
-
-		context = ctx;
 
 		GUIHousePublisher ghp = getInstance();
 		ghp.setSize(640, 540);
