@@ -51,6 +51,7 @@ aal_eficiency/AALfficiencyService/src/main/java/org/universAAL/AALfficiency/mode
 aal_eficiency/AALfficiencyService/src/main/java/org/universAAL/AALfficiency/model/AALfficiencyScoreModel.java -text svneol=unset#text/plain
 aal_eficiency/AALfficiencyService/src/main/java/org/universAAL/AALfficiency/model/AdviceModel.java -text svneol=unset#text/plain
 aal_eficiency/AALfficiencyService/src/main/java/org/universAAL/AALfficiency/model/ChallengeModel.java -text svneol=unset#text/plain
+aal_eficiency/AALfficiencyService/src/main/java/org/universAAL/AALfficiency/utils/Setup.java -text svneol=unset#text/plain
 aal_eficiency/ont.aalfficiency/.classpath -text svneol=unset#text/plain
 aal_eficiency/ont.aalfficiency/.project -text svneol=unset#text/plain
 aal_eficiency/ont.aalfficiency/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
