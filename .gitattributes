@@ -597,6 +597,8 @@ food_shopping/utils/external-jars/food_shopping/jd2xx_20602.jar -text
 food_shopping/utils/external-jars/food_shopping/mysql-connector-java-5.1.18-bin.jar -text
 food_shopping/utils/foodShopping_v7.0_mw1.1.0.launch -text
 food_shopping/utils/install.bat -text
+health/PhysicalActivityMonitorModule/INSTALLATION[!!-~]&[!!-~]TESTING.txt -text
+health/PhysicalActivityMonitorModule/README.txt -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/LICENSE.txt -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/pom.xml -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/Activator.java -text
