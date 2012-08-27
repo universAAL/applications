@@ -22,6 +22,7 @@ help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/me
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_en_US.properties -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es.properties -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es_ES.properties -text
+help_when_out/hwo.pom/pom.xml -text
 help_when_out/hwo.servlet/help_when_outdoor_1.1.0.launch -text
 help_when_out/hwo.servlet/pom.xml -text
 help_when_out/hwo.servlet/src/main/java/org/universAAL/AALapplication/helpwhenoutdoor/AbnormalSituationDetector.java -text
