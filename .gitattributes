@@ -1,4 +1,27 @@
 * text=auto !eol
+help_when_out/hwo.mobile/pom.xml -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Activator.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Caregiver.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Coordinates.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/DataStorage.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/HwoConsumer.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/HwoNamespace.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Line2D.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Line2DDouble.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Messages.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/POI.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/POI_UAAL.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/SCallee.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/SCalleeProvidedService.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/UImanager.java -text
+help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/WanderingDetector.java -text
+help_when_out/hwo.mobile/src/main/resources/android/handler/enviarSMS.jpg -text
+help_when_out/hwo.mobile/src/main/resources/android/handler/smsNoEnviado.gif -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_en.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_en_US.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es_ES.properties -text
 help_when_out/hwo.servlet/help_when_outdoor_1.1.0.launch -text
 help_when_out/hwo.servlet/pom.xml -text
 help_when_out/hwo.servlet/src/main/java/org/universAAL/AALapplication/helpwhenoutdoor/AbnormalSituationDetector.java -text
