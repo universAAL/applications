@@ -13,7 +13,6 @@ dojo.declare("org.persona.service.helpwhenoutside.MapEditor", org.persona.servic
      */
     constructor: function(){
     
-    
         this.SAFE_AREA_END_THRESHOLD = 0.05; // in Kilometers
         this.homeMarkerAlreadyAdded = false;
         
@@ -278,6 +277,8 @@ dojo.declare("org.persona.service.helpwhenoutside.MapEditor", org.persona.servic
      */
     drawArea: function(whichArea){
         // do nothing if no area is specified
+        
+        console.log("ESTOY EN DRAW AREA EN MAP EDITOR -> " + whichArea);
         if (whichArea == null) 
             return;
         // hide the POI options and set the Accordion pane title to Draw Options
@@ -293,6 +294,8 @@ dojo.declare("org.persona.service.helpwhenoutside.MapEditor", org.persona.servic
 			(homeArea == null || homeArea.getLength() < 1)
 			)
 		{
+		            console.log("voy a pedir los points 1");
+		
 			alert(translatedStrings['HOME_AREA_NOT_DRAWN']);
 			return;
 		}
@@ -301,6 +304,8 @@ dojo.declare("org.persona.service.helpwhenoutside.MapEditor", org.persona.servic
         
         // if there is an already existant area, delete it
         if (area != null) {
+                    console.log("voy a pedir los points 2");
+        
             map.removeOverlay(area);
         }
         area = mapData.clearArea(whichArea);
@@ -310,15 +315,20 @@ dojo.declare("org.persona.service.helpwhenoutside.MapEditor", org.persona.servic
 			var retString = this.checkArea(); 
 			
             if (retString == true) {
+            console.log("voy a pedir los points 3");
                 var areaName = (whichArea == mapData.AREAS.SAFE_AREA) ? 'safeArea' : 'homeArea'
                 mapController.sendToServer(areaName, mapData.getPoints(whichArea));
             }
             else {
+                        console.log("voy a pedir los points 4");
+            
                 alert(translatedStrings['NOT_CONTAINED']);
                 map.removeOverlay(area);
             }
             
         }));
+                    console.log("voy a pedir los points 5");
+        
         // let the user draw the safe area
         area.enableDrawing();
         

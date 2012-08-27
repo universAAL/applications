@@ -140,7 +140,7 @@ public class DataStorage {
 	 * @return
 	 */
 	public Vector getArea(String which) {
-
+System.out.println("WHICH " + which);
 		String fileName;
 		if (which == null || which.equals(""))
 			return null;
@@ -165,7 +165,7 @@ public class DataStorage {
 				double lat = Double.parseDouble(st.nextToken());
 				double lng = Double.parseDouble(st.nextToken());
 				areaPoint.add(new Point(lat, lng, CoordinateSystem.WGS84));
-
+System.out.println("añadiendo punto del area " + lat + " " + lng + " which " + which);
 			}
 
 		} catch (FileNotFoundException e) {

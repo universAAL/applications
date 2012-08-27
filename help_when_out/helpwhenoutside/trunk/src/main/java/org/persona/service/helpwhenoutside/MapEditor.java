@@ -34,7 +34,6 @@ public class MapEditor extends org.universAAL.ri.servicegateway.GatewayPort {
 
 		this.dataService = dataService;
 		dataStorage = DataStorage.getInstance(); 
-	
 	}
 
 	/*
@@ -50,7 +49,7 @@ public class MapEditor extends org.universAAL.ri.servicegateway.GatewayPort {
 		/*if (handleAuthorization(req, resp) == false)
 			return;
 */
-
+		System.out.println("DO GET");
 		PrintWriter out = resp.getWriter();
 		resp.setHeader("Cache-Control", "no-store, no-cache");
 		/*
@@ -63,9 +62,11 @@ public class MapEditor extends org.universAAL.ri.servicegateway.GatewayPort {
 		 * serviceData=getHistory -> send the location history
 		 */
 		String dataParameter = req.getParameter("serviceData");
+		System.out.println("dataParameter " + dataParameter);
 		if (dataParameter != null && dataParameter.equals("all")) {
 			resp.setContentType("text/xml");
 			String xmlString = dataService.getAllData();
+			System.out.println("estoy en doget, devolviendo datos..." +xmlString );
 			out.println(xmlString);
 
 		}
@@ -89,7 +90,7 @@ public class MapEditor extends org.universAAL.ri.servicegateway.GatewayPort {
 		}
 		// load the whereis.html file, including the JavaScript resources
 		else {
-
+			System.out.println("cargando la pagina web...");
 			InputStream htmlIS = this.getClass().getClassLoader()
 					.getResourceAsStream("helpwhenoutside/mapeditor.html");
 

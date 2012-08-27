@@ -168,7 +168,7 @@ public class HelpWhenOutsideXMLDataService implements
 			StreamResult xmlResult = new StreamResult(sw);
 			DOMSource source = new DOMSource(serviceDoc);
 			transformer.transform(source, xmlResult);
-			log.info("Writing XML document for Help When Outside");
+			log.info("Writing XML document for Help When Outside, devolviendo el xml document structure");
 			return sw.toString();
 		} catch (TransformerConfigurationException e) {
 			// TODO Auto-generated catch block
@@ -237,7 +237,7 @@ public class HelpWhenOutsideXMLDataService implements
 			// TODO: handle DOM errors
 			e.printStackTrace();
 		}
-		
+		System.out.println("service doc " + serviceDoc.toString());
 		
 		return write(serviceDoc);
 	}

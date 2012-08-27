@@ -80,6 +80,7 @@ dojo.declare("org.persona.service.helpwhenoutside.MapData", null, // parent
     },
     
     setHomePosition: function(lat, lng){
+    console.log("set home position " + lat + " long " + lng);
         this.homePosition[0] = lat;
         this.homePosition[1] = lng;
     },
@@ -111,10 +112,12 @@ dojo.declare("org.persona.service.helpwhenoutside.MapData", null, // parent
      */
     getPoints: function(whichArea){
         // whichArea is an index for the array, it must be <= 1
+ console.log("GET AREA EN MAPDATA. which area " + whichArea);	       
 		if (whichArea > 1)
 			return null;
-			
+		
 		var area = this.areaPolylines[whichArea];
+		if (area!=null) console.log("area es distinto de null");
 		var nv = area.getVertexCount(); 
         var points = []
         for (var i = 0; i < nv; ++i) {
@@ -151,6 +154,11 @@ dojo.declare("org.persona.service.helpwhenoutside.MapData", null, // parent
 			console.debug("getArea: wrong area specified");
 			return null;
 		}
+		
+				if (this.areaPolylines!=null) 
+		console.log("are poly... distinto de null");
+		
+				console.log("MAPDATA.JS -> getArea, antes de enviar el areaPolylines[whichArea] " +  " which area " + whichArea);
 		
 		return this.areaPolylines[whichArea];
        	        
