@@ -1,4 +1,0 @@
-#CSV file with the following fields:
-#end date (gg/mm/yyyy), end time (hh:mm), begin date (gg/mm/yyyy), begin time (hh:mm), appointment address, appointment description
-#please note that appointments must be ordered by end date, end time
-03/03/2009, 18:15, 03/03/2009, 17:15, Calle de Yecla 10 Valencia, birthday party
