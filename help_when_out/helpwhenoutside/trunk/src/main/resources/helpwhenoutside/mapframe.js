@@ -193,20 +193,29 @@ dojo.declare("org.persona.service.helpwhenoutside.MapFrame", null, // parent
         // If no safe area is available, the world map is shown, 
         // centering on the coordinate (0,0) at minimum zoom level
         var homePosition = mapData.getHomePosition();
+         
+        console.log("home position 0 " + homePosition[0] + " home position 1 " + homePosition[1]);
         var zoomLevel = 15;
         var safeArea = mapData.getArea(mapData.AREAS.SAFE_AREA);
+                console.log("MAPFRAME.JS -> showData, antes de mapData.getArea");
+        
         var homeArea = mapData.getArea(mapData.AREAS.HOME_AREA);
+        console.log("MAPFRAME.JS -> showData, despues de mapData.getArea vertex " + homeArea.getVertexCount() + " mapData.AREAS.HOME_AREA " + mapData.AREAS.HOME_AREA + " homeArea.length " + homeArea.length);
+        
         if (homePosition[0] == null || homePosition[1] == null) {
             // initializes the values to the Equator
             homePosition[0] = 0.0;
             homePosition[1] = 0.0;
-            
+            console.log("MAPFRAME.JS -> showData, SAFE AREA " + safeArea + " vertex count " + safeArea.getVertexCount());
             if (safeArea != null && safeArea.getVertexCount() > 1) {
+            console.log("MAPFRAME.JS -> showData, antes de mapData.getPoints('safeArea')");
                 var points = mapData.getPoints('safeArea');
+                console.log("MAPFRAME.JS -> showData, despues de mapData.getPoints('safeArea') points...." + points);
                 // add all the points on the safe area to find the center
                 for (var i = 0; i < points.length; ++i) {
                     homePosition[0] = homePosition[0] + parseFloat(points[i].lat);
                     homePosition[1] = homePosition[1] + parseFloat(points[i].lon);
+                    console.log("home position i " + i + " lat " + points[i].lat + " lon " + points[i].lon);
                 }
                 // normalize the values
                 homePosition[0] = homePosition[0] / points.length;

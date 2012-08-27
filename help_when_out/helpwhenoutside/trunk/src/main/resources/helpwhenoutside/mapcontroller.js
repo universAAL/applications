@@ -11,7 +11,7 @@ dojo.declare("org.persona.service.helpwhenoutside.MapController", null, // paren
     },
     
     loadDataFromServer: function(whichData, callback){
-
+console.log(" which en map controller " + whichData + " servletURL " + this.servletURL);
         dojo.xhrGet({
             url: this.servletURL + "?serviceData=" + whichData,
             handleAs: 'xml',
@@ -19,6 +19,7 @@ dojo.declare("org.persona.service.helpwhenoutside.MapController", null, // paren
 			{	
 				// TODO: at the moment ioArgs is not passed to the
 				// handle function
+				console.log("RESPONSE " + response);
 				this.dataLoaded(response, callback)
 			}),
             error: function(response, ioArgs){
