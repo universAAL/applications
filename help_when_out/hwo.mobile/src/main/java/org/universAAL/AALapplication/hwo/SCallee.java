@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
-import org.universAAL.AALapplication.personal_safety.sms.owl.EnvioSMSService;
+//import org.universAAL.AALapplication.personal_safety.sms.owl.EnvioSMSService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.service.ServiceCall;
@@ -237,10 +237,11 @@ protected SCallee(ModuleContext context, ServiceProfile[] realizedServices) {
 		// SMS
 	
 	 private ServiceRequest sendSMS(String txt,String num){
-			ServiceRequest sendSMS = new ServiceRequest(new EnvioSMSService(null), null);
+/*			ServiceRequest sendSMS = new ServiceRequest(new EnvioSMSService(null), null);
 			sendSMS.getRequestedService().addInstanceLevelRestriction(MergedRestriction.getFixedValueRestriction(EnvioSMSService.PROP_MANDA_TEXTO,new String(txt)),new String[] { EnvioSMSService.PROP_MANDA_TEXTO });
 			sendSMS.getRequestedService().addInstanceLevelRestriction(MergedRestriction.getFixedValueRestriction(EnvioSMSService.PROP_TIENE_NUMERO, new String(num)),new String[] { EnvioSMSService.PROP_TIENE_NUMERO });
-			return sendSMS;
+			return sendSMS;*/
+		 return null;
 	 }
 	 
 	public boolean SendSMS(String txt, String number){
