@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>hwo.pom</artifactId>
-	<version>C.0</version>
+	<version>C.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Help When Outdoor AAL Service</name>

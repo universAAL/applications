@@ -129,9 +129,9 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>C.0</version>
+		<version>C.0.1-SNAPSHOT</version>
 		<relativePath>../hwo.pom</relativePath>
 	</parent>
-	<version>C.0.1</version>
+	<version>C.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 </project>
