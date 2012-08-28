@@ -5,12 +5,12 @@
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0</version>
+		<version>C.0</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 
 	<artifactId>hwo.pom</artifactId>
-	<version>B.0</version>
+	<version>C.0</version>
 	<packaging>pom</packaging>
 
 	<name>Help When Outdoor AAL Service</name>

@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>help_when_outdoor.servlet</artifactId>
+  <artifactId>hwo.servlet</artifactId>
   <name>Help When Outdoor</name>
   <description/>
     <dependencies>
@@ -11,23 +11,19 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.data.representation</artifactId>
-			<version>1.1.0</version>
+			<artifactId>mw.data.representation.osgi</artifactId>
 		</dependency>
 		<dependency> 
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.ui</artifactId>
-			<version>1.1.0</version>
+			<artifactId>mw.bus.ui.osgi</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.service</artifactId>
-			<version>1.1.0</version>
+			<artifactId>mw.bus.service.osgi</artifactId>
 		</dependency>
 		<dependency>
    			<groupId>org.universAAL.ontology</groupId>
    			<artifactId>ont.phWorld</artifactId>
-   			<version>1.1.0</version>
 		</dependency>
 		
 		
@@ -53,23 +49,20 @@
 		
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context</artifactId>
-			<version>1.1.0</version>
+			<artifactId>mw.bus.context.osgi</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
-			<version>1.1.0</version>
+			<version>1.2.0</version>
 		</dependency>
 		<dependency>
 			 <groupId>org.universAAL.middleware</groupId>
 			 <artifactId>mw.container.osgi</artifactId>
-			 <version>1.1.0</version>
 		</dependency>
 		<dependency>
 			 <groupId>org.universAAL.middleware</groupId>
-			 <artifactId>mw.container.xfaces</artifactId>
-			 <version>1.1.0</version>
+			 <artifactId>mw.container.xfaces.osgi</artifactId>
 		</dependency>
 		
 		<dependency>
@@ -136,9 +129,9 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>B.0</version>
+		<version>C.0</version>
 		<relativePath>../hwo.pom</relativePath>
 	</parent>
-	<version>B.0.1</version>
+	<version>C.0.1</version>
 	<packaging>bundle</packaging>
 </project>
