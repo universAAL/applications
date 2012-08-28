@@ -860,7 +860,6 @@ health/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/Activator
 health/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/QuestionnaireStrategyOntologyFactory.java -text
 health/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/Questionnaire4TreatmentStrategy.java -text
 health/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/QuestionnaireStrategyOntology.java -text
-help_when_out/Info/Testing[!!-~]the[!!-~]Application.docx -text
 help_when_out/data/GoogleNavigation.apk -text
 help_when_out/data/felix-conf-1.1.0/android.shell-1.4.2.jar -text
 help_when_out/data/felix-conf-1.1.0/auto/hwo.mobile-0.1.0-SNAPSHOT.jar -text
