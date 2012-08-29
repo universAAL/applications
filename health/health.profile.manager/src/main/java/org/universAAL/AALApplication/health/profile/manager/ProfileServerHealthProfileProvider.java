@@ -52,11 +52,13 @@ import org.universaal.ontology.health.owl.HealthProfile;
  * @author amedrano
  *
  */
-public class ProfileServerManager {
+public class ProfileServerHealthProfileProvider implements HealthProfileProvider {
 
 	protected static final String OUTPUT_SUB_PROFILE = HealthOntology.NAMESPACE + "subProfile";
 
-	private static final String ARG_OUT = HealthOntology.NAMESPACE + "argOut";;
+	private static final String ARG_OUT = HealthOntology.NAMESPACE + "argOut";
+	
+	private static final String MODULE = "ProfileServerManager";
 
 	/**
 	 * Needed for making service requests
@@ -70,7 +72,7 @@ public class ProfileServerManager {
 	 * 
 	 * @param context
 	 */
-	public ProfileServerManager(ModuleContext context) {
+	public ProfileServerHealthProfileProvider(ModuleContext context) {
 
 		moduleContext = context;
 
@@ -78,13 +80,8 @@ public class ProfileServerManager {
 		caller = new DefaultServiceCaller(context);
 	}
 
-	/**
-	 * Returns the {org.universAAL.ontology.profile.health.HealthProfile} of the
-	 * given user.
-	 * 
-	 * @param userURI The URI of the user
-	 * 
-	 * @return The health profile of the user
+	/* (non-Javadoc)
+	 * @see org.universAAL.AALApplication.health.profile.manager.HealthProfileProviderInterface#getHealthProfile(java.lang.String)
 	 */
 	/*
 	public HealthProfile getHealthProfile(String userURI) {
@@ -135,7 +132,7 @@ public class ProfileServerManager {
 			}
 		}
 		else {
-			moduleContext.logError("No User Profile Found", null);
+			moduleContext.logError(MODULE,"No User Profile Found", null);
 			return null;
 		}
 	}
@@ -160,14 +157,12 @@ public class ProfileServerManager {
 			return null;
 		}
 		*/
-		moduleContext.logDebug("Created new Health Profile", null);
+		moduleContext.logDebug(MODULE,"Created new Health Profile", null);
 		return hp;
 	}
 
-	/**
-	 * Updates the {org.universAAL.ontology.profile.health.HealthProfile}.
-	 *  
-	 * @param healthProfile The updated health profile
+	/* (non-Javadoc)
+	 * @see org.universAAL.AALApplication.health.profile.manager.HealthProfileProviderInterface#updateHealthProfile(org.universaal.ontology.health.owl.HealthProfile)
 	 */
 	/*
 	public void updateHealthProfile(HealthProfile healthProfile) {
@@ -187,7 +182,7 @@ public class ProfileServerManager {
 	public void updateHealthProfile(HealthProfile healthProfile) {
 		AssistedPersonProfile app = getProfile(healthProfile.getAssignedAssistedPerson());
 		if (app == null) {
-			moduleContext.logError("unable to retrieve AssistedPersonProfile", null);
+			moduleContext.logError(MODULE,"unable to retrieve AssistedPersonProfile", null);
 			return;
 		}
 		
@@ -196,13 +191,13 @@ public class ProfileServerManager {
 		if (!app.hasProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE)
 				|| subprf == null
 				|| subprf instanceof HealthProfile) {
-			moduleContext.logDebug("adding single Health Profile", null);
+			moduleContext.logDebug(MODULE,"adding single Health Profile", null);
 			app.setProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE, healthProfile);
 			//moduleContext.logDebug("HP set to: " 
 			//		+ ((Resource) app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE)).getLocalName(), null);
 		}
 		else {
-			moduleContext.logDebug("managing multiple sub profiles", null);
+			moduleContext.logDebug(MODULE,"managing multiple sub profiles", null);
 			List<Resource> subprofiles;
 			if (subprf instanceof List) {
 				subprofiles = (List<Resource>) subprf;
@@ -217,12 +212,12 @@ public class ProfileServerManager {
 			app.setProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE, subprofiles);
 		}
 		
-		moduleContext.logDebug("Performing update Profile", null);
+		moduleContext.logDebug(MODULE, "Performing update Profile", null);
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null),	null);
 		req.addChangeEffect(new String[] { ProfilingService.PROP_CONTROLS,
 				Profilable.PROP_HAS_PROFILE }, app);
 		ServiceResponse resp = caller.call(req);
-		moduleContext.logDebug("Updating HealthProfile: " + resp.getCallStatus().name(), null);
+		moduleContext.logDebug(MODULE, "Updating HealthProfile: " + resp.getCallStatus().name(), null);
 	}
 	/**
 	 * Copied from org.universAAL.context.prof.serv.ArtifactIntegrationTest
@@ -288,12 +283,12 @@ public class ProfileServerManager {
 					return (HealthProfile) su;
 				} 
 				else {
-					moduleContext.logError("No health profile found", null);
+					moduleContext.logError(MODULE,"No health profile found", null);
 					return null;
 				}
 			}
 		}
-		moduleContext.logError("no subprofiles found", null);
+		moduleContext.logError(MODULE, "no subprofiles found", null);
 		return null;
 	}
 }

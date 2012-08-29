@@ -25,15 +25,17 @@ public class ProjectActivator implements BundleActivator {
 
 	static ModuleContext context;
 
+	private static final String MODULE = "health.profile.manager";
+	
 	public void start(BundleContext arg0) throws Exception {	
 		context = uAALBundleContainer.THE_CONTAINER
                 .registerModule(new Object[] {arg0});	
-		context.logDebug("Initialising Project", null);
+		context.logDebug(MODULE, "Initialising Project", null);
 
 		/*
 		 * uAAL stuff
 		 */
-		context.logInfo("Project started", null);
+		context.logInfo(MODULE, "Project started", null);
 	}
 
 
