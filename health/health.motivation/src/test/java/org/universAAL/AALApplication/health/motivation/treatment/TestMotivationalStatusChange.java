@@ -252,16 +252,16 @@ public Treatment generateTreatment4Test() throws Exception{
 	
 	// Probar los metodos al contrario: en sentido descendente:
 	
-	
+	*/
 	@Test
 	public void testChangeToPrecontemplationFromContemplation(){
 		
 		wmt1.setMotivationalStatus(MotivationalStatusType.contemplation);
 		
-		//PerformedSessionsSupport pss = new PerformedSessionsSupport(wmt1);
-		//pss.setNumberOfConsecutiveNonPerformedSessionsCont(3);
-		//Treatment treatmentTest = pss.getAssociatedTreatment();
-		PerformedSessionsSupport pss4wmt1 = new PerformedSessionsSupport(wmt1, 3, 0, 0);
+		PerformedSessionsSupport pss = new PerformedSessionsSupport(wmt1);
+		pss.setNumberOfConsecutiveNonPerformedSessionsCont(3);
+		Treatment treatmentTest = pss.getAssociatedTreatment();
+		//PerformedSessionsSupport pss4wmt1 = new PerformedSessionsSupport(wmt1, 3, 0, 0);
 		
 		ksession.update(wmt1ChangingStatus, wmt1);
 		ksession.fireAllRules();
@@ -276,7 +276,7 @@ public Treatment generateTreatment4Test() throws Exception{
 		Assert.assertEquals(true, wmt1.getMotivationalStatus()== MotivationalStatusType.precontemplation);
 		
 	}
-	*/
+	
 	
 	@Test
 	public void testChangeToContemplationFromAction(){
@@ -324,7 +324,7 @@ public Treatment generateTreatment4Test() throws Exception{
 		Assert.assertEquals(true, TestIface.sentToCaregiverContainsPlainMessage(contentExpected));
 	}
 	
-	/*
+	
 	@Test
 	public void testTreatmentActivation() throws Exception{
 		
@@ -358,7 +358,7 @@ public Treatment generateTreatment4Test() throws Exception{
 	
 	}
 	
-	*/
+	
 	@Test
 	public void testTreatmentCancelation(){
 		wmt1.setStatus(StatusType.cancelled);

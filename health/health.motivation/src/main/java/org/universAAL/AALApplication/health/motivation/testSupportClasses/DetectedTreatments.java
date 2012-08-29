@@ -26,14 +26,18 @@ public class DetectedTreatments {
 	
 	public static boolean containsTreatment(Treatment t){
 		
-		for (int i=0;i<detectedTreatments.size();i++){
+		/*for (int i=0;i<detectedTreatments.size();i++){
 
 			Treatment treatment = detectedTreatments.get(i);
 
 			if(treatment.getName().equals(t.getName()))
 					return true;
 		}
-		return false;
+		return false;*/
+		if (detectedTreatments.contains(t))
+			return true;
+		else
+			return false;
 	}
 	
 	public static void deleteTreatmentFromDetectedTreatments(Treatment t){

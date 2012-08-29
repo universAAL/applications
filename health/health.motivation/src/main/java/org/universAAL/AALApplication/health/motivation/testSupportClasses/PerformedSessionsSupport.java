@@ -37,9 +37,9 @@ public class PerformedSessionsSupport {
 	}
 	
 	public PerformedSessionsSupport(Treatment t){
-		PerformedSessionsSupport pss = new PerformedSessionsSupport();
-		pss.setAssociatedTreatment(t);
-		mapOfPSSupport.put(t,pss);
+		//PerformedSessionsSupport pss = new PerformedSessionsSupport();
+		setAssociatedTreatment(t);
+		mapOfPSSupport.put(t,this);
 	}
 	
 	// Constructor para los tests, borrar cuando se arregle lo otro:
