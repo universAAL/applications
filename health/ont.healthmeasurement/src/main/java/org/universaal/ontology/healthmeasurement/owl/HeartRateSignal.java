@@ -27,7 +27,7 @@ public class HeartRateSignal extends Signal {
   public static final String PROP_IS_COMPOSED_BY = HealthMeasurementOntology.NAMESPACE
     + "isComposedBy";
   public static final String PROP_INTERVAL = HealthMeasurementOntology.NAMESPACE
-    + "PROP_INTERVAL";
+    + "PROP_INTERVAL";//eliminar, porque ya la tiene signal.
 
 
   public HeartRateSignal () {

@@ -39,7 +39,7 @@ public class MotivationalMessage extends Message {
 	+ "messageSubtype";
 
 	public static final String PROP_NAME = MessageOntology.NAMESPACE
-	  + "name";
+	  + "name"; // tengo que quitar esta propiedad?
 	
 	//CONSTRUCTORS
 
