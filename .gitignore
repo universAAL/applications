@@ -46,3 +46,7 @@ agenda/agenda.server/.classpath
 agenda/agenda.server/.project
 agenda/agenda.server/.settings
 agenda/agenda.server/target
+long_term_behav/ont.drools/.classpath
+long_term_behav/ont.drools/.project
+long_term_behav/ont.drools/.settings
+long_term_behav/ont.drools/target
