@@ -18,6 +18,8 @@ public class ArtifactTest extends IntegrationTest {
 	private static final String NAMESPACE = "http://ontology.upm.es/Test.owl#";
 	private static final String USER = "saied";
 
+	private static final String MODULE = "health.profile.manager";
+	
     private ServiceCaller caller;
     
     public ArtifactTest() {
@@ -36,23 +38,23 @@ public class ArtifactTest extends IntegrationTest {
     	ServiceRequest req = new ServiceRequest(new ProfilingService(null),	null);
     	req.addAddEffect(new String[] { ProfilingService.PROP_CONTROLS }, ap);
 
-    	ProjectActivator.context.logInfo("Calling new Assided Person Profile", null);
+    	ProjectActivator.context.logInfo(MODULE, "Calling new Assided Person Profile", null);
     	ServiceResponse r = caller.call(req);
     	
-    	ProjectActivator.context.logInfo("Adding Assisted Person Profile Result: " + r.getCallStatus().name(), null);
+    	ProjectActivator.context.logInfo(MODULE, "Adding Assisted Person Profile Result: " + r.getCallStatus().name(), null);
     	//assertTrue(.equals(CallStatus.succeeded));
     }
     
     public void testGetProfile() {
-    	ProjectActivator.context.logInfo("Testing get Health Profile", null);
-    	ProfileServerManager psm = new ProfileServerManager(ProjectActivator.context);
+    	ProjectActivator.context.logInfo(MODULE, "Testing get Health Profile", null);
+    	HealthProfileProvider psm = new ProfileServerHealthProfileProvider(ProjectActivator.context);
     	HealthProfile hp = psm.getHealthProfile(NAMESPACE+USER);
     	assertNotNull(hp);
     }
     
     public void testUpdateProfile() {
-    	ProjectActivator.context.logInfo("Testing update Health Profile", null);
-    	ProfileServerManager psm = new ProfileServerManager(ProjectActivator.context);
+    	ProjectActivator.context.logInfo(MODULE, "Testing update Health Profile", null);
+    	HealthProfileProvider psm = new ProfileServerHealthProfileProvider(ProjectActivator.context);
     	HealthProfile hp = psm.getHealthProfile(NAMESPACE+USER);
     	String treatmentName = "Take Weight measurement";
     	Treatment t = new TakeMeasurementActivity(treatmentName, "", null);

@@ -1,109 +1,76 @@
-/*******************************************************************************
- * Copyright 2012 UPM, http://www.upm.es 
- * Universidad Politécnica de Madrid
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- ******************************************************************************/
 package org.universAAL.AALApplication.health.profile.manager;
 
-import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.service.CallStatus;
-import org.universAAL.middleware.service.ServiceCall;
-import org.universAAL.middleware.service.ServiceCallee;
-import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.middleware.service.owls.process.ProcessOutput;
-import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.health.owl.services.GetProfileService;
-import org.universaal.ontology.health.owl.services.UpdateProfileService;
 
-/**
- * @author amedrano
- *
- */
-public class HealthProfileProvider extends ServiceCallee {
+public interface HealthProfileProvider {
 
-	static private ServiceProfile[] profiles
-		= new ServiceProfile[] { new GetProfileService().getProfile(), new UpdateProfileService().getProfile()};
-	
-    // prepare a standard error message for later use
-    private static final ServiceResponse invalidInput = new ServiceResponse(
-	    CallStatus.serviceSpecificFailure);
-    static {
-    	invalidInput.addOutput(new ProcessOutput(
-    			ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR, "Invalid input!"));
-    }
-
-	private ProfileServerManager psm;
-	
 	/**
-	 * @param context
-	 * @param realizedServices
+	 * Returns the {org.universAAL.ontology.profile.health.HealthProfile} of the
+	 * given user.
+	 * 
+	 * @param userURI The URI of the user
+	 * 
+	 * @return The health profile of the user
 	 */
-	protected HealthProfileProvider(ModuleContext context,
-			ServiceProfile[] realizedServices) {
-		super(context, realizedServices);
-		psm = new ProfileServerManager(context);
-	}
+	/*
+	public HealthProfile getHealthProfile(String userURI) {
 	
-	public HealthProfileProvider(ModuleContext context) {
-		this(context,profiles);
+		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
+		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, userURI);
+		req.addRequiredOutput(OUTPUT_SUB_PROFILE, new String[] { 
+				ProfilingService.PROP_CONTROLS, 
+				Profilable.PROP_HAS_PROFILE, 
+				Profile.PROP_HAS_SUB_PROFILE });
+	
+		ServiceResponse sr = caller.call(req);
+		if(sr.getCallStatus() == CallStatus.succeeded) {
+			try {
+		    	List<?> subProfiles = sr.getOutput(OUTPUT_SUB_PROFILE, true);
+		    	if(subProfiles == null || subProfiles.size() == 0) {
+		    		moduleContext.logInfo("there are no sub profiles, creating default health subprofile", null);
+		    		return newHealthProfile(userURI);
+		    	}
+		    	Iterator<?> iter = subProfiles.iterator();
+		    	while(iter.hasNext()) {
+		    		SubProfile subProfile = (SubProfile)iter.next();
+		    		if(subProfile.getClassURI().equals(HealthProfile.MY_URI)) {
+		    			return (HealthProfile)subProfile;
+		    		}
+		    	}
+	    		moduleContext.logInfo("there is no health profile, creating default one", null);
+	    		return newHealthProfile(userURI);
+			} catch(Exception e) {
+				moduleContext.logError( "got exception", e);
+				return null;
+		    }
+		} else {
+			moduleContext.logWarn("callstatus is not succeeded", null);
+			return null;
+		}
 	}
-
-	/* (non-Javadoc)
-	 * @see org.universAAL.middleware.service.ServiceCallee#communicationChannelBroken()
 	 */
-	@Override
-	public void communicationChannelBroken() {
-		// TODO Auto-generated method stub
+	public abstract HealthProfile getHealthProfile(String userURI);
 
-	}
-
-	/* (non-Javadoc)
-	 * @see org.universAAL.middleware.service.ServiceCallee#handleCall(org.universAAL.middleware.service.ServiceCall)
+	/**
+	 * Updates the {org.universAAL.ontology.profile.health.HealthProfile}.
+	 *  
+	 * @param healthProfile The updated health profile
 	 */
-	@Override
-	public ServiceResponse handleCall(ServiceCall call) {
-		if(call == null)
-		    return invalidInput;
-
-		String operation = call.getProcessURI();
-		if(operation == null)
-		    return invalidInput;
-
-		Object userInput = call.getInputValue(GetProfileService.INPUT_USER);
-		if(userInput == null)
-		    return invalidInput;
-		
-		if(operation.startsWith(GetProfileService.MY_URI))
-			return getProfile((String)userInput);
-		
-		HealthProfile profile = (HealthProfile) call.getInputValue(UpdateProfileService.INPUT_PROFILE);
-		if(operation.startsWith(UpdateProfileService.MY_URI) && profile!= null)
-			return updateProfile(profile);
-		
-		return invalidInput;
+	/*
+	public void updateHealthProfile(HealthProfile healthProfile) {
+	
+		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
+		req.addAddEffect(new String[] { 
+				ProfilingService.PROP_CONTROLS, 
+				Profilable.PROP_HAS_PROFILE, 
+				Profile.PROP_HAS_SUB_PROFILE }, healthProfile);
+	
+		 ServiceResponse sr = caller.call(req);
+		 if(sr.getCallStatus() != CallStatus.succeeded) {
+			 moduleContext.logWarn("callstatus is not succeeded", null);
+		 }
 	}
-
-	private ServiceResponse updateProfile(HealthProfile profile) {
-		psm.updateHealthProfile(profile);
-		return new ServiceResponse(CallStatus.succeeded);
-	}
-
-	private ServiceResponse getProfile(String userInput) {
-		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
-		sr.addOutput(new ProcessOutput(GetProfileService.OUTPUT_PROFILE, psm.getHealthProfile(userInput)));
-		return sr;
-	}
+	 */
+	public abstract void updateHealthProfile(HealthProfile healthProfile);
 
 }
