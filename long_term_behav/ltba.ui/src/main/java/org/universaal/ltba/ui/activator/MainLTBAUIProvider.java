@@ -115,17 +115,17 @@ public class MainLTBAUIProvider extends UICaller {
 				new LTBACaller(myModuleContext, lastUser);
 				LTBACaller.switchOff();
 			} else if (SUBMISSION_SHOW.equals(uir.getSubmissionID())) {
-				myModuleContext.logDebug("To DroolsCaller in SUBMISSION_SHOW",
+				myModuleContext.logDebug("","To DroolsCaller in SUBMISSION_SHOW",
 						null);
 				new DayUI(myModuleContext).showDialog(lastUser);
 				return;
 			} else if (SUBMISSION_WEEK.equals(uir.getSubmissionID())) {
-				myModuleContext.logDebug("To DroolsCaller in SUBMISSION_WEEK",
+				myModuleContext.logDebug("","To DroolsCaller in SUBMISSION_WEEK",
 						null);
 				new WeekUI(myModuleContext).showDialog(lastUser);
 				return;
 			} else if (SUBMISSION_MONTH.equals(uir.getSubmissionID())) {
-				myModuleContext.logDebug("To DroolsCaller in SUBMISSION_MONTH",
+				myModuleContext.logDebug("","To DroolsCaller in SUBMISSION_MONTH",
 						null);
 				new MonthUI(myModuleContext).showDialog(lastUser);
 				return;

@@ -66,7 +66,7 @@ public class DaySequenceGenerator {
 	 *            The day of the date.
 	 */
 	private void putDay(int year, int month, int day) {
-		context.logDebug("PUTTING:" + cal.get(Calendar.YEAR) + "-"
+		context.logDebug("","PUTTING:" + cal.get(Calendar.YEAR) + "-"
 				+ cal.get(Calendar.MONTH) + "-"
 				+ cal.get(Calendar.DAY_OF_MONTH), null);
 		cal.set(year, month, day, 4, 0, 0);
