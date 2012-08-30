@@ -47,25 +47,32 @@ public class AALfficiencyProvider extends ServiceCallee {
 			return null;
 		} else {
 			String operation = call.getProcessURI();
-			Object input = call
-					.getInputValue(ProvidedAALfficiencyService.INPUT_ADVICE_URI);
+			
 			if (operation == null) {
 				return null;
 			} else if (operation
 					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ADVICES)) {
 				return engine.getAdvices();
 			}
-			else if (operation
-					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_CHALLENGES)) {
-				return engine.getChallenges();
+		/*	else if (operation
+					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ACTIVITY_DATA)) {
+				return engine.getActivityData();
 			}
 			else if (operation
-					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_SCORE)) {
-				return engine.getScore();
-			}
+					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ELECTRICITY_DATA)) {
+				return engine.getElectricityData();
+			}*/
 			else if (operation
 					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ADVICE_INFO)) {
+				Object input = call
+						.getInputValue(ProvidedAALfficiencyService.INPUT_ADVICE_URI);
 				return engine.getAdviceInfo(input.toString());
+			}
+			else if (operation
+					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_CHALLENGE_INFO)) {
+				Object input = call
+						.getInputValue(ProvidedAALfficiencyService.INPUT_CHALLENGE_URI);
+				return engine.getChallengeInfo(input.toString());
 			}
 			}
 	return null;

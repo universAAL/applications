@@ -3,15 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-	<groupId>org.universAAL.support</groupId>
-    <artifactId>support.pom</artifactId>
-    <version>1.2.0</version>
-    <relativePath>../../pom/pom.xml</relativePath>
-	</parent>
 	<groupId>org.universAAL.AALapplication</groupId>
+    <artifactId>new_services.pom</artifactId>
+    <version>C.0</version>
+	</parent>
 	<packaging>bundle</packaging>
 	<artifactId>AALfficiencyService</artifactId>
-	<version>1.2.1-SNAPSHOT</version>
+	<version>1.2.3-SNAPSHOT</version>
 	<name>AALfficiency Service</name>
 	<url />
 	<dependencies>		
@@ -25,15 +23,17 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.aalfficiency</artifactId>
+			<artifactId>ont.aalfficiencyscores</artifactId>
+			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
-	</dependencies>
+		</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
