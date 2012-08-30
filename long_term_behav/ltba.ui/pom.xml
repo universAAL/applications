@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>ltba.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0.2-SNAPSHOT</version>
+		<version>C.0.1-SNAPSHOT</version>
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.ui</artifactId>
@@ -27,7 +27,7 @@
 		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context</artifactId>
+			<artifactId>mw.bus.context.osgi</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
@@ -36,7 +36,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.ui</artifactId>
+			<artifactId>mw.bus.ui.osgi</artifactId>
 		</dependency>
 	</dependencies>
 	<description>The LTBA service user interface.</description>

@@ -21,14 +21,14 @@ public class Activator implements BundleActivator {
 
 		this.context = uAALBundleContainer.THE_CONTAINER
 				.registerModule(new Object[] { context });
-		this.context.logDebug("Initialising Project", null);
+		this.context.logDebug("","Initialising Project", null);
 
 		/*
 		 * uAAL stuff
 		 */
 		service = new LTBAUIProvider(this.context);
 
-		this.context.logInfo("Project started", null);
+		this.context.logInfo("","Project started", null);
 
 	}
 
