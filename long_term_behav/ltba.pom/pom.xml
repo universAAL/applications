@@ -5,10 +5,10 @@
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<version>B.0</version>
+		<relativePath>../../new_services.pom</relativePath>
 	</parent>
-	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>ltba.pom</artifactId>
-	<version>B.0.1</version>
+	<version>B.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>POM file for LTBA project</name>
 	<description>POM file for LTBA project</description>
@@ -36,8 +36,18 @@
 				<version>0.0.4</version>
 			</dependency>
 			<dependency>
+				<artifactId>ont.profile</artifactId>
+				<groupId>org.universaal.ontology</groupId>
+				<version>1.1.0</version>
+			</dependency>
+			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.ltba</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.aalapplication</groupId>
+				<artifactId>ltba.ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

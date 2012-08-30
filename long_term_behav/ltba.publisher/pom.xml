@@ -2,13 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>new_services.pom</artifactId>
+		<artifactId>ltba.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0</version>
+		<version>B.0.2-SNAPSHOT</version>
+		<relativePath>../ltba.pom</relativePath>
 	</parent>
-	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>ltba.publisher</artifactId>
-	<version>B.0.1</version>
 	<packaging>bundle</packaging>
 	<name>LTBA raw events publisher</name>
 	<description>Event publisher for simulating real sensors in real conditions.			</description>
@@ -38,7 +37,6 @@
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
@@ -52,8 +50,12 @@
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>ltba.manager</artifactId>
-			<version>B.0.1</version>
+			<version>${project.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>ltba.ui</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>

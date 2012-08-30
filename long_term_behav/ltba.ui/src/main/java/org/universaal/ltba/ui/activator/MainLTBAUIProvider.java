@@ -1,4 +1,4 @@
-package org.universaal.drools.ui.impl;
+package org.universaal.ltba.ui.activator;
 
 import java.util.Locale;
 
@@ -12,8 +12,15 @@ import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.middleware.util.Constants;
+import org.universAAL.ontology.profile.AssistedPerson;
+import org.universaal.ltba.ui.impl.common.LTBACaller;
+import org.universaal.ltba.ui.impl.common.SharedResources;
+import org.universaal.ltba.ui.impl.reports.DayUI;
+import org.universaal.ltba.ui.impl.reports.MonthUI;
+import org.universaal.ltba.ui.impl.reports.WeekUI;
 
-public class UIProvider extends UICaller {
+public class MainLTBAUIProvider extends UICaller {
 
 	static final String MY_UI_NAMESPACE = "http://www.tsbtecnolgias.es/LTBAUICaller.owl#";
 	static final String SUBMISSION_ON = MY_UI_NAMESPACE + "submissionOn";
@@ -26,8 +33,9 @@ public class UIProvider extends UICaller {
 			+ "selectedRange";
 
 	ModuleContext myModuleContext;
+	Resource lastUser = new Resource();
 
-	protected UIProvider(ModuleContext context) {
+	public MainLTBAUIProvider(ModuleContext context) {
 		super(context);
 		myModuleContext = context;
 	}
@@ -42,7 +50,8 @@ public class UIProvider extends UICaller {
 
 	}
 
-	public void showDialog(Resource inputUser) {
+	public Form showDialog(Resource inputUser) {
+		lastUser = inputUser;
 		Form f = Form.newDialog("LTBA UI", new Resource());
 		// start of the form model
 		// new SimpleOutput(f.getIOControls(), null, null,
@@ -52,48 +61,81 @@ public class UIProvider extends UICaller {
 
 		// Submit s = new Submit(f.getIOControls(), new Label("Activate LTBA",
 		// null), "ltbaButton");
-		new Submit(f.getIOControls(), new Label("ltbaOn", null), SUBMISSION_ON);
-		new Submit(f.getIOControls(), new Label("ltbaOff", null),
-				SUBMISSION_OFF);
-		new Submit(f.getIOControls(), new Label("ltbaDay", null),
+		if (SharedResources.ltbaIsOn) {
+			new Submit(f.getIOControls(), new Label(">ltbaOn<", null),
+					SUBMISSION_ON);
+			new Submit(f.getIOControls(), new Label("ltbaOff", null),
+					SUBMISSION_OFF);
+		} else {
+			new Submit(f.getIOControls(), new Label("ltbaOn", null),
+					SUBMISSION_ON);
+			new Submit(f.getIOControls(), new Label(">ltbaOff<", null),
+					SUBMISSION_OFF);
+		}
+		new Submit(f.getSubmits(), new Label("Day Report", null),
 				SUBMISSION_SHOW);
-		new Submit(f.getIOControls(), new Label("ltbaWeek", null),
+		new Submit(f.getSubmits(), new Label("Week Report", null),
 				SUBMISSION_WEEK);
-		new Submit(f.getIOControls(), new Label("ltbaMonth", null),
+		new Submit(f.getSubmits(), new Label("Month Report", null),
 				SUBMISSION_MONTH);
+		if (inputUser == null) {
+			System.out.println("NULL INPUT USER");
+		}
+		new Submit(f.getSubmits(), new Label("Donete", null), "doneForm");
 
-		new Submit(f.getSubmits(), new Label("Done", null), "doneForm");
+		/**
+		 * TODO There is a bug. Despite when the service request is created, a
+		 * user is specified, when this call is handled, the user extracted from
+		 * the object of the call is null. This workaround will allow keep the
+		 * service working, but the users must be correctly handled in the
+		 * future.
+		 */
+		if (inputUser == null) {
+			inputUser = new AssistedPerson(
+					Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+		}
 		UIRequest req = new UIRequest(inputUser, f, LevelRating.none,
 				Locale.ENGLISH, PrivacyLevel.insensible);
 		this.sendUIRequest(req);
+		return f;
 	}
 
 	public void handleUIResponse(UIResponse uir) {
+		if (lastUser == null) {
+			lastUser = new AssistedPerson(
+					Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+		}
 		if (uir != null) {
 			if (SUBMISSION_ON.equals(uir.getSubmissionID())) {
-				new LTBACaller(myModuleContext);
+				SharedResources.ltbaIsOn = true;
+				new LTBACaller(myModuleContext, lastUser);
 				LTBACaller.switchOn();
 			} else if (SUBMISSION_OFF.equals(uir.getSubmissionID())) {
-				new LTBACaller(myModuleContext);
+				SharedResources.ltbaIsOn = false;
+				new LTBACaller(myModuleContext, lastUser);
 				LTBACaller.switchOff();
 			} else if (SUBMISSION_SHOW.equals(uir.getSubmissionID())) {
 				myModuleContext.logDebug("To DroolsCaller in SUBMISSION_SHOW",
 						null);
-				new LTBACaller(myModuleContext);
-				LTBACaller.printReport();
+				new DayUI(myModuleContext).showDialog(lastUser);
+				return;
 			} else if (SUBMISSION_WEEK.equals(uir.getSubmissionID())) {
 				myModuleContext.logDebug("To DroolsCaller in SUBMISSION_WEEK",
 						null);
-				new LTBACaller(myModuleContext);
-				LTBACaller.printWeek();
+				new WeekUI(myModuleContext).showDialog(lastUser);
+				return;
 			} else if (SUBMISSION_MONTH.equals(uir.getSubmissionID())) {
 				myModuleContext.logDebug("To DroolsCaller in SUBMISSION_MONTH",
 						null);
-				new LTBACaller(myModuleContext);
-				LTBACaller.printMonth();
+				new MonthUI(myModuleContext).showDialog(lastUser);
+				return;
 			}
-
-			;
+			// yoda conditions everywhere
+			if ("doneForm".equals(uir.getSubmissionID())) {
+				startMainDialog();
+			} else {
+				showDialog(lastUser);
+			}
 		}
 	}
 

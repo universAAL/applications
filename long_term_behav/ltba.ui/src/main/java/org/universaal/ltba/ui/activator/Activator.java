@@ -1,10 +1,10 @@
-package org.universaal.drools.ui.activator;
+package org.universaal.ltba.ui.activator;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
-import org.universaal.drools.ui.impl.LTBAUIProvider;
+import org.universaal.ltba.ui.impl.common.LTBAUIProvider;
 
 public class Activator implements BundleActivator {
 

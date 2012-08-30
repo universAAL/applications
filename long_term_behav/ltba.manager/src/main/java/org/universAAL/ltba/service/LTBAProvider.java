@@ -24,8 +24,6 @@ public class LTBAProvider extends ServiceCallee {
 
 	@Override
 	public void communicationChannelBroken() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -33,11 +31,10 @@ public class LTBAProvider extends ServiceCallee {
 
 		LogUtils.logDebug(mctx, getClass(), "ServiceProvided",
 				new String[] { "Handling service call..." }, null);
-		
-		System.out.println("HANDLING SERVICE CALL:" +
-				"\n" +
-				call.getProcessURI());
-		
+
+		System.out.println("HANDLING SERVICE CALL:" + "\n"
+				+ call.getProcessURI());
+
 		if (call == null) {
 			return null;
 		} else {
@@ -46,38 +43,38 @@ public class LTBAProvider extends ServiceCallee {
 				return null;
 			} else if (operation
 					.startsWith(ProvidedLTBAService.SERVICE_SWITCH_ON)) {
-				System.out.println("SWITCHING ON IN HANDLERe");
+//				System.out.println("SWITCHING ON IN HANDLERe");
 				LogUtils.logTrace(mctx, getClass(), "ServiceProvided",
 						new String[] { "SWITCHING ON..." }, null);
 				listener.setStatus(true);
 				return new ServiceResponse(CallStatus.succeeded);
 			} else if (operation
 					.startsWith(ProvidedLTBAService.SERVICE_SWITCH_OFF)) {
-				System.out.println("SWITCHING OFF IN HANDLER");
+//				System.out.println("SWITCHING OFF IN HANDLER");
 				LogUtils.logTrace(mctx, getClass(), "ServiceProvided",
 						new String[] { "SWITCHING OFF..." }, null);
 				listener.setStatus(false);
 				return new ServiceResponse(CallStatus.succeeded);
 			} else if (operation
 					.startsWith(ProvidedLTBAService.SERVICE_PRINT_REPORT)) {
-				System.out.println("PRINTING REPORT!!");
-				// Assuming it's created in the Activator				
-				/**Gonna print a week report for testing*/
-				ConsequenceListener.getInstance().printDayReport();
+//				System.out.println("PRINTING REPORT!!");
+				// Assuming it's created in the Activator
+				ConsequenceListener.getInstance().printDayReport(
+						call.getInvolvedUser());
 				return new ServiceResponse(CallStatus.succeeded);
 			} else if (operation
 					.startsWith(ProvidedLTBAService.SERVICE_SHOW_WEEK)) {
 				System.out.println("PRINTING WEEK!!");
-				// Assuming it's created in the Activator				
-				/**Gonna print a week report for testing*/
-				ConsequenceListener.getInstance().printWeekReport();
+				// Assuming it's created in the Activator
+				/** Gonna print a week report for testing */
+				ConsequenceListener.getInstance().printWeekReport(call.getInvolvedUser());
 				return new ServiceResponse(CallStatus.succeeded);
-			}else if (operation
+			} else if (operation
 					.startsWith(ProvidedLTBAService.SERVICE_SHOW_MONTH)) {
 				System.out.println("PRINTING MONTH!!");
-				// Assuming it's created in the Activator				
-				/**Gonna print a week report for testing*/
-				ConsequenceListener.getInstance().printMonthReport();
+				// Assuming it's created in the Activator
+				/** Gonna print a week report for testing */
+				ConsequenceListener.getInstance().printMonthReport(call.getInvolvedUser());
 				return new ServiceResponse(CallStatus.succeeded);
 			}
 		}

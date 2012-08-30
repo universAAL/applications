@@ -2,50 +2,41 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>new_services.pom</artifactId>
+		<artifactId>ltba.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0</version>
+		<version>B.0.2-SNAPSHOT</version>
+		<relativePath>../ltba.pom</relativePath>
 	</parent>
-	<groupId>org.universaal.aalapplication</groupId>
 	<artifactId>ltba.ui</artifactId>
-	<version>B.0.1</version>
 	<packaging>bundle</packaging>
 	<name>LTBA user interface.</name>
 	<dependencies>
 		<dependency>
 			<artifactId>ont.drools</artifactId>
 			<groupId>org.universaal.ontology</groupId>
-			<version>B.0.1</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<artifactId>drools.reasoner</artifactId>
-			<groupId>org.universaal.aalapplication</groupId>
-			<version>B.0.1</version>
+			<artifactId>ont.profile</artifactId>
+			<groupId>org.universaal.ontology</groupId>
 		</dependency>
+		<!--		<dependency>-->
+		<!--			<artifactId>drools.reasoner</artifactId>-->
+		<!--			<groupId>org.universaal.aalapplication</groupId>-->
+		<!--			<version>B.0.1</version>-->
+		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context</artifactId>
-			<version>1.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.core</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.activityhub</artifactId>
-			<version>0.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.ltba</artifactId>
-			<version>B.0.1</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.ui</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 	</dependencies>
 	<description>The LTBA service user interface.</description>
@@ -59,9 +50,14 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
-						<Bundle-Activator>org.universaal.drools.ui.activator.Activator</Bundle-Activator>
+						<Bundle-Activator>org.universaal.ltba.ui.activator.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+
+						<!--
+							<Export-Package>*,org.universaal.drools.ui.impl.main</Export-Package>
+						-->
+
 					</instructions>
 				</configuration>
 			</plugin>

@@ -17,6 +17,7 @@ import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
@@ -32,6 +33,7 @@ public class ConsequenceListener extends ContextSubscriber {
 	private static ConsequenceListener INSTANCE;
 	public Calendar debuggingCalendar = Calendar.getInstance();
 	private boolean debugTime = false;
+	private ModuleContext mc;
 
 	private static ContextEventPattern[] getContextSuscriptionsParam() {
 		ContextEventPattern cep = new ContextEventPattern();
@@ -50,6 +52,7 @@ public class ConsequenceListener extends ContextSubscriber {
 
 	protected ConsequenceListener(ModuleContext context) {
 		super(context, getContextSuscriptionsParam());
+		mc = context;
 		activityLogger = new ActivityLogger(context);
 		INSTANCE = this;
 	}
@@ -147,20 +150,21 @@ public class ConsequenceListener extends ContextSubscriber {
 	}
 
 	// TODO dont use ConsequenceListener for showing reports!!!!!!!
-	public void printDayReport() {
-		GraphicReporter.showDayReport(new Date(), activityLogger);
+	public void printDayReport(Resource inputUser) {
+		GraphicReporter
+				.showDayReport(new Date(), activityLogger, mc, inputUser);
 		// activityLogger.printReport();
 	}
 
 	// TODO dont use ConsequenceListener for showing reports!!!!!!!
-	public void printMonthReport() {
-		GraphicReporter.showMonthReport(activityLogger);
+	public void printMonthReport(Resource inputUser) {
+		GraphicReporter.showMonthReport(activityLogger, mc, inputUser);
 		// activityLogger.printReport();
 	}
 
 	// TODO dont use ConsequenceListener for showing reports!!!!!!!
-	public void printWeekReport() {
-		GraphicReporter.showWeekReport(activityLogger);
+	public void printWeekReport(Resource inputUser) {
+		GraphicReporter.showWeekReport(activityLogger, mc, inputUser);
 		// activityLogger.printReport();
 	}
 
