@@ -3,24 +3,24 @@
 	<parent>
 		<artifactId>drools.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0.2-SNAPSHOT</version>
+		<version>C.0.1-SNAPSHOT</version>
 		<relativePath>../drools.pom</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>${parent.groupId}</groupId>
 	<artifactId>drools.reasoner</artifactId>
-	<version>${parent.version}</version>
 	<name>Drools reasoner</name>
 	<description>The Drools based reasoner</description>
 	<packaging>bundle</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.data.representation</artifactId>
+			<artifactId>mw.data.representation.osgi</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.service</artifactId>
+			<artifactId>mw.bus.service.osgi</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 		<!--		<dependency>-->
 		<!--			<groupId>org.universAAL.middleware</groupId>-->
@@ -29,7 +29,8 @@
 		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context</artifactId>
+			<artifactId>mw.bus.context.osgi</artifactId>
+			<version>1.2.0</version>
 		</dependency>
 		<!--		<dependency>-->
 		<!--			<groupId>org.universAAL.ontology</groupId>-->
@@ -46,7 +47,7 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.drools</artifactId>
-			<version>B.0.2-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
