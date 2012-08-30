@@ -1,12 +1,9 @@
 package org.universAAL.drools.engine;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.UUID;
-
-import javax.persistence.EntityManagerFactory;
 
 import org.drools.FactHandle;
 import org.drools.KnowledgeBase;
@@ -20,13 +17,11 @@ import org.drools.conf.AssertBehaviorOption;
 import org.drools.conf.EventProcessingOption;
 import org.drools.definition.KnowledgePackage;
 import org.drools.io.ResourceFactory;
-import org.drools.runtime.Environment;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.ConsequenceException;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
-import org.universAAL.middleware.container.osgi.util.Messages;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextPublisher;
@@ -37,8 +32,6 @@ import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
 import org.universAAL.ontology.phThing.Sensor;
-
-import com.mysql.jdbc.log.Log;
 
 //import bitronix.tm.TransactionManagerServices;
 //import bitronix.tm.resource.jdbc.PoolingDataSource;
