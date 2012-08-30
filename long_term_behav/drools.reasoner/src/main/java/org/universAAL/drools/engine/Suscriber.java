@@ -3,15 +3,9 @@ package org.universAAL.drools.engine;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
-import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
-import org.universAAL.middleware.owl.MergedRestriction;
-import org.universAAL.ontology.drools.Consequence;
-import org.universAAL.ontology.drools.ConsequenceProperty;
-import org.universAAL.ontology.location.Location;
-import org.universAAL.ontology.phThing.Sensor;
 
 /**
  * Suscriber component for listening ALL the context event in the context bus.

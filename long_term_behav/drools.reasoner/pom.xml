@@ -1,32 +1,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<artifactId>new_services.pom</artifactId>
+		<artifactId>drools.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0</version>
+		<version>B.0.2-SNAPSHOT</version>
+		<relativePath>../drools.pom</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.universAAL.AALapplication</groupId>
+	<groupId>${parent.groupId}</groupId>
 	<artifactId>drools.reasoner</artifactId>
-	<version>B.0.1</version>
-	<name >Drools reasoner</name>
-	<description >The Drools based reasoner</description>
+	<version>${parent.version}</version>
+	<name>Drools reasoner</name>
+	<description>The Drools based reasoner</description>
 	<packaging>bundle</packaging>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.core</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<!--		<dependency>-->
 		<!--			<groupId>org.universAAL.middleware</groupId>-->
@@ -36,7 +30,6 @@
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<!--		<dependency>-->
 		<!--			<groupId>org.universAAL.ontology</groupId>-->
@@ -47,23 +40,24 @@
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr</artifactId>
 			<version>3.1.3</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.drools</artifactId>
-			<version>B.0.1</version>
+			<version>B.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-core</artifactId>
 			<version>5.3.0.Final</version>
 		</dependency>
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-persistence-jpa</artifactId>
-			<version>5.3.0.Final</version>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>org.drools</groupId>-->
+		<!--			<artifactId>drools-persistence-jpa</artifactId>-->
+		<!--			<version>5.3.0.Final</version>-->
+		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>knowledge-api</artifactId>
@@ -78,11 +72,13 @@
 			<groupId>org.mvel</groupId>
 			<artifactId>mvel2</artifactId>
 			<version>2.1.0.drools2</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.17</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.felix</groupId>

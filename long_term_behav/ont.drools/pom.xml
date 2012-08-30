@@ -7,9 +7,9 @@
 		<relativePath>../pom/pom.xml</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.universAAL.ontology</groupId>
+	<groupId>${parent.groupId}</groupId>
 	<artifactId>ont.drools</artifactId>
-	<version>B.0.1</version>
+	<version>B.0.2-SNAPSHOT</version>
 	<description>Drools ontology</description>
 	<packaging>bundle</packaging>
 	<dependencies>
@@ -21,12 +21,10 @@
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.phWorld</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 	</dependencies>
 	<build>
