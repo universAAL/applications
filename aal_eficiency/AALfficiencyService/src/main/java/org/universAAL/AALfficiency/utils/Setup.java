@@ -2,8 +2,11 @@ package org.universAAL.AALfficiency.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+
+import org.universAAL.AALfficiency.model.ChallengeModel;
 
 public class Setup {
 public static final String SETUP_FILENAME = "AALfficiencyService.properties";
@@ -26,7 +29,7 @@ public static final String SETUP_FILENAME = "AALfficiencyService.properties";
 	}
 		
 	
-	public int gettotalScore(){
+	public int getTotalScore(){
 		Properties properties = new Properties();
 		try {
 			String setup = getSetupFileName();
@@ -39,29 +42,59 @@ public static final String SETUP_FILENAME = "AALfficiencyService.properties";
 		    	return new Integer(url).intValue();
 		    }
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		return 0;
 	}
 	
-	public int gettodayScore(){
+	public void setTotalScore(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.put("totalScore",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getTodayScore(){
 		Properties properties = new Properties();
 		try {
 			String setup = getSetupFileName();
 //			System.out.println("setup is in: "+setup);
 		    properties.load(new FileInputStream(setup));
 		    String url = properties.getProperty("todayScore");
+		    
 		    if (url==null) {
 		    	return 0;
 		    } else {
 		    	return new Integer(url).intValue();
 		    }
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		return 0;
 	}
-	public int gettotalElectricScore(){
+	
+	public void setTodayScore(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.put("todayScore",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getTotalElectricScore(){
 		Properties properties = new Properties();
 		try {
 			String setup = getSetupFileName();
@@ -73,12 +106,25 @@ public static final String SETUP_FILENAME = "AALfficiencyService.properties";
 		    } else {
 		    	return new Integer(url).intValue();
 		    }
-		} catch (IOException e) {
+		} catch (IOException e) {e.printStackTrace();
 		}
 		
 		return 0;
 	}
-	public int gettodayElectricScore(){
+	public void setTotalElectricScore(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.put("totalElectricScore",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getTodayElectricScore(){
 		Properties properties = new Properties();
 		try {
 			String setup = getSetupFileName();
@@ -91,11 +137,56 @@ public static final String SETUP_FILENAME = "AALfficiencyService.properties";
 		    	return new Integer(url).intValue();
 		    }
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		return 0;
 	}
-	public int gettotalActivityScore(){
+	public void setTodayElectricScore(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.put("todayElectricScore",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getElectricitySaving(){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    String url = properties.getProperty("ElectricitySaving");
+		    if (url==null) {
+		    	return 0;
+		    } else {
+		    	return new Integer(url).intValue();
+		    }
+		} catch (IOException e) {e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	public void setElectricitySaving(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.put("ElectricitySaving",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public int getTotalActivityScore(){
 		Properties properties = new Properties();
 		try {
 			String setup = getSetupFileName();
@@ -108,11 +199,24 @@ public static final String SETUP_FILENAME = "AALfficiencyService.properties";
 		    	return new Integer(url).intValue();
 		    }
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		return 0;
 	}
-	public int gettodayActivityScore(){
+	public void setTotalActivityScore(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.put("totalActivityScore",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public int getTodayActivityScore(){
 		Properties properties = new Properties();
 		try {
 			String setup = getSetupFileName();
@@ -125,8 +229,184 @@ public static final String SETUP_FILENAME = "AALfficiencyService.properties";
 		    	return new Integer(url).intValue();
 		    }
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		return 0;
 	}
+	public void setTodayActivityScore(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.put("todayActivityScore",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public int getActivitySteps(){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    String url = properties.getProperty("ActivitySteps");
+		    if (url==null) {
+		    	return 0;
+		    } else {
+		    	return new Integer(url).intValue();
+		    }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	public void setActivitySteps(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.put("ActivitySteps",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getActivityKcal(){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    String url = properties.getProperty("ActivityKcal");
+		    if (url==null) {
+		    	return 0;
+		    } else {
+		    	return new Integer(url).intValue();
+		    }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	public void setActivityKcal(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.put("ActivityKcal",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setElectricityChallengeDescription(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.setProperty("ElectricityChallengeDescription",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void setElectricityChallengeGoal(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.setProperty("ElectricityChallengeGoal",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		}
+	}
+	
+	public ChallengeModel getElectricityChallenge(){
+		ChallengeModel c = new ChallengeModel();
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    String desc = properties.getProperty("ElectricityChallengeDescription");
+		    String goal = properties.getProperty("ElectricityChallengeGoal");
+		    c.setActive("true");
+		    c.setType("Electricity");
+		    if (desc!=null)
+		    	c.setDescription(desc);
+		    if (goal!=null)
+		    	c.setGoal(goal);
+		    
+		    return c;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+	
+	public void setActivityChallengeDescription(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.setProperty("ActivityChallengeDescription",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void setActivityChallengeGoal(String t){
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    properties.setProperty("ActivityChallengeGoal",t);
+		    properties.store(new FileOutputStream(setup), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ChallengeModel getActivityChallenge(){
+		ChallengeModel c = new ChallengeModel();
+		Properties properties = new Properties();
+		try {
+			String setup = getSetupFileName();
+//			System.out.println("setup is in: "+setup);
+		    properties.load(new FileInputStream(setup));
+		    String desc = properties.getProperty("ActivityChallengeDescription");
+		    String goal = properties.getProperty("ActivityChallengeGoal");
+		    c.setActive("true");
+		    c.setType("Activity");
+		    if (desc!=null)
+		    	c.setDescription(desc);
+		    if (goal!=null)
+		    	c.setGoal(goal);
+		    
+		    return c;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+	
+	
+	
 }

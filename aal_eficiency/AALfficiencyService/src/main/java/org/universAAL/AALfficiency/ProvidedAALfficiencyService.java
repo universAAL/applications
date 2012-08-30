@@ -9,11 +9,11 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.aalfficiency.*;
+import org.universAAL.ontology.aalfficiency.scores.*;
 
 import java.util.Hashtable;
 
-public class ProvidedAALfficiencyService extends Aalfficiency{
+public class ProvidedAALfficiencyService extends AalfficiencyScores{
 
     private static Hashtable serverLevelRestrictions = new Hashtable();
     
@@ -21,26 +21,31 @@ public class ProvidedAALfficiencyService extends Aalfficiency{
  	public static final String NAMESPACE = "http://www.tsbtecnologias.es/AALfficiency.owl#";
  	public static final String MY_URI = NAMESPACE+"ProvidedAALfficiencyService";
  	
- 	//Score Managing
- 	public static final String SERVICE_GET_SCORE = NAMESPACE+"getScore";
- 	public static final String OUTPUT_SCORE = NAMESPACE+"Score";
+ 	//Activity Data Managing
+ 	public static final String SERVICE_GET_ACTIVITY_DATA = NAMESPACE+"getActivityData";
+ 	public static final String OUTPUT_ACTIVITY_DATA = NAMESPACE+"ActivityData";
+ 	
+ 	//Electricity Data Managing
+ 	public static final String SERVICE_GET_ELECTRICITY_DATA = NAMESPACE+"getElectricityData";
+ 	public static final String OUTPUT_ELECTRICITY_DATA = NAMESPACE+"ElectricityData";
+ 	
  	//Challenges Managing
- 	public static final String SERVICE_GET_CHALLENGES = NAMESPACE+"getChallenges";
- 	public static final String OUTPUT_CHALLENGES = NAMESPACE+"Challenges";
+ 	public static final String SERVICE_GET_CHALLENGE_INFO = NAMESPACE+"getChallengeInfo";
+ 	public static final String INPUT_CHALLENGE_URI = NAMESPACE+"ChallengeURI";
+ 	public static final String OUTPUT_CHALLENGE = NAMESPACE+"ChallengeInfo";
  	//Advices Managing
  	public static final String SERVICE_GET_ADVICES = NAMESPACE+"getAdvices";
  	public static final String OUTPUT_ADVICES = NAMESPACE+"Advices";
  	public static final String SERVICE_GET_ADVICE_INFO = NAMESPACE+"getAdviceInfo";
  	public static final String INPUT_ADVICE_URI = NAMESPACE + "AdviceURI";
- 	public static final String OUTPUT_ADVICE_TYPE = NAMESPACE+"AdviceType";
- 	public static final String OUTPUT_ADVICE_TEXT = NAMESPACE+"AdviceText";
+ 	public static final String OUTPUT_ADVICE_INFO = NAMESPACE+"AdviceInfo";
  	
  	
- 	static final ServiceProfile[] profiles = new ServiceProfile[4];
+ 	static final ServiceProfile[] profiles = new ServiceProfile[5];
  	
  	static{
  		OntologyManagement.getInstance().register(
-				new SimpleOntology(MY_URI, Aalfficiency.MY_URI,
+				new SimpleOntology(MY_URI, AalfficiencyScores.MY_URI,
 						new ResourceFactoryImpl() {
 							@Override
 							public Resource createInstance(String classURI,
@@ -50,30 +55,40 @@ public class ProvidedAALfficiencyService extends Aalfficiency{
 							}
 						}));
  		
- 		ProvidedAALfficiencyService getScore = new ProvidedAALfficiencyService(SERVICE_GET_SCORE);
- 		getScore.addOutput(OUTPUT_SCORE, AalfficiencyScore.MY_URI,1, 1, new String[]{Aalfficiency.PROP_HAS_SCORE});
- 		profiles[0] = getScore.myProfile;
+ 		/*ProvidedAALfficiencyService getActivityData = new ProvidedAALfficiencyService(SERVICE_GET_ACTIVITY_DATA);
+ 		getActivityData.addOutput(OUTPUT_ACTIVITY_DATA, ActivityScore.MY_URI,1, 1, new String[]{AalfficiencyScores.PROP_HAS_ACTIVITY_SCORE});
+ 		profiles[0] = getActivityData.myProfile;
  		
- 		ProvidedAALfficiencyService getChallenges = new ProvidedAALfficiencyService(SERVICE_GET_CHALLENGES);
- 		getChallenges.addOutput(OUTPUT_CHALLENGES, AalfficiencyChallenges.MY_URI, 1,1, new String[]{Aalfficiency.PROP_HAS_CHALLENGES});
- 		profiles[1] = getChallenges.myProfile;
+ 		ProvidedAALfficiencyService getElectricityData = new ProvidedAALfficiencyService(SERVICE_GET_ELECTRICITY_DATA);
+ 		getElectricityData.addOutput(OUTPUT_ELECTRICITY_DATA, ElectricityScore.MY_URI, 1,1, new String[]{AalfficiencyScores.PROP_HAS_ELECTRICITY_SCORE});
+ 		profiles[1] = getElectricityData.myProfile;*/
  		
  		ProvidedAALfficiencyService getAdvices = new ProvidedAALfficiencyService(SERVICE_GET_ADVICES);
- 		getAdvices.addOutput(OUTPUT_ADVICES, AalfficiencyAdvices.MY_URI, 1, 1, new String[]{Aalfficiency.PROP_HAS_ADVICES});
+ 		getAdvices.addOutput(OUTPUT_ADVICES, AalfficiencyAdvices.MY_URI, 1, 1, new String[]{AalfficiencyScores.PROP_HAS_ADVICES});
  		profiles[2] = getAdvices.myProfile;
  		
  		ProvidedAALfficiencyService getAdviceInfo = new ProvidedAALfficiencyService(
  	 			SERVICE_GET_ADVICE_INFO);
- 	 		getAdviceInfo.addFilteringInput(INPUT_ADVICE_URI, Advice.MY_URI, 1, 1,
- 	 				 new String[]{Aalfficiency.PROP_HAS_ADVICES, AalfficiencyAdvices.PROP_HAS_ADVICES,Advice.MY_URI});
- 	 		getAdviceInfo.addOutput(OUTPUT_ADVICE_TYPE, Advice.MY_URI, 1, 1, new String[] 
- 	 						{ Aalfficiency.PROP_HAS_ADVICES, AalfficiencyAdvices.PROP_HAS_ADVICES,Advice.MY_URI});
- 	 		profiles[3] = getAdviceInfo.myProfile;
+ 	 	getAdviceInfo.addFilteringInput(INPUT_ADVICE_URI, Advice.MY_URI, 1, 1,
+ 	 				 new String[]{Advice.MY_URI});
+ 	 	getAdviceInfo.addOutput(OUTPUT_ADVICE_INFO, Advice.MY_URI, 1, 1, new String[] 
+ 	 						{Advice.MY_URI});
+ 	 	profiles[3] = getAdviceInfo.myProfile;
+ 	 		
+ 	 	ProvidedAALfficiencyService getChallengeInfo = new ProvidedAALfficiencyService(
+ 	 			SERVICE_GET_CHALLENGE_INFO);
+ 	 	getChallengeInfo.addFilteringInput(INPUT_CHALLENGE_URI, Challenge.MY_URI, 1, 1,
+ 	 					 new String[]{Challenge.MY_URI});
+ 	 	getChallengeInfo.addOutput(OUTPUT_CHALLENGE, Challenge.MY_URI, 1, 1, new String[] 
+ 	 	 						{Challenge.MY_URI});
+ 	 	profiles[4] = getChallengeInfo.myProfile;
  		 	}
  	
  	public ProvidedAALfficiencyService(String instanceURI) {
 		super(instanceURI);
 		// TODO Auto-generated constructor stub
 	}
-
+ 	public String getClassURI() {
+ 		return MY_URI;
+ 	    }
 }
