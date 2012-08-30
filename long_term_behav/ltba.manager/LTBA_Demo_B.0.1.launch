@@ -21,22 +21,22 @@
 <booleanAttribute key="org.ops4j.pax.cursor.overwriteSystemBundles" value="false"/>
 <booleanAttribute key="org.ops4j.pax.cursor.overwriteUserBundles" value="false"/>
 <mapAttribute key="org.ops4j.pax.cursor.provisionItems">
-<mapEntry key="mvn:org.universaal.aalapplication/ltba.manager/B.0.1" value="true@true@7@true"/>
 <mapEntry key="mvn:org.universaal.ontology/ont.activityhub/0.0.4" value="true@true@7@false"/>
+<mapEntry key="mvn:org.universaal.aalapplication/ltba.manager/B.0.1" value="true@true@7@true"/>
 <mapEntry key="mvn:org.universaal.ontology/ont.lighting/1.1.1-SNAPSHOT" value="false@true@7@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.profile/1.1.0" value="true@true@7@false"/>
 <mapEntry key="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4" value="true@true@2@false"/>
-<mapEntry key="mvn:org.universAAL.middleware/mw.container.osgi/1.1.0" value="true@true@2@false"/>
 <mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.com.thoughtworks.xstream-1.3.1.jar" value="true@true@1@false"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.container.osgi/1.1.0" value="true@true@2@false"/>
 <mapEntry key="wrap:mvn:jp.go.ipa/jgcl/1.0" value="true@true@2@false"/>
 <mapEntry key="mvn:org.drools/drools-core/5.3.0.Final" value="true@true@1@false"/>
-<mapEntry key="wrap:mvn:mysql/mysql-connector-java/5.1.17" value="true@true@2@false"/>
 <mapEntry key="mvn:org.universaal.aalapplication/drools.monitor/B.0.1" value="true@false@8@true"/>
-<mapEntry key="wrap:mvn:java3d/vecmath/1.3.1" value="true@true@2@false"/>
+<mapEntry key="wrap:mvn:mysql/mysql-connector-java/5.1.17" value="true@true@2@false"/>
 <mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.org.antlr-3.1.3.jar" value="true@true@1@false"/>
+<mapEntry key="wrap:mvn:java3d/vecmath/1.3.1" value="true@true@2@false"/>
 <mapEntry key="wrap:mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2" value="true@true@3@false"/>
-<mapEntry key="wrap:mvn:org.hibernate/hibernate-core/4.1.2.Final" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universaal.ontology/ont.drools/B.0.1" value="true@true@6@true"/>
+<mapEntry key="wrap:mvn:org.hibernate/hibernate-core/4.1.2.Final" value="true@true@null@false"/>
 <mapEntry key="mvn:javax.xml.bind/jaxb-api-osgi/2.2.1" value="true@true@1@false"/>
 <mapEntry key="mvn:org.universAAL.middleware/mw.bus.ui/1.1.0" value="true@true@5@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.phWorld/1.1.0" value="true@true@6@false"/>
@@ -55,10 +55,10 @@
 <mapEntry key="wrap:mvn:org.hibernate/ejb3-persistence/1.0.2.GA" value="true@true@6@false"/>
 <mapEntry key="wrap:mvn:org.codehaus.btm/btm/1.3.3" value="false@true@6@false"/>
 <mapEntry key="mvn:org.universaal.aalapplication/drools.publisher.test/B.0.1" value="true@false@8@true"/>
-<mapEntry key="mvn:org.drools/drools-persistence-jpa/5.3.0.Final" value="true@true@6@false"/>
 <mapEntry key="mvn:org.universaal.ontology/ont.profile.uipreferences/1.1.0" value="true@true@6@false"/>
-<mapEntry key="mvn:org.universAAL.middleware/mw.acl.interfaces/1.1.0" value="true@true@2@false"/>
+<mapEntry key="mvn:org.drools/drools-persistence-jpa/5.3.0.Final" value="true@true@6@false"/>
 <mapEntry key="mvn:org.universaal.ontology/ont.profile/1.1.0" value="true@true@6@false"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.acl.interfaces/1.1.0" value="true@true@2@false"/>
 <mapEntry key="mvn:org.universAAL.AALapplication/ltba.publisher/B.0.1" value="true@true@7@true"/>
 <mapEntry key="wrap:mvn:org.ops4j.pax.logging/pax-logging-api/1.6.2" value="true@true@2@false"/>
 <mapEntry key="mvn:org.universAAL.middleware/mw.data.representation/1.1.0" value="true@true@4@false"/>
@@ -67,8 +67,8 @@
 <mapEntry key="mvn:org.universAAL.middleware/mw.bus.context/1.1.0" value="true@true@5@false"/>
 <mapEntry key="mvn:org.universaal.ui/ui.dm.mobile/1.1.0" value="true@true@6@true"/>
 <mapEntry key="wrap:mvn:java3d/j3d-core/1.3.1" value="true@true@2@false"/>
-<mapEntry key="mvn:org.universaal.ontology/ont.profile.userid/1.1.0" value="true@true@6@false"/>
 <mapEntry key="mvn:org.universAAL.ui/ui.dm/1.1.0" value="false@false@8@false"/>
+<mapEntry key="mvn:org.universaal.ontology/ont.profile.userid/1.1.0" value="true@true@6@false"/>
 <mapEntry key="mvn:org.universaal.aalapplication/ltba.ui/B.0.1" value="true@true@8@true"/>
 <mapEntry key="mvn:org.drools/knowledge-api/5.3.0.Final" value="true@true@1@false"/>
 <mapEntry key="wrap:mvn:org.ops4j.pax.logging/pax-logging-service/1.6.2" value="true@true@3@false"/>
@@ -89,21 +89,21 @@
 <listEntry value="--overwriteUserBundles=false"/>
 <listEntry value="--overwriteSystemBundles=false"/>
 <listEntry value="--log=INFO"/>
-<listEntry value="mvn:org.universaal.aalapplication/ltba.manager/B.0.1@7@update"/>
 <listEntry value="mvn:org.universaal.ontology/ont.activityhub/0.0.4@7"/>
+<listEntry value="mvn:org.universaal.aalapplication/ltba.manager/B.0.1@7@update"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.profile/1.1.0@7"/>
 <listEntry value="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4@2"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.container.osgi/1.1.0@2"/>
 <listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.com.thoughtworks.xstream-1.3.1.jar@1"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.container.osgi/1.1.0@2"/>
 <listEntry value="wrap:mvn:jp.go.ipa/jgcl/1.0@2"/>
 <listEntry value="mvn:org.drools/drools-core/5.3.0.Final@1"/>
-<listEntry value="wrap:mvn:mysql/mysql-connector-java/5.1.17@2"/>
 <listEntry value="mvn:org.universaal.aalapplication/drools.monitor/B.0.1@8@nostart@update"/>
-<listEntry value="wrap:mvn:java3d/vecmath/1.3.1@2"/>
+<listEntry value="wrap:mvn:mysql/mysql-connector-java/5.1.17@2"/>
 <listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandbox/mllorente/doolsDeps/com.springsource.org.antlr-3.1.3.jar@1"/>
+<listEntry value="wrap:mvn:java3d/vecmath/1.3.1@2"/>
 <listEntry value="wrap:mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2@3"/>
-<listEntry value="wrap:mvn:org.hibernate/hibernate-core/4.1.2.Final"/>
 <listEntry value="mvn:org.universaal.ontology/ont.drools/B.0.1@6@update"/>
+<listEntry value="wrap:mvn:org.hibernate/hibernate-core/4.1.2.Final"/>
 <listEntry value="mvn:javax.xml.bind/jaxb-api-osgi/2.2.1@1"/>
 <listEntry value="mvn:org.universAAL.middleware/mw.bus.ui/1.1.0@5"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.phWorld/1.1.0@6"/>
@@ -120,10 +120,10 @@
 <listEntry value="wrap:mvn:org.hibernate/hibernate/3.2.6.ga"/>
 <listEntry value="wrap:mvn:org.hibernate/ejb3-persistence/1.0.2.GA@6"/>
 <listEntry value="mvn:org.universaal.aalapplication/drools.publisher.test/B.0.1@8@nostart@update"/>
-<listEntry value="mvn:org.drools/drools-persistence-jpa/5.3.0.Final@6"/>
 <listEntry value="mvn:org.universaal.ontology/ont.profile.uipreferences/1.1.0@6"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.acl.interfaces/1.1.0@2"/>
+<listEntry value="mvn:org.drools/drools-persistence-jpa/5.3.0.Final@6"/>
 <listEntry value="mvn:org.universaal.ontology/ont.profile/1.1.0@6"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.acl.interfaces/1.1.0@2"/>
 <listEntry value="mvn:org.universAAL.AALapplication/ltba.publisher/B.0.1@7@update"/>
 <listEntry value="wrap:mvn:org.ops4j.pax.logging/pax-logging-api/1.6.2@2"/>
 <listEntry value="mvn:org.universAAL.middleware/mw.data.representation/1.1.0@4"/>

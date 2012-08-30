@@ -1,15 +1,12 @@
-package org.universaal.drools.ui.impl;
+package org.universaal.ltba.ui.impl.common;
 
-import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.ontology.drools.DroolsReasoning;
-import org.universAAL.ontology.ltba.ActivityReportType;
 import org.universAAL.ontology.ltba.LTBAService;
 
 /**
@@ -22,6 +19,7 @@ public class LTBACaller {
 
 	private static ServiceCaller caller;
 	private ModuleContext mc;
+	private static Resource inputUser;
 
 	/**
 	 * Standard constructor
@@ -29,9 +27,10 @@ public class LTBACaller {
 	 * @param context
 	 *            ModuleContext
 	 */
-	public LTBACaller(ModuleContext context) {
+	public LTBACaller(ModuleContext context, Resource user) {
 		mc = context;
 		caller = new DefaultServiceCaller(mc);
+		inputUser = user;
 	}
 
 	/**
@@ -41,7 +40,8 @@ public class LTBACaller {
 	 * @return The service request for the specified profile.
 	 */
 	private static ServiceRequest switchOnRequest() {
-		ServiceRequest switchOn = new ServiceRequest(new LTBAService(), null);
+		ServiceRequest switchOn = new ServiceRequest(new LTBAService(),
+				inputUser);
 		switchOn.addAddEffect(
 				new String[] { LTBAService.PROP_SERVICE_HAS_STATUS_VALUE },
 				true);
@@ -55,7 +55,8 @@ public class LTBACaller {
 	 * @return The service request for the specified profile.
 	 */
 	private static ServiceRequest switchOffRequest() {
-		ServiceRequest switchOff = new ServiceRequest(new LTBAService(), null);
+		ServiceRequest switchOff = new ServiceRequest(new LTBAService(),
+				inputUser);
 		switchOff
 				.addRemoveEffect(new String[] { LTBAService.PROP_SERVICE_HAS_STATUS_VALUE });
 		return switchOff;
@@ -68,7 +69,8 @@ public class LTBACaller {
 	 */
 	private static ServiceRequest printReportRequest() {
 		System.out.println("printReportRequest");
-		ServiceRequest printReport = new ServiceRequest(new LTBAService(), null);
+		ServiceRequest printReport = new ServiceRequest(new LTBAService(),
+				inputUser);
 		printReport.addAddEffect(
 				new String[] { LTBAService.PROP_HAS_TEXT_REPORT }, "atext");
 		return printReport;
@@ -81,7 +83,8 @@ public class LTBACaller {
 	 */
 	private static ServiceRequest printWeekRequest() {
 		System.out.println("printWeekRequest");
-		ServiceRequest printWeek = new ServiceRequest(new LTBAService(), null);
+		ServiceRequest printWeek = new ServiceRequest(new LTBAService(),
+				inputUser);
 		printWeek.addAddEffect(
 				new String[] { LTBAService.PROP_HAS_WEEK_REPORT }, "atext");
 		return printWeek;
@@ -94,7 +97,8 @@ public class LTBACaller {
 	 */
 	private static ServiceRequest printMonthRequest() {
 		System.out.println("printMonthRequest");
-		ServiceRequest printMonth = new ServiceRequest(new LTBAService(), null);
+		ServiceRequest printMonth = new ServiceRequest(new LTBAService(),
+				inputUser);
 		// printMonth.addAddEffect(
 		// new String[] { LTBAService.PROP_HAS_ACTIVITY_REPORT,
 		// ActivityReportType.MY_URI }, ActivityReportType.month);

@@ -1,18 +1,21 @@
 package org.universAAL.ltba.activity.representation;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.universAAL.ltba.activity.ActivityEntry;
-import org.universAAL.ltba.activity.DailyActivity;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.rdf.Resource;
+import org.universaal.ltba.ui.activator.MainLTBAUIProvider;
 
 
 public class DayGraphicReport extends JFrame {
@@ -26,19 +29,39 @@ public class DayGraphicReport extends JFrame {
 	protected int mouse_y;
 	protected int mouse_x;
 	protected boolean isMousePostitionPrintable;
+	ModuleContext mc;
+	Resource inputUser;
 
-	public DayGraphicReport(DayCollectionActivityMap dayMap) {
+	public DayGraphicReport(DayCollectionActivityMap dayMap,
+			ModuleContext context, final Resource inputUser) {
 
 		System.out.println("THIS IS A NEW CANVAS!!");
+		mc = context;
 		canvas = new DayCanvas(dayMap);
 		canvas.setMap(dayMap);
 		// addCanvasListener();
 		setSize(canvas.WIDTH + 50, canvas.HEIGHT + 50);
 		roomsLabel = new JLabel("ROOMS");
 		roomsLabel.setVisible(true);
+		JButton bDone = new JButton("Done");
+		this.inputUser = inputUser;
+		bDone.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				new MainLTBAUIProvider(mc).showDialog(inputUser);
+
+			}
+		});
+		bDone.setPreferredSize(new Dimension(100, 80));
 		getContentPane().add(canvas, BorderLayout.CENTER);
-		getContentPane().add(roomsLabel, BorderLayout.PAGE_END);
+		JPanel endPane = new JPanel();
+		endPane.add(roomsLabel);
+		endPane.add(bDone);
+		getContentPane().add(endPane, BorderLayout.PAGE_END);
+
 		setVisible(true);
+		toFront();
+		setExtendedState(MAXIMIZED_BOTH);
 		repaint();
 
 	}
@@ -102,5 +125,4 @@ public class DayGraphicReport extends JFrame {
 
 	}
 
-	
 }

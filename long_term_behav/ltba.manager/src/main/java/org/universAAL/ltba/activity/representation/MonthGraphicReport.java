@@ -1,12 +1,21 @@
 package org.universAAL.ltba.activity.representation;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import org.apache.log4j.chainsaw.Main;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.rdf.Resource;
+import org.universaal.ltba.ui.activator.MainLTBAUIProvider;
 
 public class MonthGraphicReport extends JFrame {
 
@@ -16,22 +25,39 @@ public class MonthGraphicReport extends JFrame {
 	protected int mouse_y;
 	protected int mouse_x;
 	protected boolean isMousePostitionPrintable;
+	private ModuleContext mc;
+	private Resource inputUser;
 
 	/**
 	 * Creates a graphic report from a DayCollectionActivityMap
 	 * 
 	 * @param monthMap
 	 *            The map for the days to be represented.
+	 * @param user
+	 * @param context
 	 */
-	public MonthGraphicReport(DayCollectionActivityMap monthMap) {
-
+	public MonthGraphicReport(DayCollectionActivityMap monthMap,
+			ModuleContext context, Resource user) {
+		mc = context;
+		inputUser = user;
 		canvas = new MonthCanvas(monthMap);
 		canvas.setMap(monthMap);
 		setSize(MonthCanvas.WIDTH + 50, MonthCanvas.HEIGHT + 50);
 		roomsLabel = new JLabel("ROOMS");
 		roomsLabel.setVisible(true);
+		JButton bDone = new JButton("Done");
+		bDone.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				new MainLTBAUIProvider(mc).showDialog(inputUser);
+
+			}
+		});
+		bDone.setPreferredSize(new Dimension(100, 80));
 		getContentPane().add(canvas, BorderLayout.CENTER);
 		getContentPane().add(roomsLabel, BorderLayout.PAGE_END);
+		getContentPane().add(bDone, BorderLayout.EAST);		
 		setVisible(true);
 		repaint();
 

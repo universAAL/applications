@@ -5,20 +5,25 @@ import java.util.Date;
 
 import org.universAAL.ltba.activity.ActivityLogger;
 import org.universAAL.ltba.activity.DailyActivity;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.rdf.Resource;
+
 /**
  * Provides graphic reports for activity intensity in different periods of time.
+ * 
  * @author mllorente
- *
+ * 
  */
 public class GraphicReporter {
 
-	public static void showDayReport(Date date, ActivityLogger al) {
+	public static void showDayReport(Date date, ActivityLogger al,
+			ModuleContext context, Resource inputUser) {
 		DayCollectionActivityMap dam = new DayCollectionActivityMap(
 				DayCanvas.DAY_COLUMN_LENGTH, 1, new ArrayList<DailyActivity>(
 						al.dayList.subList(al.dayList.size() - 1, al.dayList
 								.size())));
 		/** Create (and show) a WeeklyGraphicReport */
-		DayGraphicReport dgr = new DayGraphicReport(dam);
+		DayGraphicReport dgr = new DayGraphicReport(dam, context, inputUser);
 	}
 
 	/**
@@ -27,8 +32,10 @@ public class GraphicReporter {
 	 * 
 	 * @param al
 	 *            The Activity Logger
+	 * @param inputUser 
+	 * @param mc 
 	 */
-	public static void showWeekReport(ActivityLogger al) {
+	public static void showWeekReport(ActivityLogger al, ModuleContext mc, Resource inputUser) {
 
 		/** Week to be shown */
 		ArrayList<DailyActivity> weekShown = new ArrayList<DailyActivity>(7);
@@ -61,11 +68,12 @@ public class GraphicReporter {
 		DayCollectionActivityMap dcam = new DayCollectionActivityMap(
 				WeekCanvas.DAY_COLUMN_LENGTH, 7, weekShown);
 		/** Create (and show) a WeeklyGraphicReport */
-		WeeklyGraphicReport wgr = new WeeklyGraphicReport(dcam);
+		WeeklyGraphicReport wgr = new WeeklyGraphicReport(dcam,mc,inputUser);
 
 	}
 
-	public static void showMonthReport(ActivityLogger al) {
+	public static void showMonthReport(ActivityLogger al,
+			ModuleContext context, Resource user) {
 
 		/** Month to be shown */
 		ArrayList<DailyActivity> monthShown = new ArrayList<DailyActivity>(7);
@@ -98,7 +106,7 @@ public class GraphicReporter {
 		DayCollectionActivityMap dcam = new DayCollectionActivityMap(
 				WeekCanvas.DAY_COLUMN_LENGTH, 30, monthShown);
 		/** Create (and show) a WeeklyGraphicReport */
-		MonthGraphicReport mgr = new MonthGraphicReport(dcam);
+		MonthGraphicReport mgr = new MonthGraphicReport(dcam, context, user);
 
 	}
 

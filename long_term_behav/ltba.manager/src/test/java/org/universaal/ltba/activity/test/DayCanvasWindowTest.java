@@ -45,9 +45,13 @@ public class DayCanvasWindowTest extends TestCase {
 		// }
 
 		// wam.initWeekActivityMap();
-		DayGraphicReport dgr = new DayGraphicReport(dam);
-		WeeklyGraphicReport wgr = new WeeklyGraphicReport(wam);
-		MonthGraphicReport mgr = new MonthGraphicReport(mam);
+		// DayGraphicReport dgr = new DayGraphicReport(dam);
+
+		/**
+		 * WeeklyGraphicReport wgr = new WeeklyGraphicReport(wam);
+		 * MonthGraphicReport mgr = new MonthGraphicReport(mam);
+		 */
+
 		// try {
 		// System.in.read();
 		// } catch (IOException e1) {

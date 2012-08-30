@@ -47,7 +47,9 @@ public class CanvasWindowTest {
 		// e1.printStackTrace();
 		// }
 		// wam.initWeekActivityMap();
+		/**
 		WeeklyGraphicReport wgr = new WeeklyGraphicReport(wam);
+		*/
 		// try {
 		// System.in.read();
 		// } catch (IOException e) {

@@ -33,37 +33,28 @@ public class ActivityLogger {
 	}
 
 	public void putEntry(long timestamp, Room room, ActivityIntensity intensity) {
-		// System.out.println("INSERTANDO ENTRADA");
+
 		Calendar thisCal = Calendar.getInstance();
 		thisCal.setTime(new Date(timestamp));
-//		System.out.println("ENTRY:" + thisCal.get(Calendar.YEAR) + "-"
-//				+ thisCal.get(Calendar.MONTH) + "-"
-//				+ thisCal.get(Calendar.DAY_OF_MONTH));
+
 		if (!dayList.isEmpty()) {
-			// System.out.println("LISTA NO VACÍA");
+
 			DailyActivity lastDay = dayList.get(dayList.size() - 1);
 
 			if (lastDay.getYear() == thisCal.get(Calendar.YEAR)
 					&& lastDay.getMonth() == (thisCal.get(Calendar.MONTH))
 					&& lastDay.getDay() == (thisCal.get(Calendar.DAY_OF_MONTH))) {
-				// System.out.println("ESTAMOS EN EL MISMO DÍA");
-				// System.out.println("Este día: " + thisCal.get(Calendar.YEAR)
-				// + "-" + thisCal.get(Calendar.MONTH) + "-"
-				// + thisCal.get(Calendar.DAY_OF_MONTH));
+
 				lastDay.addNewEntry(timestamp, room, intensity);
 
 			} else {
-				// System.out.println("Ultimo día: " + lastDay.getYear() + "-"
-				// + lastDay.getMonth() + "-" + lastDay.getDay());
-				// System.out.println("Este día: " + thisCal.get(Calendar.YEAR)
-				// + "-" + thisCal.get(Calendar.MONTH) + "-"
-				// + thisCal.get(Calendar.DAY_OF_MONTH));
+
 				DailyActivity newDay = new DailyActivity(timestamp);
 				newDay.addNewEntry(timestamp, room, intensity);
 				dayList.add(newDay);
 			}
 		} else {
-			// System.out.println("LISTA VACÍA");
+
 			DailyActivity newDay = new DailyActivity(timestamp);
 			newDay.addNewEntry(timestamp, room, intensity);
 			dayList.add(newDay);
@@ -85,64 +76,64 @@ public class ActivityLogger {
 			System.out.println();
 			day.print();
 		}
-		showGraphicTable();
+		// showGraphicTable();
 	}
 
-	public void showGraphicTable() {
-
-		// String[][] tableData = showTableReport();
-		// String[] header = new String[tableData[0].length];
-		// for (int i = 0; i < tableData[0].length; i++) {
-		// header[i] = "-";
-		// }
-		// JTable table1 = new JTable(tableData, header);
-		// table1.setDefaultRenderer(String.class, new MyTableRenderer());
-		// JPanel jp = new SingleReportingTable(tableData);
-		// // jp.add(table1);
-		// JFrame jf = new JFrame("ACTIVITY REPORT");
-		// jf.setSize(640, 480);
-		// jf.add(jp);
-		// jf.setVisible(true);
-		// jf.repaint();
-		ArrayList<DailyActivity> lastWeek = new ArrayList<DailyActivity>(7);
-
-		System.out
-				.println("My current dayList has the size: " + dayList.size());
-
-		if (dayList.size() < 7) {
-			for (int i = 0; i < 7 - dayList.size(); i++) {
-				System.out
-						.println("Inserting a day from the begginning of the world: "
-								+ i);
-				lastWeek.add(new DailyActivity(0));
-			}
-
-			for (int i = 7 - dayList.size(); i < 7; i++) {
-				System.out.println("Inserting a day from the daylist: " + i);
-				lastWeek.add(dayList.get(i - 7 + dayList.size()));
-			}
-		} else {
-			for (int i = dayList.size() - 7; i < dayList.size(); i++) {
-				System.out.println("Inserting a day from the dayList");
-				lastWeek.add(dayList.get(i));
-			}
-		}
-		try {
-			System.in.read();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			System.in.read();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		DayCollectionActivityMap dcam = new DayCollectionActivityMap(
-				WeekCanvas.DAY_COLUMN_LENGTH, 7, lastWeek);
-		// wam.initWeekActivityMap();
-		WeeklyGraphicReport jf2 = new WeeklyGraphicReport(dcam);
-	}
+	// public void showGraphicTable() {
+	//
+	// // String[][] tableData = showTableReport();
+	// // String[] header = new String[tableData[0].length];
+	// // for (int i = 0; i < tableData[0].length; i++) {
+	// // header[i] = "-";
+	// // }
+	// // JTable table1 = new JTable(tableData, header);
+	// // table1.setDefaultRenderer(String.class, new MyTableRenderer());
+	// // JPanel jp = new SingleReportingTable(tableData);
+	// // // jp.add(table1);
+	// // JFrame jf = new JFrame("ACTIVITY REPORT");
+	// // jf.setSize(640, 480);
+	// // jf.add(jp);
+	// // jf.setVisible(true);
+	// // jf.repaint();
+	// ArrayList<DailyActivity> lastWeek = new ArrayList<DailyActivity>(7);
+	//
+	// System.out
+	// .println("My current dayList has the size: " + dayList.size());
+	//
+	// if (dayList.size() < 7) {
+	// for (int i = 0; i < 7 - dayList.size(); i++) {
+	// System.out
+	// .println("Inserting a day from the begginning of the world: "
+	// + i);
+	// lastWeek.add(new DailyActivity(0));
+	// }
+	//
+	// for (int i = 7 - dayList.size(); i < 7; i++) {
+	// System.out.println("Inserting a day from the daylist: " + i);
+	// lastWeek.add(dayList.get(i - 7 + dayList.size()));
+	// }
+	// } else {
+	// for (int i = dayList.size() - 7; i < dayList.size(); i++) {
+	// System.out.println("Inserting a day from the dayList");
+	// lastWeek.add(dayList.get(i));
+	// }
+	// }
+	// try {
+	// System.in.read();
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// try {
+	// System.in.read();
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	//
+	// DayCollectionActivityMap dcam = new DayCollectionActivityMap(
+	// WeekCanvas.DAY_COLUMN_LENGTH, 7, lastWeek);
+	// // wam.initWeekActivityMap();
+	// WeeklyGraphicReport jf2 = new WeeklyGraphicReport(dcam);
+	// }
 
 	public String[][] showTableReport() {
 		String[][] data = new String[25][1];

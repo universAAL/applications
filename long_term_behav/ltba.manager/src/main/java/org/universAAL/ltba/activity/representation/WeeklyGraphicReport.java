@@ -2,17 +2,24 @@ package org.universAAL.ltba.activity.representation;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.universAAL.ltba.activity.ActivityEntry;
 import org.universAAL.ltba.activity.DailyActivity;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.rdf.Resource;
+import org.universaal.ltba.ui.activator.MainLTBAUIProvider;
 
 public class WeeklyGraphicReport extends JFrame {
 
@@ -26,9 +33,13 @@ public class WeeklyGraphicReport extends JFrame {
 	protected int mouse_y;
 	protected int mouse_x;
 	protected boolean isMousePostitionPrintable;
+	private ModuleContext mc;
+	private Resource inputUser;
 
-	public WeeklyGraphicReport(DayCollectionActivityMap weekMap) {
-
+	public WeeklyGraphicReport(DayCollectionActivityMap weekMap,
+			ModuleContext context, Resource user) {
+		mc = context;
+		inputUser = user;
 		System.out.println("THIS IS A NEW CANVAS!!");
 		canvas = new WeekCanvas(weekMap);
 		Color[][] colorData = new Color[canvas.DAY_COLUMN_LENGTH][7];
@@ -39,9 +50,17 @@ public class WeeklyGraphicReport extends JFrame {
 		setSize(canvas.WIDTH + 50, canvas.HEIGHT + 50);
 		roomsLabel = new JLabel("ROOMS");
 		roomsLabel.setVisible(true);
-		//panel = new JPanel(new BorderLayout());
-		getContentPane().add(canvas,BorderLayout.CENTER);
-		getContentPane().add(roomsLabel,BorderLayout.PAGE_END);
+		JButton bDone = new JButton("Done");
+		bDone.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MainLTBAUIProvider(mc).showDialog(inputUser);
+			}
+		});
+		bDone.setPreferredSize(new Dimension(100, 80));
+		// panel = new JPanel(new BorderLayout());
+		getContentPane().add(canvas, BorderLayout.CENTER);
+		getContentPane().add(roomsLabel, BorderLayout.PAGE_END);
+		getContentPane().add(bDone, BorderLayout.EAST);
 		// pack();
 		setVisible(true);
 		repaint();
@@ -79,8 +98,8 @@ public class WeeklyGraphicReport extends JFrame {
 		canvas.addMouseMotionListener(new MouseMotionListener() {
 
 			public void mouseMoved(MouseEvent e) {
-				//System.out.println("x->" + canvas.getMousePosition().x);
-				//System.out.println("y->" + canvas.getMousePosition().y);
+				// System.out.println("x->" + canvas.getMousePosition().x);
+				// System.out.println("y->" + canvas.getMousePosition().y);
 				mouse_x = canvas.getMousePosition().x;
 				mouse_y = canvas.getMousePosition().y;
 
@@ -91,9 +110,10 @@ public class WeeklyGraphicReport extends JFrame {
 						&& mouse_y > WeekCanvas.Y_OFFSET
 						&& mouse_y < WeekCanvas.WEEK_RECTANGLE_HEIGHT
 								+ WeekCanvas.Y_OFFSET) {
-					//System.out.println("Inside if");
-					roomsLabel.setText(canvas.getMap().getAtomicEntryFromCoordinates(mouse_x,
-							mouse_y).getAtomicMap().toString());
+					// System.out.println("Inside if");
+					roomsLabel.setText(canvas.getMap()
+							.getAtomicEntryFromCoordinates(mouse_x, mouse_y)
+							.getAtomicMap().toString());
 
 				}
 			}

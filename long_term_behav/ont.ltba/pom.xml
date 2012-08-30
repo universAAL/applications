@@ -5,10 +5,10 @@
 		<artifactId>ont.pom</artifactId>
 		<groupId>org.universAAL.ontology</groupId>
 		<version>1.1.0</version>
+		<relativePath>../pom/pom.xml</relativePath>
 	</parent>
-	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.ltba</artifactId>
-	<version>B.0.1</version>
+	<version>B.0.2-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>LTBA ontology.</name>
 	<description>The Long Term Behaviour Analyzer Ontologies</description>
@@ -51,41 +51,4 @@
 			<version>1.1.0</version>
 		</dependency>
 	</dependencies>
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name>Central Maven Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>apache-snapshots</id>
-			<name>Apache Snapshots</name>
-			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<updatePolicy>daily</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal</id>
-			<name>universAAL Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal-snapshots</id>
-			<name>universAAL Snapshot Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-	</repositories>
 </project>
