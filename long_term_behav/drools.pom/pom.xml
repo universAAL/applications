@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0</version>
+		<version>C.0</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 	<artifactId>drools.pom</artifactId>
-	<version>B.0.2-SNAPSHOT</version>
+	<version>C.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>The Drools Reasoner POM file</name>
 	<description>The Drools Reasoner POM file</description>
@@ -21,7 +21,7 @@
 			<dependency>
 				<artifactId>ont.drools</artifactId>
 				<groupId>org.universaal.ontology</groupId>
-				<version>B.0.2-SNAPSHOT</version>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
