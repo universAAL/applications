@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+	<groupId>org.universAAL.support</groupId>
+    <artifactId>support.pom</artifactId>
+    <version>1.2.0</version>
+    <relativePath>../../pom/pom.xml</relativePath>
+	</parent>
+	<groupId>org.universAAL.AALapplication</groupId>
+	<packaging>bundle</packaging>
+	<artifactId>EnergyReaderPublisher</artifactId>
+	<version>1.2.1-SNAPSHOT</version>
+	<name>Energy Reader Service</name>
+	<url />
+	<dependencies>		
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.composite</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.readenergy</artifactId>
+			<version>1.2.1-SNAPSHOT</version>
+		</dependency>
+    	<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.20</version>
+		</dependency>
+    	<dependency>
+    		<groupId>org.universAAL.ontology</groupId>
+    		<artifactId>ont.aalfficiencyscores</artifactId>
+    		<version>1.2.1-SNAPSHOT</version>
+    	</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Activator>org.universAAL.EnergyReader.Activator</Bundle-Activator>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Export-Package>org.universAAL.EnergyReader</Export-Package>
+						<Import-Package>com.mysql.jdbc,*</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>
