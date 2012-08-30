@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es 
- Universidad Politécnica de Madrid
+ Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,9 @@ import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.OntClassInfoSetup;
 import org.universAAL.middleware.owl.Ontology;
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
-import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
+import org.universAAL.ontology.profile.ProfileOntology;
 import org.universaal.ontology.QuestionnaireStrategyOntologyFactory;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.Treatment;
