@@ -779,7 +779,7 @@ health/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/Menta
 health/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/Neoplasms.java -text
 health/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/NervousSystemDisease.java -text
 health/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/RespiratorySystemDisease.java -text
-health/ont.disease/src/main/java/org/universaal/ontology/disease/Activator.java -text svneol=unset#text/plain
+health/ont.disease/src/main/java/org/universaal/ontology/disease/DeseaseActivator.java -text svneol=unset#text/plain
 health/ont.disease/src/main/java/org/universaal/ontology/disease/DiseaseFactory.java -text svneol=unset#text/plain
 health/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Diagnostic.java -text
 health/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Disease.java -text svneol=unset#text/plain
@@ -798,7 +798,7 @@ health/ont.health/HealthOntology.uml -text svneol=unset#text/plain
 health/ont.health/LICENSE-2.0.txt -text
 health/ont.health/NOTICE -text
 health/ont.health/pom.xml -text svneol=unset#application/octet-stream
-health/ont.health/src/main/java/org/universaal/ontology/health/Activator.java -text
+health/ont.health/src/main/java/org/universaal/ontology/health/HealthActivator.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/HealthOntologyFactory.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/ActivityHeartRateRequirement.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/BloodPressureRequirement.java -text
@@ -843,7 +843,7 @@ health/ont.healthmeasurement/HealthMeasurement.di -text
 health/ont.healthmeasurement/HealthMeasurement.notation -text
 health/ont.healthmeasurement/HealthMeasurement.uml -text svneol=unset#text/plain
 health/ont.healthmeasurement/pom.xml -text svneol=unset#text/plain
-health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/Activator.java -text svneol=unset#text/plain
+health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/HealthMeasruementActivator.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/HealthMeasurementFactory.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/BloodPressure.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/HealthMeasurement.java -text svneol=unset#text/plain
@@ -862,7 +862,7 @@ health/ont.message/MessageOntology.di -text
 health/ont.message/MessageOntology.notation -text
 health/ont.message/MessageOntology.uml -text
 health/ont.message/pom.xml -text svneol=unset#application/octet-stream
-health/ont.message/src/main/java/org/universaal/ontology/Activator.java -text svneol=unset#application/octet-stream
+health/ont.message/src/main/java/org/universaal/ontology/MessageActivator.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/MessageOntologyFactory.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/owl/Message.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/owl/MessageOntology.java -text svneol=unset#application/octet-stream

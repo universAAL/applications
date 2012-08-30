@@ -4,12 +4,12 @@
   		<parent>
     		<groupId>org.universAAL.ontology</groupId>
     		<artifactId>ont.pom</artifactId>
-    		<version>1.1.1-SNAPSHOT</version>
+    		<version>1.2.1-SNAPSHOT</version>
     		<relativePath>../pom/</relativePath>
 		</parent>
   	
   	<artifactId>ont.disease</artifactId>
-  	<version>1.1.1-SNAPSHOT</version>
+  	<version>1.2.1-SNAPSHOT</version>
   	<name>Disease Ontology</name>
  	<description>No further description provided</description>
  	<properties>
@@ -30,15 +30,15 @@
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.data.representation</artifactId>
+				<artifactId>mw.data.representation.core</artifactId>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.bus.context</artifactId>
+				<artifactId>mw.bus.context.core</artifactId>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.bus.service</artifactId>
+				<artifactId>mw.bus.service.core</artifactId>
 			</dependency>
 			<dependency>
            		<groupId>org.universAAL.ontology</groupId>
@@ -54,7 +54,6 @@
 					<configuration>
 						<instructions>
 							<Bundle-Name>${project.name}</Bundle-Name>
-							<Bundle-Activator>org.universaal.ontology.disease.Activator</Bundle-Activator>
 							<Bundle-Description>${project.description}</Bundle-Description>
 							<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 							<Export-Package>org.universaal.ontology.disease.owl.*,

@@ -1,23 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-<!-- 	<parent> -->
-<!-- 		<groupId>org.universAAL.ontology</groupId> -->
-<!-- 		<artifactId>ont.pom</artifactId> -->
-<!-- 		<version>1.1.1-SNAPSHOT</version> -->
-<!-- 		<relativePath>../pom/</relativePath> -->
-<!-- 	</parent> -->
-<!--   	Remvoe when translated to Onotologies repo -->
-  	<parent>
-		<groupId>org.universAAL.AALapplication</groupId>
-		<artifactId>health.pom</artifactId>
-		<version>B.0.1-SNAPSHOT</version>
-		<relativePath>../health.pom/</relativePath>
+	<parent>
+		<groupId>org.universAAL.ontology</groupId>
+		<artifactId>ont.pom</artifactId>
+		<version>1.2.1-SNAPSHOT</version>
+		<relativePath>../pom/</relativePath>
 	</parent>
 	
-	<groupId>org.universAAL.ontology</groupId>
   	<artifactId>ont.health</artifactId>
-  	<version>1.1.1-SNAPSHOT</version>
+  	<version>1.2.1-SNAPSHOT</version>
   	<name>HealthOntology</name>
  	<description>No description provided</description>
   	<packaging>bundle</packaging>
@@ -31,7 +23,12 @@
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.healthmeasurement</artifactId>
-				<version>1.1.1-SNAPSHOT</version>
+				<version>1.2.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.disease</artifactId>
+				<version>1.2.1-SNAPSHOT</version>
 			</dependency>
   		</dependencies>
   	</dependencyManagement>
@@ -47,19 +44,19 @@
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.data.representation</artifactId>
+				<artifactId>mw.data.representation.core</artifactId>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.bus.context</artifactId>
+				<artifactId>mw.bus.context.core</artifactId>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.bus.ui</artifactId>
+				<artifactId>mw.bus.ui.core</artifactId>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.bus.service</artifactId>
+				<artifactId>mw.bus.service.core</artifactId>
 			</dependency>
 			<dependency>
            		<groupId>org.universAAL.ontology</groupId>
@@ -96,7 +93,6 @@
 					<configuration>
 						<instructions>
 							<Bundle-Name>${project.name}</Bundle-Name>
-							<Bundle-Activator>org.universaal.ontology.health.Activator</Bundle-Activator>
 							<Bundle-Description>${project.description}</Bundle-Description>
 							<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 							<Bundle-Version>${project.version}</Bundle-Version>
