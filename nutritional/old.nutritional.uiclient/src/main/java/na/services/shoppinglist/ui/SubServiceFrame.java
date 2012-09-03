@@ -828,8 +828,9 @@ public class SubServiceFrame extends AdaptivePanel implements ActionListener, Li
 	
 
 	private void generatePDF(VIsualShoppingList superSL, Calendar startDate, int size) throws DocumentException, IOException {
-		PDFGenerator pdf = new PDFGenerator();
-		pdf.createPDF(superSL, startDate, size);
+		System.out.println("GENERATE PDF....FAKE");
+	//	PDFGenerator pdf = new PDFGenerator();
+	//	pdf.createPDF(superSL, startDate, size);
 	}
 	
 	

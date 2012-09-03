@@ -16,17 +16,19 @@ import na.utils.lang.Messages;
 
 
 
-import com.itextpdf.text.*;
+/*import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.FontSelector;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfWriter;*/
 
 public class PDFGenerator {
-	public void createPDF(VIsualShoppingList superSL, Calendar startDate, int size) throws DocumentException, IOException {
+	
+	public void createPDF(){}
+	//public void createPDF(VIsualShoppingList superSL, Calendar startDate, int size) throws DocumentException, IOException {
 		/*
 		 * Ordenar por categoria
 		 */
-		Map<String, FoodItem> sortedSL = VIsualShoppingList.sortByCategoryThenName(superSL.items);
+	/*	Map<String, FoodItem> sortedSL = VIsualShoppingList.sortByCategoryThenName(superSL.items);
 //		Iterator itt = sortedSL.values().iterator();
 //		while (itt.hasNext()) {
 //			FoodItem item = ((FoodItem)itt.next());
@@ -141,6 +143,6 @@ public class PDFGenerator {
 //		lista.add(new ListItem("    "+Utils.Strings.capitalize(name) + amount));
 		Phrase phrase_2 = fs.process("    "+Utils.Strings.capitalize(name) + amount);
 		lista.add(new ListItem(phrase_2));
-	}
+	}*/
 }
  
