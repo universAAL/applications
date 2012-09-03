@@ -7,6 +7,7 @@
 <stringAttribute key="checked" value="[NONE]"/>
 <booleanAttribute key="clearConfig" value="false"/>
 <stringAttribute key="configLocation" value="${workspace_loc}/../svn/support/trunk/samples/lighting/uiclient/rundir/confadmin"/>
+<booleanAttribute key="default" value="true"/>
 <booleanAttribute key="default_auto_start" value="true"/>
 <intAttribute key="default_start_level" value="9"/>
 <booleanAttribute key="includeOptional" value="true"/>
@@ -25,47 +26,37 @@
 <listEntry value="obr"/>
 </listAttribute>
 <mapAttribute key="org.ops4j.pax.cursor.provisionItems">
-<mapEntry key="wrap:mvn:org.universAAL.ui/ui.handler.gui.tableLayout" value="true@true@8@false"/>
-<mapEntry key="mvn:org.apache.felix/org.apache.felix.log" value="true@true@2@false"/>
-<mapEntry key="wrap:mvn:axis/axis-pax/1.4" value="true@true@null@false"/>
-<mapEntry key="mvn:org.ops4j.pax.logging/pax-logging-api/1.4" value="true@true@3@false"/>
-<mapEntry key="mvn:org.universAAL.middleware/mw.data.representation/0.3.0-SNAPSHOT" value="true@true@4@true"/>
 <mapEntry key="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4" value="true@true@2@false"/>
-<mapEntry key="mvn:org.universAAL.samples/smp.lighting.uiclient" value="true@true@null@true"/>
-<mapEntry key="mvn:org.universAAL.middleware/mw.acl.interfaces" value="true@true@2@false"/>
-<mapEntry key="mvn:org.ops4j.pax.confman/pax-confman-propsloader" value="true@true@3@false"/>
-<mapEntry key="wrap:mvn:jp.go.ipa/jgcl/1.0" value="true@true@2@false"/>
-<mapEntry key="mvn:org.universAAL.ontology/ont.lighting" value="true@true@5@false"/>
-<mapEntry key="wrap:mvn:commons-discovery/commons-discovery/0.5" value="true@true@null@false"/>
-<mapEntry key="wrap:mvn:org.apache.axis/axis-jaxrpc/1.4" value="true@true@null@false"/>
-<mapEntry key="wrap:mvn:mysql/mysql-connector-java/5.1.6" value="true@true@2@false"/>
-<mapEntry key="mvn:org.universAAL.samples/smp.lighting.server" value="true@true@6@false"/>
-<mapEntry key="wrap:mvn:java3d/vecmath/1.3.1" value="true@true@2@false"/>
-<mapEntry key="wrap:mvn:com.itextpdf/itextpdf/5.1.1" value="true@true@null@false"/>
-<mapEntry key="mvn:org.ops4j.pax.logging/pax-logging-service/1.4" value="true@true@3@false"/>
-<mapEntry key="wrap:mvn:org.universAAL.support/jena.osgi/0.3.0-SNAPSHOT" value="true@true@2@true"/>
-<mapEntry key="mvn:org.universAAL.middleware/mw.bus.io/0.3.0-SNAPSHOT" value="true@true@4@true"/>
-<mapEntry key="wrap:mvn:org.bouncycastle/jce.jdk13/144" value="true@true@2@false"/>
-<mapEntry key="wrap:mvn:com.miglayout/miglayout/3.7.4" value="true@true@null@false"/>
-<mapEntry key="wrap:mvn:java3d/j3d-core/1.3.1" value="true@true@2@false"/>
-<mapEntry key="mvn:org.universAAL.ontology/ont.profile" value="true@true@6@false"/>
-<mapEntry key="mvn:org.universAAL.ui/ui.handler.gui/0.1.1-SNAPSHOT" value="true@true@8@false"/>
-<mapEntry key="mvn:org.universAAL.ontology/ont.phWorld/0.2.3-SNAPSHOT" value="true@true@5@true"/>
-<mapEntry key="mvn:org.universAAL.middleware/mw.bus.service/0.3.0-SNAPSHOT" value="true@true@4@true"/>
-<mapEntry key="wrap:mvn:javax.mail/mail/1.4.1" value="true@true@null@false"/>
-<mapEntry key="mvn:org.universAAL.ui/ui.dm" value="true@true@7@false"/>
+<mapEntry key="mvn:org.apache.felix/org.apache.felix.log" value="true@true@2@false"/>
 <mapEntry key="mvn:org.apache.felix/org.apache.felix.upnp.basedriver" value="true@true@2@false"/>
-<mapEntry key="mvn:org.universAAL.AALapplication/nutritional.uiclient" value="true@true@null@true"/>
-<mapEntry key="wrap:mvn:org.uaal.testing/testing-services/0-1-Snap" value="true@false@null@true"/>
-<mapEntry key="mvn:org.universAAL.middleware/mw.data.serialization/0.3.0-SNAPSHOT" value="true@true@4@true"/>
-<mapEntry key="wrap:mvn:org.osgi/osgi_R4_compendium/1.0" value="true@true@2@false"/>
+<mapEntry key="mvn:org.ops4j.pax.confman/pax-confman-propsloader" value="true@true@3@false"/>
+<mapEntry key="mvn:org.ops4j.pax.logging/pax-logging-api/1.4" value="true@true@3@false"/>
+<mapEntry key="mvn:org.ops4j.pax.logging/pax-logging-service/1.4" value="true@true@3@false"/>
+<mapEntry key="mvn:org.universAAL.context/ctxt.jena.converter/0.3.0-SNAPSHOT" value="true@true@3@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.acl.interfaces" value="true@true@2@false"/>
 <mapEntry key="mvn:org.universAAL.middleware/mw.acl.upnp" value="true@true@3@false"/>
 <mapEntry key="mvn:org.universAAL.middleware/mw.bus.context/0.3.0-SNAPSHOT" value="true@true@4@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.bus.io/0.3.0-SNAPSHOT" value="true@true@4@true"/>
 <mapEntry key="mvn:org.universAAL.middleware/mw.bus.model/0.3.0-SNAPSHOT" value="true@true@3@true"/>
-<mapEntry key="mvn:org.universAAL.context/ctxt.jena.converter/0.3.0-SNAPSHOT" value="true@true@3@true"/>
-<mapEntry key="mvn:org.universAAL.samples/smp.lighting.client" value="false@false@9@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.bus.service/0.3.0-SNAPSHOT" value="true@true@4@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.data.representation/0.3.0-SNAPSHOT" value="true@true@4@true"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.data.serialization/0.3.0-SNAPSHOT" value="true@true@4@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.lighting" value="true@true@5@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.nutrition" value="true@true@6@true"/>
-<mapEntry key="wrap:mvn:axis/axis-wsdl4j" value="true@true@null@false"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.phWorld/0.2.3-SNAPSHOT" value="true@true@5@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.profile" value="true@true@6@false"/>
+<mapEntry key="mvn:org.universAAL.samples/smp.lighting.client" value="false@false@9@true"/>
+<mapEntry key="mvn:org.universAAL.samples/smp.lighting.server" value="true@true@6@false"/>
+<mapEntry key="mvn:org.universAAL.ui/ui.dm" value="true@true@7@false"/>
+<mapEntry key="mvn:org.universAAL.ui/ui.handler.gui/0.1.1-SNAPSHOT" value="true@true@8@false"/>
+<mapEntry key="wrap:mvn:java3d/j3d-core/1.3.1" value="true@true@2@false"/>
+<mapEntry key="wrap:mvn:java3d/vecmath/1.3.1" value="true@true@2@false"/>
+<mapEntry key="wrap:mvn:jp.go.ipa/jgcl/1.0" value="true@true@2@false"/>
+<mapEntry key="wrap:mvn:mysql/mysql-connector-java/5.1.6" value="true@true@2@false"/>
+<mapEntry key="wrap:mvn:org.bouncycastle/jce.jdk13/144" value="true@true@2@false"/>
+<mapEntry key="wrap:mvn:org.osgi/osgi_R4_compendium/1.0" value="true@true@2@false"/>
+<mapEntry key="wrap:mvn:org.universAAL.support/jena.osgi/0.3.0-SNAPSHOT" value="true@true@2@true"/>
+<mapEntry key="wrap:mvn:org.universAAL.ui/ui.handler.gui.tableLayout" value="true@true@8@false"/>
 </mapAttribute>
 <listAttribute key="org.ops4j.pax.cursor.runArguments">
 <listEntry value="--overwrite=false"/>
@@ -73,50 +64,42 @@
 <listEntry value="--overwriteSystemBundles=false"/>
 <listEntry value="--log=INFO"/>
 <listEntry value="--profiles=obr"/>
-<listEntry value="wrap:mvn:org.universAAL.ui/ui.handler.gui.tableLayout@8"/>
 <listEntry value="mvn:org.apache.felix/org.apache.felix.log@2"/>
-<listEntry value="mvn:org.ops4j.pax.logging/pax-logging-api/1.4@3"/>
-<listEntry value="wrap:mvn:axis/axis-pax/1.4"/>
 <listEntry value="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4@2"/>
 <listEntry value="mvn:org.universAAL.middleware/mw.acl.interfaces@2"/>
-<listEntry value="mvn:org.universAAL.samples/smp.lighting.uiclient@update"/>
 <listEntry value="wrap:mvn:jp.go.ipa/jgcl/1.0@2"/>
-<listEntry value="mvn:org.ops4j.pax.confman/pax-confman-propsloader@3"/>
 <listEntry value="wrap:mvn:mysql/mysql-connector-java/5.1.6@2"/>
-<listEntry value="wrap:mvn:org.apache.axis/axis-jaxrpc/1.4"/>
-<listEntry value="wrap:mvn:commons-discovery/commons-discovery/0.5"/>
 <listEntry value="wrap:mvn:java3d/vecmath/1.3.1@2"/>
 <listEntry value="wrap:mvn:org.universAAL.support/jena.osgi/0.3.0-SNAPSHOT@2@update"/>
-<listEntry value="mvn:org.ops4j.pax.logging/pax-logging-service/1.4@3"/>
-<listEntry value="mvn:org.universAAL.ui/ui.handler.gui/0.1.1-SNAPSHOT@8"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.data.serialization/0.3.0-SNAPSHOT@4@update"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.acl.upnp@3"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.bus.context/0.3.0-SNAPSHOT@4@update"/>
-<listEntry value="mvn:org.universAAL.context/ctxt.jena.converter/0.3.0-SNAPSHOT@3@update"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.bus.model/0.3.0-SNAPSHOT@3@update"/>
-<listEntry value="mvn:org.universAAL.ontology/ont.nutrition@6@update"/>
-<listEntry value="wrap:mvn:axis/axis-wsdl4j"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.data.representation/0.3.0-SNAPSHOT@4@update"/>
-<listEntry value="mvn:org.universAAL.ontology/ont.lighting@5"/>
-<listEntry value="mvn:org.universAAL.samples/smp.lighting.server@6"/>
-<listEntry value="wrap:mvn:com.itextpdf/itextpdf/5.1.1"/>
 <listEntry value="wrap:mvn:org.bouncycastle/jce.jdk13/144@2"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.bus.io/0.3.0-SNAPSHOT@4@update"/>
-<listEntry value="wrap:mvn:com.miglayout/miglayout/3.7.4"/>
 <listEntry value="wrap:mvn:java3d/j3d-core/1.3.1@2"/>
-<listEntry value="mvn:org.universAAL.ontology/ont.profile@6"/>
-<listEntry value="mvn:org.universAAL.ontology/ont.phWorld/0.2.3-SNAPSHOT@5@update"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.bus.service/0.3.0-SNAPSHOT@4@update"/>
-<listEntry value="wrap:mvn:javax.mail/mail/1.4.1"/>
 <listEntry value="mvn:org.apache.felix/org.apache.felix.upnp.basedriver@2"/>
-<listEntry value="mvn:org.universAAL.ui/ui.dm@7"/>
-<listEntry value="mvn:org.universAAL.AALapplication/nutritional.uiclient@update"/>
-<listEntry value="wrap:mvn:org.uaal.testing/testing-services/0-1-Snap@nostart@update"/>
 <listEntry value="wrap:mvn:org.osgi/osgi_R4_compendium/1.0@2"/>
+<listEntry value="mvn:org.ops4j.pax.logging/pax-logging-api/1.4@3"/>
+<listEntry value="mvn:org.ops4j.pax.confman/pax-confman-propsloader@3"/>
+<listEntry value="mvn:org.ops4j.pax.logging/pax-logging-service/1.4@3"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.acl.upnp@3"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.bus.model/0.3.0-SNAPSHOT@3@update"/>
+<listEntry value="mvn:org.universAAL.context/ctxt.jena.converter/0.3.0-SNAPSHOT@3@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.data.representation/0.3.0-SNAPSHOT@4@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.bus.io/0.3.0-SNAPSHOT@4@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.bus.service/0.3.0-SNAPSHOT@4@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.data.serialization/0.3.0-SNAPSHOT@4@update"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.bus.context/0.3.0-SNAPSHOT@4@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.lighting@5"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.phWorld/0.2.3-SNAPSHOT@5@update"/>
+<listEntry value="mvn:org.universAAL.samples/smp.lighting.server@6"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.profile@6"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.nutrition@6@update"/>
+<listEntry value="mvn:org.universAAL.ui/ui.dm@7"/>
+<listEntry value="wrap:mvn:org.universAAL.ui/ui.handler.gui.tableLayout@8"/>
+<listEntry value="mvn:org.universAAL.ui/ui.handler.gui/0.1.1-SNAPSHOT@8"/>
 </listAttribute>
 <stringAttribute key="osgi_framework_id" value="--platform=felix --version=1.4.0"/>
 <stringAttribute key="pde.version" value="3.3"/>
 <booleanAttribute key="show_selected_only" value="false"/>
 <booleanAttribute key="tracing" value="false"/>
+<booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfigArea" value="false"/>
+<stringAttribute key="workspace_bundles" value="food_shopping.service.RFidProvider@default:default,food_shopping.service.client@default:default,food_shopping.service.server@default:default,medication.manager.ont@default:default,medication.manager.service@default:default,medication.manager.shell.commands@default:default,medication.manager.ui@default:default,medication.missing.services.simulation@default:default,nutritional.simulator@default:default,ont.foodDevices@default:default,ont.nutrition@default:default,ont.safetyDevices@default:default,org.universaal.application.nutritional.democlient@default:default,safety_home.service.client@default:default,safety_home.service.humiditySensorProvider@default:default,safety_home.service.lightSensorProvider@default:default,safety_home.service.motionSensorProvider@default:default,safety_home.service.server@default:default,safety_home.service.smartCardProvider@default:default,safety_home.service.smokeDetectionProvider@default:default,safety_home.service.temperatureSensorProvider@default:default,safety_home.service.windowProvider@default:default,security.authorizator@default:default,test1@default:default,ucc.api@default:default,ucc.core@default:default,ucc.model@default:default,ucc.plugin.information@default:default,ucc.plugin.karaf@default:default,ucc.plugin.ustore@default:default,ucc.viewjambi@default:default"/>
 </launchConfiguration>

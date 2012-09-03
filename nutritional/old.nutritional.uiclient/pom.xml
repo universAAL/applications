@@ -60,8 +60,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>nutritional.ontology</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<artifactId>ont.nutrition</artifactId>
+			<version>0.1.2-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

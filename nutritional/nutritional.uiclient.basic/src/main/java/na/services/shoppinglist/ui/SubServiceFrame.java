@@ -1,7 +1,5 @@
 package na.services.shoppinglist.ui;
 
-
-
 import java.awt.Desktop;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -53,7 +51,7 @@ import na.widgets.spinner2.AdaptiveSpinner2;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.itextpdf.text.DocumentException;
+//import com.itextpdf.text.DocumentException;
 
 
 @SuppressWarnings("serial")
@@ -469,11 +467,11 @@ public class SubServiceFrame extends AdaptivePanel implements ActionListener, Li
 			}
 		} catch (FileNotFoundException e) {
 			log.info("Shop: Error, fileNotFound...");
-			e.printStackTrace();
-		} catch (DocumentException e) {
+			e.printStackTrace();}
+	/*	} catch (DocumentException e) {
 			log.info("Shop: Error, doc exception");
 			e.printStackTrace();
-		} catch (Exception e) {
+		}*/ catch (Exception e) {
 			log.error("Error sending email...");
 			e.printStackTrace();
 			showMessage("Error",Messages.Shopping_email_carerNotSent+ " ("+carerMail+") reason: "+e.getLocalizedMessage(),JOptionPane.ERROR_MESSAGE);
@@ -507,10 +505,10 @@ public class SubServiceFrame extends AdaptivePanel implements ActionListener, Li
 		} catch (FileNotFoundException e) {
 			log.info("Shop: Error, fileNotFound...");
 			e.printStackTrace();
-		} catch (DocumentException e) {
+		}/*catch (DocumentException e) {
 			log.info("Shop: Error, doc exception");
 			e.printStackTrace();
-		} catch (Exception e) {
+		}*/ catch (Exception e) {
 			log.error("Error sending email...");
 			e.printStackTrace();
 			showMessage("Error",Messages.Shopping_email_mainNotSent + " ("+eMail+") reason: "+e.getLocalizedMessage(),JOptionPane.ERROR_MESSAGE);
@@ -616,11 +614,11 @@ public class SubServiceFrame extends AdaptivePanel implements ActionListener, Li
 			log.info("Shop: Couldn't open PDF reader.");
 			e.printStackTrace();
 			showMessage("Error","Couldn't open Pdf reader.", JOptionPane.ERROR_MESSAGE);
-		} catch (DocumentException e) {
+		} /*catch (DocumentException e) {
 			log.error("Error en fichero");
 			log.info("Shop: Error en el PDF");
 			e.printStackTrace();
-		} 
+		} */
 //		catch (JposException e) {
 //			log.error("Error while printing :(");
 //			e.printStackTrace();
@@ -827,9 +825,11 @@ public class SubServiceFrame extends AdaptivePanel implements ActionListener, Li
 	}
 	
 
-	private void generatePDF(VIsualShoppingList superSL, Calendar startDate, int size) throws DocumentException, IOException {
-		PDFGenerator pdf = new PDFGenerator();
-		pdf.createPDF(superSL, startDate, size);
+//	private void generatePDF(VIsualShoppingList superSL, Calendar startDate, int size) throws DocumentException, IOException {
+	private void generatePDF(VIsualShoppingList superSL, Calendar startDate, int size) {
+//		PDFGenerator pdf = new PDFGenerator();
+//		pdf.createPDF(superSL, startDate, size);
+		System.out.println("GENERATE PDF....FAKE");
 	}
 	
 	

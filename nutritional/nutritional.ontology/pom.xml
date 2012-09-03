@@ -48,7 +48,7 @@
             <Bundle-Activator>org.universAAL.ontology.Activator</Bundle-Activator>
             <Bundle-Description>${project.description}</Bundle-Description>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-            <Export-Package>org.universAAL.ontology.nutrition</Export-Package>
+            <Export-Package>org.universAAL.ontology.nutrition, org.universAAL.ontology</Export-Package>
             <Private-Package>org.universAAL.ontology</Private-Package>
           </instructions>
         </configuration>
