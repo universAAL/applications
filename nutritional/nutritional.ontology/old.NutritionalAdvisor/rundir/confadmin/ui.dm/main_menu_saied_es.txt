@@ -1,0 +1,2 @@
+/Nutritional Advisor|http://www.tsb.upv.es/|http://ontology.universAAL.org/Nutrition.owl#NutritionService
+/Lighting Service|http://www.igd.fraunhofer.de|http://ontology.persona.ima.igd.fhg.de/Lighting.owl#Lighting
