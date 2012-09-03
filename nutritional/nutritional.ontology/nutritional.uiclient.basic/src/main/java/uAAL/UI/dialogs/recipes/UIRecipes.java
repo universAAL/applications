@@ -1,0 +1,165 @@
+package uAAL.UI.dialogs.recipes;
+
+import java.util.Locale;
+
+import nna.SharedResources;
+import nna.utils.Utils;
+
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.owl.supply.LevelRating;
+import org.universAAL.middleware.rdf.PropertyPath;
+import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.middleware.ui.UIRequest;
+import org.universAAL.middleware.ui.UIResponse;
+import org.universAAL.middleware.ui.owl.PrivacyLevel;
+import org.universAAL.middleware.ui.rdf.Form;
+import org.universAAL.middleware.ui.rdf.InputField;
+import org.universAAL.middleware.ui.rdf.Label;
+import org.universAAL.middleware.ui.rdf.SimpleOutput;
+import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.middleware.ui.rdf.TextArea;
+
+import uAAL.UI.dialogs.CustomUICaller;
+import uAAL.UI.dialogs.menus.UIMenusTomorrow;
+
+
+
+
+/**
+ * @author hecgamar
+ * 
+ */
+public class UIRecipes extends CustomUICaller {
+
+	private final static String window = "UIRecipes#";
+	static final String MY_UI_NAMESPACE = SharedResources.CLIENT_NUTRITIONAL_UI_NAMESPACE
+			+ window;
+
+	static final String SUBMIT_GOBACK = MY_UI_NAMESPACE + "back";
+	static final String SUBMIT_TODAY = MY_UI_NAMESPACE + "today";
+	static final String SUBMIT_TOMORROW = MY_UI_NAMESPACE + "tomorrow";
+	static final String SUBMIT_FAVOURITES = MY_UI_NAMESPACE + "favourites";
+	
+	static final String USER_INPUT_SELECTED_LAMP = MY_UI_NAMESPACE
+			+ "selectedLamp";
+
+	static final PropertyPath PROP_PATH_SCALE_VALUE = new PropertyPath(null,
+			false, new String[] { USER_INPUT_SELECTED_LAMP, SUBMIT_GOBACK });
+	static final PropertyPath PROP_PATH_SELECTED_LAMP = new PropertyPath(null,
+			false, new String[] { USER_INPUT_SELECTED_LAMP });
+
+	private Form mainDialog = null;
+	private CustomUICaller parentUICaller = null;
+	private ModuleContext myContext;
+
+	
+	public UIRecipes(ModuleContext context) {
+		super(context);
+		this.myContext = context;
+	}
+
+	public void handleUIResponse(UIResponse uir) {
+		Utils.println(window + " Recibo ID: " + uir.getSubmissionID());
+		if (uir != null) {
+			if (SUBMIT_GOBACK.equals(uir.getSubmissionID())) {
+				Utils.println(window+"  go back to previous screen");
+//				this.parentUICaller.callMainForm();
+				this.backToMainMenusDialog(this.getContext());
+				return; // Cancel Dialog, go back to main dialog
+			}
+
+			if (SUBMIT_TODAY.equals(uir.getSubmissionID())) {
+				Utils.println(window + " Mostrar ventana TODAY!!");
+				this.showTodayMainDialog(this);
+				return;
+			}
+			if (SUBMIT_TOMORROW.equals(uir.getSubmissionID())) {
+				Utils.println(window + " Mostrar ventana TOMORROW!!");
+				this.showTomorrwoMainDialog(this);
+				return;
+			}
+			if (SUBMIT_FAVOURITES.equals(uir.getSubmissionID())) {
+				Utils.println(window + " Mostrar ventana FAVOURITES!!");
+				// this.startMenuMainDialog();
+				return;
+			}
+		}
+		Utils.println(window + " Continues");
+	}
+	
+	public void showTodayMainDialog(CustomUICaller parentForm) {
+		Utils.println(window + " showTodayRecipesMainDialog");
+		UIRecipesToday menus = new UIRecipesToday(this.myContext);
+		menus.startMainDialog(this);
+	}
+	
+	public void showTomorrwoMainDialog(CustomUICaller parentForm) {
+		Utils.println(window + " showTomorrowRecipesMainDialog");
+		UIRecipesTomorrow menus = new UIRecipesTomorrow(this.myContext);
+		menus.startMainDialog(this);
+	}
+
+	public void startMainDialog(CustomUICaller parentForm) {
+		Utils.println(window + " startMainDialog");
+		this.parentUICaller = parentForm;
+		if (mainDialog == null)
+			mainDialog = initMainDialog();
+		UIRequest out = new UIRequest(SharedResources.testUser, mainDialog,
+				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+		sendUIRequest(out);
+	}
+
+	private Form initMainDialog() {
+		Utils.println(window + " createMenusMainDialog");
+		Form f = Form.newDialog("Nutritional Recipes", new Resource());
+
+		InputField in = new InputField(f.getIOControls(), new Label(
+				"Menus del día:", null), PROP_PATH_SCALE_VALUE, null, null);
+		in.setAlertString("Expected: a number between 0 and 100!");
+
+		SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null,
+				"Select what recipes are you interested in: Today, Tomorrow or Week");
+		
+//		TextArea ta = new TextArea(f.getIOControls(), new Label(
+//				"Recipes menu:", null), PROP_PATH_SCALE_VALUE, null, null);
+//		ta.setAlertString("Aqui falta algo");
+//		ta.setHelpString("Ayuda para el text");
+//		SimpleOutput so = new SimpleOutput(f.getIOControls(), null, null,
+//				"Recetas interesantes que estan muy buenas!");
+
+		// add an exit button for quitting the dialog
+		new Submit(f.getSubmits(), new Label("Today", null), SUBMIT_TODAY);
+		new Submit(f.getSubmits(), new Label("Tomorrow", null), SUBMIT_TOMORROW);
+		new Submit(f.getSubmits(), new Label("Week", null), SUBMIT_FAVOURITES);
+		new Submit(f.getSubmits(), new Label("Go back!", null), SUBMIT_GOBACK);
+
+		return f;
+	}
+
+	public void communicationChannelBroken() {
+		System.out.println(window + " communicationChannelBroken");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.universAAL.middleware.ui.UICaller#dialogAborted(java.lang.String)
+	 */
+	@Override
+	public void dialogAborted(String dialogID) {
+		Utils.println(window + " dialogAborted: " + dialogID);
+	}
+
+	@Override
+	public void callMainForm() {
+		//TODO
+//		Utils.println(window+ " showing my MainForm!");
+//		this.startMainDialog();
+	}
+	
+	@Override
+	public Form getMainForm() {
+		return this.mainDialog;
+	}
+}
