@@ -1006,12 +1006,3 @@ help_when_out/hwo.servlet/src/main/resources/helpwhenoutdoor/whereis[!!-~]-[!!-~
 help_when_out/hwo.servlet/src/main/resources/helpwhenoutdoor/whereis.html -text
 help_when_out/hwo.servlet/src/main/resources/helpwhenoutdoor/whereis.js -text
 new_services.pom/pom.xml -text
-nutritional/.classpath -text
-nutritional/.project -text
-nutritional/.settings/org.eclipse.core.resources.prefs -text
-nutritional/.settings/org.eclipse.jdt.core.prefs -text
-nutritional/.settings/org.eclipse.m2e.core.prefs -text
-nutritional/.settings/org.eclipse.pde.core.prefs -text
-nutritional/README.txt -text
-nutritional/pom.xml -text
-nutritional/src/main/java/org/universaal/application/nutritional/democlient/ProjectActivator.java -text
