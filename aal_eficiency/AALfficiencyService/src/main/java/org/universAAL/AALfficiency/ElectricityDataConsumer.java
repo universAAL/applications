@@ -17,14 +17,9 @@ public class ElectricityDataConsumer extends ContextSubscriber {
 	private static final String OUTPUT_DATA = NAMESPACE+"#ElectricityData";
 	
 	 private static ContextEventPattern[] getContextSubscriptionParams() {
-			// I am interested in all events with a ElectricityData as subject
 			ContextEventPattern cep = new ContextEventPattern();
-			cep.addRestriction(MergedRestriction.getAllValuesRestriction(
-				ContextEvent.PROP_RDF_SUBJECT, AalfficiencyScores.PROP_HAS_ELECTRICITY_SCORE));
-			cep.addRestriction(MergedRestriction.getAllValuesRestriction(
-				ContextEvent.PROP_RDF_SUBJECT, Challenge.PROP_HAS_DESCRIPTION));
-			cep.addRestriction(MergedRestriction.getAllValuesRestriction(
-					ContextEvent.PROP_RDF_SUBJECT, Challenge.PROP_HAS_GOAL));
+			//cep.addRestriction(MergedRestriction.getAllValuesRestriction(
+				//ContextEvent.PROP_RDF_SUBJECT, ElectricityScore.MY_URI));
 			return new ContextEventPattern[] { cep };
 		    }
 	
