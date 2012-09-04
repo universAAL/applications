@@ -17,9 +17,8 @@ public class Activator implements BundleActivator {
 		ModuleContext mc = uAALBundleContainer.THE_CONTAINER
 		.registerModule(new Object[] { context });
 	
-		//CallerTest.testCall1(mc);
 		System.out.println("Now calling to AAlfficiency!!");
-		AAlfficiencyTest.testCall3(mc);
+		AAlfficiencyTest.testCall4(mc);
 		
     }
 
