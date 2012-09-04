@@ -3,6 +3,7 @@ package org.universAAL.AALfficiency.model;
 import java.util.ArrayList;
 
 import org.universAAL.AALfficiency.ProvidedAALfficiencyService;
+import org.universAAL.AALfficiency.utils.Setup;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
@@ -20,36 +21,42 @@ public class AALfficiencyEngine {
 	static final String ADVICE_URI = ProvidedAALfficiencyService.NAMESPACE
 		    + "advice";
 	
+	private Setup properties = new Setup();
+	
 	private AALfficiencyAdvicesModel advices = new AALfficiencyAdvicesModel(new AdviceModel[]{
 			new AdviceModel(ADVICES_URI+"0","Electricity","Remember to turn off the lights when leaving a room"),
 			new AdviceModel(ADVICES_URI+"1","Electricity","Don't let turn on devices you're not using"),
 			new AdviceModel(ADVICES_URI+"2","Activity","Walking 30 minuts a day will help you keep healthy")});
 	
-	private ActivityScoreModel activity = new ActivityScoreModel(10,60,200,150,new ChallengeModel
-			(CHALLENGE_URI+"0","Activity","1000","Walk 1000 steps a day and burn 500 Kcal", "true"),"false");
+	//private ActivityScoreModel activity = new ActivityScoreModel(10,60,200,150,new ChallengeModel
+		//	(CHALLENGE_URI+"0","Activity","1000","Walk 1000 steps a day and burn 500 Kcal", "true"),"false");
 	
-	private ElectricityScoreModel electricity = new ElectricityScoreModel(14,104,12,new ChallengeModel
-			(CHALLENGE_URI+"1","Electricity","20","Reduce a 20% consumption on big consumptions", "true"),"false");
+	//private ElectricityScoreModel electricity = new ElectricityScoreModel(14,104,12,new ChallengeModel
+		//	(CHALLENGE_URI+"1","Electricity","20","Reduce a 20% consumption on big consumptions", "true"),"false");
 	
 	
 	public AALfficiencyEngine() {
 	}
 	
-	/*public ServiceResponse getActivityData(){
+	public ServiceResponse getActivityData(){
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
 		//create the AALfficiency Score
 		
 		System.out.print("Returning Activity Data");
 		
+		ChallengeModel  challenge = properties.getActivityChallenge(); 
+		
+		Challenge c = new Challenge(CHALLENGE_URI+"Activity");
+		c.setChallengeDescription(challenge.getDescription());
+		c.setChallengeGoal(challenge.getGoal());
+		
 		ActivityScore activity = new ActivityScore(ACTIVITY_DATA_URI);
-		activity.setActivityTodayScore(this.activity.getTodayScore());
-		activity.setActivityTotalScore(this.activity.getTotalScore());
-		activity.(this.activity.getChallenge().getURI(),this.activity.getChallenge().getType(),
-				String.valueOf(this.activity.getChallenge().getGoal()), this.activity.getChallenge().getDescription());
-		activity.setKcal(this.activity.getKcal());
-		activity.setSteps(this.activity.getSteps());
-		activity.setSentByPublisher(this.activity.getSentByPublisher());
+		activity.setActivityTodayScore(properties.getTodayActivityScore());
+		activity.setActivityTotalScore(properties.getTotalActivityScore());
+		activity.setActivityChallenge(c);
+		activity.setActivityKcal(properties.getActivityKcal());
+		activity.setActivitySteps(properties.getActivitySteps());
 				
 		// create and add a ProcessOutput-Event that binds the output URI to the
 		// created list of lamps
@@ -67,22 +74,27 @@ public class AALfficiencyEngine {
 		
 		System.out.print("Returning Electricity Data");
 		
-		ElectricityData electricity = new ElectricityData(ELECTRICITY_DATA_URI);
-		electricity.setTodayScore(this.electricity.getTodayScore());
-		electricity.setTotalScore(this.electricity.getTotalScore());
-		electricity.setChallenge(this.electricity.getChallenge().getURI(),this.electricity.getChallenge().getType(),
-				String.valueOf(this.electricity.getChallenge().getGoal()), this.electricity.getChallenge().getDescription());
-		electricity.setSaving(this.electricity.getSaving());
-		electricity.setSentByPublisher(this.electricity.getSentByPublisher());
+		ChallengeModel  challenge = properties.getElectricityChallenge();
+		
+		Challenge c = new Challenge(CHALLENGE_URI+"Electricity");
+		c.setChallengeDescription(challenge.getDescription());
+		c.setChallengeGoal(challenge.getGoal());
+		
+		ElectricityScore electricity = new ElectricityScore(ELECTRICITY_DATA_URI);
+		electricity.setElectricityTodayScore(properties.getTodayElectricScore());
+		electricity.setElectricityTotalScore(properties.getTotalElectricScore());
+		electricity.setElectricityChallenge(c);
+		electricity.setElectricitySaving(properties.getElectricitySaving());
+		
 				
 		// create and add a ProcessOutput-Event that binds the output URI to the
 		// created list of lamps
 		sr.addOutput(new ProcessOutput(
-			ProvidedAALfficiencyService.OUTPUT_ACTIVITY_DATA, activity));
-		System.out.print("AALfficiency Service returning Activity Data");
+			ProvidedAALfficiencyService.OUTPUT_ELECTRICITY_DATA, electricity));
+		System.out.print("AALfficiency Service returning Electricity Data");
 		return sr;
 		
-	}*/
+	}
 	
 	public ServiceResponse getAdvices(){
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
@@ -134,21 +146,25 @@ public class AALfficiencyEngine {
 		System.out.print("Returning Challenge Info");
 		//create the AALfficiencyChallenges
 		Challenge c = new Challenge();
+		ChallengeModel challenge = new ChallengeModel();
 		
-		if (this.activity.getChallenge().getURI().compareTo(uri)==0){
-			c.setChallengeDescription(this.activity.getChallenge().getDescription());
-			c.setChallengeGoal(String.valueOf(this.activity.getChallenge().getGoal()));
-			//c.(this.activity.getChallenge().getType());
+		if (uri.contains("Activity")){
+			challenge = properties.getActivityChallenge(); 
+			c = new Challenge(CHALLENGE_URI+"Activity");
+			c.setChallengeDescription(challenge.getDescription());
+			c.setChallengeGoal(challenge.getGoal());
 			sr.addOutput(new ProcessOutput(
-						ProvidedAALfficiencyService.OUTPUT_CHALLENGE, c));
+						ProvidedAALfficiencyService.OUTPUT_ACTIVITY_CHALLENGE, c));
 		}
 		
-		else if (this.electricity.getChallenge().getURI().compareTo(uri)==0){
-			c.setChallengeDescription(this.electricity.getChallenge().getDescription());
-			c.setChallengeGoal(String.valueOf(this.electricity.getChallenge().getGoal()));
+		else if (uri.contains("Electricity")){
+			challenge = properties.getElectricityChallenge();
+			c = new Challenge(CHALLENGE_URI+"Electricity");
+			c.setChallengeDescription(challenge.getDescription());
+			c.setChallengeGoal(challenge.getGoal());
 			//c.setChallengeType(this.electricity.getChallenge().getType());
 			sr.addOutput(new ProcessOutput(
-					ProvidedAALfficiencyService.OUTPUT_CHALLENGE, c));
+					ProvidedAALfficiencyService.OUTPUT_ELECTRICITY_CHALLENGE, c));
 		}
 		
 				
