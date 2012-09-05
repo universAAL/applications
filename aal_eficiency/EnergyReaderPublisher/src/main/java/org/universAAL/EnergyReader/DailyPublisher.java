@@ -75,17 +75,20 @@ public class DailyPublisher extends TimerTask{
     	System.out.print("Publishing scores the context bus\n");
     	
     	Challenge c = new Challenge(NAMESPACE+"ElectricityDataChallenge");
-    	c.setChallengeDescription(energy.getChallenge().getDescription());
-    	c.setChallengeGoal(energy.getChallenge().getGoal());
+    	c.setDescription(energy.getChallenge().getDescription());
+    	c.setGoal(energy.getChallenge().getGoal());
     	
     	ElectricityScore e = new ElectricityScore(NAMESPACE+"ElectricityData");
-    	e.setElectricityTodayScore(energy.getTodayScore());
-    	e.setElectricitySaving(energy.getPercentage());
+    	e.setTodayElectricityScore(energy.getTodayScore());
+    	e.setTotalElectricityScore(energy.getPercentage());
     	
-    	cp.publish(new ContextEvent(e, ElectricityScore.PROP_HAS_TODAY_SCORE));
-    	cp.publish(new ContextEvent(e, ElectricityScore.PROP_HAS_SAVING));
-    	cp.publish(new ContextEvent(c, Challenge.PROP_HAS_DESCRIPTION));
-    	cp.publish(new ContextEvent(c, Challenge.PROP_HAS_GOAL));
+    	AalfficiencyScores sc = new AalfficiencyScores(NAMESPACE+"Scores");
+    	sc.setElectricityScore(e);
+    	
+    	cp.publish(new ContextEvent(e, ElectricityScore.PROP_TODAY_ELECTRICITY_SCORE));
+    	cp.publish(new ContextEvent(e, ElectricityScore.PROP_SAVING));
+    	cp.publish(new ContextEvent(c, Challenge.PROP_DESCRIPTION));
+    	cp.publish(new ContextEvent(c, Challenge.PROP_GOAL));
 	}
     
     
@@ -105,9 +108,9 @@ public class DailyPublisher extends TimerTask{
 				c.getMeasure().setMeasurement(m);
 			}
 			db.deleteMeasurements();
-			for (int i=0;i<consumptions.length;i++){
+			/*for (int i=0;i<consumptions.length;i++){
 				publishMeassurement(consumptions[i]);
-			}
+			}*/
 			List<ChallengeModel> challenges = db.getActiveChallenges();
 			for (ChallengeModel c : challenges){
 				int total = db.getChallengeConsumption(c.getId());

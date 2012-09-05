@@ -3,12 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-	<groupId>org.universAAL.support</groupId>
-    <artifactId>support.pom</artifactId>
-    <version>1.2.0</version>
-    <relativePath>../../pom/pom.xml</relativePath>
-	</parent>
 	<groupId>org.universAAL.AALapplication</groupId>
+    <artifactId>new_services.pom</artifactId>
+    <version>C.0</version>
+	</parent>
 	<packaging>bundle</packaging>
 	<artifactId>EnergyReaderPublisher</artifactId>
 	<version>1.2.1-SNAPSHOT</version>
