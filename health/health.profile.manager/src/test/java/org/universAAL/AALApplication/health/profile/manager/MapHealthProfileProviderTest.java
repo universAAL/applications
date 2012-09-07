@@ -17,6 +17,10 @@ public class MapHealthProfileProviderTest extends IntegrationTest {
 
 	private MapHealthProfileProvider mHPP;
 
+	public MapHealthProfileProviderTest(){
+		setIgnoreVersionMismatch(false);
+	}
+	
 	public void onSetUp() {
 		mHPP = new MapHealthProfileProvider();
 	}

@@ -12,7 +12,7 @@ import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.TakeMeasurementActivity;
 import org.universaal.ontology.health.owl.Treatment;
 
-public class ArtifactTest extends IntegrationTest {
+public class ProfileServerHealthProfileProviderTest extends IntegrationTest {
 
 	
 	private static final String NAMESPACE = "http://ontology.upm.es/Test.owl#";
@@ -22,7 +22,7 @@ public class ArtifactTest extends IntegrationTest {
 	
     private ServiceCaller caller;
     
-    public ArtifactTest() {
+    public ProfileServerHealthProfileProviderTest() {
         setIgnoreVersionMismatch(true);
     }
     
@@ -64,16 +64,5 @@ public class ArtifactTest extends IntegrationTest {
     	assertTrue(hp.getTreatments().length == 1);
 		assertTrue(hp.getTreatments()[0].getName().equals(treatmentName));
     }
-    /*
-    public void testGetProfileService() {
-    	ProjectActivator.context.logInfo("Testing get Health Profile Service Call", null);
-    	ServiceRequest req = new ServiceRequest( new GetProfileService(), new AssistedPerson(NAMESPACE+USER));
-    	req.addRequiredOutput(HealthProfile.MY_URI, new String[] {GetProfileService.PROP_MANAGES_PROFILE});
-    	ServiceResponse sr = caller.call(req);
-    	assertTrue(sr.getCallStatus().equals(CallStatus.succeeded));
-  
-    	HealthProfile hp = (HealthProfile) sr.getOutput(GetProfileService.PROP_MANAGES_PROFILE, true).get(0); 
-    	assertNotNull(hp);
-    }
-    */
+
 }

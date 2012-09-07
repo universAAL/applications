@@ -36,8 +36,8 @@ public class MainForm extends InputListener {
 	private static final String MESSAGE_ICON = null;
 	private static final String TREATMENT_LABEL = "Treatment";
 	private static final String TREATMENT_ICON = null;
-	private static final String PREFERENCES_LABEL = null;
-	private static final String PREFERENCES_ICON = "Preferences";
+	private static final String PREFERENCES_LABEL = "Preferences";
+	private static final String PREFERENCES_ICON = null;
 	static final LevelRating PRIORITY = LevelRating.low;
 	static final PrivacyLevel PRIVACY = PrivacyLevel.insensible;
 	
