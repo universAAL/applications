@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>personal_safety.pom</artifactId>		
-		<version>B.0.1-SNAPSHOT</version>
+		<version>C.0.1-SNAPSHOT</version>
 		<relativePath>../personal_safety.pom</relativePath>
 	</parent>
 	
@@ -21,7 +21,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.data.representation</artifactId>
+			<artifactId>mw.data.representation.core</artifactId>
 		</dependency>
 		<dependency>
 		  <groupId>org.universAAL.ontology</groupId>
@@ -33,15 +33,15 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.ui</artifactId>
+			<artifactId>mw.bus.ui.core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.service</artifactId>
+			<artifactId>mw.bus.service.core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context</artifactId>
+			<artifactId>mw.bus.context.core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>

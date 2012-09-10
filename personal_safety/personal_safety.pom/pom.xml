@@ -4,12 +4,12 @@
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0</version>
+		<version>C.0</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 
 	<artifactId>personal_safety.pom</artifactId>
-	<version>B.0.1-SNAPSHOT</version>
+	<version>C.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Personal Safety AAL Service</name>
