@@ -4,13 +4,13 @@
     
   <parent>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<artifactId>new_services.pom</artifactId>
-		<version>B.0</version>
-		<relativePath>../../new_services.pom</relativePath>
+		<artifactId>nutritional.pom</artifactId>
+		<version>B.0.1</version>
+		<relativePath>../nutritional.pom</relativePath>
 	</parent>
   
   <artifactId>nutritional.uiclient.basic</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>B.0.1</version>
   <packaging>bundle</packaging>
 
   
@@ -91,7 +91,7 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.nutrition</artifactId>
-			<version>0.1.2-SNAPSHOT</version>
+			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
