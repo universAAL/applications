@@ -1,4 +1,4 @@
-package org.universAAL.EnergyReader.model;
+package org.univerAAL.AALapplication.dbExample.model;
 
 public class EnergyScoreModel {
 
