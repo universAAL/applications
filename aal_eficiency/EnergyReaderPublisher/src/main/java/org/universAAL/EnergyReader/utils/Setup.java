@@ -1,4 +1,4 @@
-package org.universAAL.EnergyReader.utils;
+package org.univerAAL.AALapplication.dbExample.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

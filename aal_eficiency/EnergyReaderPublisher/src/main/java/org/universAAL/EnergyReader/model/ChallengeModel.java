@@ -1,11 +1,10 @@
-package org.universAAL.EnergyReader.model;
+package org.univerAAL.AALapplication.dbExample.model;
 
 import java.util.Date;
 
 public class ChallengeModel {
 	
 	private int id;
-	private String challenge; 
 	private String description; 
 	private String goal; 
 	private String type; 
@@ -22,12 +21,6 @@ public class ChallengeModel {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public String getChallenge() {
-		return challenge;
-	}
-	public void setChallenge(String challenge) {
-		this.challenge = challenge;
 	}
 	public String getDescription() {
 		return description;

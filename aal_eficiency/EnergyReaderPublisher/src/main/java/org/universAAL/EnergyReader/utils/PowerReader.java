@@ -1,4 +1,4 @@
-package org.universAAL.EnergyReader.utils;
+package org.univerAAL.AALapplication.dbExample.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.universAAL.EnergyReader.model.*;
+import org.univerAAL.AALapplication.dbExample.model.*;
 
 public class PowerReader {
 void EnergyReader(){}
