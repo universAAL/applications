@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0</version>
+		<version>C.0</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
-	
-		
+
 	<artifactId>nutritional.pom</artifactId>
-	<version>B.0.1</version>
+	<version>C.0.1-SNAPSHOT</version>
 	<name>Nutritional Advisor AAL Service</name>
 	<packaging>pom</packaging>
-	
 
 	<url>http://forge.universaal.org/wiki/new_services:Nutritional_Advisor_universAAL_service</url>
 
@@ -24,8 +23,6 @@
 		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=232</url>
 	</issueManagement>
 	<inceptionYear>2010</inceptionYear>
-
-	<!-- Remember to rename health.pom folder (and super pom module reference) -->
 
 	<scm>
 		<connection>${svn.base}/nutritional/${project.artifactId}</connection>
@@ -36,14 +33,12 @@
 		<module>../nutritional.ontology</module>
 		<module>../nutritional.uiclient.basic</module>
 	</modules>
-	
 
 	<repositories>
-        <repository>
-            <id>JBossRepo</id>
-            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
-    
+		<repository>
+			<id>JBossRepo</id>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
 
 </project>
