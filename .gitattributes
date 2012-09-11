@@ -1036,6 +1036,7 @@ nutritional/nutritional.ontology/src/main/java/org/universAAL/ontology/nutrition
 nutritional/nutritional.ontology/src/main/java/org/universAAL/ontology/nutrition/NutritionService.java -text
 nutritional/nutritional.ontology/src/main/java/org/universAAL/ontology/nutrition/Recipe.java -text
 nutritional/nutritional.ontology/src/main/java/org/universAAL/ontology/nutrition/ShoppingList.java -text
+nutritional/nutritional.pom/pom.xml -text
 nutritional/nutritional.simulator/.classpath -text
 nutritional/nutritional.simulator/.project -text
 nutritional/nutritional.simulator/.settings/org.eclipse.core.resources.prefs -text
