@@ -15,4 +15,8 @@ nutritional/nutritional.ontology/.project
 nutritional/nutritional.ontology/.settings
 nutritional/nutritional.ontology/target
 nutritional/nutritional.simulator/target
+nutritional/nutritional.uiclient.basic/.classpath
+nutritional/nutritional.uiclient.basic/.project
+nutritional/nutritional.uiclient.basic/.settings
+nutritional/nutritional.uiclient.basic/target
 nutritional/target
