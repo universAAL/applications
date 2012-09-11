@@ -154,6 +154,9 @@ nutritional/nutritional.ontology/target
 nutritional/nutritional.pom/.project
 nutritional/nutritional.pom/.settings
 nutritional/nutritional.simulator/target
+nutritional/nutritional.uiclient.basic/.classpath
+nutritional/nutritional.uiclient.basic/.project
+nutritional/nutritional.uiclient.basic/.settings
 nutritional/nutritional.uiclient.basic/target
 nutritional/old.NutritionalAdvisor/.classpath
 nutritional/old.NutritionalAdvisor/.project

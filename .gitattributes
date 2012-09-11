@@ -4141,12 +4141,6 @@ nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/Service
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetTodayMenuCallee.java -text
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/tests/OntoFactory.class -text svneol=unset#unset
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/tests/OntoFactory.java -text
-nutritional/nutritional.uiclient.basic/.classpath -text
-nutritional/nutritional.uiclient.basic/.project -text
-nutritional/nutritional.uiclient.basic/.settings/org.eclipse.core.resources.prefs -text
-nutritional/nutritional.uiclient.basic/.settings/org.eclipse.jdt.core.prefs -text
-nutritional/nutritional.uiclient.basic/.settings/org.eclipse.m2e.core.prefs -text
-nutritional/nutritional.uiclient.basic/.settings/org.eclipse.pde.core.prefs -text
 nutritional/nutritional.uiclient.basic/LICENSE -text
 nutritional/nutritional.uiclient.basic/NOTICE -text
 nutritional/nutritional.uiclient.basic/launchers/uAAL[!!-~]nueva[!!-~]UI.launch -text
