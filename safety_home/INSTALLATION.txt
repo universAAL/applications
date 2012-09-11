@@ -1,0 +1,24 @@
+
+INTSTALLATION
+-------------
+
+1. Execute the utils/install.bat 
+   file that lies in utils folder.
+
+2. Fill in the username and password
+   for the connection to Database in 
+   the utils/app.properties file 
+   in the utils folder. Copy paste the 
+   app.properties file in 
+   rundir\confadmin\safety_home folder.
+   Rename the file as safety_home.properties.
+
+3. Import each Eclipse project.
+
+4. Execute "Maven Install" for 
+   each project.
+
+5. Import the utils/safetyServer_v5.0_mw1.1.0.launch
+   launch file in the utils folder. 
+   
+
