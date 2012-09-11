@@ -1,2 +1,0 @@
-
-C:\Users\dimokas>mvn install:install-file -Dfile=C:\universAAL\external-jars\safety_home\mysql-connector-java-5.1.18-bin.jar -DgroupId=org.universAAL.safety.database -DartifactId=mysql.connector.java -Dversion=5.1.18 -Dpackaging=jar

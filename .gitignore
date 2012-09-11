@@ -205,17 +205,3 @@ personal_safety/smp.test-location.publisher/.classpath
 personal_safety/smp.test-location.publisher/.project
 personal_safety/smp.test-location.publisher/.settings
 personal_safety/smp.test-location.publisher/target
-safety_home/ont.safetyDevices/.classpath
-safety_home/ont.safetyDevices/.project
-safety_home/ont.safetyDevices/.settings
-safety_home/ont.safetyDevices/target
-safety_home/pom/.project
-safety_home/pom/.settings
-safety_home/safety_home.service.client/.classpath
-safety_home/safety_home.service.client/.project
-safety_home/safety_home.service.client/.settings
-safety_home/safety_home.service.client/target
-safety_home/safety_home.service.server/.classpath
-safety_home/safety_home.service.server/.project
-safety_home/safety_home.service.server/.settings
-safety_home/safety_home.service.server/target

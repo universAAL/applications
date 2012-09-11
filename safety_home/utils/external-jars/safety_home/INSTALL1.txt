@@ -1,2 +1,0 @@
-
-mvn install:install-file -Dfile=C:\universAAL\external-jars\safety_home\askit_domoticsV5.0.jar -DgroupId=org.universAAL.control.safetyDevices -DartifactId=control.safetyDevices -Dversion=5.0 -Dpackaging=jar
