@@ -4147,6 +4147,8 @@ nutritional/nutritional.uiclient.basic/.settings/org.eclipse.core.resources.pref
 nutritional/nutritional.uiclient.basic/.settings/org.eclipse.jdt.core.prefs -text
 nutritional/nutritional.uiclient.basic/.settings/org.eclipse.m2e.core.prefs -text
 nutritional/nutritional.uiclient.basic/.settings/org.eclipse.pde.core.prefs -text
+nutritional/nutritional.uiclient.basic/LICENSE -text
+nutritional/nutritional.uiclient.basic/NOTICE -text
 nutritional/nutritional.uiclient.basic/launchers/uAAL[!!-~]nueva[!!-~]UI.launch -text
 nutritional/nutritional.uiclient.basic/pom.xml -text
 nutritional/nutritional.uiclient.basic/src/main/java/na/Activator.java -text
