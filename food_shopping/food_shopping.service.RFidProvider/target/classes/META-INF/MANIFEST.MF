@@ -1,0 +1,48 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1347349094342
+Build-Jdk: 1.6.0_27
+Built-By: dimokas
+Bundle-Activator: org.universAAL.AALapplication.food_shopping.service.RF
+ idProvider.Activator
+Bundle-Description: RFid Reader Provider
+Bundle-DocURL: http://www.universAAL.org/
+Bundle-License: http://www.apache.org/licenses/
+Bundle-ManifestVersion: 2
+Bundle-Name: RFid Reader Provider
+Bundle-SymbolicName: food_shopping.service.RFidProvider
+Bundle-Vendor: universAAL Consortium
+Bundle-Version: 1.2.0
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.universAAL.AALapplication.food_shopping.service.db.m
+ anager.entities;uses:="org.universAAL.AALapplication.food_shopping.serv
+ ice.db.utils,org.universAAL.AALapplication.food_shopping.service.db.uti
+ ls.statements";version="1.2.0",org.universAAL.AALapplication.food_shopp
+ ing.service.db.manager.entitymanagers;uses:="org.universAAL.AALapplicat
+ ion.food_shopping.service.db.utils,org.universAAL.AALapplication.food_s
+ hopping.service.db.manager.entities,org.universAAL.AALapplication.food_
+ shopping.service.db.utils.statements,org.universAAL.AALapplication.food
+ _shopping.service.db.utils.criteria";version="1.2.0",org.universAAL.AAL
+ application.food_shopping.service.db.utils;uses:="javax.sql,com.mysql.j
+ dbc,org.universAAL.AALapplication.food_shopping.service.db.manager.enti
+ ties";version="1.2.0",org.universAAL.AALapplication.food_shopping.servi
+ ce.db.utils.criteria;uses:="org.universAAL.AALapplication.food_shopping
+ .service.db.utils";version="1.2.0",org.universAAL.AALapplication.food_s
+ hopping.service.db.utils.statements;uses:="org.universAAL.AALapplicatio
+ n.food_shopping.service.db.utils.criteria,org.universAAL.AALapplication
+ .food_shopping.service.db.utils";version="1.2.0",org.universAAL.AALappl
+ ication.food_shopping.service.RFidProvider;uses:="org.universAAL.middle
+ ware.container,org.universAAL.middleware.container.osgi,org.osgi.framew
+ ork,com.metratec.lib.rfidreader,org.universAAL.AALapplication.food_shop
+ ping.service.db.utils,org.universAAL.middleware.context.owl,org.univers
+ AAL.AALapplication.food_shopping.service.db.manager.entitymanagers,org.
+ universAAL.middleware.rdf,org.universAAL.middleware.context,org.univers
+ AAL.AALapplication.food_shopping.service.db.utils.criteria,org.universA
+ AL.ontology.Shopping";version="1.2.0"
+Import-Package: com.metratec.lib.rfidreader,com.mysql.jdbc;version="[5.1
+ ,6)",javax.sql,org.osgi.framework;version="[1.3,2)",org.universAAL.midd
+ leware.container;version="[1.2,2)",org.universAAL.middleware.container.
+ osgi;version="[1.2,2)",org.universAAL.middleware.context;version="[1.2,
+ 2)",org.universAAL.middleware.context.owl;version="[1.2,2)",org.univers
+ AAL.middleware.rdf;version="[1.2,2)",org.universAAL.ontology.Shopping;v
+ ersion="[1.0,2)"
+Tool: Bnd-1.50.0
