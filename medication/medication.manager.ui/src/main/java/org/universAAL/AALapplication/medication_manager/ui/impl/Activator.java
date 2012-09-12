@@ -14,12 +14,12 @@ public class Activator implements BundleActivator {
   public void start(BundleContext arg0) throws Exception {
     context = uAALBundleContainer.THE_CONTAINER
         .registerModule(new Object[]{arg0});
-    context.logDebug("Initialising Project", null);
+//    context.logDebug("Initialising Project");
 
     service = new ReminderDialogProvider(context);
     medicationManagerServiceButtonProvider = new MedicationManagerServiceButtonProvider(context);
 
-    context.logInfo("Project started", null);
+//    context.logInfo("Project started");
   }
 
 

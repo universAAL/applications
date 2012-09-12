@@ -3825,7 +3825,7 @@ medication/medication.manager.ui.runner/runner/configurations/ctxt.che/store/txn
 medication/medication.manager.ui.runner/runner/configurations/ctxt.che/store/values.dat -text
 medication/medication.manager.ui.runner/runner/configurations/ctxt.che/store/values.hash -text
 medication/medication.manager.ui.runner/runner/configurations/ctxt.che/store/values.id -text
-medication/medication.manager.ui.runner/runner/configurations/mw.bus.model/sodapop.key -text
+medication/medication.manager.ui.runner/runner/configurations/mw.bus.model.osgi/sodapop.key -text
 medication/medication.manager.ui.runner/runner/configurations/services/org.ops4j.pax.logging.properties -text
 medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_bg.txt -text
 medication/medication.manager.ui.runner/runner/configurations/ui.dm.mobile/main_menu_de.txt -text
