@@ -4,7 +4,7 @@
 
 	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>medication.manager.ui.runner</artifactId>
-	<version>B.0.1-SNAPSHOT</version>
+	<version>C.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Runner Folder</name>
 
@@ -18,24 +18,24 @@
 					<args>pax.configuration</args>
 					<provision>
 						<!-- MW -->
-							<provision>scan-composite:mvn:org.universAAL.middleware/mw.composite/1.1.0/composite</provision>
+							<provision>scan-composite:mvn:org.universAAL.middleware/mw.composite/1.2.0/composite</provision>
 						<!-- Ontologies -->
-							<provision>scan-composite:mvn:org.universAAL.ontology/ont.composite/1.1.0/composite</provision>
+							<provision>scan-composite:mvn:org.universAAL.ontology/ont.composite/1.2.0/composite</provision>
 						<!-- Platform -->
 							<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che/1.1.0/composite</provision> -->
 							<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che.mobile/1.1.0/composite</provision> -->
 							<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.dm/1.1.0/composite</provision> -->
-							<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.1.0/composite</provision>
+							<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.2.0/composite</provision>
  							<!--<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui/1.1.0/composite</provision>-->
 							<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.1.0/composite</provision> -->
- 							<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.0/composite</provision>
+ 							<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.2.0/composite</provision>
 
 						<!-- Services -->
-							<provision>mvn:org.universAAL.AALapplication/medication.manager.ui/B.0.1-SNAPSHOT</provision>
-							<provision>mvn:org.universAAL.ontology/medication.manager.ont/1.1.1-SNAPSHOT</provision>
-							<provision>mvn:org.universAAL.AALapplication/medication.missing.services.simulation/B.0.1-SNAPSHOT</provision>
-							<provision>mvn:org.universAAL.AALapplication/medication.manager.service/B.0.1-SNAPSHOT</provision>
-							<provision>mvn:org.universAAL.AALapplication/medication.manager.shell.commands/B.0.1-SNAPSHOT</provision>
+							<provision>mvn:org.universAAL.AALapplication/medication.manager.ui/C.0.1-SNAPSHOT</provision>
+							<provision>mvn:org.universAAL.ontology/medication.manager.ont/1.2.0-SNAPSHOT</provision>
+							<provision>mvn:org.universAAL.AALapplication/medication.missing.services.simulation/C.0.1-SNAPSHOT</provision>
+							<provision>mvn:org.universAAL.AALapplication/medication.manager.service/C.0.1-SNAPSHOT</provision>
+							<provision>mvn:org.universAAL.AALapplication/medication.manager.shell.commands/C.0.1-SNAPSHOT</provision>
 
 						<!-- Whatever you want, like: -->
 							<!-- <provision>{opt:wrap}:mvn:{groupId}/{artifactId}/{version}@{opt:#level | nostart | noupdate}</provision> -->
