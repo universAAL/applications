@@ -2734,6 +2734,8 @@ help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Wanderi
 help_when_out/hwo.mobile/src/main/resources/android/handler/enviarSMS.jpg -text
 help_when_out/hwo.mobile/src/main/resources/android/handler/smsNoEnviado.gif -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_de.properties -text
+help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_de_DE.properties -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_en.properties -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_en_US.properties -text
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es.properties -text
