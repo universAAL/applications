@@ -7,6 +7,8 @@ import org.universAAL.drools.engine.RulesEngine;
 import org.universAAL.ontology.location.Location;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.ontology.phThing.Sensor;
+import org.universAAL.drools.models.Fact;
+import org.universAAL.drools.models.FactProperty;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
@@ -36,28 +38,26 @@ return "HIGH";
 rule "Activity insertion"
 //agenda-group "MAIN"
     when
-        ContextEvent( $s:(((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)))
+    	ContextEvent(eval( RDFSubject instanceof Sensor), $s:(((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)))
         not Activity ( place matches $s )
     then
         System.out.println("Inserting activity...");
     	Activity act = new Activity(new String($s.toString()),"NULL",0);
     	insert(act);
+    	
+    	FactProperty room = new FactProperty("ROOM",new String($s.toString()));
+    	FactProperty intensity = new FactProperty("INTENSITY","NULL");
+    	Fact f = new Fact("ACTIVITY",new FactProperty[]{room, intensity});
+    	insert(f);
 end
-/*
-rule "Activity counter without accumulate" 
-no-loop
-agenda-group "counter"
-auto-focus true
-	when		
-       $c: ContextEvent( $place: ((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)) over window:time(2m) 
-       and $a:Activity(place matches $place,$counter: counter)
+
+rule "Simple rule"
+	when
+		ContextEvent(  )
 	then
-		System.out.println("Incrementing counter...");
-		String st = intensityUpdater($counter+1);		
-		modify($a){setCounter($counter+1),setIntensity(st)};	
-		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup("MAIN").setFocus();	
+		System.out.println("Ping?");
 end
-*/
+
 //LOOK AT THE WINDOW TIME LENGHT
 rule "Activity counter with accumulate" 
 no-loop
@@ -73,6 +73,23 @@ no-loop
 		//kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup("MAIN").setFocus();	
 end
 
+
+rule "Fact counter with accumulate" 
+no-loop
+//agenda-group "counter"
+//auto-focus true
+	when
+	   $f:Fact( $place : getAttribute("ROOM"))		
+       and Number($i:intValue ) from accumulate ($c: ContextEvent( ((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME) matches $place) over window:time(20s),count($c)) 
+	then
+		System.out.println("Counter FACTS changing...");
+		String st = intensityUpdater($i);		
+		//modify($f){setCounter($i),setIntensity(st)}
+		//kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup("MAIN").setFocus();	
+end
+
+
+
 rule "Intensity changed"
 salience -1
 	when
@@ -80,6 +97,22 @@ salience -1
 	then		
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"Source","Intensity"},new String[]{$p,$i});
 end
+
+/*
+rule "Activity counter without accumulate" 
+no-loop
+agenda-group "counter"
+auto-focus true
+	when		
+       $c: ContextEvent( $place: ((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)) over window:time(2m) 
+       and $a:Activity(place matches $place,$counter: counter)
+	then
+		System.out.println("Incrementing counter...");
+		String st = intensityUpdater($counter+1);		
+		modify($a){setCounter($counter+1),setIntensity(st)};	
+		kcontext.getKnowledgeRuntime().getAgenda().getAgendaGroup("MAIN").setFocus();	
+end
+*/
 
 /*
 rule "Activity intensity updating LOW"  no-loop true agenda-group "updater" auto-focus true
