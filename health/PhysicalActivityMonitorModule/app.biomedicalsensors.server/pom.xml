@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.universAAL.support.samples</groupId>
-		<artifactId>samples.pom</artifactId>
-		<version>1.1.1-SNAPSHOT</version>
-		<relativePath>../../samples.pom/pom.xml</relativePath>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>new_services.pom</artifactId>
+		<version>C.0</version>
+		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 	<groupId>org.universAAL.apps</groupId>
 	<packaging>bundle</packaging>
-	<artifactId>app.biomedicalsensors.server</artifactId>  
-	<version>1.0.0-SNAPSHOT</version>
+	<artifactId>app.biomedicalsensors.server</artifactId>
 	<name>Biomedical Sensors App Server</name>
-	<url/>
+	<url />
 
 	<dependencies>
 		<dependency>
@@ -20,44 +20,27 @@
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.container.osgi</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.biomedicalsensors</artifactId>
+			<version>C.0.2</version>
+			<type>bundle</type>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.bluetoothcove</groupId>
-			<artifactId>smp.bluetoothcove</artifactId>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.composite</artifactId>
+
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplicationUtils.zephyrutils</groupId>
+			<artifactId>zephyrutils</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.data.representation.osgi</artifactId>
-			<version>1.1.2-SNAPSHOT</version>
-			<type>bundle</type>
+			<groupId>org.universAAL.AALapplicationUtils.bluecove</groupId>
+			<artifactId>bluecove</artifactId>
+			<version>2.1.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context.osgi</artifactId>
-			<version>1.1.2-SNAPSHOT</version>
-			<type>bundle</type>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.service.osgi</artifactId>
-			<version>1.1.2-SNAPSHOT</version>
-			<type>bundle</type>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.container.xfaces.osgi</artifactId>
-			<version>1.1.2-SNAPSHOT</version>
-			<type>bundle</type>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.biomedicalsensors</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-			<type>bundle</type>
-		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -77,4 +60,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<version>C.0.2</version>
 </project>

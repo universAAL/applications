@@ -476,6 +476,8 @@ health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/src/main/java/
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/src/test/resources/log4j.properties -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/LICENSE.txt -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/PhysicalActivityMonitor_UIClient.launch -text
+health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch -text
+health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/SIREN.WAV -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/pom.xml -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/src/main/java/org/universAAL/apps/biomedicalsensors/uiclient/AePlayWave.java -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/src/main/java/org/universAAL/apps/biomedicalsensors/uiclient/AlertUI.java -text
@@ -486,7 +488,11 @@ health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/src/main/jav
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/src/main/java/org/universAAL/apps/biomedicalsensors/uiclient/UIProvider.java -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.uiclient/src/main/java/org/universAAL/apps/biomedicalsensors/uiclient/osgi/Activator.java -text
 health/PhysicalActivityMonitorModule/eclipse.launchers/PhysicalActivityMonitor_UIClient.launch -text
+health/PhysicalActivityMonitorModule/eclipse.launchers/PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch -text
+health/PhysicalActivityMonitorModule/external-jars/physical_activity_monitor/bluecove-2.1.0.jar -text
+health/PhysicalActivityMonitorModule/external-jars/physical_activity_monitor/zephyrutils-1.0.jar -text
 health/PhysicalActivityMonitorModule/external-jars/smp.bluetoothcove-1.0.jar -text
+health/PhysicalActivityMonitorModule/install.bat -text
 health/PhysicalActivityMonitorModule/ont.biomedicalsensors/LICENSE.txt -text
 health/PhysicalActivityMonitorModule/ont.biomedicalsensors/pom.xml -text
 health/PhysicalActivityMonitorModule/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/Activator.java -text
