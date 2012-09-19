@@ -3729,6 +3729,12 @@ help_when_out/hwo.servlet/src/main/resources/helpwhenoutdoor/whereis[!!-~]-[!!-~
 help_when_out/hwo.servlet/src/main/resources/helpwhenoutdoor/whereis.html -text
 help_when_out/hwo.servlet/src/main/resources/helpwhenoutdoor/whereis.js -text
 long_term_behav/Drools[!!-~]Reasoner[!!-~]QuickGuide[!!-~]v1.docx -text
+long_term_behav/drools.event.publisher/LTBA_Publisher_B.0.1.launch -text
+long_term_behav/drools.event.publisher/LTBA_Publisher_B.0.1_OSGI_enterprise.launch -text
+long_term_behav/drools.event.publisher/LTBA_Publisher_B.0.1_with_reasoner.launch -text
+long_term_behav/drools.event.publisher/LTBA_Publisher_B.0.1_with_reasoner_UI.launch -text
+long_term_behav/drools.event.publisher/OSGi_Enterprise_LTBA.launch -text
+long_term_behav/drools.event.publisher/pom.xml -text
 long_term_behav/drools.pom/pom.xml -text
 long_term_behav/drools.reasoner/DroolsSafetyHome.launch -text
 long_term_behav/drools.reasoner/Drools_basic_step_by_step.launch -text
