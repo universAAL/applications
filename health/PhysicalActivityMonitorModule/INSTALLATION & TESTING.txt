@@ -2,23 +2,19 @@
 INSTALLATION
 -------------
 
-1. Add (import) the following projects: app.biomedicalsensors.server, 
+1. Execute the install.bat file that lies in PhysicalActivityMonitorModule folder.
+
+2. Add (import) the following projects: app.biomedicalsensors.server, 
    app.biomedicalsensors.uiclient and ont.biomedicalsensors to your workspace.
-
-2. Copy the  PhysicalActivityMonitor_UIClient.launch (under eclipse.launchers folder)  
-   to the app.biomedicalsensors.server project.
  
-3. Copy the smp.bluetoothcove-1.0.jar file from external-jars folder to your 
-   .m2\repository\org\universAAL\bluetoothcove\smp.bluetoothcove\1.0 
-   folder.
-
-4. Execute "Maven Install" for 
+3. Execute "Maven Install" for 
    each project.
 
-5. Copy all the included files from the ui.dm.mobile folder to your 
+4. Copy all the included files from the ui.dm.mobile folder to your 
    \workspace\rundir\confadmin\ui.dm.mobile folder.
 
-6. Run the PhysicalActivityMonitor_UIClient.launch file.
+5. Run the PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch file 
+   (in app.biomedicalsensors.uiclient project).
 
 TESTING
 --------
@@ -27,7 +23,7 @@ TESTING
 2. Select "Zephyr 'Zephyr-1'" from the dropdown list and press the "Start Monitoring"
    button. As a respond a subdialog with fake measurements  will be presented. If the  
    I'm OK" button is pressed the orange alert closes while the monitoring keeps runnning.
-   If nothing is pressed, a red alert appears approximately after 20 seconds.  
+   If nothing pressed, a red alert appears approximately after 20 seconds.  
  
 
 

@@ -26,7 +26,7 @@ projects.
    module (service).
 
 5. external-jars: This folder contains the 
-   necessary .jar library  for the bluetooth
+   necessary .jar libraries  for the bluetooth
    communication between the biomedical
    sensor and the server
 

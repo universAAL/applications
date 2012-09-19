@@ -1,3 +1,21 @@
+/*
+	Copyright 2012 CERTH, http://www.certh.gr
+	
+	See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	  http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+ */
 package org.universAAL.apps.biomedicalsensors.uiclient;
 
 import java.io.File;
@@ -377,9 +395,9 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 		if ((redAlertActive) && (alertActive)) {
 			// When Red Alert is active a Sound Alert is played to inform the
 			// user (if the sound file is stored locally)
-			AePlayWave aw = new AePlayWave(
-					"../app.biomedicalsensors.uiclient/siren.wav");
-			aw.start();
+			/*
+			 * AePlayWave aw = new AePlayWave("C:\\siren.wav"); aw.start();
+			 */
 		} else if ((!orangeAlertActive) && (alertActive)) {
 			orangeAlertTime = formatedTime;
 			orangeAlertPostureValue = postureValue;
@@ -517,7 +535,11 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 
 				Form f = al.startOrangeDialog(alertType, LevelRating.full);
 				redAlertActive = true;
-				AePlayWave aw = new AePlayWave("C:\\siren.wav");
+				// When Red Alert is active a Sound Alert is played to inform
+				// the
+				// user (if the sound file is stored locally)
+				AePlayWave aw = new AePlayWave(
+						"../../app.biomedicalsensors.uiclient/siren.wav");
 				aw.start();
 
 			}
