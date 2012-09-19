@@ -25,7 +25,7 @@ public class Activator implements BundleActivator {
 				.registerModule(new Object[] { context });
 
 		// provider = new DroolsReasonerProvider(mc);
-		provider = new DroolsReasonerProvider(mc);
+		provider = new DroolsReasonerProvider(context);
 		rules = RulesEngine.getInstance(context);
 		LogUtils.logInfo(mc, getClass(), "start",
 				new String[] { "UUID of the RulesEngine instance: "
@@ -66,6 +66,8 @@ public class Activator implements BundleActivator {
 			provider.close();
 			provider = null;
 		}
+		RulesEngine.getInstance().shutdown();
+		
 
 	}
 	//	

@@ -1,7 +1,9 @@
 package org.universAAL.drools.engine;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -16,10 +18,13 @@ import org.drools.builder.ResourceType;
 import org.drools.conf.AssertBehaviorOption;
 import org.drools.conf.EventProcessingOption;
 import org.drools.definition.KnowledgePackage;
+import org.drools.io.Resource;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.ConsequenceException;
 import org.osgi.framework.BundleContext;
+import org.universAAL.drools.models.RuleModel;
+import org.universAAL.drools.samples.SampleRules;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.context.ContextEvent;
@@ -47,6 +52,10 @@ import org.universAAL.ontology.phThing.Sensor;
  * knowledge.
  * 
  * @author mllorente TSB Technologies for Health and Well-being
+ */
+/**
+ * @author mllorente
+ * 
  */
 public final class RulesEngine {
 
@@ -95,6 +104,7 @@ public final class RulesEngine {
 	 * @return Instance of the rules engine.
 	 */
 	public static RulesEngine getInstance(BundleContext context) {
+		System.out.println("THIS RULE ENGINE: " + uuid);
 		if (INSTANCE == null)
 			return new RulesEngine(context);
 		else
@@ -200,7 +210,6 @@ public final class RulesEngine {
 							.getResource("reasoner.drl")), ResourceType.DRL);
 		} else {
 			// props.setProperty("drools.dialect.java.compiler", "JANINO");
-
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 			// System.out.println(ResourceFactory.newClassPathResource(".//").toString());
 			// System.out.println(rulesEngineContext.getBundle().getResource("reasoner.drl"));
@@ -237,15 +246,16 @@ public final class RulesEngine {
 	public void insertContextEvent(Object event) {
 		if (event instanceof ContextEvent) {
 			if (((ContextEvent) event).getRDFSubject() instanceof Sensor) {
-				ksession.insert(event);
 			} else {
 				System.out
 						.println("[DROOLS REASONER]The received event is not an instance of PhThng.Sensor - IGNORED");
 			}
 		} else {
+
 			System.out
 					.println("[DROOLS REASONER]The received event is not an instance of ContextEvent - IGNORED");
 		}
+		ksession.insert(event);
 		// ksession.fireAllRules();
 	}
 
@@ -362,6 +372,165 @@ public final class RulesEngine {
 
 	public static void stopRulesEngine() {
 		System.out.println("Rules engine stopped from method!!!");
+	}
+
+	/**
+	 * Inserts a single rule from a string.
+	 * 
+	 * @param st
+	 *            The rule codification.
+	 * @throws Exception
+	 */
+	private void insertSingleRule(final String st) {
+		Properties props = new Properties();
+		KnowledgeBuilder auxkbuilder;
+		props.setProperty("drools.dialect.java.compiler", "JANINO");
+		KnowledgeBuilderConfiguration cfg = KnowledgeBuilderFactory
+				.newKnowledgeBuilderConfiguration(props, ClassLoader
+						.getSystemClassLoader());
+		auxkbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(cfg);
+
+		final Resource res = ResourceFactory
+				.newReaderResource(new StringReader(st));
+		auxkbuilder.add(res, ResourceType.DRL);
+		// auxkbuilder.add(ResourceFactory.newUrlResource(rulesEngineBundleContext
+		// .getBundle().getResource("reasoner.drl")), ResourceType.DRL);
+
+		if (auxkbuilder.hasErrors()) {
+			rulesEngineModuleContext.logError("",
+					"An error happened when inserting a rule.", null);
+			rulesEngineModuleContext.logError("", auxkbuilder.getErrors()
+					.toString(), null);
+
+		}
+		// Adding rules dynamically
+		kbase.addKnowledgePackages(auxkbuilder.getKnowledgePackages());
+		System.out.println("Rules added dynamically.");
+	}
+
+	/**
+	 * Inserts a rule from a string.
+	 * 
+	 * @param ruleIn
+	 *            The rule codification.
+	 * @throws Exception
+	 */
+	public void insertRule(final String ruleIn) {
+		System.out.println("INSERTING THE RULE IN THE CALLS RULE ENGINE "
+				+ uuid);
+		System.out.println(ruleIn);
+		ksession.halt();
+		// final List<String> descriptors = new ArrayList<String>();
+
+		// final List<String> humanIds = ParseRule.extractHumanIds(ruleIn);
+		// for (final String humanId : humanIds) {
+		// descriptors.add(humanId);
+		// }
+		try {
+
+			insertSingleRule(ruleIn);
+			ksession.fireUntilHalt();
+		} catch (final Exception e) {
+			System.out.println(e);
+			// Rollback
+			// for (final String humanIdRollback : descriptors) {
+			// try {
+			// removeRule(humanIdRollback);
+			// rulesEngineModuleContext.logError("", "Rule removed : "
+			// + humanIdRollback, null);
+			// } catch (final Exception e1) {
+			// rulesEngineModuleContext.logError("",
+			// "Error trying to remove rule: " + humanIdRollback,
+			// null);
+			// }
+			// }
+			rulesEngineModuleContext.logError("",
+					"Error inserting a list of rules. Error in the rules group: "
+							+ ruleIn + e, null);
+		}
+
+	}
+
+	/**
+	 * Inserts a list of rules. In any rule fails,
+	 * 
+	 * @param rules
+	 *            ArrayList
+	 * @throws DroolsException
+	 *             drools exception.
+	 */
+	public void insertRuleList(final List<RuleModel> rules) {
+
+		final List<String> descriptors = new ArrayList<String>();
+		for (final RuleModel rule : rules) {
+			final List<String> humanIds = ParseRule.extractHumanIds(rule
+					.getRuleDefinition());
+			for (final String humanId : humanIds) {
+				descriptors.add(humanId);
+			}
+			try {
+				insertSingleRule(rule.getRuleDefinition());
+			} catch (final Exception e) {
+				// Rollback
+				for (final String humanIdRollback : descriptors) {
+					try {
+						removeRule(humanIdRollback);
+						rulesEngineModuleContext.logDebug("", "Rule removed : "
+								+ humanIdRollback, null);
+					} catch (final Exception e1) {
+						rulesEngineModuleContext.logError("",
+								"Error trying to remove rule: "
+										+ humanIdRollback, null);
+					}
+				}
+				rulesEngineModuleContext.logError("",
+						"Error inserting a list of rules. Error in the rules group: "
+								+ rule.getRuleDefinition() + "\n" + e, null);
+			}
+
+		}
+
+	}
+
+	/**
+	 * Removes a rule from a a specified package.
+	 * 
+	 * @param name
+	 *            Name of the rule
+	 * @param pckg
+	 *            Package of the rule
+	 */
+	public void removeRule(final String name, final String pckg) {
+		try {
+			kbase.removeRule(pckg, name);
+		} catch (final Exception e) {
+			rulesEngineModuleContext.logError("",
+					"Error removing a rule. Have you correctly specified its identifier?\n"
+							+ e, null);
+		}
+	}
+
+	/**
+	 * Removes a rule from the default package.
+	 * 
+	 * @param name
+	 *            Name of the rule
+	 */
+	public void removeRule(final String name) {
+		try {
+			kbase.removeRule("drools", name);
+		} catch (final Exception e) {
+			// e.printStackTrace();
+			rulesEngineModuleContext.logError("",
+					"Error removing a rule. Is you rule in the default package \"drools\"?\n"
+							+ e, null);
+		}
+	}
+
+	public void shutdown() {
+		ksession.halt();
+		ksession.dispose();
+		INSTANCE = null;
 	}
 
 	// private void setUpPersistence() {

@@ -3739,6 +3739,7 @@ long_term_behav/drools.reasoner/artifact.composite -text
 long_term_behav/drools.reasoner/persistence.xml -text
 long_term_behav/drools.reasoner/pom.xml -text
 long_term_behav/drools.reasoner/src/main/resources/META-INF/persistence.xml -text
+long_term_behav/drools.reasoner/src/main/resources/droolsWorkshop1.drl -text
 long_term_behav/drools.reasoner/src/main/resources/jndi.properties -text
 long_term_behav/drools.reasoner/src/main/resources/log4j.xml -text
 long_term_behav/drools.reasoner/src/main/resources/persistence.xml -text
