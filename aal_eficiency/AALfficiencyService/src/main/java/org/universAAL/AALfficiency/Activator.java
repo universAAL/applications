@@ -8,9 +8,9 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 public class Activator implements BundleActivator {
     public static BundleContext osgiContext = null;
-    public static ModuleContext context = null;
+    public static  ModuleContext context = null;
 
-	public static AALfficiencyProvider scallee=null;
+	public static final AALfficiencyProvider scallee=null;
 
 
     public void start(BundleContext bcontext) throws Exception {

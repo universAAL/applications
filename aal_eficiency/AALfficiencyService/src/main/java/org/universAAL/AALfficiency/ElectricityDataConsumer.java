@@ -45,25 +45,35 @@ public class ElectricityDataConsumer extends ContextSubscriber {
 		Setup s = new Setup();
 		// TODO Auto-generated method stub
 		//ElectricityData e = (ElectricityData)event.getRDFSubject();
-		if (event.getRDFPredicate().compareTo("http://ontology.universAAL.org/Aalfficiency.owl#ElectricityTodayScore")==0){
-			s.setTodayElectricScore(String.valueOf(event.getRDFObject()));
+		if (event.getRDFPredicate().compareTo("http://ontology.universAAL.org/Aalfficiency.owl#electricityScore")==0){
+			//s.setTodayElectricScore(String.valueOf(event.getRDFObject()));
+			System.out.println("----------------\n" + " sub="
+					+ event.getSubjectURI() + "\n pred=" + event.getRDFPredicate()
+					+ "\n obj=" + event.getRDFObject() + "\n tst="
+					+ event.getTimestamp());
 			System.out.print("****************************************************");}
-		else if (event.getRDFPredicate().compareTo("http://ontology.universAAL.org/Aalfficiency.owl#ElectricitySaving")==0){
+		else if (event.getRDFPredicate().compareTo("http://ontology.universAAL.org/Aalfficiency.owl#saving")==0){
 				s.setElectricitySaving(String.valueOf(event.getRDFObject()));
+				System.out.println("----------------\n" + " sub="
+						+ event.getSubjectURI() + "\n pred=" + event.getRDFPredicate()
+						+ "\n obj=" + event.getRDFObject() + "\n tst="
+						+ event.getTimestamp());
 				System.out.print("****************************************************");}
-		else if (event.getRDFPredicate().compareTo("http://ontology.universAAL.org/Aalfficiency.owl#ChallengeDescription")==0
-				&& event.getSubjectURI().compareTo("http://tsbtecnologias.es/ReadEnergy#ElectricityDataChallenge")==0){
+		else if (event.getRDFPredicate().compareTo("http://ontology.universAAL.org/Aalfficiency.owl#Description")==0){
 			s.setElectricityChallengeDescription((String)event.getRDFObject());
+			System.out.println("----------------\n" + " sub="
+					+ event.getSubjectURI() + "\n pred=" + event.getRDFPredicate()
+					+ "\n obj=" + event.getRDFObject() + "\n tst="
+					+ event.getTimestamp());
 			System.out.print("****************************************************");}
-		else if (event.getRDFPredicate().compareTo("http://ontology.universAAL.org/Aalfficiency.owl#ChallengeGoal")==0
-				&& event.getSubjectURI().compareTo("http://tsbtecnologias.es/ReadEnergy#ElectricityDataChallenge")==0){
+		else if (event.getRDFPredicate().compareTo("http://ontology.universAAL.org/Aalfficiency.owl#Goal")==0){
 			s.setElectricityChallengeGoal((String)event.getRDFObject());
+			System.out.println("----------------\n" + " sub="
+					+ event.getSubjectURI() + "\n pred=" + event.getRDFPredicate()
+					+ "\n obj=" + event.getRDFObject() + "\n tst="
+					+ event.getTimestamp());
 			System.out.print("****************************************************");}
 		
-		System.out.println("----------------\n" + " sub="
-			+ event.getSubjectURI() + "\n pred=" + event.getRDFPredicate()
-			+ "\n obj=" + event.getRDFObject() + "\n tst="
-			+ event.getTimestamp());
 		
 	}
 
