@@ -14,7 +14,7 @@ import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 
 public class AALfficiencyProvider extends ServiceCallee {
 	
-	private ModuleContext mctx;
+
 	private AALfficiencyEngine engine = new AALfficiencyEngine();
 	
 	// this is just to prepare a standard error message for later use
@@ -28,13 +28,13 @@ public class AALfficiencyProvider extends ServiceCallee {
     protected AALfficiencyProvider(ModuleContext context, ServiceProfile[] realizedServices) {
 	super(context, realizedServices);
 	// TODO Auto-generated constructor stub
-	mctx = context;
+	
     }
 
     protected AALfficiencyProvider(ModuleContext context) {
 	super(context, ProvidedAALfficiencyService.profiles);
 	// TODO Auto-generated constructor stub
-	mctx = context;
+
     }
 
     public void communicationChannelBroken() {
@@ -54,25 +54,37 @@ public class AALfficiencyProvider extends ServiceCallee {
 					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ADVICES)) {
 				return engine.getAdvices();
 			}
-		/*	else if (operation
+			else if (operation
 					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ACTIVITY_DATA)) {
 				return engine.getActivityData();
 			}
 			else if (operation
 					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ELECTRICITY_DATA)) {
 				return engine.getElectricityData();
-			}*/
+			}
 			else if (operation
 					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ADVICE_INFO)) {
 				Object input = call
 						.getInputValue(ProvidedAALfficiencyService.INPUT_ADVICE_URI);
 				return engine.getAdviceInfo(input.toString());
 			}
+			
 			else if (operation
-					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_CHALLENGE_INFO)) {
+					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ELECTRICITY_CHALLENGE)) {
+				return engine.getChallengeInfo("Electricity");
+			}
+			else if (operation
+					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_ACTIVITY_CHALLENGE)) {
+				return engine.getChallengeInfo("Activity");
+			}
+			else if (operation
+					.startsWith(ProvidedAALfficiencyService.SERVICE_GET_CHALLENGE)) {
 				Object input = call
-						.getInputValue(ProvidedAALfficiencyService.INPUT_CHALLENGE_URI);
-				return engine.getChallengeInfo(input.toString());
+						.getInputValue(ProvidedAALfficiencyService.INPUT_CHALLENGE);
+				if (input.toString().contains("Activity"))
+					return engine.getChallengeInfo("Activity");
+				else
+					return engine.getChallengeInfo("Electricity");
 			}
 			}
 	return null;
