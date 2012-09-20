@@ -14,7 +14,7 @@
 
 	<groupId>org.universAAL.apps</groupId>
 	<artifactId>app.biomedicalsensors.uiclient</artifactId>
-	<version>C.0.1</version>
+	<version>C.0.2</version>
 	<name>Physical Activity Monitor Module UI Client</name>
 	<url />
 
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.biomedicalsensors</artifactId>
-			<version>C.0.2</version>
+			<version>1.2.1-SNAPSHOT</version>
 			<type>bundle</type>
 		</dependency>
 		<dependency>
