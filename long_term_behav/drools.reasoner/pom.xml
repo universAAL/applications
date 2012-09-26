@@ -86,7 +86,6 @@
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 
-
 		<!--		<dependency>-->
 		<!--			<groupId>org.codehaus.btm</groupId>-->
 		<!--			<artifactId>btm</artifactId>-->
@@ -141,11 +140,11 @@
 		<!--			<version>4.1.0.Final</version>-->
 		<!--		</dependency>-->
 
-<!--				<dependency>-->
-<!--					<groupId>antlr</groupId>-->
-<!--					<artifactId>antlr</artifactId>-->
-<!--					<version>2.7.7</version>-->
-<!--				</dependency>-->
+		<!--				<dependency>-->
+		<!--					<groupId>antlr</groupId>-->
+		<!--					<artifactId>antlr</artifactId>-->
+		<!--					<version>2.7.7</version>-->
+		<!--				</dependency>-->
 
 		<!--		<dependency>-->
 		<!--			<groupId>org.dynamicjava.osgi</groupId>-->
@@ -182,19 +181,33 @@
 		<!--	<artifactId>service.utils</artifactId>-->
 		<!--	<version>0.1.0-SNAPSHOT</version>-->
 		<!--		</dependency>-->
-		<dependency>
-			<groupId>org.eclipse.jdt</groupId>
-			<artifactId>core</artifactId>
-			<version>3.3.0-v_771</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.core</groupId>
-			<artifactId>org.eclipse.core.resources</artifactId>
-			<version>3.6.0.v20100526-0737</version>
-		</dependency>
-
-
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.jdt</groupId>-->
+<!--			<artifactId>core</artifactId>-->
+<!--			<version>3.3.0-v_771</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.core</groupId>-->
+<!--			<artifactId>org.eclipse.core.resources</artifactId>-->
+<!--			<version>3.6.0.v20100526-0737</version>-->
+<!--		</dependency>-->
 	</dependencies>
+
+<!--	<profiles>-->
+<!--		<profile>-->
+<!--			<id>uAAL-Runtime</id>-->
+<!--			<dependencies>-->
+<!--				<dependency>-->
+<!--					<groupId>org.mvel</groupId>-->
+<!--					<artifactId>mvel2</artifactId>-->
+<!--					<version>2.1.0.drools2</version>-->
+<!--					<scope>compile</scope>-->
+<!--				</dependency>-->
+<!--			</dependencies>-->
+<!--		</profile>-->
+<!--	</profiles>-->
+
+
 	<build>
 		<plugins>
 			<plugin>
@@ -215,6 +228,17 @@
 						-->
 					</instructions>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<configuration>
+					<skipAttach>false</skipAttach>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.universAAL.support</groupId>
+				<artifactId>uaal-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
