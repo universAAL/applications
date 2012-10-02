@@ -74,11 +74,11 @@ public class ProvidedAALfficiencyService extends AalfficiencyScores{
  		getAdvices.addOutput(OUTPUT_ADVICES, AalfficiencyAdvices.MY_URI, 1, 1, new String[]{AalfficiencyScores.PROP_AALFFICIENCY_ADVICES});
  		profiles[2] = getAdvices.myProfile;
  		
- 		String[] path= new String[]{AalfficiencyScores.PROP_AALFFICIENCY_ADVICES,AalfficiencyAdvices.PROP_ADVICE};
+ 		//String[] path= new String[]{AalfficiencyScores.PROP_AALFFICIENCY_ADVICES,AalfficiencyAdvices.PROP_ADVICE};
  		
  		ProvidedAALfficiencyService getAdviceInfo = new ProvidedAALfficiencyService(SERVICE_GET_ADVICE_INFO);
- 	 	getAdviceInfo.addFilteringInput(INPUT_ADVICE_URI, Advice.MY_URI, 1, 1,path);
- 	 	getAdviceInfo.addOutput(OUTPUT_ADVICE_INFO, Advice.MY_URI, 1, 1, path);
+ 	 	getAdviceInfo.addFilteringInput(INPUT_ADVICE_URI, Advice.MY_URI, 1, 1,new String[]{AalfficiencyAdvices.PROP_ADVICE});
+ 	 	getAdviceInfo.addOutput(OUTPUT_ADVICE_INFO, Advice.MY_URI, 1, 1, new String[]{AalfficiencyAdvices.PROP_ADVICE});
  	 	profiles[3] = getAdviceInfo.myProfile;
  	 		 	
  	 	
@@ -92,6 +92,7 @@ public class ProvidedAALfficiencyService extends AalfficiencyScores{
  	 	getElectricityChallenge.addOutput(OUTPUT_ELECTRICITY_CHALLENGE, Challenge.MY_URI, 1, 1, new String[]{ElectricityScore.PROP_CHALLENGE});
  		profiles[4] = getElectricityChallenge.myProfile;
  	 	
+ 		
  		ProvidedAALfficiencyService getActivityChallenge = new ProvidedAALfficiencyService(SERVICE_GET_ACTIVITY_CHALLENGE);
  		getActivityChallenge.addOutput(OUTPUT_ACTIVITY_CHALLENGE, Challenge.MY_URI, 1, 1, new String[]{ActivityScore.PROP_CHALLENGE});
  		profiles[5] = getActivityChallenge.myProfile;
