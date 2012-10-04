@@ -69,56 +69,6 @@ public class AAlfficiencyTest {
 
 				return getAdvices;
 		}
-		 
-		 
-		 public static void testCall1(ModuleContext c) {
-				System.out.println("Llamando getScore...");
-				ServiceCaller caller = new DefaultServiceCaller(c);
-				//ServiceRequest addReq = new ServiceRequest(new Aalfficiency(null),null);
-				// Make a call for the lamps and get the request
-				ServiceResponse sr = caller.call(getActivityScoreRequest());
-
-				if (sr.getCallStatus() == CallStatus.succeeded) {
-				    try {
-				    	
-				    List scoreList =  sr.getOutput(OUTPUT_ACTIVITY_SCORE, true);
-					
-					if (scoreList == null || scoreList.size()==0) {
-			    		LogUtils.logInfo(Activator.mc, AAlfficiencyTest.class,
-			    				"getScore",
-			    	new Object[] { "there is no score" }, null);
-					}
-					else{
-						ActivityScore[] scores = (ActivityScore[]) scoreList
-								.toArray(new ActivityScore[scoreList.size()]);
-						for (int i=0;i<scores.length;i++) {
-							System.out.print("ActivityScore "+scores[i]+"\n");
-						}
-					}
-				    } catch (Exception e) {
-					LogUtils.logError(Activator.mc, AAlfficiencyTest.class,
-						"getAdvices", new Object[] { "got exception",
-							e.getMessage() }, e);
-				    }
-				} else {
-				    LogUtils.logWarn(Activator.mc, AAlfficiencyTest.class,
-					    "getAdvices",
-					    new Object[] { "callstatus is not succeeded" }, null);
-				}
-
-			}
-			
-			 public static ServiceRequest getActivityScoreRequest() {
-					// Again we want to create a ServiceRequest regarding LightSources
-					ServiceRequest getActivityScoreAdvices = new ServiceRequest(new AalfficiencyScores(), null);
-
-					// In this case, we do not intend to change anything but only retrieve
-					// some info
-					getActivityScoreAdvices.addRequiredOutput(OUTPUT_CHALLENGE,new String[] {Challenge.MY_URI});
-
-					return getActivityScoreAdvices;
-			}
-		 
 		
 			 public static void testCall3(ModuleContext c) {
 					System.out.println("Llamando getScore...");
