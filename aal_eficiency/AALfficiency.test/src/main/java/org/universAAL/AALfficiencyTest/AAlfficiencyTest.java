@@ -65,7 +65,7 @@ public class AAlfficiencyTest {
 
 				// In this case, we do not intend to change anything but only retrieve
 				// some info
-				getAdvices.addRequiredOutput(OUTPUT_ADVICES,new String[] {AalfficiencyScores.PROP_HAS_ADVICES});
+				getAdvices.addRequiredOutput(OUTPUT_ADVICES,new String[] {AalfficiencyScores.PROP_AALFFICIENCY_ADVICES});
 
 				return getAdvices;
 		}
@@ -114,7 +114,7 @@ public class AAlfficiencyTest {
 
 					// In this case, we do not intend to change anything but only retrieve
 					// some info
-					getActivityScoreAdvices.addRequiredOutput(OUTPUT_ACTIVITY_SCORE,new String[] {AalfficiencyScores.PROP_HAS_ACTIVITY_SCORE});
+					getActivityScoreAdvices.addRequiredOutput(OUTPUT_CHALLENGE,new String[] {Challenge.MY_URI});
 
 					return getActivityScoreAdvices;
 			}
@@ -163,7 +163,7 @@ public class AAlfficiencyTest {
 
 						// In this case, we do not intend to change anything but only retrieve
 						// some info
-						getScoreAdvices.addRequiredOutput(OUTPUT_ELECTRICITY_SCORE,new String[] {AalfficiencyScores.PROP_HAS_ELECTRICITY_SCORE});
+						getScoreAdvices.addRequiredOutput(OUTPUT_ELECTRICITY_SCORE,new String[] {AalfficiencyScores.PROP_ELECTRICITY_SCORE});
 
 						return getScoreAdvices;
 				}
@@ -207,17 +207,16 @@ public class AAlfficiencyTest {
 					
 					 public static ServiceRequest getAdviceInfoRequest() {
 							// Again we want to create a ServiceRequest regarding LightSources
-							ServiceRequest getScoreAdvices = new ServiceRequest(new AalfficiencyScores(), null);
+							ServiceRequest getAdviceINfo = new ServiceRequest(new AalfficiencyScores(), null);
 
-							getScoreAdvices.addValueFilter(new String[] 
-									{AalfficiencyAdvices.PROP_HAS_ADVICES}, 
+							getAdviceINfo.addValueFilter(new String[]{AalfficiencyAdvices.PROP_ADVICE}, 
 									new Advice("http://www.tsbtecnologias.es/AALfficiency.owl#advices0"));
 							
 							// In this case, we do not intend to change anything but only retrieve
 							// some info
-							getScoreAdvices.addRequiredOutput(OUTPUT_ADVICE,new String[]{AalfficiencyAdvices.PROP_HAS_ADVICES, Advice.MY_URI});
+							getAdviceINfo.addRequiredOutput(OUTPUT_ADVICE,new String[]{AalfficiencyAdvices.PROP_ADVICE});
 
-							return getScoreAdvices;
+							return getAdviceINfo;
 					} 
 				 
 			 
