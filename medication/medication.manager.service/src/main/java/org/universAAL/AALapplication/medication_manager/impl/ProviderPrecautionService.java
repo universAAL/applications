@@ -37,7 +37,7 @@ public final class ProviderPrecautionService extends Precaution {
               }
             }));
 
-    String[] ppPrecation = new String[]{Precaution.SIDEEFFECT, Precaution.INCOMPLIANCE};
+    String[] ppPrecation = new String[]{Precaution.PROP_SIDEEFFECT, Precaution.PROP_INCOMPLIANCE};
 
     ProviderPrecautionService getPrecation =
         new ProviderPrecautionService(SERVICE_GET_PRECAUTION);

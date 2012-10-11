@@ -33,7 +33,7 @@ public final class MedicationConsumer {
 
     ServiceRequest serviceRequest = new ServiceRequest(new Precaution(), user);
 
-    serviceRequest.addRequiredOutput(OUTPUT_PRECAUTION, new String[]{Precaution.SIDEEFFECT, Precaution.INCOMPLIANCE});
+    serviceRequest.addRequiredOutput(OUTPUT_PRECAUTION, new String[]{Precaution.PROP_SIDEEFFECT, Precaution.PROP_INCOMPLIANCE});
 
     ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
 

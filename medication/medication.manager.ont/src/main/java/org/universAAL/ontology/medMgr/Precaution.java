@@ -9,8 +9,8 @@ import org.universAAL.middleware.service.owl.Service;
 public class Precaution extends Service {
 
   public static final String MY_URI = MedicationOntology.NAMESPACE + "Precaution";
-  public static final String SIDEEFFECT = MedicationOntology.NAMESPACE + "sideeffect";
-  public static final String INCOMPLIANCE = MedicationOntology.NAMESPACE + "incompliance";
+  public static final String PROP_SIDEEFFECT = MedicationOntology.NAMESPACE + "sideeffect";
+  public static final String PROP_INCOMPLIANCE = MedicationOntology.NAMESPACE + "incompliance";
 
   public Precaution() {
     super();
@@ -25,19 +25,19 @@ public class Precaution extends Service {
   }
 
   public String getSideEffect() {
-    return (String) getProperty(SIDEEFFECT);
+    return (String) getProperty(PROP_SIDEEFFECT);
   }
 
   public void setSideEffect(String value) {
-    setProperty(SIDEEFFECT, value);
+    setProperty(PROP_SIDEEFFECT, value);
   }
 
   public String getIncompliance() {
-    return (String) getProperty(INCOMPLIANCE);
+    return (String) getProperty(PROP_INCOMPLIANCE);
   }
 
   public void setIncompliance(String value) {
-    setProperty(INCOMPLIANCE, value);
+    setProperty(PROP_INCOMPLIANCE, value);
   }
 
   public boolean isWellFormed() {

@@ -10,6 +10,7 @@ import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.medMgr.MissedIntake;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
@@ -50,6 +51,8 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
     Log.info("Received event of type %s", getClass(), event.getType());
 
     MissedIntake missedIntake = (MissedIntake) event.getRDFSubject();
+
+    ServiceProfile serviceProfile = missedIntake.getProfile();
 
     Time time = missedIntake.getTime();
 

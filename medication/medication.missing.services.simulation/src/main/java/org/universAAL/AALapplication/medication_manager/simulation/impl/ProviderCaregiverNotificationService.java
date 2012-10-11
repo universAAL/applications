@@ -37,7 +37,7 @@ public final class ProviderCaregiverNotificationService extends MissedIntake {
               }
             }));
 
-    String[] ppMissedIntake = new String[]{MissedIntake.TIME, MissedIntake.USER};
+    String[] ppMissedIntake = new String[]{MissedIntake.PROP_TIME, MissedIntake.PROP_USER};
 
     ProviderCaregiverNotificationService notify =
         new ProviderCaregiverNotificationService(SERVICE_NOTIFY);

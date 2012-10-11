@@ -56,7 +56,7 @@ public final class MissedIntakeContextProvider {
     MissedIntake missedIntake = new MissedIntake();
     missedIntake.setTime(time);
     missedIntake.setUser(user);
-    ContextEvent contextEvent = new ContextEvent(missedIntake, MissedIntake.TIME);
+    ContextEvent contextEvent = new ContextEvent(missedIntake, MissedIntake.PROP_TIME);
     contextPublisher.publish(contextEvent);
   }
 
