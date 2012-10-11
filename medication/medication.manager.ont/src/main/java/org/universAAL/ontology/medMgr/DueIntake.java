@@ -9,8 +9,8 @@ public class DueIntake extends Service {
 
   public static final String MY_URI = MedicationOntology.NAMESPACE + "DueIntake";
 
-  public static final String DEVICE_ID = MedicationOntology.NAMESPACE + "deviceId";
-  public static final String TIME = MedicationOntology.NAMESPACE + "time";
+  public static final String PROP_DEVICE_ID = MedicationOntology.NAMESPACE + "deviceId";
+  public static final String PROP_TIME = MedicationOntology.NAMESPACE + "time";
 
   public DueIntake() {
     super();
@@ -33,19 +33,19 @@ public class DueIntake extends Service {
   }
 
   public String getDeviceId() {
-    return (String) props.get(DEVICE_ID);
+    return (String) props.get(PROP_DEVICE_ID);
   }
 
   public void setDeviceId(String deviceId) {
-    props.put(DEVICE_ID, deviceId);
+    props.put(PROP_DEVICE_ID, deviceId);
   }
 
   public Time getTime() {
-    return (Time) props.get(TIME);
+    return (Time) props.get(PROP_TIME);
   }
 
   public void setTime(Time time) {
-    props.put(TIME, time);
+    props.put(PROP_TIME, time);
   }
 
 }

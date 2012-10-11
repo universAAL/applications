@@ -11,7 +11,6 @@ import org.universAAL.middleware.owl.Enumeration;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.medMgr.DueIntake;
 import org.universAAL.ontology.medMgr.Time;
-import org.universAAL.ontology.profile.User;
 
 /**
  * @author George Fournadjiev
@@ -56,7 +55,7 @@ public final class MedicationReminderContextProvider {
     DueIntake dueIntake = new DueIntake();
     dueIntake.setDeviceId(deviceId);
     dueIntake.setTime(time);
-    ContextEvent contextEvent = new ContextEvent(dueIntake, DueIntake.DEVICE_ID);
+    ContextEvent contextEvent = new ContextEvent(dueIntake, DueIntake.PROP_DEVICE_ID);
     contextPublisher.publish(contextEvent);
   }
 

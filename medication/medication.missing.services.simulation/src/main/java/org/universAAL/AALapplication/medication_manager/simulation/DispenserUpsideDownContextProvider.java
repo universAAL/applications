@@ -53,7 +53,7 @@ public final class DispenserUpsideDownContextProvider {
   public static void dispenserUpsideDownDeviceIdEvent(String deviceId) {
     DispenserUpsideDown dispenserUpsideDown = new DispenserUpsideDown();
     dispenserUpsideDown.setDeviceId(deviceId);
-    ContextEvent contextEvent = new ContextEvent(dispenserUpsideDown, DispenserUpsideDown.DEVICE_ID);
+    ContextEvent contextEvent = new ContextEvent(dispenserUpsideDown, DispenserUpsideDown.PROP_DEVICE_ID);
     contextPublisher.publish(contextEvent);
   }
 

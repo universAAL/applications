@@ -36,81 +36,81 @@ public final class MedicationOntology extends Ontology {
     oci.setResourceComment("The type of a Precaution");
     oci.setResourceLabel("Precaution");
     oci.addSuperClass(Service.MY_URI);
-    oci.addDatatypeProperty(Precaution.SIDEEFFECT);
+    oci.addDatatypeProperty(Precaution.PROP_SIDEEFFECT);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            Precaution.SIDEEFFECT,
+            Precaution.PROP_SIDEEFFECT,
             TypeMapper.getDatatypeURI(String.class), 0, 1));
-    oci.addDatatypeProperty(Precaution.INCOMPLIANCE);
+    oci.addDatatypeProperty(Precaution.PROP_INCOMPLIANCE);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            Precaution.INCOMPLIANCE,
+            Precaution.PROP_INCOMPLIANCE,
             TypeMapper.getDatatypeURI(String.class), 0, 1));
 
     // load Time
     oci = createNewOntClassInfo(Time.MY_URI, FACTORY, 1);
     oci.setResourceComment("The type of a Time");
     oci.setResourceLabel("Time");
-    oci.addDatatypeProperty(Time.YEAR);
+    oci.addDatatypeProperty(Time.PROP_YEAR);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            Time.YEAR,
+            Time.PROP_YEAR,
             TypeMapper.getDatatypeURI(Integer.class), 0, 1));
-    oci.addDatatypeProperty(Time.MONTH);
+    oci.addDatatypeProperty(Time.PROP_MONTH);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            Time.MONTH,
+            Time.PROP_MONTH,
             TypeMapper.getDatatypeURI(Integer.class), 0, 1));
-    oci.addDatatypeProperty(Time.DAY);
+    oci.addDatatypeProperty(Time.PROP_DAY);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            Time.DAY,
+            Time.PROP_DAY,
             TypeMapper.getDatatypeURI(Integer.class), 0, 1));
-    oci.addDatatypeProperty(Time.HOUR);
+    oci.addDatatypeProperty(Time.PROP_HOUR);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            Time.HOUR,
+            Time.PROP_HOUR,
             TypeMapper.getDatatypeURI(Integer.class), 0, 1));
-    oci.addDatatypeProperty(Time.MINUTES);
+    oci.addDatatypeProperty(Time.PROP_MINUTES);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            Time.MINUTES,
+            Time.PROP_MINUTES,
             TypeMapper.getDatatypeURI(Integer.class), 0, 1));
 
     // load MissedIntake
     oci = createNewOntClassInfo(MissedIntake.MY_URI, FACTORY, 2);
     oci.setResourceComment("The type of a MissedIntake");
     oci.setResourceLabel("MissedIntake");
-    oci.addObjectProperty(MissedIntake.TIME).setFunctional();
+    oci.addObjectProperty(MissedIntake.PROP_TIME).setFunctional();
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            MissedIntake.TIME, Time.MY_URI, 1, 1));
-    oci.addObjectProperty(MissedIntake.USER).setFunctional();
+            MissedIntake.PROP_TIME, Time.MY_URI, 1, 1));
+    oci.addObjectProperty(MissedIntake.PROP_USER).setFunctional();
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            MissedIntake.USER, User.MY_URI, 1, 1));
+            MissedIntake.PROP_USER, User.MY_URI, 1, 1));
 
     // load DueIntake
     oci = createNewOntClassInfo(DueIntake.MY_URI, FACTORY, 3);
     oci.setResourceComment("The type of a DueIntake");
     oci.setResourceLabel("DueIntake");
-    oci.addDatatypeProperty(DueIntake.DEVICE_ID);
+    oci.addDatatypeProperty(DueIntake.PROP_DEVICE_ID);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            DueIntake.DEVICE_ID, TypeMapper.getDatatypeURI(String.class), 1, 1));
-    oci.addObjectProperty(DueIntake.TIME).setFunctional();
+            DueIntake.PROP_DEVICE_ID, TypeMapper.getDatatypeURI(String.class), 1, 1));
+    oci.addObjectProperty(DueIntake.PROP_TIME).setFunctional();
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            DueIntake.TIME, Time.MY_URI, 1, 1));
+            DueIntake.PROP_TIME, Time.MY_URI, 1, 1));
 
     // load DispenserUpsideDown
     oci = createNewOntClassInfo(DispenserUpsideDown.MY_URI, FACTORY, 4);
     oci.setResourceComment("The type of a DispenserUpsideDown");
     oci.setResourceLabel("DispenserUpsideDown");
-    oci.addDatatypeProperty(DispenserUpsideDown.DEVICE_ID);
+    oci.addDatatypeProperty(DispenserUpsideDown.PROP_DEVICE_ID);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            DispenserUpsideDown.DEVICE_ID, TypeMapper.getDatatypeURI(String.class), 1, 1));
+            DispenserUpsideDown.PROP_DEVICE_ID, TypeMapper.getDatatypeURI(String.class), 1, 1));
 
 
   }

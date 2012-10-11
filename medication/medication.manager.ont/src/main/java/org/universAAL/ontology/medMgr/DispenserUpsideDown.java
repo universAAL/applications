@@ -9,7 +9,7 @@ public class DispenserUpsideDown extends Service {
 
   public static final String MY_URI = MedicationOntology.NAMESPACE + "DispenserUpsideDowna";
 
-  public static final String DEVICE_ID = MedicationOntology.NAMESPACE + "deviceId";
+  public static final String PROP_DEVICE_ID = MedicationOntology.NAMESPACE + "deviceId";
 
   public DispenserUpsideDown() {
     super();
@@ -32,11 +32,11 @@ public class DispenserUpsideDown extends Service {
   }
 
   public String getDeviceId() {
-    return (String) props.get(DEVICE_ID);
+    return (String) props.get(PROP_DEVICE_ID);
   }
 
   public void setDeviceId(String deviceId) {
-    props.put(DEVICE_ID, deviceId);
+    props.put(PROP_DEVICE_ID, deviceId);
   }
 
 }

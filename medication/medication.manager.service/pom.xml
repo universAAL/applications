@@ -24,6 +24,12 @@
       <artifactId>medication.manager.ui</artifactId>
       <version>C.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>org.universAAL.context</groupId>
+      <artifactId>ctxt.che</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -42,6 +48,6 @@
           </instructions>
         </configuration>
       </plugin>
-     </plugins>
+    </plugins>
   </build>
 </project>

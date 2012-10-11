@@ -10,9 +10,9 @@ public class MissedIntake extends Service {
 
   public static final String MY_URI = MedicationOntology.NAMESPACE + "MissedIntake";
 
-  public static final String TIME = MedicationOntology.NAMESPACE + "time";
+  public static final String PROP_TIME = MedicationOntology.NAMESPACE + "time";
 
-  public static final String USER = MedicationOntology.NAMESPACE + "user";
+  public static final String PROP_USER = MedicationOntology.NAMESPACE + "user";
 
   public MissedIntake() {
     super();
@@ -35,19 +35,19 @@ public class MissedIntake extends Service {
   }
 
   public Time getTime() {
-    return (Time) props.get(TIME);
+    return (Time) props.get(PROP_TIME);
   }
 
   public void setTime(Time time) {
-    props.put(TIME, time);
+    props.put(PROP_TIME, time);
   }
 
   public User getUser() {
-    return (User) props.get(USER);
+    return (User) props.get(PROP_USER);
   }
 
   public void setUser(User user) {
-    props.put(USER, user);
+    props.put(PROP_USER, user);
   }
 
 }
