@@ -32,13 +32,14 @@ public final class UsecasePrecaution extends Usecase {
         saiedUser, getClass());
 
 
-    Precaution precaution = MedicationConsumer.requestDetails(saiedUser);
+    Precaution[] precautions = MedicationConsumer.requestDetails(saiedUser);
 
-    if (precaution == null) {
-      throw new MedicationManagerShellException("There is no precaution in our database for that user");
+    if (precautions == null || precautions.length != 2) {
+      throw new MedicationManagerShellException("There is no precaution in our database for that user " +
+          "or the returned Precaution array contains not 2 elements");
     }
 
-    printInfo(precaution);
+    printInfo(precautions);
 
   }
 
@@ -47,10 +48,10 @@ public final class UsecasePrecaution extends Usecase {
     return USECASE;
   }
 
-  private void printInfo(Precaution precaution) {
-    String sideeffect = precaution.getSideEffect();
+  private void printInfo(Precaution[] precautions) {
+    String sideeffect = precautions[0].getSideEffect();
     Log.info("Side effects:\n %s", getClass(), sideeffect);
-    String incompliance = precaution.getIncompliance();
+    String incompliance = precautions[1].getIncompliance();
     Log.info("Incompliance:\n %s", getClass(), incompliance);
   }
 }
