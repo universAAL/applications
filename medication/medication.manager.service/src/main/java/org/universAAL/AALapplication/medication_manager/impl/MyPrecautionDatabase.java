@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public final class MyPrecautionDatabase {
 
-  private static final Map<User, Precaution> PRECAUTION_MAP = new HashMap<User, Precaution>();
+  private static final Map<User, Precaution[]> PRECAUTION_MAP = new HashMap<User, Precaution[]>();
 
   static {
     fillPrecautionMap();
@@ -22,11 +22,13 @@ public final class MyPrecautionDatabase {
     User[] allUsers = UserIDs.getAllUsers();
 
     for (int i = 0; i < allUsers.length; i++) {
-      User id = allUsers[i];
-      Precaution precaution = new Precaution(Precaution.MY_URI);
-      addSideeffect(precaution);
-      precaution.setIncompliance("These medications must not be used with alcohol");
-      PRECAUTION_MAP.put(id, precaution);
+      User user = allUsers[i];
+      Precaution precautionSideEffect = new Precaution(Precaution.MY_URI);
+      addSideeffect(precautionSideEffect);
+      Precaution precautionIncompliance = new Precaution(Precaution.MY_URI);
+      precautionIncompliance.setIncompliance("These medications must not be used with alcohol");
+      Precaution[] precautions = new Precaution[]{precautionSideEffect, precautionIncompliance};
+      PRECAUTION_MAP.put(user, precautions);
     }
   }
 
@@ -50,7 +52,7 @@ public final class MyPrecautionDatabase {
 
   }
 
-  public static Precaution getPrecaution(User user) {
+  public static Precaution[] getPrecaution(User user) {
     return PRECAUTION_MAP.get(user);
   }
 

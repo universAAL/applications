@@ -19,7 +19,8 @@ public final class ProviderPrecautionService extends Precaution {
 
   public static final String SERVICE_GET_PRECAUTION = PRECAUTION_SERVER_NAMESPACE + "getPrecaution";
 
-  static final String OUTPUT_PRECAUTION = PRECAUTION_SERVER_NAMESPACE + "precaution";
+  static final String OUTPUT_PRECAUTION_SIDEEFFECT = PRECAUTION_SERVER_NAMESPACE + "sideeffect";
+  static final String OUTPUT_PRECAUTION_INCOMPLIANCE = PRECAUTION_SERVER_NAMESPACE + "incompliance";
 
   static final ServiceProfile[] profiles = new ServiceProfile[1];
 
@@ -37,13 +38,16 @@ public final class ProviderPrecautionService extends Precaution {
               }
             }));
 
-    String[] ppPrecation = new String[]{Precaution.PROP_SIDEEFFECT, Precaution.PROP_INCOMPLIANCE};
+    String[] ppPrecationSideeffect = new String[]{Precaution.PROP_SIDEEFFECT};
 
     ProviderPrecautionService getPrecation =
         new ProviderPrecautionService(SERVICE_GET_PRECAUTION);
 
-    getPrecation.addOutput(OUTPUT_PRECAUTION,
-        Precaution.MY_URI, 1, 1, ppPrecation);
+    getPrecation.addOutput(OUTPUT_PRECAUTION_SIDEEFFECT, Precaution.MY_URI, 1, 1, ppPrecationSideeffect);
+
+    String[] ppPrecationIncompliance = new String[]{Precaution.PROP_INCOMPLIANCE};
+
+    getPrecation.addOutput(OUTPUT_PRECAUTION_INCOMPLIANCE, Precaution.MY_URI, 1, 1, ppPrecationIncompliance);
 
     profiles[0] = getPrecation.myProfile;
 

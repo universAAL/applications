@@ -9,6 +9,8 @@ import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.medMgr.Precaution;
 import org.universAAL.ontology.profile.User;
 
+import java.util.Arrays;
+
 /**
  * @author George Fournadjiev
  */
@@ -63,15 +65,16 @@ public final class PrecautionProvider extends ServiceCallee {
   private ServiceResponse getPrecaution(User user) {
     ServiceResponse response = new ServiceResponse(CallStatus.succeeded);
 
-    Precaution precaution = MyPrecautionDatabase.getPrecaution(user);
+    Precaution[] precautions = MyPrecautionDatabase.getPrecaution(user);
 
-    Log.info("Found the following precaution: %s", getClass(), precaution);
+    Log.info("Found the following precaution: %s", getClass(), Arrays.asList(precautions));
 
-    if (precaution == null) {
+    if (precautions == null || precautions.length != 2) {
       return invalidInput;
     }
 
-    response.addOutput(new ProcessOutput(ProviderPrecautionService.OUTPUT_PRECAUTION, precaution));
+    response.addOutput(new ProcessOutput(ProviderPrecautionService.OUTPUT_PRECAUTION_SIDEEFFECT, precautions[0]));
+    response.addOutput(new ProcessOutput(ProviderPrecautionService.OUTPUT_PRECAUTION_INCOMPLIANCE, precautions[1]));
 
     return response;
   }
