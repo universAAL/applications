@@ -1,30 +1,16 @@
 package org.universAAL.AALApplication.health.motivation.motivationalMessages;
 
-import java.util.Locale;
-
-import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
-import org.universAAL.middleware.owl.DataRepOntology;
-import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universAAL.middleware.service.owl.ServiceBusOntology;
-import org.universAAL.middleware.ui.owl.UIBusOntology;
-import org.universAAL.ontology.ProfileOntology;
-import org.universAAL.ontology.location.LocationOntology;
-import org.universAAL.ontology.phThing.PhThingOntology;
-import org.universAAL.ontology.shape.ShapeOntology;
-import org.universAAL.ontology.space.SpaceOntology;
+import org.universAAL.ontology.questionnaire.ChoiceLabel;
+import org.universAAL.ontology.questionnaire.Questionnaire;
+import org.universAAL.ontology.questionnaire.SingleChoiceQuestion;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.disease.owl.DiseaseOntology;
-import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
-import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
-import org.universAAL.ontology.questionnaire.*;
 
 public class TreatmentDetectionMessage extends MotivationalQuestionnaire implements MotivationalMessageContent{
 	

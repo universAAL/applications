@@ -11,9 +11,9 @@ import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
 import org.universAAL.middleware.ui.owl.UIBusOntology;
-import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
+import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.health.HealthProfile;
 import org.universAAL.ontology.questionnaire.QuestionnaireOntology;
@@ -118,6 +118,16 @@ public class TestIfaceForMM implements SendMotivationMessageIface, MotivationSer
 
 
 	public String getAPPosesiveGenderArticle() {
+		return "his";
+	}
+
+
+	public String getCaregiverGenderArticle() {
+		return "him";
+	}
+
+
+	public String getCaregiverPosesiveGenderArticle() {
 		return "his";
 	}
 	

@@ -11,9 +11,9 @@ import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
 import org.universAAL.middleware.ui.owl.UIBusOntology;
-import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
+import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.questionnaire.Answer;
 import org.universAAL.ontology.questionnaire.AnsweredQuestionnaire;
@@ -67,12 +67,12 @@ public class TestSolution implements MotivationInterface{
 	
 	public Questionnaire createQuestionnaire(){
 		
-		Questionnaire questionnaire = new Questionnaire ("Cuestionario de test", "Este cuestionario sirve para probar la solución a un test con preguntas con respuesta correcta");
+		Questionnaire questionnaire = new Questionnaire ("Cuestionario de test", "Este cuestionario sirve para probar la soluciï¿½n a un test con preguntas con respuesta correcta");
 		
-		String questionWording1 = "¿Es bueno fumar?";
-		String questionWording2 = "¿Es bueno hacer ejercicio?";
+		String questionWording1 = "ï¿½Es bueno fumar?";
+		String questionWording2 = "ï¿½Es bueno hacer ejercicio?";
 		
-		ChoiceLabel choiceYES = new ChoiceLabel(Boolean.TRUE, "Sí");
+		ChoiceLabel choiceYES = new ChoiceLabel(Boolean.TRUE, "Sï¿½");
 		ChoiceLabel choiceNO = new ChoiceLabel(Boolean.FALSE, "No");
 		
 		ChoiceLabel[] choices = {choiceYES, choiceNO};
