@@ -41,7 +41,6 @@ aal_eficiency/AALfficiencyService/.settings/org.eclipse.jdt.core.prefs -text svn
 aal_eficiency/AALfficiencyService/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
 aal_eficiency/AALfficiencyService/.settings/org.maven.ide.eclipse.prefs -text svneol=unset#text/plain
 aal_eficiency/AALfficiencyService/AALfficiencyService.launch -text svneol=unset#text/plain
-aal_eficiency/AALfficiencyService/AalfficiencyService.launch -text svneol=unset#text/plain
 aal_eficiency/AALfficiencyService/aalapp.xml -text svneol=unset#text/plain
 aal_eficiency/AALfficiencyService/pom.xml -text svneol=unset#text/plain
 aal_eficiency/AALfficiencyService/src/main/java/org/universAAL/AALfficiency/AALfficiencyProvider.java -text svneol=unset#text/plain
@@ -538,8 +537,6 @@ health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui2/MainMenu.java -text
 health/health.motivation/pom.xml -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/CSubscriber.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/ClassesNeededRegistration.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/Motivation.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationInterface.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationManager.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationServiceRequirementsIface.java -text
@@ -560,10 +557,7 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentDetectionMessage.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivationalMessages/TreatmentExtensionInquiryToCaregiver.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageManager.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageServiceTools.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MessageVariables.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/MotivationalMessagesDatabase.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/motivatonalMessageManagement/PruebaCSV.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/osgi/Activator.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/SchedulingMessagesSent.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/schedulingTools/SchedulingTools.java -text
@@ -574,7 +568,6 @@ health/health.motivation/src/main/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/DetectedTreatments.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/PerformedSessionsSupport.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/SessionNotPerformed.java -text
-health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/Solution.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/testSupportClasses/TreatmentTypeClassification.java -text
 health/health.motivation/src/main/resources/messagesDB/en_motivationalMessagesDB.csv -text
 health/health.motivation/src/main/resources/rules/ActionRules.drl -text

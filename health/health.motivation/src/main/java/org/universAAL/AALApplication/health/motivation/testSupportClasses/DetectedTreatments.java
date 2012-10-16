@@ -1,45 +1,55 @@
 package org.universAAL.AALApplication.health.motivation.testSupportClasses;
 
 import java.util.ArrayList;
-
-import org.universaal.ontology.health.owl.PerformedSession;
 import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.owl.MotivationalMessage;
 
+/**
+ * The purpose of this class is to manage the already detected treatments.  
+ * 
+ */
 public class DetectedTreatments {
 
 
+	//Detected treatments will be stored in an arraylist
 	public static ArrayList <Treatment> detectedTreatments = new ArrayList <Treatment>();
 
 	
 	/**
-	 * Getters y setters de tratamientos detectados y sesiones realizadas
+	 * This method inserts treatments in the main arraylist
+	 * @param treatment to be stored
 	 */
 	
 	public static void insertDetectedTreatment(Treatment t){
 		detectedTreatments.add(t);
 	}
 	
+	/**
+	 * This method returns all the treatments stored in the main arraylist
+	 * @return all detected treatments.
+	 */
+	
 	public static ArrayList <Treatment> getDetectedTreatments(){
 		return detectedTreatments;
 	}
 	
+	
+	/**
+	 * This method checks whether a treatment has been stored or not
+	 * in the main arraylist
+	 * @param treatment to be checked in the arraylist
+	 */
 	public static boolean containsTreatment(Treatment t){
 		
-		/*for (int i=0;i<detectedTreatments.size();i++){
-
-			Treatment treatment = detectedTreatments.get(i);
-
-			if(treatment.getName().equals(t.getName()))
-					return true;
-		}
-		return false;*/
 		if (detectedTreatments.contains(t))
 			return true;
 		else
 			return false;
 	}
 	
+	/**
+	 * This method deletes a specicif treatment from the arraylist
+	 * @param t
+	 */
 	public static void deleteTreatmentFromDetectedTreatments(Treatment t){
 		detectedTreatments.remove(t);
 	}
