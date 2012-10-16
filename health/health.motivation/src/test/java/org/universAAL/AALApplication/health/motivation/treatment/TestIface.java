@@ -1,37 +1,30 @@
 package org.universAAL.AALApplication.health.motivation.treatment;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import junit.framework.TestCase;
-
-import org.drools.lang.DRLParser.decl_field_initialization_return;
-import org.universAAL.AALApplication.health.motivation.ClassesNeededRegistration;
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
-import org.universAAL.AALApplication.health.motivation.testSupportClasses.DetectedTreatments;
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
 import org.universAAL.middleware.ui.owl.UIBusOntology;
-import org.universAAL.ontology.ProfileOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
+import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.health.HealthProfile;
 import org.universAAL.ontology.questionnaire.Questionnaire;
 import org.universAAL.ontology.questionnaire.QuestionnaireOntology;
 import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
+import org.universAAL.ontology.vcard.VCardOntology;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
@@ -41,8 +34,6 @@ import org.universaal.ontology.owl.MessageOntology;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
-import org.universaal.ontology.owl.MotivationalPlainMessage;
-import org.universaal.ontology.owl.MotivationalQuestionnaire;
 import org.universaal.ontology.owl.QuestionnaireStrategyOntology;
 
 public class TestIface implements SendMotivationMessageIface, MotivationServiceRequirementsIface {
@@ -61,6 +52,7 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 		OntologyManagement.getInstance().register(new ShapeOntology());
 		OntologyManagement.getInstance().register(new PhThingOntology());
 		OntologyManagement.getInstance().register(new SpaceOntology());
+		OntologyManagement.getInstance().register(new VCardOntology());
 		OntologyManagement.getInstance().register(new ProfileOntology());
 		OntologyManagement.getInstance().register(new QuestionnaireOntology());
 		OntologyManagement.getInstance().register(new DiseaseOntology());
