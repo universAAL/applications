@@ -45,16 +45,16 @@ import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 
 import com.csvreader.CsvReader;
 
+/**
+ * The purpose of this class is to manage the motivational messages:
+ * from the acquisition of the message from its keys, to the variables substitution,
+ * and the sending to the assisted person or caregiver.
+ */
+
 public class MessageManager {
 
 	public File enMessagesDB;
 	public File spMessagesDB; 
-
-
-	/*
-	private static final int EN = 1;
-	private static final int ES = 0;
-	 */  
 
 	public static String disease;
 	public static String treatment_type;
@@ -106,7 +106,7 @@ public class MessageManager {
 	public static void buildMapStructure() throws IOException {
 		map.clear();
 
-		InputStream is = MessageManager.class.getResourceAsStream("/messagesDB/en_motivationalMessagesDB.csv");
+		InputStream is = MessageManager.class.getResourceAsStream("/messagesDB/en_motivationalMessagesDB.csv"); //the route where the motivational messages database is.
 		if(is == null)
 			throw new IOException("Cannot read en_motivationalMessagesDB.csv");
 		
@@ -149,12 +149,18 @@ public class MessageManager {
 		reader.close();
 	}
 
-
+/**
+ * This method buils the initial map of variables. These variables must be provided by the platform.
+ */
 	public static void buildInitialMapOfVariables(){
 		MessageVariables.buildInitialMapOfVariables();
 
 	}
-
+	/**
+	 * This method adds variables to the map of variables. 
+	 * @param key
+	 * @param value
+	 */
 	public static void addToMapOfVariables(String key, String value){
 		MessageVariables.addToMapOfVariables(key, value);
 	}
@@ -320,12 +326,31 @@ public class MessageManager {
 		}
 	}
 
+	/**
+	 * This method sends a motivational message to the assisted person.
+	 * @param disease
+	 * @param treatmentType
+	 * @param motStatus
+	 * @param messageType
+	 * @param messageSubType
+	 * @param treatment
+	 * @throws DatatypeConfigurationException
+	 */
 	public static void sendMessageToAssistedPerson(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType,MotivationalMessageSubclassification messageSubType, Treatment t) throws DatatypeConfigurationException{
 		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType, messageSubType);
 		mm.setSentDate(SchedulingTools.getNow());
 		mmSender.sendMessageToAP(mm, t);
 	}
-
+/**
+ * This method sends a motivational message to the caregiver.
+ * @param disease
+ * @param treatmentType
+ * @param motStatus
+ * @param messageType
+ * @param messageSubType
+ * @param treatment
+ * @throws DatatypeConfigurationException
+ */
 	public static void sendMessageToCaregiver(String disease, String treatmentType, MotivationalStatusType motStatus, MotivationalMessageClassification messageType, MotivationalMessageSubclassification messageSubType, Treatment t) throws DatatypeConfigurationException{
 		MotivationalMessage mm = getMessageToSendToUser(disease, treatmentType, motStatus, messageType, messageSubType);
 		mm.setSentDate(SchedulingTools.getNow());

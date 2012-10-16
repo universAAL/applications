@@ -1,11 +1,31 @@
+/*******************************************************************************
+ * Copyright 2012 UPM, http://www.upm.es 
+ Universidad Politecnica de Madrid
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+
 package org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement;
+
 
 import java.util.Map;
 import java.util.TreeMap;
-
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 
-//llamar a un método que obtenga del sistema estas variables
+/**
+ * This class manages all the issues related to the motivational message variables.
+ */
+
 public class MessageVariables {
 	
 	public static Map<String, String> mapOfVariables = new TreeMap<String, String>();
@@ -16,6 +36,11 @@ public class MessageVariables {
 		requirements = iface;
 	}
 	
+	/**
+	 * This method builds the initial map of variables, from which
+	 * the variables will be substituted. The value of these variables
+	 * should be provided by the platform.
+	 */
 	public static void buildInitialMapOfVariables(){
 		
 		String username = requirements.getAssistedPersonName();
@@ -40,10 +65,20 @@ public class MessageVariables {
 		mapOfVariables.put("caregiverPosesiveGender", caregiverPosesiveGenderArticle);
 	}
 	
+	/**
+	 * This method add new variables to the map of variables.
+	 * @param key (variable)
+	 * @param value
+	 */
 	public static void addToMapOfVariables(String key, String value){
 		mapOfVariables.put(key, value);
 	}
 	
+	/**
+	 * This method substitutes the variable for its value.
+	 * @param the set of variables to be substituted
+	 * @return the set of values associated to the variables.
+	 */
 	public static String[] replaceVariables (String[] variable){
 		String[] values = new String[variable.length];
 		for (int i=0;i<variable.length;i++){
@@ -56,43 +91,4 @@ public class MessageVariables {
 		return values;
 	}
 	
-	/*
-public static String[] replaceVariables(String[] variable){
-		
-	String[] values = new String[variable.length];
-	
-	for (int i=0;i<variable.length;i++){
-			
-		if (variable[i].equals("caregiverRol"))
-			values[i] = "Doctor";
-			
-		else if(variable[i].equals("treatmentName"))
-			values[i] = "Nombredeltratamiento";
-			
-		else if(variable[i].equals("username"))
-			values[i] = "Pepe";
-			
-		else if(variable[i].equals("treatmentDescription"))
-			values[i] = "Definición del tratamiento";
-			
-		else if(variable[i].equals("treatmentPuropose"))
-			values[i] = "Propósito del tratamiento";
-		else if(variable[i].equals("prueba"))
-			values[i] = "Marina para saber si esto funciona";	
-		else if(variable[i].equals("partOfDay"))
-			values[i] = "morning";
-		else if(variable[i].equals("userPetName"))
-			values[i] = "Bobby";
-		else if(variable[i].equals("veterinarianDate"))
-			values[i] = "16 h";
-		else if(variable[i].equals("veterinarianPlace"))
-			values[i] = "City Mall";
-		else{
-			System.out.println("Parámetro no definido");
-			values[i] = null;
-		}
-	}
-		return values;
-}
-*/
 }
