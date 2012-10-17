@@ -73,8 +73,9 @@ public class MinutePublisher extends TimerTask{
 		EnergyReaderDBInterface db = new EnergyReaderDBInterface();
 		
 		try {
-			db.insertMeasurement(consumptions);
+			
 			for (int i=0;i<consumptions.length;i++){
+				db.insertDailyMeasurement(consumptions[i].getDevice().getName(), consumptions[i].getMeasure().getMeasurement());
 				publishAnEvent(consumptions[i]);
 			}
 		} catch (Exception e) {

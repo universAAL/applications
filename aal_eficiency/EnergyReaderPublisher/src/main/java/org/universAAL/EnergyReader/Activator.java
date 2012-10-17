@@ -7,6 +7,7 @@ import java.util.Timer;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.EnergyReader.database.EnergyReaderDBInterface;
 import org.universAAL.middleware.container.ModuleContext;
 
 
@@ -17,14 +18,18 @@ public class Activator implements BundleActivator {
 
     public void start(BundleContext bcontext) throws Exception {
     	System.out.print("Starting publisher\n");
+    	EnergyReaderDBInterface db = new EnergyReaderDBInterface();
+    	System.out.print("Creating DB\n");
+    	db.createDB();
     	t = new Timer();
-		//t.schedule(new MinutePublisher(bcontext), 0, 60*1000);
+		t.schedule(new MinutePublisher(bcontext), 0, 60*1000);
 		t1 = new Timer();
 		t1.scheduleAtFixedRate(new DailyPublisher(bcontext), get1115am(), 1000*60*60*24);
     }
 
     public void stop(BundleContext arg0) throws Exception {
     	t.cancel();
+    	t1.cancel();
     }
 
     private static Date get1115am(){
@@ -34,8 +39,8 @@ public class Activator implements BundleActivator {
           tomorrow.get(Calendar.YEAR),
           tomorrow.get(Calendar.MONTH),
           tomorrow.get(Calendar.DATE),
-          9,
-          28
+          13,
+          35
         );
         return result.getTime();
       }
