@@ -83,9 +83,7 @@ public class AALfficiencyEngine {
 		electricity.setChallenge(c);
 		electricity.setSaving(properties.getElectricitySaving());
 		
-				
-		// create and add a ProcessOutput-Event that binds the output URI to the
-		// created list of lamps
+		
 		sr.addOutput(new ProcessOutput(
 			ProvidedAALfficiencyService.OUTPUT_ELECTRICITY_DATA, electricity));
 		System.out.print("AALfficiency Service returning Electricity Data");

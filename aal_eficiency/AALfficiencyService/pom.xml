@@ -33,11 +33,39 @@
 			<artifactId>ont.readenergy</artifactId>
 			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
-		    	<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.20</version>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.readenergy</artifactId>
+			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.fitbitdata</artifactId>
+			<version>1.2.1-SNAPSHOT</version>
+		</dependency>
+    	<dependency>
+			    <groupId>org.apache.derby</groupId>
+			    <artifactId>derby</artifactId>
+			    <version>10.7.1.1</version>
+		</dependency>
+		
+    	<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+    		<artifactId>json-simple</artifactId>
+    		<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scribe</groupId>
+			<artifactId>scribe</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		
 		</dependencies>
 
 	<build>

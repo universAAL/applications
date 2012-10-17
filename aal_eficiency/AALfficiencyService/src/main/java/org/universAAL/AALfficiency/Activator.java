@@ -22,7 +22,7 @@ public class Activator implements BundleActivator {
 		new Thread() {
 		    public void run() {
 			new AALfficiencyProvider(context);
-			new ElectricityDataConsumer(context);
+			new ScoresConsumer(context);
 		    }
 		}.start();
 
