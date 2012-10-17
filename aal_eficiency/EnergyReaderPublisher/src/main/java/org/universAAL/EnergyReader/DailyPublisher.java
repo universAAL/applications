@@ -23,10 +23,10 @@ import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.ontology.aalfficiency.scores.*;
 import org.universAAL.ontology.energy.reader.EnergyMeasurement;
 import org.universAAL.ontology.energy.reader.ReadEnergy;
 import org.universAAL.ontology.energy.reader.ReadEnergyDevice;
-import org.universAAL.ontology.aalfficiency.scores.*;
 
 public class DailyPublisher extends TimerTask{ 
 	
@@ -72,7 +72,7 @@ public class DailyPublisher extends TimerTask{
     
     public void publishEnergyScore(EnergyScoreModel energy) {
     	
-    	System.out.print("Publishing scores the context bus\n");
+    	
     	
     	Challenge c = new Challenge(NAMESPACE+"ElectricityDataChallenge");
     	c.setDescription(energy.getChallenge().getDescription());
@@ -80,15 +80,16 @@ public class DailyPublisher extends TimerTask{
     	
     	ElectricityScore e = new ElectricityScore(NAMESPACE+"ElectricityData");
     	e.setTodayElectricityScore(energy.getTodayScore());
-    	e.setTotalElectricityScore(energy.getPercentage());
+    	e.setSaving(energy.getPercentage());
+    	e.setChallenge(c);
     	
     	AalfficiencyScores sc = new AalfficiencyScores(NAMESPACE+"Scores");
     	sc.setElectricityScore(e);
     	
-    	cp.publish(new ContextEvent(e, ElectricityScore.PROP_TODAY_ELECTRICITY_SCORE));
-    	cp.publish(new ContextEvent(e, ElectricityScore.PROP_SAVING));
-    	cp.publish(new ContextEvent(c, Challenge.PROP_DESCRIPTION));
-    	cp.publish(new ContextEvent(c, Challenge.PROP_GOAL));
+    	System.out.print("Publishing scores the context bus\n");
+    	System.out.print("--------------------------------\n");
+    	cp.publish(new ContextEvent(sc, AalfficiencyScores.PROP_ELECTRICITY_SCORE));
+    	
 	}
     
     
@@ -104,22 +105,19 @@ public class DailyPublisher extends TimerTask{
 			for (ReadEnergyModel c : consumptions){
 				int m = db.totalMeasurements(c.getDevice().getName());
 				System.out.print("TOTAL: "+m+"\n");
-				db.insertTotalMeasurement(c.getDevice().getName(), m);
+				db.insertHistoricMeasurement(c.getDevice().getName(), m);
 				c.getMeasure().setMeasurement(m);
 			}
 			db.deleteMeasurements();
-			/*for (int i=0;i<consumptions.length;i++){
+			for (int i=0;i<consumptions.length;i++){
 				publishMeassurement(consumptions[i]);
-			}*/
-			List<ChallengeModel> challenges = db.getActiveChallenges();
-			for (ChallengeModel c : challenges){
-				int total = db.getChallengeConsumption(c.getId());
-				System.out.print("CHALLENGE "+ c.getDescription()+". CONSUMPTION "+total+"\n");
-				EnergyScoreModel score = getElectricityChallengeScore(c,total);
-				System.out.print("SCORE "+ score +"\n");
-				publishEnergyScore(score);
 			}
-			
+			ChallengeModel c = db.getActiveChallenges();
+			int total = db.getChallengeConsumption(c.getId());
+			System.out.print("CHALLENGE "+ c.getDescription()+". CONSUMPTION "+total+"\n");
+			EnergyScoreModel score = getElectricityChallengeScore(c,total);
+			System.out.print("SCORE "+ score +"\n");
+			publishEnergyScore(score);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -133,9 +131,12 @@ public class DailyPublisher extends TimerTask{
 		EnergyScoreModel energyScore = new EnergyScoreModel();
 		int score =0;
 		int average = challenge.getOriginalMeasurement();
-		String goal = challenge.getGoal();
 		int currentScore = challenge.getCurrentScore();
 		int totalScore = challenge.getTotalScore();
+		
+		String goal = challenge.getGoal();
+		String[] splitGoal = goal.split(" ");
+		int g = Integer.parseInt(splitGoal[0]);
 		
 		EnergyReaderDBInterface db = new EnergyReaderDBInterface();
 		
@@ -149,7 +150,7 @@ public class DailyPublisher extends TimerTask{
 		//Once we know the percentage of saving, we can calculate the 
 		//percentage of the total score corresponding to that saving
 		if (percentage < 100){
-			score = ((percentage*totalScore)/Integer.parseInt(goal))-currentScore;
+			score = ((percentage*totalScore)/g)-currentScore;
 		}
 		
 		energyScore.setTodayScore(score);
