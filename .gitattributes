@@ -1,4 +1,11 @@
 * text=auto !eol
+aal_eficiency/AALfficiency.pom/.classpath -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.pom/.project -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.pom/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.pom/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.pom/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.pom/AALfficiency.launch -text svneol=unset#text/plain
+aal_eficiency/AALfficiency.pom/pom.xml -text svneol=unset#text/plain
 aal_eficiency/AALfficiency.test/.classpath -text svneol=unset#text/plain
 aal_eficiency/AALfficiency.test/.project -text svneol=unset#text/plain
 aal_eficiency/AALfficiency.test/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
