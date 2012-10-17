@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>org.universAAL.support.samples</groupId>
+    <artifactId>samples.pom</artifactId>
+    <version>1.2.1-SNAPSHOT</version>
+  </parent>
+  
+  	<groupId>org.universAAL.AALapplication</groupId>
+	<packaging>pom</packaging>
+	<artifactId>AAlfficiency</artifactId>
+	<version>1.2.1-SNAPSHOT</version>
+	<name>The AAlfficiency POM file</name>
+	<description>The AAlfficiency POM file</description>
+	<modules>
+		<module>../ont.fitbitdata</module>
+		<module>../ont.aalfficiencyscores</module>
+		<module>../ont.readenergy</module>
+		<module>../FitbitPublisher</module>
+		<module>../EnergyReaderPublisher</module>
+		<module>../AALfficiencyService</module>
+	</modules>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<artifactId>ont.fitbitdata</artifactId>
+				<groupId>org.universaal.ontology</groupId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>ont.aalfficiencyscores</artifactId>
+				<groupId>org.universaal.ontology</groupId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<artifactId>ont.readenergy</artifactId>
+				<groupId>org.universaal.ontology</groupId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+</project>
