@@ -17,8 +17,6 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.MapController", null
             handleAs: 'xml',
             load: dojo.hitch(this, function(response, ioArgs)
 			{	
-			console.log('MAPCONTROLLER.JS -> loadDataFromServer, whichArea]', whichData);
-		
 				// TODO: at the moment ioArgs is not passed to the
 				// handle function
 				this.dataLoaded(response, callback)
@@ -217,7 +215,7 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.MapController", null
      * Send the operation to server, using optional data
      * @param {Object} operation Can be 'deletePOI', 'addPOI', 'clearMap', 'safeArea', 'historyInterval','homeArea'
      * @param {Object} data If operation is 'deletePOI', 'addPOI' it is the point deleted or added.
-     * If 'safeArea' it is the list of points belonging to the safe area
+     * If 'safeArea' it is the list of points beloning to the safe area
      */
     sendToServer: function(operation, data){
         xhrArgs = {
@@ -232,7 +230,6 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.MapController", null
 				errorPopUp.document.write(response);
             }
         };
-        console.log("operation " + operation + " data " + data);
         dojo.xhrPut(xhrArgs);
         
     }

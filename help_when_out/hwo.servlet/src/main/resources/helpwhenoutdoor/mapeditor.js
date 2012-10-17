@@ -18,7 +18,7 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.MapEditor", org.univ
         this.homeMarkerAlreadyAdded = false;
         
         mapController.setServletURL('mapeditor');
-        // load the data, like POI list and safe area from the universAAL server
+        // load the data, like POI list and safe area from the uAAL server
         // using AJAX.
         mapController.loadDataFromServer('all', dojo.hitch(this, this.showData));
         
@@ -46,7 +46,7 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.MapEditor", org.univ
 			}
                 
         };
-        // Dropdown buttons and dialogs behave differently, they 
+        // Dropdown buttons and dialogs behave differentely, they 
 		// need a different translation code
         dijit.registry.byClass("dijit.form.DropDownButton").forEach(assignTranslation);
 		dijit.registry.byClass("dijit.Dialog").forEach(assignTranslation);
@@ -54,7 +54,7 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.MapEditor", org.univ
     },
     showData: function(){
         this.inherited(arguments);
-        // add the listener used to catch the movement of the home icon
+        // add the listner used to catch the movement of the home icon
         //GEvent.addListener(this.homeMarker, 'dragend', dojo.hitch(this, this.homePositionChanged));
         
         var poiList = mapData.getPOIList();
@@ -311,7 +311,6 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.MapEditor", org.univ
 			
             if (retString == true) {
                 var areaName = (whichArea == mapData.AREAS.SAFE_AREA) ? 'safeArea' : 'homeArea'
-                console.log("MAPEDITOR.JS -> drawArea, antes de mapData.getPoints(whichArea) " + whichArea);
                 mapController.sendToServer(areaName, mapData.getPoints(whichArea));
             }
             else {

@@ -194,44 +194,40 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.MapFrame", null, // 
         // centering on the coordinate (0,0) at minimum zoom level
         var homePosition = mapData.getHomePosition();
         var zoomLevel = 15;
-console.log("MAPFRAME.JS -> showData, antes de mapData.getArea");
         var safeArea = mapData.getArea(mapData.AREAS.SAFE_AREA);
-console.log("MAPFRAME.JS -> showData, despues de mapData.getArea " + safeArea.getVertexCount() + " mapData.AREAS.SAFE_AREA " + mapData.AREAS.SAFE_AREA + " safeArea.length " + safeArea.length);
         var homeArea = mapData.getArea(mapData.AREAS.HOME_AREA);
         if (homePosition[0] == null || homePosition[1] == null) {
             // initializes the values to the Equator
             homePosition[0] = 0.0;
             homePosition[1] = 0.0;
-                        
+            
             if (safeArea != null && safeArea.getVertexCount() > 1) {
-console.log("MAPFRAME.JS -> showData, antes de mapData.getPoints('safeArea')");
                 var points = mapData.getPoints('safeArea');
-               // gema var points = mapData.getPoints(mapData.AREAS.SAFE_AREA);
-console.log("MAPFRAME.JS -> showData, despues de mapData.getPoints('safeArea') points...." + points);
                 // add all the points on the safe area to find the center
                 for (var i = 0; i < points.length; ++i) {
-                console.log("home position i " + i + " lat " + points[i].lat + " lon " + points[i].lon);
                     homePosition[0] = homePosition[0] + parseFloat(points[i].lat);
                     homePosition[1] = homePosition[1] + parseFloat(points[i].lon);
                 }
-            
                 // normalize the values
                 homePosition[0] = homePosition[0] / points.length;
                 homePosition[1] = homePosition[1] / points.length;
-                console.log("homePosition[0]: " + homePosition[0]);
-                console.log("homePosition[1]: " + homePosition[1]);
+                console.debug("homePosition[0]: " + homePosition[0]);
+                console.debug("homePosition[1]: " + homePosition[1]);
             }
             else {
                 zoomLevel = 1;
+                console.log("Home position is null")
                 alert("Warning: the home position and the safe aren't set. Please set them in the Map Editor");
             }
+            
         }
         map.setCenter(new GLatLng(homePosition[0], homePosition[1]), zoomLevel);
         this.initHomePosition(homePosition[0], homePosition[1]);
+        
         var POIList = mapData.getPOIList();
         
         for (i = 0; i < POIList.length; i++) {
-            console.debug("POI LIST i: " + i);
+            console.debug("i: " + i);
             var name = POIList[i].name;
             map.addOverlay(POIList[i]);
             this.createMarkerHTML(POIList[i]);
@@ -244,6 +240,6 @@ console.log("MAPFRAME.JS -> showData, despues de mapData.getPoints('safeArea') p
         if (homeArea != null) {
             map.addOverlay(homeArea);
         }
-       
+        
     }
 });
