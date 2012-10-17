@@ -10,7 +10,7 @@
 <booleanAttribute key="default" value="true"/>
 <booleanAttribute key="default_auto_start" value="true"/>
 <intAttribute key="default_start_level" value="35"/>
-<stringAttribute key="deselected_workspace_plugins" value="AALfficiency.test,dbExample"/>
+<stringAttribute key="deselected_workspace_plugins" value="AALfficiency.test,FitbitPublisher"/>
 <booleanAttribute key="includeOptional" value="true"/>
 <stringAttribute key="org.eclipse.debug.core.source_locator_id" value="org.eclipse.pde.ui.launcher.PDESourceLookupDirector"/>
 <stringAttribute key="org.eclipse.debug.core.source_locator_memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;sourceLookupDirector&gt;&#13;&#10;&lt;sourceContainers duplicates=&quot;false&quot;&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;folder nest=&amp;quot;false&amp;quot; path=&amp;quot;/mw.bus.context/src/main/java&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.folder&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;folder nest=&amp;quot;false&amp;quot; path=&amp;quot;/mw.bus.model/src/main/java&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.folder&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;folder nest=&amp;quot;false&amp;quot; path=&amp;quot;/mw.bus.service/src/main/java&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.folder&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;folder nest=&amp;quot;false&amp;quot; path=&amp;quot;/mw.data.representation/src/main/java&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.folder&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;folder nest=&amp;quot;false&amp;quot; path=&amp;quot;/mw.data.serialization/src/main/java&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.folder&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;folder nest=&amp;quot;false&amp;quot; path=&amp;quot;/ont.aalfficiency/src/main/java&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.folder&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;folder nest=&amp;quot;false&amp;quot; path=&amp;quot;/ont.phWorld/src/main/java&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.folder&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;folder nest=&amp;quot;false&amp;quot; path=&amp;quot;/AALfficiencyService/src/main/java&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.folder&quot;/&gt;&#13;&#10;&lt;container memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;default/&amp;gt;&amp;#13;&amp;#10;&quot; typeId=&quot;org.eclipse.debug.core.containerType.default&quot;/&gt;&#13;&#10;&lt;/sourceContainers&gt;&#13;&#10;&lt;/sourceLookupDirector&gt;&#13;&#10;"/>
@@ -27,8 +27,10 @@
 <listEntry value="obr"/>
 </listAttribute>
 <mapAttribute key="org.ops4j.pax.cursor.provisionItems">
-<mapEntry key="scan-bundle:mvn:org.universAAL.AALapplication/AALfficiencyService/1.2.3-SNAPSHOT" value="true@false@null@true"/>
-<mapEntry key="scan-composite:mvn:org.universAAL.AALapplication/AALfficiencyService/1.2.3-SNAPSHOT/deps" value="true@true@null@true"/>
+<mapEntry key="scan-bundle:file:/C:/Users/imarti/.m2/repository/org/universAAL/AALapplication/AALfficiency.test/0.1.0-SNAPSHOT/AALfficiency.test-0.1.0-SNAPSHOT.jar" value="false@false@8@false"/>
+<mapEntry key="scan-bundle:file:/C:/Users/imarti/.m2/repository/org/universAAL/AALapplication/AALfficiencyService/1.2.3-SNAPSHOT/AALfficiencyService-1.2.3-SNAPSHOT.jar" value="true@false@7@false"/>
+<mapEntry key="scan-bundle:file:/C:/Users/imarti/.m2/repository/org/universAAL/AALapplication/EnergyReaderPublisher/1.2.2-SNAPSHOT/EnergyReaderPublisher-1.2.2-SNAPSHOT.jar" value="true@false@2@false"/>
+<mapEntry key="scan-composite:file:/C:/Users/imarti/.m2/repository/org/universAAL/AALapplication/AALfficiencyService/1.2.3-SNAPSHOT/AALfficiencyService-1.2.3-SNAPSHOT.deps" value="true@true@1@false"/>
 </mapAttribute>
 <listAttribute key="org.ops4j.pax.cursor.runArguments">
 <listEntry value="--overwrite=false"/>
@@ -36,8 +38,9 @@
 <listEntry value="--overwriteSystemBundles=false"/>
 <listEntry value="--log=DEBUG"/>
 <listEntry value="--profiles=obr"/>
-<listEntry value="scan-composite:mvn:org.universAAL.AALapplication/AALfficiencyService/1.2.3-SNAPSHOT/deps@update"/>
-<listEntry value="scan-bundle:mvn:org.universAAL.AALapplication/AALfficiencyService/1.2.3-SNAPSHOT@nostart@update"/>
+<listEntry value="scan-composite:file:/C:/Users/imarti/.m2/repository/org/universAAL/AALapplication/AALfficiencyService/1.2.3-SNAPSHOT/AALfficiencyService-1.2.3-SNAPSHOT.deps@1"/>
+<listEntry value="scan-bundle:file:/C:/Users/imarti/.m2/repository/org/universAAL/AALapplication/EnergyReaderPublisher/1.2.2-SNAPSHOT/EnergyReaderPublisher-1.2.2-SNAPSHOT.jar@2@nostart"/>
+<listEntry value="scan-bundle:file:/C:/Users/imarti/.m2/repository/org/universAAL/AALapplication/AALfficiencyService/1.2.3-SNAPSHOT/AALfficiencyService-1.2.3-SNAPSHOT.jar@7@nostart"/>
 </listAttribute>
 <stringAttribute key="osgi_framework_id" value="--platform=felix --version=1.4.0"/>
 <stringAttribute key="pde.version" value="3.3"/>
