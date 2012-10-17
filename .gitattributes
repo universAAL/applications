@@ -89,25 +89,6 @@ aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model/ChallengeModel.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model/SleepModel.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/utils/Setup.java -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/.classpath -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/.project -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/AalfficiencyOntology.di -text
-aal_eficiency/ont.aalfficiency/AalfficiencyOntology.notation -text
-aal_eficiency/ont.aalfficiency/AalfficiencyOntology.uml -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/aalapp.xml -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/pom.xml -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/src/main/java/org/universAAL/ontology/AalfficiencyFactory.java -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/src/main/java/org/universAAL/ontology/AalfficiencyOntology.java -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/src/main/java/org/universAAL/ontology/Activator.java -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/src/main/java/org/universAAL/ontology/aalfficiency/Aalfficiency.java -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/src/main/java/org/universAAL/ontology/aalfficiency/AalfficiencyAdvices.java -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/src/main/java/org/universAAL/ontology/aalfficiency/AalfficiencyChallenges.java -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/src/main/java/org/universAAL/ontology/aalfficiency/AalfficiencyScore.java -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/src/main/java/org/universAAL/ontology/aalfficiency/Advice.java -text svneol=unset#text/plain
-aal_eficiency/ont.aalfficiency/src/main/java/org/universAAL/ontology/aalfficiency/Challenge.java -text svneol=unset#text/plain
 agenda/agenda.client/LICENSE -text
 agenda/agenda.client/NOTICE -text
 agenda/agenda.client/pom.xml -text
