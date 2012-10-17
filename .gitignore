@@ -148,6 +148,7 @@ help_when_out/hwo.pom/.project
 help_when_out/hwo.pom/.settings
 help_when_out/hwo.servlet/.classpath
 help_when_out/hwo.servlet/.project
+help_when_out/hwo.servlet/.settings
 help_when_out/hwo.servlet/target
 long_term_behav/ont.drools/.classpath
 long_term_behav/ont.drools/.project
