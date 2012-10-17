@@ -40,7 +40,7 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.Whereis", org.univer
         
         // set the URL where the AJAX call is carried out
         mapController.setServletURL('whereis');
-        // load the data, like POI list and safe area from the universAAL server
+        // load the data, like POI list and safe area from the uAAL server
         // using AJAX.
         mapController.loadDataFromServer('all', dojo.hitch(this, this.showData));
         

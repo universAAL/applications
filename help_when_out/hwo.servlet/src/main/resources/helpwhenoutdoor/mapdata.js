@@ -110,21 +110,18 @@ dojo.declare("org.universAAL.AALapplication.helpwhenoutdoor.MapData", null, // p
      * It can be MapData.AREAS.SAFE_AREA or MapData.AREAS.HOME_AREA  
      */
     getPoints: function(whichArea){
-    
         // whichArea is an index for the array, it must be <= 1
-        if (whichArea > 1)
+		if (whichArea > 1)
 			return null;
-console.log("MAPDATA.JS -> getPoints, antes de leer los areaPolylines[whichArea] " + whichArea);	
+			
 		var area = this.areaPolylines[whichArea];
-	
-console.log("MAPDATA.JS -> getPoints, despues de leer los areaPolylines[whichArea]....voy a petar aqui -> antes");		   
-		var nv = area.getVertexCount();
-console.log("MAPDATA.JS -> getPoints, despues de leer los areaPolylines[whichArea]....voy a petar aqui -> despues");
+		var nv = area.getVertexCount(); 
         var points = []
         for (var i = 0; i < nv; ++i) {
             var point = area.getVertex(i);
             points.push(point.lat())
             points.push(point.lng());
+            
         }
         return points;
     },
@@ -144,24 +141,20 @@ console.log("MAPDATA.JS -> getPoints, despues de leer los areaPolylines[whichAre
         else 
             color = "#00ff00";
 
-		console.log("MAPDATA.JS -> clearArea, antes de crear limpiar el areaPolylines[whichArea] " + whichArea);
+		
 		this.areaPolylines[whichArea] = new GPolyline([], color);
-	
-		console.log("MAPDATA.JS -> clearArea, despues de crear limpiar el areaPolylines[whichArea], devolviendo el area... limpico " + whichArea);
 		return 	this.areaPolylines[whichArea];		
     },
     
     getArea: function(whichArea){
-    
  		if (whichArea > 1) {
-			console.log("getArea: wrong area specified");
+			console.debug("getArea: wrong area specified");
 			return null;
 		}
-		if (this.areaPolylines!=null) 
-		console.log("are poly... distinto de null");
 		
-		console.log("MAPDATA.JS -> getArea, antes de enviar el areaPolylines[whichArea] " +  " which area " + whichArea);
 		return this.areaPolylines[whichArea];
+       	        
+        
     },
     
     /**
@@ -171,12 +164,12 @@ console.log("MAPDATA.JS -> getPoints, despues de leer los areaPolylines[whichAre
     setArea: function(points, whichArea){
         
 		if (whichArea > 1) {
-			console.log("setArea: wrong area specified " + whichArea);
+			console.debug("setArea: wrong area specified " + whichArea);
 			return null;
 		}        
        
         if (points != null && points.length > 0) {
-            console.log("Setting area " + whichArea + " with points " + points);
+            console.debug("Setting area " + whichArea + " with points " + points);
 			
 			var color = null;
 	        if (whichArea == this.AREAS.SAFE_AREA) // default 
@@ -184,7 +177,8 @@ console.log("MAPDATA.JS -> getPoints, despues de leer los areaPolylines[whichAre
 	        else 
 	            color = "#00ff00";
 
-           this.areaPolylines[whichArea] = new GPolyline(points, color);
+            this.areaPolylines[whichArea] = new GPolyline(points, color);
+            
         }
         else {
             console.debug("Points: " + points);
