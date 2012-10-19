@@ -60,12 +60,6 @@ aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/mo
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/utils/Constants.java -text svneol=unset#text/plain
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/utils/PowerReader.java -text svneol=unset#text/plain
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/utils/Setup.java -text svneol=unset#text/plain
-aal_eficiency/FitbitPublisher/.classpath -text svneol=unset#text/plain
-aal_eficiency/FitbitPublisher/.project -text svneol=unset#text/plain
-aal_eficiency/FitbitPublisher/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
-aal_eficiency/FitbitPublisher/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
-aal_eficiency/FitbitPublisher/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
-aal_eficiency/FitbitPublisher/.settings/org.eclipse.pde.core.prefs -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/FitbitPublisher.launch -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/pom.xml -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/Activator.java -text svneol=unset#text/plain
