@@ -3900,7 +3900,8 @@ personal_safety/personal_safety.run/runner/deploy-pom.xml -text
 personal_safety/personal_safety.run/runner/felix/config.ini -text
 personal_safety/personal_safety.run/runner/felix/system.properties -text
 personal_safety/personal_safety.run/runner/run.bat -text
-personal_safety/personal_safety.service/LICENSE -text
+personal_safety/personal_safety.service/ASL2.0 -text
+personal_safety/personal_safety.service/MITX.txt -text
 personal_safety/personal_safety.service/NOTICE -text
 personal_safety/personal_safety.service/pom.xml -text
 personal_safety/personal_safety.service/src/main/java/org/universAAL/AALapplication/personal_safety/osgi/Activator.java -text svneol=unset#text/plain
@@ -3914,7 +3915,8 @@ personal_safety/personal_safety.service/src/main/resources/messages/messages_DA.
 personal_safety/personal_safety.service/src/main/resources/messages/messages_EN.properties -text
 personal_safety/personal_safety.service/src/main/resources/messages/messages_ES.properties -text
 personal_safety/personal_safety.service/src/main/resources/messages/messages_IT.properties -text
-personal_safety/personal_safety.sms.sender/LICENSE -text
+personal_safety/personal_safety.sms.sender/ASL2.0 -text
+personal_safety/personal_safety.sms.sender/MITX.txt -text
 personal_safety/personal_safety.sms.sender/NOTICE -text
 personal_safety/personal_safety.sms.sender/pom.xml -text
 personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/Activator.java -text
