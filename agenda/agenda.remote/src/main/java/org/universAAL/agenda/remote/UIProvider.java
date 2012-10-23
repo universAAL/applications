@@ -80,6 +80,20 @@ public class UIProvider extends UICaller {
 
     User remoteLoggedUser = null;
 
+    /**
+     * Sets currently selected calendar owner (assisted person). In other words
+     * reads dropdown selection of the user whose events remote caregiver wants
+     * to manage.
+     * 
+     * @param uiresp 
+     */
+    private void readAndSetCurrentlySelectedCalendarOwner(UIResponse uiresp) {
+	String username = (String) uiresp
+		.getUserInput(new String[] { AgendaWebGUI.REF_USER });
+	currentlySelectedCalOwner = new User(
+		Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + username);
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -100,12 +114,7 @@ public class UIProvider extends UICaller {
 	    if (submit.equals("submit")) {
 		handleSubmit(uiresponse);
 		submit = null;
-	    } else if (submit.equals("add")) {
-		log.debug("Processing Input: Add another");
-		showMainScreen(remoteLoggedUser, currentlySelectedCalOwner);
-		submit = null;
-	    }
-
+	    } 
 	    // FIXME commented when transferring to UI Bus (no
 	    // InputEvent.uAAL_MAIN_MENU_REQUEST) related to: AgendaWebGUI line
 	    // 305
@@ -120,29 +129,24 @@ public class UIProvider extends UICaller {
 		// * +"Internet")
 		// */,
 		// InputEvent.uAAL_MAIN_MENU_REQUEST);
-		showInitialScreen(remoteLoggedUser);	
+		showInitialScreen(remoteLoggedUser);
 		submit = null;
 	    }
 
 	    // SC2011 button Events, Event editor
 	    else if (submit.equals("get_event_list")) {
-		
-//		Calendar cal = (Calendar) uiresponse
-//			.getUserInput(new String[] { AgendaWebGUI.REF_CALENDAR });
-		
-		//show all events from currently selected AP
-		log.debug("Processing Input: Go to Events");
+		readAndSetCurrentlySelectedCalendarOwner(uiresponse);
+
+		log.debug("Processing Input: Go to Events List");
 		showEventsScreen(remoteLoggedUser, currentlySelectedCalOwner);
 		// takes events from specific calendar
 		submit = null;
-	    } else if (submit.equals("editEventsForUser")) {
+
+	    } else if (submit.equals("add")) {
 		// get cal owner when selecting from initial screen, before
 		// going to mainscreen for editing events
-		String username = (String) uiresponse
-			.getUserInput(new String[] { AgendaWebGUI.REF_USER });
-		currentlySelectedCalOwner = new User(
-			Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + username);
-		log.debug("Processing Input: edit events for user");
+		readAndSetCurrentlySelectedCalendarOwner(uiresponse);
+		log.debug("Processing Input: add event for user");
 		showMainScreen(remoteLoggedUser, currentlySelectedCalOwner);
 		// takes events from specific calendar
 		submit = null;
@@ -163,12 +167,7 @@ public class UIProvider extends UICaller {
 		}
 
 		submit = null;
-	    }
-
-	    else if (submit.equals("Event_editor")) {
-		log.debug("Processing Input: Go to Event Editor");
-		showMainScreen(remoteLoggedUser, currentlySelectedCalOwner);
-		submit = null;
+	    
 	    } else if (submit.equals("google")) {
 		log.debug("Running Google calendar");
 		Calendar cal = (Calendar) uiresponse
@@ -190,7 +189,9 @@ public class UIProvider extends UICaller {
 
     /**
      * Handle submit event data
-     * @param event uiresponse
+     * 
+     * @param event
+     *            uiresponse
      */
     protected void handleSubmit(UIResponse event) {
 	log.debug("Processing Input: Submit");
@@ -339,7 +340,7 @@ public class UIProvider extends UICaller {
     public void showMainScreen(User remoteLoggedUser, User calOwner) {
 	log
 		.info(
-			"Sending UI Request: showMainScreen for addind event and reminder for user {}",
+			"Sending UI Request: showMainScreen for adding event and reminder for user {}",
 			remoteLoggedUser.getURI());
 	Form f = webUI.getMainScreenMenuForm(calOwner);
 	UIRequest oe = new UIRequest(remoteLoggedUser, f, LevelRating.middle,
@@ -348,8 +349,8 @@ public class UIProvider extends UICaller {
     }
 
     public void showMessageScreen(User user, String msg) {
-	log.info("Sending UI Request: info message screen for user {}", user
-		.getURI());
+	log.info("Sending UI Request with info message: " + msg
+		+ " screen for user {}", user.getURI());
 	Form f = webUI.getMessageForm(msg);
 	UIRequest oe = new UIRequest(user, f, LevelRating.middle, Locale
 		.getDefault(), PrivacyLevel.insensible);
@@ -359,7 +360,8 @@ public class UIProvider extends UICaller {
     // SC2011 show events screen
     public void showEventsScreen(User user, User calOwner) {
 	log.info("Sending UI Request: showEventsScreen for user {}", user
-		.getURI());
+		.getURI()
+		+ " for calendar owner: " + calOwner.getURI());
 	Form f = webUI.getEventsForm(currentlySelectedCalOwner);
 	UIRequest oe = new UIRequest(user, f, LevelRating.middle, Locale
 		.getDefault(), PrivacyLevel.insensible);
