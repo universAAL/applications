@@ -48,7 +48,6 @@ import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.middleware.ui.rdf.TextArea;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
-import org.universAAL.ontology.agendaEventSelection.FilterParams;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -83,6 +82,7 @@ public class AgendaWebGUI {
 
     public static final String REF_USER = uAAL_INPUT_NAMESPACE + "user";
 
+    //needs to be publicly available because of event delete option
     public static HashMap<Integer, Event> map;
 
     // TODO new june 2012
@@ -136,10 +136,9 @@ public class AgendaWebGUI {
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.GetEventList"),
 		    (String) null), "get_event_list");
-	    // Submit
-	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
-		    Messages.getString("AgendaWebGUI.EditEvents"),
-		    (String) null), "editEventsForUser");
+	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
+			.getString("AgendaWebGUI.AddNewEvent"), (String) null), "add");
+	
 	}	
 
 	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
@@ -280,7 +279,7 @@ public class AgendaWebGUI {
 	    // Message
 	    new SimpleOutput(invisiblegroup2, null, null, Messages
 		    .getString("AgendaWebGUI.InfoToSetReminder"));
-	    new InputField(
+	    InputField remMsg= new InputField(
 		    invisiblegroup2,
 		    new Label(Messages.getString("AgendaWebGUI.Message"),
 			    (String) null),
@@ -320,7 +319,7 @@ public class AgendaWebGUI {
 			    .getString("AgendaWebGUI.Year"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_REM_YEAR }),
 		    null, null);
-	    for (int i = currentYear; i < currentYear + 15; i++) {
+	    for (int i = currentYear; i < currentYear + 10; i++) {
 		remyearselect.addChoiceItem(new ChoiceItem(Integer.toString(i),
 			(String) null, new Integer(i)));
 	    }
@@ -380,9 +379,12 @@ public class AgendaWebGUI {
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.GetEventList"),
 		    (String) null), "get_event_list");
-	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
+	    Submit s=new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.Submit"), (String) null),
 		    "submit");
+		//TODO if rem msg should not be mandatory delete below command	    
+	    //make Reminder Message mandatory (no submit can be done while this message is empty)
+	    s.addMandatoryInput(remMsg);
 
 	    // new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 	    // Messages.getString("AgendaWebGUI.28"), (String) null),
@@ -391,7 +393,7 @@ public class AgendaWebGUI {
 	    // FIXME removed when trasferring to UI Bus (no
 	    // InputEvent.uAAL_MAIN_MENU_REQUEST) related to: UIProvider line
 	    // 219
-	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
+	     new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.Home"), (String) null),
 		    "agenda_home");
 	}
@@ -446,9 +448,8 @@ public class AgendaWebGUI {
 
 	Collections.sort(events, new MyEventComparator());
 
-	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
-		.getString("AgendaWebGUI.EventEditor"), (String) null),
-		"Event_editor");
+	 new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
+			.getString("AgendaWebGUI.AddNewEvent"), (String) null), "add");
 	
 	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
 		.getString("AgendaWebGUI.Home"), (String) null), "agenda_home");

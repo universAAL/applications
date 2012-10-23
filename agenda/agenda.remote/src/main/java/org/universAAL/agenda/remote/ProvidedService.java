@@ -33,6 +33,7 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+
 /**
  * 
  * @author alfiva
@@ -52,7 +53,7 @@ public class ProvidedService extends CalendarUIService {
     // provided by this class
 
     static final ServiceProfile[] profiles = new ServiceProfile[PROVIDED_SERVICES];
-    private static Hashtable serverPEditorRestrictions = new Hashtable();
+    private static Hashtable<?, ?> serverPEditorRestrictions = new Hashtable();
 
     static {
 	OntologyManagement.getInstance().register(
@@ -64,9 +65,9 @@ public class ProvidedService extends CalendarUIService {
 				return new ProvidedService(instanceURI);
 			    }
 			}));
-	
-		addRestriction(
-		(MergedRestriction) CalendarUIService.getClassRestrictionsOnProperty(CalendarUIService.MY_URI,
+
+	addRestriction((MergedRestriction) CalendarUIService
+		.getClassRestrictionsOnProperty(CalendarUIService.MY_URI,
 			CalendarUIService.PROP_CONTROLS).copy(),
 		new String[] { CalendarUIService.PROP_CONTROLS },
 		serverPEditorRestrictions);
@@ -80,14 +81,26 @@ public class ProvidedService extends CalendarUIService {
 	super(uri);
     }
 
-    protected Hashtable getClassLevelRestrictions() {
+    protected Hashtable<?, ?> getClassLevelRestrictions() {
 	return serverPEditorRestrictions;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.universAAL.ontology.agenda.service.CalendarUIService#
+     * getPropSerializationType(java.lang.String)
+     */
     public int getPropSerializationType(String propURI) {
 	return PROP_SERIALIZATION_FULL;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.ontology.agenda.service.CalendarUIService#isWellFormed()
+     */
     public boolean isWellFormed() {
 	return true;
     }
