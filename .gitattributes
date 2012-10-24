@@ -3260,13 +3260,10 @@ nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/menus/UIMen
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/InterfaceProvider.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/Messages.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIHelp.java -text
-nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIMain.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIMenus.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIProfile.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIRecipeDetail.java -text
-nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIRecipes.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIShopping.java -text
-nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/messages.properties -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/profile/UIProfile.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/recipes/UIRecipe_Detail.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/recipes/UIRecipes.java -text
