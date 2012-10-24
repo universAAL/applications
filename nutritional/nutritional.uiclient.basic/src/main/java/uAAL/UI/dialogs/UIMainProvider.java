@@ -111,7 +111,7 @@ public class UIMainProvider extends CustomUICaller {
 //		new MediaObject(f.getIOControls(),new Label("","recepie91.jpg"),null);
 		// add an exit button for quitting the dialog
 //		TextArea ta = new TextArea(f.getIOControls(), new Label( "Title of textarea", null),
-//				PROP_PATH_SCALE_VALUE	, null, "Some text inside the textarea");
+//				PROP_PATH_REF1	, null, "Some text inside the textarea");
 		
 		new Submit(f.getSubmits(), new Label("Menus", null), SUBMIT_MENUS);
 		new Submit(f.getSubmits(), new Label("Recipes", null), SUBMIT_RECIPES);

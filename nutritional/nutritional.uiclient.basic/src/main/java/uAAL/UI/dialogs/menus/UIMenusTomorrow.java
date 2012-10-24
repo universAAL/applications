@@ -104,7 +104,7 @@ public class UIMenusTomorrow extends CustomUICaller {
 				"Actions", null), PROP_PATH_SCALE_VALUE, null, null);
 
 		// MergedRestriction.getAllValuesRestrictionWithCardinality(
-//		USER_INPUT_SELECTED_LAMP, Recipe.MY_URI, 1, 1)
+//		USER_INPUT_REFX, Recipe.MY_URI, 1, 1)
 		Select1 select = new Select1(groupActions,
 				new Label("Recipes", null), PROP_PATH_SELECTED_RECIPE, null, null);
 		Submit but_seeDetails = new Submit(groupActions,
@@ -145,7 +145,7 @@ public class UIMenusTomorrow extends CustomUICaller {
 							select.addChoiceItem(new ChoiceItem(dish.getDescription(), null, new Integer(dish.getRecipeID())));
 //							InputField in = new InputField(groupDish, new Label(
 //									"Receta:", null), new PropertyPath(null,
-//											false, new String[] { USER_INPUT_SELECTED_RECIPE+dish.getRecipeID() }), null, ""+dish.getRecipeID());
+//											false, new String[] { USER_INPUT_REFX+dish.getRecipeID() }), null, ""+dish.getRecipeID());
 //							in.setAlertString("Expected: a number between 0 and 100!");
 							
 							Utils.println(window + "image: " + dish.getImage());
@@ -159,7 +159,7 @@ public class UIMenusTomorrow extends CustomUICaller {
 							}
 //							Submit but_changeMeal = new Submit(groupDish,
 //									new Label("Change meal", null),
-//									SUBMIT_ChangeMeal);
+//									SUBMIT_CHANGEMEAL);
 							// MediaObject img_picture = new
 							// MediaObject(groupDish, new Label(
 							// "See details", null), Prop_C, "image/jpeg");

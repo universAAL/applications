@@ -25,9 +25,11 @@ import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.medMgr.Precaution;
 import org.universAAL.ontology.profile.User;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,10 +38,13 @@ import java.util.List;
 public final class MedicationConsumer {
 
   private static ServiceCaller serviceCaller;
-
+//TODO: Change namespace
   private static final String PRECAUTION_CONSUMER_NAMESPACE = "http://ontology.igd.fhg.de/MedicationConsumer.owl#";
 
-  private static final String OUTPUT_PRECAUTION = PRECAUTION_CONSUMER_NAMESPACE + "precaution";
+//  private static final String OUTPUT_PRECAUTION = PRECAUTION_CONSUMER_NAMESPACE + "precaution";
+  
+  private static final String OUTPUT_PRECAUTION_SIDEEFFECT = PRECAUTION_CONSUMER_NAMESPACE + "sideeffect";
+  private static final String OUTPUT_PRECAUTION_INCOMPLIANCE = PRECAUTION_CONSUMER_NAMESPACE + "incompliance";
 
   public MedicationConsumer(ModuleContext moduleContext) {
 
@@ -51,28 +56,57 @@ public final class MedicationConsumer {
 
     ServiceRequest serviceRequest = new ServiceRequest(new Precaution(), user);
 
-    serviceRequest.addRequiredOutput(OUTPUT_PRECAUTION, new String[]{Precaution.SIDEEFFECT, Precaution.INCOMPLIANCE});
+//    serviceRequest.addRequiredOutput(OUTPUT_PRECAUTION, new String[]{Precaution.SIDEEFFECT, Precaution.INCOMPLIANCE});
 
+    serviceRequest.addRequiredOutput(OUTPUT_PRECAUTION_SIDEEFFECT, new String[]{Precaution.PROP_SIDEEFFECT});
+    serviceRequest.addRequiredOutput(OUTPUT_PRECAUTION_INCOMPLIANCE, new String[]{Precaution.PROP_INCOMPLIANCE });
+    
     ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
 
     CallStatus callStatus = serviceResponse.getCallStatus();
 //    Log.info("callStatus %s", MedicationConsumer.class, callStatus);
 
-    Precaution precaution = getPrecaution(serviceResponse);
-    if (callStatus.equals(CallStatus.succeeded) && precaution != null) {
-      return precaution;
+    if (callStatus.equals(CallStatus.succeeded)){
+	return getPrecaution(serviceResponse);
     }
 
     return null;
   }
 
   private static Precaution getPrecaution(ServiceResponse serviceResponse) {
-    List list = serviceResponse.getOutput(OUTPUT_PRECAUTION, true);
-    if (list.isEmpty() || list.size() > 1) {
-      return null;
+//    List list = serviceResponse.getOutput(OUTPUT_PRECAUTION, true);
+//    if (list.isEmpty() || list.size() > 1) {
+//      return null;
+//    }
+//
+//    return (Precaution) list.get(0);
+    Precaution p=new Precaution();
+    List list = serviceResponse.getOutput(OUTPUT_PRECAUTION_SIDEEFFECT, true);
+    if (list!=null && !list.isEmpty()) {
+	if(list.size()==1){
+	    System.out.println("=====================SIDE1=====================");
+	    p.setProperty(Precaution.PROP_SIDEEFFECT, ((Precaution)list.get(0)).getSideEffect());
+	}else{
+	    System.out.println("=====================SIDEN=====================");
+	    p.setProperty(Precaution.PROP_SIDEEFFECT, list);
+	}
+    }else{
+	System.out.println("=====================SIDEnull=====================");
+	return null;
     }
-
-    return (Precaution) list.get(0);
-
+    list = serviceResponse.getOutput(OUTPUT_PRECAUTION_INCOMPLIANCE, true);
+    if (list!=null && !list.isEmpty()) {
+	if(list.size()==1){
+	    System.out.println("=====================INCOM1=====================");
+	    p.setProperty(Precaution.PROP_INCOMPLIANCE, ((Precaution)list.get(0)).getIncompliance());
+	}else{
+	    System.out.println("=====================INCOMN=====================");
+	    p.setProperty(Precaution.PROP_INCOMPLIANCE, list);
+	}
+    }else{
+	System.out.println("=====================INCOMnull=====================");
+	return null;
+    }
+    return p;
   }
 }

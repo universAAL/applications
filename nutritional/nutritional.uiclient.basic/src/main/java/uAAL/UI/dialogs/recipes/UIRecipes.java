@@ -140,7 +140,7 @@ public class UIRecipes extends CustomUICaller {
 				"Select what recipes are you interested in: Today, Tomorrow or Week");
 		
 //		TextArea ta = new TextArea(f.getIOControls(), new Label(
-//				"Recipes menu:", null), PROP_PATH_SCALE_VALUE, null, null);
+//				"Recipes menu:", null), PROP_PATH_REF1, null, null);
 //		ta.setAlertString("Aqui falta algo");
 //		ta.setHelpString("Ayuda para el text");
 //		SimpleOutput so = new SimpleOutput(f.getIOControls(), null, null,

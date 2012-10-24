@@ -85,7 +85,7 @@ public class UIRecipe_Detail extends CustomUICaller {
 			false, new String[] { USER_INPUT_SELECTED_LAMP3, SUBMIT_GOBACK });
 	
 //	static final PropertyPath PROP_PATH_RECIPE_IMAGE = new PropertyPath(null,
-//			false, new String[] { USER_INPUT_SELECTED_LAMP2, SUBMIT_GOBACK });
+//			false, new String[] { USER_INPUT_REF2, SUBMIT_GOBACK });
 
 	private Form mainDialog = null;
 	private CustomUICaller parentUICaller = null;
@@ -201,11 +201,11 @@ public class UIRecipe_Detail extends CustomUICaller {
 				} else {
 					String category = meal.getCategory();
 					Group groupMeal = new Group(f.getIOControls(), new Label(
-							category, null), PROP_PATH_SCALE_VALUE, null, null);
+							category, null), PROP_PATH_REF1, null, null);
 					int num_dishes = meal.getDishes().length;
 					for (int index_dishes = 0; index_dishes < num_dishes; index_dishes++) {
 						Group groupDish = new Group(groupMeal, new Label(
-								"Dish", null), PROP_PATH_SCALE_VALUE, null,
+								"Dish", null), PROP_PATH_REF1, null,
 								null);
 						Dish dish = meal.getDishes(index_dishes);
 						if (dish == null) {
@@ -235,11 +235,11 @@ public class UIRecipe_Detail extends CustomUICaller {
 
 			/*
 			 * InputField in = new InputField(g, new Label( "Menus del día:",
-			 * null), PROP_PATH_SCALE_VALUE, null, null);
+			 * null), PROP_PATH_REF1, null, null);
 			 * in.setAlertString("Expected: a number between 0 and 100!");
 			 * 
 			 * TextArea ta = new TextArea(g, new Label( "Introducción:", null),
-			 * PROP_PATH_SCALE_VALUE, null, null);
+			 * PROP_PATH_REF1, null, null);
 			 * ta.setAlertString("Aqui falta algo");
 			 * ta.setHelpString("Ayuda para el text");
 			 */

@@ -1,5 +1,9 @@
 package nna.utils;
 
+import nna.SharedResources;
+
+import org.universAAL.middleware.container.utils.LogUtils;
+
 public class Utils {
 
 	
@@ -11,7 +15,10 @@ public class Utils {
 	 * @param msg The message to be printed
 	 */
 	public static void println(String msg) {
-		System.out.println("NutriUI: "+msg);
+	    
+	    LogUtils.logDebug(SharedResources.moduleContext, Utils.class, "Nutritional Advisor", new Object[]{msg},null);
+	    
+//		System.out.println("NutriUI: "+msg);
 	}
 	
 	
