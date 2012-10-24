@@ -3257,6 +3257,16 @@ nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/UIMainProvi
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/help/UIHelp.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/menus/UIMenus.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/menus/UIMenusTomorrow.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/InterfaceProvider.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/Messages.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIHelp.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIMain.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIMenus.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIProfile.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIRecipeDetail.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIRecipes.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/UIShopping.java -text
+nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/packed/messages.properties -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/profile/UIProfile.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/recipes/UIRecipe_Detail.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/UI/dialogs/recipes/UIRecipes.java -text
@@ -3270,6 +3280,9 @@ nutritional/nutritional.uiclient.basic/src/main/java/uAAL/services/ServiceGetTod
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/services/ServiceGetTodayMenuCallee.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/services/tests/OntoFactory.java -text
 nutritional/nutritional.uiclient.basic/src/main/java/uAAL/services/tests/OntoFactoryTester.java -text
+nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages.properties -text
+nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages_en.properties -text
+nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages_es.properties -text
 nutritional/old.NutritionalAdvisor/LICENSE.txt -text
 nutritional/old.NutritionalAdvisor/NOTICE.txt -text
 nutritional/old.NutritionalAdvisor/Nutritional[!!-~]Launcher.launch -text

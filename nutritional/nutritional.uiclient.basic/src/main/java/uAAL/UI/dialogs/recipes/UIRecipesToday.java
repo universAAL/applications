@@ -104,7 +104,7 @@ public class UIRecipesToday extends CustomUICaller {
 
 		/*
 		Group groupActions = new Group(f.getIOControls(), new Label(
-				"Actions", null), PROP_PATH_SCALE_VALUE, null, null);
+				"Actions", null), PROP_PATH_REF1, null, null);
 
 		Select1 select = new Select1(groupActions,
 				new Label("Recipes", null), PROP_PATH_SELECTED_RECIPE, null, null);
@@ -161,7 +161,7 @@ public class UIRecipesToday extends CustomUICaller {
 							}
 //							Submit but_changeMeal = new Submit(groupDish,
 //									new Label("Change meal", null),
-//									SUBMIT_ChangeMeal);
+//									SUBMIT_CHANGEMEAL);
 							// MediaObject img_picture = new
 							// MediaObject(groupDish, new Label(
 							// "See details", null), Prop_C, "image/jpeg");
