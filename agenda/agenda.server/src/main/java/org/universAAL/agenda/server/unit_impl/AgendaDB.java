@@ -405,6 +405,7 @@ public class AgendaDB implements AgendaDBInterface {
     public Calendar addCalendar(Calendar c, User owner, boolean commit)
 	    throws InvalidParameterException {
 	try {
+	    conn.setAutoCommit(false);
 	    PreparedStatement ps = conn.prepareStatement(prop
 		    .getProperty("getUserID"));
 	    if (owner == null)
@@ -424,24 +425,19 @@ public class AgendaDB implements AgendaDBInterface {
 
 		ps = conn.prepareStatement(prop
 			.getProperty("addUserWithUserName"));
-		ps.setInt(1, 1); //type id of Assisted Person is 1
+		ps.setInt(1, 1); // type id of Assisted Person is 1
 		ps.setString(2, ownerName);
 		ps.executeUpdate();
-		
-		ps = conn.prepareStatement(prop
-			    .getProperty("getUserID"));
+
+		ps = conn.prepareStatement(prop.getProperty("getUserID"));
 		ps.setString(1, ownerName);
 		ResultSet rs1 = ps.executeQuery();
-		    if (rs1.next()) {
-			idUser = rs1.getInt(1);
-		    } else {
-		    LogUtils
-			    .logWarn(
-				    mcontext,
-				    this.getClass(),
-				    "addCalendar",
-				    new Object[] { "User: " +ownerName+ " was not correctly added" },
-				    null);
+		if (rs1.next()) {
+		    idUser = rs1.getInt(1);
+		} else {
+		    LogUtils.logWarn(mcontext, this.getClass(), "addCalendar",
+			    new Object[] { "User: " + ownerName
+				    + " was not correctly added" }, null);
 		    return null;
 		}
 
@@ -451,8 +447,10 @@ public class AgendaDB implements AgendaDBInterface {
 	    ps.setInt(2, idUser);
 	    ps.executeUpdate();
 	    c.setOwner(owner);
-	    if (commit)
+	    if (commit) {
 		conn.commit();
+		conn.setAutoCommit(false);
+	    }
 	    LogUtils.logInfo(mcontext, this.getClass(), "addCalendar",
 		    new Object[] { "Calendar added." }, null);
 
