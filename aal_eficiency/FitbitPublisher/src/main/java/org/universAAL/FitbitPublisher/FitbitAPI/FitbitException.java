@@ -1,3 +1,4 @@
+
 package org.universAAL.FitbitPublisher.FitbitAPI;
 
 /* 
