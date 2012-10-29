@@ -63,6 +63,7 @@ aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/ut
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/utils/PowerReader.java -text svneol=unset#text/plain
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/utils/Setup.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/FitbitPublisher.launch -text svneol=unset#text/plain
+aal_eficiency/FitbitPublisher/NOTICE -text
 aal_eficiency/FitbitPublisher/pom.xml -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/Activator.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/FitbitAPI/FitbitApi.java -text svneol=unset#text/plain
