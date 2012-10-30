@@ -18,24 +18,22 @@
 package org.universAAL.ontology.medMgr;
 
 import org.universAAL.middleware.service.owl.Service;
-import org.universAAL.ontology.profile.User;
 
 /**
  * @author George Fournadjiev
  */
-public class MissedIntake extends Service {
+public class NewPrescription extends Service {
 
-  public static final String MY_URI = MedicationOntology.NAMESPACE + "MissedIntake";
+  public static final String MY_URI = MedicationOntology.NAMESPACE + "NewPrescription";
 
-  public static final String PROP_TIME = MedicationOntology.NAMESPACE + "time";
+  public static final String PROP_MEDICATION_TREATMENT = MedicationOntology.NAMESPACE + "medicationTreatment";
+  public static final String PROP_RECEIVED_MESSAGE = MedicationOntology.NAMESPACE + "receivedMessage";
 
-  public static final String PROP_USER = MedicationOntology.NAMESPACE + "user";
-
-  public MissedIntake() {
+  public NewPrescription() {
     super();
   }
 
-  public MissedIntake(String uri) {
+  public NewPrescription(String uri) {
     super(uri);
   }
 
@@ -51,20 +49,20 @@ public class MissedIntake extends Service {
     return true;
   }
 
-  public Time getTime() {
-    return (Time) props.get(PROP_TIME);
+  public MedicationTreatment getMedicationTreatment() {
+    return (MedicationTreatment) props.get(PROP_MEDICATION_TREATMENT);
   }
 
-  public void setTime(Time time) {
-    props.put(PROP_TIME, time);
+  public void setMedicationTreatment(MedicationTreatment medicationTreatment) {
+    props.put(PROP_MEDICATION_TREATMENT, medicationTreatment);
   }
 
-  public User getUser() {
-    return (User) props.get(PROP_USER);
+  public String getReceivedMessage() {
+    return (String) props.get(PROP_RECEIVED_MESSAGE);
   }
 
-  public void setUser(User user) {
-    props.put(PROP_USER, user);
+  public void setReceivedMessage(String message) {
+    props.put(PROP_RECEIVED_MESSAGE, message);
   }
 
 }
