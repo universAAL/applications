@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+    <!--meal_relation:before, after, with_meal, any-->
+    <!--unit:pill, drops-->
+
+<prescription id="1" description="cold" start_date="18/5/2012">
+  <medicines>
+
+    <medicine id="1" name="aspirin" days="5">
+      <description>aspirin description</description>
+      <meal_relation>with_meal</meal_relation>
+      <intakes>
+        <intake>
+          <time>8:15</time>
+          <unit>pill</unit>
+          <dose>1</dose>
+        </intake>
+      </intakes>
+
+    </medicine>
+
+    <medicine id="2" name="analgin" days="30">
+      <description>analgin description</description>
+      <meal_relation>any</meal_relation>
+      <intakes>
+        <intake>
+          <time>12:00</time>
+          <unit>pill</unit>
+          <dose>2</dose>
+        </intake>
+        <intake>
+          <time>20:50</time>
+          <unit>drops</unit>
+          <dose>15</dose>
+        </intake>
+      </intakes>
+
+    </medicine>
+
+    <medicine id="3" name="viteral" days="15">
+      <description>viteral description</description>
+      <meal_relation>before</meal_relation>
+      <intakes>
+        <intake>
+          <time>23:50</time>
+          <unit>pill</unit>
+          <dose>1</dose>
+        </intake>
+      </intakes>
+
+    </medicine>
+
+  </medicines>
+
+  <doctor>
+    <name>d-r Pencho Penchev</name>
+  </doctor>
+
+</prescription>
+
+
