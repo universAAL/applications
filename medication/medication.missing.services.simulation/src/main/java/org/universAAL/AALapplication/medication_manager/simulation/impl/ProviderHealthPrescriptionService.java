@@ -22,58 +22,64 @@ import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.medMgr.DueIntake;
+import org.universAAL.ontology.medMgr.MedicationTreatment;
+import org.universAAL.ontology.medMgr.NewPrescription;
 
 /**
  * @author George Fournadjiev
  */
-public final class ProviderDueIntakeService extends DueIntake {
+public final class ProviderHealthPrescriptionService extends NewPrescription {
 
-  public static final String DUE_INTAKE_SERVER_NAMESPACE =
-      "http://ontologies.universAAL.com/DueIntakeServer.owl#";
+  public static final String HEALTH_PRESCRIPTION_SERVICE_SERVER_NAMESPACE =
+      "http://ontology.igd.fhg.de/HealthPrescriptionServer.owl#";
 
-  public static final String MY_URI = DUE_INTAKE_SERVER_NAMESPACE + "DueIntakeService";
+  public static final String MY_URI = HEALTH_PRESCRIPTION_SERVICE_SERVER_NAMESPACE + "HealthPrescriptionService";
 
-  public static final String SERVICE_GET_DUE_INTAKE = DUE_INTAKE_SERVER_NAMESPACE + "getDueIntake";
+  public static final String SERVICE_NOTIFY = HEALTH_PRESCRIPTION_SERVICE_SERVER_NAMESPACE + "notify";
 
-  static final String OUTPUT_DUE_INTAKE = DUE_INTAKE_SERVER_NAMESPACE + "dueIntake";
+  static final String OUTPUT_RECEIVED_MESSAGE = HEALTH_PRESCRIPTION_SERVICE_SERVER_NAMESPACE + "receivedMessage";
+  static final String INPUT_MEDICATION_TREATMENT = HEALTH_PRESCRIPTION_SERVICE_SERVER_NAMESPACE + "medicationTreatment";
 
   static final ServiceProfile[] profiles = new ServiceProfile[1];
 
   static {
 
+
     //Register
 
     OntologyManagement.getInstance().register(
-        new SimpleOntology(MY_URI, DueIntake.MY_URI,
+        new SimpleOntology(MY_URI, NewPrescription.MY_URI,
             new ResourceFactoryImpl() {
               @Override
               public Resource createInstance(String classURI,
                                              String instanceURI, int factoryIndex) {
-                return new ProviderDueIntakeService(instanceURI);
+                return new ProviderHealthPrescriptionService(instanceURI);
               }
             }));
 
-    String[] ppDueIntake = new String[]{DueIntake.PROP_DEVICE_ID};
+    String[] ppNewPrescription = new String[]{NewPrescription.PROP_RECEIVED_MESSAGE};
 
-    ProviderDueIntakeService getDueIntake =
-        new ProviderDueIntakeService(SERVICE_GET_DUE_INTAKE);
+    ProviderHealthPrescriptionService notify =
+        new ProviderHealthPrescriptionService(SERVICE_NOTIFY);
 
-    getDueIntake.addOutput(OUTPUT_DUE_INTAKE,
-        DueIntake.MY_URI, 1, 1, ppDueIntake);
+    String[] ppInputNewPrescription = new String[]{NewPrescription.PROP_MEDICATION_TREATMENT};
 
-    profiles[0] = getDueIntake.myProfile;
+    notify.addInputWithAddEffect(INPUT_MEDICATION_TREATMENT, MedicationTreatment.MY_URI, 1, 1, ppInputNewPrescription);
+    notify.addOutput(OUTPUT_RECEIVED_MESSAGE,
+        NewPrescription.MY_URI, 1, 1, ppNewPrescription);
+
+
+    profiles[0] = notify.myProfile;
 
   }
 
-  private ProviderDueIntakeService(String uri) {
+  private ProviderHealthPrescriptionService(String uri) {
     super(uri);
   }
 
   public String getClassURI() {
     return MY_URI;
   }
-
 
 }
 

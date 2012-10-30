@@ -49,7 +49,7 @@
             </Bundle-Activator>
             <Bundle-Description>${project.description}</Bundle-Description>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-            <Private-Package>org.universAAL.AALapplication.medication_manager.shell.commands.impl</Private-Package>
+            <Private-Package>org.universAAL.AALapplication.medication_manager.shell.commands.impl.*</Private-Package>
           </instructions>
         </configuration>
       </plugin>

@@ -15,32 +15,37 @@
  ******************************************************************************/
 
 
-package org.universAAL.ontology.medMgr;
+package org.universAAL.AALapplication.medication_manager.ui.prescription;
+
+import org.universAAL.ontology.medMgr.MedicationException;
 
 /**
  * @author George Fournadjiev
  */
-public final class MedicinesInfo {
+public enum MealRelationDTO {
+  BEFORE("before"),
+  AFTER("after"),
+  ANY("any"),
+  WITH_MEAL("with_meal");
 
-  private final String generalInfo;
-  private final String detailsInfo;
-  private final Time time;
+  private final String value;
 
-  public MedicinesInfo(String generalInfo, String detailsInfo, Time time) {
-    this.generalInfo = generalInfo;
-    this.detailsInfo = detailsInfo;
-    this.time = time;
+  private MealRelationDTO(String value) {
+    this.value = value;
   }
 
-  public String getGeneralInfo() {
-    return generalInfo;
+  public static MealRelationDTO getEnumValueFor(String mealRelationText) {
+    for (MealRelationDTO mealRelationDTO : values()) {
+      if (mealRelationDTO.value.equals(mealRelationText)) {
+        return mealRelationDTO;
+      }
+    }
+
+    throw new MedicationException("Unknown MealRelationDTO enum value: " + mealRelationText);
   }
 
-  public String getDetailsInfo() {
-    return detailsInfo;
+  public static String getStringValueFor(MealRelationDTO mealRelationDTO) {
+    return mealRelationDTO.value;
   }
 
-  public Time getTime() {
-    return time;
-  }
 }

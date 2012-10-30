@@ -17,25 +17,26 @@
 
 package org.universAAL.ontology.medMgr;
 
-import org.universAAL.middleware.service.owl.Service;
-import org.universAAL.ontology.profile.User;
+import org.universAAL.middleware.owl.ManagedIndividual;
 
 /**
  * @author George Fournadjiev
  */
-public class MissedIntake extends Service {
+public class Intake extends ManagedIndividual {
 
-  public static final String MY_URI = MedicationOntology.NAMESPACE + "MissedIntake";
+  public static final String MY_URI = MedicationOntology.NAMESPACE + "Medicine";
 
   public static final String PROP_TIME = MedicationOntology.NAMESPACE + "time";
 
-  public static final String PROP_USER = MedicationOntology.NAMESPACE + "user";
+  public static final String PROP_DOSE = MedicationOntology.NAMESPACE + "dose";
 
-  public MissedIntake() {
+  public static final String PROP_UNIT = MedicationOntology.NAMESPACE + "unit";
+
+  public Intake() {
     super();
   }
 
-  public MissedIntake(String uri) {
+  public Intake(String uri) {
     super(uri);
   }
 
@@ -51,20 +52,28 @@ public class MissedIntake extends Service {
     return true;
   }
 
-  public Time getTime() {
-    return (Time) props.get(PROP_TIME);
+  public String getTime() {
+    return (String) props.get(PROP_TIME);
   }
 
-  public void setTime(Time time) {
+  public void setTime(String time) {
     props.put(PROP_TIME, time);
   }
 
-  public User getUser() {
-    return (User) props.get(PROP_USER);
+  public int getDose() {
+    return (Integer) props.get(PROP_DOSE);
   }
 
-  public void setUser(User user) {
-    props.put(PROP_USER, user);
+  public void setDose(int dose) {
+    props.put(PROP_DOSE, dose);
+  }
+
+  public IntakeUnit getUnit() {
+    return (IntakeUnit) props.get(PROP_UNIT);
+  }
+
+  public void setUnit(IntakeUnit intakeUnit) {
+    props.put(PROP_UNIT, intakeUnit);
   }
 
 }

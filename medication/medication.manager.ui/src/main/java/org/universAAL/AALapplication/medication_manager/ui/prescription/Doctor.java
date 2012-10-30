@@ -15,32 +15,27 @@
  ******************************************************************************/
 
 
-package org.universAAL.ontology.medMgr;
+package org.universAAL.AALapplication.medication_manager.ui.prescription;
 
 /**
  * @author George Fournadjiev
  */
-public final class MedicinesInfo {
+public final class Doctor {
 
-  private final String generalInfo;
-  private final String detailsInfo;
-  private final Time time;
+  private final String name;
 
-  public MedicinesInfo(String generalInfo, String detailsInfo, Time time) {
-    this.generalInfo = generalInfo;
-    this.detailsInfo = detailsInfo;
-    this.time = time;
+  public Doctor(String name) {
+    this.name = name;
   }
 
-  public String getGeneralInfo() {
-    return generalInfo;
+  public String getName() {
+    return name;
   }
 
-  public String getDetailsInfo() {
-    return detailsInfo;
-  }
-
-  public Time getTime() {
-    return time;
+  @Override
+  public String toString() {
+    return "Doctor{" +
+        "name='" + name + '\'' +
+        '}';
   }
 }
