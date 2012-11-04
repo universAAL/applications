@@ -1,4 +1,4 @@
-/Panic Button|http://www.tsb.upv.es|http://ontology.aal-persona.org/tta.owl#Panic
-/Take me Home|http://www.tsb.upv.es|http://ontology.aal-persona.org/tta.owl#TakeHome
-/Form Tests|http://www.tsb.upv.es|http://ontology.aal-persona.org/Tests.owl#Forms
-/Lighting|http://www.igd.fraunhofer.de|urn:samples.lighting.uiclient:ServiceProvider#Main
+/LTBA UI|http://www.tsbtecnologias.es|http://ontologies.universAAL.com/LTBAUI.owl#LTBAUIProvider
+/Medication Manager|http://depot.universAAL.com|http://ontologies.universAAL.com/MedicationManagerService.owl#MedicationManagerButtonService
+/Agenda|http://www.anco.gr|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
+/Nutritional Advisor|http://www.tsb.upv.es/|http://ontology.universAAL.org/Nutrition.owl#NutritionService|app/Nutritional_Advisor.png
