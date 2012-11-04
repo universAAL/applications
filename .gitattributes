@@ -296,6 +296,7 @@ agenda/agenda.runner/runner/configurations/ui.dm/main_menu_saied.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_saied_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_saied_es.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/main_menu_saied_hr.txt -text
+agenda/agenda.runner/runner/configurations/ui.dm/mainmenu_saied.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/messages.properties -text
 agenda/agenda.runner/runner/configurations/ui.dm/messages_de.properties -text
 agenda/agenda.runner/runner/configurations/ui.dm/messages_el.properties -text
