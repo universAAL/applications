@@ -360,8 +360,9 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 		List<Double> posturePlotData = new ArrayList<Double>();
 		List<Double> activityPlotData = new ArrayList<Double>();
 		List<Double> hrPlotData = new ArrayList<Double>();
+		System.out.println("Received A context event containing");
 		for (int i = 0; i < me.length; i++) {
-			System.out.println("Received context event with name: "
+			System.out.println("Measurement: "
 					+ me[i].getMeasurementName() + ": "
 					+ me[i].getMeasurementValue() + " "
 					+ me[i].getMeasurementUnit() + " at "
@@ -405,20 +406,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 			double[] alData = convertDoubles(activityPlotData);
 			double[] hrData = convertDoubles(hrPlotData);
 			alertType = "Orange";
-			/*
-			 * new ImagePlot(
-			 * "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
-			 * +alertType+"posture.png", ppData, "Last Posture Measurements",
-			 * "Measurement", "Degrees", 350, 250); new ImagePlot(
-			 * "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
-			 * +alertType+"activity.png", alData,
-			 * "Last Activity Level Measurements", "Measurement", "", 350, 250);
-			 * new ImagePlot(
-			 * "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
-			 * +alertType+"heartrate.png", hrData,
-			 * "Last Heart Rate Measurements", "Measurement", "beats/min", 350,
-			 * 250);
-			 */
+			
 			try {
 				new ImagePlot(
 						new File(

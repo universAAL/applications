@@ -230,7 +230,7 @@ public class DEMOBluetoothDeviceDiscovery {
 		System.out.println("Try to send message on connection URL:" + url);
 
 		// Generated random values for the DEMO
-		//activityLevel = 2;
+		// activityLevel = 2;
 		skinTemperature = 36;
 		Format formatter;
 		Date date = new Date();
@@ -238,7 +238,7 @@ public class DEMOBluetoothDeviceDiscovery {
 		formattedTimeNow = formatter.format(date);
 		formatter = new SimpleDateFormat("ss");
 		float rand = Integer.valueOf(formatter.format(date));
-		posture = 50 + (int) rand;
+		posture = 60 + (int) rand;
 		activityLevel = 2 + (int) rand;
 		heartRate = 100 - rand;
 		breathingRate = 23 - rand / 10;

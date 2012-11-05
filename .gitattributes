@@ -525,11 +525,13 @@ food_shopping/utils/foodShopping_v1.0.5_mw1.2.0.launch -text
 food_shopping/utils/food_shopping.properties -text
 food_shopping/utils/install.bat -text
 health/PhysicalActivityMonitorModule/INSTALLATION[!!-~]&[!!-~]TESTING.txt -text
+health/PhysicalActivityMonitorModule/PAM.drl -text
 health/PhysicalActivityMonitorModule/README.txt -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/LICENSE.txt -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/pom.xml -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/Activator.java -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/BiomedicalSensorsCallee.java -text
+health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/BiomedicalSensorsServerContextSubscriber.java -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/BiomedicalSensorsServiceProfiles.java -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/bluetooth/DEMOBluetoothDeviceDiscovery.java -text
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/unit_impl/BiomedicalSensorStateListener.java -text
@@ -552,7 +554,6 @@ health/PhysicalActivityMonitorModule/eclipse.launchers/PhysicalActivityMonitor_U
 health/PhysicalActivityMonitorModule/eclipse.launchers/PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch -text
 health/PhysicalActivityMonitorModule/external-jars/physical_activity_monitor/bluecove-2.1.0.jar -text
 health/PhysicalActivityMonitorModule/external-jars/physical_activity_monitor/zephyrutils-1.0.jar -text
-health/PhysicalActivityMonitorModule/external-jars/smp.bluetoothcove-1.0.jar -text
 health/PhysicalActivityMonitorModule/install.bat -text
 health/PhysicalActivityMonitorModule/ont.biomedicalsensors/LICENSE.txt -text
 health/PhysicalActivityMonitorModule/ont.biomedicalsensors/pom.xml -text
