@@ -32,3 +32,4 @@ projects.
 
 6. ui.dm.mobile: This folder contains the main 
    menu labels and messages
+7. PAM.drl: This file is the rules definition file for Physical Activity monitor.

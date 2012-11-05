@@ -30,6 +30,7 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 public class Activator implements BundleActivator {
 
 	private BiomedicalSensorsCallee provider = null;
+	private BiomedicalSensorsServerContextSubscriber cs=null;
 	public static ModuleContext mc;
 
 	/*
@@ -45,6 +46,7 @@ public class Activator implements BundleActivator {
 		new Thread() {
 			public void run() {
 				provider = new BiomedicalSensorsCallee(mc);
+				cs=new BiomedicalSensorsServerContextSubscriber(mc);
 			}
 		}.start();
 	}

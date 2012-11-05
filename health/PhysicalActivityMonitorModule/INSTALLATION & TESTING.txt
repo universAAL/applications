@@ -5,15 +5,16 @@ INSTALLATION
 1. Execute the install.bat file that lies in PhysicalActivityMonitorModule folder.
 
 2. Add (import) the following projects: app.biomedicalsensors.server, 
-   app.biomedicalsensors.uiclient and ont.biomedicalsensors to your workspace.
+   app.biomedicalsensors.uiclient and ont.biomedicalsensors to your workspace.(optionaly if you do not already have it drools.reasoner)
+
+3. Copy the PAM.drl file to the resources folder of your drools reasoner project and configure accordingly the RulesEngine.java in order to execute PAM.drl
  
-3. Execute "Maven Install" for 
+4. Execute "Maven Install" for 
    each project.
 
-4. Copy all the included files from the ui.dm.mobile folder to your 
+5. Copy all the included files from the ui.dm.mobile folder to your 
    \workspace\rundir\confadmin\ui.dm.mobile folder.
-
-5. Run the PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch file 
+6. Run the PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch file 
    (in app.biomedicalsensors.uiclient project).
 
 TESTING
