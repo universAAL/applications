@@ -1,9 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>hwo.servlet</artifactId>
-  <name>Help When Outdoor</name>
-  <description/>
-    <dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>hwo.servlet</artifactId>
+	<name>Help When Outdoor</name>
+	<description />
+	<dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -13,7 +14,7 @@
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation.osgi</artifactId>
 		</dependency>
-		<dependency> 
+		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.ui.osgi</artifactId>
 		</dependency>
@@ -22,57 +23,50 @@
 			<artifactId>mw.bus.service.osgi</artifactId>
 		</dependency>
 		<dependency>
-   			<groupId>org.universAAL.ontology</groupId>
-   			<artifactId>ont.phWorld</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.phWorld</artifactId>
+			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
-		
-		
-		<dependency>
-   			<groupId>org.ops4j.pax.web</groupId>
-   			<artifactId>pax-web-api</artifactId>
-   			<version>1.0.5</version>
-		</dependency>
-		<dependency>
-   			<groupId>org.ops4j.pax.web</groupId>
-   			<artifactId>pax-web-jetty-bundle</artifactId>
-   			<version>1.0.5</version>
-		</dependency><dependency>
-   			<groupId>org.ops4j.pax.web</groupId>
-   			<artifactId>pax-web-spi</artifactId>
-   			<version>1.0.5</version>
-		</dependency><dependency>
-   			<groupId>org.universAAL.remote-interoperability</groupId>
-   			<artifactId>ri.servicegateway</artifactId>
-   			<version>1.1.0</version>
-		</dependency>
-		
-		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.ops4j.pax.web</groupId> -->
+<!-- 			<artifactId>pax-web-api</artifactId> -->
+<!-- 			<version>1.0.5</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.ops4j.pax.web</groupId> -->
+<!-- 			<artifactId>pax-web-jetty-bundle</artifactId> -->
+<!-- 			<version>1.0.5</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.ops4j.pax.web</groupId> -->
+<!-- 			<artifactId>pax-web-spi</artifactId> -->
+<!-- 			<version>1.0.5</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context.osgi</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.profile</artifactId>
-			<version>1.2.0</version>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.container.osgi</artifactId>
 		</dependency>
 		<dependency>
-			 <groupId>org.universAAL.middleware</groupId>
-			 <artifactId>mw.container.osgi</artifactId>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.container.xfaces.osgi</artifactId>
 		</dependency>
 		<dependency>
-			 <groupId>org.universAAL.middleware</groupId>
-			 <artifactId>mw.container.xfaces.osgi</artifactId>
+			<groupId>org.universAAL.remote</groupId>
+			<artifactId>ri.servicegateway</artifactId>
+			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
 		
-		<dependency>
-  		<groupId>org.universAAL.remote-interoperability</groupId>
-  		<artifactId>ri.servicegateway</artifactId>
- 		 <version>1.1.0</version>
+		<dependency> 
+			<groupId>org.universAAL.remote</groupId>
+			<artifactId>ri.gateway.communicator</artifactId>
+			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
-    
 	</dependencies>
-    <build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -86,6 +80,14 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 					</instructions>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.universAAL.support</groupId>
+				<artifactId>uaal-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

@@ -38,11 +38,16 @@ class HwoConsumer extends ContextSubscriber {
 	 private HelpWhenOutdoorDataService dataService;
 	 private DataStorage dataStorage;
 	
-	private static ContextEventPattern[] getContextSubscriptionParams() {
+	public static ContextEventPattern[] getContextSubscriptionParams() {
 		//We are interested in any events related to "Locator", class that will carry GPS' changes events.
 		
 		ContextEventPattern cep = new ContextEventPattern();
-		cep.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT,AssistedPerson.MY_URI));  
+		//prevoius version was bugged
+		MergedRestriction subjectRestriction = MergedRestriction
+			.getAllValuesRestrictionWithCardinality(
+				ContextEvent.PROP_RDF_SUBJECT,
+				AssistedPerson.MY_URI, 1, 1);
+		cep.addRestriction(subjectRestriction);  
 		return new ContextEventPattern[] {cep};
 		
 	}  
