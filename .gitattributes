@@ -76,20 +76,23 @@ aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model/ChallengeModel.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model/SleepModel.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/utils/Setup.java -text svneol=unset#text/plain
-agenda/agenda.client/LICENSE -text
-agenda/agenda.client/NOTICE -text
+agenda/agenda.client/ASL2.0.txt -text
+agenda/agenda.client/MITX.txt -text
+agenda/agenda.client/NOTICE.txt -text
 agenda/agenda.client/pom.xml -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/AgendaConsumer.java -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/ServiceRequestCreator.java -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/osgi/Activator.java -text
-agenda/agenda.eventSelection.client/LICENSE -text
-agenda/agenda.eventSelection.client/NOTICE -text
+agenda/agenda.eventSelection.client/ASL2.0.txt -text
+agenda/agenda.eventSelection.client/MITX.txt -text
+agenda/agenda.eventSelection.client/NOTICE.txt -text
 agenda/agenda.eventSelection.client/pom.xml -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer.java -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolServiceRequestCreator.java -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/osgi/Activator.java -text
-agenda/agenda.eventSelection.ont/LICENSE -text
-agenda/agenda.eventSelection.ont/NOTICE -text
+agenda/agenda.eventSelection.ont/ASL2.0.txt -text
+agenda/agenda.eventSelection.ont/MITX.txt -text
+agenda/agenda.eventSelection.ont/NOTICE.txt -text
 agenda/agenda.eventSelection.ont/pom.xml -text
 agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/AgendaEventSelectionActivator.java -text
 agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/AgendaEventSelectionOntologyFactory.java -text
@@ -100,8 +103,9 @@ agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEve
 agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/TimeSearchType.java -text
 agenda/agenda.eventSelection.ont/src/main/java/org/universAAL/ontology/agendaEventSelection/service/EventSelectionToolService.java -text
 agenda/agenda.eventSelection.ont/src/test/java/org/universAAL/ontology/test/ArtifactIntegrationTest.java -text
-agenda/agenda.eventSelection.server/LICENSE -text
-agenda/agenda.eventSelection.server/NOTICE -text
+agenda/agenda.eventSelection.server/ASL2.0.txt -text
+agenda/agenda.eventSelection.server/MITX.txt -text
+agenda/agenda.eventSelection.server/NOTICE.txt -text
 agenda/agenda.eventSelection.server/pom.xml -text
 agenda/agenda.eventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/database/EventSelectionToolDBInterface.java -text
 agenda/agenda.eventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/server/EventProvider.java -text
@@ -118,8 +122,9 @@ agenda/agenda.eventSelection.server/src/main/resources/org/universAAL/agendaEven
 agenda/agenda.eventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_es.properties -text
 agenda/agenda.eventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_hr.properties -text
 agenda/agenda.eventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_nl.properties -text
-agenda/agenda.gui/LICENSE -text
-agenda/agenda.gui/NOTICE -text
+agenda/agenda.gui/ASL2.0.txt -text
+agenda/agenda.gui/MITX.txt -text
+agenda/agenda.gui/NOTICE.txt -text
 agenda/agenda.gui/pom.xml -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/AnalogClock.java -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/CalendarEntry.java -text
@@ -203,8 +208,9 @@ agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_hr.
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_it.properties -text
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_nl.properties -text
 agenda/agenda.gui/src/test/resources/icon_danger_small.gif -text
-agenda/agenda.ont/LICENSE -text
-agenda/agenda.ont/NOTICE -text
+agenda/agenda.ont/ASL2.0.txt -text
+agenda/agenda.ont/MITX.txt -text
+agenda/agenda.ont/NOTICE.txt -text
 agenda/agenda.ont/backup_before1.1.0/MobileDevice.java -text
 agenda/agenda.ont/pom.xml -text
 agenda/agenda.ont/src/main/java/org/universAAL/ontology/AgendaActivator.java -text
@@ -230,10 +236,14 @@ agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_hr.
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_it.properties -text
 agenda/agenda.ont/src/main/resources/org/universAAL/ontology/agenda/messages_nl.properties -text
 agenda/agenda.ont/src/test/java/org/universAAL/ontology/test/ArtifactIntegrationTest.java -text
+agenda/agenda.pom/composite/ASL2.0.txt -text
+agenda/agenda.pom/composite/MITX.txt -text
+agenda/agenda.pom/composite/NOTICE.txt -text
 agenda/agenda.pom/composite/pom.xml -text
 agenda/agenda.pom/pom.xml -text
-agenda/agenda.remote/LICENSE -text
-agenda/agenda.remote/NOTICE -text
+agenda/agenda.remote/ASL2.0.txt -text
+agenda/agenda.remote/MITX.txt -text
+agenda/agenda.remote/NOTICE.txt -text
 agenda/agenda.remote/documentation/agenda.remote.PNG -text
 agenda/agenda.remote/documentation/agenda.remote.ucls -text
 agenda/agenda.remote/pom.xml -text
@@ -250,6 +260,9 @@ agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_de
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_el-TODO.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_en.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es.properties -text
+agenda/agenda.runner/ASL2.0.txt -text
+agenda/agenda.runner/MITX.txt -text
+agenda/agenda.runner/NOTICE.txt -text
 agenda/agenda.runner/Run.bat -text
 agenda/agenda.runner/dbSchemaRepository/AgendaDBwithInitialTestCalendar.sql -text
 agenda/agenda.runner/dbSchemaRepository/AgendaUniversAAL_MySQL_WorkbenchModel.mwb -text
@@ -385,8 +398,9 @@ agenda/agenda.runner/runner/felix/config.ini -text
 agenda/agenda.runner/runner/felix/system.properties -text
 agenda/agenda.runner/runner/remoteDebug.bat -text
 agenda/agenda.runner/runner/run.bat -text
-agenda/agenda.server/LICENSE -text
-agenda/agenda.server/NOTICE -text
+agenda/agenda.server/ASL2.0.txt -text
+agenda/agenda.server/MITX.txt -text
+agenda/agenda.server/NOTICE.txt -text
 agenda/agenda.server/documentation/agenda.server.PNG -text
 agenda/agenda.server/documentation/agenda.server.ucls -text
 agenda/agenda.server/pom.xml -text

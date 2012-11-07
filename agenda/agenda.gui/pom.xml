@@ -12,7 +12,6 @@
 	<artifactId>agenda.gui</artifactId>
 	<packaging>bundle</packaging>
 	<name>Agenda AAL Service GUI</name>
-	
 	<dependencies>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
