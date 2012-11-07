@@ -1,5 +1,6 @@
-PERSONA Agenda Remote Interface
+Agenda AAL Service Remote
 
+Copyright by 
 Copyright 2008-2010 ITACA-TSB, http://www.tsb.upv.es
 Instituto Tecnologico de Aplicaciones de Comunicacion 
 Avanzadas - Grupo Tecnologias para la Salud y el 
@@ -10,8 +11,7 @@ Bienestar (TSB)
 
 I. Included Software
 
-This does not include any software developed by 3rd parties
-
+PERSONA Agenda Remote Interface
 
 II. Used Software
 
@@ -23,7 +23,16 @@ This product uses software developed at
 The OPS4J (http://www.ops4j.org)
 Licensed under the Apache License 2.0.
 
+This product uses software developed at
+The OSGi Alliance (http://www.osgi.org/).
+Copyright 2006-2008 The OSGi Alliance.
+Licensed under the Apache License 2.0.
+
+This product uses software developed at
+Junit (http://www.junit.org/).
+Licensed under Common Public License 1.0.
 
 III. License Summary
 - Apache License 2.0
-
+- MIT License
+- Common Public License 1.0
