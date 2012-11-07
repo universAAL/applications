@@ -6,7 +6,7 @@
   <artifactId>agenda.runner</artifactId>
   <packaging>jar</packaging>  
   <version>C.1.1-SNAPSHOT</version>
-  <name>Runner Folder</name>
+  <name>Agenda AAL Service Runner</name>
 
   <build>
     <plugins>  
@@ -17,28 +17,15 @@
         <configuration>
           <args>pax.configuration</args>
           <provision>
-          <!--          agenda C.0.1-SNAPSHOT -->
-<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.2.0-2MODALITIES/composite</provision>-->
-<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.2.0/composite</provision>-->
-<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.2.0/composite</provision>-->
-<!--			<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/C.0.1-SNAPSHOT/composite</provision>-->
-
     <!--          agenda C.1.1-SNAPSHOT -->
-			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm/1.2.10-SNAPSHOT/composite</provision>
+			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm/1.2.12-SNAPSHOT/composite</provision>
+			<provision>wrap:mvn:org.universAAL.ui/gui.swing.waveLAF/1.2.2-SNAPSHOT</provision>
 			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.2.2-SNAPSHOT/composite</provision>
-		<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.2.3-SNAPSHOT/composite</provision>
+			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.2.3-SNAPSHOT/composite</provision>
 			<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/C.1.1-SNAPSHOT/composite</provision>
 
-<!--			uim fw-->
 <!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.2.1-2MODALITIES/composite</provision> -->
-<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.2.1-SNAPSHOT/composite</provision>-->
-<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.2.2-SNAPSHOT/composite@{opt:update}</provision>-->
-<!--					<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/1.2.2-SNAPSHOT/composite</provision>-->
-
-
-
-<!--					<provision>mvn:org.universAAL.tools/tools.log_mon/1.2.1-SNAPSHOT</provision>-->
-
+<!--			<provision>mvn:org.universAAL.tools/tools.log_mon/1.2.1-SNAPSHOT</provision>-->
 	 </provision>
         </configuration>	
       </plugin>    	

@@ -21,6 +21,13 @@
            <!-- Explanation: -->
           <!-- <provision>{opt:wrap}:mvn:{groupId}/{artifactId}/{version}@{opt:#level | nostart | noupdate}</provision>-->
           
+           <!--          agenda C.0.1-SNAPSHOT compatible with mw 1.2.0 -->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.2.0-2MODALITIES/composite</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.2.0/composite</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.2.0/composite</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/C.0.1-SNAPSHOT/composite</provision>-->
+          
+          
 <!--IMPORTANT: For web handler random password is necessary!!!-->
 
           <!--		RUN AGENDA	platform 1.1.0 compatible (for Odense demo) BEGIN -->
