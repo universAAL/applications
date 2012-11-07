@@ -326,7 +326,10 @@ agenda/agenda.runner/runner/configurations/ui.dm/mainmenu_saied.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/mainmenu_saied_en.txt -text
 agenda/agenda.runner/runner/configurations/ui.dm/messages.properties -text
 agenda/agenda.runner/runner/configurations/ui.dm/messages_en.properties -text
+agenda/agenda.runner/runner/configurations/ui.handler.gui.swing/icons/app/Behavioral_Analizer.png -text
 agenda/agenda.runner/runner/configurations/ui.handler.gui.swing/icons/app/Health.png -text
+agenda/agenda.runner/runner/configurations/ui.handler.gui.swing/icons/app/Health2.png -text
+agenda/agenda.runner/runner/configurations/ui.handler.gui.swing/icons/app/Medication.png -text
 agenda/agenda.runner/runner/configurations/ui.handler.gui.swing/icons/app/Nutritional_Advisor.png -text
 agenda/agenda.runner/runner/configurations/ui.handler.gui.swing/icons/app/Personal_Agenda.png -text
 agenda/agenda.runner/runner/configurations/ui.handler.gui.swing/icons/app/Personal_Safety.png -text
