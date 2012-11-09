@@ -114,12 +114,12 @@ public class Activator implements BundleActivator, BundleProvider, Runnable {
 				    HwoConsumer.getContextSubscriptionParams());
 			
 		    }catch (Exception e) {
-			e.printStackTrace();
+			log.error("AAL Space Gateway error :" + e.getLocalizedMessage());
 		    }finally{
 			try {
 			    Thread.sleep(5000);
 			} catch (InterruptedException e) {
-			    log.error("AAL Space Gateway error :" + e.getLocalizedMessage());
+			    e.printStackTrace();
 			}
 		    }
 		    if (result){
