@@ -4053,7 +4053,8 @@ personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALappli
 personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/owl/SMSOntFactory.java -text
 personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/owl/SMSOntology.java -text
 personal_safety/personal_safety.sms.sender/src/main/java/org/universAAL/AALapplication/personal_safety/sms/owl/SMSService.java -text
-personal_safety/personal_safety.sw.panic/LICENSE -text
+personal_safety/personal_safety.sw.panic/ASL2.0 -text
+personal_safety/personal_safety.sw.panic/MITX.txt -text svneol=unset#text/plain
 personal_safety/personal_safety.sw.panic/NOTICE -text
 personal_safety/personal_safety.sw.panic/pom.xml -text
 personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Application/personal_safety/sw/panic/OPublisher.java -text svneol=unset#text/plain
