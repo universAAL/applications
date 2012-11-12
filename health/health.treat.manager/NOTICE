@@ -1,7 +1,30 @@
-universAAL Health Treatment Management
+universAAL Health Management Service
 
-Copyright 2010-2014 UPM http://www.upm.es
-Universidad Politécnica de Madrdid
+Copyright 2012-2014 UPM, http://www.upm.es
+Universidad Politéctinca de Madrid
 
 OCO Source Materials
 © Copyright IBM Corp. 2011
+
+I. Included Software
+first version of artifact by UPM within the universAAL project.
+
+II. Used Software
+
+This product uses software developed at
+The Apache Software Foundation (http://www.apache.org/).
+Licensed under the Apache License 2.0.
+
+This product uses software developed at
+Junit (http://www.junit.org/).
+Licensed under Common Public License 1.0.
+
+This product uses software developed at
+The OPS4J (http://www.ops4j.org)
+Licensed under the Apache License 2.0.
+
+III. License Summary
+- Apache License 2.0
+- MIT License
+- Common Public License 1.0
+- JGCL - Java Geometry Class Library
