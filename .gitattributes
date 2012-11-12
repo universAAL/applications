@@ -598,7 +598,9 @@ health/PhysicalActivityMonitorModule/ui.dm.mobile/main_menu_joe_el.txt -text
 health/PhysicalActivityMonitorModule/ui.dm.mobile/messages.properties -text
 health/PhysicalActivityMonitorModule/ui.dm.mobile/messages_el.properties -text
 health/PhysicalActivityMonitorModule/ui.dm.mobile/messages_en.properties -text
-health/health.manager/LICENSE.txt -text svneol=unset#text/plain
+health/health.manager/ASL2.0 -text
+health/health.manager/MITX.txt -text svneol=unset#text/plain
+health/health.manager/NOTICE -text
 health/health.manager/pom.xml -text
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/HealthManager.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ISubscriber.java -text svneol=unset#text/plain
@@ -618,6 +620,9 @@ health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentNewForm.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
 health/health.manager/src/main/java/org/universAAL/AALapplication/health/manager/ui2/MainMenu.java -text
+health/health.motivation/ASL2.0 -text
+health/health.motivation/MITX.txt -text svneol=unset#text/plain
+health/health.motivation/NOTICE -text
 health/health.motivation/pom.xml -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/CSubscriber.java -text
 health/health.motivation/src/main/java/org/universAAL/AALApplication/health/motivation/MotivationInterface.java -text
@@ -673,6 +678,9 @@ health/health.motivation/src/test/java/org/universAAL/AALApplication/health/moti
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentCompleteness.java -text
 health/health.motivation/src/test/java/org/universAAL/AALApplication/health/motivation/treatment/TestTreatmentDetection.java -text
 health/health.pom/pom.xml -text svneol=unset#text/plain
+health/health.profile.manager/ASL2.0 -text
+health/health.profile.manager/MITX.txt -text svneol=unset#text/plain
+health/health.profile.manager/NOTICE -text
 health/health.profile.manager/pom.xml -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProvider.java -text svneol=unset#text/plain
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileServiceProvider.java -text
@@ -682,26 +690,34 @@ health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health
 health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProviderTest.java -text svneol=unset#text/plain
 health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/MapHealthProfileProviderTest.java -text svneol=unset#text/plain
 health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/ProfileServerHealthProfileProviderTest.java -text
+health/health.test.treatment.generator/ASL2.0 -text
+health/health.test.treatment.generator/MITX.txt -text svneol=unset#text/plain
+health/health.test.treatment.generator/NOTICE -text
 health/health.test.treatment.generator/pom.xml -text
 health/health.test.treatment.generator/src/main/java/health/test/treatment/generator/ProjectActivator.java -text
 health/health.test.treatment.generator/src/main/java/health/test/treatment/generator/TreatmentGenerator.java -text
-health/health.treat.logger/LICENSE -text
+health/health.treat.logger/ASL2.0 -text
+health/health.treat.logger/MITX.txt -text svneol=unset#text/plain
 health/health.treat.logger/NOTICE -text
 health/health.treat.logger/pom.xml -text
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/PerformedSessionManager.java -text
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/PerformedSessionManagerProvider.java -text
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/impl/ProfileServerPerformedSessionManager.java -text
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/osgi/Activator.java -text
-health/health.treat.manager/LICENSE -text
+health/health.treat.manager/ASL2.0 -text
+health/health.treat.manager/MITX.txt -text svneol=unset#text/plain
 health/health.treat.manager/NOTICE -text
 health/health.treat.manager/pom.xml -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManager.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerProvider.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/impl/ProfileServerTreatmentManager.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/osgi/Activator.java -text
+health/ont.disease/ASL2.0 -text
 health/ont.disease/Disease.di -text
 health/ont.disease/Disease.notation -text
 health/ont.disease/Disease.uml -text svneol=unset#text/plain
+health/ont.disease/MITX.txt -text svneol=unset#text/plain
+health/ont.disease/NOTICE -text
 health/ont.disease/pom.xml -text svneol=unset#text/plain
 health/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/AcuteRheumaticFever.java -text
 health/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/HeartFailure.java -text
@@ -728,10 +744,11 @@ health/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Patogeny.ja
 health/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Pronostic.java -text
 health/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Sympthom.java -text
 health/ont.disease/src/test/java/org/universaal/test/integrationTest/ArtifactTest.java -text
+health/ont.health/ASL2.0 -text
 health/ont.health/HealthOntology.di -text
 health/ont.health/HealthOntology.notation -text
 health/ont.health/HealthOntology.uml -text svneol=unset#text/plain
-health/ont.health/LICENSE-2.0.txt -text
+health/ont.health/MITX.txt -text svneol=unset#text/plain
 health/ont.health/NOTICE -text
 health/ont.health/pom.xml -text svneol=unset#application/octet-stream
 health/ont.health/src/main/java/org/universaal/ontology/health/HealthActivator.java -text
@@ -775,9 +792,12 @@ health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/Sess
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/TreatmentManagementService.java -text
 health/ont.health/src/main/java/org/universaal/ontology/health/owl/services/UpdateProfileService.java -text
 health/ont.health/src/test/java/org/universaal/ontology/test/HealthOntologyTest.java -text
+health/ont.healthmeasurement/ASL2.0 -text
 health/ont.healthmeasurement/HealthMeasurement.di -text
 health/ont.healthmeasurement/HealthMeasurement.notation -text
 health/ont.healthmeasurement/HealthMeasurement.uml -text svneol=unset#text/plain
+health/ont.healthmeasurement/MITX.txt -text svneol=unset#text/plain
+health/ont.healthmeasurement/NOTICE -text
 health/ont.healthmeasurement/pom.xml -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/HealthMeasruementActivator.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/HealthMeasurementFactory.java -text svneol=unset#text/plain
@@ -793,10 +813,13 @@ health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasure
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/SingleValueMeasurement.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Unit.java -text svneol=unset#text/plain
 health/ont.healthmeasurement/src/test/java/ont/healthmeasurement/tests/ArtifactTest.java -text
+health/ont.message/ASL2.0 -text
 health/ont.message/LICENSE-2.0.txt -text
+health/ont.message/MITX.txt -text svneol=unset#text/plain
 health/ont.message/MessageOntology.di -text
 health/ont.message/MessageOntology.notation -text
 health/ont.message/MessageOntology.uml -text
+health/ont.message/NOTICE -text
 health/ont.message/pom.xml -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/MessageActivator.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/MessageOntologyFactory.java -text svneol=unset#application/octet-stream
@@ -808,6 +831,9 @@ health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessage
 health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageSubclassification.java -text
 health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
 health/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
+health/ont.questionnaireStrategy/ASL2.0 -text
+health/ont.questionnaireStrategy/MITX.txt -text svneol=unset#text/plain
+health/ont.questionnaireStrategy/NOTICE -text
 health/ont.questionnaireStrategy/pom.xml -text
 health/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/Activator.java -text
 health/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/QuestionnaireStrategyOntologyFactory.java -text
