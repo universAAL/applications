@@ -20,8 +20,14 @@ This product uses software developed at
 The OPS4J (http://www.ops4j.org)
 Licensed under the Apache License 2.0.
 
+This product uses software developed at
+SourceForge (http://sourceforge.net/projects/javacsv/)
+Licensed under the GNU Library 
+or Lesser General Public License version 2.0 (LGPLv2)
+
 III. License Summary
 - Apache License 2.0
 - MIT License
 - Common Public License 1.0
 - JGCL - Java Geometry Class Library
+- LGPLv2s
