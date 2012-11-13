@@ -2887,6 +2887,9 @@ medication/medication.manager.integration.tests/pom.xml -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Log.java -text
 medication/medication.manager.integration.tests/src/test/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationTest.java -text
+medication/medication.manager.ont/ASL2.0 -text
+medication/medication.manager.ont/MITX.txt -text
+medication/medication.manager.ont/NOTICE -text
 medication/medication.manager.ont/pom.xml -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/impl/Activator.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/impl/Log.java -text
@@ -2910,6 +2913,9 @@ medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/P
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Time.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/UserIDs.java -text
 medication/medication.manager.pom/pom.xml -text
+medication/medication.manager.service/ASL2.0 -text
+medication/medication.manager.service/MITX.txt -text
+medication/medication.manager.service/NOTICE -text
 medication/medication.manager.service/artifact.composite -text
 medication/medication.manager.service/pom.xml -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Activator.java -text
@@ -2920,6 +2926,9 @@ medication/medication.manager.service/src/main/java/org/universAAL/AALapplicatio
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyPrecautionDatabase.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/PrecautionProvider.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/ProviderPrecautionService.java -text
+medication/medication.manager.shell.commands/ASL2.0 -text
+medication/medication.manager.shell.commands/MITX.txt -text
+medication/medication.manager.shell.commands/NOTICE -text
 medication/medication.manager.shell.commands/pom.xml -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/Activator.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/Log.java -text
@@ -2937,6 +2946,9 @@ medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapp
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/UsecaseMissedIntake.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/UsecaseNewPrescription.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/UsecasePrecaution.java -text
+medication/medication.manager.ui.runner/ASL2.0 -text
+medication/medication.manager.ui.runner/MITX.txt -text
+medication/medication.manager.ui.runner/NOTICE -text
 medication/medication.manager.ui.runner/README.txt -text
 medication/medication.manager.ui.runner/Run.bat -text
 medication/medication.manager.ui.runner/pax.configuration -text
@@ -2997,6 +3009,9 @@ medication/medication.manager.ui.runner/runner/felix/config.ini -text
 medication/medication.manager.ui.runner/runner/felix/system.properties -text
 medication/medication.manager.ui.runner/runner/remoteDebug.bat -text
 medication/medication.manager.ui.runner/runner/run.bat -text
+medication/medication.manager.ui/ASL2.0 -text
+medication/medication.manager.ui/MITX.txt -text
+medication/medication.manager.ui/NOTICE -text
 medication/medication.manager.ui/pom.xml -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/DispenserUpsideDownDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/MedicationInfoDialog.java -text
@@ -3015,6 +3030,9 @@ medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/med
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/prescription/MealRelationDTO.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/prescription/MedicineDTO.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/prescription/PrescriptionDTO.java -text
+medication/medication.missing.services.simulation/ASL2.0 -text
+medication/medication.missing.services.simulation/MITX.txt -text
+medication/medication.missing.services.simulation/NOTICE -text
 medication/medication.missing.services.simulation/artifact.composite -text
 medication/medication.missing.services.simulation/pom.xml -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/DispenserUpsideDownContextProvider.java -text
