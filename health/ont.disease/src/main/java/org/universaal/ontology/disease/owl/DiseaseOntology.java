@@ -1,9 +1,6 @@
 
 package org.universaal.ontology.disease.owl;
 
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import org.universAAL.middleware.owl.BoundingValueRestriction;
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.MergedRestriction;
@@ -11,11 +8,8 @@ import org.universAAL.middleware.owl.OntClassInfoSetup;
 import org.universAAL.middleware.owl.Ontology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
-import org.universAAL.ontology.location.Location;
 import org.universAAL.ontology.location.LocationOntology;
-import org.universAAL.ontology.phThing.Device;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.AcuteRheumaticFever;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
 import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HypertensiveDisease;
