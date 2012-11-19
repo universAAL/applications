@@ -3145,8 +3145,11 @@ nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/Service
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/ServiceGetTodayMenuCallee.java -text
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/tests/OntoFactory.class -text svneol=unset#unset
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/tests/OntoFactory.java -text
+nutritional/nutritional.uiclient.basic/ASL2.0.txt -text
 nutritional/nutritional.uiclient.basic/LICENSE -text
+nutritional/nutritional.uiclient.basic/MITX.txt -text
 nutritional/nutritional.uiclient.basic/NOTICE -text
+nutritional/nutritional.uiclient.basic/NOTICE.txt -text
 nutritional/nutritional.uiclient.basic/launchers/uAAL[!!-~]nueva[!!-~]UI.launch -text
 nutritional/nutritional.uiclient.basic/pom.xml -text
 nutritional/nutritional.uiclient.basic/src/main/java/na/Activator.java -text
