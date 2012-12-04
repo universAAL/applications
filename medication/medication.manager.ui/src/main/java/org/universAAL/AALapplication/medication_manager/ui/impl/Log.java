@@ -40,6 +40,15 @@ public class Log {
         new Object[]{formatMsg(format, args)}, t);
   }
 
+  /**
+   * Helper method for logging.
+   */
+  public static void error(String format, Class aClass, Object... args) {
+    StackTraceElement callingMethod = Thread.currentThread().getStackTrace()[2];
+    LogUtils.logError(Activator.context, aClass, callingMethod.getMethodName(),
+        new Object[]{formatMsg(format, args)}, null);
+  }
+
   public static String formatMsg(String format, Object... args) {
     if (args != null) {
       return String.format(format, args);

@@ -26,6 +26,7 @@ import org.universAAL.ontology.medMgr.Intake;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
 import org.universAAL.ontology.medMgr.Medicine;
 import org.universAAL.ontology.medMgr.MissedIntake;
+import org.universAAL.ontology.medMgr.NewMedicationTreatmentNotifier;
 import org.universAAL.ontology.medMgr.NewPrescription;
 import org.universAAL.ontology.medMgr.Precaution;
 import org.universAAL.ontology.medMgr.Time;
@@ -44,7 +45,8 @@ public final class MedicationFactory extends ResourceFactoryImpl {
   public static final int INTAKE_FACTORY_INDEX = 5;
   public static final int MEDICINE_FACTORY_INDEX = 6;
   public static final int MEDICATION_TREATMENT_FACTORY_INDEX = 7;
-  public static final int NEW_PRESCRIPTION_FACTORY_INDEX = 8;
+  public static final int NEW_MEDICATION_TREATMENT_NOTIFIER_FACTORY_INDEX = 8;
+  public static final int NEW_PRESCRIPTION_FACTORY_INDEX = 9;
 
   public Resource createInstance(String classURI, String instanceURI, int factoryIndex) {
 
@@ -64,6 +66,8 @@ public final class MedicationFactory extends ResourceFactoryImpl {
       return new Medicine(instanceURI);
     } else if (factoryIndex == MEDICATION_TREATMENT_FACTORY_INDEX) {
       return new MedicationTreatment(instanceURI);
+    } else if (factoryIndex == NEW_MEDICATION_TREATMENT_NOTIFIER_FACTORY_INDEX) {
+      return new NewMedicationTreatmentNotifier(instanceURI);
     } else if (factoryIndex == NEW_PRESCRIPTION_FACTORY_INDEX) {
       return new NewPrescription(instanceURI);
     }

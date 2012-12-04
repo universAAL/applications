@@ -18,11 +18,14 @@
 package org.universAAL.AALapplication.medication_manager.ui;
 
 import org.universAAL.AALapplication.medication_manager.ui.impl.Log;
+import org.universAAL.AALapplication.medication_manager.ui.impl.NewPrescriptionContextProvider;
 import org.universAAL.AALapplication.medication_manager.ui.prescription.IntakeDTO;
 import org.universAAL.AALapplication.medication_manager.ui.prescription.MealRelationDTO;
 import org.universAAL.AALapplication.medication_manager.ui.prescription.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.ui.prescription.PrescriptionDTO;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
+import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
@@ -32,6 +35,7 @@ import org.universAAL.ontology.medMgr.MealRelation;
 import org.universAAL.ontology.medMgr.MedicationException;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
 import org.universAAL.ontology.medMgr.Medicine;
+import org.universAAL.ontology.medMgr.NewMedicationTreatmentNotifier;
 import org.universAAL.ontology.medMgr.NewPrescription;
 import org.universAAL.ontology.medMgr.UserIDs;
 import org.universaal.ontology.health.owl.TreatmentPlanning;
@@ -52,36 +56,74 @@ import java.util.Set;
 public final class NewPrescriptionHandler {
 
   private static ServiceCaller serviceCaller;
+  private static NewPrescriptionContextProvider newPrescriptionContextProvider;
 
-  private static final String NEW_PRESCRIPTION_NAMESPACE = "http://ontology.igd.fhg.de/NewPrescription.owl#";
-  private static final String OUTPUT_NEW_PRESCRIPTION_RECEIVED_MESSAGE = NEW_PRESCRIPTION_NAMESPACE + "receivedMessage";
+  private static final String NEW_MEDICATION_TREATMENT_NOTIFIER_NAMESPACE =
+      "http://ontology.igd.fhg.de/NewMedicationTreatmentNotifier.owl#";
+  private static final String OUTPUT_NEW_PRESCRIPTION_RECEIVED_MESSAGE =
+      NEW_MEDICATION_TREATMENT_NOTIFIER_NAMESPACE + "receivedMessage";
   private static final String MEDICATION_TREATMENT = "MedicationTreatment";
 
-  public NewPrescriptionHandler(ServiceCaller serviceCaller) {
-    this.serviceCaller = serviceCaller;
+  public NewPrescriptionHandler(ModuleContext context, NewPrescriptionContextProvider contextProvider) {
+
+    serviceCaller = new DefaultServiceCaller(context);
+    newPrescriptionContextProvider = contextProvider;
   }
 
   public static void callHealthServiceWithNewPrescription(PrescriptionDTO prescriptionDTO) {
 
-    MedicationTreatment medicationTreatment = new MedicationTreatment();
-
     try {
-
-      populateMedicationTreatment(prescriptionDTO, medicationTreatment);
-
-      callHealthService(medicationTreatment);
-
+      NewPrescription newPrescription = createNewPrescription(prescriptionDTO);
+      handleNewPrescription(prescriptionDTO, newPrescription);
+      newPrescriptionContextProvider.publishNewPrescriptionEvent(newPrescription);
     } catch (DatatypeConfigurationException e) {
       throw new MedicationException(e);
     }
 
   }
 
-  private static void callHealthService(MedicationTreatment medicationTreatment) {
-    ServiceRequest serviceRequest = new ServiceRequest(new NewPrescription(), UserIDs.getSaiedUser());
-    serviceRequest.addAddEffect(new String[]{NewPrescription.PROP_MEDICATION_TREATMENT}, medicationTreatment);
+  private static void handleNewPrescription(PrescriptionDTO prescriptionDTO,
+                                            NewPrescription newPrescription)
+      throws DatatypeConfigurationException {
+
+    List<MedicationTreatment> medicationTreatmentList = new ArrayList<MedicationTreatment>();
+    Set<MedicineDTO> medicineDTOSet = prescriptionDTO.getMedicineDTOSet();
+    for (MedicineDTO medicineDTO : medicineDTOSet) {
+      Medicine medicine = new Medicine();
+      medicine.setMedicineId(medicineDTO.getId());
+      medicine.setDays(medicineDTO.getDays());
+      medicine.setDescription(medicineDTO.getDescription());
+      medicine.setName(medicineDTO.getName());
+      setMealRelationEnum(medicine, medicineDTO.getMealRelationDTO());
+      setIntakes(medicine, medicineDTO);
+      MedicationTreatment medicationTreatment = createMedicationTreatment(prescriptionDTO);
+      medicationTreatment.setMedicine(medicine);
+      boolean hasTheCallSucceed = callHealthService(medicationTreatment);
+      if (!hasTheCallSucceed) {
+        throw new MedicationException("Error sending the MedicationTreatment for the medicine with id:" + medicine.getMedicineId());
+      }
+      medicationTreatmentList.add(medicationTreatment);
+    }
+
+    newPrescription.setMedicationTreatments(medicationTreatmentList);
+  }
+
+  private static NewPrescription createNewPrescription(PrescriptionDTO prescriptionDTO)
+      throws DatatypeConfigurationException {
+
+    NewPrescription newPrescription = new NewPrescription();
+    newPrescription.setPrescriptionId(prescriptionDTO.getId());
+    newPrescription.setDescription(prescriptionDTO.getDescription());
+    Date startDate = prescriptionDTO.getStartDate();
+    newPrescription.setDate(getXMLGregorianCalendar(startDate));
+    return newPrescription;
+  }
+
+  private static boolean callHealthService(MedicationTreatment medicationTreatment) {
+    ServiceRequest serviceRequest = new ServiceRequest(new NewMedicationTreatmentNotifier(), UserIDs.getSaiedUser());
+    serviceRequest.addAddEffect(new String[]{NewMedicationTreatmentNotifier.PROP_MEDICATION_TREATMENT}, medicationTreatment);
     serviceRequest.addRequiredOutput(OUTPUT_NEW_PRESCRIPTION_RECEIVED_MESSAGE,
-        new String[]{NewPrescription.PROP_RECEIVED_MESSAGE});
+        new String[]{NewMedicationTreatmentNotifier.PROP_RECEIVED_MESSAGE});
 
     ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
 
@@ -91,8 +133,10 @@ public final class NewPrescriptionHandler {
     String receivedMessage = getReceivedMessage(serviceResponse);
     if (callStatus.equals(CallStatus.succeeded) && receivedMessage != null) {
       Log.info("The received message from the Health Service is %s", NewPrescriptionHandler.class, receivedMessage);
+      return true;
     } else {
-      Log.info("There is the problem with the response with the Health Service", NewPrescriptionHandler.class);
+      Log.error("There is the problem with the response with the Health Service", NewPrescriptionHandler.class);
+      return false;
     }
 
 
@@ -109,8 +153,10 @@ public final class NewPrescriptionHandler {
 
   }
 
-  private static void populateMedicationTreatment(PrescriptionDTO prescriptionDTO,
-                                                  MedicationTreatment medicationTreatment) throws DatatypeConfigurationException {
+  private static MedicationTreatment createMedicationTreatment(PrescriptionDTO prescriptionDTO)
+      throws DatatypeConfigurationException {
+
+    MedicationTreatment medicationTreatment = new MedicationTreatment();
 
     medicationTreatment.setPrescriptionId(prescriptionDTO.getId());
     medicationTreatment.setName(MEDICATION_TREATMENT);
@@ -126,22 +172,15 @@ public final class NewPrescriptionHandler {
     medicationTreatment.setMedicationTreatmentStartDate(date);
     setTreatmentPlaning(medicationTreatment, date, gregorianCalendar, prescriptionDTO);
 
-    Set<MedicineDTO> medicineDTOSet = prescriptionDTO.getMedicineDTOSet();
-    List<Medicine> medicineList = new ArrayList<Medicine>();
-    for (MedicineDTO medicineDTO : medicineDTOSet) {
-      Medicine medicine = new Medicine();
-      medicine.setMedicineId(medicineDTO.getId());
-      medicine.setDays(medicineDTO.getDays());
-      medicine.setDescription(medicineDTO.getDescription());
-      medicine.setName(medicineDTO.getName());
-      setMealRelationEnum(medicine, medicineDTO.getMealRelationDTO());
-      setIntakes(medicine, medicineDTO);
-      medicineList.add(medicine);
-    }
-    if (!medicineList.isEmpty()) {
-      medicationTreatment.setMedicines(medicineList);
-    }
+    return medicationTreatment;
   }
+
+  private static XMLGregorianCalendar getXMLGregorianCalendar(Date startDate) throws DatatypeConfigurationException {
+    GregorianCalendar gregorianCalendar = new GregorianCalendar();
+    gregorianCalendar.setTime(startDate);
+    return (DatatypeFactory.newInstance()).newXMLGregorianCalendar(gregorianCalendar);
+  }
+
 
   private static void setTreatmentPlaning(MedicationTreatment medicationTreatment, XMLGregorianCalendar startDate,
                                           GregorianCalendar gregorianCalendar,

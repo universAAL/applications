@@ -219,23 +219,35 @@ public final class MedicationOntology extends Ontology {
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(MedicationTreatment.PROP_MEDICATION_TREATMENT_START_DATE,
             TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 1, 1));
-    oci.addObjectProperty(MedicationTreatment.PROP_MEDICINES);
+    oci.addObjectProperty(MedicationTreatment.PROP_MEDICINE);
     oci.addRestriction(MergedRestriction
-        .getAllValuesRestriction(MedicationTreatment.PROP_MEDICINES, Medicine.MY_URI));
+        .getAllValuesRestrictionWithCardinality(MedicationTreatment.PROP_MEDICINE, Medicine.MY_URI, 1, 1));
+
+    // load NewMedicationTreatmentNotifier
+    oci = createNewOntClassInfo(NewMedicationTreatmentNotifier.MY_URI, FACTORY, NEW_MEDICATION_TREATMENT_NOTIFIER_FACTORY_INDEX);
+    oci.setResourceComment("The type of a NewMedicationTreatmentNotifier");
+    oci.setResourceLabel("NewMedicationTreatmentNotifier");
+    oci.addObjectProperty(NewMedicationTreatmentNotifier.PROP_MEDICATION_TREATMENT).setFunctional();
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            NewMedicationTreatmentNotifier.PROP_MEDICATION_TREATMENT, MedicationTreatment.MY_URI, 1, 1));
+    oci.addDatatypeProperty(NewMedicationTreatmentNotifier.PROP_RECEIVED_MESSAGE);
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            NewMedicationTreatmentNotifier.PROP_RECEIVED_MESSAGE, TypeMapper.getDatatypeURI(String.class), 1, 1));
 
     // load NewPrescription
     oci = createNewOntClassInfo(NewPrescription.MY_URI, FACTORY, NEW_PRESCRIPTION_FACTORY_INDEX);
     oci.setResourceComment("The type of a NewPrescription");
     oci.setResourceLabel("NewPrescription");
-    oci.addObjectProperty(NewPrescription.PROP_MEDICATION_TREATMENT).setFunctional();
+    oci.addObjectProperty(NewPrescription.PROP_MEDICATION_TREATMENTS);
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestriction(
+            NewPrescription.PROP_MEDICATION_TREATMENTS, MedicationTreatment.MY_URI));
+    oci.addDatatypeProperty(NewMedicationTreatmentNotifier.PROP_RECEIVED_MESSAGE);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            NewPrescription.PROP_MEDICATION_TREATMENT, MedicationTreatment.MY_URI, 1, 1));
-    oci.addDatatypeProperty(NewPrescription.PROP_RECEIVED_MESSAGE);
-    oci.addRestriction(MergedRestriction
-        .getAllValuesRestrictionWithCardinality(
-            NewPrescription.PROP_RECEIVED_MESSAGE, TypeMapper.getDatatypeURI(String.class), 1, 1));
-
+            NewMedicationTreatmentNotifier.PROP_RECEIVED_MESSAGE, TypeMapper.getDatatypeURI(String.class), 1, 1));
 
   }
 }
