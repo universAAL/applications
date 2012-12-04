@@ -111,11 +111,10 @@ public final class HealthPrescriptionServiceProvider extends ServiceCallee {
         HealthPrescriptionServiceProvider.class, medicationTreatment.getTreatmentPlanning().getStartDate());
     Log.info("medicationTreatment.getTreatmentPlanning().getEndDate() = %s",
         HealthPrescriptionServiceProvider.class, medicationTreatment.getTreatmentPlanning().getEndDate());
-    List<Medicine> medicines = medicationTreatment.getMedicines();
-    Log.info("Printing medicines", HealthPrescriptionServiceProvider.class);
-    for (Medicine medicine : medicines) {
-      temporaryMethodPrintMedicine(medicine);
-    }
+//   List<Medicine> medicines = medicationTreatment.getMedicine();
+    Medicine medicine = medicationTreatment.getMedicine();
+    Log.info("Printing medicine", HealthPrescriptionServiceProvider.class);
+    temporaryMethodPrintMedicine(medicine);
 
   }
 
@@ -137,8 +136,8 @@ public final class HealthPrescriptionServiceProvider extends ServiceCallee {
     for (Intake intake : intakeList) {
       Log.info("  &&&&&&&&& Intake &&&&&&&&&&&&&&&&&&", HealthPrescriptionServiceProvider.class);
       Log.info("intake.getTime() = %s", HealthPrescriptionServiceProvider.class, intake.getTime());
-      Log.info("intake.getDose() = %s", HealthPrescriptionServiceProvider.class,intake.getDose());
-      Log.info("intake.getUnit() = %s", HealthPrescriptionServiceProvider.class,intake.getUnit());
+      Log.info("intake.getDose() = %s", HealthPrescriptionServiceProvider.class, intake.getDose());
+      Log.info("intake.getUnit() = %s", HealthPrescriptionServiceProvider.class, intake.getUnit());
       Log.info("  &&&&&&&&& end Intake &&&&&&&&&&&&&&&&&&", HealthPrescriptionServiceProvider.class);
     }
 

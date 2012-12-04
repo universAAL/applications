@@ -20,8 +20,6 @@ package org.universAAL.ontology.medMgr;
 import org.universaal.ontology.health.owl.Treatment;
 
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author George Fournadjiev
@@ -32,7 +30,7 @@ public class MedicationTreatment extends Treatment {
   public static final String PROP_PRESCRIPTION_ID = MedicationOntology.NAMESPACE + "prescription_id";
   public static final String PROP_DOCTOR_NAME = MedicationOntology.NAMESPACE + "doctorName";
   public static final String PROP_MEDICATION_TREATMENT_START_DATE = MedicationOntology.NAMESPACE + "medicationTreatmentStartDate";
-  public static final String PROP_MEDICINES = MedicationOntology.NAMESPACE + "medicines";
+  public static final String PROP_MEDICINE = MedicationOntology.NAMESPACE + "medicine";
 
   public MedicationTreatment() {
     super();
@@ -70,26 +68,12 @@ public class MedicationTreatment extends Treatment {
     setProperty(PROP_MEDICATION_TREATMENT_START_DATE, startDate);
   }
 
-  public List<Medicine> getMedicines() {
-    Object value = getProperty(PROP_MEDICINES);
-    if (value instanceof Medicine) {
-      ArrayList<Medicine> medicines = new ArrayList<Medicine>();
-      medicines.add((Medicine) value);
-      return medicines;
-    }
-    return (List<Medicine>) value;
+  public Medicine getMedicine() {
+    return (Medicine) getProperty(PROP_MEDICINE);
   }
 
-  public void setMedicines(List<Medicine> medicineList) {
-    if (medicineList == null || medicineList.isEmpty()) {
-      return;
-    }
-    if (medicineList.size() > 1) {
-      setProperty(PROP_MEDICINES, medicineList);
-    } else {
-      Medicine medicine = medicineList.get(0);
-      setProperty(PROP_MEDICINES, medicine);
-    }
+  public void setMedicine(Medicine medicine) {
+    setProperty(PROP_MEDICINE, medicine);
   }
 
   public boolean isWellFormed() {

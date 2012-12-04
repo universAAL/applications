@@ -22,8 +22,6 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.medication_manager.ui.NewPrescriptionHandler;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
-import org.universAAL.middleware.service.DefaultServiceCaller;
-import org.universAAL.middleware.service.ServiceCaller;
 
 
 public class Activator implements BundleActivator {
@@ -40,8 +38,8 @@ public class Activator implements BundleActivator {
     service = new ReminderDialogProvider(context);
     medicationManagerServiceButtonProvider = new MedicationManagerServiceButtonProvider(context);
 
-    ServiceCaller serviceCaller = new DefaultServiceCaller(context);
-    NewPrescriptionHandler newPrescriptionHandler = new NewPrescriptionHandler(serviceCaller);
+    NewPrescriptionContextProvider newPrescriptionContextProvider = new NewPrescriptionContextProvider(context);
+    NewPrescriptionHandler newPrescriptionHandler = new NewPrescriptionHandler(context, newPrescriptionContextProvider);
 
     bundleContext.registerService(NewPrescriptionHandler.class.getName(), newPrescriptionHandler, null);
 

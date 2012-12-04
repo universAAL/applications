@@ -2908,6 +2908,7 @@ medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/M
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MissedIntake.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MyDeviceUserMappingDatabase.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/MyIntakeInfosDatabase.java -text
+medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/NewMedicationTreatmentNotifier.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/NewPrescription.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Precaution.java -text
 medication/medication.manager.ont/src/main/java/org/universAAL/ontology/medMgr/Time.java -text
@@ -3023,6 +3024,7 @@ medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/med
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Log.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/MainMedicationManagerMenu.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/MedicationManagerServiceButtonProvider.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/NewPrescriptionContextProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/ReminderDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/RequestMedicationInfoDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/prescription/Doctor.java -text

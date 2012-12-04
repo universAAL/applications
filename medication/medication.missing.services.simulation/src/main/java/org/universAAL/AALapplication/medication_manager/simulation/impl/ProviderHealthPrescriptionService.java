@@ -23,12 +23,12 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
-import org.universAAL.ontology.medMgr.NewPrescription;
+import org.universAAL.ontology.medMgr.NewMedicationTreatmentNotifier;
 
 /**
  * @author George Fournadjiev
  */
-public final class ProviderHealthPrescriptionService extends NewPrescription {
+public final class ProviderHealthPrescriptionService extends NewMedicationTreatmentNotifier {
 
   public static final String HEALTH_PRESCRIPTION_SERVICE_SERVER_NAMESPACE =
       "http://ontology.igd.fhg.de/HealthPrescriptionServer.owl#";
@@ -48,7 +48,7 @@ public final class ProviderHealthPrescriptionService extends NewPrescription {
     //Register
 
     OntologyManagement.getInstance().register(
-        new SimpleOntology(MY_URI, NewPrescription.MY_URI,
+        new SimpleOntology(MY_URI, NewMedicationTreatmentNotifier.MY_URI,
             new ResourceFactoryImpl() {
               @Override
               public Resource createInstance(String classURI,
@@ -57,16 +57,16 @@ public final class ProviderHealthPrescriptionService extends NewPrescription {
               }
             }));
 
-    String[] ppNewPrescription = new String[]{NewPrescription.PROP_RECEIVED_MESSAGE};
+    String[] ppNewPrescription = new String[]{NewMedicationTreatmentNotifier.PROP_RECEIVED_MESSAGE};
 
     ProviderHealthPrescriptionService notify =
         new ProviderHealthPrescriptionService(SERVICE_NOTIFY);
 
-    String[] ppInputNewPrescription = new String[]{NewPrescription.PROP_MEDICATION_TREATMENT};
+    String[] ppInputNewPrescription = new String[]{NewMedicationTreatmentNotifier.PROP_MEDICATION_TREATMENT};
 
     notify.addInputWithAddEffect(INPUT_MEDICATION_TREATMENT, MedicationTreatment.MY_URI, 1, 1, ppInputNewPrescription);
     notify.addOutput(OUTPUT_RECEIVED_MESSAGE,
-        NewPrescription.MY_URI, 1, 1, ppNewPrescription);
+        NewMedicationTreatmentNotifier.MY_URI, 1, 1, ppNewPrescription);
 
 
     profiles[0] = notify.myProfile;
