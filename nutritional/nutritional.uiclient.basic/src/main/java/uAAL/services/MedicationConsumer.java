@@ -27,6 +27,7 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.medMgr.Precaution;
+
 import org.universAAL.ontology.profile.User;
 
 import java.util.Iterator;
