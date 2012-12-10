@@ -3445,6 +3445,9 @@ nutritional/nutritional.uiclient.basic/src/main/java/uAAL/services/tests/OntoFac
 nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages.properties -text
 nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages_en.properties -text
 nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages_es.properties -text
+ontologies/ont.pom/composite/pom.xml -text
+ontologies/ont.pom/pom.xml -text
+ontologies/ont.pom/update.bat -text
 personal_safety/personal_safety.pom/pom.xml -text
 personal_safety/personal_safety.run/Run.bat -text
 personal_safety/personal_safety.run/pax.configuration -text

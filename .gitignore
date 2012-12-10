@@ -189,6 +189,9 @@ nutritional/nutritional.uiclient.basic/.classpath
 nutritional/nutritional.uiclient.basic/.project
 nutritional/nutritional.uiclient.basic/.settings
 nutritional/nutritional.uiclient.basic/target
+ontologies/ont.pom/.project
+ontologies/ont.pom/.settings
+ontologies/ont.pom/target
 personal_safety/personal_safety.pom/*.project
 personal_safety/personal_safety.pom/*.settings
 personal_safety/personal_safety.pom/target
