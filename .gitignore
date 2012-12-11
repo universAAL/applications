@@ -211,6 +211,10 @@ ontologies/ont.message/target
 ontologies/ont.pom/.project
 ontologies/ont.pom/.settings
 ontologies/ont.pom/target
+ontologies/ont.questionnaireStrategy/.classpath
+ontologies/ont.questionnaireStrategy/.project
+ontologies/ont.questionnaireStrategy/.settings
+ontologies/ont.questionnaireStrategy/target
 personal_safety/personal_safety.pom/*.project
 personal_safety/personal_safety.pom/*.settings
 personal_safety/personal_safety.pom/target

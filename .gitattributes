@@ -3567,6 +3567,14 @@ ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQue
 ontologies/ont.pom/composite/pom.xml -text
 ontologies/ont.pom/pom.xml -text
 ontologies/ont.pom/update.bat -text
+ontologies/ont.questionnaireStrategy/ASL2.0 -text
+ontologies/ont.questionnaireStrategy/MITX.txt -text svneol=unset#text/plain
+ontologies/ont.questionnaireStrategy/NOTICE -text
+ontologies/ont.questionnaireStrategy/pom.xml -text
+ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/Activator.java -text
+ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/QuestionnaireStrategyOntologyFactory.java -text
+ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/Questionnaire4TreatmentStrategy.java -text
+ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/QuestionnaireStrategyOntology.java -text
 personal_safety/personal_safety.pom/pom.xml -text
 personal_safety/personal_safety.run/Run.bat -text
 personal_safety/personal_safety.run/pax.configuration -text
