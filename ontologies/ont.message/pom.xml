@@ -2,29 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.universAAL.ontology</groupId>
+		<groupId>org.universAAL.ontology.services</groupId>
 		<artifactId>ont.pom</artifactId>
-		<version>1.2.1-SNAPSHOT</version>
+		<version>1.3.1-SNAPSHOT</version>
 		<relativePath>../pom/</relativePath>
 	</parent>
-
-<!-- 	Remove when transported to ontologies repo -->
-<!-- 	<parent> -->
-<!-- 		<groupId>org.universAAL.AALapplication</groupId> -->
-<!-- 		<artifactId>health.pom</artifactId> -->
-<!-- 		<version>B.0.1-SNAPSHOT</version> -->
-<!-- 		<relativePath>../health.pom/</relativePath> -->
-<!-- 	</parent> -->
-	<dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.health</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
-		</dependency>
-		</dependencies>
-	</dependencyManagement>
 	
+  	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.message</artifactId>
 	<version>1.2.1-SNAPSHOT</version>
 	<name>MessageOntology</name>
