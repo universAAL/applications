@@ -25,7 +25,7 @@ package org.universAAL.AALapplication.health.performedSession.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.universAAL.AALApplication.health.profile.manager.ProfileServerManager;
+import org.universAAL.AALApplication.health.profile.manager.MapHealthProfileProvider;
 import org.universAAL.AALapplication.health.performedSession.manager.PerformedSessionManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
@@ -41,17 +41,19 @@ import org.universaal.ontology.health.owl.Treatment;
  * @author amedrano
  * @author roni
  */
-public class ProfileServerPerformedSessionManager extends ProfileServerManager 
+public class ProfileServerPerformedSessionManager extends MapHealthProfileProvider 
 	implements PerformedSessionManager {
 
-    /**
+    private ModuleContext mc;
+
+	/**
      * Constructor.
      * 
      * @param context
      */
     public ProfileServerPerformedSessionManager(ModuleContext context) {
-
-    	super(context);
+    	mc = context;
+    	//super(context);
     }
 
 	/**
@@ -70,7 +72,7 @@ public class ProfileServerPerformedSessionManager extends ProfileServerManager
 		if(null != profile) {
 			Treatment treament = getTreatment(profile, treatmentURI);
 			if(null == treament) {
-				 LogUtils.logInfo(moduleContext, ProfileServerPerformedSessionManager.class,
+				 LogUtils.logInfo(mc, ProfileServerPerformedSessionManager.class,
 			    			"getAllPerformedSessions",
 			    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
 			} else {
@@ -109,7 +111,7 @@ public class ProfileServerPerformedSessionManager extends ProfileServerManager
 		if(null != profile) {
 			Treatment treament = getTreatment(profile, treatmentURI);
 			if(null == treament) {
-				 LogUtils.logInfo(moduleContext, ProfileServerPerformedSessionManager.class,
+				 LogUtils.logInfo(mc, ProfileServerPerformedSessionManager.class,
 			    			"getAllPerformedSessions",
 			    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
 			} else {
@@ -146,7 +148,7 @@ public class ProfileServerPerformedSessionManager extends ProfileServerManager
 		if(null != profile) {
 			Treatment treament = getTreatment(profile, treatmentURI);
 			if(null == treament) {
-				 LogUtils.logInfo(moduleContext, ProfileServerPerformedSessionManager.class,
+				 LogUtils.logInfo(mc, ProfileServerPerformedSessionManager.class,
 			    			"sessionPerformed",
 			    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
 			} else {
