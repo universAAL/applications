@@ -1,12 +1,12 @@
 
 package org.universaal.ontology.healthmeasurement;
 
+import org.universAAL.middleware.container.ModuleActivator;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.container.uAALModuleActivator;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 
-public class HealthMeasruementActivator implements uAALModuleActivator {
+public class HealthMeasruementActivator implements ModuleActivator {
 
   static ModuleContext context = null;
   HealthMeasurementOntology ontology = new HealthMeasurementOntology();

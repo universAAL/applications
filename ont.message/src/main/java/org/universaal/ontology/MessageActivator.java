@@ -15,12 +15,12 @@
  ******************************************************************************/
 package org.universaal.ontology;
 
+import org.universAAL.middleware.container.ModuleActivator;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.container.uAALModuleActivator;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universaal.ontology.owl.MessageOntology;
 
-public class MessageActivator implements uAALModuleActivator {
+public class MessageActivator implements ModuleActivator {
 
   static ModuleContext context = null;
   MessageOntology ontology = new MessageOntology();

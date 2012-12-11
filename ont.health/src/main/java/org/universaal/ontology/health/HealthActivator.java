@@ -15,12 +15,12 @@
  ******************************************************************************/
 package org.universaal.ontology.health;
 
+import org.universAAL.middleware.container.ModuleActivator;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.container.uAALModuleActivator;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universaal.ontology.health.owl.HealthOntology;
 
-public class HealthActivator implements uAALModuleActivator {
+public class HealthActivator implements ModuleActivator {
 
   static ModuleContext context = null;
   HealthOntology ontology = new HealthOntology();
