@@ -193,6 +193,13 @@ ontologies/ont.disease/.classpath
 ontologies/ont.disease/.project
 ontologies/ont.disease/.settings
 ontologies/ont.disease/target
+ontologies/ont.health/*.classpath
+ontologies/ont.health/*.project
+ontologies/ont.health/*.settings
+ontologies/ont.health/.classpath
+ontologies/ont.health/.project
+ontologies/ont.health/.settings
+ontologies/ont.health/target
 ontologies/ont.pom/.project
 ontologies/ont.pom/.settings
 ontologies/ont.pom/target
