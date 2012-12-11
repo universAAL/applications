@@ -1,35 +1,40 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<artifactId>personal_safety.pom</artifactId>		
-		<version>C.0.1-SNAPSHOT</version>
+		<artifactId>personal_safety.pom</artifactId>
+		<version>D.0.1-SNAPSHOT</version>
 		<relativePath>../personal_safety.pom</relativePath>
 	</parent>
-	
-  <artifactId>personal_safety.service</artifactId>
-  <packaging>bundle</packaging>
-  
-  <name>Personal Safety Service</name>
-  <description>Risk situation manager, inherited from PERSONA</description>
-  
-    <dependencies>
+
+	<artifactId>personal_safety.service</artifactId>
+	<packaging>bundle</packaging>
+
+	<name>Personal Safety Service</name>
+	<description>Risk situation manager, inherited from PERSONA</description>
+
+	<dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.container.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation.core</artifactId>
 		</dependency>
 		<dependency>
-		  <groupId>org.universAAL.ontology</groupId>
-		  <artifactId>ont.profile</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.profile</artifactId>
 		</dependency>
 		<dependency>
-		  <groupId>org.universAAL.ontology</groupId>
-		  <artifactId>ont.risk</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.risk</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
@@ -51,9 +56,9 @@
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>personal_safety.sms</artifactId>
 		</dependency>
-    </dependencies>
-    
-    <build>
+	</dependencies>
+
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -62,7 +67,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
-<!--						<Bundle-Activator>${project.groupID}.${project.artifactId}.Activator</Bundle-Activator>-->
+						<!-- <Bundle-Activator>${project.groupID}.${project.artifactId}.Activator</Bundle-Activator> -->
 						<Bundle-Activator>org.universAAL.AALapplication.personal_safety.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
@@ -71,20 +76,20 @@
 					</instructions>
 				</configuration>
 			</plugin>
-		    <plugin>
-		       <groupId>org.universAAL.support</groupId>
-		       <artifactId>uaal-maven-plugin</artifactId>
-		    </plugin>
-		    <plugin>
-		       <groupId>org.codehaus.mojo</groupId>
-		       <artifactId>build-helper-maven-plugin</artifactId>
-		       <configuration>
-		         <skipAttach>false</skipAttach>
-		       </configuration>
-		    </plugin>
+			<plugin>
+				<groupId>org.universAAL.support</groupId>
+				<artifactId>uaal-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<configuration>
+					<skipAttach>false</skipAttach>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	
+
 	<scm>
 		<connection>${svn.base}/personal_safety/service</connection>
 		<developerConnection>${svn.base}/personal_safety/service</developerConnection>
