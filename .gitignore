@@ -189,6 +189,10 @@ nutritional/nutritional.uiclient.basic/.classpath
 nutritional/nutritional.uiclient.basic/.project
 nutritional/nutritional.uiclient.basic/.settings
 nutritional/nutritional.uiclient.basic/target
+ontologies/ont.disease/.classpath
+ontologies/ont.disease/.project
+ontologies/ont.disease/.settings
+ontologies/ont.disease/target
 ontologies/ont.pom/.project
 ontologies/ont.pom/.settings
 ontologies/ont.pom/target

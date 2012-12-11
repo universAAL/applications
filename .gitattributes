@@ -3445,6 +3445,38 @@ nutritional/nutritional.uiclient.basic/src/main/java/uAAL/services/tests/OntoFac
 nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages.properties -text
 nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages_en.properties -text
 nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages_es.properties -text
+ontologies/ont.disease/ASL2.0 -text
+ontologies/ont.disease/Disease.di -text
+ontologies/ont.disease/Disease.notation -text
+ontologies/ont.disease/Disease.uml -text svneol=unset#text/plain
+ontologies/ont.disease/MITX.txt -text svneol=unset#text/plain
+ontologies/ont.disease/NOTICE -text
+ontologies/ont.disease/pom.xml -text svneol=unset#text/plain
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/AcuteRheumaticFever.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/HeartFailure.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/HypertensiveDisease.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/IschemicHeartDisease.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/OtherCirculatorySystemDisease.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/CertainInfectiousParasiticDisease.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/CirculatorySystemDisease.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/DigestiveSystemDisease.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/MentalDisorder.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/Neoplasms.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/NervousSystemDisease.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/RespiratorySystemDisease.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/DeseaseActivator.java -text svneol=unset#text/plain
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/DiseaseFactory.java -text svneol=unset#text/plain
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Diagnostic.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Disease.java -text svneol=unset#text/plain
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/DiseaseOntology.java -text svneol=unset#text/plain
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/DiseaseSeverityStatus.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/DiseaseTimeEvolvingStatus.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Epidemiology.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Etiology.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Patogeny.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Pronostic.java -text
+ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Sympthom.java -text
+ontologies/ont.disease/src/test/java/org/universaal/test/integrationTest/ArtifactTest.java -text
 ontologies/ont.pom/composite/pom.xml -text
 ontologies/ont.pom/pom.xml -text
 ontologies/ont.pom/update.bat -text
