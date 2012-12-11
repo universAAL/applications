@@ -2,14 +2,15 @@
 	<modelVersion>4.0.0</modelVersion> 
   	
   	<parent>
-    		<groupId>org.universAAL.ontology</groupId>
+    		<groupId>org.universAAL.ontology.services</groupId>
     		<artifactId>ont.pom</artifactId>
-    		<version>1.2.1-SNAPSHOT</version>
+    		<version>1.3.1-SNAPSHOT</version>
     		<relativePath>../pom/</relativePath>
 	</parent>
   	
+  	<groupId>org.universAAL.ontology</groupId>
   	<artifactId>ont.healthmeasurement</artifactId>
-  	<version>1.2.1-SNAPSHOT</version>
+  	<version>1.3.1-SNAPSHOT</version>
   	<name>HealthMeasurement</name>
  	<description>org.eclipse.uml2.uml.internal.impl.CommentImpl@e1728c (body: null)</description>
  	<properties>
