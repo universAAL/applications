@@ -200,6 +200,10 @@ ontologies/ont.health/.classpath
 ontologies/ont.health/.project
 ontologies/ont.health/.settings
 ontologies/ont.health/target
+ontologies/ont.healthmeasurement/.classpath
+ontologies/ont.healthmeasurement/.project
+ontologies/ont.healthmeasurement/.settings
+ontologies/ont.healthmeasurement/target
 ontologies/ont.pom/.project
 ontologies/ont.pom/.settings
 ontologies/ont.pom/target

@@ -3525,6 +3525,27 @@ ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/
 ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/TreatmentManagementService.java -text
 ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/UpdateProfileService.java -text
 ontologies/ont.health/src/test/java/org/universaal/ontology/test/HealthOntologyTest.java -text
+ontologies/ont.healthmeasurement/ASL2.0 -text
+ontologies/ont.healthmeasurement/HealthMeasurement.di -text
+ontologies/ont.healthmeasurement/HealthMeasurement.notation -text
+ontologies/ont.healthmeasurement/HealthMeasurement.uml -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/MITX.txt -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/NOTICE -text
+ontologies/ont.healthmeasurement/pom.xml -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/HealthMeasruementActivator.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/HealthMeasurementFactory.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/BloodPressure.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/HealthMeasurement.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/HealthMeasurementOntology.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/HeartRate.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/HeartRateSignal.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Measurement.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/MultiValueMeasurement.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/PersonWeight.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Signal.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/SingleValueMeasurement.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Unit.java -text svneol=unset#text/plain
+ontologies/ont.healthmeasurement/src/test/java/ont/healthmeasurement/tests/ArtifactTest.java -text
 ontologies/ont.pom/composite/pom.xml -text
 ontologies/ont.pom/pom.xml -text
 ontologies/ont.pom/update.bat -text
