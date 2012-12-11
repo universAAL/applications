@@ -25,7 +25,7 @@ package org.universAAL.AALapplication.health.treat.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.universAAL.AALApplication.health.profile.manager.ProfileServerManager;
+import org.universAAL.AALApplication.health.profile.manager.MapHealthProfileProvider;
 import org.universAAL.AALapplication.health.treat.manager.TreatmentManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
@@ -41,17 +41,18 @@ import org.universaal.ontology.health.owl.TreatmentPlanning;
  * @author amedrano
  * @author roni
  */
-public class ProfileServerTreatmentManager extends ProfileServerManager 
+public class ProfileServerTreatmentManager extends MapHealthProfileProvider 
 	implements TreatmentManager {
 
-    /**
+    private ModuleContext mc;
+
+	/**
      * Constructor.
      * 
      * @param context
      */
 	 public ProfileServerTreatmentManager(ModuleContext context) {
-
-		 super(context);
+		 mc = context;
 	 }
 	 	
 	 /**
@@ -87,7 +88,7 @@ public class ProfileServerTreatmentManager extends ProfileServerManager
 			 if(newHealthProfile.deleteTreatment(treatmentURI)) {
 				  updateHealthProfile(profile);
 			 } else {
-				 LogUtils.logInfo(moduleContext, ProfileServerTreatmentManager.class,
+				 LogUtils.logInfo(mc, ProfileServerTreatmentManager.class,
 		    			"deleteTreatment",
 		    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
 			 }
@@ -106,7 +107,7 @@ public class ProfileServerTreatmentManager extends ProfileServerManager
 
 		// check that the new treatment has the same URI
 		if(!treatmentURI.equals(newTreatment.getURI())) {
-			 LogUtils.logError(moduleContext, ProfileServerTreatmentManager.class,
+			 LogUtils.logError(mc, ProfileServerTreatmentManager.class,
 					 "editTreatment",
 					 new Object[] { "new treatment URI does not equal to " + treatmentURI}, null);
 			return;
@@ -119,7 +120,7 @@ public class ProfileServerTreatmentManager extends ProfileServerManager
 			 if(newHealthProfile.editTreatment(newTreatment)) {
 				  updateHealthProfile(profile);
 			 } else {
-				 LogUtils.logInfo(moduleContext, ProfileServerTreatmentManager.class,
+				 LogUtils.logInfo(mc, ProfileServerTreatmentManager.class,
 		    			"editTreatment",
 		    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
 			 }
