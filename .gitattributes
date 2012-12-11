@@ -3546,6 +3546,24 @@ ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmea
 ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/SingleValueMeasurement.java -text svneol=unset#text/plain
 ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Unit.java -text svneol=unset#text/plain
 ontologies/ont.healthmeasurement/src/test/java/ont/healthmeasurement/tests/ArtifactTest.java -text
+ontologies/ont.message/ASL2.0 -text
+ontologies/ont.message/LICENSE-2.0.txt -text
+ontologies/ont.message/MITX.txt -text svneol=unset#text/plain
+ontologies/ont.message/MessageOntology.di -text
+ontologies/ont.message/MessageOntology.notation -text
+ontologies/ont.message/MessageOntology.uml -text
+ontologies/ont.message/NOTICE -text
+ontologies/ont.message/pom.xml -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universaal/ontology/MessageActivator.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universaal/ontology/MessageOntologyFactory.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universaal/ontology/owl/Message.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MessageOntology.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MessageService.java -text
+ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessage.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageClassification.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageSubclassification.java -text
+ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
 ontologies/ont.pom/composite/pom.xml -text
 ontologies/ont.pom/pom.xml -text
 ontologies/ont.pom/update.bat -text

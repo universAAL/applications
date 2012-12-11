@@ -204,6 +204,10 @@ ontologies/ont.healthmeasurement/.classpath
 ontologies/ont.healthmeasurement/.project
 ontologies/ont.healthmeasurement/.settings
 ontologies/ont.healthmeasurement/target
+ontologies/ont.message/.classpath
+ontologies/ont.message/.project
+ontologies/ont.message/.settings
+ontologies/ont.message/target
 ontologies/ont.pom/.project
 ontologies/ont.pom/.settings
 ontologies/ont.pom/target
