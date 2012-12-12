@@ -90,6 +90,10 @@ health/health.biomedicalsensors.server/.classpath
 health/health.biomedicalsensors.server/.project
 health/health.biomedicalsensors.server/.settings
 health/health.biomedicalsensors.server/target
+health/health.biomedicalsensors.uiclient/.classpath
+health/health.biomedicalsensors.uiclient/.project
+health/health.biomedicalsensors.uiclient/.settings
+health/health.biomedicalsensors.uiclient/target
 health/health.manager/.classpath
 health/health.manager/.project
 health/health.manager/.settings
