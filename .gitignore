@@ -86,6 +86,10 @@ health/PhysicalActivityMonitorModule/ont.biomedicalsensors/.classpath
 health/PhysicalActivityMonitorModule/ont.biomedicalsensors/.project
 health/PhysicalActivityMonitorModule/ont.biomedicalsensors/.settings
 health/PhysicalActivityMonitorModule/ont.biomedicalsensors/target
+health/health.biomedicalsensors.server/.classpath
+health/health.biomedicalsensors.server/.project
+health/health.biomedicalsensors.server/.settings
+health/health.biomedicalsensors.server/target
 health/health.manager/.classpath
 health/health.manager/.project
 health/health.manager/.settings

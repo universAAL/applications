@@ -598,6 +598,16 @@ health/PhysicalActivityMonitorModule/ui.dm.mobile/main_menu_joe_el.txt -text
 health/PhysicalActivityMonitorModule/ui.dm.mobile/messages.properties -text
 health/PhysicalActivityMonitorModule/ui.dm.mobile/messages_el.properties -text
 health/PhysicalActivityMonitorModule/ui.dm.mobile/messages_en.properties -text
+health/health.biomedicalsensors.server/LICENSE.txt -text
+health/health.biomedicalsensors.server/pom.xml -text
+health/health.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/Activator.java -text
+health/health.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/BiomedicalSensorsCallee.java -text
+health/health.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/BiomedicalSensorsServerContextSubscriber.java -text
+health/health.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/BiomedicalSensorsServiceProfiles.java -text
+health/health.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/bluetooth/DEMOBluetoothDeviceDiscovery.java -text
+health/health.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/unit_impl/BiomedicalSensorStateListener.java -text
+health/health.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/unit_impl/MyBiomedicalSensors.java -text
+health/health.biomedicalsensors.server/src/test/resources/log4j.properties -text
 health/health.manager/ASL2.0 -text
 health/health.manager/MITX.txt -text svneol=unset#text/plain
 health/health.manager/NOTICE -text
