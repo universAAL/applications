@@ -52,10 +52,10 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
-						<Bundle-Activator>org.universAAL.apps.biomedicalsensors.uiclient.osgi.Activator</Bundle-Activator>
+						<Bundle-Activator>org.universAAL.AALapplication.biomedicalsensors.uiclient.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Private-Package>org.universAAL.apps.biomedicalsensors.uiclient</Private-Package>
+						<Private-Package>org.universAAL.AALapplication.biomedicalsensors.uiclient</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -67,8 +67,8 @@
 			<id>uAAL-Runtime</id>
 			<dependencies>
 				<dependency>
-					<groupId>org.universAAL.apps</groupId>
-					<artifactId>app.biomedicalsensors.server</artifactId>
+					<groupId>org.universAAL.AALapplication</groupId>
+					<artifactId>health.biomedicalsensors.server</artifactId>
 					<version>1.0.0-SNAPSHOT</version>
 				</dependency>
 				<dependency>
