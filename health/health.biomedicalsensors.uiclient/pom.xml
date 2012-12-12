@@ -4,17 +4,15 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.universAAL.AALapplication</groupId>
-		<artifactId>new_services.pom</artifactId>
-		<version>C.0</version>
-		<relativePath>../../new_services.pom</relativePath>
-	</parent>
+        <artifactId>health.pom</artifactId>
+        <groupId>org.universAAL.AALapplication</groupId>
+        <version>D.0.1-SNAPSHOT</version>
+        <relativePath>../health.pom</relativePath>
+    </parent>
 
 	<packaging>bundle</packaging>
 
-	<groupId>org.universAAL.apps</groupId>
-	<artifactId>app.biomedicalsensors.uiclient</artifactId>
-	<version>C.0.2</version>
+	<artifactId>health.biomedicalsensors.uiclient</artifactId>
 	<name>Physical Activity Monitor Module UI Client</name>
 	<url />
 
