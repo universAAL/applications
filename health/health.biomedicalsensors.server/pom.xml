@@ -54,10 +54,10 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
-						<Bundle-Activator>org.universAAL.apps.biomedicalsensors.server.Activator</Bundle-Activator>
+						<Bundle-Activator>org.universAAL.AALapplication.biomedicalsensors.server.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Private-Package>org.universAAL.apps.biomedicalsensors.server.*</Private-Package>
+						<Private-Package>org.universAAL.AALapplication.biomedicalsensors.server.*</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>

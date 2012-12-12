@@ -34,6 +34,8 @@
 		<module>../health.profile.manager</module>
 		<module>../health.treat.logger</module>
 		<module>../health.treat.manager</module>
+		<module>../health.biomedicalsensors.server</module>
+		<module>../health.biomedicalsensors.uiclient</module>
 		<!-- module>../health.motivation</module -->
 <!-- 		<module>../health.manager</module> -->
 	</modules>
@@ -53,6 +55,16 @@
 			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>health.profile.manager</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>health.biomedicalsensors.server</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>health.biomedicalsensors.uiclient</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
