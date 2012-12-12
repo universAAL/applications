@@ -240,7 +240,8 @@ public class DEMOBluetoothDeviceDiscovery {
 		float rand = Integer.valueOf(formatter.format(date));
 		posture = 60 + (int) rand;
 		activityLevel = 2 + (int) rand;
-		heartRate = 100 - rand;
+		//heartRate = 100 - rand;
+		heartRate=100;
 		breathingRate = 23 - rand / 10;
 		bluetoothOpen = false;
 
