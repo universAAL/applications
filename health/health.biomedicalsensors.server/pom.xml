@@ -2,15 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.universAAL.AALapplication</groupId>
-		<artifactId>new_services.pom</artifactId>
-		<version>C.0</version>
-		<relativePath>../../new_services.pom</relativePath>
-	</parent>
-	<groupId>org.universAAL.apps</groupId>
+	 <parent>
+        <artifactId>health.pom</artifactId>
+        <groupId>org.universAAL.AALapplication</groupId>
+        <version>D.0.1-SNAPSHOT</version>
+        <relativePath>../health.pom</relativePath>
+    </parent>
 	<packaging>bundle</packaging>
-	<artifactId>app.biomedicalsensors.server</artifactId>
+	<artifactId>health.biomedicalsensors.server</artifactId>
 	<name>Biomedical Sensors App Server</name>
 	<url />
 
@@ -64,5 +63,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<version>C.0.2</version>
+	
 </project>
