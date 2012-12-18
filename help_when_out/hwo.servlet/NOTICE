@@ -1,4 +1,4 @@
-Nutritional UI client
+Help when outdoor servlet
 
 Copyright 2008-2014 ITACA-TSB, http://www.tsb.upv.es
 Instituto Tecnologico de Aplicaciones de Comunicacion 
@@ -8,7 +8,9 @@ Bienestar (TSB)
 
 I. Included Software
 
-This does not include any software developed by 3rd parties.
+Includes software developed in the PERSONA project by
+Copyright 2008-2010 Vodafone Italy, http://www.vodafone.it
+Vodafone Omnitel N.V.
 
 
 II. Used Software
@@ -29,3 +31,4 @@ Licensed under the Apache License 2.0.
 
 III. License Summary
 - Apache License 2.0
+- MIT X License
