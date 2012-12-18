@@ -9,7 +9,11 @@ Bienestar (TSB)
 
 I. Included Software
 
-Nutritional UI Client
+Includes software developed in project OASIS by 
+ITACA-TSB, http://www.tsb.upv.es
+Instituto Tecnologico de Aplicaciones de Comunicacion 
+Avanzadas - Grupo Tecnologias para la Salud y el 
+Bienestar (TSB)
 
 II. Used Software
 
