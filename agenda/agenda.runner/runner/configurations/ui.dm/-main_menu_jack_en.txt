@@ -1,0 +1,2 @@
+/Agenda|http://www.tsb.upv.es|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
+/main_menu_jack_en|http://www.tsb.upv.es|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService

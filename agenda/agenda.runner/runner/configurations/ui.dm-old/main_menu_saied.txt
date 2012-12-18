@@ -1,0 +1,3 @@
+/Agenda|http://www.anco.gr|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
+/Form Tests|http://www.tsb.upv.es|http://ontology.aal-persona.org/Tests.owl#Forms
+/Main Menu saied default|http://www.igd.fraunhofer.de|urn:samples.lighting.uiclient:ServiceProvider#Main
