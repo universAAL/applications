@@ -1,0 +1,2 @@
+/Agenda|http://www.anco.gr|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
+/Main Menu bob hr|http://www.madrid_workshop.org|service_ont_URI
