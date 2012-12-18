@@ -1733,6 +1733,9 @@ help_when_out/helpwhenoutside/trunk/src/main/resources/helpwhenoutside/universaa
 help_when_out/helpwhenoutside/trunk/src/main/resources/helpwhenoutside/whereis[!!-~]-[!!-~]copia.html -text
 help_when_out/helpwhenoutside/trunk/src/main/resources/helpwhenoutside/whereis.html -text
 help_when_out/helpwhenoutside/trunk/src/main/resources/helpwhenoutside/whereis.js -text
+help_when_out/hwo.mobile/ASL2.0.txt -text
+help_when_out/hwo.mobile/MITX.txt -text
+help_when_out/hwo.mobile/NOTICE -text
 help_when_out/hwo.mobile/pom.xml -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Activator.java -text
 help_when_out/hwo.mobile/src/main/java/org/universAAL/AALapplication/hwo/Caregiver.java -text
