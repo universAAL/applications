@@ -15,32 +15,38 @@
  ******************************************************************************/
 package org.universAAL.ontology;
 
-
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.container.uAALModuleActivator;
+import org.universAAL.middleware.container.ModuleActivator;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.ontology.agenda.AgendaOntology;
 
 /**
  * 
  * @author eandgrg
- *
+ * 
  */
-public class AgendaActivator implements uAALModuleActivator {
+public class AgendaActivator implements ModuleActivator {
 
-  AgendaOntology ontology = new AgendaOntology();
+    AgendaOntology ontology = new AgendaOntology();
 
-  /* (non-Javadoc)
-   * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-   */
-  public void start(ModuleContext context) throws Exception {
-    OntologyManagement.getInstance().register(ontology);
-  }
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
+     * )
+     */
+    public void start(ModuleContext context) throws Exception {
+	OntologyManagement.getInstance().register(ontology);
+    }
 
-  /* (non-Javadoc)
-   * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-   */
-  public void stop(ModuleContext arg0) throws Exception {
-    OntologyManagement.getInstance().unregister(ontology);
-  }
-}	
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     */
+    public void stop(ModuleContext arg0) throws Exception {
+	OntologyManagement.getInstance().unregister(ontology);
+    }
+}

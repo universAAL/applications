@@ -3317,7 +3317,6 @@ nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed
 ontologies/ont.agenda/ASL2.0.txt -text
 ontologies/ont.agenda/MITX.txt -text
 ontologies/ont.agenda/NOTICE.txt -text
-ontologies/ont.agenda/backup_before1.1.0/MobileDevice.java -text
 ontologies/ont.agenda/pom.xml -text
 ontologies/ont.agenda/src/main/java/org/universAAL/ontology/AgendaActivator.java -text
 ontologies/ont.agenda/src/main/java/org/universAAL/ontology/AgendaOntologyFactory.java -text
