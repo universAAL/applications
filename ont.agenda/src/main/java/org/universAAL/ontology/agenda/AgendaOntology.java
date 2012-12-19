@@ -42,7 +42,8 @@ import org.universAAL.ontology.profile.UserProfile;
 public final class AgendaOntology extends Ontology {
 
     private static AgendaOntologyFactory factory = new AgendaOntologyFactory();
-    public static final String NAMESPACE = Resource.uAAL_NAMESPACE_PREFIX+"PersonalAgenda.owl#";
+    public static final String NAMESPACE = Resource.uAAL_NAMESPACE_PREFIX
+	    + "PersonalAgenda.owl#";
 
     public AgendaOntology() {
 	super(NAMESPACE);
@@ -116,7 +117,7 @@ public final class AgendaOntology extends Ontology {
 		.getAllValuesRestrictionWithCardinality(
 			Reminder.PROP_REPEAT_INTERVAL, TypeMapper
 				.getDatatypeURI(Integer.class), 0, 1));
-	
+
 	// load TimeInterval
 	oci = createNewOntClassInfo(TimeInterval.MY_URI, factory, 4);
 	oci.setResourceComment("The class of a time interval.");
@@ -139,7 +140,7 @@ public final class AgendaOntology extends Ontology {
 			TimeInterval.PROP_END_TIME, TypeMapper
 				.getDatatypeURI(XMLGregorianCalendar.class), 1,
 			1));
-	
+
 	// load EventDetails
 	oci = createNewOntClassInfo(EventDetails.MY_URI, factory, 3);
 	oci.setResourceComment("The class of event details.");
@@ -160,7 +161,8 @@ public final class AgendaOntology extends Ontology {
 				.getDatatypeURI(String.class), 0, 1));
 	oci.addRestriction(MergedRestriction
 		.getAllValuesRestrictionWithCardinality(
-			EventDetails.PROP_HAS_ADDRESS, PhysicalAddress.MY_URI, 1, 1));
+			EventDetails.PROP_HAS_ADDRESS, PhysicalAddress.MY_URI,
+			1, 1));
 	oci.addRestriction(MergedRestriction
 		.getAllValuesRestrictionWithCardinality(
 			EventDetails.PROP_DESCRIPTION, TypeMapper
@@ -176,22 +178,19 @@ public final class AgendaOntology extends Ontology {
 	oci.addRestriction(MergedRestriction.getAllValuesRestriction(
 		EventDetails.PROP_PARTICIPANTS, TypeMapper
 			.getDatatypeURI(String.class)));
-	//TimeInterval is used here so it should be defined before
+	// TimeInterval is used here so it should be defined before
 	oci.addRestriction(MergedRestriction
 		.getAllValuesRestrictionWithCardinality(
 			EventDetails.PROP_HAS_VALID_PERIOD,
 			TimeInterval.MY_URI, 0, 1));
-	
-	
-	
-	
+
 	// load Calendar
 	oci1 = createNewOntClassInfo(Calendar.MY_URI, factory, 0);
 	oci1.setResourceComment("The class of a calendar");
 	oci1.setResourceLabel("Calendar");
 	oci1.addSuperClass(ManagedIndividual.MY_URI);
-	//continue later
-	
+	// continue later
+
 	// load Event
 	oci = createNewOntClassInfo(Event.MY_URI, factory, 2);
 	oci.setResourceComment("The class of all events.");
@@ -204,11 +203,11 @@ public final class AgendaOntology extends Ontology {
 	oci.addDatatypeProperty(Event.PROP_PERSISTENT).setFunctional();
 	oci.addDatatypeProperty(Event.PROP_VISIBLE).setFunctional();
 	oci.addObjectProperty(Event.PROP_HAS_PARENT_CALENDAR).setFunctional();
-	//Reminder is used here so it should be defined before	
+	// Reminder is used here so it should be defined before
 	oci.addRestriction(MergedRestriction
 		.getAllValuesRestrictionWithCardinality(
 			Event.PROP_HAS_REMINDER, Reminder.MY_URI, 0, 1));
-	//EventDetails is used here so it should be defined before	
+	// EventDetails is used here so it should be defined before
 	oci
 		.addRestriction(MergedRestriction
 			.getAllValuesRestrictionWithCardinality(
@@ -226,13 +225,14 @@ public final class AgendaOntology extends Ontology {
 	oci.addRestriction(MergedRestriction
 		.getAllValuesRestrictionWithCardinality(Event.PROP_VISIBLE,
 			TypeMapper.getDatatypeURI(Boolean.class), 0, 1));
-	//Calendar is used here so it should be defined before
+	// Calendar is used here so it should be defined before
 	oci.addRestriction(MergedRestriction
 		.getAllValuesRestrictionWithCardinality(
 			Event.PROP_HAS_PARENT_CALENDAR, Calendar.MY_URI, 0, 1));
-	
-	//continue defining Calendar after it has been loaded before it is used in Event
-	//Event is used here so it should be defined before
+
+	// continue defining Calendar after it has been loaded before it is used
+	// in Event
+	// Event is used here so it should be defined before
 	oci1.addRestriction(MergedRestriction.getAllValuesRestriction(
 		Calendar.PROP_HAS_EVENT, Event.MY_URI));
 	oci1.addRestriction(MergedRestriction
@@ -240,8 +240,8 @@ public final class AgendaOntology extends Ontology {
 			Calendar.PROP_HAS_OWNER, User.MY_URI, 1, 1));
 	oci1.addRestriction(MergedRestriction
 		.getAllValuesRestrictionWithCardinality(Calendar.PROP_NAME,
-			TypeMapper.getDatatypeURI(String.class), 0, 1));	
-	
+			TypeMapper.getDatatypeURI(String.class), 0, 1));
+
 	// load ExternalCalendar
 	oci = createNewOntClassInfo(ExternalCalendar.MY_URI, factory, 7);
 	oci.setResourceComment("The class of external calendar");
@@ -250,8 +250,6 @@ public final class AgendaOntology extends Ontology {
 	oci.addObjectProperty(Calendar.PROP_HAS_EVENT).setFunctional();
 	oci.addObjectProperty(Calendar.PROP_HAS_OWNER).setFunctional();
 	oci.addDatatypeProperty(Calendar.PROP_NAME).setFunctional();
-	
-	
 
 	/*
 	 * Services
@@ -280,15 +278,8 @@ public final class AgendaOntology extends Ontology {
 	oci.setResourceLabel("Calendar/Agenda UI service");
 	oci.addSuperClass(Service.MY_URI);
 	oci.addObjectProperty(CalendarUIService.PROP_CONTROLS).setFunctional();
-	oci.addRestriction(MergedRestriction
-		.getAllValuesRestriction(
-			CalendarUIService.PROP_CONTROLS,
-			Calendar.MY_URI));
-
-	// load MobileDevice?
-//	oci = createNewOntClassInfo(MobileDevice.MY_URI, factory, 7);
-//	oci.setResourceComment("The class of a Mobile device.");
-//	oci.setResourceLabel("Mobile Device");
+	oci.addRestriction(MergedRestriction.getAllValuesRestriction(
+		CalendarUIService.PROP_CONTROLS, Calendar.MY_URI));
 
     }
 }

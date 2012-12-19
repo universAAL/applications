@@ -61,8 +61,6 @@ public class AgendaOntologyFactory extends ResourceFactoryImpl {
 	case 7:
 	    return new ExternalCalendar(instanceURI);
 
-	    // case 8:
-	    // return new MobileDevice(instanceURI);
 	}
 	return null;
     }
