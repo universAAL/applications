@@ -21,6 +21,16 @@
            <!-- Explanation: -->
           <!-- <provision>{opt:wrap}:mvn:{groupId}/{artifactId}/{version}@{opt:#level | nostart | noupdate}</provision>-->
           
+          
+           <!--          agenda C.1.1-SNAPSHOT -->
+<!--    <provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/C.1.1-SNAPSHOT/composite</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm/1.2.12-SNAPSHOT/composite</provision>-->
+<!--			<provision>wrap:mvn:org.universAAL.ui/ui.handler.gui.swing.bluesteelLAF/1.2.2-SNAPSHOT</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.2.2-SNAPSHOT/composite</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.2.4-SNAPSHOT/composite</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.2.1-2MODALITIES/composite</provision>-->
+<!--			<provision>mvn:org.universAAL.tools/tools.log_mon/1.2.1-SNAPSHOT</provision>-->
+          
            <!--          agenda C.0.1-SNAPSHOT compatible with mw 1.2.0 -->
 <!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.2.0-2MODALITIES/composite</provision>-->
 <!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.2.0/composite</provision>-->
@@ -32,11 +42,11 @@
 
           <!--		RUN AGENDA	platform 1.1.0 compatible (for Odense demo) BEGIN -->
 			<!--ui.dm.mobile/1.1.3-SNAPSHOT/ has saied for Modality.gui and jack for Modality.web-->
-			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.1.3-SNAPSHOT/composite</provision> 
-			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.3/composite</provision>
-			<provision>mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.3-SNAPSHOT</provision>
-			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.1.0/composite</provision>
-			<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/B.0.1-SNAPSHOT/composite</provision>
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/1.1.3-SNAPSHOT/composite</provision> -->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.3/composite</provision>-->
+<!--			<provision>mvn:org.universAAL.ui/ui.handler.gui.swing/1.1.3-SNAPSHOT</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/1.1.0/composite</provision>-->
+<!--			<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/B.0.1-SNAPSHOT/composite</provision>-->
 <!--		RUN AGENDA	platform 1.1.0 (for Odense demo) compatible END -->
 	    
 <!--		RUN AGENDA	1.0.0 BEGIN -->
