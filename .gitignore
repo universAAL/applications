@@ -6,10 +6,6 @@ agenda/agenda.eventSelection.client/.classpath
 agenda/agenda.eventSelection.client/.project
 agenda/agenda.eventSelection.client/.settings
 agenda/agenda.eventSelection.client/target
-agenda/agenda.eventSelection.ont/.classpath
-agenda/agenda.eventSelection.ont/.project
-agenda/agenda.eventSelection.ont/.settings
-agenda/agenda.eventSelection.ont/target
 agenda/agenda.eventSelection.server/.classpath
 agenda/agenda.eventSelection.server/.project
 agenda/agenda.eventSelection.server/.settings
@@ -174,6 +170,10 @@ ontologies/ont.agenda/.classpath
 ontologies/ont.agenda/.project
 ontologies/ont.agenda/.settings
 ontologies/ont.agenda/target
+ontologies/ont.agendaEventSelection/.classpath
+ontologies/ont.agendaEventSelection/.project
+ontologies/ont.agendaEventSelection/.settings
+ontologies/ont.agendaEventSelection/target
 ontologies/ont.biomedicalsensors/.classpath
 ontologies/ont.biomedicalsensors/.project
 ontologies/ont.biomedicalsensors/.settings
