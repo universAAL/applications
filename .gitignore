@@ -170,10 +170,10 @@ nutritional/nutritional.uiclient.basic/.classpath
 nutritional/nutritional.uiclient.basic/.project
 nutritional/nutritional.uiclient.basic/.settings
 nutritional/nutritional.uiclient.basic/target
-ontologies/agenda.ont/.classpath
-ontologies/agenda.ont/.project
-ontologies/agenda.ont/.settings
-ontologies/agenda.ont/target
+ontologies/ont.agenda/.classpath
+ontologies/ont.agenda/.project
+ontologies/ont.agenda/.settings
+ontologies/ont.agenda/target
 ontologies/ont.biomedicalsensors/.classpath
 ontologies/ont.biomedicalsensors/.project
 ontologies/ont.biomedicalsensors/.settings
