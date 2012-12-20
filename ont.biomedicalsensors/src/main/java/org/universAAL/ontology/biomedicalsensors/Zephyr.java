@@ -18,7 +18,6 @@
  */
 package org.universAAL.ontology.biomedicalsensors;
 
-import org.universAAL.ontology.BiomedicalSensorsOntology;
 
 /**
  * Ontological enumeration of possible Zephyr sensors.

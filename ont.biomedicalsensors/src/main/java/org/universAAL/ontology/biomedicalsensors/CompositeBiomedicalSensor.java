@@ -18,7 +18,6 @@
  */
 package org.universAAL.ontology.biomedicalsensors;
 
-import org.universAAL.ontology.BiomedicalSensorsOntology;
 import org.universAAL.ontology.phThing.Device;
 
 /**

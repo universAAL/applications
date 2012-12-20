@@ -16,26 +16,28 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
  */
-package org.universAAL.ontology.biomedicalsensors;
-
-import org.universAAL.middleware.owl.ManagedIndividual;
+package org.universAAL.ontology;
 
 /**
- * Ontological representation of a the sensor type concept, to be extended by
- * different enumerations of types.
- * 
  * @author billyk, joemoul
  * 
  */
-public abstract class SensorType extends ManagedIndividual {
-	public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
-			+ "sensorType";
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.ModuleActivator;
+import org.universAAL.middleware.owl.OntologyManagement;
+import org.universAAL.ontology.biomedicalsensors.BiomedicalSensorsOntology;
 
-	protected SensorType(String uri) {
-		super(uri);
+public class BiomedicalSensorsActivator implements ModuleActivator {
+
+	BiomedicalSensorsOntology ont = new BiomedicalSensorsOntology();
+
+	public void start(ModuleContext context) throws Exception {
+
+		OntologyManagement.getInstance().register(ont);
 	}
 
-	public String getClassURI() {
-		return MY_URI;
+	public void stop(ModuleContext context) throws Exception {
+		OntologyManagement.getInstance().unregister(ont);
 	}
+
 }
