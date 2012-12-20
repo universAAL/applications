@@ -19,7 +19,6 @@
 package org.universAAL.ontology.biomedicalsensors;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.ontology.BiomedicalSensorsOntology;
 
 /**
  * Ontological representation of a Measure Entity.
