@@ -3355,14 +3355,11 @@ ontologies/ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agenda
 ontologies/ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/service/EventSelectionToolService.java -text
 ontologies/ont.agendaEventSelection/src/test/java/org/universAAL/ontology/test/ArtifactIntegrationTest.java -text
 ontologies/ont.biomedicalsensors/ASL2.0 -text
-ontologies/ont.biomedicalsensors/LICENSE.txt -text
 ontologies/ont.biomedicalsensors/MITX -text
 ontologies/ont.biomedicalsensors/NOTICE -text
 ontologies/ont.biomedicalsensors/pom.xml -text
-ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/Activator.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/BiomedicalSensorsActivator.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/BiomedicalSensorsFactory.java -text
-ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/BiomedicalSensorsOntology.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/AlertService.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/BPmonitor.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/BiomedicalSensorService.java -text
