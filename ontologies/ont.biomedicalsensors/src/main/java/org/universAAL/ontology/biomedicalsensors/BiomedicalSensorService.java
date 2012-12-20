@@ -19,7 +19,6 @@
 package org.universAAL.ontology.biomedicalsensors;
 
 import org.universAAL.middleware.service.owl.Service;
-import org.universAAL.ontology.BiomedicalSensorsOntology;
 
 /**
  * Ontological service that handles biomedical sensors.
