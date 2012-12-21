@@ -560,6 +560,7 @@ health/PhysicalActivityMonitorModule/ui.dm.mobile/messages_en.properties -text
 health/health.biomedicalsensors.run/eclipse.launchers/PhysicalActivityMonitor_UIClient.launch -text
 health/health.biomedicalsensors.run/eclipse.launchers/PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT[!!-~]Drools.launch -text
 health/health.biomedicalsensors.run/eclipse.launchers/PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch -text
+health/health.biomedicalsensors.run/eclipse.launchers/PhysicalActivityMonitor_UIClient_1.3.0-drools.launch -text
 health/health.biomedicalsensors.run/ui.dm.mobile/main_menu.txt -text
 health/health.biomedicalsensors.run/ui.dm.mobile/main_menu_el.txt -text
 health/health.biomedicalsensors.run/ui.dm.mobile/main_menu_en.txt -text
@@ -567,6 +568,18 @@ health/health.biomedicalsensors.run/ui.dm.mobile/main_menu_joe_el.txt -text
 health/health.biomedicalsensors.run/ui.dm.mobile/messages.properties -text
 health/health.biomedicalsensors.run/ui.dm.mobile/messages_el.properties -text
 health/health.biomedicalsensors.run/ui.dm.mobile/messages_en.properties -text
+health/health.biomedicalsensors.run/ui.dm/main_menu.txt -text
+health/health.biomedicalsensors.run/ui.dm/main_menu_de.txt -text
+health/health.biomedicalsensors.run/ui.dm/main_menu_el.txt -text
+health/health.biomedicalsensors.run/ui.dm/main_menu_en.txt -text
+health/health.biomedicalsensors.run/ui.dm/main_menu_saied_de.txt -text
+health/health.biomedicalsensors.run/ui.dm/main_menu_saied_el.txt -text
+health/health.biomedicalsensors.run/ui.dm/main_menu_saied_en.txt -text
+health/health.biomedicalsensors.run/ui.dm/main_menu_saied_pl.txt -text
+health/health.biomedicalsensors.run/ui.dm/messages.properties -text
+health/health.biomedicalsensors.run/ui.dm/messages_de.properties -text
+health/health.biomedicalsensors.run/ui.dm/messages_el.properties -text
+health/health.biomedicalsensors.run/ui.dm/messages_en.properties -text
 health/health.biomedicalsensors.server/LICENSE.txt -text
 health/health.biomedicalsensors.server/pom.xml -text
 health/health.biomedicalsensors.server/src/main/java/org/universAAL/apps/biomedicalsensors/server/Activator.java -text
