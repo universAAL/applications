@@ -1,0 +1,2 @@
+/Physical Activity Monitor UI Client|http://www.certh.gr|http://ontology.universAAL.org/BiomedicalSensors.owl#BiomedicalSensorService
+/FORM UI Client|http://ontology.universAAL.org/Tests.owl#startUI
