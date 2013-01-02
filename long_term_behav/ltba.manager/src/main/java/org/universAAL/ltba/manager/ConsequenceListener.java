@@ -105,11 +105,11 @@ public class ConsequenceListener extends ContextSubscriber {
 		// System.out.println("HANDLING IN CONSEQUENCE-LISTENER");
 		if (getStatus()) {
 			Consequence csq = (Consequence) event.getRDFObject();
-			System.out.println("LOLEOLOELOLOE");
-			System.out.println("DEBUG TIME: " + debugTime);
-			System.out.println("THIS CALENDAR (CONSEQUENCE HANDLER): "
-					+ debuggingCalendar);
-			System.out.println("LOLEOLOELOLOE");
+//			System.out.println("LOLEOLOELOLOE");
+//			System.out.println("DEBUG TIME: " + debugTime);
+//			System.out.println("THIS CALENDAR (CONSEQUENCE HANDLER): "
+//					+ debuggingCalendar);
+//			System.out.println("LOLEOLOELOLOE");
 
 			System.out.println("Consequence listened: ");
 

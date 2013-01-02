@@ -4,12 +4,13 @@
 	<parent>
 		<artifactId>ltba.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>C.0.1-SNAPSHOT</version>
+		<version>D.0.1-SNAPSHOT</version>
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.ui</artifactId>
 	<packaging>bundle</packaging>
 	<name>LTBA user interface.</name>
+	<version>${parent.version}</version>
 	<dependencies>
 		<dependency>
 			<artifactId>ont.drools</artifactId>
@@ -20,11 +21,6 @@
 			<artifactId>ont.profile</artifactId>
 			<groupId>org.universaal.ontology</groupId>
 		</dependency>
-		<!--		<dependency>-->
-		<!--			<artifactId>drools.reasoner</artifactId>-->
-		<!--			<groupId>org.universaal.aalapplication</groupId>-->
-		<!--			<version>B.0.1</version>-->
-		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context.osgi</artifactId>
@@ -53,11 +49,6 @@
 						<Bundle-Activator>org.universaal.ltba.ui.activator.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-
-						<!--
-							<Export-Package>*,org.universaal.drools.ui.impl.main</Export-Package>
-						-->
-
 					</instructions>
 				</configuration>
 			</plugin>
