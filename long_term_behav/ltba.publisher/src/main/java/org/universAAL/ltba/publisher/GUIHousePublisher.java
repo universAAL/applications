@@ -14,12 +14,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JToggleButton;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import javax.swing.Timer;
@@ -55,6 +57,12 @@ public class GUIHousePublisher extends JFrame {
 			tGarden, tClock;
 	private static JButton bKitchen, bBedroom, bBathroom, bLivingRoom, bHall,
 			bGarden, bDay, bWeek, bMonth;
+	// Magnetic contacts
+	private static JToggleButton bKMCWindow, bKMCDoor, bKMCDrawerCuttery,
+			bkMCDrawerDishes;
+	// Electric current sensors
+	private static JButton bKECSDishwasher, bKECSWashingMachine, bKECSOven,
+			bKECSMicorwaveOven;
 	private static JLabel lKitchen, lBedroom, lBathroom, lLivingRoom, lHall,
 			lGarden, lClock;
 	private static long dKitchen, dBedroom, dBathroom, dLivingRoom, dHall,
@@ -71,6 +79,8 @@ public class GUIHousePublisher extends JFrame {
 	private final static String simulatedTime = "Simulated time: ";
 	private final static JLabel nothing = new JLabel();
 	private static long pseudoClockDiff = 0;
+
+	private static ActionListener mcListener;
 
 	/**
 	 * Serializable
@@ -121,17 +131,45 @@ public class GUIHousePublisher extends JFrame {
 		cClock = new JCheckBox("Submit enabled", false);
 
 		initTimers();
-		initButtonListener();
+		initPresenceDetectorListener();
+		initMagneticContactListener();
 		initGUIElements();
 
 		GUIHousePublisher ghp = getInstance();
 		ghp.setSize(640, 540);
 
+		// Magnetic Contacts
+
+		ButtonGroup bg = new ButtonGroup();
+		bKMCWindow = new JToggleButton("Window");
+		bKMCWindow.addActionListener(mcListener);
+
+		bKMCDoor = new JToggleButton("Door");
+		bKMCDoor.addActionListener(mcListener);
+		bkMCDrawerDishes = new JToggleButton("Drawer dishes");
+		bkMCDrawerDishes.addActionListener(mcListener);
+		bKMCDrawerCuttery = new JToggleButton("Drawer cuttery");
+		bKMCDrawerCuttery.addActionListener(mcListener);
+
+		JPanel pKMC = new JPanel();
+		pKMC.setBorder(BorderFactory.createTitledBorder("Magnetic contacts"));
+
+		// bg.add(bKMCDoor);
+		// bg.add(bKMCWindow);
+		// bg.add(bKMCDrawerCuttery);
+		// bg.add(bkMCDrawerDishes);
+
+		pKMC.add(bKMCDoor);
+		pKMC.add(bKMCWindow);
+		pKMC.add(bkMCDrawerDishes);
+		pKMC.add(bKMCDrawerCuttery);
+
 		bKitchen = new JButton("PRESENCE DETECTOR");
 
 		JPanel pKitchen = new JPanel(new GridLayout(2, 1, 7, 7));
 		pKitchen.setBorder(BorderFactory.createTitledBorder("Kitchen"));
-		pKitchen.add(lKitchen);
+		pKitchen.add(pKMC);
+		// pKitchen.add(lKitchen);
 		pKitchen.add(bKitchen);
 
 		bBathroom = new JButton("PRESENCE DETECTOR");
@@ -275,7 +313,7 @@ public class GUIHousePublisher extends JFrame {
 
 	}
 
-	private static void initButtonListener() {
+	private static void initPresenceDetectorListener() {
 		ConsequenceListener.getInstance().startDebugTime();
 
 		buttonListener = new ActionListener() {
@@ -331,6 +369,34 @@ public class GUIHousePublisher extends JFrame {
 					}
 				}
 			}
+		};
+	}
+
+	private static void initMagneticContactListener() {
+		ConsequenceListener.getInstance().startDebugTime();
+		mcListener = new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				if (e.getSource().equals(bKMCDoor)) {
+					StaticPublisher.publishMagneticContactEventDetected(
+							"Door@Kitchen", ((JToggleButton) e.getSource())
+									.isSelected(), context);
+				} else if (e.getSource().equals(bKMCWindow)) {
+					StaticPublisher.publishMagneticContactEventDetected(
+							"Window@Kitchen", ((JToggleButton) e.getSource())
+									.isSelected(), context);
+				} else if (e.getSource().equals(bKMCDrawerCuttery)) {
+					StaticPublisher.publishMagneticContactEventDetected(
+							"DrawerCuttery@Kitchen", ((JToggleButton) e
+									.getSource()).isSelected(), context);
+				} else if (e.getSource().equals(bkMCDrawerDishes)) {
+					StaticPublisher.publishMagneticContactEventDetected(
+							"DrawerDishes@Kitchen", ((JToggleButton) e
+									.getSource()).isSelected(), context);
+				}
+			}
+
 		};
 	}
 

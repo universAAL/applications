@@ -16,6 +16,8 @@ import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
 import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.ontology.activityhub.ContactClosureSensor;
+import org.universAAL.ontology.activityhub.ContactClosureSensorEvent;
 import org.universAAL.ontology.activityhub.MotionSensor;
 import org.universAAL.ontology.activityhub.MotionSensorEvent;
 import org.universAAL.ontology.location.Location;
@@ -51,8 +53,29 @@ public class StaticPublisher {
 				+ "Location.owl#MotionSensorTestLocation", location);
 		ms.setLocation(motionSensorLocation);
 		ms.setProperty(MotionSensor.PROP_MEASURED_VALUE, mse.motion_detected);
-		
+
 		cp.publish(new ContextEvent(ms, Sensor.PROP_MEASURED_VALUE));
+	}
+
+	public static void publishMagneticContactEventDetected(String name,
+			Boolean open, BundleContext theContext) {
+		if (cp == null)
+			initHelperClasses(theContext);
+		ContactClosureSensor ccs = new ContactClosureSensor(
+				"http://www.tsbtecnologias.es/MotionSensor.owl#ContactClosureSensor");
+		ContactClosureSensorEvent ccse = new ContactClosureSensorEvent(
+				TSB_NAMESPACE + "ContactClosureSensorEvent.owl#ContactEvent");
+		Location ccsLocation = new Location(TSB_NAMESPACE
+				+ "Location.owl#ContactClosureSensorTestLocation", name);
+		ccs.setLocation(ccsLocation);
+		if (open) {
+			ccs.setProperty(ContactClosureSensor.PROP_MEASURED_VALUE,
+					ccse.contact_opened);
+		} else {
+			ccs.setProperty(ContactClosureSensor.PROP_MEASURED_VALUE,
+					ccse.contact_closed);
+		}
+		cp.publish(new ContextEvent(ccs, Sensor.PROP_MEASURED_VALUE));
 	}
 
 	private static void initHelperClasses(BundleContext theContext) {
@@ -71,7 +94,7 @@ public class StaticPublisher {
 
 		Resource r;
 		ContextEvent ce;
-		
+
 	}
 
 }
