@@ -2,6 +2,7 @@ package org.universAAL.drools.engine;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
@@ -91,6 +92,7 @@ public final class RulesEngine {
 			e.printStackTrace();
 		}
 		INSTANCE = this;
+
 	}
 
 	/**
@@ -207,7 +209,8 @@ public final class RulesEngine {
 			// System.out.println(rulesEngineBundleContext.getBundle().getResource("reasoner.drl"));
 			kbuilder.add(ResourceFactory
 					.newUrlResource(rulesEngineBundleContext.getBundle()
-							.getResource("reasoner.drl")), ResourceType.DRL);
+							.getResource("users/droolsWorkshop1.drl")),
+					ResourceType.DRL);
 		} else {
 			// props.setProperty("drools.dialect.java.compiler", "JANINO");
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
@@ -247,16 +250,16 @@ public final class RulesEngine {
 		if (event instanceof ContextEvent) {
 			if (((ContextEvent) event).getRDFSubject() instanceof Sensor) {
 			} else {
-				System.out
-						.println("[DROOLS REASONER]The received event is not an instance of PhThng.Sensor - IGNORED");
+				// Not a sensor (genius)
 			}
 		} else {
-
-			System.out
-					.println("[DROOLS REASONER]The received event is not an instance of ContextEvent - IGNORED");
+			// Not a contextEvent
 		}
+		// It has been decided to insert always. The rule ALWAYS must check if it's being
+		// received the correct class in order to made a cast from Object to a
+		// more specific class. This can be easily implemented by placing
+		// eval(myReceivedObject instanceof TheClassToBeCast).
 		ksession.insert(event);
-		// ksession.fireAllRules();
 	}
 
 	/**
