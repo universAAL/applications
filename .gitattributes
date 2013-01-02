@@ -3418,6 +3418,8 @@ ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Patogen
 ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Pronostic.java -text
 ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Sympthom.java -text
 ontologies/ont.disease/src/test/java/org/universaal/test/integrationTest/ArtifactTest.java -text
+ontologies/ont.drools/artifact.composite -text
+ontologies/ont.drools/pom.xml -text
 ontologies/ont.health/ASL2.0 -text
 ontologies/ont.health/HealthOntology.di -text
 ontologies/ont.health/HealthOntology.notation -text
@@ -3487,6 +3489,8 @@ ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmea
 ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/SingleValueMeasurement.java -text svneol=unset#text/plain
 ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Unit.java -text svneol=unset#text/plain
 ontologies/ont.healthmeasurement/src/test/java/ont/healthmeasurement/tests/ArtifactTest.java -text
+ontologies/ont.ltba/artifact.composite -text
+ontologies/ont.ltba/pom.xml -text
 ontologies/ont.message/ASL2.0 -text
 ontologies/ont.message/LICENSE-2.0.txt -text
 ontologies/ont.message/MITX.txt -text svneol=unset#text/plain
