@@ -2759,16 +2759,6 @@ long_term_behav/ltba.publisher/OSGi_Enterprise_LTBA.launch -text
 long_term_behav/ltba.publisher/pom.xml -text
 long_term_behav/ltba.ui/artifact.composite -text
 long_term_behav/ltba.ui/pom.xml -text
-long_term_behav/ont.drools/artifact.composite -text
-long_term_behav/ont.drools/pom.xml -text
-long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/Activator.java -text
-long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/Consequence.java -text
-long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/ConsequenceProperty.java -text
-long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/Fact.java -text
-long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/FactProperty.java -text
-long_term_behav/ont.drools/src/main/java/org/universAAL/ontology/drools/Rule.java -text
-long_term_behav/ont.ltba/artifact.composite -text
-long_term_behav/ont.ltba/pom.xml -text
 medication/README.txt -text
 medication/medication.manager.integration.tests/artifact.composite -text
 medication/medication.manager.integration.tests/pom.xml -text
