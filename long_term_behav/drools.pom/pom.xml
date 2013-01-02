@@ -12,10 +12,6 @@
 	<packaging>pom</packaging>
 	<name>The Drools Reasoner POM file</name>
 	<description>The Drools Reasoner POM file</description>
-	<modules>
-		<module>../ont.drools</module>
-		<module>../drools.reasoner</module>
-	</modules>
 	<dependencyManagement>
 		<dependencies>
 <!--			<dependency>-->
@@ -25,4 +21,7 @@
 <!--			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
+	<modules>
+		<module>../../ontologies/ont.drools</module>
+	</modules>
 </project>
