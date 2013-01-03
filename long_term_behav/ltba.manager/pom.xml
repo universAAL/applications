@@ -8,6 +8,7 @@
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.manager</artifactId>
+	<version>${parent.version}</version>
 	<packaging>bundle</packaging>
 	<name>LTBA manager</name>
 	<description>LTBA main module for coordinating all the LTBA components.</description>
@@ -71,6 +72,25 @@
 			<version>4.0</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
+	<developers>
+		<developer>
+			<id>mllorente</id>
+			<name>Miguel Llorente</name>
+			<email>mllorente@tsbtecnologias.es</email>
+			<organization>TSB Tecnologias</organization>
+			<organizationUrl>http://www.tsbtenologias.es</organizationUrl>
+			<properties>
+				<project>
+					universAAL
+				</project>
+			</properties>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>ASL 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
 </project>

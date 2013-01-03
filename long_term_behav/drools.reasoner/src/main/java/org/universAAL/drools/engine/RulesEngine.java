@@ -72,7 +72,6 @@ import org.universAAL.ontology.phThing.Sensor;
  * knowledge.
  * 
  * @author Miguel Llorente (mllorente)
- * 
  */
 
 public final class RulesEngine {
@@ -226,14 +225,14 @@ public final class RulesEngine {
 			// System.out.println(rulesEngineBundleContext.getBundle().getResource("reasoner.drl"));
 			kbuilder.add(ResourceFactory
 					.newUrlResource(rulesEngineBundleContext.getBundle()
-							.getResource("users/droolsWorkshop1.drl")),
-					ResourceType.DRL);
+							.getResource("reasoner.drl")), ResourceType.DRL);
 		} else {
 			// props.setProperty("drools.dialect.java.compiler", "JANINO");
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 			// System.out.println(ResourceFactory.newClassPathResource(".//").toString());
 			// System.out.println(rulesEngineContext.getBundle().getResource("reasoner.drl"));
-			kbuilder.add(ResourceFactory.newClassPathResource("reasoner.drl"),
+			kbuilder.add(ResourceFactory
+					.newClassPathResource("droolsWorkshop1.drl"),
 					ResourceType.DRL);
 		}
 		if (kbuilder.hasErrors()) {
@@ -272,7 +271,8 @@ public final class RulesEngine {
 		} else {
 			// Not a contextEvent
 		}
-		// It has been decided to insert always. The rule ALWAYS must check if it's being
+		// It has been decided to insert always. The rule ALWAYS must check if
+		// it's being
 		// received the correct class in order to made a cast from Object to a
 		// more specific class. This can be easily implemented by placing
 		// eval(myReceivedObject instanceof TheClassToBeCast).

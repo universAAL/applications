@@ -8,20 +8,41 @@
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 	<artifactId>drools.pom</artifactId>
-	<version>D.0.1-SNAPHOT</version>
+	<version>D.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>The Drools Reasoner POM file</name>
 	<description>The Drools Reasoner POM file</description>
 	<dependencyManagement>
 		<dependencies>
-<!--			<dependency>-->
-<!--				<artifactId>ont.drools</artifactId>-->
-<!--				<groupId>org.universaal.ontology</groupId>-->
-<!--				<version>${project.version}</version>-->
-<!--			</dependency>-->
+			<!--			<dependency>-->
+			<!--				<artifactId>ont.drools</artifactId>-->
+			<!--				<groupId>org.universaal.ontology</groupId>-->
+			<!--				<version>${project.version}</version>-->
+			<!--			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
 	<modules>
 		<module>../../ontologies/ont.drools</module>
+		<module>../drools.reasoner</module>
 	</modules>
+	<developers>
+		<developer>
+			<id>mllorente</id>
+			<name>Miguel Llorente</name>
+			<email>mllorente@tsbtecnologias.es</email>
+			<organization>TSB Tecnologias</organization>
+			<organizationUrl>http://www.tsbtenologias.es</organizationUrl>
+			<properties>
+				<project>
+					universAAL
+				</project>
+			</properties>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>ASL 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
 </project>
