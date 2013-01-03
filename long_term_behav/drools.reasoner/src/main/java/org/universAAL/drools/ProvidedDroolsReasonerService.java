@@ -1,3 +1,22 @@
+/*
+	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
+	TSB - Tecnologías para la Salud y el Bienestar
+	
+	See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	  http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+ */
 package org.universAAL.drools;
 
 import org.universAAL.middleware.owl.MergedRestriction;
@@ -16,8 +35,7 @@ import org.universAAL.ontology.drools.Rule;
  * Service descriptor for the rule engine. It defines the access method to the
  * rules engine in order to add, modify or remove rules, or facts.
  * 
- * @author mllorente 
- * TSB Technologies for Health and Well-being
+ * @author Miguel Llorente (mllorente)
  */
 public class ProvidedDroolsReasonerService extends DroolsReasoning {
 
@@ -43,9 +61,11 @@ public class ProvidedDroolsReasonerService extends DroolsReasoning {
 	public static final String SERVICE_FIRE_CONSEQUENCE = DROOLS_REASONER_NAMESPACE
 			+ "fireConsequence";
 	// LTBA ON
-	public static final String SERVICE_SWITCH_ON = DROOLS_REASONER_NAMESPACE+"switchOn";
+	public static final String SERVICE_SWITCH_ON = DROOLS_REASONER_NAMESPACE
+			+ "switchOn";
 	// LTBA OFF
-	public static final String SERVICE_SWITCH_OFF = DROOLS_REASONER_NAMESPACE+"switchOff";
+	public static final String SERVICE_SWITCH_OFF = DROOLS_REASONER_NAMESPACE
+			+ "switchOff";
 	// Input rule
 	public static final String INPUT_RULE = DROOLS_REASONER_NAMESPACE
 			+ "inputRule";
@@ -170,14 +190,18 @@ public class ProvidedDroolsReasonerService extends DroolsReasoning {
 				new String[] { DroolsReasoning.PROP_KNOWS_FACTS,
 						Fact.PROP_HAS_IDENTIFIER });
 		profiles[5] = removeFact.myProfile;
-		//Switch ON
-		//TODO Add property for avoiding passing null parameters to the efect (e.g. LTBA_STATE)
-		ProvidedDroolsReasonerService switchOn = new ProvidedDroolsReasonerService(SERVICE_SWITCH_ON);
-		switchOn.myProfile.addAddEffect(null,null);
-		profiles[6] = switchOn.myProfile;		
-		//Switch OFF
-		//TODO Add property for avoiding passing null parameters to the efect (e.g. LTBA_STATE)
-		ProvidedDroolsReasonerService switchOff = new ProvidedDroolsReasonerService(SERVICE_SWITCH_OFF);
+		// Switch ON
+		// TODO Add property for avoiding passing null parameters to the efect
+		// (e.g. LTBA_STATE)
+		ProvidedDroolsReasonerService switchOn = new ProvidedDroolsReasonerService(
+				SERVICE_SWITCH_ON);
+		switchOn.myProfile.addAddEffect(null, null);
+		profiles[6] = switchOn.myProfile;
+		// Switch OFF
+		// TODO Add property for avoiding passing null parameters to the efect
+		// (e.g. LTBA_STATE)
+		ProvidedDroolsReasonerService switchOff = new ProvidedDroolsReasonerService(
+				SERVICE_SWITCH_OFF);
 		switchOff.getProfile().addRemoveEffect(null);
 		profiles[7] = switchOff.myProfile;
 
