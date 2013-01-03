@@ -3,11 +3,12 @@
 	<parent>
 		<artifactId>drools.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>D.0.1-SNAPHOT</version>
+		<version>D.0.1-SNAPSHOT</version>
 		<relativePath>../drools.pom</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>drools.reasoner</artifactId>
+	<version>${parent.version}</version>
 	<name>Drools reasoner</name>
 	<description>The Drools based reasoner</description>
 	<packaging>bundle</packaging>
@@ -140,4 +141,24 @@
 			<url>http://repository.springsource.com/maven/bundles/external</url>
 		</repository>
 	</repositories>
+	<developers>
+		<developer>
+			<id>mllorente</id>
+			<name>Miguel Llorente</name>
+			<email>mllorente@tsbtecnologias.es</email>
+			<organization>TSB Tecnologias</organization>
+			<organizationUrl>http://www.tsbtenologias.es</organizationUrl>
+			<properties>
+				<project>
+					universAAL
+				</project>
+			</properties>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>ASL 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
 </project>

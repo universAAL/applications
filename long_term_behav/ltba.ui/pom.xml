@@ -54,4 +54,24 @@
 			</plugin>
 		</plugins>
 	</build>
+	<developers>
+		<developer>
+			<id>mllorente</id>
+			<name>Miguel Llorente</name>
+			<email>mllorente@tsbtecnologias.es</email>
+			<organization>TSB Tecnologias</organization>
+			<organizationUrl>http://www.tsbtenologias.es</organizationUrl>
+			<properties>
+				<project>
+					universAAL
+				</project>
+			</properties>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>ASL 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
 </project>
