@@ -1,6 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+		<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>hwo.pom</artifactId>
+		<version>D.0.1-SNAPSHOT</version>
+		<relativePath>../hwo.pom</relativePath>
+	</parent>
+	<version>D.0.1-SNAPSHOT</version>
+	<packaging>bundle</packaging>
 	<artifactId>hwo.servlet</artifactId>
 	<name>Help When Outdoor</name>
 	<description />
@@ -8,7 +16,6 @@
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
-			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
@@ -25,7 +32,6 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.phWorld</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.ops4j.pax.web</groupId> -->
@@ -57,13 +63,10 @@
 		<dependency>
 			<groupId>org.universAAL.remote</groupId>
 			<artifactId>ri.servicegateway</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
-		
 		<dependency> 
 			<groupId>org.universAAL.remote</groupId>
 			<artifactId>ri.gateway.communicator</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -128,12 +131,4 @@
 			</releases>
 		</repository>
 	</repositories>
-	<parent>
-		<groupId>org.universAAL.AALapplication</groupId>
-		<artifactId>hwo.pom</artifactId>
-		<version>C.0.1-SNAPSHOT</version>
-		<relativePath>../hwo.pom</relativePath>
-	</parent>
-	<version>C.0.1-SNAPSHOT</version>
-	<packaging>bundle</packaging>
 </project>
