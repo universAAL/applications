@@ -1,8 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.universAAL.AALapplication</groupId>
+  <parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>hwo.pom</artifactId>
+		<version>D.0.1-SNAPSHOT</version>
+		<relativePath>../hwo.pom</relativePath>
+  </parent>
   <artifactId>hwo.mobile</artifactId>
-  <version>C.0.1-SNAPSHOT</version>
+  <version>D.0.1-SNAPSHOT</version>
   <name>Help When Outdoor - Mobile application</name>
   <description/>
   <packaging>bundle</packaging>
@@ -10,27 +15,22 @@
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
-			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation.osgi</artifactId>
-			<version>1.2.0</version>
 		</dependency>
 		<dependency> 
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.ui.osgi</artifactId>
-			<version>1.2.0</version>
 		</dependency>	
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service.osgi</artifactId>
-			<version>1.2.0</version>
 		</dependency>
 		<dependency> <!--  añadido sms handler  -->
 			<groupId>org.universAAL.ui</groupId>
 			<artifactId>ui.handler.sms</artifactId>
-			<version>1.2.0</version>
 		</dependency>
 	 <!--	<dependency>  añadido personal safety sms  
 			<groupId>org.universAAL.AALapplication</groupId>
@@ -40,27 +40,22 @@
 		<dependency>
    			<groupId>org.universAAL.ontology</groupId>
    			<artifactId>ont.phWorld</artifactId>
-   			<version>1.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context.osgi</artifactId>
-			<version>1.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
-			<version>1.2.0</version>
 		</dependency>
 		<dependency>
 			 <groupId>org.universAAL.middleware</groupId>
 			 <artifactId>mw.container.osgi</artifactId>
-			 <version>1.2.0</version>
 		</dependency>
 		<dependency>
 			 <groupId>org.universAAL.middleware</groupId>
 			 <artifactId>mw.container.xfaces.osgi</artifactId>
-			 <version>1.2.0</version>
 		</dependency>
 	</dependencies>
     <build>
