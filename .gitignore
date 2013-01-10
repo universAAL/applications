@@ -162,6 +162,10 @@ nutritional/nutritional.uiclient.basic/.classpath
 nutritional/nutritional.uiclient.basic/.project
 nutritional/nutritional.uiclient.basic/.settings
 nutritional/nutritional.uiclient.basic/target
+ontologies/ont.activity/.classpath
+ontologies/ont.activity/.project
+ontologies/ont.activity/.settings
+ontologies/ont.activity/target
 ontologies/ont.agenda/.classpath
 ontologies/ont.agenda/.project
 ontologies/ont.agenda/.settings
