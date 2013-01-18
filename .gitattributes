@@ -69,7 +69,6 @@ aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/Activ
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/FitbitAPI/FitbitApi.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/FitbitAPI/FitbitException.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/FitbitAPI/FitbitService.java -text svneol=unset#text/plain
-aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/FitbitAPI/Range.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/FitbitPublisher.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/database/FitbitDBInterface.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model/ActivityModel.java -text svneol=unset#text/plain
