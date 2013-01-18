@@ -3,15 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-    <groupId>org.universAAL.support.samples</groupId>
-    <artifactId>samples.pom</artifactId>
-    <version>1.2.1-SNAPSHOT</version>
-    <relativePath>../samples.pom</relativePath>
-  	</parent>
-  	<groupId>org.universAAL.AALapplication</groupId>
-	<packaging>bundle</packaging>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>D.0</version>
+		<relativePath>../new_services.pom/pom.xml</relativePath>
+	</parent>
+
+  	<packaging>bundle</packaging>
 	<artifactId>AALfficiencyService</artifactId>
-	<version>1.2.3-SNAPSHOT</version>
 	<name>AALfficiency Service</name>
 	<url />
 	<dependencies>		
@@ -26,22 +25,15 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.aalfficiencyscores</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.readenergy</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.readenergy</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.fitbitdata</artifactId>
-			<version>1.2.1-SNAPSHOT</version>
+			
 		</dependency>
     	<dependency>
 			    <groupId>org.apache.derby</groupId>
