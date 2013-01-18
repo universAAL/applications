@@ -43,14 +43,11 @@ public class Activator implements BundleActivator {
     
     public static Setup s = new Setup();
     
-    public static FitbitDBInterface db = new FitbitDBInterface();
-
+    
     public void start(BundleContext bcontext) throws Exception {
 	Activator.osgiContext = bcontext;
 	Activator.context = uAALBundleContainer.THE_CONTAINER
 		.registerModule(new Object[] { bcontext });
-	
-	db.createDB();
 	
 	Timer t1 = new Timer();
 	t1.scheduleAtFixedRate(new FitbitPublisher(bcontext), getTime(), 1000*60*60*24);
