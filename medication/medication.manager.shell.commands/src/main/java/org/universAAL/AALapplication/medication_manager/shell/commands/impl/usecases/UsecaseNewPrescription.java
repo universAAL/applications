@@ -17,6 +17,8 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.ui.NewPrescriptionHandler;
@@ -32,28 +34,31 @@ import static org.universAAL.AALapplication.medication_manager.shell.commands.im
 public final class UsecaseNewPrescription extends Usecase {
 
 
+  private static final String PRESCRIPTIONS = "prescriptions";
   private final File prescriptionDirectory;
 
-  private static NewPrescriptionHandler newPrescriptionHandler;
+  public static BundleContext bundleContext;
 
   public static final String COMMAND_INFO =
       "This command expects two parameters, which are: usecase id and the file name";
 
+  private static final String USECASE_ID = "UC08";
   private static final String USECASE_TITLE = "UC08: New prescription created  - ";
   private static final String USECASE = USECASE_TITLE +
       "Simulates the creation of the new prescription by the doctor(formal caregiver) and " +
       "triggers Medication Manager action to handle it";
 
-  public UsecaseNewPrescription(int usecaseId) {
-    super(usecaseId);
-    prescriptionDirectory = new File(medicationManagerConfigurationDirectory, "prescriptions");
+  public UsecaseNewPrescription() {
+    super(USECASE_ID);
+    prescriptionDirectory = new File(medicationManagerConfigurationDirectory, PRESCRIPTIONS);
   }
 
   @Override
   public void execute(String... parameters) {
 
     if (!prescriptionDirectory.isDirectory()) {
-      throw new MedicationManagerShellException("The required directory does not exists:" + prescriptionDirectory);
+      throw new MedicationManagerShellException("The required directory does not exists:" + PRESCRIPTIONS + " under the" +
+          "***/runner/configurations/services/medication_manager");
     }
 
     if (parameters == null || parameters.length == 0) {
@@ -77,6 +82,20 @@ public final class UsecaseNewPrescription extends Usecase {
     PrescriptionParser prescriptionParser = new PrescriptionParser();
     PrescriptionDTO prescriptionDTO = prescriptionParser.parse(prescriptionFile);
 
+    if (bundleContext == null) {
+      throw new MedicationManagerShellException("The bundleContext is not set");
+    }
+
+    ServiceReference sr = bundleContext.getServiceReference(NewPrescriptionHandler.class.getName());
+
+    if (sr == null) {
+      throw new MedicationManagerShellException("The ServiceReference is null for NewPrescriptionHandler");
+    }
+
+    NewPrescriptionHandler newPrescriptionHandler = (NewPrescriptionHandler) bundleContext.getService(sr);
+    if (newPrescriptionHandler == null) {
+      throw new MedicationManagerShellException("The NewPrescriptionHandler service is missing");
+    }
     newPrescriptionHandler.callHealthServiceWithNewPrescription(prescriptionDTO);
 
   }
@@ -87,8 +106,4 @@ public final class UsecaseNewPrescription extends Usecase {
     return USECASE;
   }
 
-  public static void setNewPrescriptionHandler(NewPrescriptionHandler handler) {
-
-    newPrescriptionHandler = handler;
-  }
 }

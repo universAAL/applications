@@ -27,12 +27,13 @@ import org.universAAL.ontology.medMgr.MyDeviceUserMappingDatabase;
  */
 public final class UsecaseDispenserUpsideDown extends Usecase {
 
+  private static final String USECASE_ID = "UC03";
   private static final String USECASE_TITLE = "UC03: Dispenser upside-down notification  - ";
   private static final String USECASE = USECASE_TITLE +
       "The service notifies the AP that the pill dispenser is upside-down and cannot be used";
 
-  public UsecaseDispenserUpsideDown(int usecaseId) {
-    super(usecaseId);
+  public UsecaseDispenserUpsideDown() {
+    super(USECASE_ID);
   }
 
   @Override

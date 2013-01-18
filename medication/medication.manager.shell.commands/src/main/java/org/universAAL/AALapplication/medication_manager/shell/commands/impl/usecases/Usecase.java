@@ -17,11 +17,11 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
-import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationConsoleCommands;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
+import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationConsoleCommands;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -29,34 +29,24 @@ import java.util.Map;
  */
 public abstract class Usecase {
 
-  private final int usecaseId;
+  private final String usecaseId;
 
   public static final String NO_PARAMETERS_MESSAGE = "This usecase doesn't expect parameters";
-  private static final Map<Integer, Usecase> USECASE_MAP = new HashMap<Integer, Usecase>();
+  private static final Map<String, Usecase> USECASE_MAP = new LinkedHashMap<String, Usecase>();
 
   static {
-    int id = 1;
-    UsecasePrecaution usecasePrecaution = new UsecasePrecaution(id);
-    USECASE_MAP.put(usecasePrecaution.getUsecaseId(), usecasePrecaution);
-    id++;
-    UsecaseMissedIntake usecaseMissedIntake = new UsecaseMissedIntake(id);
-    USECASE_MAP.put(usecaseMissedIntake.getUsecaseId(), usecaseMissedIntake);
-    id++;
-    UsecaseMedicationReminder usecaseMedicationReminder = new UsecaseMedicationReminder(id);
-    USECASE_MAP.put(usecaseMedicationReminder.getUsecaseId(), usecaseMedicationReminder);
-    id++;
-    UsecaseDispenserUpsideDown usecaseDispenserUpsideDown = new UsecaseDispenserUpsideDown(id);
-    USECASE_MAP.put(usecaseDispenserUpsideDown.getUsecaseId(), usecaseDispenserUpsideDown);
-    id++;
-    UsecaseNewPrescription usecaseNewPrescription = new UsecaseNewPrescription(id);
-    USECASE_MAP.put(usecaseNewPrescription.getUsecaseId(), usecaseNewPrescription);
+    USECASE_MAP.put(new UsecaseMedicationReminder().getUsecaseId(), new UsecaseMedicationReminder());
+    USECASE_MAP.put(new UsecaseDispenserUpsideDown().getUsecaseId(), new UsecaseDispenserUpsideDown());
+    USECASE_MAP.put(new UsecaseMissedIntake().getUsecaseId(), new UsecaseMissedIntake());
+    USECASE_MAP.put(new UsecaseNewPrescription().getUsecaseId(), new UsecaseNewPrescription());
+    USECASE_MAP.put(new UsecasePrecaution().getUsecaseId(), new UsecasePrecaution());
   }
 
-  protected Usecase(int usecaseId) {
+  protected Usecase(String usecaseId) {
     this.usecaseId = usecaseId;
   }
 
-  public int getUsecaseId() {
+  public String getUsecaseId() {
     return usecaseId;
   }
 
@@ -64,7 +54,7 @@ public abstract class Usecase {
 
   public abstract String getDescription();
 
-  public static Usecase getUsecase(Integer usecaseId) {
+  public static Usecase getUsecase(String usecaseId) {
     Usecase usecase = USECASE_MAP.get(usecaseId);
 
     if (usecase == null) {
