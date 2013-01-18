@@ -3455,6 +3455,22 @@ ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Symptho
 ontologies/ont.disease/src/test/java/org/universaal/test/integrationTest/ArtifactTest.java -text
 ontologies/ont.drools/artifact.composite -text
 ontologies/ont.drools/pom.xml -text
+ontologies/ont.fitbitdata/.classpath -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/.project -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/NOTICE -text
+ontologies/ont.fitbitdata/fitbitdata.di -text
+ontologies/ont.fitbitdata/fitbitdata.notation -text
+ontologies/ont.fitbitdata/fitbitdata.uml -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/pom.xml -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/FitbitDataActivator.java -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/FitbitdataFactory.java -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Activity.java -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitData.java -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitdataOntology.java -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Sleep.java -text svneol=unset#text/plain
 ontologies/ont.health/ASL2.0 -text
 ontologies/ont.health/HealthOntology.di -text
 ontologies/ont.health/HealthOntology.notation -text
