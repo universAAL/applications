@@ -26,11 +26,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSetMetaData;
 import java.util.Date;
 
 import org.universAAL.EnergyReader.model.ChallengeModel;
 import org.universAAL.EnergyReader.utils.Setup;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 
 public class EnergyReaderDBInterface {
 	private Setup s = new Setup();
@@ -48,9 +48,15 @@ public class EnergyReaderDBInterface {
 	public void createDB() throws Exception{
 		// load the h2-JDBC driver using the current class loader
 	    Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+	    String configFolderPath = System.getProperty(
+                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
+                        .getProperty("user.dir"));
+        System.setProperty("derby.system.home", configFolderPath);
 		try {
 			Connection connect = null;
-			connect = DriverManager.getConnection("jdbc:derby:"+DBNAME+";create=true;");
+			String dbURL = "jdbc:derby:" + configFolderPath
+                    + "/EnergyReaderPublisher/EnergyReaderDB;create=true";
+			connect = DriverManager.getConnection(dbURL);
 			statement = connect.createStatement();
 		    statement.setQueryTimeout(30);  // set timeout to 30 sec.
 		    
@@ -133,8 +139,13 @@ public class EnergyReaderDBInterface {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-			connect = DriverManager.
-					getConnection("jdbc:derby:"+DBNAME);
+			 String configFolderPath = System.getProperty(
+		                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
+		                        .getProperty("user.dir"));
+		        System.setProperty("derby.system.home", configFolderPath);
+		        String dbURL = "jdbc:derby:" + configFolderPath
+	                    + "/EnergyReaderPublisher/EnergyReaderDB;create=true";
+				connect = DriverManager.getConnection(dbURL);
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -161,9 +172,14 @@ public class EnergyReaderDBInterface {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+			String configFolderPath = System.getProperty(
+	                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
+	                        .getProperty("user.dir"));
+	        System.setProperty("derby.system.home", configFolderPath);
 			// Setup the connection with the DB
-			connect = DriverManager.
-					getConnection("jdbc:derby:"+DBNAME);
+	        String dbURL = "jdbc:derby:" + configFolderPath
+                    + "/EnergyReaderPublisher/EnergyReaderDB;create=true";
+			connect = DriverManager.getConnection(dbURL);
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -193,11 +209,14 @@ public class EnergyReaderDBInterface {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+			String configFolderPath = System.getProperty(
+	                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
+	                        .getProperty("user.dir"));
+	        System.setProperty("derby.system.home", configFolderPath);
 			// Setup the connection with the DB
-			String user = s.getDBUser();
-			String pwd = s.getDBPwd();
-			connect = DriverManager.
-					getConnection("jdbc:derby:"+DBNAME);
+	        String dbURL = "jdbc:derby:" + configFolderPath
+                    + "/EnergyReaderPublisher/EnergyReaderDB;create=true";
+			connect = DriverManager.getConnection(dbURL);
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -225,11 +244,14 @@ public class EnergyReaderDBInterface {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-			// Setup the connection with the DB
-			String user = s.getDBUser();
-			String pwd = s.getDBPwd();
-			connect = DriverManager.
-					getConnection("jdbc:derby:"+DBNAME);
+			String configFolderPath = System.getProperty(
+	                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
+	                        .getProperty("user.dir"));
+	        System.setProperty("derby.system.home", configFolderPath);
+	        
+	        String dbURL = "jdbc:derby:" + configFolderPath
+                    + "/EnergyReaderPublisher/EnergyReaderDB;create=true";
+			connect = DriverManager.getConnection(dbURL);
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -248,11 +270,14 @@ public class EnergyReaderDBInterface {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-			// Setup the connection with the DB
-			String user = s.getDBUser();
-			String pwd = s.getDBPwd();
-			connect = DriverManager.
-					getConnection("jdbc:derby:"+DBNAME);
+			String configFolderPath = System.getProperty(
+	                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
+	                        .getProperty("user.dir"));
+	        System.setProperty("derby.system.home", configFolderPath);
+	        
+	        String dbURL = "jdbc:derby:" + configFolderPath
+                    + "/EnergyReaderPublisher/EnergyReaderDB;create=true";
+			connect = DriverManager.getConnection(dbURL);
 			
 			int days = s.getElectricityChallengeDays();
 			
@@ -340,11 +365,13 @@ public class EnergyReaderDBInterface {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-			// Setup the connection with the DB
-			String user = s.getDBUser();
-			String pwd = s.getDBPwd();
-			connect = DriverManager.
-					getConnection("jdbc:derby:"+DBNAME);
+			String configFolderPath = System.getProperty(
+	                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
+	                        .getProperty("user.dir"));
+	        System.setProperty("derby.system.home", configFolderPath);
+	        String dbURL = "jdbc:derby:" + configFolderPath
+                    + "/EnergyReaderPublisher/EnergyReaderDB;create=true";
+			connect = DriverManager.getConnection(dbURL);
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -377,10 +404,13 @@ public class EnergyReaderDBInterface {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-			// Setup the connection with the DB
-			String user = s.getDBUser();
-			String pwd = s.getDBPwd();
-			connect = DriverManager.getConnection("jdbc:derby:"+DBNAME);
+			String configFolderPath = System.getProperty(
+	                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
+	                        .getProperty("user.dir"));
+	        System.setProperty("derby.system.home", configFolderPath);
+	        String dbURL = "jdbc:derby:" + configFolderPath
+                    + "/EnergyReaderPublisher/EnergyReaderDB;create=true";
+			connect = DriverManager.getConnection(dbURL);
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
