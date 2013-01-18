@@ -3336,6 +3336,24 @@ nutritional/nutritional.uiclient.basic/src/main/java/uAAL/services/tests/OntoFac
 nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages.properties -text
 nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages_en.properties -text
 nutritional/nutritional.uiclient.basic/src/main/resources/uAAL/UI/dialogs/packed/messages_es.properties -text
+ontologies/ont.aalfficiencyscores/.classpath -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/.project -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/ASL2.0.txt -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/MITX.txt -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/NOTICE -text
+ontologies/ont.aalfficiencyscores/pom.xml -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/AalfficiencyScoresActivator.java -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/AalfficiencyScoresFactory.java -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/AalfficiencyAdvices.java -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/AalfficiencyScores.java -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/AalfficiencyScoresOntology.java -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/ActivityScore.java -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/Advice.java -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/Challenge.java -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/ElectricityScore.java -text svneol=unset#text/plain
 ontologies/ont.activity/Activity.di -text
 ontologies/ont.activity/Activity.notation -text
 ontologies/ont.activity/Activity.uml -text
