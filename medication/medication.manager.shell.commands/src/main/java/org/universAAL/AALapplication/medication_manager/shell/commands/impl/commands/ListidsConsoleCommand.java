@@ -57,7 +57,7 @@ public final class ListidsConsoleCommand extends ConsoleCommand {
 
   }
 
-  private void printImplementedUsecaseId(int id, String usecase) {
+  private void printImplementedUsecaseId(String id, String usecase) {
     StringBuilder usecaseBuilder = new StringBuilder();
     usecaseBuilder.append("The usecase with the id=");
     usecaseBuilder.append(id);

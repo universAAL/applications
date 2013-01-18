@@ -59,6 +59,21 @@ public class MedicationManagerCommands {
 
   }
 
+  @Descriptor("Trigger specific sql related action")
+  public void sql(@Descriptor("parameters") String... parameters) {
+
+    SqlConsoleCommand consoleCommand = (SqlConsoleCommand) MedicationConsoleCommands.getSqlConsoleCommand();
+
+    if (parameters == null || parameters.length != 2) {
+      throw new MedicationManagerShellException(consoleCommand.getParametersInfo());
+    }
+
+    Log.info("Executing medication:sql command with the following parameters: %s, %s",
+        getClass(), parameters[0], parameters[1]);
+
+    consoleCommand.execute(parameters);
+  }
+
 
 }
 

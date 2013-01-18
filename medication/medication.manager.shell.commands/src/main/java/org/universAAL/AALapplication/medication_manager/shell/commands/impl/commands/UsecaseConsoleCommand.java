@@ -45,7 +45,7 @@ public final class UsecaseConsoleCommand extends ConsoleCommand {
       throw new MedicationManagerShellException(COMMAND_INFO);
     }
 
-    int usecaseId = getUsecaseId(parameters[0]);
+    String usecaseId = parameters[0];
     Usecase usecase = Usecase.getUsecase(usecaseId);
     String[] params = getParamsWithoutTheFirstElementUsecaseId(parameters);
 
@@ -60,18 +60,4 @@ public final class UsecaseConsoleCommand extends ConsoleCommand {
     return params;
   }
 
-  private int getUsecaseId(String parameter) {
-    try {
-
-      Integer usecaseId = Integer.valueOf(parameter);
-
-      return usecaseId;
-
-    } catch (NumberFormatException e) {
-
-      throw new MedicationManagerShellException("The first command parameter must be number" +
-          "and must represent usecaseId", e);
-
-    }
-  }
 }

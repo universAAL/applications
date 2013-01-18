@@ -34,6 +34,7 @@ public final class UsecaseMedicationReminder extends Usecase {
   private static final String EVENING = "evening";
   private static final String ERROR_MESSAGE = "Expected only one parameter, which must have one of the following values: " +
       MORNING + ", " + LUNCH + ", " + EVENING;
+  private static final String USECASE_ID = "UC01.1";
   private static final String USECASE_TITLE = "UC01.1: Medication reminder for AP (pill dispenser) - ";
   private static final String USECASE = USECASE_TITLE +
       "The service handles reminder notifications, triggered by the pill dispenser and delivered via " +
@@ -41,8 +42,8 @@ public final class UsecaseMedicationReminder extends Usecase {
       "if the user presses the info button: \n\t Usecase:\n\t\t" + "UC02: AP requests information about intake - " +
       "Upon request by the Assisted Person, the service provides information about medicine to be taken";
 
-  public UsecaseMedicationReminder(int usecaseId) {
-    super(usecaseId);
+  public UsecaseMedicationReminder() {
+    super(USECASE_ID);
   }
 
   @Override

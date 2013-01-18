@@ -127,11 +127,13 @@ help_when_out/hwo.servlet/.classpath
 help_when_out/hwo.servlet/.project
 help_when_out/hwo.servlet/.settings
 help_when_out/hwo.servlet/target
+medication/medication.manager.configuration/*.iml
 medication/medication.manager.integration.tests/*.iml
 medication/medication.manager.integration.tests/*.log
 medication/medication.manager.integration.tests/target
 medication/medication.manager.ont/*.iml
 medication/medication.manager.ont/target
+medication/medication.manager.persistence/*.iml
 medication/medication.manager.pom/*.idea
 medication/medication.manager.pom/*.iml
 medication/medication.manager.service/*.iml

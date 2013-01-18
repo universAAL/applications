@@ -19,13 +19,12 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationConsoleCommands;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationManagerCommands;
+import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.SqlConsoleCommand;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases.UsecaseNewPrescription;
-import org.universAAL.AALapplication.medication_manager.ui.NewPrescriptionHandler;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -38,8 +37,7 @@ import static java.io.File.*;
 /**
  * @author George Fournadjiev
  */
-public class
-    Activator implements BundleActivator {
+public class Activator implements BundleActivator {
 
   public static ModuleContext mc;
   public static File medicationManagerConfigurationDirectory;
@@ -59,16 +57,15 @@ public class
     props.put(OSGI_COMMAND_FUNCTION, new String[]{
         MedicationConsoleCommands.HELP_COMMMAND,
         MedicationConsoleCommands.LISTIDS_COMMMAND,
-        MedicationConsoleCommands.USECASE_COMMMAND}
+        MedicationConsoleCommands.USECASE_COMMMAND,
+        MedicationConsoleCommands.SQL_COMMMAND}
     );
     context.registerService(MedicationManagerCommands.class.getName(),
         new MedicationManagerCommands(), props);
 
-    ServiceReference sr = context.getServiceReference(NewPrescriptionHandler.class.getName());
+    UsecaseNewPrescription.bundleContext = context;
 
-    NewPrescriptionHandler handler = (NewPrescriptionHandler) context.getService(sr);
-
-    UsecaseNewPrescription.setNewPrescriptionHandler(handler);
+    SqlConsoleCommand.bundleContext = context;
 
   }
 
