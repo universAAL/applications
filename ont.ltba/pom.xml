@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.ltba</artifactId>
-	<version>D.0.1-SNAPSHOT</version>
+	<version>${parent.version}</version>
 	<packaging>bundle</packaging>
 	<name>LTBA ontology.</name>
 	<description>The Long Term Behaviour Analyzer Ontologies</description>
@@ -40,11 +40,6 @@
 			<version>1.4.0</version>
 			<type>bundle</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.universaal.middleware</groupId>
-			<artifactId>mw.data.representation.osgi</artifactId>
-			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universaal.middleware</groupId>

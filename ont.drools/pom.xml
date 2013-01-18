@@ -4,11 +4,12 @@
 		<artifactId>ont.pom</artifactId>
 		<groupId>org.universAAL.ontology.services</groupId>
 		<version>1.3.1-SNAPSHOT</version>
-		<relativePath>../pom/pom.xml</relativePath>
+		<relativePath>../ont.pom</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.drools</artifactId>
-	<version>D.0.1-SNAPSHOT</version>
+	<version>${parent.version}</version>
 	<description>Drools ontology</description>
 	<packaging>bundle</packaging>
 	<dependencies>
