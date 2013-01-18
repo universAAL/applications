@@ -50,6 +50,16 @@ public abstract class TreatmentManagementService extends HealthService{
     //OUTPUT PARAMETERS URI    
 	public static final String OUTPUT_TREATMENTS = HealthOntology.NAMESPACE + "matchingTreatments";
 
+	// Filtering between timestamps
+	public static final String PROP_TIMESTAMP_FROM =  HealthOntology.NAMESPACE
+			+ "listsTreatmentsTimestampFrom";
+	public static final String PROP_TIMESTAMP_TO =  HealthOntology.NAMESPACE
+			+ "listsTreatmentsTimestampTo";
+
+	public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "timestampFrom";
+
+	public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "timestampTo";
+	
     //CONSTRUCTORS
 	public TreatmentManagementService() {
 		super();
