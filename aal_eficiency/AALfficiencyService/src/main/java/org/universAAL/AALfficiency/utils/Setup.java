@@ -26,11 +26,16 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.universAAL.AALfficiency.model.ChallengeModel;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 
 public class Setup {
 public static final String SETUP_FILENAME = "AALfficiencyService.properties";
 	
 	private static String setupFileName = null;
+	
+	private static String configFolderPath = System.getProperty(
+            BundleConfigHome.uAAL_CONF_ROOT_DIR, System
+                    .getProperty("user.dir"));
 	
 	static public String getSetupFileName() {
 		if (setupFileName != null) {
@@ -38,7 +43,7 @@ public static final String SETUP_FILENAME = "AALfficiencyService.properties";
 		}
 		File dir1 = new File(".");
 		try {
-			setupFileName = "C:\\AALfficiency\\"+SETUP_FILENAME;
+			setupFileName = configFolderPath+"/AALfficiencyService/"+SETUP_FILENAME;
             System.out.println("Fichero: "+setupFileName);
 			return setupFileName;
 		} catch (Exception e) {
