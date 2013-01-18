@@ -36,10 +36,6 @@ public class Activator implements BundleActivator {
     private Timer t,t1;
 
     public void start(BundleContext bcontext) throws Exception {
-    	System.out.print("Starting publisher\n");
-    	EnergyReaderDBInterface db = new EnergyReaderDBInterface();
-    	System.out.print("Creating DB\n");
-    	db.createDB();
     	t = new Timer();
 		t.schedule(new MinutePublisher(bcontext), 0, 60*1000);
 		t1 = new Timer();
