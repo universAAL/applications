@@ -25,6 +25,9 @@ package org.universAAL.AALapplication.health.performedSession.manager;
 import java.util.List;
 
 import org.universAAL.AALapplication.health.performedSession.manager.impl.ProfileServerPerformedSessionManager;
+import org.universAAL.AALapplication.health.performedSession.manager.profiles.ListPerformedSessionBetweenTimeStampsService;
+import org.universAAL.AALapplication.health.performedSession.manager.profiles.ListPerformedSessionService;
+import org.universAAL.AALapplication.health.performedSession.manager.profiles.SessionPerformedService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -33,10 +36,7 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universaal.ontology.health.owl.PerformedSession;
-import org.universaal.ontology.health.owl.services.ListPerformedSessionBetweenTimeStampsService;
-import org.universaal.ontology.health.owl.services.ListPerformedSessionService;
 import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
-import org.universaal.ontology.health.owl.services.SessionPerformedService;
 
 /**
  * This class provides the performed sessions manager services.

@@ -22,22 +22,20 @@
  */
 package org.universAAL.AALApplication.health.profile.manager;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.profile.AssistedPerson;
-import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Profilable;
+import org.universAAL.ontology.profile.Profile;
 import org.universAAL.ontology.profile.SubProfile;
+import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.service.ProfilingService;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.HealthProfile;
@@ -54,11 +52,7 @@ import org.universaal.ontology.health.owl.HealthProfile;
  */
 public class ProfileServerHealthProfileProvider implements HealthProfileProvider {
 
-	protected static final String OUTPUT_SUB_PROFILE = HealthOntology.NAMESPACE + "subProfile";
-
 	private static final String ARG_OUT = HealthOntology.NAMESPACE + "argOut";
-	
-	private static final String MODULE = "ProfileServerManager";
 
 	/**
 	 * Needed for making service requests
@@ -80,15 +74,12 @@ public class ProfileServerHealthProfileProvider implements HealthProfileProvider
 		caller = new DefaultServiceCaller(context);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.universAAL.AALApplication.health.profile.manager.HealthProfileProviderInterface#getHealthProfile(java.lang.String)
-	 */
-	/*
+	/** {@inheritDoc} */
 	public HealthProfile getHealthProfile(String userURI) {
 
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
-		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, userURI);
-		req.addRequiredOutput(OUTPUT_SUB_PROFILE, new String[] { 
+		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, new User(userURI));
+		req.addRequiredOutput(ARG_OUT, new String[] { 
 				ProfilingService.PROP_CONTROLS, 
 				Profilable.PROP_HAS_PROFILE, 
 				Profile.PROP_HAS_SUB_PROFILE });
@@ -96,11 +87,12 @@ public class ProfileServerHealthProfileProvider implements HealthProfileProvider
 		ServiceResponse sr = caller.call(req);
 		if(sr.getCallStatus() == CallStatus.succeeded) {
 			try {
-		    	List<?> subProfiles = sr.getOutput(OUTPUT_SUB_PROFILE, true);
+		    	List<?> subProfiles = sr.getOutput(ARG_OUT, true);
 		    	if(subProfiles == null || subProfiles.size() == 0) {
-		    		moduleContext.logInfo("there are no sub profiles, creating default health subprofile", null);
+		    		moduleContext.logInfo(this.getClass().getName(),"there are no sub profiles, creating default health subprofile", null);
 		    		return newHealthProfile(userURI);
 		    	}
+		    	moduleContext.logDebug(getClass().getName(), "searching in " + subProfiles.size() + " suprofiles", null);
 		    	Iterator<?> iter = subProfiles.iterator();
 		    	while(iter.hasNext()) {
 		    		SubProfile subProfile = (SubProfile)iter.next();
@@ -108,39 +100,23 @@ public class ProfileServerHealthProfileProvider implements HealthProfileProvider
 		    			return (HealthProfile)subProfile;
 		    		}
 		    	}
-	    		moduleContext.logInfo("there is no health profile, creating default one", null);
+	    		moduleContext.logInfo(this.getClass().getName(),"there is no health profile, creating default one", null);
 	    		return newHealthProfile(userURI);
 			} catch(Exception e) {
-				moduleContext.logError( "got exception", e);
+				moduleContext.logError(this.getClass().getName(), "got exception", e);
 				return null;
 		    }
 		} else {
-			moduleContext.logWarn("callstatus is not succeeded", null);
-			return null;
-		}
-	}
-	 */
-	public HealthProfile getHealthProfile(String userURI) {
-		AssistedPerson ap = new AssistedPerson(userURI);
-		AssistedPersonProfile app = getProfile(ap);
-		if( app != null) {
-			HealthProfile hp = getHealthProfile(app);
-			if (hp != null) {
-				return hp;
-			}else {
-				return newHealthProfile(ap);
-			}
-		}
-		else {
-			moduleContext.logError(MODULE,"No User Profile Found", null);
+			moduleContext.logWarn(this.getClass().getName(),"callstatus is not succeeded", null);
 			return null;
 		}
 	}
 
-	private HealthProfile newHealthProfile(AssistedPerson ap) {
-		HealthProfile hp = new HealthProfile(ap.getURI()+"HealthSubprofile");
+	private HealthProfile newHealthProfile(String uri) {
+		HealthProfile hp = new HealthProfile(uri+"HealthSubprofile");
+		AssistedPerson ap = new AssistedPerson(uri);
 		hp.assignHealthProfileToAP(ap);
-		/*
+		
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null),
 				null);
 		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, ap);
@@ -149,22 +125,16 @@ public class ProfileServerHealthProfileProvider implements HealthProfileProvider
 				hp);
 		ServiceResponse resp = caller.call(req);
 		if (resp.getCallStatus().equals(CallStatus.succeeded)) {
-			moduleContext.logDebug("Added new Health Profile", null);
+			moduleContext.logDebug(this.getClass().getName(),"Added new Health Profile", null);
 			return hp;
 		}
 		else {
-			moduleContext.logWarn("callstatus is not succeeded, subprofile not added", null);
+			moduleContext.logWarn(this.getClass().getName(),"callstatus is not succeeded, subprofile not added", null);
 			return null;
 		}
-		*/
-		moduleContext.logDebug(MODULE,"Created new Health Profile", null);
-		return hp;
 	}
-
-	/* (non-Javadoc)
-	 * @see org.universAAL.AALApplication.health.profile.manager.HealthProfileProviderInterface#updateHealthProfile(org.universaal.ontology.health.owl.HealthProfile)
-	 */
-	/*
+	
+	/** {@inheritDoc} */
 	public void updateHealthProfile(HealthProfile healthProfile) {
 
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
@@ -175,120 +145,8 @@ public class ProfileServerHealthProfileProvider implements HealthProfileProvider
 
 		 ServiceResponse sr = caller.call(req);
 		 if(sr.getCallStatus() != CallStatus.succeeded) {
-			 moduleContext.logWarn("callstatus is not succeeded", null);
+			 moduleContext.logWarn(this.getClass().getName(),"callstatus is not succeeded", null);
 		 }
 	}
-	 */
-	public void updateHealthProfile(HealthProfile healthProfile) {
-		AssistedPersonProfile app = getProfile(healthProfile.getAssignedAssistedPerson());
-		if (app == null) {
-			moduleContext.logError(MODULE,"unable to retrieve AssistedPersonProfile", null);
-			return;
-		}
-		
-		Object subprf = app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE);
-
-		if (!app.hasProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE)
-				|| subprf == null
-				|| subprf instanceof HealthProfile) {
-			moduleContext.logDebug(MODULE,"adding single Health Profile", null);
-			app.setProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE, healthProfile);
-			//moduleContext.logDebug("HP set to: " 
-			//		+ ((Resource) app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE)).getLocalName(), null);
-		}
-		else {
-			moduleContext.logDebug(MODULE,"managing multiple sub profiles", null);
-			List<Resource> subprofiles;
-			if (subprf instanceof List) {
-				subprofiles = (List<Resource>) subprf;
-				HealthProfile oldHP = getHealthProfile(app);
-				subprofiles.remove(oldHP);
-			}		
-			else {
-				subprofiles = new ArrayList<Resource>();
-				subprofiles.add((Resource) subprf);
-			}
-			subprofiles.add(healthProfile);
-			app.setProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE, subprofiles);
-		}
-		
-		moduleContext.logDebug(MODULE, "Performing update Profile", null);
-		ServiceRequest req = new ServiceRequest(new ProfilingService(null),	null);
-		req.addChangeEffect(new String[] { ProfilingService.PROP_CONTROLS,
-				Profilable.PROP_HAS_PROFILE }, app);
-		ServiceResponse resp = caller.call(req);
-		moduleContext.logDebug(MODULE, "Updating HealthProfile: " + resp.getCallStatus().name(), null);
-	}
-	/**
-	 * Copied from org.universAAL.context.prof.serv.ArtifactIntegrationTest
-	 * @param profile
-	 * @return
-	 */
-	private AssistedPersonProfile getProfile(AssistedPerson assistedPerson) {
-		AssistedPersonProfile app = new AssistedPersonProfile(assistedPerson.getURI()+ "prof");
-		assistedPerson.setProfile(app);
-		return getProfile(app);
-	}
-	/**
-	 * Copied from org.universAAL.context.prof.serv.ArtifactIntegrationTest
-	 * @param profile
-	 * @return
-	 */
-	private AssistedPersonProfile getProfile(AssistedPersonProfile app) {
-		ServiceRequest req = new ServiceRequest(new ProfilingService(null),	null);
-		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE }, app);
-		req.addRequiredOutput(ARG_OUT, new String[] {
-				ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE });
-		ServiceResponse resp = caller.call(req);
-		if (resp.getCallStatus().equals(CallStatus.succeeded)) {
-			return (AssistedPersonProfile) getReturnValue(resp.getOutputs(), ARG_OUT);
-		} else {
-			return null;
-		}
-	}
-	/**
-	 * Copied from org.universAAL.context.prof.serv.ArtifactIntegrationTest
-	 * @param outputs
-	 * @param expectedOutput
-	 * @return
-	 */
-	private Object getReturnValue(List outputs, String expectedOutput) {
-		Object returnValue = null;
-		if (!(outputs == null)) {
-			for (Iterator i = outputs.iterator(); i.hasNext();) {
-				ProcessOutput output = (ProcessOutput) i.next();
-				if (output.getURI().equals(expectedOutput))
-					if (returnValue == null)
-						returnValue = output.getParameterValue();
-			}
-		}
-		return returnValue;
-	}
-
-	private HealthProfile getHealthProfile (AssistedPersonProfile app) {
-		Object supp = app.getProperty(AssistedPersonProfile.PROP_HAS_SUB_PROFILE);
-		if (supp != null) {
-			if (supp instanceof HealthProfile) {
-				return (HealthProfile) supp;
-			}
-			if (supp instanceof List) {
-				List<SubProfile> suppl = (List<SubProfile>) supp;
-				Iterator<SubProfile> it = suppl.iterator();
-				SubProfile su = it.next();
-				while (it.hasNext() 
-						&& !su.getClassURI().equals(HealthProfile.MY_URI)) {
-					su =  it.next();
-				}
-				if (su.getClassURI().equals(HealthProfile.MY_URI)) {
-					return (HealthProfile) su;
-				} 
-				else {
-					moduleContext.logError(MODULE,"No health profile found", null);
-					return null;
-				}
-			}
-		}
-		moduleContext.logError(MODULE, "no subprofiles found", null);
-		return null;
-	}
+	
 }
