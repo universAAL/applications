@@ -1,22 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  <parent>
-    <groupId>org.universAAL.support.samples</groupId>
-    <artifactId>samples.pom</artifactId>
-    <version>1.2.1-SNAPSHOT</version>
-  </parent>
-  
-  	<groupId>org.universAAL.AALapplication</groupId>
+ 	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>D.0</version>
+		<relativePath>../new_services.pom/pom.xml</relativePath>
+	</parent>
+  	
+	<artifactId>AAlfficiency.pom</artifactId>
+	<version>D.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<artifactId>AAlfficiency</artifactId>
-	<version>1.2.1-SNAPSHOT</version>
 	<name>The AAlfficiency POM file</name>
 	<description>The AAlfficiency POM file</description>
 	<modules>
-		<module>../ont.fitbitdata</module>
-		<module>../ont.aalfficiencyscores</module>
-		<module>../ont.readenergy</module>
 		<module>../FitbitPublisher</module>
 		<module>../EnergyReaderPublisher</module>
 		<module>../AALfficiencyService</module>
@@ -27,17 +24,17 @@
 			<dependency>
 				<artifactId>ont.fitbitdata</artifactId>
 				<groupId>org.universaal.ontology</groupId>
-				<version>${project.version}</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<artifactId>ont.aalfficiencyscores</artifactId>
 				<groupId>org.universaal.ontology</groupId>
-				<version>${project.version}</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<artifactId>ont.readenergy</artifactId>
 				<groupId>org.universaal.ontology</groupId>
-				<version>${project.version}</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
