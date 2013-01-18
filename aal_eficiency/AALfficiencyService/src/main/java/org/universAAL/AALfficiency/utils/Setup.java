@@ -43,7 +43,10 @@ public static final String SETUP_FILENAME = "AALfficiencyService.properties";
 		}
 		File dir1 = new File(".");
 		try {
-			setupFileName = configFolderPath+"/AALfficiencyService/"+SETUP_FILENAME;
+			if(configFolderPath.substring(configFolderPath.length() - 1)!="/"){
+				configFolderPath+="/";
+			}
+			setupFileName = configFolderPath+"AALfficiencyService/"+SETUP_FILENAME;
             System.out.println("Fichero: "+setupFileName);
 			return setupFileName;
 		} catch (Exception e) {
