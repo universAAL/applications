@@ -689,11 +689,11 @@ health/health.profile.manager/MITX.txt -text svneol=unset#text/plain
 health/health.profile.manager/NOTICE -text
 health/health.profile.manager/pom.xml -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProvider.java -text svneol=unset#text/plain
-health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileServiceProvider.java -text
-health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/MapHealthProfileProvider.java -text svneol=unset#text/plain
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ProfileServerHealthProfileProvider.java -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ProjectActivator.java -text
+health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ServiceProvider.java -text
 health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProviderTest.java -text svneol=unset#text/plain
+health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/MapHealthProfileProvider.java -text svneol=unset#text/plain
 health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/MapHealthProfileProviderTest.java -text svneol=unset#text/plain
 health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/ProfileServerHealthProfileProviderTest.java -text
 health/health.test.treatment.generator/ASL2.0 -text
@@ -710,6 +710,9 @@ health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/pe
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/PerformedSessionManagerProvider.java -text
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/impl/ProfileServerPerformedSessionManager.java -text
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/osgi/Activator.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/profiles/ListPerformedSessionBetweenTimeStampsService.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/profiles/ListPerformedSessionService.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/profiles/SessionPerformedService.java -text
 health/health.treat.manager/ASL2.0 -text
 health/health.treat.manager/MITX.txt -text svneol=unset#text/plain
 health/health.treat.manager/NOTICE -text
@@ -718,6 +721,12 @@ health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/t
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/TreatmentManagerProvider.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/impl/ProfileServerTreatmentManager.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/osgi/Activator.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/profiles/EditTreatmentService.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/profiles/ListTreatmentBetweenTimeStampsService.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/profiles/ListTreatmentService.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/profiles/NewTreatmentService.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/profiles/RemoveTreatmentService.java -text
+health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/profiles/TreatmentManagerProfilesOnt.java -text svneol=unset#text/plain
 help_when_out/helpwhenoutside/pom_parent.xml -text
 help_when_out/helpwhenoutside/trunk/LICENSE -text
 help_when_out/helpwhenoutside/trunk/NOTICE -text

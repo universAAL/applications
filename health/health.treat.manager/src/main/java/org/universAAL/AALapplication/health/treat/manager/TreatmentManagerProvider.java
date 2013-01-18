@@ -25,6 +25,11 @@ package org.universAAL.AALapplication.health.treat.manager;
 import java.util.List;
 
 import org.universAAL.AALapplication.health.treat.manager.impl.ProfileServerTreatmentManager;
+import org.universAAL.AALapplication.health.treat.manager.profiles.EditTreatmentService;
+import org.universAAL.AALapplication.health.treat.manager.profiles.ListTreatmentBetweenTimeStampsService;
+import org.universAAL.AALapplication.health.treat.manager.profiles.ListTreatmentService;
+import org.universAAL.AALapplication.health.treat.manager.profiles.NewTreatmentService;
+import org.universAAL.AALapplication.health.treat.manager.profiles.RemoveTreatmentService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -33,11 +38,6 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.services.EditTreatmentService;
-import org.universaal.ontology.health.owl.services.ListTreatmentBetweenTimeStampsService;
-import org.universaal.ontology.health.owl.services.ListTreatmentService;
-import org.universaal.ontology.health.owl.services.NewTreatmentService;
-import org.universaal.ontology.health.owl.services.RemoveTreatmentService;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 /**
