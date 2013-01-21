@@ -15,7 +15,6 @@
  ******************************************************************************/
 package org.universaal.ontology.health;
 
-import org.universAAL.AALapplication.health.performedSession.manager.profiles.SessionPerformedService;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universaal.ontology.health.owl.*;
@@ -59,8 +58,6 @@ public class HealthOntologyFactory extends ResourceFactoryImpl {
    	    return new ReposeHeartRateRequirement(instanceURI);
       case 20:
         return new PerformedSessionManagementService(instanceURI);
-      case 29:
-      	  return new SessionPerformedService(instanceURI);
       case 32:
     	  return new Diet(instanceURI);
       case 33:
