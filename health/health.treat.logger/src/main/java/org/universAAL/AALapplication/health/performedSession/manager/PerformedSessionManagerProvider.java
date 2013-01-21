@@ -27,8 +27,10 @@ import java.util.List;
 import org.universAAL.AALapplication.health.performedSession.manager.impl.ProfileServerPerformedSessionManager;
 import org.universAAL.AALapplication.health.performedSession.manager.profiles.ListPerformedSessionBetweenTimeStampsService;
 import org.universAAL.AALapplication.health.performedSession.manager.profiles.ListPerformedSessionService;
+import org.universAAL.AALapplication.health.performedSession.manager.profiles.PerformedSessionServiceProfilesOnt;
 import org.universAAL.AALapplication.health.performedSession.manager.profiles.SessionPerformedService;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -52,6 +54,7 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 	
 	// define profiles
 	static {
+		OntologyManagement.getInstance().register(new PerformedSessionServiceProfilesOnt());
     	profiles[0] = new SessionPerformedService().getProfile();		
     	profiles[1] = new ListPerformedSessionService().getProfile();
     	profiles[2] = new ListPerformedSessionBetweenTimeStampsService().getProfile();

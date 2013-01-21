@@ -712,6 +712,7 @@ health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/pe
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/osgi/Activator.java -text
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/profiles/ListPerformedSessionBetweenTimeStampsService.java -text
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/profiles/ListPerformedSessionService.java -text
+health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/profiles/PerformedSessionServiceProfilesOnt.java -text svneol=unset#text/plain
 health/health.treat.logger/src/main/java/org/universAAL/AALapplication/health/performedSession/manager/profiles/SessionPerformedService.java -text
 health/health.treat.manager/ASL2.0 -text
 health/health.treat.manager/MITX.txt -text svneol=unset#text/plain
