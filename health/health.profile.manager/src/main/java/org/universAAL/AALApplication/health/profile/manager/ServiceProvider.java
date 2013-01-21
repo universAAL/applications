@@ -208,14 +208,11 @@ public class ServiceProvider extends ServiceCallee {
 					})
 					);
 		}
-		
-		public static final String INPUT_OLD_PROFILE = HealthOntology.NAMESPACE +
-				"oldProfile";
 
 		private void buildProfile() {
-			addFilteringInput(INPUT_USER, AssistedPerson.MY_URI, 1, 1, new String[] {PROP_ASSISTED_USER});
-			addFilteringInput(INPUT_OLD_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
-			addOutput(OUTPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
+			//addFilteringInput(INPUT_USER, AssistedPerson.MY_URI, 1, 1, new String[] {PROP_ASSISTED_USER});
+			addInputWithChangeEffect(INPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
+			//addOutput(OUTPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
 		}
 
 	    //CONSTRUCTORS

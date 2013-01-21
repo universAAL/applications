@@ -25,13 +25,18 @@ package org.universAAL.AALapplication.health.performedSession.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.universAAL.AALApplication.health.profile.manager.MapHealthProfileProvider;
 import org.universAAL.AALapplication.health.performedSession.manager.PerformedSessionManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
+import org.universAAL.middleware.service.CallStatus;
+import org.universAAL.middleware.service.DefaultServiceCaller;
+import org.universAAL.middleware.service.ServiceRequest;
+import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.PerformedSession;
 import org.universaal.ontology.health.owl.Treatment;
+import org.universaal.ontology.health.owl.services.ProfileManagementService;
 
 /**
  * This class actually implements the 
@@ -41,10 +46,11 @@ import org.universaal.ontology.health.owl.Treatment;
  * @author amedrano
  * @author roni
  */
-public class ProfileServerPerformedSessionManager extends MapHealthProfileProvider 
+public class ProfileServerPerformedSessionManager  
 	implements PerformedSessionManager {
 
-    private ModuleContext mc;
+    private static final String REQ_OUTPUT_PROFILE = "http://ontologies.universaal.org/PerformedSessionManager#profile";
+	private ModuleContext mc;
 
 	/**
      * Constructor.
@@ -181,6 +187,34 @@ public class ProfileServerPerformedSessionManager extends MapHealthProfileProvid
 				}
 			}
 		}
+		return null;
+	}
+	
+	
+	/**
+	 * @param profile
+	 */
+	private void updateHealthProfile(HealthProfile profile) {
+		ServiceRequest req = new ServiceRequest(new ProfileManagementService(null), null);
+		req.addChangeEffect(new String[] {ProfileManagementService.PROP_MANAGES_PROFILE}, profile);
+		
+		new DefaultServiceCaller(mc).call(req);
+	}
+
+	/**
+	 * @param userURI
+	 * @return
+	 */
+	private HealthProfile getHealthProfile(String userURI) {
+		ServiceRequest req = new ServiceRequest(new ProfileManagementService(null), null);
+		req.addValueFilter(new String[] {ProfileManagementService.PROP_ASSISTED_USER}, new AssistedPerson(userURI));
+		req.addRequiredOutput(REQ_OUTPUT_PROFILE, new String[] {ProfileManagementService.PROP_MANAGES_PROFILE});
+		
+		ServiceResponse sr = new DefaultServiceCaller(mc).call(req);
+		if (sr.getCallStatus() == CallStatus.succeeded) {
+			return (HealthProfile) sr.getOutput(REQ_OUTPUT_PROFILE, false).get(0);
+		}
+		
 		return null;
 	}
 }

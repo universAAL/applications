@@ -25,13 +25,18 @@ package org.universAAL.AALapplication.health.treat.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.universAAL.AALApplication.health.profile.manager.MapHealthProfileProvider;
 import org.universAAL.AALapplication.health.treat.manager.TreatmentManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
+import org.universAAL.middleware.service.CallStatus;
+import org.universAAL.middleware.service.DefaultServiceCaller;
+import org.universAAL.middleware.service.ServiceRequest;
+import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.TreatmentPlanning;
+import org.universaal.ontology.health.owl.services.ProfileManagementService;
 
 /**
  * This class actually implements the 
@@ -41,10 +46,11 @@ import org.universaal.ontology.health.owl.TreatmentPlanning;
  * @author amedrano
  * @author roni
  */
-public class ProfileServerTreatmentManager extends MapHealthProfileProvider 
+public class ProfileServerTreatmentManager //extends MapHealthProfileProvider 
 	implements TreatmentManager {
 
-    private ModuleContext mc;
+    private static final String REQ_OUTPUT_PROFILE = "http://ontologies.universaal.org/TreatmentManager#profile";
+	private ModuleContext mc;
 
 	/**
      * Constructor.
@@ -64,13 +70,10 @@ public class ProfileServerTreatmentManager extends MapHealthProfileProvider
 	 public void newTreatment(String userURI, Treatment treatment) {
 		 
 		 HealthProfile profile = getHealthProfile(userURI);
-		 if(null != profile) {
-			 // just until we fix the mix of the Health Profiles....
-			 org.universaal.ontology.health.owl.HealthProfile newHealthProfile = new org.universaal.ontology.health.owl.HealthProfile();
-			 newHealthProfile.addTreatment(treatment);
-
-			 updateHealthProfile(profile);
-		 }
+		 	profile.addTreatment(treatment);
+		 	// TODO expand planned sessions...
+		 	
+			updateHealthProfile(profile);
 	 }
 
 	/**
@@ -83,9 +86,7 @@ public class ProfileServerTreatmentManager extends MapHealthProfileProvider
 
 		 HealthProfile profile = getHealthProfile(userURI);
 		 if(null != profile) {
-			 // just until we fix the mix of the Health Profiles....
-			 org.universaal.ontology.health.owl.HealthProfile newHealthProfile = new org.universaal.ontology.health.owl.HealthProfile();
-			 if(newHealthProfile.deleteTreatment(treatmentURI)) {
+			 if(profile.deleteTreatment(treatmentURI)) {
 				  updateHealthProfile(profile);
 			 } else {
 				 LogUtils.logInfo(mc, ProfileServerTreatmentManager.class,
@@ -115,9 +116,8 @@ public class ProfileServerTreatmentManager extends MapHealthProfileProvider
 		
 		 HealthProfile profile = getHealthProfile(userURI);
 		 if(null != profile) {
-			 // just until we fix the mix of the Health Profiles....
-			 org.universaal.ontology.health.owl.HealthProfile newHealthProfile = new org.universaal.ontology.health.owl.HealthProfile();
-			 if(newHealthProfile.editTreatment(newTreatment)) {
+			 if(profile.editTreatment(newTreatment)) {
+				 //TODO re expand planned sessions
 				  updateHealthProfile(profile);
 			 } else {
 				 LogUtils.logInfo(mc, ProfileServerTreatmentManager.class,
@@ -135,20 +135,19 @@ public class ProfileServerTreatmentManager extends MapHealthProfileProvider
 	 * 
 	 * @return All the treatments that are associated with the user 
 	 */
-	public List getAllTreatments(String userURI) {
+	public List<Treatment> getAllTreatments(String userURI) {
 		
 		HealthProfile profile = getHealthProfile(userURI);
 		if(null != profile) {
-			// just until we fix the mix of the Health Profiles....
-			org.universaal.ontology.health.owl.HealthProfile newHealthProfile = new org.universaal.ontology.health.owl.HealthProfile();
-			Treatment[] treatments = newHealthProfile.getTreatments();
-			
-			if(null != treatments) {
-				List list = new ArrayList(treatments.length);
-				for(int i=0; i<treatments.length; i++) {
-					list.add(treatments[i]);
+			Object propList = profile.getProperty(HealthProfile.PROP_HAS_TREATMENT);
+			if (propList instanceof List) {
+				return ((List<Treatment>) propList);
+			} else {
+				List<Treatment> al = new ArrayList<Treatment>();
+				if (propList != null && propList instanceof Treatment) {
+					al.add((Treatment) propList);
 				}
-				return list;
+				return al;
 			}
 		}
 		return null;
@@ -167,32 +166,56 @@ public class ProfileServerTreatmentManager extends MapHealthProfileProvider
 	 * @return All the treatments that are associated with the user in a
 	 * specific period of time
 	 */
-	public List getTreatmentsBetweenTimestamps(String userURI, 
+	public List<Treatment> getTreatmentsBetweenTimestamps(String userURI, 
 			long timestampFrom, long timestampTo) {
 		
 		HealthProfile profile = getHealthProfile(userURI);
 		if(null != profile) {
-			// just until we fix the mix of the Health Profiles....
-			org.universaal.ontology.health.owl.HealthProfile newHealthProfile = new org.universaal.ontology.health.owl.HealthProfile();
-			Treatment[] treatments = newHealthProfile.getTreatments();
-			
+			List<Treatment> treatments = getAllTreatments(userURI);
+			List<Treatment> list = new ArrayList<Treatment>();
 			if(null != treatments) {
-				List list = new ArrayList();
-				for(int i=0; i<treatments.length; i++) {
-					TreatmentPlanning planning = treatments[i].getTreatmentPlanning(); 
+				for(int i=0; i<treatments.size(); i++) {
+					TreatmentPlanning planning = treatments.get(i).getTreatmentPlanning(); 
 					if(null != planning) {
 						if((timestampTo == -1 && timestampFrom == -1) || 
 								((timestampFrom != -1 && 
 								planning.getStartDate().getMillisecond() >= timestampFrom) &&
 								(timestampTo != -1 && 
 								planning.getEndDate().getMillisecond() <= timestampTo))) {
-							list.add(treatments[i]);
+							list.add(treatments.get(i));
 						}
 					}
 				}
 				return list;
 			}
 		}
+		return null;
+	}
+	
+	/**
+	 * @param profile
+	 */
+	private void updateHealthProfile(HealthProfile profile) {
+		ServiceRequest req = new ServiceRequest(new ProfileManagementService(null), null);
+		req.addChangeEffect(new String[] {ProfileManagementService.PROP_MANAGES_PROFILE}, profile);
+		
+		new DefaultServiceCaller(mc).call(req);
+	}
+
+	/**
+	 * @param userURI
+	 * @return
+	 */
+	private HealthProfile getHealthProfile(String userURI) {
+		ServiceRequest req = new ServiceRequest(new ProfileManagementService(null), null);
+		req.addValueFilter(new String[] {ProfileManagementService.PROP_ASSISTED_USER}, new AssistedPerson(userURI));
+		req.addRequiredOutput(REQ_OUTPUT_PROFILE, new String[] {ProfileManagementService.PROP_MANAGES_PROFILE});
+		
+		ServiceResponse sr = new DefaultServiceCaller(mc).call(req);
+		if (sr.getCallStatus() == CallStatus.succeeded) {
+			return (HealthProfile) sr.getOutput(REQ_OUTPUT_PROFILE, false).get(0);
+		}
+		
 		return null;
 	}
 }
