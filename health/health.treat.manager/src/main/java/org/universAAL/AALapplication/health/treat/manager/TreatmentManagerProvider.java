@@ -30,7 +30,9 @@ import org.universAAL.AALapplication.health.treat.manager.profiles.ListTreatment
 import org.universAAL.AALapplication.health.treat.manager.profiles.ListTreatmentService;
 import org.universAAL.AALapplication.health.treat.manager.profiles.NewTreatmentService;
 import org.universAAL.AALapplication.health.treat.manager.profiles.RemoveTreatmentService;
+import org.universAAL.AALapplication.health.treat.manager.profiles.TreatmentManagerProfilesOnt;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -54,6 +56,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	
 	// define profiles
 	static {
+		OntologyManagement.getInstance().register(new TreatmentManagerProfilesOnt());
     	profiles[0] = new NewTreatmentService().getProfile();		
     	profiles[1] = new RemoveTreatmentService().getProfile();
     	profiles[2] = new EditTreatmentService().getProfile();

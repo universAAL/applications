@@ -18,17 +18,16 @@
  * limitations under the License.
  ******************************************************************************/
 
-packaorg.universAAL.AALapplication.health.treat.manager.profilesces;
+package org.universAAL.AALapplication.health.treat.manager.profiles;
 
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 public class EditTreatmentService extends TreatmentManagementService {
 
 	//NAMESPACE & PROPERTIES
-	public static final String MY_URI = HealthOntology.NAMESPACE
+	public static final String MY_URI = TreatmentManagerProfilesOnt.NAMESPACE
 			+ "EditTreatmentService";
 
 	//CONSTRUCTOR	

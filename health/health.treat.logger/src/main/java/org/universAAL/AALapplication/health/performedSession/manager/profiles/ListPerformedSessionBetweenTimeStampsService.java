@@ -18,7 +18,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-packaorg.universAAL.AALapplication.health.performedSession.manager.profilesces;
+package org.universAAL.AALapplication.health.performedSession.manager.profiles;
 
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.profile.User;

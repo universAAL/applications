@@ -16,10 +16,8 @@
  ******************************************************************************/
 package org.universAAL.AALapplication.health.treat.manager.profiles;
 
-import org.universAAL.middleware.owl.OntClassInfo;
 import org.universAAL.middleware.owl.OntClassInfoSetup;
 import org.universAAL.middleware.owl.Ontology;
-import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
@@ -38,9 +36,7 @@ public class TreatmentManagerProfilesOnt extends Ontology {
 		    super(NAMESPACE);
 		  }
 
-	/* (non-Javadoc)
-	 * @see org.universAAL.middleware.owl.Ontology#create()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public void create() {
 		OntClassInfoSetup oci;
