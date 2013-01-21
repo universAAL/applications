@@ -25,7 +25,7 @@ import org.universaal.ontology.health.owl.HealthOntology;
  * 
  * @navassoc - "manages" - HealthProfile
  */
-public abstract class ProfileManagementService extends HealthService{
+public class ProfileManagementService extends HealthService{
 
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
