@@ -692,7 +692,6 @@ health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ProfileServerHealthProfileProvider.java -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ProjectActivator.java -text
 health/health.profile.manager/src/main/java/org/universAAL/AALApplication/health/profile/manager/ServiceProvider.java -text
-health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/HealthProfileProviderTest.java -text svneol=unset#text/plain
 health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/MapHealthProfileProvider.java -text svneol=unset#text/plain
 health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/MapHealthProfileProviderTest.java -text svneol=unset#text/plain
 health/health.profile.manager/src/test/java/org/universAAL/AALApplication/health/profile/manager/ProfileServerHealthProfileProviderTest.java -text
