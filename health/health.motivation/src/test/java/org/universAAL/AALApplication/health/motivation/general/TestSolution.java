@@ -5,7 +5,6 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.universAAL.AALApplication.health.motivation.MotivationInterface;
-import org.universAAL.AALApplication.health.motivation.testSupportClasses.Solution;
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.rdf.TypeMapper;
@@ -90,18 +89,18 @@ public class TestSolution implements MotivationInterface{
 	public void setUp(){
 		registerClassesNeeded();
 	}
-	@Test
-	public void testSolution(){
-		Questionnaire q = createQuestionnaire();
-		Solution solution = new Solution();
-		AnsweredQuestionnaire testSolution = solution.getSolution(q);
-		
-		Answer[] testAnswers = testSolution.getAnswers();
-		
-		Object[] answerContent1 = testAnswers[0].getAnswerContent();
-		Object[] answerContent2 = testAnswers[1].getAnswerContent();
-		
-		Assert.assertEquals(Boolean.FALSE, answerContent1[0]);	
-		Assert.assertEquals(Boolean.TRUE, answerContent2[0]);	
-	}
+//	@Test
+//	public void testSolution(){
+//		Questionnaire q = createQuestionnaire();
+//		Solution solution = new Solution();
+//		AnsweredQuestionnaire testSolution = solution.getSolution(q);
+//		
+//		Answer[] testAnswers = testSolution.getAnswers();
+//		
+//		Object[] answerContent1 = testAnswers[0].getAnswerContent();
+//		Object[] answerContent2 = testAnswers[1].getAnswerContent();
+//		
+//		Assert.assertEquals(Boolean.FALSE, answerContent1[0]);	
+//		Assert.assertEquals(Boolean.TRUE, answerContent2[0]);	
+//	}
 }
