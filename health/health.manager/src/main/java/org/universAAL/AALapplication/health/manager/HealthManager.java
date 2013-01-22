@@ -25,12 +25,12 @@ public class HealthManager {
 	private static HealthManager singleton;
 	private static ModuleContext context;
 	private ISubscriber isubcriber;
-	private OPublisher opublisher;	
+	//private OPublisher opublisher;	
 	private User user;
 	
 	private HealthManager() {
 		isubcriber = new ISubscriber(context);
-		opublisher = new OPublisher(context);
+		//opublisher = new OPublisher(context);
 	}
 	
 	public static HealthManager getInstance() {
@@ -46,9 +46,9 @@ public class HealthManager {
 	public ISubscriber getIsubcriber() {
 		return isubcriber;
 	}
-	public OPublisher getOpublisher() {
-		return opublisher;
-	}
+//	public OPublisher getOpublisher() {
+//		return opublisher;
+//	}
 
 	public User getUser() {
 		return user;

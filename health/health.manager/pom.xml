@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>health.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>B.0.1-SNAPSHOT</version>
+		<version>D.0.1-SNAPSHOT</version>
 		<relativePath>../health.pom/</relativePath>
 	</parent>
 
@@ -51,7 +51,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.ui</artifactId>
+			<artifactId>mw.bus.ui.core</artifactId>
 		</dependency>
 	</dependencies>
 

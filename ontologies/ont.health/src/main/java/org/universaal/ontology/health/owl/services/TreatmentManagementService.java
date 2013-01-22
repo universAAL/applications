@@ -33,7 +33,7 @@ import org.universaal.ontology.health.owl.HealthOntology;
  * 
  * @navassoc - "manages" - Treatment
  */
-public abstract class TreatmentManagementService extends HealthService{
+public class TreatmentManagementService extends HealthService{
 
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE

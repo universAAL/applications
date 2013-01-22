@@ -4,7 +4,6 @@ import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
