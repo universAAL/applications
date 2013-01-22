@@ -25,6 +25,9 @@
     <module>../ont.biomedicalsensors</module>
     <module>../ont.drools</module>
     <module>../ont.ltba</module>
+    <module>../ont.aalfficiencyscores</module>
+    <module>../ont.fitbitdata</module>
+    <module>../ont.readenergy</module>
   </modules>
   <scm>
     <connection>${svn.base}/${project.artifactId}</connection>
@@ -81,7 +84,7 @@
       <dependency>
         <groupId>org.universAAL.ontology</groupId>
         <artifactId>ont.message</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.3.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.ontology</groupId>
@@ -96,16 +99,31 @@
       <dependency>
         <groupId>org.universAAL.ontology</groupId>
         <artifactId>ont.ltba</artifactId>
-        <version>D.0.1-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.universAAL.ontology.services</groupId>
-        <artifactId>ont.drools</artifactId>
-        <version>D.0.1-SNAPSHOT</version>
+        <version>1.3.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.ontology</groupId>
         <artifactId>ont.activity</artifactId>
+        <version>1.3.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.ontology</groupId>
+        <artifactId>ont.aalfficiencyscores</artifactId>
+        <version>1.3.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.ontology</groupId>
+        <artifactId>ont.drools</artifactId>
+        <version>1.3.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.ontology</groupId>
+        <artifactId>ont.fitbitdata</artifactId>
+        <version>1.3.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.ontology</groupId>
+        <artifactId>ont.readenergy</artifactId>
         <version>1.3.1-SNAPSHOT</version>
       </dependency>
     </dependencies>
