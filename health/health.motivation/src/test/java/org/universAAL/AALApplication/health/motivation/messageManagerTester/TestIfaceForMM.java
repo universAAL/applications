@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import org.universAAL.AALApplication.health.motivation.ClassesNeededRegistration;
 import org.universAAL.AALApplication.health.motivation.MotivationServiceRequirementsIface;
 import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIface;
 import org.universAAL.middleware.owl.DataRepOntology;
