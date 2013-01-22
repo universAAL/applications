@@ -12,12 +12,12 @@ public class ProjectActivator implements BundleActivator {
 	public void start(BundleContext arg0) throws Exception {	
 		context = uAALBundleContainer.THE_CONTAINER
                 .registerModule(new Object[] {arg0});	
-		context.logDebug("Initialising Project", null);
+		context.logDebug(getClass().getName(),"Initialising Project", null);
 
 		/*
 		 * uAAL stuff
 		 */
-		context.logInfo("Project started", null);
+		context.logInfo(getClass().getName(),"Project started", null);
 	}
 
 
