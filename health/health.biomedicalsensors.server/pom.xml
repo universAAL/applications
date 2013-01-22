@@ -24,7 +24,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.universAAL.ontology.services</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.drools</artifactId>
 		</dependency>
 

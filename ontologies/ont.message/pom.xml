@@ -10,7 +10,7 @@
 	
   	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.message</artifactId>
-	<version>1.2.1-SNAPSHOT</version>
+	<version>1.3.1-SNAPSHOT</version>
 	<name>MessageOntology</name>
 	<description>No further description provided</description>
 	<packaging>bundle</packaging>
