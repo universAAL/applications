@@ -24,9 +24,9 @@
 		<relativePath>../health.pom/</relativePath>
 	</parent>
 
-	<artifactId>health.manager</artifactId>
-	<name>Health Manager</name>
-	<description>Main component for Health Management uAAL Service</description>
+	<artifactId>health.ui.client</artifactId>
+	<name>Health UI interface</name>
+	<description>UI interface for health service</description>
 
 	<licenses>
 		<license>
