@@ -1,7 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl.database;
 
 import org.universAAL.AALapplication.medication_manager.configuration.SqlScriptParser;
-import org.universAAL.AALapplication.medication_manager.persistence.SqlUtility;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 
@@ -32,12 +32,27 @@ public final class DerbyDatabase implements Database {
     this.connection = connection;
   }
 
+  public SqlUtility getSqlUtility() {
+    return new SqlUtilityImpl(connection);
+  }
+
   public void initDatabase() throws Exception {
     Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-    handleSequence();
+    System.out.println("getNextIdFromIdGenerator() = " + getNextIdFromIdGenerator());
     if (checkIfTablesNotExists()) {
       createTablesAndPopulateThemInOneTransaction();
     }
+  }
+
+  public int getNextIdFromIdGenerator() {
+    try {
+      int sequenceValue = getNextSequenceValue();
+      return sequenceValue;
+    } catch (SQLException e) {
+      createSequence();
+    }
+
+    throw new MedicationManagerPersistenceException("unable to get next id from sequence generator");
   }
 
   private void createTablesAndPopulateThemInOneTransaction() {
@@ -71,26 +86,13 @@ public final class DerbyDatabase implements Database {
     }
   }
 
-  public SqlUtility getSqlUtility() {
-    return new SqlUtilityImpl(connection);
-  }
-
-  private void handleSequence() throws SQLException {
-    try {
-      int sequenceValue = getNextSequenceValue();
-      System.out.println("sequenceValue = " + sequenceValue);
-    } catch (SQLException e) {
-      createSequence();
-    }
-  }
-
-  private int getNextSequenceValue() throws SQLException {
+  public int getNextSequenceValue() throws SQLException {
     PreparedStatement statement = null;
     try {
       statement = connection.prepareStatement(
           "VALUES NEXT VALUE FOR " + MEDICATION_MANAGER + ".ID_GEN");
       ResultSet rs = statement.executeQuery();
-      while (rs.next()) {
+      if (rs.next()) {
         int id = rs.getInt(1);
         return id;
       }
@@ -101,7 +103,7 @@ public final class DerbyDatabase implements Database {
     throw new MedicationManagerPersistenceException("Unexpected missing sequence value");
   }
 
-  private void createSequence() throws SQLException {
+  private void createSequence() {
     Log.info("The sequence does not exists, so creating the sequence", getClass());
     PreparedStatement ps = null;
     try {

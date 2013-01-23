@@ -19,12 +19,13 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationConsoleCommands;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationManagerCommands;
-import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.SqlConsoleCommand;
-import org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases.UsecaseNewPrescription;
+import org.universAAL.AALapplication.medication_manager.ui.NewPrescriptionHandler;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -40,6 +41,7 @@ import static java.io.File.*;
 public class Activator implements BundleActivator {
 
   public static ModuleContext mc;
+  public static BundleContext bundleContext;
   public static File medicationManagerConfigurationDirectory;
 
   public static final Logger logger = LoggerFactory.getLogger(Activator.class);
@@ -52,6 +54,8 @@ public class Activator implements BundleActivator {
 
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
+    bundleContext = context;
+
     Hashtable props = new Hashtable();
     props.put(OSGI_COMMAND_SCOPE, MedicationConsoleCommands.COMMAND_PREFIX);
     props.put(OSGI_COMMAND_FUNCTION, new String[]{
@@ -62,10 +66,6 @@ public class Activator implements BundleActivator {
     );
     context.registerService(MedicationManagerCommands.class.getName(),
         new MedicationManagerCommands(), props);
-
-    UsecaseNewPrescription.bundleContext = context;
-
-    SqlConsoleCommand.bundleContext = context;
 
   }
 
@@ -97,4 +97,43 @@ public class Activator implements BundleActivator {
 
     return directory;
   }
+
+  public static PersistentService getPersistentService() {
+    if (bundleContext == null) {
+      throw new MedicationManagerShellException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = bundleContext.getServiceReference(PersistentService.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerShellException("The ServiceReference is null for PersistentService");
+    }
+
+    PersistentService persistentService = (PersistentService) bundleContext.getService(srPS);
+
+    if (persistentService == null) {
+      throw new MedicationManagerShellException("The PersistentService is missing");
+    }
+    return persistentService;
+  }
+
+  public static NewPrescriptionHandler getNewPrescriptionHandler() {
+    if (bundleContext == null) {
+      throw new MedicationManagerShellException("The bundleContext is not set");
+    }
+
+    ServiceReference sr = bundleContext.getServiceReference(NewPrescriptionHandler.class.getName());
+
+    if (sr == null) {
+      throw new MedicationManagerShellException("The ServiceReference is null for NewPrescriptionHandler");
+    }
+
+    NewPrescriptionHandler newPrescriptionHandler = (NewPrescriptionHandler) bundleContext.getService(sr);
+    if (newPrescriptionHandler == null) {
+      throw new MedicationManagerShellException("The NewPrescriptionHandler service is missing");
+    }
+    return newPrescriptionHandler;
+  }
+
+
 }

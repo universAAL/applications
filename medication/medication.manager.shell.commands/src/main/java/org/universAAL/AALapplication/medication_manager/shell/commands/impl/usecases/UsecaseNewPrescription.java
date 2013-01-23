@@ -17,8 +17,6 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.ui.NewPrescriptionHandler;
@@ -36,8 +34,6 @@ public final class UsecaseNewPrescription extends Usecase {
 
   private static final String PRESCRIPTIONS = "prescriptions";
   private final File prescriptionDirectory;
-
-  public static BundleContext bundleContext;
 
   public static final String COMMAND_INFO =
       "This command expects two parameters, which are: usecase id and the file name";
@@ -82,20 +78,7 @@ public final class UsecaseNewPrescription extends Usecase {
     PrescriptionParser prescriptionParser = new PrescriptionParser();
     PrescriptionDTO prescriptionDTO = prescriptionParser.parse(prescriptionFile);
 
-    if (bundleContext == null) {
-      throw new MedicationManagerShellException("The bundleContext is not set");
-    }
-
-    ServiceReference sr = bundleContext.getServiceReference(NewPrescriptionHandler.class.getName());
-
-    if (sr == null) {
-      throw new MedicationManagerShellException("The ServiceReference is null for NewPrescriptionHandler");
-    }
-
-    NewPrescriptionHandler newPrescriptionHandler = (NewPrescriptionHandler) bundleContext.getService(sr);
-    if (newPrescriptionHandler == null) {
-      throw new MedicationManagerShellException("The NewPrescriptionHandler service is missing");
-    }
+    NewPrescriptionHandler newPrescriptionHandler = getNewPrescriptionHandler();
     newPrescriptionHandler.callHealthServiceWithNewPrescription(prescriptionDTO);
 
   }

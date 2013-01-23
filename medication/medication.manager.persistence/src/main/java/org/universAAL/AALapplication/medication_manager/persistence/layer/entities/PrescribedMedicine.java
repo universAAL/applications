@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.persistence;
+package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 

@@ -130,6 +130,7 @@ medication/medication.manager.integration.tests/target
 medication/medication.manager.ont/*.iml
 medication/medication.manager.ont/target
 medication/medication.manager.persistence/*.iml
+medication/medication.manager.persistence/target
 medication/medication.manager.pom/*.idea
 medication/medication.manager.pom/*.iml
 medication/medication.manager.service/*.iml
