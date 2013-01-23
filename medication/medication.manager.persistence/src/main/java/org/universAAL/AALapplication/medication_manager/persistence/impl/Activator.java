@@ -20,7 +20,7 @@ package org.universAAL.AALapplication.medication_manager.persistence.impl;
 import org.apache.derby.jdbc.ResourceAdapterImpl;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.universAAL.AALapplication.medication_manager.persistence.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.DerbyDatabase;
 import org.universAAL.middleware.container.ModuleContext;
@@ -71,11 +71,16 @@ public class Activator implements BundleActivator {
     return DriverManager.getConnection("jdbc:derby:" + MEDICATION_MANAGER + ";create=true;");
   }
 
-  public static void closeStatement(Statement statement) throws SQLException {
-    if (statement == null || statement.isClosed()) {
-      return;
-    }
+  public static void closeStatement(Statement statement) {
+    try {
+      if (statement == null || statement.isClosed()) {
+        return;
+      }
 
-    statement.close();
+      statement.close();
+    } catch (SQLException e) {
+      //nothing we could here except logging
+      Log.error(e, "Unexpected error while closing statement", Activator.class);
+    }
   }
 }

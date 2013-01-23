@@ -1,6 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl.database;
 
-import org.universAAL.AALapplication.medication_manager.persistence.SqlUtility;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 

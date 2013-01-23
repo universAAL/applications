@@ -43,7 +43,7 @@
             <Bundle-Description>${project.description}</Bundle-Description>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Private-Package>org.universAAL.AALapplication.medication_manager.persistence.impl.*</Private-Package>
-            <Export-Package>org.universAAL.AALapplication.medication_manager.persistence</Export-Package>
+            <Export-Package>org.universAAL.AALapplication.medication_manager.persistence.layer.*</Export-Package>
           </instructions>
         </configuration>
       </plugin>

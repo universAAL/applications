@@ -17,10 +17,12 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
-import org.universAAL.AALapplication.medication_manager.persistence.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.SqlUtility;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 
@@ -52,8 +54,6 @@ public final class SqlConsoleCommand extends ConsoleCommand {
           "\n\t \n\t - " + FILE + " fileName" + " (will execute sql statements from file)" +
           "\n\t \n\t - " + EXECUTE + " sqlStatement (will execute any sql statement)";
 
-  public static BundleContext bundleContext;
-
   public SqlConsoleCommand(String name, String description) {
     super(name, description);
 
@@ -78,8 +78,28 @@ public final class SqlConsoleCommand extends ConsoleCommand {
 
     String secondParam = parameters[1].trim();
 
-    callSqlUtility(firstParam, secondParam);
+//    callSqlUtility(firstParam, secondParam);
 
+    testPersistentService();
+  }
+
+  private void testPersistentService() {
+    PersistentService persistentService = getPersistentService();
+
+    PersonDao personDao = persistentService.getPersonDao();
+
+    Person person = personDao.get(1);
+    System.out.println("person = " + person);
+
+    Person per = personDao.getByName("name");
+
+    System.out.println("per = " + per);
+
+    MedicineDao medicineDao = persistentService.getMedicineDao();
+
+    Medicine medicine = medicineDao.getByName("new");
+
+    System.out.println("medicine = " + medicine);
   }
 
   private void checkFirstParam(String firstParam) {
@@ -98,21 +118,7 @@ public final class SqlConsoleCommand extends ConsoleCommand {
 
   private void callSqlUtility(String firstParam, String secondParam) {
 
-    if (bundleContext == null) {
-      throw new MedicationManagerShellException("The bundleContext is not set");
-    }
-
-    ServiceReference srPS = bundleContext.getServiceReference(PersistentService.class.getName());
-
-    if (srPS == null) {
-      throw new MedicationManagerShellException("The ServiceReference is null for PersistentService");
-    }
-
-    PersistentService persistentService = (PersistentService) bundleContext.getService(srPS);
-
-    if (persistentService == null) {
-      throw new MedicationManagerShellException("The PersistentService is missing");
-    }
+    PersistentService persistentService = getPersistentService();
 
     SqlUtility sqlUtility = persistentService.getSqlUtility();
 
