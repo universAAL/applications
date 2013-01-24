@@ -6,13 +6,14 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 /**
  * @author George Fournadjiev
  */
-public final class PersonDao extends AbstractDao {
+public final class PrescriptionDao extends AbstractDao {
 
 
-  private static final String TABLE_NAME = "person";
+  private static final String TABLE_NAME = "prescription";
 
-  public PersonDao(Database database) {
+  public PrescriptionDao(Database database) {
     super(database, TABLE_NAME);
   }
+
 
 }

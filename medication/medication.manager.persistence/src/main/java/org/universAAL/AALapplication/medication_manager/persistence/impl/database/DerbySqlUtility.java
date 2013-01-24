@@ -20,11 +20,11 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
 /**
  * @author George Fournadjiev
  */
-public final class SqlUtilityImpl implements SqlUtility {
+public final class DerbySqlUtility implements SqlUtility {
 
   private final Connection connection;
 
-  public SqlUtilityImpl(Connection connection) {
+  public DerbySqlUtility(Connection connection) {
 
     this.connection = connection;
   }

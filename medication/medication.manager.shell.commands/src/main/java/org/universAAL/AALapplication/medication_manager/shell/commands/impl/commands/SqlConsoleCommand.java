@@ -19,10 +19,15 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl.com
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.InventoryLogDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescribedMedicineDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.TreatmentDao;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 
@@ -78,7 +83,7 @@ public final class SqlConsoleCommand extends ConsoleCommand {
 
     String secondParam = parameters[1].trim();
 
-//    callSqlUtility(firstParam, secondParam);
+    callSqlUtility(firstParam, secondParam);
 
     testPersistentService();
   }
@@ -86,20 +91,28 @@ public final class SqlConsoleCommand extends ConsoleCommand {
   private void testPersistentService() {
     PersistentService persistentService = getPersistentService();
 
-    PersonDao personDao = persistentService.getPersonDao();
+    System.out.println("////////////////////////////BEGIN/////////////////////////////////////");
 
-    Person person = personDao.get(1);
-    System.out.println("person = " + person);
-
-    Person per = personDao.getByName("name");
-
-    System.out.println("per = " + per);
-
+    DispenserDao dispenserDao = persistentService.getDispenserDao();
+    dispenserDao.getById(1);
+    IntakeDao intakeDao = persistentService.getIntakeDao();
+    intakeDao.getById(1);
+    InventoryLogDao inventoryLogDao = persistentService.getInventoryLogDao();
+    inventoryLogDao.getById(1);
     MedicineDao medicineDao = persistentService.getMedicineDao();
+    medicineDao.getById(1);
+    MedicineInventoryDao medicineInventoryDao = persistentService.getMedicineInventoryDao();
+    medicineInventoryDao.getById(1);
+    PersonDao personDao = persistentService.getPersonDao();
+    personDao.getById(1);
+    PrescribedMedicineDao prescribedMedicineDao = persistentService.getPrescribedMedicineDao();
+    prescribedMedicineDao.getById(1);
+    PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
+    prescriptionDao.getById(1);
+    TreatmentDao treatmentDao = persistentService.getTreatmentDao();
+    treatmentDao.getById(1);
 
-    Medicine medicine = medicineDao.getByName("new");
-
-    System.out.println("medicine = " + medicine);
+    System.out.println("////////////////////////////END/////////////////////////////////////");
   }
 
   private void checkFirstParam(String firstParam) {

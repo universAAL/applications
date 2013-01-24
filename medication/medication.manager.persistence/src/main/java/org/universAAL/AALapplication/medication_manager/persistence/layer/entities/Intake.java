@@ -1,5 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
+
 import java.util.Date;
 
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
@@ -7,9 +9,8 @@ import static org.universAAL.AALapplication.medication_manager.configuration.Uti
 /**
  * @author George Fournadjiev
  */
-public final class Intake {
+public final class Intake extends Entity {
 
-  private final int id;
   private final Person patient;
   private final Medicine medicine;
   private final int quantity;
@@ -21,9 +22,10 @@ public final class Intake {
   public Intake(int id, Person patient, Medicine medicine, int quantity, UnitClass unitClass,
                 Date timePlan, Date timeTaken, Dispenser dispenser) {
 
-    validate(id, patient, medicine, quantity, unitClass, timePlan);
+    super(id);
 
-    this.id = id;
+    validate(patient, medicine, quantity, unitClass, timePlan);
+
     this.patient = patient;
     this.medicine = medicine;
     this.quantity = quantity;
@@ -33,20 +35,22 @@ public final class Intake {
     this.dispenser = dispenser;
   }
 
-  private void validate(int id, Person patient, Medicine medicine, int quantity,
+  public Intake(Person patient, Medicine medicine, int quantity, UnitClass unitClass,
+                Date timePlan, Date timeTaken, Dispenser dispenser) {
+
+   this(0, patient, medicine, quantity, unitClass, timePlan, timeTaken, dispenser);
+  }
+
+
+  private void validate(Person patient, Medicine medicine, int quantity,
                         UnitClass unitClass, Date timePlan) {
 
-    validateParameter(id, "id");
     validateParameter(patient, "patient");
     validateParameter(medicine, "medicine");
     validateParameter(quantity, "quantity");
     validateParameter(unitClass, "unitClass");
     validateParameter(timePlan, "timePlan");
 
-  }
-
-  public int getId() {
-    return id;
   }
 
   public Person getPatient() {
@@ -80,7 +84,7 @@ public final class Intake {
   @Override
   public String toString() {
     return "Intake{" +
-        "id=" + id +
+        "id=" + getId() +
         ", patient:" + patient +
         ", medicine=" + medicine +
         ", quantity=" + quantity +

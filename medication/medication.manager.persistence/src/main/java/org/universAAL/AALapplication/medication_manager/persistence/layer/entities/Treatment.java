@@ -1,25 +1,27 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
+
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 
 /**
  * @author George Fournadjiev
  */
-public final class Treatment {
+public final class Treatment extends Entity {
 
-  private final int treatmentId;
   private final String name;
   private final Person patient;
   private final Medicine medicine;
   private final Person physician;
   private final Status status;
 
-  public Treatment(int treatmentId, String name, Person patient, Medicine medicine,
+  public Treatment(int id, String name, Person patient, Medicine medicine,
                    Person physician, Status status) {
 
-    validate(treatmentId, name, patient, medicine, physician, status);
+    super(id);
 
-    this.treatmentId = treatmentId;
+    validate(name, patient, medicine, physician, status);
+
     this.name = name;
     this.patient = patient;
     this.medicine = medicine;
@@ -27,20 +29,21 @@ public final class Treatment {
     this.status = status;
   }
 
-  private void validate(int treatmentId, String name, Person patient, Medicine medicine,
+  public Treatment(String name, Person patient, Medicine medicine,
+                   Person physician, Status status) {
+
+    this(0, name, patient, medicine, physician, status);
+  }
+
+  private void validate(String name, Person patient, Medicine medicine,
                         Person physician, Status status) {
 
-    validateParameter(treatmentId, "treatmentId");
     validateParameter(name, "name");
     validateParameter(patient, "patient");
     validateParameter(medicine, "medicine");
     validateParameter(physician, "physician");
     validateParameter(status, "status");
 
-  }
-
-  public int getTreatmentId() {
-    return treatmentId;
   }
 
   public String getName() {
@@ -66,7 +69,7 @@ public final class Treatment {
   @Override
   public String toString() {
     return "Treatment{" +
-        "treatmentId=" + treatmentId +
+        "id=" + getId() +
         ", name='" + name + '\'' +
         ", patient:" + patient +
         ", " + medicine +

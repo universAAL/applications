@@ -1,7 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MealRelation;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 
 /**
@@ -10,13 +9,11 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 public final class MedicineDao extends AbstractDao {
 
 
+  private static final String TABLE_NAME = "medicine";
+
   public MedicineDao(Database database) {
-    super(database);
+    super(database, TABLE_NAME);
   }
 
-  public Medicine getByName(String name) {
 
-    return new Medicine(11, "1", "2", "3", "4", MealRelation.WITH_MEAL);
-
-  }
 }

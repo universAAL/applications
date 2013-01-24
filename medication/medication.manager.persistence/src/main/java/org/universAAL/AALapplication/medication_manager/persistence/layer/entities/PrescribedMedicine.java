@@ -1,41 +1,41 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
+
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 
 /**
  * @author George Fournadjiev
  */
-public final class PrescribedMedicine {
+public final class PrescribedMedicine extends Entity {
 
-  private final int prescribedMedicineId;
   private final Prescription prescription;
   private final Medicine medicine;
   private final Treatment treatment;
 
-  public PrescribedMedicine(int prescribedMedicineId, Prescription prescription,
+  public PrescribedMedicine(int id, Prescription prescription,
                             Medicine medicine, Treatment treatment) {
 
-    validate(prescribedMedicineId, prescription, medicine, treatment);
+    super(id);
 
+    validate(prescription, medicine, treatment);
 
-    this.prescribedMedicineId = prescribedMedicineId;
     this.prescription = prescription;
     this.medicine = medicine;
     this.treatment = treatment;
   }
 
-  private void validate(int prescribedMedicineId, Prescription prescription,
-                        Medicine medicine, Treatment treatment) {
+  public PrescribedMedicine(Prescription prescription, Medicine medicine, Treatment treatment) {
 
-    validateParameter(prescribedMedicineId, "prescribedMedicineId");
+    this(0, prescription, medicine, treatment);
+  }
+
+  private void validate(Prescription prescription, Medicine medicine, Treatment treatment) {
+
     validateParameter(prescription, "prescription");
     validateParameter(medicine, "medicine");
     validateParameter(treatment, "treatment");
 
-  }
-
-  public int getPrescribedMedicineId() {
-    return prescribedMedicineId;
   }
 
   public Prescription getPrescription() {
@@ -53,7 +53,7 @@ public final class PrescribedMedicine {
   @Override
   public String toString() {
     return "PrescribedMedicine{" +
-        "prescribedMedicineId=" + prescribedMedicineId +
+        "id=" + getId() +
         ", " + prescription +
         ", " + medicine +
         ", " + treatment +

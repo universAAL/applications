@@ -1,36 +1,37 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
+
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 
 /**
  * @author George Fournadjiev
  */
-public final class Person {
+public final class Person extends Entity {
 
-  private final int personId;
   private final String name;
   private final String personUri;
   private final Role role;
 
-  public Person(int personId, String name, String personUri, Role role) {
-    validate(personId, name, personUri, role);
+  public Person(int id, String name, String personUri, Role role) {
+    super(id);
 
-    this.personId = personId;
+    validate(name, personUri, role);
+
     this.name = name;
     this.personUri = personUri;
     this.role = role;
   }
 
-  private void validate(int personId, String name, String personUri, Role role) {
+  public Person(String name, String personUri, Role role) {
+    this(0, name, personUri, role);
+  }
 
-    validateParameter(personId, "personId");
+  private void validate(String name, String personUri, Role role) {
+
     validateParameter(name, "name");
     validateParameter(personUri, "personUri");
     validateParameter(role, "role");
-  }
-
-  public int getPersonId() {
-    return personId;
   }
 
   public String getName() {
@@ -48,7 +49,7 @@ public final class Person {
   @Override
   public String toString() {
     return "Person{" +
-        "personId=" + personId +
+        "id=" + getId() +
         ", name='" + name + '\'' +
         ", personUri='" + personUri + '\'' +
         ", role=" + role +
