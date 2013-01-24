@@ -12,10 +12,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
@@ -24,35 +27,64 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
 public final class DerbyDatabase implements Database {
 
   private final Connection connection;
+  private final DerbySqlUtility derbySqlUtility;
 
   public static final String MEDICATION_MANAGER = "Medication_Manager";
 
   public DerbyDatabase(Connection connection) {
+    validateParameter(connection, "connection");
 
     this.connection = connection;
+    this.derbySqlUtility = new DerbySqlUtility(connection);
   }
 
   public SqlUtility getSqlUtility() {
-    return new SqlUtilityImpl(connection);
+    return derbySqlUtility;
   }
 
   public void initDatabase() throws Exception {
     Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-    System.out.println("getNextIdFromIdGenerator() = " + getNextIdFromIdGenerator());
     if (checkIfTablesNotExists()) {
       createTablesAndPopulateThemInOneTransaction();
+      createSequence();
     }
   }
 
   public int getNextIdFromIdGenerator() {
     try {
       int sequenceValue = getNextSequenceValue();
+      System.out.println("getNextIdFromIdGenerator() = " + sequenceValue);
       return sequenceValue;
     } catch (SQLException e) {
-      createSequence();
+      throw new MedicationManagerPersistenceException("unable to get next id from sequence generator", e);
     }
 
-    throw new MedicationManagerPersistenceException("unable to get next id from sequence generator");
+  }
+
+  public List<Column> getById(String tableName, int id) {
+    Statement statement = null;
+    try {
+      statement = connection.createStatement();
+      String sqlQuery = "select * from " + MEDICATION_MANAGER + '.' + tableName +
+          "\n\t where id=" + id;
+
+      System.out.println("sqlQuery = " + sqlQuery);
+
+      ResultSet rs = statement.executeQuery(sqlQuery);
+      while (rs.next()) {
+        int dbId = rs.getInt("id");
+        System.out.println("dbId = " + dbId);
+      }
+      //TODO
+
+    } catch (SQLException e) {
+//      throw new MedicationManagerPersistenceException(e);
+      e.printStackTrace();
+    } finally {
+      closeStatement(statement);
+    }
+
+    return new ArrayList<Column>();
   }
 
   private void createTablesAndPopulateThemInOneTransaction() {

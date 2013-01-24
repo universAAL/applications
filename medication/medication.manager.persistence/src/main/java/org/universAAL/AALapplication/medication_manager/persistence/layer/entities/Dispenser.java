@@ -1,34 +1,33 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
+
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 
 /**
  * @author George Fournadjiev
  */
-public final class Dispenser {
+public final class Dispenser extends Entity {
 
-  private final int dispenserId;
   private final Person patient;
   private final String dispenserUri;
 
-  public Dispenser(int dispenserId, Person patient, String dispenserUri) {
+  public Dispenser(int id, Person patient, String dispenserUri) {
+    super(id);
+    validate(patient, dispenserUri);
 
-    validate(dispenserId, patient, dispenserUri);
-
-    this.dispenserId = dispenserId;
     this.patient = patient;
     this.dispenserUri = dispenserUri;
   }
 
-  private void validate(int dispenserId, Person patient, String dispenserUri) {
-
-    validateParameter(dispenserId, "dispenserId");
-    validateParameter(patient, "patient");
-    validateParameter(dispenserUri, "dispenserUri");
+  public Dispenser(Person patient, String dispenserUri) {
+    this(0, patient, dispenserUri);
   }
 
-  public int getDispenserId() {
-    return dispenserId;
+  private void validate(Person patient, String dispenserUri) {
+
+    validateParameter(patient, "patient");
+    validateParameter(dispenserUri, "dispenserUri");
   }
 
   public Person getPatient() {
@@ -42,7 +41,7 @@ public final class Dispenser {
   @Override
   public String toString() {
     return "Dispenser{" +
-        "dispenserId=" + dispenserId +
+        "id=" + getId() +
         ", patient:" + patient +
         ", dispenserUri='" + dispenserUri + '\'' +
         '}';

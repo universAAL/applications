@@ -1,5 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
+
 import java.util.Date;
 
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
@@ -7,39 +9,41 @@ import static org.universAAL.AALapplication.medication_manager.configuration.Uti
 /**
  * @author George Fournadjiev
  */
-public final class Prescription {
+public final class Prescription extends Entity {
 
-  private final int prescriptionId;
   private final Date timeOfCreation;
   private final Person patient;
   private final Person physician;
   private final PrescriptionStatus prescriptionStatus;
 
-  public Prescription(int prescriptionId, Date timeOfCreation, Person patient,
+  public Prescription(int id, Date timeOfCreation, Person patient,
                       Person physician, PrescriptionStatus prescriptionStatus) {
 
-    validate(prescriptionId, timeOfCreation, patient, physician, prescriptionStatus);
+    super(id);
 
-    this.prescriptionId = prescriptionId;
+    validate(timeOfCreation, patient, physician, prescriptionStatus);
+
     this.timeOfCreation = timeOfCreation;
     this.patient = patient;
     this.physician = physician;
     this.prescriptionStatus = prescriptionStatus;
   }
 
-  private void validate(int prescriptionId, Date timeOfCreation, Person patient,
+  public Prescription(Date timeOfCreation, Person patient,
+                      Person physician, PrescriptionStatus prescriptionStatus) {
+
+    this(0, timeOfCreation, patient, physician, prescriptionStatus);
+
+  }
+
+  private void validate(Date timeOfCreation, Person patient,
                         Person physician, PrescriptionStatus prescriptionStatus) {
 
-    validateParameter(prescriptionId, "prescriptionId");
     validateParameter(timeOfCreation, "timeOfCreation");
     validateParameter(patient, "patient");
     validateParameter(physician, "physician");
     validateParameter(prescriptionStatus, "prescriptionStatus");
 
-  }
-
-  public int getPrescriptionId() {
-    return prescriptionId;
   }
 
   public Date getTimeOfCreation() {
@@ -61,7 +65,7 @@ public final class Prescription {
   @Override
   public String toString() {
     return "Prescription{" +
-        "prescriptionId=" + prescriptionId +
+        "id=" + getId() +
         ", timeOfCreation=" + timeOfCreation +
         ", patient:" + patient +
         ", physician:" + physician +

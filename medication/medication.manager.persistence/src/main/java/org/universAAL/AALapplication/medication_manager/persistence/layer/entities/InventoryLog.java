@@ -1,5 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
+
 import java.util.Date;
 
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
@@ -7,9 +9,8 @@ import static org.universAAL.AALapplication.medication_manager.configuration.Uti
 /**
  * @author George Fournadjiev
  */
-public final class InventoryLog {
+public final class InventoryLog extends Entity {
 
-  private final int id;
   private final Date timeOfCreation;
   private final Person patient;
   private final Medicine medicine;
@@ -20,9 +21,10 @@ public final class InventoryLog {
   public InventoryLog(int id, Date timeOfCreation, Person patient, Medicine medicine,
                       int changedQuantity, UnitClass unitClass, Reference reference) {
 
-    validate(id, timeOfCreation, patient, medicine, changedQuantity, unitClass, reference);
+    super(id);
 
-    this.id = id;
+    validate(timeOfCreation, patient, medicine, changedQuantity, unitClass, reference);
+
     this.timeOfCreation = timeOfCreation;
     this.patient = patient;
     this.medicine = medicine;
@@ -31,10 +33,15 @@ public final class InventoryLog {
     this.reference = reference;
   }
 
-  private void validate(int id, Date timeOfCreation, Person patient, Medicine medicine,
+  public InventoryLog(Date timeOfCreation, Person patient, Medicine medicine,
+                      int changedQuantity, UnitClass unitClass, Reference reference) {
+
+   this(0, timeOfCreation, patient, medicine, changedQuantity, unitClass, reference);
+  }
+
+  private void validate(Date timeOfCreation, Person patient, Medicine medicine,
                         int changedQuantity, UnitClass unitClass, Reference reference) {
 
-    validateParameter(id, "id");
     validateParameter(timeOfCreation, "timeOfCreation");
     validateParameter(patient, "patient");
     validateParameter(medicine, "medicine");
@@ -42,10 +49,6 @@ public final class InventoryLog {
     validateParameter(unitClass, "unitClass");
     validateParameter(reference, "reference");
 
-  }
-
-  public int getId() {
-    return id;
   }
 
   public Date getTimeOfCreation() {
@@ -75,7 +78,7 @@ public final class InventoryLog {
   @Override
   public String toString() {
     return "InventoryLog{" +
-        "id=" + id +
+        "id=" + getId() +
         ", timeOfCreation=" + timeOfCreation +
         ", patient:" + patient +
         ", " + medicine +

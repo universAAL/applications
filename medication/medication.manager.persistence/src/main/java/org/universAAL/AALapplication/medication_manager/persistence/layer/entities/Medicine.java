@@ -1,25 +1,27 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
+
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 
 /**
  * @author George Fournadjiev
  */
-public final class Medicine {
+public final class Medicine extends Entity {
 
-  private final int medicineId;
   private final String medicineName;
   private final String medicineInfo;
   private final String medicineSideEffects;
   private final String incompliances;
   private final MealRelation mealRelation;
 
-  public Medicine(int medicineId, String medicineName, String medicineInfo,
-                      String medicineSideEffects, String incompliances, MealRelation mealRelation) {
+  public Medicine(int id, String medicineName, String medicineInfo,
+                  String medicineSideEffects, String incompliances, MealRelation mealRelation) {
 
-    validate(medicineId, medicineName, mealRelation);
+    super(id);
 
-    this.medicineId = medicineId;
+    validate(medicineName, mealRelation);
+
     this.medicineName = medicineName;
     this.medicineInfo = medicineInfo;
     this.medicineSideEffects = medicineSideEffects;
@@ -27,16 +29,17 @@ public final class Medicine {
     this.mealRelation = mealRelation;
   }
 
-  private void validate(int medicineId, String medicineName, MealRelation mealRelation) {
+  public Medicine(String medicineName, String medicineInfo,
+                  String medicineSideEffects, String incompliances, MealRelation mealRelation) {
 
-    validateParameter(medicineId, "medicineId");
+    this(0, medicineName, medicineInfo, medicineSideEffects, incompliances, mealRelation);
+  }
+
+  private void validate(String medicineName, MealRelation mealRelation) {
+
     validateParameter(medicineName, "medicineName");
     validateParameter(mealRelation, "mealRelation");
 
-  }
-
-  public int getMedicineId() {
-    return medicineId;
   }
 
   public String getMedicineName() {
@@ -62,7 +65,7 @@ public final class Medicine {
   @Override
   public String toString() {
     return "Medicine{" +
-        "medicineId=" + medicineId +
+        "medicineId=" + getId() +
         ", medicineName='" + medicineName + '\'' +
         ", medicineInfo='" + medicineInfo + '\'' +
         ", medicineSideEffects='" + medicineSideEffects + '\'' +

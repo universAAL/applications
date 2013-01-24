@@ -1,13 +1,14 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.entities;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
+
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 
 /**
  * @author George Fournadjiev
  */
-public final class MedicineInventory {
+public final class MedicineInventory extends Entity {
 
-  private final int id;
   private final Person patient;
   private final Medicine medicine;
   private final UnitClass unitClass;
@@ -17,9 +18,10 @@ public final class MedicineInventory {
   public MedicineInventory(int id, Person patient, Medicine medicine,
                            UnitClass unitClass, int quantity, int warningThreshold) {
 
-    validate(id, patient, medicine, unitClass, warningThreshold);
+    super(id);
 
-    this.id = id;
+    validate(patient, medicine, unitClass, warningThreshold);
+
     this.patient = patient;
     this.medicine = medicine;
     this.unitClass = unitClass;
@@ -27,17 +29,18 @@ public final class MedicineInventory {
     this.warningThreshold = warningThreshold;
   }
 
-  private void validate(int id, Person patient, Medicine medicine, UnitClass unitClass, int warningThreshold) {
+  public MedicineInventory(Person patient, Medicine medicine,
+                           UnitClass unitClass, int quantity, int warningThreshold) {
 
-    validateParameter(id, "id");
+    this(0, patient, medicine, unitClass, quantity, warningThreshold);
+  }
+
+  private void validate(Person patient, Medicine medicine, UnitClass unitClass, int warningThreshold) {
+
     validateParameter(patient, "patient");
     validateParameter(medicine, "medicine");
     validateParameter(unitClass, "unitClass");
     validateParameter(warningThreshold, "warningThreshold");
-  }
-
-  public int getId() {
-    return id;
   }
 
   public Person getPatient() {
@@ -58,6 +61,18 @@ public final class MedicineInventory {
 
   public int getWarningThreshold() {
     return warningThreshold;
+  }
+
+  @Override
+  public String toString() {
+    return "MedicineInventory{" +
+        "id=" + getId() +
+        ", patient=" + patient +
+        ", medicine=" + medicine +
+        ", unitClass=" + unitClass +
+        ", quantity=" + quantity +
+        ", warningThreshold=" + warningThreshold +
+        '}';
   }
 }
 
