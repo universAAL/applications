@@ -13,6 +13,8 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.ActivityFactory;
 import org.universAAL.ontology.location.LocationOntology;
+import org.universAAL.ontology.profile.ProfileOntology;
+import org.universAAL.ontology.profile.User;
 
 
 /**
@@ -22,6 +24,7 @@ public final class ActivityOntology extends Ontology {
 
   private static ActivityFactory factory = new ActivityFactory();
   public static final String NAMESPACE ="http://ontology.universAAL.org/Activity#";
+  private static final String PROP_PERFORMS_ACTION = NAMESPACE + "performsAction";
 	
   public ActivityOntology() {
     super(NAMESPACE);
@@ -33,8 +36,7 @@ public final class ActivityOntology extends Ontology {
     r.setResourceLabel("activity");
     addImport(DataRepOntology.NAMESPACE);
     addImport(LocationOntology.NAMESPACE);
-		
-    
+    addImport(ProfileOntology.NAMESPACE);
 
 
     // ******* Declaration of regular classes of the ontology ******* //
@@ -143,5 +145,10 @@ public final class ActivityOntology extends Ontology {
     oci_WakingUp.setResourceComment("");
     oci_WakingUp.setResourceLabel("WakingUp");
     oci_WakingUp.addSuperClass(PersonalHygeneActivity.MY_URI); 
+    
+    // ** Adding properties **//
+    OntClassInfoSetup oci_user = extendExistingOntClassInfo(User.MY_URI);
+    oci_user.addObjectProperty(PROP_PERFORMS_ACTION);
+    oci_user.addRestriction(MergedRestriction.getAllValuesRestriction(PROP_PERFORMS_ACTION, Activity.MY_URI));
   }
 }
