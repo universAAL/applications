@@ -17,23 +17,33 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.ontology.medMgr.MyDeviceUserMappingDatabase;
 import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
-import org.universAAL.ontology.medMgr.MyIntakeInfosDatabase;
 import org.universAAL.ontology.medMgr.Time;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
  */
 public final class UsecaseMedicationReminder extends Usecase {
 
-  private static final String MORNING = "morning";
-  private static final String LUNCH = "lunch";
-  private static final String EVENING = "evening";
-  private static final String ERROR_MESSAGE = "Expected only one parameter, which must have one of the following values: " +
-      MORNING + ", " + LUNCH + ", " + EVENING;
+  private static final String ERROR_MESSAGE = "Expected two parameters, which are: " +
+      "1. UserId \n" +
+      "2. IntakeId \n" +
+      "Please check the person and intake tables for the valid ids";
   private static final String USECASE_ID = "UC01.1";
   private static final String USECASE_TITLE = "UC01.1: Medication reminder for AP (pill dispenser) - ";
   private static final String USECASE = USECASE_TITLE +
@@ -48,42 +58,64 @@ public final class UsecaseMedicationReminder extends Usecase {
 
   @Override
   public void execute(String... parameters) {
-    if (parameters == null || parameters.length != 1) {
+    if (parameters == null || parameters.length != 2) {
       throw new MedicationManagerShellException(ERROR_MESSAGE);
     }
 
-    Time time = checkParameterAndGetTimeObject(parameters[0]);
+    PersistentService persistentService = getPersistentService();
 
-    String deviceId = MyDeviceUserMappingDatabase.getDeviceIdForSaiedUser();
+    PersonDao personDao = persistentService.getPersonDao();
+    Person person = personDao.getById(getIdFromString(parameters[0]));
+
+    System.out.println(person);
+
+    DispenserDao dispenserDao = persistentService.getDispenserDao();
+    Dispenser dis = dispenserDao.getById(1);
+    System.out.println(dis);
+    Dispenser dispenser = dispenserDao.findByPerson(person);
+    String deviceId = String.valueOf(dispenser.getId());
+
+    IntakeDao intakeDao = persistentService.getIntakeDao();
+    Intake intake = intakeDao.getById(getIdFromString(parameters[1]));
+
+    int intakePersonId = intake.getPatient().getId();
+    int personId = person.getId();
+
+    if (intakePersonId != personId) {
+      throw new MedicationManagerShellException("The intake with id=" + intake.getId() +
+          " is not associated with the patient with id=" + personId);
+    }
+
+    Time time = getTimeObject(intake.getTimePlan());
 
     Log.info("Executing the " + USECASE_TITLE + ". The deviceId is : " +
-        deviceId, getClass());
+        deviceId + " for user with id=" + personId, getClass());
 
 
     MedicationReminderContextProvider.dueIntakeReminderDeviceIdEvent(deviceId, time);
 
   }
 
-  private Time checkParameterAndGetTimeObject(String parameter) {
-    if (!MORNING.equalsIgnoreCase(parameter) &&
-        !LUNCH.equalsIgnoreCase(parameter) &&
-        !EVENING.equalsIgnoreCase(parameter)) {
-
-       throw new MedicationManagerShellException(ERROR_MESSAGE);
-
+  private int getIdFromString(String parameter) {
+    try {
+      return Integer.parseInt(parameter);
+    } catch (NumberFormatException e) {
+      throw new MedicationManagerShellException("Parameter is not a valid number", e);
     }
+  }
 
-    Time time;
+  private Time getTimeObject(Date date) {
 
-    if (MORNING.equalsIgnoreCase(parameter)) {
-      time = MyIntakeInfosDatabase.MORNING_INTAKE;
-    } else if (LUNCH.equalsIgnoreCase(parameter)) {
-      time = MyIntakeInfosDatabase.LUNCH_INTAKE;
-    } else { //EVENING.equalsIgnoreCase(parameter)
-      time = MyIntakeInfosDatabase.EVENING_INTAKE;
-    }
+    GregorianCalendar gregorianCalendar = new GregorianCalendar();
+    gregorianCalendar.setTime(date);
 
-    return time;
+    int year = gregorianCalendar.get(Calendar.YEAR);
+    int month = gregorianCalendar.get(Calendar.MONTH);
+    int day = gregorianCalendar.get(Calendar.DAY_OF_MONTH);
+    int hour = gregorianCalendar.get(Calendar.HOUR);
+    int minutes = gregorianCalendar.get(Calendar.MINUTE);
+
+    return new Time(year, month, day, hour, minutes);
 
   }
 

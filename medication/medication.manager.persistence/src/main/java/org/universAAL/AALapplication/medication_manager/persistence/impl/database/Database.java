@@ -2,7 +2,7 @@ package org.universAAL.AALapplication.medication_manager.persistence.impl.databa
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author George Fournadjiev
@@ -16,5 +16,5 @@ public interface Database {
 
   int getNextIdFromIdGenerator();
 
-  List<Column> getById(String tableName, int id);
+  Map<String, Column> getById(String tableName, int id);
 }

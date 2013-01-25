@@ -38,7 +38,7 @@ public final class Intake extends Entity {
   public Intake(Person patient, Medicine medicine, int quantity, UnitClass unitClass,
                 Date timePlan, Date timeTaken, Dispenser dispenser) {
 
-   this(0, patient, medicine, quantity, unitClass, timePlan, timeTaken, dispenser);
+    this(0, patient, medicine, quantity, unitClass, timePlan, timeTaken, dispenser);
   }
 
 

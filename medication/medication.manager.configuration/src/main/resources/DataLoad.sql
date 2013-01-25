@@ -6,6 +6,15 @@ VALUES (1, 'Said', 'urn:org.universAAL.aal_space:test_env#saied', 'patient');
 INSERT INTO MEDICATION_MANAGER.PERSON (ID, NAME, PERSON_URI, ROLE)
 VALUES (2, 'd-r Pencho Penchev', 'urn:org.universAAL.aal_space:test_env#pencho', 'physician');
 
+INSERT INTO MEDICATION_MANAGER.PERSON (ID, NAME, PERSON_URI, ROLE)
+VALUES (3, 'Alejandro', 'urn:org.universAAL.aal_space:test_env#alejandro', 'patient');
+
+INSERT INTO MEDICATION_MANAGER.PERSON (ID, NAME, PERSON_URI, ROLE)
+VALUES (4, 'George', 'urn:org.universAAL.aal_space:test_env#george', 'patient');
+
+INSERT INTO MEDICATION_MANAGER.PERSON (ID, NAME, PERSON_URI, ROLE)
+VALUES (5, 'Venelin', 'urn:org.universAAL.aal_space:test_env#venelin', 'patient');
+
 // MEDICINE TABLE
 
 INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
@@ -16,6 +25,11 @@ VALUES (2, 'Analgin', 'Analgin description', 'Analgin side_effects', 'Analgin in
 
 INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
 VALUES (3, 'Viteral', 'Viteral description', 'Viteral side_effects', 'Viteral incompliances', 'before');
+
+
+// DISPENSER TABLE
+
+INSERT INTO MEDICATION_MANAGER.DISPENSER (ID, PATIENT_FK_ID, DISPENSER_URI) VALUES (1, 1, 'dispenserUri');
 
 // MEDICINE_INVENTORY TABLE
 
