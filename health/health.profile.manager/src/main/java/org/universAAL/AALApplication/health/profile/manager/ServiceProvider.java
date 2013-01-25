@@ -128,6 +128,7 @@ public class ServiceProvider extends ServiceCallee {
 
 		//INPUT PARAMETERS URI
 		public static final String INPUT_PROFILE      = HealthOntology.NAMESPACE + "healthProfile";
+		public static final String INPUT_USER      = HealthOntology.NAMESPACE + "user";
 
 	    //OUTPUT PARAMETERS URI    
 		public static final String OUTPUT_PROFILE = HealthOntology.NAMESPACE + "matchingHealthProfile";

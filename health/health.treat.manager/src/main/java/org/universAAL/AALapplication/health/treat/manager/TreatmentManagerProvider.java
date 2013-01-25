@@ -41,7 +41,6 @@ import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 /**
  * This class provides the treatment manager services.
@@ -120,7 +119,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		if(operation == null)
 		    return null;
 
-		User userInput = (User) call.getInputValue(TreatmentManagementService.INPUT_USER);
+		User userInput = (User) call.getInputValue(NewTreatmentService.INPUT_USER);
 		if(userInput == null)
 		    return null;
 

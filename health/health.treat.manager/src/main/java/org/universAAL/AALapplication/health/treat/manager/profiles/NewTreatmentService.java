@@ -32,6 +32,7 @@ public class NewTreatmentService extends TreatmentManagementService {
 		+ "AddTreatmentService";
 	
 	//INPUT PARAMETERS URI
+	public static final String INPUT_USER      = HealthOntology.NAMESPACE + "user";
 	public static final String INPUT_TREATMENT      = HealthOntology.NAMESPACE + "treatment";
 
 	//CONSTRUCTOR
