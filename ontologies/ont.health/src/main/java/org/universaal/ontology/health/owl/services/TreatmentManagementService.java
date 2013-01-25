@@ -41,14 +41,6 @@ public class TreatmentManagementService extends HealthService{
 
 	public static final String PROP_MANAGES_TREATMENT = HealthOntology.NAMESPACE
 	+ "managesTreatments";
-	
-	//INPUT PARAMETERS URI
-	public static final String INPUT_TREATMENT      = HealthOntology.NAMESPACE + "treatment";
-	public static final String INPUT_OLD_TREATMENT  = HealthOntology.NAMESPACE + "oldTreatment";
-	public static final String INPUT_NEW_TREATMENT  = HealthOntology.NAMESPACE + "newTreatment";
-
-    //OUTPUT PARAMETERS URI    
-	public static final String OUTPUT_TREATMENTS = HealthOntology.NAMESPACE + "matchingTreatments";
 
 	// Filtering between timestamps
 	public static final String PROP_TIMESTAMP_FROM =  HealthOntology.NAMESPACE
@@ -56,9 +48,7 @@ public class TreatmentManagementService extends HealthService{
 	public static final String PROP_TIMESTAMP_TO =  HealthOntology.NAMESPACE
 			+ "listsTreatmentsTimestampTo";
 
-	public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "timestampFrom";
 
-	public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "timestampTo";
 	
     //CONSTRUCTORS
 	public TreatmentManagementService() {
