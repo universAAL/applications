@@ -1,9 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl.database;
 
-import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Column;
-import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
+import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 
-import java.util.List;
+import java.util.Map;
 
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 
@@ -20,12 +19,20 @@ public abstract class AbstractDao {
     validateParameter(tableName, "tableName");
 
     this.database = database;
-    this.tableName = tableName;
+    this.tableName = tableName.toUpperCase();
   }
 
-  public List<Column> getById(int id) {
+  public abstract <T> T getById(int id);
 
-    return database.getById(tableName, id);
+  public Map<String, Column> getTableColumnsValuesById(int id) {
+
+    Map<String, Column> columnMap = database.getById(tableName, id);
+
+    if (columnMap.isEmpty()) {
+      throw new MedicationManagerPersistenceException("There is no such record in the table with id=" + id);
+    }
+
+    return columnMap;
 
   }
 

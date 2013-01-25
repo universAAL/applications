@@ -1,23 +1,25 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl.database;
 
 import org.universAAL.AALapplication.medication_manager.configuration.SqlScriptParser;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 
 import java.io.BufferedReader;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static java.sql.Types.*;
 import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
@@ -61,7 +63,10 @@ public final class DerbyDatabase implements Database {
 
   }
 
-  public List<Column> getById(String tableName, int id) {
+  public Map<String, Column> getById(String tableName, int id) {
+
+    Map<String, Column> columns = new LinkedHashMap<String, Column>();
+
     Statement statement = null;
     try {
       statement = connection.createStatement();
@@ -71,20 +76,45 @@ public final class DerbyDatabase implements Database {
       System.out.println("sqlQuery = " + sqlQuery);
 
       ResultSet rs = statement.executeQuery(sqlQuery);
+
+      Set<String> columnsNames = derbySqlUtility.getDBColumns(tableName);
+      ResultSetMetaData metaData = rs.getMetaData();
       while (rs.next()) {
-        int dbId = rs.getInt("id");
-        System.out.println("dbId = " + dbId);
+        fillColumnsData(columns, columnsNames, rs, metaData);
       }
-      //TODO
 
     } catch (SQLException e) {
-//      throw new MedicationManagerPersistenceException(e);
-      e.printStackTrace();
+      throw new MedicationManagerPersistenceException(e);
     } finally {
       closeStatement(statement);
     }
 
-    return new ArrayList<Column>();
+    return columns;
+  }
+
+  private void fillColumnsData(Map<String, Column> columns, Set<String> columnsNames,
+                               ResultSet rs, ResultSetMetaData metaData) throws SQLException {
+
+    for (String name : columnsNames) {
+      int columnIndex = rs.findColumn(name);
+      int sqlType = metaData.getColumnType(columnIndex);
+      Column col = createColumn(name, sqlType, rs);
+      columns.put(col.getName(), col);
+    }
+  }
+
+  private Column createColumn(String name, int sqlType, ResultSet rs) throws SQLException {
+    switch (sqlType) {
+      case INTEGER:
+        int integer = rs.getInt(name);
+        return new Column(name, integer);
+      case TIMESTAMP: Timestamp date = rs.getTimestamp(name);
+        return new Column(name, date);
+      case VARCHAR: String string = rs.getString(name);
+        return new Column(name, string);
+      default:
+        throw new MedicationManagerPersistenceException("Unsupported sql type : " + sqlType);
+    }
   }
 
   private void createTablesAndPopulateThemInOneTransaction() {

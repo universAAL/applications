@@ -1,31 +1,28 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl.database;
 
+import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
+
 /**
  * @author George Fournadjiev
  */
-public final class Column<N, V> {
+public final class Column {
 
-  private N name; //first member of pair
-  private V value; //second member of pair
+  private final String name;
+  private final Object value;
 
-  public Column(N name, V value) {
+  public Column(String name, Object value) {
+
+    validateParameter(name, "name");
+
     this.name = name;
     this.value = value;
   }
 
-  public void setName(N name) {
-    this.name = name;
+  public String getName() {
+    return name;
   }
 
-  public void setValue(V value) {
-    this.value = value;
-  }
-
-  public N getName() {
-    return  name;
-  }
-
-  public V getValue() {
+  public Object getValue() {
     return value;
   }
 

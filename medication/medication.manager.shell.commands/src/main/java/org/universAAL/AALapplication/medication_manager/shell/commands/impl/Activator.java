@@ -71,6 +71,8 @@ public class Activator implements BundleActivator {
 
   public void stop(BundleContext context) throws Exception {
     medicationManagerConfigurationDirectory = null;
+    mc = null;
+    bundleContext = null;
   }
 
   private File getMedicationManagerConfigurationDirectory() {
