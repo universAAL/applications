@@ -538,6 +538,10 @@ public final class HealthOntology extends Ontology {
     oci.addRestriction(MergedRestriction.getAllValuesRestriction(
     		PerformedSessionManagementService.PROP_MANAGES_SESSION,  PlannedSession.MY_URI));
     
+    oci.addObjectProperty(PerformedSessionManagementService.PROP_ASSOCIATED_TREATMENT);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		PerformedSessionManagementService.PROP_ASSOCIATED_TREATMENT, Treatment.MY_URI, 0, 1));
+    
     oci.addDatatypeProperty(PerformedSessionManagementService.PROP_TIMESTAMP_FROM);
     oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
     		PerformedSessionManagementService.PROP_TIMESTAMP_FROM, 
