@@ -32,7 +32,9 @@ public class RemoveTreatmentService extends TreatmentManagementService {
 			+ "RemoveTreatmentService";
 	
 	//INPUT PARAMETERS URI
+	public static final String INPUT_USER      = HealthOntology.NAMESPACE + "user";
 	public static final String INPUT_TREATMENT      = HealthOntology.NAMESPACE + "treatment";
+	
 	//CONSTRUCTOR	
 	public RemoveTreatmentService() {
 		super();

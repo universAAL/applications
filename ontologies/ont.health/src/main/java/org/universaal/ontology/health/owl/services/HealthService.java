@@ -41,9 +41,6 @@ public abstract class HealthService extends Service{
 	public static final String PROP_ASSISTED_USER_PROFILE = HealthOntology.NAMESPACE
 			+ "healthProfile";
 	
-	//INPUT PARAMETERS URI
-	public static final String INPUT_USER           = HealthOntology.NAMESPACE + "user";
-	
 	//CONSTRUCTORS
 	public HealthService() {
 		super();

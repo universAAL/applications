@@ -37,7 +37,8 @@ public class ListTreatmentService extends TreatmentManagementService {
 	public static final String MY_URI = TreatmentManagerProfilesOnt.NAMESPACE
 	+ "ListTreatmentService";
 	
-    //OUTPUT PARAMETERS URI    
+    // PARAMETERS URI
+	public static final String INPUT_USER      = HealthOntology.NAMESPACE + "user";
 	public static final String OUTPUT_TREATMENTS = HealthOntology.NAMESPACE + "matchingTreatments";
 	
 	//CONSTRUCTOR	

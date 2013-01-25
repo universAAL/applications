@@ -33,6 +33,8 @@ public class EditTreatmentService extends TreatmentManagementService {
 	
 	//INPUT PARAMETERS URI
 	public static final String INPUT_TREATMENT      = HealthOntology.NAMESPACE + "treatment";
+	public static final String INPUT_USER      = HealthOntology.NAMESPACE + "user";
+	
 	//CONSTRUCTOR	
 	public EditTreatmentService() {
 		super();

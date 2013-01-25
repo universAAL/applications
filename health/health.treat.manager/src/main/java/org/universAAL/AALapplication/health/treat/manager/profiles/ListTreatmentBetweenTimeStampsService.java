@@ -39,6 +39,8 @@ public class ListTreatmentBetweenTimeStampsService extends TreatmentManagementSe
 			+ "ListTreatmentBetweenTimeStampsService";
 		
 	//INPUT PARAMETERS URI
+	public static final String INPUT_USER      = HealthOntology.NAMESPACE + "user";
+	
 	public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "timestampFrom";
 
 	public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "timestampTo";
