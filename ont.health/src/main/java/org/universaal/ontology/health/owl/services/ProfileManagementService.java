@@ -31,15 +31,6 @@ public class ProfileManagementService extends HealthService{
 	public static final String MY_URI = HealthOntology.NAMESPACE
 	+ "HealthProfileManagementService";
 
-	public static final String PROP_MANAGES_PROFILE = HealthOntology.NAMESPACE
-	+ "managesHealthProfile";
-	
-	//INPUT PARAMETERS URI
-	public static final String INPUT_PROFILE      = HealthOntology.NAMESPACE + "healthProfile";
-
-    //OUTPUT PARAMETERS URI    
-	public static final String OUTPUT_PROFILE = HealthOntology.NAMESPACE + "matchingHealthProfile";
-
     //CONSTRUCTORS
 	public ProfileManagementService() {
 		super();
@@ -61,7 +52,7 @@ public class ProfileManagementService extends HealthService{
 	 * (java.lang.String)
 	 */
 	public int getPropSerializationType(String propURI) {
-		return  PROP_MANAGES_PROFILE.equals(propURI) 
+		return  PROP_ASSISTED_USER_PROFILE.equals(propURI) 
 		 ? PROP_SERIALIZATION_FULL : super
 				.getPropSerializationType(propURI);
 	}

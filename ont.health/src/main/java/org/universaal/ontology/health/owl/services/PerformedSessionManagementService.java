@@ -42,11 +42,14 @@ public class PerformedSessionManagementService extends HealthService{
 	+ "managesSession";
 
 	//INPUT PARAMETERS URI
-	public static final String INPUT_TREATMENT         = HealthOntology.NAMESPACE + "treatment";
-	public static final String INPUT_PERFORMED_SESSION = HealthOntology.NAMESPACE + "performedSession";
+//	public static final String INPUT_TREATMENT         = HealthOntology.NAMESPACE + "treatment";
+//	public static final String INPUT_PERFORMED_SESSION = HealthOntology.NAMESPACE + "performedSession";
 
     //OUTPUT PARAMETERS URI    
-	public static final String OUTPUT_PERFORMED_SESSIONS = HealthOntology.NAMESPACE + "matchingPerformedSessions";
+//	public static final String OUTPUT_PERFORMED_SESSIONS = HealthOntology.NAMESPACE + "matchingPerformedSessions";
+
+	public static final String PROP_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "sessionsFrom";
+	public static final String PROP_TIMESTAMP_TO = HealthOntology.NAMESPACE + "sessionsTo";
 	
 	//CONSTRUCTORS
 	public PerformedSessionManagementService() {

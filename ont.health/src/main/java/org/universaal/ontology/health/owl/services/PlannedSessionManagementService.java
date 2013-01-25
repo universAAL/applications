@@ -35,9 +35,6 @@ public class PlannedSessionManagementService extends HealthService{
 	public static final String PROP_MANAGES_SESSION = HealthOntology.NAMESPACE
 	+ "managesSession";
 	
-	public static final String PROP_LISTS_SESSIONS =  HealthOntology.NAMESPACE
-	+ "listsSessions";
-	
 	//CONSTRUCTORS
 	  public PlannedSessionManagementService() {
 		  super();
@@ -59,8 +56,7 @@ public class PlannedSessionManagementService extends HealthService{
 	   * (java.lang.String)
 	   */
 	  public int getPropSerializationType(String propURI) {
-		  return PROP_MANAGES_SESSION.equals(propURI) ||
-		  PROP_LISTS_SESSIONS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
+		  return PROP_MANAGES_SESSION.equals(propURI) ? PROP_SERIALIZATION_FULL : super
 				  .getPropSerializationType(propURI);
 	  }
 
