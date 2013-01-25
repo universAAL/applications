@@ -126,6 +126,12 @@ public class ServiceProvider extends ServiceCallee {
 		public static final String MY_URI = HealthOntology.NAMESPACE
 		+ "GetProfileService";
 
+		//INPUT PARAMETERS URI
+		public static final String INPUT_PROFILE      = HealthOntology.NAMESPACE + "healthProfile";
+
+	    //OUTPUT PARAMETERS URI    
+		public static final String OUTPUT_PROFILE = HealthOntology.NAMESPACE + "matchingHealthProfile";
+		
 		static {
 			OntologyManagement.getInstance().register(
 					new SimpleOntology(MY_URI, ProfileManagementService.MY_URI, 
@@ -144,7 +150,7 @@ public class ServiceProvider extends ServiceCallee {
 		}
 		private void buildProfile() {
 			addFilteringInput(INPUT_USER, AssistedPerson.MY_URI, 1, 1, new String[] {PROP_ASSISTED_USER});
-			addOutput(OUTPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
+			addOutput(OUTPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_ASSISTED_USER_PROFILE});
 		}
 
 	    //CONSTRUCTORS
@@ -170,7 +176,7 @@ public class ServiceProvider extends ServiceCallee {
 		 * (java.lang.String)
 		 */
 		public int getPropSerializationType(String propURI) {
-			return  PROP_MANAGES_PROFILE.equals(propURI) 
+			return  PROP_ASSISTED_USER_PROFILE.equals(propURI) 
 			 ? PROP_SERIALIZATION_FULL : super
 					.getPropSerializationType(propURI);
 		}
@@ -192,6 +198,9 @@ public class ServiceProvider extends ServiceCallee {
 		public static final String MY_URI = HealthOntology.NAMESPACE
 		+ "UpdateProfileService";
 		
+		//INPUT PARAMETERS URI
+		public static final String INPUT_PROFILE      = HealthOntology.NAMESPACE + "healthProfile";
+
 		static {
 			OntologyManagement.getInstance().register(
 					new SimpleOntology(MY_URI, ProfileManagementService.MY_URI, 
@@ -211,8 +220,8 @@ public class ServiceProvider extends ServiceCallee {
 
 		private void buildProfile() {
 			//addFilteringInput(INPUT_USER, AssistedPerson.MY_URI, 1, 1, new String[] {PROP_ASSISTED_USER});
-			addInputWithChangeEffect(INPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
-			//addOutput(OUTPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_MANAGES_PROFILE});
+			addInputWithChangeEffect(INPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_ASSISTED_USER_PROFILE});
+			//addOutput(OUTPUT_PROFILE, HealthProfile.MY_URI, 0, 1, new String[] {PROP_ASSISTED_PERSON_PROFILE});
 		}
 
 	    //CONSTRUCTORS
@@ -238,7 +247,7 @@ public class ServiceProvider extends ServiceCallee {
 		 * (java.lang.String)
 		 */
 		public int getPropSerializationType(String propURI) {
-			return  PROP_MANAGES_PROFILE.equals(propURI) 
+			return  PROP_ASSISTED_USER_PROFILE.equals(propURI) 
 			 ? PROP_SERIALIZATION_FULL : super
 					.getPropSerializationType(propURI);
 		}

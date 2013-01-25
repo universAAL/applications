@@ -39,6 +39,7 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
@@ -119,63 +120,75 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		if(operation == null)
 		    return null;
 
-		Object userInput = call.getInputValue(TreatmentManagementService.INPUT_USER);
+		User userInput = (User) call.getInputValue(TreatmentManagementService.INPUT_USER);
 		if(userInput == null)
 		    return null;
 
 		if(operation.startsWith(ListTreatmentService.MY_URI))
-			return getAllTreatments(userInput.toString());
+			return getAllTreatments(userInput);
 
-		Object treatmentInput = call
-			.getInputValue(TreatmentManagementService.INPUT_TREATMENT);
+		if(operation.startsWith(ListTreatmentBetweenTimeStampsService.MY_URI)) {
+			Object timestampFromInput = call
+					.getInputValue(ListTreatmentBetweenTimeStampsService.INPUT_TIMESTAMP_FROM);
 
-		Object oldTreatmentInput = call
-			.getInputValue(TreatmentManagementService.INPUT_OLD_TREATMENT);
+			Object timestampToInput = call
+					.getInputValue(ListTreatmentBetweenTimeStampsService.INPUT_TIMESTAMP_TO);	
+			if (timestampFromInput != null && timestampToInput != null) {
+				return getTreatmentsBetweenTimestamps(
+						userInput, ((Long)timestampFromInput).longValue(), 
+						((Long)timestampToInput).longValue());
+			} else {
+				return invalidInput;
+			}
+		}
+		    
 
-		Object newTreatmentInput = call
-			.getInputValue(TreatmentManagementService.INPUT_NEW_TREATMENT);
-
-		Object timestampFromInput = call
-			.getInputValue(ListTreatmentBetweenTimeStampsService.INPUT_TIMESTAMP_FROM);
-
-		Object timestampToInput = call
-			.getInputValue(ListTreatmentBetweenTimeStampsService.INPUT_TIMESTAMP_TO);
-
-		if(timestampFromInput != null && timestampToInput != null &&
-				operation.startsWith(ListTreatmentBetweenTimeStampsService.MY_URI))
-		    return getTreatmentsBetweenTimestamps(
-		    		userInput.toString(), ((Long)timestampFromInput).longValue(), 
-		    		((Long)timestampToInput).longValue());
-
-		if(treatmentInput != null &&
-				operation.startsWith(NewTreatmentService.MY_URI))
-		    return newTreatment(userInput.toString(), (Treatment)treatmentInput);
+		if(operation.startsWith(NewTreatmentService.MY_URI)) {
+			Object treatmentInput = call
+			.getInputValue(NewTreatmentService.INPUT_TREATMENT);
+			if (treatmentInput != null) {
+				return newTreatment(userInput, (Treatment)treatmentInput);
+			} else {
+				return invalidInput;
+			}
+		}
 		
-		if(treatmentInput != null &&
-				operation.startsWith(RemoveTreatmentService.MY_URI))
-		    return deleteTreatment(userInput.toString(), treatmentInput.toString());
+		if(operation.startsWith(RemoveTreatmentService.MY_URI)) {
+			Object treatmentInput = call.getInputValue(RemoveTreatmentService.INPUT_TREATMENT);
+			if (treatmentInput != null) {
+				return deleteTreatment(userInput, (Treatment) treatmentInput);
+			} else {
+				return invalidInput;
+			}
+		}
+		
+		if(	operation.startsWith(EditTreatmentService.MY_URI)) {
+			Object treatmentInput = call
+					.getInputValue(EditTreatmentService.INPUT_TREATMENT);
 
-		if(oldTreatmentInput != null && newTreatmentInput != null &&
-				operation.startsWith(EditTreatmentService.MY_URI))
-		    return editTreatment(userInput.toString(), oldTreatmentInput.toString(),
-		    		(Treatment)newTreatmentInput);
+			if (treatmentInput != null) {
+				return editTreatment(userInput, (Treatment)treatmentInput);
+			} else {
+				return invalidInput;
+			}
+		}
 
 		return null;
 	}
-	
+
 	/**
 	 * Creates a service response that including all the treatments that are
 	 * associated with the given user.
 	 * 
-	 * @param userURI The URI of the user
+	 * @param user The  user
 	 */
-	private ServiceResponse getAllTreatments(String userURI) {
+	private ServiceResponse getAllTreatments(User user) {
 		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		List treatmentsList = treatmentManager.getAllTreatments(userURI);
+		List treatmentsList = treatmentManager.getAllTreatments(user);
 		sr.addOutput(new ProcessOutput(
-				TreatmentManagementService.OUTPUT_TREATMENTS, treatmentsList));
+				ListTreatmentService.OUTPUT_TREATMENTS, treatmentsList));
 		
 		return sr;		
 	}
@@ -184,19 +197,19 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	 * Creates a service response that including all the treatments that are
 	 * associated with the given user and are between the given timestamps.
 	 * 
-	 * @param userURI The URI of the user
+	 * @param user The user
      * @param timestampFrom The lower bound of the period
      * @param timestampTo The upper bound of the period
 	 */
 	private ServiceResponse getTreatmentsBetweenTimestamps(
-			String userURI, long timestampFrom, long timestampTo) {
+			User user, long timestampFrom, long timestampTo) {
 		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
 		List treatmentsList = treatmentManager.getTreatmentsBetweenTimestamps(
-				userURI, timestampFrom, timestampTo);
+				user, timestampFrom, timestampTo);
 		sr.addOutput(new ProcessOutput(
-				TreatmentManagementService.OUTPUT_TREATMENTS, treatmentsList));
+				ListTreatmentBetweenTimeStampsService.OUTPUT_TREATMENTS, treatmentsList));
 		
 		return sr;
 	}
@@ -204,14 +217,14 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	/**
 	 * Creates a service response for adding a new treatment for the given user.
 	 * 
-	 * @param userURI The URI of the user 
+	 * @param user The user 
 	 * @param treatment The treatment to be added
 	 */
-	private ServiceResponse newTreatment(String userURI, Treatment treatment) {
+	private ServiceResponse newTreatment(User user, Treatment treatment) {
 		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		treatmentManager.newTreatment(userURI, treatment);
+		treatmentManager.newTreatment(user, treatment);
 		
 		return sr;
 	}
@@ -219,14 +232,14 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	/**
 	 * Creates a service response for deleting a treatment for the given user.
 	 * 
-	 * @param userURI The URI of the user 
-	 * @param treatmentURI The treatment to be deleted
+	 * @param user The user 
+	 * @param treatment The treatment to be deleted
 	 */
-	private ServiceResponse deleteTreatment(String userURI, String treatmentURI) {
+	private ServiceResponse deleteTreatment(User user, Treatment treatment) {
 		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		treatmentManager.deleteTreatment(userURI, treatmentURI);
+		treatmentManager.deleteTreatment(user, treatment);
 		
 		return sr;
 	}
@@ -234,17 +247,16 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	/**
 	 * Creates a service response for editing a treatment for the given user.
 	 * 
-	 * @param userURI The URI of the user 
-	 * @param oldTreatmentURI The treatment to be editted
-	 * @param newTreatment The new treatment
+	 * @param user The user 
+	 * @param oldTreatmentURI The updated treatment
 	 */
-	private ServiceResponse editTreatment(
-			String userURI, String oldTreatmentURI, Treatment newTreatment) {
+	private ServiceResponse editTreatment(User userInput,
+			Treatment treatmentInput) {
 		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		treatmentManager.editTreatment(userURI, oldTreatmentURI, newTreatment);
+		treatmentManager.updateTreatment(treatmentInput);
 		
 		return sr;
 	}
-}
+	}

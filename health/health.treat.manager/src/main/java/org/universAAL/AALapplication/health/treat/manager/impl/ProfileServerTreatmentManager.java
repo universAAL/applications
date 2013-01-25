@@ -32,7 +32,7 @@ import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.TreatmentPlanning;
@@ -64,80 +64,85 @@ public class ProfileServerTreatmentManager //extends MapHealthProfileProvider
 	 /**
 	  * Adds a new treatment definition to the user health profile.
 	  * 
-	  * @param userURI The URI of the user
+	  * @param healthProfile The URI of the user
 	  * @param treatment The treatment to be added to the health profile
 	  */
-	 public void newTreatment(String userURI, Treatment treatment) {
-		 
-		 HealthProfile profile = getHealthProfile(userURI);
-		 	profile.addTreatment(treatment);
-		 	// TODO expand planned sessions...
-		 	
-			updateHealthProfile(profile);
+	 public void newTreatment(User user, Treatment treatment) {
+		 HealthProfile profile = getHealthProfile(user);
+		 newTreatment(profile, treatment);
 	 }
 
-	/**
-	 * Deletes a treatment definition from the user health profile.
-	 * 
-	 * @param userURI The URI of the user
-	 * @param treatmentURI The treatment to be deleted
-	 */
-	public void deleteTreatment(String userURI, String treatmentURI) {
+	/** {@inheritDoc} */
+	public void newTreatment(HealthProfile profile, Treatment treatment) {
+		profile.addTreatment(treatment);
+	 	// TODO expand planned sessions...
+	 	
+		updateHealthProfile(profile);
+	}
 
-		 HealthProfile profile = getHealthProfile(userURI);
-		 if(null != profile) {
-			 if(profile.deleteTreatment(treatmentURI)) {
-				  updateHealthProfile(profile);
-			 } else {
-				 LogUtils.logInfo(mc, ProfileServerTreatmentManager.class,
-		    			"deleteTreatment",
-		    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
-			 }
+	/** {@inheritDoc} */
+	public void deleteTreatment(User user, Treatment treatment) {
+		deleteTreatment(getHealthProfile(user), treatment);		
+	}
+	
+	/** {@inheritDoc} */
+	public void deleteTreatment(HealthProfile healthProfile, Treatment treatment) {
+		 if(null != healthProfile) {
+		 if(healthProfile.deleteTreatment(treatment.getURI())) {
+			  updateHealthProfile(healthProfile);
+		 } else {
+			 LogUtils.logInfo(mc, ProfileServerTreatmentManager.class,
+	    			"deleteTreatment",
+	    			new Object[] { "treatment " + treatment.getURI() + " does not exist"}, null);
 		 }
+	 }
 	}
 
 	/**
 	 * Edits a treatment in the user health profile.
-	 * 
-	 * @param userURI The URI of the user
-	 * @param treatmentURI The URI of the treatment to be changed
 	 * @param newTreatment The new treatment 
 	 */
-	public void editTreatment(String userURI, String treatmentURI, 
-			Treatment newTreatment) {
-
-		// check that the new treatment has the same URI
-		if(!treatmentURI.equals(newTreatment.getURI())) {
-			 LogUtils.logError(mc, ProfileServerTreatmentManager.class,
-					 "editTreatment",
-					 new Object[] { "new treatment URI does not equal to " + treatmentURI}, null);
-			return;
-		}
+	public void updateTreatment(Treatment newTreatment) {
+		//TODO SPARQL Query to update the treatment.
 		
-		 HealthProfile profile = getHealthProfile(userURI);
-		 if(null != profile) {
-			 if(profile.editTreatment(newTreatment)) {
-				 //TODO re expand planned sessions
-				  updateHealthProfile(profile);
-			 } else {
-				 LogUtils.logInfo(mc, ProfileServerTreatmentManager.class,
-		    			"editTreatment",
-		    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
-			 }
-		 }
+//		// check that the new treatment has the same URI
+//		if(!treatmentURI.equals(newTreatment.getURI())) {
+//			 LogUtils.logError(mc, ProfileServerTreatmentManager.class,
+//					 "editTreatment",
+//					 new Object[] { "new treatment URI does not equal to " + treatmentURI}, null);
+//			return;
+//		}
+//		
+//		 HealthProfile profile = getHealthProfile(userURI);
+//		 if(null != profile) {
+//			 if(profile.editTreatment(newTreatment)) {
+//				 //TODO re expand planned sessions
+//				  updateHealthProfile(profile);
+//			 } else {
+//				 LogUtils.logInfo(mc, ProfileServerTreatmentManager.class,
+//		    			"editTreatment",
+//		    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
+//			 }
+//		 }
 	}
 
 	/**
 	 * Returns a {java.util.List} of all the treatments that are associated with
 	 * the given user health profile.
 	 * 
-	 * @param userURI The URI of the user
+	 * @param user The URI of the user
 	 * 
 	 * @return All the treatments that are associated with the user 
 	 */
-	public List<Treatment> getAllTreatments(String userURI) {
+	public List<Treatment> getAllTreatments(User user) {
 		
-		HealthProfile profile = getHealthProfile(userURI);
+		HealthProfile profile = getHealthProfile(user);
+		return getAllTreatments(profile);
+	}
+		
+
+	/** {@inheritDoc} */
+	public List<Treatment> getAllTreatments(HealthProfile profile) {
 		if(null != profile) {
 			Object propList = profile.getProperty(HealthProfile.PROP_HAS_TREATMENT);
 			if (propList instanceof List) {
@@ -152,12 +157,12 @@ public class ProfileServerTreatmentManager //extends MapHealthProfileProvider
 		}
 		return null;
 	}
-		
+
 	/**
 	 * Returns a {java.util.List} of all the treatments that are associated with 
 	 * the given user health profile and are between the given timestamps.
 	 * 
-	 * @param userURI The URI of the user
+	 * @param user The URI of the user
      * @param timestampFrom The lower bound of the period, the value -1 means 
      * that there is not a lower bound 
      * @param timestampTo The upper bound of the period, the value -1 means 
@@ -166,12 +171,18 @@ public class ProfileServerTreatmentManager //extends MapHealthProfileProvider
 	 * @return All the treatments that are associated with the user in a
 	 * specific period of time
 	 */
-	public List<Treatment> getTreatmentsBetweenTimestamps(String userURI, 
+	public List<Treatment> getTreatmentsBetweenTimestamps(User user, 
 			long timestampFrom, long timestampTo) {
 		
-		HealthProfile profile = getHealthProfile(userURI);
+		HealthProfile profile = getHealthProfile(user);
+		return getTreatmentsBetweenTimestamps(profile, timestampFrom, timestampTo);
+	}
+	
+	/** {@inheritDoc} */
+	public List<Treatment> getTreatmentsBetweenTimestamps(
+			HealthProfile profile, long timestampFrom, long timestampTo) {
 		if(null != profile) {
-			List<Treatment> treatments = getAllTreatments(userURI);
+			List<Treatment> treatments = getAllTreatments(profile);
 			List<Treatment> list = new ArrayList<Treatment>();
 			if(null != treatments) {
 				for(int i=0; i<treatments.size(); i++) {
@@ -191,25 +202,25 @@ public class ProfileServerTreatmentManager //extends MapHealthProfileProvider
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @param profile
 	 */
 	private void updateHealthProfile(HealthProfile profile) {
 		ServiceRequest req = new ServiceRequest(new ProfileManagementService(null), null);
-		req.addChangeEffect(new String[] {ProfileManagementService.PROP_MANAGES_PROFILE}, profile);
+		req.addChangeEffect(new String[] {ProfileManagementService.PROP_ASSISTED_USER_PROFILE}, profile);
 		
 		new DefaultServiceCaller(mc).call(req);
 	}
-
+	
 	/**
-	 * @param userURI
+	 * @param user
 	 * @return
 	 */
-	private HealthProfile getHealthProfile(String userURI) {
+	private HealthProfile getHealthProfile(User user) {
 		ServiceRequest req = new ServiceRequest(new ProfileManagementService(null), null);
-		req.addValueFilter(new String[] {ProfileManagementService.PROP_ASSISTED_USER}, new AssistedPerson(userURI));
-		req.addRequiredOutput(REQ_OUTPUT_PROFILE, new String[] {ProfileManagementService.PROP_MANAGES_PROFILE});
+		req.addValueFilter(new String[] {ProfileManagementService.PROP_ASSISTED_USER}, user);
+		req.addRequiredOutput(REQ_OUTPUT_PROFILE, new String[] {ProfileManagementService.PROP_ASSISTED_USER_PROFILE});
 		
 		ServiceResponse sr = new DefaultServiceCaller(mc).call(req);
 		if (sr.getCallStatus() == CallStatus.succeeded) {

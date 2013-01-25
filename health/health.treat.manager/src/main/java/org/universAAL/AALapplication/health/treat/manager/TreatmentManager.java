@@ -24,6 +24,8 @@ package org.universAAL.AALapplication.health.treat.manager;
 
 import java.util.List;
 
+import org.universAAL.ontology.profile.User;
+import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.Treatment;
 
 /**
@@ -43,50 +45,84 @@ public interface TreatmentManager {
 	/**
 	 * Adds a new treatment definition to the user health profile.
 	 * 
-	 * @param userURI The URI of the user
+	 * @param user The URI of the user
 	 * @param treatment The treatment to be added to the health profile
 	 */
-	public void newTreatment(String userURI, Treatment treatment);
+	public void newTreatment(User user, Treatment treatment);
+
+	/**
+	 * Adds a new treatment definition to the user health profile.
+	 * 
+	 * @param healthProfile the health profile to which to add the treatment
+	 * @param treatment The treatment to be added to the health profile
+	 */
+	public void newTreatment(HealthProfile healthProfile, Treatment treatment);
 
 	/**
 	 * Deletes a treatment definition from the user health profile.
-	 * 
-	 * @param userURI The URI of the user
-	 * @param treatmentURI The treatment to be deleted
+	 * @param user the user from which to remove the treatment
+	 * @param treatment The treatment to be deleted
 	 */
-	public void deleteTreatment(String userURI, String treatmentURI);
+	public void deleteTreatment(User user, Treatment treatment);
+	
+	/**
+	 * Deletes a treatment definition from the user health profile.
+	 * @param healthProfile the health profile from which to remove the treatment
+	 * @param treatment The treatment to be deleted
+	 */
+	public void deleteTreatment(HealthProfile healthProfile, Treatment treatment);
 
 	/**
 	 * Edits a treatment in the user health profile.
-	 * 
-	 * @param userURI The URI of the user
-	 * @param treatmentURI The URI of the treatment to be changed
-	 * @param newTreatment The new treatment
+	 * @param newTreatment The updated treatment
 	 */
-	public void editTreatment(String userURI, String treatmentURI, 
-			Treatment newTreatment);
+	public void updateTreatment(Treatment newTreatment);
 
 	/**
 	 * Returns a {java.util.List} of all the treatments that are associated with
 	 * the given user health profile.
 	 * 
-	 * @param userURI The URI of the user
+	 * @param user The user
 	 * 
 	 * @return All the treatments that are associated with the user 
 	 */
-	public List getAllTreatments(String userURI);
+	public List<Treatment> getAllTreatments(User user);
+	
+	/**
+	 * Returns a {java.util.List} of all the treatments that are associated with
+	 * the given user health profile.
+	 * 
+	 * @param profile The user's health profile.
+	 * 
+	 * @return All the treatments that are associated with the user 
+	 */
+	public List<Treatment> getAllTreatments(HealthProfile profile);
 	
 	/**
 	 * Returns a {java.util.List} of all the treatments that are associated with 
 	 * the given user health profile and are between the given timestamps.
 	 * 
-	 * @param userURI The URI of the user
+	 * @param user The user
      * @param timestampFrom The lower bound of the period
      * @param timestampTo The upper bound of the period
 	 * 
 	 * @return All the treatments that are associated with the user in a 
 	 * specific period of time
 	 */
-	public List getTreatmentsBetweenTimestamps(String userURI, 
+	public List<Treatment> getTreatmentsBetweenTimestamps(User user, 
+			long timestampFrom, long timestampTo);
+	
+	/**
+	 * Returns a {java.util.List} of all the treatments that are associated with 
+	 * the given user health profile and are between the given timestamps.
+	 * 
+	 * @param profile The user's health profile
+     * @param timestampFrom The lower bound of the period
+     * @param timestampTo The upper bound of the period
+	 * 
+	 * @return All the treatments that are associated with the user in a 
+	 * specific period of time
+	 */
+	public List<Treatment> getTreatmentsBetweenTimestamps(HealthProfile profile, 
 			long timestampFrom, long timestampTo);
 }

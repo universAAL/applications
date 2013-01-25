@@ -21,6 +21,7 @@
 package org.universAAL.AALapplication.health.treat.manager.profiles;
 
 import org.universAAL.ontology.profile.User;
+import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
@@ -35,7 +36,10 @@ public class ListTreatmentService extends TreatmentManagementService {
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = TreatmentManagerProfilesOnt.NAMESPACE
 	+ "ListTreatmentService";
-
+	
+    //OUTPUT PARAMETERS URI    
+	public static final String OUTPUT_TREATMENTS = HealthOntology.NAMESPACE + "matchingTreatments";
+	
 	//CONSTRUCTOR	
 	public ListTreatmentService() {
 		super();

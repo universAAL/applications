@@ -483,7 +483,12 @@ public final class HealthOntology extends Ontology {
     oci.addObjectProperty(HealthService.PROP_ASSISTED_USER);
     oci.addRestriction(MergedRestriction
     		.getAllValuesRestrictionWithCardinality(
-    				HealthService.PROP_ASSISTED_USER, AssistedPerson.MY_URI, 1, 1));
+    				HealthService.PROP_ASSISTED_USER, AssistedPerson.MY_URI, 0, 1));
+    
+    oci.addObjectProperty(HealthService.PROP_ASSISTED_USER_PROFILE);
+    oci.addRestriction(MergedRestriction
+    		.getAllValuesRestrictionWithCardinality(
+    				HealthService.PROP_ASSISTED_USER_PROFILE, HealthProfile.MY_URI, 0, 1));
     
     //load TreatmentManagementService
     oci = createNewAbstractOntClassInfo(TreatmentManagementService.MY_URI);
@@ -495,6 +500,18 @@ public final class HealthOntology extends Ontology {
     oci.addRestriction(MergedRestriction.getAllValuesRestriction(
     		TreatmentManagementService.PROP_MANAGES_TREATMENT,  Treatment.MY_URI));
     
+    oci.addDatatypeProperty(TreatmentManagementService.PROP_TIMESTAMP_FROM);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		TreatmentManagementService.PROP_TIMESTAMP_FROM, 
+    		TypeMapper.getDatatypeURI(Long.class), 0, 1));
+    //TODO change to XMLGregorianCalendar!
+    
+    oci.addDatatypeProperty(TreatmentManagementService.PROP_TIMESTAMP_TO);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		TreatmentManagementService.PROP_TIMESTAMP_TO, 
+    		TypeMapper.getDatatypeURI(Long.class), 0, 1));
+  //TODO change to XMLGregorianCalendar!
+    
     
     //load PlannedSessionManagementService
     
@@ -504,12 +521,12 @@ public final class HealthOntology extends Ontology {
     oci.addSuperClass(HealthService.MY_URI); 
 
     oci.addObjectProperty(PlannedSessionManagementService.PROP_MANAGES_SESSION);
-    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
-    		PlannedSessionManagementService.PROP_MANAGES_SESSION, PlannedSession.MY_URI, 1,1));
-    
-    oci.addObjectProperty(PlannedSessionManagementService.PROP_LISTS_SESSIONS);
     oci.addRestriction(MergedRestriction.getAllValuesRestriction(
-    		PlannedSessionManagementService.PROP_LISTS_SESSIONS, PlannedSession.MY_URI));    
+    		PlannedSessionManagementService.PROP_MANAGES_SESSION, PlannedSession.MY_URI));
+    
+//    oci.addObjectProperty(PlannedSessionManagementService.PROP_LISTS_SESSIONS);
+//    oci.addRestriction(MergedRestriction.getAllValuesRestriction(
+//    		PlannedSessionManagementService.PROP_LISTS_SESSIONS, PlannedSession.MY_URI));    
     
     //load PerformedSessionManagementService
     oci = createNewAbstractOntClassInfo(PerformedSessionManagementService.MY_URI);
@@ -521,33 +538,23 @@ public final class HealthOntology extends Ontology {
     oci.addRestriction(MergedRestriction.getAllValuesRestriction(
     		PerformedSessionManagementService.PROP_MANAGES_SESSION,  PlannedSession.MY_URI));
     
-    // load ListPerformedSessionService
-//    oci = createNewOntClassInfo(ListPerformedSessionService.MY_URI, factory, 27);
-//    oci.setResourceComment("Service listing the performed sessions.");
-//    oci.setResourceLabel("ListPerformedSessionService");
-//    oci.addSuperClass(PerformedSessionManagementService.MY_URI);
-//
-//    oci.addObjectProperty(ListPerformedSessionService.PROP_LISTS_PERFORMED_SESSIONS);
-//    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
-//    		ListPerformedSessionService.PROP_LISTS_PERFORMED_SESSIONS, PlannedSession.MY_URI,1,1));  
+    oci.addDatatypeProperty(PerformedSessionManagementService.PROP_TIMESTAMP_FROM);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		PerformedSessionManagementService.PROP_TIMESTAMP_FROM, 
+    		TypeMapper.getDatatypeURI(Long.class), 0, 1));
+  //TODO change to XMLGregorianCalendar!
     
-    // load ListPerformedSessionBetweenTimeStampsService
-//    oci = createNewOntClassInfo(ListPerformedSessionBetweenTimeStampsService.MY_URI, factory, 28);
-//    oci.setResourceComment("Service listing the performed sessions between 2 timestamps.");
-//    oci.setResourceLabel("ListPerformedBetweenTimeStampsSessionService");
-//    oci.addSuperClass(ListPerformedSessionService.MY_URI);
-    
-    // load SessionPerformedService
-//    oci = createNewOntClassInfo(SessionPerformedService.MY_URI, factory, 29);
-//    oci.setResourceComment("Service to add a performed sessions.");
-//    oci.setResourceLabel("SessionPerformedService");
-//    oci.addSuperClass(PerformedSessionManagementService.MY_URI);    
+    oci.addDatatypeProperty(PerformedSessionManagementService.PROP_TIMESTAMP_TO);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		PerformedSessionManagementService.PROP_TIMESTAMP_TO, 
+    		TypeMapper.getDatatypeURI(Long.class), 0, 1)); 
+  //TODO change to XMLGregorianCalendar!
     
     //load ProfileManagementService
     oci = createNewAbstractOntClassInfo(ProfileManagementService.MY_URI);
     oci.setResourceComment("Services to manage Health Profile.");
     oci.setResourceLabel("HealthProfileManagementService");
-    oci.addSuperClass(HealthService.MY_URI);    
+    oci.addSuperClass(HealthService.MY_URI);
     
   }
 }
