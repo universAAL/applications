@@ -38,7 +38,7 @@ public final class PersistentServiceImpl implements PersistentService {
     this.personDao = new PersonDao(database);
     this.medicineDao = new MedicineDao(database);
     this.dispenserDao = new DispenserDao(database, personDao);
-    this.intakeDao = new IntakeDao(database);
+    this.intakeDao = new IntakeDao(database, dispenserDao, personDao, medicineDao);
     this.inventoryLogDao = new InventoryLogDao(database);
     this.medicineInventoryDao = new MedicineInventoryDao(database);
     this.prescribedMedicineDao = new PrescribedMedicineDao(database);

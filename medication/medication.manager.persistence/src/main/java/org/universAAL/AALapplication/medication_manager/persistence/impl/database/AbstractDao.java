@@ -11,7 +11,7 @@ import static org.universAAL.AALapplication.medication_manager.configuration.Uti
  */
 public abstract class AbstractDao {
 
-  private final Database database;
+  protected final Database database;
   private final String tableName;
 
   protected AbstractDao(Database database, String tableName) {
@@ -29,7 +29,8 @@ public abstract class AbstractDao {
     Map<String, Column> columnMap = database.getById(tableName, id);
 
     if (columnMap.isEmpty()) {
-      throw new MedicationManagerPersistenceException("There is no such record in the table with id=" + id);
+      throw new MedicationManagerPersistenceException("There is no such record in the table : " +
+          tableName + " with id=" + id);
     }
 
     return columnMap;

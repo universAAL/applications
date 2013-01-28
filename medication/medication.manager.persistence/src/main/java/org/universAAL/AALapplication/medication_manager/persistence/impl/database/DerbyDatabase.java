@@ -6,6 +6,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.Medicat
 import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 
 import java.io.BufferedReader;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -64,14 +65,19 @@ public final class DerbyDatabase implements Database {
   }
 
   public Map<String, Column> getById(String tableName, int id) {
+    String message = "There are more than one record with the following id : " + id;
+    String sqlQuery = "select * from " + MEDICATION_MANAGER + '.' + tableName +
+        "\n\t where id=" + id;
+    return getStringColumnMapSingleRecord(sqlQuery, tableName, message);
+  }
+
+  private Map<String, Column> getStringColumnMapSingleRecord(String sqlQuery, String tableName, String message) {
 
     Map<String, Column> columns = new LinkedHashMap<String, Column>();
 
     Statement statement = null;
     try {
       statement = connection.createStatement();
-      String sqlQuery = "select * from " + MEDICATION_MANAGER + '.' + tableName +
-          "\n\t where id=" + id;
 
       System.out.println("sqlQuery = " + sqlQuery);
 
@@ -79,7 +85,12 @@ public final class DerbyDatabase implements Database {
 
       Set<String> columnsNames = derbySqlUtility.getDBColumns(tableName);
       ResultSetMetaData metaData = rs.getMetaData();
+      int count = 0;
       while (rs.next()) {
+        count++;
+        if (count > 1) {
+          throw new MedicationManagerPersistenceException(message);
+        }
         fillColumnsData(columns, columnsNames, rs, metaData);
       }
 
@@ -90,6 +101,16 @@ public final class DerbyDatabase implements Database {
     }
 
     return columns;
+  }
+
+  public Map<String, Column> findDispenserByPerson(String tableName, String personTableName, int personId) {
+    String message = "There are more than one record (dispensers)" +
+        " with the following PATIENT_FK_ID : " + personId;
+
+    String sqlQuery = "select * from " + MEDICATION_MANAGER + '.' + tableName +
+        "\n\t where PATIENT_FK_ID=" + personId;
+
+    return getStringColumnMapSingleRecord(sqlQuery, tableName, message);
   }
 
   private void fillColumnsData(Map<String, Column> columns, Set<String> columnsNames,
@@ -108,10 +129,16 @@ public final class DerbyDatabase implements Database {
       case INTEGER:
         int integer = rs.getInt(name);
         return new Column(name, integer);
-      case TIMESTAMP: Timestamp date = rs.getTimestamp(name);
+      case TIMESTAMP:
+        Timestamp date = rs.getTimestamp(name);
         return new Column(name, date);
-      case VARCHAR: String string = rs.getString(name);
+      case VARCHAR:
+        String string = rs.getString(name);
         return new Column(name, string);
+      case CLOB:
+        Clob clob = rs.getClob(name);
+        String text = clob.getSubString(1, (int)clob.length());
+        return new Column(name, text);
       default:
         throw new MedicationManagerPersistenceException("Unsupported sql type : " + sqlType);
     }

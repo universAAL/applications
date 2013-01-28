@@ -64,22 +64,22 @@ public final class UsecaseMedicationReminder extends Usecase {
 
     PersistentService persistentService = getPersistentService();
 
-    PersonDao personDao = persistentService.getPersonDao();
-    Person person = personDao.getById(getIdFromString(parameters[0]));
+    Log.info("Persistent service found", getClass());
 
-    System.out.println(person);
+    PersonDao personDao = persistentService.getPersonDao();
+    int personId = getIdFromString(parameters[0]);
+    Person person = personDao.getById(personId);
 
     DispenserDao dispenserDao = persistentService.getDispenserDao();
-    Dispenser dis = dispenserDao.getById(1);
-    System.out.println(dis);
     Dispenser dispenser = dispenserDao.findByPerson(person);
     String deviceId = String.valueOf(dispenser.getId());
+
+    Log.info("DeviceId=%s", getClass(), deviceId);
 
     IntakeDao intakeDao = persistentService.getIntakeDao();
     Intake intake = intakeDao.getById(getIdFromString(parameters[1]));
 
     int intakePersonId = intake.getPatient().getId();
-    int personId = person.getId();
 
     if (intakePersonId != personId) {
       throw new MedicationManagerShellException("The intake with id=" + intake.getId() +

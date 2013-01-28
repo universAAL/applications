@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Column;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
@@ -14,7 +15,7 @@ import java.util.Map;
 public final class PersonDao extends AbstractDao {
 
 
-  private static final String TABLE_NAME = "person";
+  static final String TABLE_NAME = "PERSON";
 
   public PersonDao(Database database) {
     super(database, TABLE_NAME);
@@ -23,8 +24,8 @@ public final class PersonDao extends AbstractDao {
   @Override
   @SuppressWarnings("unchecked")
   public Person getById(int id) {
+    Log.info("Looking for the person with id=%s", getClass(), id);
     Map<String, Column> columns = getTableColumnsValuesById(id);
-
 
     Column col = columns.get("NAME");
     String name = (String) col.getValue();
@@ -36,7 +37,11 @@ public final class PersonDao extends AbstractDao {
     String roleString = (String) col.getValue();
     Role role = Role.getEnumValueFor(roleString);
 
-    return new Person(id, name, personUri, role);
+    Person person = new Person(id, name, personUri, role);
+
+    Log.info("Person found: %s", getClass(), person);
+
+    return person;
 
   }
 
