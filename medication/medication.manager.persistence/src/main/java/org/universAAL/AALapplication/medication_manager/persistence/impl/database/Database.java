@@ -17,4 +17,6 @@ public interface Database {
   int getNextIdFromIdGenerator();
 
   Map<String, Column> getById(String tableName, int id);
+
+  Map<String, Column> findDispenserByPerson(String tableName, String personTableName, int personId);
 }

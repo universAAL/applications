@@ -10,7 +10,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 public final class InventoryLogDao extends AbstractDao {
 
 
-  private static final String TABLE_NAME = "inventory_log";
+  private static final String TABLE_NAME = "INVENTORY_LOG";
 
   public InventoryLogDao(Database database) {
     super(database, TABLE_NAME);

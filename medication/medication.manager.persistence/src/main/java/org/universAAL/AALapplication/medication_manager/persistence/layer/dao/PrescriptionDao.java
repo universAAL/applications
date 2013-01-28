@@ -10,7 +10,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 public final class PrescriptionDao extends AbstractDao {
 
 
-  private static final String TABLE_NAME = "prescription";
+  private static final String TABLE_NAME = "PRESCRIPTION";
 
   public PrescriptionDao(Database database) {
     super(database, TABLE_NAME);
