@@ -3618,6 +3618,30 @@ ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMes
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageSubclassification.java -text
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
+ontologies/ont.nutrition/ASL2.0.txt -text
+ontologies/ont.nutrition/MITX.txt -text
+ontologies/ont.nutrition/NOTICE.txt -text
+ontologies/ont.nutrition/Nutrition.di -text
+ontologies/ont.nutrition/Nutrition.notation -text
+ontologies/ont.nutrition/Nutrition.uml -text
+ontologies/ont.nutrition/pom.xml -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/NutritionActivator.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/NutritionFactory.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/DayOfWeek.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Dish.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/DishCategory.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Food.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/FoodCategory.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/FoodSubCategory.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Ingredient.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Meal.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/MealCategory.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/MeasureUnit.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/MenuDay.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/NutritionOntology.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/NutritionService.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Recipe.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/ShoppingList.java -text
 ontologies/ont.pom/composite/pom.xml -text
 ontologies/ont.pom/pom.xml -text
 ontologies/ont.pom/update.bat -text
