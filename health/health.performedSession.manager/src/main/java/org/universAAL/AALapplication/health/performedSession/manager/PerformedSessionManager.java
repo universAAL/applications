@@ -24,7 +24,9 @@ package org.universAAL.AALapplication.health.performedSession.manager;
 
 import java.util.List;
 
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.PerformedSession;
+import org.universaal.ontology.health.owl.Treatment;
 
 /**
  * Interface for the actual performed sessions storage and retrieval.
@@ -43,40 +45,61 @@ public interface PerformedSessionManager {
 
 	/**
 	 * Returns a {@java.util.List} of all the performed sessions that are 
+	 * associated to the given user.
+	 * 
+	 * @param user The user who performed the sessions
+	 * @return All the sessions that were performed by the user for the given
+	 * treatment
+	 */
+	public List<PerformedSession> getAllPerformedSessions(User user);
+
+	/**
+	 * Returns a {@java.util.List} of all the performed sessions that are 
+	 * associated to the given user and are between the given 
+	 * timestamps.
+	 * 
+	 * @param user The user who performed the sessions
+	 * @param timestampFrom The lower bound of the period
+	 * @param timestampTo The upper bound of the period
+	 * @return The sessions that were performed by the user for the given 
+	 * treatment in a specific period of time  
+	 */
+	public List<PerformedSession> getPerformedSessionsBetweenTimestamps(User user, 
+			long timestampFrom, long timestampTo);
+	
+	/**
+	 * Returns a {@java.util.List} of all the performed sessions that are 
 	 * associated to the given user and treatment.
 	 * 
-	 * @param userURI The URI of the user who performed the sessions
-	 * @param treatmentURI The URI of the associated treatment   
+	 * @param user The user who performed the sessions
+	 * @param treatment The associated treatment   
 	 * 
 	 * @return All the sessions that were performed by the user for the given
 	 * treatment
 	 */
-	public List getAllPerformedSessions(String userURI, String treatmentURI);
+	public List<PerformedSession> getTreatmentPerformedSessions(User user, Treatment treatment);
 
 	/**
 	 * Returns a {@java.util.List} of all the performed sessions that are 
 	 * associated to the given user and treatment and are between the given 
 	 * timestamps.
 	 * 
-	 * @param userURI The URI of the user who performed the sessions
-	 * @param treatmentURI The URI of the associated treatment   
+	 * @param user The user who performed the sessions
+	 * @param treatment The associated treatment   
      * @param timestampFrom The lower bound of the period
      * @param timestampTo The upper bound of the period
 	 * 
 	 * @return The sessions that were performed by the user for the given 
 	 * treatment in a specific period of time  
 	 */
-	public List getPerformedSessionsBetweenTimestamps(String userURI, 
-			String treatmentURI, long timestampFrom, long timestampTo);
-
+	public List<PerformedSession> getTreatmentPerformedSessionsBetweenTimestamps(User user, 
+			Treatment treatment, long timestampFrom, long timestampTo);
 	/**
 	 * Stores the new session that was performed by the user for the given
 	 * treatment.
 	 * 
-	 * @param userURI The URI of the user who performed this session
-	 * @param treatmentURI The URI of the associated treatment 
+	 * @param user The URI of the user who performed this session
 	 * @param session The session that was performed by the user
 	 */
-	public void sessionPerformed(String userURI, String treatmentURI, 
-			PerformedSession session);
+	public void sessionPerformed(User user, PerformedSession session);
 }
