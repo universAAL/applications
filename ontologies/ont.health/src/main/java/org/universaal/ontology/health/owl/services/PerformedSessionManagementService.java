@@ -30,7 +30,10 @@ import org.universaal.ontology.health.owl.HealthOntology;
  * @author mdelafuente
  * @author roni
  * 
- * @navassoc - "manages" - PerformedSession
+ * @navassoc - "PROP_MANAGES_SESSION" * PerformedSession
+ * @navassoc - "PROP_ASSOCIATED_TREATMENT" 0,1 Treatment
+ * @navassoc - "PROP_TIMESTAMP_FROM" 0,1 Long
+ * @navassoc - "PROP_TIMESTAMP_TO" 0,1 Long
  */
 public class PerformedSessionManagementService extends HealthService{
 	
