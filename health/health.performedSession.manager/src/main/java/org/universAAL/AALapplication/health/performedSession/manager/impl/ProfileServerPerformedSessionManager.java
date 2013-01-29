@@ -32,7 +32,7 @@ import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.PerformedSession;
 import org.universaal.ontology.health.owl.Treatment;
@@ -62,29 +62,70 @@ public class ProfileServerPerformedSessionManager
     	//super(context);
     }
 
-	/**
-	 * Returns a {@java.util.List} of all the performed sessions that are 
-	 * associated to the given user and treatment.
-	 * 
-	 * @param userURI The URI of the user who performed the sessions
-	 * @param treatmentURI The URI of the associated treatment   
-	 * 
-	 * @return All the sessions that were performed by the user for the given
-	 * treatment
-	 */
-	public List getAllPerformedSessions(String userURI, String treatmentURI) {
+	/** {@inheritDoc} */
+	public List<PerformedSession> getAllPerformedSessions(User user) {
 
-		HealthProfile profile = getHealthProfile(userURI);
+		HealthProfile profile = getHealthProfile(user);
 		if(null != profile) {
-			Treatment treament = getTreatment(profile, treatmentURI);
-			if(null == treament) {
+			Treatment[] allTreatments = profile.getTreatments();
+			List<PerformedSession> sessions = new ArrayList<PerformedSession>();
+			for (int i = 0; i < allTreatments.length; i++) {
+				Treatment treatment = allTreatments[i];
+				PerformedSession[] performedSessions = treatment.getPerformedSessions();
+				if(null != performedSessions) {
+					for(int j=0; i<performedSessions.length; j++) {
+						sessions.add(performedSessions[j]);
+					}
+				}
+
+			}
+			return sessions;
+		}
+		return null;
+	}
+
+	/** {@inheritDoc} */
+	public List<PerformedSession> getPerformedSessionsBetweenTimestamps(
+			User user, long timestampFrom, long timestampTo) {
+
+		HealthProfile profile = getHealthProfile(user);
+		if(null != profile) {
+			Treatment[] allTreatments = profile.getTreatments();
+			List<PerformedSession> sessions = new ArrayList<PerformedSession>();
+			for (int i = 0; i < allTreatments.length; i++) {
+				Treatment treatment = allTreatments[i];
+				PerformedSession[] performedSessions = treatment.getPerformedSessions();
+				if(null != performedSessions) {
+					for(int j=0; i<performedSessions.length; j++) {
+						if((timestampTo == -1 && timestampFrom == -1) || 
+								((timestampFrom != -1 && 
+								performedSessions[i].getSessionStartTime().getMillisecond() >= timestampFrom) &&
+								(timestampTo != -1 && 
+								performedSessions[i].getSessionStartTime().getMillisecond() <= timestampTo))) {
+							sessions.add(performedSessions[j]);
+						}
+					}
+				}
+
+			}
+			return sessions;
+		}
+		return null;
+	}
+
+	/** {@inheritDoc} */
+	public List<PerformedSession> getTreatmentPerformedSessions(User user, Treatment treatment) {
+
+		HealthProfile profile = getHealthProfile(user);
+		if(null != profile) {
+			if(null == treatment) {
 				 LogUtils.logInfo(mc, ProfileServerPerformedSessionManager.class,
 			    			"getAllPerformedSessions",
-			    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
+			    			new Object[] { "treatment " + treatment + " does not exist"}, null);
 			} else {
-				PerformedSession[] performedSessions = treament.getPerformedSessions();
+				PerformedSession[] performedSessions = treatment.getPerformedSessions();
 				if(null != performedSessions) {
-					List list = new ArrayList(performedSessions.length);
+					List<PerformedSession> list = new ArrayList<PerformedSession>(performedSessions.length);
 					for(int i=0; i<performedSessions.length; i++) {
 						list.add(performedSessions[i]);
 					}
@@ -95,35 +136,21 @@ public class ProfileServerPerformedSessionManager
 		return null;
 	}
 
-	/**
-	 * Returns a {@java.util.List} of all the performed sessions that are 
-	 * associated to the given user and treatment and are between the given 
-	 * timestamps.
-	 * 
-	 * @param userURI The URI of the user who performed the sessions
-	 * @param treatmentURI The URI of the associated treatment   
-     * @param timestampFrom The lower bound of the period, the value -1 means 
-     * that there is not a lower bound 
-     * @param timestampTo The upper bound of the period, the value -1 means 
-     * that there is not an upper bound 
-	 * 
-	 * @return The sessions that were performed by the user for the given 
-	 * treatment in a specific period of time  
-	 */
-	public List getPerformedSessionsBetweenTimestamps(String userURI, 
-			String treatmentURI, long timestampFrom, long timestampTo) {
+	/** {@inheritDoc} */
+	public List<PerformedSession> getTreatmentPerformedSessionsBetweenTimestamps(User user,
+			Treatment treatment, long timestampFrom, long timestampTo) {
 		
-		HealthProfile profile = getHealthProfile(userURI);
+		HealthProfile profile = getHealthProfile(user);
 		if(null != profile) {
-			Treatment treament = getTreatment(profile, treatmentURI);
-			if(null == treament) {
+			//Treatment treament = getTreatment(profile, treatment);
+			if(null == treatment) {
 				 LogUtils.logInfo(mc, ProfileServerPerformedSessionManager.class,
 			    			"getAllPerformedSessions",
-			    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
+			    			new Object[] { "treatment " + treatment + " does not exist"}, null);
 			} else {
-				PerformedSession[] performedSessions = treament.getPerformedSessions();
+				PerformedSession[] performedSessions = treatment.getPerformedSessions();
 				if(null != performedSessions) {
-					List list = new ArrayList();
+					List<PerformedSession> list = new ArrayList<PerformedSession>();
 					for(int i=0; i<performedSessions.length; i++) {
 						if((timestampTo == -1 && timestampFrom == -1) || 
 								((timestampFrom != -1 && 
@@ -140,75 +167,44 @@ public class ProfileServerPerformedSessionManager
 		return null;
 	}
 	
-	/**
-	 * Stores the new session that was performed by the user for the given
-	 * treatment.
-	 * 
-	 * @param userURI The URI of the user who performed this session
-	 * @param treatmentURI The URI of the associated treatment 
-	 * @param session The session that was performed by the user
-	 */
-	public void sessionPerformed(String userURI, String treatmentURI, PerformedSession session) {
+	/** {@inheritDoc} */
+	public void sessionPerformed(User user, PerformedSession session) {
 
-		HealthProfile profile = getHealthProfile(userURI);
+		HealthProfile profile = getHealthProfile(user);
 		if(null != profile) {
-			Treatment treament = getTreatment(profile, treatmentURI);
-			if(null == treament) {
+			Treatment treatment;
+			treatment = null;
+			//TODO find the associated Treatment.
+			
+			if(null == treatment) {
 				 LogUtils.logInfo(mc, ProfileServerPerformedSessionManager.class,
 			    			"sessionPerformed",
-			    			new Object[] { "treatment " + treatmentURI + " does not exist"}, null);
+			    			new Object[] { "treatment: " + treatment.getURI() + " does not exist"}, null);
 			} else {
-				treament.addPerformedSession(session);
+				treatment.addPerformedSession(session);
 				updateHealthProfile(profile);
 			}
 		}
-	}
-
-	/**
-	 * Returns a {org.universaal.ontology.health.owl.Treatment} of the
-	 * given user in its health profile.
-	 * 
-	 * @param userURI The URI of the user
-	 * @param treatmentURI The URI of the associated treatment 
-	 * 
-	 * @return A treatment of the user 
-	 */
-	private Treatment getTreatment(HealthProfile healthProfile, String treatmentURI) {
-
-		// just until we fix the mix of the Health Profiles....
-		org.universaal.ontology.health.owl.HealthProfile newHealthProfile = new org.universaal.ontology.health.owl.HealthProfile();
-		Treatment[] treatments = newHealthProfile.getTreatments();
-		
-		Treatment theTreatment = null;
-		if(null != treatments) {
-			for(int i=0; i<treatments.length; i++) {
-				if(treatments[i].getURI().equals(treatmentURI)) {
-					return treatments[i];
-				}
-			}
-		}
-		return null;
-	}
-	
+	}	
 	
 	/**
 	 * @param profile
 	 */
 	private void updateHealthProfile(HealthProfile profile) {
 		ServiceRequest req = new ServiceRequest(new ProfileManagementService(null), null);
-		req.addChangeEffect(new String[] {ProfileManagementService.PROP_MANAGES_PROFILE}, profile);
+		req.addChangeEffect(new String[] {ProfileManagementService.PROP_ASSISTED_USER_PROFILE}, profile);
 		
 		new DefaultServiceCaller(mc).call(req);
 	}
 
 	/**
-	 * @param userURI
+	 * @param user
 	 * @return
 	 */
-	private HealthProfile getHealthProfile(String userURI) {
+	private HealthProfile getHealthProfile(User user) {
 		ServiceRequest req = new ServiceRequest(new ProfileManagementService(null), null);
-		req.addValueFilter(new String[] {ProfileManagementService.PROP_ASSISTED_USER}, new AssistedPerson(userURI));
-		req.addRequiredOutput(REQ_OUTPUT_PROFILE, new String[] {ProfileManagementService.PROP_MANAGES_PROFILE});
+		req.addValueFilter(new String[] {ProfileManagementService.PROP_ASSISTED_USER}, user);
+		req.addRequiredOutput(REQ_OUTPUT_PROFILE, new String[] {ProfileManagementService.PROP_ASSISTED_USER_PROFILE});
 		
 		ServiceResponse sr = new DefaultServiceCaller(mc).call(req);
 		if (sr.getCallStatus() == CallStatus.succeeded) {

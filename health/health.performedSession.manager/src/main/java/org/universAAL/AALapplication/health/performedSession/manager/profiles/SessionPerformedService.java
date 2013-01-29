@@ -34,7 +34,12 @@ public class SessionPerformedService extends PerformedSessionManagementService {
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
 			+ "SessionPerformedService";
+	//INPUT PARAMETERS URI
+	public static final String INPUT_USER      = HealthOntology.NAMESPACE + "user";
 	
+//	public static final String INPUT_TREATMENT = HealthOntology.NAMESPACE + "associatedTreatment";
+	public static final String INPUT_PERFORMED_SESSION = HealthOntology.NAMESPACE + "performedSession";
+
 	//CONSTRUCTOR	
 	public SessionPerformedService() {
 		super();

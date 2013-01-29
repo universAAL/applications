@@ -37,7 +37,10 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.profile.User;
+import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.PerformedSession;
+import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
 
 /**
@@ -49,6 +52,8 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 
 	// the actual performed session manager 
 	private PerformedSessionManager performedSessionManager = null;
+
+	public static final String INPUT_USER = HealthOntology.NAMESPACE + "user";
 	
 	static final ServiceProfile[] profiles = new ServiceProfile[5];
 	
@@ -115,37 +120,46 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 		if(operation == null)
 		    return null;
 
-		Object userInput = call.getInputValue(PerformedSessionManagementService.INPUT_USER);
+		User userInput = (User) call.getInputValue(PerformedSessionManagerProvider.INPUT_USER);
 		if(userInput == null)
 		    return null;
 
-		Object treatmentInput = call.getInputValue(PerformedSessionManagementService.INPUT_TREATMENT);
-		if(treatmentInput == null)
-		    return null;
-
-		if(operation.startsWith(ListPerformedSessionService.MY_URI))
-			return getAllPerformedsessions(userInput.toString(), treatmentInput.toString());
-
-		Object performedSessionInput = call
-			.getInputValue(PerformedSessionManagementService.INPUT_PERFORMED_SESSION);
-
+		if(operation.startsWith(ListPerformedSessionService.MY_URI)) {
+			Object treatmentInput = call.getInputValue(ListPerformedSessionService.INPUT_TREATMENT);
+			if(treatmentInput == null)
+				return null;
+			return getAllPerformedsessions(userInput, (Treatment) treatmentInput);
+		}
+		
+		if(operation.startsWith(ListPerformedSessionBetweenTimeStampsService.MY_URI)) {
 		Object timestampFromInput = call
 			.getInputValue(ListPerformedSessionBetweenTimeStampsService.INPUT_TIMESTAMP_FROM);
 
 		Object timestampToInput = call
 			.getInputValue(ListPerformedSessionBetweenTimeStampsService.INPUT_TIMESTAMP_TO);
+			
+			if (timestampFromInput != null && timestampToInput != null) {
 
-		if(timestampFromInput != null && timestampToInput != null &&
-				operation.startsWith(ListPerformedSessionBetweenTimeStampsService.MY_URI))
-		    return getPerformedSessionsBetweenTimestamps(
-		    		userInput.toString(), treatmentInput.toString(), 
+				Object treatmentInput = call.getInputValue(ListPerformedSessionService.INPUT_TREATMENT);
+				return getPerformedSessionsBetweenTimestamps(
+		    		userInput, (Treatment) treatmentInput, 
 		    		((Long)timestampFromInput).longValue(), 
 		    		((Long)timestampToInput).longValue());
+			}
+		}
+		    
 
-		if(performedSessionInput != null &&
-				operation.startsWith(SessionPerformedService.MY_URI))
-		    return sessionPerformed(userInput.toString(), treatmentInput.toString(), 
+
+
+		
+
+		if(operation.startsWith(SessionPerformedService.MY_URI)) {
+			Object performedSessionInput = call
+					.getInputValue(SessionPerformedService.INPUT_PERFORMED_SESSION);
+			if (performedSessionInput != null)
+				return sessionPerformed(userInput,
 		    		(PerformedSession)performedSessionInput);
+		}
 		
 		return null;
 	}
@@ -154,17 +168,17 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 	 * Creates a service response that including all the performed sessions that 
 	 * are associated with the given user and treatment.
 	 * 
-	 * @param userURI The URI of the user
-	 * @param treatmentURI The URI of the associated treatment   
+	 * @param user The URI of the user
+	 * @param treatment The URI of the associated treatment   
 	 */
-	private ServiceResponse getAllPerformedsessions(String userURI, String treatmentURI) {
+	private ServiceResponse getAllPerformedsessions(User user, Treatment treatment) {
 		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		List performedSessionsList = 
-			performedSessionManager.getAllPerformedSessions(userURI, treatmentURI);
+		List<PerformedSession> performedSessionsList = 
+			performedSessionManager.getAllPerformedSessions(user);
 		sr.addOutput(new ProcessOutput(
-				PerformedSessionManagementService.OUTPUT_PERFORMED_SESSIONS, performedSessionsList));
+				PerformedSessionManagementService.PROP_MANAGES_SESSION, performedSessionsList));
 		
 		return sr;		
 	}
@@ -174,20 +188,20 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 	 * are associated with the given user and treatment and are between the 
 	 * given timestamps.
 	 * 
-	 * @param userURI The URI of the user
-	 * @param treatmentURI The URI of the associated treatment   
+	 * @param user The URI of the user
+	 * @param treatment The URI of the associated treatment   
      * @param timestampFrom The lower bound of the period
      * @param timestampTo The upper bound of the period
 	 */
 	private ServiceResponse getPerformedSessionsBetweenTimestamps(
-			String userURI, String treatmentURI, long timestampFrom, long timestampTo) {
+			User user, Treatment treatment, long timestampFrom, long timestampTo) {
 		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		List performedSessionsList = performedSessionManager.
-				getPerformedSessionsBetweenTimestamps(userURI, treatmentURI, timestampFrom, timestampTo);
+		List<PerformedSession> performedSessionsList = performedSessionManager.
+				getPerformedSessionsBetweenTimestamps(user, timestampFrom, timestampTo);
 		sr.addOutput(new ProcessOutput(
-				PerformedSessionManagementService.OUTPUT_PERFORMED_SESSIONS, performedSessionsList));
+				PerformedSessionManagementService.PROP_MANAGES_SESSION, performedSessionsList));
 		
 		return sr;
 	}
@@ -196,16 +210,15 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 	 * Creates a service response for storing a session that was performed by 
 	 * the given user for the given treatment.
 	 * 
-	 * @param userURI The URI of the user 
+	 * @param user The URI of the user 
 	 * @param treatmentURI The URI of the associated treatment   
 	 * @param session The session that was performed by the user
 	 */
-	private ServiceResponse sessionPerformed(String userURI, 
-			String treatmentURI, PerformedSession session) {
+	private ServiceResponse sessionPerformed(User user, PerformedSession session) {
 		
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		
-		performedSessionManager.sessionPerformed(userURI, treatmentURI, session);
+		performedSessionManager.sessionPerformed(user, session);
 		
 		return sr;
 	}

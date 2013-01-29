@@ -20,6 +20,7 @@
 
 package org.universAAL.AALapplication.health.performedSession.manager.profiles;
 
+import org.universAAL.AALapplication.health.performedSession.manager.PerformedSessionManagerProvider;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.PerformedSession;
@@ -36,9 +37,11 @@ public class ListPerformedSessionService extends PerformedSessionManagementServi
 	//NAMESPACE & PROPERTIES
 	public static final String MY_URI = HealthOntology.NAMESPACE
 	+ "ListPerformedSessionService";
+
+	public static final String INPUT_TREATMENT = HealthOntology.NAMESPACE + "associatedTreatment";
 	
-	public static final String PROP_LISTS_PERFORMED_SESSIONS =  HealthOntology.NAMESPACE
-	+ "listsPerformedSessions";
+	public static final String OUTPUT_PERFORMED_SESSIONS = HealthOntology.NAMESPACE + "matchingPerformedSessions";
+
 
 	//CONSTRUCTOR	
 	public ListPerformedSessionService() {
@@ -52,10 +55,10 @@ public class ListPerformedSessionService extends PerformedSessionManagementServi
 	}
 
 	private  void buildProfile() {
-		addFilteringInput(INPUT_USER, User.MY_URI, 1, 1, 
+		addFilteringInput(PerformedSessionManagerProvider.INPUT_USER, User.MY_URI, 1, 1, 
     			new String[] { PROP_ASSISTED_USER });
     	addOutput(OUTPUT_PERFORMED_SESSIONS, PerformedSession.MY_URI, 0, -1, 
-    			new String[] { PROP_LISTS_PERFORMED_SESSIONS });
+    			new String[] { PROP_MANAGES_SESSION });
 	}
 	
 	public String getClassURI() {
