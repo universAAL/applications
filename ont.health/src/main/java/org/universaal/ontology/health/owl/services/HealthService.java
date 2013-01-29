@@ -22,12 +22,14 @@ package org.universaal.ontology.health.owl.services;
 
 import org.universAAL.middleware.service.owl.Service;
 import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.HealthProfile;
 
 /**
  * @author amedrano
  * @author roni
  * 
- * @navassoc - "assistedPerson" - AssistedPerson
+ * @navassoc - "PROP_ASSISTED_USER" 1 AssistedPerson
+ * @navassoc - "PROP_ASSISTED_USER_PROFILE" 1 HealthProfile
  */
 public abstract class HealthService extends Service{
 	
