@@ -26,12 +26,12 @@ public final class DeviceIDs {
   private final static String[] DEVICE_IDS = new String[6];
 
   static {
-    DEVICE_IDS[0] = PREFIX + "id1";
-    DEVICE_IDS[1] = PREFIX + "id2";
-    DEVICE_IDS[2] = PREFIX + "id3";
-    DEVICE_IDS[3] = PREFIX + "id4";
-    DEVICE_IDS[4] = PREFIX + "id5";
-    DEVICE_IDS[5] = PREFIX + "id6";
+    DEVICE_IDS[0] = "1";
+    DEVICE_IDS[1] = "2";
+    DEVICE_IDS[2] = "3";
+    DEVICE_IDS[3] = "4";
+    DEVICE_IDS[4] = "5";
+    DEVICE_IDS[5] = "6";
   }
 
 

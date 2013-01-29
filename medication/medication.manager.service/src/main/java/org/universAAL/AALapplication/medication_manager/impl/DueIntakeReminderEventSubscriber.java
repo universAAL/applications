@@ -17,6 +17,8 @@
 
 package org.universAAL.AALapplication.medication_manager.impl;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.ui.ReminderDialog;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
@@ -27,6 +29,8 @@ import org.universAAL.ontology.medMgr.DueIntake;
 import org.universAAL.ontology.medMgr.MyDeviceUserMappingDatabase;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
+
+import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
@@ -69,6 +73,9 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
     String deviceId = missedIntake.getDeviceId();
 
     Log.info("DeviceId %s", getClass(), deviceId);
+
+    PersistentService persistentService = getPersistentService();
+    PersonDao personDao = persistentService.getPersonDao();
 
     User user = MyDeviceUserMappingDatabase.getUser(deviceId);
 

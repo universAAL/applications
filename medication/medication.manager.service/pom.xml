@@ -30,6 +30,12 @@
       <version>1.2.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>medication.manager.persistence</artifactId>
+      <version>C.0.1-SNAPSHOT</version>
+    </dependency>
+
   </dependencies>
 
   <build>
