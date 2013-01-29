@@ -2864,6 +2864,7 @@ medication/medication.manager.service/src/main/java/org/universAAL/AALapplicatio
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/DispenserUpsideDownEventSubscriber.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/DueIntakeReminderEventSubscriber.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Log.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MedicationManagerException.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MissedIntakeEventSubscriber.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyPrecautionDatabase.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/PrecautionProvider.java -text

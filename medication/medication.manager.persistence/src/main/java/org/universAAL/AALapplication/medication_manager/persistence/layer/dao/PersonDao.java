@@ -45,4 +45,7 @@ public final class PersonDao extends AbstractDao {
 
   }
 
+  public Person findPatient(String deviceId) {
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
 }
