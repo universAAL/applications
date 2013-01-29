@@ -25,6 +25,9 @@ import org.universaal.ontology.health.owl.HealthOntology;
  * Also, this service lists the planned sessions that composes a 
  * treatment planning.
  * @author mdelafuente
+ * 
+ * @navassoc - "PROP_MANAGES_SESSION" * PlannedSession
+ * @navassoc - "PROP_ASSOCIATED_TREATMENT" 0,1 Treatment
  */
 public class PlannedSessionManagementService extends HealthService{
 	
@@ -34,6 +37,9 @@ public class PlannedSessionManagementService extends HealthService{
 
 	public static final String PROP_MANAGES_SESSION = HealthOntology.NAMESPACE
 	+ "managesSession";
+	
+	public static final String PROP_ASSOCIATED_TREATMENT = 
+			HealthOntology.NAMESPACE + "plannedSessionsTreatment";
 	
 	//CONSTRUCTORS
 	  public PlannedSessionManagementService() {
