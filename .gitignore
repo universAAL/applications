@@ -124,11 +124,13 @@ help_when_out/hwo.servlet/.project
 help_when_out/hwo.servlet/.settings
 help_when_out/hwo.servlet/target
 medication/medication.manager.configuration/*.iml
+medication/medication.manager.configuration/target/classes
+medication/medication.manager.configuration/target/generated-sources
+medication/medication.manager.configuration/target/medication.manager.configuration-C.0.1-SNAPSHOT.jar
+medication/medication.manager.configuration/target/surefire
 medication/medication.manager.integration.tests/*.iml
 medication/medication.manager.integration.tests/*.log
 medication/medication.manager.integration.tests/target
-medication/medication.manager.ont/*.iml
-medication/medication.manager.ont/target
 medication/medication.manager.persistence/*.iml
 medication/medication.manager.persistence/target
 medication/medication.manager.pom/*.idea
