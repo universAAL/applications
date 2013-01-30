@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>medication.manager.pom</artifactId>
-    <version>C.0.1-SNAPSHOT</version>
+    <version>D.0.1-SNAPSHOT</version>
     <relativePath>../medication.manager.pom</relativePath>
   </parent>
   <artifactId>medication.manager.service</artifactId>
@@ -16,24 +16,23 @@
   <dependencies>
     <dependency>
       <groupId>org.universAAL.ontology</groupId>
-      <artifactId>medication.manager.ont</artifactId>
-      <version>1.2.0-SNAPSHOT</version>
+      <artifactId>ont.medication</artifactId>
+      <version>1.3.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
       <artifactId>medication.manager.ui</artifactId>
-      <version>C.0.1-SNAPSHOT</version>
+      <version>D.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.universAAL.context</groupId>
       <artifactId>ctxt.che</artifactId>
-      <version>1.2.0</version>
+      <version>1.3.0</version>
     </dependency>
-
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
       <artifactId>medication.manager.persistence</artifactId>
-      <version>C.0.1-SNAPSHOT</version>
+      <version>D.0.1-SNAPSHOT</version>
     </dependency>
 
   </dependencies>

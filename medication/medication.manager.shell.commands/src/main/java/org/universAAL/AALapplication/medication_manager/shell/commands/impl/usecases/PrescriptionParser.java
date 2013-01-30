@@ -167,7 +167,7 @@ public final class PrescriptionParser {
 
     Log.info("The " + attributeName + " attribute value is: %s", PrescriptionParser.class, value);
 
-    if (value == null || value.trim().isEmpty()) {
+    if (value == null || value.trim().length() == 0) {
       throw new MedicationManagerShellException("The " + attributeName +
           " attribute is missing value. Must not be null or empty");
     }
