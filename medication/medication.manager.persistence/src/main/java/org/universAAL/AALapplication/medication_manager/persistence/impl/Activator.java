@@ -73,7 +73,7 @@ public class Activator implements BundleActivator {
 
   public static void closeStatement(Statement statement) {
     try {
-      if (statement == null || statement.isClosed()) {
+      if (statement == null) {
         return;
       }
 
