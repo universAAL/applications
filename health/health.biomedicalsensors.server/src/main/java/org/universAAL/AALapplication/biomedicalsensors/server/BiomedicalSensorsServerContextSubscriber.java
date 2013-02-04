@@ -18,40 +18,18 @@
  */
 package org.universAAL.AALapplication.biomedicalsensors.server;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
-import org.universAAL.middleware.owl.Intersection;
 import org.universAAL.middleware.owl.MergedRestriction;
-import org.universAAL.middleware.owl.TypeURI;
-import org.universAAL.middleware.owl.supply.LevelRating;
-import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
-import org.universAAL.middleware.service.ServiceRequest;
-import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.middleware.ui.rdf.Form;
-import org.universAAL.ontology.biomedicalsensors.AlertService;
-import org.universAAL.ontology.biomedicalsensors.BiomedicalSensorService;
 import org.universAAL.ontology.biomedicalsensors.CompositeBiomedicalSensor;
-import org.universAAL.ontology.biomedicalsensors.MeasuredEntity;
-import org.universAAL.ontology.biomedicalsensors.Zephyr;
-/*import org.universAAL.ontology.drools.Consequence;
+import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
-*/
+
 /**
  * @author billyk,joemoul
  * 
@@ -72,8 +50,8 @@ public class BiomedicalSensorsServerContextSubscriber extends ContextSubscriber 
 
 		ContextEventPattern cep = new ContextEventPattern();
 
-		/*cep.addRestriction(MergedRestriction.getAllValuesRestriction(
-				ContextEvent.PROP_RDF_SUBJECT, DroolsReasoning.MY_URI));*/
+		cep.addRestriction(MergedRestriction.getAllValuesRestriction(
+				ContextEvent.PROP_RDF_SUBJECT, DroolsReasoning.MY_URI));
 
 		return new ContextEventPattern[] { cep };
 	}
@@ -93,14 +71,14 @@ public class BiomedicalSensorsServerContextSubscriber extends ContextSubscriber 
 	 */
 	public void handleContextEvent(ContextEvent event) {
 
-	/*	System.out.println("I got the event" + event.getRDFObject().toString());
+		System.out.println("I got the event" + event.getRDFObject().toString());
 		System.out.println("I got the event subject"
 				+ event.getRDFSubject().toString());
 		System.out.println("I got the event Predicate"
-				+ event.getRDFPredicate().toString());*/
-		// DroolsReasoning c=(DroolsReasoning)event.getRDFSubject();
-		/*Consequence csq = (Consequence) event.getRDFObject();
-		System.out.println("***********************Consequence listened: ");
+				+ event.getRDFPredicate().toString());
+		DroolsReasoning c = (DroolsReasoning) event.getRDFSubject();
+		Consequence csq = (Consequence) event.getRDFObject();
+		System.out.println("Consequence listened: ");
 
 		ConsequenceProperty[] consequenceArray = csq.getProperties();
 		String source = null;
@@ -130,9 +108,8 @@ public class BiomedicalSensorsServerContextSubscriber extends ContextSubscriber 
 			} else {
 				BiomedicalSensorsCallee.postureRuleFired = false;
 			}
-		}*/
+		}
 
-		
 	}
 
 	/*
