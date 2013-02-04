@@ -8,16 +8,19 @@
 		<version>D.0.1-SNAPSHOT</version>
 		<relativePath>../health.pom</relativePath>
 	</parent>
-	<packaging>bundle</packaging>
+
 	<artifactId>health.biomedicalsensors.server</artifactId>
+	<packaging>bundle</packaging>
 	<name>Biomedical Sensors App Server</name>
 	<url />
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.composite</artifactId>
@@ -26,11 +29,6 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.drools</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.biomedicalsensors</artifactId>
 		</dependency>
 
 		<dependency>
@@ -45,6 +43,10 @@
 			<version>2.1.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.biomedicalsensors</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
