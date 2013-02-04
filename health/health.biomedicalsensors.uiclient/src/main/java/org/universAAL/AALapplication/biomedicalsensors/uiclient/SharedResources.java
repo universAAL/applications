@@ -26,7 +26,7 @@ import org.universAAL.ontology.profile.AssistedPerson;
 
 public class SharedResources {
 
-	public static final String CLIENT_BIOMEDICALSENSORS_UI_NAMESPACE = "urn:app.biomedicalsensors.uiclient:";
+	public static final String CLIENT_BIOMEDICALSENSORS_UI_NAMESPACE = "urn:health.biomedicalsensors.uiclient:";
 
 	public static ModuleContext moduleContext;
 
