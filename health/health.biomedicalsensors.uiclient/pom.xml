@@ -10,38 +10,38 @@
 		<relativePath>../health.pom</relativePath>
 	</parent>
 
-	<packaging>bundle</packaging>
-
 	<artifactId>health.biomedicalsensors.uiclient</artifactId>
+	<packaging>bundle</packaging>
 	<name>Physical Activity Monitor Module UI Client</name>
 	<url />
 
 	<dependencies>
-		<!-- non-universAAL -->
+
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
-		<!-- universAAL non-ui -->
 
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.phWorld</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.composite</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>org.universAAL.ontology.services</groupId>
+			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.biomedicalsensors</artifactId>
-			<version>1.3.1-SNAPSHOT</version>
-			<type>bundle</type>
 		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -410,7 +410,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 			try {
 				new ImagePlot(
 						new File(
-								"../app.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
+								"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
 								+ alertType + "Posture.png", ppData,
 						"Last Posture Measurements", "Measurement", "Degrees",
 						350, 250);
@@ -421,7 +421,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 			try {
 				new ImagePlot(
 						new File(
-								"../app.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
+								"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
 								+ alertType + "Activity.png", alData,
 						"Last Activity Level Measurements", "Measurement", "",
 						350, 250);
@@ -432,7 +432,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 			try {
 				new ImagePlot(
 						new File(
-								"../app.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
+								"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
 								+ alertType + "Heartrate.png", hrData,
 						"Last Heart Rate Measurements", "Measurement",
 						"beats/min", 350, 250);
@@ -471,26 +471,26 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 				double[] alData = convertDoubles(activityPlotData);
 				double[] hrData = convertDoubles(hrPlotData);
 				alertType = "RED";
-				/*
-				 * new ImagePlot(
-				 * "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
-				 * +alertType+"posture.png", ppData,
-				 * "Last Posture Measurements", "Measurement", "Degrees", 350,
-				 * 250); new ImagePlot(
-				 * "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
-				 * +alertType+"activity.png", alData,
-				 * "Last Activity Level Measurements", "Measurement", "", 350,
-				 * 250); new ImagePlot(
-				 * "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
-				 * +alertType+"heartrate.png", hrData,
-				 * "Last Heart Rate Measurements", "Measurement", "beats/min",
-				 * 350, 250);
-				 */
+				
+				  /*new ImagePlot(
+				  "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
+				  +alertType+"posture.png", ppData,
+				  "Last Posture Measurements", "Measurement", "Degrees", 350,
+				  250); new ImagePlot(
+				  "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
+				  +alertType+"activity.png", alData,
+				  "Last Activity Level Measurements", "Measurement", "", 350,
+				  250); new ImagePlot(
+				  "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
+				  +alertType+"heartrate.png", hrData,
+				  "Last Heart Rate Measurements", "Measurement", "beats/min",
+				  350, 250);*/
+				 
 
 				try {
 					new ImagePlot(
 							new File(
-									"../app.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
+									"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
 									+ alertType + "Posture.png", ppData,
 							"Last Posture Measurements", "Measurement",
 							"Degrees", 350, 250);
@@ -501,7 +501,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 				try {
 					new ImagePlot(
 							new File(
-									"../app.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
+									"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
 									+ alertType + "Activity.png", alData,
 							"Last Activity Level Measurements", "Measurement",
 							"", 350, 250);
@@ -512,7 +512,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 				try {
 					new ImagePlot(
 							new File(
-									"../app.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
+									"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
 									+ alertType + "Heartrate.png", hrData,
 							"Last Heart Rate Measurements", "Measurement",
 							"beats/min", 350, 250);
@@ -527,7 +527,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 				// the
 				// user (if the sound file is stored locally)
 				AePlayWave aw = new AePlayWave(
-						"../../app.biomedicalsensors.uiclient/siren.wav");
+						"../health.biomedicalsensors.uiclient/siren.wav");
 				aw.start();
 
 			}
