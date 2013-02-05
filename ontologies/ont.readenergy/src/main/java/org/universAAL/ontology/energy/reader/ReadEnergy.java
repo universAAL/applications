@@ -64,4 +64,11 @@ public class ReadEnergy extends ManagedIndividual{
 		return (String) props.get(PROP_IS_DAILY);
 	}
 	
+	public ReadEnergyDevice getDevice(){
+		return (ReadEnergyDevice) props.get(PROP_HAS_DEVICE);
+	}
+	
+	public EnergyMeasurement getMeasurement(){
+		return (EnergyMeasurement) props.get(PROP_HAS_MEASUREMENT);
+	}
 }
