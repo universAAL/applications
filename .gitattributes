@@ -3366,6 +3366,7 @@ ontologies/ont.aalfficiencyscores/.project -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+ontologies/ont.aalfficiencyscores/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.aalfficiencyscores/ASL2.0.txt -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/MITX.txt -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/NOTICE -text
@@ -3496,6 +3497,10 @@ ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Patogen
 ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Pronostic.java -text
 ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Sympthom.java -text
 ontologies/ont.disease/src/test/java/org/universaal/test/integrationTest/ArtifactTest.java -text
+ontologies/ont.drools/.classpath -text
+ontologies/ont.drools/.project -text
+ontologies/ont.drools/.settings/org.eclipse.jdt.core.prefs -text
+ontologies/ont.drools/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.drools/artifact.composite -text
 ontologies/ont.drools/pom.xml -text
 ontologies/ont.fitbitdata/.classpath -text svneol=unset#text/plain
@@ -3503,6 +3508,7 @@ ontologies/ont.fitbitdata/.project -text svneol=unset#text/plain
 ontologies/ont.fitbitdata/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 ontologies/ont.fitbitdata/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 ontologies/ont.fitbitdata/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+ontologies/ont.fitbitdata/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.fitbitdata/NOTICE -text
 ontologies/ont.fitbitdata/fitbitdata.di -text
 ontologies/ont.fitbitdata/fitbitdata.notation -text
@@ -3573,8 +3579,16 @@ ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmea
 ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/SingleValueMeasurement.java -text svneol=unset#text/plain
 ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Unit.java -text svneol=unset#text/plain
 ontologies/ont.healthmeasurement/src/test/java/ont/healthmeasurement/tests/ArtifactTest.java -text
+ontologies/ont.ltba/.classpath -text
+ontologies/ont.ltba/.project -text
+ontologies/ont.ltba/.settings/org.eclipse.jdt.core.prefs -text
+ontologies/ont.ltba/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.ltba/artifact.composite -text
 ontologies/ont.ltba/pom.xml -text
+ontologies/ont.medication/.classpath -text
+ontologies/ont.medication/.project -text
+ontologies/ont.medication/.settings/org.eclipse.jdt.core.prefs -text
+ontologies/ont.medication/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.medication/ASL2.0 -text
 ontologies/ont.medication/MITX.txt -text
 ontologies/ont.medication/NOTICE -text
@@ -3619,6 +3633,10 @@ ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMes
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageSubclassification.java -text
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
+ontologies/ont.nutrition/.classpath -text
+ontologies/ont.nutrition/.project -text
+ontologies/ont.nutrition/.settings/org.eclipse.jdt.core.prefs -text
+ontologies/ont.nutrition/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.nutrition/ASL2.0.txt -text
 ontologies/ont.nutrition/MITX.txt -text
 ontologies/ont.nutrition/NOTICE.txt -text
@@ -3659,6 +3677,7 @@ ontologies/ont.readenergy/.project -text svneol=unset#text/plain
 ontologies/ont.readenergy/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 ontologies/ont.readenergy/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 ontologies/ont.readenergy/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+ontologies/ont.readenergy/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.readenergy/NOTICE -text
 ontologies/ont.readenergy/ont.energy.reader.di -text
 ontologies/ont.readenergy/ont.energy.reader.notation -text
