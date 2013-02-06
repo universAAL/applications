@@ -3920,6 +3920,7 @@ safety_home/utils/external-jars/safety_home/commons-pool-1.1.jar -text
 safety_home/utils/external-jars/safety_home/mysql-connector-java-5.1.18-bin.jar -text
 safety_home/utils/install.bat -text
 safety_home/utils/safetyServer_v1.0.5_mw1.2.0.launch -text
+safety_home/utils/safetyServer_v1.1.0_mw1.2.1.launch -text
 samples/heating/pom.xml -text
 samples/heating/src/main/java/org/universAAL/samples/heating/Activator.java -text
 samples/heating/src/main/java/org/universAAL/samples/heating/CSubscriber.java -text
