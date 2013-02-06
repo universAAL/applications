@@ -29,23 +29,10 @@ public class AgendaActivator implements ModuleActivator {
 
     AgendaOntology ontology = new AgendaOntology();
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
-     * )
-     */
     public void start(ModuleContext context) throws Exception {
 	OntologyManagement.getInstance().register(ontology);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-     */
     public void stop(ModuleContext arg0) throws Exception {
 	OntologyManagement.getInstance().unregister(ontology);
     }
