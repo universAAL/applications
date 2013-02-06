@@ -18,7 +18,7 @@ INTSTALLATION
 4. Execute "Maven Install" for 
    each project.
 
-5. Import the utils/safetyServer_v5.0_mw1.1.0.launch
+5. Import the utils/safetyServer_v1.1.0_mw1.2.1.launch
    launch file in the utils folder. 
    
 
