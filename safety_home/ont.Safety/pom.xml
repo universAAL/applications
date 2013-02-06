@@ -10,7 +10,7 @@
  
   <groupId>org.universAAL.AALapplication</groupId>
   <artifactId>ont.Safety</artifactId>
-  <version>1.0.5-SNAPSHOT</version>
+  <version>1.1.0-SNAPSHOT</version>
   <name>Safety Device Ontology</name>
   <description>Safety Device Ontology</description>
   <packaging>bundle</packaging>

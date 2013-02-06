@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.ontology.Safety.Door;
 import org.universAAL.ontology.Safety.Window;
 import org.universAAL.ontology.Safety.LightSensor;
@@ -32,14 +33,14 @@ import org.universAAL.ontology.phThing.Device;
 
 enum SoundEffect {
 	
-	   OPEN("/sounds/door_open.wav"),
-	   CLOSE("/sounds/door_close.wav"),     
-	   LOCK("/sounds/door_lock.wav"),
-	   UNLOCK("/sounds/door_unlock.wav"),
-	   DOORBELL("/sounds/door_bell.wav"),
-	   SMOKE("/sounds/smoke_detection.wav"),
-	   MOTION("/sounds/motion_detection.wav"),
-	   WINDOW("/sounds/window_open.wav");
+	   OPEN("door_open.wav"),
+	   CLOSE("door_close.wav"),     
+	   LOCK("door_lock.wav"),
+	   UNLOCK("door_unlock.wav"),
+	   DOORBELL("door_bell.wav"),
+	   SMOKE("smoke_detection.wav"),
+	   MOTION("motion_detection.wav"),
+	   WINDOW("window_open.wav");
 	   
 	   // Nested class for specifying volume
 	   public static enum Volume {
@@ -58,7 +59,19 @@ enum SoundEffect {
 	    	  //File soundFile = new File(soundFileName);
 	    	  //AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 	    	  /* Open input stream and create audio input stream  */
-	    	  AudioInputStream audioIn = AudioSystem.getAudioInputStream(SafetyUIClient.class.getResourceAsStream(soundFileName));
+
+	    	  String curDir = System.getProperty("user.dir");
+	    	  //System.out.println("*** "+curDir);
+				
+	    	  File confHome = new File(new BundleConfigHome("safety_home").getAbsolutePath());
+	    	  //System.out.println("*** "+confHome.getAbsolutePath());
+	    	  String filePath = confHome.getAbsolutePath() + File.separator + "sounds" + File.separator + soundFileName; 
+	    	  //System.out.println("*** "+filePath);
+	    	  
+	    	  //AudioInputStream audioIn = AudioSystem.getAudioInputStream(SafetyUIClient.class.getResourceAsStream(soundFileName));
+	    	  File soundFile = new File(filePath);
+	    	  AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+
 	    	  // Get a clip resource.
 	    	  clip = AudioSystem.getClip();
 	    	  // Open audio clip and load samples from the audio input stream.

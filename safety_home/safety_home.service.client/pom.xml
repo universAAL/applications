@@ -44,19 +44,27 @@
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context.osgi</artifactId>
-			</dependency>
+		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service.osgi</artifactId>
 			</dependency>
 		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.profile</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.phWorld</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.ui.osgi</artifactId>
-			</dependency>		
+			<artifactId>mw.composite</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>ont.Safety</artifactId>
-			<version>1.0.5-SNAPSHOT</version>
+			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
     <build>
@@ -113,5 +121,5 @@
 			</releases>
 		</repository>
 	</repositories>	
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 </project>
