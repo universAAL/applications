@@ -2787,6 +2787,7 @@ medication/medication.manager.configuration/src/main/java/org/universAAL/AALappl
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/Log.java -text
 medication/medication.manager.configuration/src/main/resources/CreateTables.sql -text
 medication/medication.manager.configuration/src/main/resources/DataLoad.sql -text
+medication/medication.manager.configuration/src/main/resources/medication_manager/prescriptions/1.xml -text
 medication/medication.manager.integration.tests/artifact.composite -text
 medication/medication.manager.integration.tests/pom.xml -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text
