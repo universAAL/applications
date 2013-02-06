@@ -13,7 +13,6 @@
 	<name>POM file for LTBA project</name>
 	<description>POM file for LTBA project</description>
 	<modules>
-		<module>../../ontologies/ont.ltba</module>
 		<module>../ltba.manager</module>
 		<module>../ltba.publisher</module>
 		<module>../ltba.ui</module>
