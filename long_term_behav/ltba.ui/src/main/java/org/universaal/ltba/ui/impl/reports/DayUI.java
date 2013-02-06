@@ -21,6 +21,7 @@ package org.universaal.ltba.ui.impl.reports;
 
 import java.util.Locale;
 
+import org.universaal.ltba.ui.activator.MainLTBAUIProvider;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
@@ -32,7 +33,6 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
-import org.universaal.ltba.ui.activator.MainLTBAUIProvider;
 import org.universaal.ltba.ui.impl.common.LTBACaller;
 import org.universaal.ltba.ui.impl.common.SharedResources;
 
