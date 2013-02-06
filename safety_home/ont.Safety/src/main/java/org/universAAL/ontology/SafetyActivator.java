@@ -1,23 +1,21 @@
 package org.universAAL.ontology;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleActivator;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.ontology.Safety.SafetyOntology;
 
+public class SafetyActivator implements ModuleActivator {
 
-public class SafetyActivator implements BundleActivator {
-
-    static BundleContext context = null;
+    static ModuleContext context = null;
     SafetyOntology safetyOntology = new SafetyOntology();
 
-    public void start(BundleContext context) throws Exception {
+    public void start(ModuleContext context) throws Exception {
 	SafetyActivator.context = context;
 	OntologyManagement.getInstance().register(safetyOntology);
     }
 
-    public void stop(BundleContext arg0) throws Exception {
+    public void stop(ModuleContext arg0) throws Exception {
 	OntologyManagement.getInstance().unregister(safetyOntology);
     }
 }
