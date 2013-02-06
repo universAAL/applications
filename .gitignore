@@ -259,6 +259,10 @@ personal_safety/smp.test-location.publisher/.classpath
 personal_safety/smp.test-location.publisher/.project
 personal_safety/smp.test-location.publisher/.settings
 personal_safety/smp.test-location.publisher/target
+safety_home/ont.Safety/.classpath
+safety_home/ont.Safety/.project
+safety_home/ont.Safety/.settings
+safety_home/ont.Safety/target
 safety_home/pom/.project
 safety_home/pom/.settings
 safety_home/safety_home.service.client/.classpath

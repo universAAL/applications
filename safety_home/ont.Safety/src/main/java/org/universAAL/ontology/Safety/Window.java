@@ -1,7 +1,5 @@
 package org.universAAL.ontology.Safety;
 
-import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.ontology.location.Location;
 import org.universAAL.ontology.phThing.Device;
 
