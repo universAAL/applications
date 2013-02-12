@@ -171,7 +171,7 @@ public class DataStorage {
 			while (st.hasMoreTokens()) {
 				double lat = Double.parseDouble(st.nextToken());
 				double lng = Double.parseDouble(st.nextToken());
-				areaPoint.add(new Point(lat, lng, CoordinateSystem.WGS84));
+				areaPoint.add(new Point(lat, lng, 0.0, CoordinateSystem.WGS84));
 
 			}
 
@@ -279,7 +279,7 @@ public class DataStorage {
 						poiName = st.nextToken();
 					else
 						poiName = "No Name";
-					POI_UAAL poi = new POI_UAAL(poiName, new Point(lat, lng,CoordinateSystem.WGS84));
+					POI_UAAL poi = new POI_UAAL(poiName, new Point(lat, lng, 0.0, CoordinateSystem.WGS84));
 					poiList.add(poi);
 				}
 			}
@@ -355,7 +355,7 @@ public class DataStorage {
 		// at this point lat, lng, name are set and represent the POI
 		// so a valid POI object can be created 
 		
-		POI_UAAL deletedPOI = new POI_UAAL(name, new Point(lat,lng,CoordinateSystem.WGS84));
+		POI_UAAL deletedPOI = new POI_UAAL(name, new Point(lat,lng,0.0,CoordinateSystem.WGS84));
 		
 		Vector poiList = getPOIList();
 		if (poiList == null)
