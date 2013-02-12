@@ -23,7 +23,7 @@ protected class RoutePoint {
 	
 	
 	protected RoutePoint(){
-		RP = new Point(200,200,CoordinateSystem.WGS84);
+		RP = new Point(200,200,0.0,CoordinateSystem.WGS84);
 		timestamp=-1;
 	}
 }

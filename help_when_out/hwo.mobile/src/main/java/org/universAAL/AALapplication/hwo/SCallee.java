@@ -277,7 +277,7 @@ private class MyLocationListener implements LocationListener {
     	log.info("Change in Location");
         String message = String.format("New Location \n Longitude: %1$s \n Latitude: %2$s",location.getLongitude(), location.getLatitude());
         log.debug(message);
-        ap.setLocation(new Point(location.getLatitude(),location.getLongitude(),CoordinateSystem.WGS84));
+        ap.setLocation(new Point(location.getLatitude(),location.getLongitude(),location.getAltitude(),CoordinateSystem.WGS84));
     	cp.publish(new ContextEvent(ap,ap.PROP_PHYSICAL_LOCATION));
           }
 

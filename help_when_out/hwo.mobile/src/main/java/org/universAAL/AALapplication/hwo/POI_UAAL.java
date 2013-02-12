@@ -15,7 +15,7 @@ public class POI_UAAL
 	public POI_UAAL()
 	{
 		this.name = "none";
-		this.point = new Point(0.0,0.0,CoordinateSystem.WGS84);
+		this.point = new Point(0.0,0.0,0.0,CoordinateSystem.WGS84);
 		
 	}
 	public POI_UAAL(String name, Point point)
