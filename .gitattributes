@@ -3691,6 +3691,21 @@ ontologies/ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/En
 ontologies/ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/ReadEnergy.java -text svneol=unset#text/plain
 ontologies/ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/ReadEnergyDevice.java -text svneol=unset#text/plain
 ontologies/ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/ReadEnergyOntology.java -text svneol=unset#text/plain
+ontologies/ont.safety/ASL2.0 -text
+ontologies/ont.safety/MITX -text
+ontologies/ont.safety/NOTICE -text
+ontologies/ont.safety/pom.xml -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/Door.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/HumiditySensor.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/LightSensor.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/MotionSensor.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/SafetyManagement.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/SafetyOntology.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/SmokeSensor.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/TemperatureSensor.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/Window.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/SafetyActivator.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/SafetyFactory.java -text
 personal_safety/personal_safety.pom/pom.xml -text
 personal_safety/personal_safety.run/Run.bat -text
 personal_safety/personal_safety.run/pax.configuration -text
