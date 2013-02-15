@@ -216,6 +216,10 @@ ontologies/ont.healthmeasurement/.project
 ontologies/ont.healthmeasurement/.settings
 ontologies/ont.healthmeasurement/target
 ontologies/ont.medication/*.iml
+ontologies/ont.medication/.classpath
+ontologies/ont.medication/.project
+ontologies/ont.medication/.settings
+ontologies/ont.medication/target
 ontologies/ont.message/.classpath
 ontologies/ont.message/.project
 ontologies/ont.message/.settings
