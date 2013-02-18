@@ -26,33 +26,14 @@ import org.universAAL.ontology.Safety.SafetyOntology;
  * 
  */
 
-/*
-public class SafetyActivator implements BundleActivator {
-
-    static BundleContext context = null;
-    SafetyOntology safetyOntology = new SafetyOntology();
-
-    public void start(BundleContext context) throws Exception {
-	SafetyActivator.context = context;
-	OntologyManagement.getInstance().register(safetyOntology);
-    }
-
-    public void stop(BundleContext arg0) throws Exception {
-	OntologyManagement.getInstance().unregister(safetyOntology);
-    }
-}
-*/
-
 public class SafetyActivator implements ModuleActivator {
-	public static ModuleContext context;
     SafetyOntology safetyOntology = new SafetyOntology();
 
     public void start(ModuleContext context) throws Exception {
-    	//SafetyActivator.context = context;
     	OntologyManagement.getInstance().register(safetyOntology);
     }
 
-    public void stop(ModuleContext arg0) throws Exception {
+    public void stop(ModuleContext context) throws Exception {
 		OntologyManagement.getInstance().unregister(safetyOntology);
     }
 }

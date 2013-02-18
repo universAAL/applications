@@ -59,8 +59,4 @@ public class SafetyFactory extends ResourceFactoryImpl {
 
 		return null;
     }
-
-    public Resource castAs(Resource r, String classURI) {
-    	return null;
-    }
 }
