@@ -3772,7 +3772,6 @@ safety_home/ont.Safety/src/main/java/org/universAAL/ontology/Safety/TemperatureS
 safety_home/ont.Safety/src/main/java/org/universAAL/ontology/Safety/Window.java -text
 safety_home/ont.Safety/src/main/java/org/universAAL/ontology/SafetyActivator.java -text
 safety_home/ont.Safety/src/main/java/org/universAAL/ontology/SafetyFactory.java -text
-safety_home/pom/pom.xml -text
 safety_home/safety_home.service.client/LICENSE.txt -text
 safety_home/safety_home.service.client/pom.xml -text
 safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplication/safety_home/service/client/Activator.java -text
