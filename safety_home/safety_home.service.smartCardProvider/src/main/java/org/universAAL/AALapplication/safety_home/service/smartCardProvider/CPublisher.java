@@ -1,8 +1,22 @@
+/*****************************************************************************************
+ * Copyright 2012 CERTH, http://www.certh.gr - Center for Research and Technology Hellas
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *****************************************************************************************/
+
 package org.universAAL.AALapplication.safety_home.service.smartCardProvider;
 
-/* More on how to use this class at: 
- * http://forge.universaal.org/wiki/support:Developer_Handbook_6#Publishing_context_events */
-
+import org.universAAL.AALapplication.db.Derby.DerbyInterface;
 import org.universAAL.AALapplication.db.manager.entitymanagers.UserManager;
 import org.universAAL.AALapplication.db.utils.Value;
 import org.universAAL.middleware.container.ModuleContext;
@@ -35,6 +49,10 @@ import org.universAAL.AALapplication.db.utils.ResultRow;
 import org.universAAL.AALapplication.db.utils.Value;
 import java.net.*;
 
+/**
+ * @author dimokas
+ * 
+ */
 
 public class CPublisher extends ContextPublisher{
 	public static final String SAFETY_CARD_PROVIDER_NAMESPACE = "http://ontology.universaal.org/SafetySmartCardProvider.owl#";
@@ -107,7 +125,7 @@ public class CPublisher extends ContextPublisher{
 		return ( lb+ (int)( Math.random()*d)) ;		
 	}
 	
-	public void getUserByRFidTag(){
+public void getUserByRFidTag(){
 		
         Socket kkSocket = null;
         PrintWriter out = null;
@@ -127,6 +145,75 @@ public class CPublisher extends ContextPublisher{
         	error = 1;
             //System.err.println("Couldn't get I/O for the connection to: 160.40.60.229");
             //System.exit(1);
+        }
+
+        /* TESTING DERBY DATABASE
+        try{
+	        this.populateUserBySmartCardUsingDerby("E007000012D70E90");
+			if (this.userDetails.size()>0){
+				ResultRow rr = (ResultRow)this.userDetails.get(0);
+				System.out.println(rr.getStringValue(new Column("USERS","FIRSTNAME")) + "\t" + rr.getStringValue(new Column("USERS","LASTNAME"))+"\t"+rr.getStringValue(new Column("ROLE","NAME"))+"\t"+rr.getStringValue(new Column("SMARTCARD","SHORTDESCRIPTION")));
+				this.user = rr.getStringValue(new Column("ROLE","NAME")) + ": " + rr.getStringValue(new Column("USERS","FIRSTNAME")) + " " + rr.getStringValue(new Column("USERS","LASTNAME"));
+			}
+			else
+				this.user = "Unknown Person";
+			publishDoorBell(0);
+        }
+        catch(Exception e){ e.printStackTrace(); }
+        */
+        
+        if (error==0){
+	        try{
+	        	String fromServer;
+				con = ConnectionManager.getConnection();
+	        	System.out.println("Starting Client ...");
+	        	while ((fromServer = in.readLine()) != null) {
+	        		System.out.println("Server: " + fromServer);
+	        		if (fromServer.indexOf("Tag ID:")!=-1){
+	        			// Old function call based on MySQL
+	        			//this.populateUserBySmartCard(con, fromServer.substring(fromServer.indexOf(":")+2,fromServer.length()));
+	        			this.populateUserBySmartCardUsingDerby(fromServer.substring(fromServer.indexOf(":")+2,fromServer.length()));
+	        			if (this.userDetails.size()>0){
+	        				ResultRow rr = (ResultRow)this.userDetails.get(0);
+	        				System.out.println(rr.getStringValue(new Column("USERS","FIRSTNAME")) + "\t" + rr.getStringValue(new Column("USERS","LASTNAME"))+"\t"+rr.getStringValue(new Column("ROLE","NAME"))+"\t"+rr.getStringValue(new Column("SMARTCARD","SHORTDESCRIPTION")));
+	        				this.user = rr.getStringValue(new Column("ROLE","NAME")) + ": " + rr.getStringValue(new Column("USERS","FIRSTNAME")) + " " + rr.getStringValue(new Column("USERS","LASTNAME"));
+	        			}
+	        			else
+	        				this.user = "Unknown Person";
+	        			publishDoorBell(0);
+	        		}
+	        		if (fromServer.equals("Bye"))
+	        			break;
+	        	}
+	
+	        	out.close();
+	        	in.close();
+	        	kkSocket.close();
+			} 
+			catch (Exception e){
+				e.printStackTrace();
+			}
+			finally{ ConnectionManager.returnConnection(con); }
+        }
+	}
+
+/*	
+	public void getUserByRFidTag(){
+		
+        Socket kkSocket = null;
+        PrintWriter out = null;
+        BufferedReader in = null;
+        Connection con = null;
+        int error = 0;
+        
+        try {
+            kkSocket = new Socket("160.40.60.229", 4444);
+            out = new PrintWriter(kkSocket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
+        } catch (UnknownHostException e) {
+        	error = 1;
+        } catch (IOException e) {
+        	error = 1;
         }
 
         if (error==0){
@@ -161,7 +248,7 @@ public class CPublisher extends ContextPublisher{
 			finally{ ConnectionManager.returnConnection(con); }
         }
 	}
-
+*/
 	public void getRandomUser(){
    		Connection con = null;
 		try{
@@ -200,6 +287,11 @@ public class CPublisher extends ContextPublisher{
 	private void populateAllUsers(Connection con) throws SQLException{
 		 UserManager um = new UserManager(con);
 		 this.allusers = um.getAllUsers(new Vector(),null);
+	}
+
+	private void populateUserBySmartCardUsingDerby(String tagUid) throws Exception{
+		 DerbyInterface di = new DerbyInterface();
+		 this.userDetails = di.getUserBySmartCardUsingDerby(tagUid);
 	}
 
 	private void populateUserBySmartCard(Connection con, int smartcard_id) throws SQLException{

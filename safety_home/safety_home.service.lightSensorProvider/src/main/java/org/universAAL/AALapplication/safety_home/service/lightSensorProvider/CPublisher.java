@@ -1,3 +1,19 @@
+/*****************************************************************************************
+ * Copyright 2012 CERTH, http://www.certh.gr - Center for Research and Technology Hellas
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *****************************************************************************************/
+
 package org.universAAL.AALapplication.safety_home.service.lightSensorProvider;
 
 import org.universAAL.AALapplication.safety_home.service.lightSensorSoapClient.SOAPClient;
@@ -14,6 +30,11 @@ import org.universAAL.ontology.phThing.Device;
 import org.universAAL.ontology.Safety.HumiditySensor;
 import org.universAAL.ontology.Safety.LightSensor;
 
+/**
+ * @author dimokas
+ * 
+ */
+
 public class CPublisher extends ContextPublisher{
 	public static final String SAFETY_LIGHT_PROVIDER_NAMESPACE = "http://ontology.universaal.org/SafetyLightProvider.owl#";
 	public static final String MY_URI = SAFETY_LIGHT_PROVIDER_NAMESPACE + "Light";
@@ -22,6 +43,8 @@ public class CPublisher extends ContextPublisher{
 	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
 	
 	private ContextPublisher cp;
+	private int previousState = -1;
+	private int state = 0;
 	
 	public CPublisher(ModuleContext context, ContextProvider providerInfo) {
 		super(context, providerInfo);
@@ -59,18 +82,28 @@ public class CPublisher extends ContextPublisher{
 	
 	private void publishLightStatus(int deviceID){
 		Device device=null;
+		System.out.println("previous state="+previousState);
+		System.out.println("state="+state);
+		
 		if(deviceID==0){
 			LightSensor light = new LightSensor(CPublisher.DEVICE_URI_PREFIX + deviceID);
 			device=(Device)light;
 			light.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "light"));
-			if (SOAPClient.isLightOpen())
+
+			if (SOAPClient.isLightOpen()){
 				light.setSensorStatus(new Integer(1000));
-			else
+				state = 1;
+			}
+			else{
 				light.setSensorStatus(new Integer(0));
-			
-			System.out.println("############### PUBLISHING EVENT ###############");
-			cp.publish(new ContextEvent(light, LightSensor.PROP_SENSOR_STATUS));
-			System.out.println("################################################");
+				state = 0;
+			}
+			if (previousState != state){
+				System.out.println("############### PUBLISHING LIGHT EVENT ###############");
+				cp.publish(new ContextEvent(light, LightSensor.PROP_SENSOR_STATUS));
+				System.out.println("################################################");
+				previousState = state;
+			}
 		}
 	}
 

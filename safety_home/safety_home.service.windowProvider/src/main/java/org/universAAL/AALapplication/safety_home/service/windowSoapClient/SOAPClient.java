@@ -1,3 +1,19 @@
+/*****************************************************************************************
+ * Copyright 2012 CERTH, http://www.certh.gr - Center for Research and Technology Hellas
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *****************************************************************************************/
+
 package org.universAAL.AALapplication.safety_home.service.windowSoapClient;
 
 import java.net.*;
@@ -13,6 +29,11 @@ import org.universAAL.ri.wsdlToolkit.ioApi.WSOperation;
 import org.universAAL.ri.wsdlToolkit.ioApi.WSOperationInput;
 import org.universAAL.ri.wsdlToolkit.parser.WSDLParser;
 
+/**
+ * @author dimokas
+ * 
+ */
+
 public class SOAPClient {
 
   //public final static String DEFAULT_SERVER = "http://160.40.60.234:11223/0-TFK/contactSensor";
@@ -20,7 +41,7 @@ public class SOAPClient {
   public final static String SOAP_ACTION = "";
 
   public static boolean isWindowClosed(){
-	  boolean isOpen = true;
+	  boolean isClose = true;
 	  String server = DEFAULT_SERVER;
 	  try {
 		  ParsedWSDLDefinition definition = new ParsedWSDLDefinition();
@@ -42,11 +63,12 @@ public class SOAPClient {
 			  invocationResult = Axis2WebServiceInvoker.invokeWebService(operation, definition);
 		  }
 		  if (((NativeObject) operation.getHasOutput().getHasNativeOrComplexObjects().get(0)).getHasValue().equals("true"))
-				isOpen = true;
+				isClose = true;
 			else
-				isOpen = false;
-
-			return isOpen;
+				isClose = false;
+		  //System.out.println("isClose="+isClose);
+		  
+		  return isClose;
 	  }
 	  catch (Exception e) {
 		  //System.err.println(e);
