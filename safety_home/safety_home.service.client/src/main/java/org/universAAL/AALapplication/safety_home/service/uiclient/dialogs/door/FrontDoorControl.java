@@ -53,6 +53,11 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.middleware.ui.rdf.TextArea;
 
+//import org.eclipse.core.runtime.FileLocator;
+//import org.eclipse.core.runtime.IPath;
+//import org.eclipse.core.runtime.Path;
+//import org.eclipse.core.runtime.Platform;
+
 /**
  * @author dimokas
  * 
@@ -83,10 +88,10 @@ enum SoundEffect {
 	    	  //AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 	    	  /* Open input stream and create audio input stream  */
 
-	    	  String curDir = System.getProperty("user.dir");
+	    	  //String curDir = System.getProperty("user.dir");
 	    	  //System.out.println("*** "+curDir);
-	    	  File confHome = new File(new BundleConfigHome("safety_home").getAbsolutePath());
-	    	  //System.out.println("*** "+confHome.getAbsolutePath());
+	    	  File confHome = new File(new BundleConfigHome("safety").getAbsolutePath());
+	    	  //System.out.println("*** "+confHome.getAbsolutePath() + "  soundfilename="+soundFileName);
 	    	  String filePath = confHome.getAbsolutePath() + File.separator + "sounds" + File.separator + soundFileName;
 	    	  /*
 	    	  URI filePath=null;
@@ -140,6 +145,7 @@ public class FrontDoorControl extends UICaller {
     static final String SUBMISSION_OPEN = MY_UI_NAMESPACE + "open";
     static final String SUBMISSION_CLOSE = MY_UI_NAMESPACE + "close";
     static final String SUBMISSION_VISITOR = MY_UI_NAMESPACE + "visitor";
+    static final String SUBMISSION_STATUS = MY_UI_NAMESPACE + "status";
 	static final String SUBMISSION_GOBACK = MY_UI_NAMESPACE + "back";
 
     public static String deviceURI = "http://ontology.universaal.org/SafetyServer.owl#controlledDevice0";
@@ -149,7 +155,9 @@ public class FrontDoorControl extends UICaller {
 	private Form openDialog = null;
 	private Form closeDialog = null;
 	private Form visitorDialog = null;
+	private Form statusDialog = null;
 	private String active = ""; 
+	private String status = ""; 
 	private String visitorText = "";
 	private String person = null;
 	
@@ -168,28 +176,28 @@ public class FrontDoorControl extends UICaller {
 			if (SUBMISSION_UNLOCK.equals(uir.getSubmissionID())) {
 				if (SafetyClient.unlock(deviceURI)){
 					//boolean b = SafetyClient.unlock(deviceURI);
-					this.active="unlock";
+					this.active=this.status="unlock";
 					startUnlockDialog();
 				}
 			} 
 			else if (SUBMISSION_LOCK.equals(uir.getSubmissionID())) {
 				if (SafetyClient.lock(deviceURI)){
 					//boolean b = SafetyClient.lock(deviceURI);
-			    	this.active="lock";
+			    	this.active=this.status="lock";
 					startLockDialog();
 				}
 			} 
 			else if (SUBMISSION_OPEN.equals(uir.getSubmissionID())) {
 				if (SafetyClient.open(deviceURI)){
 					//boolean b = SafetyClient.open(deviceURI);
-					this.active="open";
+					this.active=this.status="open";
 					startOpenDialog();
 				}
 			} 
 			else if (SUBMISSION_CLOSE.equals(uir.getSubmissionID())) {
 				if (SafetyClient.close(deviceURI)){
 					//boolean b = SafetyClient.close(deviceURI);
-					this.active="close";
+					this.active=this.status="close";
 					startCloseDialog();
 				}
 			} 
@@ -197,8 +205,11 @@ public class FrontDoorControl extends UICaller {
 				this.active="visitor";
 				startVisitorDialog();
 			} 
+			else if (SUBMISSION_STATUS.equals(uir.getSubmissionID())) {
+				this.active="status";
+				startStatusDialog();
+			} 
 		}
-		Utils.println(window + " Continues");
 		if (this.active.equals(""))
 			startMainDialog();
 	}
@@ -213,6 +224,44 @@ public class FrontDoorControl extends UICaller {
 		sendUIRequest(out);
 	}
 
+	public void startStatusDialog() {
+		Utils.println(window + "startStatusDialog");
+		statusDialog = statusMainDialog();
+
+		UIRequest out = new UIRequest(SharedResources.testUser, statusDialog,
+				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+		sendUIRequest(out);
+	}
+
+	private Form statusMainDialog() {
+		Utils.println(window + "createStatusMainDialog");
+		Form f = Form.newDialog("Status Front Door", new Resource());
+		
+		if (this.status.equals("")){
+			SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null, "Welcome to the Front Door Control application.\n\n");
+		}
+		else if (this.status.equals("unlock")){
+			new MediaObject(f.getIOControls(), new Label("Unlocked Door", null), "image/jpeg",
+				((java.net.URL)UIProvider.class.getResource("/images/door_unlock.jpg")).toString());
+		}
+		else if (this.status.equals("lock")){
+			new MediaObject(f.getIOControls(), new Label("Locked Door", null), "image/jpeg",
+				((java.net.URL)UIProvider.class.getResource("/images/door_lock.jpg")).toString());
+		}
+		else if (this.status.equals("open")){
+			new MediaObject(f.getIOControls(), new Label("Open Door", null), "image/jpeg",
+				((java.net.URL)UIProvider.class.getResource("/images/door_open.jpg")).toString());
+		}
+		else if (this.status.equals("close")){
+			new MediaObject(f.getIOControls(), new Label("Closed Door", null), "image/jpeg",
+				((java.net.URL)UIProvider.class.getResource("/images/door_close.jpg")).toString());
+		}
+
+		f = submitButtons(f);
+		
+		return f;
+	}
+	
 	public void startVisitorDialog() {
 		Utils.println(window + "startVisitorDialog");
 		visitorDialog = visitorMainDialog();
@@ -261,12 +310,13 @@ public class FrontDoorControl extends UICaller {
 	private Form initMainDialog() {
 		Utils.println(window + "createMenusMainDialog");
 		Form f = Form.newDialog("Front Door Control", new Resource());
-		SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null, "Welcome to the Front Door Control.\n\n" +
+		SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null, "Welcome to the Front Door Control application.\n\n" +
 		"- Press the button \"Unlock Door\" to unlock the door.\n"+
 		"- Press the button \"Lock Door\" to lock the door.\n"+
 		"- Press the button \"Open Door\" to open the door.\n"+
 		"- Press the button \"Close Door\" to close the door.\n"+
-		"- Press the button \"Visitors\" to see the visitors.\n");		
+		"- Press the button \"Visitors\" to see the visitors.\n"+		
+		"- Press the button \"Status\" to see the status of the door.\n");		
 		
 		f = submitButtons(f);
 
@@ -368,18 +418,19 @@ public class FrontDoorControl extends UICaller {
 	
 	private Form submitButtons(Form f){
 		Submit b1 = new Submit(f.getSubmits(), new Label("Unlock the Door", null),SUBMISSION_UNLOCK);
-		Submit b2 = new Submit(f.getSubmits(), new Label("Lock the Door   ", null), SUBMISSION_LOCK);
-		Submit b3 = new Submit(f.getSubmits(), new Label("Open the Door  ", null), SUBMISSION_OPEN);
-		Submit b4 = new Submit(f.getSubmits(), new Label("Close the Door  ", null), SUBMISSION_CLOSE);
-		Submit b5 = new Submit(f.getSubmits(), new Label("Visitors         ", null), SUBMISSION_VISITOR);
-		Submit b6 = new Submit(f.getSubmits(), new Label("Go back", null), SUBMISSION_GOBACK);
+		Submit b2 = new Submit(f.getSubmits(), new Label("Lock the Door", null), SUBMISSION_LOCK);
+		Submit b3 = new Submit(f.getSubmits(), new Label("Open the Door", null), SUBMISSION_OPEN);
+		Submit b4 = new Submit(f.getSubmits(), new Label("Close the Door", null), SUBMISSION_CLOSE);
+		Submit b5 = new Submit(f.getSubmits(), new Label("Visitors", null), SUBMISSION_VISITOR);
+		Submit b6 = new Submit(f.getSubmits(), new Label("Status", null), SUBMISSION_STATUS);
+		Submit b7 = new Submit(f.getSubmits(), new Label("Go back", null), SUBMISSION_GOBACK);
 		
 		return f;
 	}
 	
 	public void setKnockingPerson(String person) {
 		System.out.println("********************************************");
-		System.out.println(person);
+		Utils.println(window + " Person knocking the door: " +person);
 		System.out.println("********************************************");
 		  try{	
 			if (person.indexOf("Unknown Person")!=-1){
