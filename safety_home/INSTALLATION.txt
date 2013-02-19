@@ -3,7 +3,7 @@ INTSTALLATION
 -------------
 
 1. Copy and paste the utils\sounds folder
-   in rundir\confadmin\safety_home folder.
+   in rundir\confadmin\safety folder.
 
 2. Import each Eclipse project.
 
