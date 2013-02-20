@@ -198,7 +198,6 @@ agenda/agenda.runner/Run.bat -text
 agenda/agenda.runner/dbSchemaRepository/AgendaDBwithInitialTestCalendar.sql -text
 agenda/agenda.runner/dbSchemaRepository/AgendaUniversAAL_MySQL_WorkbenchModel.mwb -text
 agenda/agenda.runner/dbSchemaRepository/Er[!!-~]model.png -text
-agenda/agenda.runner/dbSchemaRepository/stable_agenda_db-oldFromPersona.sql -text
 agenda/agenda.runner/dbSchemaRepository/universAALAgendaDBwithTestDataAndProcedures.sql -text
 agenda/agenda.runner/dbSchemaRepository/universAALagendaDBwithProceduresAnd2TestUsers.sql -text
 agenda/agenda.runner/eclipse.launchers/runner-Remote-Debug.launch -text
