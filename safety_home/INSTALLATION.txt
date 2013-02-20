@@ -12,5 +12,8 @@ INTSTALLATION
 
 4. Import the utils/safety_UI_mw1.3.0.launch
    launch file in the utils folder. 
+
+5. Copy and paste the utils\ui.dm folder
+   in rundir\confadmin\
    
 
