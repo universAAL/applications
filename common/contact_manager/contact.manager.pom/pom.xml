@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>new_services.pom</artifactId>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <version>D.0</version>
+    <relativePath>../../../new_services.pom</relativePath>
+  </parent>
+  <artifactId>contact.manager.pom</artifactId>
+  <version>D.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Contact Manager AAL Service</name>
+  <url>***TODO***</url>
+
+  <dependencies>
+    <!--
+      The dependency to itests has always come before the dependency to
+      org.osgi.core (groupId:org.apache.felix). The easiest approach is to
+      just put the dependency to itests as the first one.
+     -->
+
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.compendium</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.universAAL.middleware</groupId>
+      <artifactId>mw.container.osgi</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.universAAL.ontology</groupId>
+      <artifactId>ont.profile</artifactId>
+      <version>1.3.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/</url>
+    </license>
+  </licenses>
+  <issueManagement>
+    <system>GForge - Tracker</system>
+    <!--<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=</url>-->
+  </issueManagement>
+  <inceptionYear>2011</inceptionYear>
+  <scm>
+    <connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/medication</connection>
+    <developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/medication</developerConnection>
+  </scm>
+  <modules>
+     <module>../contact.manager.persistence</module>
+     <module>../contact.manager.service</module>
+     <module>../contact.manager.shell.commands</module>
+  </modules>
+</project>
