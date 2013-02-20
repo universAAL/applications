@@ -39,6 +39,13 @@ agenda/agenda.server/.classpath
 agenda/agenda.server/.project
 agenda/agenda.server/.settings
 agenda/agenda.server/target
+common/contact_manager/contact.manager.persistence/*.iml
+common/contact_manager/contact.manager.persistence/target
+common/contact_manager/contact.manager.pom/*.iml
+common/contact_manager/contact.manager.service/*.iml
+common/contact_manager/contact.manager.service/target
+common/contact_manager/contact.manager.shell.commands/*.iml
+common/contact_manager/contact.manager.shell.commands/target
 food_shopping/food_shopping.service.RFidProvider/*.classpath
 food_shopping/food_shopping.service.RFidProvider/*.project
 food_shopping/food_shopping.service.RFidProvider/*.settings

@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <version>D.0.1-SNAPSHOT</version>
+    <artifactId>contact.manager.pom</artifactId>
+    <relativePath>../contact.manager.pom</relativePath>
+  </parent>
+  <artifactId>contact.manager.shell.commands</artifactId>
+  <name>Contact Manager shell commands</name>
+  <description>Contact Manager shell commands</description>
+  <packaging>bundle</packaging>
+
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.gogo.shell</artifactId>
+      <version>0.10.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>contact.manager.persistence</artifactId>
+      <version>D.0.1-SNAPSHOT</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-Activator>org.universAAL.AALapplication.contact_manager.shell.commands.impl.Activator
+            </Bundle-Activator>
+            <Bundle-Description>${project.description}</Bundle-Description>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Private-Package>org.universAAL.AALapplication.contact_manager.shell.commands.impl.*</Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+
+        <groupId>org.apache.maven.plugins</groupId>
+
+        <artifactId>maven-antrun-plugin</artifactId>
+
+        <version>1.7</version>
+
+        <executions>
+
+          <execution>
+
+            <id>copy</id>
+
+            <phase>install</phase>
+
+            <configuration>
+
+              <target name="copy file">
+
+                <copy file="${project.basedir}/target/${project.artifactId}-${project.version}.jar"
+                      tofile="D:\universAAL\svn\protoRev.runner\runner\bundles\contact.manager.shell.commands_1.3.0.jar"/>
+
+              </target>
+
+            </configuration>
+
+            <goals>
+
+              <goal>run</goal>
+
+            </goals>
+
+          </execution>
+
+        </executions>
+
+      </plugin>
+    </plugins>
+  </build>
+</project>
