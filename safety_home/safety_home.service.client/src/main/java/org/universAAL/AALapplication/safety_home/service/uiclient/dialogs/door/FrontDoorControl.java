@@ -156,6 +156,7 @@ public class FrontDoorControl extends UICaller {
 	private Form closeDialog = null;
 	private Form visitorDialog = null;
 	private Form statusDialog = null;
+	private Form errorDialog = null;
 	private String active = ""; 
 	private String status = ""; 
 	private String visitorText = "";
@@ -179,6 +180,9 @@ public class FrontDoorControl extends UICaller {
 					this.active=this.status="unlock";
 					startUnlockDialog();
 				}
+				else
+					startErrorDialog(1);
+				
 			} 
 			else if (SUBMISSION_LOCK.equals(uir.getSubmissionID())) {
 				if (SafetyClient.lock(deviceURI)){
@@ -186,6 +190,8 @@ public class FrontDoorControl extends UICaller {
 			    	this.active=this.status="lock";
 					startLockDialog();
 				}
+				else
+					startErrorDialog(2);
 			} 
 			else if (SUBMISSION_OPEN.equals(uir.getSubmissionID())) {
 				if (SafetyClient.open(deviceURI)){
@@ -193,6 +199,8 @@ public class FrontDoorControl extends UICaller {
 					this.active=this.status="open";
 					startOpenDialog();
 				}
+				else
+					startErrorDialog(3);
 			} 
 			else if (SUBMISSION_CLOSE.equals(uir.getSubmissionID())) {
 				if (SafetyClient.close(deviceURI)){
@@ -200,6 +208,8 @@ public class FrontDoorControl extends UICaller {
 					this.active=this.status="close";
 					startCloseDialog();
 				}
+				else
+					startErrorDialog(4);
 			} 
 			else if (SUBMISSION_VISITOR.equals(uir.getSubmissionID())) {
 				this.active="visitor";
@@ -307,6 +317,15 @@ public class FrontDoorControl extends UICaller {
 		sendUIRequest(out);
 	}
 
+	public void startErrorDialog(int action) {
+		Utils.println(window + "startErrorDialog");
+		errorDialog = errorMainDialog(action);
+
+		UIRequest out = new UIRequest(SharedResources.testUser, errorDialog,
+				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+		sendUIRequest(out);
+	}
+
 	private Form initMainDialog() {
 		Utils.println(window + "createMenusMainDialog");
 		Form f = Form.newDialog("Front Door Control", new Resource());
@@ -391,6 +410,23 @@ public class FrontDoorControl extends UICaller {
 		//closeIcon.setPreferredResolution(500, 500);
 		SoundEffect.CLOSE.play();
 		
+		f = submitButtons(f);
+		
+		return f;
+	}
+
+	private Form errorMainDialog(int action) {
+		Utils.println(window + "createErrorMainDialog");
+		Form f = Form.newDialog("Error Front Door", new Resource());
+		
+		if (action==4){
+			SimpleOutput errormsg = new SimpleOutput(f.getIOControls(), null, null, "The operation failed.\n\n" +
+					"You have to open the door first.");
+		}
+		else{
+			SimpleOutput errormsg = new SimpleOutput(f.getIOControls(), null, null, "The operation failed.\n\n" +
+					"Please try again later.");
+		}
 		f = submitButtons(f);
 		
 		return f;
