@@ -21,6 +21,7 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.db.Derby.DerbyInterface;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 /**
  * @author dimokas
@@ -34,10 +35,16 @@ public class Activator implements BundleActivator{
 
     public void start(final BundleContext context) throws Exception {
 		mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { context });
-		System.out.println("Smart Card Provider started ...");
-		System.out.println("Create database started ...");
-		db.createDB();
-		System.out.println("Database creation completed ...");
+		LogUtils.logInfo(Activator.mc,	Activator.class,	"start",
+				new Object[] { "Smart Card Provider started ..." }, null);
+		// Check if DB exists. If not create DB. 
+		if (!db.exist()){
+			LogUtils.logInfo(Activator.mc,	DerbyInterface.class, "createDB",
+					new Object[] { "Create database started ..." }, null);
+			db.createDB();
+			LogUtils.logInfo(Activator.mc,	DerbyInterface.class, "createDB",
+					new Object[] { "Database creation completed ..." }, null);
+		}
 		new Thread() {
 			public void run() {
 				new CPublisher(mc);

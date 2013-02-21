@@ -457,15 +457,9 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 			door.setStatus(value? 100: 0);
 			//cp.publish(new ContextEvent(door, Door.PROP_DEVICE_STATUS));
 			
-/*
-			LogUtils
-				.logInfo(
-						Activator.logger,
-						"SafetyProvider",
-						"DeviceStateChanged",
-						new Object[] { "publishing a context event on the state of a Door!" },
-						null);
-*/
+			LogUtils.logWarn(Activator.mc,	SafetyProvider.class, "DeviceStateChanged",
+					new Object[] { "publishing a context event on the state of a Door!" }, null);
+			
 			// finally create an context event and publish it with the door as
 			// subject and the property that changed as predicate
 			//cp.publish(new ContextEvent(door, Door.PROP_DEVICE_STATUS));

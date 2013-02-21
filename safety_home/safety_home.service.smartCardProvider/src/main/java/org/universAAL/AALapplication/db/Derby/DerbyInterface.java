@@ -16,6 +16,8 @@ import org.universAAL.AALapplication.db.utils.Value;
 import org.universAAL.AALapplication.db.utils.criteria.Criterion;
 import org.universAAL.AALapplication.db.utils.criteria.StringCriterion;
 import org.universAAL.AALapplication.db.utils.statements.SelectStatement;
+import org.universAAL.AALapplication.safety_home.service.smartCardProvider.Activator;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 public class DerbyInterface {
 	private static final String DBNAME ="safety_home";
@@ -24,6 +26,42 @@ public class DerbyInterface {
 	private Statement statement = null;
 	private ResultSet resultSet = null;
 	
+	public boolean exist(){
+		try {
+			// load the Derby driver using the current class loader
+		    Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+			Connection connect = null;
+			connect = DriverManager.getConnection("jdbc:derby:"+DBNAME+";create=false;");
+			statement = connect.createStatement();
+		    statement.setQueryTimeout(30);  // set timeout to 30 sec.
+		    
+			// Statements allow to issue SQL queries to the database
+			statement = connect.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM safety_home.smartcard");
+			
+			LogUtils.logInfo(Activator.mc,	DerbyInterface.class,	"exist",
+					new Object[] { "Check if database exists ..." }, null);
+
+			if (resultSet.next()){
+				LogUtils.logInfo(Activator.mc,	DerbyInterface.class,	"exist",
+						new Object[] { "Database exists ..." }, null);
+				return true;
+			}
+			else{
+				LogUtils.logInfo(Activator.mc,	DerbyInterface.class,	"exist",
+						new Object[] { "Database does not exist ..." }, null);
+				return false;
+			}
+		}
+		catch (Exception e) {
+			LogUtils.logWarn(Activator.mc,	DerbyInterface.class,	"exist",
+					new Object[] { "Database does not exist ..." }, null);
+			return false;
+		} finally {
+			close();
+		}
+	}
+
 	public void createDB() throws Exception{
 		// load the Derby driver using the current class loader
 	    Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
