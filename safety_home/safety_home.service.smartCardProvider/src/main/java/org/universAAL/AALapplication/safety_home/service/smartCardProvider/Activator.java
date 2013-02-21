@@ -37,7 +37,8 @@ public class Activator implements BundleActivator{
 		mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { context });
 		LogUtils.logInfo(Activator.mc,	Activator.class,	"start",
 				new Object[] { "Smart Card Provider started ..." }, null);
-		// Check if DB exists. If not create DB. 
+		// Check if DB exists. If not create DB.
+		db.init();
 		if (!db.exist()){
 			LogUtils.logInfo(Activator.mc,	DerbyInterface.class, "createDB",
 					new Object[] { "Create database started ..." }, null);

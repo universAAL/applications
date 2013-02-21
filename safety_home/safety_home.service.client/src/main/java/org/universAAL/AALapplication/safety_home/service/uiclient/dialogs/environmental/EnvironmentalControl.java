@@ -77,7 +77,7 @@ enum SoundEffect {
 
 	    	  String curDir = System.getProperty("user.dir");
 	    	  //System.out.println("*** "+curDir);
-	    	  File confHome = new File(new BundleConfigHome("safety_home").getAbsolutePath());
+	    	  File confHome = new File(new BundleConfigHome("safety").getAbsolutePath());
 	    	  //System.out.println("*** "+confHome.getAbsolutePath());
 	    	  String filePath = confHome.getAbsolutePath() + File.separator + "sounds" + File.separator + soundFileName; 
 	    	  /*

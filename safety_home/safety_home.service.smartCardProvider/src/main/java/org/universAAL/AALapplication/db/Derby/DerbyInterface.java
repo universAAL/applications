@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.db.Derby;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,21 +18,30 @@ import org.universAAL.AALapplication.db.utils.criteria.Criterion;
 import org.universAAL.AALapplication.db.utils.criteria.StringCriterion;
 import org.universAAL.AALapplication.db.utils.statements.SelectStatement;
 import org.universAAL.AALapplication.safety_home.service.smartCardProvider.Activator;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.container.utils.LogUtils;
 
 public class DerbyInterface {
-	private static final String DBNAME ="safety_home";
+	private static String DBNAME ="safety_home";
+	private static String DBURL ="safety_home";
 
 	private Connection connect = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
 	
+	public void init(){
+  	  File confHome = new File(new BundleConfigHome("safety").getAbsolutePath());
+  	  DBURL = confHome.getAbsolutePath() + File.separator + DBNAME;
+  	  DBURL = DBURL.replaceAll("\\\\", "/");
+	}
+	
 	public boolean exist(){
+		
 		try {
 			// load the Derby driver using the current class loader
 		    Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
 			Connection connect = null;
-			connect = DriverManager.getConnection("jdbc:derby:"+DBNAME+";create=false;");
+			connect = DriverManager.getConnection("jdbc:derby:"+DBURL+";create=false;");
 			statement = connect.createStatement();
 		    statement.setQueryTimeout(30);  // set timeout to 30 sec.
 		    
@@ -67,7 +77,9 @@ public class DerbyInterface {
 	    Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
 		try {
 			Connection connect = null;
-			connect = DriverManager.getConnection("jdbc:derby:"+DBNAME+";create=true;");
+			connect = DriverManager.getConnection("jdbc:derby:"+DBURL+";create=true;");
+
+			//connect = DriverManager.getConnection("jdbc:derby:c:/universAAL/workspaces/uAAL130/rundir/confadmin/safety/safety_home;create=true;");
 			statement = connect.createStatement();
 		    statement.setQueryTimeout(30);  // set timeout to 30 sec.
 		    
@@ -158,7 +170,7 @@ public class DerbyInterface {
 		try {
 			// This will load the MySQL driver, each DB has its own driver
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-			connect = DriverManager.getConnection("jdbc:derby:"+DBNAME);
+			connect = DriverManager.getConnection("jdbc:derby:"+DBURL);
 
 	        System.out.println("************************************************");
 	        System.out.println("tag uid="+tagUid);
