@@ -24,7 +24,9 @@ public class InterfaceProvider extends UICaller {
 
     public static final String MY_UI_NAMESPACE = SharedResources.CLIENT_NUTRITIONAL_UI_NAMESPACE
 	    + "UIProvider#";
-    public static final String IMG_URL = "http://127.0.0.1:8080/resources/nutritional.uiclient.basic/";
+    public static final String IMG_URL = "http://127.0.0.1:"
+	    + System.getProperty("org.osgi.service.http.port", "8080")
+	    + "/resources/nutritional.uiclient.basic/";
 
     public InterfaceProvider(ModuleContext context) {
 	super(context);
