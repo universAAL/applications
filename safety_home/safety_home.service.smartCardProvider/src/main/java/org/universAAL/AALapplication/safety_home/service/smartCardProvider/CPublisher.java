@@ -165,7 +165,7 @@ public void getUserByRFidTag(){
         if (error==0){
 	        try{
 	        	String fromServer;
-				con = ConnectionManager.getConnection();
+				//con = ConnectionManager.getConnection();
 	        	System.out.println("Starting Client ...");
 	        	while ((fromServer = in.readLine()) != null) {
 	        		System.out.println("Server: " + fromServer);
@@ -193,7 +193,7 @@ public void getUserByRFidTag(){
 			catch (Exception e){
 				e.printStackTrace();
 			}
-			finally{ ConnectionManager.returnConnection(con); }
+			//finally{ ConnectionManager.returnConnection(con); }
         }
 	}
 
@@ -291,6 +291,7 @@ public void getUserByRFidTag(){
 
 	private void populateUserBySmartCardUsingDerby(String tagUid) throws Exception{
 		 DerbyInterface di = new DerbyInterface();
+		 di.init();
 		 this.userDetails = di.getUserBySmartCardUsingDerby(tagUid);
 	}
 
