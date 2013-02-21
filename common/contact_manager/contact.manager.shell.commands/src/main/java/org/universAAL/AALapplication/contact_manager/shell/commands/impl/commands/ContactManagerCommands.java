@@ -30,54 +30,65 @@ public class ContactManagerCommands {
   @Descriptor("Displays Contact Manager commands")
   public void help() {
 
-    ConsoleCommand consoleCommand = getHelpCommand();
-
-    Log.info("Calling " + consoleCommand.getCommandText(), getClass());
-
-    consoleCommand.execute();
+    callCommand(getHelpCommand());
 
   }
+
+  @Descriptor("Triggers a call to AddContactService, which is part of the Contact Manager Service")
+  public void add(@Descriptor("parameters") String... parameters) {
+
+    callCommand(getAddContactConsoleCommand());
+  }
+
+  @Descriptor("Triggers a call to GetContactService, which is part of the Contact Manager Service")
+  public void get(@Descriptor("parameters") String... parameters) {
+
+    callCommand(getGetContactConsoleCommand());
+  }
+
+  @Descriptor("Triggers a call to RemoveContactService, which is part of the Contact Manager Service")
+  public void remove(@Descriptor("parameters") String... parameters) {
+
+    callCommand(getRemoveContactConsoleCommand());
+  }
+
+  @Descriptor("Triggers a call to EditContactService, which is part of the Contact Manager Service")
+  public void edit(@Descriptor("parameters") String... parameters) {
+
+    callCommand(getEditContactConsoleCommand());
+  }
+
 
   @Descriptor("Triggers a call to ListContactService, which is part of the Contact Manager Service")
   public void list(@Descriptor("parameters") String... parameters) {
 
-    ConsoleCommand consoleCommand = getListContactConsoleCommand();
-
-    Log.info("Calling " + consoleCommand.getCommandText(), getClass());
-
-    consoleCommand.execute(parameters);
+    callCommand(getListContactConsoleCommand());
   }
 
   @Descriptor("Triggers a call to ImportContactService, which is part of the Contact Manager Service")
   public void imports(@Descriptor("parameters") String... parameters) {
 
-    ConsoleCommand consoleCommand = getImportContactConsoleCommand();
-
-    Log.info("Calling " + consoleCommand.getCommandText(), getClass());
-
-    consoleCommand.execute(parameters);
+    callCommand(getImportContactConsoleCommand());
   }
 
   @Descriptor("Triggers a call to ExportContactService, which is part of the Contact Manager Service")
   public void exports(@Descriptor("parameters") String... parameters) {
 
-    ConsoleCommand consoleCommand = getExportContactConsoleCommand();
-
-    Log.info("Calling " + consoleCommand.getCommandText(), getClass());
-
-    consoleCommand.execute(parameters);
+    callCommand(getExportContactConsoleCommand());
   }
 
   @Descriptor("Triggers printing of the data in the database tables Contact Manager Service")
   public void print(@Descriptor("parameters") String... parameters) {
 
-    ConsoleCommand consoleCommand = getPrintConsoleCommand();
+    callCommand(getPrintConsoleCommand());
+  }
+
+  private void callCommand(ConsoleCommand consoleCommand) {
 
     Log.info("Calling " + consoleCommand.getCommandText(), getClass());
 
-    consoleCommand.execute(parameters);
+    consoleCommand.execute();
   }
-
 
 }
 
