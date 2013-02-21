@@ -34,8 +34,6 @@ public class SharedResources {
 
     public static ServiceProvider serviceProvider;
     public static UIProvider uIProvider;
-	//public static FrontDoorControl fdc;
-	//public static EnvironmentalControl ec;
 
     public static final AssistedPerson testUser = new AssistedPerson(
 	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");

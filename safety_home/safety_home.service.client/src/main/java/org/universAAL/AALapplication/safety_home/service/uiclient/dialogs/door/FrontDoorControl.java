@@ -53,10 +53,6 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.middleware.ui.rdf.TextArea;
 
-//import org.eclipse.core.runtime.FileLocator;
-//import org.eclipse.core.runtime.IPath;
-//import org.eclipse.core.runtime.Path;
-//import org.eclipse.core.runtime.Platform;
 
 /**
  * @author dimokas
@@ -161,6 +157,7 @@ public class FrontDoorControl extends UICaller {
 	private String status = ""; 
 	private String visitorText = "";
 	private String person = null;
+	private static boolean success = false;
 	
 	public FrontDoorControl(ModuleContext context) {
 		super(context);
@@ -176,9 +173,15 @@ public class FrontDoorControl extends UICaller {
 			}
 			if (SUBMISSION_UNLOCK.equals(uir.getSubmissionID())) {
 				if (SafetyClient.unlock(deviceURI)){
-					//boolean b = SafetyClient.unlock(deviceURI);
 					this.active=this.status="unlock";
 					startUnlockDialog();
+/*
+					new Thread() {
+						public void run() {
+							success = SafetyClient.unlock(deviceURI);
+						}
+					}.start();
+*/
 				}
 				else
 					startErrorDialog(1);
@@ -186,7 +189,6 @@ public class FrontDoorControl extends UICaller {
 			} 
 			else if (SUBMISSION_LOCK.equals(uir.getSubmissionID())) {
 				if (SafetyClient.lock(deviceURI)){
-					//boolean b = SafetyClient.lock(deviceURI);
 			    	this.active=this.status="lock";
 					startLockDialog();
 				}
@@ -195,7 +197,6 @@ public class FrontDoorControl extends UICaller {
 			} 
 			else if (SUBMISSION_OPEN.equals(uir.getSubmissionID())) {
 				if (SafetyClient.open(deviceURI)){
-					//boolean b = SafetyClient.open(deviceURI);
 					this.active=this.status="open";
 					startOpenDialog();
 				}
@@ -204,7 +205,6 @@ public class FrontDoorControl extends UICaller {
 			} 
 			else if (SUBMISSION_CLOSE.equals(uir.getSubmissionID())) {
 				if (SafetyClient.close(deviceURI)){
-					//boolean b = SafetyClient.close(deviceURI);
 					this.active=this.status="close";
 					startCloseDialog();
 				}
@@ -222,6 +222,7 @@ public class FrontDoorControl extends UICaller {
 		}
 		if (this.active.equals(""))
 			startMainDialog();
+		Utils.println(window + " Continues");
 	}
 	
 	public void startMainDialog() {
@@ -287,6 +288,7 @@ public class FrontDoorControl extends UICaller {
 
 		UIRequest out = new UIRequest(SharedResources.testUser, unlockDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+		
 		sendUIRequest(out);
 	}
 
@@ -449,6 +451,7 @@ public class FrontDoorControl extends UICaller {
 		Form f = Form.newMessage("Visitor Alert Message", this.visitorText);
 		new MediaObject(f.getIOControls(), new Label("", null), "image/jpeg",
 				((java.net.URL)UIProvider.class.getResource("/images/"+person+".jpg")).toString());
+
 		return f;
 	}
 	

@@ -40,6 +40,7 @@ import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
+import org.universAAL.middleware.ui.rdf.Group;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.MediaObject;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
@@ -307,6 +308,28 @@ public class EnvironmentalControl extends UICaller {
 		Utils.println(window + "createTemperatureMainDialog");
 		Form f = Form.newDialog("Temperature", new Resource());
 		//Form f = Form.newSubdialog("Temperature", mainDialog.getURI());
+/*
+		Group g1 = new Group(f.getIOControls(), new Label("Normal group 1",
+			      (String) null), null, null, (Resource) null);
+		new MediaObject(g1, new Label("", null), "image/jpeg",
+				((java.net.URL)UIProvider.class.getResource("/images/temperature.jpg")).toString());
+		
+		Group g2 = new Group(f.getIOControls(), new Label("Normal group 2",
+			      (String) null), null, null, (Resource) null);
+		new MediaObject(g2, new Label("", null), "image/jpeg",
+				((java.net.URL)UIProvider.class.getResource("/images/closed_window.jpg")).toString());
+
+		Group g3 = new Group(f.getIOControls(), new Label("Normal group 3",
+			      (String) null), null, null, (Resource) null);
+		new MediaObject(g3, new Label("", null), "image/jpeg",
+				((java.net.URL)UIProvider.class.getResource("/images/motion.jpg")).toString());
+		
+		Group g4 = new Group(f.getIOControls(), new Label("Normal group 4",
+			      (String) null), null, null, (Resource) null);
+		new MediaObject(g4, new Label("", null), "image/jpeg",
+				((java.net.URL)UIProvider.class.getResource("/images/light_on.jpg")).toString());
+*/		
+		
 		if (this.temperature!=0)
 			new MediaObject(f.getIOControls(), new Label("Temperature is "+this.temperature, null), "image/jpeg",
 				((java.net.URL)UIProvider.class.getResource("/images/temperature.jpg")).toString());

@@ -43,16 +43,9 @@ public class ServiceProvider extends ServiceCallee {
 				"Safety and Security UI Client", START_URI) });
     }
 
-    /**
-     * @see org.persona.middleware.service.ServiceCallee#communicationChannelBroken()
-     */
     public void communicationChannelBroken() {
-	// TODO Auto-generated method stub
     }
 
-    /**
-     * @see org.persona.middleware.service.ServiceCallee#handleCall(org.persona.middleware.service.ServiceCall)
-     */
     public ServiceResponse handleCall(ServiceCall call) {
 	if (call != null) {
 	    String operation = call.getProcessURI();
