@@ -23,6 +23,9 @@ package org.universAAL.AALapplication.contact_manager.shell.commands.impl.comman
 public final class ContactConsoleCommands {
 
   private static final ConsoleCommand HELP_CONSOLE_COMMAND;
+  private static final ConsoleCommand ADD_CONTACT_CONSOLE_COMMAND;
+  private static final ConsoleCommand GET_CONTACT_CONSOLE_COMMAND;
+  private static final ConsoleCommand REMOVE_CONTACT_CONSOLE_COMMAND;
   private static final ConsoleCommand EDIT_CONTACT_CONSOLE_COMMAND;
   private static final ConsoleCommand LIST_CONTACT_CONSOLE_COMMAND;
   private static final ConsoleCommand IMPORT_CONTACT_CONSOLE_COMMAND;
@@ -42,26 +45,25 @@ public final class ContactConsoleCommands {
   private static final ConsoleCommand[] CONSOLE_COMMANDS;
 
   static {
-    CONSOLE_COMMANDS = new ConsoleCommand[6];
+    CONSOLE_COMMANDS = new ConsoleCommand[9];
     HELP_CONSOLE_COMMAND = createHelpCommand();
     CONSOLE_COMMANDS[0] = HELP_CONSOLE_COMMAND;
+    ADD_CONTACT_CONSOLE_COMMAND = createAddContactCommand();
+    CONSOLE_COMMANDS[1] = ADD_CONTACT_CONSOLE_COMMAND;
+    GET_CONTACT_CONSOLE_COMMAND = createGetContactCommand();
+    CONSOLE_COMMANDS[2] = GET_CONTACT_CONSOLE_COMMAND;
+    REMOVE_CONTACT_CONSOLE_COMMAND = createRemoveContactCommand();
+    CONSOLE_COMMANDS[3] = REMOVE_CONTACT_CONSOLE_COMMAND;
     EDIT_CONTACT_CONSOLE_COMMAND = createEditContactCommand();
-    CONSOLE_COMMANDS[1] = EDIT_CONTACT_CONSOLE_COMMAND;
+    CONSOLE_COMMANDS[4] = EDIT_CONTACT_CONSOLE_COMMAND;
     LIST_CONTACT_CONSOLE_COMMAND = createListContactCommand();
-    CONSOLE_COMMANDS[2] = LIST_CONTACT_CONSOLE_COMMAND;
+    CONSOLE_COMMANDS[5] = LIST_CONTACT_CONSOLE_COMMAND;
     IMPORT_CONTACT_CONSOLE_COMMAND = createImportContactCommand();
-    CONSOLE_COMMANDS[3] = IMPORT_CONTACT_CONSOLE_COMMAND;
+    CONSOLE_COMMANDS[6] = IMPORT_CONTACT_CONSOLE_COMMAND;
     EXPORT_CONTACT_CONSOLE_COMMAND = createExportContactCommand();
-    CONSOLE_COMMANDS[4] = EXPORT_CONTACT_CONSOLE_COMMAND;
+    CONSOLE_COMMANDS[7] = EXPORT_CONTACT_CONSOLE_COMMAND;
     PRINT_TABLES_CONSOLE_COMMAND = createPrintTablesCommand();
-    CONSOLE_COMMANDS[5] = PRINT_TABLES_CONSOLE_COMMAND;
-  }
-
-  private static ConsoleCommand createPrintTablesCommand() {
-    String name = COMMAND_PREFIX + ':' + PRINT_TABLES;
-    String description = "Printing all the data in the database tables";
-
-    return new PrintTablesConsoleCommand(name, description);
+    CONSOLE_COMMANDS[8] = PRINT_TABLES_CONSOLE_COMMAND;
   }
 
   private static ConsoleCommand createHelpCommand() {
@@ -71,11 +73,32 @@ public final class ContactConsoleCommands {
     return new ContactManagerHelpCommand(name, description);
   }
 
+  private static ConsoleCommand createAddContactCommand() {
+    String name = COMMAND_PREFIX + ':' + ADD_CONTACT;
+    String description = "Calling AddContactsService";
+
+    return new AddContactConsoleCommand(name, description);
+  }
+
+  private static ConsoleCommand createGetContactCommand() {
+    String name = COMMAND_PREFIX + ':' + GET_CONTACT;
+    String description = "Calling GetContactsService";
+
+    return new GetContactConsoleCommand(name, description);
+  }
+
+  private static ConsoleCommand createRemoveContactCommand() {
+    String name = COMMAND_PREFIX + ':' + REMOVE_CONTACT;
+    String description = "Calling RemoveContactsService";
+
+    return new RemoveContactConsoleCommand(name, description);
+  }
+
   private static ConsoleCommand createEditContactCommand() {
     String name = COMMAND_PREFIX + ':' + EDIT_CONTACT;
     String description = "Calling EditContactsService";
 
-    return new ListContactConsoleCommand(name, description);
+    return new EditContactConsoleCommand(name, description);
   }
 
   private static ConsoleCommand createListContactCommand() {
@@ -99,12 +122,31 @@ public final class ContactConsoleCommands {
     return new ExportContactConsoleCommand(name, description);
   }
 
+  private static ConsoleCommand createPrintTablesCommand() {
+    String name = COMMAND_PREFIX + ':' + PRINT_TABLES;
+    String description = "Printing all the data in the database tables";
+
+    return new PrintTablesConsoleCommand(name, description);
+  }
+
   public static synchronized ConsoleCommand[] getConsoleCommands() {
     return CONSOLE_COMMANDS;
   }
 
   public static synchronized ConsoleCommand getHelpCommand() {
     return HELP_CONSOLE_COMMAND;
+  }
+
+  public static synchronized ConsoleCommand getAddContactConsoleCommand() {
+    return ADD_CONTACT_CONSOLE_COMMAND;
+  }
+
+  public static synchronized ConsoleCommand getGetContactConsoleCommand() {
+    return GET_CONTACT_CONSOLE_COMMAND;
+  }
+
+  public static synchronized ConsoleCommand getRemoveContactConsoleCommand() {
+    return REMOVE_CONTACT_CONSOLE_COMMAND;
   }
 
   public static synchronized ConsoleCommand getEditContactConsoleCommand() {
