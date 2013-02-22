@@ -402,6 +402,8 @@ common/contact_manager/contact.manager.service/ASL2.0 -text
 common/contact_manager/contact.manager.service/MITX.txt -text
 common/contact_manager/contact.manager.service/pom.xml -text
 common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/Activator.java -text
+common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/AddContactService.java -text
+common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/AddContactServiceProvider.java -text
 common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/ContactManagerException.java -text
 common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/Log.java -text
 common/contact_manager/contact.manager.shell.commands/ASL2.0 -text
@@ -411,6 +413,7 @@ common/contact_manager/contact.manager.shell.commands/pom.xml -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/Activator.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/ContactManagerShellException.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/Log.java -text
+common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/callees/AddContactConsumer.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/commands/AddContactConsoleCommand.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/commands/ConsoleCommand.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/commands/ContactConsoleCommands.java -text
