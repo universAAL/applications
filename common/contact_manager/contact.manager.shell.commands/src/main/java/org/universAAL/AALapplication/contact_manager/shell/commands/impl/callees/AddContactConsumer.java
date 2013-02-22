@@ -35,10 +35,7 @@ import org.universAAL.ontology.profile.service.ProfilingService;
  */
 public final class AddContactConsumer {
 
-  private static ServiceCaller serviceCaller;
-
-  private static final String ADD_CONTACT_CONSUMER_NAMESPACE = "http://ontology.igd.fhg.de/AddContactConsumer.owl#";
-
+  private final ServiceCaller serviceCaller;
 
   public AddContactConsumer(ModuleContext moduleContext) {
 
@@ -47,7 +44,7 @@ public final class AddContactConsumer {
   }
 
 
-  public static boolean sendAddContact(User user, PersonalInformationSubprofile personalInformationSubprofile) {
+  public boolean sendAddContact(User user, PersonalInformationSubprofile personalInformationSubprofile) {
 
     Log.info("Trying to send a contact", AddContactConsumer.class);
 

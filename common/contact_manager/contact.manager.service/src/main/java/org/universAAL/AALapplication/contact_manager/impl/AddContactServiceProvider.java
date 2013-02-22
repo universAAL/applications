@@ -77,7 +77,7 @@ public final class AddContactServiceProvider extends ServiceCallee {
 
 
     if (personalInformationSubprofile != null && personalInformationSubprofile.isWellFormed()) {
-      printMedicationTreatmentData(personalInformationSubprofile);
+      printPersonalInformationSubprofileData(personalInformationSubprofile);
       return getSuccessfulServiceResponse(involvedUser);
     }
 
@@ -91,7 +91,7 @@ public final class AddContactServiceProvider extends ServiceCallee {
     return new ServiceResponse(CallStatus.succeeded);
   }
 
-  private void printMedicationTreatmentData(PersonalInformationSubprofile personalInformationSubprofile) {
+  private void printPersonalInformationSubprofileData(PersonalInformationSubprofile personalInformationSubprofile) {
     /*Log.info("personalInformationSubprofile.getPrescriptionId() = %s",
         HealthPrescriptionServiceProvider.class, personalInformationSubprofile.getPrescriptionId());
     Log.info("personalInformationSubprofile.getName() = %s",

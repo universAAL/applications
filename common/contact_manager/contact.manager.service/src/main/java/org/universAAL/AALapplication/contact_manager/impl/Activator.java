@@ -48,7 +48,7 @@ public class Activator implements BundleActivator {
     Log.info("Starting %s", getClass(), "Starting the Medication Service");
     new Thread() {
       public void run() {
-        //TODO
+        new AddContactServiceProvider(mc);
       }
     }.start();
 
