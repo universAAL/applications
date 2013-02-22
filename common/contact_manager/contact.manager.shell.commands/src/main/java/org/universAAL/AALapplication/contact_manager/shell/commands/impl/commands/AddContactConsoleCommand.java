@@ -17,8 +17,12 @@
 
 package org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands;
 
+import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Activator;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
+import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees.AddContactConsumer;
+import org.universAAL.ontology.profile.PersonalInformationSubprofile;
+import org.universAAL.ontology.profile.User;
 
 import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactConsoleCommands.*;
 
@@ -47,7 +51,13 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
       throw new ContactManagerShellException("The " + COMMAND + " doesn't expect any parameters");
     }
 
-    throw new UnsupportedOperationException(COMMAND + " is not implemented yet");
+    PersonalInformationSubprofile personalInformationSubprofile =
+        new PersonalInformationSubprofile(PersonalInformationSubprofile.MY_URI);
+
+    User user = new User("urn:org.universAAL.aal_space:test_env#saied");
+    AddContactConsumer addContactConsumer = new AddContactConsumer(Activator.mc);
+    boolean res = AddContactConsumer.sendAddContact(user, personalInformationSubprofile);
+    System.out.println("res = " + res);
   }
 
 
