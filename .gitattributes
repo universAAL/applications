@@ -395,6 +395,8 @@ common/contact_manager/contact.manager.persistence/src/main/java/org/universAAL/
 common/contact_manager/contact.manager.persistence/src/main/java/org/universAAL/AALapplication/contact_manager/persistence/impl/database/Entity.java -text
 common/contact_manager/contact.manager.persistence/src/main/java/org/universAAL/AALapplication/contact_manager/persistence/layer/ContactManagerPersistentService.java -text
 common/contact_manager/contact.manager.persistence/src/main/java/org/universAAL/AALapplication/contact_manager/persistence/layer/Util.java -text
+common/contact_manager/contact.manager.persistence/src/main/java/org/universAAL/AALapplication/contact_manager/persistence/layer/VCard.java -text
+common/contact_manager/contact.manager.persistence/src/main/java/org/universAAL/AALapplication/contact_manager/persistence/layer/VCardBuilder.java -text
 common/contact_manager/contact.manager.persistence/src/main/resources/CreateTables.sql -text
 common/contact_manager/contact.manager.persistence/src/main/resources/DataLoad.sql -text
 common/contact_manager/contact.manager.pom/pom.xml -text

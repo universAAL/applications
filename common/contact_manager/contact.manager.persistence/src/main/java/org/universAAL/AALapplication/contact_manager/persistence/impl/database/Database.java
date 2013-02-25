@@ -1,6 +1,8 @@
 package org.universAAL.AALapplication.contact_manager.persistence.impl.database;
 
 
+import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
+
 import java.util.Map;
 
 /**
@@ -16,5 +18,5 @@ public interface Database {
 
   Map<String, Column> getById(String tableName, int id);
 
-
+  boolean saveVCard(VCard vCard);
 }

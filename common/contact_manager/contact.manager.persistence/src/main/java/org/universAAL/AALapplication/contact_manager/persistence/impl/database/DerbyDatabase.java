@@ -3,6 +3,7 @@ package org.universAAL.AALapplication.contact_manager.persistence.impl.database;
 import org.universAAL.AALapplication.contact_manager.persistence.impl.ContactManagerPersistenceException;
 import org.universAAL.AALapplication.contact_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.contact_manager.persistence.impl.SqlScriptParser;
+import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
 import java.sql.Clob;
 import java.sql.Connection;
@@ -69,6 +70,11 @@ public final class DerbyDatabase implements Database {
     String sqlQuery = "select * from " + CONTACT_MANAGER + '.' + tableName +
         "\n\t where id=" + id;
     return getStringColumnMapSingleRecord(sqlQuery, tableName, message);
+  }
+
+  public boolean saveVCard(VCard vCard) {
+    //TODO
+    return true;
   }
 
   private Map<String, Column> getStringColumnMapSingleRecord(String sqlQuery, String tableName, String message) {
