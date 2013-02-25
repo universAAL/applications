@@ -17,6 +17,9 @@
 
 package org.universAAL.AALapplication.contact_manager.impl;
 
+import org.universAAL.AALapplication.contact_manager.persistence.layer.ContactManagerPersistentService;
+import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
+import org.universAAL.AALapplication.contact_manager.persistence.layer.VCardBuilder;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -25,6 +28,12 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.profile.PersonalInformationSubprofile;
 import org.universAAL.ontology.profile.User;
+
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import static org.universAAL.AALapplication.contact_manager.impl.Activator.*;
+import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
+import static org.universAAL.ontology.profile.PersonalInformationSubprofile.*;
 
 
 /**
@@ -37,9 +46,18 @@ public final class AddContactServiceProvider extends ServiceCallee {
   private static final ServiceResponse invalidInput = new ServiceResponse(
       CallStatus.serviceSpecificFailure);
 
+  private static String[] UN_IMPLEMENTED_PROPERTIES;
+  private static String[] IMPLEMENTED_PROPERTIES;
+
   static {
     invalidInput.addOutput(new ProcessOutput(
         ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR, "Invalid input!"));
+
+    IMPLEMENTED_PROPERTIES = new String[]{PROP_VCARD_VERSION, PROP_LAST_REVISION, PROP_NICKNAME, PROP_DISPLAY_NAME,
+        PROP_UCI_LABEL, PROP_UCI_ADDITIONAL_DATA, PROP_ABOUT_ME, PROP_BDAY, PROP_FN};
+
+    UN_IMPLEMENTED_PROPERTIES = new String[]{PROP_BIRTHPLACE, PROP_GENDER, PROP_EMAIL, PROP_N, PROP_ORG,
+        PROP_PHOTO, PROP_TEL, PROP_URL};
   }
 
   public AddContactServiceProvider(ModuleContext context) {
@@ -64,8 +82,6 @@ public final class AddContactServiceProvider extends ServiceCallee {
       return invalidInput;
     }
 
-    System.out.println("processURI = " + processURI);
-
     if (!processURI.startsWith(AddContactService.ADD_CONTACT)) {
       return invalidInput;
     }
@@ -73,12 +89,10 @@ public final class AddContactServiceProvider extends ServiceCallee {
     PersonalInformationSubprofile personalInformationSubprofile =
         (PersonalInformationSubprofile) call.getInputValue(AddContactService.INPUT_ADD_CONTACT);
 
-    System.out.println("personalInformationSubprofile = " + personalInformationSubprofile);
+    if (personalInformationSubprofile != null && personalInformationSubprofile.isWellFormed() &&
+        personalInformationSubprofile.numberOfProperties() > 1) {
 
-
-    if (personalInformationSubprofile != null && personalInformationSubprofile.isWellFormed()) {
-      printPersonalInformationSubprofileData(personalInformationSubprofile);
-      return getSuccessfulServiceResponse(involvedUser);
+      return persistContact(involvedUser, personalInformationSubprofile);
     }
 
     return invalidInput;
@@ -91,28 +105,79 @@ public final class AddContactServiceProvider extends ServiceCallee {
     return new ServiceResponse(CallStatus.succeeded);
   }
 
-  private void printPersonalInformationSubprofileData(PersonalInformationSubprofile personalInformationSubprofile) {
-    /*Log.info("personalInformationSubprofile.getPrescriptionId() = %s",
-        HealthPrescriptionServiceProvider.class, personalInformationSubprofile.getPrescriptionId());
-    Log.info("personalInformationSubprofile.getName() = %s",
-        HealthPrescriptionServiceProvider.class, personalInformationSubprofile.getName());
-    Log.info("personalInformationSubprofile.getDescription() = %s",
-        HealthPrescriptionServiceProvider.class, personalInformationSubprofile.getDescription());
-    Log.info("personalInformationSubprofile.getDoctorName() = %s",
-        HealthPrescriptionServiceProvider.class, personalInformationSubprofile.getDoctorName());
-    Log.info("personalInformationSubprofile.getStatus() = %s",
-        HealthPrescriptionServiceProvider.class, personalInformationSubprofile.getStatus());
-    Log.info("personalInformationSubprofile.getMedicationTreatmentStartDate() = %s",
-        HealthPrescriptionServiceProvider.class, personalInformationSubprofile.getMedicationTreatmentStartDate());
-    Log.info("personalInformationSubprofile.getTreatmentPlanning().getStartDate() = %s",
-        HealthPrescriptionServiceProvider.class, personalInformationSubprofile.getTreatmentPlanning().getStartDate());
-    Log.info("personalInformationSubprofile.getTreatmentPlanning().getEndDate() = %s",
-        HealthPrescriptionServiceProvider.class, personalInformationSubprofile.getTreatmentPlanning().getEndDate());
-//   List<Medicine> medicines = personalInformationSubprofile.getMedicine();
-    Medicine medicine = personalInformationSubprofile.getMedicine();
-    Log.info("Printing medicine", HealthPrescriptionServiceProvider.class);*/
+  private ServiceResponse persistContact(User involvedUser, PersonalInformationSubprofile personalInformationSubprofile) {
+    printNotSupportedProperties();
+
+    Log.info("Start processing the properties", getClass());
+    VCardBuilder vCardBuilder = new VCardBuilder();
+
+    for (String propName : IMPLEMENTED_PROPERTIES) {
+      Log.info("Check for %s property", getClass(), propName);
+      Object value = personalInformationSubprofile.getProperty(propName);
+      processProperty(propName, value, vCardBuilder);
+    }
+
+    VCard vCard = vCardBuilder.buildVCard();
+    ContactManagerPersistentService persistentService = getContactManagerPersistentService();
+    boolean success = persistentService.saveVCard(vCard);
+
+    if (success) {
+      return getSuccessfulServiceResponse(involvedUser);
+    }
+
+    return invalidInput;
   }
 
+  private void processProperty(String propName, Object value, VCardBuilder vCardBuilder) {
+    if (value == null) {
+      Log.info("The %s property is not set and skipping processing for it", getClass(), propName);
+      return;
+    }
+
+    if (PROP_VCARD_VERSION.equals(propName)) {
+      vCardBuilder.buildVcardVersion((String) value);
+    } else if (PROP_LAST_REVISION.equals(propName)) {
+      XMLGregorianCalendar calendar = (XMLGregorianCalendar) value;
+      vCardBuilder.buildLastRevision(getDateFromXMLGregorianCalendar(calendar));
+
+    } else if (PROP_ABOUT_ME.equals(propName)) {
+      vCardBuilder.buildAboutMe((String) value);
+
+    } else if (PROP_UCI_LABEL.equals(propName)) {
+      vCardBuilder.buildUciLabel((String) value);
+
+    } else if (PROP_NICKNAME.equals(propName)) {
+      vCardBuilder.buildNickname((String) value);
+
+    } else if (PROP_BDAY.equals(propName)) {
+      XMLGregorianCalendar calendar = (XMLGregorianCalendar) value;
+      vCardBuilder.buildBday(getDateFromXMLGregorianCalendar(calendar));
+
+    } else if (PROP_DISPLAY_NAME.equals(propName)) {
+      vCardBuilder.buildDisplayName((String) value);
+
+    } else if (PROP_FN.equals(propName)) {
+      vCardBuilder.buildFn((String) value);
+
+    } else if (PROP_UCI_ADDITIONAL_DATA.equals(propName)) {
+      vCardBuilder.buildUciAdditional_data((String) value);
+
+    } else {
+      throw new ContactManagerException("Unexpected property:" + propName);
+    }
+
+
+  }
+
+  private void printNotSupportedProperties() {
+
+    Log.info("Not supported properties", getClass());
+
+    for (String propName : UN_IMPLEMENTED_PROPERTIES) {
+      Log.info("%s is not supported", getClass(), propName);
+
+    }
+  }
 
 
 }

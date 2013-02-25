@@ -15,7 +15,7 @@ public abstract class Entity {
     this.id = id;
   }
 
-  protected Entity() {
+  protected Entity(int i, Object o3, Object o2, Object o1, Object o) {
     this(0);
   }
 

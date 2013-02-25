@@ -40,6 +40,7 @@ import static org.universAAL.AALapplication.contact_manager.persistence.impl.dat
 public class Activator implements BundleActivator {
 
   private Connection connection = null;
+  private static Database derbyDatabase = null;
   public static ModuleContext mc;
 
   public void start(final BundleContext context) throws Exception {
@@ -49,7 +50,7 @@ public class Activator implements BundleActivator {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
     connection = getConnection();
-    Database derbyDatabase = new DerbyDatabase(connection);
+    derbyDatabase = new DerbyDatabase(connection);
 
     derbyDatabase.initDatabase();
 
@@ -61,6 +62,7 @@ public class Activator implements BundleActivator {
   }
 
   public void stop(BundleContext context) throws Exception {
+    derbyDatabase = null;
     connection.close();
     connection = null;
   }
@@ -84,5 +86,12 @@ public class Activator implements BundleActivator {
       //nothing we could here except logging
       Log.error(e, "Unexpected error while closing statement", Activator.class);
     }
+  }
+
+  public static Database getDatabase() {
+    if (derbyDatabase == null) {
+      throw new ContactManagerPersistenceException("The Database object is null");
+    }
+    return derbyDatabase;
   }
 }
