@@ -28,10 +28,10 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.profile.PersonalInformationSubprofile;
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.vcard.Email;
 import org.universAAL.ontology.vcard.Tel;
 
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import java.util.List;
 
 import static org.universAAL.AALapplication.contact_manager.impl.Activator.*;
@@ -57,9 +57,9 @@ public final class AddContactServiceProvider extends ServiceCallee {
         ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR, "Invalid input!"));
 
     IMPLEMENTED_PROPERTIES = new String[]{PROP_VCARD_VERSION, PROP_LAST_REVISION, PROP_NICKNAME, PROP_DISPLAY_NAME,
-        PROP_UCI_LABEL, PROP_UCI_ADDITIONAL_DATA, PROP_ABOUT_ME, PROP_BDAY, PROP_FN, PROP_TEL};
+        PROP_UCI_LABEL, PROP_UCI_ADDITIONAL_DATA, PROP_ABOUT_ME, PROP_BDAY, PROP_FN, PROP_TEL, PROP_EMAIL};
 
-    UN_IMPLEMENTED_PROPERTIES = new String[]{PROP_BIRTHPLACE, PROP_GENDER, PROP_EMAIL, PROP_N, PROP_ORG,
+    UN_IMPLEMENTED_PROPERTIES = new String[]{PROP_BIRTHPLACE, PROP_GENDER, PROP_N, PROP_ORG,
         PROP_PHOTO, PROP_URL};
   }
 
@@ -167,6 +167,9 @@ public final class AddContactServiceProvider extends ServiceCallee {
 
     } else if (PROP_TEL.equals(propName)) {
       vCardBuilder.buildTelephones((List<Tel>) value);
+
+    } else if (PROP_EMAIL.equals(propName)) {
+      vCardBuilder.buildEmails((List<Email>) value);
 
     } else {
       throw new ContactManagerException("Unexpected property:" + propName);
