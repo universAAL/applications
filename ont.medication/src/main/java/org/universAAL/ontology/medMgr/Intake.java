@@ -24,7 +24,7 @@ import org.universAAL.middleware.owl.ManagedIndividual;
  */
 public class Intake extends ManagedIndividual {
 
-  public static final String MY_URI = MedicationOntology.NAMESPACE + "Medicine";
+  public static final String MY_URI = MedicationOntology.NAMESPACE + "Intake";
 
   public static final String PROP_TIME = MedicationOntology.NAMESPACE + "time";
 
