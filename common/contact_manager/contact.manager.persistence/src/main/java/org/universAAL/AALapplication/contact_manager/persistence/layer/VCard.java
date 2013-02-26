@@ -21,9 +21,11 @@ public final class VCard extends Entity {
   private final Date bday;
   private final String fn;
   private final List<Telephone> telephones;
+  private final List<Mail> emails;
 
   public VCard(int id, String vcardVersion, Date lastRevision, String nickname, String displayName, String uciLabel,
-               String uciAdditionalData, String aboutMe, Date bday, String fn, List<Telephone> telephones) {
+               String uciAdditionalData, String aboutMe, Date bday,
+               String fn, List<Telephone> telephones, List<Mail> emails) {
 
     super(id);
 
@@ -37,12 +39,15 @@ public final class VCard extends Entity {
     this.bday = bday;
     this.fn = fn;
     this.telephones = telephones;
+    this.emails = emails;
   }
 
   public VCard(String vcardVersion, Date lastRevision, String nickname, String displayName, String uciLabel,
-               String uciAdditionalData, String aboutMe, Date bday, String fn, List<Telephone> telephones) {
+               String uciAdditionalData, String aboutMe, Date bday,
+               String fn, List<Telephone> telephones, List<Mail> emails) {
 
-    this(0, vcardVersion, lastRevision, nickname, displayName, uciLabel, uciAdditionalData, aboutMe, bday, fn, telephones);
+    this(0, vcardVersion, lastRevision, nickname, displayName, uciLabel,
+        uciAdditionalData, aboutMe, bday, fn, telephones, emails);
 
   }
 
@@ -84,5 +89,9 @@ public final class VCard extends Entity {
 
   public List<Telephone> getTelephones() {
     return Collections.unmodifiableList(telephones);
+  }
+
+  public List<Mail> getEmails() {
+    return Collections.unmodifiableList(emails);
   }
 }

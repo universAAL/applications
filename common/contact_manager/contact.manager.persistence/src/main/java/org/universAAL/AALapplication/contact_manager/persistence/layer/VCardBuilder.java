@@ -4,11 +4,14 @@ import org.universAAL.AALapplication.contact_manager.persistence.impl.Activator;
 import org.universAAL.AALapplication.contact_manager.persistence.impl.ContactManagerPersistenceException;
 import org.universAAL.AALapplication.contact_manager.persistence.impl.database.Database;
 import org.universAAL.ontology.vcard.Cell;
+import org.universAAL.ontology.vcard.Email;
 import org.universAAL.ontology.vcard.Fax;
+import org.universAAL.ontology.vcard.Internet;
 import org.universAAL.ontology.vcard.Msg;
 import org.universAAL.ontology.vcard.Tel;
 import org.universAAL.ontology.vcard.Video;
 import org.universAAL.ontology.vcard.Voice;
+import org.universAAL.ontology.vcard.X400;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +34,7 @@ public final class VCardBuilder {
   private Date bday;
   private String fn;
   private List<Telephone> telephones;
+  private List<Mail> emails;
 
   public void buildVcardVersion(String vCardVersion) {
     this.vcardVersion = vCardVersion;
@@ -72,14 +76,18 @@ public final class VCardBuilder {
     this.telephones = getTelephones(telephones);
   }
 
-  private List<Telephone> getTelephones(List<Tel> telephones) {
-    if (telephones == null || telephones.isEmpty()) {
+  public void buildEmails(List<Email> emails) {
+    this.emails = getEmails(emails);
+  }
+
+  private List<Telephone> getTelephones(List<Tel> telList) {
+    if (telList == null || telList.isEmpty()) {
       return new ArrayList<Telephone>();
     }
 
     List<Telephone> telephoneList = new ArrayList<Telephone>();
 
-    for (Tel tel : telephones) {
+    for (Tel tel : telList) {
       Telephone telephone = createTelephone(tel);
       telephoneList.add(telephone);
     }
@@ -109,6 +117,37 @@ public final class VCardBuilder {
     return new Telephone(value, telEnum);
   }
 
+  private List<Mail> getEmails(List<Email> mails) {
+    if (mails == null || mails.isEmpty()) {
+      return new ArrayList<Mail>();
+    }
+
+    List<Mail> emailList = new ArrayList<Mail>();
+
+    for (Email mail : mails) {
+      Mail em = createEmail(mail);
+      emailList.add(em);
+    }
+
+    return emailList;
+  }
+
+  private Mail createEmail(Email mail) {
+
+    EmailEnum emailEnum;
+
+    if (mail instanceof Internet) {
+      emailEnum = EmailEnum.INTERNET;
+    } else if (mail instanceof X400) {
+      emailEnum = EmailEnum.X400;
+    } else {
+      throw new ContactManagerPersistenceException("Unsupported version of the Email subclass : " + mail.getClass());
+    }
+
+    String value = (String) mail.getProperty(Email.PROP_VALUE);
+    return new Mail(value, emailEnum);
+  }
+
   public VCard buildVCard() {
     Database database = Activator.getDatabase();
     VCard vCard = new VCard(
@@ -122,7 +161,8 @@ public final class VCardBuilder {
         aboutMe,
         bday,
         fn,
-        telephones
+        telephones,
+        emails
     );
 
 

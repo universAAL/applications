@@ -17,6 +17,7 @@
 
 package org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands;
 
+import org.universAAL.AALapplication.contact_manager.persistence.layer.EmailEnum;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.TelEnum;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Activator;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
@@ -25,11 +26,14 @@ import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees
 import org.universAAL.ontology.profile.PersonalInformationSubprofile;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.vcard.Cell;
+import org.universAAL.ontology.vcard.Email;
 import org.universAAL.ontology.vcard.Fax;
+import org.universAAL.ontology.vcard.Internet;
 import org.universAAL.ontology.vcard.Msg;
 import org.universAAL.ontology.vcard.Tel;
 import org.universAAL.ontology.vcard.Video;
 import org.universAAL.ontology.vcard.Voice;
+import org.universAAL.ontology.vcard.X400;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.FileInputStream;
@@ -86,7 +90,7 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
     PROPERTIES = new String[]{VCARD_VERSION, LAST_REVISION, NICKNAME, DISPLAY_NAME, UCI_LABEL, UCI_ADDITIONAL_DATA,
         BIRTHPLACE, ABOUT_ME, GENDER, BDAY, EMAIL, FN, N, ORG, PHOTO, TEL, URL};
 
-    UN_IMPLEMENTED_PROPERTIES = new String[]{BIRTHPLACE, GENDER, EMAIL, N, ORG, PHOTO, URL};
+    UN_IMPLEMENTED_PROPERTIES = new String[]{BIRTHPLACE, GENDER, N, ORG, PHOTO, URL};
 
   }
 
@@ -156,6 +160,8 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
         personalInformationSubprofile, PROP_FN);
 
     populateTelProperty(props, personalInformationSubprofile);
+
+    populateEmailProperty(props, personalInformationSubprofile);
 
 
     if (personalInformationSubprofile.numberOfProperties() < 2) {
@@ -267,6 +273,58 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
     return tel;
   }
 
+  private void populateEmailProperty(Properties props, PersonalInformationSubprofile personalInformationSubprofile) {
+
+      String value = props.getProperty(EMAIL);
+
+      if (value == null) {
+        return;
+      }
+
+      List<Email> emails = new ArrayList<Email>();
+
+      StringTokenizer st = new StringTokenizer(value, ";");
+
+      while (st.hasMoreElements()) {
+        String pair = st.nextToken();
+        Email mail = createEmail(pair);
+        emails.add(mail);
+      }
+
+      if (emails.isEmpty()) {
+        throw new ContactManagerShellException("Missing email property ; delimiter");
+      }
+
+      personalInformationSubprofile.setProperty(PROP_EMAIL, emails);
+    }
+
+    private Email createEmail(String pair) {
+      StringTokenizer st = new StringTokenizer(pair, ":");
+      if (st.countTokens() != 2) {
+        throw new ContactManagerShellException("Missing email property : delimiter. " +
+            "Must have two values separated it by this delimiter");
+      }
+
+      String number = st.nextToken();
+      String type = st.nextToken();
+
+      EmailEnum emailEnum = EmailEnum.getEnumFromValue(type);
+      Email mail;
+
+      if (EmailEnum.INTERNET == emailEnum) {
+        mail = new Internet();
+      } else if (EmailEnum.X400 == emailEnum) {
+        mail = new X400();
+      } else {
+        throw new ContactManagerShellException("Unknown EmailEnum : " + emailEnum);
+      }
+
+      mail.setProperty(Email.PROP_VALUE, number);
+
+      return mail;
+    }
+
+
   private XMLGregorianCalendar getXMLGregorianCalendar(String value) {
     try {
       Date date = DATE_FORMAT.parse(value);
@@ -286,10 +344,6 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
       personalInformationSubprofile.setProperty(propNameDestination, value);
     }
 
-  }
-
-  private PersonalInformationSubprofile getPersonalInformationSubprofile() {
-    return new PersonalInformationSubprofile(PersonalInformationSubprofile.MY_URI);
   }
 
   private Properties getProperties(String fileName) {
