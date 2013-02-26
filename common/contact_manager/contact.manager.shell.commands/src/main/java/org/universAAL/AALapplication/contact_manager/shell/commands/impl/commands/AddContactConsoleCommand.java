@@ -17,12 +17,19 @@
 
 package org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands;
 
+import org.universAAL.AALapplication.contact_manager.persistence.layer.TelEnum;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Activator;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees.AddContactConsumer;
 import org.universAAL.ontology.profile.PersonalInformationSubprofile;
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.vcard.Cell;
+import org.universAAL.ontology.vcard.Fax;
+import org.universAAL.ontology.vcard.Msg;
+import org.universAAL.ontology.vcard.Tel;
+import org.universAAL.ontology.vcard.Video;
+import org.universAAL.ontology.vcard.Voice;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.FileInputStream;
@@ -31,11 +38,15 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import static java.io.File.*;
+import static org.universAAL.AALapplication.contact_manager.persistence.layer.TelEnum.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
 import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.Activator.*;
 import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactConsoleCommands.*;
@@ -75,7 +86,7 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
     PROPERTIES = new String[]{VCARD_VERSION, LAST_REVISION, NICKNAME, DISPLAY_NAME, UCI_LABEL, UCI_ADDITIONAL_DATA,
         BIRTHPLACE, ABOUT_ME, GENDER, BDAY, EMAIL, FN, N, ORG, PHOTO, TEL, URL};
 
-    UN_IMPLEMENTED_PROPERTIES = new String[]{BIRTHPLACE, GENDER, EMAIL, N, ORG, PHOTO, TEL, URL};
+    UN_IMPLEMENTED_PROPERTIES = new String[]{BIRTHPLACE, GENDER, EMAIL, N, ORG, PHOTO, URL};
 
   }
 
@@ -144,6 +155,8 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
     populateTextProperty(FN, props,
         personalInformationSubprofile, PROP_FN);
 
+    populateTelProperty(props, personalInformationSubprofile);
+
 
     if (personalInformationSubprofile.numberOfProperties() < 2) {
       throw new ContactManagerShellException("There is not any property set in this VCard");
@@ -196,6 +209,62 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
       personalInformationSubprofile.setProperty(propNameDestination, calendar);
     }
 
+  }
+
+  private void populateTelProperty(Properties props, PersonalInformationSubprofile personalInformationSubprofile) {
+
+    String value = props.getProperty(TEL);
+
+    if (value == null) {
+      return;
+    }
+
+    List<Tel> telephones = new ArrayList<Tel>();
+
+    StringTokenizer st = new StringTokenizer(value, ";");
+
+    while (st.hasMoreElements()) {
+      String pair = st.nextToken();
+      Tel tel = createTel(pair);
+      telephones.add(tel);
+    }
+
+    if (telephones.isEmpty()) {
+      throw new ContactManagerShellException("Missing tel property ; delimiter");
+    }
+
+    personalInformationSubprofile.setProperty(PROP_TEL, telephones);
+  }
+
+  private Tel createTel(String pair) {
+    StringTokenizer st = new StringTokenizer(pair, ":");
+    if (st.countTokens() != 2) {
+      throw new ContactManagerShellException("Missing tel property : delimiter. Must have two values separated it by this delimiter");
+    }
+
+    String number = st.nextToken();
+    String type = st.nextToken();
+
+    TelEnum telEnum = getEnumFromValue(type);
+    Tel tel;
+
+    if (CELL == telEnum) {
+      tel = new Cell();
+    } else if (MSG == telEnum) {
+      tel = new Msg();
+    } else if (VIDEO == telEnum) {
+      tel = new Video();
+    } else if (FAX == telEnum) {
+      tel = new Fax();
+    } else if (VOICE == telEnum) {
+      tel = new Voice();
+    } else {
+      throw new ContactManagerShellException("Unknown TelEnum : " + telEnum);
+    }
+
+    tel.setProperty(Tel.PROP_VALUE, number);
+
+    return tel;
   }
 
   private XMLGregorianCalendar getXMLGregorianCalendar(String value) {
