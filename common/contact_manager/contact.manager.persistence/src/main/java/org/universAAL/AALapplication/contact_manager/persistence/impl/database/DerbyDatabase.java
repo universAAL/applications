@@ -3,6 +3,10 @@ package org.universAAL.AALapplication.contact_manager.persistence.impl.database;
 import org.universAAL.AALapplication.contact_manager.persistence.impl.ContactManagerPersistenceException;
 import org.universAAL.AALapplication.contact_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.contact_manager.persistence.impl.SqlScriptParser;
+import org.universAAL.AALapplication.contact_manager.persistence.layer.EmailEnum;
+import org.universAAL.AALapplication.contact_manager.persistence.layer.Mail;
+import org.universAAL.AALapplication.contact_manager.persistence.layer.TelEnum;
+import org.universAAL.AALapplication.contact_manager.persistence.layer.Telephone;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
 import java.sql.Clob;
@@ -10,16 +14,15 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static java.sql.Types.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.impl.Activator.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
 
@@ -31,6 +34,8 @@ public final class DerbyDatabase implements Database {
   private final Connection connection;
 
   public static final String CONTACT_MANAGER = "Contact_Manager";
+  private static final String VCARD = "VCARD";
+  private static final String TYPES = "TYPES";
 
   public DerbyDatabase(Connection connection) {
     validateParameter(connection, "connection");
@@ -65,21 +70,16 @@ public final class DerbyDatabase implements Database {
 
   }
 
-  public Map<String, Column> getById(String tableName, int id) {
-    String message = "There are more than one record with the following id : " + id;
-    String sqlQuery = "select * from " + CONTACT_MANAGER + '.' + tableName +
-        "\n\t where id=" + id;
-    return getStringColumnMapSingleRecord(sqlQuery, tableName, message);
-  }
-
   public boolean saveVCard(VCard vCard) {
     //TODO
     return true;
   }
 
-  private Map<String, Column> getStringColumnMapSingleRecord(String sqlQuery, String tableName, String message) {
+  public VCard getVCard(String userUri) {
+    String sqlQuery = "select * from " + CONTACT_MANAGER + "." + VCARD +
+        "\n\t where user_uri='" + userUri + '\'';
 
-    Map<String, Column> columns = new LinkedHashMap<String, Column>();
+    sqlQuery = sqlQuery.toUpperCase();
 
     Statement statement = null;
     try {
@@ -89,24 +89,17 @@ public final class DerbyDatabase implements Database {
 
       ResultSet rs = statement.executeQuery(sqlQuery);
 
-      Set<String> columnsNames = getDBColumns(tableName);
-      ResultSetMetaData metaData = rs.getMetaData();
-      int count = 0;
-      while (rs.next()) {
-        count++;
-        if (count > 1) {
-          throw new ContactManagerPersistenceException(message);
-        }
-        fillColumnsData(columns, columnsNames, rs, metaData);
+      if (rs.next()) {
+        return createVCard(rs);
       }
-
     } catch (SQLException e) {
       throw new ContactManagerPersistenceException(e);
     } finally {
       closeStatement(statement);
     }
 
-    return columns;
+    throw new ContactManagerPersistenceException("No VCard records found with the userUri : " + userUri);
+
   }
 
   private Set<String> getDBColumns(String tableName) throws SQLException {
@@ -120,35 +113,115 @@ public final class DerbyDatabase implements Database {
   }
 
 
-  private void fillColumnsData(Map<String, Column> columns, Set<String> columnsNames,
-                               ResultSet rs, ResultSetMetaData metaData) throws SQLException {
+  private VCard createVCard(ResultSet rs) throws SQLException {
 
-    for (String name : columnsNames) {
-      int columnIndex = rs.findColumn(name);
-      int sqlType = metaData.getColumnType(columnIndex);
-      Column col = createColumn(name, sqlType, rs);
-      columns.put(col.getName(), col);
-    }
+    String userUri = rs.getString("user_uri");
+    String vcardVersion = rs.getString("vcard_version");
+    Date lastRevision = rs.getDate("last_revision");
+    String nickname = rs.getString("nickname");
+    String displayName = rs.getString("display_name");
+    Clob uciLabelClob = rs.getClob("uci_label");
+    String uciLabel = uciLabelClob.getSubString(1, (int) uciLabelClob.length());
+    Clob uciAditionalDataClob = rs.getClob("uci_additional_data");
+    String uciAditionalData = uciAditionalDataClob.getSubString(1, (int) uciAditionalDataClob.length());
+    String aboutMe = rs.getString("about_me");
+    Date bday = rs.getDate("bday");
+    String fn = rs.getString("fn");
+
+    List<Telephone> telephones = getTelephones(userUri);
+    List<Mail> mails = getMails(userUri);
+
+    return new VCard(
+        userUri,
+        vcardVersion,
+        lastRevision,
+        nickname,
+        displayName,
+        uciLabel,
+        uciAditionalData,
+        aboutMe,
+        bday,
+        fn,
+        telephones,
+        mails
+    );
+
   }
 
-  private Column createColumn(String name, int sqlType, ResultSet rs) throws SQLException {
-    switch (sqlType) {
-      case INTEGER:
-        int integer = rs.getInt(name);
-        return new Column(name, integer);
-      case TIMESTAMP:
-        Timestamp date = rs.getTimestamp(name);
-        return new Column(name, date);
-      case VARCHAR:
-        String string = rs.getString(name);
-        return new Column(name, string);
-      case CLOB:
-        Clob clob = rs.getClob(name);
-        String text = clob.getSubString(1, (int) clob.length());
-        return new Column(name, text);
-      default:
-        throw new ContactManagerPersistenceException("Unsupported sql type : " + sqlType);
+  private List<Telephone> getTelephones(String userUri) throws SQLException {
+    String sqlQuery = "select * from " + CONTACT_MANAGER + '.' + TYPES +
+        "\n\t where name='tel'" + " and " +
+        "\n\t vcard_fk='" + userUri + '\'';
+
+    sqlQuery = sqlQuery.toUpperCase();
+
+    List<Telephone> telephones = new ArrayList<Telephone>();
+
+    Statement statement = null;
+    try {
+      statement = connection.createStatement();
+
+      System.out.println("sqlQuery = " + sqlQuery);
+
+      ResultSet rs = statement.executeQuery(sqlQuery);
+      while (rs.next()) {
+        Telephone tel = createTelephone(rs);
+        telephones.add(tel);
+      }
+    } catch (SQLException e) {
+      throw new ContactManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
     }
+
+    return telephones;
+  }
+
+  private Telephone createTelephone(ResultSet rs) throws SQLException {
+    String type = rs.getString("type");
+    String value = rs.getString("value");
+
+    TelEnum enumFromValue = TelEnum.getEnumFromValue(type);
+
+    return new Telephone(value, enumFromValue);
+  }
+
+  private List<Mail> getMails(String userUri) throws SQLException {
+    String sqlQuery = "select * from " + CONTACT_MANAGER + '.' + TYPES +
+        "\n\t where name='email'" + " and " +
+        "\n\t vcard_fk='" + userUri + '\'';
+
+    sqlQuery = sqlQuery.toUpperCase();
+
+    List<Mail> telephones = new ArrayList<Mail>();
+
+    Statement statement = null;
+    try {
+      statement = connection.createStatement();
+
+      System.out.println("sqlQuery = " + sqlQuery);
+
+      ResultSet rs = statement.executeQuery(sqlQuery);
+      while (rs.next()) {
+        Mail mail = createMail(rs);
+        telephones.add(mail);
+      }
+    } catch (SQLException e) {
+      throw new ContactManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+
+    return telephones;
+  }
+
+  private Mail createMail(ResultSet rs) throws SQLException {
+    String type = rs.getString("type");
+    String value = rs.getString("value");
+
+    EmailEnum anEnum = EmailEnum.getEnumFromValue(type);
+
+    return new Mail(value, anEnum);
   }
 
   private void createTablesAndPopulateThemInOneTransaction() {

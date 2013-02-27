@@ -1,8 +1,6 @@
 package org.universAAL.AALapplication.contact_manager.persistence.layer;
 
-import org.universAAL.AALapplication.contact_manager.persistence.impl.Activator;
 import org.universAAL.AALapplication.contact_manager.persistence.impl.ContactManagerPersistenceException;
-import org.universAAL.AALapplication.contact_manager.persistence.impl.database.Database;
 import org.universAAL.ontology.vcard.Cell;
 import org.universAAL.ontology.vcard.Email;
 import org.universAAL.ontology.vcard.Fax;
@@ -24,6 +22,7 @@ import static org.universAAL.AALapplication.contact_manager.persistence.layer.Te
  */
 public final class VCardBuilder {
 
+  private String personUri;
   private String vcardVersion;
   private Date lastRevision;
   private String nickname;
@@ -35,6 +34,10 @@ public final class VCardBuilder {
   private String fn;
   private List<Telephone> telephones;
   private List<Mail> emails;
+
+  public void buildPersonUri(String personUri) {
+    this.personUri = personUri;
+  }
 
   public void buildVcardVersion(String vCardVersion) {
     this.vcardVersion = vCardVersion;
@@ -149,9 +152,8 @@ public final class VCardBuilder {
   }
 
   public VCard buildVCard() {
-    Database database = Activator.getDatabase();
     VCard vCard = new VCard(
-        database.getNextIdFromIdGenerator(),
+        personUri,
         vcardVersion,
         lastRevision,
         nickname,
