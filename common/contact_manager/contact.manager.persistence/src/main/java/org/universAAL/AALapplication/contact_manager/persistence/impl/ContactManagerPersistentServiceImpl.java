@@ -4,6 +4,8 @@ import org.universAAL.AALapplication.contact_manager.persistence.impl.database.D
 import org.universAAL.AALapplication.contact_manager.persistence.layer.ContactManagerPersistentService;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
+import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
+
 /**
  * @author George Fournadjiev
  */
@@ -18,6 +20,13 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
 
   public boolean saveVCard(VCard vCard) {
     return database.saveVCard(vCard);
+  }
+
+  public VCard getVCard(String personUri) {
+
+    validateParameter(personUri, "personUri");
+
+    return database.getVCard(personUri);
   }
 
   public void printData() {

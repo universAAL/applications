@@ -6,22 +6,16 @@ import static org.universAAL.AALapplication.contact_manager.persistence.layer.Ut
 /**
  * @author George Fournadjiev
  */
-final class Mail {
+public final class Mail extends Type {
 
-  private final String value;
   private final EmailEnum emailEnum;
 
-  Mail(String value, EmailEnum emailEnum) {
+  public Mail(String value, EmailEnum emailEnum) {
+    super(value);
 
-    validateParameter(value, "validate");
     validateParameter(emailEnum, "emailEnum");
 
-    this.value = value;
     this.emailEnum = emailEnum;
-  }
-
-  public String getValue() {
-    return value;
   }
 
   public EmailEnum getEmailEnum() {

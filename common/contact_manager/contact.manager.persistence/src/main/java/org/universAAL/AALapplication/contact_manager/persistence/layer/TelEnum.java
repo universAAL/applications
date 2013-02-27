@@ -20,7 +20,7 @@ public enum TelEnum {
   }
 
   public static TelEnum getEnumFromValue(String textValue) {
-
+    textValue = textValue.toLowerCase();
     for (TelEnum telEnum : values()) {
       if (telEnum.value.equals(textValue)) {
         return telEnum;

@@ -6,22 +6,17 @@ import static org.universAAL.AALapplication.contact_manager.persistence.layer.Ut
 /**
  * @author George Fournadjiev
  */
-final class Telephone {
+public final class Telephone extends Type {
 
-  private final String value;
   private final TelEnum telEnum;
 
-  Telephone(String value, TelEnum telEnum) {
+  public Telephone(String value, TelEnum telEnum) {
 
-    validateParameter(value, "validate");
+    super(value);
+
     validateParameter(telEnum, "telEnum");
 
-    this.value = value;
     this.telEnum = telEnum;
-  }
-
-  public String getValue() {
-    return value;
   }
 
   public TelEnum getTelEnum() {

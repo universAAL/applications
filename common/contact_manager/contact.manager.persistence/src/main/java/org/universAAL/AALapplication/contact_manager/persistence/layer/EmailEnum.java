@@ -17,7 +17,7 @@ public enum EmailEnum {
   }
 
   public static EmailEnum getEnumFromValue(String textValue) {
-
+    textValue = textValue.toLowerCase();
     for (EmailEnum telEnum : values()) {
       if (telEnum.value.equals(textValue)) {
         return telEnum;

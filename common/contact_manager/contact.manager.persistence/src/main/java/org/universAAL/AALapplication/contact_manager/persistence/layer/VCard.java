@@ -1,16 +1,17 @@
 package org.universAAL.AALapplication.contact_manager.persistence.layer;
 
-import org.universAAL.AALapplication.contact_manager.persistence.impl.database.Entity;
-
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
+
 /**
  * @author George Fournadjiev
  */
-public final class VCard extends Entity {
+public final class VCard {
 
+  private final String personUri;
   private final String vcardVersion;
   private final Date lastRevision;
   private final String nickname;
@@ -23,12 +24,13 @@ public final class VCard extends Entity {
   private final List<Telephone> telephones;
   private final List<Mail> emails;
 
-  public VCard(int id, String vcardVersion, Date lastRevision, String nickname, String displayName, String uciLabel,
-               String uciAdditionalData, String aboutMe, Date bday,
+  public VCard(String personUri, String vcardVersion, Date lastRevision, String nickname,
+               String displayName, String uciLabel, String uciAdditionalData, String aboutMe, Date bday,
                String fn, List<Telephone> telephones, List<Mail> emails) {
 
-    super(id);
+    validateParameter(personUri, "personUri");
 
+    this.personUri = personUri;
     this.vcardVersion = vcardVersion;
     this.lastRevision = lastRevision;
     this.nickname = nickname;
@@ -42,13 +44,8 @@ public final class VCard extends Entity {
     this.emails = emails;
   }
 
-  public VCard(String vcardVersion, Date lastRevision, String nickname, String displayName, String uciLabel,
-               String uciAdditionalData, String aboutMe, Date bday,
-               String fn, List<Telephone> telephones, List<Mail> emails) {
-
-    this(0, vcardVersion, lastRevision, nickname, displayName, uciLabel,
-        uciAdditionalData, aboutMe, bday, fn, telephones, emails);
-
+  public String getPersonUri() {
+    return personUri;
   }
 
   public String getVcardVersion() {
@@ -93,5 +90,23 @@ public final class VCard extends Entity {
 
   public List<Mail> getEmails() {
     return Collections.unmodifiableList(emails);
+  }
+
+  @Override
+  public String toString() {
+    return "VCard{" +
+        "personUri='" + personUri + '\'' +
+        ", vcardVersion='" + vcardVersion + '\'' +
+        ", lastRevision=" + lastRevision +
+        ", nickname='" + nickname + '\'' +
+        ", displayName='" + displayName + '\'' +
+        ", uciLabel='" + uciLabel + '\'' +
+        ", uciAdditionalData='" + uciAdditionalData + '\'' +
+        ", aboutMe='" + aboutMe + '\'' +
+        ", bday=" + bday +
+        ", fn='" + fn + '\'' +
+        ", telephones=" + telephones +
+        ", emails=" + emails +
+        '}';
   }
 }

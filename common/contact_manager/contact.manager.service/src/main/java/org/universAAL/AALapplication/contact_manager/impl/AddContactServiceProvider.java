@@ -113,6 +113,7 @@ public final class AddContactServiceProvider extends ServiceCallee {
 
     Log.info("Start processing the properties", getClass());
     VCardBuilder vCardBuilder = new VCardBuilder();
+    vCardBuilder.buildPersonUri(involvedUser.getURI());
 
     for (String propName : IMPLEMENTED_PROPERTIES) {
       Log.info("Check for %s property", getClass(), propName);
@@ -124,11 +125,18 @@ public final class AddContactServiceProvider extends ServiceCallee {
     ContactManagerPersistentService persistentService = getContactManagerPersistentService();
     boolean success = persistentService.saveVCard(vCard);
 
+    temoMethod(persistentService);
+
     if (success) {
       return getSuccessfulServiceResponse(involvedUser);
     }
 
     return invalidInput;
+  }
+
+  private void temoMethod(ContactManagerPersistentService persistentService) {
+    VCard vCard = persistentService.getVCard("urn:org.universAAL.aal_space:test_env#hary");
+    System.out.println("vCard" + vCard);
   }
 
   private void processProperty(String propName, Object value, VCardBuilder vCardBuilder) {
