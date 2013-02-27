@@ -33,10 +33,13 @@ import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
 import org.universAAL.ontology.profile.Caregiver;
+import org.universAAL.ontology.profile.Gender;
 import org.universAAL.ontology.profile.Profile;
 import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.SubProfile;
 import org.universAAL.ontology.profile.health.HealthProfileOntology;
+import org.universaal.ontology.disease.owl.Disease;
+import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.HealthOntologyFactory;
 import org.universaal.ontology.health.owl.services.HealthService;
 import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
@@ -61,6 +64,8 @@ public final class HealthOntology extends Ontology {
   + "hasHealthProfile";
   public static final String PROP_PRESCRIBES_TREATMENT = HealthOntology.NAMESPACE
   + "prescribesTreatment";
+private static final String DISEASE_PROP_DIAGNOSE_DATE = HealthOntology.NAMESPACE + "diagnoseDate";
+private static final String DISEASE_PROP_DISCHARGE_DATE = HealthOntology.NAMESPACE + "dischargeDate";
   
   public HealthOntology() {
     super(NAMESPACE);
@@ -76,6 +81,7 @@ public final class HealthOntology extends Ontology {
     addImport(ProfileOntology.NAMESPACE);
 	addImport(HealthProfileOntology.NAMESPACE);	
     addImport(HealthMeasurementOntology.NAMESPACE);
+    addImport(DiseaseOntology.NAMESPACE);
    
 	OntClassInfoSetup oci;
 	OntClassInfoSetup oci_treatment;
@@ -433,6 +439,16 @@ public final class HealthOntology extends Ontology {
       TakeMeasurementActivity.MY_URI, 1, 1));
     
     
+    //Disease Extension
+    OntClassInfoSetup ocid = extendExistingOntClassInfo(Disease.MY_URI);
+    ocid.addDatatypeProperty(DISEASE_PROP_DIAGNOSE_DATE);
+    ocid.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		DISEASE_PROP_DISCHARGE_DATE, TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 0, 1));
+    ocid.addDatatypeProperty(DISEASE_PROP_DISCHARGE_DATE);
+    ocid.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		DISEASE_PROP_DISCHARGE_DATE, TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 0, 1));
+    
+    
     // load HealthProfile
     oci = createNewOntClassInfo(HealthProfile.MY_URI, factory, 12);  
     oci.setResourceLabel("HealthProfile");
@@ -442,8 +458,31 @@ public final class HealthOntology extends Ontology {
     oci.addObjectProperty(HealthProfile.PROP_HAS_TREATMENT);
     //oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(HealthProfile.PROP_HAS_TREATMENT, Treatment.MY_URI, 0, -1));
     oci.addRestriction(MergedRestriction.getAllValuesRestriction(HealthProfile.PROP_HAS_TREATMENT, Treatment.MY_URI));
+    
     oci.addObjectProperty(HealthProfile.PROP_IS_ASSIGNED_TO_AP);
     oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(HealthProfile.PROP_IS_ASSIGNED_TO_AP, AssistedPerson.MY_URI, 1, 1));
+    
+    oci.addObjectProperty(HealthProfile.PROP_LAST_MEASUREMENTS);
+    oci.addRestriction(MergedRestriction.getAllValuesRestriction(HealthProfile.PROP_LAST_MEASUREMENTS,
+    		HealthMeasurement.MY_URI));
+    
+    oci.addDatatypeProperty(HealthProfile.PROP_BIRTH_DATE);
+    oci.addRestriction(
+    		MergedRestriction.getAllValuesRestrictionWithCardinality(
+    				HealthProfile.PROP_BIRTH_DATE, TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 1, 1));
+    
+    oci.addObjectProperty(HealthProfile.PROP_GENDER);
+    oci.addRestriction(
+    		MergedRestriction.getAllValuesRestrictionWithCardinality(
+    				HealthProfile.PROP_GENDER, Gender.MY_URI, 1, 1));
+    
+    oci.addObjectProperty(HealthProfile.PROP_DIAGNOSED_DISEASES);
+    oci.addRestriction(MergedRestriction.getAllValuesRestriction(
+    		HealthProfile.PROP_DIAGNOSED_DISEASES, Disease.MY_URI));
+    
+    //TODO: Add Habits property (needs new Ontolgoy)
+    
+    //TODO: Add Current Symthoms (needs new Ontolgoy)
     
     //load Diet
     oci = createNewOntClassInfo(Diet.MY_URI, factory, 32);  
