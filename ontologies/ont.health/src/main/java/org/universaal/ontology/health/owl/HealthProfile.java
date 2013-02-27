@@ -2,7 +2,7 @@
  * Copyright 2012 UPM, http://www.upm.es - Universidad PolitÃ©cnica de Madrid
  *
  * OCO Source Materials
- * © Copyright IBM Corp. 2011
+ * ï¿½ Copyright IBM Corp. 2011
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,14 @@
 package org.universaal.ontology.health.owl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.Gender;
 import org.universAAL.ontology.profile.SubProfile;
+import org.universaal.ontology.healthmeasurement.owl.HealthMeasurement;
 
 public class HealthProfile extends SubProfile{
 
@@ -33,6 +37,13 @@ public class HealthProfile extends SubProfile{
     	+ "hasTreatment";
 	public static final String PROP_IS_ASSIGNED_TO_AP = HealthOntology.NAMESPACE
 		+ "isAssignedToAP";
+	public static final String PROP_LAST_MEASUREMENTS = HealthOntology.NAMESPACE 
+		+ "lastMeasurements";
+	public static final String PROP_BIRTH_DATE = HealthOntology.NAMESPACE 
+			+ "birthDate";
+	public static final String PROP_GENDER = HealthOntology.NAMESPACE + "gender";
+	
+	public static final String PROP_DIAGNOSED_DISEASES = HealthOntology.NAMESPACE + "diseases";
 	
 	//CONSTRUCTORS
 	public HealthProfile () {
@@ -68,13 +79,26 @@ public class HealthProfile extends SubProfile{
 	}
   
 	public int getPropSerializationType(String arg0) {
-		return PROP_SERIALIZATION_FULL;
+		// privacy? asigned to doesn't need to be serialized fully
+		if (arg0.equals(PROP_IS_ASSIGNED_TO_AP)) {
+			return PROP_SERIALIZATION_REDUCED;
+		}
+		if (arg0.startsWith(HealthOntology.NAMESPACE)) {
+			return PROP_SERIALIZATION_FULL;
+		}
+		else {
+			return super.getPropSerializationType(arg0);
+		}
 	}
 
   public boolean isWellFormed() {
 	return true 
       && props.containsKey(PROP_HAS_TREATMENT)
-      && props.containsKey(PROP_IS_ASSIGNED_TO_AP);
+      && props.containsKey(PROP_IS_ASSIGNED_TO_AP)
+      && props.containsKey(PROP_BIRTH_DATE)
+      && props.containsKey(PROP_DIAGNOSED_DISEASES)
+      && props.containsKey(PROP_GENDER)
+      && props.containsKey(PROP_LAST_MEASUREMENTS);
   }
   
   //GETTERS & SETTERS
@@ -171,11 +195,67 @@ public class HealthProfile extends SubProfile{
 		props.put(PROP_HAS_TREATMENT, list);
 		return found;
 	}
+	
+	/**
+	 * Update the last measurement taken for this AP.
+	 * @param measurement  the new measure taken.
+	 */
+	public void updateHealthMeasurement(HealthMeasurement measurement) {
+		List lMeasurements = (List) props.get(PROP_LAST_MEASUREMENTS);
+		if (lMeasurements == null) {
+			lMeasurements = new ArrayList();
+		}
+		List newLastMeasurements = new ArrayList();
+		for (Iterator i = lMeasurements.iterator(); i.hasNext();) {
+			HealthMeasurement hm = (HealthMeasurement) i.next();
+			if (hm.getURI().equals(measurement.getURI())) {
+				newLastMeasurements.add(measurement);				
+			}else {
+				newLastMeasurements.add(hm);
+			}
+		}
+		props.put(PROP_LAST_MEASUREMENTS, newLastMeasurements);
+	}
+	
+	/**
+	 * Get the last measurement.
+	 * @param healthMeasurementURI filter the {@link HealthMeasurement} type.
+	 * @return the instance of {@link HealthMeasurement} or null if not found.
+	 */
+	public HealthMeasurement getLastMeasurement(String healthMeasurementURI) {
+		List lMeasurements = (List) props.get(PROP_LAST_MEASUREMENTS);
+		if (lMeasurements == null) {
+			return null;
+		}
+		for (Iterator i = lMeasurements.iterator(); i.hasNext();) {
+			HealthMeasurement hm = (HealthMeasurement) i.next();
+			if (hm.getURI().equals(healthMeasurementURI)) {
+				return hm;
+			}
+		}
+		return null;
+	}
   
 	//OTHER METHODS
 	public void assignHealthProfileToAP(AssistedPerson ap){
 		this.setAssignedAssistedPerson(ap);
 		//The assisted person becomes an assisted person with a health profile
 		//AssistedPersonWithHealthProfile apwhp = new AssistedPersonWithHealthProfile(this);
+	}
+
+	public Gender getGender() {
+		return (Gender) props.get(PROP_GENDER);
+	}
+
+	public void setGender(Gender gender) {
+		props.put(PROP_GENDER, gender);
+	}
+
+	public XMLGregorianCalendar getBirthdate() {
+		return (XMLGregorianCalendar) props.get(PROP_BIRTH_DATE);
+	}
+
+	public void setBirthdate(XMLGregorianCalendar birthdate) {
+		props.put(PROP_BIRTH_DATE, birthdate);
 	}
 }
