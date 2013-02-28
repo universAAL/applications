@@ -6,7 +6,7 @@ import static org.universAAL.AALapplication.contact_manager.persistence.layer.Ut
 /**
  * @author George Fournadjiev
  */
-public final class Telephone extends Type {
+public final class Telephone extends BaseType {
 
   private final TelEnum telEnum;
 

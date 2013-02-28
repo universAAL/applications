@@ -7,6 +7,7 @@ import org.universAAL.AALapplication.contact_manager.persistence.layer.EmailEnum
 import org.universAAL.AALapplication.contact_manager.persistence.layer.Mail;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.TelEnum;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.Telephone;
+import org.universAAL.AALapplication.contact_manager.persistence.layer.Type;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
 import java.sql.Clob;
@@ -128,8 +129,9 @@ public final class DerbyDatabase implements Database {
     Date bday = rs.getDate("bday");
     String fn = rs.getString("fn");
 
-    List<Telephone> telephones = getTelephones(userUri);
-    List<Mail> mails = getMails(userUri);
+    List<Type> types = getTypes(userUri);
+    List<Telephone> telephones = getTelephones(types);
+    List<Mail> mails = getMails(types);
 
     return new VCard(
         userUri,
@@ -148,14 +150,13 @@ public final class DerbyDatabase implements Database {
 
   }
 
-  private List<Telephone> getTelephones(String userUri) throws SQLException {
+  private List<Type> getTypes(String userUri) throws SQLException {
     String sqlQuery = "select * from " + CONTACT_MANAGER + '.' + TYPES +
-        "\n\t where name='tel'" + " and " +
-        "\n\t vcard_fk='" + userUri + '\'';
+        "\n\t where vcard_fk='" + userUri + '\'';
 
     sqlQuery = sqlQuery.toUpperCase();
 
-    List<Telephone> telephones = new ArrayList<Telephone>();
+    List<Type> types = new ArrayList<Type>();
 
     Statement statement = null;
     try {
@@ -165,8 +166,8 @@ public final class DerbyDatabase implements Database {
 
       ResultSet rs = statement.executeQuery(sqlQuery);
       while (rs.next()) {
-        Telephone tel = createTelephone(rs);
-        telephones.add(tel);
+        Type type = createType(rs);
+        types.add(type);
       }
     } catch (SQLException e) {
       throw new ContactManagerPersistenceException(e);
@@ -174,50 +175,56 @@ public final class DerbyDatabase implements Database {
       closeStatement(statement);
     }
 
+    return types;
+  }
+
+  private Type createType(ResultSet rs) throws SQLException {
+    String name = rs.getString("name");
+    String type = rs.getString("type");
+    String value = rs.getString("value");
+
+    return new Type(value, name, type);
+  }
+
+  private List<Telephone> getTelephones(List<Type> types) {
+
+    List<Telephone> telephones = new ArrayList<Telephone>();
+
+    for (Type type : types) {
+      if (type.getName().equalsIgnoreCase("tel")) {
+        Telephone tel = createTelephone(type);
+        telephones.add(tel);
+      }
+    }
+
     return telephones;
   }
 
-  private Telephone createTelephone(ResultSet rs) throws SQLException {
-    String type = rs.getString("type");
-    String value = rs.getString("value");
+  private Telephone createTelephone(Type typeObject) {
+    String type = typeObject.getType();
+    String value = typeObject.getValue();
 
     TelEnum enumFromValue = TelEnum.getEnumFromValue(type);
 
     return new Telephone(value, enumFromValue);
   }
 
-  private List<Mail> getMails(String userUri) throws SQLException {
-    String sqlQuery = "select * from " + CONTACT_MANAGER + '.' + TYPES +
-        "\n\t where name='email'" + " and " +
-        "\n\t vcard_fk='" + userUri + '\'';
-
-    sqlQuery = sqlQuery.toUpperCase();
-
+  private List<Mail> getMails(List<Type> types) throws SQLException {
     List<Mail> telephones = new ArrayList<Mail>();
 
-    Statement statement = null;
-    try {
-      statement = connection.createStatement();
-
-      System.out.println("sqlQuery = " + sqlQuery);
-
-      ResultSet rs = statement.executeQuery(sqlQuery);
-      while (rs.next()) {
-        Mail mail = createMail(rs);
-        telephones.add(mail);
+    for (Type type : types) {
+      if (type.getName().equalsIgnoreCase("email")) {
+        Mail tel = createMail(type);
+        telephones.add(tel);
       }
-    } catch (SQLException e) {
-      throw new ContactManagerPersistenceException(e);
-    } finally {
-      closeStatement(statement);
     }
 
     return telephones;
   }
 
-  private Mail createMail(ResultSet rs) throws SQLException {
-    String type = rs.getString("type");
-    String value = rs.getString("value");
+  private Mail createMail(Type typeObject) throws SQLException {
+    String type = typeObject.getType();
+    String value = typeObject.getValue();
 
     EmailEnum anEnum = EmailEnum.getEnumFromValue(type);
 

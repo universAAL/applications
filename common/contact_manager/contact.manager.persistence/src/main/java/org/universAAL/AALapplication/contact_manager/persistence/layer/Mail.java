@@ -6,7 +6,7 @@ import static org.universAAL.AALapplication.contact_manager.persistence.layer.Ut
 /**
  * @author George Fournadjiev
  */
-public final class Mail extends Type {
+public final class Mail extends BaseType {
 
   private final EmailEnum emailEnum;
 
