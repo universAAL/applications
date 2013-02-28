@@ -32,6 +32,8 @@ import static org.universAAL.AALapplication.contact_manager.persistence.layer.Ut
  */
 public final class DerbyDatabase implements Database {
 
+  private static final String TEL = "tel";
+  private static final String EMAIL = "email";
   private final Connection connection;
 
   public static final String CONTACT_MANAGER = "Contact_Manager";
@@ -71,35 +73,100 @@ public final class DerbyDatabase implements Database {
 
   }
 
-  public boolean saveVCard(VCard vCard) {
-    //TODO
-    return true;
+  public void setAutocommit(boolean autocommit) {
+    try {
+      connection.setAutoCommit(autocommit);
+    } catch (SQLException e) {
+      throw new ContactManagerPersistenceException(e);
+    }
   }
 
-  public VCard getVCard(String userUri) {
+  public void saveVCard(VCard vCard) throws SQLException {
+    connection.setAutoCommit(false);
+
+    String sqlVCard = "INSERT INTO CONTACT_MANAGER.VCARD (USER_URI, VCARD_VERSION, LAST_REVISION, NICKNAME,\n" +
+        "DISPLAY_NAME, UCI_LABEL, UCI_ADDITIONAL_DATA, ABOUT_ME, BDAY, FN)\n" +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    PreparedStatement statementVCard = connection.prepareStatement(sqlVCard);
+
+    System.out.println("sqlVCard = " + sqlVCard);
+
+    statementVCard.setString(1, vCard.getUserUri());
+    statementVCard.setString(2, vCard.getVCardVersion());
+    java.sql.Date lr = new java.sql.Date(vCard.getLastRevision().getTime());
+    statementVCard.setDate(3, lr);
+    statementVCard.setString(4, vCard.getNickname());
+    statementVCard.setString(5, vCard.getDisplayName());
+    statementVCard.setString(6, vCard.getUciLabel());
+    statementVCard.setString(7, vCard.getUciAdditionalData());
+    statementVCard.setString(8, vCard.getAboutMe());
+    java.sql.Date db = new java.sql.Date(vCard.getBday().getTime());
+    statementVCard.setDate(9, db);
+    statementVCard.setString(10, vCard.getFn());
+
+    statementVCard.execute();
+
+    String typesSql = "INSERT INTO CONTACT_MANAGER.TYPES (ID, NAME, TYPE, VALUE, VCARD_FK)\n" +
+            "VALUES (?, ?, ?, ?, ?)";
+
+    PreparedStatement statementTypes = connection.prepareStatement(typesSql);
+
+    List<Type> types = createTypes(vCard.getTelephones(), vCard.getEmails());
+
+    for (Type t : types) {
+      int id = getNextIdFromIdGenerator();
+      statementTypes.setInt(1, id);
+      statementTypes.setString(2, t.getName());
+      statementTypes.setString(3, t.getType());
+      statementTypes.setString(4, t.getValue());
+      statementTypes.setString(5, vCard.getUserUri());
+
+      statementTypes.execute();
+    }
+
+    connection.commit();
+
+    connection.setAutoCommit(true);
+
+  }
+
+  private List<Type> createTypes(List<Telephone> telephones, List<Mail> emails) {
+    List<Type> types = new ArrayList<Type>();
+
+    for (Telephone t : telephones) {
+      Type type = new Type(t.getValue(), TEL, t.getType());
+      types.add(type);
+    }
+
+    for (Mail m : emails) {
+      Type type = new Type(m.getValue(), EMAIL, m.getType());
+      types.add(type);
+    }
+
+    return types;
+  }
+
+  public VCard getVCard(String userUri) throws SQLException {
     String sqlQuery = "select * from " + CONTACT_MANAGER + "." + VCARD +
         "\n\t where user_uri='" + userUri + '\'';
 
     sqlQuery = sqlQuery.toUpperCase();
 
-    Statement statement = null;
-    try {
-      statement = connection.createStatement();
+    Statement statement = connection.createStatement();
 
-      System.out.println("sqlQuery = " + sqlQuery);
+    System.out.println("sqlQuery = " + sqlQuery);
 
-      ResultSet rs = statement.executeQuery(sqlQuery);
-
-      if (rs.next()) {
-        return createVCard(rs);
-      }
-    } catch (SQLException e) {
-      throw new ContactManagerPersistenceException(e);
-    } finally {
-      closeStatement(statement);
+    ResultSet rs = statement.executeQuery(sqlQuery);
+    VCard vCard = null;
+    if (rs.next()) {
+      vCard = createVCard(rs);
     }
 
-    throw new ContactManagerPersistenceException("No VCard records found with the userUri : " + userUri);
+    closeStatement(statement);
+
+
+    return vCard;
 
   }
 
@@ -191,7 +258,7 @@ public final class DerbyDatabase implements Database {
     List<Telephone> telephones = new ArrayList<Telephone>();
 
     for (Type type : types) {
-      if (type.getName().equalsIgnoreCase("tel")) {
+      if (type.getName().equalsIgnoreCase(TEL)) {
         Telephone tel = createTelephone(type);
         telephones.add(tel);
       }
@@ -213,7 +280,7 @@ public final class DerbyDatabase implements Database {
     List<Mail> telephones = new ArrayList<Mail>();
 
     for (Type type : types) {
-      if (type.getName().equalsIgnoreCase("email")) {
+      if (type.getName().equalsIgnoreCase(EMAIL)) {
         Mail tel = createMail(type);
         telephones.add(tel);
       }

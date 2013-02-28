@@ -19,4 +19,6 @@ public abstract class BaseType {
   public String getValue() {
     return value;
   }
+
+  public abstract String getType();
 }

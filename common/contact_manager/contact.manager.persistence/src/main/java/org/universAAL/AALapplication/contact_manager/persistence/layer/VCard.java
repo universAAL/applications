@@ -11,8 +11,8 @@ import static org.universAAL.AALapplication.contact_manager.persistence.layer.Ut
  */
 public final class VCard {
 
-  private final String personUri;
-  private final String vcardVersion;
+  private final String userUri;
+  private final String vCardVersion;
   private final Date lastRevision;
   private final String nickname;
   private final String displayName;
@@ -24,14 +24,16 @@ public final class VCard {
   private final List<Telephone> telephones;
   private final List<Mail> emails;
 
-  public VCard(String personUri, String vcardVersion, Date lastRevision, String nickname,
+  public VCard(String userUri, String vCardVersion, Date lastRevision, String nickname,
                String displayName, String uciLabel, String uciAdditionalData, String aboutMe, Date bday,
                String fn, List<Telephone> telephones, List<Mail> emails) {
 
-    validateParameter(personUri, "personUri");
+    validateParameter(userUri, "userUri");
+    validateParameter(telephones, "telephones");
+    validateParameter(emails, "emails");
 
-    this.personUri = personUri;
-    this.vcardVersion = vcardVersion;
+    this.userUri = userUri;
+    this.vCardVersion = vCardVersion;
     this.lastRevision = lastRevision;
     this.nickname = nickname;
     this.displayName = displayName;
@@ -44,12 +46,12 @@ public final class VCard {
     this.emails = emails;
   }
 
-  public String getPersonUri() {
-    return personUri;
+  public String getUserUri() {
+    return userUri;
   }
 
-  public String getVcardVersion() {
-    return vcardVersion;
+  public String getVCardVersion() {
+    return vCardVersion;
   }
 
   public Date getLastRevision() {
@@ -95,8 +97,8 @@ public final class VCard {
   @Override
   public String toString() {
     return "VCard{" +
-        "personUri='" + personUri + '\'' +
-        ", vcardVersion='" + vcardVersion + '\'' +
+        "userUri='" + userUri + '\'' +
+        ", vCardVersion='" + vCardVersion + '\'' +
         ", lastRevision=" + lastRevision +
         ", nickname='" + nickname + '\'' +
         ", displayName='" + displayName + '\'' +

@@ -4,6 +4,8 @@ import org.universAAL.AALapplication.contact_manager.persistence.impl.database.D
 import org.universAAL.AALapplication.contact_manager.persistence.layer.ContactManagerPersistentService;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
+import java.sql.SQLException;
+
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
 
 /**
@@ -18,18 +20,32 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
     this.database = database;
   }
 
-  public boolean saveVCard(VCard vCard) {
-    return database.saveVCard(vCard);
+  public void saveVCard(VCard vCard) {
+
+    validateParameter(vCard, "vCard");
+
+    try {
+      database.setAutocommit(false);
+      database.saveVCard(vCard);
+    } catch (SQLException e) {
+      throw new ContactManagerPersistenceException(e);
+    } finally {
+      database.setAutocommit(true);
+    }
   }
 
   public VCard getVCard(String personUri) {
 
     validateParameter(personUri, "personUri");
 
-    return database.getVCard(personUri);
+    try {
+      return database.getVCard(personUri);
+    } catch (SQLException e) {
+      throw new ContactManagerPersistenceException(e);
+    }
   }
 
   public void printData() {
-     database.printData();
+    database.printData();
   }
 }

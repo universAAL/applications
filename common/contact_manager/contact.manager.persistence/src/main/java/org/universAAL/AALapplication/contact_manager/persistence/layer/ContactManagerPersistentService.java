@@ -7,7 +7,7 @@ package org.universAAL.AALapplication.contact_manager.persistence.layer;
 public interface ContactManagerPersistentService {
 
 
-  boolean saveVCard(VCard vCard);
+  void saveVCard(VCard vCard);
 
   VCard getVCard(String personUri);
 

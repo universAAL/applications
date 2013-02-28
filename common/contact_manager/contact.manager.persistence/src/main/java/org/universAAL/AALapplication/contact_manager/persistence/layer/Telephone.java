@@ -22,4 +22,9 @@ public final class Telephone extends BaseType {
   public TelEnum getTelEnum() {
     return telEnum;
   }
+
+  @Override
+  public String getType() {
+    return telEnum.getValue();
+  }
 }

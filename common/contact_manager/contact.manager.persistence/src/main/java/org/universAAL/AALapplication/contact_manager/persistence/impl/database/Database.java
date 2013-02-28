@@ -3,6 +3,8 @@ package org.universAAL.AALapplication.contact_manager.persistence.impl.database;
 
 import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
+import java.sql.SQLException;
+
 /**
  * @author George Fournadjiev
  */
@@ -14,7 +16,9 @@ public interface Database {
 
   int getNextIdFromIdGenerator();
 
-  boolean saveVCard(VCard vCard);
+  void setAutocommit(boolean autocommit);
 
-  VCard getVCard(String personUri);
+  void saveVCard(VCard vCard) throws SQLException;
+
+  VCard getVCard(String personUri) throws SQLException;
 }

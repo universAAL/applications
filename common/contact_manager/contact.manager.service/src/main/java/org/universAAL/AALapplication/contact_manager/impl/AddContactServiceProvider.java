@@ -123,20 +123,14 @@ public final class AddContactServiceProvider extends ServiceCallee {
 
     VCard vCard = vCardBuilder.buildVCard();
     ContactManagerPersistentService persistentService = getContactManagerPersistentService();
-    boolean success = persistentService.saveVCard(vCard);
 
-    temoMethod(persistentService);
-
-    if (success) {
-      return getSuccessfulServiceResponse(involvedUser);
+    try {
+      persistentService.saveVCard(vCard);
+    } catch (ContactManagerException e) {
+      return invalidInput;
     }
 
-    return invalidInput;
-  }
-
-  private void temoMethod(ContactManagerPersistentService persistentService) {
-    VCard vCard = persistentService.getVCard("urn:org.universAAL.aal_space:test_env#hary");
-    System.out.println("vCard" + vCard);
+    return getSuccessfulServiceResponse(involvedUser);
   }
 
   private void processProperty(String propName, Object value, VCardBuilder vCardBuilder) {
