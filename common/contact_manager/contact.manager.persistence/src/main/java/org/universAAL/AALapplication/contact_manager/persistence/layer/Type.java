@@ -1,22 +1,28 @@
 package org.universAAL.AALapplication.contact_manager.persistence.layer;
 
-import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
-
 /**
  * @author George Fournadjiev
  */
-public abstract class Type {
+public final class Type extends BaseType {
 
-  private final String value;
+  private final String name;
+  private final String type;
 
-  protected Type(String value) {
+  public Type(String value, String name, String type) {
+    super(value);
 
-    validateParameter(value, "validate");
+    Util.validateParameter(name, "name");
+    Util.validateParameter(type, "type");
 
-    this.value = value;
+    this.name = name;
+    this.type = type;
   }
 
-  public String getValue() {
-    return value;
+  public String getName() {
+    return name;
+  }
+
+  public String getType() {
+    return type;
   }
 }
