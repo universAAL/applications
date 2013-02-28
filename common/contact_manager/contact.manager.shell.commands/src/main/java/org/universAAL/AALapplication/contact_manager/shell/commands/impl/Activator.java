@@ -23,6 +23,8 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.ContactManagerPersistentService;
+import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees.AddContactConsumer;
+import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees.EditContactConsumer;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactConsoleCommands;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactManagerCommands;
 import org.universAAL.middleware.container.ModuleContext;
@@ -54,6 +56,13 @@ public class Activator implements BundleActivator {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
     bundleContext = context;
+
+    new Thread() {
+          public void run() {
+            new AddContactConsumer(mc);
+            new EditContactConsumer(mc);
+          }
+        }.start();
 
     Hashtable props = new Hashtable();
     props.put(OSGI_COMMAND_SCOPE, ContactConsoleCommands.COMMAND_PREFIX);

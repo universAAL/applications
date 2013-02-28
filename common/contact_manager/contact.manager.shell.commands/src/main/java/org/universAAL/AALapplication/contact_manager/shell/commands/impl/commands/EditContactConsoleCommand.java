@@ -17,7 +17,6 @@
 
 package org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands;
 
-import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
 
 import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactConsoleCommands.*;
@@ -25,7 +24,7 @@ import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.
 /**
  * @author George Fournadjiev
  */
-public final class EditContactConsoleCommand extends ConsoleCommand {
+public final class EditContactConsoleCommand extends SendVCardConsoleCommand {
 
   private static final String COMMAND = COMMAND_PREFIX + ':' + EDIT_CONTACT + " command";
 
@@ -34,20 +33,12 @@ public final class EditContactConsoleCommand extends ConsoleCommand {
   }
 
   @Override
-  public String getParametersInfo() {
-    return NO_PARAMETERS;
-  }
-
-  @Override
   public void execute(String... parameters) {
 
     Log.info("Executing " + COMMAND, getClass());
 
-    if (parameters != null && parameters.length != 0) {
-      throw new ContactManagerShellException("The " + COMMAND + " doesn't expect any parameters");
-    }
+    executeCommand(COMMAND, EDIT_CONTACT_TYPE, parameters);
 
-    throw new UnsupportedOperationException(COMMAND + " is not implemented yet");
   }
 
 

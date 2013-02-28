@@ -23,12 +23,12 @@ import org.universAAL.middleware.container.ModuleContext;
 /**
  * @author George Fournadjiev
  */
-public final class AddContactServiceProvider extends VCardReceivedContactServiceProvider {
+public final class EditContactServiceProvider extends VCardReceivedContactServiceProvider {
 
 
-  public AddContactServiceProvider(ModuleContext context) {
-    super(context, AddContactService.ADD_CONTACT, AddContactService.profiles,
-        ADD, AddContactService.INPUT_ADD_CONTACT);
+  public EditContactServiceProvider(ModuleContext context) {
+    super(context, EditContactService.EDIT_CONTACT, EditContactService.profiles,
+        EDIT, EditContactService.INPUT_EDIT_CONTACT);
 
   }
 
