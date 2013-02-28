@@ -34,8 +34,17 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
     }
   }
 
-  public void editVCard(String userUri ,VCard vCard) {
-    throw new UnsupportedOperationException("editVCard - Not implemented yet");
+  public void editVCard(String userUri, VCard vCard) {
+    validateParameter(vCard, "vCard");
+
+    try {
+      database.setAutocommit(false);
+      database.editVCard(userUri, vCard);
+    } catch (SQLException e) {
+      throw new ContactManagerPersistenceException(e);
+    } finally {
+      database.setAutocommit(true);
+    }
   }
 
   public VCard getVCard(String userUri) {

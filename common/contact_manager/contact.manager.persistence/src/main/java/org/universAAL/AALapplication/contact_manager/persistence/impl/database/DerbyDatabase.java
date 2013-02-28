@@ -108,7 +108,7 @@ public final class DerbyDatabase implements Database {
     statementVCard.execute();
 
     String typesSql = "INSERT INTO CONTACT_MANAGER.TYPES (ID, NAME, TYPE, VALUE, VCARD_FK)\n" +
-            "VALUES (?, ?, ?, ?, ?)";
+        "VALUES (?, ?, ?, ?, ?)";
 
     PreparedStatement statementTypes = connection.prepareStatement(typesSql);
 
@@ -127,8 +127,42 @@ public final class DerbyDatabase implements Database {
 
     connection.commit();
 
+    closeStatement(statementVCard);
+    closeStatement(statementTypes);
+
     connection.setAutoCommit(true);
 
+  }
+
+  public void editVCard(String userUri, VCard vCard) throws SQLException {
+
+    connection.setAutoCommit(false);
+
+    String sqlVCard = "UPDATE CONTACT_MANAGER.VCARD SET VCARD_VERSION = ?, LAST_REVISION = ?, NICKNAME = ?, " +
+        "DISPLAY_NAME = ?, UCI_LABEL = ?, UCI_ADDITIONAL_DATA = ?, ABOUT_ME = ?, " +
+        "BDAY = ?, FN = ? WHERE USER_URI = '" + userUri + "'";
+
+
+    PreparedStatement statementVCard = connection.prepareStatement(sqlVCard);
+
+    statementVCard.setString(1, vCard.getVCardVersion());
+    java.sql.Date lr = new java.sql.Date(vCard.getLastRevision().getTime());
+    statementVCard.setDate(2, lr);
+    statementVCard.setString(3, vCard.getNickname());
+    statementVCard.setString(4, vCard.getDisplayName());
+    statementVCard.setString(5, vCard.getUciLabel());
+    statementVCard.setString(6, vCard.getUciAdditionalData());
+    statementVCard.setString(7, vCard.getAboutMe());
+    java.sql.Date db = new java.sql.Date(vCard.getBday().getTime());
+    statementVCard.setDate(8, db);
+    statementVCard.setString(9, vCard.getFn());
+
+    statementVCard.execute();
+
+    connection.commit();
+
+    closeStatement(statementVCard);
+    connection.setAutoCommit(true);
   }
 
   private List<Type> createTypes(List<Telephone> telephones, List<Mail> emails) {

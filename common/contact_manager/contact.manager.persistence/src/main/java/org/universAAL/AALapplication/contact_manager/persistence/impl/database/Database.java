@@ -20,5 +20,7 @@ public interface Database {
 
   void saveVCard(VCard vCard) throws SQLException;
 
+  void editVCard(String userUri, VCard vCard) throws SQLException;
+
   VCard getVCard(String personUri) throws SQLException;
 }
