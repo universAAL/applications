@@ -17,6 +17,7 @@
 
 package org.universAAL.AALapplication.contact_manager.impl;
 
+import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
@@ -31,16 +32,17 @@ import org.universAAL.ontology.profile.service.ProfilingService;
 /**
  * @author George Fournadjiev
  */
-public final class AddContactService extends ProfilingService {
+public final class EditContactService extends ProfilingService {
 
-  public static final String ADD_CONTACT_SERVICE_SERVER_NAMESPACE =
-      "http://ontology.igd.fhg.de/AddContactServer.owl#";
+  public static final String EDIT_CONTACT_SERVICE_SERVER_NAMESPACE =
+      "http://ontology.igd.fhg.de/EditContactServer.owl#";
 
-  public static final String MY_URI = ADD_CONTACT_SERVICE_SERVER_NAMESPACE + "AddContactService";
+  public static final String MY_URI = EDIT_CONTACT_SERVICE_SERVER_NAMESPACE + "EditContactService";
 
-  public static final String ADD_CONTACT = ADD_CONTACT_SERVICE_SERVER_NAMESPACE + "addContact";
+  public static final String EDIT_CONTACT = EDIT_CONTACT_SERVICE_SERVER_NAMESPACE + "editContact";
 
-  static final String INPUT_ADD_CONTACT = ADD_CONTACT_SERVICE_SERVER_NAMESPACE + "PersonalInformationSubprofile";
+  static final String INPUT_EDIT_CONTACT = EDIT_CONTACT_SERVICE_SERVER_NAMESPACE + "PersonalInformationSubprofile";
+  static final String INPUT_EDIT = EDIT_CONTACT_SERVICE_SERVER_NAMESPACE + "edit";
 
   static final ServiceProfile[] profiles = new ServiceProfile[1];
 
@@ -55,23 +57,27 @@ public final class AddContactService extends ProfilingService {
               @Override
               public Resource createInstance(String classURI,
                                              String instanceURI, int factoryIndex) {
-                return new AddContactService(instanceURI);
+                return new EditContactService(instanceURI);
               }
             }));
 
-    AddContactService addContactService =
-        new AddContactService(ADD_CONTACT);
+    EditContactService editContactService =
+        new EditContactService(EDIT_CONTACT);
 
 
     String[] ppInputAddContact = new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE};
 
-    addContactService.addInputWithAddEffect(INPUT_ADD_CONTACT, PersonalInformationSubprofile.MY_URI, 1, 1, ppInputAddContact);
+    editContactService.addInputWithAddEffect(INPUT_EDIT_CONTACT, PersonalInformationSubprofile.MY_URI, 1, 1, ppInputAddContact);
 
-    profiles[0] = addContactService.myProfile;
+    editContactService.addInputWithAddEffect(INPUT_EDIT, ManagedIndividual.MY_URI, 1, 1, ppInputAddContact);
+
+
+
+    profiles[0] = editContactService.myProfile;
 
   }
 
-  private AddContactService(String uri) {
+  private EditContactService(String uri) {
     super(uri);
   }
 

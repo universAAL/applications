@@ -34,12 +34,16 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
     }
   }
 
-  public VCard getVCard(String personUri) {
+  public void editVCard(String userUri ,VCard vCard) {
+    throw new UnsupportedOperationException("editVCard - Not implemented yet");
+  }
 
-    validateParameter(personUri, "personUri");
+  public VCard getVCard(String userUri) {
+
+    validateParameter(userUri, "personUri");
 
     try {
-      return database.getVCard(personUri);
+      return database.getVCard(userUri);
     } catch (SQLException e) {
       throw new ContactManagerPersistenceException(e);
     }

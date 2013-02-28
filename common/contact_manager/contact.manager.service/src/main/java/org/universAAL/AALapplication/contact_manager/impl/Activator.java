@@ -49,6 +49,7 @@ public class Activator implements BundleActivator {
     new Thread() {
       public void run() {
         new AddContactServiceProvider(mc);
+        new EditContactServiceProvider(mc);
       }
     }.start();
 
