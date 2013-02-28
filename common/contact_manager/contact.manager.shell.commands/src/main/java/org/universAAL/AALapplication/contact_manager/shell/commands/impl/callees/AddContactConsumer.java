@@ -17,6 +17,7 @@
 
 package org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees;
 
+import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
@@ -35,7 +36,7 @@ import org.universAAL.ontology.profile.service.ProfilingService;
  */
 public final class AddContactConsumer {
 
-  private final ServiceCaller serviceCaller;
+  private static ServiceCaller serviceCaller;
 
   public AddContactConsumer(ModuleContext moduleContext) {
 
@@ -44,9 +45,13 @@ public final class AddContactConsumer {
   }
 
 
-  public boolean sendAddContact(User user, PersonalInformationSubprofile personalInformationSubprofile) {
+  public static boolean sendAddContact(User user, PersonalInformationSubprofile personalInformationSubprofile) {
 
     Log.info("Trying to send a contact", AddContactConsumer.class);
+
+    if (serviceCaller == null) {
+      throw new ContactManagerShellException("The ServiceCaller is note set");
+    }
 
     ServiceRequest serviceRequest = new ServiceRequest(new ProfilingService(), user);
 

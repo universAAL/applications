@@ -19,10 +19,8 @@ package org.universAAL.AALapplication.contact_manager.shell.commands.impl.comman
 
 import org.universAAL.AALapplication.contact_manager.persistence.layer.EmailEnum;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.TelEnum;
-import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Activator;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
-import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees.AddContactConsumer;
 import org.universAAL.ontology.profile.PersonalInformationSubprofile;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.vcard.Cell;
@@ -53,6 +51,7 @@ import static java.io.File.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.TelEnum.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
 import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.Activator.*;
+import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees.AddContactConsumer.*;
 import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactConsoleCommands.*;
 import static org.universAAL.ontology.profile.PersonalInformationSubprofile.*;
 
@@ -123,8 +122,7 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
       throw new ContactManagerShellException("The " + USER_URI + " property is not set");
     }
     User user = new User(userUri);
-    AddContactConsumer addContactConsumer = new AddContactConsumer(Activator.mc);
-    boolean res = addContactConsumer.sendAddContact(user, personalInformationSubprofile);
+    boolean res = sendAddContact(user, personalInformationSubprofile);
     System.out.println("res = " + res);
   }
 
