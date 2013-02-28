@@ -25,7 +25,7 @@ public class PerformedMeasurementSession extends PerformedSession{
 	+ "PerformedMeasurementSession";
 
 	public static final String PROP_HAS_HEALTH_MEASUREMENT = HealthOntology.NAMESPACE
-	+ "managesSession";
+	+ "hasMeasurement";
 
 	public PerformedMeasurementSession () {
 		super();

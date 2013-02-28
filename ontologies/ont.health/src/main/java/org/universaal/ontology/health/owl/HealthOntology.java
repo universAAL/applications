@@ -484,6 +484,8 @@ private static final String DISEASE_PROP_DISCHARGE_DATE = HealthOntology.NAMESPA
     
     //TODO: Add Current Symthoms (needs new Ontolgoy)
     
+    //TODO: Add Health Contact Subprofile to compile all health contacts (hospital, emergencgy, doctor...) (needs a taxonomy of health specialities?)
+    
     //load Diet
     oci = createNewOntClassInfo(Diet.MY_URI, factory, 32);  
     oci.setResourceLabel("Diet");

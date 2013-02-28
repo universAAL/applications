@@ -34,9 +34,11 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthProfile;
+import org.universaal.ontology.health.owl.PerformedMeasurementSession;
 import org.universaal.ontology.health.owl.PerformedSession;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.services.ProfileManagementService;
+import org.universaal.ontology.healthmeasurement.owl.HealthMeasurement;
 
 /**
  * This class actually implements the 
@@ -172,9 +174,16 @@ public class ProfileServerPerformedSessionManager
 
 		HealthProfile profile = getHealthProfile(user);
 		if(null != profile) {
+			boolean needsUpdate = false;
 			Treatment treatment;
-			treatment = null;
-			//TODO find the associated Treatment.
+			if (session instanceof PerformedMeasurementSession) {
+				HealthMeasurement hm = ((PerformedMeasurementSession) session)
+						.getHealthMeasurement();
+				profile.updateHealthMeasurement(hm);
+				needsUpdate = true;
+			}
+			treatment = session.getAssociatedTreatment();
+			//TODO find the associated Treatment. if treatment == null or not in the list of treatments.
 			
 			if(null == treatment) {
 				 LogUtils.logInfo(mc, ProfileServerPerformedSessionManager.class,
@@ -182,6 +191,9 @@ public class ProfileServerPerformedSessionManager
 			    			new Object[] { "treatment: " + treatment.getURI() + " does not exist"}, null);
 			} else {
 				treatment.addPerformedSession(session);
+				needsUpdate = true;
+			}
+			if (needsUpdate) {
 				updateHealthProfile(profile);
 			}
 		}
