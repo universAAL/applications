@@ -21,4 +21,9 @@ public final class Mail extends BaseType {
   public EmailEnum getEmailEnum() {
     return emailEnum;
   }
+
+  @Override
+  public String getType() {
+    return emailEnum.getValue();
+  }
 }

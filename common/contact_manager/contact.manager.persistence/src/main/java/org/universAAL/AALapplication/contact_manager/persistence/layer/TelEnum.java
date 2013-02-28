@@ -19,6 +19,10 @@ public enum TelEnum {
     this.value = value;
   }
 
+  public String getValue() {
+    return value.toUpperCase();
+  }
+
   public static TelEnum getEnumFromValue(String textValue) {
     textValue = textValue.toLowerCase();
     for (TelEnum telEnum : values()) {

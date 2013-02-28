@@ -65,6 +65,7 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
 
   private static DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
+  public static final String USER_URI = "userUri";
   public static final String VCARD_VERSION = "vCardVersion";
   public static final String LAST_REVISION = "lastRevision";
   public static final String NICKNAME = "nicname";
@@ -87,7 +88,7 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
   private static String[] PROPERTIES;
 
   static {
-    PROPERTIES = new String[]{VCARD_VERSION, LAST_REVISION, NICKNAME, DISPLAY_NAME, UCI_LABEL, UCI_ADDITIONAL_DATA,
+    PROPERTIES = new String[]{USER_URI, VCARD_VERSION, LAST_REVISION, NICKNAME, DISPLAY_NAME, UCI_LABEL, UCI_ADDITIONAL_DATA,
         BIRTHPLACE, ABOUT_ME, GENDER, BDAY, EMAIL, FN, N, ORG, PHOTO, TEL, URL};
 
     UN_IMPLEMENTED_PROPERTIES = new String[]{BIRTHPLACE, GENDER, N, ORG, PHOTO, URL};
@@ -113,18 +114,21 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
           " expects exactly one parameter and it is the name of properties file containing properties of the new VCard");
     }
 
-    PersonalInformationSubprofile personalInformationSubprofile = createPersonalInformationSubprofile(parameters[0]);
+    Properties props = getProperties(parameters[0]);
 
+    PersonalInformationSubprofile personalInformationSubprofile = createPersonalInformationSubprofile(props);
 
-    User user = new User("urn:org.universAAL.aal_space:test_env#saied");
+    String userUri = props.getProperty(USER_URI);
+    if (userUri == null) {
+      throw new ContactManagerShellException("The " + USER_URI + " property is not set");
+    }
+    User user = new User(userUri);
     AddContactConsumer addContactConsumer = new AddContactConsumer(Activator.mc);
     boolean res = addContactConsumer.sendAddContact(user, personalInformationSubprofile);
     System.out.println("res = " + res);
   }
 
-  private PersonalInformationSubprofile createPersonalInformationSubprofile(String fileName) {
-
-    Properties props = getProperties(fileName);
+  private PersonalInformationSubprofile createPersonalInformationSubprofile(Properties props) {
 
     checkForUnknownProperties(props);
     checkForUnImplementedProperties(props);
@@ -348,15 +352,22 @@ public final class AddContactConsoleCommand extends ConsoleCommand {
 
   private Properties getProperties(String fileName) {
     Properties props = new Properties();
+    FileInputStream fis = null;
     try {
       String path = contactManagerConfigurationDirectory + separator + fileName;
-      FileInputStream fis = new FileInputStream(path);
+      fis = new FileInputStream(path);
       props.load(fis);
       return props;
     } catch (FileNotFoundException e) {
       throw new ContactManagerShellException(e);
     } catch (IOException e) {
       throw new RuntimeException(e);
+    } finally {
+      try {
+        fis.close();
+      } catch (IOException e) {
+        //noting can do here
+      }
     }
   }
 
