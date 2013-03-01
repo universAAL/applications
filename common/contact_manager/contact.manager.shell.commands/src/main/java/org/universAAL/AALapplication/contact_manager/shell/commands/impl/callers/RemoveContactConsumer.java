@@ -15,7 +15,7 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees;
+package org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers;
 
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
@@ -25,7 +25,6 @@ import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.ontology.profile.PersonalInformationSubprofile;
 import org.universAAL.ontology.profile.Profilable;
 import org.universAAL.ontology.profile.Profile;
 import org.universAAL.ontology.profile.User;
@@ -34,20 +33,20 @@ import org.universAAL.ontology.profile.service.ProfilingService;
 /**
  * @author George Fournadjiev
  */
-public final class AddContactConsumer {
+public final class RemoveContactConsumer {
 
   private static ServiceCaller serviceCaller;
 
-  public AddContactConsumer(ModuleContext moduleContext) {
+  public RemoveContactConsumer(ModuleContext moduleContext) {
 
     serviceCaller = new DefaultServiceCaller(moduleContext);
 
   }
 
 
-  public static boolean sendAddContact(User user, PersonalInformationSubprofile personalInformationSubprofile) {
+  public static boolean sendRemoveContact(User user) {
 
-    Log.info("Trying to send a contact", AddContactConsumer.class);
+    Log.info("Trying to remove a contact", RemoveContactConsumer.class);
 
     if (serviceCaller == null) {
       throw new ContactManagerShellException("The ServiceCaller is note set");
@@ -57,12 +56,12 @@ public final class AddContactConsumer {
 
     String[] ppInputAddContact = new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE};
 
-    serviceRequest.addAddEffect(ppInputAddContact, personalInformationSubprofile);
+    serviceRequest.addRemoveEffect(ppInputAddContact);
 
     ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
 
     CallStatus callStatus = serviceResponse.getCallStatus();
-    Log.info("callStatus %s", AddContactConsumer.class, callStatus);
+    Log.info("callStatus %s", RemoveContactConsumer.class, callStatus);
 
     if (callStatus.equals(CallStatus.succeeded)) {
       return true;

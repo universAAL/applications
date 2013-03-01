@@ -415,6 +415,8 @@ common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALa
 common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/EditContactService.java -text
 common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/EditContactServiceProvider.java -text
 common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/Log.java -text
+common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/RemoveContactService.java -text
+common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/RemoveContactServiceProvider.java -text
 common/contact_manager/contact.manager.service/src/main/java/org/universAAL/AALapplication/contact_manager/impl/VCardReceivedContactServiceProvider.java -text
 common/contact_manager/contact.manager.shell.commands/ASL2.0 -text
 common/contact_manager/contact.manager.shell.commands/MITX.txt -text
@@ -423,8 +425,9 @@ common/contact_manager/contact.manager.shell.commands/pom.xml -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/Activator.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/ContactManagerShellException.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/Log.java -text
-common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/callees/AddContactConsumer.java -text
-common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/callees/EditContactConsumer.java -text
+common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/callers/AddContactConsumer.java -text
+common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/callers/EditContactConsumer.java -text
+common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/callers/RemoveContactConsumer.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/commands/AddContactConsoleCommand.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/commands/ConsoleCommand.java -text
 common/contact_manager/contact.manager.shell.commands/src/main/java/org/universAAL/AALapplication/contact_manager/shell/commands/impl/commands/ContactConsoleCommands.java -text

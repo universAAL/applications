@@ -50,6 +50,7 @@ public class Activator implements BundleActivator {
       public void run() {
         new AddContactServiceProvider(mc);
         new EditContactServiceProvider(mc);
+        new RemoveContactServiceProvider(mc);
       }
     }.start();
 
