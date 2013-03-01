@@ -81,16 +81,65 @@ public final class DerbyDatabase implements Database {
     }
   }
 
-  public void saveVCard(VCard vCard) throws SQLException {
-    connection.setAutoCommit(false);
+  public PreparedStatement createEditStatementVCard(String userUri) throws SQLException {
+    String sqlVCard = "UPDATE CONTACT_MANAGER.VCARD SET VCARD_VERSION = ?, LAST_REVISION = ?, NICKNAME = ?, " +
+            "DISPLAY_NAME = ?, UCI_LABEL = ?, UCI_ADDITIONAL_DATA = ?, ABOUT_ME = ?, " +
+            "BDAY = ?, FN = ? WHERE USER_URI = '" + userUri + "'";
 
+    System.out.println("sqlVCard = " + sqlVCard);
+
+    return connection.prepareStatement(sqlVCard);
+
+  }
+
+  public PreparedStatement createEditStatementTypes(String userUri) throws SQLException {
+
+
+    throw new UnsupportedOperationException("Not implemented yet");
+
+  }
+
+  public PreparedStatement createEditDeleteStatementTypes(String userUri) throws SQLException {
+    throw new UnsupportedOperationException("Not implemented yet");
+
+  }
+
+  public PreparedStatement createAddStatementVCard() throws SQLException {
     String sqlVCard = "INSERT INTO CONTACT_MANAGER.VCARD (USER_URI, VCARD_VERSION, LAST_REVISION, NICKNAME,\n" +
         "DISPLAY_NAME, UCI_LABEL, UCI_ADDITIONAL_DATA, ABOUT_ME, BDAY, FN)\n" +
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    PreparedStatement statementVCard = connection.prepareStatement(sqlVCard);
-
     System.out.println("sqlVCard = " + sqlVCard);
+
+    return connection.prepareStatement(sqlVCard);
+
+  }
+
+  public PreparedStatement createAddStatementTypes() throws SQLException {
+    String typesSql = "INSERT INTO CONTACT_MANAGER.TYPES (ID, NAME, TYPE, VALUE, VCARD_FK)\n" +
+        "VALUES (?, ?, ?, ?, ?)";
+
+    System.out.println("typesSql = " + typesSql);
+
+    return connection.prepareStatement(typesSql);
+
+  }
+
+  public void commit() throws SQLException {
+    connection.commit();
+  }
+
+  public void rollback() {
+    try {
+      connection.rollback();
+    } catch (SQLException e) {
+      //nothing we can do here
+      Log.error(e, "Rollback problem", getClass());
+    }
+  }
+
+  public void saveVCard(VCard vCard, PreparedStatement statementVCard,
+                        PreparedStatement statementTypes) throws SQLException {
 
     statementVCard.setString(1, vCard.getUserUri());
     statementVCard.setString(2, vCard.getVCardVersion());
@@ -107,11 +156,6 @@ public final class DerbyDatabase implements Database {
 
     statementVCard.execute();
 
-    String typesSql = "INSERT INTO CONTACT_MANAGER.TYPES (ID, NAME, TYPE, VALUE, VCARD_FK)\n" +
-        "VALUES (?, ?, ?, ?, ?)";
-
-    PreparedStatement statementTypes = connection.prepareStatement(typesSql);
-
     List<Type> types = createTypes(vCard.getTelephones(), vCard.getEmails());
 
     for (Type t : types) {
@@ -125,25 +169,11 @@ public final class DerbyDatabase implements Database {
       statementTypes.execute();
     }
 
-    connection.commit();
-
-    closeStatement(statementVCard);
-    closeStatement(statementTypes);
-
-    connection.setAutoCommit(true);
-
   }
 
-  public void editVCard(String userUri, VCard vCard) throws SQLException {
+  public void editVCard(String userUri, VCard vCard, PreparedStatement statementVCard,
+                        PreparedStatement statementDeleteTypes, PreparedStatement statementTypes) throws SQLException {
 
-    connection.setAutoCommit(false);
-
-    String sqlVCard = "UPDATE CONTACT_MANAGER.VCARD SET VCARD_VERSION = ?, LAST_REVISION = ?, NICKNAME = ?, " +
-        "DISPLAY_NAME = ?, UCI_LABEL = ?, UCI_ADDITIONAL_DATA = ?, ABOUT_ME = ?, " +
-        "BDAY = ?, FN = ? WHERE USER_URI = '" + userUri + "'";
-
-
-    PreparedStatement statementVCard = connection.prepareStatement(sqlVCard);
 
     statementVCard.setString(1, vCard.getVCardVersion());
     java.sql.Date lr = new java.sql.Date(vCard.getLastRevision().getTime());
@@ -159,10 +189,6 @@ public final class DerbyDatabase implements Database {
 
     statementVCard.execute();
 
-    connection.commit();
-
-    closeStatement(statementVCard);
-    connection.setAutoCommit(true);
   }
 
   private List<Type> createTypes(List<Telephone> telephones, List<Mail> emails) {
