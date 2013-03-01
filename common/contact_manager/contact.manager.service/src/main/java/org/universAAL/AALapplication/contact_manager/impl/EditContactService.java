@@ -17,7 +17,6 @@
 
 package org.universAAL.AALapplication.contact_manager.impl;
 
-import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
@@ -42,7 +41,6 @@ public final class EditContactService extends ProfilingService {
   public static final String EDIT_CONTACT = EDIT_CONTACT_SERVICE_SERVER_NAMESPACE + "editContact";
 
   static final String INPUT_EDIT_CONTACT = EDIT_CONTACT_SERVICE_SERVER_NAMESPACE + "PersonalInformationSubprofile";
-  static final String INPUT_EDIT = EDIT_CONTACT_SERVICE_SERVER_NAMESPACE + "edit";
 
   static final ServiceProfile[] profiles = new ServiceProfile[1];
 
@@ -67,11 +65,7 @@ public final class EditContactService extends ProfilingService {
 
     String[] ppInputAddContact = new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE};
 
-    editContactService.addInputWithAddEffect(INPUT_EDIT_CONTACT, PersonalInformationSubprofile.MY_URI, 1, 1, ppInputAddContact);
-
-    editContactService.addInputWithAddEffect(INPUT_EDIT, ManagedIndividual.MY_URI, 1, 1, ppInputAddContact);
-
-
+    editContactService.addInputWithChangeEffect(INPUT_EDIT_CONTACT, PersonalInformationSubprofile.MY_URI, 1, 1, ppInputAddContact);
 
     profiles[0] = editContactService.myProfile;
 
