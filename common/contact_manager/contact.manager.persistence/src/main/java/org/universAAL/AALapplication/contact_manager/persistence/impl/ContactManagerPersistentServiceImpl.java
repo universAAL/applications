@@ -35,7 +35,7 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
       database.saveVCard(vCard, statementVCard, statementTypes);
       database.commit();
     } catch (Exception e) {
-      throw new ContactManagerPersistenceException(e);
+      throw new ContactManagerPersistenceException("Problem saving the VCard", e);
     } finally {
       database.setAutocommit(true);
       database.rollback();
@@ -54,12 +54,12 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
     try {
       database.setAutocommit(false);
       statementVCard = database.createEditStatementVCard(userUri);
-      statementTypes = database.createEditStatementTypes(userUri);
+      statementTypes = database.createAddStatementTypes();
       statementDeleteTypes = database.createEditDeleteStatementTypes(userUri);
       database.editVCard(userUri, vCard, statementVCard, statementDeleteTypes, statementTypes);
       database.commit();
     } catch (Exception e) {
-      throw new ContactManagerPersistenceException(e);
+      throw new ContactManagerPersistenceException("Problem updating the VCard", e);
     } finally {
       database.setAutocommit(true);
       database.rollback();

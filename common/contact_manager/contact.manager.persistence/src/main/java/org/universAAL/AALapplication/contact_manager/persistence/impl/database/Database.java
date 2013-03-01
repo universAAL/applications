@@ -33,8 +33,6 @@ public interface Database {
 
   PreparedStatement createEditStatementVCard(String userUri) throws SQLException;
 
-  PreparedStatement createEditStatementTypes(String userUri) throws SQLException;
-
   PreparedStatement createEditDeleteStatementTypes(String userUri) throws SQLException;
 
   public void commit() throws SQLException;

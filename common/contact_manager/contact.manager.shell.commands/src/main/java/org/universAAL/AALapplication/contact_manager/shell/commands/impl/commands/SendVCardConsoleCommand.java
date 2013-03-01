@@ -368,7 +368,9 @@ public abstract class SendVCardConsoleCommand extends ConsoleCommand {
       throw new RuntimeException(e);
     } finally {
       try {
-        fis.close();
+        if (fis != null) {
+          fis.close();
+        }
       } catch (IOException e) {
         //noting can do here
       }
