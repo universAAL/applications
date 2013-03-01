@@ -83,8 +83,8 @@ public final class DerbyDatabase implements Database {
 
   public PreparedStatement createEditStatementVCard(String userUri) throws SQLException {
     String sqlVCard = "UPDATE CONTACT_MANAGER.VCARD SET VCARD_VERSION = ?, LAST_REVISION = ?, NICKNAME = ?, " +
-            "DISPLAY_NAME = ?, UCI_LABEL = ?, UCI_ADDITIONAL_DATA = ?, ABOUT_ME = ?, " +
-            "BDAY = ?, FN = ? WHERE USER_URI = '" + userUri + "'";
+        "DISPLAY_NAME = ?, UCI_LABEL = ?, UCI_ADDITIONAL_DATA = ?, ABOUT_ME = ?, " +
+        "BDAY = ?, FN = ? WHERE USER_URI = '" + userUri + "'";
 
     System.out.println("sqlVCard = " + sqlVCard);
 
@@ -92,15 +92,12 @@ public final class DerbyDatabase implements Database {
 
   }
 
-  public PreparedStatement createEditStatementTypes(String userUri) throws SQLException {
-
-
-    throw new UnsupportedOperationException("Not implemented yet");
-
-  }
-
   public PreparedStatement createEditDeleteStatementTypes(String userUri) throws SQLException {
-    throw new UnsupportedOperationException("Not implemented yet");
+    String typesSql = "delete from contact_manager.TYPES where vcard_fk = '" + userUri + "'";
+
+    System.out.println("typesSql = " + typesSql);
+
+    return connection.prepareStatement(typesSql);
 
   }
 
@@ -156,6 +153,11 @@ public final class DerbyDatabase implements Database {
 
     statementVCard.execute();
 
+    insertTypes(vCard, statementTypes);
+
+  }
+
+  private void insertTypes(VCard vCard, PreparedStatement statementTypes) throws SQLException {
     List<Type> types = createTypes(vCard.getTelephones(), vCard.getEmails());
 
     for (Type t : types) {
@@ -168,7 +170,6 @@ public final class DerbyDatabase implements Database {
 
       statementTypes.execute();
     }
-
   }
 
   public void editVCard(String userUri, VCard vCard, PreparedStatement statementVCard,
@@ -189,6 +190,14 @@ public final class DerbyDatabase implements Database {
 
     statementVCard.execute();
 
+    int affectedRows = statementDeleteTypes.executeUpdate();
+
+    if (affectedRows == 0) {
+      throw new ContactManagerPersistenceException("No affected row by the update statement. " +
+          "Maybe no such user with the following userUri:" + userUri);
+    }
+
+    insertTypes(vCard, statementTypes);
   }
 
   private List<Type> createTypes(List<Telephone> telephones, List<Mail> emails) {
