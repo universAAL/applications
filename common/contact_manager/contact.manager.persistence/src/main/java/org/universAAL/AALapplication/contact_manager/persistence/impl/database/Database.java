@@ -3,6 +3,7 @@ package org.universAAL.AALapplication.contact_manager.persistence.impl.database;
 
 import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -18,9 +19,25 @@ public interface Database {
 
   void setAutocommit(boolean autocommit);
 
-  void saveVCard(VCard vCard) throws SQLException;
+  void saveVCard(VCard vCard, PreparedStatement statementVCard,
+                 PreparedStatement statementTypes) throws SQLException;
 
-  void editVCard(String userUri, VCard vCard) throws SQLException;
+  void editVCard(String userUri, VCard vCard, PreparedStatement statementVCard,
+                 PreparedStatement statementDeleteTypes, PreparedStatement statementTypes) throws SQLException;
 
   VCard getVCard(String personUri) throws SQLException;
+
+  PreparedStatement createAddStatementVCard() throws SQLException;
+
+  PreparedStatement createAddStatementTypes() throws SQLException;
+
+  PreparedStatement createEditStatementVCard(String userUri) throws SQLException;
+
+  PreparedStatement createEditStatementTypes(String userUri) throws SQLException;
+
+  PreparedStatement createEditDeleteStatementTypes(String userUri) throws SQLException;
+
+  public void commit() throws SQLException;
+
+  public void rollback();
 }

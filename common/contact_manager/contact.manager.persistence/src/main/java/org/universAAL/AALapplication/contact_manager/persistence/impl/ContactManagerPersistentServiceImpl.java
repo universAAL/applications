@@ -4,8 +4,10 @@ import org.universAAL.AALapplication.contact_manager.persistence.impl.database.D
 import org.universAAL.AALapplication.contact_manager.persistence.layer.ContactManagerPersistentService;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import static org.universAAL.AALapplication.contact_manager.persistence.impl.Activator.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
 
 /**
@@ -24,26 +26,46 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
 
     validateParameter(vCard, "vCard");
 
+    PreparedStatement statementVCard = null;
+    PreparedStatement statementTypes = null;
     try {
       database.setAutocommit(false);
-      database.saveVCard(vCard);
-    } catch (SQLException e) {
+      statementVCard = database.createAddStatementVCard();
+      statementTypes = database.createAddStatementTypes();
+      database.saveVCard(vCard, statementVCard, statementTypes);
+      database.commit();
+    } catch (Exception e) {
       throw new ContactManagerPersistenceException(e);
     } finally {
       database.setAutocommit(true);
+      database.rollback();
+      closeStatement(statementVCard);
+      closeStatement(statementTypes);
     }
   }
 
   public void editVCard(String userUri, VCard vCard) {
+    validateParameter(userUri, "userUri");
     validateParameter(vCard, "vCard");
 
+    PreparedStatement statementVCard = null;
+    PreparedStatement statementTypes = null;
+    PreparedStatement statementDeleteTypes = null;
     try {
       database.setAutocommit(false);
-      database.editVCard(userUri, vCard);
-    } catch (SQLException e) {
+      statementVCard = database.createEditStatementVCard(userUri);
+      statementTypes = database.createEditStatementTypes(userUri);
+      statementDeleteTypes = database.createEditDeleteStatementTypes(userUri);
+      database.editVCard(userUri, vCard, statementVCard, statementDeleteTypes, statementTypes);
+      database.commit();
+    } catch (Exception e) {
       throw new ContactManagerPersistenceException(e);
     } finally {
       database.setAutocommit(true);
+      database.rollback();
+      closeStatement(statementVCard);
+      closeStatement(statementTypes);
+      closeStatement(statementDeleteTypes);
     }
   }
 
