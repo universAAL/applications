@@ -15,4 +15,5 @@ public interface ContactManagerPersistentService {
 
   void printData(); //temporary method to see the data inside database tables
 
+  void removeVCard(String uri);
 }

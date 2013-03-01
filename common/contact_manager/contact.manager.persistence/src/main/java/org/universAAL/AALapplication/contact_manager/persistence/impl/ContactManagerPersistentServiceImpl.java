@@ -83,4 +83,16 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
   public void printData() {
     database.printData();
   }
+
+  public void removeVCard(String uri) {
+    validateParameter(uri, "uri");
+
+    try {
+      database.removeVCard(uri);
+    } catch (SQLException e) {
+      throw new ContactManagerPersistenceException(e);
+    }
+
+
+  }
 }

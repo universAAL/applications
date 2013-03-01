@@ -84,7 +84,7 @@ public final class DerbyDatabase implements Database {
   public PreparedStatement createEditStatementVCard(String userUri) throws SQLException {
     String sqlVCard = "UPDATE CONTACT_MANAGER.VCARD SET VCARD_VERSION = ?, LAST_REVISION = ?, NICKNAME = ?, " +
         "DISPLAY_NAME = ?, UCI_LABEL = ?, UCI_ADDITIONAL_DATA = ?, ABOUT_ME = ?, " +
-        "BDAY = ?, FN = ? WHERE USER_URI = '" + userUri + "'";
+        "BDAY = ?, FN = ? WHERE USER_URI = '" + userUri.toUpperCase() + "'";
 
     System.out.println("sqlVCard = " + sqlVCard);
 
@@ -135,10 +135,14 @@ public final class DerbyDatabase implements Database {
     }
   }
 
+  public void removeVCard(String uri) {
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
+
   public void saveVCard(VCard vCard, PreparedStatement statementVCard,
                         PreparedStatement statementTypes) throws SQLException {
 
-    statementVCard.setString(1, vCard.getUserUri());
+    statementVCard.setString(1, vCard.getUserUri().toUpperCase());
     statementVCard.setString(2, vCard.getVCardVersion());
     java.sql.Date lr = new java.sql.Date(vCard.getLastRevision().getTime());
     statementVCard.setDate(3, lr);

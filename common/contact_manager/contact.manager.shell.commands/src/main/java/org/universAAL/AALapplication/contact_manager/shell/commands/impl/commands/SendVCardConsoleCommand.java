@@ -50,8 +50,8 @@ import static java.io.File.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.TelEnum.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
 import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.Activator.*;
-import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees.AddContactConsumer.*;
-import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees.EditContactConsumer.*;
+import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers.AddContactConsumer.*;
+import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers.EditContactConsumer.*;
 import static org.universAAL.ontology.profile.PersonalInformationSubprofile.*;
 
 /**
@@ -59,6 +59,7 @@ import static org.universAAL.ontology.profile.PersonalInformationSubprofile.*;
  */
 public abstract class SendVCardConsoleCommand extends ConsoleCommand {
 
+  private static final String PARAMETERS_INFO = "This command requires one parameter: the name of properties file containing properties of the new VCard";
   private static DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
   public static final String USER_URI = "userUri";
@@ -100,7 +101,7 @@ public abstract class SendVCardConsoleCommand extends ConsoleCommand {
 
   @Override
   public String getParametersInfo() {
-    return "This command requires one parameter: the name of properties file containing properties of the new VCard";
+    return PARAMETERS_INFO;
   }
 
   public void executeCommand(String command, int commandType, String... parameters) {

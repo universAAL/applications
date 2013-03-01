@@ -38,4 +38,6 @@ public interface Database {
   public void commit() throws SQLException;
 
   public void rollback();
+
+  void removeVCard(String uri) throws SQLException;
 }

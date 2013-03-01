@@ -15,7 +15,7 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.contact_manager.shell.commands.impl.callees;
+package org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers;
 
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
@@ -34,20 +34,20 @@ import org.universAAL.ontology.profile.service.ProfilingService;
 /**
  * @author George Fournadjiev
  */
-public final class EditContactConsumer {
+public final class AddContactConsumer {
 
   private static ServiceCaller serviceCaller;
 
-  public EditContactConsumer(ModuleContext moduleContext) {
+  public AddContactConsumer(ModuleContext moduleContext) {
 
     serviceCaller = new DefaultServiceCaller(moduleContext);
 
   }
 
 
-  public static boolean sendEditContact(User user, PersonalInformationSubprofile personalInformationSubprofile) {
+  public static boolean sendAddContact(User user, PersonalInformationSubprofile personalInformationSubprofile) {
 
-    Log.info("Trying to send a contact", EditContactConsumer.class);
+    Log.info("Trying to send a contact", AddContactConsumer.class);
 
     if (serviceCaller == null) {
       throw new ContactManagerShellException("The ServiceCaller is note set");
@@ -57,12 +57,12 @@ public final class EditContactConsumer {
 
     String[] ppInputAddContact = new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE};
 
-    serviceRequest.addChangeEffect(ppInputAddContact, personalInformationSubprofile);
+    serviceRequest.addAddEffect(ppInputAddContact, personalInformationSubprofile);
 
     ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
 
     CallStatus callStatus = serviceResponse.getCallStatus();
-    Log.info("callStatus %s", EditContactConsumer.class, callStatus);
+    Log.info("callStatus %s", AddContactConsumer.class, callStatus);
 
     if (callStatus.equals(CallStatus.succeeded)) {
       return true;
