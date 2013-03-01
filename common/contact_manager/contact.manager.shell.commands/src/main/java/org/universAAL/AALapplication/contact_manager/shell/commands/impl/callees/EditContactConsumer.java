@@ -20,7 +20,6 @@ package org.universAAL.AALapplication.contact_manager.shell.commands.impl.callee
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
@@ -58,14 +57,7 @@ public final class EditContactConsumer {
 
     String[] ppInputAddContact = new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE};
 
-    serviceRequest.addAddEffect(ppInputAddContact, personalInformationSubprofile);
-
-    serviceRequest.addAddEffect(ppInputAddContact, new ManagedIndividual() {
-      @Override
-      public int getPropSerializationType(String s) {
-        return PROP_SERIALIZATION_FULL;
-      }
-    });
+    serviceRequest.addChangeEffect(ppInputAddContact, personalInformationSubprofile);
 
     ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
 
