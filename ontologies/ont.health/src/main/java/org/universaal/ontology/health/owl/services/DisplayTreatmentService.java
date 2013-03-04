@@ -1,10 +1,6 @@
 /*******************************************************************************
- * Copyright 2012 UPM, http://www.upm.es 
- * Universidad Politécnica de Madrid
+ * Copyright 2013 Universidad Politécnica de Madrid
  * 
- *	OCO Source Materials
- *	� Copyright IBM Corp. 2011
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,38 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-
 package org.universaal.ontology.health.owl.services;
 
 import org.universAAL.middleware.service.owl.Service;
 import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.HealthProfile;
 
 /**
+ * Launch display of a treatment.
+ * Service Profiles should specify the class of Treatment they are intended to.
+ * The UI must be a Dialog and must be return as {@link DisplayTreatmentService#PROP_FORM_FOR_TREATMENT}
  * @author amedrano
- * @author roni
  * 
- * @navassoc - "PROP_ASSISTED_USER" 1 AssistedPerson
- * @navassoc - "PROP_ASSISTED_USER_PROFILE" 1 HealthProfile
+ * @navassoc - "PROP_TREATMENT" 1 Treatment
+ * @navassoc - "PROP_FORM_FOR_TREATMENT" 1 Form
+ *
  */
-public abstract class HealthService extends Service{
-	
-	//NAMESPACE & PROPERTIES
-	public static final String MY_URI = HealthOntology.NAMESPACE
-	+ "HealthService";
-	
-	public static final String PROP_ASSISTED_USER = HealthOntology.NAMESPACE
-			+"assistedPerson";
+public class DisplayTreatmentService extends Service {
 
-	public static final String PROP_ASSISTED_USER_PROFILE = HealthOntology.NAMESPACE
-			+ "healthProfile";
+	public static final String MY_URI = HealthOntology.NAMESPACE
+			+ "DisplayTreatmentService";
 	
+	public static final String PROP_TREATMENT = HealthOntology.NAMESPACE
+			+ "treatmentToBeDisplayed";
+	
+	public static final String PROP_FORM_FOR_TREATMENT = HealthOntology.NAMESPACE
+			+ "formForTreatment";
 	//CONSTRUCTORS
-	public HealthService() {
+	public DisplayTreatmentService() {
 		super();
 	}
 
-	public HealthService(String uri) {
+	public DisplayTreatmentService(String uri) {
 		super(uri);
 	}
 
@@ -57,9 +52,16 @@ public abstract class HealthService extends Service{
 		return MY_URI;
 	}
 
+	
 	/** {@inheritDoc} */
-	public boolean isWellFormed() {
-		  return true;
+	public int getPropSerializationType(String propURI) {
+		return PROP_TREATMENT.equals(propURI) 
+				|| PROP_FORM_FOR_TREATMENT.equals(propURI)? PROP_SERIALIZATION_FULL : super
+				.getPropSerializationType(propURI);
 	}
 
+	/** {@inheritDoc} */
+	public boolean isWellFormed() {
+		return true;
+	}
 }
