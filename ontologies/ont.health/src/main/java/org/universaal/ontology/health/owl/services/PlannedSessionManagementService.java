@@ -50,23 +50,19 @@ public class PlannedSessionManagementService extends HealthService{
 		  super(uri);
 	  }
 
-	  public String getClassURI() {
+	  /** {@inheritDoc} */
+	public String getClassURI() {
 		  return MY_URI;
 	  }
 
-	  /*
-	   * (non-Javadoc)
-	   * 
-	   * @see
-	   * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
-	   * (java.lang.String)
-	   */
-	  public int getPropSerializationType(String propURI) {
+	  /** {@inheritDoc} */
+	public int getPropSerializationType(String propURI) {
 		  return PROP_MANAGES_SESSION.equals(propURI) ? PROP_SERIALIZATION_FULL : super
 				  .getPropSerializationType(propURI);
 	  }
 
-	  public boolean isWellFormed() {
+	  /** {@inheritDoc} */
+	public boolean isWellFormed() {
 		  return true;
 	  }
 	

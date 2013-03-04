@@ -61,23 +61,19 @@ public class TreatmentManagementService extends HealthService{
 		super(uri);
 	}
 
+	/** {@inheritDoc} */
 	public String getClassURI() {
 		return MY_URI;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
-	 * (java.lang.String)
-	 */
+	/** {@inheritDoc} */
 	public int getPropSerializationType(String propURI) {
 		return  PROP_MANAGES_TREATMENT.equals(propURI) 
 		 ? PROP_SERIALIZATION_FULL : super
 				.getPropSerializationType(propURI);
 	}
 
+	/** {@inheritDoc} */
 	public boolean isWellFormed() {
 		return true;
 	}

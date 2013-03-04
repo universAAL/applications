@@ -51,15 +51,10 @@ public class PerformedSessionManagementService extends HealthService{
 	//CONSTRUCTORS
 	public PerformedSessionManagementService() {
 		super();
-		buildProfile();
 	}
 
 	public PerformedSessionManagementService(String uri) {
 		super(uri);
-		buildProfile();
-	}
-	private void buildProfile() {
-		
 	}
 
 	public String getClassURI() {

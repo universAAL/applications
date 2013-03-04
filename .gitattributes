@@ -3592,6 +3592,7 @@ ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/Treatment
 ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/Walking.java -text
 ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/WeightMeasurementTreatment.java -text
 ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/WeightRequirement.java -text
+ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/DisplayTreatmentService.java -text svneol=unset#text/plain
 ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/HealthService.java -text
 ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PerformedSessionManagementService.java -text
 ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PlannedSessionManagementService.java -text
