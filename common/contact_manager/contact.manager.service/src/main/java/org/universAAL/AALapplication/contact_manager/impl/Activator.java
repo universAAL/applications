@@ -51,6 +51,7 @@ public class Activator implements BundleActivator {
         new AddContactServiceProvider(mc);
         new EditContactServiceProvider(mc);
         new RemoveContactServiceProvider(mc);
+        new GetContactServiceProvider(mc);
       }
     }.start();
 

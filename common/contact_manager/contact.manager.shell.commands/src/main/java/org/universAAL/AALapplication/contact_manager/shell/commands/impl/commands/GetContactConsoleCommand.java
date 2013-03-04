@@ -19,7 +19,9 @@ package org.universAAL.AALapplication.contact_manager.shell.commands.impl.comman
 
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
+import org.universAAL.ontology.profile.User;
 
+import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers.GetContactConsumer.*;
 import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactConsoleCommands.*;
 
 /**
@@ -35,7 +37,7 @@ public final class GetContactConsoleCommand extends ConsoleCommand {
 
   @Override
   public String getParametersInfo() {
-    return NO_PARAMETERS;
+    return "This command requires one parameter : the user_uri";
   }
 
   @Override
@@ -43,11 +45,13 @@ public final class GetContactConsoleCommand extends ConsoleCommand {
 
     Log.info("Executing " + COMMAND, getClass());
 
-    if (parameters != null && parameters.length != 0) {
-      throw new ContactManagerShellException("The " + COMMAND + " doesn't expect any parameters");
+    if (parameters != null && parameters.length != 1) {
+      throw new ContactManagerShellException("The " + COMMAND + " expects one parameter (user_uri)");
     }
 
-    throw new UnsupportedOperationException(COMMAND + " is not implemented yet");
+    User user = new User(parameters[0]);
+
+    getContact(user);
   }
 
 
