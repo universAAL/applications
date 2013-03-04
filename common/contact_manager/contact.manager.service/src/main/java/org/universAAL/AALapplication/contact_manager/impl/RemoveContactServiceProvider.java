@@ -69,7 +69,15 @@ public final class RemoveContactServiceProvider extends ServiceCallee {
     ContactManagerPersistentService persistentService = getContactManagerPersistentService();
     persistentService.removeVCard(involvedUser.getURI());
 
-    throw new UnsupportedOperationException("Not implemented yet");
 
+    return getSuccessfulServiceResponse(involvedUser);
+
+  }
+
+  private ServiceResponse getSuccessfulServiceResponse(User involvedUser) {
+    String userId = involvedUser.getURI();
+    Log.info("Remove contact Service Response for the user %s", getClass(), userId);
+
+    return new ServiceResponse(CallStatus.succeeded);
   }
 }

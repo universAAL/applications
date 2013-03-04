@@ -5,7 +5,6 @@ import org.universAAL.AALapplication.contact_manager.persistence.layer.ContactMa
 import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import static org.universAAL.AALapplication.contact_manager.persistence.impl.Activator.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
@@ -48,6 +47,8 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
     validateParameter(userUri, "userUri");
     validateParameter(vCard, "vCard");
 
+    userUri = userUri.toUpperCase();
+
     PreparedStatement statementVCard = null;
     PreparedStatement statementTypes = null;
     PreparedStatement statementDeleteTypes = null;
@@ -71,11 +72,12 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
 
   public VCard getVCard(String userUri) {
 
-    validateParameter(userUri, "personUri");
-
+    validateParameter(userUri, "userUri");
+    userUri = userUri.toUpperCase();
+    //TODO
     try {
       return database.getVCard(userUri);
-    } catch (SQLException e) {
+    } catch (Exception e) {
       throw new ContactManagerPersistenceException(e);
     }
   }
@@ -84,13 +86,25 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
     database.printData();
   }
 
-  public void removeVCard(String uri) {
-    validateParameter(uri, "uri");
+  public void removeVCard(String userUri) {
+    validateParameter(userUri, "userUri");
+    userUri = userUri.toUpperCase();
 
+    PreparedStatement statementVCard = null;
+    PreparedStatement statementTypes = null;
     try {
-      database.removeVCard(uri);
-    } catch (SQLException e) {
-      throw new ContactManagerPersistenceException(e);
+      database.setAutocommit(false);
+      statementVCard = database.createDeleteStatementVCard(userUri);
+      statementTypes = database.createDeleteStatementTypes(userUri);
+      database.removeVCard(userUri, statementVCard, statementTypes);
+      database.commit();
+    } catch (Exception e) {
+      throw new ContactManagerPersistenceException("Problem deleting the VCard", e);
+    } finally {
+      database.setAutocommit(true);
+      database.rollback();
+      closeStatement(statementVCard);
+      closeStatement(statementTypes);
     }
 
 

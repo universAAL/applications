@@ -32,7 +32,7 @@ public final class VCard {
     validateParameter(telephones, "telephones");
     validateParameter(emails, "emails");
 
-    this.userUri = userUri;
+    this.userUri = userUri.toUpperCase();
     this.vCardVersion = vCardVersion;
     this.lastRevision = lastRevision;
     this.nickname = nickname;

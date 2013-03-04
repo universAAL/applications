@@ -35,9 +35,13 @@ public interface Database {
 
   PreparedStatement createEditDeleteStatementTypes(String userUri) throws SQLException;
 
+  PreparedStatement createDeleteStatementVCard(String userUri) throws SQLException;
+
+  PreparedStatement createDeleteStatementTypes(String userUri) throws SQLException;
+
   public void commit() throws SQLException;
 
   public void rollback();
 
-  void removeVCard(String uri) throws SQLException;
+  void removeVCard(String uri, PreparedStatement statementVCard, PreparedStatement statementTypes) throws SQLException;
 }
