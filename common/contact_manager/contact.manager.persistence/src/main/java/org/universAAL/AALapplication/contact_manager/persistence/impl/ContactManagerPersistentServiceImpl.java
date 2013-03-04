@@ -5,6 +5,7 @@ import org.universAAL.AALapplication.contact_manager.persistence.layer.ContactMa
 import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 import static org.universAAL.AALapplication.contact_manager.persistence.impl.Activator.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
@@ -74,12 +75,19 @@ public final class ContactManagerPersistentServiceImpl implements ContactManager
 
     validateParameter(userUri, "userUri");
     userUri = userUri.toUpperCase();
-    //TODO
+    Statement statementVCard = null;
+    Statement statementTypes = null;
     try {
-      return database.getVCard(userUri);
+      statementVCard = database.createGetStatementVCard();
+      statementTypes = database.createGetStatementTypes();
+      return database.getVCard(userUri, statementVCard, statementTypes);
     } catch (Exception e) {
       throw new ContactManagerPersistenceException(e);
+    } finally {
+      closeStatement(statementVCard);
+      closeStatement(statementTypes);
     }
+
   }
 
   public void printData() {

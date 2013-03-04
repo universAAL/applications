@@ -140,6 +140,16 @@ public final class DerbyDatabase implements Database {
 
   }
 
+  public Statement createGetStatementVCard() throws SQLException {
+    return connection.createStatement();
+
+  }
+
+  public Statement createGetStatementTypes() throws SQLException {
+    return connection.createStatement();
+
+  }
+
   public void commit() throws SQLException {
     connection.commit();
   }
@@ -157,13 +167,10 @@ public final class DerbyDatabase implements Database {
                           PreparedStatement statementTypes) throws SQLException {
 
 
-    boolean res = statementTypes.execute();
+    statementTypes.execute();
 
-    System.out.println("res types = " + res);
 
-    res = statementVCard.execute();
-
-    System.out.println("res vcard = " + res);
+    statementVCard.execute();
 
   }
 
@@ -183,9 +190,7 @@ public final class DerbyDatabase implements Database {
     statementVCard.setDate(9, db);
     statementVCard.setString(10, vCard.getFn());
 
-    boolean res = statementVCard.execute();
-
-    System.out.println("res = " + res);
+    statementVCard.execute();
 
     insertTypes(vCard, statementTypes);
 
@@ -250,24 +255,17 @@ public final class DerbyDatabase implements Database {
     return types;
   }
 
-  public VCard getVCard(String userUri) throws SQLException {
+  public VCard getVCard(String userUri, Statement statementVCard, Statement statementTypes) throws SQLException {
     String sqlQuery = "select * from " + CONTACT_MANAGER + "." + VCARD +
         "\n\t where user_uri='" + userUri + '\'';
 
     sqlQuery = sqlQuery.toUpperCase();
 
-    Statement statement = connection.createStatement();
-
-    System.out.println("sqlQuery = " + sqlQuery);
-
-    ResultSet rs = statement.executeQuery(sqlQuery);
+    ResultSet rs = statementVCard.executeQuery(sqlQuery);
     VCard vCard = null;
     if (rs.next()) {
-      vCard = createVCard(rs);
+      vCard = createVCard(rs, statementTypes);
     }
-
-    closeStatement(statement);
-
 
     return vCard;
 
@@ -284,7 +282,7 @@ public final class DerbyDatabase implements Database {
   }
 
 
-  private VCard createVCard(ResultSet rs) throws SQLException {
+  private VCard createVCard(ResultSet rs, Statement statementTypes) throws SQLException {
 
     String userUri = rs.getString("user_uri");
     String vcardVersion = rs.getString("vcard_version");
@@ -299,7 +297,7 @@ public final class DerbyDatabase implements Database {
     Date bday = rs.getDate("bday");
     String fn = rs.getString("fn");
 
-    List<Type> types = getTypes(userUri);
+    List<Type> types = getTypes(userUri, statementTypes);
     List<Telephone> telephones = getTelephones(types);
     List<Mail> mails = getMails(types);
 
@@ -320,7 +318,7 @@ public final class DerbyDatabase implements Database {
 
   }
 
-  private List<Type> getTypes(String userUri) throws SQLException {
+  private List<Type> getTypes(String userUri, Statement statementTypes) throws SQLException {
     String sqlQuery = "select * from " + CONTACT_MANAGER + '.' + TYPES +
         "\n\t where vcard_fk='" + userUri + '\'';
 
@@ -328,22 +326,14 @@ public final class DerbyDatabase implements Database {
 
     List<Type> types = new ArrayList<Type>();
 
-    Statement statement = null;
-    try {
-      statement = connection.createStatement();
+    System.out.println("sqlQuery = " + sqlQuery);
 
-      System.out.println("sqlQuery = " + sqlQuery);
-
-      ResultSet rs = statement.executeQuery(sqlQuery);
-      while (rs.next()) {
-        Type type = createType(rs);
-        types.add(type);
-      }
-    } catch (SQLException e) {
-      throw new ContactManagerPersistenceException(e);
-    } finally {
-      closeStatement(statement);
+    ResultSet rs = statementTypes.executeQuery(sqlQuery);
+    while (rs.next()) {
+      Type type = createType(rs);
+      types.add(type);
     }
+
 
     return types;
   }

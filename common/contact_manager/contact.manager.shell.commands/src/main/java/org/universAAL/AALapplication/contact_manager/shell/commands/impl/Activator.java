@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.contact_manager.persistence.layer.ContactManagerPersistentService;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers.AddContactConsumer;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers.EditContactConsumer;
+import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers.GetContactConsumer;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers.RemoveContactConsumer;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactConsoleCommands;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactManagerCommands;
@@ -63,6 +64,7 @@ public class Activator implements BundleActivator {
             new AddContactConsumer(mc);
             new EditContactConsumer(mc);
             new RemoveContactConsumer(mc);
+            new GetContactConsumer(mc);
           }
         }.start();
 

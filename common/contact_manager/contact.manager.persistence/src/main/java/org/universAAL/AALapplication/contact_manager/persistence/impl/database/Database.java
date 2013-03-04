@@ -5,6 +5,7 @@ import org.universAAL.AALapplication.contact_manager.persistence.layer.VCard;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * @author George Fournadjiev
@@ -25,7 +26,7 @@ public interface Database {
   void editVCard(String userUri, VCard vCard, PreparedStatement statementVCard,
                  PreparedStatement statementDeleteTypes, PreparedStatement statementTypes) throws SQLException;
 
-  VCard getVCard(String personUri) throws SQLException;
+  VCard getVCard(String personUri, Statement statementVCard, Statement statementTypes) throws SQLException;
 
   PreparedStatement createAddStatementVCard() throws SQLException;
 
@@ -38,6 +39,10 @@ public interface Database {
   PreparedStatement createDeleteStatementVCard(String userUri) throws SQLException;
 
   PreparedStatement createDeleteStatementTypes(String userUri) throws SQLException;
+
+  Statement createGetStatementVCard() throws SQLException;
+
+  Statement createGetStatementTypes() throws SQLException;
 
   public void commit() throws SQLException;
 

@@ -19,9 +19,9 @@ package org.universAAL.AALapplication.contact_manager.shell.commands.impl.comman
 
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.ContactManagerShellException;
 import org.universAAL.AALapplication.contact_manager.shell.commands.impl.Log;
-import org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers.RemoveContactConsumer;
 import org.universAAL.ontology.profile.User;
 
+import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.callers.RemoveContactConsumer.*;
 import static org.universAAL.AALapplication.contact_manager.shell.commands.impl.commands.ContactConsoleCommands.*;
 
 /**
@@ -51,7 +51,7 @@ public final class RemoveContactConsoleCommand extends ConsoleCommand {
 
     User user = new User(parameters[0]);
 
-    RemoveContactConsumer.sendRemoveContact(user);
+    sendRemoveContact(user);
   }
 
 
