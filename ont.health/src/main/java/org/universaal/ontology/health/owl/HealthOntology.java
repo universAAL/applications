@@ -29,6 +29,8 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
+import org.universAAL.middleware.ui.owl.UIBusOntology;
+import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.AssistedPersonProfile;
@@ -37,10 +39,10 @@ import org.universAAL.ontology.profile.Gender;
 import org.universAAL.ontology.profile.Profile;
 import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.SubProfile;
-import org.universAAL.ontology.profile.health.HealthProfileOntology;
 import org.universaal.ontology.disease.owl.Disease;
 import org.universaal.ontology.disease.owl.DiseaseOntology;
 import org.universaal.ontology.health.HealthOntologyFactory;
+import org.universaal.ontology.health.owl.services.DisplayTreatmentService;
 import org.universaal.ontology.health.owl.services.HealthService;
 import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universaal.ontology.health.owl.services.PlannedSessionManagementService;
@@ -79,9 +81,9 @@ private static final String DISEASE_PROP_DISCHARGE_DATE = HealthOntology.NAMESPA
     addImport(ServiceBusOntology.NAMESPACE);
     addImport(LocationOntology.NAMESPACE);
     addImport(ProfileOntology.NAMESPACE);
-	addImport(HealthProfileOntology.NAMESPACE);	
     addImport(HealthMeasurementOntology.NAMESPACE);
     addImport(DiseaseOntology.NAMESPACE);
+    addImport(UIBusOntology.NAMESPACE);
    
 	OntClassInfoSetup oci;
 	OntClassInfoSetup oci_treatment;
@@ -605,5 +607,18 @@ private static final String DISEASE_PROP_DISCHARGE_DATE = HealthOntology.NAMESPA
     oci.setResourceLabel("HealthProfileManagementService");
     oci.addSuperClass(HealthService.MY_URI);
     
+  //load DisplayTreatmentService
+    oci = createNewAbstractOntClassInfo(DisplayTreatmentService.MY_URI);
+    oci.setResourceComment("Services to display specific treatments.");
+    oci.setResourceLabel("HealthDisplayTreatmentService");
+    oci.addSuperClass(Service.MY_URI);
+    
+    oci.addObjectProperty(DisplayTreatmentService.PROP_TREATMENT);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		DisplayTreatmentService.PROP_TREATMENT, Treatment.MY_URI, 1, 1));
+    
+    oci.addObjectProperty(DisplayTreatmentService.PROP_FORM_FOR_TREATMENT);
+    oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
+    		DisplayTreatmentService.PROP_FORM_FOR_TREATMENT, Form.MY_URI, 1, 1));
   }
 }
