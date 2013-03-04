@@ -93,7 +93,7 @@ public final class DerbyDatabase implements Database {
   }
 
   public PreparedStatement createEditDeleteStatementTypes(String userUri) throws SQLException {
-    String typesSql = "delete from contact_manager.TYPES where vcard_fk = '" + userUri + "'";
+    String typesSql = "delete from CONTACT_MANAGER.TYPES where VCARD_FK = '" + userUri + "'";
 
     System.out.println("typesSql = " + typesSql);
 
@@ -122,6 +122,24 @@ public final class DerbyDatabase implements Database {
 
   }
 
+  public PreparedStatement createDeleteStatementVCard(String userUri) throws SQLException {
+    String sqlVCard = "delete from CONTACT_MANAGER.VCARD where USER_URI = '" + userUri + "'";
+
+    System.out.println("sqlVCard = " + sqlVCard);
+
+    return connection.prepareStatement(sqlVCard);
+
+  }
+
+  public PreparedStatement createDeleteStatementTypes(String userUri) throws SQLException {
+    String typesSql = "delete from CONTACT_MANAGER.TYPES where VCARD_FK = '" + userUri + "'";
+
+    System.out.println("typesSql = " + typesSql);
+
+    return connection.prepareStatement(typesSql);
+
+  }
+
   public void commit() throws SQLException {
     connection.commit();
   }
@@ -135,8 +153,18 @@ public final class DerbyDatabase implements Database {
     }
   }
 
-  public void removeVCard(String uri) {
-    throw new UnsupportedOperationException("Not implemented yet");
+  public void removeVCard(String uri, PreparedStatement statementVCard,
+                          PreparedStatement statementTypes) throws SQLException {
+
+
+    boolean res = statementTypes.execute();
+
+    System.out.println("res types = " + res);
+
+    res = statementVCard.execute();
+
+    System.out.println("res vcard = " + res);
+
   }
 
   public void saveVCard(VCard vCard, PreparedStatement statementVCard,
@@ -155,7 +183,9 @@ public final class DerbyDatabase implements Database {
     statementVCard.setDate(9, db);
     statementVCard.setString(10, vCard.getFn());
 
-    statementVCard.execute();
+    boolean res = statementVCard.execute();
+
+    System.out.println("res = " + res);
 
     insertTypes(vCard, statementTypes);
 
@@ -170,7 +200,7 @@ public final class DerbyDatabase implements Database {
       statementTypes.setString(2, t.getName());
       statementTypes.setString(3, t.getType());
       statementTypes.setString(4, t.getValue());
-      statementTypes.setString(5, vCard.getUserUri());
+      statementTypes.setString(5, vCard.getUserUri().toUpperCase());
 
       statementTypes.execute();
     }

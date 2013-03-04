@@ -36,6 +36,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.List;
 
 import static org.universAAL.AALapplication.contact_manager.impl.Activator.*;
+import static org.universAAL.AALapplication.contact_manager.impl.Log.*;
 import static org.universAAL.AALapplication.contact_manager.persistence.layer.Util.*;
 import static org.universAAL.ontology.profile.PersonalInformationSubprofile.*;
 
@@ -87,11 +88,11 @@ public abstract class VCardReceivedContactServiceProvider extends ServiceCallee 
   public ServiceResponse handleCall(ServiceCall call) {
     String processURI = call.getProcessURI();
 
-    Log.info("Received call %s", getClass(), processURI);
+    info("Received call %s", getClass(), processURI);
 
     User involvedUser = (User) call.getInvolvedUser();
 
-    Log.info("involvedUser %s", getClass(), involvedUser);
+    info("involvedUser %s", getClass(), involvedUser);
 
     if (involvedUser == null) {
       return invalidInput;
@@ -118,12 +119,12 @@ public abstract class VCardReceivedContactServiceProvider extends ServiceCallee 
 
     printNotSupportedProperties();
 
-    Log.info("Start processing the properties", getClass());
+    info("Start processing the properties", getClass());
     VCardBuilder vCardBuilder = new VCardBuilder();
     vCardBuilder.buildPersonUri(involvedUser.getURI());
 
     for (String propName : IMPLEMENTED_PROPERTIES) {
-      Log.info("Check for %s property", getClass(), propName);
+      info("Check for %s property", getClass(), propName);
       Object value = personalInformationSubprofile.getProperty(propName);
       processProperty(propName, value, vCardBuilder);
     }
@@ -135,7 +136,13 @@ public abstract class VCardReceivedContactServiceProvider extends ServiceCallee 
 
   private ServiceResponse getSuccessfulServiceResponse(User involvedUser) {
     String userId = involvedUser.getURI();
-    Log.info("Add contact Service Response for the user %s", getClass(), userId);
+    info("Add contact Service Response for the user %s", getClass(), userId);
+
+    if (type == ADD) {
+      info("Add contact Service Response for the user %s", getClass(), userId);
+    } else if (type == EDIT) {
+      info("Edit contact Service Response for the user %s", getClass(), userId);
+    }
 
     return new ServiceResponse(CallStatus.succeeded);
   }
@@ -147,11 +154,11 @@ public abstract class VCardReceivedContactServiceProvider extends ServiceCallee 
     try {
       if (type == ADD) {
         System.out.println("***********ADDING***************");
-        Log.info("Add contact VCard to the database for userUri:%s", getClass(), involvedUser.getURI());
+        info("Add contact VCard to the database for userUri:%s", getClass(), involvedUser.getURI());
         persistentService.saveVCard(vCard);
-      } else if(type == EDIT) {
+      } else if (type == EDIT) {
         System.out.println("***********EDITING***************");
-        Log.info("Edit contact VCard to the database for userUri:%s", getClass(), involvedUser.getURI());
+        info("Edit contact VCard to the database for userUri:%s", getClass(), involvedUser.getURI());
         persistentService.editVCard(involvedUser.getURI(), vCard);
       }
     } catch (ContactManagerException e) {
@@ -163,7 +170,7 @@ public abstract class VCardReceivedContactServiceProvider extends ServiceCallee 
 
   private void processProperty(String propName, Object value, VCardBuilder vCardBuilder) {
     if (value == null) {
-      Log.info("The %s property is not set and skipping processing for it", getClass(), propName);
+      info("The %s property is not set and skipping processing for it", getClass(), propName);
       return;
     }
 
@@ -210,10 +217,10 @@ public abstract class VCardReceivedContactServiceProvider extends ServiceCallee 
 
   private void printNotSupportedProperties() {
 
-    Log.info("Not supported properties", getClass());
+    info("Not supported properties", getClass());
 
     for (String propName : UN_IMPLEMENTED_PROPERTIES) {
-      Log.info("%s is not supported", getClass(), propName);
+      info("%s is not supported", getClass(), propName);
 
     }
   }
