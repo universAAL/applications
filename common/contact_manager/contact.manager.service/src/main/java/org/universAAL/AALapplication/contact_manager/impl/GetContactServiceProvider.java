@@ -83,7 +83,7 @@ public final class GetContactServiceProvider extends ServiceCallee {
 
     Log.info("involvedUser %s", getClass(), involvedUser);
 
-    if (involvedUser == null) {
+    if (involvedUser == null || involvedUser.getURI() == null) {
       return invalidInput;
     }
 

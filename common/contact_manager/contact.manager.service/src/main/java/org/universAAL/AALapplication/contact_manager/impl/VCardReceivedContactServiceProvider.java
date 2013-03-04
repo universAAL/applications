@@ -94,7 +94,7 @@ public abstract class VCardReceivedContactServiceProvider extends ServiceCallee 
 
     info("involvedUser %s", getClass(), involvedUser);
 
-    if (involvedUser == null) {
+    if (involvedUser == null || involvedUser.getURI() == null) {
       return invalidInput;
     }
 
