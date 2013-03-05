@@ -70,9 +70,9 @@ public final class MedicationReminderContextProvider {
 
   public static void dueIntakeReminderDeviceIdEvent(String deviceId, Time time) {
     DueIntake dueIntake = new DueIntake();
-    dueIntake.setDeviceId(deviceId);
+    dueIntake.setDeviceUri(deviceId);
     dueIntake.setTime(time);
-    ContextEvent contextEvent = new ContextEvent(dueIntake, DueIntake.PROP_DEVICE_ID);
+    ContextEvent contextEvent = new ContextEvent(dueIntake, DueIntake.PROP_DEVICE_URI);
     contextPublisher.publish(contextEvent);
   }
 

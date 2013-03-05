@@ -26,7 +26,6 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
 import org.universAAL.ontology.medMgr.Time;
 
 import java.util.Calendar;
@@ -34,6 +33,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator.*;
+import static org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider.*;
 
 /**
  * @author George Fournadjiev
@@ -72,9 +72,9 @@ public final class UsecaseMedicationReminder extends Usecase {
 
     DispenserDao dispenserDao = persistentService.getDispenserDao();
     Dispenser dispenser = dispenserDao.findByPerson(person);
-    String deviceId = String.valueOf(dispenser.getId());
+    String deviceUri = dispenser.getDispenserUri();
 
-    Log.info("DeviceId=%s", getClass(), deviceId);
+    Log.info("DeviceUri=%s", getClass(), deviceUri);
 
     IntakeDao intakeDao = persistentService.getIntakeDao();
     Intake intake = intakeDao.getById(getIdFromString(parameters[1]));
@@ -89,10 +89,10 @@ public final class UsecaseMedicationReminder extends Usecase {
     Time time = getTimeObject(intake.getTimePlan());
 
     Log.info("Executing the " + USECASE_TITLE + ". The deviceId is : " +
-        deviceId + " for user with id=" + personId, getClass());
+        deviceUri + " for user with id=" + personId, getClass());
 
 
-    MedicationReminderContextProvider.dueIntakeReminderDeviceIdEvent(deviceId, time);
+    dueIntakeReminderDeviceIdEvent(deviceUri, time);
 
   }
 

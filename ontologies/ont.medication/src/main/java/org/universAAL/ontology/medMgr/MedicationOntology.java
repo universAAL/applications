@@ -127,10 +127,10 @@ public final class MedicationOntology extends Ontology {
     oci = createNewOntClassInfo(DueIntake.MY_URI, FACTORY, DUE_INTAKE_FACTORY_INDEX);
     oci.setResourceComment("The type of a DueIntake");
     oci.setResourceLabel("DueIntake");
-    oci.addDatatypeProperty(DueIntake.PROP_DEVICE_ID);
+    oci.addDatatypeProperty(DueIntake.PROP_DEVICE_URI);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
-            DueIntake.PROP_DEVICE_ID, TypeMapper.getDatatypeURI(String.class), 1, 1));
+            DueIntake.PROP_DEVICE_URI, TypeMapper.getDatatypeURI(String.class), 1, 1));
     oci.addObjectProperty(DueIntake.PROP_TIME).setFunctional();
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(

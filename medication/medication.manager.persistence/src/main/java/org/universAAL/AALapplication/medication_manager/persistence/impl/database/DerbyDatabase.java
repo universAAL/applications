@@ -113,6 +113,12 @@ public final class DerbyDatabase implements Database {
     return getStringColumnMapSingleRecord(sqlQuery, tableName, message);
   }
 
+  public Map<String, Column> executeQueryExpectedSingleRecord(String tableName, String sql) {
+    String message = "There are more than one record for the following query : " + sql;
+
+    return getStringColumnMapSingleRecord(sql, tableName, message);
+  }
+
   private void fillColumnsData(Map<String, Column> columns, Set<String> columnsNames,
                                ResultSet rs, ResultSetMetaData metaData) throws SQLException {
 
@@ -137,7 +143,7 @@ public final class DerbyDatabase implements Database {
         return new Column(name, string);
       case CLOB:
         Clob clob = rs.getClob(name);
-        String text = clob.getSubString(1, (int)clob.length());
+        String text = clob.getSubString(1, (int) clob.length());
         return new Column(name, text);
       default:
         throw new MedicationManagerPersistenceException("Unsupported sql type : " + sqlType);
