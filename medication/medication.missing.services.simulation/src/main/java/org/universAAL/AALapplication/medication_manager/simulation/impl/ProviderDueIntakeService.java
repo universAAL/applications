@@ -54,7 +54,7 @@ public final class ProviderDueIntakeService extends DueIntake {
               }
             }));
 
-    String[] ppDueIntake = new String[]{DueIntake.PROP_DEVICE_ID};
+    String[] ppDueIntake = new String[]{DueIntake.PROP_DEVICE_URI};
 
     ProviderDueIntakeService getDueIntake =
         new ProviderDueIntakeService(SERVICE_GET_DUE_INTAKE);

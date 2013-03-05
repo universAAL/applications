@@ -19,6 +19,7 @@ package org.universAAL.AALapplication.medication_manager.impl;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.ui.ReminderDialog;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
@@ -26,7 +27,6 @@ import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.medMgr.DueIntake;
-import org.universAAL.ontology.medMgr.MyDeviceUserMappingDatabase;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
@@ -64,20 +64,22 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
   public void handleContextEvent(ContextEvent event) {
     Log.info("Received event of type %s", getClass(), event.getType());
 
-    DueIntake missedIntake = (DueIntake) event.getRDFSubject();
+    DueIntake dueIntake = (DueIntake) event.getRDFSubject();
 
-    Time time = missedIntake.getTime();
+    Time time = dueIntake.getTime();
 
     Log.info("Time %s", getClass(), time);
 
-    String deviceId = missedIntake.getDeviceId();
+    String deviceUri = dueIntake.getDeviceUri();
 
-    Log.info("DeviceId %s", getClass(), deviceId);
+    Log.info("DeviceUri %s", getClass(), deviceUri);
 
     PersistentService persistentService = getPersistentService();
     PersonDao personDao = persistentService.getPersonDao();
 
-    User user = MyDeviceUserMappingDatabase.getUser(deviceId);
+    Person person = personDao.findPatient(deviceUri);
+
+    User user = new User(person.getPersonUri());
 
     ReminderDialog reminderDialog =
         new ReminderDialog(moduleContext, time);

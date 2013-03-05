@@ -22,6 +22,12 @@ public abstract class AbstractDao {
     this.tableName = tableName.toUpperCase();
   }
 
+  public void checkForSetDao(AbstractDao dao, String daoName) {
+    if (dao == null) {
+      throw new MedicationManagerPersistenceException(daoName + " is not set");
+    }
+  }
+
   public abstract <T> T getById(int id);
 
   public Map<String, Column> getTableColumnsValuesById(int id) {
@@ -36,5 +42,20 @@ public abstract class AbstractDao {
     return columnMap;
 
   }
+
+  public Map<String, Column> executeQueryExpectedSingleRecord(String tableName, String sql) {
+
+    Map<String, Column> record =  database.executeQueryExpectedSingleRecord(tableName, sql);
+
+    if (record == null || record.isEmpty()) {
+      throw new MedicationManagerPersistenceException("Missing the record in the table:" +
+          tableName + " for the following sql:\n" + sql);
+    }
+
+    return record;
+
+  }
+
+
 
 }

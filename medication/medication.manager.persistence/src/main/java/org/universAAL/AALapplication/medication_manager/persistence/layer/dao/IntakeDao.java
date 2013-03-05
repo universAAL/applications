@@ -18,9 +18,9 @@ import java.util.Map;
  */
 public final class IntakeDao extends AbstractDao {
 
-  private final DispenserDao dispenserDao;
-  private final PersonDao personDao;
-  private final MedicineDao medicineDao;
+  private DispenserDao dispenserDao;
+  private PersonDao personDao;
+  private MedicineDao medicineDao;
 
   private static final String TABLE_NAME = "INTAKE";
   private static final String PATIENT_FK_ID = "PATIENT_FK_ID";
@@ -30,11 +30,20 @@ public final class IntakeDao extends AbstractDao {
   private static final String TIME_PLAN = "TIME_PLAN";
   private static final String TIME_TAKEN = "TIME_TAKEN";
 
-  public IntakeDao(Database database, DispenserDao dispenserDao, PersonDao personDao, MedicineDao medicineDao) {
+  public IntakeDao(Database database) {
     super(database, TABLE_NAME);
 
+  }
+
+  public void setDispenserDao(DispenserDao dispenserDao) {
     this.dispenserDao = dispenserDao;
+  }
+
+  public void setPersonDao(PersonDao personDao) {
     this.personDao = personDao;
+  }
+
+  public void setMedicineDao(MedicineDao medicineDao) {
     this.medicineDao = medicineDao;
   }
 
@@ -42,6 +51,10 @@ public final class IntakeDao extends AbstractDao {
   @SuppressWarnings("unchecked")
   public Intake getById(int id) {
     Log.info("Looking for the intake with id=%s", getClass(), id);
+
+    checkForSetDao(dispenserDao, "dispenserDao");
+    checkForSetDao(personDao, "personDao");
+    checkForSetDao(medicineDao, "medicineDao");
 
     Map<String, Column> columns = getTableColumnsValuesById(id);
 

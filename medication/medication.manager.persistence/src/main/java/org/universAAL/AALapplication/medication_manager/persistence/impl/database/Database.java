@@ -19,4 +19,7 @@ public interface Database {
   Map<String, Column> getById(String tableName, int id);
 
   Map<String, Column> findDispenserByPerson(String tableName, String personTableName, int personId);
+
+  Map<String,Column> executeQueryExpectedSingleRecord(String tableName, String sql);
+
 }

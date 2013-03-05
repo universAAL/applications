@@ -11,8 +11,6 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 
 import java.util.Map;
 
-import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
-
 /**
  * @author George Fournadjiev
  */
@@ -21,15 +19,16 @@ public final class DispenserDao extends AbstractDao {
   private static final String PATIENT_FK_ID = "PATIENT_FK_ID";
   private static final String DISPENSER_URI = "DISPENSER_URI";
   private static final String ID = "ID";
-  private final PersonDao personDao;
+  private PersonDao personDao;
 
   private static final String TABLE_NAME = "DISPENSER";
 
-  public DispenserDao(Database database, PersonDao personDao) {
+  public DispenserDao(Database database) {
     super(database, TABLE_NAME);
 
-    validateParameter(personDao, "personDao");
+  }
 
+  public void setPersonDao(PersonDao personDao) {
     this.personDao = personDao;
   }
 
@@ -37,6 +36,8 @@ public final class DispenserDao extends AbstractDao {
   @SuppressWarnings("unchecked")
   public Dispenser getById(int id) {
     Log.info("Looking for the dispenser with id=%s", getClass(), id);
+
+    checkForSetDao(personDao, "personDao");
 
     Map<String, Column> columns = getTableColumnsValuesById(id);
 
@@ -84,5 +85,23 @@ public final class DispenserDao extends AbstractDao {
 
     return dispenser;
 
+  }
+
+  public Dispenser getByDispenserUri(String deviceUri) {
+    String sql = "select * from MEDICATION_MANAGER.DISPENSER where DISPENSER_URI = '" + deviceUri + "'";
+
+    checkForSetDao(personDao, "personDao");
+
+    Map<String, Column> dispenserRecordMap = executeQueryExpectedSingleRecord(TABLE_NAME, sql);
+
+    Column colId = dispenserRecordMap.get(ID);
+    int id = (Integer) colId.getValue();
+    Column colUri = dispenserRecordMap.get(DISPENSER_URI);
+    String dispenserUri = (String) colUri.getValue();
+    Column colPatient = dispenserRecordMap.get(PATIENT_FK_ID);
+    int personId = (Integer) colPatient.getValue();
+    Person person = personDao.getById(personId);
+
+    return new Dispenser(id, person, dispenserUri);
   }
 }
