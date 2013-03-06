@@ -38,6 +38,8 @@ public class ReminderDialog extends UICaller {
   private final ModuleContext moduleContext;
   private final Time time;
 
+  private boolean userActed;
+
   private static final String CLOSE_BUTTON = "closeButton";
   private static final String INFO_BUTTON = "reminderButton";
 
@@ -45,6 +47,7 @@ public class ReminderDialog extends UICaller {
     super(context);
     moduleContext = context;
     this.time = time;
+    this.userActed = false;
   }
 
   public ReminderDialog(ModuleContext context) {
@@ -61,6 +64,7 @@ public class ReminderDialog extends UICaller {
 
   @Override
   public void handleUIResponse(UIResponse input) {
+    userActed = true;
     if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
       System.out.println("close");
     } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
@@ -108,4 +112,7 @@ public class ReminderDialog extends UICaller {
     return firstLetter.charAt(0) + fullUserUriName.substring(index + 2);
   }
 
+  public boolean isUserActed() {
+    return userActed;
+  }
 }

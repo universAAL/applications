@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.medication_manager.simulation.DispenserUpsideDownContextProvider;
 import org.universAAL.AALapplication.medication_manager.simulation.MedicationConsumer;
 import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
-import org.universAAL.AALapplication.medication_manager.simulation.MissedIntakeContextProvider;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -47,7 +46,6 @@ public class Activator implements BundleActivator {
     new Thread() {
       public void run() {
         new MedicationConsumer(mc);
-        new MissedIntakeContextProvider(mc);
         new CaregiverNotificationProvider(mc);
         new MedicationReminderContextProvider(mc);
         new DispenserUpsideDownContextProvider(mc);
