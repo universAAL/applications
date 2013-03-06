@@ -3506,38 +3506,6 @@ ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedica
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/Scale.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/SensorType.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/Zephyr.java -text
-ontologies/ont.disease/ASL2.0 -text
-ontologies/ont.disease/Disease.di -text
-ontologies/ont.disease/Disease.notation -text
-ontologies/ont.disease/Disease.uml -text svneol=unset#text/plain
-ontologies/ont.disease/MITX.txt -text svneol=unset#text/plain
-ontologies/ont.disease/NOTICE -text
-ontologies/ont.disease/pom.xml -text svneol=unset#text/plain
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/AcuteRheumaticFever.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/HeartFailure.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/HypertensiveDisease.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/IschemicHeartDisease.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10CirculatorySystemDiseases/owl/OtherCirculatorySystemDisease.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/CertainInfectiousParasiticDisease.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/CirculatorySystemDisease.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/DigestiveSystemDisease.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/MentalDisorder.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/Neoplasms.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/NervousSystemDisease.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/ICD10Diseases/owl/RespiratorySystemDisease.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/DeseaseActivator.java -text svneol=unset#text/plain
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/DiseaseFactory.java -text svneol=unset#text/plain
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Diagnostic.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Disease.java -text svneol=unset#text/plain
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/DiseaseOntology.java -text svneol=unset#text/plain
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/DiseaseSeverityStatus.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/DiseaseTimeEvolvingStatus.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Epidemiology.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Etiology.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Patogeny.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Pronostic.java -text
-ontologies/ont.disease/src/main/java/org/universaal/ontology/disease/owl/Sympthom.java -text
-ontologies/ont.disease/src/test/java/org/universaal/test/integrationTest/ArtifactTest.java -text
 ontologies/ont.drools/.classpath -text
 ontologies/ont.drools/.project -text
 ontologies/ont.drools/.settings/org.eclipse.jdt.core.prefs -text
@@ -3561,66 +3529,6 @@ ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Activ
 ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitData.java -text svneol=unset#text/plain
 ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitdataOntology.java -text svneol=unset#text/plain
 ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Sleep.java -text svneol=unset#text/plain
-ontologies/ont.health/ASL2.0 -text
-ontologies/ont.health/HealthOntology.di -text
-ontologies/ont.health/HealthOntology.notation -text
-ontologies/ont.health/HealthOntology.uml -text svneol=unset#text/plain
-ontologies/ont.health/MITX.txt -text svneol=unset#text/plain
-ontologies/ont.health/NOTICE -text
-ontologies/ont.health/pom.xml -text svneol=unset#application/octet-stream
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/HealthActivator.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/HealthOntologyFactory.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/ActivityHeartRateRequirement.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/BloodPressureRequirement.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/DiastolicBloodPressureRequirement.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/Diet.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthOntology.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthProfile.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/HealthyHabitsAdoption.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/HeartRateRequirement.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/MeasuredPhysicalActivity.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/MeasurementRequirements.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/MotivationalStatusType.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/PerformedMeasurementSession.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/PerformedSession.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/PlannedSession.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/ReposeHeartRateRequirement.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/StatusType.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/SystolicBloodPressureRequirement.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/TakeMeasurementActivity.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/Treatment.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/TreatmentPlanning.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/Walking.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/WeightMeasurementTreatment.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/WeightRequirement.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/DisplayTreatmentService.java -text svneol=unset#text/plain
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/HealthService.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PerformedSessionManagementService.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/PlannedSessionManagementService.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/ProfileManagementService.java -text
-ontologies/ont.health/src/main/java/org/universaal/ontology/health/owl/services/TreatmentManagementService.java -text
-ontologies/ont.health/src/test/java/org/universaal/ontology/test/HealthOntologyTest.java -text
-ontologies/ont.healthmeasurement/ASL2.0 -text
-ontologies/ont.healthmeasurement/HealthMeasurement.di -text
-ontologies/ont.healthmeasurement/HealthMeasurement.notation -text
-ontologies/ont.healthmeasurement/HealthMeasurement.uml -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/MITX.txt -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/NOTICE -text
-ontologies/ont.healthmeasurement/pom.xml -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/HealthMeasruementActivator.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/HealthMeasurementFactory.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/BloodPressure.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/HealthMeasurement.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/HealthMeasurementOntology.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/HeartRate.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/HeartRateSignal.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Measurement.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/MultiValueMeasurement.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/PersonWeight.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Signal.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/SingleValueMeasurement.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/main/java/org/universaal/ontology/healthmeasurement/owl/Unit.java -text svneol=unset#text/plain
-ontologies/ont.healthmeasurement/src/test/java/ont/healthmeasurement/tests/ArtifactTest.java -text
 ontologies/ont.ltba/.classpath -text
 ontologies/ont.ltba/.project -text
 ontologies/ont.ltba/.settings/org.eclipse.jdt.core.prefs -text
