@@ -19,10 +19,11 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl.use
 
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.simulation.MissedIntakeContextProvider;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.medMgr.UserIDs;
 import org.universAAL.ontology.profile.User;
+
+import static org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider.*;
 
 /**
  * @author George Fournadjiev
@@ -51,7 +52,7 @@ public final class UsecaseMissedIntake extends Usecase {
 
 
     Time time = new Time(2012, 5, 12, 16, 52);
-    MissedIntakeContextProvider.missedIntakeTimeEvent(time, saiedUser);
+    missedIntakeTimeEvent(time, saiedUser);
 
   }
 

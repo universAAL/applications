@@ -15,8 +15,9 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.medication_manager.simulation;
+package org.universAAL.AALapplication.medication_manager.providers;
 
+import org.universAAL.AALapplication.medication_manager.impl.Log;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
@@ -70,6 +71,7 @@ public final class MissedIntakeContextProvider {
 
 
   public static void missedIntakeTimeEvent(Time time, User user) {
+    Log.info("Publishing event for user: %s and time: %s", MissedIntakeContextProvider.class, user, time);
     MissedIntake missedIntake = new MissedIntake();
     missedIntake.setTime(time);
     missedIntake.setUser(user);

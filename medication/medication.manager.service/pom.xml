@@ -50,6 +50,7 @@
             <Bundle-Description>${project.description}</Bundle-Description>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Private-Package>org.universAAL.AALapplication.medication_manager.impl</Private-Package>
+            <Export-Package>org.universAAL.AALapplication.medication_manager.providers</Export-Package>
           </instructions>
         </configuration>
       </plugin>

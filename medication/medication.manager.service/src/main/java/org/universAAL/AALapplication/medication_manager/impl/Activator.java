@@ -22,6 +22,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -49,6 +50,7 @@ public class Activator implements BundleActivator {
     new Thread() {
       public void run() {
         new PrecautionProvider(mc);
+        new MissedIntakeContextProvider(mc);
         new MissedIntakeEventSubscriber(mc);
         new DueIntakeReminderEventSubscriber(mc);
         new DispenserUpsideDownEventSubscriber(mc);

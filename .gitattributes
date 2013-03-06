@@ -2825,6 +2825,7 @@ medication/medication.manager.configuration/src/main/java/org/universAAL/AALappl
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/Log.java -text
 medication/medication.manager.configuration/src/main/resources/CreateTables.sql -text
 medication/medication.manager.configuration/src/main/resources/DataLoad.sql -text
+medication/medication.manager.configuration/src/main/resources/medication.properties -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/prescriptions/1.xml -text
 medication/medication.manager.integration.tests/artifact.composite -text
 medication/medication.manager.integration.tests/pom.xml -text
@@ -2883,6 +2884,7 @@ medication/medication.manager.service/src/main/java/org/universAAL/AALapplicatio
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MyPrecautionDatabase.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/PrecautionProvider.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/ProviderPrecautionService.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/providers/MissedIntakeContextProvider.java -text
 medication/medication.manager.shell.commands/ASL2.0 -text
 medication/medication.manager.shell.commands/MITX.txt -text
 medication/medication.manager.shell.commands/NOTICE -text
@@ -2998,7 +3000,6 @@ medication/medication.missing.services.simulation/pom.xml -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/DispenserUpsideDownContextProvider.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/MedicationConsumer.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/MedicationReminderContextProvider.java -text
-medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/MissedIntakeContextProvider.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/Activator.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/CaregiverNotificationProvider.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/HealthPrescriptionServiceProvider.java -text

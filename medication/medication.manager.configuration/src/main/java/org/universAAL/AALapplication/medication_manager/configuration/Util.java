@@ -1,9 +1,26 @@
 package org.universAAL.AALapplication.medication_manager.configuration;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * @author George Fournadjiev
  */
 public final class Util {
+
+  private static final Properties MEDICATION_PROPERTIES = new Properties();
+
+  static {
+    try {
+      InputStream inputStream = Util.class.getClassLoader().getResourceAsStream("medication.properties");
+      MEDICATION_PROPERTIES.load(inputStream);
+      inputStream.close();
+    } catch (IOException e) {
+      throw new MedicationManagerConfigurationException(e);
+    }
+  }
+
 
   private Util() {
     // to prevent initialization, because this is util class
@@ -26,4 +43,7 @@ public final class Util {
 
   }
 
+  public static Properties getMedicationProperties() {
+    return MEDICATION_PROPERTIES;
+  }
 }

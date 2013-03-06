@@ -38,6 +38,11 @@
     </dependency>
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>medication.manager.service</artifactId>
+      <version>D.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
       <artifactId>medication.manager.ui</artifactId>
       <version>D.0.1-SNAPSHOT</version>
     </dependency>
