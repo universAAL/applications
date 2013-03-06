@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>health.pom</artifactId>
-		<version>D.0.1-SNAPSHOT</version>
+		<version>D.1.1-SNAPSHOT</version>
 		<relativePath>../health.pom/</relativePath>
 	</parent>
 
@@ -46,7 +46,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.health</artifactId>
+			<artifactId>ont.profile.health</artifactId>
 		</dependency>
 
 		<dependency>
@@ -55,7 +55,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.disease</artifactId>
+			<artifactId>ont.health.disease</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
