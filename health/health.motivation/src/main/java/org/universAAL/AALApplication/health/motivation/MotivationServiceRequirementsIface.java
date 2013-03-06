@@ -1,12 +1,7 @@
 package org.universAAL.AALApplication.health.motivation;
 
-import java.util.Locale;
-
 import org.universAAL.ontology.profile.User;
-import org.universAAL.ontology.profile.health.HealthProfile;
-import org.universaal.ontology.health.owl.MotivationalStatusType;
-import org.universaal.ontology.owl.MotivationalMessage;
-import org.universaal.ontology.owl.MotivationalMessageClassification;
+import org.universaal.ontology.health.owl.HealthProfile;
 
 public interface MotivationServiceRequirementsIface {
 	
