@@ -48,7 +48,7 @@
 
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.health</artifactId>
+			<artifactId>ont.profile.health</artifactId>
 		</dependency>
 
 		<dependency>
