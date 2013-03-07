@@ -3535,8 +3535,6 @@ ontologies/ont.ltba/.settings/org.eclipse.jdt.core.prefs -text
 ontologies/ont.ltba/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.ltba/artifact.composite -text
 ontologies/ont.ltba/pom.xml -text
-ontologies/ont.medication/.settings/org.eclipse.core.resources.prefs -text
-ontologies/ont.medication/.settings/org.eclipse.m2e.core.prefs -text
 ontologies/ont.medication/ASL2.0 -text
 ontologies/ont.medication/MITX.txt -text
 ontologies/ont.medication/NOTICE -text
