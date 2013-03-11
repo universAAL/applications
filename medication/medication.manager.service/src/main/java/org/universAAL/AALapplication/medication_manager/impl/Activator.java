@@ -22,8 +22,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -50,12 +50,19 @@ public class Activator implements BundleActivator {
     new Thread() {
       public void run() {
         new PrecautionProvider(mc);
-        new MissedIntakeContextProvider(mc);
-        new MissedIntakeEventSubscriber(mc);
-        new DueIntakeReminderEventSubscriber(mc);
+        MissedIntakeContextProvider missedIntakeContextProvider = new MissedIntakeContextProvider(mc);
+        registerService(missedIntakeContextProvider, context);
+        MissedIntakeEventSubscriber missedIntakeEventSubscriber = new MissedIntakeEventSubscriber(mc);
+        new DueIntakeReminderEventSubscriber(mc, missedIntakeContextProvider);
         new DispenserUpsideDownEventSubscriber(mc);
       }
     }.start();
+
+  }
+
+  private void registerService(Object service, BundleContext context) {
+
+    context.registerService(service.getClass().getName(), service, null);
 
   }
 
@@ -69,22 +76,22 @@ public class Activator implements BundleActivator {
   }
 
   public static PersistentService getPersistentService() {
-      if (bundleContext == null) {
-        throw new MedicationManagerException("The bundleContext is not set");
-      }
-
-      ServiceReference srPS = bundleContext.getServiceReference(PersistentService.class.getName());
-
-      if (srPS == null) {
-        throw new MedicationManagerException("The ServiceReference is null for PersistentService");
-      }
-
-      PersistentService persistentService = (PersistentService) bundleContext.getService(srPS);
-
-      if (persistentService == null) {
-        throw new MedicationManagerException("The PersistentService is missing");
-      }
-      return persistentService;
+    if (bundleContext == null) {
+      throw new MedicationManagerException("The bundleContext is not set");
     }
+
+    ServiceReference srPS = bundleContext.getServiceReference(PersistentService.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerException("The ServiceReference is null for PersistentService");
+    }
+
+    PersistentService persistentService = (PersistentService) bundleContext.getService(srPS);
+
+    if (persistentService == null) {
+      throw new MedicationManagerException("The PersistentService is missing");
+    }
+    return persistentService;
+  }
 
 }
