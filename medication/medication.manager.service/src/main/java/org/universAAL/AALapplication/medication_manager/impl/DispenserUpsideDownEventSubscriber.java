@@ -17,6 +17,10 @@
 
 package org.universAAL.AALapplication.medication_manager.impl;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.ui.DispenserUpsideDownDialog;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
@@ -24,8 +28,9 @@ import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.medMgr.DispenserUpsideDown;
-import org.universAAL.ontology.medMgr.MyDeviceUserMappingDatabase;
 import org.universAAL.ontology.profile.User;
+
+import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
@@ -61,11 +66,17 @@ public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber 
 
     DispenserUpsideDown dispenserUpsideDown = (DispenserUpsideDown) event.getRDFSubject();
 
-    String deviceId = dispenserUpsideDown.getDeviceId();
+    String deviceUri = dispenserUpsideDown.getDeviceId();
 
-    Log.info("DeviceId %s", getClass(), deviceId);
+    Log.info("DeviceUri %s", getClass(), deviceUri);
 
-    User user = MyDeviceUserMappingDatabase.getUser(deviceId);
+    PersistentService persistentService = getPersistentService();
+    DispenserDao dispenserDao = persistentService.getDispenserDao();
+    Dispenser dispenser = dispenserDao.getByDispenserUri(deviceUri);
+
+    Person person = dispenser.getPatient();
+
+    User user = new User(person.getPersonUri());
 
     DispenserUpsideDownDialog dispenserUpsideDownDialog =
         new DispenserUpsideDownDialog(moduleContext);

@@ -17,15 +17,23 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.simulation.DispenserUpsideDownContextProvider;
-import org.universAAL.ontology.medMgr.MyDeviceUserMappingDatabase;
+
+import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
  */
 public final class UsecaseDispenserUpsideDown extends Usecase {
+
+  private static final String ERROR_MESSAGE = "Expected one parameters, which is: " +
+        "2. DeviceId \n" +
+        "Please check the dispenser table for the valid ids";
 
   private static final String USECASE_ID = "UC03";
   private static final String USECASE_TITLE = "UC03: Dispenser upside-down notification  - ";
@@ -39,16 +47,23 @@ public final class UsecaseDispenserUpsideDown extends Usecase {
   @Override
   public void execute(String... parameters) {
 
-    if (parameters != null && parameters.length > 0) {
-      throw new MedicationManagerShellException(NO_PARAMETERS_MESSAGE);
+    if (parameters == null || parameters.length != 1) {
+      throw new MedicationManagerShellException(ERROR_MESSAGE);
     }
 
-    String deviceId = MyDeviceUserMappingDatabase.getDeviceIdForSaiedUser();
+    int id = Integer.parseInt(parameters[0]);
 
-    Log.info("Executing the " + USECASE_TITLE + ". The deviceId is : " +
-        deviceId, getClass());
+    PersistentService persistentService = getPersistentService();
+    DispenserDao dispenserDao = persistentService.getDispenserDao();
+    Dispenser dispenser = dispenserDao.getById(id);
+    String deviceUri = dispenser.getDispenserUri();
 
-    DispenserUpsideDownContextProvider.dispenserUpsideDownDeviceIdEvent(deviceId);
+    Log.info("Executing the " + USECASE_TITLE + ". The deviceUri is : " +
+        deviceUri, getClass());
+
+    DispenserUpsideDownContextProvider provider = getDispenserUpsideDownContextProvider();
+
+    provider.dispenserUpsideDownDeviceIdEvent(deviceUri);
   }
 
   @Override

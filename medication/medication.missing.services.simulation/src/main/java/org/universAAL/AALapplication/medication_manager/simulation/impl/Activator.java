@@ -47,11 +47,19 @@ public class Activator implements BundleActivator {
       public void run() {
         new MedicationConsumer(mc);
         new CaregiverNotificationProvider(mc);
-        new MedicationReminderContextProvider(mc);
-        new DispenserUpsideDownContextProvider(mc);
+        MedicationReminderContextProvider medicationReminderContextProvider = new MedicationReminderContextProvider(mc);
+        registerService(medicationReminderContextProvider, context);
+        DispenserUpsideDownContextProvider dispenserUpsideDownContextProvider = new DispenserUpsideDownContextProvider(mc);
+        registerService(dispenserUpsideDownContextProvider, context);
         new HealthPrescriptionServiceProvider(mc);
       }
     }.start();
+
+  }
+
+  private void registerService(Object service, BundleContext context) {
+
+    context.registerService(service.getClass().getName(), service, null);
 
   }
 
