@@ -36,7 +36,7 @@ import org.universAAL.ontology.profile.User;
  */
 public final class MissedIntakeContextProvider {
 
-  private static ContextPublisher contextPublisher;
+  private final ContextPublisher contextPublisher;
 
   private static final String MISSED_INTAKE_SERVER_NAMESPACE =
       "http://ontology.igd.fhg.de/MissedIntakeServer.owl#";
@@ -70,7 +70,7 @@ public final class MissedIntakeContextProvider {
   }
 
 
-  public static void missedIntakeTimeEvent(Time time, User user) {
+  public void missedIntakeTimeEvent(Time time, User user) {
     Log.info("Publishing event for user: %s and time: %s", MissedIntakeContextProvider.class, user, time);
     MissedIntake missedIntake = new MissedIntake();
     missedIntake.setTime(time);

@@ -31,8 +31,7 @@ import static org.universAAL.AALapplication.medication_manager.shell.commands.im
  */
 public final class UsecaseDispenserUpsideDown extends Usecase {
 
-  private static final String ERROR_MESSAGE = "Expected one parameters, which is: " +
-        "2. DeviceId \n" +
+  private static final String ERROR_MESSAGE = "Expected one parameters, which is: DeviceId \n" +
         "Please check the dispenser table for the valid ids";
 
   private static final String USECASE_ID = "UC03";

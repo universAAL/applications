@@ -17,19 +17,25 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.ontology.medMgr.Time;
-import org.universAAL.ontology.medMgr.UserIDs;
 import org.universAAL.ontology.profile.User;
 
-import static org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider.*;
+import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator.*;
+
 
 /**
  * @author George Fournadjiev
  */
 public final class UsecaseMissedIntake extends Usecase {
 
+  private static final String ERROR_MESSAGE = "Expected one parameters, which is: userId \n" +
+      "Please check the person table for the valid ids";
   private static final String USECASE_ID = "UC04.1";
   private static final String USECASE_TITLE = "UC04.1: Medicine intake control (pill dispenser)";
   private static final String USECASE = USECASE_TITLE + " - The service " +
@@ -42,17 +48,22 @@ public final class UsecaseMissedIntake extends Usecase {
   @Override
   public void execute(String... parameters) {
 
-    if (parameters != null && parameters.length > 0) {
-      throw new MedicationManagerShellException(NO_PARAMETERS_MESSAGE);
+    if (parameters == null || parameters.length != 1) {
+      throw new MedicationManagerShellException(ERROR_MESSAGE);
     }
 
-    User saiedUser = UserIDs.getSaiedUser();
-    Log.info("Executing the " + USECASE_TITLE + " . The mocked user is : " +
-        saiedUser, getClass());
+    PersistentService persistentService = getPersistentService();
+    PersonDao personDao = persistentService.getPersonDao();
+    int id = Integer.parseInt(parameters[0]);
+    Person person = personDao.getById(id);
+    User user = new User(person.getPersonUri());
+    Log.info("Executing the " + USECASE_TITLE + " . The user is : " + user, getClass());
 
 
     Time time = new Time(2012, 5, 12, 16, 52);
-    missedIntakeTimeEvent(time, saiedUser);
+
+    MissedIntakeContextProvider provider = getMissedIntakeContextProvider();
+    provider.missedIntakeTimeEvent(time, user);
 
   }
 

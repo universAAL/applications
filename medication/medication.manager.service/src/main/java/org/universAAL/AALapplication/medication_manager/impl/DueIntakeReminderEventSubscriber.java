@@ -44,6 +44,7 @@ import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
 public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
   private final ModuleContext moduleContext;
+  private final MissedIntakeContextProvider missedIntakeEventSubscriber;
   private final int timeoutSeconds;
 
   private static ContextEventPattern[] getContextEventPatterns() {
@@ -58,10 +59,11 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
   }
 
-  public DueIntakeReminderEventSubscriber(ModuleContext context) {
+  public DueIntakeReminderEventSubscriber(ModuleContext context, MissedIntakeContextProvider missedIntakeEventSubscriber) {
     super(context, getContextEventPatterns());
 
     this.moduleContext = context;
+    this.missedIntakeEventSubscriber = missedIntakeEventSubscriber;
 
     Properties properties = getMedicationProperties();
     String timeoutProperty = properties.getProperty("medication.reminder.timeout");
@@ -139,7 +141,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
     Time time = dueIntake.getTime();
 
-    MissedIntakeContextProvider.missedIntakeTimeEvent(time, user);
+    missedIntakeEventSubscriber.missedIntakeTimeEvent(time, user);
 
   }
 }
