@@ -34,7 +34,7 @@ import org.universAAL.ontology.medMgr.Time;
  */
 public final class MedicationReminderContextProvider {
 
-  private static ContextPublisher contextPublisher;
+  private final ContextPublisher contextPublisher;
 
   private static final String MEDICATION_REMINDER_SERVER_NAMESPACE =
       "http://ontology.igd.fhg.de/MedicationReminderServer.owl#";
@@ -68,7 +68,7 @@ public final class MedicationReminderContextProvider {
   }
 
 
-  public static void dueIntakeReminderDeviceIdEvent(String deviceId, Time time) {
+  public void dueIntakeReminderDeviceIdEvent(String deviceId, Time time) {
     DueIntake dueIntake = new DueIntake();
     dueIntake.setDeviceUri(deviceId);
     dueIntake.setTime(time);

@@ -33,7 +33,7 @@ import org.universAAL.ontology.medMgr.DispenserUpsideDown;
  */
 public final class DispenserUpsideDownContextProvider {
 
-  private static ContextPublisher contextPublisher;
+  private final ContextPublisher contextPublisher;
 
   private static final String DISPENSER_UPSIDE_DOWN_SERVER_NAMESPACE =
       "http://ontology.igd.fhg.de/DispenserUpsideDownServer.owl#";
@@ -67,9 +67,9 @@ public final class DispenserUpsideDownContextProvider {
   }
 
 
-  public static void dispenserUpsideDownDeviceIdEvent(String deviceId) {
+  public void dispenserUpsideDownDeviceIdEvent(String deviceUri) {
     DispenserUpsideDown dispenserUpsideDown = new DispenserUpsideDown();
-    dispenserUpsideDown.setDeviceId(deviceId);
+    dispenserUpsideDown.setDeviceId(deviceUri);
     ContextEvent contextEvent = new ContextEvent(dispenserUpsideDown, DispenserUpsideDown.PROP_DEVICE_ID);
     contextPublisher.publish(contextEvent);
   }

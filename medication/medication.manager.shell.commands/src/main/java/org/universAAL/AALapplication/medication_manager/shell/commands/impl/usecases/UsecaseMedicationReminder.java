@@ -26,6 +26,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
+import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
 import org.universAAL.ontology.medMgr.Time;
 
 import java.util.Calendar;
@@ -33,7 +34,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator.*;
-import static org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider.*;
 
 /**
  * @author George Fournadjiev
@@ -92,7 +92,8 @@ public final class UsecaseMedicationReminder extends Usecase {
         deviceUri + " for user with id=" + personId, getClass());
 
 
-    dueIntakeReminderDeviceIdEvent(deviceUri, time);
+    MedicationReminderContextProvider provider = getMedicationReminderContextProvider();
+    provider.dueIntakeReminderDeviceIdEvent(deviceUri, time);
 
   }
 

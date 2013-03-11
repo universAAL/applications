@@ -25,6 +25,8 @@ import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationConsoleCommands;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationManagerCommands;
+import org.universAAL.AALapplication.medication_manager.simulation.DispenserUpsideDownContextProvider;
+import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
 import org.universAAL.AALapplication.medication_manager.ui.NewPrescriptionHandler;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -135,6 +137,44 @@ public class Activator implements BundleActivator {
       throw new MedicationManagerShellException("The NewPrescriptionHandler service is missing");
     }
     return newPrescriptionHandler;
+  }
+
+  public static MedicationReminderContextProvider getMedicationReminderContextProvider() {
+    if (bundleContext == null) {
+      throw new MedicationManagerShellException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = bundleContext.getServiceReference(MedicationReminderContextProvider.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerShellException("The ServiceReference is null for MedicationReminderContextProvider");
+    }
+
+    MedicationReminderContextProvider service = (MedicationReminderContextProvider) bundleContext.getService(srPS);
+
+    if (service == null) {
+      throw new MedicationManagerShellException("The MedicationReminderContextProvider service is missing");
+    }
+    return service;
+  }
+
+  public static DispenserUpsideDownContextProvider getDispenserUpsideDownContextProvider() {
+    if (bundleContext == null) {
+      throw new MedicationManagerShellException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = bundleContext.getServiceReference(DispenserUpsideDownContextProvider.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerShellException("The ServiceReference is null for DispenserUpsideDownContextProvider");
+    }
+
+    DispenserUpsideDownContextProvider service = (DispenserUpsideDownContextProvider) bundleContext.getService(srPS);
+
+    if (service == null) {
+      throw new MedicationManagerShellException("The DispenserUpsideDownContextProvider service is missing");
+    }
+    return service;
   }
 
 
