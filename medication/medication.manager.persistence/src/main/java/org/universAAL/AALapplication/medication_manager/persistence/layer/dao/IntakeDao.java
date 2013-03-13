@@ -17,8 +17,10 @@ import org.universAAL.ontology.profile.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -114,17 +116,17 @@ public final class IntakeDao extends AbstractDao {
 
 
   public List<Intake> getIntakesByUserAndTime(User inputUser, Time time) {
-    /*String sql = "SELECT INTA.* \n" +
+    String sql = "SELECT INTA.* \n" +
         "  FROM MEDICATION_MANAGER.INTAKE INTA,\n" +
         "      MEDICATION_MANAGER.PERSON P\n" +
         "    \n" +
-        "  WHERE P.PERSON_URI = '" + inputUser.getURI().toUpperCase() + "'\n" +
-        "  AND INTA.PATIENT_FK_ID = P.ID\n" +
-        "  AND INTA.TIME_PLAN > ?\n" +
-        "  AND INTA.TIME_PLAN < ?";*/
+        "  WHERE P.PERSON_URI = ? \n" +
+        "  AND INTA.PATIENT_FK_ID = P.ID \n" +
+        "  AND INTA.TIME_PLAN > ? \n" +
+        "  AND INTA.TIME_PLAN < ? ";
 
-    String sql = "SELECT * \n" +
-        "  FROM MEDICATION_MANAGER.INTAKE \n";
+    /*String sql = "SELECT * \n" +
+        "  FROM MEDICATION_MANAGER.INTAKE \n";*/
 
     System.out.println("sql = " + sql);
     System.out.println("time = " + time);
@@ -142,11 +144,11 @@ public final class IntakeDao extends AbstractDao {
   }
 
   private List<Intake> getIntakes(User inputUser, Time time, String sql, PreparedStatement statement) throws SQLException {
-//    statement.setString(1, inputUser.getURI());
+    statement.setString(1, inputUser.getURI());
     ConfigurationProperties configurationProperties = getConfigurationProperties();
     int minutesInterval = configurationProperties.getIntakeIntervalMinutes();
-//    statement.setDate(2, createDate(time, -minutesInterval));
-//    statement.setDate(3, createDate(time, minutesInterval));
+    statement.setTimestamp(2, createDate(time, -minutesInterval));
+    statement.setTimestamp(3, createDate(time, minutesInterval));
     List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
     return createIntakes(results);
   }
@@ -158,9 +160,19 @@ public final class IntakeDao extends AbstractDao {
     return statement;
   }
 
-  private java.sql.Date createDate(Time time, int minutes) {
-    System.out.println(" uraaaaaaaaaaaaaaa ");
-    throw new UnsupportedOperationException("Not implemented yet");
+  private Timestamp createDate(Time time, int minutes) {
+
+    GregorianCalendar calendar =
+        new GregorianCalendar(time.getYear(), time.getMonth(), time.getDay(),
+            time.getHour(), time.getMinutes() + minutes);
+
+    Date date = calendar.getTime();
+
+    Timestamp sqlDate = new Timestamp(date.getTime());
+
+    System.out.println("sqlDate = " + sqlDate);
+
+    return sqlDate;
   }
 
   private List<Intake> createIntakes(List<Map<String, Column>> results) {
