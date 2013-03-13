@@ -24,16 +24,16 @@ import org.universAAL.ontology.profile.User;
  */
 public final class UserIDs {
 
-  private final static String PREFIX = "urn:org.universAAL.aal_space:test_env#";
+  private final static String PREFIX = "URN:ORG.UNIVERSAAL.AAL_SPACE:TEST_ENV#";
   private final static User[] USERS = new User[6];
 
   static {
-    USERS[0] = new User(PREFIX + "saied");
-    USERS[1] = new User(PREFIX + "alejandro");
-    USERS[2] = new User(PREFIX + "george");
-    USERS[3] = new User(PREFIX + "hector");
-    USERS[4] = new User(PREFIX + "venelin");
-    USERS[5] = new User("saied");
+    USERS[0] = new User(PREFIX + "SAIED");
+    USERS[1] = new User(PREFIX + "ALEJANDRO");
+    USERS[2] = new User(PREFIX + "GEORGE");
+    USERS[3] = new User(PREFIX + "HECTOR");
+    USERS[4] = new User(PREFIX + "VENELIN");
+    USERS[5] = new User("SAIED");
   }
 
 
@@ -48,6 +48,6 @@ public final class UserIDs {
   }
 
   public static User getSaied() {
-      return new User("saied");
+      return new User("SAIED");
   }
 }
