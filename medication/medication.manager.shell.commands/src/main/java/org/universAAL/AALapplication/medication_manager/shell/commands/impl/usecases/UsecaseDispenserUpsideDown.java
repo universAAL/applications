@@ -22,7 +22,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.Di
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.simulation.DispenserUpsideDownContextProvider;
+import org.universAAL.AALapplication.medication_manager.simulation.export.DispenserUpsideDownContextProvider;
 
 import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator.*;
 

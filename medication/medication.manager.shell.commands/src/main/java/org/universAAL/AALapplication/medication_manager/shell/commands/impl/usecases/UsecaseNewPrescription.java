@@ -19,8 +19,8 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl.use
 
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.ui.NewPrescriptionHandler;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.PrescriptionDTO;
+import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
+import org.universAAL.AALapplication.medication_manager.simulation.export.PrescriptionDTO;
 
 import java.io.File;
 

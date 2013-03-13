@@ -19,11 +19,11 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl.use
 
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.Doctor;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.IntakeDTO;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.MealRelationDTO;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.MedicineDTO;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.PrescriptionDTO;
+import org.universAAL.AALapplication.medication_manager.simulation.export.Doctor;
+import org.universAAL.AALapplication.medication_manager.simulation.export.IntakeDTO;
+import org.universAAL.AALapplication.medication_manager.simulation.export.MealRelationDTO;
+import org.universAAL.AALapplication.medication_manager.simulation.export.MedicineDTO;
+import org.universAAL.AALapplication.medication_manager.simulation.export.PrescriptionDTO;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

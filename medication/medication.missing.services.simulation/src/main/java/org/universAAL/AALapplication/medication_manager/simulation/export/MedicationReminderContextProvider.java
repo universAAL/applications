@@ -15,7 +15,7 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.medication_manager.simulation;
+package org.universAAL.AALapplication.medication_manager.simulation.export;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;

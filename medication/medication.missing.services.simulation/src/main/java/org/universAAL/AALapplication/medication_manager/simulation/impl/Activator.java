@@ -21,9 +21,10 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.universAAL.AALapplication.medication_manager.simulation.DispenserUpsideDownContextProvider;
-import org.universAAL.AALapplication.medication_manager.simulation.MedicationConsumer;
-import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
+import org.universAAL.AALapplication.medication_manager.simulation.export.DispenserUpsideDownContextProvider;
+import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationConsumer;
+import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationReminderContextProvider;
+import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -55,6 +56,11 @@ public class Activator implements BundleActivator {
       }
     }.start();
 
+    NewPrescriptionContextProvider newPrescriptionContextProvider = new NewPrescriptionContextProvider(mc);
+    NewPrescriptionHandler newPrescriptionHandler = new NewPrescriptionHandler(mc, newPrescriptionContextProvider);
+
+    context.registerService(NewPrescriptionHandler.class.getName(), newPrescriptionHandler, null);
+
   }
 
   private void registerService(Object service, BundleContext context) {
@@ -68,5 +74,6 @@ public class Activator implements BundleActivator {
     * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
     */
   public void stop(BundleContext context) throws Exception {
+
   }
 }

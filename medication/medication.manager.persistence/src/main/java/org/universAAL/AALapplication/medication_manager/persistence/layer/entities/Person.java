@@ -2,7 +2,8 @@ package org.universAAL.AALapplication.medication_manager.persistence.layer.entit
 
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Entity;
 
-import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
+
 
 /**
  * @author George Fournadjiev

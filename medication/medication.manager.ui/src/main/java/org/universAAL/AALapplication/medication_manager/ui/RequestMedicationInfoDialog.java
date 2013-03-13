@@ -17,6 +17,12 @@
 
 package org.universAAL.AALapplication.medication_manager.ui;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
+import org.universAAL.AALapplication.medication_manager.ui.impl.MedicationManagerUIException;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
@@ -29,24 +35,30 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.medMgr.MedicinesInfo;
-import org.universAAL.ontology.medMgr.MyIntakeInfosDatabase;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
+import java.util.List;
 import java.util.Locale;
+
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass.*;
+import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
 
 public class RequestMedicationInfoDialog extends UICaller {
 
-  private static final String EMPTY_STRING = "";
-  private static final Time ZERO_TIME_DUMMY = new Time(0, 0, 0, 0, 0);
   private final ModuleContext moduleContext;
   private final Time time;
+  private MedicinesInfo medicinesInfo;
 
   private static final String CLOSE_BUTTON = "closeButton";
   private static final String INFO_BUTTON = "infoButton";
 
   public RequestMedicationInfoDialog(ModuleContext context, Time time) {
     super(context);
+
+    validateParameter(context, "context");
+    validateParameter(time, "time");
+
     this.moduleContext = context;
     this.time = time;
   }
@@ -70,7 +82,7 @@ public class RequestMedicationInfoDialog extends UICaller {
       ReminderDialog reminderDialog = new ReminderDialog(moduleContext, time);
       reminderDialog.showDialog(user);
     } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
-      MedicationInfoDialog medicationInfoDialog = new MedicationInfoDialog(moduleContext, time);
+      MedicationInfoDialog medicationInfoDialog = new MedicationInfoDialog(moduleContext, time, getMedicinesInfo());
       medicationInfoDialog.showDialog(user);
     } else {
       System.out.println("unknown");
@@ -81,14 +93,11 @@ public class RequestMedicationInfoDialog extends UICaller {
     Form f = Form.newDialog("Medication Manager UI", new Resource());
     //start of the form model
 
-    MedicinesInfo intakeInfoForUser;
-    if (time != null) {
-      intakeInfoForUser = MyIntakeInfosDatabase.getIntakeInfoForUser(inputUser, time);
-    } else {
-      intakeInfoForUser = new MedicinesInfo(EMPTY_STRING, EMPTY_STRING, ZERO_TIME_DUMMY);
-    }
 
-    new SimpleOutput(f.getIOControls(), null, null, intakeInfoForUser.getGeneralInfo());
+    createMedicineInfo(inputUser);
+
+
+    new SimpleOutput(f.getIOControls(), null, null, medicinesInfo.getGeneralInfo());
     //...
     new Submit(f.getSubmits(), new Label("close", null), CLOSE_BUTTON);
     new Submit(f.getSubmits(), new Label("info", null), INFO_BUTTON);
@@ -96,6 +105,87 @@ public class RequestMedicationInfoDialog extends UICaller {
     UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
     this.sendUIRequest(req);
 
+  }
+
+  public void createMedicineInfo(User inputUser) {
+    PersistentService persistentService = getPersistentService();
+
+    IntakeDao intakeDao = persistentService.getIntakeDao();
+
+    List<Intake> intakes = intakeDao.getIntakesByUserAndTime(inputUser, time);
+
+    this.medicinesInfo = createMedicineInfo(intakes);
+  }
+
+  public MedicinesInfo getMedicinesInfo() {
+    if (medicinesInfo == null) {
+       throw new MedicationManagerUIException("The MedicineInfo field is not set");
+    }
+    return medicinesInfo;
+  }
+
+  private MedicinesInfo createMedicineInfo(List<Intake> intakes) {
+    String generalInfo = getGeneralInfo(intakes);
+    String detailsInfo = getDetailsInfo(intakes);
+
+    return new MedicinesInfo(generalInfo, detailsInfo, time);
+  }
+
+  private String getGeneralInfo(List<Intake> intakes) {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("   Intake info for          ");
+    sb.append(time.getDailyTextFormat());
+    sb.append("  o'clock   ");
+    sb.append("\n");
+    appendQuantityAndUnits(sb, intakes);
+
+    return sb.toString();
+  }
+
+  private void appendQuantityAndUnits(StringBuilder sb, List<Intake> intakes) {
+    int count = 0;
+    for (Intake in : intakes) {
+      sb.append('\n');
+      count++;
+      sb.append(count);
+      sb.append(". ");
+      sb.append(in.getMedicine().getMedicineName());
+      sb.append("  -  ");
+      sb.append(in.getQuantity());
+      UnitClass unitClass = in.getUnitClass();
+      if (unitClass == PILLS) {
+        sb.append(" pills");
+      } else if (unitClass == DROPS) {
+        sb.append(" drops");
+      } else {
+        throw new MedicationManagerUIException("Unknown UnitClass enum value : " + unitClass);
+      }
+    }
+
+
+    sb.append('\n');
+  }
+
+  private String getDetailsInfo(List<Intake> intakes) {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("    Medication info          ");
+    sb.append("\n\n");
+
+    int count = 0;
+    for (Intake in : intakes) {
+      sb.append('\n');
+      count++;
+      sb.append(count);
+      sb.append(". ");
+      Medicine medicine = in.getMedicine();
+      sb.append(medicine.getMedicineName());
+      sb.append('\n');
+      sb.append(medicine.getMedicineInfo());
+    }
+
+    return sb.toString();
   }
 
 }

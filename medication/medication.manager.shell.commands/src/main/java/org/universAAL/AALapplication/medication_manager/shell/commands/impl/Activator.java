@@ -26,9 +26,9 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Persis
 import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationConsoleCommands;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationManagerCommands;
-import org.universAAL.AALapplication.medication_manager.simulation.DispenserUpsideDownContextProvider;
-import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
-import org.universAAL.AALapplication.medication_manager.ui.NewPrescriptionHandler;
+import org.universAAL.AALapplication.medication_manager.simulation.export.DispenserUpsideDownContextProvider;
+import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationReminderContextProvider;
+import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 

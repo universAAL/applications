@@ -15,37 +15,27 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.medication_manager.ui.prescription;
-
-import org.universAAL.ontology.medMgr.MedicationException;
+package org.universAAL.AALapplication.medication_manager.simulation.export;
 
 /**
  * @author George Fournadjiev
  */
-public enum MealRelationDTO {
-  BEFORE("before"),
-  AFTER("after"),
-  ANY("any"),
-  WITH_MEAL("with_meal");
+public final class Doctor {
 
-  private final String value;
+  private final String name;
 
-  private MealRelationDTO(String value) {
-    this.value = value;
+  public Doctor(String name) {
+    this.name = name;
   }
 
-  public static MealRelationDTO getEnumValueFor(String mealRelationText) {
-    for (MealRelationDTO mealRelationDTO : values()) {
-      if (mealRelationDTO.value.equals(mealRelationText)) {
-        return mealRelationDTO;
-      }
-    }
-
-    throw new MedicationException("Unknown MealRelationDTO enum value: " + mealRelationText);
+  public String getName() {
+    return name;
   }
 
-  public static String getStringValueFor(MealRelationDTO mealRelationDTO) {
-    return mealRelationDTO.value;
+  @Override
+  public String toString() {
+    return "Doctor{" +
+        "name='" + name + '\'' +
+        '}';
   }
-
 }

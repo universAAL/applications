@@ -15,27 +15,25 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.medication_manager.ui.prescription;
+package org.universAAL.AALapplication.medication_manager.ui.impl;
 
 /**
  * @author George Fournadjiev
  */
-public final class Doctor {
+public final class MedicationManagerUIException extends RuntimeException {
 
-  private final String name;
 
-  public Doctor(String name) {
-    this.name = name;
+  private static final long serialVersionUID = -6536506555816585093L;
+
+  public MedicationManagerUIException(String message) {
+    super(message);
   }
 
-  public String getName() {
-    return name;
+  public MedicationManagerUIException(String message, Throwable cause) {
+    super(message, cause);
   }
 
-  @Override
-  public String toString() {
-    return "Doctor{" +
-        "name='" + name + '\'' +
-        '}';
+  public MedicationManagerUIException(Throwable cause) {
+    super(cause);
   }
 }

@@ -17,10 +17,11 @@
 
 package org.universAAL.AALapplication.medication_manager.impl;
 
-import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.AALapplication.medication_manager.ui.ReminderDialog;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
@@ -31,11 +32,9 @@ import org.universAAL.ontology.medMgr.DueIntake;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
-import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
 
 /**
@@ -65,10 +64,9 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
     this.moduleContext = context;
     this.missedIntakeEventSubscriber = missedIntakeEventSubscriber;
 
-    Properties properties = getMedicationProperties();
-    String timeoutProperty = properties.getProperty("medication.reminder.timeout");
+    ConfigurationProperties properties = getConfigurationProperties();
 
-    this.timeoutSeconds = Integer.parseInt(timeoutProperty);
+    this.timeoutSeconds = properties.getMedicationReminderTimeout();
   }
 
   public void communicationChannelBroken() {
@@ -103,6 +101,14 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
     reminderDialog.showDialog(user);
 
     setTimeOut(reminderDialog, dueIntake, user);
+
+    /*RequestMedicationInfoDialog dialog = new RequestMedicationInfoDialog(moduleContext, time);
+    dialog.showDialog(user);*/
+
+   /* RequestMedicationInfoDialog requestDialog = new RequestMedicationInfoDialog(moduleContext, time);
+    requestDialog.createMedicineInfo(user);
+    MedicationInfoDialog dialog = new MedicationInfoDialog(moduleContext, time, requestDialog.getMedicinesInfo());
+    dialog.showDialog(user);*/
 
   }
 
