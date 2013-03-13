@@ -117,6 +117,8 @@ public final class Time extends Service {
     String minutesText = String.valueOf(minutes);
     if (minutes == 0) {
        minutesText = minutesText + '0';
+    } else if(minutes < 10) {
+      minutesText = '0' + minutesText;
     }
     return getHour() + ":" + minutesText;
   }

@@ -102,14 +102,6 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
     setTimeOut(reminderDialog, dueIntake, user);
 
-    /*RequestMedicationInfoDialog dialog = new RequestMedicationInfoDialog(moduleContext, time);
-    dialog.showDialog(user);*/
-
-   /* RequestMedicationInfoDialog requestDialog = new RequestMedicationInfoDialog(moduleContext, time);
-    requestDialog.createMedicineInfo(user);
-    MedicationInfoDialog dialog = new MedicationInfoDialog(moduleContext, time, requestDialog.getMedicinesInfo());
-    dialog.showDialog(user);*/
-
   }
 
   private void validateDueIntake(DueIntake dueIntake) {

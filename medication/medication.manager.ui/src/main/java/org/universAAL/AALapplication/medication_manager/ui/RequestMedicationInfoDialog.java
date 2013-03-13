@@ -114,7 +114,7 @@ public class RequestMedicationInfoDialog extends UICaller {
 
     List<Intake> intakes = intakeDao.getIntakesByUserAndTime(inputUser, time);
 
-    this.medicinesInfo = createMedicineInfo(intakes);
+    this.medicinesInfo = createMedicineInfoFromIntakes(intakes);
   }
 
   public MedicinesInfo getMedicinesInfo() {
@@ -124,7 +124,7 @@ public class RequestMedicationInfoDialog extends UICaller {
     return medicinesInfo;
   }
 
-  private MedicinesInfo createMedicineInfo(List<Intake> intakes) {
+  private MedicinesInfo createMedicineInfoFromIntakes(List<Intake> intakes) {
     String generalInfo = getGeneralInfo(intakes);
     String detailsInfo = getDetailsInfo(intakes);
 

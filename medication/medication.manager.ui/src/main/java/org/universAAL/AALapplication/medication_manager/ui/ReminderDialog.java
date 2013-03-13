@@ -17,6 +17,7 @@
 
 package org.universAAL.AALapplication.medication_manager.ui;
 
+import org.universAAL.AALapplication.medication_manager.ui.impl.MedicationManagerUIException;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
@@ -114,6 +115,10 @@ public class ReminderDialog extends UICaller {
   public static String getUserfriendlyName(User inputUser) {
     String fullUserUriName = inputUser.toString();
     int index = fullUserUriName.lastIndexOf('#');
+    if (index == -1) {
+      throw new MedicationManagerUIException("Expected # symbol in the user.getUri() format like: \n" +
+          "urn:org.universAAL.aal_space:test_env#saied");
+    }
     String firstLetter = fullUserUriName.substring(index + 1).toUpperCase();
     return firstLetter.charAt(0) + fullUserUriName.substring(index + 2);
   }
