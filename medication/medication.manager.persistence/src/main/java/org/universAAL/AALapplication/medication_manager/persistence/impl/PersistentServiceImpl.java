@@ -1,19 +1,19 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.InventoryLogDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineDao;
-import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescribedMedicineDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.TreatmentDao;
 
-import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
  * @author George Fournadjiev

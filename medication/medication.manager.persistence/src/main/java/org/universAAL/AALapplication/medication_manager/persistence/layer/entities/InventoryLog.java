@@ -4,7 +4,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 
 import java.util.Date;
 
-import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
@@ -36,7 +36,7 @@ public final class InventoryLog extends Entity {
   public InventoryLog(Date timeOfCreation, Person patient, Medicine medicine,
                       int changedQuantity, UnitClass unitClass, Reference reference) {
 
-   this(0, timeOfCreation, patient, medicine, changedQuantity, unitClass, reference);
+    this(0, timeOfCreation, patient, medicine, changedQuantity, unitClass, reference);
   }
 
   private void validate(Date timeOfCreation, Person patient, Medicine medicine,

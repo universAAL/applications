@@ -4,7 +4,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 
 import java.util.Date;
 
-import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
  * @author George Fournadjiev

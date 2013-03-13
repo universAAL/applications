@@ -15,7 +15,7 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.medication_manager.ui.prescription;
+package org.universAAL.AALapplication.medication_manager.simulation.export;
 
 import org.universAAL.ontology.medMgr.MedicationException;
 

@@ -19,7 +19,7 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl.use
 
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.simulation.MedicationConsumer;
+import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationConsumer;
 import org.universAAL.ontology.medMgr.Precaution;
 import org.universAAL.ontology.medMgr.UserIDs;
 import org.universAAL.ontology.profile.User;

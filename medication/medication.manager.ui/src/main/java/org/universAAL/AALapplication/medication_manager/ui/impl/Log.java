@@ -27,7 +27,7 @@ public class Log {
    */
   public static void info(String format, Class aClass, Object... args) {
     StackTraceElement callingMethod = Thread.currentThread().getStackTrace()[2];
-    LogUtils.logInfo(Activator.context, aClass, callingMethod.getMethodName(),
+    LogUtils.logInfo(Activator.mc, aClass, callingMethod.getMethodName(),
         new Object[]{formatMsg(format, args)}, null);
   }
 
@@ -36,7 +36,7 @@ public class Log {
    */
   public static void error(Throwable t, String format, Class aClass, Object... args) {
     StackTraceElement callingMethod = Thread.currentThread().getStackTrace()[2];
-    LogUtils.logError(Activator.context, aClass, callingMethod.getMethodName(),
+    LogUtils.logError(Activator.mc, aClass, callingMethod.getMethodName(),
         new Object[]{formatMsg(format, args)}, t);
   }
 
@@ -45,7 +45,7 @@ public class Log {
    */
   public static void error(String format, Class aClass, Object... args) {
     StackTraceElement callingMethod = Thread.currentThread().getStackTrace()[2];
-    LogUtils.logError(Activator.context, aClass, callingMethod.getMethodName(),
+    LogUtils.logError(Activator.mc, aClass, callingMethod.getMethodName(),
         new Object[]{formatMsg(format, args)}, null);
   }
 

@@ -33,6 +33,8 @@ import org.universAAL.ontology.profile.User;
 
 import java.util.Locale;
 
+import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
+
 public class ReminderDialog extends UICaller {
 
   private final ModuleContext moduleContext;
@@ -45,6 +47,10 @@ public class ReminderDialog extends UICaller {
 
   public ReminderDialog(ModuleContext context, Time time) {
     super(context);
+
+    validateParameter(context, "context");
+    validateParameter(time, "time");
+
     moduleContext = context;
     this.time = time;
     this.userActed = false;

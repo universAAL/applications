@@ -1,6 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
+import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Column;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
@@ -9,9 +11,18 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
+import org.universAAL.ontology.medMgr.Time;
+import org.universAAL.ontology.profile.User;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
@@ -58,7 +69,14 @@ public final class IntakeDao extends AbstractDao {
 
     Map<String, Column> columns = getTableColumnsValuesById(id);
 
-    Column col = columns.get(PATIENT_FK_ID);
+    return getIntake(columns);
+  }
+
+  private Intake getIntake(Map<String, Column> columns) {
+    Column col = columns.get(ID);
+    int intakeId = (Integer) col.getValue();
+
+    col = columns.get(PATIENT_FK_ID);
     int personId = (Integer) col.getValue();
     Person person = personDao.getById(personId);
 
@@ -88,12 +106,72 @@ public final class IntakeDao extends AbstractDao {
       dispenser = dispenserDao.getById(dispenserId);
     }
 
-    Intake intake = new Intake(id, person, medicine, quantity, unitClass, timePlan, timeTaken, dispenser);
+    Intake intake = new Intake(intakeId, person, medicine, quantity, unitClass, timePlan, timeTaken, dispenser);
 
     Log.info("Intake found: %s", getClass(), intake);
-
     return intake;
   }
 
 
+  public List<Intake> getIntakesByUserAndTime(User inputUser, Time time) {
+    /*String sql = "SELECT INTA.* \n" +
+        "  FROM MEDICATION_MANAGER.INTAKE INTA,\n" +
+        "      MEDICATION_MANAGER.PERSON P\n" +
+        "    \n" +
+        "  WHERE P.PERSON_URI = '" + inputUser.getURI().toUpperCase() + "'\n" +
+        "  AND INTA.PATIENT_FK_ID = P.ID\n" +
+        "  AND INTA.TIME_PLAN > ?\n" +
+        "  AND INTA.TIME_PLAN < ?";*/
+
+    String sql = "SELECT * \n" +
+        "  FROM MEDICATION_MANAGER.INTAKE \n";
+
+    System.out.println("sql = " + sql);
+    System.out.println("time = " + time);
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql, statement);
+      return getIntakes(inputUser, time, sql, statement);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+
+  }
+
+  private List<Intake> getIntakes(User inputUser, Time time, String sql, PreparedStatement statement) throws SQLException {
+//    statement.setString(1, inputUser.getURI());
+    ConfigurationProperties configurationProperties = getConfigurationProperties();
+    int minutesInterval = configurationProperties.getIntakeIntervalMinutes();
+//    statement.setDate(2, createDate(time, -minutesInterval));
+//    statement.setDate(3, createDate(time, minutesInterval));
+    List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
+    return createIntakes(results);
+  }
+
+  private PreparedStatement getPreparedStatement(String sql, PreparedStatement statement) throws SQLException {
+    Connection connection = database.getConnection();
+    statement = connection.prepareStatement(sql);
+
+    return statement;
+  }
+
+  private java.sql.Date createDate(Time time, int minutes) {
+    System.out.println(" uraaaaaaaaaaaaaaa ");
+    throw new UnsupportedOperationException("Not implemented yet");
+  }
+
+  private List<Intake> createIntakes(List<Map<String, Column>> results) {
+
+    List<Intake> intakes = new ArrayList<Intake>();
+
+    for (Map<String, Column> columns : results) {
+      Intake intake = getIntake(columns);
+      intakes.add(intake);
+    }
+
+    return intakes;
+  }
 }

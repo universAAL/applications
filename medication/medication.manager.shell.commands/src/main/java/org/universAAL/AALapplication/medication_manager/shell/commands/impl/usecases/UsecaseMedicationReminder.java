@@ -26,7 +26,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.simulation.MedicationReminderContextProvider;
+import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationReminderContextProvider;
 import org.universAAL.ontology.medMgr.Time;
 
 import java.util.Calendar;
@@ -113,7 +113,7 @@ public final class UsecaseMedicationReminder extends Usecase {
     int year = gregorianCalendar.get(Calendar.YEAR);
     int month = gregorianCalendar.get(Calendar.MONTH);
     int day = gregorianCalendar.get(Calendar.DAY_OF_MONTH);
-    int hour = gregorianCalendar.get(Calendar.HOUR);
+    int hour = gregorianCalendar.get(Calendar.HOUR_OF_DAY);
     int minutes = gregorianCalendar.get(Calendar.MINUTE);
 
     return new Time(year, month, day, hour, minutes);

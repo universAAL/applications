@@ -15,39 +15,37 @@
  ******************************************************************************/
 
 
-package org.universAAL.ontology.medMgr;
+package org.universAAL.AALapplication.medication_manager.simulation.export;
 
-import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.medMgr.MedicationException;
 
 /**
  * @author George Fournadjiev
  */
-public final class UserIDs {
+public enum MealRelationDTO {
+  BEFORE("before"),
+  AFTER("after"),
+  ANY("any"),
+  WITH_MEAL("with_meal");
 
-  private final static String PREFIX = "URN:ORG.UNIVERSAAL.AAL_SPACE:TEST_ENV#";
-  private final static User[] USERS = new User[6];
+  private final String value;
 
-  static {
-    USERS[0] = new User(PREFIX + "SAIED");
-    USERS[1] = new User(PREFIX + "ALEJANDRO");
-    USERS[2] = new User(PREFIX + "GEORGE");
-    USERS[3] = new User(PREFIX + "HECTOR");
-    USERS[4] = new User(PREFIX + "VENELIN");
-    USERS[5] = new User("SAIED");
+  private MealRelationDTO(String value) {
+    this.value = value;
   }
 
+  public static MealRelationDTO getEnumValueFor(String mealRelationText) {
+    for (MealRelationDTO mealRelationDTO : values()) {
+      if (mealRelationDTO.value.equals(mealRelationText)) {
+        return mealRelationDTO;
+      }
+    }
 
-  public static User[] getAllUsers() {
-    User[] res = new User[USERS.length];
-    System.arraycopy(USERS, 0, res, 0, USERS.length);
-    return res;
+    throw new MedicationException("Unknown MealRelationDTO enum value: " + mealRelationText);
   }
 
-  public static User getSaiedUser() {
-    return USERS[0];
+  public static String getStringValueFor(MealRelationDTO mealRelationDTO) {
+    return mealRelationDTO.value;
   }
 
-  public static User getSaied() {
-      return new User("SAIED");
-  }
 }

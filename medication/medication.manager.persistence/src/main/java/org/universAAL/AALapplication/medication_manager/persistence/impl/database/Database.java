@@ -2,6 +2,9 @@ package org.universAAL.AALapplication.medication_manager.persistence.impl.databa
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,4 +25,7 @@ public interface Database {
 
   Map<String,Column> executeQueryExpectedSingleRecord(String tableName, String sql);
 
+  List<Map<String,Column>> executeQueryExpectedMultipleRecord(String tableName, PreparedStatement statement);
+
+  Connection getConnection();
 }

@@ -15,13 +15,14 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import static java.sql.Types.*;
-import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
@@ -73,8 +74,6 @@ public final class DerbyDatabase implements Database {
 
   private Map<String, Column> getStringColumnMapSingleRecord(String sqlQuery, String tableName, String message) {
 
-    Map<String, Column> columns = new LinkedHashMap<String, Column>();
-
     Statement statement = null;
     try {
       statement = connection.createStatement();
@@ -85,14 +84,17 @@ public final class DerbyDatabase implements Database {
 
       Set<String> columnsNames = derbySqlUtility.getDBColumns(tableName);
       ResultSetMetaData metaData = rs.getMetaData();
+      Map<String, Column> columns = new LinkedHashMap<String, Column>();
       int count = 0;
       while (rs.next()) {
         count++;
         if (count > 1) {
           throw new MedicationManagerPersistenceException(message);
         }
-        fillColumnsData(columns, columnsNames, rs, metaData);
+        columns = fillColumnsData(columnsNames, rs, metaData);
       }
+
+      return columns;
 
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
@@ -100,7 +102,6 @@ public final class DerbyDatabase implements Database {
       closeStatement(statement);
     }
 
-    return columns;
   }
 
   public Map<String, Column> findDispenserByPerson(String tableName, String personTableName, int personId) {
@@ -119,8 +120,36 @@ public final class DerbyDatabase implements Database {
     return getStringColumnMapSingleRecord(sql, tableName, message);
   }
 
-  private void fillColumnsData(Map<String, Column> columns, Set<String> columnsNames,
-                               ResultSet rs, ResultSetMetaData metaData) throws SQLException {
+  public List<Map<String, Column>> executeQueryExpectedMultipleRecord(String tableName, PreparedStatement statement) {
+
+    List<Map<String, Column>> results = new ArrayList<Map<String, Column>>();
+
+    try {
+      ResultSet rs = statement.executeQuery();
+
+      Set<String> columnsNames = derbySqlUtility.getDBColumns(tableName);
+      ResultSetMetaData metaData = rs.getMetaData();
+      while (rs.next()) {
+
+        Map<String, Column> columns = fillColumnsData(columnsNames, rs, metaData);
+        results.add(columns);
+      }
+
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
+
+    return results;
+  }
+
+  public Connection getConnection() {
+    return connection;
+  }
+
+  private Map<String, Column> fillColumnsData(Set<String> columnsNames,
+                                              ResultSet rs, ResultSetMetaData metaData) throws SQLException {
+
+    Map<String, Column> columns = new LinkedHashMap<String, Column>();
 
     for (String name : columnsNames) {
       int columnIndex = rs.findColumn(name);
@@ -128,6 +157,8 @@ public final class DerbyDatabase implements Database {
       Column col = createColumn(name, sqlType, rs);
       columns.put(col.getName(), col);
     }
+
+    return columns;
   }
 
   private Column createColumn(String name, int sqlType, ResultSet rs) throws SQLException {

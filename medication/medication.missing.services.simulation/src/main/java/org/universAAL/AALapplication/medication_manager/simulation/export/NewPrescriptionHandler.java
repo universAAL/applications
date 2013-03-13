@@ -15,14 +15,10 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.medication_manager.ui;
+package org.universAAL.AALapplication.medication_manager.simulation.export;
 
-import org.universAAL.AALapplication.medication_manager.ui.impl.Log;
-import org.universAAL.AALapplication.medication_manager.ui.impl.NewPrescriptionContextProvider;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.IntakeDTO;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.MealRelationDTO;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.MedicineDTO;
-import org.universAAL.AALapplication.medication_manager.ui.prescription.PrescriptionDTO;
+import org.universAAL.AALapplication.medication_manager.simulation.impl.Log;
+import org.universAAL.AALapplication.medication_manager.simulation.impl.NewPrescriptionContextProvider;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;

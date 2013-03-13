@@ -19,29 +19,25 @@ package org.universAAL.AALapplication.medication_manager.ui.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.universAAL.AALapplication.medication_manager.ui.NewPrescriptionHandler;
+import org.osgi.framework.ServiceReference;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 
 public class Activator implements BundleActivator {
 
-  static ModuleContext context;
+  static ModuleContext mc;
+  static BundleContext context;
   public ReminderDialogProvider service;
   public MedicationManagerServiceButtonProvider medicationManagerServiceButtonProvider;
 
   public void start(BundleContext bundleContext) throws Exception {
-    context = uAALBundleContainer.THE_CONTAINER
+    mc = uAALBundleContainer.THE_CONTAINER
         .registerModule(new Object[]{bundleContext});
-//    context.logDebug("Initialising Project");
-
-    service = new ReminderDialogProvider(context);
-    medicationManagerServiceButtonProvider = new MedicationManagerServiceButtonProvider(context);
-
-    NewPrescriptionContextProvider newPrescriptionContextProvider = new NewPrescriptionContextProvider(context);
-    NewPrescriptionHandler newPrescriptionHandler = new NewPrescriptionHandler(context, newPrescriptionContextProvider);
-
-    bundleContext.registerService(NewPrescriptionHandler.class.getName(), newPrescriptionHandler, null);
+    context = bundleContext;
+    service = new ReminderDialogProvider(mc);
+    medicationManagerServiceButtonProvider = new MedicationManagerServiceButtonProvider(mc);
 
   }
 
@@ -50,5 +46,41 @@ public class Activator implements BundleActivator {
     // TODO Auto-generated method stub
 
   }
+
+  public static PersistentService getPersistentService() {
+    if (context == null) {
+      throw new MedicationManagerUIException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = context.getServiceReference(PersistentService.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerUIException("The ServiceReference is null for PersistentService");
+    }
+
+    PersistentService persistentService = (PersistentService) context.getService(srPS);
+
+    if (persistentService == null) {
+      throw new MedicationManagerUIException("The PersistentService is missing");
+    }
+    return persistentService;
+  }
+
+  public static void validateParameter(int parameter, String parameterName) {
+
+      if (parameter <= 0) {
+        throw new MedicationManagerUIException("The parameter : " +
+            parameterName + " must be positive number");
+      }
+
+    }
+
+    public static void validateParameter(Object parameter, String parameterName) {
+
+      if (parameter == null) {
+        throw new MedicationManagerUIException("The parameter : " + parameterName + " cannot be null");
+      }
+
+    }
 
 }

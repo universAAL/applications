@@ -2,9 +2,11 @@ package org.universAAL.AALapplication.medication_manager.persistence.impl.databa
 
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 
+import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.Map;
 
-import static org.universAAL.AALapplication.medication_manager.configuration.Util.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
@@ -13,6 +15,8 @@ public abstract class AbstractDao {
 
   protected final Database database;
   private final String tableName;
+
+  protected static final String ID = "ID";
 
   protected AbstractDao(Database database, String tableName) {
     validateParameter(database, "database");
@@ -30,7 +34,7 @@ public abstract class AbstractDao {
 
   public abstract <T> T getById(int id);
 
-  public Map<String, Column> getTableColumnsValuesById(int id) {
+  protected Map<String, Column> getTableColumnsValuesById(int id) {
 
     Map<String, Column> columnMap = database.getById(tableName, id);
 
@@ -43,9 +47,9 @@ public abstract class AbstractDao {
 
   }
 
-  public Map<String, Column> executeQueryExpectedSingleRecord(String tableName, String sql) {
+  protected Map<String, Column> executeQueryExpectedSingleRecord(String tableName, String sql) {
 
-    Map<String, Column> record =  database.executeQueryExpectedSingleRecord(tableName, sql);
+    Map<String, Column> record = database.executeQueryExpectedSingleRecord(tableName, sql);
 
     if (record == null || record.isEmpty()) {
       throw new MedicationManagerPersistenceException("Missing the record in the table:" +
@@ -56,6 +60,19 @@ public abstract class AbstractDao {
 
   }
 
+  protected List<Map<String, Column>> executeQueryExpectedMultipleRecord(String tableName,
+                                                                         String sql, PreparedStatement statement) {
+
+    List<Map<String, Column>> results = database.executeQueryExpectedMultipleRecord(tableName, statement);
+
+    if (results == null || results.isEmpty()) {
+      throw new MedicationManagerPersistenceException("Missing the record in the table:" +
+          tableName + " for the following sql:\n" + sql);
+    }
+
+    return results;
+
+  }
 
 
 }
