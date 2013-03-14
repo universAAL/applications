@@ -18,7 +18,7 @@ VALUES (5, 'Venelin', 'urn:org.universAAL.aal_space:test_env#venelin', 'patient'
 // MEDICINE TABLE
 
 INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
-VALUES (1, 'Aspirin', 'Aspirin description', 'Aspirin side_effects', 'Aspirin incompliances', 'with_meal');
+VALUES (1, 'Aspirin', 'Aspirin description', 'No sideeffect', 'These medications must not be used with alcohol', 'with_meal');
 
 INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
 VALUES (2, 'Analgin', 'Analgin description', 'Analgin side_effects', 'Analgin incompliances', 'any');
@@ -32,6 +32,10 @@ VALUES (4, 'Validol', 'Validol description', 'Validol side_effects', 'Validol in
 INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
 VALUES (5, 'Benalgin', 'Benalgin description', 'Benalgin side_effects', 'Benalgin incompliances', 'after');
 
+INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
+VALUES (6, 'Zocor', 'Zocor description',
+'Severe allergic reactions (rash; hives; itching; difficulty breathing; tightness in the chest;swelling of the mouth, face, lips, or tongue; unusual hoarseness); burning, numbness, or tingling;change in the amount of urine produced; confusion; dark or red-colored urine; decreased sexual ability; depression; dizziness; fast or irregular heartbeat; fever, chills, or persistent sore throat; joint pain; loss of appetite; memory problems; muscle pain, tenderness, or weakness (with or without fever and fatigue); pale stools; red, swollen, blistered, or peeling skin; severe or persistent nausea or stomach or back pain; shortness of breath; trouble sleeping; unusual bruising or bleeding; unusual tiredness or weakness; vomiting;  yellowing of the skin or eyes.',
+'These medications must not be used with alcohol', 'after');
 
 // DISPENSER TABLE
 
@@ -65,7 +69,13 @@ VALUES (1, '2012-12-19 17:07:36', 1, 2, 'y');
 // TREATMENT TABLE
 
 INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, NAME, PATIENT_FK_ID, MEDICINE_FK_ID, PHYSICIAN_FK_ID, STATUS)
-VALUES (1, 'cold', 1, 1, 2, 'y');
+VALUES (1, 'holesterol', 1, 1, 2, 'y');
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, NAME, PATIENT_FK_ID, MEDICINE_FK_ID, PHYSICIAN_FK_ID, STATUS)
+VALUES (2, 'holesterol', 1, 6, 2, 'y');
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, NAME, PATIENT_FK_ID, MEDICINE_FK_ID, PHYSICIAN_FK_ID, STATUS)
+VALUES (3, 'cold', 1, 5, 2, 'n');
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, NAME, PATIENT_FK_ID, MEDICINE_FK_ID, PHYSICIAN_FK_ID, STATUS)
+VALUES (4, 'cold', 2, 1, 2, 'y');
 
 // INTAKE TABLE
 

@@ -91,7 +91,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
     PersistentService persistentService = getPersistentService();
     PersonDao personDao = persistentService.getPersonDao();
 
-    Person person = personDao.findPatient(deviceUri);
+    Person person = personDao.findPersonByDeviceUri(deviceUri);
 
     User user = new User(person.getPersonUri());
 

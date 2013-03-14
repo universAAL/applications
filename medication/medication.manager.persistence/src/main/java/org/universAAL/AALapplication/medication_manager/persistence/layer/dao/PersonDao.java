@@ -34,7 +34,15 @@ public final class PersonDao extends AbstractDao {
     Log.info("Looking for the person with id=%s", getClass(), id);
     Map<String, Column> columns = getTableColumnsValuesById(id);
 
-    Column col = columns.get("NAME");
+    return getPerson(columns);
+
+  }
+
+  private Person getPerson(Map<String, Column> columns) {
+    Column col = columns.get(ID);
+    int personId = (Integer) col.getValue();
+
+    col = columns.get("NAME");
     String name = (String) col.getValue();
 
     col = columns.get("PERSON_URI");
@@ -44,15 +52,24 @@ public final class PersonDao extends AbstractDao {
     String roleString = (String) col.getValue();
     Role role = Role.getEnumValueFor(roleString);
 
-    Person person = new Person(id, name, personUri, role);
+    Person person = new Person(personId, name, personUri, role);
 
     Log.info("Person found: %s", getClass(), person);
 
     return person;
-
   }
 
-  public Person findPatient(String deviceUri) {
+  public Person findPersonByPersonUri(String personUri) {
+    Log.info("Looking for the person with personUri=%s", getClass(), personUri);
+
+    String sql = "select * from MEDICATION_MANAGER.PERSON where PERSON_URI = '" + personUri + "'";
+
+    Map<String, Column> personRecordMap = executeQueryExpectedSingleRecord(TABLE_NAME, sql);
+
+    return getPerson(personRecordMap);
+  }
+
+  public Person findPersonByDeviceUri(String deviceUri) {
     Log.info("Looking for the person with deviceUri=%s", getClass(), deviceUri);
 
     checkForSetDao(dispenserDao, "dispenserDao");
