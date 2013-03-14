@@ -17,19 +17,24 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationConsumer;
 import org.universAAL.ontology.medMgr.Precaution;
-import org.universAAL.ontology.medMgr.UserIDs;
 import org.universAAL.ontology.profile.User;
+
+import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
  */
 public final class UsecasePrecaution extends Usecase {
 
-
+  private static final String ERROR_MESSAGE = "Expected one parameters, which is: UserId \n" +
+      "Please check the person table for the valid ids";
   private static final String USECASE_ID = "UC12";
   private static final String USECASE_TITLE = "UC12: Incompliancy identification";
   private static final String USECASE = USECASE_TITLE + " - The service provides warnings " +
@@ -43,16 +48,20 @@ public final class UsecasePrecaution extends Usecase {
   @Override
   public void execute(String... parameters) {
 
-    if (parameters != null && parameters.length > 0) {
-      throw new MedicationManagerShellException(NO_PARAMETERS_MESSAGE);
+    if (parameters == null || parameters.length != 1) {
+      throw new MedicationManagerShellException(ERROR_MESSAGE);
     }
 
-    User saiedUser = UserIDs.getSaiedUser();
-    Log.info("Executing the " + USECASE_TITLE + ". The mocked user is : " +
-        saiedUser, getClass());
+    PersistentService persistentService = getPersistentService();
+    PersonDao personDao = persistentService.getPersonDao();
+    int personId = Integer.parseInt(parameters[0]);
 
+    Person person = personDao.getById(personId);
 
-    Precaution[] precautions = MedicationConsumer.requestDetails(saiedUser);
+    Log.info("Executing the " + USECASE_TITLE + ". The user is : " + person, getClass());
+
+    User user = new User(person.getPersonUri());
+    Precaution[] precautions = MedicationConsumer.requestDetails(user);
 
     if (precautions == null || precautions.length != 2) {
       throw new MedicationManagerShellException("There is no precaution in our database for that user " +
@@ -62,6 +71,7 @@ public final class UsecasePrecaution extends Usecase {
     printInfo(precautions);
 
   }
+
 
   @Override
   public String getDescription() {

@@ -125,9 +125,6 @@ public final class IntakeDao extends AbstractDao {
         "  AND INTA.TIME_PLAN > ? \n" +
         "  AND INTA.TIME_PLAN < ? ";
 
-    /*String sql = "SELECT * \n" +
-        "  FROM MEDICATION_MANAGER.INTAKE \n";*/
-
     System.out.println("sql = " + sql);
     System.out.println("time = " + time);
 

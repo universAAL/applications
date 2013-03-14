@@ -90,9 +90,13 @@ public final class DispenserDao extends AbstractDao {
   public Dispenser getByDispenserUri(String deviceUri) {
     String sql = "select * from MEDICATION_MANAGER.DISPENSER where DISPENSER_URI = '" + deviceUri + "'";
 
-    checkForSetDao(personDao, "personDao");
-
     Map<String, Column> dispenserRecordMap = executeQueryExpectedSingleRecord(TABLE_NAME, sql);
+
+    return getDispenser(dispenserRecordMap);
+  }
+
+  private Dispenser getDispenser(Map<String, Column> dispenserRecordMap) {
+    checkForSetDao(personDao, "personDao");
 
     Column colId = dispenserRecordMap.get(ID);
     int id = (Integer) colId.getValue();

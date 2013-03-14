@@ -13,10 +13,10 @@ public final class Treatment extends Entity {
   private final Person patient;
   private final Medicine medicine;
   private final Person physician;
-  private final Status status;
+  private final TreatmentStatus status;
 
   public Treatment(int id, String name, Person patient, Medicine medicine,
-                   Person physician, Status status) {
+                   Person physician, TreatmentStatus status) {
 
     super(id);
 
@@ -30,13 +30,13 @@ public final class Treatment extends Entity {
   }
 
   public Treatment(String name, Person patient, Medicine medicine,
-                   Person physician, Status status) {
+                   Person physician, TreatmentStatus status) {
 
     this(0, name, patient, medicine, physician, status);
   }
 
   private void validate(String name, Person patient, Medicine medicine,
-                        Person physician, Status status) {
+                        Person physician, TreatmentStatus status) {
 
     validateParameter(name, "name");
     validateParameter(patient, "patient");
@@ -62,7 +62,7 @@ public final class Treatment extends Entity {
     return physician;
   }
 
-  public Status getStatus() {
+  public TreatmentStatus getStatus() {
     return status;
   }
 

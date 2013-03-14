@@ -52,6 +52,8 @@ public final class PersistentServiceImpl implements PersistentService {
     intakeDao.setDispenserDao(dispenserDao);
     intakeDao.setMedicineDao(medicineDao);
     intakeDao.setPersonDao(personDao);
+    treatmentDao.setPersonDao(personDao);
+    treatmentDao.setMedicineDao(medicineDao);
 
   }
 
