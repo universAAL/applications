@@ -17,6 +17,7 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
@@ -35,8 +36,10 @@ public final class UsecaseNewPrescription extends Usecase {
   private static final String PRESCRIPTIONS = "prescriptions";
   private final File prescriptionDirectory;
 
-  public static final String COMMAND_INFO =
-      "This command expects two parameters, which are: usecase id and the file name";
+  public static final String ERROR_MESSAGE =
+      "This command expects 3 parameters, which are: \n" +
+          "1. usecase id \n" +
+          "2. the file name ";
 
   private static final String USECASE_ID = "UC08";
   private static final String USECASE_TITLE = "UC08: New prescription created  - ";
@@ -54,16 +57,18 @@ public final class UsecaseNewPrescription extends Usecase {
 
     if (!prescriptionDirectory.isDirectory()) {
       throw new MedicationManagerShellException("The required directory does not exists:" + PRESCRIPTIONS + " under the" +
-          "***/runner/configurations/services/medication_manager");
+          "***/runner/configurations/medication_manager");
     }
 
-    if (parameters == null || parameters.length == 0) {
-      throw new MedicationManagerShellException(COMMAND_INFO);
+    if (parameters == null || parameters.length != 1) {
+      throw new MedicationManagerShellException(ERROR_MESSAGE);
     }
 
     String fileName = parameters[0];
-    Log.info("Executing the " + USECASE_TITLE + ". The file name is : " + fileName, getClass());
+    Log.info("Executing the %s . The file name is : %s", getClass(), USECASE_TITLE, fileName);
     Log.info("The Medication Manager will look for the file in following directory: " + prescriptionDirectory, getClass());
+
+    PersistentService persistentService = getPersistentService();
 
     File prescriptionFile = new File(prescriptionDirectory, fileName);
 
@@ -76,7 +81,7 @@ public final class UsecaseNewPrescription extends Usecase {
     }
 
     PrescriptionParser prescriptionParser = new PrescriptionParser();
-    PrescriptionDTO prescriptionDTO = prescriptionParser.parse(prescriptionFile);
+    PrescriptionDTO prescriptionDTO = prescriptionParser.parse(prescriptionFile, persistentService);
 
     NewPrescriptionHandler newPrescriptionHandler = getNewPrescriptionHandler();
     newPrescriptionHandler.callHealthServiceWithNewPrescription(prescriptionDTO);

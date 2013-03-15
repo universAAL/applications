@@ -51,8 +51,8 @@ import java.util.Set;
  */
 public final class NewPrescriptionHandler {
 
-  private static ServiceCaller serviceCaller;
-  private static NewPrescriptionContextProvider newPrescriptionContextProvider;
+  private final ServiceCaller serviceCaller;
+  private final NewPrescriptionContextProvider newPrescriptionContextProvider;
 
   private static final String NEW_MEDICATION_TREATMENT_NOTIFIER_NAMESPACE =
       "http://ontology.igd.fhg.de/NewMedicationTreatmentNotifier.owl#";
@@ -66,7 +66,7 @@ public final class NewPrescriptionHandler {
     newPrescriptionContextProvider = contextProvider;
   }
 
-  public static void callHealthServiceWithNewPrescription(PrescriptionDTO prescriptionDTO) {
+  public void callHealthServiceWithNewPrescription(PrescriptionDTO prescriptionDTO) {
 
     try {
       NewPrescription newPrescription = createNewPrescription(prescriptionDTO);
@@ -78,7 +78,7 @@ public final class NewPrescriptionHandler {
 
   }
 
-  private static void handleNewPrescription(PrescriptionDTO prescriptionDTO,
+  private void handleNewPrescription(PrescriptionDTO prescriptionDTO,
                                             NewPrescription newPrescription)
       throws DatatypeConfigurationException {
 
@@ -104,7 +104,7 @@ public final class NewPrescriptionHandler {
     newPrescription.setMedicationTreatments(medicationTreatmentList);
   }
 
-  private static NewPrescription createNewPrescription(PrescriptionDTO prescriptionDTO)
+  private NewPrescription createNewPrescription(PrescriptionDTO prescriptionDTO)
       throws DatatypeConfigurationException {
 
     NewPrescription newPrescription = new NewPrescription();
@@ -115,7 +115,7 @@ public final class NewPrescriptionHandler {
     return newPrescription;
   }
 
-  private static boolean callHealthService(MedicationTreatment medicationTreatment) {
+  private boolean callHealthService(MedicationTreatment medicationTreatment) {
     ServiceRequest serviceRequest = new ServiceRequest(new NewMedicationTreatmentNotifier(), UserIDs.getSaiedUser());
     serviceRequest.addAddEffect(new String[]{NewMedicationTreatmentNotifier.PROP_MEDICATION_TREATMENT}, medicationTreatment);
     serviceRequest.addRequiredOutput(OUTPUT_NEW_PRESCRIPTION_RECEIVED_MESSAGE,
@@ -138,7 +138,7 @@ public final class NewPrescriptionHandler {
 
   }
 
-  private static String getReceivedMessage(ServiceResponse serviceResponse) {
+  private String getReceivedMessage(ServiceResponse serviceResponse) {
     List receivedMessageList = serviceResponse.getOutput(OUTPUT_NEW_PRESCRIPTION_RECEIVED_MESSAGE, true);
     if (receivedMessageList.isEmpty() || receivedMessageList.size() > 1) {
       Log.info("received response object as a null or list is bigger than 1", NewPrescriptionHandler.class);
@@ -149,14 +149,14 @@ public final class NewPrescriptionHandler {
 
   }
 
-  private static MedicationTreatment createMedicationTreatment(PrescriptionDTO prescriptionDTO)
+  private MedicationTreatment createMedicationTreatment(PrescriptionDTO prescriptionDTO)
       throws DatatypeConfigurationException {
 
     MedicationTreatment medicationTreatment = new MedicationTreatment();
 
     medicationTreatment.setPrescriptionId(prescriptionDTO.getId());
     medicationTreatment.setName(MEDICATION_TREATMENT);
-    medicationTreatment.setDoctorName(prescriptionDTO.getDoctor().getName());
+    medicationTreatment.setDoctorName(prescriptionDTO.getPhysician().getName());
     medicationTreatment.setDescription(prescriptionDTO.getDescription());
 
     Date startDate = prescriptionDTO.getStartDate();
@@ -171,14 +171,14 @@ public final class NewPrescriptionHandler {
     return medicationTreatment;
   }
 
-  private static XMLGregorianCalendar getXMLGregorianCalendar(Date startDate) throws DatatypeConfigurationException {
+  private XMLGregorianCalendar getXMLGregorianCalendar(Date startDate) throws DatatypeConfigurationException {
     GregorianCalendar gregorianCalendar = new GregorianCalendar();
     gregorianCalendar.setTime(startDate);
     return (DatatypeFactory.newInstance()).newXMLGregorianCalendar(gregorianCalendar);
   }
 
 
-  private static void setTreatmentPlaning(MedicationTreatment medicationTreatment, XMLGregorianCalendar startDate,
+  private void setTreatmentPlaning(MedicationTreatment medicationTreatment, XMLGregorianCalendar startDate,
                                           GregorianCalendar gregorianCalendar,
                                           PrescriptionDTO prescriptionDTO) throws DatatypeConfigurationException {
 
@@ -189,7 +189,7 @@ public final class NewPrescriptionHandler {
     medicationTreatment.setTreatmentPlanning(treatmentPlanning);
   }
 
-  private static XMLGregorianCalendar getEndDate(GregorianCalendar gregorianCalendar,
+  private XMLGregorianCalendar getEndDate(GregorianCalendar gregorianCalendar,
                                                  PrescriptionDTO prescriptionDTO) throws DatatypeConfigurationException {
 
     GregorianCalendar cal = new GregorianCalendar();
@@ -203,7 +203,7 @@ public final class NewPrescriptionHandler {
 
   }
 
-  private static int getMaxDays(Set<MedicineDTO> medicineDTOSet) {
+  private int getMaxDays(Set<MedicineDTO> medicineDTOSet) {
     int maxDays = -1;
 
     for (MedicineDTO medicineDTO : medicineDTOSet) {
@@ -216,7 +216,7 @@ public final class NewPrescriptionHandler {
     return maxDays;
   }
 
-  private static void setMealRelationEnum(Medicine medicine, MealRelationDTO mealRelationDTO) {
+  private void setMealRelationEnum(Medicine medicine, MealRelationDTO mealRelationDTO) {
 
     String value = MealRelationDTO.getStringValueFor(mealRelationDTO);
 
@@ -224,7 +224,7 @@ public final class NewPrescriptionHandler {
     medicine.setMealRelation(mealRelation);
   }
 
-  private static void setIntakes(Medicine medicine, MedicineDTO medicineDTO) {
+  private void setIntakes(Medicine medicine, MedicineDTO medicineDTO) {
     Set<IntakeDTO> intakeDTOSet = medicineDTO.getIntakeDTOSet();
     List<Intake> intakeList = new ArrayList<Intake>();
     for (IntakeDTO intakeDTO : intakeDTOSet) {
@@ -241,7 +241,7 @@ public final class NewPrescriptionHandler {
 
   }
 
-  private static void setIntakeEnum(Intake intake, IntakeDTO intakeDTO) {
+  private void setIntakeEnum(Intake intake, IntakeDTO intakeDTO) {
     String value = IntakeDTO.Unit.getStringValueFromEnum(intakeDTO.getUnit());
     IntakeUnit intakeUnit = IntakeUnit.valueOf(value);
     intake.setUnit(intakeUnit);

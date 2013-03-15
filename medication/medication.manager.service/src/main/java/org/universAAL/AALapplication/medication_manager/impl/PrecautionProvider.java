@@ -45,8 +45,6 @@ import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
  */
 public final class PrecautionProvider extends ServiceCallee {
 
-  private final MyPrecautionDatabase myPrecaution;
-
   // this is just to prepare a standard error message for later use
   private static final ServiceResponse invalidInput = new ServiceResponse(
       CallStatus.serviceSpecificFailure);
@@ -59,7 +57,6 @@ public final class PrecautionProvider extends ServiceCallee {
   public PrecautionProvider(ModuleContext context) {
     super(context, ProviderPrecautionService.profiles);
 
-    myPrecaution = new MyPrecautionDatabase();
   }
 
   public void communicationChannelBroken() {

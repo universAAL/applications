@@ -17,6 +17,8 @@
 
 package org.universAAL.AALapplication.medication_manager.simulation.export;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -29,14 +31,18 @@ public final class PrescriptionDTO {
   private final String description;
   private final Date startDate;
   private final Set<MedicineDTO> medicineDTOSet;
-  private final Doctor doctor;
+  private final Person physician;
+  private final Person patient;
 
-  public PrescriptionDTO(int id, String description, Date startDate, Set<MedicineDTO> medicineDTOSet, Doctor doctor) {
+  public PrescriptionDTO(int id, String description, Date startDate,
+                         Set<MedicineDTO> medicineDTOSet, Person physician, Person patient) {
+
     this.id = id;
     this.description = description;
     this.startDate = startDate;
     this.medicineDTOSet = medicineDTOSet;
-    this.doctor = doctor;
+    this.physician = physician;
+    this.patient = patient;
   }
 
   public int getId() {
@@ -55,18 +61,23 @@ public final class PrescriptionDTO {
     return medicineDTOSet;
   }
 
-  public Doctor getDoctor() {
-    return doctor;
+  public Person getPhysician() {
+    return physician;
+  }
+
+  public Person getPatient() {
+    return patient;
   }
 
   @Override
   public String toString() {
-    return "Prescription{" +
+    return "PrescriptionDTO{" +
         "id=" + id +
         ", description='" + description + '\'' +
         ", startDate=" + startDate +
-        ", medicineSet=" + medicineDTOSet +
-        ", doctor=" + doctor +
+        ", medicineDTOSet=" + medicineDTOSet +
+        ", physician=" + physician +
+        ", patient=" + patient +
         '}';
   }
 }
