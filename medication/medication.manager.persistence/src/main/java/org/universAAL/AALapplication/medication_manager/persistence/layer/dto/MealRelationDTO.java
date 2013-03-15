@@ -15,7 +15,7 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.medication_manager.simulation.export;
+package org.universAAL.AALapplication.medication_manager.persistence.layer.dto;
 
 import org.universAAL.ontology.medMgr.MedicationException;
 

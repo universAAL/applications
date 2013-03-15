@@ -15,66 +15,69 @@
  ******************************************************************************/
 
 
-package org.universAAL.AALapplication.medication_manager.simulation.export;
+package org.universAAL.AALapplication.medication_manager.persistence.layer.dto;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+
+import java.util.Date;
 import java.util.Set;
 
 /**
  * @author George Fournadjiev
  */
-public final class MedicineDTO {
+public final class PrescriptionDTO {
 
   private final int id;
-  private final String name;
-  private final int days;
   private final String description;
-  private final MealRelationDTO mealRelationDTO;
-  private final Set<IntakeDTO> intakeDTOSet;
+  private final Date startDate;
+  private final Set<MedicineDTO> medicineDTOSet;
+  private final Person physician;
+  private final Person patient;
 
-  public MedicineDTO(int id, String name, int days, String description,
-                     MealRelationDTO mealRelationDTO, Set<IntakeDTO> intakeDTOSet) {
+  public PrescriptionDTO(int id, String description, Date startDate,
+                         Set<MedicineDTO> medicineDTOSet, Person physician, Person patient) {
 
     this.id = id;
-    this.name = name;
-    this.days = days;
     this.description = description;
-    this.mealRelationDTO = mealRelationDTO;
-    this.intakeDTOSet = intakeDTOSet;
+    this.startDate = startDate;
+    this.medicineDTOSet = medicineDTOSet;
+    this.physician = physician;
+    this.patient = patient;
   }
 
   public int getId() {
     return id;
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public int getDays() {
-    return days;
-  }
-
   public String getDescription() {
     return description;
   }
 
-  public MealRelationDTO getMealRelationDTO() {
-    return mealRelationDTO;
+  public Date getStartDate() {
+    return startDate;
   }
 
-  public Set<IntakeDTO> getIntakeDTOSet() {
-    return intakeDTOSet;
+  public Set<MedicineDTO> getMedicineDTOSet() {
+    return medicineDTOSet;
+  }
+
+  public Person getPhysician() {
+    return physician;
+  }
+
+  public Person getPatient() {
+    return patient;
   }
 
   @Override
   public String toString() {
-    return "Medicine{" +
+    return "PrescriptionDTO{" +
         "id=" + id +
-        ", name='" + name + '\'' +
-        ", days=" + days +
         ", description='" + description + '\'' +
-        ", mealRelationDTO=" + mealRelationDTO +
-        ", intakeSet=" + intakeDTOSet +
+        ", startDate=" + startDate +
+        ", medicineDTOSet=" + medicineDTOSet +
+        ", physician=" + physician +
+        ", patient=" + patient +
         '}';
   }
 }

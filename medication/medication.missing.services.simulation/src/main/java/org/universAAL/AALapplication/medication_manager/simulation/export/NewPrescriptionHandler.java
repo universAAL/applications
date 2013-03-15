@@ -17,6 +17,10 @@
 
 package org.universAAL.AALapplication.medication_manager.simulation.export;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MealRelationDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.Log;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.NewPrescriptionContextProvider;
 import org.universAAL.middleware.container.ModuleContext;

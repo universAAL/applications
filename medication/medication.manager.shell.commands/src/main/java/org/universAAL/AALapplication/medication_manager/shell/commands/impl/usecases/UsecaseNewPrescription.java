@@ -18,14 +18,15 @@
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionFactory;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
-import org.universAAL.AALapplication.medication_manager.simulation.export.PrescriptionDTO;
 
 import java.io.File;
 
 import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator.*;
+import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log.*;
 
 /**
  * @author George Fournadjiev
@@ -65,8 +66,8 @@ public final class UsecaseNewPrescription extends Usecase {
     }
 
     String fileName = parameters[0];
-    Log.info("Executing the %s . The file name is : %s", getClass(), USECASE_TITLE, fileName);
-    Log.info("The Medication Manager will look for the file in following directory: " + prescriptionDirectory, getClass());
+    info("Executing the %s . The file name is : %s", getClass(), USECASE_TITLE, fileName);
+    info("The Medication Manager will look for the file in following directory: " + prescriptionDirectory, getClass());
 
     PersistentService persistentService = getPersistentService();
 
@@ -83,8 +84,20 @@ public final class UsecaseNewPrescription extends Usecase {
     PrescriptionParser prescriptionParser = new PrescriptionParser();
     PrescriptionDTO prescriptionDTO = prescriptionParser.parse(prescriptionFile, persistentService);
 
+    info("The Medication Manager will try to save prescriptionDTO in the database: ", getClass());
+
+    PrescriptionFactory prescriptionFactory = getPrescriptionFactory();
+
+    prescriptionFactory.save(prescriptionDTO);
+
+    info("The Medication Manager successfully saved prescriptionDTO in the database: ", getClass());
+
+    info("The Medication Manager will try to send the prescription the Health Service ", getClass());
+
     NewPrescriptionHandler newPrescriptionHandler = getNewPrescriptionHandler();
     newPrescriptionHandler.callHealthServiceWithNewPrescription(prescriptionDTO);
+
+    info("The Medication Manager successfully sent the prescription the Health Service ", getClass());
 
   }
 
