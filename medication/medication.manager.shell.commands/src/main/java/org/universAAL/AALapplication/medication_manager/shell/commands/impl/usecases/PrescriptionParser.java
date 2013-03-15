@@ -22,10 +22,10 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.Pe
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.simulation.export.IntakeDTO;
-import org.universAAL.AALapplication.medication_manager.simulation.export.MealRelationDTO;
-import org.universAAL.AALapplication.medication_manager.simulation.export.MedicineDTO;
-import org.universAAL.AALapplication.medication_manager.simulation.export.PrescriptionDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MealRelationDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

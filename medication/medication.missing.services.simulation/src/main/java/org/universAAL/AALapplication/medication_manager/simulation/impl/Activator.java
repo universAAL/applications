@@ -53,13 +53,13 @@ public class Activator implements BundleActivator {
         DispenserUpsideDownContextProvider dispenserUpsideDownContextProvider = new DispenserUpsideDownContextProvider(mc);
         registerService(dispenserUpsideDownContextProvider, context);
         new HealthPrescriptionServiceProvider(mc);
+        NewPrescriptionContextProvider newPrescriptionContextProvider = new NewPrescriptionContextProvider(mc);
+        NewPrescriptionHandler newPrescriptionHandler = new NewPrescriptionHandler(mc, newPrescriptionContextProvider);
+
+        context.registerService(NewPrescriptionHandler.class.getName(), newPrescriptionHandler, null);
       }
     }.start();
 
-    NewPrescriptionContextProvider newPrescriptionContextProvider = new NewPrescriptionContextProvider(mc);
-    NewPrescriptionHandler newPrescriptionHandler = new NewPrescriptionHandler(mc, newPrescriptionContextProvider);
-
-    context.registerService(NewPrescriptionHandler.class.getName(), newPrescriptionHandler, null);
 
   }
 
