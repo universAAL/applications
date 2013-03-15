@@ -130,7 +130,7 @@ public final class SqlConsoleCommand extends ConsoleCommand {
 
     if (!sqlFilesDirectory.isDirectory()) {
       throw new MedicationManagerShellException("The required directory does not exists:" + SQL + " under the" +
-          "***/runner/configurations/services/medication_manager");
+          "***/runner/configurations/medication_manager");
     }
 
     Log.info("The Medication Manager will look for the file " + secondParam +

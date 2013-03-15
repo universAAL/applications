@@ -86,7 +86,7 @@ public class Activator implements BundleActivator {
       String pathToCurrentDir = currentDir.getCanonicalPath();
       String bundlesConfigurationLocationProperty = System.getProperty("bundles.configuration.location");
       pathToMedicationManagerConfigurationDirectory = pathToCurrentDir + separator +
-          bundlesConfigurationLocationProperty + separator + "services" + separator + "medication_manager";
+          bundlesConfigurationLocationProperty + separator + "medication_manager";
     } catch (Exception e) {
       throw new MedicationManagerShellException(e);
     }

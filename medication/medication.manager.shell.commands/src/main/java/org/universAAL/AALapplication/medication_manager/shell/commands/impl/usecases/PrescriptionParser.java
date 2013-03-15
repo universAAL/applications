@@ -17,9 +17,11 @@
 
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.simulation.export.Doctor;
 import org.universAAL.AALapplication.medication_manager.simulation.export.IntakeDTO;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MealRelationDTO;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicineDTO;
@@ -55,7 +57,7 @@ public final class PrescriptionParser {
   private static final String COULD_NOT_PARSE_THE_PRESCRIPTION_XML_FILE = "Could not parse the prescription xml file";
   private static final String ID = "id";
 
-  public PrescriptionDTO parse(File prescriptionFile) {
+  public PrescriptionDTO parse(File prescriptionFile, PersistentService persistentService) {
 
     PrescriptionDTO prescriptionDTO;
 
@@ -68,7 +70,7 @@ public final class PrescriptionParser {
       Log.info("Trying to get the root element", PrescriptionParser.class);
       Element documentElement = doc.getDocumentElement();
       documentElement.normalize();
-      prescriptionDTO = createPrescription(documentElement);
+      prescriptionDTO = createPrescription(documentElement, persistentService);
       Log.info("The file successfully parsed", PrescriptionParser.class);
     } catch (MedicationManagerShellException e) {
       throw e;
@@ -83,7 +85,7 @@ public final class PrescriptionParser {
     return prescriptionDTO;
   }
 
-  private PrescriptionDTO createPrescription(Element documentElement) {
+  private PrescriptionDTO createPrescription(Element documentElement, PersistentService persistentService) {
     String rootTagName = documentElement.getTagName();
 
     if (rootTagName == null) {
@@ -111,9 +113,11 @@ public final class PrescriptionParser {
 
     Set<MedicineDTO> medicineDTOs = getMedicineSet(nodeList);
 
-    Doctor doctor = getDoctor(nodeList);
+    Person physician = getPhysician(nodeList, persistentService);
 
-    return new PrescriptionDTO(id, description, startDate, medicineDTOs, doctor);
+    Person patient = getPatient(nodeList, persistentService);
+
+    return new PrescriptionDTO(id, description, startDate, medicineDTOs, physician, patient);
 
   }
 
@@ -174,15 +178,39 @@ public final class PrescriptionParser {
     return value;
   }
 
-  private Doctor getDoctor(NodeList nodeList) {
-    Node doctorNode = getNode(nodeList, "doctor");
+  private Person getPhysician(NodeList nodeList, PersistentService persistentService) {
+    return getPerson(nodeList, "doctor", persistentService);
 
-    NodeList doctorChildNodes = doctorNode.getChildNodes();
+  }
 
-    Node nameNode = getNode(doctorChildNodes, "name");
+  private Person getPerson(NodeList nodeList, String tagName, PersistentService persistentService) {
+    Node node = getNode(nodeList, tagName);
 
-    return new Doctor(nameNode.getTextContent());
+    NodeList childNodes = node.getChildNodes();
 
+    Node nameNode = getNode(childNodes, "id");
+
+    String textContent = nameNode.getTextContent();
+
+    int id;
+
+    try {
+      id = Integer.parseInt(textContent);
+      PersonDao personDao = persistentService.getPersonDao();
+      Person person = personDao.getById(id);
+
+      System.out.println("person = " + person);
+
+      return person;
+
+    } catch (NumberFormatException e) {
+      throw new MedicationManagerShellException("The id tag (" + tagName + "'s child tag) is not a valid number");
+    }
+
+  }
+
+  private Person getPatient(NodeList nodeList, PersistentService persistentService) {
+    return getPerson(nodeList, "patient", persistentService);
   }
 
   private Set<MedicineDTO> getMedicineSet(NodeList nodeList) {
