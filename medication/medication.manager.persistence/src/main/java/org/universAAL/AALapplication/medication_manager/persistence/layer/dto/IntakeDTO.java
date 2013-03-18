@@ -19,6 +19,8 @@ package org.universAAL.AALapplication.medication_manager.persistence.layer.dto;
 
 import org.universAAL.ontology.medMgr.MedicationException;
 
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
+
 /**
  * @author George Fournadjiev
  */
@@ -29,6 +31,10 @@ public final class IntakeDTO {
   private final int dose;
 
   public IntakeDTO(String time, Unit unit, int dose) {
+
+    validateParameter(time, "time");
+    validateParameter(unit, "dose");
+
     this.time = time;
     this.unit = unit;
     this.dose = dose;
@@ -56,7 +62,7 @@ public final class IntakeDTO {
   }
 
   public enum Unit {
-    PILL("pill"), DROPS("drops");
+    PILL("PILL"), DROPS("DROPS");
 
     private String value;
 
@@ -66,7 +72,7 @@ public final class IntakeDTO {
 
     public static Unit getEnumValueFor(String unitText) {
       for (Unit unit : values()) {
-        if (unit.value.equals(unitText)) {
+        if (unit.value.equalsIgnoreCase(unitText)) {
           return unit;
         }
       }

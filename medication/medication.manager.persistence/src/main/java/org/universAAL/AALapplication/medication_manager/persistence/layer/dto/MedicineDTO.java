@@ -19,6 +19,8 @@ package org.universAAL.AALapplication.medication_manager.persistence.layer.dto;
 
 import java.util.Set;
 
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
+
 /**
  * @author George Fournadjiev
  */
@@ -28,16 +30,25 @@ public final class MedicineDTO {
   private final String name;
   private final int days;
   private final String description;
+  private final String sideeffects;
+  private final String incompliances;
   private final MealRelationDTO mealRelationDTO;
   private final Set<IntakeDTO> intakeDTOSet;
 
-  public MedicineDTO(int id, String name, int days, String description,
+  public MedicineDTO(int id, String name, int days, String description, String sideeffects, String incompliances,
                      MealRelationDTO mealRelationDTO, Set<IntakeDTO> intakeDTOSet) {
 
+    validateParameter(id, "id");
+    validateParameter(name, "name");
+    validateParameter(mealRelationDTO, "mealRelationDTO");
+    validateParameter(intakeDTOSet, "intakeDTOSet");
+
     this.id = id;
-    this.name = name;
+    this.name = name.toUpperCase();
     this.days = days;
-    this.description = description;
+    this.description = description != null ? description.toUpperCase() : null;
+    this.sideeffects = sideeffects != null ? sideeffects.toUpperCase() : null;
+    this.incompliances = incompliances != null ? incompliances.toUpperCase() : null;
     this.mealRelationDTO = mealRelationDTO;
     this.intakeDTOSet = intakeDTOSet;
   }
@@ -58,6 +69,14 @@ public final class MedicineDTO {
     return description;
   }
 
+  public String getSideeffects() {
+    return sideeffects;
+  }
+
+  public String getIncompliances() {
+    return incompliances;
+  }
+
   public MealRelationDTO getMealRelationDTO() {
     return mealRelationDTO;
   }
@@ -68,13 +87,15 @@ public final class MedicineDTO {
 
   @Override
   public String toString() {
-    return "Medicine{" +
+    return "MedicineDTO{" +
         "id=" + id +
         ", name='" + name + '\'' +
         ", days=" + days +
         ", description='" + description + '\'' +
+        ", sideeffects='" + sideeffects + '\'' +
+        ", incompliances='" + incompliances + '\'' +
         ", mealRelationDTO=" + mealRelationDTO +
-        ", intakeSet=" + intakeDTOSet +
+        ", intakeDTOSet=" + intakeDTOSet +
         '}';
   }
 }

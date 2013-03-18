@@ -22,6 +22,8 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import java.util.Date;
 import java.util.Set;
 
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
+
 /**
  * @author George Fournadjiev
  */
@@ -37,8 +39,16 @@ public final class PrescriptionDTO {
   public PrescriptionDTO(int id, String description, Date startDate,
                          Set<MedicineDTO> medicineDTOSet, Person physician, Person patient) {
 
+    validateParameter(id, "id");
+    validateParameter(description, "description");
+    validateParameter(startDate, "startDate");
+    validateParameter(medicineDTOSet, "medicineDTOSet");
+    validateParameter(medicineDTOSet, "medicineDTOSet");
+    validateParameter(physician, "physician");
+    validateParameter(patient, "patient");
+
     this.id = id;
-    this.description = description;
+    this.description = description.toUpperCase();
     this.startDate = startDate;
     this.medicineDTOSet = medicineDTOSet;
     this.physician = physician;

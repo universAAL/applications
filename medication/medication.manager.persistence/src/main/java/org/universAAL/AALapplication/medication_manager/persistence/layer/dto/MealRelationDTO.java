@@ -23,10 +23,10 @@ import org.universAAL.ontology.medMgr.MedicationException;
  * @author George Fournadjiev
  */
 public enum MealRelationDTO {
-  BEFORE("before"),
-  AFTER("after"),
-  ANY("any"),
-  WITH_MEAL("with_meal");
+  BEFORE("BEFORE"),
+  AFTER("AFTER"),
+  ANY("ANY"),
+  WITH_MEAL("WITH_MEAL");
 
   private final String value;
 
@@ -36,7 +36,7 @@ public enum MealRelationDTO {
 
   public static MealRelationDTO getEnumValueFor(String mealRelationText) {
     for (MealRelationDTO mealRelationDTO : values()) {
-      if (mealRelationDTO.value.equals(mealRelationText)) {
+      if (mealRelationDTO.value.equalsIgnoreCase(mealRelationText)) {
         return mealRelationDTO;
       }
     }
@@ -48,4 +48,7 @@ public enum MealRelationDTO {
     return mealRelationDTO.value;
   }
 
+  public String getValue() {
+    return value;
+  }
 }
