@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionFactory;
 
@@ -19,8 +20,11 @@ public final class PrescriptionFactoryImpl implements PrescriptionFactory {
   }
 
   public void save(PrescriptionDTO prescriptionDTO) {
-    info("PrescriptionFactoryImpl is not implemented yet", getClass());
+    info("Trying to save the PrescriptionDTO: %s", getClass(), prescriptionDTO);
 
-    //TODO
+    PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
+
+    prescriptionDao.save(prescriptionDTO);
+
   }
 }

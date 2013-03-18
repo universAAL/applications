@@ -2,7 +2,9 @@ package org.universAAL.AALapplication.medication_manager.persistence.impl.databa
 
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +74,12 @@ public abstract class AbstractDao {
 
     return results;
 
+  }
+
+  public PreparedStatement getPreparedStatement(String sql) throws SQLException {
+    Connection connection = database.getConnection();
+
+    return connection.prepareStatement(sql);
   }
 
 

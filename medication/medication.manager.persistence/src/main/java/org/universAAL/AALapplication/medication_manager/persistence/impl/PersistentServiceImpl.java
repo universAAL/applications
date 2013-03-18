@@ -9,7 +9,6 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.In
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescribedMedicineDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.TreatmentDao;
 
@@ -25,7 +24,6 @@ public final class PersistentServiceImpl implements PersistentService {
   private final IntakeDao intakeDao;
   private final InventoryLogDao inventoryLogDao;
   private final MedicineInventoryDao medicineInventoryDao;
-  private final PrescribedMedicineDao prescribedMedicineDao;
   private final PrescriptionDao prescriptionDao;
   private final PersonDao personDao;
   private final MedicineDao medicineDao;
@@ -41,7 +39,6 @@ public final class PersistentServiceImpl implements PersistentService {
     this.intakeDao = new IntakeDao(database);
     this.inventoryLogDao = new InventoryLogDao(database);
     this.medicineInventoryDao = new MedicineInventoryDao(database);
-    this.prescribedMedicineDao = new PrescribedMedicineDao(database);
     this.prescriptionDao = new PrescriptionDao(database);
     this.treatmentDao = new TreatmentDao(database);
 
@@ -51,10 +48,10 @@ public final class PersistentServiceImpl implements PersistentService {
     dispenserDao.setPersonDao(personDao);
     intakeDao.setDispenserDao(dispenserDao);
     intakeDao.setMedicineDao(medicineDao);
-    intakeDao.setPersonDao(personDao);
-    treatmentDao.setPersonDao(personDao);
+    intakeDao.setTreatmentDao(treatmentDao);
+    treatmentDao.setPrescriptionDao(prescriptionDao);
     treatmentDao.setMedicineDao(medicineDao);
-
+    prescriptionDao.setPersonDao(personDao);
   }
 
   public SqlUtility getSqlUtility() {
@@ -83,10 +80,6 @@ public final class PersistentServiceImpl implements PersistentService {
 
   public MedicineInventoryDao getMedicineInventoryDao() {
     return medicineInventoryDao;
-  }
-
-  public PrescribedMedicineDao getPrescribedMedicineDao() {
-    return prescribedMedicineDao;
   }
 
   public PrescriptionDao getPrescriptionDao() {

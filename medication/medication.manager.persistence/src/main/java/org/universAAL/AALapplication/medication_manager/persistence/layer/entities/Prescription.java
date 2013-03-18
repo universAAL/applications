@@ -14,35 +14,38 @@ public final class Prescription extends Entity {
   private final Date timeOfCreation;
   private final Person patient;
   private final Person physician;
+  private final String description;
   private final PrescriptionStatus prescriptionStatus;
 
-  public Prescription(int id, Date timeOfCreation, Person patient,
-                      Person physician, PrescriptionStatus prescriptionStatus) {
+  public Prescription(int id, Date timeOfCreation, Person patient, Person physician,
+                      String description, PrescriptionStatus prescriptionStatus) {
 
     super(id);
 
-    validate(timeOfCreation, patient, physician, prescriptionStatus);
+    validate(timeOfCreation, patient, physician, prescriptionStatus, description);
 
     this.timeOfCreation = timeOfCreation;
     this.patient = patient;
     this.physician = physician;
+    this.description = description;
     this.prescriptionStatus = prescriptionStatus;
   }
 
-  public Prescription(Date timeOfCreation, Person patient,
+  public Prescription(Date timeOfCreation, Person patient, String description,
                       Person physician, PrescriptionStatus prescriptionStatus) {
 
-    this(0, timeOfCreation, patient, physician, prescriptionStatus);
+    this(0, timeOfCreation, patient, physician, description, prescriptionStatus);
 
   }
 
   private void validate(Date timeOfCreation, Person patient,
-                        Person physician, PrescriptionStatus prescriptionStatus) {
+                        Person physician, PrescriptionStatus prescriptionStatus, String description) {
 
     validateParameter(timeOfCreation, "timeOfCreation");
     validateParameter(patient, "patient");
     validateParameter(physician, "physician");
     validateParameter(prescriptionStatus, "prescriptionStatus");
+    validateParameter(description, "description");
 
   }
 
@@ -65,10 +68,10 @@ public final class Prescription extends Entity {
   @Override
   public String toString() {
     return "Prescription{" +
-        "id=" + getId() +
-        ", timeOfCreation=" + timeOfCreation +
-        ", patient:" + patient +
-        ", physician:" + physician +
+        "timeOfCreation=" + timeOfCreation +
+        ", patient=" + patient +
+        ", physician=" + physician +
+        ", description='" + description + '\'' +
         ", prescriptionStatus=" + prescriptionStatus +
         '}';
   }

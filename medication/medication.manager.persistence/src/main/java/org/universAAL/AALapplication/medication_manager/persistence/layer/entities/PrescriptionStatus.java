@@ -26,4 +26,8 @@ public enum PrescriptionStatus {
 
     throw new MedicationManagerPersistenceException("Unknown PrescriptionStatus enum for value : " + statusText);
   }
+
+  public String getType() {
+    return type;
+  }
 }

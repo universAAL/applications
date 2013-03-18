@@ -9,57 +9,40 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
  */
 public final class Treatment extends Entity {
 
-  private final String name;
-  private final Person patient;
+  private final Prescription prescription;
   private final Medicine medicine;
-  private final Person physician;
   private final TreatmentStatus status;
 
-  public Treatment(int id, String name, Person patient, Medicine medicine,
-                   Person physician, TreatmentStatus status) {
+  public Treatment(int id, Prescription prescription, Medicine medicine, TreatmentStatus status) {
 
     super(id);
 
-    validate(name, patient, medicine, physician, status);
+    validate(prescription, medicine, status);
 
-    this.name = name;
-    this.patient = patient;
+    this.prescription = prescription;
     this.medicine = medicine;
-    this.physician = physician;
     this.status = status;
   }
 
-  public Treatment(String name, Person patient, Medicine medicine,
-                   Person physician, TreatmentStatus status) {
+  public Treatment(Prescription prescription, Medicine medicine, TreatmentStatus status) {
 
-    this(0, name, patient, medicine, physician, status);
+    this(0, prescription, medicine, status);
   }
 
-  private void validate(String name, Person patient, Medicine medicine,
-                        Person physician, TreatmentStatus status) {
+  private void validate(Prescription prescription, Medicine medicine, TreatmentStatus status) {
 
-    validateParameter(name, "name");
-    validateParameter(patient, "patient");
+    validateParameter(prescription, "prescription");
     validateParameter(medicine, "medicine");
-    validateParameter(physician, "physician");
     validateParameter(status, "status");
 
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public Person getPatient() {
-    return patient;
+  public Prescription getPrescription() {
+    return prescription;
   }
 
   public Medicine getMedicine() {
     return medicine;
-  }
-
-  public Person getPhysician() {
-    return physician;
   }
 
   public TreatmentStatus getStatus() {
@@ -69,11 +52,8 @@ public final class Treatment extends Entity {
   @Override
   public String toString() {
     return "Treatment{" +
-        "id=" + getId() +
-        ", name='" + name + '\'' +
-        ", patient:" + patient +
-        ", " + medicine +
-        ", physician:" + physician +
+        "prescription=" + prescription +
+        ", medicine=" + medicine +
         ", status=" + status +
         '}';
   }

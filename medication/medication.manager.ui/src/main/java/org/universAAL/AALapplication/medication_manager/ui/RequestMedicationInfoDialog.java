@@ -21,6 +21,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Persis
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
 import org.universAAL.AALapplication.medication_manager.ui.impl.MedicationManagerUIException;
 import org.universAAL.middleware.container.ModuleContext;
@@ -107,7 +108,7 @@ public class RequestMedicationInfoDialog extends UICaller {
 
   }
 
-  public void createMedicineInfo(User inputUser) {
+  private void createMedicineInfo(User inputUser) {
     PersistentService persistentService = getPersistentService();
 
     IntakeDao intakeDao = persistentService.getIntakeDao();
@@ -124,7 +125,7 @@ public class RequestMedicationInfoDialog extends UICaller {
     return medicinesInfo;
   }
 
-  private MedicinesInfo createMedicineInfoFromIntakes(List<Intake> intakes) {
+  public MedicinesInfo createMedicineInfoFromIntakes(List<Intake> intakes) {
     String generalInfo = getGeneralInfo(intakes);
     String detailsInfo = getDetailsInfo(intakes);
 
@@ -150,7 +151,8 @@ public class RequestMedicationInfoDialog extends UICaller {
       count++;
       sb.append(count);
       sb.append(". ");
-      sb.append(in.getMedicine().getMedicineName());
+      Treatment treatment = in.getTreatment();
+      sb.append(treatment.getMedicine().getMedicineName());
       sb.append("  -  ");
       sb.append(in.getQuantity());
       UnitClass unitClass = in.getUnitClass();
@@ -179,7 +181,8 @@ public class RequestMedicationInfoDialog extends UICaller {
       count++;
       sb.append(count);
       sb.append(". ");
-      Medicine medicine = in.getMedicine();
+      Treatment treatment = in.getTreatment();
+      Medicine medicine = treatment.getMedicine();
       sb.append(medicine.getMedicineName());
       sb.append('\n');
       sb.append(medicine.getMedicineInfo());
