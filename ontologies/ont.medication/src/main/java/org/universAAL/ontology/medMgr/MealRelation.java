@@ -62,12 +62,15 @@ public class MealRelation extends ManagedIndividual {
     if (name == null)
       return null;
 
-    if (name.startsWith(MedicationOntology.NAMESPACE))
+    if (name.startsWith(MedicationOntology.NAMESPACE)) {
       name = name.substring(MedicationOntology.NAMESPACE.length());
+    }
 
-    for (int i = 0; i <= names.length; i++)
-      if (names[i].equals(name))
+    for (int i = 0; i < names.length; i++) {
+      if (names[i].equalsIgnoreCase(name)) {
         return getIntakeUnitByOrder(i);
+      }
+    }
 
     return null;
   }

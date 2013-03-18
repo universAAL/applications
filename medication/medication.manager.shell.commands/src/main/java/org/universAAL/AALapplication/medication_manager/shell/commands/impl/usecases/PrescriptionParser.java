@@ -19,13 +19,13 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl.use
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
-import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MealRelationDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
+import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -268,6 +268,18 @@ public final class PrescriptionParser {
 
     Log.info("description = %s", PrescriptionParser.class, description);
 
+    Node sideffectsNode = getNode(nodeList, "sideffects");
+
+    String sideffects = descriptionNode.getTextContent();
+
+    Log.info("sideffects = %s", PrescriptionParser.class, sideffects);
+
+    Node incompliancesNode = getNode(nodeList, "incompliances");
+
+    String incompliances = descriptionNode.getTextContent();
+
+    Log.info("incompliances = %s", PrescriptionParser.class, incompliances);
+
     Node mealRelationNode = getNode(nodeList, "meal_relation");
 
     String mealRelationText = mealRelationNode.getTextContent();
@@ -278,7 +290,7 @@ public final class PrescriptionParser {
 
     Set<IntakeDTO> intakeDTOSet = getIntakeSet(node.getChildNodes());
 
-    return new MedicineDTO(id, name, days, description, mealRelationDTO, intakeDTOSet);
+    return new MedicineDTO(id, name, days, description, sideffects, incompliances, mealRelationDTO, intakeDTOSet);
 
   }
 

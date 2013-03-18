@@ -5,6 +5,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.Medicat
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Column;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Prescription;
@@ -12,11 +13,16 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.persistence.layer.entities.PrescriptionStatus.*;
@@ -121,7 +127,7 @@ public final class PrescriptionDao extends AbstractDao {
   }
 
   public void save(PrescriptionDTO prescriptionDTO) {
-/*
+
     Connection connection = null;
     try {
       connection = database.getConnection();
@@ -132,27 +138,106 @@ public final class PrescriptionDao extends AbstractDao {
       throw new MedicationManagerPersistenceException(e);
     } finally {
       setConnectionAutoCommitToTrue(connection);
-    }*/
+    }
 
   }
 
-  /*private void persistPrescriptionDto(PrescriptionDTO prescriptionDTO, Connection connection) throws SQLException {
+  private void persistPrescriptionDto(PrescriptionDTO prescriptionDTO, Connection connection) throws SQLException {
 
     String sql = "INSERT INTO MEDICATION_MANAGER.PRESCRIPTION " +
         "(ID, TIME_OF_CREATION, PATIENT_FK_ID, PHYSICIAN_FK_ID, DESCRIPTION, STATUS) " +
         "VALUES (?, ?, ?, ?, ?, ?)";
 
-    PreparedStatement ps = connection.prepareStatement(sql);
+    PreparedStatement psPrescription = null;
 
     try {
-      int id = database.getNextIdFromIdGenerator();
-      ps.setInt(1, id);
-      ps.setTimestamp(2, prescriptionDTO.);
+      psPrescription = connection.prepareStatement(sql);
+      insertRecordIntoPrescriptionTable(prescriptionDTO, psPrescription);
+      insertMissingRecordsIntoMedicineTable(prescriptionDTO.getMedicineDTOSet(), connection);
+    } finally {
+      closeStatement(psPrescription);
+    }
+
+  }
+
+  private void insertMissingRecordsIntoMedicineTable(Set<MedicineDTO> medicineDTOSet,
+                                                     Connection connection) throws SQLException {
+
+    Set<String> medicineNames = getMedicineNames(connection);
+
+    for (MedicineDTO medicineDTO : medicineDTOSet) {
+      String name = medicineDTO.getName();
+      if (!medicineNames.contains(name)) {
+        persistMedicineDTO(medicineDTO, connection);
+      }
+    }
+
+  }
+
+  private void persistMedicineDTO(MedicineDTO medicineDTO,
+                                  Connection connection) throws SQLException {
+    String sql = "INSERT INTO MEDICATION_MANAGER.MEDICINE " +
+        "(ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION) " +
+        "VALUES (?, ?, ?, ?, ?, ?)";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = connection.prepareStatement(sql);
+      insertRecordIntoMedicineTable(medicineDTO, ps);
     } finally {
       closeStatement(ps);
     }
+  }
 
-  }*/
+  private void insertRecordIntoMedicineTable(MedicineDTO medicineDTO, PreparedStatement ps) throws SQLException {
+    int id = database.getNextIdFromIdGenerator();
+    ps.setInt(1, id);
+    ps.setString(2, medicineDTO.getName());
+    ps.setString(3, medicineDTO.getDescription());
+    ps.setString(4, medicineDTO.getSideeffects());
+    ps.setString(5, medicineDTO.getIncompliances());
+    ps.setString(6, medicineDTO.getMealRelationDTO().getValue());
+    ps.execute();
+  }
+
+  private Set<String> getMedicineNames(Connection connection) throws SQLException {
+    String sql = "SELECT MEDICINE_NAME FROM MEDICATION_MANAGER.MEDICINE";
+
+    Statement statement = null;
+    ResultSet rs = null;
+
+    try {
+      statement = connection.createStatement();
+      rs = statement.executeQuery(sql);
+      Set<String> medicineNames = new HashSet<String>();
+      while (rs.next()) {
+        medicineNames.add(rs.getString(1));
+      }
+      return medicineNames;
+    } finally {
+      if (rs != null) {
+        rs.close();
+      }
+      closeStatement(statement);
+    }
+  }
+
+  private void insertRecordIntoPrescriptionTable(PrescriptionDTO prescriptionDTO,
+                                                 PreparedStatement ps) throws SQLException {
+
+    int id = database.getNextIdFromIdGenerator();
+    ps.setInt(1, id);
+    Date now = new Date();
+    long time = now.getTime();
+    Timestamp timeOfCreation = new Timestamp(time);
+    ps.setTimestamp(2, timeOfCreation);
+    ps.setInt(3, prescriptionDTO.getPatient().getId());
+    ps.setInt(4, prescriptionDTO.getPhysician().getId());
+    ps.setString(5, prescriptionDTO.getDescription());
+    ps.setString(6, PrescriptionStatus.ACTIVE.getType());
+    ps.execute();
+  }
 
   private void setConnectionAutoCommitToTrue(Connection connection) {
     try {
