@@ -11,23 +11,21 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
  */
 public final class Intake extends Entity {
 
-  private final Person patient;
-  private final Medicine medicine;
+  private final Treatment treatment;
   private final int quantity;
   private final UnitClass unitClass;
   private final Date timePlan;
   private final Date timeTaken;
   private final Dispenser dispenser;
 
-  public Intake(int id, Person patient, Medicine medicine, int quantity, UnitClass unitClass,
+  public Intake(int id, Treatment treatment, int quantity, UnitClass unitClass,
                 Date timePlan, Date timeTaken, Dispenser dispenser) {
 
     super(id);
 
-    validate(patient, medicine, quantity, unitClass, timePlan);
+    validate(treatment, quantity, unitClass, timePlan);
 
-    this.patient = patient;
-    this.medicine = medicine;
+    this.treatment = treatment;
     this.quantity = quantity;
     this.unitClass = unitClass;
     this.timePlan = timePlan;
@@ -35,30 +33,25 @@ public final class Intake extends Entity {
     this.dispenser = dispenser;
   }
 
-  public Intake(Person patient, Medicine medicine, int quantity, UnitClass unitClass,
+  public Intake(Treatment treatment, int quantity, UnitClass unitClass,
                 Date timePlan, Date timeTaken, Dispenser dispenser) {
 
-    this(0, patient, medicine, quantity, unitClass, timePlan, timeTaken, dispenser);
+    this(0, treatment, quantity, unitClass, timePlan, timeTaken, dispenser);
   }
 
 
-  private void validate(Person patient, Medicine medicine, int quantity,
+  private void validate(Treatment treatment, int quantity,
                         UnitClass unitClass, Date timePlan) {
 
-    validateParameter(patient, "patient");
-    validateParameter(medicine, "medicine");
+    validateParameter(treatment, "treatment");
     validateParameter(quantity, "quantity");
     validateParameter(unitClass, "unitClass");
     validateParameter(timePlan, "timePlan");
 
   }
 
-  public Person getPatient() {
-    return patient;
-  }
-
-  public Medicine getMedicine() {
-    return medicine;
+  public Treatment getTreatment() {
+    return treatment;
   }
 
   public int getQuantity() {
@@ -84,9 +77,7 @@ public final class Intake extends Entity {
   @Override
   public String toString() {
     return "Intake{" +
-        "id=" + getId() +
-        ", patient:" + patient +
-        ", medicine=" + medicine +
+        "treatment=" + treatment +
         ", quantity=" + quantity +
         ", unitClass=" + unitClass +
         ", timePlan=" + timePlan +

@@ -24,6 +24,8 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.Pe
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Prescription;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationReminderContextProvider;
@@ -79,7 +81,10 @@ public final class UsecaseMedicationReminder extends Usecase {
     IntakeDao intakeDao = persistentService.getIntakeDao();
     Intake intake = intakeDao.getById(getIdFromString(parameters[1]));
 
-    int intakePersonId = intake.getPatient().getId();
+    Treatment treatment = intake.getTreatment();
+    Prescription prescription = treatment.getPrescription();
+    Person patient = prescription.getPatient();
+    int intakePersonId = patient.getId();
 
     if (intakePersonId != personId) {
       throw new MedicationManagerShellException("The intake with id=" + intake.getId() +

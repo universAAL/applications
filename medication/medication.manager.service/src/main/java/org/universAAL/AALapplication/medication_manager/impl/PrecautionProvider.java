@@ -19,9 +19,11 @@ package org.universAAL.AALapplication.medication_manager.impl;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.TreatmentDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Prescription;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
@@ -32,6 +34,7 @@ import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.medMgr.Precaution;
 import org.universAAL.ontology.profile.User;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -111,8 +114,13 @@ public final class PrecautionProvider extends ServiceCallee {
   }
 
   private Precaution[] getPrecautions(int personId, PersistentService persistentService) {
+
+    PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
+    List<Prescription> prescriptions = prescriptionDao.getByPerson(personId);
+
     TreatmentDao treatmentDao = persistentService.getTreatmentDao();
-    List<Treatment> treatments = treatmentDao.getByPersonAndActive(personId);
+
+    List<Treatment> treatments = getTreatments(prescriptions, treatmentDao);
 
     Map<Medicine, String> sideeffectMap = new LinkedHashMap<Medicine, String>();
     Map<Medicine, String> incompliancesMap = new LinkedHashMap<Medicine, String>();
@@ -132,6 +140,17 @@ public final class PrecautionProvider extends ServiceCallee {
     }
 
     return getPrecautions(sideeffectMap, incompliancesMap);
+  }
+
+  private List<Treatment> getTreatments(List<Prescription> prescriptions, TreatmentDao treatmentDao) {
+    List<Treatment> treatmentList = new ArrayList<Treatment>();
+
+    for (Prescription pr : prescriptions) {
+      List<Treatment> treatments = treatmentDao.getByPrescriptionAndActive(pr.getId());
+      treatmentList.addAll(treatments);
+    }
+
+    return treatmentList;
   }
 
   private Precaution[] getPrecautions(Map<Medicine, String> sideeffectMap, Map<Medicine, String> incompliancesMap) {

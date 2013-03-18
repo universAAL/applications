@@ -6,7 +6,6 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.In
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescribedMedicineDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.TreatmentDao;
 
@@ -29,8 +28,6 @@ public interface PersistentService {
   MedicineInventoryDao getMedicineInventoryDao();
 
   PersonDao getPersonDao();
-
-  PrescribedMedicineDao getPrescribedMedicineDao();
 
   PrescriptionDao getPrescriptionDao();
 
