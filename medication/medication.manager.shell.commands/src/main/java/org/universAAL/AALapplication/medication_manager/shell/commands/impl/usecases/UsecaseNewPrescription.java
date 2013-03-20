@@ -18,8 +18,8 @@
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionFactory;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
 
@@ -86,9 +86,9 @@ public final class UsecaseNewPrescription extends Usecase {
 
     info("The Medication Manager will try to save prescriptionDTO in the database: ", getClass());
 
-    PrescriptionFactory prescriptionFactory = getPrescriptionFactory();
+    PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
 
-    prescriptionFactory.save(prescriptionDTO);
+    prescriptionDao.save(prescriptionDTO);
 
     info("The Medication Manager successfully saved prescriptionDTO in the database: ", getClass());
 

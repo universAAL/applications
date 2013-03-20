@@ -17,6 +17,7 @@
 
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dto;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 
 import java.util.Date;
@@ -29,17 +30,16 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
  */
 public final class PrescriptionDTO {
 
-  private final int id;
+  private int prescriptionId;
   private final String description;
   private final Date startDate;
   private final Set<MedicineDTO> medicineDTOSet;
   private final Person physician;
   private final Person patient;
 
-  public PrescriptionDTO(int id, String description, Date startDate,
+  public PrescriptionDTO(String description, Date startDate,
                          Set<MedicineDTO> medicineDTOSet, Person physician, Person patient) {
 
-    validateParameter(id, "id");
     validateParameter(description, "description");
     validateParameter(startDate, "startDate");
     validateParameter(medicineDTOSet, "medicineDTOSet");
@@ -47,7 +47,6 @@ public final class PrescriptionDTO {
     validateParameter(physician, "physician");
     validateParameter(patient, "patient");
 
-    this.id = id;
     this.description = description.toUpperCase();
     this.startDate = startDate;
     this.medicineDTOSet = medicineDTOSet;
@@ -55,8 +54,15 @@ public final class PrescriptionDTO {
     this.patient = patient;
   }
 
-  public int getId() {
-    return id;
+  public int getPrescriptionId() {
+    if (prescriptionId == 0) {
+      throw new MedicationManagerPersistenceException("The prescriptionId is not set");
+    }
+    return prescriptionId;
+  }
+
+  public void setPrescriptionId(int prescriptionId) {
+    this.prescriptionId = prescriptionId;
   }
 
   public String getDescription() {
@@ -82,7 +88,6 @@ public final class PrescriptionDTO {
   @Override
   public String toString() {
     return "PrescriptionDTO{" +
-        "id=" + id +
         ", description='" + description + '\'' +
         ", startDate=" + startDate +
         ", medicineDTOSet=" + medicineDTOSet +

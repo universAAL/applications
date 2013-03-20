@@ -3,7 +3,7 @@
 <!--meal_relation:before, after, with_meal, any-->
 <!--unit:pill, drops-->
 
-<prescription description="cold" start_date="18/5/2012">
+<prescription description="cold" start_date="18/31/2012">
   <medicines>
 
     <medicine name="aspirin" days="5">
@@ -13,7 +13,12 @@
       <meal_relation>with_meal</meal_relation>
       <intakes>
         <intake>
-          <time>8:15</time>
+          <time>20:00</time>
+          <unit>pill</unit>
+          <dose>2</dose>
+        </intake>
+        <intake>
+          <time>08:00</time>
           <unit>pill</unit>
           <dose>1</dose>
         </intake>
@@ -28,44 +33,39 @@
       <meal_relation>any</meal_relation>
       <intakes>
         <intake>
-          <time>12:00</time>
+          <time>15:10</time>
           <unit>pill</unit>
           <dose>2</dose>
         </intake>
         <intake>
-          <time>20:50</time>
+          <time>21:00</time>
           <unit>pill</unit>
-          <dose>15</dose>
+          <dose>7</dose>
         </intake>
       </intakes>
 
     </medicine>
 
-    <medicine name="centrum" days="15">
-      <description>centrum description</description>
-      <sideffects>centrum sideffects</sideffects>
-      <incompliances>centrum incompliances</incompliances>
-      <meal_relation>before</meal_relation>
+    <medicine name="milgama N" days="7">
+      <description>milgama N description</description>
+      <sideffects>milgama N sideffects</sideffects>
+      <incompliances>milgama N incompliances</incompliances>
+      <meal_relation>with_meal</meal_relation>
       <intakes>
         <intake>
-          <time>23:50</time>
+          <time>23:59</time>
           <unit>pill</unit>
-          <dose>1</dose>
+          <dose>2</dose>
         </intake>
-      </intakes>
-
-    </medicine>
-
-    <medicine name="valerian" days="15">
-      <description>valerian description</description>
-      <sideffects>valerian sideffects</sideffects>
-      <incompliances>valerian incompliances</incompliances>
-      <meal_relation>before</meal_relation>
-      <intakes>
         <intake>
-          <time>18:50</time>
-          <unit>drops</unit>
-          <dose>18</dose>
+          <time>07:49</time>
+          <unit>pill</unit>
+          <dose>2</dose>
+        </intake>
+        <intake>
+          <time>17:59</time>
+          <unit>pill</unit>
+          <dose>2</dose>
         </intake>
       </intakes>
 
@@ -78,7 +78,7 @@
   </doctor>
 
   <patient>
-    <id>1</id>
+    <id>3</id>
   </patient>
 
 </prescription>

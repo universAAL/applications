@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl.database;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 
 import java.sql.Connection;
@@ -80,6 +81,21 @@ public abstract class AbstractDao {
     Connection connection = database.getConnection();
 
     return connection.prepareStatement(sql);
+  }
+
+  public void rollback(Connection connection, Exception exc) {
+
+    if (connection == null) {
+      return;
+    }
+
+    Log.info("Exception occurred: %s. Rollback changes", getClass(), exc.getMessage());
+
+    try {
+      connection.rollback();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
   }
 
 

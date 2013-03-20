@@ -25,7 +25,6 @@ import org.universAAL.AALapplication.medication_manager.configuration.Configurat
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.DerbyDatabase;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionFactory;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -61,9 +60,6 @@ public class Activator implements BundleActivator {
     PersistentService persistentService = new PersistentServiceImpl(derbyDatabase);
     context.registerService(PersistentService.class.getName(),
         persistentService, null);
-
-    context.registerService(PrescriptionFactory.class.getName(),
-            new PrescriptionFactoryImpl(persistentService), null);
 
   }
 

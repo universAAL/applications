@@ -17,6 +17,11 @@
 
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dto;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
@@ -26,25 +31,29 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
  */
 public final class MedicineDTO {
 
-  private final int id;
+  private int medicineId;
   private final String name;
   private final int days;
+  private final Date treatmentStartDate;
+  private final Date treatmentEndDate;
   private final String description;
   private final String sideeffects;
   private final String incompliances;
   private final MealRelationDTO mealRelationDTO;
   private final Set<IntakeDTO> intakeDTOSet;
 
-  public MedicineDTO(int id, String name, int days, String description, String sideeffects, String incompliances,
+  public MedicineDTO(String name, Date startDate, int days,
+                     String description, String sideeffects, String incompliances,
                      MealRelationDTO mealRelationDTO, Set<IntakeDTO> intakeDTOSet) {
 
-    validateParameter(id, "id");
     validateParameter(name, "name");
+    validateParameter(startDate, "startDate");
     validateParameter(mealRelationDTO, "mealRelationDTO");
     validateParameter(intakeDTOSet, "intakeDTOSet");
 
-    this.id = id;
     this.name = name.toUpperCase();
+    this.treatmentStartDate = startDate;
+    this.treatmentEndDate = endDate(startDate, days);
     this.days = days;
     this.description = description != null ? description.toUpperCase() : null;
     this.sideeffects = sideeffects != null ? sideeffects.toUpperCase() : null;
@@ -53,12 +62,36 @@ public final class MedicineDTO {
     this.intakeDTOSet = intakeDTOSet;
   }
 
-  public int getId() {
-    return id;
+  public int getMedicineId() {
+    if (medicineId == 0) {
+      throw new MedicationManagerPersistenceException("The prescriptionId is not set");
+    }
+    return medicineId;
+  }
+
+  public void setMedicineIdId(int medicineId) {
+    this.medicineId = medicineId;
+  }
+
+  private static Date endDate(Date startDate, int days) {
+    GregorianCalendar cal = new GregorianCalendar();
+    cal.setTime(startDate);
+
+    cal.add(Calendar.DAY_OF_MONTH, days);
+
+    return cal.getTime();
   }
 
   public String getName() {
     return name;
+  }
+
+  public Date getTreatmentStartDate() {
+    return treatmentStartDate;
+  }
+
+  public Date getTreatmentEndDate() {
+    return treatmentEndDate;
   }
 
   public int getDays() {
@@ -88,9 +121,10 @@ public final class MedicineDTO {
   @Override
   public String toString() {
     return "MedicineDTO{" +
-        "id=" + id +
         ", name='" + name + '\'' +
         ", days=" + days +
+        ", treatmentStartDate=" + treatmentStartDate +
+        ", treatmentEndDate=" + treatmentEndDate +
         ", description='" + description + '\'' +
         ", sideeffects='" + sideeffects + '\'' +
         ", incompliances='" + incompliances + '\'' +

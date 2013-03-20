@@ -7,13 +7,17 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.Medicat
  */
 public enum UnitClass {
 
-  PILLS("PILLS"),
+  PILLS("PILL"),
   DROPS("DROPS");
 
   private String type;
 
   private UnitClass(String type) {
     this.type = type;
+  }
+
+  public String getType() {
+    return type;
   }
 
   public static UnitClass getEnumValueFor(String unitClassText) {

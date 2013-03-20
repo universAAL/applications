@@ -23,6 +23,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.In
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MealRelationDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
@@ -102,8 +103,6 @@ public final class PrescriptionParser {
 
     Log.info("Getting the attributes of the prescription", PrescriptionParser.class);
 
-    int id = getInt(documentElement, ID);
-
     String description = getText(documentElement, "description");
 
     Date startDate = getDate(documentElement);
@@ -111,13 +110,13 @@ public final class PrescriptionParser {
     Log.info("Trying to get the prescription child nodes", PrescriptionParser.class);
     NodeList nodeList = documentElement.getChildNodes();
 
-    Set<MedicineDTO> medicineDTOs = getMedicineSet(nodeList);
+    Set<MedicineDTO> medicineDTOs = getMedicineSet(nodeList, startDate);
 
     Person physician = getPhysician(nodeList, persistentService);
 
     Person patient = getPatient(nodeList, persistentService);
 
-    return new PrescriptionDTO(id, description, startDate, medicineDTOs, physician, patient);
+    return new PrescriptionDTO(description, startDate, medicineDTOs, physician, patient);
 
   }
 
@@ -213,17 +212,17 @@ public final class PrescriptionParser {
     return getPerson(nodeList, "patient", persistentService);
   }
 
-  private Set<MedicineDTO> getMedicineSet(NodeList nodeList) {
+  private Set<MedicineDTO> getMedicineSet(NodeList nodeList, Date startDate) {
     Log.info("Trying to get medicines tag", PrescriptionParser.class);
     Node medicinesNode = getNode(nodeList, "medicines");
     Log.info("Trying to get medicines child nodes", PrescriptionParser.class);
     NodeList medicineNodeList = medicinesNode.getChildNodes();
-    Set<MedicineDTO> medicineDTOs = getMedicines(medicineNodeList);
+    Set<MedicineDTO> medicineDTOs = getMedicines(medicineNodeList, startDate);
 
     return medicineDTOs;
   }
 
-  private Set<MedicineDTO> getMedicines(NodeList medicineNodeList) {
+  private Set<MedicineDTO> getMedicines(NodeList medicineNodeList, Date startDate) {
     Log.info("Trying to create Medicine Set", PrescriptionParser.class);
     List<Node> medicineNodes = new ArrayList<Node>();
     for (int i = 0; i < medicineNodeList.getLength(); i++) {
@@ -233,15 +232,15 @@ public final class PrescriptionParser {
       }
     }
 
-    return createMedicineSet(medicineNodes);
+    return createMedicineSet(medicineNodes, startDate);
   }
 
-  private Set<MedicineDTO> createMedicineSet(List<Node> medicineNodes) {
+  private Set<MedicineDTO> createMedicineSet(List<Node> medicineNodes, Date startDate) {
     Set<MedicineDTO> medicinesSet = new HashSet<MedicineDTO>();
 
     for (Node node : medicineNodes) {
       if ("medicine".equals(node.getNodeName()) && node.getNodeType() == Node.ELEMENT_NODE) {
-        MedicineDTO medicineDTO = createMedicine(node);
+        MedicineDTO medicineDTO = createMedicine(node, startDate);
         medicinesSet.add(medicineDTO);
       }
     }
@@ -254,9 +253,8 @@ public final class PrescriptionParser {
 
   }
 
-  private MedicineDTO createMedicine(Node node) {
+  private MedicineDTO createMedicine(Node node, Date startDate) {
     Element element = (Element) node;
-    int id = getInt(element, ID);
     String name = getText(element, "name");
     int days = getInt(element, "days");
 
@@ -270,13 +268,13 @@ public final class PrescriptionParser {
 
     Node sideffectsNode = getNode(nodeList, "sideffects");
 
-    String sideffects = descriptionNode.getTextContent();
+    String sideffects = sideffectsNode.getTextContent();
 
     Log.info("sideffects = %s", PrescriptionParser.class, sideffects);
 
     Node incompliancesNode = getNode(nodeList, "incompliances");
 
-    String incompliances = descriptionNode.getTextContent();
+    String incompliances = incompliancesNode.getTextContent();
 
     Log.info("incompliances = %s", PrescriptionParser.class, incompliances);
 
@@ -290,7 +288,8 @@ public final class PrescriptionParser {
 
     Set<IntakeDTO> intakeDTOSet = getIntakeSet(node.getChildNodes());
 
-    return new MedicineDTO(id, name, days, description, sideffects, incompliances, mealRelationDTO, intakeDTOSet);
+    return new MedicineDTO(name, startDate, days, description,
+        sideffects, incompliances, mealRelationDTO, intakeDTOSet);
 
   }
 
@@ -315,7 +314,7 @@ public final class PrescriptionParser {
     }
 
     if (intakeList.isEmpty()) {
-      throw new MedicationManagerShellException("Missing intake tag, which mus be child of the intakes tag");
+      throw new MedicationManagerShellException("Missing intake tag, which musT be child of the intakes tag");
     }
 
     return createIntakeSetFromNodes(intakeList);
@@ -333,7 +332,7 @@ public final class PrescriptionParser {
 
   private IntakeDTO createIntakeFromNode(Node intakeNode) {
     NodeList nodeList = intakeNode.getChildNodes();
-    String time = getTime(nodeList);
+    TimeDTO time = getTime(nodeList);
 
     IntakeDTO.Unit unit = getUnit(nodeList);
 
@@ -366,38 +365,12 @@ public final class PrescriptionParser {
     return IntakeDTO.Unit.getEnumValueFor(value);
   }
 
-  private String getTime(NodeList nodeList) {
+  private TimeDTO getTime(NodeList nodeList) {
     Node timeNode = getNode(nodeList, "time");
 
     String value = timeNode.getTextContent();
 
-    validateTime(value);
-
-    return value;
-  }
-
-  private void validateTime(String value) {
-    String message = "The time must be between 0:00 and 23:59 (in that format)";
-    int index = value.indexOf(':');
-    if (index <= 0) {
-      throw new MedicationManagerShellException(message);
-    }
-    String hourText = value.substring(0, index);
-
-    int hour = Integer.parseInt(hourText);
-
-    if (hour < 0 || hour > 23) {
-      throw new MedicationManagerShellException(message);
-    }
-
-    String minuteString = value.substring(index + 1);
-
-    int minute = Integer.parseInt(minuteString);
-
-    if (minute < 0 || minute > 59) {
-      throw new MedicationManagerShellException(message);
-    }
-
+    return TimeDTO.createTimeDTO(value);
   }
 
   private Node getNode(NodeList nodeList, String nodeName) {

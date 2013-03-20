@@ -23,7 +23,6 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionFactory;
 import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationConsoleCommands;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationManagerCommands;
@@ -197,25 +196,5 @@ public class Activator implements BundleActivator {
     }
     return service;
   }
-
-  public static PrescriptionFactory getPrescriptionFactory() {
-    if (bundleContext == null) {
-      throw new MedicationManagerShellException("The bundleContext is not set");
-    }
-
-    ServiceReference srPS = bundleContext.getServiceReference(PrescriptionFactory.class.getName());
-
-    if (srPS == null) {
-      throw new MedicationManagerShellException("The ServiceReference is null for PrescriptionFactory");
-    }
-
-    PrescriptionFactory service = (PrescriptionFactory) bundleContext.getService(srPS);
-
-    if (service == null) {
-      throw new MedicationManagerShellException("The PrescriptionFactory is missing");
-    }
-    return service;
-  }
-
 
 }
