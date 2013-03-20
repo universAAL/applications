@@ -52,6 +52,7 @@ public final class PersistentServiceImpl implements PersistentService {
     treatmentDao.setPrescriptionDao(prescriptionDao);
     treatmentDao.setMedicineDao(medicineDao);
     prescriptionDao.setPersonDao(personDao);
+    prescriptionDao.setMedicineDao(medicineDao);
   }
 
   public SqlUtility getSqlUtility() {

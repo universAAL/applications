@@ -26,21 +26,22 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
  */
 public final class IntakeDTO {
 
-  private final String time;
+  private final TimeDTO time;
   private final Unit unit;
   private final int dose;
 
-  public IntakeDTO(String time, Unit unit, int dose) {
+  public IntakeDTO(TimeDTO time, Unit unit, int dose) {
 
     validateParameter(time, "time");
     validateParameter(unit, "dose");
+    validateParameter(dose, "dose");
 
     this.time = time;
     this.unit = unit;
     this.dose = dose;
   }
 
-  public String getTime() {
+  public TimeDTO getTime() {
     return time;
   }
 
@@ -68,6 +69,10 @@ public final class IntakeDTO {
 
     Unit(String value) {
       this.value = value;
+    }
+
+    public String getValue() {
+      return value;
     }
 
     public static Unit getEnumValueFor(String unitText) {

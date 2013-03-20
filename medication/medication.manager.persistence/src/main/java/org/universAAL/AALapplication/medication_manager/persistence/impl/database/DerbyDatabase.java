@@ -57,7 +57,6 @@ public final class DerbyDatabase implements Database {
   public int getNextIdFromIdGenerator() {
     try {
       int sequenceValue = getNextSequenceValue();
-      System.out.println("getNextIdFromIdGenerator() = " + sequenceValue);
       return sequenceValue;
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException("unable to get next id from sequence generator", e);

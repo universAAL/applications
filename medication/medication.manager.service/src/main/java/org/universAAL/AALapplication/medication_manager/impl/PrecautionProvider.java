@@ -126,8 +126,7 @@ public final class PrecautionProvider extends ServiceCallee {
     Map<Medicine, String> incompliancesMap = new LinkedHashMap<Medicine, String>();
 
 
-    for (int i = 0; i < treatments.size(); i++) {
-      Treatment treatment = treatments.get(i);
+    for (Treatment treatment : treatments) {
       Medicine medicine = treatment.getMedicine();
       String se = medicine.getMedicineSideEffects();
       if (se != null && !se.trim().isEmpty()) {
@@ -147,10 +146,31 @@ public final class PrecautionProvider extends ServiceCallee {
 
     for (Prescription pr : prescriptions) {
       List<Treatment> treatments = treatmentDao.getByPrescriptionAndActive(pr.getId());
-      treatmentList.addAll(treatments);
+      addTreatments(treatmentList, treatments);
     }
 
     return treatmentList;
+  }
+
+  private void addTreatments(List<Treatment> treatmentList, List<Treatment> treatments) {
+
+    for (Treatment tr : treatments) {
+      if (treatmentHasUniqueMedicine(treatmentList, tr)) {
+        treatmentList.add(tr);
+      }
+    }
+
+  }
+
+  private boolean treatmentHasUniqueMedicine(List<Treatment> treatmentList, Treatment tr) {
+    boolean unique = true;
+    for (Treatment treatment : treatmentList) {
+      if (tr.getMedicine().getId() == treatment.getMedicine().getId()) {
+         unique = false;
+      }
+    }
+
+    return unique;
   }
 
   private Precaution[] getPrecautions(Map<Medicine, String> sideeffectMap, Map<Medicine, String> incompliancesMap) {
@@ -177,7 +197,7 @@ public final class PrecautionProvider extends ServiceCallee {
       return sb.toString();
     }
 
-    Set<Medicine> medicines = map.keySet ();
+    Set<Medicine> medicines = map.keySet();
 
     int count = 0;
     for (Medicine med : medicines) {

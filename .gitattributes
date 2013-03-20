@@ -2827,6 +2827,7 @@ medication/medication.manager.configuration/src/main/resources/CreateTables.sql 
 medication/medication.manager.configuration/src/main/resources/DataLoad.sql -text
 medication/medication.manager.configuration/src/main/resources/medication.properties -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/prescriptions/1.xml -text
+medication/medication.manager.configuration/src/main/resources/medication_manager/prescriptions/2.xml -text
 medication/medication.manager.integration.tests/artifact.composite -text
 medication/medication.manager.integration.tests/pom.xml -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text
@@ -2837,7 +2838,6 @@ medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplic
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/impl/Log.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/impl/MedicationManagerPersistenceException.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/impl/PersistentServiceImpl.java -text
-medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/impl/PrescriptionFactoryImpl.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/impl/database/AbstractDao.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/impl/database/Column.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/impl/database/Database.java -text
@@ -2858,7 +2858,7 @@ medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplic
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/dto/MealRelationDTO.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/dto/MedicineDTO.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/dto/PrescriptionDTO.java -text
-medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/dto/PrescriptionFactory.java -text
+medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/dto/TimeDTO.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/entities/Dispenser.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/entities/Intake.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/entities/InventoryLog.java -text

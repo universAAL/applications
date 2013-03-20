@@ -21,6 +21,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.In
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MealRelationDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.Log;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.NewPrescriptionContextProvider;
 import org.universAAL.middleware.container.ModuleContext;
@@ -90,7 +91,7 @@ public final class NewPrescriptionHandler {
     Set<MedicineDTO> medicineDTOSet = prescriptionDTO.getMedicineDTOSet();
     for (MedicineDTO medicineDTO : medicineDTOSet) {
       Medicine medicine = new Medicine();
-      medicine.setMedicineId(medicineDTO.getId());
+      medicine.setMedicineId(medicineDTO.getMedicineId());
       medicine.setDays(medicineDTO.getDays());
       medicine.setDescription(medicineDTO.getDescription());
       medicine.setName(medicineDTO.getName());
@@ -112,7 +113,7 @@ public final class NewPrescriptionHandler {
       throws DatatypeConfigurationException {
 
     NewPrescription newPrescription = new NewPrescription();
-    newPrescription.setPrescriptionId(prescriptionDTO.getId());
+    newPrescription.setPrescriptionId(prescriptionDTO.getPrescriptionId());
     newPrescription.setDescription(prescriptionDTO.getDescription());
     Date startDate = prescriptionDTO.getStartDate();
     newPrescription.setDate(getXMLGregorianCalendar(startDate));
@@ -158,7 +159,7 @@ public final class NewPrescriptionHandler {
 
     MedicationTreatment medicationTreatment = new MedicationTreatment();
 
-    medicationTreatment.setPrescriptionId(prescriptionDTO.getId());
+    medicationTreatment.setPrescriptionId(prescriptionDTO.getPrescriptionId());
     medicationTreatment.setName(MEDICATION_TREATMENT);
     medicationTreatment.setDoctorName(prescriptionDTO.getPhysician().getName());
     medicationTreatment.setDescription(prescriptionDTO.getDescription());
@@ -234,7 +235,8 @@ public final class NewPrescriptionHandler {
     for (IntakeDTO intakeDTO : intakeDTOSet) {
       Intake intake = new Intake();
       intake.setDose(intakeDTO.getDose());
-      intake.setTime(intakeDTO.getTime());
+      TimeDTO time = intakeDTO.getTime();
+      intake.setTime(time.getTimeText());
       setIntakeEnum(intake, intakeDTO);
       intakeList.add(intake);
     }
