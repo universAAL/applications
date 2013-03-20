@@ -75,7 +75,7 @@ public final class MedicineDao extends AbstractDao {
     StringBuffer sqlBuffer = new StringBuffer();
 
     sqlBuffer.append("select * from MEDICATION_MANAGER.MEDICINE\n" +
-        "  where MEDICINE_NAME in(");
+        "  where UPPER(MEDICINE_NAME) in(");
 
     int size = medicineDTOSet.size();
 
@@ -83,7 +83,7 @@ public final class MedicineDao extends AbstractDao {
     for (MedicineDTO dto : medicineDTOSet) {
       String name = dto.getName();
       sqlBuffer.append('\'');
-      sqlBuffer.append(name);
+      sqlBuffer.append(name.toUpperCase());
       sqlBuffer.append('\'');
       i++;
       if (i < size) {

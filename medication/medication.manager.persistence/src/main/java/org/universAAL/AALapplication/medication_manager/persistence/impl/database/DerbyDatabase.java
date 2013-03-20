@@ -65,9 +65,12 @@ public final class DerbyDatabase implements Database {
   }
 
   public Map<String, Column> getById(String tableName, int id) {
+
     String message = "There are more than one record with the following id : " + id;
+
     String sqlQuery = "select * from " + MEDICATION_MANAGER + '.' + tableName +
         "\n\t where id=" + id;
+
     return getStringColumnMapSingleRecord(sqlQuery, tableName, message);
   }
 
@@ -270,7 +273,6 @@ public final class DerbyDatabase implements Database {
     int counter = 0;
     while (sqlTablesMap.size() > counter) {
       String sqlStatement = sqlTablesMap.get(counter + 1);
-      sqlStatement = sqlStatement.toUpperCase();
       statement.executeUpdate(sqlStatement);
       counter++;
     }

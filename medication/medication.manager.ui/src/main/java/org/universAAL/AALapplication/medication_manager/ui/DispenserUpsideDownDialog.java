@@ -33,6 +33,8 @@ import org.universAAL.ontology.profile.User;
 
 import java.util.Locale;
 
+import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
+
 public class DispenserUpsideDownDialog extends UICaller {
 
   private static final String DISPENSER_UPSIDE_DOWN_FORM = "DispenserUpsideDownFor";
@@ -55,7 +57,11 @@ public class DispenserUpsideDownDialog extends UICaller {
   }
 
   public void showDialog(User inputUser) {
+
+    validateParameter(inputUser, "inputUser");
+
     Log.info("Request a DispenserUpsideDownDialog for user %s", getClass(), inputUser);
+
     Form f = Form.newDialog("Medication Manager UI", new Resource());
     //start of the form model
     String message = getMessage(inputUser);
@@ -68,6 +74,7 @@ public class DispenserUpsideDownDialog extends UICaller {
   }
 
   private String getMessage(User user) {
+
     StringBuilder sb = new StringBuilder();
     String userFriendlyname = ReminderDialog.getUserfriendlyName(user);
     sb.append(userFriendlyname);

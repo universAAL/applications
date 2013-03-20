@@ -1,98 +1,98 @@
-// PERSON TABLE
+// person table
 
-INSERT INTO MEDICATION_MANAGER.PERSON (ID, NAME, PERSON_URI, ROLE)
-VALUES (1, 'SAID', 'URN:ORG.UNIVERSAAL.AAL_SPACE:TEST_ENV#SAIED', 'PATIENT');
+insert into medication_manager.person (id, name, person_uri, role)
+values (1, 'said', 'urn:org.universaal.aal_space:test_env#saied', 'patient');
 
-INSERT INTO MEDICATION_MANAGER.PERSON (ID, NAME, PERSON_URI, ROLE, USERNAME, PASSWORD)
-VALUES (2, 'D-R PENCHO PENCHEV', 'URN:ORG.UNIVERSAAL.AAL_SPACE:TEST_ENV#PENCHO', 'PHYSICIAN', 'pencho', 'pass');
+insert into medication_manager.person (id, name, person_uri, role, username, password)
+values (2, 'd-r Pencho Penchev', 'urn:org.universaal.aal_space:test_env#pencho', 'physician', 'pencho', 'pass');
 
-INSERT INTO MEDICATION_MANAGER.PERSON (ID, NAME, PERSON_URI, ROLE)
-VALUES (3, 'ALEJANDRO', 'URN:ORG.UNIVERSAAL.AAL_SPACE:TEST_ENV#ALEJANDRO', 'PATIENT');
+insert into medication_manager.person (id, name, person_uri, role)
+values (3, 'Alejandro', 'urn:org.universaal.aal_space:test_env#alejandro', 'patient');
 
-INSERT INTO MEDICATION_MANAGER.PERSON (ID, NAME, PERSON_URI, ROLE)
-VALUES (4, 'GEORGE', 'URN:ORG.UNIVERSAAL.AAL_SPACE:TEST_ENV#GEORGE', 'PATIENT');
+insert into medication_manager.person (id, name, person_uri, role)
+values (4, 'George', 'urn:org.universaal.aal_space:test_env#george', 'patient');
 
-INSERT INTO MEDICATION_MANAGER.PERSON (ID, NAME, PERSON_URI, ROLE)
-VALUES (5, 'VENELIN', 'URN:ORG.UNIVERSAAL.AAL_SPACE:TEST_ENV#VENELIN', 'PATIENT');
+insert into medication_manager.person (id, name, person_uri, role)
+values (5, 'Venelin', 'urn:org.universaal.aal_space:test_env#venelin', 'patient');
 
-// MEDICINE TABLE
+// medicine table
 
-INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
-VALUES (1, 'ASPIRIN', 'ASPIRIN DESCRIPTION', 'NO SIDEEFFECT', 'THESE MEDICATIONS MUST NOT BE USED WITH ALCOHOL', 'WITH_MEAL');
+insert into medication_manager.medicine (id, medicine_name, medicine_info, side_effects, incompliances, meal_relation)
+values (1, 'Aspirin', 'aspirin description', 'no sideeffect', 'these medications must not be used with alcohol', 'with_meal');
 
-INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
-VALUES (2, 'ANALGIN', 'ANALGIN DESCRIPTION', 'ANALGIN SIDE_EFFECTS', 'ANALGIN INCOMPLIANCES', 'ANY');
+insert into medication_manager.medicine (id, medicine_name, medicine_info, side_effects, incompliances, meal_relation)
+values (2, 'Analgin', 'analgin description', 'analgin side_effects', 'analgin incompliances', 'any');
 
-INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
-VALUES (3, 'VITERAL', 'VITERAL DESCRIPTION', 'VITERAL SIDE_EFFECTS', 'VITERAL INCOMPLIANCES', 'BEFORE');
+insert into medication_manager.medicine (id, medicine_name, medicine_info, side_effects, incompliances, meal_relation)
+values (3, 'Viteral', 'viteral description', 'viteral side_effects', 'viteral incompliances', 'before');
 
-INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
-VALUES (4, 'VALIDOL', 'VALIDOL DESCRIPTION', 'VALIDOL SIDE_EFFECTS', 'VALIDOL INCOMPLIANCES', 'ANY');
+insert into medication_manager.medicine (id, medicine_name, medicine_info, side_effects, incompliances, meal_relation)
+values (4, 'Validol', 'validol description', 'validol side_effects', 'validol incompliances', 'any');
 
-INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
-VALUES (5, 'BENALGIN', 'BENALGIN DESCRIPTION', 'BENALGIN SIDE_EFFECTS', 'BENALGIN INCOMPLIANCES', 'AFTER');
+insert into medication_manager.medicine (id, medicine_name, medicine_info, side_effects, incompliances, meal_relation)
+values (5, 'Benalgin', 'benalgin description', 'benalgin side_effects', 'benalgin incompliances', 'after');
 
-INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION)
-VALUES (6, 'ZOCOR', 'ZOCOR DESCRIPTION',
-'SEVERE ALLERGIC REACTIONS (RASH; HIVES; ITCHING; DIFFICULTY BREATHING; TIGHTNESS IN THE CHEST;SWELLING OF THE MOUTH, FACE, LIPS, OR TONGUE; UNUSUAL HOARSENESS); BURNING, NUMBNESS, OR TINGLING;CHANGE IN THE AMOUNT OF URINE PRODUCED; CONFUSION; DARK OR RED-COLORED URINE; DECREASED SEXUAL ABILITY; DEPRESSION; DIZZINESS; FAST OR IRREGULAR HEARTBEAT; FEVER, CHILLS, OR PERSISTENT SORE THROAT; JOINT PAIN; LOSS OF APPETITE; MEMORY PROBLEMS; MUSCLE PAIN, TENDERNESS, OR WEAKNESS (WITH OR WITHOUT FEVER AND FATIGUE); PALE STOOLS; RED, SWOLLEN, BLISTERED, OR PEELING SKIN; SEVERE OR PERSISTENT NAUSEA OR STOMACH OR BACK PAIN; SHORTNESS OF BREATH; TROUBLE SLEEPING; UNUSUAL BRUISING OR BLEEDING; UNUSUAL TIREDNESS OR WEAKNESS; VOMITING;  YELLOWING OF THE SKIN OR EYES.',
-'THESE MEDICATIONS MUST NOT BE USED WITH ALCOHOL', 'AFTER');
+insert into medication_manager.medicine (id, medicine_name, medicine_info, side_effects, incompliances, meal_relation)
+values (6, 'Zocor', 'zocor description',
+'severe allergic reactions (rash; hives; itching; difficulty breathing; tightness in the chest;swelling of the mouth, face, lips, or tongue; unusual hoarseness); burning, numbness, or tingling;change in the amount of urine produced; confusion; dark or red-colored urine; decreased sexual ability; depression; dizziness; fast or irregular heartbeat; fever, chills, or persistent sore throat; joint pain; loss of appetite; memory problems; muscle pain, tenderness, or weakness (with or without fever and fatigue); pale stools; red, swollen, blistered, or peeling skin; severe or persistent nausea or stomach or back pain; shortness of breath; trouble sleeping; unusual bruising or bleeding; unusual tiredness or weakness; vomiting;  yellowing of the skin or eyes.',
+'these medications must not be used with alcohol', 'after');
 
-// DISPENSER TABLE
+// dispenser table
 
-INSERT INTO MEDICATION_MANAGER.DISPENSER (ID, PATIENT_FK_ID, DISPENSER_URI) VALUES (1, 1, 'DISPENSERURI');
-INSERT INTO MEDICATION_MANAGER.DISPENSER (ID, PATIENT_FK_ID, DISPENSER_URI) VALUES (2, 4, 'DISPENSERURIGEORGE');
+insert into medication_manager.dispenser (id, patient_fk_id, dispenser_uri) values (1, 1, 'dispenseruri');
+insert into medication_manager.dispenser (id, patient_fk_id, dispenser_uri) values (2, 4, 'dispenserurigeorge');
 
-// MEDICINE_INVENTORY TABLE
+// medicine_inventory table
 
-INSERT INTO MEDICATION_MANAGER.MEDICINE_INVENTORY (ID, PATIENT_FK_ID, MEDICINE_FK_ID, UNIT_CLASS, QUANTITY, WARNING_THRESHOLD)
-VALUES (1, 1, 1, 'PILL', 100, 10);
+insert into medication_manager.medicine_inventory (id, patient_fk_id, medicine_fk_id, unit_class, quantity, warning_threshold)
+values (1, 1, 1, 'pill', 100, 10);
 
-INSERT INTO MEDICATION_MANAGER.MEDICINE_INVENTORY (ID, PATIENT_FK_ID, MEDICINE_FK_ID, UNIT_CLASS, QUANTITY, WARNING_THRESHOLD)
-VALUES (2, 1, 2, 'PILL', 200, 10);
+insert into medication_manager.medicine_inventory (id, patient_fk_id, medicine_fk_id, unit_class, quantity, warning_threshold)
+values (2, 1, 2, 'pill', 200, 10);
 
-INSERT INTO MEDICATION_MANAGER.MEDICINE_INVENTORY (ID, PATIENT_FK_ID, MEDICINE_FK_ID, UNIT_CLASS, QUANTITY, WARNING_THRESHOLD)
-VALUES (3, 1, 3, 'PILL', 100, 10);
+insert into medication_manager.medicine_inventory (id, patient_fk_id, medicine_fk_id, unit_class, quantity, warning_threshold)
+values (3, 1, 3, 'pill', 100, 10);
 
-// INVENTORY_LOG TABLE
+// inventory_log table
 
-INSERT INTO MEDICATION_MANAGER.INVENTORY_LOG (ID, TIME_OF_CREATION, PATIENT_FK_ID, MEDICINE_FK_ID, CHANGE_QUANTITY, UNITS, REFERENCE)
-VALUES (1, '2012-12-19 16:03:20', 1, 1, 30, 'PILL', 'PURCHASE');
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (1, '2012-12-19 16:03:20', 1, 1, 30, 'pill', 'purchase');
 
-INSERT INTO MEDICATION_MANAGER.INVENTORY_LOG (ID, TIME_OF_CREATION, PATIENT_FK_ID, MEDICINE_FK_ID, CHANGE_QUANTITY, UNITS, REFERENCE)
-VALUES (2, '2012-12-19 16:12:24', 1, 1, -1, 'PILL', 'INTAKE');
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (2, '2012-12-19 16:12:24', 1, 1, -1, 'pill', 'intake');
 
-// PRESCRIPTION TABLE
+// prescription table
 
-INSERT INTO MEDICATION_MANAGER.PRESCRIPTION (ID, TIME_OF_CREATION, PATIENT_FK_ID, PHYSICIAN_FK_ID, DESCRIPTION, STATUS)
-VALUES (1, '2012-12-19 17:07:36', 1, 2, 'COLD', 'ACTIVE');
-INSERT INTO MEDICATION_MANAGER.PRESCRIPTION (ID, TIME_OF_CREATION, PATIENT_FK_ID, PHYSICIAN_FK_ID, DESCRIPTION, STATUS)
-VALUES (2, '2012-12-21 17:07:36', 1, 2, 'BLOOD PRESSURE', 'ACTIVE');
+insert into medication_manager.prescription (id, time_of_creation, patient_fk_id, physician_fk_id, description, status)
+values (1, '2012-12-19 17:07:36', 1, 2, 'cold', 'active');
+insert into medication_manager.prescription (id, time_of_creation, patient_fk_id, physician_fk_id, description, status)
+values (2, '2012-12-21 17:07:36', 1, 2, 'blood pressure', 'active');
 
-// TREATMENT TABLE
+// treatment table
 
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, STATUS, START_DATE, END_DATE)
-VALUES (1, 1, 1, 'Y', '2012-12-19 00:00:00', '2012-12-19 23:59:00');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, STATUS, START_DATE, END_DATE)
-VALUES (2, 1, 3, 'Y', '2012-12-19 00:00:00', '2012-12-19 23:59:00');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, STATUS, START_DATE, END_DATE)
-VALUES (3, 1, 5, 'N', '2012-12-19 00:00:00', '2012-12-19 23:59:00');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, STATUS, START_DATE, END_DATE)
-VALUES (4, 2, 6, 'Y', '2013-02-19 00:00:00', '2013-02-19 23:59:00');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, STATUS, START_DATE, END_DATE)
-VALUES (5, 2, 2, 'Y', '2013-02-19 00:00:00', '2013-02-19 23:59:00');
+insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
+values (1, 1, 1, 'y', '2012-12-19 00:00:00', '2012-12-19 23:59:00');
+insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
+values (2, 1, 3, 'y', '2012-12-19 00:00:00', '2012-12-19 23:59:00');
+insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
+values (3, 1, 5, 'n', '2012-12-19 00:00:00', '2012-12-19 23:59:00');
+insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
+values (4, 2, 6, 'y', '2013-02-19 00:00:00', '2013-02-19 23:59:00');
+insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
+values (5, 2, 2, 'y', '2013-02-19 00:00:00', '2013-02-19 23:59:00');
 
-// INTAKE TABLE
+// intake table
 
-INSERT INTO MEDICATION_MANAGER.INTAKE (ID, TREATMENT_FK_ID, QUANTITY, UNITS, TIME_PLAN)
-VALUES (1, 1, 1, 'PILL', '2012-12-19 16:10:00');
-INSERT INTO MEDICATION_MANAGER.INTAKE (ID, TREATMENT_FK_ID, QUANTITY, UNITS, TIME_PLAN)
-VALUES (2, 2, 2, 'PILL', '2012-12-19 16:10:00');
-INSERT INTO MEDICATION_MANAGER.INTAKE (ID, TREATMENT_FK_ID, QUANTITY, UNITS, TIME_PLAN)
-VALUES (3, 3, 3, 'PILL', '2012-12-19 16:10:00');
-INSERT INTO MEDICATION_MANAGER.INTAKE (ID, TREATMENT_FK_ID, QUANTITY, UNITS, TIME_PLAN)
-VALUES (4, 4, 2, 'PILL', '2013-02-19 21:05:00');
-INSERT INTO MEDICATION_MANAGER.INTAKE (ID, TREATMENT_FK_ID, QUANTITY, UNITS, TIME_PLAN)
-VALUES (5, 5, 1, 'PILL', '2013-02-19 21:05:00');
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (1, 1, 1, 'pill', '2012-12-19 16:10:00');
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (2, 2, 2, 'pill', '2012-12-19 16:10:00');
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (3, 3, 3, 'pill', '2012-12-19 16:10:00');
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (4, 4, 2, 'pill', '2013-02-19 21:05:00');
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (5, 5, 1, 'pill', '2013-02-19 21:05:00');
 
 
 

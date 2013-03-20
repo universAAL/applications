@@ -41,6 +41,7 @@ public final class IntakeDao extends AbstractDao {
   private static final String UNITS = "UNITS";
   private static final String TIME_PLAN = "TIME_PLAN";
   private static final String TIME_TAKEN = "TIME_TAKEN";
+  private static final String DISPENSER_FK_ID = "DISPENSER_FK_ID";
 
   public IntakeDao(Database database) {
     super(database, TABLE_NAME);
@@ -94,7 +95,7 @@ public final class IntakeDao extends AbstractDao {
     col = columns.get(TIME_TAKEN);
     Date timeTaken = (Date) col.getValue();
 
-    col = columns.get("DISPENSER_FK_ID");
+    col = columns.get(DISPENSER_FK_ID);
     Integer dispenserId = (Integer) col.getValue();
 
     Dispenser dispenser = null;
@@ -116,9 +117,9 @@ public final class IntakeDao extends AbstractDao {
         "  MEDICATION_MANAGER.PRESCRIPTION PR,\n" +
         "      MEDICATION_MANAGER.PERSON P\n" +
         "    \n" +
-        "  WHERE P.PERSON_URI = ? \n" +
+        "  WHERE UPPER(P.PERSON_URI) = ? \n" +
         "  AND INTA.TREATMENT_FK_ID = TR.ID \n" +
-        "  AND TR.STATUS = ? \n" +
+        "  AND UPPER(TR.STATUS) = ? \n" +
         "  AND TR.PRESCRIPTION_FK_ID = PR.ID \n" +
         "  AND PR.PATIENT_FK_ID = P.ID \n" +
         "  AND INTA.TIME_PLAN > ? \n" +
@@ -140,8 +141,8 @@ public final class IntakeDao extends AbstractDao {
   }
 
   private List<Intake> getIntakes(User inputUser, Time time, String sql, PreparedStatement statement) throws SQLException {
-    statement.setString(1, inputUser.getURI());
-    statement.setString(2, ACTIVE.getValue());
+    statement.setString(1, inputUser.getURI().toUpperCase());
+    statement.setString(2, ACTIVE.getValue().toUpperCase());
     ConfigurationProperties configurationProperties = getConfigurationProperties();
     int minutesInterval = configurationProperties.getIntakeIntervalMinutes();
     statement.setTimestamp(3, createDate(time, -minutesInterval));

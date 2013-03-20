@@ -47,7 +47,7 @@ public final class PrescriptionDTO {
     validateParameter(physician, "physician");
     validateParameter(patient, "patient");
 
-    this.description = description.toUpperCase();
+    this.description = description;
     this.startDate = startDate;
     this.medicineDTOSet = medicineDTOSet;
     this.physician = physician;

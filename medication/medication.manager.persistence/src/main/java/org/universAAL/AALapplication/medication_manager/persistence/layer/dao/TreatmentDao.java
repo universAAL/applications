@@ -54,7 +54,7 @@ public final class TreatmentDao extends AbstractDao {
   }
 
   public List<Treatment> getByPrescriptionAndActive(int prescriptionId) {
-    String sql = "select * from MEDICATION_MANAGER.TREATMENT where PRESCRIPTION_FK_ID = ? and STATUS = ?";
+    String sql = "select * from MEDICATION_MANAGER.TREATMENT where PRESCRIPTION_FK_ID = ? and UPPER(STATUS) = ?";
 
     System.out.println("sql = " + sql);
 
@@ -100,7 +100,7 @@ public final class TreatmentDao extends AbstractDao {
   private List<Treatment> getTreatments(int prescriptionId, String sql,
                                         PreparedStatement statement) throws SQLException {
     statement.setInt(1, prescriptionId);
-    statement.setString(2, ACTIVE.getValue());
+    statement.setString(2, ACTIVE.getValue().toUpperCase());
     List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
     return createTreatments(results);
   }
