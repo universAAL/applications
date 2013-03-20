@@ -6,41 +6,41 @@
 <prescription description="cold" start_date="18/31/2012">
   <medicines>
 
-    <medicine name="aspirin" days="5">
-      <description>aspirin description</description>
-      <sideffects>aspirin sideffects</sideffects>
-      <incompliances>aspirin incompliances</incompliances>
+    <medicine name="gericap" days="3">
+      <description>gericap description</description>
+      <sideffects>gericap sideffects</sideffects>
+      <incompliances>gericap incompliances</incompliances>
       <meal_relation>with_meal</meal_relation>
       <intakes>
         <intake>
-          <time>20:00</time>
-          <unit>pill</unit>
-          <dose>2</dose>
-        </intake>
-        <intake>
-          <time>08:00</time>
+          <time>11:30</time>
           <unit>pill</unit>
           <dose>1</dose>
+        </intake>
+        <intake>
+          <time>20:50</time>
+          <unit>pill</unit>
+          <dose>2</dose>
         </intake>
       </intakes>
 
     </medicine>
 
-    <medicine name="neurobex" days="30">
-      <description>neurobex description</description>
-      <sideffects>neurobex sideffects</sideffects>
-      <incompliances>neurobex incompliances</incompliances>
+    <medicine name="tiogama" days="30">
+      <description>tiogama description</description>
+      <sideffects>tiogama sideffects</sideffects>
+      <incompliances>tiogama incompliances</incompliances>
       <meal_relation>any</meal_relation>
       <intakes>
         <intake>
-          <time>15:10</time>
+          <time>10:10</time>
           <unit>pill</unit>
           <dose>2</dose>
         </intake>
         <intake>
-          <time>21:00</time>
+          <time>23:20</time>
           <unit>pill</unit>
-          <dose>7</dose>
+          <dose>1</dose>
         </intake>
       </intakes>
 
@@ -78,7 +78,7 @@
   </doctor>
 
   <patient>
-    <id>3</id>
+    <id>1</id>
   </patient>
 
 </prescription>

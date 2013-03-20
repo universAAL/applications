@@ -118,8 +118,7 @@ public final class SqlConsoleCommand extends ConsoleCommand {
   }
 
   private String getSelectStatement(String statement) {
-    statement = statement.toUpperCase();
-    if (!statement.startsWith("SELECT")) {
+    if (!statement.toUpperCase().startsWith("SELECT")) {
       throw new MedicationManagerShellException("This command supports only SELECT statement");
     }
 

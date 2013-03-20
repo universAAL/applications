@@ -34,6 +34,8 @@ import org.universAAL.ontology.profile.User;
 
 import java.util.Locale;
 
+import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
+
 public class MedicationInfoDialog extends UICaller {
 
   private final ModuleContext moduleContext;
@@ -65,8 +67,10 @@ public class MedicationInfoDialog extends UICaller {
   }
 
   public void showDialog(User inputUser) {
-    Form f = Form.newDialog("Medication Manager UI", new Resource());
 
+    validateParameter(inputUser, "inputUser");
+
+    Form f = Form.newDialog("Medication Manager UI", new Resource());
 
     //start of the form model
 

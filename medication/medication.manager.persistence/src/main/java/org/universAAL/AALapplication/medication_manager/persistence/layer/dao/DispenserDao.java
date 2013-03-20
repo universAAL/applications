@@ -88,7 +88,7 @@ public final class DispenserDao extends AbstractDao {
   }
 
   public Dispenser getByDispenserUri(String deviceUri) {
-    String sql = "select * from MEDICATION_MANAGER.DISPENSER where DISPENSER_URI = '" + deviceUri + "'";
+    String sql = "select * from MEDICATION_MANAGER.DISPENSER where UPPER(DISPENSER_URI) = UPPER('" + deviceUri + "')";
 
     Map<String, Column> dispenserRecordMap = executeQueryExpectedSingleRecord(TABLE_NAME, sql);
 

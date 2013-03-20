@@ -51,13 +51,13 @@ public final class MedicineDTO {
     validateParameter(mealRelationDTO, "mealRelationDTO");
     validateParameter(intakeDTOSet, "intakeDTOSet");
 
-    this.name = name.toUpperCase();
+    this.name = name;
     this.treatmentStartDate = startDate;
     this.treatmentEndDate = endDate(startDate, days);
     this.days = days;
-    this.description = description != null ? description.toUpperCase() : null;
-    this.sideeffects = sideeffects != null ? sideeffects.toUpperCase() : null;
-    this.incompliances = incompliances != null ? incompliances.toUpperCase() : null;
+    this.description = description;
+    this.sideeffects = sideeffects;
+    this.incompliances = incompliances;
     this.mealRelationDTO = mealRelationDTO;
     this.intakeDTOSet = intakeDTOSet;
   }

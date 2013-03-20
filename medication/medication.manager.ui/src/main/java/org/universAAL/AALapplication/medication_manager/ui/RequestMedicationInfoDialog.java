@@ -91,9 +91,11 @@ public class RequestMedicationInfoDialog extends UICaller {
   }
 
   public void showDialog(User inputUser) {
+
+    validateParameter(inputUser, "inputUser");
+
     Form f = Form.newDialog("Medication Manager UI", new Resource());
     //start of the form model
-
 
     createMedicineInfo(inputUser);
 
