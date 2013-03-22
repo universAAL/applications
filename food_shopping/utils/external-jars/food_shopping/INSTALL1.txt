@@ -1,2 +1,0 @@
-
-mvn install:install-file -Dfile=C:\universAAL\external-jars\food_shopping\MetratecReaderLibrary_r1-1.jar -DgroupId=org.universAAL.control.foodDevices.RFid -DartifactId=control.foodDevices.MetratecReaderLibrary -Dversion=1.1 -Dpackaging=jar
