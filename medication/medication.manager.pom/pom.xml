@@ -62,6 +62,7 @@
     <module>../medication.manager.shell.commands</module>
     <module>../medication.missing.services.simulation</module>
     <module>../medication.manager.ui</module>
+    <module>../medication.manager.servlet.ui</module>
     <!--  <module>../medication.manager.integration.tests</module> -->
     <!--<module>../medication.manager.ui.runner</module>-->
   </modules>
