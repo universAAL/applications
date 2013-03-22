@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>universALL - Medication Medical Service: Prescriptions</title>
+
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+	<script type="text/javascript" src="js/prescriptions.js"></script>
+
+	<link rel="stylesheet" href="css/common.css" type="text/css">
+	<link rel="stylesheet" href="css/prescriptions.css" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript">
+	/*
+	 define user name, example:
+	 userObj.name="User Name";
+
+	 In for cycle - add all prescriptions, Example:
+	 userObj.prescriptions.push({"date":'2013-01-12', 'notes':'Sleeping problems', 'medicine':{'name':'Medicine_1', 'how':'7 days x 3 pills'}});
+	 */
+	userObj.name = "Elena Ivanova";
+	userObj.prescriptions.push({"date":'2013-01-12', 'notes':'Sleeping problems', 'medicine':{'name':'Medicine_1', 'how':'7 days x 3 pills'}});
+	userObj.prescriptions.push({"date":'2013-12-15', 'notes':'Sleeping problems', 'medicine':{'name':'Medicine_2', 'how':'7 days x 1 pills'}});
+</script>
+<div class="cont">
+	<h1>universALL<br/>Medication Medical Service</h1>
+
+	<h2>Prescription history for <span>userName</span></h2>
+	<table>
+		<tr>
+			<th>Date</th>
+			<th>Notes</th>
+			<th>Medicine</th>
+		</tr>
+		<tr>
+			<td colspan="3">No prescriptions</td>
+		</tr>
+		<tr class="templ">
+			<td></td>
+			<td></td>
+			<td>
+				<span></span>
+				<span></span>
+			</td>
+		</tr>
+	</table>
+
+	<input type="button" name="new_prescription" value="New prescription"
+	       onclick="document.location.href='prescription.html'"/>
+	<input type="button" name="back" value="Back" onclick="history.back()"/>
+
+</div>
+
+</body>
+</html>

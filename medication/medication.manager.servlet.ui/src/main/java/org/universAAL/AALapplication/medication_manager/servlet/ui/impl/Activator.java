@@ -5,6 +5,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SelectUserServlet;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -25,6 +26,8 @@ public final class Activator implements BundleActivator {
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
+    Pair<String> stringPair = new Pair<String>("id", "ed");
+    Pair<Integer> integerPair = new Pair<Integer>("id", 5);
     registerServlet(context);
 
   }
