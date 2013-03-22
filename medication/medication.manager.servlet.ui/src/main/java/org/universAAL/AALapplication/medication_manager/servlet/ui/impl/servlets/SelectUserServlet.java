@@ -2,6 +2,9 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.HtmlParser;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.Util;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.JavasrciptObjectCreator;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Script;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author George Fournadjiev
@@ -16,19 +21,25 @@ import java.io.PrintWriter;
 public final class SelectUserServlet extends HttpServlet {
 
 
+  private static final String USER_HTML = "user.html";
+  private final HtmlParser selectUserHtmlParser;
+
+  public SelectUserServlet() {
+    String htmlText = Util.getHtml(USER_HTML);
+    selectUserHtmlParser = new HtmlParser(htmlText);
+  }
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+    synchronized (selectUserHtmlParser) {
+      String script = getScript();
+      String htmlOutput = selectUserHtmlParser.addScriptElement(script);
 
-    String htmlText = Util.getHtml("user.html");
-    HtmlParser htmlParser = new HtmlParser(htmlText);
+      PrintWriter writer = resp.getWriter();
 
-    String script = getScript();
-    String htmlOutput = htmlParser.addScriptElement(script);
-
-    PrintWriter writer = resp.getWriter();
-
-    writer.println(htmlOutput);
+      writer.println(htmlOutput);
+    }
   }
 
   @Override
@@ -39,14 +50,43 @@ public final class SelectUserServlet extends HttpServlet {
 
   private static String getScript() {
 
-    String script = "<script type=\"text/javascript\">\t\n" +
-        "\tusers.push({'id':'user1', \"name\": \"Elena Ivanova\"});\n" +
-        "\tusers.push({'id':'user2', \"name\": \"Polq Ivanova\"});\n" +
-        "\tusers.push({'id':'user3', \"name\": \"Zoi Ivanova\"});\n" +
-        "\tusers.push({'id':'user4', \"name\": \"Petq Ivanova\"});\n" +
-        "\t</script>";
+    List<String> pairs = new LinkedList<String>();
 
-    return script;
+    Pair<String> id = new Pair<String>("id", "1");
+    Pair<String> name = new Pair<String>("name", "Pencho Penchev");
+    addRow(pairs, id, name);
+
+    Pair<String> id1 = new Pair<String>("id", "2");
+    Pair<String> name1 = new Pair<String>("name", "Ivan Ivanov");
+    addRow(pairs, id1, name1);
+
+    Pair<String> id2 = new Pair<String>("id", "3");
+    Pair<String> name2 = new Pair<String>("name", "Petar Petrov");
+    addRow(pairs, id2, name2);
+
+    return createSelectUserScript(pairs);
+
+  }
+
+  private static void addRow(List<String> pairs, Pair id, Pair<String> name) {
+    JavasrciptObjectCreator creator = new JavasrciptObjectCreator();
+
+    creator.addPair(id);
+    creator.addPair(name);
+
+    String javascriptObject = creator.createJavascriptObject();
+
+    pairs.add(javascriptObject);
+  }
+
+  private static String createSelectUserScript(List<String> pairs) {
+
+
+    String[] objects = new String[pairs.size()];
+    objects = pairs.toArray(objects);
+    Script script = new Script("users.push", objects);
+
+    return script.getScriptText();
 
   }
 }

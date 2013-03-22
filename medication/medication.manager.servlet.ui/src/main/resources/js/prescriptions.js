@@ -1,0 +1,22 @@
+﻿var userObj = {"name":"", "prescriptions":[]};
+$(function () {
+
+  if (userObj) {
+    var tableSelector = 'table';
+    var $trTempl = $(tableSelector + ' tr.templ').clone();
+
+    $('h2 span').html(userObj.name);
+    if (userObj.prescriptions.length > 0) {
+      $(tableSelector + ' tr:has(td)').remove();
+      $.each(userObj.prescriptions, function (i, prescription) {
+        var tr = $trTempl.clone();
+        tr.find('td:eq(0)').html(prescription.date).next('td').html(prescription.notes);
+        if ($.isPlainObject(prescription.medicine)) {
+          tr.find('td:eq(2) span:first').html(prescription.medicine.name);
+          tr.find('td:eq(2) span:last').html(prescription.medicine.how);
+        }
+        $(tableSelector).append(tr);
+      });
+    }
+  } else alert("No user information");
+});
