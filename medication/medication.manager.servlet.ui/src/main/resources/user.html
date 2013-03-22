@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb"><head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>universALL - Medication Medical Service: User selection</title>
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript" src="js/user.js"></script>
+<script type="text/javascript">
+	var users=[];
+	//In for cycle - add all users, example:
+	//users.push({'id':'user1', "name": "User Name"});
+</script>
+
+</head>
+
+<body>
+	<script type="text/javascript">	
+	users.push({'id':'user1', "name": "Elena Ivanova"});
+	users.push({'id':'user2', "name": "Petq Ivanova"});
+	</script>
+	
+	<div class="cont">
+	<h1>universALL<br/>Medication Medical Service</h1>
+	<form action="perscriptions.html" method="post">
+	<label>Select a user to process</label>
+		<select name="users">
+			<option value="userID">user name</option>
+		</select>
+		<input type="submit" name="process_user" value="Process user"/>
+		<input type="button" name="back" value="Back" onclick="history.back()"/>
+
+
+	</form>
+	</div>
+
+</body></html>

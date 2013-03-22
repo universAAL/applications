@@ -165,6 +165,8 @@ medication/medication.manager.pom/*.idea
 medication/medication.manager.pom/*.iml
 medication/medication.manager.service/*.iml
 medication/medication.manager.service/target
+medication/medication.manager.servlet.ui/*.iml
+medication/medication.manager.servlet.ui/target
 medication/medication.manager.shell.commands/*.iml
 medication/medication.manager.shell.commands/target
 medication/medication.manager.ui.runner/*.iml
