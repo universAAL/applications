@@ -1,0 +1,2 @@
+
+mvn install:install-file -Dfile=C:\universAAL\external-jars\food_shopping\jd2xx_20602.jar -DgroupId=org.universAAL.control.foodDevices.RFid -DartifactId=control.foodDevices.jd2xx_20602 -Dversion=1.1 -Dpackaging=jar
