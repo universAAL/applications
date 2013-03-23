@@ -2934,6 +2934,7 @@ medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplica
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/parser/script/forms/ScriptForm.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/parser/script/forms/UserSelectScriptForm.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/BaseServlet.java -text
+medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/HandleNewPrescriptionServlet.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/ListPrescriptionsServlet.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/LoginServlet.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/NewPrescriptionServlet.java -text
