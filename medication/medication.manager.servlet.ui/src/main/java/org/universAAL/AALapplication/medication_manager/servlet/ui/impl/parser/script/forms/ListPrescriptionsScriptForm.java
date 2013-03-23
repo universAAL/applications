@@ -15,7 +15,6 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
   private static final String DATE = "date";
   private static final String NOTES = "notes";
   private static final String MEDICINE = "medicine";
-  private static final String NAME = "name";
   private static final String HOW = "how";
 
   public ListPrescriptionsScriptForm(PersistentService persistentService) {
@@ -32,18 +31,18 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
 
   @Override
   public void process() {
-    Pair<String> id = new Pair<String>(DATE, "2013-01-12");
+    Pair<String> date = new Pair<String>(DATE, "2013-01-12");
     Pair<String> name = new Pair<String>(NOTES, "1. Sleeping problems");
     String medicineValue = createMedicineObject("Aspirin", "5 days 3 pills");
     Pair<String> medicine = new Pair<String>(MEDICINE, medicineValue, true);
 
-    addRow(id, name, medicine);
+    addRow(date, name, medicine);
 
-    Pair<String> id1 = new Pair<String>(DATE, "2012-12-15");
+    Pair<String> date1 = new Pair<String>(DATE, "2012-12-15");
     Pair<String> name1 = new Pair<String>(NOTES, "2. Sleeping problems");
     String medicineValue1 = createMedicineObject("Viteral", "5 days 1 pill");
     Pair<String> medicine1 = new Pair<String>(MEDICINE, medicineValue1, true);
-    addRow(id1, name1, medicine1);
+    addRow(date1, name1, medicine1);
   }
 
   private String createMedicineObject(String name, String how) {
