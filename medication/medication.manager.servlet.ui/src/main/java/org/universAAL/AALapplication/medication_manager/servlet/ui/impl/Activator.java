@@ -23,11 +23,11 @@ public final class Activator implements BundleActivator {
   public static ModuleContext mc;
   public static BundleContext bundleContext;
 
-  private static final String LOGIN_SERVLET_ALIAS = "/login";
-  private static final String SELECT_USER_SERVLET_ALIAS = "/user";
-  private static final String LIST_PRESCRIPTIONS_SERVLET_ALIAS = "/list";
-  private static final String NEW_PRESCRIPTION_SERVLET_ALIAS = "/new";
-  private static final String LOGIN_HTML = "/login.html";
+  public static final String LOGIN_SERVLET_ALIAS = "/login";
+  public static final String SELECT_USER_SERVLET_ALIAS = "/user";
+  public static final String LIST_PRESCRIPTIONS_SERVLET_ALIAS = "/list";
+  public static final String NEW_PRESCRIPTION_SERVLET_ALIAS = "/new";
+  public static final String LOGIN_HTML = "/login.html";
   private static final String JS_ALIAS = "/js";
   private static final String CSS_ALIAS = "/css";
 

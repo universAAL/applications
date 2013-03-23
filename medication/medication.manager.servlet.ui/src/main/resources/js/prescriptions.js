@@ -4,7 +4,7 @@ $(function () {
   if (userObj) {
     alert("but pres=" + $('button[name="new_prescription"]').size())
     $('button[name="new_prescription"]').click(function () {
-      document.location.href = "prescription.html";
+      document.location.href = "/new";
     });
     $('button[name="back"]').click(function () {
       history.back();
