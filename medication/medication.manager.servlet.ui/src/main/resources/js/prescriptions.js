@@ -2,6 +2,14 @@
 $(function () {
 
   if (userObj) {
+    alert("but pres=" + $('button[name="new_prescription"]').size())
+    $('button[name="new_prescription"]').click(function () {
+      document.location.href = "prescription.html";
+    });
+    $('button[name="back"]').click(function () {
+      history.back();
+    });
+
     var tableSelector = 'table';
     var $trTempl = $(tableSelector + ' tr.templ').clone();
 

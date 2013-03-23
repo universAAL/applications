@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author George Fournadjiev
  */
-public final class JavasrciptObjectCreator {
+public final class JavaScriptObjectCreator {
 
   private final List<Pair> objectPairs = new LinkedList<Pair>();
 
