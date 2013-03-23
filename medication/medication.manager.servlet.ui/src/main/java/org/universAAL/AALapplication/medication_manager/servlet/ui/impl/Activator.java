@@ -5,7 +5,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SelectUserServlet;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -21,18 +21,31 @@ public final class Activator implements BundleActivator {
   private static final String SELECT_USER_SERVLET_ALIAS = "/user";
   private static final String JS_ALIAS = "/js";
   private static final String CSS_ALIAS = "/css";
+
   public static ModuleContext mc;
+  public static BundleContext bundleContext;
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
-    Pair<String> stringPair = new Pair<String>("id", "ed");
-    Pair<Integer> integerPair = new Pair<Integer>("id", 5);
-    registerServlet(context);
+    bundleContext = context;
+
+    registerServlets(context);
 
   }
 
-  private void registerServlet(BundleContext context) throws ServletException, NamespaceException {
+  public void stop(BundleContext context) throws Exception {
+
+    bundleContext = null;
+    HttpService service = getHttpService(context);
+
+    service.unregister(SELECT_USER_SERVLET_ALIAS);
+    service.unregister(JS_ALIAS);
+    service.unregister(CSS_ALIAS);
+
+  }
+
+  private void registerServlets(BundleContext context) throws ServletException, NamespaceException {
     HttpService httpService = getHttpService(context);
 
     SelectUserServlet selectUserServlet = new SelectUserServlet();
@@ -55,16 +68,6 @@ public final class Activator implements BundleActivator {
     return httpService;
   }
 
-  public void stop(BundleContext context) throws Exception {
-
-    HttpService service = getHttpService(context);
-
-    service.unregister(SELECT_USER_SERVLET_ALIAS);
-    service.unregister(JS_ALIAS);
-    service.unregister(CSS_ALIAS);
-
-  }
-
   public static void validateParameter(int parameter, String parameterName) {
 
     if (parameter <= 0) {
@@ -80,6 +83,26 @@ public final class Activator implements BundleActivator {
       throw new MedicationManagerServletUIException("The parameter : " + parameterName + " cannot be null");
     }
 
+  }
+
+  public static PersistentService getPersistentService() {
+    if (bundleContext == null) {
+      throw new MedicationManagerServletUIException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = bundleContext.getServiceReference(PersistentService.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerServletUIException("The ServiceReference is null for PersistentService");
+    }
+
+    PersistentService persistentService = (PersistentService) bundleContext.getService(srPS);
+
+    if (persistentService == null) {
+      throw new MedicationManagerServletUIException("The PersistentService is missing");
+    }
+
+    return persistentService;
   }
 
 }

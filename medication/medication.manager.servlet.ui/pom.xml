@@ -28,6 +28,12 @@
       <type>bundle</type>
     </dependency>
 
+    <dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>medication.manager.persistence</artifactId>
+      <version>D.1-SNAPSHOT</version>
+    </dependency>
+
   </dependencies>
 
   <build>
