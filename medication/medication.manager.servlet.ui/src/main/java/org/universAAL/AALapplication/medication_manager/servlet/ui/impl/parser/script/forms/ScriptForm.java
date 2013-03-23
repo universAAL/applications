@@ -12,14 +12,18 @@ import java.util.List;
  */
 public abstract class ScriptForm {
 
+  protected String[] singleJavascriptObjects;
   private final String functionCallText;
   private final List<String> pairs = new LinkedList<String>();
 
   protected ScriptForm(String functionCallText) {
     this.functionCallText = functionCallText;
+    this.singleJavascriptObjects = new String[]{};
   }
 
   public abstract void process();
+
+  public abstract void setSingleJavascriptObjects();
 
   public void addRow(Pair... pair) {
     JavaScriptObjectCreator creator = new JavaScriptObjectCreator();
@@ -36,9 +40,14 @@ public abstract class ScriptForm {
   public String createScriptText() {
     process();
 
-    String[] objects = new String[pairs.size()];
-    objects = pairs.toArray(objects);
-    Script script = new Script(functionCallText, objects);
+    String[] rowsObjects = new String[pairs.size()];
+    rowsObjects = pairs.toArray(rowsObjects);
+    Script script;
+    if (singleJavascriptObjects.length != 0) {
+      script = new Script(singleJavascriptObjects, functionCallText, rowsObjects);
+    } else {
+      script = new Script(functionCallText, rowsObjects);
+    }
 
     return script.getScriptText();
 
