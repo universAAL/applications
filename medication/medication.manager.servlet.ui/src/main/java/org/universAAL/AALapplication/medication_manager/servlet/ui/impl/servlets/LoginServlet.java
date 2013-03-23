@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
+
 /**
  * @author George Fournadjiev
  */
@@ -30,7 +32,12 @@ public final class LoginServlet extends HttpServlet {
 
     Person person = (Person) httpSession.getAttribute(LOGGED_DOCTOR);
 
-    resp.getWriter().println("Helllllloooooooooooooooo");
+    if (person == null) {
+      httpSession.setAttribute(LOGGED_DOCTOR, DOCTOR);
+    }
+
+
+    resp.sendRedirect(LIST_PRESCRIPTIONS_SERVLET_ALIAS);
 
 
   }
