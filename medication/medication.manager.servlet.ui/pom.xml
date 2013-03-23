@@ -22,10 +22,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.apache.felix</groupId>
-      <artifactId>javax.servlet</artifactId>
-      <version>1.0.0</version>
-      <type>bundle</type>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.5</version>
     </dependency>
 
     <dependency>
