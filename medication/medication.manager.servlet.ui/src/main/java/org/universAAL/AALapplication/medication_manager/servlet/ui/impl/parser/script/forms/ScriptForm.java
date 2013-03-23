@@ -16,6 +16,9 @@ public abstract class ScriptForm {
   private final String functionCallText;
   private final List<String> pairs = new LinkedList<String>();
 
+  static final String ID = "id";
+  static final String NAME = "name";
+
   protected ScriptForm(String functionCallText) {
     this.functionCallText = functionCallText;
     this.singleJavascriptObjects = new String[]{};
@@ -43,7 +46,7 @@ public abstract class ScriptForm {
     String[] rowsObjects = new String[pairs.size()];
     rowsObjects = pairs.toArray(rowsObjects);
     Script script;
-    if (singleJavascriptObjects.length != 0) {
+    if (singleJavascriptObjects == null || singleJavascriptObjects.length != 0) {
       script = new Script(singleJavascriptObjects, functionCallText, rowsObjects);
     } else {
       script = new Script(functionCallText, rowsObjects);
