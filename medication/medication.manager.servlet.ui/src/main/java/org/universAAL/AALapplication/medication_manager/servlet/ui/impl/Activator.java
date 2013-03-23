@@ -7,6 +7,7 @@ import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.ListPrescriptionsServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.LoginServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.NewPrescriptionServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SelectUserServlet;
 import org.universAAL.middleware.container.ModuleContext;
@@ -19,15 +20,16 @@ import javax.servlet.ServletException;
  */
 public final class Activator implements BundleActivator {
 
+  public static ModuleContext mc;
+  public static BundleContext bundleContext;
 
+  private static final String LOGIN_SERVLET_ALIAS = "/login";
   private static final String SELECT_USER_SERVLET_ALIAS = "/user";
   private static final String LIST_PRESCRIPTIONS_SERVLET_ALIAS = "/list";
   private static final String NEW_PRESCRIPTION_SERVLET_ALIAS = "/new";
+  private static final String LOGIN_HTML = "/login.html";
   private static final String JS_ALIAS = "/js";
   private static final String CSS_ALIAS = "/css";
-
-  public static ModuleContext mc;
-  public static BundleContext bundleContext;
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
@@ -46,6 +48,8 @@ public final class Activator implements BundleActivator {
     service.unregister(SELECT_USER_SERVLET_ALIAS);
     service.unregister(LIST_PRESCRIPTIONS_SERVLET_ALIAS);
     service.unregister(NEW_PRESCRIPTION_SERVLET_ALIAS);
+    service.unregister(LOGIN_SERVLET_ALIAS);
+    service.unregister(LOGIN_HTML);
     service.unregister(JS_ALIAS);
     service.unregister(CSS_ALIAS);
 
@@ -60,6 +64,9 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(LIST_PRESCRIPTIONS_SERVLET_ALIAS, listPrescriptionsServlet, null, null);
     NewPrescriptionServlet newPrescriptionServlet = new NewPrescriptionServlet();
     httpService.registerServlet(NEW_PRESCRIPTION_SERVLET_ALIAS, newPrescriptionServlet, null, null);
+    LoginServlet loginServlet = new LoginServlet();
+    httpService.registerServlet(LOGIN_SERVLET_ALIAS, loginServlet, null, null);
+    httpService.registerResources(LOGIN_HTML, LOGIN_HTML, null);
     httpService.registerResources(JS_ALIAS, "js", null);
     httpService.registerResources(CSS_ALIAS, "css", null);
   }
