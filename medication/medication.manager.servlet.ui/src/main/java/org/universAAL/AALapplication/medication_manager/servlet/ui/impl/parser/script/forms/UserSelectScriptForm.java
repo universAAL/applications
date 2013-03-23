@@ -8,15 +8,21 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.s
  */
 public final class UserSelectScriptForm extends ScriptForm {
 
-  private static final String ID = "id";
-  private static final String NAME = "name";
   private final PersistentService persistentService;
 
   private static final String USER_SELECT_FUNCTION_CALL_TEXT = "users.push";
+  private static final String ID = "id";
+  private static final String NAME = "name";
 
   public UserSelectScriptForm(PersistentService persistentService) {
     super(USER_SELECT_FUNCTION_CALL_TEXT);
+
     this.persistentService = persistentService;
+  }
+
+  @Override
+  public void setSingleJavascriptObjects() {
+    // nothing to do here
   }
 
   @Override

@@ -6,6 +6,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.ListPrescriptionsServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SelectUserServlet;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -19,6 +20,7 @@ public final class Activator implements BundleActivator {
 
 
   private static final String SELECT_USER_SERVLET_ALIAS = "/user";
+  private static final String LIST_PRESCRIPTIONS_SERVLET_ALIAS = "/list";
   private static final String JS_ALIAS = "/js";
   private static final String CSS_ALIAS = "/css";
 
@@ -40,6 +42,7 @@ public final class Activator implements BundleActivator {
     HttpService service = getHttpService(context);
 
     service.unregister(SELECT_USER_SERVLET_ALIAS);
+    service.unregister(LIST_PRESCRIPTIONS_SERVLET_ALIAS);
     service.unregister(JS_ALIAS);
     service.unregister(CSS_ALIAS);
 
@@ -50,6 +53,8 @@ public final class Activator implements BundleActivator {
 
     SelectUserServlet selectUserServlet = new SelectUserServlet();
     httpService.registerServlet(SELECT_USER_SERVLET_ALIAS, selectUserServlet, null, null);
+    ListPrescriptionsServlet listPrescriptionsServlet = new ListPrescriptionsServlet();
+    httpService.registerServlet(LIST_PRESCRIPTIONS_SERVLET_ALIAS, listPrescriptionsServlet, null, null);
     httpService.registerResources(JS_ALIAS, "js", null);
     httpService.registerResources(CSS_ALIAS, "css", null);
   }

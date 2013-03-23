@@ -21,7 +21,8 @@ public abstract class BaseServlet extends HttpServlet {
     htmlParser = new HtmlParser(htmlText);
   }
 
-  public void sendResponse(HttpServletResponse resp, ScriptForm scriptForm) throws IOException {
+  public void sendResponse(HttpServletResponse resp,
+                           ScriptForm scriptForm) throws IOException {
 
     try {
 

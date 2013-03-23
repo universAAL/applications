@@ -5,39 +5,92 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.
  */
 public final class Script {
 
+  private static final char NEW_LINE = '\n';
+  private final String[] singleJavaScriptObjects;
   private final String functionCallText;
-  private final String[] javaScriptObjects;
+  private final String[] rowsJavaScriptObjects;
 
   private static final String SCRIPT_START = "<script type=\"text/javascript\">\n";
   private static final String SCRIPT_END = "\n</script>>";
   private static final String EMPTY = "";
+  private static final String NEW_LINE_WITH_TAB = "\n\t";
 
-  public Script(String functionCallText, String[] javaScriptObjects) {
+  public Script(String[] singleJavaScriptObjects, String functionCallText, String[] rowsJavaScriptObjects) {
+
+    this.singleJavaScriptObjects = singleJavaScriptObjects == null ? new String[]{} : singleJavaScriptObjects;
     this.functionCallText = functionCallText;
-    this.javaScriptObjects = javaScriptObjects;
+    this.rowsJavaScriptObjects = rowsJavaScriptObjects == null ? new String[]{} : rowsJavaScriptObjects;
+
+  }
+
+  public Script(String functionCallText, String[] rowsJavaScriptObjects) {
+    this(null, functionCallText, rowsJavaScriptObjects);
   }
 
   public String getScriptText() {
 
-    if (javaScriptObjects == null || javaScriptObjects.length == 0) {
+    if (missingInfo()) {
       return EMPTY;
     }
 
+    if (missingRowsJavaScriptObject()) {
+      return singleJavaScriptObjectsScriptText();
+    }
+
+    return getFullScriptText();
+  }
+
+  private String getFullScriptText() {
+
     StringBuffer sb = new StringBuffer();
     sb.append(SCRIPT_START);
-    sb.append("\n\t");
-    for (String objectText : javaScriptObjects) {
+    sb.append(NEW_LINE_WITH_TAB);
+
+    for (String singleObject : singleJavaScriptObjects) {
+      sb.append(singleObject);
+      sb.append(NEW_LINE_WITH_TAB);
+    }
+
+    sb.append(NEW_LINE_WITH_TAB);
+
+    for (String objectText : rowsJavaScriptObjects) {
       sb.append(functionCallText);
       sb.append('(');
       sb.append(objectText);
       sb.append(");");
-      sb.append("\n\t");
+      sb.append(NEW_LINE_WITH_TAB);
     }
 
-    sb.append('\n');
+    sb.append(NEW_LINE);
 
     sb.append(SCRIPT_END);
 
     return sb.toString();
+  }
+
+  private String singleJavaScriptObjectsScriptText() {
+    StringBuffer sb = new StringBuffer();
+    sb.append(SCRIPT_START);
+    sb.append(NEW_LINE_WITH_TAB);
+
+    for (String singleObject : singleJavaScriptObjects) {
+      sb.append(singleObject);
+      sb.append(NEW_LINE_WITH_TAB);
+    }
+
+    sb.append(NEW_LINE);
+
+    sb.append(SCRIPT_END);
+
+    return sb.toString();
+  }
+
+  private boolean missingInfo() {
+
+    return singleJavaScriptObjects.length == 0 && missingRowsJavaScriptObject();
+  }
+
+  private boolean missingRowsJavaScriptObject() {
+    return rowsJavaScriptObjects.length == 0;
   }
 }
