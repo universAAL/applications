@@ -21,7 +21,6 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
     super(LIST_PRESCRIPTIONS_FUNCTION_CALL_TEXT);
 
     this.persistentService = persistentService;
-    setSingleJavascriptObjects();
   }
 
   @Override

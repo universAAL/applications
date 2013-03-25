@@ -24,6 +24,10 @@ public abstract class ScriptForm {
     this.singleJavascriptObjects = new String[]{};
   }
 
+  protected ScriptForm() {
+    this(null);
+  }
+
   public abstract void process();
 
   public abstract void setSingleJavascriptObjects();
