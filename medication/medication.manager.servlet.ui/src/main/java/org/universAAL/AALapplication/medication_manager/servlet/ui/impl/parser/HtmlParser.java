@@ -1,11 +1,10 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser;
 
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
@@ -17,7 +16,7 @@ public final class HtmlParser {
 
   public HtmlParser(String htmlText) {
 
-    validateParameter(htmlText, "htmlFile");
+    Util.validateParameter(htmlText, "htmlFile");
 
     int index = htmlText.indexOf("<body>");
 

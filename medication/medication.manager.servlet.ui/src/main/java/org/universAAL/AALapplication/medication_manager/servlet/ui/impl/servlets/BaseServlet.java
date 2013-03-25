@@ -1,7 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.HtmlParser;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.Util;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
 
 import javax.servlet.http.HttpServlet;

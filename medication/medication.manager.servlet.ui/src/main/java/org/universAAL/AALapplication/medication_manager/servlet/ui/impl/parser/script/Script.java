@@ -27,6 +27,10 @@ public final class Script {
     this(null, functionCallText, rowsJavaScriptObjects);
   }
 
+  public Script(String[] singleJavaScriptObjects) {
+    this(singleJavaScriptObjects, null, null);
+  }
+
   public String getScriptText() {
 
     if (missingInfo()) {

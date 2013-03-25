@@ -8,20 +8,23 @@
 
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
+	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/login.js"></script>
 	<link rel="stylesheet" href="css/common.css" type="text/css">
 	<link rel="stylesheet" href="css/login.css" type="text/css">
 </head>
 
 <body>
+
 <div class="cont">
 	<h1>universALL<br/>Medication Medical Service</h1>
 
-	<form action="login" method="post">
+	<form name="user" action="" method="post">
 		<input type="text" name="username" value="username"/>
 		<input type="password" name="password" value="password"/>
-		<input type="submit" name="login" value="Login"/>
+		<input type="submit" name="login" value="Login" class="button"/>
 	</form>
+	<div class="error_msg" style="display: none">Wrong username and/or password</div>
 </div>
 
 </body>

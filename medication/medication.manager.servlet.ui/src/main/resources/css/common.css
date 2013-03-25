@@ -1,0 +1,30 @@
+@import url(reset-min.css);
+/* commented backslash hack \ */
+html, body { background: #4f81bd !important; }
+
+a { behavior: url("hidefocus.htc"); }
+
+select, input, fieldset { z-index: inherit; position: relative; }
+
+input { -webkit-appearance: none; }
+
+*:focus { outline: none !important; }
+
+a { cursor: pointer; cursor: hand; }
+
+/* end hack */
+html, body { margin: 0; padding: 0; font-family: "Helvetica World", "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif; font-size: 20px; }
+
+body { -webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+hr { border: #6993b6 inset 1px; }
+
+body > .loading { height: 1px; overflow: visible; position: absolute; top: 50%; width: 100%; }
+body > .icon { display: block; width: 48px; height: 48px; left: 50%; margin-left: -24px; position: absolute; top: -24px; padding: 0; background: url("../images/48x48/progressbar.gif") no-repeat center center; }
+body .selected { background: red; }
+body .error { background: #fef1ec; border: 1px solid #cd0a0a; color: #cd0a0a; }
+body .error_msg { display: inline-block; background: #fef1ec; border: 1px solid #cd0a0a; color: #cd0a0a; padding: 1em 0.7em; margin: 10px; }
+body .cont { margin: 20px auto; text-align: center; }
+body h1 { font-size: 26px; line-height: 50px; margin: 20px; }
+body input, body select, body button { padding: 3px; border: 2px solid #385d8a; background: #c6d9f1; }
+body input.button, body select.button, body button.button { width: auto; }

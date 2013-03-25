@@ -12,9 +12,11 @@ public final class Person extends Entity {
 
   private final String name;
   private final String personUri;
+  private final String username;
+  private final String password;
   private final Role role;
 
-  public Person(int id, String name, String personUri, Role role) {
+  public Person(int id, String name, String personUri, Role role, String username, String password) {
     super(id);
 
     validate(name, personUri, role);
@@ -22,6 +24,17 @@ public final class Person extends Entity {
     this.name = name;
     this.personUri = personUri;
     this.role = role;
+    this.username = username;
+    this.password = password;
+  }
+
+  public Person(String name, String personUri, Role role, String username, String password) {
+    this(0, name, personUri, role, username, password);
+
+  }
+
+  public Person(int id, String name, String personUri, Role role) {
+    this(id, name, personUri, role, null, null);
   }
 
   public Person(String name, String personUri, Role role) {
@@ -45,6 +58,14 @@ public final class Person extends Entity {
 
   public Role getRole() {
     return role;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public String getPassword() {
+    return password;
   }
 
   @Override
