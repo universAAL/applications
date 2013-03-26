@@ -9,7 +9,6 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.s
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
@@ -52,7 +51,7 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
       isServletSet(displayServlet, "displayServlet");
       isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
 
-      HttpSession session = getSession(req);
+      Session session = getSession(req);
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {
@@ -60,20 +59,13 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
         return;
       }
 
-     /* String cancel = req.getParameter(CANCEL);
-
-      if (cancel != null && cancel.equalsIgnoreCase(TRUE)) {
-        selectUserHtmlWriterServlet.doGet(req, resp);
-        return;
-      }*/
-
       Person patient = getPatient(req, session);
 
       handleResponse(resp, patient);
     }
   }
 
-  private Person getPatient(HttpServletRequest req, HttpSession session) {
+  private Person getPatient(HttpServletRequest req, Session session) {
     String patientId = req.getParameter(USER);
 
     if (patientId == null) {

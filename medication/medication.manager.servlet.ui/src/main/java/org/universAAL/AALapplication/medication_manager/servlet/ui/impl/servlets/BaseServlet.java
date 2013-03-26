@@ -2,7 +2,6 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author George Fournadjiev
@@ -16,11 +15,11 @@ public abstract class BaseServlet extends HttpServlet {
   }
 
 
-  protected HttpSession getSession(HttpServletRequest req) {
+  protected Session getSession(HttpServletRequest req) {
     String id = req.getRequestedSessionId();
-    HttpSession session = sessionTracking.getSession(id);
+    Session session = sessionTracking.getSession(id);
     if (session == null) {
-      session = req.getSession(true);
+      session = new Session(id);
       sessionTracking.addSession(session);
     }
 
@@ -29,7 +28,7 @@ public abstract class BaseServlet extends HttpServlet {
 
   protected void invalidateSession(String id) {
 
-    HttpSession session = sessionTracking.getSession(id);
+    Session session = sessionTracking.getSession(id);
 
     if (session == null) {
       return;

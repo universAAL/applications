@@ -1,6 +1,5 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,12 +8,13 @@ import java.util.Map;
  */
 public final class SessionTracking {
 
-  private final Map<String, HttpSession> sessionMap = new HashMap<String, HttpSession>();
+  private final Map<String, Session> sessionMap = new HashMap<String, Session>();
   private final Object lock = new Object();
 
 
-  public void addSession(HttpSession session) {
+  public void addSession(Session session) {
     String id = session.getId();
+
     synchronized (lock) {
       if (!hasSession(id)) {
          sessionMap.put(id, session);
@@ -28,7 +28,7 @@ public final class SessionTracking {
     }
   }
 
-  public HttpSession getSession(String id) {
+  public Session getSession(String id) {
     synchronized (lock) {
       return sessionMap.get(id);
     }
@@ -36,7 +36,7 @@ public final class SessionTracking {
 
   public void removeSession(String id) {
     synchronized (lock) {
-      HttpSession session = sessionMap.remove(id);
+      Session session = sessionMap.remove(id);
       if (session != null) {
         session.invalidate();
       }

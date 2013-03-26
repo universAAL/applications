@@ -50,7 +50,7 @@ public abstract class ScriptForm {
     String[] rowsObjects = new String[pairs.size()];
     rowsObjects = pairs.toArray(rowsObjects);
     Script script;
-    if (singleJavascriptObjects == null || singleJavascriptObjects.length != 0) {
+    if (singleJavascriptObjects != null && singleJavascriptObjects.length != 0) {
       script = new Script(singleJavascriptObjects, functionCallText, rowsObjects);
     } else {
       script = new Script(functionCallText, rowsObjects);

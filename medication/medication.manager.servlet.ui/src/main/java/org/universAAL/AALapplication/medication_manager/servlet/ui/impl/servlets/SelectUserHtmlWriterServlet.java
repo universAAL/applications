@@ -8,7 +8,6 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.s
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
@@ -38,7 +37,7 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
     synchronized (lock) {
       isServletSet(displayServlet, "displayServlet");
 
-      HttpSession httpSession = getSession(req);
+      Session httpSession = getSession(req);
       Person doctor = (Person) httpSession.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {
