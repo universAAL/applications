@@ -12,6 +12,7 @@ var LOGIN_SERVLET_ALIAS = "/login",
   CANCEL = "?cancel=true";
 
 $(function () {
+    $("h1").html("universAAL<br/>Medication Medical Service");
   if (isStatic) {
     LOGIN_SERVLET_ALIAS = "login.html";
     SELECT_USER_SERVLET_ALIAS = "user.html",
@@ -21,7 +22,7 @@ $(function () {
       NEW_MEDICINE_SERVLET_ALIAS = "medicine.html",
       HANDLE_NEW_MEDICINE_SERVLET_ALIAS = "new_prescription.html";
   }
-  $('form[name="user"]').attr("action", LOGIN_SERVLET_ALIAS);
+  $('form[name="user"]').attr("action", isStatic? SELECT_USER_SERVLET_ALIAS : LOGIN_SERVLET_ALIAS);
 
   $('form[name="prescriptions"]').attr("action", LIST_PRESCRIPTIONS_SERVLET_ALIAS);
   $('form[name="prescriptions"] button[name="back"]').click(function (e) {

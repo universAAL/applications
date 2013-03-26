@@ -1,8 +1,5 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl;
 
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
-
 import javax.servlet.http.HttpServlet;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +12,6 @@ import java.io.InputStreamReader;
 public final class Util {
 
 
-  public static final Person DOCTOR = new Person("Penchno", "uri", Role.PHYSICIAN, "us", "pa");
   public static final String LOGGED_DOCTOR = "Doctor";
   public static final String LOGIN_HTML_SERVLET_ALIAS = "/login.html";
   public static final String LOGIN_SERVLET_ALIAS = "/login";
@@ -25,6 +21,9 @@ public final class Util {
   public static final String HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS = "/handle_new_prescription";
   public static final String LOGIN_ERROR = "LOGIN_ERROR";
   public static final String LOGIN_FILE_NAME = "login.html";
+  public static final String EMPTY = "";
+  public static final String CANCEL = "cancel";
+  public static final String TRUE = "true";
 
   private Util() {
   }

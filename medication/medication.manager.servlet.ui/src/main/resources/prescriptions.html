@@ -1,58 +1,76 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb">
 <head>
 
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>universALL - Medication Medical Service: Prescriptions</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>universALL - Medication Medical Service: Prescriptions</title>
 
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
-    <script type="text/javascript" src="js/prescriptions.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/prescriptions.js"></script>
 
-    <link rel="stylesheet" href="css/common.css" type="text/css">
-    <link rel="stylesheet" href="css/prescriptions.css" type="text/css">
+	<link rel="stylesheet" href="css/common.css" type="text/css">
+	<link rel="stylesheet" href="css/prescriptions.css" type="text/css">
 </head>
 
 <body>
 <script type="text/javascript">
-    /*
-     define user name, example:
-     userObj.name="User Name";
+	/*
+	 define user name, example:
+	 userObj.name="User Name";
 
-     In for cycle - add all prescriptions, Example:
-     userObj.prescriptions.push({"date":'2013-01-12', 'notes':'Sleeping problems', 'medicine':{'name':'Medicine_1', 'how':'7 days x 3 pills'}});
+	 In for cycle - add all prescriptions, Example:
+	 userObj.prescriptions.push({"date":'2013-01-12',
+	 'notes':'Sleeping problems',
+	 'medicines':[{'name':'Medicine_2', 'how':'7 days x 1 pills'},{'name':'Medicine_1', 'how':'7 days x 3 pills'}]});
 
-     userObj.name = "Elena Ivanova";
-     userObj.prescriptions.push({"date":'2013-01-12', 'notes':'Sleeping problems', 'medicine':{'name':'Medicine_1', 'how':'7 days x 3 pills'}});
-     userObj.prescriptions.push({"date":'2013-12-15', 'notes':'Sleeping problems 2', 'medicine':{'name':'Medicine_2', 'how':'7 days x 1 pills'}});*/
+	userObj.name = "Elena Ivanova";
+	userObj.prescriptions.push({"date":'2013-01-12',
+		'notes':' We recommend against using this property; please try to use feature detection instead (see jQuery.support). jQuery.browser may be moved to a plugin in a future release of jQuery.',
+		'medicines':[
+			{'name':'Medicine name 1 that is too long', 'how':'10 days x 3 pills'}
+		]});
+	userObj.prescriptions.push({"date":'2013-05-01',
+		'notes':'Contains flags for the useragent, read from navigator.userAgent. We recommend against using this property; please try to use feature detection instead (see jQuery.support). jQuery.browser may be moved to a plugin in a future release of jQuery.',
+		'medicines':[
+			{'name':'Medicine_2_1', 'how':'7 days x 1 pills'},
+			{'name':'Medicine_2_2', 'how':'5 days x 3 pills'}
+		]});*/
 </script>
 <div class="cont">
-    <h1>universALL<br/>Medication Medical Service</h1>
+	<div>
+		<h1></h1>
 
-    <h2>Prescription history for <span>userName</span></h2>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Notes</th>
-            <th>Medicine</th>
-        </tr>
-        <tr>
-            <td colspan="3">No prescriptions</td>
-        </tr>
-        <tr class="templ">
-            <td></td>
-            <td></td>
-            <td>
-                <span></span>
-                <span></span>
-            </td>
-        </tr>
-    </table>
-
-    <button name="new_prescription">New prescription</button>
-    <button name="back">Back</button>
-
+		<h2>Prescription history for <span></span></h2>
+		<table class="t1">
+			<tr>
+				<th width="20px">Date</th>
+				<th width="60%">Notes</th>
+				<th>Medicine</th>
+			</tr>
+			<tr class="odd">
+				<td colspan="3" align="center">No prescriptions</td>
+			</tr>
+			<tr class="templ">
+				<td nowrap></td>
+				<td class="notes">
+					<div></div>
+				</td>
+				<td class="medicine" nowrap>
+					<div>
+						<span></span>
+						<span></span>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<form name="new_prescription" action="" method="post">
+			<input type="submit" class="button" name="new_prescription" value="New prescription"/>
+			<button name="back" class="right">Back</button>
+		</form>
+	</div>
 </div>
 
 </body>

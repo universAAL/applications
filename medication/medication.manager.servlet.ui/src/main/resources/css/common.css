@@ -21,10 +21,26 @@ hr { border: #6993b6 inset 1px; }
 
 body > .loading { height: 1px; overflow: visible; position: absolute; top: 50%; width: 100%; }
 body > .icon { display: block; width: 48px; height: 48px; left: 50%; margin-left: -24px; position: absolute; top: -24px; padding: 0; background: url("../images/48x48/progressbar.gif") no-repeat center center; }
-body .selected { background: red; }
+body .selected { background: #8eb4e3; }
 body .error { background: #fef1ec; border: 1px solid #cd0a0a; color: #cd0a0a; }
-body .error_msg { display: inline-block; background: #fef1ec; border: 1px solid #cd0a0a; color: #cd0a0a; padding: 1em 0.7em; margin: 10px; }
-body .cont { margin: 20px auto; text-align: center; }
-body h1 { font-size: 26px; line-height: 50px; margin: 20px; }
-body input, body select, body button { padding: 3px; border: 2px solid #385d8a; background: #c6d9f1; }
-body input.button, body select.button, body button.button { width: auto; }
+body .cont { margin: 20px auto; text-align: center; padding: 20px; }
+body .cont > div { display: table; margin: 0 auto; }
+body .cont .error_msg { background: #fef1ec; border: 1px solid #cd0a0a; color: #cd0a0a; padding: 1em 0.7em; margin: 10px; }
+body .cont .error_msg.left { text-align: left; }
+body h1 { font-size: 26px; line-height: 40px; }
+body h2 { font-size: 22px; color: #c6d9f1; }
+body h1, body h2 { margin: 0 15px 15px; }
+body input, body select, body button, body textarea { padding: 3px; border: 2px solid #385d8a; background: #c6d9f1; }
+body input.button, body select.button, body button.button, body textarea.button { width: auto; cursor: pointer; }
+body button { cursor: pointer; }
+body table { text-align: left; }
+body table td, body table th { padding: 3px; vertical-align: top; }
+body table.t1 { border: 1px solid white; margin: 20px auto; width: 420px; }
+body table.t1 tr.even { background: #e9edf4; }
+body table.t1 tr.odd { background: #d0d8e8; }
+body table.t1 tr th { border: 1px solid white; border-bottom: 3px solid white; }
+body table.t1 tr td { border: 1px solid white; }
+body table.t1 tr td.mid { vertical-align: middle; }
+body form { display: block; position: relative; }
+body form .left { float: left; }
+body form .right { float: right; }

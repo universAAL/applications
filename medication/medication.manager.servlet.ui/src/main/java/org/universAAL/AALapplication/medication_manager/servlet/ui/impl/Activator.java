@@ -6,12 +6,13 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.DisplayServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.DisplayLoginHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.HandleNewPrescriptionServlet;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.ListPrescriptionsServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.ListPrescriptionsHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.LoginServlet;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.NewPrescriptionServlet;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SelectUserServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.NewPrescriptionHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SelectUserHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SessionTracking;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -58,17 +59,19 @@ public final class Activator implements BundleActivator {
   private void registerServlets(BundleContext context) throws ServletException, NamespaceException {
     HttpService httpService = getHttpService(context);
 
-    SelectUserServlet selectUserServlet = new SelectUserServlet();
+    SessionTracking sessionTracking = new SessionTracking();
+
+    SelectUserHtmlWriterServlet selectUserServlet = new SelectUserHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(SELECT_USER_SERVLET_ALIAS, selectUserServlet, null, null);
-    ListPrescriptionsServlet listPrescriptionsServlet = new ListPrescriptionsServlet();
+    ListPrescriptionsHtmlWriterServlet listPrescriptionsServlet = new ListPrescriptionsHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(LIST_PRESCRIPTIONS_SERVLET_ALIAS, listPrescriptionsServlet, null, null);
-    NewPrescriptionServlet newPrescriptionServlet = new NewPrescriptionServlet();
+    NewPrescriptionHtmlWriterServlet newPrescriptionServlet = new NewPrescriptionHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(NEW_PRESCRIPTION_SERVLET_ALIAS, newPrescriptionServlet, null, null);
-    LoginServlet loginServlet = new LoginServlet();
+    LoginServlet loginServlet = new LoginServlet(sessionTracking);
     httpService.registerServlet(LOGIN_SERVLET_ALIAS, loginServlet, null, null);
-    HandleNewPrescriptionServlet handleNewPrescriptionServlet = new HandleNewPrescriptionServlet();
+    HandleNewPrescriptionServlet handleNewPrescriptionServlet = new HandleNewPrescriptionServlet(sessionTracking);
     httpService.registerServlet(HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS, handleNewPrescriptionServlet, null, null);
-    DisplayServlet displayServlet = new DisplayServlet();
+    DisplayLoginHtmlWriterServlet displayServlet = new DisplayLoginHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(LOGIN_HTML_SERVLET_ALIAS, displayServlet, null, null);
     httpService.registerResources(JS_ALIAS, "js", null);
     httpService.registerResources(CSS_ALIAS, "css", null);
@@ -79,7 +82,9 @@ public final class Activator implements BundleActivator {
     loginServlet.setSelectUserServlet(selectUserServlet);
 
     selectUserServlet.setDisplayServlet(displayServlet);
+
     listPrescriptionsServlet.setDisplayServlet(displayServlet);
+    listPrescriptionsServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
 
   }
 
