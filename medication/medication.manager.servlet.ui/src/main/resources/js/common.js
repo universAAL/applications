@@ -1,5 +1,5 @@
-//var isStatic = true;
-isStatic=false;
+var isStatic = true;
+//isStatic=false;
 
 //Servlet aliases:
 var LOGIN_SERVLET_ALIAS = "/login",
@@ -12,7 +12,6 @@ var LOGIN_SERVLET_ALIAS = "/login",
   CANCEL = "?cancel=true";
 
 $(function () {
-    $("h1").html("universAAL<br/>Medication Medical Service");
   if (isStatic) {
     LOGIN_SERVLET_ALIAS = "login.html";
     SELECT_USER_SERVLET_ALIAS = "user.html",
@@ -40,15 +39,18 @@ $(function () {
   $('form[name="save_prescription"]').attr("action", HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS);
   $('form[name="save_prescription"] tr button[name="edit"]').live("click", function (e) {
     e.preventDefault();
-    document.location.href = HANDLE_EDIT_MEDICINE_SERVLET_ALIAS + "?id=" + $(this).closest("tr").attr("id");
+    var p=$('[name="prescriptionId"]').val();
+    document.location.href = NEW_MEDICINE_SERVLET_ALIAS + "?id=" + $(this).closest("tr").attr("id")+"&prescriptionId="+p;
   });
   $('form[name="save_prescription"] tr button[name="delete"]').live("click", function (e) {
     e.preventDefault();
-    document.location.href = NEW_PRESCRIPTION_SERVLET_ALIAS + "?deleteID=" + $(this).closest("tr").attr("id");
+    var p=$('[name="prescriptionId"]').val();
+    document.location.href = NEW_PRESCRIPTION_SERVLET_ALIAS + "?deleteID=" + $(this).closest("tr").attr("id")+"&prescriptionId="+p;;
   });
   $('form[name="save_prescription"] button[name="add_medicine"]').click(function (e) {
     e.preventDefault();
-    document.location.href = NEW_MEDICINE_SERVLET_ALIAS;
+    var p=$('[name="prescriptionId"]').val();
+    document.location.href = NEW_MEDICINE_SERVLET_ALIAS+"?prescriptionId="+p;
   });
   $('form[name="save_prescription"] button[name="back"]').click(function (e) {
     e.preventDefault();
@@ -61,9 +63,3 @@ $(function () {
     document.location.href = NEW_PRESCRIPTION_SERVLET_ALIAS + CANCEL;
   });
 });
-
-if(!String.prototype.trim) {
-  String.prototype.trim = function () {
-    return this.replace(/^\s+|\s+$/g,'');
-  };
-}

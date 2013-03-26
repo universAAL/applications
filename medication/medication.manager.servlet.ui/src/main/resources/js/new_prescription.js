@@ -1,6 +1,7 @@
-var prescriptionObj = {"date":'', 'notes':'', 'medicines':[]};
+var prescriptionObj = {"id":'', "date":'', 'notes':'', 'medicines':[]};
 $(function () {
   if (prescriptionObj) {
+    if (prescriptionObj.date == "") $('[name="save_perscription"]').attr("disabled", "disabled");
     var tableSelector = 'table#prescription';
     var $tableDays = $(tableSelector + ' table.days');
     var tr1 = $tableDays.find('tr:first');
@@ -10,8 +11,9 @@ $(function () {
       tr = (day <= 12) ? tr1 : tr2;
       tr.append('<td>' + day + '</td>');
     }
-    var $trTempl1 = $(tableSelector + ' tr.templ1').clone();
-    var $trTempl2 = $(tableSelector + ' tr.templ2').clone();
+    var $trTempl1 = $(tableSelector + ' tr.templ1').clone().show();
+    var $trTempl2 = $(tableSelector + ' tr.templ2').clone().show();
+    if (prescriptionObj.date) $('[name="prescriptionId"]').val(prescriptionObj.id);
     if (prescriptionObj.date) $('[name="date"]').val(prescriptionObj.date);
     if (prescriptionObj.notes) $('[name="notes"]').val(prescriptionObj.notes);
 
@@ -20,20 +22,33 @@ $(function () {
       $.each(prescriptionObj.medicines, function (i, medicine) {
         var tr = $trTempl1.clone();
         tr.attr("id", medicine.id);
-        tr.find('td:eq(0)').html(medicine.name)
-          .next('td').find("div").html(medicine.description)
-          .next('td').find("div").html(medicine.side_effects)
-          .next('td').find("div").html(medicine.incompliances);
+        var t = tr.find('td:eq(0)');
+        t.html(medicine.name);
+        t = t.next("td");
+        t.find("div").html(medicine.description);
+        t = t.next("td");
+        t.find("div").html(medicine.side_effects);
+        t = t.next("td");
+        t.find("div").html(medicine.incompliances);
         $(tableSelector).append(tr);
         tr = $trTempl2.clone();
         tr.attr("id", medicine.id);
-        if (medicine.hours) $.each(medicine.hours, function (i, hour) {
-          tr.find('td:text(' + hour + ')').addClass("selected");
+        var tr1 = tr.find('table.days tr:first');
+        var tr2 = tr.find('table.days tr:last');
+        if (medicine.days) {
+          tr1.find("td:eq(0)").html(medicine.days);
+        }
+        if (medicine.hours) $.each(medicine.hours, function (i, h) {
+          //tr.find('td:text(' + hour + ')').addClass("selected");
+          var cell = (h <= 12) ? tr1.find("td:nth-child(" + (h + 1) + ")") : tr2.find("td:nth-child(" + (h - 12) + ")");
+          cell.addClass("selected");
+
         });
+
         $(tableSelector).append(tr);
       });
-      $(tableSelector+" tr.templ1").addClass("odd");
-      $(tableSelector+" tr.templ2").addClass("even");
+      $(tableSelector + " tr.templ1").addClass("odd");
+      $(tableSelector + " tr.templ2").addClass("even");
     }
 
   } else alert("No prescription information");

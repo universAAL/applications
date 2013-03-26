@@ -61,6 +61,8 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
 
       Person patient = getPatient(req, session);
 
+      session.setAttribute(PATIENT, patient);
+
       handleResponse(resp, patient);
     }
   }

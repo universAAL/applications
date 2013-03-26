@@ -20,6 +20,7 @@ import static org.universAAL.AALapplication.medication_manager.persistence.layer
  */
 public final class DatabaseSimulation {
 
+  private static int idConter = 0;
 
   public static final Person DOCTOR = new Person("Penchno", "uri", PHYSICIAN, "us", "pa");
   public static final Person PATIENT_1 = new Person(100, "Penchno", "uriPencho", PATIENT);
@@ -115,5 +116,10 @@ public final class DatabaseSimulation {
     }
 
     return prescriptionDTOs;
+  }
+
+  public static synchronized int generateId() {
+    idConter++;
+    return idConter;
   }
 }

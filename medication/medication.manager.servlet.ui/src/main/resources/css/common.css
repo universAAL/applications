@@ -21,7 +21,6 @@ hr { border: #6993b6 inset 1px; }
 
 body > .loading { height: 1px; overflow: visible; position: absolute; top: 50%; width: 100%; }
 body > .icon { display: block; width: 48px; height: 48px; left: 50%; margin-left: -24px; position: absolute; top: -24px; padding: 0; background: url("../images/48x48/progressbar.gif") no-repeat center center; }
-body .selected { background: #8eb4e3; }
 body .error { background: #fef1ec; border: 1px solid #cd0a0a; color: #cd0a0a; }
 body .cont { margin: 20px auto; text-align: center; padding: 20px; }
 body .cont > div { display: table; margin: 0 auto; }
@@ -35,12 +34,15 @@ body input.button, body select.button, body button.button, body textarea.button 
 body button { cursor: pointer; }
 body table { text-align: left; }
 body table td, body table th { padding: 3px; vertical-align: top; }
-body table.t1 { border: 1px solid white; margin: 20px auto; width: 420px; }
+body table.t1 { border: 1px solid white; margin: 20px auto; min-width: 420px; }
 body table.t1 tr.even { background: #e9edf4; }
 body table.t1 tr.odd { background: #d0d8e8; }
-body table.t1 tr th { border: 1px solid white; border-bottom: 3px solid white; }
+body table.t1 tr th { color: white; border: 1px solid white; border-bottom: 3px solid white; }
 body table.t1 tr td { border: 1px solid white; }
 body table.t1 tr td.mid { vertical-align: middle; }
+body table.days tr td, body table.days tr th { text-align: center; border-color: #3a3b3d; }
+body table.days tr td.selected, body table.days tr th.selected { background-color: #8eb4e3; }
 body form { display: block; position: relative; }
 body form .left { float: left; }
 body form .right { float: right; }
+body label { padding: 3px; }
