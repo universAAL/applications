@@ -6,7 +6,6 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Database
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
@@ -47,7 +46,7 @@ public final class LoginServlet extends BaseServlet {
       isServletSet(selectUserServlet, "selectUserServlet");
       isServletSet(displayServlet, "displayServlet");
 
-      HttpSession httpSession = getSession(req);
+      Session httpSession = getSession(req);
 
       Person person = (Person) httpSession.getAttribute(LOGGED_DOCTOR);
 
@@ -74,7 +73,7 @@ public final class LoginServlet extends BaseServlet {
 
   }
 
-  private Person findDoctor(HttpServletRequest req, HttpSession httpSession) throws ServletException, IOException {
+  private Person findDoctor(HttpServletRequest req, Session session) throws ServletException, IOException {
 
     String username = req.getParameter(USERNAME);
     String password = req.getParameter(PASSWORD);
@@ -86,9 +85,9 @@ public final class LoginServlet extends BaseServlet {
     Person person = findPerson(username, password);
 
     if (person != null) {
-      httpSession.setAttribute(LOGGED_DOCTOR, person);
+      session.setAttribute(LOGGED_DOCTOR, person);
     } else {
-      httpSession.setAttribute(LOGIN_ERROR, LOGIN_ERROR);
+      session.setAttribute(LOGIN_ERROR, LOGIN_ERROR);
     }
 
     return person;

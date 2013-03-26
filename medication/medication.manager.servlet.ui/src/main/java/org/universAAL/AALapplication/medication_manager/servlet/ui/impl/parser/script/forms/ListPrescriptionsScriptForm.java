@@ -15,8 +15,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
-
 /**
  * @author George Fournadjiev
  */
@@ -28,7 +26,7 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
   private static final String LIST_PRESCRIPTIONS_FUNCTION_CALL_TEXT = "userObj.prescriptions.push";
   private static final String DATE = "date";
   private static final String NOTES = "notes";
-  private static final String MEDICINE = "medicine";
+  private static final String MEDICINE = "medicines";
   private static final String HOW = "how";
   private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyy-mm-dd");
 
@@ -37,6 +35,7 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
 
     this.persistentService = persistentService;
     this.patient = patient;
+    setSingleJavascriptObjects();
   }
 
   @Override
@@ -51,12 +50,10 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
     List<PrescriptionDTO> prescriptionDTOs = DatabaseSimulation.getDescriptions(patient);
 
     for (PrescriptionDTO pr : prescriptionDTOs) {
-//      Pair<String> date = new Pair<String>(DATE, "2013-01-12");
-
       String startDate = getStartDateText(pr.getStartDate());
       Pair<String> date = new Pair<String>(DATE, startDate);
       Pair<String> name = new Pair<String>(NOTES, pr.getDescription());
-      String medicinesTextValue = getMedicinesValue(pr.getMedicineDTOSet());
+      String medicinesTextValue = getMedicinesValue(pr.getMedicineDTOSet(), pr.getPrescriptionId());
       Pair<String> medicine = new Pair<String>(MEDICINE, medicinesTextValue, true);
 
       addRow(date, name, medicine);
@@ -64,16 +61,37 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
 
   }
 
-  private String getMedicinesValue(Set<MedicineDTO> medicineDTOSet) {
+  private String getMedicinesValue(Set<MedicineDTO> medicineDTOSet, int prescriptionId) {
     if (medicineDTOSet.isEmpty()) {
-      return EMPTY;
+      throw new MedicationManagerServletUIException("Missing medicines for " +
+          "the prescriptionDTOs with id: " + prescriptionId);
     }
-    return getSingeMedicineValue(medicineDTOSet.iterator().next());
+
+    StringBuffer sb = new StringBuffer();
+
+    sb.append('[');
+
+    int i = 0;
+    int size = medicineDTOSet.size();
+    for (MedicineDTO dto : medicineDTOSet) {
+      String jo = getSingeMedicineValue(dto);
+      sb.append(jo);
+      i++;
+      if (i < size) {
+        sb.append(',');
+      }
+    }
+
+    sb.append(']');
+    return sb.toString();
   }
 
   private String getSingeMedicineValue(MedicineDTO medicineDTO) {
     String name = medicineDTO.getName();
     Set<IntakeDTO> intakeDTOSet = medicineDTO.getIntakeDTOSet();
+    if (intakeDTOSet.isEmpty()) {
+      throw new MedicationManagerServletUIException("Missing intakes for the medicine with id: " + medicineDTO.getMedicineId());
+    }
     int doseCount = 0;
     String unit = null;
     for (IntakeDTO dto : intakeDTOSet) {

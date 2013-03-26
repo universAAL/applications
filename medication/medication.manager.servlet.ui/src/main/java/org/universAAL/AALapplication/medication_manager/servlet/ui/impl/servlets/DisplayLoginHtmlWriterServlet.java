@@ -27,7 +27,7 @@ public final class DisplayLoginHtmlWriterServlet extends BaseHtmlWriterServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
     synchronized (lock) {
-      HttpSession session = getSession(req);
+      Session session = getSession(req);
       String loggingError = (String) session.getAttribute(LOGIN_ERROR);
       boolean errorLogging = false;
       if (loggingError != null) {

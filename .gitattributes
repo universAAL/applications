@@ -2943,6 +2943,7 @@ medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplica
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/LoginServlet.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/NewPrescriptionHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/SelectUserHtmlWriterServlet.java -text
+medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/Session.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/SessionTracking.java -text
 medication/medication.manager.servlet.ui/src/main/resources/css/common.css -text
 medication/medication.manager.servlet.ui/src/main/resources/css/login.css -text

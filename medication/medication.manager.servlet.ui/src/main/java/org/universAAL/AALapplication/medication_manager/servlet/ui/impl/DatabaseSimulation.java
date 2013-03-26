@@ -36,10 +36,6 @@ public final class DatabaseSimulation {
   private static final PrescriptionDTO PRESCRIPTION_DTO_2;
   private static final PrescriptionDTO PRESCRIPTION_DTO_3;
   private static final PrescriptionDTO PRESCRIPTION_DTO_4;
-//  private static final PrescriptionDTO PRESCRIPTION_DTO_5;
-//  private static final PrescriptionDTO PRESCRIPTION_DTO_6;
-  private static final PrescriptionDTO PRESCRIPTION_DTO_7;
-  private static final PrescriptionDTO PRESCRIPTION_DTO_8;
 
   static {
 
@@ -53,6 +49,7 @@ public final class DatabaseSimulation {
 
     MedicineDTO med1 = new MedicineDTO("aspirin", new Date(), 5, "aspirin description", "aspirin  sideeffects",
         "aspirin incompliances", MealRelationDTO.AFTER, INTAKE_DTO_SET_1);
+    med1.setMedicineIdId(1);
 
     MEDICINE_DTO_SET_1.add(med1);
 
@@ -66,10 +63,12 @@ public final class DatabaseSimulation {
 
     MedicineDTO med2 = new MedicineDTO("benalgin", new Date(), 7, "benalgin description", "benalgin  sideeffects",
         "benalgin incompliances", MealRelationDTO.WITH_MEAL, INTAKE_DTO_SET_2);
+    med2.setMedicineIdId(2);
 
     MEDICINE_DTO_SET_1.add(med2);
 
     PRESCRIPTION_DTO_1 = new PrescriptionDTO("prescription 1", new Date(), MEDICINE_DTO_SET_1, DOCTOR, PATIENT_1);
+    PRESCRIPTION_DTO_1.setPrescriptionId(1);
 
     IntakeDTO in11 = new IntakeDTO(TimeDTO.createTimeDTO("6:00"), IntakeDTO.Unit.PILL, 2);
     IntakeDTO in12 = new IntakeDTO(TimeDTO.createTimeDTO("14:00"), IntakeDTO.Unit.PILL, 2);
@@ -79,24 +78,19 @@ public final class DatabaseSimulation {
 
     MedicineDTO m1 = new MedicineDTO("viteral", new Date(), 5, "viteral description", "viteral  sideeffects",
         "viteral incompliances", MealRelationDTO.AFTER, INTAKE_DTO_SET_3);
+    m1.setMedicineIdId(3);
 
     MEDICINE_DTO_SET_3.add(m1);
 
     PRESCRIPTION_DTO_2 = new PrescriptionDTO("prescription 2", new Date(), MEDICINE_DTO_SET_3, DOCTOR, PATIENT_2);
+    PRESCRIPTION_DTO_2.setPrescriptionId(2);
 
     PRESCRIPTION_DTO_3 = new PrescriptionDTO("prescription 3", new Date(), MEDICINE_DTO_SET_3, DOCTOR, PATIENT_1);
+    PRESCRIPTION_DTO_3.setPrescriptionId(3);
 
     PRESCRIPTION_DTO_4 = new PrescriptionDTO("prescription 4", new Date(), MEDICINE_DTO_SET_1, DOCTOR, PATIENT_2);
+    PRESCRIPTION_DTO_4.setPrescriptionId(4);
 
-//    PRESCRIPTION_DTO_5 = new PrescriptionDTO("prescription 5", new Date(), new HashSet<MedicineDTO>(), DOCTOR, PATIENT_1);
-
-//    PRESCRIPTION_DTO_6 = new PrescriptionDTO("prescription 6", new Date(), new HashSet<MedicineDTO>(), DOCTOR, PATIENT_2);
-
-    Set<MedicineDTO> medicineDTOs = new HashSet<MedicineDTO>();
-    medicineDTOs.add(new MedicineDTO("dummy", new Date(), 6, "desc", null, null, MealRelationDTO.AFTER, new HashSet<IntakeDTO>()));
-    PRESCRIPTION_DTO_7 = new PrescriptionDTO("prescription 7", new Date(), medicineDTOs , DOCTOR, PATIENT_1);
-
-    PRESCRIPTION_DTO_8 = new PrescriptionDTO("prescription 8", new Date(), medicineDTOs, DOCTOR, PATIENT_2);
   }
 
 
@@ -115,13 +109,9 @@ public final class DatabaseSimulation {
     if (patient.getId() == PATIENT_1.getId()) {
       prescriptionDTOs.add(PRESCRIPTION_DTO_1);
       prescriptionDTOs.add(PRESCRIPTION_DTO_3);
-//      prescriptionDTOs.add(PRESCRIPTION_DTO_5);
-      prescriptionDTOs.add(PRESCRIPTION_DTO_7);
     } else if (patient.getId() == PATIENT_2.getId()) {
       prescriptionDTOs.add(PRESCRIPTION_DTO_2);
       prescriptionDTOs.add(PRESCRIPTION_DTO_4);
-//      prescriptionDTOs.add(PRESCRIPTION_DTO_6);
-      prescriptionDTOs.add(PRESCRIPTION_DTO_8);
     }
 
     return prescriptionDTOs;
