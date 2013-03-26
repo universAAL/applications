@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb">
+<head>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>universALL - Medication Medical Service: Add Medicine</title>
+
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/medicine.js"></script>
+	<link rel="stylesheet" href="css/common.css" type="text/css">
+	<link rel="stylesheet" href="css/medicine.css" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript">
+	/*Add date and notes if are post after save medicine*/
+
+	/*The medicine object
+	 - for new medicine, set only id
+	 -for edit medicine, set all data, example:
+	medicineObj = {'id':'med1', 'name':'Medicine name 1 that is too long', 'description':'bla bla', 'side_effects':'sleeping problems', "incompliances":'alcohol', 'days':7, 'hours':[1,13, 22, 24]};
+	isNew = false;//add ths if edit medicine*/
+</script>
+<div class="cont">
+	<h1>universALL<br/>Medication Medical Service</h1>
+
+	<h2>Add medicine</h2>
+
+	<form name="save_medicine" action="" method="post">
+
+		<table id="medicine">
+			<tr>
+				<th>Medicine Name</th>
+				<td><input type="text" name="name"/></td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td><textarea name="description" rows="3" cols="50"></textarea></td>
+			</tr>
+			<tr>
+				<th>Side Effects</th>
+				<td><textarea name="side_effects" rows="3" cols="50"></textarea></td>
+			</tr>
+			<tr>
+				<th>Incompliances</th>
+				<td><textarea name="incompliances" rows="3" cols="50"></textarea></td>
+			</tr>
+			<tr>
+				<th>Days to be taken</th>
+				<td><input type="text" name="days" size="3"/></td>
+			</tr>
+		</table>
+
+		<table class="days">
+			<tr>
+				<td rowspan="2">Intake hours<input type="hidden" name="hours"/></td>
+			</tr>
+			<tr></tr>
+		</table>
+
+
+		<input type="submit" name="save_medicine" value="Save Medicine"/>
+		<button name="back">Cancel</button>
+	</form>
+
+</div>
+
+</body>
+</html>

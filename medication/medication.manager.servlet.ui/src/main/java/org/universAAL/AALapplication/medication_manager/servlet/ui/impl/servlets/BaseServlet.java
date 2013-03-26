@@ -1,69 +1,42 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.HtmlParser;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
-
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author George Fournadjiev
  */
 public abstract class BaseServlet extends HttpServlet {
 
-  private final HtmlParser htmlParser;
+  private SessionTracking sessionTracking;
 
-  protected BaseServlet(String htmlFileName) {
-    String htmlText = Util.getHtml(htmlFileName);
-    htmlParser = new HtmlParser(htmlText);
+  protected BaseServlet(SessionTracking sessionTracking) {
+    this.sessionTracking = sessionTracking;
   }
 
-  public void sendResponse(HttpServletResponse resp,
-                           ScriptForm scriptForm) throws IOException {
 
-    try {
-
-      String scriptText = scriptForm.createScriptText();
-
-      sendSuccessfulResponse(resp, scriptText);
-
-    } catch (Exception e) {
-
-      sendErrorResponse(resp, e);
-
+  protected HttpSession getSession(HttpServletRequest req) {
+    String id = req.getRequestedSessionId();
+    HttpSession session = sessionTracking.getSession(id);
+    if (session == null) {
+      session = req.getSession(true);
+      sessionTracking.addSession(session);
     }
 
+    return session;
   }
 
-  public void sendErrorResponse(HttpServletResponse resp, Exception e) throws IOException {
-    StringBuffer sb = new StringBuffer();
+  protected void invalidateSession(String id) {
 
-    sb.append("Internal error - an exception occurred: ");
-    sb.append('\n');
-    sb.append("class: ");
-    sb.append(e.getClass().getName());
-    sb.append('\n');
-    sb.append("message: ");
-    String message = e.getMessage();
-    if (message == null || message.trim().isEmpty()) {
-      sb.append("Missing message");
-    } else {
-      sb.append(message);
+    HttpSession session = sessionTracking.getSession(id);
+
+    if (session == null) {
+      return;
     }
 
-    resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, sb.toString());
+    sessionTracking.removeSession(id);
+
   }
-
-  private void sendSuccessfulResponse(HttpServletResponse resp, String script) throws IOException {
-    String htmlOutput = htmlParser.addScriptElement(script);
-
-    PrintWriter writer = resp.getWriter();
-
-    writer.println(htmlOutput);
-  }
-
 
 }

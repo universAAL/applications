@@ -9,25 +9,28 @@
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
 	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript">
+		var errorMsg = "";
+		$(function () {
+			$(".error_msg").html(errorMsg);
+		});
+	</script>
 	<link rel="stylesheet" href="css/common.css" type="text/css">
-	<link rel="stylesheet" href="css/login.css" type="text/css">
 </head>
 
 <body>
 <script type="text/javascript">
-//	isError=true;
+//	var errorMsg = "bla bla";
 </script>
-<div class="cont"><div>
-	<h1>universALL<br/>Medication Medical Service</h1>
+<div class="cont">
+	<div>
+		<h1></h1>
 
-	<form name="user" action="" method="post">
-		<input type="text" name="username" value="us"/><br/>
-		<input type="password" name="password" value="pa"/><br/>
-		<input type="submit" name="login" value="Login" class="button"/>
-	</form>
-	<div class="error_msg" style="display: none">Wrong username and/or password</div>
-</div></div>
+		<h2>Error occurred:</h2>
+
+		<div class="error_msg left"></div>
+	</div>
+</div>
 
 </body>
 </html>

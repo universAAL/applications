@@ -1,7 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.DisplayLoginScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
 
@@ -16,19 +15,19 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.U
 /**
  * @author George Fournadjiev
  */
-public final class DisplayServlet extends BaseServlet {
+public final class DisplayLoginHtmlWriterServlet extends BaseHtmlWriterServlet {
 
   private final Object lock = new Object();
 
-  public DisplayServlet() {
-    super(Util.LOGIN_FILE_NAME);
+  public DisplayLoginHtmlWriterServlet(SessionTracking sessionTracking) {
+    super(LOGIN_FILE_NAME, sessionTracking);
   }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
     synchronized (lock) {
-      HttpSession session = req.getSession(true);
+      HttpSession session = getSession(req);
       String loggingError = (String) session.getAttribute(LOGIN_ERROR);
       boolean errorLogging = false;
       if (loggingError != null) {

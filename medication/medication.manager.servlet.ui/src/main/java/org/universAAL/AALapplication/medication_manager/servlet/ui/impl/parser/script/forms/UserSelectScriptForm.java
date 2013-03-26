@@ -1,6 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
 
 /**
@@ -9,13 +11,15 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.s
 public final class UserSelectScriptForm extends ScriptForm {
 
   private final PersistentService persistentService;
+  private final Person doctor;
 
   private static final String USER_SELECT_FUNCTION_CALL_TEXT = "users.push";
 
-  public UserSelectScriptForm(PersistentService persistentService) {
+  public UserSelectScriptForm(PersistentService persistentService, Person doctor) {
     super(USER_SELECT_FUNCTION_CALL_TEXT);
 
     this.persistentService = persistentService;
+    this.doctor = doctor;
   }
 
   @Override
@@ -25,12 +29,21 @@ public final class UserSelectScriptForm extends ScriptForm {
 
   @Override
   public void process() {
-    Pair<String> id = new Pair<String>(ID, "1");
-    Pair<String> name = new Pair<String>(NAME, "Peni Peneva");
-    addRow(id, name);
 
-    Pair<String> id1 = new Pair<String>(ID, "2");
-    Pair<String> name1 = new Pair<String>(NAME, "Ken Kenov");
-    addRow(id1, name1);
+    Person[] patients = findPatients();
+
+    for (Person p : patients) {
+      String personId = String.valueOf(p.getId());
+      Pair<String> id = new Pair<String>(ID, personId);
+      Pair<String> name = new Pair<String>(NAME, p.getName());
+      addRow(id, name);
+    }
+
+  }
+
+  private Person[] findPatients() {
+    //TODO real database related code here
+
+    return DatabaseSimulation.PATIENTS;
   }
 }

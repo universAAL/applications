@@ -1,7 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -11,8 +10,12 @@ import java.util.Enumeration;
 /**
  * @author George Fournadjiev
  */
-public final class HandleNewPrescriptionServlet extends HttpServlet {
+public final class HandleNewPrescriptionServlet extends BaseServlet {
 
+
+  public HandleNewPrescriptionServlet(SessionTracking sessionTracking) {
+    super(sessionTracking);
+  }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

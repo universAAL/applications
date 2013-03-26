@@ -14,14 +14,14 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.A
 /**
  * @author George Fournadjiev
  */
-public final class NewPrescriptionServlet extends BaseServlet {
+public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServlet {
 
   private final Object lock = new Object();
 
-  private static final String NEW_PRESCRIPTION_HTML_FILE_NAME = "prescription.html";
+  private static final String NEW_PRESCRIPTION_HTML_FILE_NAME = "new_prescription.html";
 
-  public NewPrescriptionServlet() {
-    super(NEW_PRESCRIPTION_HTML_FILE_NAME);
+  public NewPrescriptionHtmlWriterServlet(SessionTracking sessionTracking) {
+    super(NEW_PRESCRIPTION_HTML_FILE_NAME, sessionTracking);
   }
 
   @Override

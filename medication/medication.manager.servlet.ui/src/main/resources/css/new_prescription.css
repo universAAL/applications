@@ -1,0 +1,10 @@
+form { text-align: left; padding: 10px 0; }
+form table:first-child { width: 100%; }
+form table:first-child td { vertical-align: middle; }
+form table:first-child td.date { width: 200px; }
+form table:first-child td.date input { width: 120px; display: block; }
+form table:first-child td label { display: inline-block; margin-right: 5px; }
+form table:first-child td.notes textarea { display: block; height: 2.5em; width: 99%; min-width: 300px; }
+form table#prescription tr.templ1 td div { height: 50px; overflow: auto; }
+form table.days tr td { border-color: #3a3b3d; text-align: center; }
+form table.days tr td.selected { background-color: #8eb4e3; }
