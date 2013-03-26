@@ -2942,11 +2942,13 @@ medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplica
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/ListPrescriptionsHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/LoginServlet.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/NewPrescriptionHtmlWriterServlet.java -text
+medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/NewPrescriptionView.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/SelectUserHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/Session.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/servlets/SessionTracking.java -text
 medication/medication.manager.servlet.ui/src/main/resources/css/common.css -text
 medication/medication.manager.servlet.ui/src/main/resources/css/login.css -text
+medication/medication.manager.servlet.ui/src/main/resources/css/medicine.css -text
 medication/medication.manager.servlet.ui/src/main/resources/css/new_prescription.css -text
 medication/medication.manager.servlet.ui/src/main/resources/css/prescriptions.css -text
 medication/medication.manager.servlet.ui/src/main/resources/css/reset-min.css -text

@@ -24,6 +24,7 @@ public final class Util {
   public static final String EMPTY = "";
   public static final String CANCEL = "cancel";
   public static final String TRUE = "true";
+  public static final String PATIENT = "PATIENT";
 
   private Util() {
   }

@@ -1,0 +1,7 @@
+form { text-align: left; padding: 10px 0; }
+form table { width: 100%; }
+form table.t1 th { border-bottom-width: 1px !important; vertical-align: middle; }
+form table:first-child td { min-width: 500px; }
+form table:first-child td textarea, form table:first-child td input { width: 98%; }
+form table.days td { cursor: pointer; }
+form table.days td input { display: none; }

@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.NewPrescriptionView;
 
 /**
  * @author George Fournadjiev
@@ -14,14 +15,16 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
   private static final String DAYS = "days";
   private static final String HOURS = "hours";
   private final PersistentService persistentService;
+  private final NewPrescriptionView newPrescriptionView;
 
   private static final String NEW_PRESCRIPTION_FUNCTION_CALL_TEXT = "prescriptionObj.medicines.push";
 
 
-  public NewPrescriptionScriptForm(PersistentService persistentService) {
+  public NewPrescriptionScriptForm(PersistentService persistentService, NewPrescriptionView newPrescriptionView) {
     super(NEW_PRESCRIPTION_FUNCTION_CALL_TEXT);
 
     this.persistentService = persistentService;
+    this.newPrescriptionView = newPrescriptionView;
     setSingleJavascriptObjects();
   }
 
@@ -31,6 +34,7 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
     //    Add date and notes if are post after save medicine
 
     this.singleJavascriptObjects = new String[]{
+        "prescriptionObj.id = \'p1\';",
         "prescriptionObj.date = \'2013-01-12\';",
         "prescriptionObj.notes = \'Pain problems\';"
     };
