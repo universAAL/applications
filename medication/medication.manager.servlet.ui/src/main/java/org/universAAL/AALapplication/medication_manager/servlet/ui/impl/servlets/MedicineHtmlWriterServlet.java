@@ -73,6 +73,7 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
       }
 
       MedicineView medicineView = new MedicineView(generateId());
+      medicineView.setName("Auto set for medicine.id=" + medicineView.getMedicineId());
 
       newPrescriptionView.addMedicineView(medicineView);
 
