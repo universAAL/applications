@@ -34,7 +34,7 @@ public final class DisplayLoginHtmlWriterServlet extends BaseHtmlWriterServlet {
       if (loggingError != null) {
         errorLogging = true;
       }
-      session.setAttribute(LOGIN_ERROR, null);
+      session.removeAttribute(LOGIN_ERROR);
       handleResponse(resp, errorLogging);
     }
   }

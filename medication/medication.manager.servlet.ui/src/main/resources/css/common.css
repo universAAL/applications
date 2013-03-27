@@ -6,8 +6,6 @@ a { behavior: url("hidefocus.htc"); }
 
 select, input, fieldset { z-index: inherit; position: relative; }
 
-input { -webkit-appearance: none; }
-
 *:focus { outline: none !important; }
 
 a { cursor: pointer; cursor: hand; }

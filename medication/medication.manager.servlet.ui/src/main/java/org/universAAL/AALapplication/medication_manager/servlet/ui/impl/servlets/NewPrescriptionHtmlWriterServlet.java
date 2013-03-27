@@ -3,7 +3,10 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.NewPrescriptionScriptForm;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -52,6 +55,10 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
         return;
       }
 
+      String cancel = req.getParameter(CANCEL);
+      if (cancel != null && TRUE.equalsIgnoreCase(cancel)) {
+
+      }
 
       Person patient = (Person) session.getAttribute(PATIENT);
 
