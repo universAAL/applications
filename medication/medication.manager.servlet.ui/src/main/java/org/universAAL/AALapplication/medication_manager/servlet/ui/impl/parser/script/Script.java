@@ -11,7 +11,7 @@ public final class Script {
   private final String[] rowsJavaScriptObjects;
 
   private static final String SCRIPT_START = "<script type=\"text/javascript\">\n";
-  private static final String SCRIPT_END = "\n</script>>";
+  private static final String SCRIPT_END = "\n</script>";
   private static final String EMPTY = "";
   private static final String NEW_LINE_WITH_TAB = "\n\t";
 
