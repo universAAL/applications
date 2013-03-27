@@ -12,7 +12,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.LoginServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.NewPrescriptionHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SelectUserHtmlWriterServlet;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SessionTracking;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -86,6 +86,8 @@ public final class Activator implements BundleActivator {
     listPrescriptionsServlet.setDisplayServlet(displayServlet);
     listPrescriptionsServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
 
+    newPrescriptionServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
+    newPrescriptionServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
   }
 
   private HttpService getHttpService(BundleContext context) {

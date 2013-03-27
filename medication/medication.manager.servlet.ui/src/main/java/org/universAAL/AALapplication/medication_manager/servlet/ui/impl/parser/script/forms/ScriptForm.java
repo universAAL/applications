@@ -36,7 +36,9 @@ public abstract class ScriptForm {
     JavaScriptObjectCreator creator = new JavaScriptObjectCreator();
 
     for (Pair p : pair) {
-      creator.addPair(p);
+      if (p.isNotEmpty()) {
+        creator.addPair(p);
+      }
     }
 
     String javascriptObject = creator.createJavascriptObject();

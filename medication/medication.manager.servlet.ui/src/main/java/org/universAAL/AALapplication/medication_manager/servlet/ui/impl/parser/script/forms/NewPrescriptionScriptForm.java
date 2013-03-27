@@ -1,8 +1,18 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.NewPrescriptionView;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.MedicineView;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -31,37 +41,138 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
   @Override
   public void setSingleJavascriptObjects() {
 
-    //    Add date and notes if are post after save medicine
+    List<String> singleObjects = new ArrayList<String>();
 
-    this.singleJavascriptObjects = new String[]{
-        "prescriptionObj.id = \'p1\';",
-        "prescriptionObj.date = \'2013-01-12\';",
-        "prescriptionObj.notes = \'Pain problems\';"
-    };
+    String prescriptionId = "prescriptionObj.id = \'" + newPrescriptionView.getPrescriptionId() + "\';";
+    singleObjects.add(prescriptionId);
+    newPrescriptionView.setStartDate("2013-03-27");
+    String date = newPrescriptionView.getStartDate();
+    if (date != null) {
+      date = "prescriptionObj.date = \'" + date + "\';";
+      singleObjects.add(date);
+    }
+    newPrescriptionView.setNotes("notes zswsws");
+    String notes = newPrescriptionView.getNotes();
+    if (notes != null) {
+      notes = "prescriptionObj.notes = \'" + notes + "\';";
+      singleObjects.add(notes);
+    }
+
+    String[] res = new String[singleObjects.size()];
+    res = singleObjects.toArray(res);
+
+    this.singleJavascriptObjects = res;
   }
 
   @Override
   public void process() {
 
-    Pair<String> id = new Pair<String>(ID, "1");
-    Pair<String> name = new Pair<String>(NAME, "Benalgin");
-    Pair<String> description = new Pair<String>(DESCRIPTION, "Benalgin Description");
-    Pair<String> sideeffects = new Pair<String>(SIDE_EFFECTS, "Benalgin sideeffects");
-    Pair<String> incompliances = new Pair<String>(INCOMPLIANCES, "Benalgin incompliances");
-    Pair<Integer> days = new Pair<Integer>(DAYS, 5, true);
-    Pair<String> hours = new Pair<String>(HOURS, "[8, 14, 21]", true);
+    Set<MedicineView> medicineViewSet = newPrescriptionView.getMedicineViewSet();
 
-    addRow(id, name, description, sideeffects, incompliances, days, hours);
+    fillMedicineViewSetWithTempData(medicineViewSet);
 
-    Pair<String> id1 = new Pair<String>(ID, "2");
-    Pair<String> name1 = new Pair<String>(NAME, "Analgin");
-    Pair<String> description1 = new Pair<String>(DESCRIPTION, "Analgin Description");
-    Pair<String> sideeffects1 = new Pair<String>(SIDE_EFFECTS, "Analgin sideeffects");
-    Pair<String> incompliances1 = new Pair<String>(INCOMPLIANCES, "Analgin incompliances");
-    Pair<Integer> days1 = new Pair<Integer>(DAYS, 9, true);
-    Pair<String> hours1 = new Pair<String>(HOURS, "[9, 13, 20]", true);
+    if (medicineViewSet.isEmpty()) {
+      return;
+    }
 
-    addRow(id1, name1, description1, sideeffects1, incompliances1, days1, hours1);
+    for (MedicineView medicineView : medicineViewSet) {
+
+      int medicineId = medicineView.getMedicineId();
+      Pair<String> id = new Pair<String>(ID, String.valueOf(medicineId));
+      Pair<String> name = new Pair<String>(NAME, medicineView.getName());
+      String descr = medicineView.getDescription();
+      Pair<String> description;
+      if (descr != null) {
+        description = new Pair<String>(DESCRIPTION, descr);
+      } else {
+        description = EMPTY_PAIR;
+      }
+      String se = medicineView.getSideeffects();
+      Pair<String> sideeffects;
+      if (se != null) {
+        sideeffects = new Pair<String>(SIDE_EFFECTS, se);
+      } else {
+        sideeffects = EMPTY_PAIR;
+      }
+      String inc = medicineView.getIncompliances();
+      Pair<String> incompliances;
+      if (inc != null) {
+        incompliances = new Pair<String>(INCOMPLIANCES, inc);
+      } else {
+        incompliances = EMPTY_PAIR;
+      }
+      Pair<Integer> days = new Pair<Integer>(DAYS, medicineView.getDays(), true);
+      Set<IntakeDTO> intakeDTOSet = medicineView.getIntakeDTOSet();
+      String hoursText = createHoursText(intakeDTOSet);
+      Pair<String> hours = new Pair<String>(HOURS, hoursText, true);
+
+      addRow(id, name, description, sideeffects, incompliances, days, hours);
+    }
+
+  }
+
+  private String createHoursText(Set<IntakeDTO> intakeDTOs) {
+    StringBuffer sb = new StringBuffer();
+    sb.append('[');
+
+    int count = 0;
+    int size = intakeDTOs.size();
+    for (IntakeDTO dto : intakeDTOs) {
+      int hour = dto.getTime().getHour();
+      sb.append(hour);
+      count++;
+      if (count < size) {
+        sb.append(", ");
+      }
+    }
+
+    sb.append("]");
+
+    return sb.toString();
+  }
+
+  private void fillMedicineViewSetWithTempData(Set<MedicineView> medicineViewSet) {
+
+    MedicineView medicineView1 = new MedicineView(1);
+    medicineView1.setName("Benalgin");
+    medicineView1.setDescription("Benalgin Description");
+    medicineView1.setSideeffects("Benalgin sideeffects");
+
+    medicineView1.setDays(8);
+
+    Set<IntakeDTO> intakeDTOs1 = new HashSet<IntakeDTO>();
+
+    IntakeDTO in11 = new IntakeDTO(TimeDTO.createTimeDTO("8:00"), IntakeDTO.Unit.PILL, 2);
+    IntakeDTO in12 = new IntakeDTO(TimeDTO.createTimeDTO("16:00"), IntakeDTO.Unit.PILL, 1);
+
+    intakeDTOs1.add(in11);
+    intakeDTOs1.add(in12);
+
+    medicineView1.setIntakeDTOSet(intakeDTOs1);
+
+    medicineViewSet.add(medicineView1);
+
+    MedicineView medicineView2 = new MedicineView(2);
+    medicineView2.setName("Analgin");
+    medicineView2.setDescription("Analgin Description");
+    medicineView2.setSideeffects("Analgin sideeffects");
+
+    medicineView2.setDays(10);
+
+    Set<IntakeDTO> intakeDTOs2 = new HashSet<IntakeDTO>();
+
+    IntakeDTO in21 = new IntakeDTO(TimeDTO.createTimeDTO("9:00"), IntakeDTO.Unit.PILL, 1);
+    IntakeDTO in22 = new IntakeDTO(TimeDTO.createTimeDTO("13:00"), IntakeDTO.Unit.PILL, 2);
+    IntakeDTO in23 = new IntakeDTO(TimeDTO.createTimeDTO("21:00"), IntakeDTO.Unit.PILL, 3);
+
+    intakeDTOs2.add(in21);
+    intakeDTOs2.add(in22);
+    intakeDTOs2.add(in23);
+
+    medicineView2.setIntakeDTOSet(intakeDTOs2);
+
+    medicineViewSet.add(medicineView2);
+
   }
 
 

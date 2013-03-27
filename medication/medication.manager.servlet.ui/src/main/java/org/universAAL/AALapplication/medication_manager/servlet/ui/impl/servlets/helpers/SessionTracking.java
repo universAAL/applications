@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
+package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,10 +1,11 @@
-package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
+package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers;
 
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 
-import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
+
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -13,8 +14,8 @@ public final class NewPrescriptionView {
 
   private final int prescriptionId;
   private String description;
-  private Date startDate;
-  private Set<MedicineDTO> medicineDTOSet;
+  private String startDate;
+  private Set<MedicineView> medicineViewSet = new HashSet<MedicineView>();
   private Person physician;
   private Person patient;
 
@@ -28,19 +29,21 @@ public final class NewPrescriptionView {
     return prescriptionId;
   }
 
-  public String getDescription() {
+  public String getNotes() {
     return description;
   }
 
-  public void setDescription(String description) {
+  public void setNotes(String description) {
     this.description = description;
   }
 
-  public Date getStartDate() {
+  public String getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(Date startDate) {
+  public void setStartDate(String startDate) {
+    validateDate(startDate);
+
     this.startDate = startDate;
   }
 
@@ -52,12 +55,12 @@ public final class NewPrescriptionView {
     return patient;
   }
 
-  public Set<MedicineDTO> getMedicineDTOSet() {
-    return medicineDTOSet;
+  public Set<MedicineView> getMedicineViewSet() {
+    return medicineViewSet;
   }
 
-  public void setMedicineDTOSet(Set<MedicineDTO> medicineDTOSet) {
-    this.medicineDTOSet = medicineDTOSet;
+  public void setMedicineViewSet(Set<MedicineView> medicineViewSet) {
+    this.medicineViewSet = medicineViewSet;
   }
 
 }

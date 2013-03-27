@@ -13,7 +13,7 @@ public final class Pair<V> {
   private static final char QUOTE = '\'';
 
   public Pair(String key, V value, boolean isValueWithoutQuotes) {
-    this.key = QUOTE + key + QUOTE;
+    this.key = key != null ? QUOTE + key + QUOTE : null;
     this.value = value;
     this.isValueWithoutQuotes = isValueWithoutQuotes;
   }
@@ -32,6 +32,11 @@ public final class Pair<V> {
   }
 
   public String getPairText() {
+
+    if (key == null) {
+      return "";
+    }
+
     String pairText = key + SEMICOLON;
 
     if (isValueWithoutQuotes) {
@@ -41,5 +46,9 @@ public final class Pair<V> {
     }
 
     return pairText;
+  }
+
+  public boolean isNotEmpty() {
+    return key != null;
   }
 }
