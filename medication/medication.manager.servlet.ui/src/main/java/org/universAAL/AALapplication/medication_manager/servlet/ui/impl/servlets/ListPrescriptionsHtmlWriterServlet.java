@@ -61,9 +61,16 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
         return;
       }
 
-      Person patient = getPatient(req, session);
+      String cancel = req.getParameter(CANCEL);
+      if (cancel != null && TRUE.equalsIgnoreCase(cancel)) {
+        session.removeAttribute(NEW_PRESCRIPTION);
+      }
 
-      session.setAttribute(PATIENT, patient);
+      Person patient = (Person) session.getAttribute(PATIENT);
+      if (patient == null) {
+        patient = getPatient(req, session);
+        session.setAttribute(PATIENT, patient);
+      }
 
       handleResponse(resp, patient);
     }

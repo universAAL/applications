@@ -3,15 +3,15 @@
 <html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb">
 <head>
 
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 	<title>universALL - Medication Medical Service: Add Medicine</title>
 
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/medicine.js"></script>
-	<link rel="stylesheet" href="css/common.css" type="text/css">
-	<link rel="stylesheet" href="css/medicine.css" type="text/css">
+	<link rel="stylesheet" href="css/common.css" type="text/css"/>
+	<link rel="stylesheet" href="css/medicine.css" type="text/css"/>
 </head>
 
 <body>
@@ -20,36 +20,48 @@
 
 	/*The medicine object
 	 - for new medicine, set only id, prescriptionId
-	 -for edit medicine, set all data, example:*/
-	medicineObj = {'id':'med1','prescriptionId':'', 'name':'Medicine name 1 that is too long', 'description':'We recommend against using this property; please try to use feature detection instead (see jQuery.support). jQuery.browser may be moved to a plugin in a future release of jQuery.', 'side_effects':'sleeping problems', "incompliances":'alcohol', 'days':7, 'hours':[1,13, 22, 24]};
+	 -for edit medicine, set all data, example:	*/
+	medicineObj.id='med1';
+	medicineObj.prescriptionId='p1';
+ /**/
 	isNew = false;//add ths if edit medicine
+	medicineObj.name='Medicine name 1 that is too long';
+	medicineObj.description='We recommend against using this property; please try to use feature detection instead (see jQuery.support). jQuery.browser may be moved to a plugin in a future release of jQuery.';
+	medicineObj.side_effects='sleeping problems';
+	medicineObj.incompliances='alcohol';
+	medicineObj.days=7;
+	medicineObj.dose=1;
+	medicineObj.unit='drops';
+	medicineObj.meal_relation='before';
+  medicineObj.hours=[1,13, 22, 24];
+
 </script>
 <div class="cont"><div>
 	<h1>universAAL<br/>Medication Medical Service</h1>
 
 	<h2>Add medicine</h2>
 
-	<form name="save_medicine" action="" method="post">
+	<form name="save_medicine" action="" method="get">
 
 		<table id="medicine" class="t1">
 			<tr>
 				<th>Medicine Name</th>
 				<td>
-						<input type="hidden" name="id">
-						<input type="hidden" name="prescriptionId">
-						<input type="text" name="name" class="all"/></td>
+						<input type="hidden" name="id" value=""/>
+						<input type="hidden" name="prescriptionId" value=""/>
+						<input type="text" name="name" class="all" value=""/></td>
 			</tr>
 			<tr>
 				<th>Description</th>
-				<td><textarea name="description" rows="3" class="all"></textarea></td>
+				<td><textarea name="description" rows="3" class="all" value=""></textarea></td>
 			</tr>
 			<tr>
 				<th>Side Effects</th>
-				<td><textarea name="side_effects" rows="3" class="all"></textarea></td>
+				<td><textarea name="side_effects" rows="3" class="all" value=""></textarea></td>
 			</tr>
 			<tr>
 				<th>Incompliances</th>
-				<td><textarea name="incompliances" rows="3" class="all"></textarea></td>
+				<td><textarea name="incompliances" rows="3" class="all" value=""></textarea></td>
 			</tr>
 			<tr>
 				<th>Days to be taken</th>
@@ -59,9 +71,10 @@
 				<th>Dose</th>
 				<td>
 					<input type="text" name="dose" size="3"/>
-				  <input type="radio" id="pills" name="unit" value="pills" checked="checked"/> <label for="pills">pills</label>
+				  <input type="radio" id="pills" name="unit" value="pills"/> <label for="pills">pills</label>
 					<input type="radio" id="drops" name="unit" value="drops"/> <label for="drops">drops</label>
-					<select name="meal_relation">
+					<select name="mealrelation">
+						<option value="">&nbsp;</option>
 					</select>
 				</td>
 			</tr>
@@ -69,13 +82,13 @@
 
 		<table class="t1 days">
 			<tr>
-				<th rowspan="2">Intake<br/>hours<input type="hidden" name="hours"/></th>
+				<th rowspan="2">Intake<br/>hours</th>
 			</tr>
 			<tr></tr>
 		</table>
 
 
-		<input type="submit" name="save_medicine" value="Save Medicine"/>
+		<input type="submit" name="save_medicine" value="Save Medicine" class="button"/>
 		<button name="back" class="right">Cancel</button>
 	</form>
 

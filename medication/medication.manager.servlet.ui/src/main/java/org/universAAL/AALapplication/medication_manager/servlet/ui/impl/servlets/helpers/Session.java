@@ -31,4 +31,7 @@ public final class Session {
     attributes.clear();
   }
 
+  public void removeAttribute(String key) {
+    attributes.remove(key);
+  }
 }

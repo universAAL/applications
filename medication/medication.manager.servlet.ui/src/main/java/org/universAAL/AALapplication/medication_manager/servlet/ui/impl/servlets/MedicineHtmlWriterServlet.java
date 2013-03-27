@@ -68,7 +68,7 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
       NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
 
       if (newPrescriptionView == null) {
-        listPrescriptionsHtmlWriterServlet.doGet(req, resp);
+        newPrescriptionHtmlWriterServlet.doGet(req, resp);
         return;
       }
 
@@ -79,18 +79,6 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
 
       handleResponse(resp, newPrescriptionView);
     }
-  }
-
-  private NewPrescriptionView getNewPrescriptionView(Person doctor, Person patient, Session session) {
-
-    NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(NEW_PRESCRIPTION);
-
-    if (newPrescriptionView == null) {
-      newPrescriptionView = new NewPrescriptionView(generateId(), doctor, patient);
-      session.setAttribute(NEW_PRESCRIPTION, newPrescriptionView);
-    }
-
-    return newPrescriptionView;
   }
 
   @Override

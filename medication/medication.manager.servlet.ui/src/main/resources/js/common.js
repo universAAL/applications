@@ -37,15 +37,15 @@ $(function () {
 
 
   $('form[name="save_prescription"]').attr("action", HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS);
-  $('form[name="save_prescription"] tr button[name="edit"]').live("click", function (e) {
+  $(document).on("click",'form[name="save_prescription"] tr button[name="edit"]', function (e) {
     e.preventDefault();
     var p=$('[name="prescriptionId"]').val();
     document.location.href = NEW_MEDICINE_SERVLET_ALIAS + "?id=" + $(this).closest("tr").attr("id")+"&prescriptionId="+p;
   });
-  $('form[name="save_prescription"] tr button[name="delete"]').live("click", function (e) {
+  $(document).on("click",'form[name="save_prescription"] tr button[name="delete"]', function (e) {
     e.preventDefault();
     var p=$('[name="prescriptionId"]').val();
-    document.location.href = HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS + "?deleteID=" + $(this).closest("tr").attr("id")+"&prescriptionId="+p;;
+    document.location.href = HANDLE_NEW_MEDICINE_SERVLET_ALIAS + "?deleteID=" + $(this).closest("tr").attr("id")+"&prescriptionId="+p;;
   });
   $('form[name="save_prescription"] button[name="add_medicine"]').click(function (e) {
     e.preventDefault();
@@ -60,6 +60,7 @@ $(function () {
   $('form[name="save_medicine"]').attr("action", HANDLE_NEW_MEDICINE_SERVLET_ALIAS);
   $('form[name="save_medicine"] button[name="back"]').click(function (e) {
     e.preventDefault();
-    document.location.href = NEW_PRESCRIPTION_SERVLET_ALIAS + CANCEL;
+    var id=$('[name="id"]').val();
+    document.location.href = NEW_PRESCRIPTION_SERVLET_ALIAS + CANCEL+"&id="+id;
   });
 });

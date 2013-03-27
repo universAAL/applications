@@ -7,10 +7,21 @@ $(function () {
   if(!isNew) {
     $("title").html("universALL - Medication Medical Service: Edit Medicine");
     $("h2").html("Edit Medicine");
-    $.each(meal, function(val, name){
-      $('[name="meal_relation"]').append('<option value="'+val+'">'+name+'</option>');
-    } );
   }
+  $('[name="id"]').val(medicineObj.id);
+  $('[name="prescriptionId"]').val(medicineObj.prescriptionId);
+  var s=$('select[name="mealrelation"]'),
+      $optionTempl= s.find('option').clone();
+  s.empty();
+
+
+  $.each(meal, function(v, name){
+    var op = $optionTempl.clone();
+    op.val(v).html(name);
+    s.append(op);
+   // s.append('<option value="'+val+'">'+name+'</option>');
+  });
+
   var $tableDays = $('table.days');
   var tr1 = $tableDays.find('tr:first');
   var tr2 = $tableDays.find('tr:last');
@@ -19,14 +30,17 @@ $(function () {
     tr = (day <= 12) ? tr1 : tr2;
     tr.append('<td><input type="checkbox" name="hours" value="'+day+'"/>' + day + '</td>');
   }
+
+
    if (medicineObj.name) {
-     $('[name="id"]').val(medicineObj.id);
-     $('[name="prescriptionId"]').val(medicineObj.prescriptionId);
      $('[name="name"]').val(medicineObj.name);
      $('[name="description"]').val(medicineObj.description);
      $('[name="side_effects"]').val(medicineObj.side_effects);
      $('[name="incompliances"]').val(medicineObj.incompliances);
      $('[name="days"]').val(medicineObj.days);
+     $('[name="dose"]').val(medicineObj.dose);
+     $('[id="'+medicineObj.unit+'"][name="unit"]').attr("checked", "checked");
+     s.val(medicineObj.meal_relation);
      $.each(medicineObj.hours, function(i, h){
       var cell=(h<=12) ? tr1.find("td:nth-child("+(h+1)+")") : tr2.find("td:nth-child("+(h-12)+")");
       cell.addClass("selected");
@@ -44,6 +58,10 @@ $(function () {
       $(this).find(":checkbox").attr("checked", true);
     }
 
+  });
+
+  $(":text").change(function(){
+    if($(this).hasClass("error") && $.trim($(this).val()).length>0) $(this).removeClass("error");
   });
 
   $("form").submit(function () {

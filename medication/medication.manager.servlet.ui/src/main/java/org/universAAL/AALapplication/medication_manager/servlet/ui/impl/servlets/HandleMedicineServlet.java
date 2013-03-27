@@ -35,6 +35,13 @@ public final class HandleMedicineServlet extends BaseServlet {
       writer.println(parameterName + " : " + value);
     }
 
+    String[] value = req.getParameterValues("hours");
+    writer.println("Printing array of hours " + value);
+    if (value != null) {
+      for (String s : value) {
+        writer.println("hour = " + s);
+      }
+    }
     writer.println("done (Medicine)");
   }
 }
