@@ -12,10 +12,10 @@ import java.util.Enumeration;
 /**
  * @author George Fournadjiev
  */
-public final class HandleNewPrescriptionServlet extends BaseServlet {
+public final class HandleMedicineServlet extends BaseServlet {
 
 
-  public HandleNewPrescriptionServlet(SessionTracking sessionTracking) {
+  public HandleMedicineServlet(SessionTracking sessionTracking) {
     super(sessionTracking);
   }
 
@@ -35,6 +35,6 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
       writer.println(parameterName + " : " + value);
     }
 
-    writer.println("done (new Prescription)");
+    writer.println("done (Medicine)");
   }
 }

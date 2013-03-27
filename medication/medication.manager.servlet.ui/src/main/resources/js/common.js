@@ -45,7 +45,7 @@ $(function () {
   $('form[name="save_prescription"] tr button[name="delete"]').live("click", function (e) {
     e.preventDefault();
     var p=$('[name="prescriptionId"]').val();
-    document.location.href = NEW_PRESCRIPTION_SERVLET_ALIAS + "?deleteID=" + $(this).closest("tr").attr("id")+"&prescriptionId="+p;;
+    document.location.href = HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS + "?deleteID=" + $(this).closest("tr").attr("id")+"&prescriptionId="+p;;
   });
   $('form[name="save_prescription"] button[name="add_medicine"]').click(function (e) {
     e.preventDefault();

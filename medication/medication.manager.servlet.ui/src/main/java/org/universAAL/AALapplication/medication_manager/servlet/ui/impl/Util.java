@@ -23,6 +23,8 @@ public final class Util {
   public static final String LIST_PRESCRIPTIONS_SERVLET_ALIAS = "/display_prescriptions";
   public static final String NEW_PRESCRIPTION_SERVLET_ALIAS = "/display_new_prescription";
   public static final String HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS = "/handle_new_prescription";
+  public static final String MEDICINE_SERVLET_ALIAS = "/display_new_medicine";
+  public static final String HANDLE_MEDICINE_SERVLET_ALIAS = "/handle_new_medicine";
   public static final String LOGIN_ERROR = "LOGIN_ERROR";
   public static final String LOGIN_FILE_NAME = "login.html";
   public static final String EMPTY = "";
@@ -33,6 +35,7 @@ public final class Util {
   public static final Pair<String> EMPTY_PAIR = new Pair<String>(null, null);
 
   private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd");
+  public static final String PRESCRIPTION_VIEW = "prescription_view";
 
   private Util() {
   }
