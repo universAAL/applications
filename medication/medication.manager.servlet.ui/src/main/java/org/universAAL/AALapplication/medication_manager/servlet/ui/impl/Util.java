@@ -36,6 +36,8 @@ public final class Util {
 
   private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd");
   public static final String PRESCRIPTION_VIEW = "prescription_view";
+  public static final String MEDICINE_VIEW = "MEDICINE_VIEW";
+  public static final String DELETE_MEDICINE_VIEW_ID = "deleteID";
 
   private Util() {
   }
@@ -97,5 +99,15 @@ public final class Util {
     } catch (ParseException e) {
       throw new MedicationManagerServletUIException("The provided text date:" + textDate + " is not a valid date");
     }
+  }
+
+  public static int getIntFromString(String var, String varName) {
+    int value;
+    try {
+      value = Integer.valueOf(var);
+    } catch (NumberFormatException e) {
+      throw new MedicationManagerServletUIException("The " + varName + " is not a integer number : " + var);
+    }
+    return value;
   }
 }

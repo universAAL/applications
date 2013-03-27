@@ -2,12 +2,9 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.MedicineView;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,22 +13,23 @@ import java.util.Set;
  */
 public final class NewMedicineScriptForm extends ScriptForm {
 
-  private static final String DESCRIPTION = "description";
-  private static final String SIDE_EFFECTS = "side_effects";
-  private static final String INCOMPLIANCES = "incompliances";
-  private static final String DAYS = "days";
-  private static final String HOURS = "hours";
+  public static final String PREFIX = "medicineObj.";
+  public static final String SUFFIX = "\';";
+  public static final String ID = "id";
+  public static final String PRESCRIPTION_ID = "prescriptionId";
   private final PersistentService persistentService;
-  private final NewPrescriptionView newPrescriptionView;
+  private final MedicineView medicineView;
+  private final int prescriptionId;
 
   private static final String NEW_PRESCRIPTION_FUNCTION_CALL_TEXT = "prescriptionObj.medicines.push";
 
 
-  public NewMedicineScriptForm(PersistentService persistentService, NewPrescriptionView newPrescriptionView) {
+  public NewMedicineScriptForm(PersistentService persistentService, MedicineView medicineView, int prescriptionId) {
     super(NEW_PRESCRIPTION_FUNCTION_CALL_TEXT);
 
     this.persistentService = persistentService;
-    this.newPrescriptionView = newPrescriptionView;
+    this.medicineView = medicineView;
+    this.prescriptionId = prescriptionId;
     setSingleJavascriptObjects();
   }
 
@@ -40,9 +38,36 @@ public final class NewMedicineScriptForm extends ScriptForm {
 
     List<String> singleObjects = new ArrayList<String>();
 
+    String medId = createSingleObjectText(ID, medicineView.getMedicineId());
+    singleObjects.add(medId);
 
+    String prescrId = createSingleObjectText(PRESCRIPTION_ID, prescriptionId);
+    singleObjects.add(prescrId);
 
+    String[] objects = new String[singleObjects.size()];
+    this.singleJavascriptObjects = singleObjects.toArray(objects);
   }
+
+  private String createSingleObjectText(String field, Object value) {
+
+    return PREFIX + field + " = \'"  + value + SUFFIX;
+  }
+
+  /*
+  medicineObj.id='med1';
+  	medicineObj.prescriptionId='p1';
+
+  		isNew = false;//add ths if edit medicine
+  	medicineObj.name='Medicine name 1 that is too long';
+  	medicineObj.description='We recommend against using this property; please try to use feature detection instead (see jQuery.support). jQuery.browser may be moved to a plugin in a future release of jQuery.';
+  	medicineObj.side_effects='sleeping problems';
+  	medicineObj.incompliances='alcohol';
+  	medicineObj.days=7;
+  	medicineObj.dose=1;
+  	medicineObj.unit='drops';
+  	medicineObj.meal_relation='before';
+    medicineObj.hours=[1,13, 22, 24];
+   */
 
   @Override
   public void process() {
@@ -68,50 +93,6 @@ public final class NewMedicineScriptForm extends ScriptForm {
     sb.append("]");
 
     return sb.toString();
-  }
-
-  private void fillMedicineViewSetWithTempData(Set<MedicineView> medicineViewSet) {
-
-    MedicineView medicineView1 = new MedicineView(1);
-    medicineView1.setName("Benalgin");
-    medicineView1.setDescription("Benalgin Description");
-    medicineView1.setSideeffects("Benalgin sideeffects");
-
-    medicineView1.setDays(8);
-
-    Set<IntakeDTO> intakeDTOs1 = new HashSet<IntakeDTO>();
-
-    IntakeDTO in11 = new IntakeDTO(TimeDTO.createTimeDTO("8:00"), IntakeDTO.Unit.PILL, 2);
-    IntakeDTO in12 = new IntakeDTO(TimeDTO.createTimeDTO("16:00"), IntakeDTO.Unit.PILL, 1);
-
-    intakeDTOs1.add(in11);
-    intakeDTOs1.add(in12);
-
-    medicineView1.setIntakeDTOSet(intakeDTOs1);
-
-    medicineViewSet.add(medicineView1);
-
-    MedicineView medicineView2 = new MedicineView(2);
-    medicineView2.setName("Analgin");
-    medicineView2.setDescription("Analgin Description");
-    medicineView2.setSideeffects("Analgin sideeffects");
-
-    medicineView2.setDays(10);
-
-    Set<IntakeDTO> intakeDTOs2 = new HashSet<IntakeDTO>();
-
-    IntakeDTO in21 = new IntakeDTO(TimeDTO.createTimeDTO("9:00"), IntakeDTO.Unit.PILL, 1);
-    IntakeDTO in22 = new IntakeDTO(TimeDTO.createTimeDTO("13:00"), IntakeDTO.Unit.PILL, 2);
-    IntakeDTO in23 = new IntakeDTO(TimeDTO.createTimeDTO("21:00"), IntakeDTO.Unit.PILL, 3);
-
-    intakeDTOs2.add(in21);
-    intakeDTOs2.add(in22);
-    intakeDTOs2.add(in23);
-
-    medicineView2.setIntakeDTOSet(intakeDTOs2);
-
-    medicineViewSet.add(medicineView2);
-
   }
 
 

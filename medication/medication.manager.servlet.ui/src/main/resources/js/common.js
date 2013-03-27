@@ -61,6 +61,6 @@ $(function () {
   $('form[name="save_medicine"] button[name="back"]').click(function (e) {
     e.preventDefault();
     var id=$('[name="id"]').val();
-    document.location.href = NEW_PRESCRIPTION_SERVLET_ALIAS + CANCEL+"&id="+id;
+    document.location.href = HANDLE_NEW_MEDICINE_SERVLET_ALIAS + "?deleteID=" +id;
   });
 });

@@ -66,11 +66,23 @@ public final class NewPrescriptionView {
     medicineViews.put(medicineView.getMedicineId(), medicineView);
   }
 
-  public void removeMedicineView(int medicineViewId) {
-    MedicineView medicineView = medicineViews.remove(medicineViewId);
+  public void removeMedicineView(String medicineViewId) {
+    int id = getIntFromString(medicineViewId, "medicineViewId");
+
+    MedicineView medicineView = medicineViews.remove(id);
+
     if (medicineView == null) {
       throw new MedicationManagerServletUIException("Missing medicineView with id: " + medicineViewId);
     }
   }
 
+  public MedicineView getMedicineView(String medicineId) {
+    int medViewId = getIntFromString(medicineId, "medicineId");
+    MedicineView medicineView = medicineViews.get(medViewId);
+    if (medicineView == null) {
+      throw new MedicationManagerServletUIException("Unexpected error. Missing medicineView with id: " + medViewId);
+    }
+
+    return medicineView;
+  }
 }

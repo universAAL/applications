@@ -98,6 +98,9 @@ public final class Activator implements BundleActivator {
     medicineHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
     medicineHtmlWriterServlet.setListPrescriptionsHtmlWriterServlet(listPrescriptionsServlet);
     medicineHtmlWriterServlet.setNewPrescriptionHtmlWriterServlet(newPrescriptionServlet);
+
+    handleMedicineServlet.setNewPrescriptionHtmlWriterServlet(newPrescriptionServlet);
+    handleMedicineServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
   }
 
   private HttpService getHttpService(BundleContext context) {

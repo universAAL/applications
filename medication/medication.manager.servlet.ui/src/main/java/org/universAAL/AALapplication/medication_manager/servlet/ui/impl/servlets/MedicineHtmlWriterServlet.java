@@ -2,7 +2,8 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.NewPrescriptionScriptForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.NewMedicineScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.MedicineView;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
@@ -23,6 +24,7 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.U
  */
 public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
 
+  public static final String PRESCRIPTION_ID = "prescriptionId";
   private final Object lock = new Object();
   private DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet;
   private NewPrescriptionHtmlWriterServlet newPrescriptionHtmlWriterServlet;
@@ -72,13 +74,35 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
         return;
       }
 
-      MedicineView medicineView = new MedicineView(generateId());
-      medicineView.setName("Auto set for medicine.id=" + medicineView.getMedicineId());
+      MedicineView medicineView = getMedicineView(newPrescriptionView, req);
 
-      newPrescriptionView.addMedicineView(medicineView);
-
-      handleResponse(resp, newPrescriptionView);
+      handleResponse(resp, medicineView, newPrescriptionView.getPrescriptionId());
     }
+  }
+
+  private MedicineView getMedicineView(NewPrescriptionView newPrescriptionView, HttpServletRequest req) {
+
+    String medicineId = req.getParameter("id");
+
+    MedicineView medicineView;
+    if (medicineId != null) {
+      medicineView = newPrescriptionView.getMedicineView(medicineId);
+    } else {
+      medicineView = new MedicineView(generateId());
+      medicineView.setName("Auto set for medicine.id=" + medicineView.getMedicineId());
+      newPrescriptionView.addMedicineView(medicineView);
+    }
+
+    String param = req.getParameter(PRESCRIPTION_ID);
+    int prescriptionId = getIntFromString(param, "param");
+
+    int id = newPrescriptionView.getPrescriptionId();
+    if (prescriptionId != id) {
+      throw new MedicationManagerServletUIException("PrescriptionId parameter: " +
+          prescriptionId + " is different from the NewPrescriptionView kept in the session: " + id);
+    }
+
+    return medicineView;
   }
 
   @Override
@@ -87,10 +111,10 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
   }
 
 
-  private void handleResponse(HttpServletResponse resp, NewPrescriptionView newPrescriptionView) throws IOException {
+  private void handleResponse(HttpServletResponse resp, MedicineView medicineView, int prescriptionId) throws IOException {
     try {
       PersistentService persistentService = getPersistentService();
-      ScriptForm scriptForm = new NewPrescriptionScriptForm(persistentService, newPrescriptionView);
+      ScriptForm scriptForm = new NewMedicineScriptForm(persistentService, medicineView, prescriptionId);
       sendResponse(resp, scriptForm);
     } catch (Exception e) {
       sendErrorResponse(resp, e);

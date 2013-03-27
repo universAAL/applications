@@ -88,11 +88,7 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
     }
 
     int id;
-    try {
-      id = Integer.valueOf(patientId);
-    } catch (NumberFormatException e) {
-      throw new MedicationManagerServletUIException("The user id is not a integer number : " + patientId);
-    }
+    id = getIntFromString(patientId, "patientId");
 
     if (id <= 0) {
       throw new MedicationManagerServletUIException("The user id must be positive integer: " + id);
