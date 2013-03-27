@@ -3,7 +3,11 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.NewPrescriptionScriptForm;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.MedicineView;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,24 +21,31 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.U
 /**
  * @author George Fournadjiev
  */
-public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServlet {
+public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
 
   private final Object lock = new Object();
   private DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet;
-  private SelectUserHtmlWriterServlet selectUserHtmlWriterServlet;
+  private NewPrescriptionHtmlWriterServlet newPrescriptionHtmlWriterServlet;
+  private ListPrescriptionsHtmlWriterServlet listPrescriptionsHtmlWriterServlet;
 
-  private static final String NEW_PRESCRIPTION_HTML_FILE_NAME = "new_prescription.html";
+  private static final String MEDICINE_HTML_FILE_NAME = "medicine.html";
 
-  public NewPrescriptionHtmlWriterServlet(SessionTracking sessionTracking) {
-    super(NEW_PRESCRIPTION_HTML_FILE_NAME, sessionTracking);
+  public MedicineHtmlWriterServlet(SessionTracking sessionTracking) {
+    super(MEDICINE_HTML_FILE_NAME, sessionTracking);
   }
 
   public void setDisplayLoginHtmlWriterServlet(DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet) {
     this.displayLoginHtmlWriterServlet = displayLoginHtmlWriterServlet;
   }
 
-  public void setSelectUserHtmlWriterServlet(SelectUserHtmlWriterServlet selectUserHtmlWriterServlet) {
-    this.selectUserHtmlWriterServlet = selectUserHtmlWriterServlet;
+  public void setNewPrescriptionHtmlWriterServlet(NewPrescriptionHtmlWriterServlet newPrescriptionHtmlWriterServlet) {
+    this.newPrescriptionHtmlWriterServlet = newPrescriptionHtmlWriterServlet;
+  }
+
+  public void setListPrescriptionsHtmlWriterServlet(ListPrescriptionsHtmlWriterServlet
+                                                        listPrescriptionsHtmlWriterServlet) {
+
+    this.listPrescriptionsHtmlWriterServlet = listPrescriptionsHtmlWriterServlet;
   }
 
   @Override
@@ -42,7 +53,8 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
 
     synchronized (lock) {
       isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
-      isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
+      isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
+      isServletSet(listPrescriptionsHtmlWriterServlet, "listPrescriptionsHtmlWriterServlet");
 
       Session session = getSession(req);
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
@@ -53,16 +65,16 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
       }
 
 
-      Person patient = (Person) session.getAttribute(PATIENT);
+      NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
 
-      if (patient == null) {
-        selectUserHtmlWriterServlet.doGet(req, resp);
+      if (newPrescriptionView == null) {
+        listPrescriptionsHtmlWriterServlet.doGet(req, resp);
         return;
       }
 
-      NewPrescriptionView newPrescriptionView = getNewPrescriptionView(doctor, patient, session);
+      MedicineView medicineView = new MedicineView(generateId());
 
-      session.setAttribute(PRESCRIPTION_VIEW, newPrescriptionView);
+      newPrescriptionView.addMedicineView(medicineView);
 
       handleResponse(resp, newPrescriptionView);
     }

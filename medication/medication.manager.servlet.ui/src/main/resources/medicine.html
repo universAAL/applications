@@ -20,9 +20,9 @@
 
 	/*The medicine object
 	 - for new medicine, set only id, prescriptionId
-	 -for edit medicine, set all data, example:
+	 -for edit medicine, set all data, example:*/
 	medicineObj = {'id':'med1','prescriptionId':'', 'name':'Medicine name 1 that is too long', 'description':'We recommend against using this property; please try to use feature detection instead (see jQuery.support). jQuery.browser may be moved to a plugin in a future release of jQuery.', 'side_effects':'sleeping problems', "incompliances":'alcohol', 'days':7, 'hours':[1,13, 22, 24]};
-	isNew = false;//add ths if edit medicine*/
+	isNew = false;//add ths if edit medicine
 </script>
 <div class="cont"><div>
 	<h1>universAAL<br/>Medication Medical Service</h1>
@@ -37,23 +37,33 @@
 				<td>
 						<input type="hidden" name="id">
 						<input type="hidden" name="prescriptionId">
-						<input type="text" name="name"/></td>
+						<input type="text" name="name" class="all"/></td>
 			</tr>
 			<tr>
 				<th>Description</th>
-				<td><textarea name="description" rows="3"></textarea></td>
+				<td><textarea name="description" rows="3" class="all"></textarea></td>
 			</tr>
 			<tr>
 				<th>Side Effects</th>
-				<td><textarea name="side_effects" rows="3"></textarea></td>
+				<td><textarea name="side_effects" rows="3" class="all"></textarea></td>
 			</tr>
 			<tr>
 				<th>Incompliances</th>
-				<td><textarea name="incompliances" rows="3"></textarea></td>
+				<td><textarea name="incompliances" rows="3" class="all"></textarea></td>
 			</tr>
 			<tr>
 				<th>Days to be taken</th>
 				<td><input type="text" name="days" size="3"/></td>
+			</tr>
+			<tr>
+				<th>Dose</th>
+				<td>
+					<input type="text" name="dose" size="3"/>
+				  <input type="radio" id="pills" name="unit" value="pills" checked="checked"/> <label for="pills">pills</label>
+					<input type="radio" id="drops" name="unit" value="drops"/> <label for="drops">drops</label>
+					<select name="meal_relation">
+					</select>
+				</td>
 			</tr>
 		</table>
 

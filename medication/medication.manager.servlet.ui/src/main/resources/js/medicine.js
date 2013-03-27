@@ -1,23 +1,15 @@
-var medicineObj={'id':'','prescriptionId':'', 'name':'', 'description':'', 'side_effects':'', "incompliances":'', 'days':0, 'hours':[]};
 var isNew=true;
-
-$("form").submit(function () {
-  var names = ["name", "id", "days"];
-  var hasError = false;
-  $.each(names, function (i, name) {
-    var el = $('[name="' + name + '"]');
-    if ($.trim(el.val()).length == 0) {
-      el.val("").addClass("error");
-      hasError = true;
-    }
-  });
-  return !hasError;
-});
+var meal={'any':'Any time', 'before':'Before meal', 'with_meal': 'With meal', 'after':'After meal'};
+var medicineObj={'id':'','prescriptionId':'', 'name':'', 'description':'', 'side_effects':'', "incompliances":'',
+  'days':0, 'dose':0,'unit':'pills', 'meal_relation':'any' , 'hours':[]};
 
 $(function () {
   if(!isNew) {
     $("title").html("universALL - Medication Medical Service: Edit Medicine");
     $("h2").html("Edit Medicine");
+    $.each(meal, function(val, name){
+      $('[name="meal_relation"]').append('<option value="'+val+'">'+name+'</option>');
+    } );
   }
   var $tableDays = $('table.days');
   var tr1 = $tableDays.find('tr:first');
@@ -52,5 +44,18 @@ $(function () {
       $(this).find(":checkbox").attr("checked", true);
     }
 
+  });
+
+  $("form").submit(function () {
+    var names = ["name", "id", "days", "dose"];
+    var hasError = false;
+    $.each(names, function (i, name) {
+      var el = $('[name="' + name + '"]');
+      if ($.trim(el.val()).length == 0) {
+        el.val("").addClass("error");
+        hasError = true;
+      }
+    });
+    return !hasError;
   });
 });

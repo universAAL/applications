@@ -7,9 +7,11 @@ import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.DisplayLoginHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.HandleMedicineServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.HandleNewPrescriptionServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.ListPrescriptionsHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.LoginServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.MedicineHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.NewPrescriptionHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SelectUserHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
@@ -73,6 +75,10 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS, handleNewPrescriptionServlet, null, null);
     DisplayLoginHtmlWriterServlet displayServlet = new DisplayLoginHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(LOGIN_HTML_SERVLET_ALIAS, displayServlet, null, null);
+    MedicineHtmlWriterServlet medicineHtmlWriterServlet = new MedicineHtmlWriterServlet(sessionTracking);
+    httpService.registerServlet(MEDICINE_SERVLET_ALIAS, medicineHtmlWriterServlet, null, null);
+    HandleMedicineServlet handleMedicineServlet = new HandleMedicineServlet(sessionTracking);
+    httpService.registerServlet(HANDLE_MEDICINE_SERVLET_ALIAS, handleMedicineServlet, null, null);
     httpService.registerResources(JS_ALIAS, "js", null);
     httpService.registerResources(CSS_ALIAS, "css", null);
 
@@ -88,6 +94,10 @@ public final class Activator implements BundleActivator {
 
     newPrescriptionServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
     newPrescriptionServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
+
+    medicineHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
+    medicineHtmlWriterServlet.setListPrescriptionsHtmlWriterServlet(listPrescriptionsServlet);
+    medicineHtmlWriterServlet.setNewPrescriptionHtmlWriterServlet(newPrescriptionServlet);
   }
 
   private HttpService getHttpService(BundleContext context) {

@@ -1,8 +1,11 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
@@ -15,7 +18,7 @@ public final class NewPrescriptionView {
   private final int prescriptionId;
   private String description;
   private String startDate;
-  private Set<MedicineView> medicineViewSet = new HashSet<MedicineView>();
+  private Map<Integer, MedicineView> medicineViews = new HashMap<Integer, MedicineView>();
   private Person physician;
   private Person patient;
 
@@ -56,11 +59,18 @@ public final class NewPrescriptionView {
   }
 
   public Set<MedicineView> getMedicineViewSet() {
-    return medicineViewSet;
+    return new HashSet<MedicineView>(medicineViews.values());
   }
 
-  public void setMedicineViewSet(Set<MedicineView> medicineViewSet) {
-    this.medicineViewSet = medicineViewSet;
+  public void addMedicineView(MedicineView medicineView) {
+    medicineViews.put(medicineView.getMedicineId(), medicineView);
+  }
+
+  public void removeMedicineView(int medicineViewId) {
+    MedicineView medicineView = medicineViews.remove(medicineViewId);
+    if (medicineView == null) {
+      throw new MedicationManagerServletUIException("Missing medicineView with id: " + medicineViewId);
+    }
   }
 
 }
