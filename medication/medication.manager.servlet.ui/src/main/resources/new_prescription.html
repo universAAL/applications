@@ -7,23 +7,25 @@
 	<title>universALL - Medication Medical Service: New Perscription</title>
 
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-
+	<script src="js/jquery-ui-1.10.2.custom.min.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/new_prescription.js"></script>
+
+	<link href="css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/common.css" type="text/css">
 	<link rel="stylesheet" href="css/new_prescription.css" type="text/css">
 </head>
 
 <body>
 <script type="text/javascript">
-	/*Add date and notes if are post after save medicine*/
+	/*Add date and notes if are post after save medicine
 	prescriptionObj.id = 'p1';
 	 prescriptionObj.date = '2013-01-12';
 	 prescriptionObj.notes = 'Sleeping problems';
 	 //for - add all medicines, example:
 	//prescriptionObj.medicines[]={'id':'med1', 'name':'Medicine_1', 'description':'bla bla', 'side_effects':'sleeping problems','incompliances':'alcohol', 'days':7,'hours':[1, 22, 24]};
 	prescriptionObj.medicines.push({'id':'med1', 'name':'Medicine_1', 'description':'bla bla', 'side_effects':'sleeping problems', "incompliances":'alcohol', 'days':7, 'hours':[1, 22, 24]});
-	prescriptionObj.medicines.push({'id':'med2', 'name':'Medicine_2', 'description':'bla bla', 'side_effects':"make sleapy<br/>shuld not drive", "incompliances":'', 'days':60, 'hours':[10, 22]});
+	prescriptionObj.medicines.push({'id':'med2', 'name':'Medicine_2', 'description':'bla bla', 'side_effects':"make sleapy<br/>shuld not drive", "incompliances":'', 'days':60, 'hours':[10, 22]});*/
 </script>
 <div class="cont">
 	<div>
@@ -31,13 +33,13 @@
 
 		<h2>New perscription details</h2>
 
-		<form name="save_prescription" action="" method="post">
+		<form name="save_prescription" action="" method="get">
 			<table>
 				<tr>
 					<td class="date" nowrap>
 						<label>Intake start date</label>
 						<input type="hidden" name="prescriptionId"/>
-						<input type="text" name="date"/>
+						<input type="text" name="date" id="datepicker" readonly/>
 					</td>
 					<td class="notes">
 						<label>Notes</label>

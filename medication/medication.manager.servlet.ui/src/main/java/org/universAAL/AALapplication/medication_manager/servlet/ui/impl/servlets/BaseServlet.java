@@ -1,5 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 

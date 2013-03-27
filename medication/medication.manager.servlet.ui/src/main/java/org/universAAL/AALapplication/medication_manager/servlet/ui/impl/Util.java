@@ -1,10 +1,14 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl;
 
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
+
 import javax.servlet.http.HttpServlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * @author George Fournadjiev
@@ -25,6 +29,10 @@ public final class Util {
   public static final String CANCEL = "cancel";
   public static final String TRUE = "true";
   public static final String PATIENT = "PATIENT";
+  public static final String NEW_PRESCRIPTION = "new_prescription";
+  public static final Pair<String> EMPTY_PAIR = new Pair<String>(null, null);
+
+  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd");
 
   private Util() {
   }
@@ -78,5 +86,13 @@ public final class Util {
       throw new MedicationManagerServletUIException("The parameter : " + parameterName + " cannot be null");
     }
 
+  }
+
+  public static void validateDate(String textDate) {
+    try {
+      SIMPLE_DATE_FORMAT.parse(textDate);
+    } catch (ParseException e) {
+      throw new MedicationManagerServletUIException("The provided text date:" + textDate + " is not a valid date");
+    }
   }
 }

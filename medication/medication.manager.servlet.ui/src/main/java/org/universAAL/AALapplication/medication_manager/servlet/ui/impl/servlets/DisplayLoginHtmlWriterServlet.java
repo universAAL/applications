@@ -3,10 +3,11 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.DisplayLoginScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;

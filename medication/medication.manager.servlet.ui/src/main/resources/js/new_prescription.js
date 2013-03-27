@@ -1,7 +1,14 @@
 var prescriptionObj = {"id":'', "date":'', 'notes':'', 'medicines':[]};
+
 $(function () {
+  var now=new Date();
+  $( "#datepicker" ).datepicker({minDate: now, dateFormat: "yy-mm-dd"});
+  $( "#datepicker" ).datepicker( "setDate", prescriptionObj.date ? prescriptionObj.date : now);
   if (prescriptionObj) {
-    if (prescriptionObj.date == "") $('[name="save_perscription"]').attr("disabled", "disabled");
+
+    if(!prescriptionObj.medicines || prescriptionObj.medicines.length==0) {
+      $('[name="save_perscription"]').attr("disabled", "disabled");
+    } else $('[name="save_perscription"]').removeAttr("disabled");
     var tableSelector = 'table#prescription';
     var $tableDays = $(tableSelector + ' table.days');
     var tr1 = $tableDays.find('tr:first');
@@ -14,7 +21,7 @@ $(function () {
     var $trTempl1 = $(tableSelector + ' tr.templ1').clone().show();
     var $trTempl2 = $(tableSelector + ' tr.templ2').clone().show();
     if (prescriptionObj.date) $('[name="prescriptionId"]').val(prescriptionObj.id);
-    if (prescriptionObj.date) $('[name="date"]').val(prescriptionObj.date);
+    //if (prescriptionObj.date) $('[name="date"]').val(prescriptionObj.date);
     if (prescriptionObj.notes) $('[name="notes"]').val(prescriptionObj.notes);
 
     if (prescriptionObj.medicines.length > 0) {
@@ -52,4 +59,17 @@ $(function () {
     }
 
   } else alert("No prescription information");
+
+  $("form").submit(function(){
+    var names = ["date", "notes"];
+    var hasError = (!prescriptionObj.medicines || prescriptionObj.medicines.length==0);
+    $.each(names, function (i, name) {
+      var el = $('[name="' + name + '"]');
+      if ($.trim(el.val()).length == 0) {
+        el.val("").addClass("error");
+        hasError = true;
+      }
+    });
+    return !hasError;
+  });
 });
