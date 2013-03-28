@@ -5,11 +5,8 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.Me
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
@@ -59,8 +56,9 @@ public final class MedicineView {
     return days;
   }
 
-  public void setDays(int days) {
-    this.days = days;
+  public void setDays(String daysText) {
+    int d = getPositiveNumber(daysText, "daysText");
+    this.days = d;
   }
 
   public String getDescription() {
@@ -68,7 +66,9 @@ public final class MedicineView {
   }
 
   public void setDescription(String description) {
-    this.description = description;
+    if (description != null && !description.trim().isEmpty()) {
+      this.description = description;
+    }
   }
 
   public String getSideeffects() {
@@ -91,8 +91,8 @@ public final class MedicineView {
     return mealRelationDTO;
   }
 
-  public void setMealRelationDTO(MealRelationDTO mealRelationDTO) {
-    this.mealRelationDTO = mealRelationDTO;
+  public void setMealRelationDTO(String mealRelation) {
+    this.mealRelationDTO = MealRelationDTO.getEnumValueFor(mealRelation);
   }
 
   public String getHours() {
@@ -115,46 +115,61 @@ public final class MedicineView {
     return dose;
   }
 
-  public void fillIntakeDTOSet(int dose, String hoursArray, String unit) {
+  public void fillIntakeDTOSet(int dose, String[] hoursArray, String unit) {
 
-    hoursArray = validateParameters(dose, hoursArray, unit);
+    validateParameters(dose, hoursArray, unit);
 
-
-
-    hours = hoursArray.substring(1, hoursArray.length() - 1);
-
-    if (hours.length() <= 2) {
-      throw new MedicationManagerServletUIException("There is no numbers inside the array");
+    int[] hours = new int[hoursArray.length];
+    for (int i = 0; i < hoursArray.length; i++) {
+      int h = getPositiveNumber(hoursArray[i], "hoursArray[" + i + "]");
+      hours[i] = h;
     }
 
-    StringTokenizer st = new StringTokenizer(hours, ",");
-    List<Integer> hoursList = new ArrayList<Integer>();
-    while (st.hasMoreElements()) {
-      String token = st.nextToken().trim();
-      int h = getIntFromString(token, "token");
-      hoursList.add(h);
-    }
-
-    if (hoursList.isEmpty()) {
-      throw new MedicationManagerServletUIException("There is no numbers inside the array");
-    }
-
-    fillIntakes(hoursList, unit, dose);
+    fillIntakes(hours, unit, dose);
 
     this.dose = dose;
     this.unit = unit;
-    this.hours = hoursArray;
+    this.hours = createJavaScriptArray(hoursArray);
 
   }
 
-  private void fillIntakes(List<Integer> hoursList, String unit, int dose) {
+  private String createJavaScriptArray(String[] hoursArray) {
+    StringBuffer sb = new StringBuffer();
+    sb.append('[');
+    int i = 0;
+    int size = hoursArray.length;
+    for (String hour : hoursArray) {
+      sb.append(hour);
+      i++;
+      if (i < size) {
+        sb.append(", ");
+      }
+    }
+
+    sb.append("]");
+
+    return sb.toString();
+  }
+
+  private void fillIntakes(int[] hours, String unit, int dose) {
     intakeDTOSet.clear();
-    for (Integer h : hoursList) {
+    for (int h : hours) {
       TimeDTO timeDTO = createTimeDTO(h);
-      IntakeDTO.Unit un = IntakeDTO.Unit.getEnumValueFor(unit);
+      IntakeDTO.Unit un = createUnit(unit);
       IntakeDTO intakeDTO = new IntakeDTO(timeDTO, un, dose);
       intakeDTOSet.add(intakeDTO);
     }
+  }
+
+  private IntakeDTO.Unit createUnit(String unit) {
+    unit = unit.trim();
+    if (unit.equalsIgnoreCase("PILLS") || unit.equalsIgnoreCase("PILL")) {
+      return IntakeDTO.Unit.PILL;
+    } else if (unit.equalsIgnoreCase("DROPS")) {
+      return IntakeDTO.Unit.DROPS;
+    }
+
+    throw new MedicationManagerServletUIException("Uknown unit : " + unit);
   }
 
   public TimeDTO createTimeDTO(int hour) {
@@ -175,7 +190,7 @@ public final class MedicineView {
     return TimeDTO.createTimeDTO(time);
   }
 
-  private String validateParameters(int dose, String hours, String unit) {
+  private void validateParameters(int dose, String[] hours, String unit) {
     if (dose <= 0) {
       throw new MedicationManagerServletUIException("The dose is not set correctly must be positive number: " + dose);
     }
@@ -184,16 +199,11 @@ public final class MedicineView {
       throw new MedicationManagerServletUIException("unit is null or empty String");
     }
 
-    if (hours == null || hours.trim().isEmpty()) {
-      throw new MedicationManagerServletUIException("hours is null or empty String");
+    if (hours == null || hours.length == 0) {
+      throw new MedicationManagerServletUIException("hours is null or empty");
     }
 
-    hours = hours.trim();
 
-    if (!hours.startsWith("[") || !hours.endsWith("]")) {
-      throw new MedicationManagerServletUIException("Hours text must be surrounded with []");
-    }
-    return hours;
   }
 
 

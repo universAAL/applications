@@ -68,9 +68,7 @@ public final class NewPrescriptionView {
 
   public void removeMedicineView(String medicineViewId) {
     int id = getIntFromString(medicineViewId, "medicineViewId");
-
     MedicineView medicineView = medicineViews.remove(id);
-
     if (medicineView == null) {
       throw new MedicationManagerServletUIException("Missing medicineView with id: " + medicineViewId);
     }
