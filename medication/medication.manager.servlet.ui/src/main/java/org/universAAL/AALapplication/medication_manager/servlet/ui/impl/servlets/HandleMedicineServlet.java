@@ -31,6 +31,7 @@ public final class HandleMedicineServlet extends BaseServlet {
   public static final String SIDE_EFFECTS = "side_effects";
   public static final String UNIT = "unit";
   public static final String HOURS = "hours";
+  public static final String CANCEL = "cancel";
   private final Object lock = new Object();
   private DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet;
   private NewPrescriptionHtmlWriterServlet newPrescriptionHtmlWriterServlet;
@@ -61,7 +62,7 @@ public final class HandleMedicineServlet extends BaseServlet {
       isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
       isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
 
-      Session session = getSession(req);
+      Session session = getSession(req, resp);
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {
@@ -72,6 +73,13 @@ public final class HandleMedicineServlet extends BaseServlet {
       NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
 
       if (newPrescriptionView == null) {
+        newPrescriptionHtmlWriterServlet.doGet(req, resp);
+        return;
+      }
+
+      String cancel = req.getParameter(CANCEL);
+      if (cancel != null && cancel.trim().equalsIgnoreCase(TRUE)) {
+        cancel(req, newPrescriptionView);
         newPrescriptionHtmlWriterServlet.doGet(req, resp);
         return;
       }
@@ -92,6 +100,16 @@ public final class HandleMedicineServlet extends BaseServlet {
 
     }
 
+  }
+
+  private void cancel(HttpServletRequest req, NewPrescriptionView newPrescriptionView) {
+    String id = getNotNullParameter(req, ID);
+
+    MedicineView medicineView = newPrescriptionView.getMedicineView(id);
+
+    if (medicineView.isNew()) {
+      newPrescriptionView.removeMedicineView(id);
+    }
   }
 
   private void saveMedicine(HttpServletRequest req, NewPrescriptionView newPrescriptionView) {

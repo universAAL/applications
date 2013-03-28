@@ -104,10 +104,6 @@ public final class MedicineView {
   }
 
   public Set<IntakeDTO> getIntakeDTOSet() {
-    if (intakeDTOSet.isEmpty()) {
-      throw new MedicationManagerServletUIException("No intakeDTO set");
-    }
-
     return intakeDTOSet;
   }
 

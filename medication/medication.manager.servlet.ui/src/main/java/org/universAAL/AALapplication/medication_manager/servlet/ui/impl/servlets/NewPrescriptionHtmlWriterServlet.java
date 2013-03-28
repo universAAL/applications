@@ -4,6 +4,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Persis
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.NewPrescriptionScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.MedicineView;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation.*;
@@ -47,7 +49,7 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
       isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
       isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
 
-      Session session = getSession(req);
+      Session session = getSession(req, resp);
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {
@@ -55,10 +57,10 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
         return;
       }
 
-      String cancel = req.getParameter(CANCEL);
+     /* String cancel = req.getParameter(CANCEL);
       if (cancel != null && TRUE.equalsIgnoreCase(cancel)) {
 
-      }
+      }*/
 
       Person patient = (Person) session.getAttribute(PATIENT);
 
@@ -84,7 +86,49 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
       session.setAttribute(NEW_PRESCRIPTION, newPrescriptionView);
     }
 
+    validateNewPrescription(newPrescriptionView);
+
     return newPrescriptionView;
+  }
+
+  private void validateNewPrescription(NewPrescriptionView newPrescriptionView) {
+    Set<MedicineView> medViews = newPrescriptionView.getMedicineViewSet();
+
+    for (MedicineView view : medViews) {
+      int id = view.getMedicineId();
+      if (notValidMedicineView(view)) {
+        newPrescriptionView.removeMedicineView(String.valueOf(id));
+      }
+    }
+  }
+
+  private boolean notValidMedicineView(MedicineView view) {
+    if (view.getName() == null) {
+      return true;
+    }
+
+    if (view.getDays() == 0) {
+      return true;
+    }
+
+    if (view.getDose() == 0) {
+      return true;
+    }
+
+    if (view.getUnit() == null) {
+      return true;
+    }
+
+    if (view.getMealRelationDTO() == null) {
+      return true;
+    }
+
+    if (view.getIntakeDTOSet().isEmpty()) {
+      return true;
+    }
+
+    return false;
+
   }
 
   @Override
