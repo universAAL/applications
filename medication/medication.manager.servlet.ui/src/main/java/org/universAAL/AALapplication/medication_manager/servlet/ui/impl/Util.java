@@ -105,13 +105,30 @@ public final class Util {
     }
   }
 
+  public static int getPositiveNumber(String var, String varName) {
+
+    int value = getIntFromString(var,varName);
+
+    if (value <= 0) {
+      throw new MedicationManagerServletUIException("The number is not positive : " + value);
+    }
+
+    return value;
+
+  }
+
+
   public static int getIntFromString(String var, String varName) {
+    if (var == null || var.trim().isEmpty()) {
+      throw new MedicationManagerServletUIException("the parameter var cannot be null or empty");
+    }
     int value;
     try {
       value = Integer.valueOf(var);
     } catch (NumberFormatException e) {
       throw new MedicationManagerServletUIException("The " + varName + " is not a integer number : " + var);
     }
+
     return value;
   }
 

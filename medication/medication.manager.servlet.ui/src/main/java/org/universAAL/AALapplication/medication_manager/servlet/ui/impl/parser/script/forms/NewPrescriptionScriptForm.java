@@ -2,13 +2,11 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.MedicineView;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -124,50 +122,6 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
     sb.append("]");
 
     return sb.toString();
-  }
-
-  private void fillMedicineViewSetWithTempData(Set<MedicineView> medicineViewSet) {
-
-    MedicineView medicineView1 = new MedicineView(1);
-    medicineView1.setName("Benalgin");
-    medicineView1.setDescription("Benalgin Description");
-    medicineView1.setSideeffects("Benalgin sideeffects");
-
-    medicineView1.setDays(8);
-
-    Set<IntakeDTO> intakeDTOs1 = new HashSet<IntakeDTO>();
-
-    IntakeDTO in11 = new IntakeDTO(TimeDTO.createTimeDTO("8:00"), IntakeDTO.Unit.PILL, 2);
-    IntakeDTO in12 = new IntakeDTO(TimeDTO.createTimeDTO("16:00"), IntakeDTO.Unit.PILL, 1);
-
-    intakeDTOs1.add(in11);
-    intakeDTOs1.add(in12);
-
-//    medicineView1.setIntakeDTOSet(intakeDTOs1);
-
-    medicineViewSet.add(medicineView1);
-
-    MedicineView medicineView2 = new MedicineView(2);
-    medicineView2.setName("Analgin");
-    medicineView2.setDescription("Analgin Description");
-    medicineView2.setSideeffects("Analgin sideeffects");
-
-    medicineView2.setDays(10);
-
-    Set<IntakeDTO> intakeDTOs2 = new HashSet<IntakeDTO>();
-
-    IntakeDTO in21 = new IntakeDTO(TimeDTO.createTimeDTO("9:00"), IntakeDTO.Unit.PILL, 1);
-    IntakeDTO in22 = new IntakeDTO(TimeDTO.createTimeDTO("13:00"), IntakeDTO.Unit.PILL, 2);
-    IntakeDTO in23 = new IntakeDTO(TimeDTO.createTimeDTO("21:00"), IntakeDTO.Unit.PILL, 3);
-
-    intakeDTOs2.add(in21);
-    intakeDTOs2.add(in22);
-    intakeDTOs2.add(in23);
-
-//    medicineView2.setIntakeDTOSet(intakeDTOs2);
-
-    medicineViewSet.add(medicineView2);
-
   }
 
 

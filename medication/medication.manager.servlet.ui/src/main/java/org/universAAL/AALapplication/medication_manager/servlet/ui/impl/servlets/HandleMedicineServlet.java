@@ -1,6 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.MedicineView;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
@@ -19,6 +21,16 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.U
  */
 public final class HandleMedicineServlet extends BaseServlet {
 
+  public static final String SAVE_MEDICINE = "save_medicine";
+  public static final String ID = "id";
+  public static final String DAYS = "days";
+  public static final String DESCRIPTION = "description";
+  public static final String NAME = "name";
+  public static final String MEAL_RELATION = "meal_relation";
+  public static final String INCOMPLIANCES = "incompliances";
+  public static final String SIDE_EFFECTS = "side_effects";
+  public static final String UNIT = "unit";
+  public static final String HOURS = "hours";
   private final Object lock = new Object();
   private DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet;
   private NewPrescriptionHtmlWriterServlet newPrescriptionHtmlWriterServlet;
@@ -70,8 +82,52 @@ public final class HandleMedicineServlet extends BaseServlet {
         newPrescriptionHtmlWriterServlet.doGet(req, resp);
         return;
       }
+
+      String saveMedicine = req.getParameter(SAVE_MEDICINE);
+      if (saveMedicine != null) {
+        saveMedicine(req, newPrescriptionView);
+        newPrescriptionHtmlWriterServlet.doGet(req, resp);
+        return;
+      }
+
     }
 
+  }
+
+  private void saveMedicine(HttpServletRequest req, NewPrescriptionView newPrescriptionView) {
+
+    String id = getNotNullParameter(req, ID);
+    MedicineView medicineView = newPrescriptionView.getMedicineView(id);
+    String daysText = getNotNullParameter(req, DAYS);
+    medicineView.setDays(daysText);
+    String description = req.getParameter(DESCRIPTION);
+    medicineView.setDescription(description);
+    String name = getNotNullParameter(req, NAME);
+    medicineView.setName(name);
+    String mealRelation = getNotNullParameter(req, MEAL_RELATION);
+    medicineView.setMealRelationDTO(mealRelation);
+    String incompliances = req.getParameter(INCOMPLIANCES);
+    medicineView.setIncompliances(incompliances);
+    String sideeffects = req.getParameter(SIDE_EFFECTS);
+    medicineView.setSideeffects(sideeffects);
+
+    String unitText = getNotNullParameter(req, UNIT);
+    String doseText = getNotNullParameter(req, "dose");
+    int dose = getPositiveNumber(doseText, "doseText");
+    String[] hours = req.getParameterValues(HOURS);
+    if (hours == null) {
+      throw new MedicationManagerServletUIException("Missing parameter with the following name: " + HOURS);
+    }
+    medicineView.fillIntakeDTOSet(dose, hours, unitText);
+
+  }
+
+  private String getNotNullParameter(HttpServletRequest req, String paramName) {
+    String parameter = req.getParameter(paramName);
+    if (parameter == null) {
+      throw new MedicationManagerServletUIException("Missing parameter with the following name: " + paramName);
+    }
+    return parameter;
   }
 
   private void printParams(HttpServletRequest req) {
