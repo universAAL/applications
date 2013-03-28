@@ -48,7 +48,7 @@ public final class LoginServlet extends BaseServlet {
       isServletSet(selectUserServlet, "selectUserServlet");
       isServletSet(displayServlet, "displayServlet");
 
-      Session httpSession = getSession(req);
+      Session httpSession = getSession(req, resp);
 
       Person person = (Person) httpSession.getAttribute(LOGGED_DOCTOR);
 

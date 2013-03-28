@@ -58,7 +58,7 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
       isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
       isServletSet(listPrescriptionsHtmlWriterServlet, "listPrescriptionsHtmlWriterServlet");
 
-      Session session = getSession(req);
+      Session session = getSession(req, resp);
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {

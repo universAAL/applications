@@ -55,8 +55,7 @@ public final class NewMedicineScriptForm extends ScriptForm {
     String prescrId = createSingleObjectText(PRESCRIPTION_ID, prescriptionId);
     singleObjects.add(prescrId);
 
-    String isNew = createSingleObjectText(IS_NEW, medicineView.isNew());
-    String isNewText = PREFIX + IS_NEW + " = " + isNew;
+    String isNewText = PREFIX + IS_NEW + " = " + medicineView.isNew();
     singleObjects.add(isNewText);
 
     String name = medicineView.getName();

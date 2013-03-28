@@ -1,5 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers;
 
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +32,9 @@ public final class SessionTracking {
 
   public Session getSession(String id) {
     synchronized (lock) {
+      if (id == null) {
+        throw new MedicationManagerServletUIException("session id is null");
+      }
       return sessionMap.get(id);
     }
   }
