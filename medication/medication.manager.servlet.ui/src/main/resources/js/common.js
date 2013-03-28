@@ -1,5 +1,3 @@
-//var isStatic = true;
-isStatic=false;
 
 //Servlet aliases:
 var LOGIN_SERVLET_ALIAS = "/login",
@@ -12,16 +10,8 @@ var LOGIN_SERVLET_ALIAS = "/login",
   CANCEL = "?cancel=true";
 
 $(function () {
-  if (isStatic) {
-    LOGIN_SERVLET_ALIAS = "login.html";
-    SELECT_USER_SERVLET_ALIAS = "user.html",
-      LIST_PRESCRIPTIONS_SERVLET_ALIAS = "prescriptions.html",
-      NEW_PRESCRIPTION_SERVLET_ALIAS = "new_prescription.html",
-      HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS = "prescriptions.html",
-      NEW_MEDICINE_SERVLET_ALIAS = "medicine.html",
-      HANDLE_NEW_MEDICINE_SERVLET_ALIAS = "new_prescription.html";
-  }
-  $('form[name="user"]').attr("action", isStatic? SELECT_USER_SERVLET_ALIAS : LOGIN_SERVLET_ALIAS);
+
+  $('form[name="user"]').attr("action",LOGIN_SERVLET_ALIAS);
 
   $('form[name="prescriptions"]').attr("action", LIST_PRESCRIPTIONS_SERVLET_ALIAS);
   $('form[name="prescriptions"] button[name="back"]').click(function (e) {
@@ -61,6 +51,6 @@ $(function () {
   $('form[name="save_medicine"] button[name="back"]').click(function (e) {
     e.preventDefault();
     var id=$('[name="id"]').val();
-    document.location.href = HANDLE_NEW_MEDICINE_SERVLET_ALIAS + "?deleteID=" +id;
+    document.location.href = HANDLE_NEW_MEDICINE_SERVLET_ALIAS + "?deleteID="+id;
   });
 });
