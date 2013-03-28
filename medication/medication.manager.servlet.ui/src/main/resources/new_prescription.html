@@ -20,9 +20,9 @@
 <!--<script type="text/javascript">
 	/*Add date and notes if are post after save medicine*/
 	prescriptionObj.id = 'p1';
-	 prescriptionObj.date = '2013-01-12';
+	/* prescriptionObj.date = '2013-01-12';
 	 prescriptionObj.notes = 'Sleeping problems';
-	 //for - add all medicines, example:
+	 //for - add all medicines, example:*/
 	//prescriptionObj.medicines[]={'id':'med1', 'name':'Medicine_1', 'description':'bla bla', 'side_effects':'sleeping problems','incompliances':'alcohol', 'days':7,'hours':[1, 22, 24]};
 	prescriptionObj.medicines.push({'id':'med1', 'name':'Medicine_1', 'description':'bla bla', 'side_effects':'sleeping problems', "incompliances":'alcohol', 'days':7, 'hours':[1, 22, 24]});
 	prescriptionObj.medicines.push({'id':'med2', 'name':'Medicine_2', 'description':'bla bla', 'side_effects':"make sleapy<br/>shuld not drive",  'days':60, 'hours':[10, 22]});
@@ -33,7 +33,7 @@
 
 		<h2>New perscription details</h2>
 
-		<form name="save_prescription" action="" method="get">
+		<form name="save_prescription" action="" method="post">
 			<table>
 				<tr>
 					<td class="date" nowrap>

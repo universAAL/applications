@@ -45,13 +45,13 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
 
     String prescriptionId = "prescriptionObj.id = \'" + newPrescriptionView.getPrescriptionId() + "\';";
     singleObjects.add(prescriptionId);
-    newPrescriptionView.setStartDate("2013-03-27");
+//    newPrescriptionView.setStartDate("2013-03-27");
     String date = newPrescriptionView.getStartDate();
     if (date != null) {
       date = "prescriptionObj.date = \'" + date + "\';";
       singleObjects.add(date);
     }
-    newPrescriptionView.setNotes("notes zswsws");
+//    newPrescriptionView.setNotes("notes zswsws");
     String notes = newPrescriptionView.getNotes();
     if (notes != null) {
       notes = "prescriptionObj.notes = \'" + notes + "\';";
@@ -69,7 +69,7 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
 
     Set<MedicineView> medicineViewSet = newPrescriptionView.getMedicineViewSet();
 
-    fillMedicineViewSetWithTempData(medicineViewSet);
+//    fillMedicineViewSetWithTempData(medicineViewSet);
 
     if (medicineViewSet.isEmpty()) {
       return;

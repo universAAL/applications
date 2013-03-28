@@ -38,6 +38,7 @@ public final class Util {
   public static final String PRESCRIPTION_VIEW = "prescription_view";
   public static final String MEDICINE_VIEW = "MEDICINE_VIEW";
   public static final String DELETE_MEDICINE_VIEW_ID = "deleteID";
+  public static final String DATE = "date";
 
   private Util() {
   }

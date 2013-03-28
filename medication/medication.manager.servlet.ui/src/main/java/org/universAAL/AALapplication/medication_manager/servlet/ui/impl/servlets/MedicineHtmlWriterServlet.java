@@ -74,9 +74,24 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
         return;
       }
 
+      setDateAndNotes(req, newPrescriptionView);
       MedicineView medicineView = getMedicineView(newPrescriptionView, req);
 
       handleResponse(resp, medicineView, newPrescriptionView.getPrescriptionId());
+    }
+  }
+
+  private void setDateAndNotes(HttpServletRequest req, NewPrescriptionView newPrescriptionView) {
+    String date = req.getParameter(DATE);
+    if (date != null && !date.trim().isEmpty()) {
+      newPrescriptionView.setStartDate(date);
+    }
+
+    String notes = req.getParameter("notes");
+    if (notes == null) {
+      newPrescriptionView.setNotes(EMPTY);
+    } else {
+      newPrescriptionView.setNotes(notes);
     }
   }
 
