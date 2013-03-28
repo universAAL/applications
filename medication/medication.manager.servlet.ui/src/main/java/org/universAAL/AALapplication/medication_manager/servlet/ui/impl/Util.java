@@ -1,8 +1,10 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl;
 
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,6 +41,7 @@ public final class Util {
   public static final String MEDICINE_VIEW = "MEDICINE_VIEW";
   public static final String DELETE_MEDICINE_VIEW_ID = "deleteID";
   public static final String DATE = "date";
+  public static final String NOTES = "notes";
 
   private Util() {
   }
@@ -110,5 +113,19 @@ public final class Util {
       throw new MedicationManagerServletUIException("The " + varName + " is not a integer number : " + var);
     }
     return value;
+  }
+
+  public static void setDateAndNotes(HttpServletRequest req, NewPrescriptionView newPrescriptionView) {
+    String date = req.getParameter(DATE);
+    if (date != null && !date.trim().isEmpty()) {
+      newPrescriptionView.setStartDate(date);
+    }
+
+    String notes = req.getParameter(NOTES);
+    if (notes == null) {
+      newPrescriptionView.setNotes(EMPTY);
+    } else {
+      newPrescriptionView.setNotes(notes);
+    }
   }
 }

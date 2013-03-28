@@ -143,7 +143,7 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
     intakeDTOs1.add(in11);
     intakeDTOs1.add(in12);
 
-    medicineView1.setIntakeDTOSet(intakeDTOs1);
+//    medicineView1.setIntakeDTOSet(intakeDTOs1);
 
     medicineViewSet.add(medicineView1);
 
@@ -164,7 +164,7 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
     intakeDTOs2.add(in22);
     intakeDTOs2.add(in23);
 
-    medicineView2.setIntakeDTOSet(intakeDTOs2);
+//    medicineView2.setIntakeDTOSet(intakeDTOs2);
 
     medicineViewSet.add(medicineView2);
 

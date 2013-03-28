@@ -18,6 +18,10 @@ public enum MealRelation {
     this.mealRelation = mealRelation;
   }
 
+  public String getValue() {
+    return mealRelation;
+  }
+
   public static MealRelation getEnumValueFor(String mealRelationText) {
 
     for (MealRelation mealRelationEnum : values()) {

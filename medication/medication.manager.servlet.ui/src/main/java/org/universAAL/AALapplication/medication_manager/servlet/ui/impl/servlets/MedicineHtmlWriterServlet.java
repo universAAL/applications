@@ -81,20 +81,6 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
     }
   }
 
-  private void setDateAndNotes(HttpServletRequest req, NewPrescriptionView newPrescriptionView) {
-    String date = req.getParameter(DATE);
-    if (date != null && !date.trim().isEmpty()) {
-      newPrescriptionView.setStartDate(date);
-    }
-
-    String notes = req.getParameter("notes");
-    if (notes == null) {
-      newPrescriptionView.setNotes(EMPTY);
-    } else {
-      newPrescriptionView.setNotes(notes);
-    }
-  }
-
   private MedicineView getMedicineView(NewPrescriptionView newPrescriptionView, HttpServletRequest req) {
 
     String medicineId = req.getParameter("id");
@@ -102,9 +88,10 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
     MedicineView medicineView;
     if (medicineId != null) {
       medicineView = newPrescriptionView.getMedicineView(medicineId);
+      medicineView.setNew(false);
     } else {
       medicineView = new MedicineView(generateId());
-      medicineView.setName("Auto set for medicine.id=" + medicineView.getMedicineId());
+      medicineView.setNew(true);
       newPrescriptionView.addMedicineView(medicineView);
     }
 
