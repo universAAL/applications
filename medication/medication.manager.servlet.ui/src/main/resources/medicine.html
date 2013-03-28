@@ -7,7 +7,9 @@
 	<title>universALL - Medication Medical Service: Add Medicine</title>
 
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script src="js/jquery-ui-1.10.2.custom.min.js"></script>
 
+	<link href="css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/medicine.js"></script>
 	<link rel="stylesheet" href="css/common.css" type="text/css"/>
@@ -15,33 +17,34 @@
 </head>
 
 <body>
-<script type="text/javascript">
-	/*Add date and notes if are post after save medicine*/
+<!--<script type="text/javascript">
+	/*Add date and notes if are post after save medicine
 
-	/*The medicine object
+	The medicine object
 	 - for new medicine, set only id, prescriptionId
-	 -for edit medicine, set all data, example:	*/
-/*	medicineObj.id='med1';
+	 -for edit medicine, set all data, example:
+	medicineObj.id='med1';
 	medicineObj.prescriptionId='p1';
 
-	isNew = false;//add ths if edit medicine
+  add this if edit medicine:
+	isNew = false;
 	medicineObj.name='Medicine name 1 that is too long';
 	medicineObj.description='We recommend against using this property; please try to use feature detection instead (see jQuery.support). jQuery.browser may be moved to a plugin in a future release of jQuery.';
 	medicineObj.side_effects='sleeping problems';
 	medicineObj.incompliances='alcohol';
-	medicineObj.days=7;
+	medicineObj.days=5;
 	medicineObj.dose=1;
 	medicineObj.unit='drops';
 	medicineObj.meal_relation='before';
   medicineObj.hours=[1,13, 22, 24];*/
 
-</script>
+</script>-->
 <div class="cont"><div>
 	<h1>universAAL<br/>Medication Medical Service</h1>
 
 	<h2>Add medicine</h2>
 
-	<form name="save_medicine" action="" method="get">
+	<form name="save_medicine" action="" method="post">
 
 		<table id="medicine" class="t1">
 			<tr>
@@ -73,8 +76,7 @@
 					<input type="text" name="dose" size="3"/>
 				  <input type="radio" id="pills" name="unit" value="pills"/> <label for="pills">pills</label>
 					<input type="radio" id="drops" name="unit" value="drops"/> <label for="drops">drops</label>
-					<select name="mealrelation">
-						<option value="">&nbsp;</option>
+					<select name="meal_relation">
 					</select>
 				</td>
 			</tr>

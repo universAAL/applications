@@ -4,22 +4,34 @@ var medicineObj={'id':'','prescriptionId':'', 'name':'', 'description':'', 'side
   'days':0, 'dose':0,'unit':'pills', 'meal_relation':'any' , 'hours':[]};
 
 $(function () {
+
   if(!isNew) {
-    $("title").html("universALL - Medication Medical Service: Edit Medicine");
+    $(this).attr("title", "universALL - Medication Medical Service: Edit Medicine");
     $("h2").html("Edit Medicine");
   }
+
   $('[name="id"]').val(medicineObj.id);
   $('[name="prescriptionId"]').val(medicineObj.prescriptionId);
-  var s=$('select[name="mealrelation"]'),
-      $optionTempl= s.find('option').clone();
-  s.empty();
+  var s=$('select[name="meal_relation"]');
+  $.each(meal, function(val, name){
+    s.append('<option value="'+val+'">'+name+'</option>');
+  });
 
-
-  $.each(meal, function(v, name){
-    var op = $optionTempl.clone();
-    op.val(v).html(name);
-    s.append(op);
-   // s.append('<option value="'+val+'">'+name+'</option>');
+  var spinnerDays = $('[name="days"]').spinner({min: 1,
+    change: function( event, ui ) {
+      var el=$('[name="days"]');
+      if(el.hasClass("error") && spinnerDays.spinner( "value" )>0) {
+        el.removeClass("error");
+      }
+    }
+    });
+  var spinnerDose = $('[name="dose"]').spinner({min: 1,
+    change: function( event, ui ) {
+      var el=$('[name="dose"]');
+      if(el.hasClass("error") && spinnerDose.spinner( "value" )>0) {
+        el.removeClass("error");
+      }
+    }
   });
 
   var $tableDays = $('table.days');
@@ -37,8 +49,8 @@ $(function () {
      $('[name="description"]').val(medicineObj.description);
      $('[name="side_effects"]').val(medicineObj.side_effects);
      $('[name="incompliances"]').val(medicineObj.incompliances);
-     $('[name="days"]').val(medicineObj.days);
-     $('[name="dose"]').val(medicineObj.dose);
+     spinnerDays.spinner("value", medicineObj.days);//$('[name="days"]').val(medicineObj.days);
+     spinnerDose.spinner("value", medicineObj.dose);//$('[name="dose"]').val(medicineObj.dose);
      $('[id="'+medicineObj.unit+'"][name="unit"]').attr("checked", "checked");
      s.val(medicineObj.meal_relation);
      $.each(medicineObj.hours, function(i, h){
@@ -56,8 +68,8 @@ $(function () {
     } else {
       $(this).addClass("selected");
       $(this).find(":checkbox").attr("checked", true);
+      $tableDays.find("th").removeClass("error");
     }
-
   });
 
   $(":text").change(function(){
@@ -74,6 +86,18 @@ $(function () {
         hasError = true;
       }
     });
+    if($tableDays.find(":checkbox:checked").size()==0){
+      hasError = true;
+      $tableDays.find("th").addClass("error");
+    }
+    if(!(spinnerDays.spinner( "value" )>0)) {
+      hasError = true;
+      $('[name="days"]').addClass("error");
+    }
+    if(!(spinnerDose.spinner( "value" )>0)) {
+      hasError = true;
+      $('[name="dose"]').addClass("error");
+    }
     return !hasError;
   });
 });
