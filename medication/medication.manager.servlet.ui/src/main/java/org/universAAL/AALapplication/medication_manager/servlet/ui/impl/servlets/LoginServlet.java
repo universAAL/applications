@@ -59,7 +59,7 @@ public final class LoginServlet extends BaseServlet {
       String cancel = req.getParameter(CANCEL);
 
       if (cancel != null && cancel.equalsIgnoreCase(TRUE)) {
-        invalidateSession(req.getRequestedSessionId());
+        invalidateSession(req, resp);
         displayServlet.doGet(req, resp);
         return;
       }
