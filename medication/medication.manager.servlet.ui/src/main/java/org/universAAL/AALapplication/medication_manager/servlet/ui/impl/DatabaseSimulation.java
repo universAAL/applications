@@ -9,8 +9,10 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role.*;
@@ -37,6 +39,8 @@ public final class DatabaseSimulation {
   private static final PrescriptionDTO PRESCRIPTION_DTO_2;
   private static final PrescriptionDTO PRESCRIPTION_DTO_3;
   private static final PrescriptionDTO PRESCRIPTION_DTO_4;
+  private static final Map<Integer, List<PrescriptionDTO>> PRESCRIPTION_DTO_MAP =
+      new HashMap<Integer, List<PrescriptionDTO>>();
 
   static {
 
@@ -92,6 +96,17 @@ public final class DatabaseSimulation {
     PRESCRIPTION_DTO_4 = new PrescriptionDTO("prescription 4", new Date(), MEDICINE_DTO_SET_1, DOCTOR, PATIENT_2);
     PRESCRIPTION_DTO_4.setPrescriptionId(4);
 
+    int id1 = PRESCRIPTION_DTO_1.getPatient().getId();
+    List<PrescriptionDTO> prescriptionDTOs1 = new ArrayList<PrescriptionDTO>();
+    prescriptionDTOs1.add(PRESCRIPTION_DTO_1);
+    prescriptionDTOs1.add(PRESCRIPTION_DTO_3);
+    PRESCRIPTION_DTO_MAP.put(id1, prescriptionDTOs1);
+    int id2 = PRESCRIPTION_DTO_2.getPatient().getId();
+    List<PrescriptionDTO> prescriptionDTOs2 = new ArrayList<PrescriptionDTO>();
+    prescriptionDTOs2.add(PRESCRIPTION_DTO_2);
+    prescriptionDTOs2.add(PRESCRIPTION_DTO_4);
+    PRESCRIPTION_DTO_MAP.put(id2, prescriptionDTOs2);
+
   }
 
 
@@ -105,17 +120,17 @@ public final class DatabaseSimulation {
     throw new MedicationManagerServletUIException("Missing patient with the following id: " + id);
   }
 
-  public static List<PrescriptionDTO> getDescriptions(Person patient) {
-    List<PrescriptionDTO> prescriptionDTOs = new ArrayList<PrescriptionDTO>();
-    if (patient.getId() == PATIENT_1.getId()) {
-      prescriptionDTOs.add(PRESCRIPTION_DTO_1);
-      prescriptionDTOs.add(PRESCRIPTION_DTO_3);
-    } else if (patient.getId() == PATIENT_2.getId()) {
-      prescriptionDTOs.add(PRESCRIPTION_DTO_2);
-      prescriptionDTOs.add(PRESCRIPTION_DTO_4);
-    }
+  public static synchronized List<PrescriptionDTO> getDescriptions(Person patient) {
 
-    return prescriptionDTOs;
+    return PRESCRIPTION_DTO_MAP.get(patient.getId());
+
+  }
+
+  public static synchronized void addDescriptionDTO(Person patient, PrescriptionDTO dto) {
+
+    List<PrescriptionDTO> prescriptionDTOs = PRESCRIPTION_DTO_MAP.get(patient.getId());
+    prescriptionDTOs.add(dto);
+
   }
 
   public static synchronized int generateId() {

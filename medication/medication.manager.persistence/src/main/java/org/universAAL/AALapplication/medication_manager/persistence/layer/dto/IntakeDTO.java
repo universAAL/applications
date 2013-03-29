@@ -33,7 +33,7 @@ public final class IntakeDTO {
   public IntakeDTO(TimeDTO time, Unit unit, int dose) {
 
     validateParameter(time, "time");
-    validateParameter(unit, "dose");
+    validateParameter(unit, "unit");
     validateParameter(dose, "dose");
 
     this.time = time;

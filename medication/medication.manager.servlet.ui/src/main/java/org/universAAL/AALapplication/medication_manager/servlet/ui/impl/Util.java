@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author George Fournadjiev
@@ -35,9 +36,8 @@ public final class Util {
   public static final String PATIENT = "PATIENT";
   public static final Pair<String> EMPTY_PAIR = new Pair<String>(null, null);
 
-  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd");
+  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
   public static final String PRESCRIPTION_VIEW = "prescription_view";
-  public static final String MEDICINE_VIEW = "MEDICINE_VIEW";
   public static final String DELETE_MEDICINE_VIEW_ID = "deleteID";
   public static final String DATE = "date";
   public static final String NOTES = "notes";
@@ -96,9 +96,9 @@ public final class Util {
 
   }
 
-  public static void validateDate(String textDate) {
+  public static Date getDate(String textDate) {
     try {
-      SIMPLE_DATE_FORMAT.parse(textDate);
+      return SIMPLE_DATE_FORMAT.parse(textDate);
     } catch (ParseException e) {
       throw new MedicationManagerServletUIException("The provided text date:" + textDate + " is not a valid date");
     }

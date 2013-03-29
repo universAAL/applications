@@ -47,7 +47,7 @@ public final class NewPrescriptionView {
   }
 
   public void setStartDate(String startDate) {
-    validateDate(startDate);
+    getDate(startDate);
 
     this.startDate = startDate;
   }
