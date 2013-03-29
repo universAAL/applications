@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.UserSelectScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
@@ -34,21 +35,26 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
   }
 
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
     synchronized (lock) {
-      isServletSet(displayServlet, "displayServlet");
+      try {
+        isServletSet(displayServlet, "displayServlet");
 
-      Session session = getSession(req, resp, getClass());
-      Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
+        Session session = getSession(req, resp, getClass());
+        Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
-      if (doctor == null) {
-        debugSessions(session.getId(), "if(Doctor is null) the servlet doGet/doPost method", getClass());
-        displayServlet.doGet(req, resp);
-        return;
+        if (doctor == null) {
+          debugSessions(session.getId(), "if(Doctor is null) the servlet doGet/doPost method", getClass());
+          displayServlet.doGet(req, resp);
+          return;
+        }
+
+        handleResponse(req, resp, doctor);
+      } catch (Exception e) {
+        Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
+        sendErrorResponse(req, resp, e);
       }
-
-      handleResponse(resp, doctor);
     }
   }
 
@@ -58,13 +64,13 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
   }
 
 
-  private void handleResponse(HttpServletResponse resp, Person doctor) throws IOException {
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp, Person doctor) throws IOException {
     try {
       PersistentService persistentService = getPersistentService();
       ScriptForm scriptForm = new UserSelectScriptForm(persistentService, doctor);
-      sendResponse(resp, scriptForm);
+      sendResponse(req, resp, scriptForm);
     } catch (Exception e) {
-      sendErrorResponse(resp, e);
+      sendErrorResponse(req, resp, e);
     }
   }
 

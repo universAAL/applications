@@ -175,17 +175,29 @@ public final class MedicineView {
 
   public TimeDTO createTimeDTO(int hour) {
 
+    boolean isProblemHour = false;
+
+    if (hour == 24) {
+      hour = 23;
+      isProblemHour = true;
+    }
+
     if (hour < 0 || hour > 23) {
       String message = "The hour:" + hour + " is not a valid hour. " +
           "The hour must be between 0 and 23";
       throw new MedicationManagerServletUIException(message);
     }
 
+    String minutes = ":00";
+    if (isProblemHour) {
+      minutes = ":59";
+    }
+
     String time;
     if (hour < 10) {
-      time = "0" + hour + ":00";
+      time = "0" + hour + minutes;
     } else {
-      time = hour + ":00";
+      time = hour + minutes;
     }
 
     return TimeDTO.createTimeDTO(time);

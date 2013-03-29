@@ -61,50 +61,55 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     synchronized (lock) {
-      isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
-      isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
-      isServletSet(listPrescriptionsHtmlWriterServlet, "listPrescriptionsHtmlWriterServlet");
-      isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
-      Session session = getSession(req, resp, getClass());
-      Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
+      try {
+        isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
+        isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
+        isServletSet(listPrescriptionsHtmlWriterServlet, "listPrescriptionsHtmlWriterServlet");
+        isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
+        Session session = getSession(req, resp, getClass());
+        Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
-      if (doctor == null) {
-        debugSessions(session.getId(), "if(doctor is null) the servlet doGet/doPost method", getClass());
-        displayLoginHtmlWriterServlet.doGet(req, resp);
-        return;
+        if (doctor == null) {
+          debugSessions(session.getId(), "if(doctor is null) the servlet doGet/doPost method", getClass());
+          displayLoginHtmlWriterServlet.doGet(req, resp);
+          return;
+        }
+
+        Person patient = (Person) session.getAttribute(PATIENT);
+
+        if (patient == null) {
+          debugSessions(session.getId(), "if(patient is null) the servlet doGet/doPost method", getClass());
+          selectUserHtmlWriterServlet.doGet(req, resp);
+          return;
+        }
+
+        NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
+
+        if (newPrescriptionView == null) {
+          debugSessions(session.getId(), "if(newPrescriptionView is null) the servlet doGet/doPost method", getClass());
+          newPrescriptionHtmlWriterServlet.doGet(req, resp);
+          return;
+        }
+
+        PrescriptionDTO prescriptionDTO = saveNewPrescription(newPrescriptionView, req, resp);
+
+        if (prescriptionDTO != null) {
+          session.removeAttribute(PRESCRIPTION_VIEW);
+          addDescriptionDTO(patient, prescriptionDTO);
+        }
+
+        debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
+        listPrescriptionsHtmlWriterServlet.doPost(req, resp);
+      } catch (Exception e) {
+        Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
+        sendErrorResponse(req, resp, e);
       }
-
-      Person patient = (Person) session.getAttribute(PATIENT);
-
-      if (patient == null) {
-        debugSessions(session.getId(), "if(patient is null) the servlet doGet/doPost method", getClass());
-        selectUserHtmlWriterServlet.doGet(req, resp);
-        return;
-      }
-
-      NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
-
-      if (newPrescriptionView == null) {
-        debugSessions(session.getId(), "if(newPrescriptionView is null) the servlet doGet/doPost method", getClass());
-        newPrescriptionHtmlWriterServlet.doGet(req, resp);
-        return;
-      }
-
-      PrescriptionDTO  prescriptionDTO = saveNewPrescription(newPrescriptionView, req, resp);
-
-      if (prescriptionDTO != null) {
-        session.removeAttribute(PRESCRIPTION_VIEW);
-        addDescriptionDTO(patient, prescriptionDTO);
-      }
-
-      debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
-      listPrescriptionsHtmlWriterServlet.doPost(req, resp);
 
     }
   }
 
   private PrescriptionDTO saveNewPrescription(NewPrescriptionView prescriptionView,
-                                   HttpServletRequest req, HttpServletResponse resp) {
+                                              HttpServletRequest req, HttpServletResponse resp) {
 
     Log.info("Creating PrescriptionDTO object from NewPrescriptionView object: %s", getClass(), prescriptionView);
 

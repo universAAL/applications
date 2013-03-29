@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.MedicineView;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
@@ -43,13 +44,11 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
 
     String prescriptionId = "prescriptionObj.id = \'" + newPrescriptionView.getPrescriptionId() + "\';";
     singleObjects.add(prescriptionId);
-//    newPrescriptionView.setStartDate("2013-03-27");
     String date = newPrescriptionView.getStartDate();
     if (date != null) {
       date = "prescriptionObj.date = \'" + date + "\';";
       singleObjects.add(date);
     }
-//    newPrescriptionView.setNotes("notes zswsws");
     String notes = newPrescriptionView.getNotes();
     if (notes != null) {
       notes = "prescriptionObj.notes = \'" + notes + "\';";
@@ -66,8 +65,6 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
   public void process() {
 
     Set<MedicineView> medicineViewSet = newPrescriptionView.getMedicineViewSet();
-
-//    fillMedicineViewSetWithTempData(medicineViewSet);
 
     if (medicineViewSet.isEmpty()) {
       return;
@@ -111,7 +108,7 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
     int count = 0;
     int size = intakeDTOs.size();
     for (IntakeDTO dto : intakeDTOs) {
-      int hour = dto.getTime().getHour();
+      int hour = getHour(dto);
       sb.append(hour);
       count++;
       if (count < size) {
@@ -122,6 +119,15 @@ public final class NewPrescriptionScriptForm extends ScriptForm {
     sb.append("]");
 
     return sb.toString();
+  }
+
+  private int getHour(IntakeDTO dto) {
+    TimeDTO time = dto.getTime();
+    int hour = time.getHour();
+    if (hour == 23 && time.getMinutes() == 59) {
+      hour = 24;
+    }
+    return hour;
   }
 
 
