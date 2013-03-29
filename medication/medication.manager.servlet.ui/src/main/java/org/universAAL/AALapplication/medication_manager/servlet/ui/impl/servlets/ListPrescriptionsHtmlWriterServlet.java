@@ -53,25 +53,27 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
       isServletSet(displayServlet, "displayServlet");
       isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
 
-      Session session = getSession(req, resp);
+      Session session = getSession(req, resp, getClass());
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {
+        debugSessions(session.getId(), "if(doctor is null) the servlet doGet/doPost method", getClass());
         displayServlet.doGet(req, resp);
         return;
       }
 
       String cancel = req.getParameter(CANCEL);
       if (cancel != null && TRUE.equalsIgnoreCase(cancel)) {
-        session.removeAttribute(NEW_PRESCRIPTION);
+        debugSessions(session.getId(), "cancel (removing PRESCRIPTION_VIEW   " +
+            "the servlet doGet/doPost method", getClass());
+        session.removeAttribute(PRESCRIPTION_VIEW);
       }
 
-      Person patient = (Person) session.getAttribute(PATIENT);
-      if (patient == null) {
-        patient = getPatient(req, session);
-        session.setAttribute(PATIENT, patient);
-      }
+      Person patient = getPatient(req, session);
+      debugSessions(session.getId(), "Patient found and set the attribute the servlet doGet/doPost method", getClass());
+      session.setAttribute(PATIENT, patient);
 
+      debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
       handleResponse(resp, patient);
     }
   }

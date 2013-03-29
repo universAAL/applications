@@ -48,25 +48,29 @@ public final class LoginServlet extends BaseServlet {
       isServletSet(selectUserServlet, "selectUserServlet");
       isServletSet(displayServlet, "displayServlet");
 
-      Session httpSession = getSession(req, resp);
+      Session session = getSession(req, resp, getClass());
 
-      Person person = (Person) httpSession.getAttribute(LOGGED_DOCTOR);
+      Person person = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (person == null) {
-        person = findDoctor(req, httpSession);
+        debugSessions(session.getId(), "if (person is null) the servlet doGet/doPost method", getClass());
+        person = findDoctor(req, session);
       }
 
       String cancel = req.getParameter(CANCEL);
 
       if (cancel != null && cancel.equalsIgnoreCase(TRUE)) {
+        debugSessions(session.getId(), "cancel button (invalidate) the servlet doGet/doPost method", getClass());
         invalidateSession(req, resp);
         displayServlet.doGet(req, resp);
         return;
       }
 
       if (person != null) {
+        debugSessions(session.getId(), "End of the servlet doGet/doPost method (person is not null", getClass());
         selectUserServlet.doGet(req, resp);
       } else {
+        debugSessions(session.getId(), "End of the servlet doGet/doPost method (person is null)", getClass());
         displayServlet.doGet(req, resp);
       }
 

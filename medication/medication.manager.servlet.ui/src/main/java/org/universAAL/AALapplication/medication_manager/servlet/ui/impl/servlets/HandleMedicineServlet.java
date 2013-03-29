@@ -62,10 +62,11 @@ public final class HandleMedicineServlet extends BaseServlet {
       isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
       isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
 
-      Session session = getSession(req, resp);
+      Session session = getSession(req, resp, getClass());
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {
+        debugSessions(session.getId(), "if(doctor is null) the servlet doGet/doPost method", getClass());
         displayLoginHtmlWriterServlet.doGet(req, resp);
         return;
       }
@@ -73,20 +74,26 @@ public final class HandleMedicineServlet extends BaseServlet {
       NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
 
       if (newPrescriptionView == null) {
+        debugSessions(session.getId(), "if(newPrescriptionView is null) the servlet doGet/doPost method", getClass());
         newPrescriptionHtmlWriterServlet.doGet(req, resp);
         return;
       }
 
       String cancel = req.getParameter(CANCEL);
       if (cancel != null && cancel.trim().equalsIgnoreCase(TRUE)) {
-        cancel(req, newPrescriptionView);
+        String id = getNotNullParameter(req, ID);
+        debugSessions(session.getId(), "cancel medicine id=" + id + " - the servlet doGet/doPost method", getClass());
+        cancel(req, newPrescriptionView, id);
+        debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
         newPrescriptionHtmlWriterServlet.doGet(req, resp);
         return;
       }
 
       String deletedId = req.getParameter(DELETE_MEDICINE_VIEW_ID);
       if (deletedId != null) {
+        debugSessions(session.getId(), "delete medicine id=" + deletedId + " - the servlet doGet/doPost method", getClass());
         newPrescriptionView.removeMedicineView(deletedId);
+        debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
         newPrescriptionHtmlWriterServlet.doGet(req, resp);
         return;
       }
@@ -94,6 +101,7 @@ public final class HandleMedicineServlet extends BaseServlet {
       String saveMedicine = req.getParameter(SAVE_MEDICINE);
       if (saveMedicine != null) {
         saveMedicine(req, newPrescriptionView);
+        debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
         newPrescriptionHtmlWriterServlet.doGet(req, resp);
         return;
       }
@@ -102,8 +110,7 @@ public final class HandleMedicineServlet extends BaseServlet {
 
   }
 
-  private void cancel(HttpServletRequest req, NewPrescriptionView newPrescriptionView) {
-    String id = getNotNullParameter(req, ID);
+  private void cancel(HttpServletRequest req, NewPrescriptionView newPrescriptionView, String id) {
 
     MedicineView medicineView = newPrescriptionView.getMedicineView(id);
 

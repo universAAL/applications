@@ -28,13 +28,16 @@ public final class DisplayLoginHtmlWriterServlet extends BaseHtmlWriterServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
     synchronized (lock) {
-      Session session = getSession(req, resp);
+      Session session = getSession(req, resp, getClass());
       String loggingError = (String) session.getAttribute(LOGIN_ERROR);
       boolean errorLogging = false;
       if (loggingError != null) {
         errorLogging = true;
       }
       session.removeAttribute(LOGIN_ERROR);
+
+      debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
+
       handleResponse(resp, errorLogging);
     }
   }

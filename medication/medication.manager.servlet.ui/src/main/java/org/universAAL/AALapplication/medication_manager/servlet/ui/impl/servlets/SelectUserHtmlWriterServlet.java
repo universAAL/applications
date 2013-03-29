@@ -39,10 +39,11 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
     synchronized (lock) {
       isServletSet(displayServlet, "displayServlet");
 
-      Session session = getSession(req, resp);
+      Session session = getSession(req, resp, getClass());
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {
+        debugSessions(session.getId(), "if(Doctor is null) the servlet doGet/doPost method", getClass());
         displayServlet.doGet(req, resp);
         return;
       }

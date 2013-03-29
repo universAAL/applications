@@ -49,6 +49,7 @@ public final class MedicineView {
   }
 
   public void setName(String name) {
+    validateRequiredStringField(name, "name");
     this.name = name;
   }
 
@@ -76,7 +77,9 @@ public final class MedicineView {
   }
 
   public void setSideeffects(String sideeffects) {
-    this.sideeffects = sideeffects;
+    if (sideeffects != null && !sideeffects.trim().isEmpty()) {
+      this.sideeffects = sideeffects;
+    }
   }
 
   public String getIncompliances() {
@@ -84,7 +87,9 @@ public final class MedicineView {
   }
 
   public void setIncompliances(String incompliances) {
-    this.incompliances = incompliances;
+    if (incompliances != null && !incompliances.trim().isEmpty()) {
+      this.incompliances = incompliances;
+    }
   }
 
   public MealRelationDTO getMealRelationDTO() {
@@ -202,5 +207,21 @@ public final class MedicineView {
 
   }
 
-
+  @Override
+  public String toString() {
+    return "MedicineView{" +
+        "medicineId=" + medicineId +
+        ", name='" + name + '\'' +
+        ", days=" + days +
+        ", description='" + description + '\'' +
+        ", sideeffects='" + sideeffects + '\'' +
+        ", incompliances='" + incompliances + '\'' +
+        ", mealRelationDTO=" + mealRelationDTO +
+        ", intakeDTOSet=" + intakeDTOSet +
+        ", hours='" + hours + '\'' +
+        ", isNew=" + isNew +
+        ", dose=" + dose +
+        ", unit='" + unit + '\'' +
+        '}';
+  }
 }

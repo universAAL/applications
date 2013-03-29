@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.DebugWriter;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 
@@ -7,6 +8,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 import java.util.Random;
 import java.util.UUID;
 
@@ -15,18 +17,22 @@ import java.util.UUID;
  */
 public abstract class BaseServlet extends HttpServlet {
 
+  private final SessionTracking sessionTracking;
+
   public static final int N = 1000000;
   public static final String COOKIE_NAME = "medication_manager_session_id";
-  private SessionTracking sessionTracking;
   public static final Random RANDOM = new Random();
+  private static final DebugWriter DEBUG_WRITER = new DebugWriter();
+
+  private static String previousRequestedId;
 
   protected BaseServlet(SessionTracking sessionTracking) {
     this.sessionTracking = sessionTracking;
   }
 
 
-  protected Session getSession(HttpServletRequest req, HttpServletResponse resp) {
-    String id = getId(req, resp);
+  protected Session getSession(HttpServletRequest req, HttpServletResponse resp, Class cl) {
+    String id = getId(req, resp, cl);
     Session session = sessionTracking.getSession(id);
     if (session == null) {
       session = new Session(id);
@@ -36,17 +42,40 @@ public abstract class BaseServlet extends HttpServlet {
     return session;
   }
 
-  private String getId(HttpServletRequest req, HttpServletResponse resp) {
+  private String getId(HttpServletRequest req, HttpServletResponse resp, Class cl) {
+    DEBUG_WRITER.println("\n\n\n\n\n\n");
+    DEBUG_WRITER.println("Calling Servlet class: " + cl.getSimpleName());
+    DEBUG_WRITER.println("### HEADERS ###");
+    Enumeration en = req.getHeaderNames();
+    while (en.hasMoreElements()) {
+      String name = (String) en.nextElement();
+      String value = req.getHeader(name);
+      String line = name + ": " + value;
+      DEBUG_WRITER.println(line);
+    }
+    DEBUG_WRITER.println("### END HEADERS ###");
 
     String id = findIdFromCookie(req);
+
+    debugSessions(id, "Beginning of the servlet doGet/doPost method", cl);
 
     if (id == null) {
       id = generateUniqueId();
       Cookie cookie = new Cookie(COOKIE_NAME, id);
       resp.addCookie(cookie);
     }
-
+    previousRequestedId = id;
     return id;
+  }
+
+  public void debugSessions(String id, String servletPlace, Class cl) {
+    DEBUG_WRITER.println("\n\n");
+    DEBUG_WRITER.println("&&&&& Debug Sessions from servlet name: " +
+        cl.getSimpleName() + "| place: " + servletPlace + " &&&&&");
+    DEBUG_WRITER.println("previousRequestedId = " + previousRequestedId);
+    DEBUG_WRITER.println("id = " + id);
+    sessionTracking.printSessions(DEBUG_WRITER, id);
+    DEBUG_WRITER.println("&&&&& END Debug Sessions &&&&&");
   }
 
   private String generateUniqueId() {
@@ -61,7 +90,9 @@ public abstract class BaseServlet extends HttpServlet {
   private String findIdFromCookie(HttpServletRequest req) {
 
     Cookie cookie = getCookie(req);
+    DEBUG_WRITER.println("cookie = " + cookie);
     if (cookie != null) {
+      DEBUG_WRITER.println("cookie = " + cookie.getName() + "|" + cookie.getValue());
       return cookie.getValue();
     }
     return null;
@@ -70,12 +101,16 @@ public abstract class BaseServlet extends HttpServlet {
   private Cookie getCookie(HttpServletRequest req) {
     Cookie[] cookies = req.getCookies();
 
+    DEBUG_WRITER.println("cookies = " + cookies);
+
     if (cookies == null || cookies.length == 0) {
+      DEBUG_WRITER.println("cookies are null or empty");
       return null;
     }
 
     for (Cookie cookie : cookies) {
       String name = cookie.getName();
+      DEBUG_WRITER.println("name = " + name);
       if (name.equalsIgnoreCase(COOKIE_NAME)) {
         return cookie;
       }
