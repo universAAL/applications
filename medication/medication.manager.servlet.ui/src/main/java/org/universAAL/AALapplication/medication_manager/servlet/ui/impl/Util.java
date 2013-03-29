@@ -28,8 +28,10 @@ public final class Util {
   public static final String HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS = "/handle_new_prescription";
   public static final String MEDICINE_SERVLET_ALIAS = "/display_new_medicine";
   public static final String HANDLE_MEDICINE_SERVLET_ALIAS = "/handle_new_medicine";
+  public static final String ERROR_PAGE_SERVLET_ALIAS = "/error";
   public static final String LOGIN_ERROR = "LOGIN_ERROR";
   public static final String LOGIN_FILE_NAME = "login.html";
+  public static final String ERROR_FILE_NAME = "error.html";
   public static final String EMPTY = "";
   public static final String CANCEL = "cancel";
   public static final String TRUE = "true";
@@ -41,6 +43,7 @@ public final class Util {
   public static final String DELETE_MEDICINE_VIEW_ID = "deleteID";
   public static final String DATE = "date";
   public static final String NOTES = "notes";
+  public static final String ERROR = "ERROR";
 
   private Util() {
   }

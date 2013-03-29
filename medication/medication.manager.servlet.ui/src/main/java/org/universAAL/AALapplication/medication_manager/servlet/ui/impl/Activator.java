@@ -6,6 +6,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.DisplayErrorPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.DisplayLoginHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.HandleMedicineServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.HandleNewPrescriptionServlet;
@@ -79,34 +80,47 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(MEDICINE_SERVLET_ALIAS, medicineHtmlWriterServlet, null, null);
     HandleMedicineServlet handleMedicineServlet = new HandleMedicineServlet(sessionTracking);
     httpService.registerServlet(HANDLE_MEDICINE_SERVLET_ALIAS, handleMedicineServlet, null, null);
+    DisplayErrorPageWriterServlet displayErrorPageWriterServlet = new DisplayErrorPageWriterServlet(sessionTracking);
+    httpService.registerServlet(ERROR_PAGE_SERVLET_ALIAS, displayErrorPageWriterServlet, null, null);
     httpService.registerResources(JS_ALIAS, "js", null);
     httpService.registerResources(CSS_ALIAS, "css", null);
 
 
     //set servlets
+
+    displayServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+
     loginServlet.setDisplayServlet(displayServlet);
     loginServlet.setSelectUserServlet(selectUserServlet);
+    loginServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
     selectUserServlet.setDisplayServlet(displayServlet);
+    selectUserServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
     listPrescriptionsServlet.setDisplayServlet(displayServlet);
     listPrescriptionsServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
+    listPrescriptionsServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
     newPrescriptionServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
     newPrescriptionServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
+    newPrescriptionServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
     medicineHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
     medicineHtmlWriterServlet.setListPrescriptionsHtmlWriterServlet(listPrescriptionsServlet);
     medicineHtmlWriterServlet.setNewPrescriptionHtmlWriterServlet(newPrescriptionServlet);
+    medicineHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
     handleMedicineServlet.setNewPrescriptionHtmlWriterServlet(newPrescriptionServlet);
     handleMedicineServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
     handleMedicineServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
+    handleMedicineServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
     handleNewPrescriptionServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
     handleNewPrescriptionServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
     handleNewPrescriptionServlet.setListPrescriptionsHtmlWriterServlet(listPrescriptionsServlet);
     handleNewPrescriptionServlet.setNewPrescriptionHtmlWriterServlet(newPrescriptionServlet);
+    handleNewPrescriptionServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+
   }
 
   private HttpService getHttpService(BundleContext context) {

@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.NewMedicineScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
@@ -54,33 +55,38 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     synchronized (lock) {
-      isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
-      isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
-      isServletSet(listPrescriptionsHtmlWriterServlet, "listPrescriptionsHtmlWriterServlet");
+      try {
+        isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
+        isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
+        isServletSet(listPrescriptionsHtmlWriterServlet, "listPrescriptionsHtmlWriterServlet");
 
-      Session session = getSession(req, resp, getClass());
-      Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
+        Session session = getSession(req, resp, getClass());
+        Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
-      if (doctor == null) {
-        debugSessions(session.getId(), "if(doctor is null) servlet doGet/doPost method", getClass());
-        displayLoginHtmlWriterServlet.doGet(req, resp);
-        return;
+        if (doctor == null) {
+          debugSessions(session.getId(), "if(doctor is null) servlet doGet/doPost method", getClass());
+          displayLoginHtmlWriterServlet.doGet(req, resp);
+          return;
+        }
+
+
+        NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
+
+        if (newPrescriptionView == null) {
+          debugSessions(session.getId(), "if(newPrescriptionView is null) the servlet doGet/doPost method", getClass());
+          newPrescriptionHtmlWriterServlet.doGet(req, resp);
+          return;
+        }
+
+        setDateAndNotes(req, newPrescriptionView);
+        MedicineView medicineView = getMedicineView(newPrescriptionView, req);
+
+        debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
+        handleResponse(req, resp, medicineView, newPrescriptionView.getPrescriptionId());
+      } catch (Exception e) {
+        Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
+        sendErrorResponse(req, resp, e);
       }
-
-
-      NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
-
-      if (newPrescriptionView == null) {
-        debugSessions(session.getId(), "if(newPrescriptionView is null) the servlet doGet/doPost method", getClass());
-        newPrescriptionHtmlWriterServlet.doGet(req, resp);
-        return;
-      }
-
-      setDateAndNotes(req, newPrescriptionView);
-      MedicineView medicineView = getMedicineView(newPrescriptionView, req);
-
-      debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
-      handleResponse(resp, medicineView, newPrescriptionView.getPrescriptionId());
     }
   }
 
@@ -116,13 +122,14 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
   }
 
 
-  private void handleResponse(HttpServletResponse resp, MedicineView medicineView, int prescriptionId) throws IOException {
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
+                              MedicineView medicineView, int prescriptionId) throws IOException {
     try {
       PersistentService persistentService = getPersistentService();
       ScriptForm scriptForm = new NewMedicineScriptForm(persistentService, medicineView, prescriptionId);
-      sendResponse(resp, scriptForm);
+      sendResponse(req, resp, scriptForm);
     } catch (Exception e) {
-      sendErrorResponse(resp, e);
+      sendErrorResponse(req, resp, e);
     }
   }
 

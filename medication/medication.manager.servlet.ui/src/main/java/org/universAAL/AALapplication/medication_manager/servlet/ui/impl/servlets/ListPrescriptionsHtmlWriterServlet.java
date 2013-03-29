@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ListPrescriptionsScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
@@ -50,31 +51,36 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     synchronized (lock) {
-      isServletSet(displayServlet, "displayServlet");
-      isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
+      try {
+        isServletSet(displayServlet, "displayServlet");
+        isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
 
-      Session session = getSession(req, resp, getClass());
-      Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
+        Session session = getSession(req, resp, getClass());
+        Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
-      if (doctor == null) {
-        debugSessions(session.getId(), "if(doctor is null) the servlet doGet/doPost method", getClass());
-        displayServlet.doGet(req, resp);
-        return;
+        if (doctor == null) {
+          debugSessions(session.getId(), "if(doctor is null) the servlet doGet/doPost method", getClass());
+          displayServlet.doGet(req, resp);
+          return;
+        }
+
+        String cancel = req.getParameter(CANCEL);
+        if (cancel != null && TRUE.equalsIgnoreCase(cancel)) {
+          debugSessions(session.getId(), "cancel (removing PRESCRIPTION_VIEW   " +
+              "the servlet doGet/doPost method", getClass());
+          session.removeAttribute(PRESCRIPTION_VIEW);
+        }
+
+        Person patient = getPatient(req, session);
+        debugSessions(session.getId(), "Patient found and set the attribute the servlet doGet/doPost method", getClass());
+        session.setAttribute(PATIENT, patient);
+
+        debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
+        handleResponse(req, resp, patient);
+      } catch (Exception e) {
+        Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
+        sendErrorResponse(req, resp, e);
       }
-
-      String cancel = req.getParameter(CANCEL);
-      if (cancel != null && TRUE.equalsIgnoreCase(cancel)) {
-        debugSessions(session.getId(), "cancel (removing PRESCRIPTION_VIEW   " +
-            "the servlet doGet/doPost method", getClass());
-        session.removeAttribute(PRESCRIPTION_VIEW);
-      }
-
-      Person patient = getPatient(req, session);
-      debugSessions(session.getId(), "Patient found and set the attribute the servlet doGet/doPost method", getClass());
-      session.setAttribute(PATIENT, patient);
-
-      debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
-      handleResponse(resp, patient);
     }
   }
 
@@ -102,13 +108,13 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
 
   }
 
-  private void handleResponse(HttpServletResponse resp, Person patient) throws IOException {
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp, Person patient) throws IOException {
     try {
       PersistentService persistentService = getPersistentService();
       ScriptForm scriptForm = new ListPrescriptionsScriptForm(persistentService, patient);
-      sendResponse(resp, scriptForm);
+      sendResponse(req, resp, scriptForm);
     } catch (Exception e) {
-      sendErrorResponse(resp, e);
+      sendErrorResponse(req, resp, e);
     }
   }
 

@@ -8,26 +8,35 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Random;
 import java.util.UUID;
+
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
  * @author George Fournadjiev
  */
 public abstract class BaseServlet extends HttpServlet {
 
+  public static final String MISSING_MESSAGE = "Missing message!";
   private final SessionTracking sessionTracking;
 
   public static final int N = 1000000;
   public static final String COOKIE_NAME = "medication_manager_session_id";
   public static final Random RANDOM = new Random();
   private static final DebugWriter DEBUG_WRITER = new DebugWriter();
+  private DisplayErrorPageWriterServlet displayErrorPageWriterServlet;
 
   private static String previousRequestedId;
 
   protected BaseServlet(SessionTracking sessionTracking) {
     this.sessionTracking = sessionTracking;
+  }
+
+  public void setDisplayErrorPageWriterServlet(DisplayErrorPageWriterServlet displayErrorPageWriterServlet) {
+    this.displayErrorPageWriterServlet = displayErrorPageWriterServlet;
   }
 
 
@@ -135,6 +144,19 @@ public abstract class BaseServlet extends HttpServlet {
 
     sessionTracking.removeSession(id);
 
+  }
+
+  public void sendErrorResponse(HttpServletRequest request, HttpServletResponse resp, Exception e) throws IOException {
+    String message = e.getMessage();
+    if (message == null) {
+      message = MISSING_MESSAGE;
+    }
+
+    Session session = getSession(request, resp, getClass());
+
+    session.setAttribute(ERROR, message);
+
+    displayErrorPageWriterServlet.doGet(request, resp);
   }
 
 }

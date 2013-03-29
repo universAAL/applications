@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.DisplayLoginScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
@@ -28,17 +29,23 @@ public final class DisplayLoginHtmlWriterServlet extends BaseHtmlWriterServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
     synchronized (lock) {
-      Session session = getSession(req, resp, getClass());
-      String loggingError = (String) session.getAttribute(LOGIN_ERROR);
-      boolean errorLogging = false;
-      if (loggingError != null) {
-        errorLogging = true;
+      try {
+        Session session = getSession(req, resp, getClass());
+        String loggingError = (String) session.getAttribute(LOGIN_ERROR);
+        boolean errorLogging = false;
+        if (loggingError != null) {
+          errorLogging = true;
+        }
+        session.removeAttribute(LOGIN_ERROR);
+
+        debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
+
+        handleResponse(req, resp, errorLogging);
+
+      } catch (Exception e) {
+        Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
+        sendErrorResponse(req, resp, e);
       }
-      session.removeAttribute(LOGIN_ERROR);
-
-      debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
-
-      handleResponse(resp, errorLogging);
     }
   }
 
@@ -48,13 +55,13 @@ public final class DisplayLoginHtmlWriterServlet extends BaseHtmlWriterServlet {
   }
 
 
-  private void handleResponse(HttpServletResponse resp, boolean hasScript) throws IOException {
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp, boolean hasScript) throws IOException {
     try {
       PersistentService persistentService = getPersistentService();
       ScriptForm scriptForm = new DisplayLoginScriptForm(persistentService, hasScript);
-      sendResponse(resp, scriptForm);
+      sendResponse(req, resp, scriptForm);
     } catch (Exception e) {
-      sendErrorResponse(resp, e);
+      sendErrorResponse(req, resp, e);
     }
   }
 

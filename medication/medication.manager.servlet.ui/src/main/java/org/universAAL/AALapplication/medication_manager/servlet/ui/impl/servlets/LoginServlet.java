@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 
@@ -45,33 +46,38 @@ public final class LoginServlet extends BaseServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     synchronized (lock) {
-      isServletSet(selectUserServlet, "selectUserServlet");
-      isServletSet(displayServlet, "displayServlet");
+      try {
+        isServletSet(selectUserServlet, "selectUserServlet");
+        isServletSet(displayServlet, "displayServlet");
 
-      Session session = getSession(req, resp, getClass());
+        Session session = getSession(req, resp, getClass());
 
-      Person person = (Person) session.getAttribute(LOGGED_DOCTOR);
+        Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
-      if (person == null) {
-        debugSessions(session.getId(), "if (person is null) the servlet doGet/doPost method", getClass());
-        person = findDoctor(req, session);
-      }
+        if (doctor == null) {
+          debugSessions(session.getId(), "if (doctor is null) the servlet doGet/doPost method", getClass());
+          doctor = findDoctor(req, session);
+        }
 
-      String cancel = req.getParameter(CANCEL);
+        String cancel = req.getParameter(CANCEL);
 
-      if (cancel != null && cancel.equalsIgnoreCase(TRUE)) {
-        debugSessions(session.getId(), "cancel button (invalidate) the servlet doGet/doPost method", getClass());
-        invalidateSession(req, resp);
-        displayServlet.doGet(req, resp);
-        return;
-      }
+        if (cancel != null && cancel.equalsIgnoreCase(TRUE)) {
+          debugSessions(session.getId(), "cancel button (invalidate) the servlet doGet/doPost method", getClass());
+          invalidateSession(req, resp);
+          displayServlet.doGet(req, resp);
+          return;
+        }
 
-      if (person != null) {
-        debugSessions(session.getId(), "End of the servlet doGet/doPost method (person is not null", getClass());
-        selectUserServlet.doGet(req, resp);
-      } else {
-        debugSessions(session.getId(), "End of the servlet doGet/doPost method (person is null)", getClass());
-        displayServlet.doGet(req, resp);
+        if (doctor != null) {
+          debugSessions(session.getId(), "End of the servlet doGet/doPost method (doctor is not null", getClass());
+          selectUserServlet.doGet(req, resp);
+        } else {
+          debugSessions(session.getId(), "End of the servlet doGet/doPost method (doctor is null)", getClass());
+          displayServlet.doGet(req, resp);
+        }
+      } catch (Exception e) {
+        Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
+        sendErrorResponse(req, resp, e);
       }
 
     }
