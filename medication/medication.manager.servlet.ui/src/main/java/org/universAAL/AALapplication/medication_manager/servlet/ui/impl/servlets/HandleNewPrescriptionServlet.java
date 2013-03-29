@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import java.util.Enumeration;
  */
 public final class HandleNewPrescriptionServlet extends BaseServlet {
 
+  private final Object lock = new Object();
 
   public HandleNewPrescriptionServlet(SessionTracking sessionTracking) {
     super(sessionTracking);
@@ -27,14 +29,18 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    PrintWriter writer = resp.getWriter();
-    Enumeration en = req.getParameterNames();
-    while (en.hasMoreElements()) {
-      String parameterName = (String) en.nextElement();
-      String value = req.getParameter(parameterName);
-      writer.println(parameterName + " : " + value);
-    }
+    synchronized (lock) {
+      Session session = getSession(req, resp, getClass());
+      PrintWriter writer = resp.getWriter();
+      Enumeration en = req.getParameterNames();
+      while (en.hasMoreElements()) {
+        String parameterName = (String) en.nextElement();
+        String value = req.getParameter(parameterName);
+        writer.println(parameterName + " : " + value);
+      }
 
-    writer.println("done (new Prescription)");
+      writer.println("done (new Prescription)");
+      debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
+    }
   }
 }

@@ -34,4 +34,8 @@ public final class Session {
   public void removeAttribute(String key) {
     attributes.remove(key);
   }
+
+  public Map<String, Object> getAttributesMap() {
+    return new HashMap<String, Object>(attributes);
+  }
 }

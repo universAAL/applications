@@ -49,29 +49,26 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
       isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
       isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
 
-      Session session = getSession(req, resp);
+      Session session = getSession(req, resp, getClass());
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {
+        debugSessions(session.getId(), "if(doctor is null) the servlet doGet/doPost method", getClass());
         displayLoginHtmlWriterServlet.doGet(req, resp);
         return;
       }
 
-     /* String cancel = req.getParameter(CANCEL);
-      if (cancel != null && TRUE.equalsIgnoreCase(cancel)) {
-
-      }*/
-
       Person patient = (Person) session.getAttribute(PATIENT);
 
       if (patient == null) {
+        debugSessions(session.getId(), "if(patient is null) the servlet doGet/doPost method", getClass());
         selectUserHtmlWriterServlet.doGet(req, resp);
         return;
       }
 
       NewPrescriptionView newPrescriptionView = getNewPrescriptionView(doctor, patient, session);
 
-      session.setAttribute(PRESCRIPTION_VIEW, newPrescriptionView);
+      debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
 
       handleResponse(resp, newPrescriptionView);
     }
@@ -79,11 +76,17 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
 
   private NewPrescriptionView getNewPrescriptionView(Person doctor, Person patient, Session session) {
 
-    NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(NEW_PRESCRIPTION);
+    NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
+    if (newPrescriptionView != null) {
+      Person per = newPrescriptionView.getPatient();
+      if (per.getId() != patient.getId()) {
+        newPrescriptionView = null;
+      }
+    }
 
     if (newPrescriptionView == null) {
       newPrescriptionView = new NewPrescriptionView(generateId(), doctor, patient);
-      session.setAttribute(NEW_PRESCRIPTION, newPrescriptionView);
+      session.setAttribute(PRESCRIPTION_VIEW, newPrescriptionView);
     }
 
     validateNewPrescription(newPrescriptionView);

@@ -58,10 +58,11 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
       isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
       isServletSet(listPrescriptionsHtmlWriterServlet, "listPrescriptionsHtmlWriterServlet");
 
-      Session session = getSession(req, resp);
+      Session session = getSession(req, resp, getClass());
       Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
 
       if (doctor == null) {
+        debugSessions(session.getId(), "if(doctor is null) servlet doGet/doPost method", getClass());
         displayLoginHtmlWriterServlet.doGet(req, resp);
         return;
       }
@@ -70,6 +71,7 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
       NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
 
       if (newPrescriptionView == null) {
+        debugSessions(session.getId(), "if(newPrescriptionView is null) the servlet doGet/doPost method", getClass());
         newPrescriptionHtmlWriterServlet.doGet(req, resp);
         return;
       }
@@ -77,6 +79,7 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
       setDateAndNotes(req, newPrescriptionView);
       MedicineView medicineView = getMedicineView(newPrescriptionView, req);
 
+      debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
       handleResponse(resp, medicineView, newPrescriptionView.getPrescriptionId());
     }
   }

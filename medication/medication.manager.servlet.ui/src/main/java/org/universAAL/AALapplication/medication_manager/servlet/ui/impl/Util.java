@@ -33,7 +33,6 @@ public final class Util {
   public static final String CANCEL = "cancel";
   public static final String TRUE = "true";
   public static final String PATIENT = "PATIENT";
-  public static final String NEW_PRESCRIPTION = "new_prescription";
   public static final Pair<String> EMPTY_PAIR = new Pair<String>(null, null);
 
   private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd");
@@ -143,6 +142,12 @@ public final class Util {
       newPrescriptionView.setNotes(EMPTY);
     } else {
       newPrescriptionView.setNotes(notes);
+    }
+  }
+
+  public static void validateRequiredStringField(String value, String propertyName) {
+    if (value == null || value.trim().isEmpty()) {
+      throw new MedicationManagerServletUIException("The " + propertyName + " String property cannot be set with null or empty");
     }
   }
 }

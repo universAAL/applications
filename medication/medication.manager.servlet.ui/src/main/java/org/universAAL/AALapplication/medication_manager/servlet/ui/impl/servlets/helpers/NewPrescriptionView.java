@@ -37,7 +37,9 @@ public final class NewPrescriptionView {
   }
 
   public void setNotes(String description) {
-    this.description = description;
+    if (description != null && !description.trim().isEmpty()) {
+      this.description = description;
+    }
   }
 
   public String getStartDate() {
@@ -82,5 +84,39 @@ public final class NewPrescriptionView {
     }
 
     return medicineView;
+  }
+
+  @Override
+  public String toString() {
+    return "NewPrescriptionView{" +
+        "prescriptionId=" + prescriptionId +
+        ", description='" + description + '\'' +
+        ", startDate='" + startDate + '\'' +
+        ", medicineViews.size=" + medicineViews.size() +
+        ", medicineViews.ids=" + getMVIds() +
+        ", medicineViews=" + medicineViews +
+        ", physician=" + physician +
+        ", patient=" + patient +
+        '}';
+  }
+
+  private String getMVIds() {
+    StringBuffer sb = new StringBuffer();
+    sb.append('[');
+    int i = 0;
+    int size = medicineViews.size();
+    for (MedicineView med : medicineViews.values()) {
+      sb.append(med.getMedicineId());
+
+      i++;
+      if (i < size) {
+        sb.append(", ");
+
+      }
+    }
+
+    sb.append(']');
+
+    return sb.toString();
   }
 }

@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public final class SessionTracking {
 
     synchronized (lock) {
       if (!hasSession(id)) {
-         sessionMap.put(id, session);
+        sessionMap.put(id, session);
       }
     }
   }
@@ -45,6 +46,39 @@ public final class SessionTracking {
       if (session != null) {
         session.invalidate();
       }
+    }
+  }
+
+  public void printSessions(DebugWriter debugWriter, String id) {
+
+    synchronized (lock) {
+      Collection<Session> sessions = sessionMap.values();
+      debugWriter.println("sessions.size() = " + sessions.size());
+      for (Session ses : sessions) {
+        if (ses.getId().equalsIgnoreCase(id)) {
+          debugWriter.println("^^^^^^^^^^^^ Start Active Session Debugging ^^^^^^^^^^^^^^^^^^^^^");
+          debugWriter.println("Active session : " + id);
+        }
+        printSession(debugWriter, ses);
+        if (ses.getId().equalsIgnoreCase(id)) {
+          debugWriter.println("^^^^^^^^^^^^^^^ End Active Session Debugging^^^^^^^^^^^^^^^^^^^^^^");
+        }
+      }
+    }
+
+  }
+
+  private void printSession(DebugWriter debugWriter, Session ses) {
+    debugWriter.println("Printing attributes for session with id: " + ses.getId());
+    printAttributes(ses.getAttributesMap(), debugWriter);
+    debugWriter.println("End printing attributes for session with id: " + ses.getId());
+  }
+
+  private void printAttributes(Map<String, Object> attributesMap, DebugWriter debugWriter) {
+    Collection<String> keys = attributesMap.keySet();
+    for (String k : keys) {
+      Object value = attributesMap.get(k);
+      debugWriter.println("key = " + k + " | value = " + value);
     }
   }
 }
