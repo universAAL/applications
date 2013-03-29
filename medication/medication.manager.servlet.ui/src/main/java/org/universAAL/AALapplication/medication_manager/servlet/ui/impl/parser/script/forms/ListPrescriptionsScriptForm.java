@@ -28,7 +28,7 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
   private static final String NOTES = "notes";
   private static final String MEDICINE = "medicines";
   private static final String HOW = "how";
-  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyy-mm-dd");
+  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
   public ListPrescriptionsScriptForm(PersistentService persistentService, Person patient) {
     super(LIST_PRESCRIPTIONS_FUNCTION_CALL_TEXT);

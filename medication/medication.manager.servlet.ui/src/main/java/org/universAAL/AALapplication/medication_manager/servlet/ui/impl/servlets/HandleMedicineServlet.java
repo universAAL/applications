@@ -35,6 +35,7 @@ public final class HandleMedicineServlet extends BaseServlet {
   private final Object lock = new Object();
   private DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet;
   private NewPrescriptionHtmlWriterServlet newPrescriptionHtmlWriterServlet;
+  private SelectUserHtmlWriterServlet selectUserHtmlWriterServlet;
 
   public HandleMedicineServlet(SessionTracking sessionTracking) {
     super(sessionTracking);
@@ -46,6 +47,10 @@ public final class HandleMedicineServlet extends BaseServlet {
 
   public void setNewPrescriptionHtmlWriterServlet(NewPrescriptionHtmlWriterServlet newPrescriptionHtmlWriterServlet) {
     this.newPrescriptionHtmlWriterServlet = newPrescriptionHtmlWriterServlet;
+  }
+
+  public void setSelectUserHtmlWriterServlet(SelectUserHtmlWriterServlet selectUserHtmlWriterServlet) {
+    this.selectUserHtmlWriterServlet = selectUserHtmlWriterServlet;
   }
 
   @Override
@@ -60,6 +65,7 @@ public final class HandleMedicineServlet extends BaseServlet {
 
       printParams(req);
       isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
+      isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
       isServletSet(newPrescriptionHtmlWriterServlet, "newPrescriptionHtmlWriterServlet");
 
       Session session = getSession(req, resp, getClass());
@@ -68,6 +74,14 @@ public final class HandleMedicineServlet extends BaseServlet {
       if (doctor == null) {
         debugSessions(session.getId(), "if(doctor is null) the servlet doGet/doPost method", getClass());
         displayLoginHtmlWriterServlet.doGet(req, resp);
+        return;
+      }
+
+      Person patient = (Person) session.getAttribute(PATIENT);
+
+      if (patient == null) {
+        debugSessions(session.getId(), "if(patient is null) the servlet doGet/doPost method", getClass());
+        selectUserHtmlWriterServlet.doGet(req, resp);
         return;
       }
 

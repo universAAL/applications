@@ -64,7 +64,7 @@ public final class MedicineDTO {
 
   public int getMedicineId() {
     if (medicineId == 0) {
-      throw new MedicationManagerPersistenceException("The prescriptionId is not set");
+      throw new MedicationManagerPersistenceException("The medicineId is not set");
     }
     return medicineId;
   }
