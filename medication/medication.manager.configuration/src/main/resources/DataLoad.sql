@@ -93,6 +93,9 @@ values (2, '2012-12-21 17:07:36', 1, 2, 'blood pressure', 'active');
 insert into medication_manager.prescription (id, time_of_creation, patient_fk_id, physician_fk_id, description, status)
 values (3, '2012-12-24 15:00:00', 3, 6, 'sleeping problems', 'active');
 
+insert into medication_manager.prescription (id, time_of_creation, patient_fk_id, physician_fk_id, description, status)
+values (4, '2013-03-25 17:00:00', 1, 2, 'pain', 'active');
+
 // treatment table
 
 insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
@@ -111,7 +114,10 @@ insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id
 values (5, 2, 2, 'y', '2013-02-19 00:00:00', '2013-02-19 23:59:00');
 
 insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
-values (6, 3, 4, 'y', '2013-04-01 00:00:00', '2013-04-19 23:59:00');
+values (6, 3, 4, 'y', '2013-03-01 00:00:00', '2013-03-19 23:59:00');
+
+insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
+values (7, 4, 5, 'y', '2013-03-25 00:00:00', '2013-04-11 21:00:00');
 
 // intake table
 
@@ -132,6 +138,9 @@ values (5, 5, 1, 'pill', '2013-02-19 21:05:00');
 
 insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
 values (6, 6, 3, 'pill', '2013-04-19 22:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (7, 7, 2, 'pill', '2013-04-01 20:10:00');
 
 
 

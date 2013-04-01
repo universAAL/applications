@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
@@ -23,7 +23,6 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.U
  */
 public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServlet {
 
-  private static final String USER = "user";
   private final Object lock = new Object();
   private DisplayLoginHtmlWriterServlet displayServlet;
   private SelectUserHtmlWriterServlet selectUserHtmlWriterServlet;
@@ -71,13 +70,15 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
           session.removeAttribute(PRESCRIPTION_VIEW);
         }
 
-        Person patient = getPatient(req, session);
+        PersistentService persistentService = getPersistentService();
+
+        Person patient = getPatient(req, session, persistentService);
         debugSessions(session.getId(), "Patient found and set the attribute the servlet doGet/doPost method", getClass());
         session.setAttribute(PATIENT, patient);
         session.removeAttribute(PRESCRIPTION_VIEW);
 
         debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
-        handleResponse(req, resp, patient, doctor);
+        handleResponse(req, resp, patient, doctor, persistentService);
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
         sendErrorResponse(req, resp, e);
@@ -85,7 +86,7 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
     }
   }
 
-  private Person getPatient(HttpServletRequest req, Session session) {
+  private Person getPatient(HttpServletRequest req, Session session, PersistentService persistentService) {
     String patientId = req.getParameter(USER);
 
     if (patientId == null) {
@@ -105,14 +106,15 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
 
     session.setAttribute(USER, patientId);
 
-    return getPatientById(id);
+    PersonDao personDao = persistentService.getPersonDao();
+
+    return personDao.getById(id);
 
   }
 
   private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
-                              Person patient, Person doctor) throws IOException {
+                              Person patient, Person doctor, PersistentService persistentService) throws IOException {
     try {
-      PersistentService persistentService = getPersistentService();
       ScriptForm scriptForm = new ListPrescriptionsScriptForm(persistentService, patient, doctor);
       sendResponse(req, resp, scriptForm);
     } catch (Exception e) {

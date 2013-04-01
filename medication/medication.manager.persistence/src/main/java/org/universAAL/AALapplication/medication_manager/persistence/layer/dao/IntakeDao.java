@@ -9,6 +9,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.TreatmentStatus;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
@@ -24,13 +25,13 @@ import java.util.List;
 import java.util.Map;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
-import static org.universAAL.AALapplication.medication_manager.persistence.layer.entities.TreatmentStatus.*;
 
 /**
  * @author George Fournadjiev
  */
 public final class IntakeDao extends AbstractDao {
 
+  public static final TreatmentStatus ACTIVE = TreatmentStatus.ACTIVE;
   private DispenserDao dispenserDao;
   private TreatmentDao treatmentDao;
   private MedicineDao medicineDao;
@@ -183,5 +184,42 @@ public final class IntakeDao extends AbstractDao {
     }
 
     return intakes;
+  }
+
+  public List<Intake> getByTreatments(List<Treatment> treatments) {
+
+    try {
+      return findTreatments(treatments);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
+  }
+
+  private List<Intake> findTreatments(List<Treatment> treatments) throws SQLException {
+    StringBuffer sqlBuffer = new StringBuffer();
+
+    sqlBuffer.append("select * from MEDICATION_MANAGER.INTAKE\n" +
+        "  where TREATMENT_FK_ID in(");
+
+    int size = treatments.size();
+
+    int i = 0;
+    for (Treatment treatment : treatments) {
+      int id = treatment.getId();
+      sqlBuffer.append(id);
+      i++;
+      if (i < size) {
+        sqlBuffer.append(", ");
+      }
+    }
+
+    sqlBuffer.append(')');
+
+
+    String sql = sqlBuffer.toString();
+
+    List<Map<String, Column>> results = database.executeQueryExpectedMultipleRecord(TABLE_NAME, getPreparedStatement(sql));
+
+    return createIntakes(results);
   }
 }

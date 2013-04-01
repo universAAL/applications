@@ -53,9 +53,7 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
 
     PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
 
-    List<Prescription> prescriptions = prescriptionDao.getPrescriptionDTO(patient, doctor);
-
-    List<PrescriptionDTO> prescriptionDTOs = createPrescriptionDTOs(prescriptions);
+    List<PrescriptionDTO> prescriptionDTOs = prescriptionDao.getPrescriptionDTO(patient, doctor);
 
     for (PrescriptionDTO pr : prescriptionDTOs) {
       String startDate = getStartDateText(pr.getStartDate());

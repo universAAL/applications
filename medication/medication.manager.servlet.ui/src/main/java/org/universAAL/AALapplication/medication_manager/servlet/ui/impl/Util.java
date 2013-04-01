@@ -44,6 +44,7 @@ public final class Util {
   public static final String DATE = "date";
   public static final String NOTES = "notes";
   public static final String ERROR = "ERROR";
+  public static final String USER = "user";
 
   private Util() {
   }
