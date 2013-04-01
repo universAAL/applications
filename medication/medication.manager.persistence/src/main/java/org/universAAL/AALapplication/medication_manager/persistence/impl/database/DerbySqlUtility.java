@@ -1,12 +1,13 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl.database;
 
-import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 
 import java.io.BufferedReader;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -27,6 +28,33 @@ public final class DerbySqlUtility implements SqlUtility {
   public DerbySqlUtility(Connection connection) {
 
     this.connection = connection;
+  }
+
+  public int generateId() {
+    try {
+      int sequenceValue = getNextSequenceValue();
+      return sequenceValue;
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException("unable to get next id from sequence generator", e);
+    }
+
+  }
+
+  private int getNextSequenceValue() throws SQLException {
+    PreparedStatement statement = null;
+    try {
+      statement = connection.prepareStatement(
+          "VALUES NEXT VALUE FOR " + MEDICATION_MANAGER + ".ID_GEN");
+      ResultSet rs = statement.executeQuery();
+      if (rs.next()) {
+        int id = rs.getInt(1);
+        return id;
+      }
+    } finally {
+      closeStatement(statement);
+    }
+
+    throw new MedicationManagerPersistenceException("Unexpected missing sequence value");
   }
 
   public void printTablesData() {
@@ -140,7 +168,7 @@ public final class DerbySqlUtility implements SqlUtility {
     System.out.println("\n***************** Printing table : " + tableName + " *****************");
     Set<String> columnNamesSet = getDBColumns(tableName);
 
-    ResultSet resultSet = statement.executeQuery("select * from " + MEDICATION_MANAGER + '.' + tableName);
+    ResultSet resultSet = statement.executeQuery("SELECT * FROM " + MEDICATION_MANAGER + '.' + tableName);
     int row = 0;
     while (resultSet.next()) {
       row++;

@@ -100,4 +100,8 @@ public final class PersistentServiceImpl implements PersistentService {
   public DoctorPatientDao getDoctorPatientDao() {
     return doctorPatientDao;
   }
+
+  public int generateId() {
+    return sqlUtility.generateId();
+  }
 }

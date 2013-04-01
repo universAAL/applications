@@ -2924,7 +2924,6 @@ medication/medication.manager.service/src/main/java/org/universAAL/AALapplicatio
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/providers/MissedIntakeContextProvider.java -text
 medication/medication.manager.servlet.ui/pom.xml -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/Activator.java -text
-medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/DatabaseSimulation.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/Log.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/MedicationManagerServletUIException.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/Util.java -text

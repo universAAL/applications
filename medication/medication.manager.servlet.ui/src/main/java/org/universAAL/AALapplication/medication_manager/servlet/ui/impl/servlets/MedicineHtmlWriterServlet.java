@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
@@ -78,11 +77,13 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
           return;
         }
 
+        PersistentService persistentService = getPersistentService();
+
         setDateAndNotes(req, newPrescriptionView);
-        MedicineView medicineView = getMedicineView(newPrescriptionView, req);
+        MedicineView medicineView = getMedicineView(newPrescriptionView, req, persistentService);
 
         debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
-        handleResponse(req, resp, medicineView, newPrescriptionView.getPrescriptionId());
+        handleResponse(req, resp, persistentService, medicineView, newPrescriptionView.getPrescriptionId());
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
         sendErrorResponse(req, resp, e);
@@ -90,7 +91,8 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
     }
   }
 
-  private MedicineView getMedicineView(NewPrescriptionView newPrescriptionView, HttpServletRequest req) {
+  private MedicineView getMedicineView(NewPrescriptionView newPrescriptionView,
+                                       HttpServletRequest req, PersistentService persistentService) {
 
     String medicineId = req.getParameter("id");
 
@@ -99,7 +101,7 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
       medicineView = newPrescriptionView.getMedicineView(medicineId);
       medicineView.setNew(false);
     } else {
-      medicineView = new MedicineView(generateId());
+      medicineView = new MedicineView(persistentService.generateId());
       medicineView.setNew(true);
       newPrescriptionView.addMedicineView(medicineView);
     }
@@ -122,10 +124,9 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
   }
 
 
-  private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp, PersistentService persistentService,
                               MedicineView medicineView, int prescriptionId) throws IOException {
     try {
-      PersistentService persistentService = getPersistentService();
       ScriptForm scriptForm = new NewMedicineScriptForm(persistentService, medicineView, prescriptionId);
       sendResponse(req, resp, scriptForm);
     } catch (Exception e) {
