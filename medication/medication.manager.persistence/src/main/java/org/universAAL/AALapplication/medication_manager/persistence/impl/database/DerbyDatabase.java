@@ -31,7 +31,7 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
 public final class DerbyDatabase implements Database {
 
   private final Connection connection;
-  private final DerbySqlUtility derbySqlUtility;
+  private final SqlUtility sqlUtility;
 
   public static final String MEDICATION_MANAGER = "Medication_Manager";
 
@@ -39,11 +39,11 @@ public final class DerbyDatabase implements Database {
     validateParameter(connection, "connection");
 
     this.connection = connection;
-    this.derbySqlUtility = new DerbySqlUtility(connection);
+    this.sqlUtility = new DerbySqlUtility(connection);
   }
 
   public SqlUtility getSqlUtility() {
-    return derbySqlUtility;
+    return sqlUtility;
   }
 
   public void initDatabase() throws Exception {
@@ -55,12 +55,7 @@ public final class DerbyDatabase implements Database {
   }
 
   public int getNextIdFromIdGenerator() {
-    try {
-      int sequenceValue = getNextSequenceValue();
-      return sequenceValue;
-    } catch (SQLException e) {
-      throw new MedicationManagerPersistenceException("unable to get next id from sequence generator", e);
-    }
+    return sqlUtility.generateId();
 
   }
 
@@ -84,7 +79,7 @@ public final class DerbyDatabase implements Database {
 
       ResultSet rs = statement.executeQuery(sqlQuery);
 
-      Set<String> columnsNames = derbySqlUtility.getDBColumns(tableName);
+      Set<String> columnsNames = sqlUtility.getDBColumns(tableName);
       ResultSetMetaData metaData = rs.getMetaData();
       Map<String, Column> columns = new LinkedHashMap<String, Column>();
       int count = 0;
@@ -111,7 +106,7 @@ public final class DerbyDatabase implements Database {
     try {
       ResultSet rs = ps.executeQuery();
 
-      Set<String> columnsNames = derbySqlUtility.getDBColumns(tableName);
+      Set<String> columnsNames = sqlUtility.getDBColumns(tableName);
       ResultSetMetaData metaData = rs.getMetaData();
       Map<String, Column> columns = new LinkedHashMap<String, Column>();
       int count = 0;
@@ -163,7 +158,7 @@ public final class DerbyDatabase implements Database {
     try {
       ResultSet rs = statement.executeQuery();
 
-      Set<String> columnsNames = derbySqlUtility.getDBColumns(tableName);
+      Set<String> columnsNames = sqlUtility.getDBColumns(tableName);
       ResultSetMetaData metaData = rs.getMetaData();
       while (rs.next()) {
 
@@ -210,7 +205,12 @@ public final class DerbyDatabase implements Database {
         return new Column(name, string);
       case CLOB:
         Clob clob = rs.getClob(name);
-        String text = clob.getSubString(1, (int) clob.length());
+        String text;
+        if (clob != null && clob.length() > 1) {
+          text = clob.getSubString(1, (int) clob.length());
+        } else {
+          text = null;
+        }
         return new Column(name, text);
       default:
         throw new MedicationManagerPersistenceException("Unsupported sql type : " + sqlType);
@@ -246,23 +246,6 @@ public final class DerbyDatabase implements Database {
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
     }
-  }
-
-  public int getNextSequenceValue() throws SQLException {
-    PreparedStatement statement = null;
-    try {
-      statement = connection.prepareStatement(
-          "VALUES NEXT VALUE FOR " + MEDICATION_MANAGER + ".ID_GEN");
-      ResultSet rs = statement.executeQuery();
-      if (rs.next()) {
-        int id = rs.getInt(1);
-        return id;
-      }
-    } finally {
-      closeStatement(statement);
-    }
-
-    throw new MedicationManagerPersistenceException("Unexpected missing sequence value");
   }
 
   private void createSequence() {

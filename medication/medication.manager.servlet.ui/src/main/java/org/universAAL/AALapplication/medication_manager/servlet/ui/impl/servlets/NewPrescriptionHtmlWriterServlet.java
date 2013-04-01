@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
@@ -68,11 +67,13 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
           return;
         }
 
-        NewPrescriptionView newPrescriptionView = getNewPrescriptionView(doctor, patient, session);
+        PersistentService persistentService = getPersistentService();
+
+        NewPrescriptionView newPrescriptionView = getNewPrescriptionView(doctor, patient, session, persistentService);
 
         debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
 
-        handleResponse(req, resp, newPrescriptionView);
+        handleResponse(req, resp, newPrescriptionView, persistentService);
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
         sendErrorResponse(req, resp, e);
@@ -80,7 +81,8 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
     }
   }
 
-  private NewPrescriptionView getNewPrescriptionView(Person doctor, Person patient, Session session) {
+  private NewPrescriptionView getNewPrescriptionView(Person doctor, Person patient,
+                                                     Session session, PersistentService persistentService) {
 
     NewPrescriptionView newPrescriptionView = (NewPrescriptionView) session.getAttribute(PRESCRIPTION_VIEW);
     if (newPrescriptionView != null) {
@@ -91,7 +93,7 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
     }
 
     if (newPrescriptionView == null) {
-      newPrescriptionView = new NewPrescriptionView(generateId(), doctor, patient);
+      newPrescriptionView = new NewPrescriptionView(persistentService.generateId(), doctor, patient);
       session.setAttribute(PRESCRIPTION_VIEW, newPrescriptionView);
     }
 
@@ -146,9 +148,10 @@ public final class NewPrescriptionHtmlWriterServlet extends BaseHtmlWriterServle
   }
 
 
-  private void handleResponse(HttpServletRequest req, HttpServletResponse resp, NewPrescriptionView newPrescriptionView) throws IOException {
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
+                              NewPrescriptionView newPrescriptionView,
+                              PersistentService persistentService) throws IOException {
     try {
-      PersistentService persistentService = getPersistentService();
       ScriptForm scriptForm = new NewPrescriptionScriptForm(persistentService, newPrescriptionView);
       sendResponse(req, resp, scriptForm);
     } catch (Exception e) {

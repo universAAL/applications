@@ -36,4 +36,6 @@ public interface PersistentService {
 
   DoctorPatientDao getDoctorPatientDao();
 
+  int generateId();
+
 }

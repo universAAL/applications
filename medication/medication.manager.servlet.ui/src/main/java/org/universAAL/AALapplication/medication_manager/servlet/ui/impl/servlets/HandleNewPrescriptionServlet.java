@@ -1,5 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
@@ -18,7 +20,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation.*;
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
@@ -91,12 +93,15 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
           return;
         }
 
+        PersistentService persistentService = getPersistentService();
+
         checkForNotesAndDateParameters(req, newPrescriptionView);
-        PrescriptionDTO prescriptionDTO = saveNewPrescription(newPrescriptionView, req, resp);
+        PrescriptionDTO prescriptionDTO = saveNewPrescription(newPrescriptionView, req, resp, persistentService);
 
         if (prescriptionDTO != null) {
           session.removeAttribute(PRESCRIPTION_VIEW);
-          addDescriptionDTO(patient, prescriptionDTO);
+          PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
+          prescriptionDao.save(prescriptionDTO);
         }
 
         debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
@@ -121,8 +126,8 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
     }
   }
 
-  private PrescriptionDTO saveNewPrescription(NewPrescriptionView prescriptionView,
-                                              HttpServletRequest req, HttpServletResponse resp) {
+  private PrescriptionDTO saveNewPrescription(NewPrescriptionView prescriptionView, HttpServletRequest req,
+                                              HttpServletResponse resp, PersistentService persistentService) {
 
     Log.info("Creating PrescriptionDTO object from NewPrescriptionView object: %s", getClass(), prescriptionView);
 
@@ -130,18 +135,20 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
     PrescriptionDTO prescriptionDTO = new PrescriptionDTO(
         prescriptionView.getNotes(),
         startDate,
-        getMedicineDTOs(prescriptionView.getMedicineViewSet(), startDate),
+        getMedicineDTOs(prescriptionView.getMedicineViewSet(), startDate, persistentService),
         prescriptionView.getPhysician(),
         prescriptionView.getPatient()
     );
 
-    int prescriptionId = generateId();
+    int prescriptionId = persistentService.generateId();
     prescriptionDTO.setPrescriptionId(prescriptionId);
 
     return prescriptionDTO;
   }
 
-  private Set<MedicineDTO> getMedicineDTOs(Set<MedicineView> medicineViewSet, Date startDate) {
+  private Set<MedicineDTO> getMedicineDTOs(Set<MedicineView> medicineViewSet,
+                                           Date startDate, PersistentService persistentService) {
+
     Set<MedicineDTO> medicineDTOSet = new HashSet<MedicineDTO>();
 
     if (medicineViewSet.isEmpty()) {
@@ -149,14 +156,15 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
     }
 
     for (MedicineView medicineView : medicineViewSet) {
-      MedicineDTO medicineDTO = createMedicineDTO(medicineView, startDate);
+      MedicineDTO medicineDTO = createMedicineDTO(medicineView, startDate, persistentService);
       medicineDTOSet.add(medicineDTO);
     }
 
     return medicineDTOSet;
   }
 
-  private MedicineDTO createMedicineDTO(MedicineView medicineView, Date startDate) {
+  private MedicineDTO createMedicineDTO(MedicineView medicineView, Date startDate,
+                                        PersistentService persistentService) {
 
     MedicineDTO medicineDTO = new MedicineDTO(
         medicineView.getName(),
@@ -168,7 +176,7 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
         medicineView.getMealRelationDTO(),
         medicineView.getIntakeDTOSet()
     );
-    medicineDTO.setMedicineIdId(generateId());
+    medicineDTO.setMedicineIdId(persistentService.generateId());
 
     return medicineDTO;
   }
