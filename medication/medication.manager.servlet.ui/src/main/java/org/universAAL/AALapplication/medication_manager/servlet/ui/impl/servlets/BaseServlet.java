@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.DebugWriter;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.DebugWriterDummy;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 
@@ -26,7 +27,7 @@ public abstract class BaseServlet extends HttpServlet {
   public static final int N = 1000000;
   public static final String COOKIE_NAME = "medication_manager_session_id";
   public static final Random RANDOM = new Random();
-  private static final DebugWriter DEBUG_WRITER = new DebugWriter();
+  private static final DebugWriter DEBUG_WRITER = new DebugWriterDummy();
   private DisplayErrorPageWriterServlet displayErrorPageWriterServlet;
 
   private static String previousRequestedId;
