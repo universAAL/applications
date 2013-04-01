@@ -3,7 +3,9 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 /**
  * @author George Fournadjiev
  */
-public interface DebugWriter {
+public final class DebugWriterDummy implements DebugWriter {
 
-  void println(String line);
+  public void println(String line) {
+    //nothing to do here
+  }
 }
