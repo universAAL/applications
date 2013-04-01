@@ -6,13 +6,17 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Column;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MealRelationDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MealRelation;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Prescription;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.PrescriptionStatus;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.TreatmentStatus;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
 
@@ -24,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,6 +44,8 @@ public final class PrescriptionDao extends AbstractDao {
 
   private PersonDao personDao;
   private MedicineDao medicineDao;
+  private TreatmentDao treatmentDao;
+  private IntakeDao intakeDao;
 
   private static final String PATIENT_FK_ID = "PATIENT_FK_ID";
   private static final String TIME_OF_CREATION = "TIME_OF_CREATION";
@@ -65,6 +73,14 @@ public final class PrescriptionDao extends AbstractDao {
 
   public void setMedicineDao(MedicineDao medicineDao) {
     this.medicineDao = medicineDao;
+  }
+
+  public void setTreatmentDao(TreatmentDao treatmentDao) {
+    this.treatmentDao = treatmentDao;
+  }
+
+  public void setIntakeDao(IntakeDao intakeDao) {
+    this.intakeDao = intakeDao;
   }
 
   public List<Prescription> getByPerson(int personId) {
@@ -412,19 +428,207 @@ public final class PrescriptionDao extends AbstractDao {
     }
   }
 
-  public List<Prescription> getPrescriptionDTO(Person patient, Person doctor) {
+  public List<PrescriptionDTO> getPrescriptionDTO(Person patient, Person doctor) {
 
     try {
-      return getByPersonAndDoctor(patient.getId(), doctor.getId());
+      List<Prescription> prescriptions = getByPersonAndDoctor(patient.getId(), doctor.getId());
+      return convertToDTO(prescriptions);
     } catch (MedicationManagerPersistenceException e) {
       if (MedicationManagerPersistenceException.MISSING_RECORD == e.getCode()) {
-        return new ArrayList<Prescription>();
+        return new ArrayList<PrescriptionDTO>();
       }
 
       throw e;
     }
 
 
+  }
+
+  private List<PrescriptionDTO> convertToDTO(List<Prescription> prescriptions) {
+    List<PrescriptionDTO> prescriptionDTOs = new ArrayList<PrescriptionDTO>();
+
+    for (Prescription prescription : prescriptions) {
+      PrescriptionDTO dto = createPrescriptionDTO(prescription);
+      prescriptionDTOs.add(dto);
+    }
+
+    return prescriptionDTOs;
+  }
+
+  private PrescriptionDTO createPrescriptionDTO(Prescription prescription) {
+
+
+    checkForSetDao(treatmentDao, "treatmentDao");
+    checkForSetDao(intakeDao, "intakeDao");
+
+    List<Treatment> treatments = treatmentDao.getByPrescriptionAndActive(prescription.getId());
+    Date startDate = treatments.get(0).getStartDate();
+
+    List<Intake> intakes = intakeDao.getByTreatments(treatments);
+
+    Set<MedicineDTO> medicineDTOSet = createMedicineDTOSet(treatments, intakes);
+
+    PrescriptionDTO prescriptionDTO = new PrescriptionDTO(
+        prescription.getDescription(),
+        startDate,
+        medicineDTOSet,
+        prescription.getPhysician(),
+        prescription.getPatient()
+    );
+
+    prescriptionDTO.setPrescriptionId(prescription.getId());
+
+    return prescriptionDTO;
+  }
+
+  private Set<MedicineDTO> createMedicineDTOSet(List<Treatment> treatments, List<Intake> intakes) {
+
+    Set<MedicineDTO> medicineDTOSet = new HashSet<MedicineDTO>();
+    for (Treatment tr : treatments) {
+      MedicineDTO medicineDTO = createMedicineDTO(tr, intakes);
+      medicineDTO.setMedicineIdId(tr.getMedicine().getId());
+      medicineDTOSet.add(medicineDTO);
+    }
+
+    return medicineDTOSet;
+  }
+
+  private MedicineDTO createMedicineDTO(Treatment tr, List<Intake> intakes) {
+
+    Medicine medicine = tr.getMedicine();
+    Date startDate = tr.getStartDate();
+
+    return new MedicineDTO(
+        medicine.getMedicineName(),
+        startDate,
+        getDays(startDate, tr.getEndDate()),
+        medicine.getMedicineInfo(),
+        medicine.getMedicineSideEffects(),
+        medicine.getIncompliances(),
+        getMealRelation(medicine),
+        getIntakeDTOSet(intakes, tr)
+    );
+  }
+
+  private Set<IntakeDTO> getIntakeDTOSet(List<Intake> intakes, Treatment tr) {
+
+    List<Intake> intakesPerTreatment = getIntakesPerTreatment(intakes, tr);
+
+    if (intakesPerTreatment.isEmpty()) {
+      throw new MedicationManagerPersistenceException("Missing intakes for the treatment: " + tr);
+    }
+
+    Set<IntakeDTO> intakeDTOs = new HashSet<IntakeDTO>();
+
+    if (intakesPerTreatment.size() == 1) {
+      IntakeDTO dto = createIntakeDao(intakesPerTreatment.get(0));
+      intakeDTOs.add(dto);
+      return intakeDTOs;
+    }
+
+    Set<Intake> realIntakesPerDaySet = new HashSet<Intake>();
+
+    List<Intake> intakesPerDay = findDayOfMonthWithFullNumberOfIntakes(intakesPerTreatment);
+
+    return convertIntakeToDTO(intakesPerDay);
+
+  }
+
+  private Set<IntakeDTO> convertIntakeToDTO(List<Intake> intakesPerDay) {
+    Set<IntakeDTO> intakeDTOs = new HashSet<IntakeDTO>();
+
+    for (Intake intake : intakesPerDay) {
+      IntakeDTO dto = createIntakeDao(intake);
+      intakeDTOs.add(dto);
+    }
+
+    return intakeDTOs;
+  }
+
+  private List<Intake> findDayOfMonthWithFullNumberOfIntakes(List<Intake> intakesPerTreatment) {
+
+    Map<Integer, List<Intake>> daysMap = new HashMap<Integer, List<Intake>>();
+
+    for (Intake in : intakesPerTreatment) {
+      int d = getDayFromIntakeTimePlan(in.getTimePlan());
+      List<Intake> intakesPerDay = daysMap.get(d);
+      if (intakesPerDay == null) {
+        intakesPerDay = new ArrayList<Intake>();
+      }
+      intakesPerDay.add(in);
+      daysMap.put(d, intakesPerDay);
+    }
+
+    return findMaxIntakesPerDay(daysMap);
+
+  }
+
+  private List<Intake> findMaxIntakesPerDay(Map<Integer, List<Intake>> daysMap) {
+
+    List<Intake> intakes = new ArrayList<Intake>();
+
+    for (int day : daysMap.keySet()) {
+      List<Intake> intakesPerDay = daysMap.get(day);
+      if (intakesPerDay.size() > intakes.size()) {
+        intakes = intakesPerDay;
+      }
+    }
+
+    return intakes;
+
+  }
+
+  private int getDayFromIntakeTimePlan(Date timePlan) {
+    Calendar plan = new GregorianCalendar();
+    plan.setTime(timePlan);
+
+    return plan.get(Calendar.DAY_OF_MONTH);
+  }
+
+  private IntakeDTO createIntakeDao(Intake intake) {
+
+    Date timePlan = intake.getTimePlan();
+
+    Calendar plan = new GregorianCalendar();
+    plan.setTime(timePlan);
+
+    int hour = plan.get(Calendar.HOUR_OF_DAY);
+    int minutes = plan.get(Calendar.MINUTE);
+
+    TimeDTO timeDTO = new TimeDTO(hour, minutes);
+
+    UnitClass unitClass = intake.getUnitClass();
+    IntakeDTO.Unit unit = IntakeDTO.Unit.getEnumValueFor(unitClass.getType());
+    return new IntakeDTO(
+        timeDTO,
+        unit,
+        intake.getQuantity()
+    );
+  }
+
+  private List<Intake> getIntakesPerTreatment(List<Intake> intakes, Treatment tr) {
+    List<Intake> intakeList = new ArrayList<Intake>();
+
+    for (Intake in : intakes) {
+      if (in.getTreatment().getId() == tr.getId()) {
+        intakeList.add(in);
+      }
+    }
+
+    return intakeList;
+  }
+
+  private MealRelationDTO getMealRelation(Medicine medicine) {
+    MealRelation mealRelation = medicine.getMealRelation();
+    return MealRelationDTO.getEnumValueFor(mealRelation.getValue());
+  }
+
+  private int getDays(Date startDate, Date endDate) {
+    if (startDate.after(endDate)) {
+      throw new MedicationManagerPersistenceException("The startDate: " + startDate +
+          " is after the endDate: " + endDate);
+    }
+    return (int) ((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
   }
 
   private List<Prescription> getByPersonAndDoctor(int personId, int doctorId) {

@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.HtmlParser;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
@@ -35,7 +36,7 @@ public abstract class BaseHtmlWriterServlet extends BaseServlet {
       sendSuccessfulResponse(resp, scriptText);
 
     } catch (Exception e) {
-
+      Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
       sendErrorResponse(req,  resp, e);
 
     }

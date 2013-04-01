@@ -14,7 +14,15 @@ public final class TimeDTO {
   private final int hour;
   private final int minutes;
 
-  private TimeDTO(int hour, int minutes) {
+  public TimeDTO(int hour, int minutes) {
+    if (hour < 0 || hour > 23) {
+      throw new MedicationManagerPersistenceException("The hour must be between 0 and 23");
+    }
+
+    if (minutes < 0 || minutes > 59) {
+      throw new MedicationManagerPersistenceException("The minutes must between 0 and 59");
+    }
+
     this.hour = hour;
     this.minutes = minutes;
   }

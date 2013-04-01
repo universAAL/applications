@@ -24,6 +24,7 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.U
  */
 public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
 
+  public static final String MULTIPLE_PATIENTS = "MULTIPLE_PATIENTS";
   private final Object lock = new Object();
   private DisplayLoginHtmlWriterServlet displayServlet;
   private ListPrescriptionsHtmlWriterServlet listPrescriptionsHtmlWriterServlet;
@@ -61,7 +62,19 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
           return;
         }
 
-        handleResponse(req, resp, doctor);
+        String cancel = req.getParameter(CANCEL);
+        if (cancel != null && TRUE.equalsIgnoreCase(cancel)) {
+          debugSessions(session.getId(), "cancel (removing PRESCRIPTION_VIEW   " +
+              "the servlet doGet/doPost method", getClass());
+          session.removeAttribute(PRESCRIPTION_VIEW);
+          boolean mupltiplePatients = (Boolean) session.getAttribute(MULTIPLE_PATIENTS);
+          if (!mupltiplePatients) {
+            displayServlet.doGet(req, resp);
+            return;
+          }
+        }
+
+        handleResponse(req, resp, doctor, session);
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
         sendErrorResponse(req, resp, e);
@@ -75,15 +88,21 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
   }
 
 
-  private void handleResponse(HttpServletRequest req, HttpServletResponse resp, Person doctor) throws IOException {
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
+                              Person doctor, Session session) throws IOException {
     try {
       PersistentService persistentService = getPersistentService();
       DoctorPatientDao doctorPatientDao = persistentService.getDoctorPatientDao();
       List<Person> patients = doctorPatientDao.findDoctorPatients(doctor);
       if (patients != null && patients.size() > 1) {
         ScriptForm scriptForm = new UserSelectScriptForm(patients);
+        session.setAttribute(MULTIPLE_PATIENTS, true);
         sendResponse(req, resp, scriptForm);
       } else if (patients != null && patients.size() == 1) {
+        session.setAttribute(MULTIPLE_PATIENTS, false);
+        Person patient = patients.get(0);
+        session.setAttribute(USER, String.valueOf(patient.getId()));
+        session.setAttribute(PATIENT, patient);
         listPrescriptionsHtmlWriterServlet.doGet(req, resp);
       } else {
         throw new MedicationManagerServletUIException("Missing patients for the doctor : " + doctor);

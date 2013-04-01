@@ -65,6 +65,10 @@ public final class Prescription extends Entity {
     return prescriptionStatus;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
   @Override
   public String toString() {
     return "Prescription{" +

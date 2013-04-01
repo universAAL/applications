@@ -13,6 +13,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,8 @@ public final class TreatmentDao extends AbstractDao {
   private static final String TABLE_NAME = "TREATMENT";
   private static final String PRESCRIPTION_FK_ID = "PRESCRIPTION_FK_ID";
   private static final String MEDICINE_FK_ID = "MEDICINE_FK_ID";
+  private static final String START_DATE = "START_DATE";
+  private static final String END_DATE = "END_DATE";
   private static final String STATUS = "STATUS";
 
   public TreatmentDao(Database database) {
@@ -86,11 +89,17 @@ public final class TreatmentDao extends AbstractDao {
 
     Medicine medicine = medicineDao.getById(medicineId);
 
+    col = columns.get(START_DATE);
+    Date startDate = (Date) col.getValue();
+
+    col = columns.get(END_DATE);
+    Date endDate = (Date) col.getValue();
+
     col = columns.get(STATUS);
     String statusValue = (String) col.getValue();
     TreatmentStatus treatmentStatus = TreatmentStatus.getEnumValueFor(statusValue);
 
-    Treatment treatment = new Treatment(treatmentId, prescription, medicine, treatmentStatus);
+    Treatment treatment = new Treatment(treatmentId, prescription, medicine, startDate, endDate, treatmentStatus);
 
     Log.info("Treatment found: %s", getClass(), treatment);
 
