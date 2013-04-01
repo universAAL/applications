@@ -91,6 +91,7 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
           return;
         }
 
+        checkForNotesAndDateParameters(req, newPrescriptionView);
         PrescriptionDTO prescriptionDTO = saveNewPrescription(newPrescriptionView, req, resp);
 
         if (prescriptionDTO != null) {
@@ -105,6 +106,18 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
         sendErrorResponse(req, resp, e);
       }
 
+    }
+  }
+
+  private void checkForNotesAndDateParameters(HttpServletRequest req, NewPrescriptionView newPrescriptionView) {
+    String date = req.getParameter(DATE);
+    if (date != null && !date.trim().isEmpty()) {
+      newPrescriptionView.setStartDate(date);
+    }
+
+    String notes = req.getParameter(NOTES);
+    if (notes != null && !notes.trim().isEmpty()) {
+      newPrescriptionView.setNotes(notes);
     }
   }
 
