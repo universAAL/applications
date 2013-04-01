@@ -22,19 +22,50 @@ package org.universAAL.AALapplication.medication_manager.persistence.impl;
  */
 public final class MedicationManagerPersistenceException extends RuntimeException {
 
+  private final int code;
+
+
+  public static final int MISSING_RECORD = 1;
 
   public MedicationManagerPersistenceException() {
+    this(0);
   }
 
   public MedicationManagerPersistenceException(String message) {
-    super(message);
+    this(message, 0);
   }
 
   public MedicationManagerPersistenceException(String message, Throwable cause) {
-    super(message, cause);
+    this(message, cause, 0);
   }
 
   public MedicationManagerPersistenceException(Throwable cause) {
+    this(cause, 0);
+  }
+
+  public MedicationManagerPersistenceException(int code) {
+    this.code = code;
+  }
+
+  public MedicationManagerPersistenceException(String message, int code) {
+    super(message);
+
+    this.code = code;
+  }
+
+  public MedicationManagerPersistenceException(String message, Throwable cause, int code) {
+    super(message, cause);
+
+    this.code = code;
+  }
+
+  public MedicationManagerPersistenceException(Throwable cause, int code) {
     super(cause);
+
+    this.code = code;
+  }
+
+  public int getCode() {
+    return code;
   }
 }

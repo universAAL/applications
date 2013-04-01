@@ -1,25 +1,23 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms;
 
-import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
+
+import java.util.List;
 
 /**
  * @author George Fournadjiev
  */
 public final class UserSelectScriptForm extends ScriptForm {
 
-  private final PersistentService persistentService;
-  private final Person doctor;
+  private final List<Person> patients;
 
   private static final String USER_SELECT_FUNCTION_CALL_TEXT = "users.push";
 
-  public UserSelectScriptForm(PersistentService persistentService, Person doctor) {
+  public UserSelectScriptForm(List<Person> patients) {
     super(USER_SELECT_FUNCTION_CALL_TEXT);
 
-    this.persistentService = persistentService;
-    this.doctor = doctor;
+    this.patients = patients;
   }
 
   @Override
@@ -30,8 +28,6 @@ public final class UserSelectScriptForm extends ScriptForm {
   @Override
   public void process() {
 
-    Person[] patients = findPatients();
-
     for (Person p : patients) {
       String personId = String.valueOf(p.getId());
       Pair<String> id = new Pair<String>(ID, personId);
@@ -41,9 +37,4 @@ public final class UserSelectScriptForm extends ScriptForm {
 
   }
 
-  private Person[] findPatients() {
-    //TODO real database related code here
-
-    return DatabaseSimulation.PATIENTS;
-  }
 }

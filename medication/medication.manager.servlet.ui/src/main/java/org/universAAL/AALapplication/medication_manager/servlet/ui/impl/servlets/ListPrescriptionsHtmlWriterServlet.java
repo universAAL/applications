@@ -77,7 +77,7 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
         session.removeAttribute(PRESCRIPTION_VIEW);
 
         debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
-        handleResponse(req, resp, patient);
+        handleResponse(req, resp, patient, doctor);
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
         sendErrorResponse(req, resp, e);
@@ -109,10 +109,11 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
 
   }
 
-  private void handleResponse(HttpServletRequest req, HttpServletResponse resp, Person patient) throws IOException {
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
+                              Person patient, Person doctor) throws IOException {
     try {
       PersistentService persistentService = getPersistentService();
-      ScriptForm scriptForm = new ListPrescriptionsScriptForm(persistentService, patient);
+      ScriptForm scriptForm = new ListPrescriptionsScriptForm(persistentService, patient, doctor);
       sendResponse(req, resp, scriptForm);
     } catch (Exception e) {
       sendErrorResponse(req, resp, e);

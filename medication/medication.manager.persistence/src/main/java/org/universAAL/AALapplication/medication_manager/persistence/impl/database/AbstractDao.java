@@ -43,7 +43,7 @@ public abstract class AbstractDao {
 
     if (columnMap.isEmpty()) {
       throw new MedicationManagerPersistenceException("There is no such record in the table : " +
-          tableName + " with id=" + id);
+          tableName + " with id=" + id, MedicationManagerPersistenceException.MISSING_RECORD);
     }
 
     return columnMap;
@@ -52,14 +52,13 @@ public abstract class AbstractDao {
 
   protected Map<String, Column> executeQueryExpectedSingleRecord(String tableName, String sql) {
 
-    Map<String, Column> record = database.executeQueryExpectedSingleRecord(tableName, sql);
+    return database.executeQueryExpectedSingleRecord(tableName, sql);
 
-    if (record == null || record.isEmpty()) {
-      throw new MedicationManagerPersistenceException("Missing the record in the table:" +
-          tableName + " for the following sql:\n" + sql);
-    }
+  }
 
-    return record;
+  protected Map<String, Column> executeQueryExpectedSingleRecord(String tableName, PreparedStatement ps) {
+
+    return database.executeQueryExpectedSingleRecord(tableName, ps);
 
   }
 
@@ -70,7 +69,7 @@ public abstract class AbstractDao {
 
     if (results == null || results.isEmpty()) {
       throw new MedicationManagerPersistenceException("Missing the record in the table:" +
-          tableName + " for the following sql:\n" + sql);
+          tableName + " for the following sql:\n" + sql, MedicationManagerPersistenceException.MISSING_RECORD);
     }
 
     return results;

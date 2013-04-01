@@ -106,6 +106,34 @@ public final class DerbyDatabase implements Database {
 
   }
 
+  private Map<String, Column> getStringColumnMapSingleRecord(PreparedStatement ps, String tableName, String message) {
+
+    try {
+      ResultSet rs = ps.executeQuery();
+
+      Set<String> columnsNames = derbySqlUtility.getDBColumns(tableName);
+      ResultSetMetaData metaData = rs.getMetaData();
+      Map<String, Column> columns = new LinkedHashMap<String, Column>();
+      int count = 0;
+      while (rs.next()) {
+        count++;
+        if (count > 1) {
+          throw new MedicationManagerPersistenceException(message);
+        }
+        columns = fillColumnsData(columnsNames, rs, metaData);
+      }
+
+      return columns;
+
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+
+  }
+
+
   public Map<String, Column> findDispenserByPerson(String tableName, String personTableName, int personId) {
     String message = "There are more than one record (dispensers)" +
         " with the following PATIENT_FK_ID : " + personId;
@@ -120,6 +148,12 @@ public final class DerbyDatabase implements Database {
     String message = "There are more than one record for the following query : " + sql;
 
     return getStringColumnMapSingleRecord(sql, tableName, message);
+  }
+
+  public Map<String, Column> executeQueryExpectedSingleRecord(String tableName, PreparedStatement ps) {
+    String message = "There are more than one record!";
+
+    return getStringColumnMapSingleRecord(ps, tableName, message);
   }
 
   public List<Map<String, Column>> executeQueryExpectedMultipleRecord(String tableName, PreparedStatement statement) {

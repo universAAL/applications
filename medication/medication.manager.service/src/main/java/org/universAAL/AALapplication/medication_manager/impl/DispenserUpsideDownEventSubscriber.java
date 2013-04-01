@@ -74,6 +74,10 @@ public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber 
     DispenserDao dispenserDao = persistentService.getDispenserDao();
     Dispenser dispenser = dispenserDao.getByDispenserUri(deviceUri);
 
+    if (dispenser == null) {
+      throw new MedicationManagerException("Missing dispenser with deviceUri: " + deviceUri);
+    }
+
     Person person = dispenser.getPatient();
 
     User user = new User(person.getPersonUri());

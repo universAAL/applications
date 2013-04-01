@@ -1,6 +1,5 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
-import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.DisplayErrorScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
@@ -55,8 +53,7 @@ public final class DisplayErrorPageWriterServlet extends BaseHtmlWriterServlet {
 
   private void handleResponse(HttpServletResponse resp, String message) throws IOException {
     try {
-      PersistentService persistentService = getPersistentService();
-      ScriptForm scriptForm = new DisplayErrorScriptForm(persistentService, message);
+      ScriptForm scriptForm = new DisplayErrorScriptForm(message);
       String scriptText = scriptForm.createScriptText();
       String htmlOutput = htmlParser.addScriptElement(scriptText);
       PrintWriter writer = resp.getWriter();

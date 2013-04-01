@@ -27,4 +27,8 @@ public enum Role {
 
     throw new MedicationManagerPersistenceException("Unknown Role enum for value : " + roleText);
   }
+
+  public String getValue() {
+    return role;
+  }
 }

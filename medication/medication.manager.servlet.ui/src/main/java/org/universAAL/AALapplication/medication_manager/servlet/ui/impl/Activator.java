@@ -96,6 +96,7 @@ public final class Activator implements BundleActivator {
 
     selectUserServlet.setDisplayServlet(displayServlet);
     selectUserServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    selectUserServlet.setListPrescriptionsHtmlWriterServlet(listPrescriptionsServlet);
 
     listPrescriptionsServlet.setDisplayServlet(displayServlet);
     listPrescriptionsServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
