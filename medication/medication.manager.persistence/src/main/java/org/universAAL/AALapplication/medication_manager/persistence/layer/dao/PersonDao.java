@@ -9,13 +9,21 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Map;
+
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
+
 
 /**
  * @author George Fournadjiev
  */
 public final class PersonDao extends AbstractDao {
 
+  public static final String NAME = "NAME";
+  public static final String PERSON_URI = "PERSON_URI";
+  public static final String ROLE = "ROLE";
   private DispenserDao dispenserDao;
 
   static final String TABLE_NAME = "PERSON";
@@ -42,13 +50,13 @@ public final class PersonDao extends AbstractDao {
     Column col = columns.get(ID);
     int personId = (Integer) col.getValue();
 
-    col = columns.get("NAME");
+    col = columns.get(NAME);
     String name = (String) col.getValue();
 
-    col = columns.get("PERSON_URI");
+    col = columns.get(PERSON_URI);
     String personUri = (String) col.getValue();
 
-    col = columns.get("ROLE");
+    col = columns.get(ROLE);
     String roleString = (String) col.getValue();
     Role role = Role.getEnumValueFor(roleString);
 
@@ -66,6 +74,11 @@ public final class PersonDao extends AbstractDao {
 
     Map<String, Column> personRecordMap = executeQueryExpectedSingleRecord(TABLE_NAME, sql);
 
+    if (personRecordMap == null || personRecordMap.isEmpty()) {
+      throw new MedicationManagerPersistenceException("Missing the record in the table:" +
+          TABLE_NAME + " for the following sql:\n" + sql);
+    }
+
     return getPerson(personRecordMap);
   }
 
@@ -82,5 +95,32 @@ public final class PersonDao extends AbstractDao {
     }
 
     return dispenser.getPatient();
+  }
+
+  public Person findDoctor(String username, String password) {
+    Log.info("Looking for the doctor with username=%s", getClass(), username);
+
+    String sql = "select * from MEDICATION_MANAGER.PERSON where UPPER(USERNAME) = ? AND " +
+        "PASSWORD = ? AND UPPER(ROLE) = ?" ;
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setString(1, username.trim().toUpperCase());
+      ps.setString(2, password);
+      ps.setString(3, Role.PHYSICIAN.getValue());
+      Map<String, Column> personRecordMap = executeQueryExpectedSingleRecord(TABLE_NAME, ps);
+      if (personRecordMap == null || personRecordMap.isEmpty()) {
+        return null;
+      }
+      return getPerson(personRecordMap);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally{
+      closeStatement(ps);
+    }
+
+
   }
 }

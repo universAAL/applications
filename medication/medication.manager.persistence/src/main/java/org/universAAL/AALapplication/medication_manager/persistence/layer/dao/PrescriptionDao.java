@@ -88,19 +88,20 @@ public final class PrescriptionDao extends AbstractDao {
     statement.setInt(1, personId);
     statement.setString(2, ACTIVE.getType().toUpperCase());
     List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
+
     return createPrescriptions(results);
   }
 
   private List<Prescription> createPrescriptions(List<Map<String, Column>> results) {
 
-    List<Prescription> treatments = new ArrayList<Prescription>();
+    List<Prescription> prescriptions = new ArrayList<Prescription>();
 
     for (Map<String, Column> columns : results) {
       Prescription prescription = getPrescription(columns);
-      treatments.add(prescription);
+      prescriptions.add(prescription);
     }
 
-    return treatments;
+    return prescriptions;
   }
 
   private Prescription getPrescription(Map<String, Column> columns) {
@@ -411,4 +412,44 @@ public final class PrescriptionDao extends AbstractDao {
     }
   }
 
+  public List<Prescription> getPrescriptionDTO(Person patient, Person doctor) {
+
+    try {
+      return getByPersonAndDoctor(patient.getId(), doctor.getId());
+    } catch (MedicationManagerPersistenceException e) {
+      if (MedicationManagerPersistenceException.MISSING_RECORD == e.getCode()) {
+        return new ArrayList<Prescription>();
+      }
+
+      throw e;
+    }
+
+
+  }
+
+  private List<Prescription> getByPersonAndDoctor(int personId, int doctorId) {
+    String sql = "select * from MEDICATION_MANAGER.PRESCRIPTION where " +
+        "PATIENT_FK_ID = ? and PHYSICIAN_FK_ID = ? and UPPER(STATUS) = ?";
+
+    System.out.println("sql = " + sql);
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql);
+      return getPrescriptions(personId, doctorId, sql, statement);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+  }
+
+  private List<Prescription> getPrescriptions(int personId, int doctorId, String sql,
+                                              PreparedStatement statement) throws SQLException {
+    statement.setInt(1, personId);
+    statement.setInt(2, doctorId);
+    statement.setString(3, ACTIVE.getType().toUpperCase());
+    List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
+    return createPrescriptions(results);
+  }
 }

@@ -1,16 +1,18 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Prescription;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.JavaScriptObjectCreator;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +24,7 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
 
   private final PersistentService persistentService;
   private final Person patient;
+  private final Person doctor;
 
   private static final String LIST_PRESCRIPTIONS_FUNCTION_CALL_TEXT = "userObj.prescriptions.push";
   private static final String DATE = "date";
@@ -30,11 +33,12 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
   private static final String HOW = "how";
   private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
-  public ListPrescriptionsScriptForm(PersistentService persistentService, Person patient) {
+  public ListPrescriptionsScriptForm(PersistentService persistentService, Person patient, Person doctor) {
     super(LIST_PRESCRIPTIONS_FUNCTION_CALL_TEXT);
 
     this.persistentService = persistentService;
     this.patient = patient;
+    this.doctor = doctor;
     setSingleJavascriptObjects();
   }
 
@@ -47,7 +51,11 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
   @Override
   public void process() {
 
-    List<PrescriptionDTO> prescriptionDTOs = DatabaseSimulation.getDescriptions(patient);
+    PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
+
+    List<Prescription> prescriptions = prescriptionDao.getPrescriptionDTO(patient, doctor);
+
+    List<PrescriptionDTO> prescriptionDTOs = createPrescriptionDTOs(prescriptions);
 
     for (PrescriptionDTO pr : prescriptionDTOs) {
       String startDate = getStartDateText(pr.getStartDate());
@@ -59,6 +67,10 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
       addRow(date, name, medicine);
     }
 
+  }
+
+  private List<PrescriptionDTO> createPrescriptionDTOs(List<Prescription> prescriptions) {
+    return new ArrayList<PrescriptionDTO>();
   }
 
   private String getMedicinesValue(Set<MedicineDTO> medicineDTOSet, int prescriptionId) {

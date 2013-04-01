@@ -25,6 +25,8 @@ public interface Database {
 
   Map<String,Column> executeQueryExpectedSingleRecord(String tableName, String sql);
 
+  Map<String,Column> executeQueryExpectedSingleRecord(String tableName, PreparedStatement ps);
+
   List<Map<String,Column>> executeQueryExpectedMultipleRecord(String tableName, PreparedStatement statement);
 
   Connection getConnection();

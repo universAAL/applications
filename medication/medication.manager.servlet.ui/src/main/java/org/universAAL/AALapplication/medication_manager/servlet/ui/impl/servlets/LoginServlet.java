@@ -1,7 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.DatabaseSimulation;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
@@ -51,13 +53,8 @@ public final class LoginServlet extends BaseServlet {
         isServletSet(displayServlet, "displayServlet");
 
         Session session = getSession(req, resp, getClass());
-
-        Person doctor = (Person) session.getAttribute(LOGGED_DOCTOR);
-
-        if (doctor == null) {
-          debugSessions(session.getId(), "if (doctor is null) the servlet doGet/doPost method", getClass());
-          doctor = findDoctor(req, session);
-        }
+        debugSessions(session.getId(), "the servlet doGet/doPost method", getClass());
+        Person doctor = findDoctor(req, session);
 
         String cancel = req.getParameter(CANCEL);
 
@@ -85,7 +82,7 @@ public final class LoginServlet extends BaseServlet {
 
   }
 
-  private Person findDoctor(HttpServletRequest req, Session session) throws ServletException, IOException {
+  private Person findDoctor(HttpServletRequest req, Session session) {
 
     String username = req.getParameter(USERNAME);
     String password = req.getParameter(PASSWORD);
@@ -114,13 +111,10 @@ public final class LoginServlet extends BaseServlet {
   }
 
   private Person findPerson(String username, String password) {
-    String doctorUsername = DatabaseSimulation.DOCTOR.getUsername();
-    String doctorPassword = DatabaseSimulation.DOCTOR.getPassword();
-    if (doctorUsername.equalsIgnoreCase(username) && doctorPassword.equalsIgnoreCase(password)) {
-      return DatabaseSimulation.DOCTOR;
-    }
+    PersistentService persistentService = getPersistentService();
+    PersonDao personDao = persistentService.getPersonDao();
 
-    return null;
+    return personDao.findDoctor(username, password);
   }
 
 }
