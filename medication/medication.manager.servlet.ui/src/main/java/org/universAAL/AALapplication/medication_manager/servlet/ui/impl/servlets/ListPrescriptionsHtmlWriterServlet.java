@@ -74,6 +74,7 @@ public final class ListPrescriptionsHtmlWriterServlet extends BaseHtmlWriterServ
         Person patient = getPatient(req, session);
         debugSessions(session.getId(), "Patient found and set the attribute the servlet doGet/doPost method", getClass());
         session.setAttribute(PATIENT, patient);
+        session.removeAttribute(PRESCRIPTION_VIEW);
 
         debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
         handleResponse(req, resp, patient);
