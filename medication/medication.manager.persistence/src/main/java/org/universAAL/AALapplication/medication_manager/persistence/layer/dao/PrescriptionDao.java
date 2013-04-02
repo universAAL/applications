@@ -70,6 +70,8 @@ public final class PrescriptionDao extends AbstractDao {
       for (PrescriptionDTO dto : prescriptionDTOs) {
         SOFT_CACHE.put(dto.getPrescriptionId(), dto);
       }
+
+      isPrescriptionDTOLoaded = true;
     }
   }
 
