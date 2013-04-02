@@ -99,10 +99,10 @@ values (4, '2013-03-25 17:00:00', 1, 2, 'pain', 'active');
 // treatment table
 
 insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
-values (1, 1, 1, 'y', '2012-12-19 00:00:00', '2012-12-19 23:59:00');
+values (1, 1, 1, 'y', '2013-04-02 21:00:00', '2013-04-09 20:00:00');
 
 insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
-values (2, 1, 3, 'y', '2012-12-19 00:00:00', '2012-12-19 23:59:00');
+values (2, 1, 3, 'y', '2013-04-02 21:00:00', '2013-04-09 20:00:00');
 
 insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
 values (3, 1, 5, 'n', '2012-12-19 00:00:00', '2012-12-19 23:59:00');
@@ -119,10 +119,13 @@ values (6, 3, 4, 'y', '2013-03-01 00:00:00', '2013-03-19 23:59:00');
 insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
 values (7, 4, 5, 'y', '2013-03-25 00:00:00', '2013-04-11 21:00:00');
 
+insert into medication_manager.treatment (id, prescription_fk_id, medicine_fk_id, status, start_date, end_date)
+values (8, 1, 2, 'y', '2013-04-02 21:00:00', '2013-04-09 20:00:00');
+
 // intake table
 
 insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
-values (1, 1, 1, 'pill', '2012-12-19 16:10:00');
+values (1, 1, 1, 'pill', '2013-04-02 22:00:00');
 
 insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
 values (2, 2, 2, 'pill', '2012-12-19 16:10:00');
@@ -141,6 +144,85 @@ values (6, 6, 3, 'pill', '2013-04-19 22:00:00');
 
 insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
 values (7, 7, 2, 'pill', '2013-04-01 20:10:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (8, 1, 1, 'pill', '2013-04-03 09:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (9, 1, 1, 'pill', '2013-04-03 16:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (10, 1, 1, 'pill', '2013-04-03 22:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (11, 1, 1, 'pill', '2013-04-04 09:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (12, 1, 1, 'pill', '2013-04-04 16:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (13, 1, 1, 'pill', '2013-04-04 22:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (14, 1, 1, 'pill', '2013-04-05 09:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (15, 1, 1, 'pill', '2013-04-05 16:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (16, 1, 1, 'pill', '2013-04-05 22:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (17, 1, 1, 'pill', '2013-04-06 09:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (18, 1, 1, 'pill', '2013-04-06 16:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (19, 1, 1, 'pill', '2013-04-06 22:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (20, 1, 1, 'pill', '2013-04-07 09:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (21, 1, 1, 'pill', '2013-04-07 16:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (22, 1, 1, 'pill', '2013-04-07 22:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (23, 1, 1, 'pill', '2013-04-08 09:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (24, 1, 1, 'pill', '2013-04-08 16:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (25, 1, 1, 'pill', '2013-04-08 22:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (26, 1, 1, 'pill', '2013-04-09 09:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (27, 1, 1, 'pill', '2013-04-09 16:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (28, 1, 1, 'pill', '2013-04-09 22:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (29, 1, 1, 'pill', '2013-04-10 09:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (30, 8, 3, 'pill', '2013-04-02 22:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (31, 8, 2, 'pill', '2013-04-03 09:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (32, 8, 3, 'pill', '2013-04-03 16:00:00');
+
+insert into medication_manager.intake (id, treatment_fk_id, quantity, units, time_plan)
+values (33, 8, 4, 'pill', '2013-04-03 22:00:00');
+
 
 
 
