@@ -35,7 +35,7 @@ return "HIGH";
 }
 }
 
-rule "Activity insertion"
+rule "Activity insertionante"
 //agenda-group "MAIN"
     when
     	ContextEvent(eval( RDFSubject instanceof Sensor), $s:(((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)))
