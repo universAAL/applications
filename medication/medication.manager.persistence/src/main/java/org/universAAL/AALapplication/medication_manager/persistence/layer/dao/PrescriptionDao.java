@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
+import org.universAAL.AALapplication.medication_manager.persistence.impl.SoftCache;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Column;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
@@ -47,6 +48,9 @@ public final class PrescriptionDao extends AbstractDao {
   private TreatmentDao treatmentDao;
   private IntakeDao intakeDao;
 
+  private static boolean isPrescriptionDTOLoaded = false;
+  private static final SoftCache<Integer, PrescriptionDTO> SOFT_CACHE = new SoftCache<Integer, PrescriptionDTO>();
+
   private static final String PATIENT_FK_ID = "PATIENT_FK_ID";
   private static final String TIME_OF_CREATION = "TIME_OF_CREATION";
   private static final String PHYSICIAN_FK_ID = "PHYSICIAN_FK_ID";
@@ -56,6 +60,17 @@ public final class PrescriptionDao extends AbstractDao {
 
   public PrescriptionDao(Database database) {
     super(database, TABLE_NAME);
+
+  }
+
+  public void loadPrescriptionDTOs() {
+    if (!isPrescriptionDTOLoaded) {
+      List<PrescriptionDTO> prescriptionDTOs = getAllActivePrescriptions();
+
+      for (PrescriptionDTO dto : prescriptionDTOs) {
+        SOFT_CACHE.put(dto.getPrescriptionId(), dto);
+      }
+    }
   }
 
   @Override
@@ -160,8 +175,11 @@ public final class PrescriptionDao extends AbstractDao {
     try {
       connection = database.getConnection();
       connection.setAutoCommit(false);
-      persistPrescriptionDto(prescriptionDTO, connection);
+      int prescriptionId = database.getNextIdFromIdGenerator();
+      persistPrescriptionDto(prescriptionId, prescriptionDTO, connection);
       connection.commit();
+      prescriptionDTO.setPrescriptionId(prescriptionId);
+      SOFT_CACHE.put(prescriptionId, prescriptionDTO);
     } catch (Exception e) {
       rollback(connection, e);
       throw new MedicationManagerPersistenceException(e);
@@ -171,7 +189,8 @@ public final class PrescriptionDao extends AbstractDao {
 
   }
 
-  private void persistPrescriptionDto(PrescriptionDTO prescriptionDTO, Connection connection) throws SQLException {
+  private void persistPrescriptionDto(int prescriptionId, PrescriptionDTO prescriptionDTO,
+                                      Connection connection) throws SQLException {
 
     String sql = "INSERT INTO MEDICATION_MANAGER.PRESCRIPTION " +
         "(ID, TIME_OF_CREATION, PATIENT_FK_ID, PHYSICIAN_FK_ID, DESCRIPTION, STATUS) " +
@@ -181,7 +200,6 @@ public final class PrescriptionDao extends AbstractDao {
 
     try {
       psPrescription = connection.prepareStatement(sql);
-      int prescriptionId = database.getNextIdFromIdGenerator();
       prescriptionDTO.setPrescriptionId(prescriptionId);
       insertRecordIntoPrescriptionTable(prescriptionId, prescriptionDTO, psPrescription);
       insertMedicineDTOs(prescriptionDTO, connection, prescriptionId);
@@ -430,6 +448,11 @@ public final class PrescriptionDao extends AbstractDao {
 
   public List<PrescriptionDTO> getPrescriptionDTO(Person patient, Person doctor) {
 
+    List<PrescriptionDTO> prescriptionDTOs = getFromCache(patient.getId(), doctor.getId());
+    if (!prescriptionDTOs.isEmpty()) {
+      return prescriptionDTOs;
+    }
+
     try {
       List<Prescription> prescriptions = getByPersonAndDoctor(patient.getId(), doctor.getId());
       return convertToDTO(prescriptions);
@@ -442,6 +465,18 @@ public final class PrescriptionDao extends AbstractDao {
     }
 
 
+  }
+
+  private List<PrescriptionDTO> getFromCache(int patientId, int doctorId) {
+    List<PrescriptionDTO> prescriptionDTOs = new ArrayList<PrescriptionDTO>();
+
+    for (PrescriptionDTO dto : SOFT_CACHE.values()) {
+      if (dto.getPatient().getId() == patientId && dto.getPhysician().getId() == doctorId) {
+         prescriptionDTOs.add(dto);
+      }
+    }
+
+    return prescriptionDTOs;
   }
 
   private List<PrescriptionDTO> convertToDTO(List<Prescription> prescriptions) {
@@ -656,4 +691,25 @@ public final class PrescriptionDao extends AbstractDao {
     List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
     return createPrescriptions(results);
   }
+
+
+  private List<PrescriptionDTO> getAllActivePrescriptions() {
+    String sql = "select * from MEDICATION_MANAGER.PRESCRIPTION  where UPPER(STATUS) = ?";
+
+    System.out.println("sql = " + sql);
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql);
+      statement.setString(1, ACTIVE.getType().toUpperCase());
+      List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
+      List<Prescription> prescriptions = createPrescriptions(results);
+      return convertToDTO(prescriptions);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+  }
+
 }
