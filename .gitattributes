@@ -2824,6 +2824,9 @@ long_term_behav/drools.reasoner/src/main/resources/persistence.xml -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerAuxClasses.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerRaw.drl -text
+long_term_behav/drools.reasoner/src/main/resources/reasoner_PIR.drl -text
+long_term_behav/drools.reasoner/src/main/resources/reasoner_e.drl -text
+long_term_behav/drools.reasoner/src/main/resources/reasoner_energy.drl -text
 long_term_behav/drools.reasoner/src/main/resources/users/droolsWorkshop1.drl -text
 long_term_behav/ltba.manager/ASL2.0.txt -text
 long_term_behav/ltba.manager/LTBA_Demo_B.0.1.launch -text

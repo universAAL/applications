@@ -21,7 +21,6 @@ package org.universAAL.drools.engine;
 
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
@@ -44,7 +43,6 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.ConsequenceException;
 import org.osgi.framework.BundleContext;
 import org.universAAL.drools.models.RuleModel;
-import org.universAAL.drools.samples.SampleRules;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.context.ContextEvent;
@@ -225,7 +223,7 @@ public final class RulesEngine {
 			// System.out.println(rulesEngineBundleContext.getBundle().getResource("reasoner.drl"));
 			kbuilder.add(ResourceFactory
 					.newUrlResource(rulesEngineBundleContext.getBundle()
-							.getResource("reasoner.drl")), ResourceType.DRL);
+							.getResource("reasoner_PIR.drl")), ResourceType.DRL);
 		} else {
 			// props.setProperty("drools.dialect.java.compiler", "JANINO");
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
@@ -265,6 +263,7 @@ public final class RulesEngine {
 	public void insertContextEvent(Object event) {
 		if (event instanceof ContextEvent) {
 			if (((ContextEvent) event).getRDFSubject() instanceof Sensor) {
+				ksession.insert(event);
 			} else {
 				// Not a sensor (genius)
 			}
@@ -276,7 +275,7 @@ public final class RulesEngine {
 		// received the correct class in order to made a cast from Object to a
 		// more specific class. This can be easily implemented by placing
 		// eval(myReceivedObject instanceof TheClassToBeCast).
-		ksession.insert(event);
+		
 	}
 
 	/**

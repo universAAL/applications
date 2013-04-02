@@ -17,15 +17,13 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
  */
-package org.universAAL.ltba.manager;
+package org.universAAL.ltba.energy;
 
 import java.util.Calendar;
 import java.util.Date;
 
 import org.osgi.framework.BundleContext;
-import org.universAAL.ltba.activity.ActivityIntensity;
 import org.universAAL.ltba.activity.ActivityLogger;
-import org.universAAL.ltba.activity.Room;
 import org.universAAL.ltba.activity.representation.GraphicReporter;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -38,22 +36,26 @@ import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
 
-import es.tsb.ltba.nomhad.gateway.NomhadGateway;
-
 /**
  * @author mllorente
  * 
  */
-public class ConsequenceListener extends ContextSubscriber {
+public class EnergyConsequenceListener extends ContextSubscriber {
 
 	private boolean status = true;
 	private ActivityLogger activityLogger;
-	private static ConsequenceListener INSTANCE;
+	private static EnergyConsequenceListener INSTANCE;
 	public Calendar debuggingCalendar = Calendar.getInstance();
 	private boolean debugTime = false;
 	private BundleContext bc;
 	private ModuleContext mc;
+	private long onTimpestamp = -1;
 
+	/**
+	 * Subscription to the events
+	 * 
+	 * @return The context event pattern for the subscription process
+	 */
 	private static ContextEventPattern[] getContextSuscriptionsParam() {
 		ContextEventPattern cep = new ContextEventPattern();
 		cep.addRestriction(MergedRestriction.getAllValuesRestriction(
@@ -69,8 +71,9 @@ public class ConsequenceListener extends ContextSubscriber {
 		return new ContextEventPattern[] { cep };
 	}
 
-	protected ConsequenceListener(ModuleContext context) {
+	public EnergyConsequenceListener(ModuleContext context) {
 		super(context, getContextSuscriptionsParam());
+		System.out.println("Creating EnergyConsequenceListener");
 		mc = context;
 		activityLogger = new ActivityLogger(context);
 		INSTANCE = this;
@@ -90,17 +93,18 @@ public class ConsequenceListener extends ContextSubscriber {
 	 *            The bundle context.
 	 * @return Instance of the context listener.
 	 */
-	public static ConsequenceListener getInstance(BundleContext context) {
+	public static EnergyConsequenceListener getInstance(BundleContext context) {
 		if (INSTANCE == null)
-			return new ConsequenceListener(uAALBundleContainer.THE_CONTAINER
-					.registerModule(new Object[] { context }));
+			return new EnergyConsequenceListener(
+					uAALBundleContainer.THE_CONTAINER
+							.registerModule(new Object[] { context }));
 		else
 			return INSTANCE;
 	}
 
-	public static ConsequenceListener getInstance(ModuleContext context) {
+	public static EnergyConsequenceListener getInstance(ModuleContext context) {
 		if (INSTANCE == null)
-			return new ConsequenceListener(context);
+			return new EnergyConsequenceListener(context);
 		else
 			return INSTANCE;
 	}
@@ -111,7 +115,7 @@ public class ConsequenceListener extends ContextSubscriber {
 	 * 
 	 * @return
 	 */
-	public static ConsequenceListener getInstance() {
+	public static EnergyConsequenceListener getInstance() {
 		return INSTANCE;
 	}
 
@@ -121,55 +125,77 @@ public class ConsequenceListener extends ContextSubscriber {
 
 	@Override
 	public void handleContextEvent(ContextEvent event) {
-		// System.out.println("HANDLING IN CONSEQUENCE-LISTENER");
-		if (getStatus()) {
-			Consequence csq = (Consequence) event.getRDFObject();
-			// System.out.println("LOLEOLOELOLOE");
-			// System.out.println("DEBUG TIME: " + debugTime);
-			// System.out.println("THIS CALENDAR (CONSEQUENCE HANDLER): "
-			// + debuggingCalendar);
-			// System.out.println("LOLEOLOELOLOE");
 
-			System.out.println("Consequence listenede: ");
-			System.out.println(csq.getURI());
-			ConsequenceProperty[] consequenceArray = csq.getProperties();
+		Consequence csq = (Consequence) event.getRDFObject();
+		System.out.println("Consequencea listened: ");
+		ConsequenceProperty[] consequenceArray = csq.getProperties();
 
-			String source = null;
-			String intensity = null;
+		String device = null;
+		String status = null;
+		String activity = null;
+		for (ConsequenceProperty consequenceProperty : consequenceArray) {
 
-			for (ConsequenceProperty consequenceProperty : consequenceArray) {
-
-				if (consequenceProperty.getKey() == "Source")
-					source = consequenceProperty.getValue();
-				else if (consequenceProperty.getKey() == "Intensity") {
-					intensity = consequenceProperty.getValue();
-				}
-//				System.out.println(consequenceProperty.getKey() + "--"
-//						+ consequenceProperty.getValue());
+			if (consequenceProperty.getKey() == "Device")
+				device = consequenceProperty.getValue();
+			else if (consequenceProperty.getKey() == "Status") {
+				status = consequenceProperty.getValue();
+			} else if (consequenceProperty.getKey() == "ActivityType") {
+				activity = consequenceProperty.getValue();
 			}
-			/*
-			 * System.out.println("<<<<<<EXECUTING NOMHAD PROTOCOL>>>>>>>>");
-			 * int meas = 0; if (intensity.equalsIgnoreCase("null")) { meas = 0;
-			 * } else if (intensity.equalsIgnoreCase("low")) { meas = 1; } else
-			 * if (intensity.equalsIgnoreCase("medium")) { meas = 3; } else if
-			 * (intensity.equalsIgnoreCase("high")) { meas = 5; } if
-			 * (!debugTime) {
-			 * NomhadGateway.getInstance().putMeasurement("localhost", "A100",
-			 * "123456", "HEALTH_INDICATORS_GROUP_WEEK",
-			 * "AAL_HEALTH_INDEX_WEEK", Integer.toString(meas));
-			 * activityLogger.putEntry(Calendar.getInstance()
-			 * .getTimeInMillis(), Room.getRoomByString(source),
-			 * ActivityIntensity.getIntensityByString(intensity));
-			 * 
-			 * } else { NomhadGateway.getInstance().putMeasurement("localhost",
-			 * "A100", "123456", "HEALTH_INDICATORS_GROUP_WEEK",
-			 * "AAL_HEALTH_INDEX_WEEK", Integer.toString(meas),
-			 * debuggingCalendar.getTimeInMillis());
-			 * activityLogger.putEntry(debuggingCalendar.getTimeInMillis(),
-			 * Room.getRoomByString(source), ActivityIntensity
-			 * .getIntensityByString(intensity)); }
-			 */}
+			System.out.println(consequenceProperty.getKey() + "--"
+					+ consequenceProperty.getValue());
+		}
 
+		if (activity == "WatchingTV") {
+			System.out.println("Watching TV detected in consequence listener");
+			if (status == "ON") {
+				onTimpestamp = System.currentTimeMillis();
+			} else if (status == "OFF") {
+				if (onTimpestamp > -1) {
+					WatchingTVController.getInstance().addTime(
+							System.currentTimeMillis() - onTimpestamp);
+				}
+			}
+		}
+
+		if (device == "Pantalla Serdula") {
+			// nothing
+		} else if (device == "Miguel Angel") {
+			// watching tv
+		} else if (device == "VeraLite") {
+			// washing dishes
+		} else if (device == "Enchufe Armario") {
+			// laundry
+		}
+
+		// System.out.println("<<<<<<EXECUTING NOMHAD PROTOCOL>>>>>>>>");
+		// int meas = 0;
+		// if (status.equalsIgnoreCase("null")) {
+		// meas = 0;
+		// } else if (status.equalsIgnoreCase("low")) {
+		// meas = 1;
+		// } else if (status.equalsIgnoreCase("medium")) {
+		// meas = 3;
+		// } else if (status.equalsIgnoreCase("high")) {
+		// meas = 5;
+		// }
+		// if (!debugTime) {
+		// NomhadGateway.getInstance().putMeasurement("A100", "123456",
+		// "HEALTH_INDICATORS_GROUP_WEEK",
+		// "AAL_HEALTH_INDEX_WEEK", Integer.toString(meas));
+		// activityLogger.putEntry(Calendar.getInstance()
+		// .getTimeInMillis(), Room.getRoomByString(device),
+		// ActivityIntensity.getIntensityByString(status));
+		//
+		// } else {
+		// NomhadGateway.getInstance().putMeasurement("A100", "123456",
+		// "HEALTH_INDICATORS_GROUP_WEEK",
+		// "AAL_HEALTH_INDEX_WEEK", Integer.toString(meas),
+		// debuggingCalendar.getTimeInMillis());
+		// activityLogger.putEntry(debuggingCalendar.getTimeInMillis(),
+		// Room.getRoomByString(device), ActivityIntensity
+		// .getIntensityByString(status));
+		// }
 	}
 
 	public void setStatus(boolean status) {

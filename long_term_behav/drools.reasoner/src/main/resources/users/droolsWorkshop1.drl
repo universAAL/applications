@@ -41,7 +41,7 @@ declare HeartRate
  dur: int 
 end
 
-rule "Activity insertion"
+rule "Activity insertionderl"
 //agenda-group "MAIN"
     when
     	ContextEvent(eval (RDFSubject instanceof Sensor),  $s:(((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)))

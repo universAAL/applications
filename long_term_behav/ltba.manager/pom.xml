@@ -62,9 +62,27 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>ltba.nomhad.gateway</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.universAAL.ui</groupId>
 			<artifactId>ui.handler.gui.swing.bluesteelLAF</artifactId>
 			<version>1.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>EnergyReaderPublisher</artifactId>
+			<version>D.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.readenergy</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.aalfficiencyscores</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
