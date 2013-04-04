@@ -69,6 +69,8 @@ public final class MedicineView {
   public void setDescription(String description) {
     if (description != null && !description.trim().isEmpty()) {
       this.description = description;
+    } else {
+      this.description = null;
     }
   }
 
@@ -79,6 +81,8 @@ public final class MedicineView {
   public void setSideeffects(String sideeffects) {
     if (sideeffects != null && !sideeffects.trim().isEmpty()) {
       this.sideeffects = sideeffects;
+    } else {
+      this.sideeffects = null;
     }
   }
 
@@ -89,6 +93,8 @@ public final class MedicineView {
   public void setIncompliances(String incompliances) {
     if (incompliances != null && !incompliances.trim().isEmpty()) {
       this.incompliances = incompliances;
+    } else {
+      this.incompliances = null;
     }
   }
 

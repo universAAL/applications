@@ -9,4 +9,10 @@ public interface ConfigurationProperties {
 
   int getIntakeIntervalMinutes();
 
+  long getHttpSessionExpireTimeoutInMinutes();
+
+  int getHttpSessionTimerCheckerIntervalInMinutes();
+
+  boolean isDebugWriterOn();
+
 }

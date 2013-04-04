@@ -37,16 +37,17 @@ public final class UsecaseNewPrescription extends Usecase {
   private static final String PRESCRIPTIONS = "prescriptions";
   private final File prescriptionDirectory;
 
-  public static final String ERROR_MESSAGE =
-      "This command expects 3 parameters, which are: \n" +
-          "1. usecase id \n" +
-          "2. the file name ";
+  public static final String PARAMETER_MESSAGE =
+      "This command expects 3  additional parameters (except usecase id), which are: " +
+          "1. usecase id and" +
+          "2. the file name." +
+          " Please check the file name in the prescriptions configuration directory";
 
   private static final String USECASE_ID = "UC08";
   private static final String USECASE_TITLE = "UC08: New prescription created  - ";
   private static final String USECASE = USECASE_TITLE +
       "Simulates the creation of the new prescription by the doctor(formal caregiver) and " +
-      "triggers Medication Manager action to handle it";
+      "triggers Medication Manager action to handle it" + "\n Parameters: " + PARAMETER_MESSAGE;
 
   public UsecaseNewPrescription() {
     super(USECASE_ID);
@@ -62,7 +63,7 @@ public final class UsecaseNewPrescription extends Usecase {
     }
 
     if (parameters == null || parameters.length != 1) {
-      throw new MedicationManagerShellException(ERROR_MESSAGE);
+      throw new MedicationManagerShellException(PARAMETER_MESSAGE);
     }
 
     String fileName = parameters[0];

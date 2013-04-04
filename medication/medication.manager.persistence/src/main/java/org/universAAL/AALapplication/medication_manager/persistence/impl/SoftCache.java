@@ -59,7 +59,10 @@ public final class SoftCache<K, V> {
 
     Collection<V> collection = new ArrayList<V>(values.size());
     for (SoftReference<V> reference : values) {
-        collection.add(reference.get());
+      V e = reference.get();
+      if (e != null) {
+        collection.add(e);
+      }
     }
 
     return collection;

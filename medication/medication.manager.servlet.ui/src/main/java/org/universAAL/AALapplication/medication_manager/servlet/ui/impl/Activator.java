@@ -5,6 +5,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.DisplayErrorPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.DisplayLoginHtmlWriterServlet;
@@ -15,12 +16,17 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.MedicineHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.NewPrescriptionHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.SelectUserHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.DebugWriter;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.DebugWriterDummy;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.DebugWriterImpl;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 import javax.servlet.ServletException;
+import java.io.File;
 
+import static java.io.File.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Util.*;
 
 /**
@@ -39,7 +45,15 @@ public final class Activator implements BundleActivator {
 
     bundleContext = context;
 
-    registerServlets(context);
+    ConfigurationProperties configurationProperties = getConfigurationProperties();
+
+    long httpSessionExpireTimeoutInMinutes = configurationProperties.getHttpSessionExpireTimeoutInMinutes();
+
+    int httpSessionTimerCheckerIntervalInMinutes = configurationProperties.getHttpSessionTimerCheckerIntervalInMinutes();
+
+    boolean isDebugOn = configurationProperties.isDebugWriterOn();
+
+    registerServlets(context, httpSessionExpireTimeoutInMinutes, httpSessionTimerCheckerIntervalInMinutes, isDebugOn);
 
   }
 
@@ -59,10 +73,24 @@ public final class Activator implements BundleActivator {
 
   }
 
-  private void registerServlets(BundleContext context) throws ServletException, NamespaceException {
+  private void registerServlets(BundleContext context,
+                                long httpSessionExpireTimeoutInMinutes,
+                                int httpSessionTimerCheckerIntervalInMinutes, boolean debugOn)
+      throws ServletException, NamespaceException {
+
+
     HttpService httpService = getHttpService(context);
 
-    SessionTracking sessionTracking = new SessionTracking();
+
+    DebugWriter debugWriter;
+    if (debugOn) {
+      debugWriter = new DebugWriterImpl();
+    } else {
+      debugWriter = new DebugWriterDummy();
+    }
+
+    SessionTracking sessionTracking =
+        new SessionTracking(httpSessionExpireTimeoutInMinutes, debugWriter, httpSessionTimerCheckerIntervalInMinutes);
 
     SelectUserHtmlWriterServlet selectUserServlet = new SelectUserHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(SELECT_USER_SERVLET_ALIAS, selectUserServlet, null, null);
@@ -156,6 +184,51 @@ public final class Activator implements BundleActivator {
     }
 
     return persistentService;
+  }
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (bundleContext == null) {
+      throw new MedicationManagerServletUIException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = bundleContext.getServiceReference(ConfigurationProperties.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerServletUIException("The ServiceReference is null for ConfigurationProperties");
+    }
+
+    ConfigurationProperties service = (ConfigurationProperties) bundleContext.getService(srPS);
+
+    if (service == null) {
+      throw new MedicationManagerServletUIException("The ConfigurationProperties is missing");
+    }
+
+    return service;
+  }
+
+  public static File getMedicationManagerConfigurationDirectory() {
+
+    String pathToMedicationManagerConfigurationDirectory;
+    try {
+      File currentDir = new File(".");
+      String pathToCurrentDir = currentDir.getCanonicalPath();
+      String bundlesConfigurationLocationProperty = System.getProperty("bundles.configuration.location");
+      pathToMedicationManagerConfigurationDirectory = pathToCurrentDir + separator +
+          bundlesConfigurationLocationProperty + separator + "medication_manager";
+    } catch (Exception e) {
+      throw new MedicationManagerServletUIException(e);
+    }
+
+    File directory = new File(pathToMedicationManagerConfigurationDirectory);
+    if (!directory.exists()) {
+      throw new MedicationManagerServletUIException("The directory does not exists:" + directory);
+    }
+
+    if (!directory.isDirectory()) {
+      throw new MedicationManagerServletUIException("The following file:" + directory + " is not a valid directory");
+    }
+
+    return directory;
   }
 
 }
