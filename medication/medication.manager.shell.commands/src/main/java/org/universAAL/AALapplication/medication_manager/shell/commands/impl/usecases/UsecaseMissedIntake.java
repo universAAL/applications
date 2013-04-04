@@ -34,12 +34,13 @@ import static org.universAAL.AALapplication.medication_manager.shell.commands.im
  */
 public final class UsecaseMissedIntake extends Usecase {
 
-  private static final String ERROR_MESSAGE = "Expected one parameters, which is: userId \n" +
-      "Please check the person table for the valid ids";
+  private static final String PARAMETER_MESSAGE = "Expected one  additional parameter (except usecase id), which is: userId." +
+      " Please check the person table for the valid ids";
   private static final String USECASE_ID = "UC04.1";
   private static final String USECASE_TITLE = "UC04.1: Medicine intake control (pill dispenser)";
   private static final String USECASE = USECASE_TITLE + " - The service " +
-      "notifies a caregiver upon missed intake. Triggered by the proper event published by the dispenser";
+      "notifies a caregiver upon missed intake. Triggered by the proper event published by the dispenser" +
+      "\n Parameters: " + PARAMETER_MESSAGE;
 
   public UsecaseMissedIntake() {
     super(USECASE_ID);
@@ -49,7 +50,7 @@ public final class UsecaseMissedIntake extends Usecase {
   public void execute(String... parameters) {
 
     if (parameters == null || parameters.length != 1) {
-      throw new MedicationManagerShellException(ERROR_MESSAGE);
+      throw new MedicationManagerShellException(PARAMETER_MESSAGE);
     }
 
     PersistentService persistentService = getPersistentService();

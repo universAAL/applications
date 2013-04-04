@@ -31,7 +31,6 @@ public abstract class Usecase {
 
   private final String usecaseId;
 
-  public static final String NO_PARAMETERS_MESSAGE = "This usecase doesn't expect parameters";
   private static final Map<String, Usecase> USECASE_MAP = new LinkedHashMap<String, Usecase>();
 
   static {

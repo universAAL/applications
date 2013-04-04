@@ -1,7 +1,9 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers;
 
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Activator;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -15,7 +17,9 @@ public final class DebugWriterImpl implements DebugWriter {
 
   public DebugWriterImpl() {
     try {
-      FileOutputStream out = new FileOutputStream("D:\\debug.txt");
+      File dir = Activator.getMedicationManagerConfigurationDirectory();
+      File file = new File(dir, "debug.log");
+      FileOutputStream out = new FileOutputStream(file);
       this.ps = new PrintStream(out);
     } catch (FileNotFoundException e) {
       throw new MedicationManagerServletUIException(e);

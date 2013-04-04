@@ -1,5 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,9 +12,11 @@ public final class Session {
 
   private final String id;
   private final Map<String, Object> attributes = new HashMap<String, Object>();
+  private Date lastAccessedTime;
 
   public Session(String id) {
     this.id = id;
+    lastAccessedTime = new Date();
   }
 
   public String getId() {
@@ -35,7 +39,29 @@ public final class Session {
     attributes.remove(key);
   }
 
+  public void setNowAsLastAccessedTime() {
+    this.lastAccessedTime = new Date();
+  }
+
+  public Date getLastAccessedTime() {
+    return lastAccessedTime;
+  }
+
   public Map<String, Object> getAttributesMap() {
     return new HashMap<String, Object>(attributes);
+  }
+
+  public void printSession(DebugWriter debugWriter) {
+    debugWriter.println("Printing attributes for session with id:" + id);
+    printAttributes(debugWriter);
+    debugWriter.println("End printing attributes for session with id:" + id);
+  }
+
+  private void printAttributes(DebugWriter debugWriter) {
+    Collection<String> keys = attributes.keySet();
+    for (String k : keys) {
+      Object value = attributes.get(k);
+      debugWriter.println("key = " + k + " | value = " + value);
+    }
   }
 }

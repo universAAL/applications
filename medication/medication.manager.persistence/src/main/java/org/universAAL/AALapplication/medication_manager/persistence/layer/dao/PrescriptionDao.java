@@ -472,7 +472,12 @@ public final class PrescriptionDao extends AbstractDao {
   private List<PrescriptionDTO> getFromCache(int patientId, int doctorId) {
     List<PrescriptionDTO> prescriptionDTOs = new ArrayList<PrescriptionDTO>();
 
-    for (PrescriptionDTO dto : SOFT_CACHE.values()) {
+    List<PrescriptionDTO> values = new ArrayList<PrescriptionDTO>(SOFT_CACHE.values());
+
+    for (PrescriptionDTO dto : values) {
+      if (dto == null) {
+        continue;
+      }
       if (dto.getPatient().getId() == patientId && dto.getPhysician().getId() == doctorId) {
          prescriptionDTOs.add(dto);
       }

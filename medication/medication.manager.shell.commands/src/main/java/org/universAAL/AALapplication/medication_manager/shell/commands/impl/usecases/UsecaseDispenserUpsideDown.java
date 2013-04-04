@@ -31,13 +31,14 @@ import static org.universAAL.AALapplication.medication_manager.shell.commands.im
  */
 public final class UsecaseDispenserUpsideDown extends Usecase {
 
-  private static final String ERROR_MESSAGE = "Expected one parameters, which is: DeviceId \n" +
-        "Please check the dispenser table for the valid ids";
+  private static final String PARAMETER_MESSAGE = "Expected one additional parameter (except usecase id), which is: DeviceId." +
+        " Please check the dispenser table for the valid ids";
 
   private static final String USECASE_ID = "UC03";
   private static final String USECASE_TITLE = "UC03: Dispenser upside-down notification  - ";
   private static final String USECASE = USECASE_TITLE +
-      "The service notifies the AP that the pill dispenser is upside-down and cannot be used";
+      "The service notifies the AP that the pill dispenser is upside-down and cannot be used" +
+      "\n Parameters: " + PARAMETER_MESSAGE;
 
   public UsecaseDispenserUpsideDown() {
     super(USECASE_ID);
@@ -47,7 +48,7 @@ public final class UsecaseDispenserUpsideDown extends Usecase {
   public void execute(String... parameters) {
 
     if (parameters == null || parameters.length != 1) {
-      throw new MedicationManagerShellException(ERROR_MESSAGE);
+      throw new MedicationManagerShellException(PARAMETER_MESSAGE);
     }
 
     int id = Integer.parseInt(parameters[0]);

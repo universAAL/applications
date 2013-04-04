@@ -12,9 +12,15 @@ import java.util.Properties;
  */
 public final class ConfigurationPropertiesImpl implements ConfigurationProperties {
 
+  public static final String DEBUG_WRITE_FILE = "debug.write.file";
+  public static final String ON = "ON";
+  private final Properties medicationProperties = new Properties();
+
   private static final String MEDICATION_REMINDER_TIMEOUT = "medication.reminder.timeout";
   private static final String MEDICATION_INTEKA_INTERVAL = "medication.intake.interval";
-  private final Properties medicationProperties = new Properties();
+  private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "http.session.expire.timeout.in.minutes";
+  private static final String HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES =
+      "http.session.timer.checker.interval.in.minutes";
 
   ConfigurationPropertiesImpl() {
     try {
@@ -52,5 +58,20 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
 
   public int getIntakeIntervalMinutes() {
     return getInt(MEDICATION_INTEKA_INTERVAL);
+  }
+
+  public long getHttpSessionExpireTimeoutInMinutes() {
+
+    return getInt(HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES);
+  }
+
+  public int getHttpSessionTimerCheckerIntervalInMinutes() {
+    return getInt(HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES);
+  }
+
+  public boolean isDebugWriterOn() {
+    String debug = medicationProperties.getProperty(DEBUG_WRITE_FILE);
+
+    return debug != null && debug.equalsIgnoreCase(ON);
   }
 }

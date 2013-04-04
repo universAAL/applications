@@ -42,17 +42,18 @@ import static org.universAAL.AALapplication.medication_manager.shell.commands.im
  */
 public final class UsecaseMedicationReminder extends Usecase {
 
-  private static final String ERROR_MESSAGE = "Expected two parameters, which are: " +
-      "1. UserId \n" +
-      "2. IntakeId \n" +
-      "Please check the person and intake tables for the valid ids";
+  private static final String PARAMETER_MESSAGE = "Expected two additional parameters (except usecase id), which are: " +
+      "1. UserId and" +
+      "2. IntakeId." +
+      " Please check the person and intake tables for the valid ids";
   private static final String USECASE_ID = "UC01.1";
   private static final String USECASE_TITLE = "UC01.1: Medication reminder for AP (pill dispenser) - ";
   private static final String USECASE = USECASE_TITLE +
       "The service handles reminder notifications, triggered by the pill dispenser and delivered via " +
       "Local Device Discovery and Integration (LDDI) service.\n" + " This usecase can trigger the following usecase, " +
       "if the user presses the info button: \n\t Usecase:\n\t\t" + "UC02: AP requests information about intake - " +
-      "Upon request by the Assisted Person, the service provides information about medicine to be taken";
+      "Upon request by the Assisted Person, the service provides information about medicine to be taken" +
+      "\n Parameters: " + PARAMETER_MESSAGE;
 
   public UsecaseMedicationReminder() {
     super(USECASE_ID);
@@ -61,7 +62,7 @@ public final class UsecaseMedicationReminder extends Usecase {
   @Override
   public void execute(String... parameters) {
     if (parameters == null || parameters.length != 2) {
-      throw new MedicationManagerShellException(ERROR_MESSAGE);
+      throw new MedicationManagerShellException(PARAMETER_MESSAGE);
     }
 
     PersistentService persistentService = getPersistentService();
