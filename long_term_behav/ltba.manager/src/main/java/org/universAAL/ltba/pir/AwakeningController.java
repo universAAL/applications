@@ -26,6 +26,14 @@ public class AwakeningController implements ActionListener {
 	private AwakeningController() {
 		super();
 		INSTANCE = this;
+		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
+		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
+		if (ip != null) {
+			serverIp = ip;
+		}
+		if (usr != null) {
+			userCode = usr;
+		}
 		t = new Timer(AWAKENING_UPDATE_PERIOD, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),

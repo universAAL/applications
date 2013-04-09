@@ -15,10 +15,20 @@ public class GoingToBedController implements ActionListener {
 	private int times;
 	private static GoingToBedController INSTANCE;
 	private Timer t;
+	private String serverIp;
+	private String userCode;
 
 	private GoingToBedController() {
 		super();
 		INSTANCE = this;
+		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
+		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
+		if (ip != null) {
+			serverIp = ip;
+		}
+		if (usr != null) {
+			userCode = usr;
+		}
 		t = new Timer(24 * 60 * 60 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
@@ -45,7 +55,7 @@ public class GoingToBedController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Sending to Nomhad time>" + gtbTime + " and times>"
 				+ times);
-		NomhadGateway.getInstance().putMeasurement("192.168.238.40", "A100",
+		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
 				"123456", "SLEEPING", "GOING_TO_BED", new String("" + gtbTime));
 		TimeSleepingController.setGTBTime((float) gtbTime);
 		gtbTime = 0;

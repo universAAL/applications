@@ -13,10 +13,20 @@ public class PresenceInBathController implements ActionListener {
 
 	private static PresenceInBathController INSTANCE;
 	private Timer t;
+	private String userCode;
+	private String serverIp;
 
 	private PresenceInBathController() {
 		super();
 		INSTANCE = this;
+		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
+		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
+		if (ip != null) {
+			serverIp = ip;
+		}
+		if (usr != null) {
+			userCode = usr;
+		}
 		t = new Timer(24 * 60 * 60 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
