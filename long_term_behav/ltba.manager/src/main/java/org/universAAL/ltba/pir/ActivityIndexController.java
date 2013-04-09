@@ -1,6 +1,6 @@
 package org.universAAL.ltba.pir;
 
-import org.universAAL.ltba.manager.Constants;
+import org.universAAL.ltba.manager.CommonUtils;
 
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
@@ -37,7 +37,7 @@ public class ActivityIndexController {
 	public void addActivityIndex(String index) {
 		System.out.println("Sending to Nomhad activityIndex>" + index);
 		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
-				Constants.NOMHAD_DEVICE_CODE, INDICATOR_GROUP, INDICATOR,
+				CommonUtils.NOMHAD_DEVICE_CODE, INDICATOR_GROUP, INDICATOR,
 				new String(index));
 	}
 

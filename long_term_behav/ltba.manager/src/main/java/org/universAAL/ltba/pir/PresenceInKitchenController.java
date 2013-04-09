@@ -13,10 +13,20 @@ public class PresenceInKitchenController implements ActionListener{
 
 	private static PresenceInKitchenController INSTANCE;
 	private Timer t;
+	private String serverIp;
+	private String userCode;
 
 	private PresenceInKitchenController() {
 		super();
 		INSTANCE = this;
+		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
+		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
+		if (ip != null) {
+			serverIp = ip;
+		}
+		if (usr != null) {
+			userCode = usr;
+		}
 		t = new Timer(24 * 60 * 60 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),

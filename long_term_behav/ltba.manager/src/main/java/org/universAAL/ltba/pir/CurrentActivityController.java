@@ -7,6 +7,8 @@ import java.util.GregorianCalendar;
 
 import javax.swing.Timer;
 
+import org.universAAL.ltba.activity.Room;
+
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
 public class CurrentActivityController {
@@ -21,6 +23,14 @@ public class CurrentActivityController {
 	private CurrentActivityController() {
 		super();
 		INSTANCE = this;
+		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
+		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
+		if (ip != null) {
+			serverIp = ip;
+		}
+		if (usr != null) {
+			userCode = usr;
+		}
 	}
 
 	public static CurrentActivityController getInstance() {
@@ -34,6 +44,14 @@ public class CurrentActivityController {
 		System.out.println("Imprimiendo el valor: " + index);
 		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
 				"123456", INDICATOR_GROUP, INDICATOR, new String(index));
+	}
+
+	public void activityDetected(String index, Room room) {
+		System.out.println("Imprimiendo el valor: " + index + " en "
+				+ room.getRoomString());
+		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
+				"123456", INDICATOR_GROUP,
+				INDICATOR + "_" + room.getRoomString(), new String(index));
 	}
 
 }

@@ -9,15 +9,25 @@ import javax.swing.Timer;
 
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class ShoppingController implements ActionListener{
+public class ShoppingController implements ActionListener {
 
 	private int times;
 	private static ShoppingController INSTANCE;
 	private Timer t;
+	private String serverIp;
+	private String userCode;
 
-	private ShoppingController()  {
+	private ShoppingController() {
 		super();
 		INSTANCE = this;
+		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
+		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
+		if (ip != null) {
+			serverIp = ip;
+		}
+		if (usr != null) {
+			userCode = usr;
+		}
 		t = new Timer(24 * 60 * 60 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
@@ -40,10 +50,11 @@ public class ShoppingController implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Sending to Nomhad awakening times>" + times );
-		NomhadGateway.getInstance().putMeasurement("192.168.238.40", "A100",
-				"123456", "ACTIVITIES", "AWAKENING_COUNT", new String("" + times));
+		System.out.println("Sending to Nomhad awakening times>" + times);
+		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
+				"123456", "ACTIVITIES", "AWAKENING_COUNT",
+				new String("" + times));
 		times = 0;
 	}
-	
+
 }

@@ -70,7 +70,12 @@ public class NomhadGateway {
 			header = header.replace("localhost", server);
 			// System.out.println(header);
 		}
-
+//		System.out.println("DEPLOYED PROPERTY"
+//				+ System.getProperty("es.tsbtecnologias.nomhad.ltba.deployed"));
+		if (System.getProperty("es.tsbtecnologias.nomhad.ltba.deployed").equalsIgnoreCase("true")) {
+//			System.out.println("REPLACING...");
+			header = header.replace("nomhad", "ltba");
+		}
 		uri.append(header);
 		uri.append(usr);
 		uri.append(OBSERVATIONS_REQUEST);
