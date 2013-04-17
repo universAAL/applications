@@ -1,12 +1,5 @@
 package org.universAAL.ltba.pir;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import javax.swing.Timer;
-
 import org.universAAL.ltba.activity.Room;
 
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
@@ -47,11 +40,16 @@ public class CurrentActivityController {
 	}
 
 	public void activityDetected(String index, Room room) {
-		System.out.println("Imprimiendo el valor: " + index + " en "
-				+ room.getRoomString());
-		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
-				"123456", INDICATOR_GROUP,
-				INDICATOR + "_" + room.getRoomString(), new String(index));
+		if (room != null) {
+			System.out.println("Imprimiendo el valor: " + index + " en "
+					+ room.getRoomStringNoBlanks());
+			NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
+					"123456", INDICATOR_GROUP,
+					INDICATOR + "_" + room.getRoomStringNoBlanks(),
+					new String(index));
+		} else {
+			activityDetected(index);
+		}
 	}
 
 }

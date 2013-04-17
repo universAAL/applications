@@ -221,9 +221,12 @@ public final class RulesEngine {
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(cfg);
 			// System.out.println(ResourceFactory.newClassPathResource(".//").toString());
 			// System.out.println(rulesEngineBundleContext.getBundle().getResource("reasoner.drl"));
-			kbuilder.add(ResourceFactory
-					.newUrlResource(rulesEngineBundleContext.getBundle()
-							.getResource("reasoner_PIR.drl")), ResourceType.DRL);
+			kbuilder
+					.add(ResourceFactory
+							.newUrlResource(rulesEngineBundleContext
+									.getBundle()
+									.getResource("reasoner_PIR.drl")),
+							ResourceType.DRL);
 		} else {
 			// props.setProperty("drools.dialect.java.compiler", "JANINO");
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
@@ -275,7 +278,7 @@ public final class RulesEngine {
 		// received the correct class in order to made a cast from Object to a
 		// more specific class. This can be easily implemented by placing
 		// eval(myReceivedObject instanceof TheClassToBeCast).
-		
+
 	}
 
 	/**

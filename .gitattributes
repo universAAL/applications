@@ -2825,6 +2825,7 @@ long_term_behav/drools.reasoner/src/main/resources/reasoner.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerAuxClasses.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerRaw.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner_PIR.drl -text
+long_term_behav/drools.reasoner/src/main/resources/reasoner_PIR_Energy.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner_e.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner_energy.drl -text
 long_term_behav/drools.reasoner/src/main/resources/users/droolsWorkshop1.drl -text

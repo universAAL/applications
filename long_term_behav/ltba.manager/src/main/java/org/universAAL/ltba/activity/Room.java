@@ -21,11 +21,11 @@ package org.universAAL.ltba.activity;
 
 /**
  * @author mllorente
- *
+ * 
  */
 public enum Room {
-	KITCHEN("KITCHEN",0), BATHROOM("BATHROOM",1), BEDROOM("BEDROOM",2), LIVINGROOM(
-			"LIVING ROOM",3), GARDEN("GARDEN",4), HALL("HALL",5);
+	KITCHEN("KITCHEN", 0), BATHROOM("BATHROOM", 1), BEDROOM("BEDROOM", 2), LIVINGROOM(
+			"LIVING_ROOM", 3), GARDEN("GARDEN", 4), HALL("HALL", 5);
 	private final String roomString;
 	private final int index;
 
@@ -38,8 +38,12 @@ public enum Room {
 		return roomString;
 	}
 
+	public String getRoomStringNoBlanks() {
+		return roomString.replace(" ", "_");
+	}
+
 	public static Room getRoomByString(String source) {
-		//System.out.println(source);
+		// System.out.println(source);
 		if (source.equalsIgnoreCase("Kitchen")) {
 			System.out.println("returning kitchen");
 			return Room.KITCHEN;
