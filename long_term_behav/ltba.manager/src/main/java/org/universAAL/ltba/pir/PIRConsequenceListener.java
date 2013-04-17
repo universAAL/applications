@@ -3,6 +3,7 @@ package org.universAAL.ltba.pir;
 import java.util.Calendar;
 
 import org.osgi.framework.BundleContext;
+import org.universAAL.ltba.activity.Room;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.context.ContextEvent;
@@ -96,6 +97,7 @@ public class PIRConsequenceListener extends ContextSubscriber {
 		String activity = null;
 		String phase = null;
 		String index = null;
+		String room = null;
 		for (ConsequenceProperty consequenceProperty : consequenceArray) {
 
 			if (consequenceProperty.getKey() == "Device") {
@@ -109,6 +111,8 @@ public class PIRConsequenceListener extends ContextSubscriber {
 				phase = consequenceProperty.getValue();
 			} else if (consequenceProperty.getKey() == "Index") {
 				index = consequenceProperty.getValue();
+			} else if (consequenceProperty.getKey() == "Room") {
+				room = consequenceProperty.getValue();
 			}
 		}
 
@@ -127,7 +131,8 @@ public class PIRConsequenceListener extends ContextSubscriber {
 		} else if (activity == "GoingOut") {
 			OutOfHomeController.getInstance().outOfHomeStart(longTime);
 		} else if (activity == "Current") {
-			CurrentActivityController.getInstance().activityDetected(index);
+			CurrentActivityController.getInstance().activityDetected(index,
+					Room.getRoomByString(room));
 		} else if (activity == "AverageDay") {
 			ActivityIndexController.getInstance().addActivityIndex(index);
 		} else if (activity == "Back") {
