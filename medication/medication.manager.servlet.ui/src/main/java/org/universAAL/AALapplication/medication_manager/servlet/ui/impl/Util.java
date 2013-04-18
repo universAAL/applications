@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.StringReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -110,7 +112,7 @@ public final class Util {
 
   public static int getPositiveNumber(String var, String varName) {
 
-    int value = getIntFromString(var,varName);
+    int value = getIntFromString(var, varName);
 
     if (value <= 0) {
       throw new MedicationManagerServletUIException("The number is not positive : " + value);
@@ -145,6 +147,7 @@ public final class Util {
     if (notes == null) {
       newPrescriptionView.setNotes(EMPTY);
     } else {
+      notes = escapeNewLinesAndSingleQuotes(notes);
       newPrescriptionView.setNotes(notes);
     }
   }
@@ -154,4 +157,28 @@ public final class Util {
       throw new MedicationManagerServletUIException("The " + propertyName + " String property cannot be set with null or empty");
     }
   }
+
+  public static String escapeNewLinesAndSingleQuotes(String description) {
+    StringBuffer sb = new StringBuffer();
+    StringReader reader = new StringReader(description);
+    LineNumberReader lineNumberReader = new LineNumberReader(reader);
+
+    try {
+      String line = lineNumberReader.readLine();
+      while (line != null) {
+        line = line.replace("'", "\\'");
+        sb.append(line);
+        line = lineNumberReader.readLine();
+        if (line != null) {
+          sb.append("\\n");
+        }
+      }
+
+      return sb.toString();
+    } catch (IOException e) {
+      throw new MedicationManagerServletUIException(e);
+    }
+
+  }
+
 }

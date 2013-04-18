@@ -122,6 +122,7 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
 
     String notes = req.getParameter(NOTES);
     if (notes != null && !notes.trim().isEmpty()) {
+      notes = escapeNewLinesAndSingleQuotes(notes);
       newPrescriptionView.setNotes(notes);
     }
   }

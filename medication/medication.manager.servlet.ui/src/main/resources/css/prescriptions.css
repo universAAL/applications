@@ -1,7 +1,7 @@
 h2 span { font-weight: bold; }
 
 table { width: 420px; }
-table tr td div { height: 50px; overflow: auto; }
+table tr td textarea { height: 50px; overflow: auto; width: 99%; border:none; }
 table tr td.notes { min-width: 350px; }
 table tr td.medicine div { border-top: 1px dotted; }
 table tr td.medicine div:first-child { border-top: none; }

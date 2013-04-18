@@ -709,7 +709,7 @@ public final class PrescriptionDao extends AbstractDao {
     try {
       statement = getPreparedStatement(sql);
       statement.setString(1, ACTIVE.getType().toUpperCase());
-      List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
+      List<Map<String, Column>> results = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, statement);
       List<Prescription> prescriptions = createPrescriptions(results);
       return convertToDTO(prescriptions);
     } catch (SQLException e) {

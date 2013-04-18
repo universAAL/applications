@@ -106,8 +106,7 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
       newPrescriptionView.addMedicineView(medicineView);
     }
 
-    String param = req.getParameter(PRESCRIPTION_ID);
-    int prescriptionId = getIntFromString(param, "param");
+    int prescriptionId = getPrescriptionId(req, newPrescriptionView);
 
     int id = newPrescriptionView.getPrescriptionId();
     if (prescriptionId != id) {
@@ -116,6 +115,17 @@ public final class MedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
     }
 
     return medicineView;
+  }
+
+  private int getPrescriptionId(HttpServletRequest req, NewPrescriptionView newPrescriptionView) {
+    String param = req.getParameter(PRESCRIPTION_ID);
+    int prescriptionId;
+    if (param != null && !param.isEmpty()) {
+      prescriptionId = getIntFromString(param, "param");
+    } else {
+      prescriptionId = newPrescriptionView.getPrescriptionId();
+    }
+    return prescriptionId;
   }
 
   @Override
