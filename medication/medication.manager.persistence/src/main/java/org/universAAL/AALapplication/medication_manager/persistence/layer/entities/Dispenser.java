@@ -11,23 +11,27 @@ public final class Dispenser extends Entity {
 
   private final Person patient;
   private final String dispenserUri;
+  private final String instructionsFileName;
 
-  public Dispenser(int id, Person patient, String dispenserUri) {
+  public Dispenser(int id, Person patient, String dispenserUri, String instructionsFileName) {
     super(id);
-    validate(patient, dispenserUri);
+
+    validate(patient, dispenserUri, instructionsFileName);
 
     this.patient = patient;
     this.dispenserUri = dispenserUri;
+    this.instructionsFileName = instructionsFileName;
   }
 
-  public Dispenser(Person patient, String dispenserUri) {
-    this(0, patient, dispenserUri);
+  public Dispenser(Person patient, String dispenserUri, String instructionsFileName) {
+    this(0, patient, dispenserUri, instructionsFileName);
   }
 
-  private void validate(Person patient, String dispenserUri) {
+  private void validate(Person patient, String dispenserUri, String instructionsFileName) {
 
     validateParameter(patient, "patient");
     validateParameter(dispenserUri, "dispenserUri");
+    validateParameter(instructionsFileName, "instructionsFileName");
   }
 
   public Person getPatient() {
@@ -38,12 +42,16 @@ public final class Dispenser extends Entity {
     return dispenserUri;
   }
 
+  public String getInstructionsFileName() {
+    return instructionsFileName;
+  }
+
   @Override
   public String toString() {
     return "Dispenser{" +
-        "id=" + getId() +
-        ", patient:" + patient +
+        "patient=" + patient +
         ", dispenserUri='" + dispenserUri + '\'' +
+        ", instructionsFileName='" + instructionsFileName + '\'' +
         '}';
   }
 }

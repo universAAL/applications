@@ -32,8 +32,7 @@ public final class DerbySqlUtility implements SqlUtility {
 
   public int generateId() {
     try {
-      int sequenceValue = getNextSequenceValue();
-      return sequenceValue;
+      return getNextSequenceValue();
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException("unable to get next id from sequence generator", e);
     }
