@@ -253,7 +253,7 @@ public final class DerbyDatabase implements Database {
     PreparedStatement ps = null;
     try {
       ps = connection.prepareStatement(
-          "CREATE SEQUENCE " + MEDICATION_MANAGER + ".ID_GEN AS BIGINT START WITH 1000");
+          "CREATE SEQUENCE " + MEDICATION_MANAGER + ".ID_GEN AS BIGINT START WITH 10000");
       ps.execute();
     } catch (SQLException e) {
       //nothing to do here in case the sequence exist and this method is triggered by other SQLException than sequence does not exists

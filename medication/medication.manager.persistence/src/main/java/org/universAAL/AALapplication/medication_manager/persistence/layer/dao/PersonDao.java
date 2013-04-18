@@ -21,10 +21,12 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
  */
 public final class PersonDao extends AbstractDao {
 
+  private DispenserDao dispenserDao;
+
   public static final String NAME = "NAME";
   public static final String PERSON_URI = "PERSON_URI";
   public static final String ROLE = "ROLE";
-  private DispenserDao dispenserDao;
+  public static final String CAREGIVER_SMS = "CAREGIVER_SMS";
 
   static final String TABLE_NAME = "PERSON";
 
@@ -60,7 +62,10 @@ public final class PersonDao extends AbstractDao {
     String roleString = (String) col.getValue();
     Role role = Role.getEnumValueFor(roleString);
 
-    Person person = new Person(personId, name, personUri, role);
+    col = columns.get(CAREGIVER_SMS);
+    String caregiverSms = (String) col.getValue();
+
+    Person person = new Person(personId, name, personUri, role, caregiverSms);
 
     Log.info("Person found: %s", getClass(), person);
 
@@ -101,7 +106,7 @@ public final class PersonDao extends AbstractDao {
     Log.info("Looking for the doctor with username=%s", getClass(), username);
 
     String sql = "select * from MEDICATION_MANAGER.PERSON where UPPER(USERNAME) = ? AND " +
-        "PASSWORD = ? AND UPPER(ROLE) = ?" ;
+        "PASSWORD = ? AND UPPER(ROLE) = ?";
 
     PreparedStatement ps = null;
 
@@ -117,7 +122,7 @@ public final class PersonDao extends AbstractDao {
       return getPerson(personRecordMap);
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
-    } finally{
+    } finally {
       closeStatement(ps);
     }
 

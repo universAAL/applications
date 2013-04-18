@@ -19,6 +19,7 @@ public final class DispenserDao extends AbstractDao {
   private static final String PATIENT_FK_ID = "PATIENT_FK_ID";
   private static final String DISPENSER_URI = "DISPENSER_URI";
   private static final String ID = "ID";
+  private static final String INSTRUCTIONS_FILE_NAME = "INSTRUCTIONS_FILE_NAME";
   private PersonDao personDao;
 
   private static final String TABLE_NAME = "DISPENSER";
@@ -49,7 +50,10 @@ public final class DispenserDao extends AbstractDao {
     col = columns.get(DISPENSER_URI);
     String dispenserUri = (String) col.getValue();
 
-    Dispenser dispenser = new Dispenser(id, person, dispenserUri);
+    col = columns.get(INSTRUCTIONS_FILE_NAME);
+    String instructionsFileName = (String) col.getValue();
+
+    Dispenser dispenser = new Dispenser(id, person, dispenserUri, instructionsFileName);
 
     Log.info("Dispenser found: %s", getClass(), dispenser);
 
@@ -79,7 +83,10 @@ public final class DispenserDao extends AbstractDao {
     col = columnMap.get(DISPENSER_URI);
     String dispenserUri = (String) col.getValue();
 
-    Dispenser dispenser = new Dispenser(id, person, dispenserUri);
+    col = columnMap.get(INSTRUCTIONS_FILE_NAME);
+    String instructionsFileName = (String) col.getValue();
+
+    Dispenser dispenser = new Dispenser(id, person, dispenserUri, instructionsFileName);
 
     Log.info("Dispenser found: %s", getClass(), dispenser);
 
@@ -105,7 +112,9 @@ public final class DispenserDao extends AbstractDao {
     Column colPatient = dispenserRecordMap.get(PATIENT_FK_ID);
     int personId = (Integer) colPatient.getValue();
     Person person = personDao.getById(personId);
+    Column instructionsFileNameColumn = dispenserRecordMap.get(INSTRUCTIONS_FILE_NAME);
+    String instructionsFileName = (String) instructionsFileNameColumn.getValue();
 
-    return new Dispenser(id, person, dispenserUri);
+    return new Dispenser(id, person, dispenserUri, instructionsFileName);
   }
 }
