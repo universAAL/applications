@@ -6,6 +6,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.Medicat
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +71,19 @@ public abstract class AbstractDao {
     if (results == null || results.isEmpty()) {
       throw new MedicationManagerPersistenceException("Missing the record in the table:" +
           tableName + " for the following sql:\n" + sql, MedicationManagerPersistenceException.MISSING_RECORD);
+    }
+
+    return results;
+
+  }
+
+  protected List<Map<String, Column>> executeQueryMultipleRecordsPossible(String tableName,
+                                                                          String sql, PreparedStatement statement) {
+
+    List<Map<String, Column>> results = database.executeQueryExpectedMultipleRecord(tableName, statement);
+
+    if (results == null) {
+      results = new ArrayList<Map<String, Column>>();
     }
 
     return results;

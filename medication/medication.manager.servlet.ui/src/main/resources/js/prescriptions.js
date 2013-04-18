@@ -13,7 +13,7 @@ $(function () {
       $(tableSelector + ' tr:has(td)').remove();
       $.each(userObj.prescriptions, function (i, prescription) {
         var tr = $trTempl.clone();
-        tr.find('td:eq(0)').html(prescription.date).next('td').find("div").html(prescription.notes);
+        tr.find('td:eq(0)').html(prescription.date).next('td').find("textarea").html(prescription.notes);
         if ($.isArray(prescription.medicines)) {
 
           $.each(prescription.medicines, function (i, medicine) {

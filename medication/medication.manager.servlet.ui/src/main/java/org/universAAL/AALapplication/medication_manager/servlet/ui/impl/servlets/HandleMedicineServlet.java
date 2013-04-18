@@ -143,16 +143,18 @@ public final class HandleMedicineServlet extends BaseServlet {
     String daysText = getNotNullParameter(req, DAYS);
     medicineView.setDays(daysText);
     String description = req.getParameter(DESCRIPTION);
+    description = escapeNewLinesAndSingleQuotes(description);
     medicineView.setDescription(description);
     String name = getNotNullParameter(req, NAME);
     medicineView.setName(name);
     String mealRelation = getNotNullParameter(req, MEAL_RELATION);
     medicineView.setMealRelationDTO(mealRelation);
     String incompliances = req.getParameter(INCOMPLIANCES);
+    incompliances = escapeNewLinesAndSingleQuotes(incompliances);
     medicineView.setIncompliances(incompliances);
     String sideeffects = req.getParameter(SIDE_EFFECTS);
+    sideeffects = escapeNewLinesAndSingleQuotes(sideeffects);
     medicineView.setSideeffects(sideeffects);
-
     String unitText = getNotNullParameter(req, UNIT);
     String doseText = getNotNullParameter(req, "dose");
     int dose = getPositiveNumber(doseText, "doseText");

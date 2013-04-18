@@ -33,11 +33,11 @@ $(function () {
         var t = tr.find('td:eq(0)');
         t.html(medicine.name);
         t = t.next("td");
-        t.find("div").html(medicine.description);
+        t.find("textarea").html(medicine.description);
         t = t.next("td");
-        t.find("div").html(medicine.side_effects);
+        t.find("textarea").html(medicine.side_effects);
         t = t.next("td");
-        t.find("div").html(medicine.incompliances);
+        t.find("textarea").html(medicine.incompliances);
         $(tableSelector).append(tr);
         tr = $trTempl2.clone();
         tr.attr("id", medicine.id);
