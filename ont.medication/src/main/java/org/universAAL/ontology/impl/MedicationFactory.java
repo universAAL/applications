@@ -20,6 +20,8 @@ package org.universAAL.ontology.impl;
 
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.ontology.medMgr.CaregiverNotifier;
+import org.universAAL.ontology.medMgr.CaregiverNotifierData;
 import org.universAAL.ontology.medMgr.DispenserUpsideDown;
 import org.universAAL.ontology.medMgr.DueIntake;
 import org.universAAL.ontology.medMgr.Intake;
@@ -47,6 +49,8 @@ public final class MedicationFactory extends ResourceFactoryImpl {
   public static final int MEDICATION_TREATMENT_FACTORY_INDEX = 7;
   public static final int NEW_MEDICATION_TREATMENT_NOTIFIER_FACTORY_INDEX = 8;
   public static final int NEW_PRESCRIPTION_FACTORY_INDEX = 9;
+  public static final int CAREGIVER_NOTIFIER_DATA_FACTORY_INDEX = 10;
+  public static final int CAREGIVER_NOTIFIER_FACTORY_INDEX = 11;
 
   public Resource createInstance(String classURI, String instanceURI, int factoryIndex) {
 
@@ -70,6 +74,10 @@ public final class MedicationFactory extends ResourceFactoryImpl {
       return new NewMedicationTreatmentNotifier(instanceURI);
     } else if (factoryIndex == NEW_PRESCRIPTION_FACTORY_INDEX) {
       return new NewPrescription(instanceURI);
+    } else if (factoryIndex == CAREGIVER_NOTIFIER_DATA_FACTORY_INDEX) {
+      return new CaregiverNotifierData(instanceURI);
+    } else if (factoryIndex == CAREGIVER_NOTIFIER_FACTORY_INDEX) {
+      return new CaregiverNotifier(instanceURI);
     }
 
     return null;
