@@ -17,13 +17,19 @@
 
 package org.universAAL.AALapplication.medication_manager.simulation.impl;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
+import org.universAAL.ontology.medMgr.CaregiverNotifierData;
 import org.universAAL.ontology.profile.User;
+
+import static org.universAAL.AALapplication.medication_manager.simulation.impl.Activator.*;
 
 
 /**
@@ -64,18 +70,42 @@ public final class CaregiverNotificationProvider extends ServiceCallee {
     }
 
     if (processURI.startsWith(ProviderCaregiverNotificationService.SERVICE_NOTIFY)) {
-      return getSuccessfulServiceResponse(involvedUser);
+      return getSuccessfulServiceResponse(call, involvedUser);
     }
 
     return invalidInput;
   }
 
-  private ServiceResponse getSuccessfulServiceResponse(User involvedUser) {
+  private ServiceResponse getSuccessfulServiceResponse(ServiceCall call, User involvedUser) {
     String userId = involvedUser.getURI();
+    CaregiverNotifierData caregiverNotifierData =
+        (CaregiverNotifierData) call.getInputValue(ProviderCaregiverNotificationService.INPUT_CAREGIVER_NOTIFIER_DATA);
+
     Log.info("Successful Caregiver Notification Service Response for the user %s", getClass(), userId);
     ServiceResponse response = new ServiceResponse(CallStatus.succeeded);
 
+    String message = createMessage(caregiverNotifierData, involvedUser);
+
+    response.addOutput(new ProcessOutput(ProviderCaregiverNotificationService.OUTPUT_RECEIVED_MESSAGE, message));
+
     return response;
+  }
+
+  private String createMessage(CaregiverNotifierData caregiverNotifierData, User involvedUser) {
+    StringBuffer sb = new StringBuffer();
+    sb.append("The Caregiver Notification Service received notification with the following content:\n\t");
+    sb.append("The notification is for the following user: ");
+    PersistentService persistentService = getPersistentService();
+    PersonDao personDao = persistentService.getPersonDao();
+    Person person = personDao.findPersonByPersonUri(involvedUser.getURI());
+    sb.append(person.getName());
+    sb.append(".\n\t Provided caregiver sms number: ");
+    sb.append(caregiverNotifierData.getSmsNumber());
+    sb.append(".\n\t With the following sms text: ");
+    sb.append(caregiverNotifierData.getSmsText());
+
+    return sb.toString();
+
   }
 
 }

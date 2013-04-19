@@ -19,8 +19,8 @@ package org.universAAL.AALapplication.medication_manager.simulation.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.osgi.framework.ServiceReference;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.simulation.export.DispenserUpsideDownContextProvider;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationConsumer;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationReminderContextProvider;
@@ -35,13 +35,14 @@ public class Activator implements BundleActivator {
 
   public static ModuleContext mc;
 
-  public static final Logger logger = LoggerFactory.getLogger(Activator.class);
+  static BundleContext bc;
 
   /*
     * (non-Javadoc)
     * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
     */
   public void start(final BundleContext context) throws Exception {
+    bc = context;
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
     new Thread() {
@@ -75,5 +76,24 @@ public class Activator implements BundleActivator {
     */
   public void stop(BundleContext context) throws Exception {
 
+  }
+
+  public static PersistentService getPersistentService() {
+    if (bc == null) {
+      throw new MedicationManagerSimulationServicesException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = bc.getServiceReference(PersistentService.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerSimulationServicesException("The ServiceReference is null for PersistentService");
+    }
+
+    PersistentService persistentService = (PersistentService) bc.getService(srPS);
+
+    if (persistentService == null) {
+      throw new MedicationManagerSimulationServicesException("The PersistentService is missing");
+    }
+    return persistentService;
   }
 }

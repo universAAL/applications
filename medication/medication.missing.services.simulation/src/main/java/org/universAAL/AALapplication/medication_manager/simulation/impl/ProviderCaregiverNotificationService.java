@@ -22,12 +22,13 @@ import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.medMgr.MissedIntake;
+import org.universAAL.ontology.medMgr.CaregiverNotifier;
+import org.universAAL.ontology.medMgr.CaregiverNotifierData;
 
 /**
  * @author George Fournadjiev
  */
-public final class ProviderCaregiverNotificationService extends MissedIntake {
+public final class ProviderCaregiverNotificationService extends CaregiverNotifier {
 
   public static final String CAREGIVER_NOTIFICATION_SERVER_NAMESPACE =
       "http://ontology.igd.fhg.de/CaregiverNotificationServer.owl#";
@@ -36,7 +37,9 @@ public final class ProviderCaregiverNotificationService extends MissedIntake {
 
   public static final String SERVICE_NOTIFY = CAREGIVER_NOTIFICATION_SERVER_NAMESPACE + "notify";
 
-  static final String OUTPUT_NOTIFY = CAREGIVER_NOTIFICATION_SERVER_NAMESPACE + "notify";
+  static final String INPUT_CAREGIVER_NOTIFIER_DATA = CAREGIVER_NOTIFICATION_SERVER_NAMESPACE + "CaregiverNotifierData";
+
+  static final String OUTPUT_RECEIVED_MESSAGE = CAREGIVER_NOTIFICATION_SERVER_NAMESPACE + "receivedMessage";
 
   static final ServiceProfile[] profiles = new ServiceProfile[1];
 
@@ -45,7 +48,7 @@ public final class ProviderCaregiverNotificationService extends MissedIntake {
     //Register
 
     OntologyManagement.getInstance().register(
-        new SimpleOntology(MY_URI, MissedIntake.MY_URI,
+        new SimpleOntology(MY_URI, CaregiverNotifier.MY_URI,
             new ResourceFactoryImpl() {
               @Override
               public Resource createInstance(String classURI,
@@ -54,13 +57,17 @@ public final class ProviderCaregiverNotificationService extends MissedIntake {
               }
             }));
 
-    String[] ppMissedIntake = new String[]{MissedIntake.PROP_TIME};
+    String[] ppInputCaregiverNotifier = new String[]{CaregiverNotifier.PROP_CAREGIVER_NOTIFIER_DATA};
 
     ProviderCaregiverNotificationService notify =
         new ProviderCaregiverNotificationService(SERVICE_NOTIFY);
 
-    notify.addOutput(OUTPUT_NOTIFY,
-        MissedIntake.MY_URI, 1, 1, ppMissedIntake);
+    notify.addInputWithAddEffect(INPUT_CAREGIVER_NOTIFIER_DATA, CaregiverNotifierData.MY_URI, 1, 1, ppInputCaregiverNotifier);
+
+    String[] ppOutputReceivedMessage = new String[]{CaregiverNotifier.PROP_RECEIVED_MESSAGE};
+
+    notify.addOutput(OUTPUT_RECEIVED_MESSAGE,
+        CaregiverNotifier.MY_URI, 1, 1, ppOutputReceivedMessage);
 
     profiles[0] = notify.myProfile;
 

@@ -3115,6 +3115,7 @@ medication/medication.missing.services.simulation/src/main/java/org/universAAL/A
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/CaregiverNotificationProvider.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/HealthPrescriptionServiceProvider.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/Log.java -text
+medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/MedicationManagerSimulationServicesException.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/NewPrescriptionContextProvider.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/ProviderCaregiverNotificationService.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/ProviderDueIntakeService.java -text
@@ -3654,6 +3655,8 @@ ontologies/ont.medication/pom.xml -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/impl/Activator.java -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/impl/Log.java -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/impl/MedicationFactory.java -text
+ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/CaregiverNotifier.java -text
+ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/CaregiverNotifierData.java -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/DispenserUpsideDown.java -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/DueIntake.java -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/Intake.java -text
