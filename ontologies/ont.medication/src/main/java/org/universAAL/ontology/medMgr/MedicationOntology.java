@@ -249,5 +249,31 @@ public final class MedicationOntology extends Ontology {
         .getAllValuesRestrictionWithCardinality(
             NewMedicationTreatmentNotifier.PROP_RECEIVED_MESSAGE, TypeMapper.getDatatypeURI(String.class), 1, 1));
 
+    // load CaregiverNotifierData
+    oci = createNewOntClassInfo(CaregiverNotifierData.MY_URI, FACTORY, CAREGIVER_NOTIFIER_DATA_FACTORY_INDEX);
+    oci.setResourceComment("The type of a CaregiverNotifierData");
+    oci.setResourceLabel("CaregiverNotifierData");
+    oci.addDatatypeProperty(CaregiverNotifierData.PROP_SMS_NUMBER);
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            CaregiverNotifierData.PROP_SMS_NUMBER, TypeMapper.getDatatypeURI(String.class), 1, 1));
+    oci.addDatatypeProperty(CaregiverNotifierData.PROP_SMS_TEXT);
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            CaregiverNotifierData.PROP_SMS_TEXT, TypeMapper.getDatatypeURI(String.class), 1, 1));
+
+    // load CaregiverNotifier
+    oci = createNewOntClassInfo(CaregiverNotifier.MY_URI, FACTORY, CAREGIVER_NOTIFIER_FACTORY_INDEX);
+    oci.setResourceComment("The type of a CaregiverNotifier");
+    oci.setResourceLabel("CaregiverNotifier");
+    oci.addObjectProperty(CaregiverNotifier.PROP_CAREGIVER_NOTIFIER_DATA).setFunctional();
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            CaregiverNotifier.PROP_CAREGIVER_NOTIFIER_DATA, CaregiverNotifierData.MY_URI, 1, 1));
+    oci.addDatatypeProperty(CaregiverNotifier.PROP_RECEIVED_MESSAGE);
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            CaregiverNotifier.PROP_RECEIVED_MESSAGE, TypeMapper.getDatatypeURI(String.class), 1, 1));
+
   }
 }
