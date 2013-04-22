@@ -88,19 +88,19 @@ insert into medication_manager.medicine_inventory (id, patient_fk_id, medicine_f
 values (11, 2, 1046, 'pill', 15, 5);
 
 insert into medication_manager.medicine_inventory (id, patient_fk_id, medicine_fk_id, unit_class, quantity, warning_threshold)
-values (11, 3, 1046, 'pill', 15, 5);
+values (12, 3, 1046, 'pill', 15, 5);
 
 insert into medication_manager.medicine_inventory (id, patient_fk_id, medicine_fk_id, unit_class, quantity, warning_threshold)
-values (12, 3, 1210, 'pill', 15, 5);
+values (13, 3, 1210, 'pill', 15, 5);
 
 insert into medication_manager.medicine_inventory (id, patient_fk_id, medicine_fk_id, unit_class, quantity, warning_threshold)
-values (13, 3, 1209, 'drops', 150, 50);
+values (14, 3, 1209, 'drops', 150, 50);
 
 insert into medication_manager.medicine_inventory (id, patient_fk_id, medicine_fk_id, unit_class, quantity, warning_threshold)
-values (14, 3, 1008, 'pill', 15, 5);
+values (15, 3, 1008, 'pill', 15, 5);
 
 insert into medication_manager.medicine_inventory (id, patient_fk_id, medicine_fk_id, unit_class, quantity, warning_threshold)
-values (15, 3, 1193, 'pill', 5, 2);
+values (16, 3, 1193, 'pill', 5, 2);
 
 
 // inventory_log table
