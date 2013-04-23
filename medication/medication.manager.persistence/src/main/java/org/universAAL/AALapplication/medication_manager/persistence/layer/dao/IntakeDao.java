@@ -76,6 +76,12 @@ public final class IntakeDao extends AbstractDao {
   }
 
   private Intake getIntake(Map<String, Column> columns) {
+
+    checkForSetDao(dispenserDao, "dispenserDao");
+    checkForSetDao(treatmentDao, "treatmentDao");
+    checkForSetDao(medicineDao, "medicineDao");
+
+
     Column col = columns.get(ID);
     int intakeId = (Integer) col.getValue();
 

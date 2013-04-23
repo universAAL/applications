@@ -61,6 +61,8 @@ public final class PersistentServiceImpl implements PersistentService {
     prescriptionDao.setTreatmentDao(treatmentDao);
     prescriptionDao.setIntakeDao(intakeDao);
     doctorPatientDao.setPersonDao(personDao);
+    medicineInventoryDao.setMedicineDao(medicineDao);
+    medicineInventoryDao.setPersonDao(personDao);
 
     Date now = new Date();
     System.out.println("before loadPrescriptionDTOs = " + now);
