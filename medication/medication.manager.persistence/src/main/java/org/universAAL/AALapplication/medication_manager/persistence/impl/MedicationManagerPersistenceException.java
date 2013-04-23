@@ -26,6 +26,7 @@ public final class MedicationManagerPersistenceException extends RuntimeExceptio
 
 
   public static final int MISSING_RECORD = 1;
+  public static final int NOT_ENOUGH_INVENTORY = 2;
 
   public MedicationManagerPersistenceException() {
     this(0);

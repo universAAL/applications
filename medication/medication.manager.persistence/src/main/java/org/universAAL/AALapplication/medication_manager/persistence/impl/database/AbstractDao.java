@@ -111,5 +111,13 @@ public abstract class AbstractDao {
     }
   }
 
+  public void setAutoCommitToTrue(Connection connection) {
+    try {
+      connection.setAutoCommit(true);
+    } catch (SQLException e) {
+      //nothing we can do here
+    }
+  }
+
 
 }

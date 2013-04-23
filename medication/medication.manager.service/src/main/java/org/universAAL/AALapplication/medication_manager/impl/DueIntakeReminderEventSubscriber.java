@@ -19,7 +19,10 @@ package org.universAAL.AALapplication.medication_manager.impl;
 
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.AALapplication.medication_manager.ui.ReminderDialog;
@@ -32,6 +35,7 @@ import org.universAAL.ontology.medMgr.DueIntake;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -91,16 +95,22 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
     PersistentService persistentService = getPersistentService();
     PersonDao personDao = persistentService.getPersonDao();
 
-    Person person = personDao.findPersonByDeviceUri(deviceUri);
+    Person patient = personDao.findPersonByDeviceUri(deviceUri);
 
-    User user = new User(person.getPersonUri());
+    User user = new User(patient.getPersonUri());
+
+    MedicineInventoryDao medicineInventoryDao = persistentService.getMedicineInventoryDao();
+
+    IntakeDao intakeDao = persistentService.getIntakeDao();
+
+    List<Intake> intakes = intakeDao.getIntakesByUserAndTime(user, time);
 
     ReminderDialog reminderDialog =
-        new ReminderDialog(moduleContext, time);
+        new ReminderDialog(moduleContext, time, patient, intakes, medicineInventoryDao);
 
     reminderDialog.showDialog(user);
 
-    setTimeOut(reminderDialog, dueIntake, user);
+    setTimeOut(reminderDialog, dueIntake, medicineInventoryDao, user, intakes, patient);
 
   }
 
@@ -116,14 +126,19 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
   }
 
-  private void setTimeOut(final ReminderDialog reminderDialog, final DueIntake dueIntake, final User user) {
+  private void setTimeOut(final ReminderDialog reminderDialog, final DueIntake dueIntake,
+                          final MedicineInventoryDao medicineInventoryDao,
+                          final User user, final List<Intake> intakes , final Person patient) {
+
     final Timer timer = new Timer();
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
         boolean userActed = reminderDialog.isUserActed();
         Log.info("Is the user made a UI response(true/false): %s", getClass(), userActed);
-        if (!userActed) {
+        if (userActed) {
+          medicineInventoryDao.decreaseInventory(patient, intakes);
+        } else {
           publishMissedIntakeEvent(dueIntake, user);
         }
         timer.cancel();

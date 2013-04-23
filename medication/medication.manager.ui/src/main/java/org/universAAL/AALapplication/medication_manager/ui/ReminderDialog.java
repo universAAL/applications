@@ -17,6 +17,9 @@
 
 package org.universAAL.AALapplication.medication_manager.ui;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.ui.impl.MedicationManagerUIException;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
@@ -32,6 +35,7 @@ import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
+import java.util.List;
 import java.util.Locale;
 
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
@@ -40,25 +44,37 @@ public class ReminderDialog extends UICaller {
 
   private final ModuleContext moduleContext;
   private final Time time;
+  private final Person patient;
+  private final List<Intake> intakes;
+  private final MedicineInventoryDao medicineInventoryDao;
 
   private boolean userActed;
 
   private static final String CLOSE_BUTTON = "closeButton";
   private static final String INFO_BUTTON = "reminderButton";
+  private static final String REQUEST_NEW_DOSE_BUTTON = "requestNewDoseButton";
 
-  public ReminderDialog(ModuleContext context, Time time) {
+  public ReminderDialog(ModuleContext context, Time time, Person patient,
+                        List<Intake> intakes, MedicineInventoryDao medicineInventoryDao) {
     super(context);
 
     validateParameter(context, "context");
-    validateParameter(time, "time");
+
 
     moduleContext = context;
     this.time = time;
     this.userActed = false;
+    this.patient = patient;
+    this.intakes = intakes;
+    this.medicineInventoryDao = medicineInventoryDao;
   }
 
   public ReminderDialog(ModuleContext context) {
-    this(context, null);
+    this(context, null, null, null, null);
+  }
+
+  public ReminderDialog(ModuleContext context, Time time) {
+    this(context, time, null, null, null);
   }
 
   @Override
@@ -76,13 +92,26 @@ public class ReminderDialog extends UICaller {
       System.out.println("close");
     } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
       showRequestMedicationInfoDialog((User) input.getUser());
+    } else if (REQUEST_NEW_DOSE_BUTTON.equals(input.getSubmissionID())) {
+      decreaseInventory();
     } else {
       System.out.println("unknown");
     }
 
   }
 
+  private void decreaseInventory() {
+    if (medicineInventoryDao == null || patient == null || intakes == null) {
+      throw new MedicationManagerUIException("There are fields in the ReminderDialog class which are null");
+    }
+    medicineInventoryDao.decreaseInventory(patient, intakes);
+  }
+
   private void showRequestMedicationInfoDialog(User user) {
+
+    if (time == null) {
+      throw new MedicationManagerUIException("There are fields in the ReminderDialog class which are null");
+    }
 
     RequestMedicationInfoDialog dialog = new RequestMedicationInfoDialog(moduleContext, time);
     dialog.showDialog(user);
@@ -109,6 +138,7 @@ public class ReminderDialog extends UICaller {
     //...
     new Submit(f.getSubmits(), new Label("Close", null), CLOSE_BUTTON);
     new Submit(f.getSubmits(), new Label("Info", null), INFO_BUTTON);
+    new Submit(f.getSubmits(), new Label("New dose", null), REQUEST_NEW_DOSE_BUTTON);
     //stop of form model
     UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
     this.sendUIRequest(req);
