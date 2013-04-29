@@ -17,28 +17,27 @@
 
 package org.universAAL.AALapplication.medication_manager.simulation.export;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.TreatmentDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MealRelationDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
-import org.universAAL.AALapplication.medication_manager.simulation.impl.Log;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
+import org.universAAL.AALapplication.medication_manager.simulation.impl.MedicationManagerSimulationServicesException;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.NewPrescriptionContextProvider;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
-import org.universAAL.middleware.service.ServiceRequest;
-import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.medMgr.Intake;
 import org.universAAL.ontology.medMgr.IntakeUnit;
 import org.universAAL.ontology.medMgr.MealRelation;
 import org.universAAL.ontology.medMgr.MedicationException;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
-import org.universAAL.ontology.medMgr.Medicine;
-import org.universAAL.ontology.medMgr.NewMedicationTreatmentNotifier;
 import org.universAAL.ontology.medMgr.NewPrescription;
-import org.universAAL.ontology.medMgr.UserIDs;
 import org.universaal.ontology.health.owl.TreatmentPlanning;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -51,18 +50,15 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
+
 /**
  * @author George Fournadjiev
  */
-public final class NewPrescriptionHandler {
+public abstract class NewPrescriptionHandler {
 
-  private final ServiceCaller serviceCaller;
+  protected final ServiceCaller serviceCaller;
   private final NewPrescriptionContextProvider newPrescriptionContextProvider;
 
-  private static final String NEW_MEDICATION_TREATMENT_NOTIFIER_NAMESPACE =
-      "http://ontology.igd.fhg.de/NewMedicationTreatmentNotifier.owl#";
-  private static final String OUTPUT_NEW_PRESCRIPTION_RECEIVED_MESSAGE =
-      NEW_MEDICATION_TREATMENT_NOTIFIER_NAMESPACE + "receivedMessage";
   private static final String MEDICATION_TREATMENT = "MedicationTreatment";
 
   public NewPrescriptionHandler(ModuleContext context, NewPrescriptionContextProvider contextProvider) {
@@ -71,11 +67,14 @@ public final class NewPrescriptionHandler {
     newPrescriptionContextProvider = contextProvider;
   }
 
-  public void callHealthServiceWithNewPrescription(PrescriptionDTO prescriptionDTO) {
+  public void callHealthServiceWithNewPrescription(PersistentService persistentService,
+                                                   PrescriptionDTO prescriptionDTO) {
 
     try {
+      PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
+      prescriptionDao.save(prescriptionDTO);
       NewPrescription newPrescription = createNewPrescription(prescriptionDTO);
-      handleNewPrescription(prescriptionDTO, newPrescription);
+      handleNewPrescription(prescriptionDTO, persistentService, newPrescription);
       newPrescriptionContextProvider.publishNewPrescriptionEvent(newPrescription);
     } catch (DatatypeConfigurationException e) {
       throw new MedicationException(e);
@@ -83,31 +82,64 @@ public final class NewPrescriptionHandler {
 
   }
 
-  private void handleNewPrescription(PrescriptionDTO prescriptionDTO,
-                                            NewPrescription newPrescription)
-      throws DatatypeConfigurationException {
+  private void handleNewPrescription(PrescriptionDTO prescriptionDTO, PersistentService persistentService,
+                                     NewPrescription newPrescription) throws DatatypeConfigurationException {
 
     List<MedicationTreatment> medicationTreatmentList = new ArrayList<MedicationTreatment>();
-    Set<MedicineDTO> medicineDTOSet = prescriptionDTO.getMedicineDTOSet();
-    for (MedicineDTO medicineDTO : medicineDTOSet) {
-      Medicine medicine = new Medicine();
-      medicine.setMedicineId(medicineDTO.getMedicineId());
-      medicine.setDays(medicineDTO.getDays());
-      medicine.setDescription(medicineDTO.getDescription());
-      medicine.setName(medicineDTO.getName());
-      setMealRelationEnum(medicine, medicineDTO.getMealRelationDTO());
-      setIntakes(medicine, medicineDTO);
-      MedicationTreatment medicationTreatment = createMedicationTreatment(prescriptionDTO);
-      medicationTreatment.setMedicine(medicine);
-      boolean hasTheCallSucceed = callHealthService(medicationTreatment);
-      if (!hasTheCallSucceed) {
-        throw new MedicationException("Error sending the MedicationTreatment for the medicine with id:" + medicine.getMedicineId());
-      }
-      medicationTreatmentList.add(medicationTreatment);
+    TreatmentDao treatmentDao = persistentService.getTreatmentDao();
+    List<Treatment> treatments = treatmentDao.getByPrescriptionAndActive(prescriptionDTO.getPrescriptionId());
+    for (Treatment tr : treatments) {
+      handleTreatment(prescriptionDTO, medicationTreatmentList, tr);
     }
 
     newPrescription.setMedicationTreatments(medicationTreatmentList);
   }
+
+  private void handleTreatment(PrescriptionDTO prescriptionDTO,
+                               List<MedicationTreatment> medicationTreatmentList,
+                               Treatment tr) throws DatatypeConfigurationException {
+
+    Medicine med = tr.getMedicine();
+    org.universAAL.ontology.medMgr.Medicine medicine = new org.universAAL.ontology.medMgr.Medicine();
+    medicine.setMedicineId(med.getId());
+    MedicineDTO medicineDTO = getMedicineDTO(med.getId(), prescriptionDTO.getMedicineDTOSet());
+    medicine.setDays(medicineDTO.getDays());
+    String medicineInfo = med.getMedicineInfo();
+    if (medicineInfo != null) {
+      medicine.setDescription(medicineInfo);
+    }
+    String medicineName = med.getMedicineName();
+    if (medicineName != null) {
+      medicine.setName(medicineName);
+    }
+    setMealRelationEnum(medicine, medicineDTO.getMealRelationDTO());
+    setIntakes(medicine, medicineDTO);
+    MedicationTreatment medicationTreatment = createMedicationTreatment(prescriptionDTO);
+    medicationTreatment.setMedicine(medicine);
+    boolean hasTheCallSucceed = callHealthService(medicationTreatment);
+    if (!hasTheCallSucceed) {
+      throw new MedicationException("Error sending the MedicationTreatment for the medicine with id:" + medicine.getMedicineId());
+    }
+    medicationTreatmentList.add(medicationTreatment);
+  }
+
+  private MedicineDTO getMedicineDTO(int id, Set<MedicineDTO> medicineDTOSet) {
+    MedicineDTO medicineDTO = null;
+    for (MedicineDTO dto : medicineDTOSet) {
+      if (dto.getMedicineId() == id) {
+        medicineDTO = dto;
+        break;
+      }
+    }
+
+    if (medicineDTO == null) {
+      throw new MedicationManagerSimulationServicesException("No matching medicineDTO");
+    }
+
+    return medicineDTO;
+  }
+
+  public abstract boolean callHealthService(MedicationTreatment medicationTreatment);
 
   private NewPrescription createNewPrescription(PrescriptionDTO prescriptionDTO)
       throws DatatypeConfigurationException {
@@ -118,40 +150,6 @@ public final class NewPrescriptionHandler {
     Date startDate = prescriptionDTO.getStartDate();
     newPrescription.setDate(getXMLGregorianCalendar(startDate));
     return newPrescription;
-  }
-
-  private boolean callHealthService(MedicationTreatment medicationTreatment) {
-    ServiceRequest serviceRequest = new ServiceRequest(new NewMedicationTreatmentNotifier(), UserIDs.getSaiedUser());
-    serviceRequest.addAddEffect(new String[]{NewMedicationTreatmentNotifier.PROP_MEDICATION_TREATMENT}, medicationTreatment);
-    serviceRequest.addRequiredOutput(OUTPUT_NEW_PRESCRIPTION_RECEIVED_MESSAGE,
-        new String[]{NewMedicationTreatmentNotifier.PROP_RECEIVED_MESSAGE});
-
-    ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
-
-    CallStatus callStatus = serviceResponse.getCallStatus();
-    Log.info("callStatus %s", NewPrescriptionHandler.class, callStatus);
-
-    String receivedMessage = getReceivedMessage(serviceResponse);
-    if (callStatus.equals(CallStatus.succeeded) && receivedMessage != null) {
-      Log.info("The received message from the Health Service is %s", NewPrescriptionHandler.class, receivedMessage);
-      return true;
-    } else {
-      Log.error("There is the problem with the response with the Health Service", NewPrescriptionHandler.class);
-      return false;
-    }
-
-
-  }
-
-  private String getReceivedMessage(ServiceResponse serviceResponse) {
-    List receivedMessageList = serviceResponse.getOutput(OUTPUT_NEW_PRESCRIPTION_RECEIVED_MESSAGE, true);
-    if (receivedMessageList.isEmpty() || receivedMessageList.size() > 1) {
-      Log.info("received response object as a null or list is bigger than 1", NewPrescriptionHandler.class);
-      return null;
-    }
-
-    return (String) receivedMessageList.get(0);
-
   }
 
   private MedicationTreatment createMedicationTreatment(PrescriptionDTO prescriptionDTO)
@@ -184,8 +182,8 @@ public final class NewPrescriptionHandler {
 
 
   private void setTreatmentPlaning(MedicationTreatment medicationTreatment, XMLGregorianCalendar startDate,
-                                          GregorianCalendar gregorianCalendar,
-                                          PrescriptionDTO prescriptionDTO) throws DatatypeConfigurationException {
+                                   GregorianCalendar gregorianCalendar,
+                                   PrescriptionDTO prescriptionDTO) throws DatatypeConfigurationException {
 
     TreatmentPlanning treatmentPlanning = new TreatmentPlanning();
     treatmentPlanning.setStartDate(startDate);
@@ -195,7 +193,7 @@ public final class NewPrescriptionHandler {
   }
 
   private XMLGregorianCalendar getEndDate(GregorianCalendar gregorianCalendar,
-                                                 PrescriptionDTO prescriptionDTO) throws DatatypeConfigurationException {
+                                          PrescriptionDTO prescriptionDTO) throws DatatypeConfigurationException {
 
     GregorianCalendar cal = new GregorianCalendar();
     cal.setTime(gregorianCalendar.getTime());
@@ -221,7 +219,7 @@ public final class NewPrescriptionHandler {
     return maxDays;
   }
 
-  private void setMealRelationEnum(Medicine medicine, MealRelationDTO mealRelationDTO) {
+  private void setMealRelationEnum(org.universAAL.ontology.medMgr.Medicine medicine, MealRelationDTO mealRelationDTO) {
 
     String value = MealRelationDTO.getStringValueFor(mealRelationDTO);
 
@@ -229,7 +227,7 @@ public final class NewPrescriptionHandler {
     medicine.setMealRelation(mealRelation);
   }
 
-  private void setIntakes(Medicine medicine, MedicineDTO medicineDTO) {
+  private void setIntakes(org.universAAL.ontology.medMgr.Medicine medicine, MedicineDTO medicineDTO) {
     Set<IntakeDTO> intakeDTOSet = medicineDTO.getIntakeDTOSet();
     List<Intake> intakeList = new ArrayList<Intake>();
     for (IntakeDTO intakeDTO : intakeDTOSet) {

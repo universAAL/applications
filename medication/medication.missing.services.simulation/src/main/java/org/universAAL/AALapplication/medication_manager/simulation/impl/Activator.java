@@ -20,11 +20,14 @@ package org.universAAL.AALapplication.medication_manager.simulation.impl;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.simulation.export.DispenserUpsideDownContextProvider;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationConsumer;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationReminderContextProvider;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
+import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandlerImpl;
+import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandlerMocked;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -55,13 +58,30 @@ public class Activator implements BundleActivator {
         registerService(dispenserUpsideDownContextProvider, context);
         new HealthPrescriptionServiceProvider(mc);
         NewPrescriptionContextProvider newPrescriptionContextProvider = new NewPrescriptionContextProvider(mc);
-        NewPrescriptionHandler newPrescriptionHandler = new NewPrescriptionHandler(mc, newPrescriptionContextProvider);
+        NewPrescriptionHandler newPrescriptionHandler = getNewPrescriptionHandler(newPrescriptionContextProvider);
 
         context.registerService(NewPrescriptionHandler.class.getName(), newPrescriptionHandler, null);
       }
     }.start();
 
 
+  }
+
+  private NewPrescriptionHandler getNewPrescriptionHandler(NewPrescriptionContextProvider provider) {
+
+    ConfigurationProperties configurationProperties = getConfigurationProperties();
+
+    boolean isMocked = configurationProperties.isHealthTreatmentServiceMocked();
+
+    NewPrescriptionHandler newPrescriptionHandler;
+
+    if (isMocked) {
+      newPrescriptionHandler = new NewPrescriptionHandlerMocked(mc, provider);
+    } else {
+      newPrescriptionHandler = new NewPrescriptionHandlerImpl(mc, provider);
+    }
+
+    return newPrescriptionHandler;
   }
 
   private void registerService(Object service, BundleContext context) {
@@ -76,6 +96,25 @@ public class Activator implements BundleActivator {
     */
   public void stop(BundleContext context) throws Exception {
 
+  }
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (bc == null) {
+      throw new MedicationManagerSimulationServicesException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = bc.getServiceReference(ConfigurationProperties.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerSimulationServicesException("The ServiceReference is null for ConfigurationProperties");
+    }
+
+    ConfigurationProperties service = (ConfigurationProperties) bc.getService(srPS);
+
+    if (service == null) {
+      throw new MedicationManagerSimulationServicesException("The ConfigurationProperties is missing");
+    }
+    return service;
   }
 
   public static PersistentService getPersistentService() {

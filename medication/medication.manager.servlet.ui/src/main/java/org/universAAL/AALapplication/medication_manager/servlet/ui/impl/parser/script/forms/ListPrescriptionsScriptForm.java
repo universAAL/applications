@@ -13,6 +13,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.s
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -54,6 +55,8 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
     PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
 
     List<PrescriptionDTO> prescriptionDTOs = prescriptionDao.getPrescriptionDTO(patient, doctor);
+
+    Collections.sort(prescriptionDTOs);
 
     for (PrescriptionDTO pr : prescriptionDTOs) {
       String startDate = getStartDateText(pr.getStartDate());

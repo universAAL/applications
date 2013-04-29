@@ -20,6 +20,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.DebugWriterDummy;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.DebugWriterImpl;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
+import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -229,6 +230,24 @@ public final class Activator implements BundleActivator {
     }
 
     return directory;
+  }
+
+  public static NewPrescriptionHandler getNewPrescriptionHandler() {
+    if (bundleContext == null) {
+      throw new MedicationManagerServletUIException("The bundleContext is not set");
+    }
+
+    ServiceReference sr = bundleContext.getServiceReference(NewPrescriptionHandler.class.getName());
+
+    if (sr == null) {
+      throw new MedicationManagerServletUIException("The ServiceReference is null for NewPrescriptionHandler");
+    }
+
+    NewPrescriptionHandler newPrescriptionHandler = (NewPrescriptionHandler) bundleContext.getService(sr);
+    if (newPrescriptionHandler == null) {
+      throw new MedicationManagerServletUIException("The NewPrescriptionHandler service is missing");
+    }
+    return newPrescriptionHandler;
   }
 
 }

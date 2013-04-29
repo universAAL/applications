@@ -96,7 +96,7 @@ public final class UsecaseNewPrescription extends Usecase {
     info("The Medication Manager will try to send the prescription the Health Service ", getClass());
 
     NewPrescriptionHandler newPrescriptionHandler = getNewPrescriptionHandler();
-    newPrescriptionHandler.callHealthServiceWithNewPrescription(prescriptionDTO);
+    newPrescriptionHandler.callHealthServiceWithNewPrescription(persistentService, prescriptionDTO);
 
     info("The Medication Manager successfully sent the prescription the Health Service ", getClass());
 
