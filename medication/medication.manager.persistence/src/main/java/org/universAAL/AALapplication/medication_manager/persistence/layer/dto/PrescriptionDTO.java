@@ -28,7 +28,7 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
 /**
  * @author George Fournadjiev
  */
-public final class PrescriptionDTO {
+public final class PrescriptionDTO implements Comparable {
 
   private int prescriptionId;
   private final String description;
@@ -52,6 +52,17 @@ public final class PrescriptionDTO {
     this.medicineDTOSet = medicineDTOSet;
     this.physician = physician;
     this.patient = patient;
+  }
+
+  public int compareTo(Object o) {
+    if (this == o) return 0;
+    if (!(o instanceof PrescriptionDTO)) {
+      throw new MedicationManagerPersistenceException("the parameter object is not PrescriptionDTO : " + o);
+    }
+
+    PrescriptionDTO that = (PrescriptionDTO) o;
+
+    return startDate.compareTo(that.startDate);
   }
 
   public int getPrescriptionId() {

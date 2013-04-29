@@ -22,14 +22,20 @@
     </dependency>
 
     <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>servlet-api</artifactId>
-        <version>2.5</version>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
     </dependency>
 
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
       <artifactId>medication.manager.persistence</artifactId>
+      <version>D.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>medication.missing.services.simulation</artifactId>
       <version>D.1-SNAPSHOT</version>
     </dependency>
 

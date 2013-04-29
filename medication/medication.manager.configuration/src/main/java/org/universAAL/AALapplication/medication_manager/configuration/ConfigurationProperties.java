@@ -15,4 +15,6 @@ public interface ConfigurationProperties {
 
   boolean isDebugWriterOn();
 
+  boolean isHealthTreatmentServiceMocked();
+
 }

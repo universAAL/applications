@@ -19,6 +19,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private static final String MEDICATION_REMINDER_TIMEOUT = "medication.reminder.timeout";
   private static final String MEDICATION_INTEKA_INTERVAL = "medication.intake.interval";
   private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "http.session.expire.timeout.in.minutes";
+  private static final String HEALTH_TREATMENT_SERVICE_MOCKED = "health.treatment.service.mocked";
   private static final String HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES =
       "http.session.timer.checker.interval.in.minutes";
 
@@ -73,5 +74,11 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     String debug = medicationProperties.getProperty(DEBUG_WRITE_FILE);
 
     return debug != null && debug.equalsIgnoreCase(ON);
+  }
+
+  public boolean isHealthTreatmentServiceMocked() {
+    String mocked = medicationProperties.getProperty(HEALTH_TREATMENT_SERVICE_MOCKED);
+
+    return mocked != null && mocked.equalsIgnoreCase(ON);
   }
 }

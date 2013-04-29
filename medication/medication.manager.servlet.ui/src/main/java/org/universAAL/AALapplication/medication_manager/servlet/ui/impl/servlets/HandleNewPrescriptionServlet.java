@@ -1,7 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
@@ -11,6 +10,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
+import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -96,14 +96,10 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
         PersistentService persistentService = getPersistentService();
 
         checkForNotesAndDateParameters(req, newPrescriptionView);
-        PrescriptionDTO prescriptionDTO = saveNewPrescription(newPrescriptionView, req, resp, persistentService);
-
-        if (prescriptionDTO != null) {
-          session.removeAttribute(PRESCRIPTION_VIEW);
-          PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
-          prescriptionDao.save(prescriptionDTO);
-        }
-
+        PrescriptionDTO prescriptionDTO = createPrescriptionDTO(newPrescriptionView, persistentService);
+        session.removeAttribute(PRESCRIPTION_VIEW);
+        NewPrescriptionHandler newPrescriptionHandler = getNewPrescriptionHandler();
+        newPrescriptionHandler.callHealthServiceWithNewPrescription(persistentService, prescriptionDTO);
         debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
         listPrescriptionsHtmlWriterServlet.doPost(req, resp);
       } catch (Exception e) {
@@ -127,8 +123,8 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
     }
   }
 
-  private PrescriptionDTO saveNewPrescription(NewPrescriptionView prescriptionView, HttpServletRequest req,
-                                              HttpServletResponse resp, PersistentService persistentService) {
+  private PrescriptionDTO createPrescriptionDTO(NewPrescriptionView prescriptionView,
+                                                PersistentService persistentService) {
 
     Log.info("Creating PrescriptionDTO object from NewPrescriptionView object: %s", getClass(), prescriptionView);
 
