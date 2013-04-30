@@ -13,8 +13,6 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.Pe
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.TreatmentDao;
 
-import java.util.Date;
-
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
@@ -64,10 +62,7 @@ public final class PersistentServiceImpl implements PersistentService {
     medicineInventoryDao.setMedicineDao(medicineDao);
     medicineInventoryDao.setPersonDao(personDao);
 
-    Date now = new Date();
-    System.out.println("before loadPrescriptionDTOs = " + now);
-    prescriptionDao.loadPrescriptionDTOs();
-    System.out.println("after loadPrescriptionDTOs = " + now);
+//    prescriptionDao.loadPrescriptionDTOs();
   }
 
   public SqlUtility getSqlUtility() {

@@ -75,8 +75,6 @@ public final class DerbyDatabase implements Database {
     try {
       statement = connection.createStatement();
 
-      System.out.println("sqlQuery = " + sqlQuery);
-
       ResultSet rs = statement.executeQuery(sqlQuery);
 
       Set<String> columnsNames = sqlUtility.getDBColumns(tableName);
