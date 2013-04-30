@@ -17,27 +17,55 @@
 
 package org.universAAL.AALapplication.medication_manager.simulation.export;
 
+import org.universAAL.AALapplication.medication_manager.simulation.impl.Log;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.NewPrescriptionContextProvider;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.service.CallStatus;
+import org.universAAL.middleware.service.ServiceRequest;
+import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
+import org.universAAL.ontology.medMgr.UserIDs;
+import org.universAAL.ontology.profile.User;
+import org.universaal.ontology.health.owl.HealthOntology;
+import org.universaal.ontology.health.owl.Treatment;
+import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 /**
  * @author George Fournadjiev
  */
 public final class NewPrescriptionHandlerImpl extends NewPrescriptionHandler {
 
-  public NewPrescriptionHandlerImpl(ModuleContext context, NewPrescriptionContextProvider contextProvider) {
-   super(context, contextProvider);
-  }
+  public static final String INPUT_USER = HealthOntology.NAMESPACE + "user";
+  public static final String INPUT_TREATMENT = HealthOntology.NAMESPACE + "treatment";
 
+  public NewPrescriptionHandlerImpl(ModuleContext context, NewPrescriptionContextProvider contextProvider) {
+    super(context, contextProvider);
+  }
 
 
   public boolean callHealthService(MedicationTreatment medicationTreatment) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    User saiedUser = UserIDs.getSaiedUser();
+    ServiceRequest serviceRequest = new ServiceRequest(new TreatmentManagementService(), saiedUser);
+//    serviceRequest.addValueFilter(new String[]{INPUT_USER}, saiedUser);
+    Treatment treatment = (Treatment) medicationTreatment;
+    serviceRequest.addAddEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT}, treatment);
+
+
+    ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
+
+    CallStatus callStatus = serviceResponse.getCallStatus();
+    Log.info("callStatus %s", NewPrescriptionHandlerImpl.class, callStatus);
+
+    if (callStatus.equals(CallStatus.succeeded)) {
+      Log.info("The call succeeded", NewPrescriptionHandlerImpl.class);
+      return true;
+    } else {
+      Log.error("There is the problem with the response with the Health Service", NewPrescriptionHandlerImpl.class);
+      return false;
+    }
 
 
   }
-
 
 
 }
