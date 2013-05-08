@@ -278,6 +278,9 @@ public final class PrescriptionParser {
 
     Log.info("incompliances = %s", PrescriptionParser.class, incompliances);
 
+    boolean missedIntakeAlert = getBoolean(nodeList, "missedIntakeAlert");
+    boolean newDoseAlert = getBoolean(nodeList, "newDoseAlert");
+
     Node mealRelationNode = getNode(nodeList, "meal_relation");
 
     String mealRelationText = mealRelationNode.getTextContent();
@@ -288,9 +291,21 @@ public final class PrescriptionParser {
 
     Set<IntakeDTO> intakeDTOSet = getIntakeSet(node.getChildNodes());
 
-    return new MedicineDTO(name, startDate, days, description,
+    return new MedicineDTO(name, startDate, days, missedIntakeAlert, newDoseAlert, description,
         sideffects, incompliances, mealRelationDTO, intakeDTOSet);
 
+  }
+
+  private boolean getBoolean(NodeList nodeList, String nodeName) {
+    try {
+      Node mealRelationNode = getNode(nodeList, nodeName);
+
+      String nodeText = mealRelationNode.getTextContent();
+
+      return Boolean.parseBoolean(nodeText);
+    } catch (Exception e) {
+      throw new MedicationManagerShellException(e);
+    }
   }
 
   private Set<IntakeDTO> getIntakeSet(NodeList intakeNodes) {

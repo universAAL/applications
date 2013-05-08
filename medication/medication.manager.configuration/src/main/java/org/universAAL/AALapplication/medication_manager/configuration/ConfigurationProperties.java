@@ -1,5 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.configuration;
 
+import java.util.Properties;
+
 /**
  * @author George Fournadjiev
  */
@@ -16,5 +18,9 @@ public interface ConfigurationProperties {
   boolean isDebugWriterOn();
 
   boolean isHealthTreatmentServiceMocked();
+
+  boolean isLoadPrescriptionDTOs();
+
+  Properties getMedicationProperties();
 
 }

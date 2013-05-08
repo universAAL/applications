@@ -16,9 +16,11 @@ public final class Treatment extends Entity {
   private final Date startDate;
   private final Date endDate;
   private final TreatmentStatus status;
+  private final boolean missedIntakeAlert;
+  private final boolean newDoseAlert;
 
-  public Treatment(int id, Prescription prescription, Medicine medicine,
-                   Date startDate, Date endDate, TreatmentStatus status) {
+  public Treatment(int id, Prescription prescription, Medicine medicine, boolean missedIntakeAlert,
+                   boolean newDoseAlert, Date startDate, Date endDate, TreatmentStatus status) {
 
     super(id);
 
@@ -26,15 +28,17 @@ public final class Treatment extends Entity {
 
     this.prescription = prescription;
     this.medicine = medicine;
+    this.missedIntakeAlert = missedIntakeAlert;
+    this.newDoseAlert = newDoseAlert;
     this.startDate = startDate;
     this.endDate = endDate;
     this.status = status;
   }
 
-  public Treatment(Prescription prescription, Medicine medicine,
-                   Date startDate, Date endDate, TreatmentStatus status) {
+  public Treatment(Prescription prescription, Medicine medicine, boolean missedIntakeAlert,
+                     boolean newDoseAlert, Date startDate, Date endDate, TreatmentStatus status) {
 
-    this(0, prescription, medicine, startDate, endDate, status);
+    this(0, prescription, medicine, missedIntakeAlert, newDoseAlert, startDate, endDate, status);
   }
 
   private void validate(Prescription prescription, Medicine medicine,
@@ -68,12 +72,24 @@ public final class Treatment extends Entity {
     return status;
   }
 
+  public boolean isMissedIntakeAlert() {
+    return missedIntakeAlert;
+  }
+
+  public boolean isNewDoseAlert() {
+    return newDoseAlert;
+  }
+
   @Override
   public String toString() {
     return "Treatment{" +
         "prescription=" + prescription +
         ", medicine=" + medicine +
+        ", startDate=" + startDate +
+        ", endDate=" + endDate +
         ", status=" + status +
+        ", missedIntakeAlert=" + missedIntakeAlert +
+        ", newDoseAlert=" + newDoseAlert +
         '}';
   }
 }

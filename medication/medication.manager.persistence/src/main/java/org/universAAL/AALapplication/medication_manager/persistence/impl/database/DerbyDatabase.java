@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl.database;
 
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.configuration.SqlScriptParser;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
@@ -20,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import static java.sql.Types.*;
@@ -34,12 +36,15 @@ public final class DerbyDatabase implements Database {
   private final SqlUtility sqlUtility;
 
   public static final String MEDICATION_MANAGER = "Medication_Manager";
+  private final ConfigurationProperties configurationProperties;
 
-  public DerbyDatabase(Connection connection) {
+  public DerbyDatabase(Connection connection, ConfigurationProperties configurationProperties) {
     validateParameter(connection, "connection");
+    validateParameter(configurationProperties, "configurationProperties");
 
     this.connection = connection;
     this.sqlUtility = new DerbySqlUtility(connection);
+    this.configurationProperties = configurationProperties;
   }
 
   public SqlUtility getSqlUtility() {
@@ -201,6 +206,9 @@ public final class DerbyDatabase implements Database {
       case VARCHAR:
         String string = rs.getString(name);
         return new Column(name, string);
+      case BOOLEAN:
+        Boolean bool = rs.getBoolean(name);
+        return new Column(name, bool);
       case CLOB:
         Clob clob = rs.getClob(name);
         String text;
@@ -218,6 +226,7 @@ public final class DerbyDatabase implements Database {
   private void createTablesAndPopulateThemInOneTransaction() {
     boolean autoCommitValue = true;
     Statement statement = null;
+    PreparedStatement ps = null;
     try {
       autoCommitValue = connection.getAutoCommit();
       connection.setAutoCommit(false);
@@ -225,20 +234,49 @@ public final class DerbyDatabase implements Database {
 
       createTables(statement);
       insertDataIntoTables(statement);
+      String sqlInsertIntoProperties = "insert into medication_manager.properties (id, name, value)\n" +
+          "values (?, ?, ?)";
+      ps = connection.prepareStatement(sqlInsertIntoProperties);
+      populatePropertiesTable(ps);
 
       connection.commit();
 
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
     } finally {
-      handleFinally(connection, statement, autoCommitValue);
+      handleFinally(connection, statement, ps, autoCommitValue);
     }
 
   }
 
-  public static void handleFinally(Connection connection, Statement statement, boolean autoCommitValue) {
+  private void populatePropertiesTable(PreparedStatement ps) throws SQLException {
+    Properties properties = configurationProperties.getMedicationProperties();
+    Set<String> keys = properties.stringPropertyNames();
+    int id = 0;
+    for (String key : keys) {
+      id++;
+      insertPropertyIntoTable(id, key, properties, ps);
+    }
+  }
+
+  private void insertPropertyIntoTable(int id, String key,
+                                       Properties properties, PreparedStatement ps) throws SQLException {
+
+    String value = properties.getProperty(key);
+    ps.setInt(1, id);
+    ps.setString(2, key);
+    ps.setString(3, value);
+
+    ps.execute();
+
+    System.setProperty(key, value);
+  }
+
+  public static void handleFinally(Connection connection, Statement statement,
+                                   PreparedStatement ps, boolean autoCommitValue) {
     try {
       closeStatement(statement);
+      closeStatement(ps);
       connection.rollback();
       connection.setAutoCommit(autoCommitValue);
     } catch (SQLException e) {

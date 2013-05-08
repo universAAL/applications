@@ -24,10 +24,8 @@ import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
-import org.universAAL.ontology.medMgr.UserIDs;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 /**
@@ -43,12 +41,10 @@ public final class NewPrescriptionHandlerImpl extends NewPrescriptionHandler {
   }
 
 
-  public boolean callHealthService(MedicationTreatment medicationTreatment) {
-    User saiedUser = UserIDs.getSaiedUser();
-    ServiceRequest serviceRequest = new ServiceRequest(new TreatmentManagementService(), saiedUser);
+  public boolean callHealthService(MedicationTreatment medicationTreatment, User user) {
+    ServiceRequest serviceRequest = new ServiceRequest(new TreatmentManagementService(), user);
 //    serviceRequest.addValueFilter(new String[]{INPUT_USER}, saiedUser);
-    Treatment treatment = (Treatment) medicationTreatment;
-    serviceRequest.addAddEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT}, treatment);
+    serviceRequest.addAddEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT}, medicationTreatment);
 
 
     ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);

@@ -25,7 +25,7 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
 import org.universAAL.ontology.medMgr.NewMedicationTreatmentNotifier;
-import org.universAAL.ontology.medMgr.UserIDs;
+import org.universAAL.ontology.profile.User;
 
 import java.util.List;
 
@@ -44,8 +44,8 @@ public final class NewPrescriptionHandlerMocked extends NewPrescriptionHandler {
 
   }
 
-  public boolean callHealthService(MedicationTreatment medicationTreatment) {
-    ServiceRequest serviceRequest = new ServiceRequest(new NewMedicationTreatmentNotifier(), UserIDs.getSaiedUser());
+  public boolean callHealthService(MedicationTreatment medicationTreatment, User user) {
+    ServiceRequest serviceRequest = new ServiceRequest(new NewMedicationTreatmentNotifier(), user);
     serviceRequest.addAddEffect(new String[]{NewMedicationTreatmentNotifier.PROP_MEDICATION_TREATMENT}, medicationTreatment);
     serviceRequest.addRequiredOutput(OUTPUT_NEW_PRESCRIPTION_RECEIVED_MESSAGE,
         new String[]{NewMedicationTreatmentNotifier.PROP_RECEIVED_MESSAGE});

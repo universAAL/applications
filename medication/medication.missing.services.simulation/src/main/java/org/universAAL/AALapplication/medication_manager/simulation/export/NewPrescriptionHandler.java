@@ -26,6 +26,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.Me
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.TimeDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.MedicationManagerSimulationServicesException;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.NewPrescriptionContextProvider;
@@ -38,6 +39,7 @@ import org.universAAL.ontology.medMgr.MealRelation;
 import org.universAAL.ontology.medMgr.MedicationException;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
 import org.universAAL.ontology.medMgr.NewPrescription;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.TreatmentPlanning;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -116,7 +118,9 @@ public abstract class NewPrescriptionHandler {
     setIntakes(medicine, medicineDTO);
     MedicationTreatment medicationTreatment = createMedicationTreatment(prescriptionDTO);
     medicationTreatment.setMedicine(medicine);
-    boolean hasTheCallSucceed = callHealthService(medicationTreatment);
+    Person patient = prescriptionDTO.getPatient();
+    User user = new User(patient.getPersonUri());
+    boolean hasTheCallSucceed = callHealthService(medicationTreatment, user);
     if (!hasTheCallSucceed) {
       throw new MedicationException("Error sending the MedicationTreatment for the medicine with id:" + medicine.getMedicineId());
     }
@@ -139,7 +143,7 @@ public abstract class NewPrescriptionHandler {
     return medicineDTO;
   }
 
-  public abstract boolean callHealthService(MedicationTreatment medicationTreatment);
+  public abstract boolean callHealthService(MedicationTreatment medicationTreatment, User user);
 
   private NewPrescription createNewPrescription(PrescriptionDTO prescriptionDTO)
       throws DatatypeConfigurationException {

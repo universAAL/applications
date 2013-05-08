@@ -90,7 +90,7 @@ public final class DerbySqlUtility implements SqlUtility {
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
     } finally {
-      handleFinally(connection, statement, autoCommit);
+      handleFinally(connection, statement, null, autoCommit);
     }
   }
 

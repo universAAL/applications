@@ -17,6 +17,7 @@ import java.util.Map;
 public final class DispenserDao extends AbstractDao {
 
   private static final String PATIENT_FK_ID = "PATIENT_FK_ID";
+  private static final String NAME = "NAME";
   private static final String DISPENSER_URI = "DISPENSER_URI";
   private static final String ID = "ID";
   private static final String INSTRUCTIONS_FILE_NAME = "INSTRUCTIONS_FILE_NAME";
@@ -46,6 +47,8 @@ public final class DispenserDao extends AbstractDao {
     int personId = (Integer) col.getValue();
     Person person = personDao.getById(personId);
 
+    col = columns.get(NAME);
+    String name = (String) col.getValue();
 
     col = columns.get(DISPENSER_URI);
     String dispenserUri = (String) col.getValue();
@@ -53,7 +56,7 @@ public final class DispenserDao extends AbstractDao {
     col = columns.get(INSTRUCTIONS_FILE_NAME);
     String instructionsFileName = (String) col.getValue();
 
-    Dispenser dispenser = new Dispenser(id, person, dispenserUri, instructionsFileName);
+    Dispenser dispenser = new Dispenser(id, person, name, dispenserUri, instructionsFileName);
 
     Log.info("Dispenser found: %s", getClass(), dispenser);
 
@@ -79,6 +82,8 @@ public final class DispenserDao extends AbstractDao {
     Column col = columnMap.get(ID);
     int id = (Integer) col.getValue();
 
+    col = columnMap.get(NAME);
+    String name = (String) col.getValue();
 
     col = columnMap.get(DISPENSER_URI);
     String dispenserUri = (String) col.getValue();
@@ -86,7 +91,7 @@ public final class DispenserDao extends AbstractDao {
     col = columnMap.get(INSTRUCTIONS_FILE_NAME);
     String instructionsFileName = (String) col.getValue();
 
-    Dispenser dispenser = new Dispenser(id, person, dispenserUri, instructionsFileName);
+    Dispenser dispenser = new Dispenser(id, person, name, dispenserUri, instructionsFileName);
 
     Log.info("Dispenser found: %s", getClass(), dispenser);
 
@@ -109,12 +114,14 @@ public final class DispenserDao extends AbstractDao {
     int id = (Integer) colId.getValue();
     Column colUri = dispenserRecordMap.get(DISPENSER_URI);
     String dispenserUri = (String) colUri.getValue();
+    Column colName= dispenserRecordMap.get(NAME);
+    String name = (String) colName.getValue();
     Column colPatient = dispenserRecordMap.get(PATIENT_FK_ID);
     int personId = (Integer) colPatient.getValue();
     Person person = personDao.getById(personId);
     Column instructionsFileNameColumn = dispenserRecordMap.get(INSTRUCTIONS_FILE_NAME);
     String instructionsFileName = (String) instructionsFileNameColumn.getValue();
 
-    return new Dispenser(id, person, dispenserUri, instructionsFileName);
+    return new Dispenser(id, person, name, dispenserUri, instructionsFileName);
   }
 }

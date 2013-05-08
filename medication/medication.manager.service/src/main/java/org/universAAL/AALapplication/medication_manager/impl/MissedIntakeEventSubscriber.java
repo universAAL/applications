@@ -18,6 +18,7 @@
 package org.universAAL.AALapplication.medication_manager.impl;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.middleware.container.ModuleContext;
@@ -96,7 +97,7 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
     ServiceRequest serviceRequest = new ServiceRequest(new CaregiverNotifier(), user);
 
     CaregiverNotifierData caregiverNotifierData = new CaregiverNotifierData();
-    String smsNumber = person.getCaregiverSms();
+    String smsNumber = getCaregiverSms(person, persistentService.getPatientLinksDao());
     caregiverNotifierData.setSmsNumber(smsNumber);
     String smsText = getSmsText(time, person);
     caregiverNotifierData.setSmsText(smsText);
@@ -118,6 +119,15 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
     }
     Log.info("Caregiver Notification callStatus %s\n" + msg, getClass(), callStatus);
 
+  }
+
+  private String getCaregiverSms(Person person, PatientLinksDao patientLinksDao) {
+    Person caregiver = patientLinksDao.findPatientCaregiver(person);
+    String caregiverSms = caregiver.getCaregiverSms();
+    if (caregiverSms == null) {
+      throw new MedicationManagerException("Missing caregiver sms for a caregiver: " + caregiver);
+    }
+    return caregiverSms;
   }
 
   private String getMessage(ServiceResponse serviceResponse) {

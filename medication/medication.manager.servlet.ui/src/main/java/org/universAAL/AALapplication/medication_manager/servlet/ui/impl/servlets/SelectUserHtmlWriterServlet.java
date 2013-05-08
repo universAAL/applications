@@ -1,7 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DoctorPatientDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
@@ -92,8 +92,8 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
                               Person doctor, Session session) throws IOException {
     try {
       PersistentService persistentService = getPersistentService();
-      DoctorPatientDao doctorPatientDao = persistentService.getDoctorPatientDao();
-      List<Person> patients = doctorPatientDao.findDoctorPatients(doctor);
+      PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
+      List<Person> patients = patientLinksDao.findDoctorPatients(doctor);
       if (patients != null && patients.size() > 1) {
         ScriptForm scriptForm = new UserSelectScriptForm(patients);
         session.setAttribute(MULTIPLE_PATIENTS, true);

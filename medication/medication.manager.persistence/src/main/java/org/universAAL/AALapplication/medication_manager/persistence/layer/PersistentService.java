@@ -1,7 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DoctorPatientDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.InventoryLogDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineDao;
@@ -34,7 +34,7 @@ public interface PersistentService {
 
   TreatmentDao getTreatmentDao();
 
-  DoctorPatientDao getDoctorPatientDao();
+  PatientLinksDao getPatientLinksDao();
 
   int generateId();
 

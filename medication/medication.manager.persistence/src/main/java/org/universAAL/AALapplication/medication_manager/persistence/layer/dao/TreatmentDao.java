@@ -34,6 +34,8 @@ public final class TreatmentDao extends AbstractDao {
   private static final String START_DATE = "START_DATE";
   private static final String END_DATE = "END_DATE";
   private static final String STATUS = "STATUS";
+  private static final String MISSED_INTAKE_ALERT = "MISSED_INTAKE_ALERT";
+  private static final String NEW_DOSE_ALERT = "NEW_DOSE_ALERT";
 
   public TreatmentDao(Database database) {
     super(database, TABLE_NAME);
@@ -99,7 +101,22 @@ public final class TreatmentDao extends AbstractDao {
     String statusValue = (String) col.getValue();
     TreatmentStatus treatmentStatus = TreatmentStatus.getEnumValueFor(statusValue);
 
-    Treatment treatment = new Treatment(treatmentId, prescription, medicine, startDate, endDate, treatmentStatus);
+    col = columns.get(MISSED_INTAKE_ALERT);
+    Boolean bool = (Boolean) col.getValue();
+    boolean missedIntakeAlert = false;
+    if (bool != null) {
+      missedIntakeAlert = bool;
+    }
+
+    col = columns.get(NEW_DOSE_ALERT);
+    bool = (Boolean) col.getValue();
+    boolean newDoseAlert = false;
+    if (bool != null) {
+      newDoseAlert = bool;
+    }
+
+    Treatment treatment = new Treatment(treatmentId, prescription, medicine,
+        missedIntakeAlert, newDoseAlert, startDate, endDate, treatmentStatus);
 
     Log.info("Treatment found: %s", getClass(), treatment);
 

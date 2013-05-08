@@ -36,13 +36,15 @@ public final class MedicineDTO {
   private final int days;
   private final Date treatmentStartDate;
   private final Date treatmentEndDate;
+  private final boolean missedIntakeAlert;
+  private final boolean newDoseAlert;
   private final String description;
   private final String sideeffects;
   private final String incompliances;
   private final MealRelationDTO mealRelationDTO;
   private final Set<IntakeDTO> intakeDTOSet;
 
-  public MedicineDTO(String name, Date startDate, int days,
+  public MedicineDTO(String name, Date startDate, int days, boolean missedIntakeAlert, boolean newDoseAlert,
                      String description, String sideeffects, String incompliances,
                      MealRelationDTO mealRelationDTO, Set<IntakeDTO> intakeDTOSet) {
 
@@ -55,6 +57,8 @@ public final class MedicineDTO {
     this.treatmentStartDate = startDate;
     this.treatmentEndDate = endDate(startDate, days);
     this.days = days;
+    this.missedIntakeAlert = missedIntakeAlert;
+    this.newDoseAlert = newDoseAlert;
     this.description = description;
     this.sideeffects = sideeffects;
     this.incompliances = incompliances;
@@ -98,6 +102,14 @@ public final class MedicineDTO {
     return days;
   }
 
+  public boolean isMissedIntakeAlert() {
+    return missedIntakeAlert;
+  }
+
+  public boolean isNewDoseAlert() {
+    return newDoseAlert;
+  }
+
   public String getDescription() {
     return description;
   }
@@ -121,10 +133,13 @@ public final class MedicineDTO {
   @Override
   public String toString() {
     return "MedicineDTO{" +
+        "medicineId=" + medicineId +
         ", name='" + name + '\'' +
         ", days=" + days +
         ", treatmentStartDate=" + treatmentStartDate +
         ", treatmentEndDate=" + treatmentEndDate +
+        ", missedIntakeAlert=" + missedIntakeAlert +
+        ", newDoseAlert=" + newDoseAlert +
         ", description='" + description + '\'' +
         ", sideeffects='" + sideeffects + '\'' +
         ", incompliances='" + incompliances + '\'' +
