@@ -27,6 +27,8 @@ public final class MedicineView {
   private boolean isNew;
   private int dose;
   private String unit;
+  private boolean missedIntakeAlert;
+  private boolean newDoseAlert;
 
   public MedicineView(int medicineId) {
     this.medicineId = medicineId;
@@ -120,6 +122,22 @@ public final class MedicineView {
 
   public int getDose() {
     return dose;
+  }
+
+  public boolean isMissedIntakeAlert() {
+    return missedIntakeAlert;
+  }
+
+  public void setMissedIntakeAlert(boolean missedIntakeAlert) {
+    this.missedIntakeAlert = missedIntakeAlert;
+  }
+
+  public boolean isNewDoseAlert() {
+    return newDoseAlert;
+  }
+
+  public void setNewDoseAlert(boolean newDoseAlert) {
+    this.newDoseAlert = newDoseAlert;
   }
 
   public void fillIntakeDTOSet(int dose, String[] hoursArray, String unit) {

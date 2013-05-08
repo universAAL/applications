@@ -6,6 +6,7 @@ import org.universAAL.AALapplication.medication_manager.configuration.Medication
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * @author George Fournadjiev
@@ -20,6 +21,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private static final String MEDICATION_INTEKA_INTERVAL = "medication.intake.interval";
   private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "http.session.expire.timeout.in.minutes";
   private static final String HEALTH_TREATMENT_SERVICE_MOCKED = "health.treatment.service.mocked";
+  private static final String LOAD_PRESCRIPTIONSDTOS = "load.prescriptionsdtos";
   private static final String HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES =
       "http.session.timer.checker.interval.in.minutes";
 
@@ -36,6 +38,15 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
         ConfigurationPropertiesImpl.class.getClassLoader().getResourceAsStream("medication.properties");
     medicationProperties.load(inputStream);
     inputStream.close();
+    setSystemProperties();
+  }
+
+  private void setSystemProperties() {
+    Set<String> keys = medicationProperties.stringPropertyNames();
+    for (String key : keys) {
+      String value = medicationProperties.getProperty(key);
+      System.setProperty(key, value);
+    }
   }
 
   public int getMedicationReminderTimeout() {
@@ -45,7 +56,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
 
   private int getInt(String propertyName) {
     Log.info("Getting property: " + propertyName, getClass());
-    String prop = medicationProperties.getProperty(propertyName);
+    String prop = System.getProperty(propertyName);
     if (prop == null) {
       throw new MedicationManagerConfigurationException("Missing property: " + propertyName);
     }
@@ -71,14 +82,24 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   public boolean isDebugWriterOn() {
-    String debug = medicationProperties.getProperty(DEBUG_WRITE_FILE);
+    String debug = System.getProperty(DEBUG_WRITE_FILE);
 
     return debug != null && debug.equalsIgnoreCase(ON);
   }
 
   public boolean isHealthTreatmentServiceMocked() {
-    String mocked = medicationProperties.getProperty(HEALTH_TREATMENT_SERVICE_MOCKED);
+    String mocked = System.getProperty(HEALTH_TREATMENT_SERVICE_MOCKED);
 
     return mocked != null && mocked.equalsIgnoreCase(ON);
+  }
+
+  public boolean isLoadPrescriptionDTOs() {
+    String load = System.getProperty(LOAD_PRESCRIPTIONSDTOS);
+
+    return load != null && load.equalsIgnoreCase(ON);
+  }
+
+  public Properties getMedicationProperties() {
+    return medicationProperties;
   }
 }

@@ -1,14 +1,16 @@
 package org.universAAL.AALapplication.medication_manager.persistence.impl;
 
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DoctorPatientDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.InventoryLogDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicationPropertiesDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.TreatmentDao;
@@ -29,9 +31,10 @@ public final class PersistentServiceImpl implements PersistentService {
   private final PersonDao personDao;
   private final MedicineDao medicineDao;
   private final TreatmentDao treatmentDao;
-  private final DoctorPatientDao doctorPatientDao;
+  private final PatientLinksDao patientLinksDao;
+  private final MedicationPropertiesDao medicationPropertiesDao;
 
-  public PersistentServiceImpl(Database database) {
+  public PersistentServiceImpl(Database database, ConfigurationProperties configurationProperties) {
     validateParameter(database, "database");
 
     this.sqlUtility = database.getSqlUtility();
@@ -43,7 +46,10 @@ public final class PersistentServiceImpl implements PersistentService {
     this.medicineInventoryDao = new MedicineInventoryDao(database);
     this.prescriptionDao = new PrescriptionDao(database);
     this.treatmentDao = new TreatmentDao(database);
-    this.doctorPatientDao = new DoctorPatientDao(database);
+    this.patientLinksDao = new PatientLinksDao(database);
+    this.medicationPropertiesDao = new MedicationPropertiesDao(database);
+
+    medicationPropertiesDao.setSystemPropertiesLoadedFromDatabase();
 
     //Set DAOs
 
@@ -58,11 +64,13 @@ public final class PersistentServiceImpl implements PersistentService {
     prescriptionDao.setMedicineDao(medicineDao);
     prescriptionDao.setTreatmentDao(treatmentDao);
     prescriptionDao.setIntakeDao(intakeDao);
-    doctorPatientDao.setPersonDao(personDao);
+    patientLinksDao.setPersonDao(personDao);
     medicineInventoryDao.setMedicineDao(medicineDao);
     medicineInventoryDao.setPersonDao(personDao);
 
-//    prescriptionDao.loadPrescriptionDTOs();
+    if (configurationProperties.isLoadPrescriptionDTOs()) {
+      prescriptionDao.loadPrescriptionDTOs();
+    }
   }
 
   public SqlUtility getSqlUtility() {
@@ -101,8 +109,12 @@ public final class PersistentServiceImpl implements PersistentService {
     return treatmentDao;
   }
 
-  public DoctorPatientDao getDoctorPatientDao() {
-    return doctorPatientDao;
+  public PatientLinksDao getPatientLinksDao() {
+    return patientLinksDao;
+  }
+
+  public MedicationPropertiesDao getMedicationPropertiesDao() {
+    return medicationPropertiesDao;
   }
 
   public int generateId() {

@@ -10,26 +10,29 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
 public final class Dispenser extends Entity {
 
   private final Person patient;
+  private final String name;
   private final String dispenserUri;
   private final String instructionsFileName;
 
-  public Dispenser(int id, Person patient, String dispenserUri, String instructionsFileName) {
+  public Dispenser(int id, Person patient, String name, String dispenserUri, String instructionsFileName) {
     super(id);
 
-    validate(patient, dispenserUri, instructionsFileName);
+    validate(patient, name, dispenserUri, instructionsFileName);
 
     this.patient = patient;
+    this.name = name;
     this.dispenserUri = dispenserUri;
     this.instructionsFileName = instructionsFileName;
   }
 
-  public Dispenser(Person patient, String dispenserUri, String instructionsFileName) {
-    this(0, patient, dispenserUri, instructionsFileName);
+  public Dispenser(Person patient, String name, String dispenserUri, String instructionsFileName) {
+    this(0, patient, name, dispenserUri, instructionsFileName);
   }
 
-  private void validate(Person patient, String dispenserUri, String instructionsFileName) {
+  private void validate(Person patient, String name, String dispenserUri, String instructionsFileName) {
 
     validateParameter(patient, "patient");
+    validateParameter(name, "name");
     validateParameter(dispenserUri, "dispenserUri");
     validateParameter(instructionsFileName, "instructionsFileName");
   }
@@ -50,6 +53,7 @@ public final class Dispenser extends Entity {
   public String toString() {
     return "Dispenser{" +
         "patient=" + patient +
+        ", name='" + name + '\'' +
         ", dispenserUri='" + dispenserUri + '\'' +
         ", instructionsFileName='" + instructionsFileName + '\'' +
         '}';

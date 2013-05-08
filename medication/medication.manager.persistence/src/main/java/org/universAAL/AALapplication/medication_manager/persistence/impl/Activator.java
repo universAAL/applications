@@ -53,11 +53,13 @@ public class Activator implements BundleActivator {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
     connection = getConnection();
-    Database derbyDatabase = new DerbyDatabase(connection);
+    ConfigurationProperties configurationProperties = getConfigurationProperties();
+    Database derbyDatabase = new DerbyDatabase(connection, configurationProperties);
 
     derbyDatabase.initDatabase();
 
-    PersistentService persistentService = new PersistentServiceImpl(derbyDatabase);
+    PersistentService persistentService = new PersistentServiceImpl(derbyDatabase, configurationProperties);
+
     context.registerService(PersistentService.class.getName(),
         persistentService, null);
 

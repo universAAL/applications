@@ -1,13 +1,13 @@
 // person table
 
-insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
-values (1, 'Said', 'urn:org.universaal.aal_space:test_env#saied', 'patient', '+35987852963');
+insert into medication_manager.person (id, name, person_uri, role)
+values (1, 'Said', 'urn:org.universaal.aal_space:test_env#saied', 'patient');
 
-insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
-values (2, 'George', 'urn:org.universaal.aal_space:test_env#george', 'patient', '+35989159753');
+insert into medication_manager.person (id, name, person_uri, role)
+values (2, 'George', 'urn:org.universaal.aal_space:test_env#george', 'patient');
 
-insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
-values (3, 'Venelin', 'urn:org.universaal.aal_space:test_env#venelin', 'patient', '+35988756123');
+insert into medication_manager.person (id, name, person_uri, role)
+values (3, 'Venelin', 'urn:org.universaal.aal_space:test_env#venelin', 'patient');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password)
 values (4, 'd-r Pencho Penchev', 'urn:org.universaal.aal_space:test_env#pencho', 'physician', 'pencho', 'pass');
@@ -15,18 +15,25 @@ values (4, 'd-r Pencho Penchev', 'urn:org.universaal.aal_space:test_env#pencho',
 insert into medication_manager.person (id, name, person_uri, role, username, password)
 values (5, 'd-r Ivan Ivanov', 'urn:org.universaal.aal_space:test_env#ivan', 'physician', 'ivan', '123');
 
-// doctor_patient table
+insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
+values (6, 'Simeon', 'urn:org.universaal.aal_space:test_env#simeon', 'caregiver', '+35988756123');
 
-insert into medication_manager.doctor_patient (id, doctor_fk_id, patient_fk_id)
-values (1, 4, 2);
+insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
+values (7, 'Asparuh', 'urn:org.universaal.aal_space:test_env#aparuh', 'caregiver', '+3598758789');
 
-insert into medication_manager.doctor_patient (id, doctor_fk_id, patient_fk_id)
-values (2, 4, 3);
+insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
+values (8, 'Ivailo', 'urn:org.universaal.aal_space:test_env#ivailo', 'caregiver', '+3598912355');
 
-insert into medication_manager.doctor_patient (id, doctor_fk_id, patient_fk_id)
-values (3, 5, 1);
+// patient_links table
 
+insert into medication_manager.patient_links (id, doctor_fk_id, patient_fk_id, caregiver_fk_id)
+values (1, 4, 2, 6);
 
+insert into medication_manager.patient_links (id, doctor_fk_id, patient_fk_id, caregiver_fk_id)
+values (2, 4, 3, 7);
+
+insert into medication_manager.patient_links (id, doctor_fk_id, patient_fk_id, caregiver_fk_id)
+values (3, 5, 1, 8);
 
 // medicine table
 
@@ -46,11 +53,11 @@ INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_
 
 // dispenser table
 
-insert into medication_manager.dispenser (id, patient_fk_id, dispenser_uri, instructions_file_name)
-values (1, 2, 'urn:org.universaal.aal_space:test_env#dispenser-1', 'instructions_1.txt');
+insert into medication_manager.dispenser (id, patient_fk_id, name, dispenser_uri, instructions_file_name)
+values (1, 2, 'dispenser one', 'urn:org.universaal.aal_space:test_env#dispenser-1', 'instructions_1.txt');
 
-insert into medication_manager.dispenser (id, patient_fk_id, dispenser_uri, instructions_file_name)
-values (2, 3, 'urn:org.universaal.aal_space:test_env#dispenser-2', 'instructions_2.txt');
+insert into medication_manager.dispenser (id, patient_fk_id, name, dispenser_uri, instructions_file_name)
+values (2, 3, 'dispenser two', 'urn:org.universaal.aal_space:test_env#dispenser-2', 'instructions_2.txt');
 
 // medicine_inventory table
 
@@ -124,23 +131,56 @@ INSERT INTO MEDICATION_MANAGER.PRESCRIPTION (ID, TIME_OF_CREATION, PATIENT_FK_ID
 // treatment table
 
 
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1009, 1006, 1007, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1025, 1006, 1008, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1047, 1045, 1046, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1072, 1069, 1070, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1088, 1069, 1071, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1106, 1105, 1046, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1122, 1105, 1008, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1152, 1148, 1149, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1158, 1148, 1150, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1174, 1148, 1151, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1194, 1192, 1193, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1211, 1208, 1209, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1227, 1208, 1210, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1243, 1208, 1008, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1264, 1263, 1046, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1285, 1284, 1193, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
-INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS) VALUES (1296, 1295, 1008, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y');
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1009, 1006, 1007, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1025, 1006, 1008, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1047, 1045, 1046, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1072, 1069, 1070, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1088, 1069, 1071, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1106, 1105, 1046, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1122, 1105, 1008, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1152, 1148, 1149, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1158, 1148, 1150, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1174, 1148, 1151, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1194, 1192, 1193, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1211, 1208, 1209, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1227, 1208, 1210, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1243, 1208, 1008, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1264, 1263, 1046, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1285, 1284, 1193, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
+
+INSERT INTO MEDICATION_MANAGER.TREATMENT (ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT)
+VALUES (1296, 1295, 1008, '2013-04-18 00:00:00', '2013-04-23 00:00:00', 'Y', true, false);
 
 
 // intake table
