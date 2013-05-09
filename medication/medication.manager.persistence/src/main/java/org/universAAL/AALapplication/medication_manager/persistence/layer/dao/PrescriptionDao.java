@@ -459,7 +459,11 @@ public final class PrescriptionDao extends AbstractDao {
 
     try {
       List<Prescription> prescriptions = getByPersonAndDoctor(patient.getId(), doctor.getId());
-      return convertToDTO(prescriptions);
+      List<PrescriptionDTO> prescriptionDTOList = convertToDTO(prescriptions);
+      for (PrescriptionDTO dto : prescriptionDTOList) {
+        SOFT_CACHE.put(dto.getPrescriptionId(), dto);
+      }
+      return prescriptionDTOList;
     } catch (MedicationManagerPersistenceException e) {
       if (MedicationManagerPersistenceException.MISSING_RECORD == e.getCode()) {
         return new ArrayList<PrescriptionDTO>();
@@ -481,7 +485,7 @@ public final class PrescriptionDao extends AbstractDao {
         continue;
       }
       if (dto.getPatient().getId() == patientId && dto.getPhysician().getId() == doctorId) {
-         prescriptionDTOs.add(dto);
+        prescriptionDTOs.add(dto);
       }
     }
 
@@ -571,8 +575,6 @@ public final class PrescriptionDao extends AbstractDao {
       intakeDTOs.add(dto);
       return intakeDTOs;
     }
-
-    Set<Intake> realIntakesPerDaySet = new HashSet<Intake>();
 
     List<Intake> intakesPerDay = findDayOfMonthWithFullNumberOfIntakes(intakesPerTreatment);
 
