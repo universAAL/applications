@@ -3,9 +3,9 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

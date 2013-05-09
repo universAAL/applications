@@ -1,7 +1,8 @@
-package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms;
+package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.forms;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers;
+package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;

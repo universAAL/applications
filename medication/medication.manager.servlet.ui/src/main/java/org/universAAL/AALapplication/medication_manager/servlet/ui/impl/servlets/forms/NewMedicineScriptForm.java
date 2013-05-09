@@ -1,8 +1,9 @@
-package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms;
+package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.forms;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MealRelationDTO;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.MedicineView;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.MedicineView;
 
 import java.util.ArrayList;
 import java.util.List;

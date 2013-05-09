@@ -1,7 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl;
 
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.NewPrescriptionView;
+
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.NewPrescriptionView;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms;
+package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.forms;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
@@ -7,9 +7,10 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.Me
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Prescription;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.JavaScriptObjectCreator;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.JavaScriptObjectCreator;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.Pair;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

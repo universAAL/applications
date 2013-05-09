@@ -1,8 +1,9 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.DebugWriter;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.Session;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
+
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.DebugWriter;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;

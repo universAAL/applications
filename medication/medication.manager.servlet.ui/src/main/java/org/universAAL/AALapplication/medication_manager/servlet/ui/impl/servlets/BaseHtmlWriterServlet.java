@@ -1,9 +1,9 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.HtmlParser;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.HtmlParser;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.parser.script.forms.ScriptForm;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets.helpers.SessionTracking;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
