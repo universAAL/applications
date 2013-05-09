@@ -147,6 +147,8 @@ medication/medication.manager.service/.settings
 medication/medication.manager.service/target
 medication/medication.manager.servlet.ui.base/*.iml
 medication/medication.manager.servlet.ui.base/target
+medication/medication.manager.servlet.ui.configuration/*.iml
+medication/medication.manager.servlet.ui.configuration/target
 medication/medication.manager.servlet.ui/*.iml
 medication/medication.manager.servlet.ui/target
 medication/medication.manager.shell.commands/*.iml
