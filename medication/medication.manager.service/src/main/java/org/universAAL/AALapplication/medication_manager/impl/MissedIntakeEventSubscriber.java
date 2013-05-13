@@ -76,48 +76,52 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
   }
 
   public void handleContextEvent(ContextEvent event) {
-    Log.info("Received event of type %s", getClass(), event.getType());
+    try {
+      Log.info("Received event of type %s", getClass(), event.getType());
 
-    MissedIntake missedIntake = (MissedIntake) event.getRDFSubject();
+      MissedIntake missedIntake = (MissedIntake) event.getRDFSubject();
 
-    Time time = missedIntake.getTime();
+      Time time = missedIntake.getTime();
 
-    Log.info("Time %s", getClass(), time);
+      Log.info("Time %s", getClass(), time);
 
-    User user = missedIntake.getUser();
+      User user = missedIntake.getUser();
 
-    Log.info("Calling the Caregiver Notification Service for the userId %s", getClass(), user);
+      Log.info("Calling the Caregiver Notification Service for the userId %s", getClass(), user);
 
-    PersistentService persistentService = getPersistentService();
+      PersistentService persistentService = getPersistentService();
 
-    PersonDao personDao = persistentService.getPersonDao();
+      PersonDao personDao = persistentService.getPersonDao();
 
-    Person person = personDao.findPersonByPersonUri(user.getURI());
+      Person person = personDao.findPersonByPersonUri(user.getURI());
 
-    ServiceRequest serviceRequest = new ServiceRequest(new CaregiverNotifier(), user);
+      ServiceRequest serviceRequest = new ServiceRequest(new CaregiverNotifier(), user);
 
-    CaregiverNotifierData caregiverNotifierData = new CaregiverNotifierData();
-    String smsNumber = getCaregiverSms(person, persistentService.getPatientLinksDao());
-    caregiverNotifierData.setSmsNumber(smsNumber);
-    String smsText = getSmsText(time, person);
-    caregiverNotifierData.setSmsText(smsText);
+      CaregiverNotifierData caregiverNotifierData = new CaregiverNotifierData();
+      String smsNumber = getCaregiverSms(person, persistentService.getPatientLinksDao());
+      caregiverNotifierData.setSmsNumber(smsNumber);
+      String smsText = getSmsText(time, person);
+      caregiverNotifierData.setSmsText(smsText);
 
 
-    serviceRequest.addAddEffect(new String[]{CaregiverNotifier.PROP_CAREGIVER_NOTIFIER_DATA}, caregiverNotifierData);
-    serviceRequest.addRequiredOutput(OUTPUT_CAREGIVER_RECEIVED_MESSAGE,
-        new String[]{CaregiverNotifier.PROP_RECEIVED_MESSAGE});
+      serviceRequest.addAddEffect(new String[]{CaregiverNotifier.PROP_CAREGIVER_NOTIFIER_DATA}, caregiverNotifierData);
+      serviceRequest.addRequiredOutput(OUTPUT_CAREGIVER_RECEIVED_MESSAGE,
+          new String[]{CaregiverNotifier.PROP_RECEIVED_MESSAGE});
 
-    ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
+      ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
 
-    CallStatus callStatus = serviceResponse.getCallStatus();
+      CallStatus callStatus = serviceResponse.getCallStatus();
 
-    String msg;
-    if (callStatus.toString().contains("call_succeeded")) {
-      msg = getMessage(serviceResponse);
-    } else {
-      msg = "The Medication Manager service was unable notified the Caregiver Notification Service";
+      String msg;
+      if (callStatus.toString().contains("call_succeeded")) {
+        msg = getMessage(serviceResponse);
+      } else {
+        msg = "The Medication Manager service was unable notified the Caregiver Notification Service";
+      }
+      Log.info("Caregiver Notification callStatus %s\n" + msg, getClass(), callStatus);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the the context event", getClass());
     }
-    Log.info("Caregiver Notification callStatus %s\n" + msg, getClass(), callStatus);
 
   }
 

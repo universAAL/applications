@@ -47,23 +47,27 @@ public final class UsecaseDispenserUpsideDown extends Usecase {
   @Override
   public void execute(String... parameters) {
 
-    if (parameters == null || parameters.length != 1) {
-      throw new MedicationManagerShellException(PARAMETER_MESSAGE);
+    try {
+      if (parameters == null || parameters.length != 1) {
+        throw new MedicationManagerShellException(PARAMETER_MESSAGE);
+      }
+
+      int id = Integer.parseInt(parameters[0]);
+
+      PersistentService persistentService = getPersistentService();
+      DispenserDao dispenserDao = persistentService.getDispenserDao();
+      Dispenser dispenser = dispenserDao.getById(id);
+      String deviceUri = dispenser.getDispenserUri();
+
+      Log.info("Executing the " + USECASE_TITLE + ". The deviceUri is : " +
+          deviceUri, getClass());
+
+      DispenserUpsideDownContextProvider provider = getDispenserUpsideDownContextProvider();
+
+      provider.dispenserUpsideDownDeviceIdEvent(deviceUri);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the the shell command for usecase id:  %s", getClass(), USECASE_ID);
     }
-
-    int id = Integer.parseInt(parameters[0]);
-
-    PersistentService persistentService = getPersistentService();
-    DispenserDao dispenserDao = persistentService.getDispenserDao();
-    Dispenser dispenser = dispenserDao.getById(id);
-    String deviceUri = dispenser.getDispenserUri();
-
-    Log.info("Executing the " + USECASE_TITLE + ". The deviceUri is : " +
-        deviceUri, getClass());
-
-    DispenserUpsideDownContextProvider provider = getDispenserUpsideDownContextProvider();
-
-    provider.dispenserUpsideDownDeviceIdEvent(deviceUri);
   }
 
   @Override

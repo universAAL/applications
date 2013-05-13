@@ -64,17 +64,21 @@ public final class SqlConsoleCommand extends ConsoleCommand {
 
   @Override
   public void execute(String... parameters) {
-    if (parameters == null || parameters.length != 2) {
-      throw new MedicationManagerShellException(COMMAND_INFO);
+    try {
+      if (parameters == null || parameters.length != 2) {
+        throw new MedicationManagerShellException(COMMAND_INFO);
+      }
+
+      String firstParam = parameters[0].trim();
+
+      checkFirstParam(firstParam);
+
+      String secondParam = parameters[1].trim();
+
+      callSqlUtility(firstParam, secondParam);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the the shell command", getClass());
     }
-
-    String firstParam = parameters[0].trim();
-
-    checkFirstParam(firstParam);
-
-    String secondParam = parameters[1].trim();
-
-    callSqlUtility(firstParam, secondParam);
 
   }
 

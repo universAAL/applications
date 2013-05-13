@@ -49,22 +49,26 @@ public final class UsecaseMissedIntake extends Usecase {
   @Override
   public void execute(String... parameters) {
 
-    if (parameters == null || parameters.length != 1) {
-      throw new MedicationManagerShellException(PARAMETER_MESSAGE);
+    try {
+      if (parameters == null || parameters.length != 1) {
+        throw new MedicationManagerShellException(PARAMETER_MESSAGE);
+      }
+
+      PersistentService persistentService = getPersistentService();
+      PersonDao personDao = persistentService.getPersonDao();
+      int id = Integer.parseInt(parameters[0]);
+      Person person = personDao.getById(id);
+      User user = new User(person.getPersonUri());
+      Log.info("Executing the " + USECASE_TITLE + " . The user is : " + user, getClass());
+
+
+      Time time = new Time(2012, 5, 12, 16, 52);
+
+      MissedIntakeContextProvider provider = getMissedIntakeContextProvider();
+      provider.missedIntakeTimeEvent(time, user);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the the shell command for usecase id:  %s", getClass(), USECASE_ID);
     }
-
-    PersistentService persistentService = getPersistentService();
-    PersonDao personDao = persistentService.getPersonDao();
-    int id = Integer.parseInt(parameters[0]);
-    Person person = personDao.getById(id);
-    User user = new User(person.getPersonUri());
-    Log.info("Executing the " + USECASE_TITLE + " . The user is : " + user, getClass());
-
-
-    Time time = new Time(2012, 5, 12, 16, 52);
-
-    MissedIntakeContextProvider provider = getMissedIntakeContextProvider();
-    provider.missedIntakeTimeEvent(time, user);
 
   }
 

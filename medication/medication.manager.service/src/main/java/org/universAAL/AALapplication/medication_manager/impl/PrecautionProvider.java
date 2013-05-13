@@ -67,23 +67,28 @@ public final class PrecautionProvider extends ServiceCallee {
   }
 
   public ServiceResponse handleCall(ServiceCall call) {
-    String processURI = call.getProcessURI();
+    try {
+      String processURI = call.getProcessURI();
 
-    Log.info("Received call %s", getClass(), processURI);
+      Log.info("Received call %s", getClass(), processURI);
 
-    User involvedUser = (User) call.getInvolvedUser();
+      User involvedUser = (User) call.getInvolvedUser();
 
-    Log.info("involvedUser %s", getClass(), involvedUser);
+      Log.info("involvedUser %s", getClass(), involvedUser);
 
-    if (involvedUser == null) {
+      if (involvedUser == null) {
+        return invalidInput;
+      }
+
+      if (processURI.startsWith(ProviderPrecautionService.SERVICE_GET_PRECAUTION)) {
+        return getSuccessfulServiceResponse(involvedUser);
+      }
+
+      return invalidInput;
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the client call", getClass());
       return invalidInput;
     }
-
-    if (processURI.startsWith(ProviderPrecautionService.SERVICE_GET_PRECAUTION)) {
-      return getSuccessfulServiceResponse(involvedUser);
-    }
-
-    return invalidInput;
   }
 
   private ServiceResponse getSuccessfulServiceResponse(User involvedUser) {

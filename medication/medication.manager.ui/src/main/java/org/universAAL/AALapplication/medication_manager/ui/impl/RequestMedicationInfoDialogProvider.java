@@ -34,6 +34,10 @@ public class RequestMedicationInfoDialogProvider extends ServiceCallee {
   private static final String MY_URI = NAMESPACE + "RequestMedicationInfoDialogService";
   private static final String START_UI = NAMESPACE + "startUI";
 
+  // this is just to prepare a standard error message for later use
+  private static final ServiceResponse invalidInput = new ServiceResponse(
+      CallStatus.serviceSpecificFailure);
+
   private ModuleContext ctxt;
 
   public RequestMedicationInfoDialogProvider(ModuleContext context, ServiceProfile[] realizedServices) {
@@ -63,9 +67,14 @@ public class RequestMedicationInfoDialogProvider extends ServiceCallee {
 
   @Override
   public ServiceResponse handleCall(ServiceCall call) {
-    User inputUser = (User) call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
-    new RequestMedicationInfoDialog(this.ctxt).showDialog((inputUser));
-    return new ServiceResponse(CallStatus.succeeded);
+    try {
+      User inputUser = (User) call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
+      new RequestMedicationInfoDialog(this.ctxt).showDialog((inputUser));
+      return new ServiceResponse(CallStatus.succeeded);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the client call", getClass());
+      return invalidInput;
+    }
   }
 
 }

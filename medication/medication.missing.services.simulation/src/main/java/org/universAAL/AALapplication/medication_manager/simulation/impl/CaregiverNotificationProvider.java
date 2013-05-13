@@ -57,29 +57,38 @@ public final class CaregiverNotificationProvider extends ServiceCallee {
   }
 
   public ServiceResponse handleCall(ServiceCall call) {
-    String processURI = call.getProcessURI();
+    try {
+      String processURI = call.getProcessURI();
 
-    Log.info("Received call %s", getClass(), processURI);
+      Log.info("Received call %s", getClass(), processURI);
 
-    User involvedUser = (User) call.getInvolvedUser();
+      User involvedUser = (User) call.getInvolvedUser();
 
-    Log.info("involvedUser %s", getClass(), involvedUser);
+      Log.info("involvedUser %s", getClass(), involvedUser);
 
-    if (involvedUser == null) {
+      if (involvedUser == null) {
+        return invalidInput;
+      }
+
+      if (processURI.startsWith(ProviderCaregiverNotificationService.SERVICE_NOTIFY)) {
+        return getSuccessfulServiceResponse(call, involvedUser);
+      }
+
+      return invalidInput;
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the client call", getClass());
       return invalidInput;
     }
-
-    if (processURI.startsWith(ProviderCaregiverNotificationService.SERVICE_NOTIFY)) {
-      return getSuccessfulServiceResponse(call, involvedUser);
-    }
-
-    return invalidInput;
   }
 
   private ServiceResponse getSuccessfulServiceResponse(ServiceCall call, User involvedUser) {
     String userId = involvedUser.getURI();
     CaregiverNotifierData caregiverNotifierData =
         (CaregiverNotifierData) call.getInputValue(ProviderCaregiverNotificationService.INPUT_CAREGIVER_NOTIFIER_DATA);
+
+    if (caregiverNotifierData == null) {
+      throw new MedicationManagerSimulationServicesException("CaregiverNotifierData object is null");
+    }
 
     Log.info("Successful Caregiver Notification Service Response for the user %s", getClass(), userId);
     ServiceResponse response = new ServiceResponse(CallStatus.succeeded);
