@@ -18,7 +18,6 @@
 package org.universAAL.AALapplication.medication_manager.impl;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.middleware.container.ModuleContext;
@@ -37,9 +36,8 @@ import org.universAAL.ontology.medMgr.MissedIntake;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
-import java.util.List;
-
 import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -47,11 +45,6 @@ import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
 public final class MissedIntakeEventSubscriber extends ContextSubscriber {
 
   private final ServiceCaller serviceCaller;
-
-  private static final String CAREGIVER_NOTIFIER_NAMESPACE =
-      "http://ontology.igd.fhg.de/CaregiverNotifier.owl#";
-  private static final String OUTPUT_CAREGIVER_RECEIVED_MESSAGE =
-      CAREGIVER_NOTIFIER_NAMESPACE + "receivedMessage";
 
   private static ContextEventPattern[] getContextEventPatterns() {
     ContextEventPattern cep = new ContextEventPattern();
@@ -125,33 +118,6 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
 
   }
 
-  private String getCaregiverSms(Person person, PatientLinksDao patientLinksDao) {
-    Person caregiver = patientLinksDao.findPatientCaregiver(person);
-    String caregiverSms = caregiver.getCaregiverSms();
-    if (caregiverSms == null) {
-      throw new MedicationManagerException("Missing caregiver sms for a caregiver: " + caregiver);
-    }
-    return caregiverSms;
-  }
-
-  private String getMessage(ServiceResponse serviceResponse) {
-    StringBuffer sb = new StringBuffer();
-    sb.append("The Medication Manager service successfully notified the Caregiver Notification Service");
-    sb.append("\n\t. Received the following message: ");
-
-    List list = serviceResponse.getOutput(OUTPUT_CAREGIVER_RECEIVED_MESSAGE, true);
-
-    if (list == null || list.size() != 1) {
-      throw new MedicationManagerException("Missing correct output in ServiceResponse object");
-    }
-
-    String msg = (String) list.get(0);
-
-    sb.append(msg);
-
-    return sb.toString();
-  }
-
   private String getSmsText(Time time, Person person) {
     StringBuffer sb = new StringBuffer();
 
@@ -163,4 +129,5 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
 
     return sb.toString();
   }
+
 }

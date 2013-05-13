@@ -28,11 +28,17 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.Ti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
+import org.universAAL.AALapplication.medication_manager.simulation.impl.Log;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.MedicationManagerSimulationServicesException;
 import org.universAAL.AALapplication.medication_manager.simulation.impl.NewPrescriptionContextProvider;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
+import org.universAAL.middleware.service.ServiceRequest;
+import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.ontology.medMgr.CaregiverNotifier;
+import org.universAAL.ontology.medMgr.CaregiverNotifierData;
 import org.universAAL.ontology.medMgr.Intake;
 import org.universAAL.ontology.medMgr.IntakeUnit;
 import org.universAAL.ontology.medMgr.MealRelation;
@@ -51,6 +57,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
+
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
 
 
 /**
@@ -78,10 +86,63 @@ public abstract class NewPrescriptionHandler {
       NewPrescription newPrescription = createNewPrescription(prescriptionDTO);
       handleNewPrescription(prescriptionDTO, persistentService, newPrescription);
       newPrescriptionContextProvider.publishNewPrescriptionEvent(newPrescription);
+      notifyCaregiverNotificationService(persistentService, prescriptionDTO);
     } catch (DatatypeConfigurationException e) {
       throw new MedicationException(e);
     }
 
+  }
+
+  private void notifyCaregiverNotificationService(PersistentService persistentService,
+                                                  PrescriptionDTO prescriptionDTO) {
+
+
+    Person person = prescriptionDTO.getPatient();
+
+    User user = new User(person.getPersonUri());
+
+    ServiceRequest serviceRequest = new ServiceRequest(new CaregiverNotifier(), user);
+
+    CaregiverNotifierData caregiverNotifierData = new CaregiverNotifierData();
+    String smsNumber = getCaregiverSms(person, persistentService.getPatientLinksDao());
+    caregiverNotifierData.setSmsNumber(smsNumber);
+    String smsText = getSmsText(person, prescriptionDTO);
+    caregiverNotifierData.setSmsText(smsText);
+
+
+    serviceRequest.addAddEffect(new String[]{CaregiverNotifier.PROP_CAREGIVER_NOTIFIER_DATA}, caregiverNotifierData);
+    serviceRequest.addRequiredOutput(OUTPUT_CAREGIVER_RECEIVED_MESSAGE,
+        new String[]{CaregiverNotifier.PROP_RECEIVED_MESSAGE});
+
+    ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
+
+    CallStatus callStatus = serviceResponse.getCallStatus();
+
+    String msg;
+    if (callStatus.toString().contains("call_succeeded")) {
+      msg = getMessage(serviceResponse);
+    } else {
+      msg = "The Medication Manager service was unable notified the Caregiver Notification Service";
+    }
+    Log.info("Caregiver Notification callStatus %s\n" + msg, getClass(), callStatus);
+
+
+  }
+
+  private String getSmsText(Person person, PrescriptionDTO prescriptionDTO) {
+    StringBuffer sb = new StringBuffer();
+
+    sb.append("New prescription has been prescribed for Person with id: ");
+    sb.append(person.getId());
+    sb.append(" and name: ");
+    sb.append(person.getName());
+    sb.append(". The prescription description is:");
+    sb.append(prescriptionDTO.getDescription());
+    sb.append(" and the starting date is:");
+    sb.append(prescriptionDTO.getStartDate());
+    sb.append(".\n");
+
+    return sb.toString();
   }
 
   private void handleNewPrescription(PrescriptionDTO prescriptionDTO, PersistentService persistentService,
