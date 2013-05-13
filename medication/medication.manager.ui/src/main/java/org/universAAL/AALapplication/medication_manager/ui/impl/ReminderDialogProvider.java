@@ -34,6 +34,10 @@ public class ReminderDialogProvider extends ServiceCallee {
   private static final String MY_URI = NAMESPACE + "ReminderDialogService";
   private static final String START_UI = NAMESPACE + "startUI";
 
+  // this is just to prepare a standard error message for later use
+  private static final ServiceResponse invalidInput = new ServiceResponse(
+      CallStatus.serviceSpecificFailure);
+
   private ModuleContext ctxt;
 
   public ReminderDialogProvider(ModuleContext context, ServiceProfile[] realizedServices) {
@@ -63,9 +67,14 @@ public class ReminderDialogProvider extends ServiceCallee {
 
   @Override
   public ServiceResponse handleCall(ServiceCall call) {
-    Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
-    new ReminderDialog(this.ctxt).showDialog((User)inputUser);
-    return new ServiceResponse(CallStatus.succeeded);
+    try {
+      Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
+      new ReminderDialog(this.ctxt).showDialog((User) inputUser);
+      return new ServiceResponse(CallStatus.succeeded);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the client call", getClass());
+      return invalidInput;
+    }
   }
 
 }

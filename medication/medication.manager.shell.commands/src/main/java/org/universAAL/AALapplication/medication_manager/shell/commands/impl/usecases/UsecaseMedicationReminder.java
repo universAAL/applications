@@ -61,45 +61,49 @@ public final class UsecaseMedicationReminder extends Usecase {
 
   @Override
   public void execute(String... parameters) {
-    if (parameters == null || parameters.length != 2) {
-      throw new MedicationManagerShellException(PARAMETER_MESSAGE);
+    try {
+      if (parameters == null || parameters.length != 2) {
+        throw new MedicationManagerShellException(PARAMETER_MESSAGE);
+      }
+
+      PersistentService persistentService = getPersistentService();
+
+      Log.info("Persistent service found", getClass());
+
+      PersonDao personDao = persistentService.getPersonDao();
+      int personId = getIdFromString(parameters[0]);
+      Person person = personDao.getById(personId);
+
+      DispenserDao dispenserDao = persistentService.getDispenserDao();
+      Dispenser dispenser = dispenserDao.findByPerson(person);
+      String deviceUri = dispenser.getDispenserUri();
+
+      Log.info("DeviceUri=%s", getClass(), deviceUri);
+
+      IntakeDao intakeDao = persistentService.getIntakeDao();
+      Intake intake = intakeDao.getById(getIdFromString(parameters[1]));
+
+      Treatment treatment = intake.getTreatment();
+      Prescription prescription = treatment.getPrescription();
+      Person patient = prescription.getPatient();
+      int intakePersonId = patient.getId();
+
+      if (intakePersonId != personId) {
+        throw new MedicationManagerShellException("The intake with id=" + intake.getId() +
+            " is not associated with the patient with id=" + personId);
+      }
+
+      Time time = getTimeObject(intake.getTimePlan());
+
+      Log.info("Executing the " + USECASE_TITLE + ". The deviceId is : " +
+          deviceUri + " for user with id=" + personId, getClass());
+
+
+      MedicationReminderContextProvider provider = getMedicationReminderContextProvider();
+      provider.dueIntakeReminderDeviceIdEvent(deviceUri, time);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the the shell command for usecase id: %s", getClass(), USECASE_ID);
     }
-
-    PersistentService persistentService = getPersistentService();
-
-    Log.info("Persistent service found", getClass());
-
-    PersonDao personDao = persistentService.getPersonDao();
-    int personId = getIdFromString(parameters[0]);
-    Person person = personDao.getById(personId);
-
-    DispenserDao dispenserDao = persistentService.getDispenserDao();
-    Dispenser dispenser = dispenserDao.findByPerson(person);
-    String deviceUri = dispenser.getDispenserUri();
-
-    Log.info("DeviceUri=%s", getClass(), deviceUri);
-
-    IntakeDao intakeDao = persistentService.getIntakeDao();
-    Intake intake = intakeDao.getById(getIdFromString(parameters[1]));
-
-    Treatment treatment = intake.getTreatment();
-    Prescription prescription = treatment.getPrescription();
-    Person patient = prescription.getPatient();
-    int intakePersonId = patient.getId();
-
-    if (intakePersonId != personId) {
-      throw new MedicationManagerShellException("The intake with id=" + intake.getId() +
-          " is not associated with the patient with id=" + personId);
-    }
-
-    Time time = getTimeObject(intake.getTimePlan());
-
-    Log.info("Executing the " + USECASE_TITLE + ". The deviceId is : " +
-        deviceUri + " for user with id=" + personId, getClass());
-
-
-    MedicationReminderContextProvider provider = getMedicationReminderContextProvider();
-    provider.dueIntakeReminderDeviceIdEvent(deviceUri, time);
 
   }
 

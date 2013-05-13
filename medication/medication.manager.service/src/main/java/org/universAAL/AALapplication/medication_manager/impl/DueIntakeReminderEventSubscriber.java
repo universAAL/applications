@@ -78,39 +78,43 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
   }
 
   public void handleContextEvent(ContextEvent event) {
-    Log.info("Received event of type %s", getClass(), event.getType());
+    try {
+      Log.info("Received event of type %s", getClass(), event.getType());
 
-    DueIntake dueIntake = (DueIntake) event.getRDFSubject();
+      DueIntake dueIntake = (DueIntake) event.getRDFSubject();
 
-    validateDueIntake(dueIntake);
+      validateDueIntake(dueIntake);
 
-    Time time = dueIntake.getTime();
+      Time time = dueIntake.getTime();
 
-    Log.info("Time %s", getClass(), time);
+      Log.info("Time %s", getClass(), time);
 
-    String deviceUri = dueIntake.getDeviceUri();
+      String deviceUri = dueIntake.getDeviceUri();
 
-    Log.info("DeviceUri %s", getClass(), deviceUri);
+      Log.info("DeviceUri %s", getClass(), deviceUri);
 
-    PersistentService persistentService = getPersistentService();
-    PersonDao personDao = persistentService.getPersonDao();
+      PersistentService persistentService = getPersistentService();
+      PersonDao personDao = persistentService.getPersonDao();
 
-    Person patient = personDao.findPersonByDeviceUri(deviceUri);
+      Person patient = personDao.findPersonByDeviceUri(deviceUri);
 
-    User user = new User(patient.getPersonUri());
+      User user = new User(patient.getPersonUri());
 
-    MedicineInventoryDao medicineInventoryDao = persistentService.getMedicineInventoryDao();
+      MedicineInventoryDao medicineInventoryDao = persistentService.getMedicineInventoryDao();
 
-    IntakeDao intakeDao = persistentService.getIntakeDao();
+      IntakeDao intakeDao = persistentService.getIntakeDao();
 
-    List<Intake> intakes = intakeDao.getIntakesByUserAndTime(user, time);
+      List<Intake> intakes = intakeDao.getIntakesByUserAndTime(user, time);
 
-    ReminderDialog reminderDialog =
-        new ReminderDialog(moduleContext, time, patient, intakes, medicineInventoryDao);
+      ReminderDialog reminderDialog =
+          new ReminderDialog(moduleContext, time, patient, intakes, medicineInventoryDao);
 
-    reminderDialog.showDialog(user);
+      reminderDialog.showDialog(user);
 
-    setTimeOut(reminderDialog, dueIntake, medicineInventoryDao, user, intakes, patient);
+      setTimeOut(reminderDialog, dueIntake, medicineInventoryDao, user, intakes, patient);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the the context event", getClass());
+    }
 
   }
 
@@ -128,7 +132,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
   private void setTimeOut(final ReminderDialog reminderDialog, final DueIntake dueIntake,
                           final MedicineInventoryDao medicineInventoryDao,
-                          final User user, final List<Intake> intakes , final Person patient) {
+                          final User user, final List<Intake> intakes, final Person patient) {
 
     final Timer timer = new Timer();
     timer.schedule(new TimerTask() {

@@ -20,6 +20,7 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl.use
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PrescriptionDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
+import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
 
@@ -57,48 +58,52 @@ public final class UsecaseNewPrescription extends Usecase {
   @Override
   public void execute(String... parameters) {
 
-    if (!prescriptionDirectory.isDirectory()) {
-      throw new MedicationManagerShellException("The required directory does not exists:" + PRESCRIPTIONS + " under the" +
-          "***/runner/configurations/medication_manager");
+    try {
+      if (!prescriptionDirectory.isDirectory()) {
+        throw new MedicationManagerShellException("The required directory does not exists:" + PRESCRIPTIONS + " under the" +
+            "***/runner/configurations/medication_manager");
+      }
+
+      if (parameters == null || parameters.length != 1) {
+        throw new MedicationManagerShellException(PARAMETER_MESSAGE);
+      }
+
+      String fileName = parameters[0];
+      info("Executing the %s . The file name is : %s", getClass(), USECASE_TITLE, fileName);
+      info("The Medication Manager will look for the file in following directory: " + prescriptionDirectory, getClass());
+
+      PersistentService persistentService = getPersistentService();
+
+      File prescriptionFile = new File(prescriptionDirectory, fileName);
+
+      if (!prescriptionFile.exists()) {
+        throw new MedicationManagerShellException("The following file does not exists: " + prescriptionFile);
+      }
+
+      if (!prescriptionFile.isFile()) {
+        throw new MedicationManagerShellException("The " + prescriptionFile + " is not a valid file");
+      }
+
+      PrescriptionParser prescriptionParser = new PrescriptionParser();
+      PrescriptionDTO prescriptionDTO = prescriptionParser.parse(prescriptionFile, persistentService);
+
+      info("The Medication Manager will try to save prescriptionDTO in the database: ", getClass());
+
+      PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
+
+      prescriptionDao.save(prescriptionDTO);
+
+      info("The Medication Manager successfully saved prescriptionDTO in the database: ", getClass());
+
+      info("The Medication Manager will try to send the prescription the Health Service ", getClass());
+
+      NewPrescriptionHandler newPrescriptionHandler = getNewPrescriptionHandler();
+      newPrescriptionHandler.callHealthServiceWithNewPrescription(persistentService, prescriptionDTO);
+
+      info("The Medication Manager successfully sent the prescription the Health Service ", getClass());
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the the shell command for usecase id:  %s", getClass(), USECASE_ID);
     }
-
-    if (parameters == null || parameters.length != 1) {
-      throw new MedicationManagerShellException(PARAMETER_MESSAGE);
-    }
-
-    String fileName = parameters[0];
-    info("Executing the %s . The file name is : %s", getClass(), USECASE_TITLE, fileName);
-    info("The Medication Manager will look for the file in following directory: " + prescriptionDirectory, getClass());
-
-    PersistentService persistentService = getPersistentService();
-
-    File prescriptionFile = new File(prescriptionDirectory, fileName);
-
-    if (!prescriptionFile.exists()) {
-      throw new MedicationManagerShellException("The following file does not exists: " + prescriptionFile);
-    }
-
-    if (!prescriptionFile.isFile()) {
-      throw new MedicationManagerShellException("The " + prescriptionFile + " is not a valid file");
-    }
-
-    PrescriptionParser prescriptionParser = new PrescriptionParser();
-    PrescriptionDTO prescriptionDTO = prescriptionParser.parse(prescriptionFile, persistentService);
-
-    info("The Medication Manager will try to save prescriptionDTO in the database: ", getClass());
-
-    PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
-
-    prescriptionDao.save(prescriptionDTO);
-
-    info("The Medication Manager successfully saved prescriptionDTO in the database: ", getClass());
-
-    info("The Medication Manager will try to send the prescription the Health Service ", getClass());
-
-    NewPrescriptionHandler newPrescriptionHandler = getNewPrescriptionHandler();
-    newPrescriptionHandler.callHealthServiceWithNewPrescription(persistentService, prescriptionDTO);
-
-    info("The Medication Manager successfully sent the prescription the Health Service ", getClass());
 
   }
 

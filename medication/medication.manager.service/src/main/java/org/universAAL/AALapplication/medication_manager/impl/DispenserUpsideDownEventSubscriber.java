@@ -62,30 +62,34 @@ public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber 
   }
 
   public void handleContextEvent(ContextEvent event) {
-    Log.info("Received event of type %s", getClass(), event.getType());
+    try {
+      Log.info("Received event of type %s", getClass(), event.getType());
 
-    DispenserUpsideDown dispenserUpsideDown = (DispenserUpsideDown) event.getRDFSubject();
+      DispenserUpsideDown dispenserUpsideDown = (DispenserUpsideDown) event.getRDFSubject();
 
-    String deviceUri = dispenserUpsideDown.getDeviceId();
+      String deviceUri = dispenserUpsideDown.getDeviceId();
 
-    Log.info("DeviceUri %s", getClass(), deviceUri);
+      Log.info("DeviceUri %s", getClass(), deviceUri);
 
-    PersistentService persistentService = getPersistentService();
-    DispenserDao dispenserDao = persistentService.getDispenserDao();
-    Dispenser dispenser = dispenserDao.getByDispenserUri(deviceUri);
+      PersistentService persistentService = getPersistentService();
+      DispenserDao dispenserDao = persistentService.getDispenserDao();
+      Dispenser dispenser = dispenserDao.getByDispenserUri(deviceUri);
 
-    if (dispenser == null) {
-      throw new MedicationManagerException("Missing dispenser with deviceUri: " + deviceUri);
+      if (dispenser == null) {
+        throw new MedicationManagerException("Missing dispenser with deviceUri: " + deviceUri);
+      }
+
+      Person person = dispenser.getPatient();
+
+      User user = new User(person.getPersonUri());
+
+      DispenserUpsideDownDialog dispenserUpsideDownDialog =
+          new DispenserUpsideDownDialog(moduleContext);
+
+      dispenserUpsideDownDialog.showDialog(user);
+    } catch (MedicationManagerException e) {
+      Log.error(e, "Error while processing the the context event", getClass());
     }
-
-    Person person = dispenser.getPatient();
-
-    User user = new User(person.getPersonUri());
-
-    DispenserUpsideDownDialog dispenserUpsideDownDialog =
-        new DispenserUpsideDownDialog(moduleContext);
-
-    dispenserUpsideDownDialog.showDialog(user);
 
   }
 }

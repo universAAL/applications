@@ -29,43 +29,52 @@ import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 
 public class MedicationManagerServiceButtonProvider extends ServiceCallee {
 
-	private static final String NAMESPACE = "http://ontologies.universAAL.com/MedicationManagerService.owl#";
-	private static final String MY_URI = NAMESPACE + "MedicationManagerButtonService";
-	private static final String START_UI = NAMESPACE + "startUI";
+  private static final String NAMESPACE = "http://ontologies.universAAL.com/MedicationManagerService.owl#";
+  private static final String MY_URI = NAMESPACE + "MedicationManagerButtonService";
+  private static final String START_UI = NAMESPACE + "startUI";
 
-	private ModuleContext ctxt;
+  // this is just to prepare a standard error message for later use
+  private static final ServiceResponse invalidInput = new ServiceResponse(
+      CallStatus.serviceSpecificFailure);
 
-	public MedicationManagerServiceButtonProvider(ModuleContext context,
+  private ModuleContext ctxt;
+
+  public MedicationManagerServiceButtonProvider(ModuleContext context,
                                                 ServiceProfile[] realizedServices) {
-		super(context, realizedServices);
-		this.ctxt = context;
-	}
+    super(context, realizedServices);
+    this.ctxt = context;
+  }
 
-	public MedicationManagerServiceButtonProvider(ModuleContext context){
-		this(context,getProfiles());
-	}
+  public MedicationManagerServiceButtonProvider(ModuleContext context) {
+    this(context, getProfiles());
+  }
 
-	private static ServiceProfile[] getProfiles() {
-		ServiceProfile initDP = InitialServiceDialog
-				.createInitialDialogProfile(
-						MY_URI,
-						"http://depot.universAAL.com",
-						"Medication Manager Service Main Menu",
-						START_UI);
-		return new ServiceProfile[] {initDP};
-	}
+  private static ServiceProfile[] getProfiles() {
+    ServiceProfile initDP = InitialServiceDialog
+        .createInitialDialogProfile(
+            MY_URI,
+            "http://depot.universAAL.com",
+            "Medication Manager Service Main Menu",
+            START_UI);
+    return new ServiceProfile[]{initDP};
+  }
 
-	@Override
-	public void communicationChannelBroken() {
-		// TODO Auto-generated method stub
+  @Override
+  public void communicationChannelBroken() {
+    // TODO Auto-generated method stub
 
-	}
+  }
 
-	@Override
-	public ServiceResponse handleCall(ServiceCall call) {
-		Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
-		new MainMedicationManagerMenu(this.ctxt).showDialog((Resource) inputUser);
-		return new ServiceResponse(CallStatus.succeeded);
-	}
+  @Override
+  public ServiceResponse handleCall(ServiceCall call) {
+    try {
+      Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
+      new MainMedicationManagerMenu(this.ctxt).showDialog((Resource) inputUser);
+      return new ServiceResponse(CallStatus.succeeded);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the client call", getClass());
+      return invalidInput;
+    }
+  }
 
 }

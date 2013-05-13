@@ -41,18 +41,22 @@ public final class ListidsConsoleCommand extends ConsoleCommand {
 
   @Override
   public void execute(String... parameters) {
-    if (parameters != null && parameters.length > 0) {
-      throw new MedicationManagerShellException(
-          "The listids command doesn't expect any parameters");
-    }
+    try {
+      if (parameters != null && parameters.length > 0) {
+        throw new MedicationManagerShellException(
+            "The listids command doesn't expect any parameters");
+      }
 
-    Collection<Usecase> usecases = Usecase.getUsecaseMap();
+      Collection<Usecase> usecases = Usecase.getUsecaseMap();
 
-    Iterator<Usecase> iterator = usecases.iterator();
+      Iterator<Usecase> iterator = usecases.iterator();
 
-    while (iterator.hasNext()) {
-      Usecase uc = iterator.next();
-      printImplementedUsecaseId(uc.getUsecaseId(), uc.getDescription());
+      while (iterator.hasNext()) {
+        Usecase uc = iterator.next();
+        printImplementedUsecaseId(uc.getUsecaseId(), uc.getDescription());
+      }
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the the shell command", getClass());
     }
 
   }

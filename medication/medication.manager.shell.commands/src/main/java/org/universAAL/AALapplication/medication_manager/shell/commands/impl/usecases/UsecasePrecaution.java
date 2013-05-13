@@ -49,27 +49,31 @@ public final class UsecasePrecaution extends Usecase {
   @Override
   public void execute(String... parameters) {
 
-    if (parameters == null || parameters.length != 1) {
-      throw new MedicationManagerShellException(PARAMETER_MESSAGE);
+    try {
+      if (parameters == null || parameters.length != 1) {
+        throw new MedicationManagerShellException(PARAMETER_MESSAGE);
+      }
+
+      PersistentService persistentService = getPersistentService();
+      PersonDao personDao = persistentService.getPersonDao();
+      int personId = Integer.parseInt(parameters[0]);
+
+      Person person = personDao.getById(personId);
+
+      Log.info("Executing the " + USECASE_TITLE + ". The user is : " + person, getClass());
+
+      User user = new User(person.getPersonUri());
+      Precaution[] precautions = MedicationConsumer.requestDetails(user);
+
+      if (precautions == null || precautions.length != 2) {
+        throw new MedicationManagerShellException("There is no precaution in our database for that user " +
+            "or the returned Precaution array contains not 2 elements");
+      }
+
+      printInfo(precautions);
+    } catch (Exception e) {
+      Log.error(e, "Error while processing the the shell command for usecase id:  %s", getClass(), USECASE_ID);
     }
-
-    PersistentService persistentService = getPersistentService();
-    PersonDao personDao = persistentService.getPersonDao();
-    int personId = Integer.parseInt(parameters[0]);
-
-    Person person = personDao.getById(personId);
-
-    Log.info("Executing the " + USECASE_TITLE + ". The user is : " + person, getClass());
-
-    User user = new User(person.getPersonUri());
-    Precaution[] precautions = MedicationConsumer.requestDetails(user);
-
-    if (precautions == null || precautions.length != 2) {
-      throw new MedicationManagerShellException("There is no precaution in our database for that user " +
-          "or the returned Precaution array contains not 2 elements");
-    }
-
-    printInfo(precautions);
 
   }
 
