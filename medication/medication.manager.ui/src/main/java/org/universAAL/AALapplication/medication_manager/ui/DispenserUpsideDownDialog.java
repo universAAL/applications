@@ -58,19 +58,23 @@ public class DispenserUpsideDownDialog extends UICaller {
 
   public void showDialog(User inputUser) {
 
-    validateParameter(inputUser, "inputUser");
+    try {
+      validateParameter(inputUser, "inputUser");
 
-    Log.info("Request a DispenserUpsideDownDialog for user %s", getClass(), inputUser);
+      Log.info("Request a DispenserUpsideDownDialog for user %s", getClass(), inputUser);
 
-    Form f = Form.newDialog("Medication Manager UI", new Resource());
-    //start of the form model
-    String message = getMessage(inputUser);
-    new SimpleOutput(f.getIOControls(), null, null, message);
-    //...
-    new Submit(f.getSubmits(), new Label("Done", null), DISPENSER_UPSIDE_DOWN_FORM);
-    //stop of form model
-    UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
-    this.sendUIRequest(req);
+      Form f = Form.newDialog("Medication Manager UI", new Resource());
+      //start of the form model
+      String message = getMessage(inputUser);
+      new SimpleOutput(f.getIOControls(), null, null, message);
+      //...
+      new Submit(f.getSubmits(), new Label("Done", null), DISPENSER_UPSIDE_DOWN_FORM);
+      //stop of form model
+      UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
+      this.sendUIRequest(req);
+    } catch (Exception e) {
+      Log.error(e, "Error while trying to show dialog", getClass());
+    }
   }
 
   private String getMessage(User user) {

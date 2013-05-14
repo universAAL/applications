@@ -58,21 +58,25 @@ public class DispenserDisplayInstructionsDialog extends UICaller {
 
   public void showDialog(User inputUser, String message) {
 
-    validateParameter(inputUser, "inputUser");
+    try {
+      validateParameter(inputUser, "inputUser");
 
-    Log.info("Request a DispenserDisplayInstructionsDialog for user %s", getClass(), inputUser);
+      Log.info("Request a DispenserDisplayInstructionsDialog for user %s", getClass(), inputUser);
 
-    Form f = Form.newDialog("Medication Manager UI", new Resource());
-    //start of the form model
-    if (message == null) {
-      message = "Problem occurred";
+      Form f = Form.newDialog("Medication Manager UI", new Resource());
+      //start of the form model
+      if (message == null) {
+        message = "Problem occurred";
+      }
+      new SimpleOutput(f.getIOControls(), null, null, message);
+      //...
+      new Submit(f.getSubmits(), new Label("Done", null), DISPENSER_DISPLAY_INSTRUCTIONS_FORM);
+      //stop of form model
+      UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
+      this.sendUIRequest(req);
+    } catch (Exception e) {
+      Log.error(e, "Error while trying to show dialog", getClass());
     }
-    new SimpleOutput(f.getIOControls(), null, null, message);
-    //...
-    new Submit(f.getSubmits(), new Label("Done", null), DISPENSER_DISPLAY_INSTRUCTIONS_FORM);
-    //stop of form model
-    UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
-    this.sendUIRequest(req);
   }
 
 
