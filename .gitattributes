@@ -1,0 +1,5 @@
+* text=auto !eol
+new_services.pom/pom.xml -text
+ontologies/ont.pom/composite/pom.xml -text
+ontologies/ont.pom/pom.xml -text
+ontologies/ont.pom/update.bat -text
