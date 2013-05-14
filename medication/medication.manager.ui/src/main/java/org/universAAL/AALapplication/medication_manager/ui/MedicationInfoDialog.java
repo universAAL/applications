@@ -17,6 +17,7 @@
 
 package org.universAAL.AALapplication.medication_manager.ui;
 
+import org.universAAL.AALapplication.medication_manager.ui.impl.Log;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
@@ -68,20 +69,24 @@ public class MedicationInfoDialog extends UICaller {
 
   public void showDialog(User inputUser) {
 
-    validateParameter(inputUser, "inputUser");
+    try {
+      validateParameter(inputUser, "inputUser");
 
-    Form f = Form.newDialog("Medication Manager UI", new Resource());
+      Form f = Form.newDialog("Medication Manager UI", new Resource());
 
-    //start of the form model
+      //start of the form model
 
-    String medicationInfoMessage = getTitle() + medicinesInfo.getDetailsInfo();
+      String medicationInfoMessage = getTitle() + medicinesInfo.getDetailsInfo();
 
-    new SimpleOutput(f.getIOControls(), null, null, medicationInfoMessage);
-    //...
-    new Submit(f.getSubmits(), new Label("Close", null), CLOSE_BUTTON);
-    //stop of form model
-    UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
-    this.sendUIRequest(req);
+      new SimpleOutput(f.getIOControls(), null, null, medicationInfoMessage);
+      //...
+      new Submit(f.getSubmits(), new Label("Close", null), CLOSE_BUTTON);
+      //stop of form model
+      UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
+      this.sendUIRequest(req);
+    } catch (Exception e) {
+      Log.error(e, "Error while trying to show dialog", getClass());
+    }
   }
 
   private String getTitle() {

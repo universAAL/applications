@@ -107,13 +107,13 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
       List<Intake> intakes = intakeDao.getIntakesByUserAndTime(user, time);
 
       ReminderDialog reminderDialog =
-          new ReminderDialog(moduleContext, time, patient, intakes, medicineInventoryDao);
+          new ReminderDialog(moduleContext, time, patient, intakes, persistentService);
 
       reminderDialog.showDialog(user);
 
       setTimeOut(reminderDialog, dueIntake, medicineInventoryDao, user, intakes, patient);
     } catch (Exception e) {
-      Log.error(e, "Error while processing the the context event", getClass());
+      Log.error(e, "Error while processing the context event", getClass());
     }
 
   }
@@ -138,17 +138,22 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
-        boolean userActed = reminderDialog.isUserActed();
-        Log.info("Is the user made a UI response(true/false): %s", getClass(), userActed);
-        if (userActed) {
-          medicineInventoryDao.decreaseInventory(patient, intakes);
-        } else {
-          publishMissedIntakeEvent(dueIntake, user);
+        try {
+          boolean userActed = reminderDialog.isUserActed();
+          Log.info("Is the user made a UI response(true/false): %s", getClass(), userActed);
+          if (userActed) {
+            medicineInventoryDao.decreaseInventory(patient, intakes);
+          } else {
+            publishMissedIntakeEvent(dueIntake, user);
+          }
+          timer.cancel();
+        } catch (Exception e) {
+          Log.error(e, "Error while processing the timeout", getClass());
         }
-        timer.cancel();
       }
 
     }, timeoutSeconds * 1000);
+
 
   }
 

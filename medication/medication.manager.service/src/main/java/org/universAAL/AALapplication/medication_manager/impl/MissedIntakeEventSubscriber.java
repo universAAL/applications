@@ -18,8 +18,12 @@
 package org.universAAL.AALapplication.medication_manager.impl;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
@@ -35,6 +39,8 @@ import org.universAAL.ontology.medMgr.CaregiverNotifierData;
 import org.universAAL.ontology.medMgr.MissedIntake;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
+
+import java.util.List;
 
 import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
@@ -87,45 +93,92 @@ public final class MissedIntakeEventSubscriber extends ContextSubscriber {
       PersonDao personDao = persistentService.getPersonDao();
 
       Person person = personDao.findPersonByPersonUri(user.getURI());
+      IntakeDao intakeDao = persistentService.getIntakeDao();
+      List<Intake> intakes = intakeDao.getIntakesByUserAndTime(user, time);
+      String intakesMessage = createMessage(intakes);
 
-      ServiceRequest serviceRequest = new ServiceRequest(new CaregiverNotifier(), user);
-
-      CaregiverNotifierData caregiverNotifierData = new CaregiverNotifierData();
-      String smsNumber = getCaregiverSms(person, persistentService.getPatientLinksDao());
-      caregiverNotifierData.setSmsNumber(smsNumber);
-      String smsText = getSmsText(time, person);
-      caregiverNotifierData.setSmsText(smsText);
-
-
-      serviceRequest.addAddEffect(new String[]{CaregiverNotifier.PROP_CAREGIVER_NOTIFIER_DATA}, caregiverNotifierData);
-      serviceRequest.addRequiredOutput(OUTPUT_CAREGIVER_RECEIVED_MESSAGE,
-          new String[]{CaregiverNotifier.PROP_RECEIVED_MESSAGE});
-
-      ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
-
-      CallStatus callStatus = serviceResponse.getCallStatus();
-
-      String msg;
-      if (callStatus.toString().contains("call_succeeded")) {
-        msg = getMessage(serviceResponse);
-      } else {
-        msg = "The Medication Manager service was unable notified the Caregiver Notification Service";
+      if (intakesMessage != null) {
+        notifyCaregiver(time, user, persistentService, person, intakesMessage);
       }
-      Log.info("Caregiver Notification callStatus %s\n" + msg, getClass(), callStatus);
+
     } catch (Exception e) {
       Log.error(e, "Error while processing the the context event", getClass());
     }
 
   }
 
-  private String getSmsText(Time time, Person person) {
+  private String createMessage(List<Intake> intakes) {
+    StringBuffer sb = new StringBuffer();
+    boolean hasAlerts = false;
+    int counter = 0;
+    for (Intake intake : intakes) {
+      Treatment treatment = intake.getTreatment();
+      if (treatment.isMissedIntakeAlert()) {
+        hasAlerts = true;
+        Medicine medicine = treatment.getMedicine();
+        counter++;
+        sb.append("\n");
+        sb.append(counter);
+        sb.append(". ");
+        sb.append("The patient has missed to take the following medicine: ");
+        sb.append(medicine.getMedicineName());
+        sb.append(". With the following dose: ");
+        sb.append(intake.getQuantity());
+        sb.append(" ");
+        sb.append(intake.getUnitClass());
+      }
+    }
+
+    if (!hasAlerts) {
+      return null;
+    }
+
+    sb.append("\n");
+    return sb.toString();
+  }
+
+  private void notifyCaregiver(Time time, User user, PersistentService persistentService,
+                               Person person, String intakesMessage) {
+
+    ServiceRequest serviceRequest = new ServiceRequest(new CaregiverNotifier(), user);
+
+    CaregiverNotifierData caregiverNotifierData = new CaregiverNotifierData();
+    String smsNumber = getCaregiverSms(person, persistentService.getPatientLinksDao());
+    caregiverNotifierData.setSmsNumber(smsNumber);
+    String smsText = getSmsText(time, person, intakesMessage);
+    caregiverNotifierData.setSmsText(smsText);
+
+
+    serviceRequest.addAddEffect(new String[]{CaregiverNotifier.PROP_CAREGIVER_NOTIFIER_DATA}, caregiverNotifierData);
+    serviceRequest.addRequiredOutput(OUTPUT_CAREGIVER_RECEIVED_MESSAGE,
+        new String[]{CaregiverNotifier.PROP_RECEIVED_MESSAGE});
+
+    ServiceResponse serviceResponse = serviceCaller.call(serviceRequest);
+
+    CallStatus callStatus = serviceResponse.getCallStatus();
+
+    String msg;
+    if (callStatus.toString().contains("call_succeeded")) {
+      msg = getMessage(serviceResponse);
+    } else {
+      msg = "The Medication Manager service was unable notified the Caregiver Notification Service";
+    }
+    Log.info("Caregiver Notification callStatus %s\n" + msg, getClass(), callStatus);
+  }
+
+  private String getSmsText(Time time, Person person, String intakesMessage) {
+
     StringBuffer sb = new StringBuffer();
 
     sb.append("Missed intake occurred at : ");
     sb.append(time.getDailyTextFormat());
     sb.append(" for the following user: ");
     sb.append(person.getName());
-    sb.append(".\n");
+    sb.append(".\n Detailed information about missed intake: ");
+    sb.append(intakesMessage);
+
+
+    sb.append("\n");
 
     return sb.toString();
   }

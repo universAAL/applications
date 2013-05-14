@@ -23,6 +23,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
+import org.universAAL.AALapplication.medication_manager.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.ui.impl.MedicationManagerUIException;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
@@ -78,35 +79,43 @@ public class RequestMedicationInfoDialog extends UICaller {
 
   @Override
   public void handleUIResponse(UIResponse input) {
-    User user = (User) input.getUser();
-    if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
-      ReminderDialog reminderDialog = new ReminderDialog(moduleContext, time);
-      reminderDialog.showDialog(user);
-    } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
-      MedicationInfoDialog medicationInfoDialog = new MedicationInfoDialog(moduleContext, time, getMedicinesInfo());
-      medicationInfoDialog.showDialog(user);
-    } else {
-      System.out.println("unknown");
+    try {
+      User user = (User) input.getUser();
+      if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
+        ReminderDialog reminderDialog = new ReminderDialog(moduleContext, time);
+        reminderDialog.showDialog(user);
+      } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
+        MedicationInfoDialog medicationInfoDialog = new MedicationInfoDialog(moduleContext, time, getMedicinesInfo());
+        medicationInfoDialog.showDialog(user);
+      } else {
+        System.out.println("unknown");
+      }
+    } catch (Exception e) {
+      Log.error(e, "Error while handling UI response", getClass());
     }
   }
 
   public void showDialog(User inputUser) {
 
-    validateParameter(inputUser, "inputUser");
+    try {
+      validateParameter(inputUser, "inputUser");
 
-    Form f = Form.newDialog("Medication Manager UI", new Resource());
-    //start of the form model
+      Form f = Form.newDialog("Medication Manager UI", new Resource());
+      //start of the form model
 
-    createMedicineInfo(inputUser);
+      createMedicineInfo(inputUser);
 
 
-    new SimpleOutput(f.getIOControls(), null, null, medicinesInfo.getGeneralInfo());
-    //...
-    new Submit(f.getSubmits(), new Label("close", null), CLOSE_BUTTON);
-    new Submit(f.getSubmits(), new Label("info", null), INFO_BUTTON);
-    //stop of form model
-    UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
-    this.sendUIRequest(req);
+      new SimpleOutput(f.getIOControls(), null, null, medicinesInfo.getGeneralInfo());
+      //...
+      new Submit(f.getSubmits(), new Label("close", null), CLOSE_BUTTON);
+      new Submit(f.getSubmits(), new Label("info", null), INFO_BUTTON);
+      //stop of form model
+      UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
+      this.sendUIRequest(req);
+    } catch (Exception e) {
+      Log.error(e, "Error while trying to show dialog", getClass());
+    }
 
   }
 
