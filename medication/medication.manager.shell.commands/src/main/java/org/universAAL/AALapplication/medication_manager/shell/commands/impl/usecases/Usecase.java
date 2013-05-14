@@ -34,11 +34,17 @@ public abstract class Usecase {
   private static final Map<String, Usecase> USECASE_MAP = new LinkedHashMap<String, Usecase>();
 
   static {
-    USECASE_MAP.put(new UsecaseMedicationReminder().getUsecaseId(), new UsecaseMedicationReminder());
-    USECASE_MAP.put(new UsecaseDispenserUpsideDown().getUsecaseId(), new UsecaseDispenserUpsideDown());
+    UsecaseMedicationReminder usecaseMedicationReminder = new UsecaseMedicationReminder();
+    USECASE_MAP.put(usecaseMedicationReminder.getUsecaseId(), usecaseMedicationReminder);
+    UsecaseDispenserUpsideDown usecaseDispenserUpsideDown = new UsecaseDispenserUpsideDown();
+    USECASE_MAP.put(usecaseDispenserUpsideDown.getUsecaseId(), usecaseDispenserUpsideDown);
     USECASE_MAP.put(new UsecaseMissedIntake().getUsecaseId(), new UsecaseMissedIntake());
-    USECASE_MAP.put(new UsecaseNewPrescription().getUsecaseId(), new UsecaseNewPrescription());
-    USECASE_MAP.put(new UsecasePrecaution().getUsecaseId(), new UsecasePrecaution());
+    UsecaseDisplayDispenserInstruction usecaseDisplayDispenserInstruction = new UsecaseDisplayDispenserInstruction();
+    USECASE_MAP.put(usecaseDisplayDispenserInstruction.getUsecaseId(), usecaseDisplayDispenserInstruction);
+    UsecaseNewPrescription usecaseNewPrescription = new UsecaseNewPrescription();
+    USECASE_MAP.put(usecaseNewPrescription.getUsecaseId(), usecaseNewPrescription);
+    UsecasePrecaution usecasePrecaution = new UsecasePrecaution();
+    USECASE_MAP.put(usecasePrecaution.getUsecaseId(), usecasePrecaution);
   }
 
   protected Usecase(String usecaseId) {
