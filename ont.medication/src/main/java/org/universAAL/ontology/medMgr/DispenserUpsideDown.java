@@ -24,7 +24,7 @@ import org.universAAL.middleware.service.owl.Service;
  */
 public class DispenserUpsideDown extends Service {
 
-  public static final String MY_URI = MedicationOntology.NAMESPACE + "DispenserUpsideDowna";
+  public static final String MY_URI = MedicationOntology.NAMESPACE + "DispenserUpsideDown";
 
   public static final String PROP_DEVICE_ID = MedicationOntology.NAMESPACE + "deviceId";
 
