@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.configuration;
 
+import org.universAAL.AALapplication.medication_manager.configuration.impl.CurrentDateInserter;
 import org.universAAL.AALapplication.medication_manager.configuration.impl.Log;
 
 import java.io.BufferedReader;
@@ -18,10 +19,12 @@ public final class SqlScriptParser {
   private final Map<Integer, String> sqlStatementMap;
   private final String statementDelimiter;
   private int keyIndex;
+  private CurrentDateInserter currentDateInserter;
 
   public SqlScriptParser() {
     sqlStatementMap = new LinkedHashMap<Integer, String>();
     statementDelimiter = ";";
+    currentDateInserter = new CurrentDateInserter();
   }
 
   public void parseSqlFile(String sqlFileName) {
@@ -73,6 +76,7 @@ public final class SqlScriptParser {
 
     if (line.length() > 1) {
       String sqlStatement = getSqlStatement(line, bufferedReader, sqlStatementBuilder);
+      sqlStatement = currentDateInserter.insertCurrentDate(sqlStatement);
       keyIndex++;
       sqlStatementMap.put(keyIndex, sqlStatement);
       Log.info("SQL statement added %s", getClass(), '\n' + sqlStatement + "\n\n\n");
