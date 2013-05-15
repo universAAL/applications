@@ -228,4 +228,47 @@ public final class IntakeDao extends AbstractDao {
 
     return createIntakes(results);
   }
+
+  public void setTimeTakenColumn(List<Intake> intakes) {
+    String sql = getSqlString(intakes);
+
+    try {
+      PreparedStatement ps = getPreparedStatement(sql);
+      Date now = new Date();
+      Timestamp date = new Timestamp(now.getTime());
+      ps.setTimestamp(1, date);
+      ps.execute();
+    } catch (Exception e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
+
+  }
+
+  private String getSqlString(List<Intake> intakes) {
+    StringBuffer sqlBuffer = new StringBuffer();
+
+    String sqlBegin = "UPDATE MEDICATION_MANAGER.INTAKE\n" +
+        "SET TIME_TAKEN = ?\n" +
+        "WHERE ID in(";
+
+
+    sqlBuffer.append(sqlBegin);
+
+    int size = intakes.size();
+
+    int i = 0;
+    for (Intake intake : intakes) {
+      int id = intake.getId();
+      sqlBuffer.append(id);
+      i++;
+      if (i < size) {
+        sqlBuffer.append(", ");
+      }
+    }
+
+    sqlBuffer.append(')');
+
+
+    return sqlBuffer.toString();
+  }
 }

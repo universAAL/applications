@@ -111,7 +111,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
       reminderDialog.showDialog(user);
 
-      setTimeOut(reminderDialog, dueIntake, medicineInventoryDao, user, intakes, patient);
+      setTimeOut(reminderDialog, dueIntake, medicineInventoryDao, intakeDao, user, intakes, patient);
     } catch (Exception e) {
       Log.error(e, "Error while processing the context event", getClass());
     }
@@ -131,7 +131,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
   }
 
   private void setTimeOut(final ReminderDialog reminderDialog, final DueIntake dueIntake,
-                          final MedicineInventoryDao medicineInventoryDao,
+                          final MedicineInventoryDao medicineInventoryDao, final IntakeDao intakeDao,
                           final User user, final List<Intake> intakes, final Person patient) {
 
     final Timer timer = new Timer();
@@ -143,6 +143,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
           Log.info("Is the user made a UI response(true/false): %s", getClass(), userActed);
           if (userActed) {
             medicineInventoryDao.decreaseInventory(patient, intakes);
+            intakeDao.setTimeTakenColumn(intakes);
           } else {
             publishMissedIntakeEvent(dueIntake, user);
           }
