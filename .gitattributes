@@ -2858,7 +2858,9 @@ medication/medication.manager.configuration/src/main/java/org/universAAL/AALappl
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/SqlScriptParser.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/Activator.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/ConfigurationPropertiesImpl.java -text
+medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/CurrentDateInserter.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/Log.java -text
+medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/Pair.java -text
 medication/medication.manager.configuration/src/main/resources/CreateTables.sql -text
 medication/medication.manager.configuration/src/main/resources/DataLoad.sql -text
 medication/medication.manager.configuration/src/main/resources/medication.properties -text
