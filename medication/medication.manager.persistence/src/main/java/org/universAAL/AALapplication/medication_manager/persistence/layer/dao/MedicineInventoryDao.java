@@ -15,6 +15,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -99,7 +100,7 @@ public final class MedicineInventoryDao extends AbstractDao {
 
       connection.commit();
 
-    } catch (SQLException e) {
+    } catch (Exception e) {
       rollback(connection, e);
       throw new MedicationManagerPersistenceException(e);
     } finally {
@@ -163,4 +164,32 @@ public final class MedicineInventoryDao extends AbstractDao {
 
   }
 
+  public List<MedicineInventory> getAllMedicineInventoriesForPatient(Person patient) {
+    String sql = "select * from MEDICATION_MANAGER.MEDICINE_INVENTORY where " +
+        "PATIENT_FK_ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, patient.getId());
+      List<Map<String, Column>> records = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
+      return getMedicineInventories(records);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
+  private List<MedicineInventory> getMedicineInventories(List<Map<String, Column>> records) {
+    List<MedicineInventory> medicineInventories = new ArrayList<MedicineInventory>();
+
+    for (Map<String, Column> columnMap : records) {
+      MedicineInventory medicineInventory = getMedicineInventory(columnMap);
+      medicineInventories.add(medicineInventory);
+    }
+
+    return medicineInventories;
+  }
 }
