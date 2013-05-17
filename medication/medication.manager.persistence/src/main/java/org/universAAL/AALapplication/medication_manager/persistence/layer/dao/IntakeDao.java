@@ -8,6 +8,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.TreatmentStatus;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
@@ -114,6 +115,42 @@ public final class IntakeDao extends AbstractDao {
 
     Log.info("Intake found: %s", getClass(), intake);
     return intake;
+  }
+
+  public List<Intake> getIntakesByUserAndTimePlanDue(Person patient) {
+    String sql = "SELECT INTA.* \n" +
+        "  FROM MEDICATION_MANAGER.INTAKE INTA,\n" +
+        "  MEDICATION_MANAGER.TREATMENT TR,\n" +
+        "  MEDICATION_MANAGER.PRESCRIPTION PR\n" +
+        "    where \n" +
+        "  INTA.TREATMENT_FK_ID = TR.ID \n" +
+        "  AND UPPER(TR.STATUS) = ? \n" +
+        "  AND TR.PRESCRIPTION_FK_ID = PR.ID \n" +
+        "  AND PR.PATIENT_FK_ID = ? \n" +
+        "  AND INTA.TIME_PLAN > ? \n";
+
+    System.out.println("sql = " + sql);
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql, statement);
+      return getIntakes(patient, sql, statement);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+
+  }
+
+  private List<Intake> getIntakes(Person patient, String sql, PreparedStatement ps) throws SQLException {
+    ps.setString(1, ACTIVE.getValue().toUpperCase());
+    ps.setInt(2, patient.getId());
+    Date now = new Date();
+    Timestamp timestamp = new Timestamp(now.getTime());
+    ps.setTimestamp(3, timestamp);
+    List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
+    return createIntakes(results);
   }
 
 
@@ -271,4 +308,6 @@ public final class IntakeDao extends AbstractDao {
 
     return sqlBuffer.toString();
   }
+
+
 }

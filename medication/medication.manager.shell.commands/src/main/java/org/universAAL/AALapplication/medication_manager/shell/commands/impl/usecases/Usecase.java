@@ -43,6 +43,8 @@ public abstract class Usecase {
     USECASE_MAP.put(usecaseDisplayDispenserInstruction.getUsecaseId(), usecaseDisplayDispenserInstruction);
     UsecaseNewPrescription usecaseNewPrescription = new UsecaseNewPrescription();
     USECASE_MAP.put(usecaseNewPrescription.getUsecaseId(), usecaseNewPrescription);
+    UsecaseInventoryStatusReview usecaseInventoryStatusReview = new UsecaseInventoryStatusReview();
+    USECASE_MAP.put(usecaseInventoryStatusReview.getUsecaseId(), usecaseInventoryStatusReview);
     UsecasePrecaution usecasePrecaution = new UsecasePrecaution();
     USECASE_MAP.put(usecasePrecaution.getUsecaseId(), usecasePrecaution);
   }

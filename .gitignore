@@ -138,6 +138,7 @@ medication/medication.manager.pom/*.iml
 medication/medication.manager.pom/.clover
 medication/medication.manager.pom/.project
 medication/medication.manager.pom/.settings
+medication/medication.manager.pom/Medication_Manager
 medication/medication.manager.pom/atlassian-ide-plugin.xml
 medication/medication.manager.pom/medication.manager.pom.ipr
 medication/medication.manager.pom/out

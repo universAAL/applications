@@ -25,7 +25,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private static final String HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES =
       "http.session.timer.checker.interval.in.minutes";
 
-  ConfigurationPropertiesImpl() {
+  public ConfigurationPropertiesImpl() {
     try {
       loadProperties();
     } catch (IOException e) {

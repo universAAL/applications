@@ -29,15 +29,21 @@ public class Activator implements BundleActivator {
 
   static ModuleContext mc;
   static BundleContext context;
-  public ReminderDialogProvider service;
   public MedicationManagerServiceButtonProvider medicationManagerServiceButtonProvider;
 
   public void start(BundleContext bundleContext) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER
         .registerModule(new Object[]{bundleContext});
     context = bundleContext;
-    service = new ReminderDialogProvider(mc);
+    ReminderDialogProvider reminderDialogProvider= new ReminderDialogProvider(mc);
     medicationManagerServiceButtonProvider = new MedicationManagerServiceButtonProvider(mc);
+    RequestMedicationInfoDialogProvider requestMedicationInfoDialogProvider = new RequestMedicationInfoDialogProvider(mc);
+    MainMedicationManagerMenu mainMedicationManagerMenu = new MainMedicationManagerMenu(mc);
+    DispenserUpsideDownDialogProvider dispenserUpsideDownDialogProvider = new DispenserUpsideDownDialogProvider(mc);
+    DispenserDisplayInstructionsDialogProvider dispenserDisplayInstructionsDialogProvider =
+        new DispenserDisplayInstructionsDialogProvider(mc);
+
+    InventoryStatusDialogProvider inventoryStatusDialogProvider = new InventoryStatusDialogProvider(mc);
 
   }
 
