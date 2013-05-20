@@ -36,6 +36,7 @@ public final class TreatmentDao extends AbstractDao {
   private static final String STATUS = "STATUS";
   private static final String MISSED_INTAKE_ALERT = "MISSED_INTAKE_ALERT";
   private static final String NEW_DOSE_ALERT = "NEW_DOSE_ALERT";
+  private static final String SHORTAGE_ALERT = "SHORTAGE_ALERT";
 
   public TreatmentDao(Database database) {
     super(database, TABLE_NAME);
@@ -115,8 +116,15 @@ public final class TreatmentDao extends AbstractDao {
       newDoseAlert = bool;
     }
 
+    col = columns.get(SHORTAGE_ALERT);
+    bool = (Boolean) col.getValue();
+    boolean shortageAlert = false;
+    if (bool != null) {
+      shortageAlert = bool;
+    }
+
     Treatment treatment = new Treatment(treatmentId, prescription, medicine,
-        missedIntakeAlert, newDoseAlert, startDate, endDate, treatmentStatus);
+        missedIntakeAlert, newDoseAlert, shortageAlert, startDate, endDate, treatmentStatus);
 
     Log.info("Treatment found: %s", getClass(), treatment);
 
@@ -141,5 +149,31 @@ public final class TreatmentDao extends AbstractDao {
     }
 
     return treatments;
+  }
+
+  public Treatment findTreatment(int patientId, int medicineId) {
+    String sql = "select * from MEDICATION_MANAGER.TREATMENT " +
+        "where MEDICINE_FK_ID = ? and UPPER(STATUS) = ?\n" +
+        " and PRESCRIPTION_FK_ID IN (select ID from MEDICATION_MANAGER.PRESCRIPTION where PATIENT_FK_ID = ?)";
+
+    System.out.println("sql = " + sql);
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql);
+      statement.setInt(1, medicineId);
+      statement.setString(2, ACTIVE.getValue().toUpperCase());
+      statement.setInt(3, patientId);
+      Map<String, Column> result = executeQueryExpectedSingleRecord(TABLE_NAME, statement);
+      if (result.isEmpty()) {
+        throw new MedicationManagerPersistenceException("Missing treatment record for the patientId :" +
+            patientId + " and medicineId: " + medicineId);
+      }
+      return getTreatment(result);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
   }
 }

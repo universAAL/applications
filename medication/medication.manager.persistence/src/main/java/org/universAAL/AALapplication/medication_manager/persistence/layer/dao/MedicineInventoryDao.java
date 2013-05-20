@@ -5,6 +5,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.Medicat
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Column;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.MedicineInventoryShortageCaregiverNotifier;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MedicineInventory;
@@ -30,6 +31,9 @@ public final class MedicineInventoryDao extends AbstractDao {
 
   private PersonDao personDao;
   private MedicineDao medicineDao;
+  private PatientLinksDao patientLinksDao;
+  private TreatmentDao treatmentDao;
+  private final MedicineInventoryShortageCaregiverNotifier notifier;
 
   private static final String TABLE_NAME = "MEDICINE_INVENTORY";
   private static final String PATIENT_FK_ID = "PATIENT_FK_ID";
@@ -40,6 +44,8 @@ public final class MedicineInventoryDao extends AbstractDao {
 
   public MedicineInventoryDao(Database database) {
     super(database, TABLE_NAME);
+
+    notifier = new MedicineInventoryShortageCaregiverNotifier();
   }
 
   public void setPersonDao(PersonDao personDao) {
@@ -48,6 +54,14 @@ public final class MedicineInventoryDao extends AbstractDao {
 
   public void setMedicineDao(MedicineDao medicineDao) {
     this.medicineDao = medicineDao;
+  }
+
+  public void setPatientLinksDao(PatientLinksDao patientLinksDao) {
+    this.patientLinksDao = patientLinksDao;
+  }
+
+  public void setTreatmentDao(TreatmentDao treatmentDao) {
+    this.treatmentDao = treatmentDao;
   }
 
   @Override
@@ -60,6 +74,8 @@ public final class MedicineInventoryDao extends AbstractDao {
 
     checkForSetDao(personDao, "personDao");
     checkForSetDao(medicineDao, "medicineDao");
+    checkForSetDao(patientLinksDao, "patientLinksDao");
+    checkForSetDao(treatmentDao, "treatmentDao");
 
     Column col = columns.get(ID);
     int medicineInventoriId = (Integer) col.getValue();
@@ -115,12 +131,23 @@ public final class MedicineInventoryDao extends AbstractDao {
     Medicine medicine = treatment.getMedicine();
     int quantity = in.getQuantity();
     MedicineInventory medicineInventory = findInventory(patient, medicine, quantity);
-    int quantityAfterDecrease = medicineInventory.getQuantity() - quantity;
+    int medicineInventoryQuantity = medicineInventory.getQuantity();
+    int quantityAfterDecrease = medicineInventoryQuantity - quantity;
     if (medicineInventory.getWarningThreshold() > quantityAfterDecrease) {
+      notifyCaregiver(patient, medicine, medicineInventory);
       throw new MedicationManagerPersistenceException("Not enough inventory", NOT_ENOUGH_INVENTORY);
     }
 
     decreaseInventory(medicineInventory, quantity);
+  }
+
+  private void notifyCaregiver(Person patient, Medicine medicine, MedicineInventory medicineInventory) {
+
+    Treatment treatment = treatmentDao.findTreatment(patient.getId(), medicine.getId());
+
+    if (treatment.isShortageAlert()) {
+      notifier.notifyCaregiverForMedicineShortage(patient, medicine, medicineInventory, patientLinksDao);
+    }
   }
 
   private void decreaseInventory(MedicineInventory medicineInventory, int quantity) throws SQLException {

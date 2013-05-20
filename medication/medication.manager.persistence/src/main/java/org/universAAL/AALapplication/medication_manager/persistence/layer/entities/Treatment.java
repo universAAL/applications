@@ -18,9 +18,10 @@ public final class Treatment extends Entity {
   private final TreatmentStatus status;
   private final boolean missedIntakeAlert;
   private final boolean newDoseAlert;
+  private final boolean shortageAlert;
 
   public Treatment(int id, Prescription prescription, Medicine medicine, boolean missedIntakeAlert,
-                   boolean newDoseAlert, Date startDate, Date endDate, TreatmentStatus status) {
+                   boolean newDoseAlert, boolean shortageAlert, Date startDate, Date endDate, TreatmentStatus status) {
 
     super(id);
 
@@ -30,15 +31,16 @@ public final class Treatment extends Entity {
     this.medicine = medicine;
     this.missedIntakeAlert = missedIntakeAlert;
     this.newDoseAlert = newDoseAlert;
+    this.shortageAlert = shortageAlert;
     this.startDate = startDate;
     this.endDate = endDate;
     this.status = status;
   }
 
   public Treatment(Prescription prescription, Medicine medicine, boolean missedIntakeAlert,
-                     boolean newDoseAlert, Date startDate, Date endDate, TreatmentStatus status) {
+                     boolean newDoseAlert, boolean shortageAlert, Date startDate, Date endDate, TreatmentStatus status) {
 
-    this(0, prescription, medicine, missedIntakeAlert, newDoseAlert, startDate, endDate, status);
+    this(0, prescription, medicine, missedIntakeAlert, newDoseAlert, shortageAlert, startDate, endDate, status);
   }
 
   private void validate(Prescription prescription, Medicine medicine,
@@ -80,6 +82,10 @@ public final class Treatment extends Entity {
     return newDoseAlert;
   }
 
+  public boolean isShortageAlert() {
+    return shortageAlert;
+  }
+
   @Override
   public String toString() {
     return "Treatment{" +
@@ -90,6 +96,7 @@ public final class Treatment extends Entity {
         ", status=" + status +
         ", missedIntakeAlert=" + missedIntakeAlert +
         ", newDoseAlert=" + newDoseAlert +
+        ", shortageAlert=" + shortageAlert +
         '}';
   }
 }
