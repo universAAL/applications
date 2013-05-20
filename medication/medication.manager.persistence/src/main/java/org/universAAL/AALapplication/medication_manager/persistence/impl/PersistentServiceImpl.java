@@ -67,6 +67,8 @@ public final class PersistentServiceImpl implements PersistentService {
     patientLinksDao.setPersonDao(personDao);
     medicineInventoryDao.setMedicineDao(medicineDao);
     medicineInventoryDao.setPersonDao(personDao);
+    medicineInventoryDao.setPatientLinksDao(patientLinksDao);
+    medicineInventoryDao.setTreatmentDao(treatmentDao);
 
     if (configurationProperties.isLoadPrescriptionDTOs()) {
       prescriptionDao.loadPrescriptionDTOs();
