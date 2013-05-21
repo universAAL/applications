@@ -70,7 +70,7 @@ public class DispenserDisplayInstructionsDialogProvider extends ServiceCallee {
   public ServiceResponse handleCall(ServiceCall call) {
     try {
       Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
-      new DispenserDisplayInstructionsDialog(this.ctxt).showDialog((User) inputUser, null);
+      new DispenserDisplayInstructionsDialog(this.ctxt).showDialog((User) inputUser);
       return new ServiceResponse(CallStatus.succeeded);
     } catch (Exception e) {
       Log.error(e, "Error while processing the client call", getClass());

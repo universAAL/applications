@@ -18,18 +18,12 @@
 package org.universAAL.AALapplication.medication_manager.shell.commands.impl.usecases;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
 import org.universAAL.AALapplication.medication_manager.ui.DispenserDisplayInstructionsDialog;
 import org.universAAL.ontology.profile.User;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 import static org.universAAL.AALapplication.medication_manager.shell.commands.impl.Activator.*;
 
@@ -46,7 +40,6 @@ public final class UsecaseDisplayDispenserInstruction extends Usecase {
   private static final String USECASE = USECASE_TITLE +
       "The service notifies the AP how to fill the dispenser (display instructions via dialog)" +
       "\n Parameters: " + PARAMETER_MESSAGE;
-  public static final String DISPENSER_INSTRUCTIONS = "dispenser_instructions";
 
   public UsecaseDisplayDispenserInstruction() {
     super(USECASE_ID);
@@ -63,21 +56,14 @@ public final class UsecaseDisplayDispenserInstruction extends Usecase {
       int id = Integer.parseInt(parameters[0]);
 
       PersistentService persistentService = getPersistentService();
-      DispenserDao dispenserDao = persistentService.getDispenserDao();
-      Dispenser dispenser = dispenserDao.getById(id);
-      String instructionsFile = dispenser.getInstructionsFileName();
+      PersonDao personDao = persistentService.getPersonDao();
 
-      Log.info("Executing the " + USECASE_TITLE + ". The instructionsFile is : " +
-          instructionsFile, getClass());
-
-      String message = getDispenserInstructions(instructionsFile);
-
-      Person patient = dispenser.getPatient();
+      Person patient = personDao.getById(id);
 
       User user = new User(patient.getPersonUri());
 
       DispenserDisplayInstructionsDialog dispenserDisplayInstructionsDialog = new DispenserDisplayInstructionsDialog(mc);
-      dispenserDisplayInstructionsDialog.showDialog(user, message);
+      dispenserDisplayInstructionsDialog.showDialog(user);
 
 
     } catch (Exception e) {
@@ -85,22 +71,6 @@ public final class UsecaseDisplayDispenserInstruction extends Usecase {
     }
   }
 
-  private String getDispenserInstructions(String instructionsFile) throws IOException {
-    String dir = medicationManagerConfigurationDirectory + File.separator + DISPENSER_INSTRUCTIONS;
-
-    File file = new File(dir, instructionsFile);
-
-    FileReader fileReader = new FileReader(file);
-    BufferedReader br = new BufferedReader(fileReader);
-    StringBuffer sb = new StringBuffer();
-    String line = br.readLine();
-    while (line != null) {
-      sb.append(line);
-      line = br.readLine();
-    }
-
-    return sb.toString();
-  }
 
   @Override
   public String getDescription() {
