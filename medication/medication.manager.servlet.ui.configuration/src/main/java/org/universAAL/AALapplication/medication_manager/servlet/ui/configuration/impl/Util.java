@@ -12,6 +12,7 @@ public final class Util {
   public static final String LOGIN_HTML_SERVLET_ALIAS = "/configuration/login.html";
   public static final String LOGIN_SERVLET_ALIAS = "/configuration/login";
   public static final String CONFIG_ACTION_SELECTOR = "/configuration/config_action_selector";
+  public static final String USER_MANAGEMENT = "/configuration/user_management";
   public static final String LOGIN_ERROR = "LOGIN_ERROR";
   public static final String LOGIN_FILE_NAME = "login.html";
   public static final String ERROR_FILE_NAME = "error.html";

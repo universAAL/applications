@@ -14,6 +14,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.h
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayErrorPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayLoginHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplaySelectConfigActionHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayUserManagementHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.LoginServlet;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
 import org.universAAL.middleware.container.ModuleContext;
@@ -59,6 +60,7 @@ public final class Activator implements BundleActivator {
     service.unregister(LOGIN_HTML_SERVLET_ALIAS);
     service.unregister(ERROR_PAGE_SERVLET_ALIAS);
     service.unregister(CONFIG_ACTION_SELECTOR);
+    service.unregister(USER_MANAGEMENT);
     service.unregister(JS_ALIAS);
     service.unregister(CSS_ALIAS);
 
@@ -94,6 +96,9 @@ public final class Activator implements BundleActivator {
     DisplaySelectConfigActionHtmlWriterServlet displaySelectConfigActionHtmlWriterServlet =
         new DisplaySelectConfigActionHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(CONFIG_ACTION_SELECTOR, displaySelectConfigActionHtmlWriterServlet, null, null);
+    DisplayUserManagementHtmlWriterServlet displayUserManagementHtmlWriterServlet =
+        new DisplayUserManagementHtmlWriterServlet(sessionTracking);
+    httpService.registerServlet(USER_MANAGEMENT, displayUserManagementHtmlWriterServlet, null, null);
 
 
     //set servlets
@@ -106,6 +111,9 @@ public final class Activator implements BundleActivator {
 
     displaySelectConfigActionHtmlWriterServlet.setDisplayServlet(displayServlet);
     displaySelectConfigActionHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+
+    displayUserManagementHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
+    displayErrorPageWriterServlet .setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
   }
 
