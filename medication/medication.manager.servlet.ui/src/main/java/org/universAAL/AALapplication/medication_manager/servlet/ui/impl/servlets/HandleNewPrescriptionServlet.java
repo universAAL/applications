@@ -167,6 +167,7 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
         medicineView.getDays(),
         medicineView.isMissedIntakeAlert(),
         medicineView.isNewDoseAlert(),
+        medicineView.isShortageAlert(),
         medicineView.getDescription(),
         medicineView.getSideeffects(),
         medicineView.getIncompliances(),

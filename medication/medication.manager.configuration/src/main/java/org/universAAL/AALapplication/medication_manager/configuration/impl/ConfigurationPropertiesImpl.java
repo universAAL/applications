@@ -13,17 +13,17 @@ import java.util.Set;
  */
 public final class ConfigurationPropertiesImpl implements ConfigurationProperties {
 
-  public static final String DEBUG_WRITE_FILE = "debug.write.file";
-  public static final String ON = "ON";
   private final Properties medicationProperties = new Properties();
 
-  private static final String MEDICATION_REMINDER_TIMEOUT = "medication.reminder.timeout";
-  private static final String MEDICATION_INTEKA_INTERVAL = "medication.intake.interval";
-  private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "http.session.expire.timeout.in.minutes";
-  private static final String HEALTH_TREATMENT_SERVICE_MOCKED = "health.treatment.service.mocked";
-  private static final String LOAD_PRESCRIPTIONSDTOS = "load.prescriptionsdtos";
+  private static final String DEBUG_WRITE_FILE = "medication.manager.debug.write.file";
+  private static final String ON = "ON";
+  private static final String MEDICATION_REMINDER_TIMEOUT = "medication.manager.reminder.timeout";
+  private static final String MEDICATION_INTAKE_INTERVAL = "medication.manager.intake.interval";
+  private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "medication.manager.http.session.expire.timeout.in.minutes";
+  private static final String HEALTH_TREATMENT_SERVICE_MOCKED = "medication.manager.health.treatment.service.mocked";
+  private static final String LOAD_PRESCRIPTIONSDTOS = "medication.manager.load.prescriptionsdtos";
   private static final String HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES =
-      "http.session.timer.checker.interval.in.minutes";
+      "medication.manager.http.session.timer.checker.interval.in.minutes";
 
   public ConfigurationPropertiesImpl() {
     try {
@@ -69,7 +69,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   public int getIntakeIntervalMinutes() {
-    return getInt(MEDICATION_INTEKA_INTERVAL);
+    return getInt(MEDICATION_INTAKE_INTERVAL);
   }
 
   public long getHttpSessionExpireTimeoutInMinutes() {
@@ -84,19 +84,31 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   public boolean isDebugWriterOn() {
     String debug = System.getProperty(DEBUG_WRITE_FILE);
 
-    return debug != null && debug.equalsIgnoreCase(ON);
+    if (debug == null) {
+      throw new MedicationManagerConfigurationException("Missing property: " + DEBUG_WRITE_FILE);
+    }
+
+    return debug.equalsIgnoreCase(ON);
   }
 
   public boolean isHealthTreatmentServiceMocked() {
     String mocked = System.getProperty(HEALTH_TREATMENT_SERVICE_MOCKED);
 
-    return mocked != null && mocked.equalsIgnoreCase(ON);
+    if (mocked == null) {
+      throw new MedicationManagerConfigurationException("Missing property: " + HEALTH_TREATMENT_SERVICE_MOCKED);
+    }
+
+    return mocked.equalsIgnoreCase(ON);
   }
 
   public boolean isLoadPrescriptionDTOs() {
     String load = System.getProperty(LOAD_PRESCRIPTIONSDTOS);
 
-    return load != null && load.equalsIgnoreCase(ON);
+    if (load == null) {
+      throw new MedicationManagerConfigurationException("Missing property: " + LOAD_PRESCRIPTIONSDTOS);
+    }
+
+    return load.equalsIgnoreCase(ON);
   }
 
   public Properties getMedicationProperties() {
