@@ -4,7 +4,7 @@ isStatic=false;
 //Servlet aliases:
 var LOGIN_SERVLET_ALIAS = "login",
     CONFIG_ACTION_SERVLET_ALIAS = "config_action_selector",
-    USER_MANAGER_SERVLET_ALIAS = "user_manager servlet",
+    USER_MANAGER_SERVLET_ALIAS = "user_management",
     PARAMETERS_SERVLET_ALIAS = "parameters_handler",
     NOTIFICATION_RULES_SERVLET_ALIAS = "notification_rules_handler",
     CANCEL = "?cancel=true";

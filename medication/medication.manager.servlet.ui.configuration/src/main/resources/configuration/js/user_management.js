@@ -4,7 +4,6 @@
     dispensers = {},
     users = [];
 function editPatient(info) {
-    debug("edit patient, info="+info)
     $('form fieldset #patient').val(info["patient"]);
     $('form fieldset #physician').val(info["physician"]);
     $('form fieldset #caregiver').val(info["caregiver"]);
@@ -13,7 +12,7 @@ function editPatient(info) {
     $.each(checks, function(i, name){
         $('form fieldset :checkbox[name="'+name+'"]').attr("checked", info["alerts"][name]);
     });
-    $('form>*').show();
+    $('form>[name!="back"]').show();
 }
 function fillSelect(selector, obj) {
     var s = $(selector);
@@ -23,7 +22,6 @@ function fillSelect(selector, obj) {
 }
 
 $(function () {
-    debug("edit buttons are: "+$('table#patients button[name="edit"]').size())
     $('table#patients button[name="edit"]').click(function (e) {
         e.preventDefault();
         editPatient($(this).closest("tr").data("info"));

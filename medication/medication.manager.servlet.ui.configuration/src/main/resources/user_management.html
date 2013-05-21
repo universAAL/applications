@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>universALL - Medication Manager Service: User Management</title>
+
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/user_management.js"></script>
+
+    <link rel="stylesheet" href="css/common.css" type="text/css">
+    <link rel="stylesheet" href="css/user_management.css" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript">
+    /*
+     define user name, example:
+     userObj.name="User Name";
+
+     In for cycle - add all prescriptions, Example:
+     userObj.prescriptions.push({"date":'2013-01-12',
+     'notes':'Sleeping problems',
+     'medicines':[{'name':'Medicine_2', 'how':'7 days x 1 pills'},{'name':'Medicine_1', 'how':'7 days x 3 pills'}]});
+     */
+    patients = {"111":"John Smith", "id2":"Sarah Smith"};//id:name
+    physicians = {"2":'Dr Petters', "3":'Dr Williams'};
+    caregivers = {"4":"Michael Klein Thompson"};
+    dispensers = {"-1":"none", "22":"Pivotel 1"};
+    users = [
+        {
+            "patient":'111',
+            "physician":"2",
+            "caregiver":"4",
+            "dispenser":"22",
+            "alerts":{"due":true, "missed":false, "successful":false, "upside":true}
+        },
+        {
+            "patient":"id2",
+            "physician":"3",
+            "caregiver":"4",
+            "dispenser":"-1",
+            "alerts":{"due":false, "missed":true, "successful":true, "upside":false}
+        }
+    ];
+</script>
+<div class="cont">
+    <div>
+        <h1>universAAL<br/>Medication Manager Service<br/>
+            User Management</h1>
+
+        <table id="patients" class="t1">
+            <tr>
+                <th>Patient</th>
+                <th>Physician</th>
+                <th>Caregiver</th>
+                <th>Dispenser</th>
+                <th>Action</th>
+
+            </tr>
+            <tr class="odd">
+                <td colspan="5" align="center">No Patients</td>
+            </tr>
+            <tr class="templ">
+                <td nowrap></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <button name="edit">Edit</button>
+                    <button name="delete">Delete</button>
+                </td>
+            </tr>
+        </table>
+        <form name="delete_patient" action="" method="post">
+            <input type="hidden" name="deleteID">
+        </form>
+        <form name="edit_patient" action="" method="post">
+            <fieldset style="display: none">
+                <legend>Edit</legend>
+                <div class="col">
+                    <span><label for="patient">Patient:</label> <select name="patient" id="patient" disabled></select></span>
+                    <span><label for="physician">Physician:</label> <select name="physician" id="physician"></select></span>
+                    <span><label for="caregiver">Caregiver:</label> <select name="caregiver" id="caregiver"></select></span>
+                    <span><label for="dispenser">Dispenser:</label> <select name="dispenser" id="dispenser"></select></span>
+                </div>
+                <div class="col col2">
+                    <span><label for="due">Due intake</label><input type="checkbox" id="due" name="due"></span>
+                    <span><label for="missed">Missed intake</label><input type="checkbox" id="missed" name="missed"></span>
+                    <span><label for="successful">Successful intake</label><input type="checkbox" id="successful" name="successful"></span>
+                    <span><label for="upside">Upside-down</label><input type="checkbox" id="upside" name="upside"></span>
+                </div>
+            </fieldset>
+            <input type="submit" class="button" name="save_patient" value="Save Patient" style="display: none"/>
+            <button name="cancel" style="display: none">Cancel</button>
+            <button name="back" class="right">Back</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

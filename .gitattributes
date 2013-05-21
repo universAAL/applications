@@ -2965,8 +2965,10 @@ medication/medication.manager.servlet.ui.configuration/src/main/java/org/univers
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayErrorPageWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayLoginHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplaySelectConfigActionHtmlWriterServlet.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayUserManagementHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/LoginServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/SelectConfigActionForm.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/UserManagementForm.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/common.css -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/images/animated-overlay.gif -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/images/ui-bg_flat_0_aaaaaa_40x100.png -text
@@ -2998,6 +3000,7 @@ medication/medication.manager.servlet.ui.configuration/src/main/resources/config
 medication/medication.manager.servlet.ui.configuration/src/main/resources/error.html -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/login.html -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/select_config_action.html -text
+medication/medication.manager.servlet.ui.configuration/src/main/resources/user_management.html -text
 medication/medication.manager.servlet.ui/pom.xml -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/Activator.java -text
 medication/medication.manager.servlet.ui/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/impl/Log.java -text
