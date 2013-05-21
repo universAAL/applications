@@ -2867,7 +2867,6 @@ medication/medication.manager.configuration/src/main/resources/medication.proper
 medication/medication.manager.configuration/src/main/resources/medication_manager/dispenser_instructions/instructions_1.txt -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/dispenser_instructions/instructions_2.txt -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/prescriptions/1.xml -text
-medication/medication.manager.configuration/src/main/resources/medication_manager/prescriptions/2.xml -text
 medication/medication.manager.integration.tests/artifact.composite -text
 medication/medication.manager.integration.tests/pom.xml -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text
