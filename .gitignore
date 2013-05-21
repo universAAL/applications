@@ -128,6 +128,8 @@ medication/medication.manager.configuration/target/classes
 medication/medication.manager.configuration/target/generated-sources
 medication/medication.manager.configuration/target/medication.manager.configuration-C.0.1-SNAPSHOT.jar
 medication/medication.manager.configuration/target/surefire
+medication/medication.manager.event.issuer/*.iml
+medication/medication.manager.event.issuer/target
 medication/medication.manager.integration.tests/*.iml
 medication/medication.manager.integration.tests/*.log
 medication/medication.manager.integration.tests/target
