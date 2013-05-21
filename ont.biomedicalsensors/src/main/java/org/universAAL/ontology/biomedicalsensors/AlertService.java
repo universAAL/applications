@@ -18,7 +18,6 @@
  */
 package org.universAAL.ontology.biomedicalsensors;
 
-
 /**
  * Ontological service that handles Alerts.
  * 
@@ -26,36 +25,36 @@ package org.universAAL.ontology.biomedicalsensors;
  * 
  */
 public class AlertService extends BiomedicalSensorService {
-	public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
-			+ "AlertService";
-	public static final String PROP_MONITORS = BiomedicalSensorsOntology.NAMESPACE
-			+ "monitorsAlerts";
+    public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
+	    + "AlertService";
+    public static final String PROP_MONITORS = BiomedicalSensorsOntology.NAMESPACE
+	    + "monitorsAlerts";
 
-	public AlertService() {
-		super();
-	}
+    public AlertService() {
+	super();
+    }
 
-	public AlertService(String uri) {
-		super(uri);
-	}
+    public AlertService(String uri) {
+	super(uri);
+    }
 
-	public String getClassURI() {
-		return MY_URI;
-	}
+    public String getClassURI() {
+	return MY_URI;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
-	 * (java.lang.String)
-	 */
-	public int getPropSerializationType(String propURI) {
-		return PROP_CONTROLS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
-				.getPropSerializationType(propURI);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
+     * (java.lang.String)
+     */
+    public int getPropSerializationType(String propURI) {
+	return PROP_CONTROLS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
+		.getPropSerializationType(propURI);
+    }
 
-	public boolean isWellFormed() {
-		return true;
-	}
+    public boolean isWellFormed() {
+	return true;
+    }
 }

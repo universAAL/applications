@@ -23,57 +23,57 @@ import org.universAAL.middleware.owl.ManagedIndividual;
 
 public class ReadEnergy extends ManagedIndividual {
 
-	public static final String MY_URI = ReadEnergyOntology.NAMESPACE
-			+ "ReadEnergy";
+    public static final String MY_URI = ReadEnergyOntology.NAMESPACE
+	    + "ReadEnergy";
 
-	public static final String PROP_HAS_MEASUREMENT = ReadEnergyOntology.NAMESPACE
-			+ "hasMeasurement";
-	public static final String PROP_HAS_DEVICE = ReadEnergyOntology.NAMESPACE
-			+ "hasDevice";
-	// This property defines if the measurement is the daily aggregate or the
-	// one made every minute
-	public static final String PROP_IS_DAILY = ReadEnergyOntology.NAMESPACE
-			+ "isDaily";
+    public static final String PROP_HAS_MEASUREMENT = ReadEnergyOntology.NAMESPACE
+	    + "hasMeasurement";
+    public static final String PROP_HAS_DEVICE = ReadEnergyOntology.NAMESPACE
+	    + "hasDevice";
+    // This property defines if the measurement is the daily aggregate or the
+    // one made every minute
+    public static final String PROP_IS_DAILY = ReadEnergyOntology.NAMESPACE
+	    + "isDaily";
 
-	public ReadEnergy(String instanceURI) {
-		super(instanceURI);
-	}
+    public ReadEnergy(String instanceURI) {
+	super(instanceURI);
+    }
 
-	public ReadEnergy() {
-		super();
-	}
+    public ReadEnergy() {
+	super();
+    }
 
-	public String getClassURI() {
-		return MY_URI;
-	}
+    public String getClassURI() {
+	return MY_URI;
+    }
 
-	public int getPropSerializationType(String propURI) {
-		return PROP_SERIALIZATION_FULL;
-	}
+    public int getPropSerializationType(String propURI) {
+	return PROP_SERIALIZATION_FULL;
+    }
 
-	public void setMeasurement(EnergyMeasurement m) {
-		props.put(PROP_HAS_MEASUREMENT, m);
-	}
+    public void setMeasurement(EnergyMeasurement m) {
+	props.put(PROP_HAS_MEASUREMENT, m);
+    }
 
-	public void setDevice(ReadEnergyDevice d) {
-		props.put(PROP_HAS_DEVICE, d);
-	}
+    public void setDevice(ReadEnergyDevice d) {
+	props.put(PROP_HAS_DEVICE, d);
+    }
 
-	public void setDaily(String daily) {
-		props.put(PROP_IS_DAILY, daily);
-	}
+    public void setDaily(String daily) {
+	props.put(PROP_IS_DAILY, daily);
+    }
 
-	public String getDaily() {
-		System.out.println("I have getDevice() and its result is: "
-				+ getDevice());
-		return (String) props.get(PROP_IS_DAILY);
-	}
+    public String getDaily() {
+	System.out.println("I have getDevice() and its result is: "
+		+ getDevice());
+	return (String) props.get(PROP_IS_DAILY);
+    }
 
-	public ReadEnergyDevice getDevice() {
-		return (ReadEnergyDevice) props.get(PROP_HAS_DEVICE);
-	}
+    public ReadEnergyDevice getDevice() {
+	return (ReadEnergyDevice) props.get(PROP_HAS_DEVICE);
+    }
 
-	public EnergyMeasurement getMeasurement() {
-		return (EnergyMeasurement) props.get(PROP_HAS_MEASUREMENT);
-	}
+    public EnergyMeasurement getMeasurement() {
+	return (EnergyMeasurement) props.get(PROP_HAS_MEASUREMENT);
+    }
 }

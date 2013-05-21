@@ -28,14 +28,14 @@ import org.universAAL.middleware.owl.ManagedIndividual;
  * 
  */
 public abstract class SensorType extends ManagedIndividual {
-	public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
-			+ "sensorType";
+    public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
+	    + "sensorType";
 
-	protected SensorType(String uri) {
-		super(uri);
-	}
+    protected SensorType(String uri) {
+	super(uri);
+    }
 
-	public String getClassURI() {
-		return MY_URI;
-	}
+    public String getClassURI() {
+	return MY_URI;
+    }
 }

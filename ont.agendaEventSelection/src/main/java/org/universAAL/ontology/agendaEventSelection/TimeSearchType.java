@@ -184,17 +184,6 @@ public class TimeSearchType extends ManagedIndividual {
     /*
      * (non-Javadoc)
      * 
-     * @see
-     * org.universAAL.middleware.owl.ManagedIndividual#setProperty(java.lang
-     * .String, java.lang.Object)
-     */
-    public void setProperty(String propURI, Object o) {
-	// do nothing
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see org.universAAL.middleware.owl.ManagedIndividual#getClassURI()
      */
     public String getClassURI() {

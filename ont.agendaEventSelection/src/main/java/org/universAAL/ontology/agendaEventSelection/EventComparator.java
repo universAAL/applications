@@ -28,7 +28,9 @@ public class EventComparator implements Comparator {
 
     /**
      * For testing.
-     * @param str main method arguments
+     * 
+     * @param str
+     *            main method arguments
      */
     public static void main(String[] str) {
 	XMLGregorianCalendar event1 = TypeMapper.getDataTypeFactory()

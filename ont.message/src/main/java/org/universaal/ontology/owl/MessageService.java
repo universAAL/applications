@@ -20,58 +20,56 @@ package org.universaal.ontology.owl;
 import org.universAAL.middleware.service.owl.Service;
 
 /**
- * This class describes the service given by the 
- * message ontology. 
- * Given a sender, a receiver and a content, we generate 
- * a message.
+ * This class describes the service given by the message ontology. Given a
+ * sender, a receiver and a content, we generate a message.
+ * 
  * @author mdelafuente
- *
+ * 
  */
-public class MessageService extends Service{
+public class MessageService extends Service {
 
-//NAMESPACE & PROPERTIES
-	  public static final String MY_URI = MessageOntology.NAMESPACE
+    // NAMESPACE & PROPERTIES
+    public static final String MY_URI = MessageOntology.NAMESPACE
 	    + "MessageService";
 
-	  public static final String PROP_SENDER =  MessageOntology.NAMESPACE
+    public static final String PROP_SENDER = MessageOntology.NAMESPACE
 	    + "sender";
-	  public static final String PROP_RECEIVER =  MessageOntology.NAMESPACE
+    public static final String PROP_RECEIVER = MessageOntology.NAMESPACE
 	    + "receiver";
-	  public static final String PROP_CONTENT =  MessageOntology.NAMESPACE
+    public static final String PROP_CONTENT = MessageOntology.NAMESPACE
 	    + "messageContent";
-	  
-	  public static final String PROP_GENERATES_MESSAGE =  MessageOntology.NAMESPACE
+
+    public static final String PROP_GENERATES_MESSAGE = MessageOntology.NAMESPACE
 	    + "generatesMessage";
-	
-//CONSTRUCTORS
-	  public MessageService() {
-		  super();
-	  }
 
-	  public MessageService(String uri) {
-		  super(uri);
-	  }
+    // CONSTRUCTORS
+    public MessageService() {
+	super();
+    }
 
-	  public String getClassURI() {
-		  return MY_URI;
-	  }
+    public MessageService(String uri) {
+	super(uri);
+    }
 
-	  /*
-	   * (non-Javadoc)
-	   * 
-	   * @see
-	   * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
-	   * (java.lang.String)
-	   */
-	  public int getPropSerializationType(String propURI) {
-		  return  PROP_SENDER.equals(propURI) ||
-		  PROP_RECEIVER.equals(propURI) ||
-		  PROP_CONTENT.equals(propURI) ||
-		  PROP_GENERATES_MESSAGE.equals(propURI) ? PROP_SERIALIZATION_FULL : super
-				  .getPropSerializationType(propURI);
-	  }
+    public String getClassURI() {
+	return MY_URI;
+    }
 
-	  public boolean isWellFormed() {
-		  return true;
-	  }
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
+     * (java.lang.String)
+     */
+    public int getPropSerializationType(String propURI) {
+	return PROP_SENDER.equals(propURI) || PROP_RECEIVER.equals(propURI)
+		|| PROP_CONTENT.equals(propURI)
+		|| PROP_GENERATES_MESSAGE.equals(propURI) ? PROP_SERIALIZATION_FULL
+		: super.getPropSerializationType(propURI);
+    }
+
+    public boolean isWellFormed() {
+	return true;
+    }
 }

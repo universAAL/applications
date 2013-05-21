@@ -21,19 +21,19 @@ import org.universaal.ontology.owl.*;
 
 public class MessageOntologyFactory extends ResourceFactoryImpl {
 
-
-  public Resource createInstance(String classURI, String instanceURI, int factoryIndex) {
+    public Resource createInstance(String classURI, String instanceURI,
+	    int factoryIndex) {
 
 	switch (factoryIndex) {
-     case 0:
+	case 0:
 	    return new MotivationalQuestionnaire(instanceURI);
-     case 1:
+	case 1:
 	    return new Message(instanceURI);
-     case 2:
+	case 2:
 	    return new MotivationalPlainMessage(instanceURI);
-     case 3:
- 	    return new MotivationalMessage(instanceURI);
+	case 3:
+	    return new MotivationalMessage(instanceURI);
 	}
 	return null;
-  }
+    }
 }

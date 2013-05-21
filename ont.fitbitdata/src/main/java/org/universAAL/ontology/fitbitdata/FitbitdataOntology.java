@@ -21,21 +21,12 @@
 package org.universAAL.ontology.fitbitdata;
 
 
-import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.OntClassInfoSetup;
 import org.universAAL.middleware.owl.Ontology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universAAL.middleware.service.owl.Service;
-import org.universAAL.middleware.service.owl.ServiceBusOntology;
-import org.universAAL.ontology.location.LocationOntology;
-
-import org.universAAL.middleware.owl.ManagedIndividual;
-
-
-//import the factory for this ontology
 import org.universAAL.ontology.FitbitdataFactory;
 
 
