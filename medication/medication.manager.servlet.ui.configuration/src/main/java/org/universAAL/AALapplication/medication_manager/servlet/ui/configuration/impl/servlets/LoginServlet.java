@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.ServletUtil.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Activator.*;
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -24,14 +25,19 @@ public final class LoginServlet extends BaseServlet {
   private static final String USERNAME = "username";
   private static final String PASSWORD = "password";
   private final Object lock = new Object();
-  private DisplayLoginHtmlWriterServlet displayServlet;
+  private DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet;
+  private DisplaySelectConfigActionHtmlWriterServlet selectConfigActionHtmlWriterServlet;
 
   public LoginServlet(SessionTracking sessionTracking) {
     super(sessionTracking);
   }
 
-  public void setDisplayServlet(DisplayLoginHtmlWriterServlet displayServlet) {
-    this.displayServlet = displayServlet;
+  public void setDisplayLoginHtmlWriterServlet(DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet) {
+    this.displayLoginHtmlWriterServlet = displayLoginHtmlWriterServlet;
+  }
+
+  public void setDisplaySelectConfigActionHtmlWriterServlet(DisplaySelectConfigActionHtmlWriterServlet selectConfigActionHtmlWriterServlet) {
+    this.selectConfigActionHtmlWriterServlet = selectConfigActionHtmlWriterServlet;
   }
 
   @Override
@@ -44,28 +50,28 @@ public final class LoginServlet extends BaseServlet {
 
     synchronized (lock) {
       try {
-        isServletSet(displayServlet, "displayServlet");
+        isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
+        isServletSet(selectConfigActionHtmlWriterServlet, "selectConfigActionHtmlWriterServlet");
 
         Session session = getSession(req, resp, getClass());
         debugSessions(session.getId(), "the servlet doGet/doPost method", getClass());
-        Person doctor = findDoctor(req, session);
+        Person admin = findDoctor(req, session);
 
         String cancel = req.getParameter(CANCEL);
 
         if (cancel != null && cancel.equalsIgnoreCase(TRUE)) {
           debugSessions(session.getId(), "cancel button (invalidate) the servlet doGet/doPost method", getClass());
           invalidateSession(req, resp);
-          displayServlet.doGet(req, resp);
+          displayLoginHtmlWriterServlet.doGet(req, resp);
           return;
         }
 
-        if (doctor != null) {
+        if (admin != null) {
           debugSessions(session.getId(), "End of the servlet doGet/doPost method (doctor is not null", getClass());
-          resp.getWriter().println("uraaaaaaaaaa");
-//          selectUserServlet.doGet(req, resp);
+          selectConfigActionHtmlWriterServlet.doGet(req, resp);
         } else {
           debugSessions(session.getId(), "End of the servlet doGet/doPost method (doctor is null)", getClass());
-          displayServlet.doGet(req, resp);
+          displayLoginHtmlWriterServlet.doGet(req, resp);
         }
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
@@ -89,7 +95,7 @@ public final class LoginServlet extends BaseServlet {
     Person person = findPerson(username, password);
 
     if (person != null) {
-      session.setAttribute(LOGGED_DOCTOR, person);
+      session.setAttribute(LOGGED_ADMIN, person);
     } else {
       session.setAttribute(LOGIN_ERROR, LOGIN_ERROR);
     }

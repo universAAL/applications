@@ -5,13 +5,12 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.h
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.DisplayErrorScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
@@ -21,7 +20,7 @@ public final class DisplayErrorPageWriterServlet extends BaseHtmlWriterServlet {
   private final Object lock = new Object();
 
   public DisplayErrorPageWriterServlet(SessionTracking sessionTracking) {
-    super(ERROR_FILE_NAME, sessionTracking);
+    super(Util.ERROR_FILE_NAME, sessionTracking);
   }
 
 
