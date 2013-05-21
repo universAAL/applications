@@ -19,10 +19,6 @@
  */
 package org.universAAL.ontology.fitbitdata;
 
-import java.util.Hashtable;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.universAAL.middleware.owl.ManagedIndividual;
 
 

@@ -19,21 +19,21 @@
  */
 package org.universAAL.ontology;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleActivator;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
 
-public class Activator implements BundleActivator {
+public class Activator implements ModuleActivator {
 
-	DroolsReasoningOntology dro = new DroolsReasoningOntology();
+    DroolsReasoningOntology dro = new DroolsReasoningOntology();
 
-	public void start(BundleContext arg0) throws Exception {
-		OntologyManagement.getInstance().register(dro);
-	}
+    public void start(ModuleContext mc) throws Exception {
+	OntologyManagement.getInstance().register(mc, dro);
+    }
 
-	public void stop(BundleContext arg0) throws Exception {
-		OntologyManagement.getInstance().unregister(dro);
+    public void stop(ModuleContext mc) throws Exception {
+	OntologyManagement.getInstance().unregister(mc, dro);
 
-	}
+    }
 
 }

@@ -22,15 +22,15 @@ import org.universaal.ontology.owl.MessageOntology;
 
 public class MessageActivator implements ModuleActivator {
 
-  static ModuleContext context = null;
-  MessageOntology ontology = new MessageOntology();
+    static ModuleContext context = null;
+    MessageOntology ontology = new MessageOntology();
 
-  public void start(ModuleContext context) throws Exception {
-    MessageActivator.context = context;
-    OntologyManagement.getInstance().register(ontology);
-  }
+    public void start(ModuleContext mcontext) throws Exception {
+	MessageActivator.context = mcontext;
+	OntologyManagement.getInstance().register(mcontext, ontology);
+    }
 
-  public void stop(ModuleContext arg0) throws Exception {
-    OntologyManagement.getInstance().unregister(ontology);
-  }
-}	
+    public void stop(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().unregister(mcontext, ontology);
+    }
+}

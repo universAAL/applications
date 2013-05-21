@@ -29,11 +29,11 @@ import org.universAAL.ontology.Safety.SafetyOntology;
 public class SafetyActivator implements ModuleActivator {
     SafetyOntology safetyOntology = new SafetyOntology();
 
-    public void start(ModuleContext context) throws Exception {
-    	OntologyManagement.getInstance().register(safetyOntology);
+    public void start(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().register(mcontext, safetyOntology);
     }
 
-    public void stop(ModuleContext context) throws Exception {
-		OntologyManagement.getInstance().unregister(safetyOntology);
+    public void stop(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().unregister(mcontext, safetyOntology);
     }
 }

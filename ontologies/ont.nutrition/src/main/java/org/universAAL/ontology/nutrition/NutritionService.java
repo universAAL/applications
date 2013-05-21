@@ -31,69 +31,70 @@ import org.universAAL.middleware.service.owl.Service;
  * 
  */
 public class NutritionService extends Service {
-	public static final String MY_URI = NutritionOntology.NAMESPACE
-			+ "NutritionService";
-	/**
-	 * Obtains a Recipe given its ID (int)
-	 */
-	public static final String SERVICE_GET_RECIPE = NutritionOntology.NAMESPACE
-			+ "getRecipe";
-	public static final String SERVICE_GET_RECIPE_OUTPUT = NutritionOntology.NAMESPACE
-			+ "getRecipeOutput";
-	public static final String SERVICE_GET_RECIPE_INPUT = NutritionOntology.NAMESPACE
-			+ "recipeID";
+    public static final String MY_URI = NutritionOntology.NAMESPACE
+	    + "NutritionService";
+    /**
+     * Obtains a Recipe given its ID (int)
+     */
+    public static final String SERVICE_GET_RECIPE = NutritionOntology.NAMESPACE
+	    + "getRecipe";
+    public static final String SERVICE_GET_RECIPE_OUTPUT = NutritionOntology.NAMESPACE
+	    + "getRecipeOutput";
+    public static final String SERVICE_GET_RECIPE_INPUT = NutritionOntology.NAMESPACE
+	    + "recipeID";
 
-	/**
-	 * Obtains today's Nutritional Menu
-	 */
-	public static final String SERVICE_GET_TODAY_MENUDAY = NutritionOntology.NAMESPACE
-			+ "getTodayMenu";
-	public static final String SERVICE_GET_TODAY_MENU_OUTPUT = NutritionOntology.NAMESPACE
-			+ "getMenuDayOutput";
-//	public static final String SERVICE_GET_TODAY_MENU_INPUT = NutritionOntology.NAMESPACE
-//			+ "menuDayID";
+    /**
+     * Obtains today's Nutritional Menu
+     */
+    public static final String SERVICE_GET_TODAY_MENUDAY = NutritionOntology.NAMESPACE
+	    + "getTodayMenu";
+    public static final String SERVICE_GET_TODAY_MENU_OUTPUT = NutritionOntology.NAMESPACE
+	    + "getMenuDayOutput";
+    // public static final String SERVICE_GET_TODAY_MENU_INPUT =
+    // NutritionOntology.NAMESPACE
+    // + "menuDayID";
 
-	/**
-	 * Used to access a Recipe
-	 */
-	public static final String PROP_OBTAINS_RECIPE = NutritionOntology.NAMESPACE
-			+ "obtainsRecipe";
-	/**
-	 * Used to access a Menu
-	 */
-	public static final String PROP_OBTAINS_MENU = NutritionOntology.NAMESPACE
-			+ "obtainsMenuDay";
+    /**
+     * Used to access a Recipe
+     */
+    public static final String PROP_OBTAINS_RECIPE = NutritionOntology.NAMESPACE
+	    + "obtainsRecipe";
+    /**
+     * Used to access a Menu
+     */
+    public static final String PROP_OBTAINS_MENU = NutritionOntology.NAMESPACE
+	    + "obtainsMenuDay";
 
-	public NutritionService() {
-		super();
-	}
+    public NutritionService() {
+	super();
+    }
 
-	public NutritionService(String uri) {
-		super(uri);
-	}
+    public NutritionService(String uri) {
+	super(uri);
+    }
 
-	public String getClassURI() {
-		return MY_URI;
-	}
+    public String getClassURI() {
+	return MY_URI;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
-	 * (java.lang.String)
-	 */
-	public int getPropSerializationType(String propURI) {
-		return PROP_SERIALIZATION_FULL;
-//		if (PROP_OBTAINS_RECIPE.equals(propURI)) 
-//			return PROP_SERIALIZATION_FULL;
-//		if (PROP_OBTAINS_MENU.equals(propURI)) 
-//			return PROP_SERIALIZATION_FULL;
-//		return super.getPropSerializationType(propURI);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
+     * (java.lang.String)
+     */
+    public int getPropSerializationType(String propURI) {
+	return PROP_SERIALIZATION_FULL;
+	// if (PROP_OBTAINS_RECIPE.equals(propURI))
+	// return PROP_SERIALIZATION_FULL;
+	// if (PROP_OBTAINS_MENU.equals(propURI))
+	// return PROP_SERIALIZATION_FULL;
+	// return super.getPropSerializationType(propURI);
+    }
 
-	public boolean isWellFormed() {
-		return true;
-	}
+    public boolean isWellFormed() {
+	return true;
+    }
 
 }

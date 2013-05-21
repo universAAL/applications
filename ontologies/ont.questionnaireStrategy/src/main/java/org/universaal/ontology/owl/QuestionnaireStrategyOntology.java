@@ -30,44 +30,50 @@ import org.universaal.ontology.QuestionnaireStrategyOntologyFactory;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.Treatment;
 
-public class QuestionnaireStrategyOntology extends Ontology{
-	
-	private static  QuestionnaireStrategyOntologyFactory factory = new QuestionnaireStrategyOntologyFactory();
-	public static final String NAMESPACE ="http://ontology.universaal.org/QuestionnaireStrategyOntology#";
-		
-	  public  QuestionnaireStrategyOntology() {
-	    super(NAMESPACE);
-	  }
+public class QuestionnaireStrategyOntology extends Ontology {
 
-	  public void create() {
-	    
-		Resource r = getInfo();
-	    r.setResourceComment("The ontology defining the most general concepts dealing with questionnaires.");
-	    r.setResourceLabel("Questionnaire");
-	    
-	    addImport(DataRepOntology.NAMESPACE);
-	    addImport(PhThingOntology.NAMESPACE);
-		addImport(ServiceBusOntology.NAMESPACE);
-	    addImport(ProfileOntology.NAMESPACE);
-	    addImport(HealthOntology.NAMESPACE);
-	    
-	    OntClassInfoSetup oci;
-	    
-	    
-	    // ******* Regular classes of the ontology ******* //
-	    
-	    //load Questionnaire4TreatmentStrategy 
-	    
-	    oci = createNewOntClassInfo(Questionnaire4TreatmentStrategy.MY_URI, factory, 0);
-	    oci.setResourceComment("");
-	    oci.setResourceLabel("Questionnaire4TreatmentStrategy");
-	    oci.addSuperClass(ManagedIndividual.MY_URI); 
-	    
-	    oci.addObjectProperty(Questionnaire4TreatmentStrategy.PROP_IS_ASSOCIATED_TO_TREATMENT).setFunctional();
-	    oci.addRestriction(MergedRestriction
-	      .getAllValuesRestrictionWithCardinality(Questionnaire4TreatmentStrategy.PROP_IS_ASSOCIATED_TO_TREATMENT, 
-	      Treatment.MY_URI, 1, 1));
-	    
-	  }
+    private static QuestionnaireStrategyOntologyFactory factory = new QuestionnaireStrategyOntologyFactory();
+    public static final String NAMESPACE = "http://ontology.universaal.org/QuestionnaireStrategyOntology#";
+
+    public QuestionnaireStrategyOntology() {
+	super(NAMESPACE);
+    }
+
+    public void create() {
+
+	Resource r = getInfo();
+	r
+		.setResourceComment("The ontology defining the most general concepts dealing with questionnaires.");
+	r.setResourceLabel("Questionnaire");
+
+	addImport(DataRepOntology.NAMESPACE);
+	addImport(PhThingOntology.NAMESPACE);
+	addImport(ServiceBusOntology.NAMESPACE);
+	addImport(ProfileOntology.NAMESPACE);
+	addImport(HealthOntology.NAMESPACE);
+
+	OntClassInfoSetup oci;
+
+	// ******* Regular classes of the ontology ******* //
+
+	// load Questionnaire4TreatmentStrategy
+
+	oci = createNewOntClassInfo(Questionnaire4TreatmentStrategy.MY_URI,
+		factory, 0);
+	oci.setResourceComment("");
+	oci.setResourceLabel("Questionnaire4TreatmentStrategy");
+	oci.addSuperClass(ManagedIndividual.MY_URI);
+
+	oci
+		.addObjectProperty(
+			Questionnaire4TreatmentStrategy.PROP_IS_ASSOCIATED_TO_TREATMENT)
+		.setFunctional();
+	oci
+		.addRestriction(MergedRestriction
+			.getAllValuesRestrictionWithCardinality(
+				Questionnaire4TreatmentStrategy.PROP_IS_ASSOCIATED_TO_TREATMENT,
+				Treatment.MY_URI, 1, 1));
+
+    }
 
 }

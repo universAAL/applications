@@ -29,17 +29,18 @@ public class NutritionActivator implements ModuleActivator {
 
     private NutritionOntology nutritionOntology = new NutritionOntology();
 
-    public void start(ModuleContext context) throws Exception {
+    public void start(ModuleContext mcontext) throws Exception {
 	System.out.println("Nutrition ontology starting");
-	boolean res = OntologyManagement.getInstance().register(
+	boolean res = OntologyManagement.getInstance().register(mcontext,
 		nutritionOntology);
 	System.out.println("Nutri: ontology registered: " + res);
 	System.out.println("Nutrition ontology started");
     }
 
-    public void stop(ModuleContext arg0) throws Exception {
+    public void stop(ModuleContext mcontext) throws Exception {
 	System.out.println("Nutrition ontology bundle stopping");
-	OntologyManagement.getInstance().unregister(nutritionOntology);
+	OntologyManagement.getInstance()
+		.unregister(mcontext, nutritionOntology);
 	System.out.println("Nutrition ontology bundle stopped");
     }
 }

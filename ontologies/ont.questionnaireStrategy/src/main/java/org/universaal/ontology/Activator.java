@@ -16,22 +16,20 @@
  ******************************************************************************/
 package org.universaal.ontology;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleActivator;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
-import org.universaal.ontology.owl.*; 
+import org.universaal.ontology.owl.QuestionnaireStrategyOntology;
 
-public class Activator implements BundleActivator {
+public class Activator implements ModuleActivator {
 
-  static BundleContext context = null;
-  QuestionnaireStrategyOntology ontology = new QuestionnaireStrategyOntology();
+    QuestionnaireStrategyOntology ontology = new QuestionnaireStrategyOntology();
 
-  public void start(BundleContext context) throws Exception {
-    Activator.context = context;
-    OntologyManagement.getInstance().register(ontology);
-  }
+    public void start(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().register(mcontext, ontology);
+    }
 
-  public void stop(BundleContext arg0) throws Exception {
-    OntologyManagement.getInstance().unregister(ontology);
-  }
-}	
+    public void stop(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().unregister(mcontext, ontology);
+    }
+}

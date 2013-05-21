@@ -30,11 +30,11 @@ public class ShoppingActivator implements ModuleActivator {
 
     ShoppingOntology shoppingOntology = new ShoppingOntology();
 
-    public void start(ModuleContext context) throws Exception {
-    	OntologyManagement.getInstance().register(shoppingOntology);
+    public void start(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().register(mcontext, shoppingOntology);
     }
 
-    public void stop(ModuleContext context) throws Exception {
-		OntologyManagement.getInstance().unregister(shoppingOntology);
+    public void stop(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().unregister(mcontext, shoppingOntology);
     }
 }

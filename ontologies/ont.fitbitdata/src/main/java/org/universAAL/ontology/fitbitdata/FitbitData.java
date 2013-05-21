@@ -19,12 +19,7 @@
  */
 package org.universAAL.ontology.fitbitdata;
 
-import java.util.Hashtable;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.universAAL.middleware.owl.ManagedIndividual;
-import org.universAAL.middleware.service.owl.Service;
 
 
 public class FitbitData extends ManagedIndividual {

@@ -19,24 +19,20 @@
  */
 package org.universAAL.ontology;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleActivator;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.ontology.energy.reader.ReadEnergyOntology;
 
-
-public class ReadEnergyActivator implements ModuleActivator{
-	static ModuleContext context = null;
+public class ReadEnergyActivator implements ModuleActivator {
     private ReadEnergyOntology aalfficiency = new ReadEnergyOntology();
-	
-	public void start(ModuleContext arg0) throws Exception {
-		context = arg0;
-		OntologyManagement.getInstance().register(aalfficiency);
-	}
 
-	public void stop(ModuleContext arg0) throws Exception {
-		OntologyManagement.getInstance().unregister(aalfficiency);
-	}
+    public void start(ModuleContext mc) throws Exception {
+
+	OntologyManagement.getInstance().register(mc, aalfficiency);
+    }
+
+    public void stop(ModuleContext mc) throws Exception {
+	OntologyManagement.getInstance().unregister(mc, aalfficiency);
+    }
 }

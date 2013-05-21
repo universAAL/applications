@@ -27,36 +27,36 @@ import org.universAAL.middleware.service.owl.Service;
  * 
  */
 public class BiomedicalSensorService extends Service {
-	public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
-			+ "BiomedicalSensorService";
-	public static final String PROP_CONTROLS = BiomedicalSensorsOntology.NAMESPACE
-			+ "controls";
+    public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
+	    + "BiomedicalSensorService";
+    public static final String PROP_CONTROLS = BiomedicalSensorsOntology.NAMESPACE
+	    + "controls";
 
-	public BiomedicalSensorService() {
-		super();
-	}
+    public BiomedicalSensorService() {
+	super();
+    }
 
-	public BiomedicalSensorService(String uri) {
-		super(uri);
-	}
+    public BiomedicalSensorService(String uri) {
+	super(uri);
+    }
 
-	public String getClassURI() {
-		return MY_URI;
-	}
+    public String getClassURI() {
+	return MY_URI;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
-	 * (java.lang.String)
-	 */
-	public int getPropSerializationType(String propURI) {
-		return PROP_CONTROLS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
-				.getPropSerializationType(propURI);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.universAAL.middleware.owl.ManagedIndividual#getPropSerializationType
+     * (java.lang.String)
+     */
+    public int getPropSerializationType(String propURI) {
+	return PROP_CONTROLS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
+		.getPropSerializationType(propURI);
+    }
 
-	public boolean isWellFormed() {
-		return true;
-	}
+    public boolean isWellFormed() {
+	return true;
+    }
 }

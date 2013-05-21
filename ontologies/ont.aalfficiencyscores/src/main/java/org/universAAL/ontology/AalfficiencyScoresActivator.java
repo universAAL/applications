@@ -24,16 +24,16 @@ import org.universAAL.middleware.container.ModuleActivator;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.ontology.aalfficiency.scores.AalfficiencyScoresOntology;
 
-public class AalfficiencyScoresActivator implements ModuleActivator{
-	static ModuleContext context = null;
+public class AalfficiencyScoresActivator implements ModuleActivator {
+    static ModuleContext context = null;
     private AalfficiencyScoresOntology aalfficiency = new AalfficiencyScoresOntology();
-	
-	public void start(ModuleContext arg0) throws Exception {
-		context = arg0;
-		OntologyManagement.getInstance().register(aalfficiency);
-	}
 
-	public void stop(ModuleContext arg0) throws Exception {
-		OntologyManagement.getInstance().unregister(aalfficiency);
-	}
+    public void start(ModuleContext mc) throws Exception {
+	context = mc;
+	OntologyManagement.getInstance().register(mc, aalfficiency);
+    }
+
+    public void stop(ModuleContext mc) throws Exception {
+	OntologyManagement.getInstance().unregister(mc, aalfficiency);
+    }
 }

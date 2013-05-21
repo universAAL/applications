@@ -8,7 +8,8 @@ import org.universAAL.middleware.owl.ManagedIndividual;
  * 
  */
 public class ReminderType extends ManagedIndividual {
-    public static final String MY_URI = AgendaOntology.NAMESPACE+"ReminderType";
+    public static final String MY_URI = AgendaOntology.NAMESPACE
+	    + "ReminderType";
 
     public static final int NO_REMINDER = 0;
     public static final int BLINKING_LIGHT = 1;
@@ -115,10 +116,6 @@ public class ReminderType extends ManagedIndividual {
 
     public int ord() {
 	return this.order;
-    }
-
-    public void setProperty(String propURI, Object o) {
-	// do nothing
     }
 
     /*

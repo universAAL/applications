@@ -22,13 +22,13 @@ import org.universaal.ontology.owl.*;
 
 public class QuestionnaireStrategyOntologyFactory extends ResourceFactoryImpl {
 
-
-  public Resource createInstance(String classURI, String instanceURI, int factoryIndex) {
+    public Resource createInstance(String classURI, String instanceURI,
+	    int factoryIndex) {
 
 	switch (factoryIndex) {
-     case 0:
+	case 0:
 	    return new Questionnaire4TreatmentStrategy(instanceURI);
 	}
 	return null;
-  }
+    }
 }

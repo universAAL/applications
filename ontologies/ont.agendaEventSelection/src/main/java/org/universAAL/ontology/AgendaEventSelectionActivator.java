@@ -28,20 +28,21 @@ public class AgendaEventSelectionActivator implements ModuleActivator {
      * (non-Javadoc)
      * 
      * @see
-     * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
-     * )
+     * org.universAAL.middleware.container.ModuleActivator#start(org.universAAL
+     * .middleware.container.ModuleContext)
      */
-    public void start(ModuleContext context) throws Exception {
-	OntologyManagement.getInstance().register(ontology);
+    public void start(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().register(mcontext, ontology);
     }
 
     /*
      * (non-Javadoc)
      * 
      * @see
-     * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     * org.universAAL.middleware.container.ModuleActivator#stop(org.universAAL
+     * .middleware.container.ModuleContext)
      */
-    public void stop(ModuleContext arg0) throws Exception {
-	OntologyManagement.getInstance().unregister(ontology);
+    public void stop(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().unregister(mcontext, ontology);
     }
 }
