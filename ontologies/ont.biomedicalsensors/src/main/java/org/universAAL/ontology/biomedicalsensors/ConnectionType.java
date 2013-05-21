@@ -21,14 +21,14 @@ package org.universAAL.ontology.biomedicalsensors;
 import org.universAAL.middleware.owl.ManagedIndividual;
 
 public abstract class ConnectionType extends ManagedIndividual {
-	public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
-			+ "connectionType";
+    public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
+	    + "connectionType";
 
-	protected ConnectionType(String uri) {
-		super(uri);
-	}
+    protected ConnectionType(String uri) {
+	super(uri);
+    }
 
-	public String getClassURI() {
-		return MY_URI;
-	}
+    public String getClassURI() {
+	return MY_URI;
+    }
 }

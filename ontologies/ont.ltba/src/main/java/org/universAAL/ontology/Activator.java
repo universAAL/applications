@@ -19,8 +19,8 @@
  */
 package org.universAAL.ontology;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleActivator;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
 
 /**
@@ -29,16 +29,16 @@ import org.universAAL.middleware.owl.OntologyManagement;
  * @author mllorente
  * 
  */
-public class Activator implements BundleActivator {
+public class Activator implements ModuleActivator {
 
-	LTBAOntology ltba = new LTBAOntology();
+    LTBAOntology ltba = new LTBAOntology();
 
-	public void start(BundleContext context) throws Exception {
-		OntologyManagement.getInstance().register(ltba);
-	}
+    public void start(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().register(mcontext, ltba);
+    }
 
-	public void stop(BundleContext context) throws Exception {
-		OntologyManagement.getInstance().unregister(ltba);
-	}
+    public void stop(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().unregister(mcontext, ltba);
+    }
 
 }

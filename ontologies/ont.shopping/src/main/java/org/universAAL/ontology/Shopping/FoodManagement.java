@@ -24,28 +24,31 @@ import org.universAAL.ontology.Shopping.ShoppingOntology;
  * 
  */
 public class FoodManagement extends Service {
-	public static final String MY_URI = ShoppingOntology.NAMESPACE + "FoodManagement";
-	public static final String PROP_FRIDGE_CONTROLS = ShoppingOntology.NAMESPACE + "controlsFridge";
-	public static final String PROP_SHOPPINGLIST_CONTROLS = ShoppingOntology.NAMESPACE + "controlsShoppingList";
+    public static final String MY_URI = ShoppingOntology.NAMESPACE
+	    + "FoodManagement";
+    public static final String PROP_FRIDGE_CONTROLS = ShoppingOntology.NAMESPACE
+	    + "controlsFridge";
+    public static final String PROP_SHOPPINGLIST_CONTROLS = ShoppingOntology.NAMESPACE
+	    + "controlsShoppingList";
 
-	public FoodManagement() {
-		super();
-	}
+    public FoodManagement() {
+	super();
+    }
 
-	public FoodManagement(String uri) {
-		super(uri);
-	}
+    public FoodManagement(String uri) {
+	super(uri);
+    }
 
-	public String getClassURI() {
-		return MY_URI;
-	}
+    public String getClassURI() {
+	return MY_URI;
+    }
 
-	public int getPropSerializationType(String propURI) {
-		return PROP_SERIALIZATION_FULL;
-	}
+    public int getPropSerializationType(String propURI) {
+	return PROP_SERIALIZATION_FULL;
+    }
 
-	public boolean isWellFormed() {
-		//return true && props.containsKey(PROP_CONTROLS);
-		return true;
-	}
+    public boolean isWellFormed() {
+	// return true && props.containsKey(PROP_CONTROLS);
+	return true;
+    }
 }

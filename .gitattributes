@@ -3744,7 +3744,6 @@ ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/Precautio
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/Time.java -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/UserIDs.java -text
 ontologies/ont.message/ASL2.0 -text
-ontologies/ont.message/LICENSE-2.0.txt -text
 ontologies/ont.message/MITX.txt -text svneol=unset#text/plain
 ontologies/ont.message/MessageOntology.di -text
 ontologies/ont.message/MessageOntology.notation -text

@@ -37,26 +37,27 @@ public class SafetyFactory extends ResourceFactoryImpl {
     public SafetyFactory() {
     }
 
-    public Resource createInstance(String classURI, String instanceURI, int factoryIndex) {
-		switch (factoryIndex) {
-		case 0:
-		    return new Door(instanceURI);
-		case 1:
-		    return new HumiditySensor(instanceURI);
-		case 2:
-		    return new LightSensor(instanceURI);
-		case 3:
-		    return new MotionSensor(instanceURI);
-		case 4:
-		    return new SmokeSensor(instanceURI);
-		case 5:
-		    return new TemperatureSensor(instanceURI);
-		case 6:
-		    return new Window(instanceURI);
-		case 7:
-		    return new SafetyManagement(instanceURI);
-		}
+    public Resource createInstance(String classURI, String instanceURI,
+	    int factoryIndex) {
+	switch (factoryIndex) {
+	case 0:
+	    return new Door(instanceURI);
+	case 1:
+	    return new HumiditySensor(instanceURI);
+	case 2:
+	    return new LightSensor(instanceURI);
+	case 3:
+	    return new MotionSensor(instanceURI);
+	case 4:
+	    return new SmokeSensor(instanceURI);
+	case 5:
+	    return new TemperatureSensor(instanceURI);
+	case 6:
+	    return new Window(instanceURI);
+	case 7:
+	    return new SafetyManagement(instanceURI);
+	}
 
-		return null;
+	return null;
     }
 }

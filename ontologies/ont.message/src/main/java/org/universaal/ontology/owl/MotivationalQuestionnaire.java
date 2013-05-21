@@ -15,75 +15,78 @@
  ******************************************************************************/
 package org.universaal.ontology.owl;
 
-import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.questionnaire.Questionnaire;
 import org.universaal.ontology.health.owl.MotivationalStatusType;
-import org.universaal.ontology.health.owl.Treatment;
 
 public class MotivationalQuestionnaire extends MotivationalMessage {
 
-//NAMESPACE & PROPERTIES
-  public static final String MY_URI = MessageOntology.NAMESPACE
-    + "MotivationalQuestionnaire";
-  /*public static final String PROP_HAS_QUESTIONNAIRE = MessageOntology.NAMESPACE
-    + "hasQuestionnaire";
-*/
-//CONSTRUCTORS
-  public MotivationalQuestionnaire () {
-    super();
-  }
-  
-  public MotivationalQuestionnaire (String uri) {
-    super(uri);
-  }
-  
-  public MotivationalQuestionnaire(String illness, String treatmentType, MotivationalStatusType motStatus, Object content){
-	  
-  }
-  
-  /*
-  public MotivationalQuestionnaire(User sender, User receiver, Questionnaire q, MotivationalStatusType ms, MotivationalMessageClassification mc,String mType, 
-		  int depth, Treatment t, String file_rute, Object content){
-	 // this.setTypeOfMessage("Questionnaire");
-	  super(sender, receiver, mc, depth, t, mType, ms, content,file_rute);
-	  
-	  
-	  this.setHasQuestionnaire(q);
-	  //this.setContent(q.getWrittenQuestionnaire(q));
-  }
-  */
-  
-  public MotivationalQuestionnaire(String illness, String ttype, MotivationalStatusType motStatus, MotivationalMessageClassification mtype, MotivationalMessageSubclassification msubtype, Questionnaire questionnaire){
-	  super(illness, ttype, motStatus, mtype, msubtype, questionnaire);
-	  //this.setHasQuestionnaire(questionnaire);
-	  this.setContent(questionnaire);
-  }
-  
-  public String getClassURI() {
-    return MY_URI;
-  }
-  public int getPropSerializationType(String arg0) {
-	  return PROP_SERIALIZATION_FULL;
-  }
+    // NAMESPACE & PROPERTIES
+    public static final String MY_URI = MessageOntology.NAMESPACE
+	    + "MotivationalQuestionnaire";
 
-  public boolean isWellFormed() {
-	return true 
-      //&& props.containsKey(PROP_HAS_QUESTIONNAIRE)
+    /*
+     * public static final String PROP_HAS_QUESTIONNAIRE =
+     * MessageOntology.NAMESPACE + "hasQuestionnaire";
+     */
+    // CONSTRUCTORS
+    public MotivationalQuestionnaire() {
+	super();
+    }
+
+    public MotivationalQuestionnaire(String uri) {
+	super(uri);
+    }
+
+    public MotivationalQuestionnaire(String illness, String treatmentType,
+	    MotivationalStatusType motStatus, Object content) {
+
+    }
+
+    /*
+     * public MotivationalQuestionnaire(User sender, User receiver,
+     * Questionnaire q, MotivationalStatusType ms,
+     * MotivationalMessageClassification mc,String mType, int depth, Treatment
+     * t, String file_rute, Object content){ //
+     * this.setTypeOfMessage("Questionnaire"); super(sender, receiver, mc,
+     * depth, t, mType, ms, content,file_rute);
+     * 
+     * 
+     * this.setHasQuestionnaire(q);
+     * //this.setContent(q.getWrittenQuestionnaire(q)); }
+     */
+
+    public MotivationalQuestionnaire(String illness, String ttype,
+	    MotivationalStatusType motStatus,
+	    MotivationalMessageClassification mtype,
+	    MotivationalMessageSubclassification msubtype,
+	    Questionnaire questionnaire) {
+	super(illness, ttype, motStatus, mtype, msubtype, questionnaire);
+	// this.setHasQuestionnaire(questionnaire);
+	this.setContent(questionnaire);
+    }
+
+    public String getClassURI() {
+	return MY_URI;
+    }
+
+    public int getPropSerializationType(String arg0) {
+	return PROP_SERIALIZATION_FULL;
+    }
+
+    public boolean isWellFormed() {
+	return true
+	// && props.containsKey(PROP_HAS_QUESTIONNAIRE)
 	;
-  }
+    }
 
-  		
+    // GETTERS & SETTERS
 
-//GETTERS & SETTERS
-  
-  /*
-  public void setHasQuestionnaire(Questionnaire questionnaire) {
-    if (questionnaire != null)
-      props.put(PROP_HAS_QUESTIONNAIRE, questionnaire);
-  }		
-
-  public Questionnaire getHasQuestionnaire() {
-	    return (Questionnaire)props.get(PROP_HAS_QUESTIONNAIRE);
-  }
-*/
+    /*
+     * public void setHasQuestionnaire(Questionnaire questionnaire) { if
+     * (questionnaire != null) props.put(PROP_HAS_QUESTIONNAIRE, questionnaire);
+     * }
+     * 
+     * public Questionnaire getHasQuestionnaire() { return
+     * (Questionnaire)props.get(PROP_HAS_QUESTIONNAIRE); }
+     */
 }

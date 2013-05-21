@@ -23,110 +23,112 @@ import org.universAAL.ontology.Shopping.ShoppingOntology;
 
 /**
  * @author dimokas
- *
+ * 
  */
 public class ShoppingList extends ManagedIndividual {
-	
-	public static final String MY_URI; 
-	public static final String PROP_NAME;
-	public static final String PROP_DATE;
-	public static final String PROP_ID;
-	public static final String PROP_HAS_FOODITEMS;
 
-	static{
-		MY_URI = ShoppingOntology.NAMESPACE + "ShoppingList";
-		PROP_NAME = ShoppingOntology.NAMESPACE + "shoppingListName";
-		PROP_DATE = ShoppingOntology.NAMESPACE + "shoppingListDate";
-		PROP_ID = ShoppingOntology.NAMESPACE + "shoppingListId";
-		PROP_HAS_FOODITEMS = ShoppingOntology.NAMESPACE + "FoodItems";
-	}
+    public static final String MY_URI;
+    public static final String PROP_NAME;
+    public static final String PROP_DATE;
+    public static final String PROP_ID;
+    public static final String PROP_HAS_FOODITEMS;
 
-	public static String[] getStandardPropertyURIs() {
-		//return new String[] {PROP_DEVICE_LOCATION, PROP_DEVICE_STATUS};
-		return new String[] {PROP_NAME,PROP_DATE};
-	}
-
-	public String getClassURI() {
-    	return MY_URI;
+    static {
+	MY_URI = ShoppingOntology.NAMESPACE + "ShoppingList";
+	PROP_NAME = ShoppingOntology.NAMESPACE + "shoppingListName";
+	PROP_DATE = ShoppingOntology.NAMESPACE + "shoppingListDate";
+	PROP_ID = ShoppingOntology.NAMESPACE + "shoppingListId";
+	PROP_HAS_FOODITEMS = ShoppingOntology.NAMESPACE + "FoodItems";
     }
-	
-	public ShoppingList(){
-		super();
-	}
-	
-	public ShoppingList(String uri) {
-		super(uri);				
-	}
-		
-	public ShoppingList(String uri, String name) {
-		super(uri);
-		if (name == null)
-			   throw new IllegalArgumentException();
-			
-		props.put(PROP_NAME, new String(name));
-	}
 
-	public ShoppingList(String uri, String name, String creationDate) {
-		super(uri);
-		if (name == null)
-			   throw new IllegalArgumentException();
-			
-		props.put(PROP_NAME, new String(name));
-		props.put(PROP_DATE, new String(creationDate));
-	}
+    public static String[] getStandardPropertyURIs() {
+	// return new String[] {PROP_DEVICE_LOCATION, PROP_DEVICE_STATUS};
+	return new String[] { PROP_NAME, PROP_DATE };
+    }
 
-	public ShoppingList(String uri, String name, String creationDate, int id) {
-		super(uri);
-		if (name == null)
-			   throw new IllegalArgumentException();
-			
-		props.put(PROP_NAME, new String(name));
-		props.put(PROP_DATE, new String(creationDate));
-		props.put(PROP_ID, new Integer(id));
-	}
+    public String getClassURI() {
+	return MY_URI;
+    }
 
-	public String getName() {
-		return (String) props.get(PROP_NAME);
-	}
-	public void setName(String name) {
-		if (name != null)
-		    props.put(PROP_NAME, name);
-	}
+    public ShoppingList() {
+	super();
+    }
 
-	public String getDate() {
-		return (String) props.get(PROP_DATE);
-	}
-	public void setDate(String date) {
-		if (date != null)
-		    props.put(PROP_DATE, date);
-	}
+    public ShoppingList(String uri) {
+	super(uri);
+    }
 
-	public Integer getId() {
-		return (Integer) props.get(PROP_ID);
-	}
-	public void setId(int id) {
-	    props.put(PROP_ID, new Integer(id));
-	}
+    public ShoppingList(String uri, String name) {
+	super(uri);
+	if (name == null)
+	    throw new IllegalArgumentException();
 
-	public void setFoodItems(ArrayList fi) {
-	    props.put(PROP_HAS_FOODITEMS, fi);
-	}
-	
-	public ArrayList getFoodItems(){
-		return (ArrayList)props.get(PROP_HAS_FOODITEMS);
-	}
-	
-	public int getPropSerializationType(String propURI) {
-		return PROP_SERIALIZATION_FULL;
-		//return (PROP_NAME.equals(propURI)) ? PROP_SERIALIZATION_REDUCED
-		//	: PROP_SERIALIZATION_FULL;
-	}
-		
-	public boolean isWellFormed() {
-		return true;
-		//return props.containsKey(PROP_NAME)
-		//&& props.containsKey(PROP_QUANTITY);
-	}
-	
-	
+	props.put(PROP_NAME, new String(name));
+    }
+
+    public ShoppingList(String uri, String name, String creationDate) {
+	super(uri);
+	if (name == null)
+	    throw new IllegalArgumentException();
+
+	props.put(PROP_NAME, new String(name));
+	props.put(PROP_DATE, new String(creationDate));
+    }
+
+    public ShoppingList(String uri, String name, String creationDate, int id) {
+	super(uri);
+	if (name == null)
+	    throw new IllegalArgumentException();
+
+	props.put(PROP_NAME, new String(name));
+	props.put(PROP_DATE, new String(creationDate));
+	props.put(PROP_ID, new Integer(id));
+    }
+
+    public String getName() {
+	return (String) props.get(PROP_NAME);
+    }
+
+    public void setName(String name) {
+	if (name != null)
+	    props.put(PROP_NAME, name);
+    }
+
+    public String getDate() {
+	return (String) props.get(PROP_DATE);
+    }
+
+    public void setDate(String date) {
+	if (date != null)
+	    props.put(PROP_DATE, date);
+    }
+
+    public Integer getId() {
+	return (Integer) props.get(PROP_ID);
+    }
+
+    public void setId(int id) {
+	props.put(PROP_ID, new Integer(id));
+    }
+
+    public void setFoodItems(ArrayList fi) {
+	props.put(PROP_HAS_FOODITEMS, fi);
+    }
+
+    public ArrayList getFoodItems() {
+	return (ArrayList) props.get(PROP_HAS_FOODITEMS);
+    }
+
+    public int getPropSerializationType(String propURI) {
+	return PROP_SERIALIZATION_FULL;
+	// return (PROP_NAME.equals(propURI)) ? PROP_SERIALIZATION_REDUCED
+	// : PROP_SERIALIZATION_FULL;
+    }
+
+    public boolean isWellFormed() {
+	return true;
+	// return props.containsKey(PROP_NAME)
+	// && props.containsKey(PROP_QUANTITY);
+    }
+
 }

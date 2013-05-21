@@ -1,55 +1,30 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
-  	<groupId>org.universAAL.ontology.services</groupId>
- 	<artifactId>ont.pom</artifactId>
-  	<relativePath>../ont.pom</relativePath>
-  	<version>1.3.1-SNAPSHOT</version>
-  </parent>
-  <groupId>org.universAAL.ontology</groupId>
-  <artifactId>ont.shopping</artifactId>
-  <version>1.3.1-SNAPSHOT</version>
-  <name>Food Shopping Ontology</name>
-  <description>Food Shopping Ontology</description>
-  <packaging>bundle</packaging>
-  <inceptionYear>2012</inceptionYear>  
-  	<dependencies>			
- 		<dependency>
-			<groupId>org.universAAL.support</groupId>
-			<artifactId>itests</artifactId>
-		</dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.universAAL.ontology.services</groupId>
+		<artifactId>ont.pom</artifactId>
+		<relativePath>../ont.pom</relativePath>
+		<version>1.3.2-SNAPSHOT</version>
+	</parent>
+	<groupId>org.universAAL.ontology</groupId>
+	<artifactId>ont.shopping</artifactId>
+	<version>1.3.2-SNAPSHOT</version>
+	<packaging>bundle</packaging>
+	<name>Food and Shopping Service - Ontology</name>
+	<description>Food Shopping Ontology</description>
+	<inceptionYear>2012</inceptionYear>
+	<dependencies>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.core</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.phWorld</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.data.representation.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.ui.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.service.core</artifactId>
-		</dependency>
-		<dependency>
-        	<groupId>org.universAAL.ontology</groupId>
-        	<artifactId>ont.phWorld</artifactId>
-       	</dependency>						
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
 		</dependency>
 	</dependencies>
-		
-    <build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -58,11 +33,13 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
-						<!-- <Bundle-Activator>org.universAAL.ontology.ShoppingActivator</Bundle-Activator> -->
+						<!--
+							<Bundle-Activator>org.universAAL.ontology.ShoppingActivator</Bundle-Activator>
+						-->
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package>org.universAAL.ontology.Shopping</Export-Package>
-            			<Private-Package>org.universAAL.ontology;-split-package:=first</Private-Package>
+						<Private-Package>org.universAAL.ontology;-split-package:=first</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -77,6 +54,6 @@
 					<skipAttach>false</skipAttach>
 				</configuration>
 			</plugin>
-		</plugins>		
+		</plugins>
 	</build>
 </project>

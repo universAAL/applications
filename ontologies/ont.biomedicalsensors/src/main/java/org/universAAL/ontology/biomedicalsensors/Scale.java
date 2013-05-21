@@ -18,7 +18,6 @@
  */
 package org.universAAL.ontology.biomedicalsensors;
 
-
 /**
  * Ontological enumeration of possible Scale (sensors).
  * 
@@ -27,42 +26,42 @@ package org.universAAL.ontology.biomedicalsensors;
  */
 public class Scale extends SensorType {
 
-	public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
-			+ "Scale";
+    public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
+	    + "Scale";
 
-	private static final String name = "Scale";
-	public static final Scale scale = new Scale();
+    private static final String name = "Scale";
+    public static final Scale scale = new Scale();
 
-	public String getClassURI() {
-		return MY_URI;
-	}
+    public String getClassURI() {
+	return MY_URI;
+    }
 
-	public static final Scale valueOf(String rqname) {
-		if (rqname == null)
-			return null;
+    public static final Scale valueOf(String rqname) {
+	if (rqname == null)
+	    return null;
 
-		if (rqname.startsWith(BiomedicalSensorsOntology.NAMESPACE))
-			rqname = rqname.substring(BiomedicalSensorsOntology.NAMESPACE
-					.length());
+	if (rqname.startsWith(BiomedicalSensorsOntology.NAMESPACE))
+	    rqname = rqname.substring(BiomedicalSensorsOntology.NAMESPACE
+		    .length());
 
-		if (rqname.equals(name))
-			return new Scale();
+	if (rqname.equals(name))
+	    return new Scale();
 
-		return null;
-	}
+	return null;
+    }
 
-	private Scale() {
-		super(BiomedicalSensorsOntology.NAMESPACE + name);
+    private Scale() {
+	super(BiomedicalSensorsOntology.NAMESPACE + name);
 
-	}
+    }
 
-	public int getPropSerializationType(String propURI) {
-		return PROP_SERIALIZATION_OPTIONAL;
+    public int getPropSerializationType(String propURI) {
+	return PROP_SERIALIZATION_OPTIONAL;
 
-	}
+    }
 
-	public boolean isWellFormed() {
-		return true;
-	}
+    public boolean isWellFormed() {
+	return true;
+    }
 
 }

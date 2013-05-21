@@ -1,53 +1,34 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
- 
-  <parent>
-  	<groupId>org.universAAL.ontology.services</groupId>
-  	<artifactId>ont.pom</artifactId>
-  	<relativePath>../ont.pom</relativePath>
-  	<version>1.3.1-SNAPSHOT</version>
-  </parent>
- 
-  <artifactId>ont.safety</artifactId> 
-  <name>Safety and Security Ontology</name>
-  <description>An ontology defining the most general concepts for Safety and Security at home</description>
-  <packaging>bundle</packaging>
-  <inceptionYear>2012</inceptionYear>  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.universAAL.ontology.services</groupId>
+		<artifactId>ont.pom</artifactId>
+		<version>1.3.2-SNAPSHOT</version>
+		<relativePath>../ont.pom</relativePath>
+	</parent>
+	<artifactId>ont.safety</artifactId>
+	<groupId>org.universAAL.ontology</groupId>
+	<version>1.3.2-SNAPSHOT</version>
+	<packaging>bundle</packaging>
+	<name>Safety and Security Service - Ontology</name>
+	<description>An ontology defining the most general concepts for Safety and Security at home</description>
+	<inceptionYear>2012</inceptionYear>
 	<dependencies>
- 		<dependency>
+		<dependency>
 			<groupId>org.universAAL.support</groupId>
 			<artifactId>itests</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.core</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.phWorld</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.data.representation.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.ui.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.service.core</artifactId>
-		</dependency>
-		<dependency>
-        	<groupId>org.universAAL.ontology</groupId>
-        	<artifactId>ont.phWorld</artifactId>
-       	</dependency>						
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
 		</dependency>
 	</dependencies>
-    <build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -56,11 +37,13 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
-						<!-- <Bundle-Activator>org.universAAL.ontology.SafetyActivator</Bundle-Activator>-->
+						<!--
+							<Bundle-Activator>org.universAAL.ontology.SafetyActivator</Bundle-Activator>
+						-->
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package>org.universAAL.ontology.Safety</Export-Package>
-            			<Private-Package>org.universAAL.ontology;-split-package:=first</Private-Package>
+						<Private-Package>org.universAAL.ontology;-split-package:=first</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -77,45 +60,22 @@
 			</plugin>
 		</plugins>
 	</build>
-<!-- 	
-		<repositories>
-			<repository>
-				<id>central</id>
-				<name>Central Maven Repository</name>
-				<url>http://repo1.maven.org/maven2</url>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-			</repository>
-			<repository>
-				<id>apache-snapshots</id>
-				<name>Apache Snapshots</name>
-				<url>http://people.apache.org/repo/m2-snapshot-repository</url>
-				<releases>
-					<enabled>false</enabled>
-				</releases>
-				<snapshots>
-					<updatePolicy>daily</updatePolicy>
-				</snapshots>
-			</repository>
-			<repository>
-				<id>uaal</id>
-				<name>universAAL Repositories</name>
-				<url>http://depot.universaal.org/maven-repo/releases/</url>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-			</repository>
-			<repository>
-				<id>uaal-snapshots</id>
-				<name>universAAL Snapshot Repositories</name>
-				<url>http://depot.universaal.org/maven-repo/snapshots/</url>
-				<releases>
-					<enabled>false</enabled>
-				</releases>
-			</repository>
+	<!--
+		<repositories> <repository> <id>central</id> <name>Central Maven
+		Repository</name> <url>http://repo1.maven.org/maven2</url> <snapshots>
+		<enabled>false</enabled> </snapshots> </repository> <repository>
+		<id>apache-snapshots</id> <name>Apache Snapshots</name>
+		<url>http://people.apache.org/repo/m2-snapshot-repository</url>
+		<releases> <enabled>false</enabled> </releases> <snapshots>
+		<updatePolicy>daily</updatePolicy> </snapshots> </repository>
+		<repository> <id>uaal</id> <name>universAAL Repositories</name>
+		<url>http://depot.universaal.org/maven-repo/releases/</url>
+		<snapshots> <enabled>false</enabled> </snapshots> </repository>
+		<repository> <id>uaal-snapshots</id> <name>universAAL Snapshot
+		Repositories</name>
+		<url>http://depot.universaal.org/maven-repo/snapshots/</url>
+		<releases> <enabled>false</enabled> </releases> </repository>
 		</repositories>
--->		
-	<groupId>org.universAAL.ontology</groupId>
-	<version>1.3.1-SNAPSHOT</version>
+	-->
+
 </project>

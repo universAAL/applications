@@ -5,160 +5,160 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 public class PluggedDevice {
-	/**
-	 * Minutes in a week
-	 */
-	private static int STACK_SIZE = 10;
-	private String name;
-	private Integer maxPwr;
-	private Integer minPwr;
-	private Integer onTh;
-	private Integer stdbyTh;
-	private Stack<Integer> measStack;
+    /**
+     * Minutes in a week
+     */
+    private static int STACK_SIZE = 10;
+    private String name;
+    private Integer maxPwr;
+    private Integer minPwr;
+    private Integer onTh;
+    private Integer stdbyTh;
+    private Stack<Integer> measStack;
 
-	public PluggedDevice(String name) {
-		this.name = name;
-		maxPwr = 0;
-		minPwr = 5000;
-		onTh = 0;
-		stdbyTh = 0;
-		measStack = new Stack<Integer>();
-		measStack.setSize(STACK_SIZE);
-	}
+    public PluggedDevice(String name) {
+	this.name = name;
+	maxPwr = 0;
+	minPwr = 5000;
+	onTh = 0;
+	stdbyTh = 0;
+	measStack = new Stack<Integer>();
+	measStack.setSize(STACK_SIZE);
+    }
 
-	public PluggedDevice(String name, Integer max, Integer min) {
-		this.name = name;
-		maxPwr = max;
-		minPwr = min;
-		onTh = 0;
-		stdbyTh = 0;
-		measStack = new Stack<Integer>();
-		measStack.setSize(STACK_SIZE);
-		ArrayList<String> al;
-		//al.
-		LinkedList ll;
-		
-	}
+    public PluggedDevice(String name, Integer max, Integer min) {
+	this.name = name;
+	maxPwr = max;
+	minPwr = min;
+	onTh = 0;
+	stdbyTh = 0;
+	measStack = new Stack<Integer>();
+	measStack.setSize(STACK_SIZE);
+	ArrayList<String> al;
+	// al.
+	LinkedList ll;
 
-	public void addValue(Integer val) {
-		measStack.add(0, val);
-		measStack.setSize(STACK_SIZE);
-	}
+    }
 
-	public void printMeasStack() {
-		System.out.print("Printing energy values stack:");
-		for (Integer integer : measStack) {
-			System.out.print(integer + "-");
-				
-			java.util.ArrayList<String> a;
-			Integer ab = 2;
-			Integer c = (int) (ab*0.2);
-			
-		}
-	}
+    public void addValue(Integer val) {
+	measStack.add(0, val);
+	measStack.setSize(STACK_SIZE);
+    }
 
-	public String toString() {
-		StringBuffer st = new StringBuffer();
-		st.append("Plugged device " + name + " maxPwr " + maxPwr + " minPwr "
-				+ minPwr + " onTh " + onTh + " stdbyTh " + stdbyTh);
-		return st.toString();
-	}
+    public void printMeasStack() {
+	System.out.print("Printing energy values stack:");
+	for (Integer integer : measStack) {
+	    System.out.print(integer + "-");
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+	    java.util.ArrayList<String> a;
+	    Integer ab = 2;
+	    Integer c = (int) (ab * 0.2);
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
+    }
 
-	/**
-	 * @return the maxPwr
-	 */
-	public Integer getMaxPwr() {
-		return maxPwr;
-	}
+    public String toString() {
+	StringBuffer st = new StringBuffer();
+	st.append("Plugged device " + name + " maxPwr " + maxPwr + " minPwr "
+		+ minPwr + " onTh " + onTh + " stdbyTh " + stdbyTh);
+	return st.toString();
+    }
 
-	/**
-	 * @param maxPwr
-	 *            the maxPwr to set
-	 */
-	public void setMaxPwr(Integer maxPwr) {
-		this.maxPwr = maxPwr;
-		recalculateThresholds();
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+	return name;
+    }
 
-	private void recalculateThresholds() {
-		int range = maxPwr - minPwr;
-		onTh = (Integer.valueOf((int) (range * 0.8)));
-		stdbyTh = onTh = (Integer.valueOf((int) (range * 0.2)));
-	}
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	/**
-	 * @return the minPwr
-	 */
-	public Integer getMinPwr() {
-		return minPwr;
-	}
+    /**
+     * @return the maxPwr
+     */
+    public Integer getMaxPwr() {
+	return maxPwr;
+    }
 
-	/**
-	 * @param minPwr
-	 *            the minPwr to set
-	 */
-	public void setMinPwr(Integer minPwr) {
-		this.minPwr = minPwr;
-	}
+    /**
+     * @param maxPwr
+     *            the maxPwr to set
+     */
+    public void setMaxPwr(Integer maxPwr) {
+	this.maxPwr = maxPwr;
+	recalculateThresholds();
+    }
 
-	/**
-	 * @return the onTh
-	 */
-	public Integer getOnTh() {
-		return onTh;
-	}
+    private void recalculateThresholds() {
+	int range = maxPwr - minPwr;
+	onTh = (Integer.valueOf((int) (range * 0.8)));
+	stdbyTh = onTh = (Integer.valueOf((int) (range * 0.2)));
+    }
 
-	/**
-	 * @param onTh
-	 *            the onTh to set
-	 */
-	public void setOnTh(Integer onTh) {
-		this.onTh = onTh;
-	}
+    /**
+     * @return the minPwr
+     */
+    public Integer getMinPwr() {
+	return minPwr;
+    }
 
-	/**
-	 * @return the stdbyTh
-	 */
-	public Integer getStdbyTh() {
-		return stdbyTh;
-	}
+    /**
+     * @param minPwr
+     *            the minPwr to set
+     */
+    public void setMinPwr(Integer minPwr) {
+	this.minPwr = minPwr;
+    }
 
-	/**
-	 * @param stdbyTh
-	 *            the stdbyTh to set
-	 */
-	public void setStdbyTh(Integer stdbyTh) {
-		this.stdbyTh = stdbyTh;
-	}
+    /**
+     * @return the onTh
+     */
+    public Integer getOnTh() {
+	return onTh;
+    }
 
-	/**
-	 * @return the measStack
-	 */
-	public Stack<Integer> getMeasStack() {
-		return measStack;
-	}
+    /**
+     * @param onTh
+     *            the onTh to set
+     */
+    public void setOnTh(Integer onTh) {
+	this.onTh = onTh;
+    }
 
-	/**
-	 * @param measStack
-	 *            the measStack to set
-	 */
-	public void setMeasStack(Stack<Integer> measStack) {
-		this.measStack = measStack;
-	}
+    /**
+     * @return the stdbyTh
+     */
+    public Integer getStdbyTh() {
+	return stdbyTh;
+    }
+
+    /**
+     * @param stdbyTh
+     *            the stdbyTh to set
+     */
+    public void setStdbyTh(Integer stdbyTh) {
+	this.stdbyTh = stdbyTh;
+    }
+
+    /**
+     * @return the measStack
+     */
+    public Stack<Integer> getMeasStack() {
+	return measStack;
+    }
+
+    /**
+     * @param measStack
+     *            the measStack to set
+     */
+    public void setMeasStack(Stack<Integer> measStack) {
+	this.measStack = measStack;
+    }
 
 }

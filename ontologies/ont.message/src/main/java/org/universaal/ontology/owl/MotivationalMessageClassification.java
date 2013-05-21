@@ -18,81 +18,91 @@ package org.universaal.ontology.owl;
 import org.universAAL.middleware.owl.ManagedIndividual;
 
 public class MotivationalMessageClassification extends ManagedIndividual {
-  public static final String MY_URI = MessageOntology.NAMESPACE
-    + "MotivationalMessageClassification";
+    public static final String MY_URI = MessageOntology.NAMESPACE
+	    + "MotivationalMessageClassification";
 
-  public static final int EDUCATIONAL = 0;
-  public static final int REMINDER = 1;
-  public static final int REWARD = 2;
-  public static final int PERSONALIZED_FEEDBACK = 3;
-  public static final int TEST = 4;
-  public static final int INQUIRY = 5;
-  public static final int NOTIFICATION= 6;
-  public static final int EMOTION= 7;
+    public static final int EDUCATIONAL = 0;
+    public static final int REMINDER = 1;
+    public static final int REWARD = 2;
+    public static final int PERSONALIZED_FEEDBACK = 3;
+    public static final int TEST = 4;
+    public static final int INQUIRY = 5;
+    public static final int NOTIFICATION = 6;
+    public static final int EMOTION = 7;
 
-  private static final String[] names = {
-    "educational","reminder","reward","personalizedFeedback", "test", "inquiry", "notification", "emotion" };
+    private static final String[] names = { "educational", "reminder",
+	    "reward", "personalizedFeedback", "test", "inquiry",
+	    "notification", "emotion" };
 
-  public static final MotivationalMessageClassification educational = new MotivationalMessageClassification(EDUCATIONAL);
-  public static final MotivationalMessageClassification reminder = new MotivationalMessageClassification(REMINDER);
-  public static final MotivationalMessageClassification reward = new MotivationalMessageClassification(REWARD);
-  public static final MotivationalMessageClassification personalizedFeedback = new MotivationalMessageClassification(PERSONALIZED_FEEDBACK);
-  public static final MotivationalMessageClassification test = new MotivationalMessageClassification(TEST);
-  public static final MotivationalMessageClassification inquiry = new MotivationalMessageClassification(INQUIRY);
-  public static final MotivationalMessageClassification notification = new MotivationalMessageClassification(NOTIFICATION);
-  public static final MotivationalMessageClassification emotion = new MotivationalMessageClassification(EMOTION);
-  
+    public static final MotivationalMessageClassification educational = new MotivationalMessageClassification(
+	    EDUCATIONAL);
+    public static final MotivationalMessageClassification reminder = new MotivationalMessageClassification(
+	    REMINDER);
+    public static final MotivationalMessageClassification reward = new MotivationalMessageClassification(
+	    REWARD);
+    public static final MotivationalMessageClassification personalizedFeedback = new MotivationalMessageClassification(
+	    PERSONALIZED_FEEDBACK);
+    public static final MotivationalMessageClassification test = new MotivationalMessageClassification(
+	    TEST);
+    public static final MotivationalMessageClassification inquiry = new MotivationalMessageClassification(
+	    INQUIRY);
+    public static final MotivationalMessageClassification notification = new MotivationalMessageClassification(
+	    NOTIFICATION);
+    public static final MotivationalMessageClassification emotion = new MotivationalMessageClassification(
+	    EMOTION);
 
-  private int order;
+    private int order;
 
-  private MotivationalMessageClassification(int order) {
-    super(MessageOntology.NAMESPACE + names[order]);
-    this.order = order;
-  }
+    private MotivationalMessageClassification(int order) {
+	super(MessageOntology.NAMESPACE + names[order]);
+	this.order = order;
+    }
 
-  public int getPropSerializationType(String propURI) {
-    return PROP_SERIALIZATION_OPTIONAL;
-  }
+    public int getPropSerializationType(String propURI) {
+	return PROP_SERIALIZATION_OPTIONAL;
+    }
 
-  public boolean isWellFormed() {
-    return true;
-  }
+    public boolean isWellFormed() {
+	return true;
+    }
 
-  public String name() {
-    return names[order];
-  }
+    public String name() {
+	return names[order];
+    }
 
-  public int ord() {
-    return order;
-  }
+    public int ord() {
+	return order;
+    }
 
-  public String getClassURI() {
-    return MY_URI;
-  }
+    public String getClassURI() {
+	return MY_URI;
+    }
 
-  public static MotivationalMessageClassification getMotivationalMessageClassificationByOrder(int order) {
-    switch (order) {
-      case EDUCATIONAL:
-        return educational;
-      case REMINDER:
-        return reminder;
-      case REWARD:
-        return reward;
-      case PERSONALIZED_FEEDBACK:
-        return personalizedFeedback;
-      case TEST:
-          return test;
-      case INQUIRY:
-          return inquiry;
-      case NOTIFICATION:
-          return notification;
-      case EMOTION:
-          return emotion;
-    default:
-      return null;    }
-  }
+    public static MotivationalMessageClassification getMotivationalMessageClassificationByOrder(
+	    int order) {
+	switch (order) {
+	case EDUCATIONAL:
+	    return educational;
+	case REMINDER:
+	    return reminder;
+	case REWARD:
+	    return reward;
+	case PERSONALIZED_FEEDBACK:
+	    return personalizedFeedback;
+	case TEST:
+	    return test;
+	case INQUIRY:
+	    return inquiry;
+	case NOTIFICATION:
+	    return notification;
+	case EMOTION:
+	    return emotion;
+	default:
+	    return null;
+	}
+    }
 
-  public static final MotivationalMessageClassification valueOf(String name) {
+    public static final MotivationalMessageClassification valueOf(String name) {
 	if (name == null)
 	    return null;
 
@@ -104,5 +114,5 @@ public class MotivationalMessageClassification extends ManagedIndividual {
 		return getMotivationalMessageClassificationByOrder(i);
 
 	return null;
-  }
+    }
 }

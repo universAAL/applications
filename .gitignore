@@ -186,6 +186,7 @@ nutritional/nutritional.uiclient.basic/.classpath
 nutritional/nutritional.uiclient.basic/.project
 nutritional/nutritional.uiclient.basic/.settings
 nutritional/nutritional.uiclient.basic/target
+ontologies/ont.aalfficiencyscores/target
 ontologies/ont.activity/.classpath
 ontologies/ont.activity/.project
 ontologies/ont.activity/.settings
@@ -202,6 +203,9 @@ ontologies/ont.biomedicalsensors/.classpath
 ontologies/ont.biomedicalsensors/.project
 ontologies/ont.biomedicalsensors/.settings
 ontologies/ont.biomedicalsensors/target
+ontologies/ont.drools/target
+ontologies/ont.fitbitdata/target
+ontologies/ont.ltba/target
 ontologies/ont.medication/*.iml
 ontologies/ont.medication/.classpath
 ontologies/ont.medication/.project
@@ -211,6 +215,7 @@ ontologies/ont.message/.classpath
 ontologies/ont.message/.project
 ontologies/ont.message/.settings
 ontologies/ont.message/target
+ontologies/ont.nutrition/target
 ontologies/ont.pom/.project
 ontologies/ont.pom/.settings
 ontologies/ont.pom/target
@@ -218,6 +223,15 @@ ontologies/ont.questionnaireStrategy/.classpath
 ontologies/ont.questionnaireStrategy/.project
 ontologies/ont.questionnaireStrategy/.settings
 ontologies/ont.questionnaireStrategy/target
+ontologies/ont.readenergy/target
+ontologies/ont.safety/.classpath
+ontologies/ont.safety/.project
+ontologies/ont.safety/.settings
+ontologies/ont.safety/target
+ontologies/ont.shopping/.classpath
+ontologies/ont.shopping/.project
+ontologies/ont.shopping/.settings
+ontologies/ont.shopping/target
 personal_safety/personal_safety.pom/*.project
 personal_safety/personal_safety.pom/*.settings
 personal_safety/personal_safety.pom/target

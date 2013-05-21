@@ -25,16 +25,16 @@ import org.universAAL.middleware.owl.OntologyManagement;
 
 import org.universAAL.ontology.fitbitdata.FitbitdataOntology;
 
-public class FitbitDataActivator implements ModuleActivator{
-	static ModuleContext context = null;
-    private FitbitdataOntology aalfficiency = new FitbitdataOntology();
-	
-	public void start(ModuleContext arg0) throws Exception {
-		context = arg0;
-		OntologyManagement.getInstance().register(aalfficiency);
-	}
+public class FitbitDataActivator implements ModuleActivator {
 
-	public void stop(ModuleContext arg0) throws Exception {
-		OntologyManagement.getInstance().unregister(aalfficiency);
-	}
+    private FitbitdataOntology aalfficiency = new FitbitdataOntology();
+
+    public void start(ModuleContext mc) throws Exception {
+
+	OntologyManagement.getInstance().register(mc, aalfficiency);
+    }
+
+    public void stop(ModuleContext mc) throws Exception {
+	OntologyManagement.getInstance().unregister(mc, aalfficiency);
+    }
 }

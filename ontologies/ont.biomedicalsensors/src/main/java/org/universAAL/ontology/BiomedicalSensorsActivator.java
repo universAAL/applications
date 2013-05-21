@@ -29,15 +29,15 @@ import org.universAAL.ontology.biomedicalsensors.BiomedicalSensorsOntology;
 
 public class BiomedicalSensorsActivator implements ModuleActivator {
 
-	BiomedicalSensorsOntology ont = new BiomedicalSensorsOntology();
+    BiomedicalSensorsOntology ont = new BiomedicalSensorsOntology();
 
-	public void start(ModuleContext context) throws Exception {
+    public void start(ModuleContext mcontext) throws Exception {
 
-		OntologyManagement.getInstance().register(ont);
-	}
+	OntologyManagement.getInstance().register(mcontext, ont);
+    }
 
-	public void stop(ModuleContext context) throws Exception {
-		OntologyManagement.getInstance().unregister(ont);
-	}
+    public void stop(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().unregister(mcontext, ont);
+    }
 
 }

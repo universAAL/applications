@@ -133,8 +133,8 @@ public class ActivityReportType extends ManagedIndividual {
 	// As commented above, currently enumerations do not support properties in
 	// our code (I have to check this later). This method prevents anyone from
 	// adding properties manually later to individuals.
-	public void setProperty(String propURI, Object o) {
-		// do nothing
-	}
+    // public void setProperty(String propURI, Object o) {
+    //		
+    // }
 
 }
