@@ -1,0 +1,65 @@
+A The battery compartment lid is located on the underside of the unit. Open the lid by sliding the tab back and lifting the lid after the tab clears the stop. Plug the battery in. Notice the design of the plug allows it to enter in only one direction. Make sure it is securely plugged in.
+
+
+
+B. Now plug the AC adapter into the unit and connect to an electrical outlet. 
+
+C. Unplug the AC adapter. Only the colon will be visible in the display and it will be flashing. This verifies the battery is operational in case of a power outage. 
+
+D. Plug the AC adapter back in and replace the battery compartment lid.
+
+
+2. Setting Time of Day 
+
+A. Set the time of day by pressing and holding down the TIME button with one finger while another finger presses the HOUR button until it advances to the correct hour.
+
+B. Continue to hold the TIME button down while you advance the minutes with the MIN button.
+
+C. Keep the TIME button down while you press AM-PM to select the time of day.
+
+D. A PM hour is shown by the single bright dot to the upper right of the clock. An AM hour is identified when this dot is off.
+The clock’s time is set as soon as the TIME button is released.
+
+3. Setting Dispensing Time 
+
+Setting the alarms is very similar to setting the clock!
+A. If one or more of the medications is to be taken at different times in a 24- hour period, you will need to use more than one alarm. To set the first of four possible alarms, press and hold down the alarm 1 button. Continue to hold the alarm 1 button down while advancing first the HOUR and then the MIN buttons. You will need to use another finger to advance the HOUR and then MIN buttons.
+
+B. Press AM-PM to set an AM or PM time.
+
+C. Repeat these steps for setting alarms 2 through 4 for the next three deliveries of oral medication if needed.
+
+You can review your dispensing times by pressing the individual alarm buttons. Remember: an alarm is set when the light above the alarm button is lit. Pressing the alarm button will toggle the alarm from on to off, shown by the light above the alarm going on and off. If you want the alarm to be set, the light must be ON when you release the button.
+Double check your alarms. If you have a two-times-a-day regimen, you should see two lights on above the alarm buttons.
+
+
+4. Loading Medication 
+
+A. To open, first use the key to unlock the lid. Note: the key cannot be removed in the unlocked position. Next, rotate the lid counterclockwise slightly and easily lift the lid off. With the AC adapter plugged into both your electrical wall socket and the unit, press the test button. This will cause the tray to rotate and the alarm to sound. Slide the "T" bar forward to the "X" to stop the alarm from sounding.
+
+B. The medication for each dosage should be placed in 28 of the 29 cups of the removable tray. Leave the first cup empty to serve as the marker and first cup that appears at the dispensing bay when MedReady is activated. To conform to any regimen, a different cocktail or combination of medications may be placed in each cup. The medication should be distributed in a counterclockwise direction since the tray rotates clockwise. Using the included filling ring makes this step easier!
+
+C. In some cases the tray may be filled with medication when it is removed from the unit. After following the instructions in step B above, place the tray with the empty cup to the right of the of the "T" bar. Press the test button to ensure the blank is in the displayed position and again slide the "T" bar forward to the "X" position to stop the alarm from sounding. Sometimes it may be necessary to repeat this operation until the empty cup is in the dispensing bay position. When you put the lid back on the empty cup should be showing when the slide is moved.
+
+
+5. Locking the Lid 
+
+After the clock and dispensing times are set and the medications are organized in their 
+cups, replace the lid over the tray and rotate it slightly clockwise to latch. Use the key
+to lock the lid in place.
+
+
+6. IMPORTANT POINTS
+
+A. Power supply. You should use the AC wall power supply whenever you can. The back-up batteries should only be used for short-term power outages and short term traveling. When you get to your destination, please use the AC wall socket plug to power the unit.
+
+B. Checking the Alarm. To check the power supply and ensure that MedReady is functioning, remove the lid and press the ALARM TEST button. The alarm will sound until you slide the "T" bar up to the "X." Remember the tray will move forward when you perform this check
+
+C. The 1650 series with internal modem requires a connection to a conventional telephone line and an ongoing monthly charge in order to enable the alerting and compliance reporting features.  No long term contract is required and you may cancel at any time.
+
+
+7. WARNING 
+
+NITROGLYCERINE SHOULD NOT GO IN THE DEVICE
+KEEP OUT OF REACH OF CHILDREN
+PLEASE KEEP DEVICE CLEAN
