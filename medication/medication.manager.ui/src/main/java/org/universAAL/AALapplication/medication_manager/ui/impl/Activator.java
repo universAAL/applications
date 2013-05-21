@@ -24,6 +24,10 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Persis
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
+import java.io.File;
+
+import static java.io.File.*;
+
 
 public class Activator implements BundleActivator {
 
@@ -35,7 +39,7 @@ public class Activator implements BundleActivator {
     mc = uAALBundleContainer.THE_CONTAINER
         .registerModule(new Object[]{bundleContext});
     context = bundleContext;
-    ReminderDialogProvider reminderDialogProvider= new ReminderDialogProvider(mc);
+    ReminderDialogProvider reminderDialogProvider = new ReminderDialogProvider(mc);
     medicationManagerServiceButtonProvider = new MedicationManagerServiceButtonProvider(mc);
     RequestMedicationInfoDialogProvider requestMedicationInfoDialogProvider = new RequestMedicationInfoDialogProvider(mc);
     MainMedicationManagerMenu mainMedicationManagerMenu = new MainMedicationManagerMenu(mc);
@@ -72,21 +76,47 @@ public class Activator implements BundleActivator {
     return persistentService;
   }
 
+  public static File getMedicationManagerConfigurationDirectory() {
+
+    String pathToMedicationManagerConfigurationDirectory;
+    try {
+      File currentDir = new File(".");
+      String pathToCurrentDir = currentDir.getCanonicalPath();
+      String bundlesConfigurationLocationProperty = System.getProperty("bundles.configuration.location");
+      pathToMedicationManagerConfigurationDirectory = pathToCurrentDir + separator +
+          bundlesConfigurationLocationProperty + separator + "medication_manager";
+    } catch (Exception e) {
+      throw new MedicationManagerUIException(e);
+    }
+
+    File directory = new File(pathToMedicationManagerConfigurationDirectory);
+    if (!directory.exists()) {
+      throw new MedicationManagerUIException("The directory does not exists:" + directory);
+    }
+
+    if (!directory.isDirectory()) {
+      throw new MedicationManagerUIException("The following file:" + directory + " is not a valid directory");
+    }
+
+    return directory;
+  }
+
+
   public static void validateParameter(int parameter, String parameterName) {
 
-      if (parameter <= 0) {
-        throw new MedicationManagerUIException("The parameter : " +
-            parameterName + " must be positive number");
-      }
-
+    if (parameter <= 0) {
+      throw new MedicationManagerUIException("The parameter : " +
+          parameterName + " must be positive number");
     }
 
-    public static void validateParameter(Object parameter, String parameterName) {
+  }
 
-      if (parameter == null) {
-        throw new MedicationManagerUIException("The parameter : " + parameterName + " cannot be null");
-      }
+  public static void validateParameter(Object parameter, String parameterName) {
 
+    if (parameter == null) {
+      throw new MedicationManagerUIException("The parameter : " + parameterName + " cannot be null");
     }
+
+  }
 
 }

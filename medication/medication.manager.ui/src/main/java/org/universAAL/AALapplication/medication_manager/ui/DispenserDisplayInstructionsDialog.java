@@ -17,7 +17,14 @@
 
 package org.universAAL.AALapplication.medication_manager.ui;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.ui.impl.Activator;
 import org.universAAL.AALapplication.medication_manager.ui.impl.Log;
+import org.universAAL.AALapplication.medication_manager.ui.impl.MedicationManagerUIException;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
@@ -31,6 +38,10 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.profile.User;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Locale;
 
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
@@ -38,6 +49,7 @@ import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator
 public class DispenserDisplayInstructionsDialog extends UICaller {
 
   private static final String DISPENSER_DISPLAY_INSTRUCTIONS_FORM = "DispenserDisplayInstructionsForm";
+  private static final String DISPENSER_INSTRUCTIONS = "dispenser_instructions";
 
   public DispenserDisplayInstructionsDialog(ModuleContext context) {
     super(context);
@@ -56,7 +68,7 @@ public class DispenserDisplayInstructionsDialog extends UICaller {
     // TODO Auto-generated method stub
   }
 
-  public void showDialog(User inputUser, String message) {
+  public void showDialog(User inputUser) {
 
     try {
       validateParameter(inputUser, "inputUser");
@@ -65,9 +77,7 @@ public class DispenserDisplayInstructionsDialog extends UICaller {
 
       Form f = Form.newDialog("Medication Manager UI", new Resource());
       //start of the form model
-      if (message == null) {
-        message = "Problem occurred";
-      }
+      String message = getInstructionText(inputUser);
       new SimpleOutput(f.getIOControls(), null, null, message);
       //...
       new Submit(f.getSubmits(), new Label("Done", null), DISPENSER_DISPLAY_INSTRUCTIONS_FORM);
@@ -77,6 +87,43 @@ public class DispenserDisplayInstructionsDialog extends UICaller {
     } catch (Exception e) {
       Log.error(e, "Error while trying to show dialog", getClass());
     }
+  }
+
+  private String getInstructionText(User inputUser) throws IOException {
+    PersistentService persistentService = getPersistentService();
+    PersonDao personDao = persistentService.getPersonDao();
+    Person patient = personDao.findPersonByPersonUri(inputUser.getURI());
+    DispenserDao dispenserDao = persistentService.getDispenserDao();
+    Dispenser dispenser = dispenserDao.findByPerson(patient);
+    String instructionsFile = dispenser.getInstructionsFileName();
+
+    return getDispenserInstructions(instructionsFile);
+  }
+
+  private String getDispenserInstructions(String instructionsFile) throws IOException {
+    File medicationManagerConfigurationDirectory = Activator.getMedicationManagerConfigurationDirectory();
+    File dispenserInstructionDir = new File(medicationManagerConfigurationDirectory, DISPENSER_INSTRUCTIONS);
+    if (!dispenserInstructionDir.exists()) {
+      throw new MedicationManagerUIException("Missing " + DISPENSER_INSTRUCTIONS + " directory");
+    }
+
+    if (!dispenserInstructionDir.isDirectory()) {
+      throw new MedicationManagerUIException("The " + DISPENSER_INSTRUCTIONS + " is not valid directory");
+    }
+
+    File file = new File(dispenserInstructionDir, instructionsFile);
+
+    FileReader fileReader = new FileReader(file);
+    BufferedReader br = new BufferedReader(fileReader);
+    StringBuffer sb = new StringBuffer();
+    String line = br.readLine();
+    while (line != null) {
+      sb.append(line);
+      sb.append('\n');
+      line = br.readLine();
+    }
+
+    return sb.toString();
   }
 
 
