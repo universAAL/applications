@@ -280,6 +280,7 @@ public final class PrescriptionParser {
 
     boolean missedIntakeAlert = getBoolean(nodeList, "missedIntakeAlert");
     boolean newDoseAlert = getBoolean(nodeList, "newDoseAlert");
+    boolean shortageAlert = getBoolean(nodeList, "shortageAlert");
 
     Node mealRelationNode = getNode(nodeList, "meal_relation");
 
@@ -291,7 +292,7 @@ public final class PrescriptionParser {
 
     Set<IntakeDTO> intakeDTOSet = getIntakeSet(node.getChildNodes());
 
-    return new MedicineDTO(name, startDate, days, missedIntakeAlert, newDoseAlert, description,
+    return new MedicineDTO(name, startDate, days, missedIntakeAlert, newDoseAlert, shortageAlert, description,
         sideffects, incompliances, mealRelationDTO, intakeDTOSet);
 
   }

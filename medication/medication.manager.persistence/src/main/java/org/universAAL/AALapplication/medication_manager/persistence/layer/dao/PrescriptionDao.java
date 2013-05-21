@@ -332,8 +332,9 @@ public final class PrescriptionDao extends AbstractDao {
                                 int prescriptionId, int id) throws SQLException {
 
     String sql = "INSERT INTO MEDICATION_MANAGER.TREATMENT " +
-        "(ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, MISSED_INTAKE_ALERT, NEW_DOSE_ALERT) " +
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        "(ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, " +
+        "MISSED_INTAKE_ALERT, NEW_DOSE_ALERT, SHORTAGE_ALERT) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     PreparedStatement ps = null;
 
@@ -360,6 +361,7 @@ public final class PrescriptionDao extends AbstractDao {
     ps.setString(6, TreatmentStatus.ACTIVE.getValue());
     ps.setBoolean(7, med.isMissedIntakeAlert());
     ps.setBoolean(8, med.isNewDoseAlert());
+    ps.setBoolean(9, med.isShortageAlert());
 
     ps.execute();
 
@@ -552,6 +554,7 @@ public final class PrescriptionDao extends AbstractDao {
         getDays(startDate, tr.getEndDate()),
         tr.isMissedIntakeAlert(),
         tr.isNewDoseAlert(),
+        tr.isShortageAlert(),
         medicine.getMedicineInfo(),
         medicine.getMedicineSideEffects(),
         medicine.getIncompliances(),

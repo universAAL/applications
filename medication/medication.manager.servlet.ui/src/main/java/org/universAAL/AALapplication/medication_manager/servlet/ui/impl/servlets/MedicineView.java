@@ -29,6 +29,7 @@ public final class MedicineView {
   private String unit;
   private boolean missedIntakeAlert;
   private boolean newDoseAlert;
+  private boolean shortageAlert;
 
   public MedicineView(int medicineId) {
     this.medicineId = medicineId;
@@ -138,6 +139,14 @@ public final class MedicineView {
 
   public void setNewDoseAlert(boolean newDoseAlert) {
     this.newDoseAlert = newDoseAlert;
+  }
+
+  public boolean isShortageAlert() {
+    return shortageAlert;
+  }
+
+  public void setShortageAlert(boolean shortageAlert) {
+    this.shortageAlert = shortageAlert;
   }
 
   public void fillIntakeDTOSet(int dose, String[] hoursArray, String unit) {
@@ -258,6 +267,9 @@ public final class MedicineView {
         ", isNew=" + isNew +
         ", dose=" + dose +
         ", unit='" + unit + '\'' +
+        ", missedIntakeAlert=" + missedIntakeAlert +
+        ", newDoseAlert=" + newDoseAlert +
+        ", shortageAlert=" + shortageAlert +
         '}';
   }
 }

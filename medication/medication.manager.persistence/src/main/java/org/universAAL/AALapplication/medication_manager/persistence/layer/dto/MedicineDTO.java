@@ -38,6 +38,7 @@ public final class MedicineDTO {
   private final Date treatmentEndDate;
   private final boolean missedIntakeAlert;
   private final boolean newDoseAlert;
+  private final boolean shortageAlert;
   private final String description;
   private final String sideeffects;
   private final String incompliances;
@@ -45,7 +46,7 @@ public final class MedicineDTO {
   private final Set<IntakeDTO> intakeDTOSet;
 
   public MedicineDTO(String name, Date startDate, int days, boolean missedIntakeAlert, boolean newDoseAlert,
-                     String description, String sideeffects, String incompliances,
+                     boolean shortageAlert, String description, String sideeffects, String incompliances,
                      MealRelationDTO mealRelationDTO, Set<IntakeDTO> intakeDTOSet) {
 
     validateParameter(name, "name");
@@ -59,6 +60,7 @@ public final class MedicineDTO {
     this.days = days;
     this.missedIntakeAlert = missedIntakeAlert;
     this.newDoseAlert = newDoseAlert;
+    this.shortageAlert = shortageAlert;
     this.description = description;
     this.sideeffects = sideeffects;
     this.incompliances = incompliances;
@@ -108,6 +110,10 @@ public final class MedicineDTO {
 
   public boolean isNewDoseAlert() {
     return newDoseAlert;
+  }
+
+  public boolean isShortageAlert() {
+    return shortageAlert;
   }
 
   public String getDescription() {
