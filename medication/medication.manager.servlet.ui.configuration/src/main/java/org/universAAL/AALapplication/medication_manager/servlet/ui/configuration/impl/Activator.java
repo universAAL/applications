@@ -11,9 +11,9 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.h
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.DebugWriterDummy;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.DebugWriterImpl;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayErrorPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayLoginHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplaySelectConfigActionHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.LoginServlet;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
 import org.universAAL.middleware.container.ModuleContext;
@@ -23,6 +23,7 @@ import javax.servlet.ServletException;
 import java.io.File;
 
 import static java.io.File.*;
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -31,24 +32,6 @@ public final class Activator implements BundleActivator {
 
   public static ModuleContext mc;
   public static BundleContext bundleContext;
-
-  private static final String JS_ALIAS = "/configuration/js";
-  private static final String CSS_ALIAS = "/configuration/css";
-
-  public static final String LOGGED_DOCTOR = "Doctor";
-  public static final String LOGIN_HTML_SERVLET_ALIAS = "/configuration/login.html";
-  public static final String LOGIN_SERVLET_ALIAS = "/configuration/login";
-  public static final String LOGIN_ERROR = "LOGIN_ERROR";
-  public static final String LOGIN_FILE_NAME = "login.html";
-  public static final String ERROR_FILE_NAME = "error.html";
-  public static final String EMPTY = "";
-  public static final String CANCEL = "cancel";
-  public static final String TRUE = "true";
-  public static final String PATIENT = "PATIENT";
-  public static final String ERROR_PAGE_SERVLET_ALIAS = "/configuration/error";
-  public static final Pair<String> EMPTY_PAIR = new Pair<String>(null, null);
-
-  public static final String ERROR = "ERROR";
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
@@ -75,6 +58,7 @@ public final class Activator implements BundleActivator {
     service.unregister(LOGIN_SERVLET_ALIAS);
     service.unregister(LOGIN_HTML_SERVLET_ALIAS);
     service.unregister(ERROR_PAGE_SERVLET_ALIAS);
+    service.unregister(CONFIG_ACTION_SELECTOR);
     service.unregister(JS_ALIAS);
     service.unregister(CSS_ALIAS);
 
@@ -107,14 +91,21 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(ERROR_PAGE_SERVLET_ALIAS, displayErrorPageWriterServlet, null, null);
     httpService.registerResources(JS_ALIAS, "/configuration/js", null);
     httpService.registerResources(CSS_ALIAS, "/configuration/css", null);
+    DisplaySelectConfigActionHtmlWriterServlet displaySelectConfigActionHtmlWriterServlet =
+        new DisplaySelectConfigActionHtmlWriterServlet(sessionTracking);
+    httpService.registerServlet(CONFIG_ACTION_SELECTOR, displaySelectConfigActionHtmlWriterServlet, null, null);
 
 
     //set servlets
 
     displayServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
-    loginServlet.setDisplayServlet(displayServlet);
+    loginServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
     loginServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    loginServlet.setDisplaySelectConfigActionHtmlWriterServlet(displaySelectConfigActionHtmlWriterServlet);
+
+    displaySelectConfigActionHtmlWriterServlet.setDisplayServlet(displayServlet);
+    displaySelectConfigActionHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
   }
 

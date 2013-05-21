@@ -6,6 +6,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.h
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.DisplayLoginScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ public final class DisplayLoginHtmlWriterServlet extends BaseHtmlWriterServlet {
   private final Object lock = new Object();
 
   public DisplayLoginHtmlWriterServlet(SessionTracking sessionTracking) {
-    super(LOGIN_FILE_NAME, sessionTracking);
+    super(Util.LOGIN_FILE_NAME, sessionTracking);
   }
 
   @Override
@@ -30,12 +31,12 @@ public final class DisplayLoginHtmlWriterServlet extends BaseHtmlWriterServlet {
     synchronized (lock) {
       try {
         Session session = getSession(req, resp, getClass());
-        String loggingError = (String) session.getAttribute(LOGIN_ERROR);
+        String loggingError = (String) session.getAttribute(Util.LOGIN_ERROR);
         boolean errorLogging = false;
         if (loggingError != null) {
           errorLogging = true;
         }
-        session.removeAttribute(LOGIN_ERROR);
+        session.removeAttribute(Util.LOGIN_ERROR);
 
         debugSessions(session.getId(), "End of the servlet doGet/doPost method", getClass());
 

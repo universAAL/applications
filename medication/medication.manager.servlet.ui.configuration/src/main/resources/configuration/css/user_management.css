@@ -1,0 +1,15 @@
+h2 span { font-weight: bold; }
+
+form { text-align: left; }
+
+table { width: 100%; }
+table tr td div { height: 50px; overflow: auto; }
+
+fieldset { margin-bottom: 20px; }
+fieldset .col { display: inline-block; width: 400px; float: left; }
+fieldset .col select, fieldset .col input { float: right; clear: right; margin: 5px 10px; line-height: 36px; max-width: 45%; }
+fieldset label { min-width: 170px; float: left; clear: left; margin: 5px 10px; line-height: 36px; }
+
+.col2 { width: 250px; float: right; }
+
+.templ { display: none; }

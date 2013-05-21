@@ -4,7 +4,7 @@
 <head>
 
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>universALL - Medication Manager Service: Login</title>
+	<title>universALL - Medication Manager Service: Administration</title>
 
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
@@ -16,17 +16,18 @@
 
 <body>
 <script type="text/javascript">
-	//isError=true;
+	isError=true;
 </script>
 <div class="cont"><div>
-	<h1>universAAL<br/>Medication Manager Service</h1>
+	<h1>universAAL<br/>Medication Manager Service<br/>
+        Administration</h1>
 
-	<form name="user" action="" method="post">
-		<input type="text" name="username" value="username"/><br/>
-		<input type="password" name="password" value="password"/><br/>
-		<input type="submit" name="login" value="Login" class="button"/>
+	<form name="action" action="" method="post">
+        <button name="user_manager" class="w200">User and device management</button><br/>
+        <button name="parameters" class="w200">System properties</button><br/>
+        <button name="notification_rules" class="w200">Notification rules</button><br/>
+        <button name="back">Log out</button>
 	</form>
-	<div class="error_msg" style="display: none">Wrong username and/or password</div>
 </div></div>
 
 </body>
