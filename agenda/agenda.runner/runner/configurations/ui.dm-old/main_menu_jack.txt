@@ -1,2 +1,0 @@
-/Agenda|http://www.tsb.upv.es|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
-/Main Menu jack default|http://www.tsb.upv.es|http://ontology.persona.ima.igd.fhg.de/Nutritional.owl#Nutritional
