@@ -1,2 +1,0 @@
-/Agenda|http://www.anco.gr|http://ontology.universAAL.org/PersonalAgenda.owl#CalendarUIService
-/Main Menu saied es|http://www.igd.fraunhofer.de|urn:samples.lighting.uiclient:ServiceProvider#Main
