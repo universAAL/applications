@@ -32,6 +32,7 @@ import org.universAAL.ontology.nutrition.NutritionOntology;
 import org.universAAL.ontology.nutrition.NutritionService;
 import org.universAAL.ontology.nutrition.Recipe;
 import org.universAAL.ontology.nutrition.ShoppingList;
+import org.universAAL.ontology.nutrition.profile.*;
 
 /**
  * @author hecgamar
@@ -55,6 +56,9 @@ public class NutritionFactory extends ResourceFactoryImpl {
     public static final int FactoryIndex_Meal = 7;
     public static final int FactoryIndex_FoodSubCategory = 8;
     public static final int FactoryIndex_FoodCategory = 9;
+    public static final int FactoryIndex_NutritionalHabits = 10;
+    public static final int FactoryIndex_NutritionalPreferences = 11;
+    public static final int FactoryIndex_NutritionalSubprofile = 12;
 
     public Resource createInstance(String classURI, String instanceURI,
 	    int factoryIndex) {
@@ -108,6 +112,18 @@ public class NutritionFactory extends ResourceFactoryImpl {
 	    System.out.println("index: " + factoryIndex
 		    + "Creating ontology instance for FoodCategory");
 	    return new FoodCategory(instanceURI);
+	case NutritionFactory.FactoryIndex_NutritionalHabits:
+	    System.out.println("index: " + factoryIndex
+		    + "Creating ontology instance for NutritionalHabits");
+	    return new NutritionalHabits(instanceURI);
+	case NutritionFactory.FactoryIndex_NutritionalPreferences:
+	    System.out.println("index: " + factoryIndex
+		    + "Creating ontology instance for NutritionalPreferences");
+	    return new NutritionalPreferences(instanceURI);
+	case NutritionFactory.FactoryIndex_NutritionalSubprofile:
+	    System.out.println("index: " + factoryIndex
+		    + "Creating ontology instance for NutritionalSubprofile");
+	    return new NutritionalSubProfile(instanceURI);
 	}
 	System.out.println("Could not create ontology instance for index: "
 		+ factoryIndex);
