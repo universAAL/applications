@@ -3760,10 +3760,6 @@ ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMes
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageSubclassification.java -text
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
-ontologies/ont.nutrition/.classpath -text
-ontologies/ont.nutrition/.project -text
-ontologies/ont.nutrition/.settings/org.eclipse.jdt.core.prefs -text
-ontologies/ont.nutrition/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.nutrition/ASL2.0.txt -text
 ontologies/ont.nutrition/MITX.txt -text
 ontologies/ont.nutrition/NOTICE.txt -text
