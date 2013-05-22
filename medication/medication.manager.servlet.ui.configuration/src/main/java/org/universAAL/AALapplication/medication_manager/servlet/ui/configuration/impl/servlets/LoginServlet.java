@@ -3,6 +3,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.configuratio
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
@@ -55,7 +56,7 @@ public final class LoginServlet extends BaseServlet {
 
         Session session = getSession(req, resp, getClass());
         debugSessions(session.getId(), "the servlet doGet/doPost method", getClass());
-        Person admin = findDoctor(req, session);
+        Person admin = findAdmin(req, session);
 
         String cancel = req.getParameter(CANCEL);
 
@@ -83,7 +84,7 @@ public final class LoginServlet extends BaseServlet {
 
   }
 
-  private Person findDoctor(HttpServletRequest req, Session session) {
+  private Person findAdmin(HttpServletRequest req, Session session) {
 
     String username = req.getParameter(USERNAME);
     String password = req.getParameter(PASSWORD);
@@ -115,7 +116,7 @@ public final class LoginServlet extends BaseServlet {
     PersistentService persistentService = getPersistentService();
     PersonDao personDao = persistentService.getPersonDao();
 
-    return personDao.findDoctor(username, password);
+    return personDao.findPerson(username, password, Role.ADMIN);
   }
 
 }

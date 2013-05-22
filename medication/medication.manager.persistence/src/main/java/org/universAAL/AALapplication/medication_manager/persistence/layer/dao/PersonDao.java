@@ -102,7 +102,7 @@ public final class PersonDao extends AbstractDao {
     return dispenser.getPatient();
   }
 
-  public Person findDoctor(String username, String password) {
+  public Person findPerson(String username, String password, Role role) {
     Log.info("Looking for the doctor with username=%s", getClass(), username);
 
     String sql = "select * from MEDICATION_MANAGER.PERSON where UPPER(USERNAME) = ? AND " +
@@ -114,7 +114,7 @@ public final class PersonDao extends AbstractDao {
       ps = getPreparedStatement(sql);
       ps.setString(1, username.trim().toUpperCase());
       ps.setString(2, password);
-      ps.setString(3, Role.PHYSICIAN.getValue());
+      ps.setString(3, role.getValue());
       Map<String, Column> personRecordMap = executeQueryExpectedSingleRecord(TABLE_NAME, ps);
       if (personRecordMap == null || personRecordMap.isEmpty()) {
         return null;

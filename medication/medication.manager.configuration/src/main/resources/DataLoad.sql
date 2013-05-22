@@ -24,6 +24,9 @@ values (7, 'Asparuh', 'urn:org.universaal.aal_space:test_env#aparuh', 'caregiver
 insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
 values (8, 'Ivailo', 'urn:org.universaal.aal_space:test_env#ivailo', 'caregiver', '+3598912355');
 
+insert into medication_manager.person (id, name, person_uri, role, username, password)
+values (9, 'admin', 'urn:org.universaal.aal_space:test_env#admin', 'admin', 'admin', 'admin');
+
 // patient_links table
 
 insert into medication_manager.patient_links (id, doctor_fk_id, patient_fk_id, caregiver_fk_id)
