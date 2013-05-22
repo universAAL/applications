@@ -1,0 +1,41 @@
+package org.universAAL.AALapplication.nutritional;
+
+import org.universAAL.AALapplication.nutritional.dialogs.InterfaceProvider;
+import org.universAAL.AALapplication.nutritional.utils.Utils;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.util.Constants;
+import org.universAAL.ontology.profile.AssistedPerson;
+
+public class SharedResources {
+
+    public static final String CLIENT_NUTRITIONAL_UI_NAMESPACE = "urn:samples.nutrition.uiclient:";
+
+    private static ModuleContext moduleContext;
+
+    public static UIServiceProvider serviceProvider;
+    public static InterfaceProvider uIProvider;
+
+    public static final AssistedPerson testUser = new AssistedPerson(
+	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+
+    public SharedResources(ModuleContext context) {
+	moduleContext = context;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
+     * )
+     */
+    public void start() {
+	Utils.println("SharedResources starts running");
+	SharedResources.serviceProvider = new UIServiceProvider(moduleContext);
+	SharedResources.uIProvider = new InterfaceProvider(moduleContext);
+    }
+
+    public static ModuleContext getMContext() {
+	return moduleContext;
+    }
+}
