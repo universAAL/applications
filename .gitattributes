@@ -3788,6 +3788,10 @@ ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Nutriti
 ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/NutritionService.java -text
 ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Recipe.java -text
 ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/ShoppingList.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/DietType.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/NutritionalHabits.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/NutritionalPreferences.java -text
+ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/NutritionalSubProfile.java -text
 ontologies/ont.pom/composite/pom.xml -text
 ontologies/ont.pom/pom.xml -text
 ontologies/ont.pom/update.bat -text
