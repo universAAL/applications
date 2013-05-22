@@ -27,9 +27,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.service.CallStatus;
@@ -49,6 +48,10 @@ import org.universAAL.ontology.profile.service.ProfilingService;
  * @author eandgrg
  */
 public class SCaller {
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
     DefaultServiceCaller caller;
     private static final String OUTPUT_LIST_OF_USERS = ProvidedService.CALENDAR_UI_NAMESPACE
 	    + "listOfUsers";
@@ -72,15 +75,15 @@ public class SCaller {
     // ProvidedService.CALENDAR_UI_NAMESPACE
     // + "listOfCalendarUsers";
 
-    private final static Logger log = LoggerFactory.getLogger(SCaller.class);
-
     public SCaller(ModuleContext mcontext) {
+	SCaller.mcontext = mcontext;
+
 	caller = new DefaultServiceCaller(mcontext);
     }
 
     public List getUserProfiles() {
 	List users = new ArrayList();
-	log.info("Agenda Remote calls with getUserProfiles");
+
 	ServiceResponse sr = caller.call(getUsers());
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
@@ -92,11 +95,18 @@ public class SCaller {
 		else
 		    users.add(value);
 	    } catch (Exception e) {
-		log.error("List of Users corrupt!: {}", e);
+		LogUtils.logError(mcontext, this.getClass(), "getUserProfiles",
+			new Object[] { "List of Users corrupt." }, e);
+
 	    }
 	} else
-	    log.error("Status of getUserProfiles() failed: {}", sr
-		    .getCallStatus());
+	    LogUtils
+		    .logError(
+			    mcontext,
+			    this.getClass(),
+			    "getUserProfiles",
+			    new Object[] { "Call failed: " + sr.getCallStatus() },
+			    null);
 
 	return users;
     }
@@ -178,11 +188,21 @@ public class SCaller {
 	ServiceResponse sr = this.caller
 		.call(getCalendarOwnerNameRequest(calendarName));
 	long endTime = System.currentTimeMillis();
-	log.info("Agenda\tService called: \'get calendar owner\' (" + startTime
-		+ ")" + "\n"
-		+ "Agenda\tService returned: \'get calendar owner\' ("
-		+ endTime + ")" + "\n" + "Agenda\tTime delay: "
-		+ (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarOwnerNameService",
+			new Object[] { "Agenda\tService called: \'get calendar owner\' ("
+				+ startTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tService returned: \'get calendar owner\' ("
+				+ endTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tTime delay: "
+				+ (endTime - startTime) }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -190,20 +210,35 @@ public class SCaller {
 			OUTPUT_CALENDAR_OWNER_NAME);
 		if (o instanceof String) {
 		    calOwnerName = (String) o;
-		    log.info("Calendar owner: " + calOwnerName
-			    + " sucessfully retrieved for calendar: "
-			    + calendarName);
+
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarOwnerNameService",
+			    new Object[] { "Calendar owner: " + calOwnerName
+				    + " sucessfully retrieved for calendar: "
+				    + calendarName }, null);
+
 		}
 		if (o == null)
-		    log.info("Calendar owner was not retrieved");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "getCalendarOwnerNameService",
+				    new Object[] { "Calendar owner was not retrieved" },
+				    null);
 
 	    } catch (Exception e) {
-		log.info(" Exception: " + e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"getCalendarOwnerNameService",
+			new Object[] { "Exception! " }, e);
+
 		return null;
 	    }
 	} else {
-	    log.info("Calendar owner was not retrieved");
-	    log.info(sr.getCallStatus().toString());
+	    LogUtils.logError(mcontext, this.getClass(),
+		    "getCalendarOwnerNameService",
+		    new Object[] { "Calendar owner was not retrieved because: "
+			    + sr.getCallStatus().toString() }, null);
 	}
 	return calOwnerName;
     }
@@ -239,11 +274,21 @@ public class SCaller {
 	ServiceResponse sr = this.caller
 		.call(getCalendarsByOwnerRequest(owner));
 	long endTime = System.currentTimeMillis();
-	log.info("Agenda\tService called: \'get calendars by owner\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'get calendars by owner\' ("
-		+ endTime + ")" + "\n" + "Agenda\tTime delay: "
-		+ (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarsByOwnerService",
+			new Object[] { "Agenda\tService called: \'get calendars by owner\' ("
+				+ startTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tService returned: \'get calendars by owner\' ("
+				+ endTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tTime delay: "
+				+ (endTime - startTime) }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -255,17 +300,33 @@ public class SCaller {
 		    allCalendars.add((Calendar) o);
 		}
 		if (o == null)
-		    log.info("Calendar List was not retrieved");
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarsByOwnerService",
+			    new Object[] { "Calendar List was not retrieved" },
+			    null);
+
 		else
-		    log.info("Calendar List was retrieved. Size = : "
-			    + allCalendars.size());
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "getCalendarsByOwnerService",
+				    new Object[] { "Calendar List was retrieved. Size = : "
+					    + allCalendars.size() }, null);
+
 	    } catch (Exception e) {
-		log.info(" Exception: " + e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"getCalendarsByOwnerService",
+			new Object[] { "Exception! " }, e);
+
 		return null;
 	    }
 	} else {
-	    log.info("Calendar list was not retrieved");
-	    log.info(sr.getCallStatus().toString());
+	    LogUtils.logError(mcontext, this.getClass(),
+		    "getCalendarsByOwnerService",
+		    new Object[] { "Calendar list was not retrieved because: "
+			    + sr.getCallStatus().toString() }, null);
+
 	}
 	return allCalendars;
     }
@@ -292,12 +353,13 @@ public class SCaller {
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getAddEventToCalendar(c, event));
 	long endTime = System.currentTimeMillis();
-	log
-		.info("Service called: \'add event to calendar\' (" + startTime
-			+ ")" + "\n"
+	LogUtils.logInfo(mcontext, this.getClass(),
+		"addEventToCalendarService",
+		new Object[] { "Service called: \'add event to calendar\' ("
+			+ startTime + ")" + "\n"
 			+ "Service returned: \'add event to calendar\' ("
 			+ endTime + ")" + "\n" + "Time delay: "
-			+ (endTime - startTime));
+			+ (endTime - startTime) }, null);
 
 	int eventId;
 	if (sr.getCallStatus() == CallStatus.succeeded) {
@@ -310,20 +372,35 @@ public class SCaller {
 		    eventId = ((Integer) o).intValue();
 
 		if (eventId <= 0) {
-		    log
-			    .info("Event was not added to calendar for unknown reason");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "addEventToCalendarService",
+				    new Object[] { "Event was not added to calendar for unknown reason" },
+				    null);
+
 		} else {
-		    log.info("Event was added to calendar");
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "addEventToCalendarService",
+			    new Object[] { "Event was added to calendar" },
+			    null);
+
 		}
 		return eventId;
 	    } catch (Exception e) {
-		log.info("Exception: " + e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"addEventToCalendarService",
+			new Object[] { "Exception! " }, e);
+
 		return -1;
 	    }
 	}
+	LogUtils.logError(mcontext, this.getClass(),
+		"addEventToCalendarService",
+		new Object[] { "Event was not added to calendar because: "
+			+ sr.getCallStatus().toString() }, null);
 
-	log.info("Event was not added to calendar");
-	log.info(sr.getCallStatus().toString());
 	return -1;
     }
 
@@ -358,17 +435,21 @@ public class SCaller {
 	ServiceResponse sr = this.caller.call(getCalendarByNameAndOwner(
 		calendarName, owner));
 	long endTime = System.currentTimeMillis();
-	log
-		.info("Agenda\tService called: \'get calendar by name and owner\' ("
-			+ startTime
-			+ ")"
-			+ "\n"
-			+ "Agenda\tService returned: \'get calendar by name and owner\' ("
-			+ endTime
-			+ ")"
-			+ "\n"
-			+ "Agenda\tTime delay: "
-			+ (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getCalendarByNameAndOwnerService",
+			new Object[] { "Agenda\tService called: \'get calendar by name and owner\' ("
+				+ startTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tService returned: \'get calendar by name and owner\' ("
+				+ endTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tTime delay: "
+				+ (endTime - startTime) }, null);
 
 	Calendar calendar = null;
 	if (sr.getCallStatus() == CallStatus.succeeded) {
@@ -377,18 +458,30 @@ public class SCaller {
 		if (o instanceof Calendar)
 		    calendar = (Calendar) o;
 		if (calendar == null)
-		    log.info("Calendar URI was not retrieved");
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarByNameAndOwnerService",
+			    new Object[] { "Calendar URI was not retrieved" },
+			    null);
+
 		else
-		    log
-			    .info("Calendar URI was retrieved: "
-				    + calendar.getURI());
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "getCalendarByNameAndOwnerService",
+			    new Object[] { "Calendar URI was retrieved: "
+				    + calendar.getURI() }, null);
+
 	    } catch (Exception e) {
-		log.error(" Exception: " + e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"getCalendarByNameAndOwnerService",
+			new Object[] { "Exception! " }, e);
+
 		return null;
 	    }
 	} else {
-	    log.info("Calendar was not retrieved");
-	    log.debug(sr.getCallStatus().toString());
+	    LogUtils.logError(mcontext, this.getClass(),
+		    "getCalendarByNameAndOwnerService",
+		    new Object[] { "Calendar was not retrieved because: "
+			    + sr.getCallStatus().toString() }, null);
+
 	}
 	return calendar;
     }
@@ -424,27 +517,45 @@ public class SCaller {
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getAddNewCalendar(c, owner));
 	long endTime = System.currentTimeMillis();
-	log.info("Agenda\tService called: \'add new calendar\' (" + startTime
-		+ ")" + "\n"
-		+ "Agenda\tService returned: \'add new calendar\' (" + endTime
-		+ ")" + "\n" + "Agenda\tTime delay: " + (endTime - startTime));
+	LogUtils.logInfo(mcontext, this.getClass(), "addNewCalendarService",
+		new Object[] { "Agenda\tService called: \'add new calendar\' ("
+			+ startTime + ")" + "\n"
+			+ "Agenda\tService returned: \'add new calendar\' ("
+			+ endTime + ")" + "\n" + "Agenda\tTime delay: "
+			+ (endTime - startTime) }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
 		Object o = getReturnValue(sr.getOutputs(), OUTPUT_CALENDAR);
 		if (o instanceof Calendar) {
-		    log.info("Calendar was added");
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "addNewCalendarService",
+			    new Object[] { "Calendar was added" }, null);
+
 		    return (Calendar) o;
 		} else {
-		    log
-			    .info("Calendar may not have been added - Wrong service output");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "addNewCalendarService",
+				    new Object[] { "Calendar may not have been added - Wrong service output" },
+				    null);
+
 		}
 	    } catch (Exception e) {
-		log.error(" Exception: " + e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"addNewCalendarService",
+			new Object[] { "Exception! " }, e);
+
 	    }
 	} else {
-	    log.info("Calendar was not added");
-	    log.debug(sr.getCallStatus().toString());
+
+	    LogUtils.logError(mcontext, this.getClass(),
+		    "addNewCalendarService",
+		    new Object[] { "Calendar was not added because: "
+			    + sr.getCallStatus().toString() }, null);
+
 	}
 	return null;
 
@@ -476,29 +587,45 @@ public class SCaller {
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getGetCalendarEventList(cal));
 	long endTime = System.currentTimeMillis();
-	log.info("Service called: \'get calendar event list\' (" + startTime
-		+ ")" + "\n"
-		+ "Service returned: \'get calendar event list\' (" + endTime
-		+ ")" + "\n" + "Time delay: " + (endTime - startTime));
+	LogUtils.logInfo(mcontext, this.getClass(), "requestEventListService",
+		new Object[] { "Service called: \'get calendar event list\' ("
+			+ startTime + ")" + "\n"
+			+ "Service returned: \'get calendar event list\' ("
+			+ endTime + ")" + "\n" + "Time delay: "
+			+ (endTime - startTime) }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
 		List events = (List) getReturnValue(sr.getOutputs(),
 			OUTPUT_CALENDAR_EVENT_LIST);
 		if (events == null || events.size() == 0) {
-		    log
-			    .info("Event List has been retreived, but it's empty or NULL");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "requestEventListService",
+				    new Object[] { "Event List has been retreived, but it's empty or NULL" },
+				    null);
+
 		    return new ArrayList();
 		}
-		log.info("Event List was retreived");
+		LogUtils.logInfo(mcontext, this.getClass(),
+			"requestEventListService",
+			new Object[] { "Event List was retreived" }, null);
+
 		return events;
 	    } catch (Exception e) {
-		log.info("Exception: " + e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"requestEventListService",
+			new Object[] { "Exception! " }, e);
+
 		return new ArrayList(0);
 	    }
 	}
-	log.info("Event List was not retreived");
-	log.debug(sr.getCallStatus().toString());
+	LogUtils.logError(mcontext, this.getClass(), "requestEventListService",
+		new Object[] { "Event List was not retreived: "
+			+ sr.getCallStatus().toString() }, null);
+
 	return new ArrayList(0);
 
     }
@@ -617,23 +744,42 @@ public class SCaller {
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = caller.call(getDeleteCalendarEvent(c, eventId));
 	long endTime = System.currentTimeMillis();
-	log.info("Agenda\tService called: \'delete calendar event\' ("
-		+ startTime + ")" + "\n"
-		+ "Agenda\tService returned: \'delete calendar event\' ("
-		+ endTime + ")" + "\n" + "Agenda\tTime delay: "
-		+ (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"deleteCalendarEventService",
+			new Object[] { "Agenda\tService called: \'delete calendar event\' ("
+				+ startTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tService returned: \'delete calendar event\' ("
+				+ endTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tTime delay: "
+				+ (endTime - startTime) }, null);
+
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
-		log.debug("Event was deleted");
+		LogUtils.logInfo(mcontext, this.getClass(),
+			"deleteCalendarEventService",
+			new Object[] { "Event was deleted" }, null);
+
 	    } catch (Exception e) {
-		log.debug("Exception: " + e.getMessage());
+		LogUtils.logError(mcontext, this.getClass(),
+			"deleteCalendarEventService",
+			new Object[] { "Exception" }, e);
+
 		return false;
 	    }
 	    return true;
 	}
+	LogUtils.logError(mcontext, this.getClass(),
+		"deleteCalendarEventService",
+		new Object[] { "Event was not deleted"
+			+ sr.getCallStatus().toString() }, null);
 
-	log.debug("Event was not deleted");
-	log.debug(sr.getCallStatus().toString());
 	return false;
     }
 
@@ -671,10 +817,21 @@ public class SCaller {
 	long endTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getAllCalendarsRequest());
 	long startTime = System.currentTimeMillis();
-	log.info("Agenda\tService called: \'get all Calendars\' (" + startTime
-		+ ")" + "\n"
-		+ "Agenda\tService returned: \'get all Calendars\' (" + endTime
-		+ ")" + "\n" + "Agenda\tTime delay: " + (endTime - startTime));
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"getAllCalendarsService",
+			new Object[] { "Agenda\tService called: \'get all Calendars\' ("
+				+ startTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tService returned: \'get all Calendars\' ("
+				+ endTime
+				+ ")"
+				+ "\n"
+				+ "Agenda\tTime delay: "
+				+ (endTime - startTime) }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -686,18 +843,39 @@ public class SCaller {
 		    allCalendars.add((Calendar) o);
 		}
 		if (o == null)
-		    log.info("Calendar List was not retrieved!");
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "getAllCalendarsService",
+				    new Object[] { "Calendar List was not retrieved!" },
+				    null);
 		else
-		    log.info("Calendar List was retrieved! Size = "
-			    + allCalendars.size());
+		    LogUtils
+			    .logInfo(
+				    mcontext,
+				    this.getClass(),
+				    "getAllCalendarsService",
+				    new Object[] { "Calendar List was retrieved! Size = "
+					    + allCalendars.size() }, null);
 
 	    } catch (Exception e) {
-		log.error("Exception while getting all calendars.");
+		LogUtils
+			.logError(
+				mcontext,
+				this.getClass(),
+				"getAllCalendarsService",
+				new Object[] { "Exception while getting all calendars." },
+				e);
 
 		return null;
 	    }
 	} else {
-	    log.info(" Service call status: " + sr.getCallStatus().toString());
+	    LogUtils.logError(mcontext, this.getClass(),
+		    "getAllCalendarsService",
+		    new Object[] { "Service call status: "
+			    + sr.getCallStatus().toString() }, null);
+
 	}
 	return allCalendars;
     }
@@ -714,7 +892,9 @@ public class SCaller {
     private Object getReturnValue(List outputs, String expectedOutput) {
 	Object returnValue = null;
 	if (outputs == null)
-	    log.error("SCaller: {} not found!", expectedOutput);
+	    LogUtils.logError(mcontext, this.getClass(), "getReturnValue",
+		    new Object[] { "SCaller: {} not found!", expectedOutput },
+		    null);
 	else
 	    for (Iterator i = outputs.iterator(); i.hasNext();) {
 		ProcessOutput output = (ProcessOutput) i.next();
@@ -722,9 +902,17 @@ public class SCaller {
 		    if (returnValue == null)
 			returnValue = output.getParameterValue();
 		    else
-			log.error("SCaller: redundant return value!");
+			LogUtils.logError(mcontext, this.getClass(),
+				"getReturnValue",
+				new Object[] { "Redundant return value!" },
+				null);
+
 		else
-		    log.error("SCaller - output ignored: {}", output.getURI());
+		    LogUtils.logError(mcontext, this.getClass(),
+			    "getReturnValue", new Object[] {
+				    "SCaller - output ignored: {}",
+				    output.getURI() }, null);
+
 	    }
 	return returnValue;
     }

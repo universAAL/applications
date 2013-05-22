@@ -8,6 +8,7 @@ import org.universAAL.ontology.agenda.EventDetails;
 import org.universAAL.ontology.agenda.Reminder;
 import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.ontology.agenda.service.CalendarAgenda;
+import org.universAAL.agenda.server.osgi.Activator;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
@@ -73,7 +74,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
     static final String SERVICE_GET_CALENDAR_BY_OWNER = AGENDA_SERVER_NAMESPACE
 	    + "getCalendarByOwner19";
     static final String SERVICE_GET_CALENDAR_OWNER_NAME = AGENDA_SERVER_NAMESPACE
-    + "getCalendarOwnerName20";
+	    + "getCalendarOwnerName20";
 
     // define the uri of every input, which is needed from the service
     // e.g. we have to call serviceX with one or more arguments,
@@ -111,19 +112,21 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	    + "oCalendarEvent";
     static final String OUTPUT_EVENT_CATEGORIES = AGENDA_SERVER_NAMESPACE
 	    + "oEventCategories";
-    
-    //NEW
+
+    // NEW
     static final String OUTPUT_CALENDAR_OWNER_NAME = AGENDA_SERVER_NAMESPACE
-    + "oCalendarOwnerName";
+	    + "oCalendarOwnerName";
 
     static final ServiceProfile[] profiles = new ServiceProfile[PROVIDED_SERVICES];
     private static Hashtable serverAgendaRestrictions = new Hashtable();
-   
+
     private ProvidedAgendaService(String uri) {
 	super(uri);
     }
+
     static {
 	OntologyManagement.getInstance().register(
+		Activator.getMcontext(),
 		new SimpleOntology(MY_URI, CalendarAgenda.MY_URI,
 			new ResourceFactoryImpl() {
 			    @Override
@@ -133,8 +136,8 @@ public class ProvidedAgendaService extends CalendarAgenda {
 			    }
 			}));
 
-	// add restriction about what the service controls; 
-	//inherit restrictions from parent class
+	// add restriction about what the service controls;
+	// inherit restrictions from parent class
 	addRestriction((MergedRestriction) CalendarAgenda
 		.getClassRestrictionsOnProperty(CalendarAgenda.MY_URI,
 			CalendarAgenda.PROP_CONTROLS).copy(),
@@ -194,7 +197,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	ProcessOutput outEvent = new ProcessOutput(OUTPUT_CALENDAR_EVENT);
 	outEvent.setParameterType(Event.MY_URI);
 	outEvent.setCardinality(1, 1);
-	
+
 	ProcessOutput outEventIdList = new ProcessOutput(
 		OUTPUT_CALENDAR_EVENT_ID_LIST);
 	outEventIdList.setParameterType(TypeMapper
@@ -528,11 +531,11 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	getCalendarOwnerName.addFilteringInput(INPUT_CALENDAR_NAME, TypeMapper
 		.getDatatypeURI(String.class), 1, 1, ppCalendarName
 		.getThePath());
-	
-	getCalendarOwnerName.addOutput(OUTPUT_CALENDAR_OWNER_NAME, TypeMapper.getDatatypeURI(String.class), 1, 1,
-		ppCalendar.getThePath());
+
+	getCalendarOwnerName.addOutput(OUTPUT_CALENDAR_OWNER_NAME, TypeMapper
+		.getDatatypeURI(String.class), 1, 1, ppCalendar.getThePath());
 	profiles[18] = getCalendarOwnerName.myProfile; // initialize the service
 	// profile
     }
-   
+
 }

@@ -2,12 +2,7 @@ package org.universAAL.agendaEventSelectionTool.server;
 
 import java.util.Hashtable;
 
-import org.universAAL.ontology.agenda.Calendar;
-import org.universAAL.ontology.agenda.Event;
-import org.universAAL.ontology.agenda.service.CalendarAgenda;
-import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
-import org.universAAL.ontology.agendaEventSelection.FilterParams;
-import org.universAAL.ontology.agendaEventSelection.service.EventSelectionToolService;
+import org.universAAL.agendaEventSelectionTool.server.osgi.Activator;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
@@ -17,6 +12,12 @@ import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.process.ProcessInput;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.agenda.Calendar;
+import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agenda.service.CalendarAgenda;
+import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
+import org.universAAL.ontology.agendaEventSelection.FilterParams;
+import org.universAAL.ontology.agendaEventSelection.service.EventSelectionToolService;
 
 /**
  * @author kagnantis
@@ -60,6 +61,7 @@ public class ProvidedESTService extends EventSelectionToolService {
 
     static {
 	OntologyManagement.getInstance().register(
+		Activator.getMcontext(),
 		new SimpleOntology(MY_URI, EventSelectionToolService.MY_URI,
 			new ResourceFactoryImpl() {
 			    @Override

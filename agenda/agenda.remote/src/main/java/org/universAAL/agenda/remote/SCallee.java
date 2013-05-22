@@ -23,10 +23,9 @@
  */
 package org.universAAL.agenda.remote;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.agenda.remote.osgi.Activator;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -42,13 +41,17 @@ import org.universAAL.ontology.profile.User;
  */
 public class SCallee extends ServiceCallee {
 
-    private final static Logger log = LoggerFactory.getLogger(SCallee.class);
+    /**
+     * {@link ModuleContext}
+     */
+    private static ModuleContext mcontext;
 
     private static final ServiceResponse failure = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
 
     public SCallee(ModuleContext mcontext) {
 	super(mcontext, ProvidedService.profiles);
+	SCallee.mcontext = mcontext;
     }
 
     public void communicationChannelBroken() {
@@ -57,15 +60,26 @@ public class SCallee extends ServiceCallee {
     }
 
     public ServiceResponse handleCall(ServiceCall call) {
-	log.info("Received a Service Call addressed to the Agenda Web UI");
+	LogUtils
+		.logInfo(
+			mcontext,
+			this.getClass(),
+			"handleCall",
+			new Object[] { "Received a Service Call addressed to the Agenda Web UI" },
+			null);
 
 	if (call == null) {
 	    failure
 		    .addOutput(new ProcessOutput(
 			    ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
 			    "Null call!?!"));
-	    log
-		    .warn("Agenda remote could not execute the requested service: Null call!?!");
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Agenda remote could not execute the requested service: Null call!!" },
+			    null);
 	    return failure;
 	}
 
@@ -74,8 +88,14 @@ public class SCallee extends ServiceCallee {
 	    failure.addOutput(new ProcessOutput(
 		    ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
 		    "Null operation!?!"));
-	    log
-		    .warn("Agenda remote could not execute the requested service: Null operation!?!");
+	    LogUtils
+		    .logWarn(
+			    mcontext,
+			    this.getClass(),
+			    "handleCall",
+			    new Object[] { "Agenda remote could not execute the requested service: Null operation!?!" },
+			    null);
+
 	    return failure;
 	}
 
@@ -86,21 +106,32 @@ public class SCallee extends ServiceCallee {
 		failure.addOutput(new ProcessOutput(
 			ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR,
 			"Invalid User Input!"));
-		log
-			.warn("Agenda remote could not execute the requested service: Invalid User Input!");
+		LogUtils
+			.logWarn(
+				mcontext,
+				this.getClass(),
+				"handleCall",
+				new Object[] { "Agenda remote could not execute the requested service: Invalid User Input!" },
+				null);
+
 		return failure;
 	    } else {
 		undefuser = (User) inputUser;
 	    }
-	    log.info("Addressed call was: {} ",
-		    ProvidedService.SERVICE_START_UI);
-	    
-	    System.err.println("remote scallee ln 98 -Showing initial dialog for user: "+undefuser);
-	    
+	    LogUtils.logInfo(mcontext, this.getClass(), "handleCall",
+		    new Object[] { "Addressed call was: {} ",
+			    ProvidedService.SERVICE_START_UI }, null);
+
 	    return showInitialDialog(undefuser);
 	}
-	log
-		.warn("Agenda remote could not execute the requested service: Unrecognized failure!");
+	LogUtils
+		.logWarn(
+			mcontext,
+			this.getClass(),
+			"handleCall",
+			new Object[] { "Agenda remote could not execute the requested service: Unrecognized failure!" },
+			null);
+
 	return failure;
     }
 

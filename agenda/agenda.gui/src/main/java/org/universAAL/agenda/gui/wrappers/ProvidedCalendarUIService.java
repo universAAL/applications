@@ -7,6 +7,7 @@ import org.universAAL.ontology.agenda.service.CalendarUIService;
 
 import java.util.Hashtable;
 
+import org.universAAL.agenda.gui.osgi.Activator;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
@@ -33,7 +34,7 @@ public class ProvidedCalendarUIService extends CalendarUIService {
 
     static {
 	
-	OntologyManagement.getInstance().register(
+	OntologyManagement.getInstance().register(Activator.getMcontext(),
 		new SimpleOntology(MY_URI, CalendarUIService.MY_URI,
 			new ResourceFactoryImpl() {
 			    @Override
