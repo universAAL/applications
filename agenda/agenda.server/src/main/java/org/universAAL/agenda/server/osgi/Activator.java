@@ -60,4 +60,11 @@ public class Activator implements BundleActivator {
     public static AgendaProvider getAgendaProvider() {
 	return Activator.provider;
     }
+
+    /**
+     * @return the mcontext
+     */
+    public static ModuleContext getMcontext() {
+        return mcontext;
+    }
 }

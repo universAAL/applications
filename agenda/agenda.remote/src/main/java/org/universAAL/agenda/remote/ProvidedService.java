@@ -33,6 +33,7 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.agenda.remote.osgi.Activator;
 
 /**
  * 
@@ -57,6 +58,7 @@ public class ProvidedService extends CalendarUIService {
 
     static {
 	OntologyManagement.getInstance().register(
+		Activator.getMcontext(),
 		new SimpleOntology(MY_URI, CalendarUIService.MY_URI,
 			new ResourceFactoryImpl() {
 			    @Override

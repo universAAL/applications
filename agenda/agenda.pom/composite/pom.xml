@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>D.0.1-SNAPSHOT</version>
+		<version>D.2.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>agenda.composite</artifactId>

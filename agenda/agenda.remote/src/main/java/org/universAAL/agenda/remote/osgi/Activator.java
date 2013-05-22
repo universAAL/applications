@@ -83,4 +83,11 @@ public class Activator implements BundleActivator {
 		new Object[] { "agenda.remote bundle has stopped." }, null);
     }
 
+    /**
+     * @return the mcontext
+     */
+    public static ModuleContext getMcontext() {
+        return mcontext;
+    }
+
 }

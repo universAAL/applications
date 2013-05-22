@@ -67,4 +67,11 @@ public class Activator implements BundleActivator {
     public static BundleContext getBundleContext() {
 	return bcontext;
     }
+
+    /**
+     * @return the mcontext
+     */
+    public static ModuleContext getMcontext() {
+        return mcontext;
+    }
 }
