@@ -9,6 +9,7 @@ public enum Role {
 
   PATIENT("PATIENT"),
   CAREGIVER("CAREGIVER"),
+  ADMIN("ADMIN"),
   PHYSICIAN("PHYSICIAN");
 
   private String role;

@@ -3,6 +3,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlet
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.Log;
@@ -114,7 +115,7 @@ public final class LoginServlet extends BaseServlet {
     PersistentService persistentService = getPersistentService();
     PersonDao personDao = persistentService.getPersonDao();
 
-    return personDao.findDoctor(username, password);
+    return personDao.findPerson(username, password, Role.PHYSICIAN);
   }
 
 }
