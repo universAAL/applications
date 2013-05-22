@@ -29,6 +29,9 @@ import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
 import org.universAAL.ontology.NutritionFactory;
+import org.universAAL.ontology.location.Location;
+import org.universAAL.ontology.nutrition.profile.*;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * 
@@ -293,6 +296,300 @@ public final class NutritionOntology extends Ontology {
 			TypeMapper.getDatatypeURI(Boolean.class), 1, 1));
 	oci.addRestriction(MergedRestriction.getAllValuesRestriction(
 		MenuDay.PROP_MEALS, Dish.MY_URI));
+
+	// ******* Declaration of enumeration classes of the ontology ******* //
+	// ******* Add content to enumeration classes of the ontology ******* //
+	OntClassInfoSetup oci_DietType = createNewAbstractOntClassInfo(DietType.MY_URI);
+	oci_DietType.setResourceComment("");
+	oci_DietType.setResourceLabel("DietType");
+	oci_DietType.toEnumeration(new ManagedIndividual[] { DietType.Saxon,
+		DietType.Mediterranean, DietType.Vegetarian, DietType.Vegan,
+		DietType.Other });
+
+	// ******* Declaration of regular classes of the ontology ******* //
+	OntClassInfoSetup oci_NutritionalHabits = createNewOntClassInfo(
+		NutritionalHabits.MY_URI, factory, 10);
+	OntClassInfoSetup oci_NutritionalPreferences = createNewOntClassInfo(
+		NutritionalPreferences.MY_URI, factory, 11);
+	OntClassInfoSetup oci_NutritionalSubProfile = createNewOntClassInfo(
+		NutritionalSubProfile.MY_URI, factory, 12);
+
+	// ******* Add content to regular classes of the ontology ******* //
+
+	oci_NutritionalHabits.setResourceComment("");
+	oci_NutritionalHabits.setResourceLabel("NutritionalHabits");
+	oci_NutritionalHabits.addSuperClass(ManagedIndividual.MY_URI);
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__CONSUMES_ALCOHOL).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__CONSUMES_ALCOHOL,
+			TypeMapper.getDatatypeURI(Boolean.class), 0, 1));
+
+	oci_NutritionalHabits.addObjectProperty(
+		NutritionalHabits.PROP_BREAKFAST_PLACE).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP_BREAKFAST_PLACE,
+			Location.MY_URI, 0, 1));
+	oci_NutritionalHabits.addObjectProperty(
+		NutritionalHabits.PROP_LUNCH_PLACE).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP_LUNCH_PLACE, Location.MY_URI, 0,
+			1));
+	oci_NutritionalHabits.addObjectProperty(
+		NutritionalHabits.PROP_DINNER_PLACE).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP_DINNER_PLACE, Location.MY_URI,
+			0, 1));
+	oci_NutritionalHabits.addObjectProperty(
+		NutritionalHabits.PROP_AFTERDINNERSNACK_PLACE).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP_AFTERDINNERSNACK_PLACE,
+			Location.MY_URI, 0, 1));
+	oci_NutritionalHabits.addObjectProperty(
+		NutritionalHabits.PROP_AFTERNOONSNACK_PLACE).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP_AFTERNOONSNACK_PLACE,
+			Location.MY_URI, 0, 1));
+	oci_NutritionalHabits.addObjectProperty(
+		NutritionalHabits.PROP_MORNINGSNACK_PLACE).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP_MORNINGSNACK_PLACE,
+			Location.MY_URI, 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__RECOMMENDED_DAILY_MEALS)
+		.setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__RECOMMENDED_DAILY_MEALS,
+			TypeMapper.getDatatypeURI(Integer.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__GET_UP_HOUR).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__GET_UP_HOUR,
+			TypeMapper.getDatatypeURI(XMLGregorianCalendar.class),
+			0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__AFTERNOON_SNACK_HOUR).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__AFTERNOON_SNACK_HOUR,
+			TypeMapper.getDatatypeURI(XMLGregorianCalendar.class),
+			0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__RECOMMENDED_FOOD_INTAKE_CALORIES)
+		.setFunctional();
+	oci_NutritionalHabits
+		.addRestriction(MergedRestriction
+			.getAllValuesRestrictionWithCardinality(
+				NutritionalHabits.PROP__RECOMMENDED_FOOD_INTAKE_CALORIES,
+				TypeMapper.getDatatypeURI(Integer.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__MORNING_SNACK_HOUR).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__MORNING_SNACK_HOUR,
+			TypeMapper.getDatatypeURI(XMLGregorianCalendar.class),
+			0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__LUNCH_HOUR).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__LUNCH_HOUR,
+			TypeMapper.getDatatypeURI(XMLGregorianCalendar.class),
+			0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__RELIGION_CONSTRAINT).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__RELIGION_CONSTRAINT,
+			TypeMapper.getDatatypeURI(String.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__NUMBER_DAILY_MEALS).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__NUMBER_DAILY_MEALS,
+			TypeMapper.getDatatypeURI(Integer.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__SELF_COOKING).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__SELF_COOKING,
+			TypeMapper.getDatatypeURI(Boolean.class), 0, 1));
+
+	oci_NutritionalHabits.addObjectProperty(
+		NutritionalHabits.PROP_DIET_TYPE).setFunctional();
+	oci_NutritionalHabits
+		.addRestriction(MergedRestriction
+			.getAllValuesRestrictionWithCardinality(
+				NutritionalHabits.PROP_DIET_TYPE,
+				DietType.MY_URI, 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__CONSUMES_TOBACCO).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__CONSUMES_TOBACCO,
+			TypeMapper.getDatatypeURI(Boolean.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__NUTRITIONAL_GOAL).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__NUTRITIONAL_GOAL,
+			TypeMapper.getDatatypeURI(String.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__SELF_SHOPPING).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__SELF_SHOPPING,
+			TypeMapper.getDatatypeURI(Boolean.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__TYPE_DAILY_MEALS).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__TYPE_DAILY_MEALS,
+			TypeMapper.getDatatypeURI(String.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__CONSUMES_DRUGS).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__CONSUMES_DRUGS,
+			TypeMapper.getDatatypeURI(Boolean.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__COMPANIONS_AT_TABLE).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__COMPANIONS_AT_TABLE,
+			TypeMapper.getDatatypeURI(Boolean.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__NUMBER_COMPANIONS_AT_TABLE)
+		.setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__NUMBER_COMPANIONS_AT_TABLE,
+			TypeMapper.getDatatypeURI(Integer.class), 0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__BREAKFAST_HOUR).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__BREAKFAST_HOUR,
+			TypeMapper.getDatatypeURI(XMLGregorianCalendar.class),
+			0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__BED_HOUR).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__BED_HOUR,
+			TypeMapper.getDatatypeURI(XMLGregorianCalendar.class),
+			0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__AFTER_DINNER_SNACK_HOUR)
+		.setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__AFTER_DINNER_SNACK_HOUR,
+			TypeMapper.getDatatypeURI(XMLGregorianCalendar.class),
+			0, 1));
+
+	oci_NutritionalHabits.addDatatypeProperty(
+		NutritionalHabits.PROP__DINNER_HOUR).setFunctional();
+	oci_NutritionalHabits.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalHabits.PROP__DINNER_HOUR,
+			TypeMapper.getDatatypeURI(XMLGregorianCalendar.class),
+			0, 1));
+
+	oci_NutritionalPreferences.setResourceComment("");
+	oci_NutritionalPreferences.setResourceLabel("NutritionalPreferences");
+	oci_NutritionalPreferences.addSuperClass(ManagedIndividual.MY_URI);
+	oci_NutritionalPreferences.addDatatypeProperty(
+		NutritionalPreferences.PROP__PREF_CONVENIENCE).setFunctional();
+	oci_NutritionalPreferences.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalPreferences.PROP__PREF_CONVENIENCE,
+			TypeMapper.getDatatypeURI(String.class), 1, 1));
+
+	oci_NutritionalPreferences.addDatatypeProperty(
+		NutritionalPreferences.PROP__PREFERRED_CUISINES)
+		.setFunctional();
+	oci_NutritionalPreferences.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalPreferences.PROP__PREFERRED_CUISINES,
+			TypeMapper.getDatatypeURI(String.class), 0, 1));
+
+	oci_NutritionalPreferences.addDatatypeProperty(
+		NutritionalPreferences.PROP__MEDICINE_FOOD_INTERACTIONS)
+		.setFunctional();
+	oci_NutritionalPreferences
+		.addRestriction(MergedRestriction
+			.getAllValuesRestrictionWithCardinality(
+				NutritionalPreferences.PROP__MEDICINE_FOOD_INTERACTIONS,
+				TypeMapper.getDatatypeURI(String.class), 0, 1));
+
+	oci_NutritionalPreferences.addDatatypeProperty(
+		NutritionalPreferences.PROP__PREFERRED_COOKING_TECHNIQUES)
+		.setFunctional();
+	oci_NutritionalPreferences
+		.addRestriction(MergedRestriction
+			.getAllValuesRestrictionWithCardinality(
+				NutritionalPreferences.PROP__PREFERRED_COOKING_TECHNIQUES,
+				TypeMapper.getDatatypeURI(String.class), 0, 1));
+
+	oci_NutritionalPreferences.addObjectProperty(
+		NutritionalPreferences.PROP_FOOD_DISLIKES).setFunctional();
+	oci_NutritionalPreferences
+		.addRestriction(MergedRestriction.getAllValuesRestriction(
+			NutritionalPreferences.PROP_FOOD_DISLIKES, Food.MY_URI));
+
+	oci_NutritionalPreferences.addObjectProperty(
+		NutritionalPreferences.PROP_FAVOURITE_RECIPES).setFunctional();
+	oci_NutritionalPreferences.addRestriction(MergedRestriction
+		.getAllValuesRestriction(
+			NutritionalPreferences.PROP_FAVOURITE_RECIPES,
+			Recipe.MY_URI));
+
+	oci_NutritionalSubProfile.setResourceComment("");
+	oci_NutritionalSubProfile.setResourceLabel("NutritionalSubProfile");
+	oci_NutritionalSubProfile.addSuperClass(ManagedIndividual.MY_URI);
+	oci_NutritionalSubProfile.addObjectProperty(
+		NutritionalSubProfile.PROP_NUTRITIONAL_HABITS).setFunctional();
+	oci_NutritionalSubProfile.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalSubProfile.PROP_NUTRITIONAL_HABITS,
+			NutritionalHabits.MY_URI, 1, 1));
+
+	oci_NutritionalSubProfile.addObjectProperty(
+		NutritionalSubProfile.PROP_NUTRITIONAL_PREFERENCES)
+		.setFunctional();
+	oci_NutritionalSubProfile.addRestriction(MergedRestriction
+		.getAllValuesRestrictionWithCardinality(
+			NutritionalSubProfile.PROP_NUTRITIONAL_PREFERENCES,
+			NutritionalPreferences.MY_URI, 1, 1));
 
 	/*
 	 * // load GetRecipeService oci =
