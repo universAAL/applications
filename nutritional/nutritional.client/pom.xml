@@ -6,7 +6,8 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>nutritional.pom</artifactId>
-		<version>D.0.1-SNAPSHOT</version>
+		<version>D.2.1-SNAPSHOT</version>
+		<relativePath>../nutritional.pom</relativePath>
 	</parent>
 
 	<artifactId>nutritional.client</artifactId>
@@ -21,22 +22,15 @@
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation.osgi</artifactId>
 		</dependency>
-		<!--<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.model.osgi</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.container.xfaces.osgi</artifactId>
-		</dependency>-->
+		<!--<dependency> <groupId>org.universAAL.middleware</groupId> <artifactId>mw.bus.model.osgi</artifactId> 
+			</dependency> <dependency> <groupId>org.universAAL.middleware</groupId> <artifactId>mw.container.xfaces.osgi</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.container.osgi</artifactId>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context.osgi</artifactId>
-		</dependency>-->
+		<!-- <dependency> <groupId>org.universAAL.middleware</groupId> <artifactId>mw.bus.context.osgi</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.ui.osgi</artifactId>
@@ -66,16 +60,9 @@
 			<artifactId>axis-pax</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.apache.axis</groupId>
-			<artifactId>axis-jaxrpc</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-discovery</groupId>
-			<artifactId>commons-discovery</artifactId>
-			<version>0.5</version>
-		</dependency>-->
+		<!-- <dependency> <groupId>org.apache.axis</groupId> <artifactId>axis-jaxrpc</artifactId> 
+			<version>1.4</version> </dependency> <dependency> <groupId>commons-discovery</groupId> 
+			<artifactId>commons-discovery</artifactId> <version>0.5</version> </dependency> -->
 
 	</dependencies>
 

@@ -23,9 +23,11 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.nutrition.Food;
-import org.universAAL.ontology.nutrition.NutritionOntology;
 import org.universAAL.ontology.nutrition.profile.NutritionalPreferences;
 import org.universAAL.ontology.nutrition.profile.NutritionalSubProfile;
+
+
+
 
 /**
  * The UI class that builds the Shopping Form and handles its associated
