@@ -9,6 +9,9 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -79,6 +82,38 @@ public final class DispenserDao extends AbstractDao {
           " with personId=" + personId);
     }
 
+    Dispenser dispenser = getDispenser(person, columnMap);
+
+    Log.info("Dispenser found: %s", getClass(), dispenser);
+
+    return dispenser;
+
+  }
+
+  public Dispenser getDispenserByPerson(Person person) {
+    Log.info("Looking for the dispenser with " + PATIENT_FK_ID + "=%s", getClass(), person.getId());
+
+    Role role = person.getRole();
+    if (role != Role.PATIENT) {
+      throw new MedicationManagerPersistenceException("The person : " + person + " \n\t is not a patient but : " + role);
+    }
+
+    int personId = person.getId();
+    Map<String, Column> columnMap = database.findDispenserByPerson(TABLE_NAME, PersonDao.TABLE_NAME, personId);
+
+    if (columnMap == null || columnMap.isEmpty()) {
+      return null;
+    }
+
+    Dispenser dispenser = getDispenser(person, columnMap);
+
+    Log.info("Dispenser found: %s", getClass(), dispenser);
+
+    return dispenser;
+
+  }
+
+  private Dispenser getDispenser(Person person, Map<String, Column> columnMap) {
     Column col = columnMap.get(ID);
     int id = (Integer) col.getValue();
 
@@ -91,12 +126,7 @@ public final class DispenserDao extends AbstractDao {
     col = columnMap.get(INSTRUCTIONS_FILE_NAME);
     String instructionsFileName = (String) col.getValue();
 
-    Dispenser dispenser = new Dispenser(id, person, name, dispenserUri, instructionsFileName);
-
-    Log.info("Dispenser found: %s", getClass(), dispenser);
-
-    return dispenser;
-
+    return new Dispenser(id, person, name, dispenserUri, instructionsFileName);
   }
 
   public Dispenser getByDispenserUri(String deviceUri) {
@@ -114,7 +144,7 @@ public final class DispenserDao extends AbstractDao {
     int id = (Integer) colId.getValue();
     Column colUri = dispenserRecordMap.get(DISPENSER_URI);
     String dispenserUri = (String) colUri.getValue();
-    Column colName= dispenserRecordMap.get(NAME);
+    Column colName = dispenserRecordMap.get(NAME);
     String name = (String) colName.getValue();
     Column colPatient = dispenserRecordMap.get(PATIENT_FK_ID);
     int personId = (Integer) colPatient.getValue();
@@ -123,5 +153,29 @@ public final class DispenserDao extends AbstractDao {
     String instructionsFileName = (String) instructionsFileNameColumn.getValue();
 
     return new Dispenser(id, person, name, dispenserUri, instructionsFileName);
+  }
+
+  public List<Dispenser> getAllDispensers() {
+    String sql = "select * from MEDICATION_MANAGER.DISPENSER";
+
+    List<Dispenser> dispensers = new ArrayList<Dispenser>();
+
+    try {
+      PreparedStatement ps = getPreparedStatement(sql);
+      List<Map<String, Column>> result = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
+
+      if (result == null || result.isEmpty()) {
+        return dispensers;
+      }
+
+      for (Map<String, Column> columnMap : result) {
+        Dispenser disp = getDispenser(columnMap);
+        dispensers.add(disp);
+      }
+
+      return dispensers;
+    } catch (Exception e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
   }
 }

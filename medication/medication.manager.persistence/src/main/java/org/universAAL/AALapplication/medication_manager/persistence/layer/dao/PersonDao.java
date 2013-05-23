@@ -11,6 +11,8 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
@@ -127,5 +129,33 @@ public final class PersonDao extends AbstractDao {
     }
 
 
+  }
+
+  public List<Person> getAllPersonsWithoutAdmins() {
+    String sql = "select * from MEDICATION_MANAGER.PERSON where UPPER(ROLE) <> ?";
+
+    PreparedStatement ps = null;
+
+    List<Person> persons = new ArrayList<Person>();
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setString(1, Role.ADMIN.getValue());
+      List<Map<String, Column>> personRecords = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
+      if (personRecords == null || personRecords.isEmpty()) {
+        return persons;
+      }
+
+      for (Map<String, Column> columnMap : personRecords) {
+        Person p = getPerson(columnMap);
+        persons.add(p);
+      }
+
+      return persons;
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
   }
 }

@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.ServletUtil.*;
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util.*;
 
 
@@ -50,8 +52,9 @@ public final class DisplayUserManagementHtmlWriterServlet extends BaseHtmlWriter
           return;
         }
 
+        PersistentService persistentService = getPersistentService();
 
-        handleResponse(req, resp);
+        handleResponse(req, resp, persistentService);
 
 
       } catch (Exception e) {
@@ -67,9 +70,10 @@ public final class DisplayUserManagementHtmlWriterServlet extends BaseHtmlWriter
   }
 
 
-  private void handleResponse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
+                              PersistentService persistentService) throws IOException {
     try {
-      ScriptForm scriptForm = new UserManagementForm();
+      ScriptForm scriptForm = new UserManagementForm(persistentService);
       sendResponse(req, resp, scriptForm);
 
     } catch (Exception e) {

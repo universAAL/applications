@@ -17,8 +17,6 @@ body { -webkit-user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
 hr { border: #6993b6 inset 1px; }
 
-body > .loading { height: 1px; overflow: visible; position: absolute; top: 50%; width: 100%; }
-body > .icon { display: block; width: 48px; height: 48px; left: 50%; margin-left: -24px; position: absolute; top: -24px; padding: 0; background: url("../images/48x48/progressbar.gif") no-repeat center center; }
 body .error { background: #fef1ec !important; border: 1px solid #cd0a0a !important; color: #cd0a0a !important; }
 body .cont { margin: 20px auto; text-align: center; padding: 20px; }
 body .cont > div { display: table; margin: 0 auto; }

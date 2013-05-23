@@ -6,14 +6,12 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.In
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Prescription;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.JavaScriptObjectCreator;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.impl.MedicationManagerServletUIException;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -69,10 +67,6 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
       addRow(date, name, medicine);
     }
 
-  }
-
-  private List<PrescriptionDTO> createPrescriptionDTOs(List<Prescription> prescriptions) {
-    return new ArrayList<PrescriptionDTO>();
   }
 
   private String getMedicinesValue(Set<MedicineDTO> medicineDTOSet, int prescriptionId) {

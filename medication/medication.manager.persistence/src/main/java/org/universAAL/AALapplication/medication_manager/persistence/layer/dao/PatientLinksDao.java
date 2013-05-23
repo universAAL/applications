@@ -93,7 +93,12 @@ public final class PatientLinksDao extends AbstractDao {
   }
 
   public Person findPatientCaregiver(Person patient) {
-    Log.info("Looking for the patient =%s caregiver", getClass(), patient);
+    PatientLinks patientLinks = getPatientLinksForPatient(patient);
+    return patientLinks.getCaregiver();
+  }
+
+  public PatientLinks getPatientLinksForPatient(Person patient) {
+    Log.info("Looking for the patient =%s PatientLinks", getClass(), patient);
 
     String sql = "select * from MEDICATION_MANAGER.PATIENT_LINKS where PATIENT_FK_ID = ?";
 
@@ -103,20 +108,18 @@ public final class PatientLinksDao extends AbstractDao {
       ps = getPreparedStatement(sql);
       int patientId = patient.getId();
       ps.setInt(1, patientId);
-      Map<String, Column> caregiverColumnMap = executeQueryExpectedSingleRecord(TABLE_NAME, ps);
-      PatientLinks patientLinks = getPatientLinks(caregiverColumnMap);
-      Person caregiver = patientLinks.getCaregiver();
-      if (caregiver == null) {
-        throw new MedicationManagerPersistenceException("Missing caregiver for a patient with id = " + patientId);
+      Map<String, Column> columnMap = executeQueryExpectedSingleRecord(TABLE_NAME, ps);
+      if (columnMap == null || columnMap.isEmpty()) {
+        throw new MedicationManagerPersistenceException("Missing patientLinks record for a patient: " + patient);
       }
-      return caregiver;
+
+      return getPatientLinks(columnMap);
+
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
     } finally {
       closeStatement(ps);
     }
-
-
   }
 
   private List<Person> getPatients(String sql, PreparedStatement ps) {

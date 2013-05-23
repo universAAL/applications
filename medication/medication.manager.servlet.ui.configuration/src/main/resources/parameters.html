@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>universALL - Medication Manager Service: Parameters</title>
+
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/parameters.js"></script>
+
+    <link href="css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css" type="text/css">
+    <link rel="stylesheet" href="css/parameters.css" type="text/css">
+</head>
+
+<body>
+<script type="text/javascript">
+    /*
+     define parameters, example:
+     */
+    parameters = {
+        "id1":{
+            "name":'medication.reminder.timeout',
+            "value":100,
+            "type":"number",
+            "format":"seconds",
+            "description":"timeout for user response"
+        },
+        "id2":{
+            "name":'medication.intake.interval',
+            "value":1,
+            "type":"number",
+            "format":"minutes",
+            "description":"timestamp to closest intake in minutes tolerance (+/-)"
+        },
+        "id3":{
+            "name":'debug.write.file',
+            "value":false,
+            "type":"boolean",
+            "format":"on/off",
+            "description":""
+        },
+        "id4":{
+            "name":'debug.text.prefix',
+            "value":"Medication Manager Service:",
+            "type":"string",
+            "format":"text",
+            "description":""
+        }
+
+    };
+</script>
+<div class="cont">
+    <div>
+        <h1>universAAL<br/>Medication Manager Service<br/>
+            Parameters</h1>
+        <form name="parameters" action="" method="post">
+        <table id="parameters" class="t1">
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Format</th>
+                <th>Description</th>
+            </tr>
+            <tr class="odd">
+                <td colspan="5" align="center">No Parameters</td>
+            </tr>
+            <tr class="templ">
+                <td nowrap></td>
+                <td></td>
+                <td nowrap></td>
+                <td></td>
+            </tr>
+        </table>
+            <input type="submit" class="button" name="save" value="Save"/>
+            <button name="back" class="right">Back</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
