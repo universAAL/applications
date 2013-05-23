@@ -21,6 +21,7 @@ package org.universAAL.AALapplication.nutritional.services;
 
 import java.util.Hashtable;
 
+import org.universAAL.AALapplication.nutritional.osgi.Activator;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
@@ -50,7 +51,7 @@ public class ServiceGetRecipe extends NutritionService {
     private static Hashtable serverNutritionalRestrictions = new Hashtable();
 
     static {
-	OntologyManagement.getInstance().register(
+	OntologyManagement.getInstance().register(Activator.getModuleContext(),
 		new SimpleOntology(MY_URI, NutritionService.MY_URI,
 			new ResourceFactoryImpl() {
 			    @Override

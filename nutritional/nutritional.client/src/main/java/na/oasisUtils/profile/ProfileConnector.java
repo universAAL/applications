@@ -29,7 +29,8 @@ import na.ws.extra.User;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.universAAL.ontology.nutrition.profile.NutritionalHabits;
+
+
 
 public class ProfileConnector {
     private static Log log = LogFactory.getLog(ProfileConnector.class);

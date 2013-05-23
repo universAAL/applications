@@ -32,7 +32,7 @@ import org.universAAL.ontology.profile.User;
 public class Activator implements BundleActivator {
 
     SharedResources sr;
-    private ModuleContext moduleContext;
+    private static ModuleContext moduleContext;
     private Arranque arranque;
     static final User testUser = new User(
 	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
@@ -54,7 +54,11 @@ public class Activator implements BundleActivator {
 	Utils.println("NUTRITIONAL UI STARTED");
     }
 
-    public void stop(BundleContext context) throws Exception {
+    public static ModuleContext getModuleContext() {
+		return moduleContext;
+	}
+
+	public void stop(BundleContext context) throws Exception {
 	Utils.println("STOPPING NUTRITIONAL UI");
     }
 
