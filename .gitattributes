@@ -2941,8 +2941,11 @@ medication/medication.manager.servlet.ui.configuration/src/main/java/org/univers
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplaySelectConfigActionHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayUserManagementHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/LoginServlet.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/DispenserScriptArrayCreator.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/PersonScriptArrayCreator.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/SelectConfigActionForm.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/UserManagementForm.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/UsersJavaScriptArrayCreator.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/common.css -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/images/animated-overlay.gif -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/images/ui-bg_flat_0_aaaaaa_40x100.png -text
@@ -2962,6 +2965,9 @@ medication/medication.manager.servlet.ui.configuration/src/main/resources/config
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/images/ui-icons_d8e7f3_256x240.png -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/jquery-ui-1.10.2.custom.min.css -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/login.css -text
+medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/notification.css -text
+medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/parameters.css -text
+medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/prescriptions.css -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/reset-min.css -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/style.css -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/user_management.css -text
@@ -2970,9 +2976,13 @@ medication/medication.manager.servlet.ui.configuration/src/main/resources/config
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/js/jquery-1.9.1.js -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/js/jquery-ui-1.10.2.custom.min.js -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/js/login.js -text
+medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/js/notification.js -text
+medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/js/parameters.js -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/js/user_management.js -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/error.html -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/login.html -text
+medication/medication.manager.servlet.ui.configuration/src/main/resources/notification.html -text
+medication/medication.manager.servlet.ui.configuration/src/main/resources/parameters.html -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/select_config_action.html -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/user_management.html -text
 medication/medication.manager.servlet.ui/pom.xml -text

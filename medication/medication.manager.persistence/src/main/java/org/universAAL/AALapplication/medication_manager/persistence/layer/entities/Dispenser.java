@@ -49,6 +49,10 @@ public final class Dispenser extends Entity {
     return instructionsFileName;
   }
 
+  public String getName() {
+    return name;
+  }
+
   @Override
   public String toString() {
     return "Dispenser{" +
