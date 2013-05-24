@@ -81,6 +81,11 @@ agenda/agenda.eventSelection.server/src/main/resources/org/universAAL/agendaEven
 agenda/agenda.eventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_es.properties -text
 agenda/agenda.eventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_hr.properties -text
 agenda/agenda.eventSelection.server/src/main/resources/org/universAAL/agendaEventSelectionTool/server/messages_nl.properties -text
+agenda/agenda.feature/LICENSE.txt svneol=native#text/plain
+agenda/agenda.feature/NOTICE.txt svneol=native#text/plain
+agenda/agenda.feature/README.txt svneol=native#text/plain
+agenda/agenda.feature/pom.xml svneol=native#text/xml
+agenda/agenda.feature/src/main/features/agenda.xml svneol=native#text/xml
 agenda/agenda.gui/ASL2.0.txt -text
 agenda/agenda.gui/MITX.txt -text
 agenda/agenda.gui/NOTICE.txt -text

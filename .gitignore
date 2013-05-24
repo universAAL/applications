@@ -11,6 +11,10 @@ agenda/agenda.eventSelection.server/.classpath
 agenda/agenda.eventSelection.server/.project
 agenda/agenda.eventSelection.server/.settings
 agenda/agenda.eventSelection.server/target
+agenda/agenda.feature/.classpath
+agenda/agenda.feature/.project
+agenda/agenda.feature/.settings
+agenda/agenda.feature/target
 agenda/agenda.gui/.classpath
 agenda/agenda.gui/.project
 agenda/agenda.gui/.settings
