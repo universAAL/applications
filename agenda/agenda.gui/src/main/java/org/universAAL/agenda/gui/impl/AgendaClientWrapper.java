@@ -53,9 +53,9 @@ public class AgendaClientWrapper {
     public List<Event> getDateEvents(List<Calendar> calendars, int year,
 	    int month, int day) {
 	FilterParams fp = new FilterParams(null);
-	System.out.println("y: " + year);
-	System.out.println("m: " + month);
-	System.out.println("d: " + day);
+	LogUtils.logDebug(mcontext, this.getClass(), "getDateEvents",
+		new Object[] { "y: " + year + "\n m: " + month + "d: " + day },
+		null);
 
 	int currentTZ = timeZone;
 	if (useDaylightSaving) {
@@ -228,7 +228,6 @@ public class AgendaClientWrapper {
 		null);
 	return allCalendars;
     }
-
 
     public Calendar addNewCalendar(String name, User owner) {
 	Calendar c = new Calendar();

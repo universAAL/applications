@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.universAAL.agenda.gui.wrappers;
 
 import org.universAAL.ontology.agenda.service.CalendarUIService;

@@ -67,7 +67,6 @@ public class SCaller {
     private static final String OUTPUT_CALENDAR_OWNER_NAME = ProvidedService.CALENDAR_UI_NAMESPACE
 	    + "calendarOwnerName";
 
-    // SC2011 added OUTPUT_CALENDAR_EVENT_LIST
     private static final String OUTPUT_CALENDAR_EVENT_LIST = ProvidedService.CALENDAR_UI_NAMESPACE
 	    + "listOfEvents";
 
@@ -81,6 +80,9 @@ public class SCaller {
 	caller = new DefaultServiceCaller(mcontext);
     }
 
+    /**
+     * @return list of users
+     */
     public List getUserProfiles() {
 	List users = new ArrayList();
 
@@ -125,63 +127,11 @@ public class SCaller {
 	return getUsers;
     }
 
-    // TODO commented when transfered to new prof ont (no ElderlyProfile)
-    // public Boolean getUserType(User user) {
-    // User retUser = null;
-    // log.info("Agenda Remote calls with getUserProfiles");
-    // ServiceResponse sr = this.caller.call(getGetUser(user));
-    // if (sr.getCallStatus() == CallStatus.succeeded) {
-    // try {
-    // Object o = getReturnValue(sr.getOutputs(), OUTPUT_USER);
-    // if (o instanceof User) {
-    // retUser = (User) o;
-    // UserProfile prof = ((User) o).getProfile();
-    // if (prof != null) {
-    // if (prof instanceof ElderlyProfile) {
-    // if (((ElderlyProfile) prof)
-    // .getPersonalPreferenceProfile()
-    // .getXactionModality().equals(Modality.gui)) {
-    // return new Boolean(true);
-    // } else {
-    // return new Boolean(false);
-    // }
-    // } else {
-    // log
-    // .error(
-    // "The user {} has no associated Elderly profile. Cannot determine type.",
-    // user.getURI());
-    // log
-    // .error(
-    // "The user {} hasProfile {}. Interpreting as Elder ()",
-    // new Object[] {
-    // user.getURI(),
-    // prof
-    // .getProperty(Resource.PROP_RDF_TYPE) });
-    // return new Boolean(true);
-    // }
-    // } else {
-    // log
-    // .error(
-    // "The user {} has no associated profile. Cannot determine type.",
-    // user.getURI());
-    // }
-    // }
-    // if (retUser == null)
-    // log
-    // .error("There is not any user with URI: ", user
-    // .getURI());
-    // } catch (Exception e) {
-    // log.error("User corrupt!: " + e.getMessage());
-    // return null;
-    // }
-    // } else {
-    // log.error("Status of getUserProfiles() failed: {}", sr
-    // .getCallStatus());
-    // }
-    // return null;
-    // }
-
-    // new
+    /**
+     * @param calendarName
+     *            calendar title
+     * @return calendar owner (a user)
+     */
     public String getCalendarOwnerNameService(String calendarName) {
 	String calOwnerName = null;
 	long startTime = System.currentTimeMillis();
@@ -243,8 +193,12 @@ public class SCaller {
 	return calOwnerName;
     }
 
-    // FIXME june 2012; check!
-
+    /**
+     * @param calendarName
+     *            calendar title
+     * @return {@link ServiceRequest} for obtaining calendar owner by using
+     *         calendar title
+     */
     private ServiceRequest getCalendarOwnerNameRequest(String calendarName) {
 	ServiceRequest getOwner = new ServiceRequest(new CalendarAgenda(null),
 		null);
@@ -268,6 +222,11 @@ public class SCaller {
     // ///////////////////////////////////////////////////
     // all following Service Requests are the same as in agenda.client
     // ////////////////////////////////////////////////////
+    /**
+     * @param owner
+     *            owner of calendars
+     * @return list of calendar given user has
+     */
     public List getCalendarsByOwnerService(User owner) {
 	List allCalendars = new ArrayList();
 	long startTime = System.currentTimeMillis();
@@ -331,6 +290,12 @@ public class SCaller {
 	return allCalendars;
     }
 
+    /**
+     * @param owner
+     *            owner of a calendar
+     * @return {@link ServiceRequest} for obtaining list of calendars owned by
+     *         given {@link User}
+     */
     private ServiceRequest getCalendarsByOwnerRequest(User owner) {
 	ServiceRequest listCalendars = new ServiceRequest(new CalendarAgenda(
 		null), null);
@@ -348,8 +313,14 @@ public class SCaller {
 	return listCalendars;
     }
 
+    /**
+     * @param c
+     *            {@link Calendar}
+     * @param event
+     *            {@link Event}
+     * @return id a {@link Event} if it was added successfully, -1 otherwise
+     */
     public int addEventToCalendarService(Calendar c, Event event) {
-
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getAddEventToCalendar(c, event));
 	long endTime = System.currentTimeMillis();
@@ -633,10 +604,7 @@ public class SCaller {
     private ServiceRequest getGetCalendarEventList(Calendar c) {
 	ServiceRequest getCalendarEventList = new ServiceRequest(
 		new CalendarAgenda(null), null); // need
-	// a
-	// service
-	// from
-	// Calendar/Agenda
+
 	if (c == null) {
 	    c = new Calendar();
 	}

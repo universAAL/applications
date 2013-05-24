@@ -1,7 +1,5 @@
 package org.universAAL.agenda.gui;
 
-import org.universAAL.ontology.agenda.Event;
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -19,7 +17,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,6 +27,7 @@ import org.universAAL.agenda.gui.components.ImagePanel;
 import org.universAAL.agenda.gui.util.ButtonCreator;
 import org.universAAL.agenda.gui.util.DateUtilities;
 import org.universAAL.agenda.gui.util.GuiConstants;
+import org.universAAL.ontology.agenda.Event;
 
 /**
  * 

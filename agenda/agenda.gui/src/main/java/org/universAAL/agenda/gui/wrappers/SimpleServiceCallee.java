@@ -54,7 +54,8 @@ public class SimpleServiceCallee extends ServiceCallee {
 	    return null;
 
 	if (operation.startsWith(ProvidedCalendarUIService.SERVICE_START_UI)) {
-	    // e.g. call.getInvolvedUser: urn:org.universAAL.aal_space:test_env#saied
+	    // e.g. call.getInvolvedUser:
+	    // urn:org.universAAL.aal_space:test_env#saied
 
 	    return showCalendarUI((User) call.getInvolvedUser());
 	}
@@ -71,16 +72,6 @@ public class SimpleServiceCallee extends ServiceCallee {
 	try {
 	    new CalendarGUI(Activator.getBundleContext(), moduleContext,
 		    loggedInUser);
-
-	    // FIXME removed when trasferring to UI Bus (no
-	    // InputEvent.uAAL_MAIN_MENU_REQUEST)
-
-	    // DefaultInputPublisher ip = new
-	    // DefaultInputPublisher(moduleContext);
-	    //
-	    // // test the main menu
-	    // ip.publish(new UIResponse(resource, null,
-	    // UIResponse.uAAL_MAIN_MENU_REQUEST));
 
 	    return new ServiceResponse(CallStatus.succeeded);
 	} catch (Exception e) {

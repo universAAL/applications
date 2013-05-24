@@ -82,10 +82,13 @@ public class AgendaWebGUI {
 
     public static final String REF_USER = uAAL_INPUT_NAMESPACE + "user";
 
-    //needs to be publicly available because of event delete option
+    // needs to be publicly available because of event delete option
     public static HashMap<Integer, Event> map;
 
-    // TODO new june 2012
+    /**
+     * @return {@link Form} for selecting a {@link User} that has accessed
+     *         Agenda service at some point
+     */
     public Form getSelectUserMenuForm() {
 	Form f = Form.newDialog(Messages
 		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
@@ -131,15 +134,15 @@ public class AgendaWebGUI {
 
 		userSelect.addChoiceItem(new ChoiceItem(owner, null, owner));
 	    }
-	   
-	    
+
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.GetEventList"),
 		    (String) null), "get_event_list");
-	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
-			.getString("AgendaWebGUI.AddNewEvent"), (String) null), "add");
-	
-	}	
+	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
+		    Messages.getString("AgendaWebGUI.AddNewEvent"),
+		    (String) null), "add");
+
+	}
 
 	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
 		.getString("AgendaWebGUI.Home"), (String) null), "agenda_home");
@@ -279,7 +282,7 @@ public class AgendaWebGUI {
 	    // Message
 	    new SimpleOutput(invisiblegroup2, null, null, Messages
 		    .getString("AgendaWebGUI.InfoToSetReminder"));
-	    InputField remMsg= new InputField(
+	    InputField remMsg = new InputField(
 		    invisiblegroup2,
 		    new Label(Messages.getString("AgendaWebGUI.Message"),
 			    (String) null),
@@ -379,21 +382,19 @@ public class AgendaWebGUI {
 	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.GetEventList"),
 		    (String) null), "get_event_list");
-	    Submit s=new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
-		    Messages.getString("AgendaWebGUI.Submit"), (String) null),
+	    Submit s = new Submit(submits,
+		    new org.universAAL.middleware.ui.rdf.Label(Messages
+			    .getString("AgendaWebGUI.Submit"), (String) null),
 		    "submit");
-		//TODO if rem msg should not be mandatory delete below command	    
-	    //make Reminder Message mandatory (no submit can be done while this message is empty)
+	    // make Reminder Message mandatory (no submit can be done while this
+	    // message is empty)
 	    s.addMandatoryInput(remMsg);
 
 	    // new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 	    // Messages.getString("AgendaWebGUI.28"), (String) null),
 	    // "google");
 
-	    // FIXME removed when trasferring to UI Bus (no
-	    // InputEvent.uAAL_MAIN_MENU_REQUEST) related to: UIProvider line
-	    // 219
-	     new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
+	    new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.Home"), (String) null),
 		    "agenda_home");
 	}
@@ -401,6 +402,11 @@ public class AgendaWebGUI {
 
     }
 
+    /**
+     * @param msg
+     *            message to put in the {@link Form}
+     * @return {@link Form} containing given message
+     */
     public Form getMessageForm(String msg) {
 	Form f = Form.newDialog(Messages
 		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
@@ -448,9 +454,9 @@ public class AgendaWebGUI {
 
 	Collections.sort(events, new MyEventComparator());
 
-	 new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
-			.getString("AgendaWebGUI.AddNewEvent"), (String) null), "add");
-	
+	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
+		.getString("AgendaWebGUI.AddNewEvent"), (String) null), "add");
+
 	new Submit(submits, new org.universAAL.middleware.ui.rdf.Label(Messages
 		.getString("AgendaWebGUI.Home"), (String) null), "agenda_home");
 
@@ -561,28 +567,28 @@ public class AgendaWebGUI {
 	return f;
     }
 
-    // FIXME SC2011 Events form; never used
-    public Form getGoogleForm(Calendar cal) {
-
-	Form f = Form.newDialog(Messages
-		.getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
-	Group controls = f.getIOControls();
-	// Group submits = f.getSubmits();
-
-	// FilterParams params = new FilterParams();
-	List<Event> events = Activator.sCaller.requestEventListService(cal);
-
-	Group GoogleGroup = new Group(controls,
-		new org.universAAL.middleware.ui.rdf.Label("Google",
-			(String) null), null, null, (Resource) null);
-	Group invisiblegroup = new Group(GoogleGroup, null, null, null,
-		(Resource) null);
-
-	new SimpleOutput(invisiblegroup, null, null, "Here this is it ");
-
-	return f;
-
-    }
+    // FIXME Events form; never used
+    // public Form getGoogleForm(Calendar cal) {
+    //
+    // Form f = Form.newDialog(Messages
+    // .getString("AgendaWebGUI.AgendaScreenTitle"), (String) null);
+    // Group controls = f.getIOControls();
+    // // Group submits = f.getSubmits();
+    //
+    // // FilterParams params = new FilterParams();
+    // List<Event> events = Activator.sCaller.requestEventListService(cal);
+    //
+    // Group GoogleGroup = new Group(controls,
+    // new org.universAAL.middleware.ui.rdf.Label("Google",
+    // (String) null), null, null, (Resource) null);
+    // Group invisiblegroup = new Group(GoogleGroup, null, null, null,
+    // (Resource) null);
+    //
+    // new SimpleOutput(invisiblegroup, null, null, "Here this is it ");
+    //
+    // return f;
+    //
+    // }
 
     public String hour(int hour) {
 	if (hour < 10) {
