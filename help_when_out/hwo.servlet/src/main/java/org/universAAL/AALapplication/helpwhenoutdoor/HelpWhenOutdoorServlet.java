@@ -28,8 +28,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.helpwhenoutdoor.common.DataStorage;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
@@ -46,9 +44,6 @@ public class HelpWhenOutdoorServlet extends org.universAAL.ri.servicegateway.Gat
 	 * Auto generated Serial Version ID (by Eclipse)
 	 */
 	private static final long serialVersionUID = -8706580244247319429L;
-
-	private static final Logger log = LoggerFactory
-			.getLogger(HelpWhenOutdoorServlet.class);
 
 	private boolean debug;
 	private String myUrl;
@@ -158,7 +153,7 @@ public class HelpWhenOutdoorServlet extends org.universAAL.ri.servicegateway.Gat
 			String line;
 			// Map API Key for the server
 			String mapKey = DataStorage.getInstance().getMapKey();
-			log.info("Google Map API Key: " + mapKey);
+			System.out.println("Google Map API Key: " + mapKey);
 			while ((line = reader.readLine()) != null) {
 				// Fill the Google API key
 				// Check for map api URL
@@ -210,7 +205,7 @@ public class HelpWhenOutdoorServlet extends org.universAAL.ri.servicegateway.Gat
 			ap.setLocation(new Point(200.0,200.0,CoordinateSystem.WGS84));
 			cp.publish(new ContextEvent(ap,ap.PROP_PHYSICAL_LOCATION));
 			//outdoorPublisher.publishLocation(new Double(200), new Double(200));
-			log.debug("Stop from PDA");
+			System.out.println("Stop from PDA");
 			return;
 		}
 		Double latitudeNum = null;
@@ -227,7 +222,7 @@ public class HelpWhenOutdoorServlet extends org.universAAL.ri.servicegateway.Gat
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			throw new ServletException();
 		}
-		log.debug("Received Lat: " + latitude + ":  Long: " + longitude);
+		System.out.println("Received Lat: " + latitude + ":  Long: " + longitude);
 
 		dataService.setLatitude(latitudeNum);
 		dataService.setLongitude(longitudeNum);

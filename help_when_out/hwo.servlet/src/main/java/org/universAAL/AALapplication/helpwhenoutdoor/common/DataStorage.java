@@ -15,8 +15,6 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.Vector;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.helpwhenoutdoor.stubs.POI;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.ontology.location.position.CoordinateSystem;
@@ -33,8 +31,6 @@ public class DataStorage {
 	private static DataStorage instance;
 	private static Properties properties;
 
-	private static final Logger log = LoggerFactory
-			.getLogger(DataStorage.class);
 	private long historyInterval;
 	private TreeMap addressLocations;
 	
@@ -109,7 +105,7 @@ public class DataStorage {
 			// overwrite the file opening a new FileOutputStream
 			// and closing it
 			if (filesToBeCleared[i].exists()) {
-				log.debug("Clearing file: " + filesToBeCleared[i].getName());
+				System.out.println("Clearing file: " + filesToBeCleared[i].getName());
 				FileOutputStream fos = new FileOutputStream(
 						filesToBeCleared[i], false);
 
@@ -117,7 +113,7 @@ public class DataStorage {
 
 			}
 		}
-		log.info("Cleared information on the data storage for Help when Outdoor");
+		System.out.println("Cleared information on the data storage for Help when Outdoor");
 
 	}
 
@@ -268,7 +264,7 @@ System.err.println("devolviendo el get home position..."+ lat + " " + lng );
 		historyInterval = getHistoryInterval();
 		// if it is less than a millisecond then set the interval to 5 seconds
 		if (historyInterval < 1) {
-			log.debug("History Interval not set: default to 5 seconds");
+			System.out.println("History Interval not set: default to 5 seconds");
 			historyInterval = 5000;
 		}
 

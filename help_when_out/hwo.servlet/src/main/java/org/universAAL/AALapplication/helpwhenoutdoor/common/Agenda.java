@@ -9,8 +9,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.osgi.framework.BundleContext;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.TypeMapper;
@@ -34,7 +32,6 @@ public class Agenda implements Runnable {
 	// private static final String OUTPUT_EVENT_LIST = EventSelectionTool.EVENT_SELECTION_TOOL_NAMESPACE+ "eventList";
 	private Thread thread;
 	private Object lock;
-	private static final Logger log = LoggerFactory.getLogger(Agenda.class);
 
 	/**
 	 * Create an Agenda object and initialize current and next appointment
@@ -121,7 +118,7 @@ public class Agenda implements Runnable {
 		Object returnValue = null;
 
 		if (outputs == null) {
-			log.info("EventSelectionToolConsumer: No info found!");
+			System.out.println("EventSelectionToolConsumer: No info found!");
 		} else
 			for (Iterator i = outputs.iterator(); i.hasNext();) {
 				ProcessOutput output = (ProcessOutput) i.next();
@@ -130,10 +127,10 @@ public class Agenda implements Runnable {
 					if (returnValue == null)
 						returnValue = output.getParameterValue();
 					else
-						log
-								.info("EventSelectionToolConsumer: redundant return value!");
+						System.out
+							.println("EventSelectionToolConsumer: redundant return value!");
 				else
-					log.info("EventSelectionToolConsumer - output ignored: "
+					System.out.println("EventSelectionToolConsumer - output ignored: "
 							+ output.getURI());
 			}
 

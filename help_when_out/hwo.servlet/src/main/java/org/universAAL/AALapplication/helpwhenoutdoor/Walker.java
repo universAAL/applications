@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
@@ -38,9 +36,6 @@ public class Walker {
 	Properties config;
 	private ContextPublisher cp;
 	
-	
-	private static final Logger log = LoggerFactory
-			.getLogger(Walker.class);
 	
 	/**
 	 * Create Walker object and create fake coordinates
@@ -77,9 +72,9 @@ public class Walker {
 		Point punto = null;
 		// Get a new position
 		punto = userpath.get(contador); 
-		log.info("Sending change location event");
+		System.out.println("Sending change location event");
 	    String message = String.format("New location \n Longitude: %1$s \n Latitude: %2$s",punto.getX(),punto.getY());
-	    log.debug(message);
+	    System.out.println(message);
 	    ap.setLocation(new Point(punto.getX(),punto.getY(),CoordinateSystem.WGS84));
 	    cp.publish(new ContextEvent(ap,ap.PROP_PHYSICAL_LOCATION));
 	   	if (contador<2) contador++;
@@ -96,7 +91,7 @@ public class Walker {
 		punto = userpath.get(contador);
 		dataService.setLatitude(punto.getX());
 		dataService.setLongitude(punto.getY());
-		log.info("New point:" + punto.getX()+punto.getY());
+		System.out.println("New point:" + punto.getX()+punto.getY());
 		dataService.setHistoryEntry(new Date().getTime());
 		if (contador<2) contador++;	
 	}

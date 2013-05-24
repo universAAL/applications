@@ -14,15 +14,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.helpwhenoutdoor.SMSGateway;
 
 public class SMSGatewayImpl extends org.universAAL.ri.servicegateway.GatewayPort implements SMSGateway {
 	
 	private String host;
-	private static final Logger log = LoggerFactory.getLogger(SMSGatewayImpl.class);
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Creates an SMSGateway object. If the host is null or empty, it defaults to 10.128.208.17:8080/MAM 
@@ -97,7 +93,7 @@ public class SMSGatewayImpl extends org.universAAL.ri.servicegateway.GatewayPort
 				// successfully delivered, else return false
 				if (sb.toString().indexOf("Result: true") != -1)
 				{
-					log.info("Sent sms to " + number);
+					System.out.println("Sent sms to " + number);
 					return true;
 				}
 				else 
