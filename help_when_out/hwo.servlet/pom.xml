@@ -1,17 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 		<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>D.1.1-SNAPSHOT</version>
+		<version>D.3.1-SNAPSHOT</version>
 		<relativePath>../hwo.pom</relativePath>
 	</parent>
-	<version>D.1.1-SNAPSHOT</version>
+	<version>D.3.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<artifactId>hwo.servlet</artifactId>
 	<name>Help When Outdoor</name>
-	<description />
+	<description/>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
@@ -92,7 +91,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+		<plugin><groupId>org.apache.karaf.tooling</groupId><artifactId>features-maven-plugin</artifactId><version>2.3.0</version></plugin></plugins>
 	</build>
 	<repositories>
 		<repository>
