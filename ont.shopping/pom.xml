@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>org.universAAL.ontology.services</groupId>
 		<artifactId>ont.pom</artifactId>
+		<version>1.3.3-SNAPSHOT</version>
 		<relativePath>../ont.pom</relativePath>
-		<version>1.3.2-SNAPSHOT</version>
 	</parent>
 	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.shopping</artifactId>
-	<version>1.3.2-SNAPSHOT</version>
+	<version>1.3.3-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>Food and Shopping Service - Ontology</name>
 	<description>Food Shopping Ontology</description>
