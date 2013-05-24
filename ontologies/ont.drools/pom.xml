@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.universAAL.ontology.services</groupId>
 		<artifactId>ont.pom</artifactId>
-		<version>1.3.2-SNAPSHOT</version>
+		<version>1.3.3-SNAPSHOT</version>
 		<relativePath>../ont.pom</relativePath>
 	</parent>
 	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.drools</artifactId>
-	<version>1.3.2-SNAPSHOT</version>
+	<version>1.3.3-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>Personal Safety Service - Drools Ontology</name>
 	<licenses>
