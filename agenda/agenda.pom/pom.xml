@@ -6,7 +6,7 @@
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<version>D.2</version>
-		<relativePath>../new_services.pom/pom.xml</relativePath>
+		<relativePath>../../new_services.pom/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>agenda.pom</artifactId>
