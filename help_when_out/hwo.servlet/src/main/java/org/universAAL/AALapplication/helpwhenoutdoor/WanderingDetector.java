@@ -18,14 +18,11 @@ import java.awt.geom.Line2D;
 import java.util.Arrays;
 import java.util.Vector;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.helpwhenoutdoor.common.DataStorage;
 import org.universAAL.ontology.location.position.CoordinateSystem;
 import org.universAAL.ontology.location.position.Point;
 
 public class WanderingDetector {
-private static final Logger log = LoggerFactory.getLogger(WanderingDetector.class);
 protected class RoutePoint {
 	Point RP;
 	long timestamp;
@@ -68,7 +65,7 @@ public WanderingDetector(int lastSegmentIntersectionThreshold,
 
 
 public String isWandering (Point p, long timestamp){
-	log.info("Checking if the user is wandering using intersection counter");
+	System.out.println("Checking if the user is wandering using intersection counter");
 	
 	
 	long oldTimestamp=-1;
@@ -97,7 +94,7 @@ public String isWandering (Point p, long timestamp){
 	 				|| routeIntersections>routeIntersectionsThreshold; //si hemos superado el limite, salimos.
 	 if (resultW)
 	 {
-		 log.info("The user is wandering");
+		 System.out.println("The user is wandering");
 		 clearRouteHistory();
 		 return "WANDERING";
 	 }
@@ -107,14 +104,14 @@ public String isWandering (Point p, long timestamp){
 	
 	 if (resultC)
 	 {
-		 log.info("The user is out of safe Area");
+		 System.out.println("The user is out of safe Area");
 		 clearRouteHistory();
 		 return "OUT";
 	 } 
 	 
 	 
 	 //añadido. Bloque para comprobar si el usuario se ha caído.
-	 log.info("Checking if the user is stopped");
+	 System.out.println("Checking if the user is stopped");
 	 boolean resultS = false;
 	 int routeSizeS=routeHistory.size();
 	
@@ -135,7 +132,7 @@ public String isWandering (Point p, long timestamp){
 	 resultS=stopped(last5points);
 	 if (resultS)
 	 {
-		 log.info("The user has stopped");
+		 System.out.println("The user has stopped");
 		 clearRouteHistory();
 		 return "STOPPED";
 	 }

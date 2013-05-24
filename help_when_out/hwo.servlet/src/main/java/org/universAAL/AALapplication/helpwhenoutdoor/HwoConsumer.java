@@ -25,16 +25,12 @@ import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.location.position.Point;
 import org.universAAL.ontology.profile.AssistedPerson;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 class HwoConsumer extends ContextSubscriber {
 	
 	//private static ServiceCaller caller;	
 	//private static final String HWO_CONSUMER_NAMESPACE = "http://ontology.universAAL.org/HwoConsumer.owl#";
 	
-	 private final static Logger log = LoggerFactory.getLogger(HwoConsumer.class);
 	 private HelpWhenOutdoorDataService dataService;
 	 private DataStorage dataStorage;
 	
@@ -72,7 +68,7 @@ class HwoConsumer extends ContextSubscriber {
 
 	public void handleContextEvent(ContextEvent event) {
 		
-		log.info("recibido evento!");
+		System.out.println("recibido evento!");
 	    LogUtils.logInfo(Activator.context, this.getClass(), "handleContextEvent",
 		    new Object[] {
 				" Recibido Evento de cambio de coordenadas.:\n" +
@@ -89,7 +85,7 @@ class HwoConsumer extends ContextSubscriber {
 	   dataService.setLongitude(p.getY());
 	   dataService.setHistoryEntry(new Date().getTime());
 	   System.out.println("Las coordenadas del evento son "+ p.getX()+", "+p.getY()+ " Y el tiempo: "+ new Date().getTime());
-	   log.info("enviando al Wandering detector");
+	   System.out.println("enviando al Wandering detector");
 	   String wd = Activator.wanderingdetector.isWandering(p, new Date().getTime());
 	} 
 	

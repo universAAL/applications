@@ -13,14 +13,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.helpwhenoutdoor.common.DataStorage;
 
 public class MapEditor extends org.universAAL.ri.servicegateway.GatewayPort {
 
 	private static final long serialVersionUID = -6405348413699069198L;
-	private static final Logger log = LoggerFactory.getLogger(MapEditor.class);
 	Properties config;
 
 	private HelpWhenOutdoorDataService dataService;
@@ -119,7 +116,7 @@ public class MapEditor extends org.universAAL.ri.servicegateway.GatewayPort {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		log.debug("Do POST !!!");
+		System.out.println("Do POST !!!");
 	}
 
 	public void doPut(HttpServletRequest request, HttpServletResponse response)
@@ -168,7 +165,7 @@ public class MapEditor extends org.universAAL.ri.servicegateway.GatewayPort {
 			// TODO: return an alert with the exception
 		}
 
-		log.debug(data);
+		System.out.println(data);
 	}
 
 	public Properties getProperties() {

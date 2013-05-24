@@ -19,8 +19,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.universAAL.AALapplication.helpwhenoutdoor.common.AddressLocation;
 import org.universAAL.AALapplication.helpwhenoutdoor.common.Agenda;
 import org.universAAL.AALapplication.helpwhenoutdoor.common.AgendaEvent;
@@ -41,7 +39,6 @@ import org.w3c.dom.Element;
  */
 public class HelpWhenOutdoorXMLDataService implements
 		HelpWhenOutdoorDataService {
-	private static final Logger log = LoggerFactory.getLogger(HelpWhenOutdoorXMLDataService.class);
 	private Double latitude;
 	private Double longitude;
 
@@ -77,7 +74,7 @@ public class HelpWhenOutdoorXMLDataService implements
 		} else {
 			this.latitude = latitude;
 			updatedLat = true;
-			log.debug("Update latitude: " + latitude);
+			System.out.println("Update latitude: " + latitude);
 		}
 	}
 
@@ -103,7 +100,7 @@ public class HelpWhenOutdoorXMLDataService implements
 		} else {
 			this.longitude = longitude;
 			updatedLng = true;
-			log.debug("Update longitude: " + longitude);
+			System.out.println("Update longitude: " + longitude);
 		}
 	}
 	
@@ -191,7 +188,7 @@ public class HelpWhenOutdoorXMLDataService implements
 			StreamResult xmlResult = new StreamResult(sw);
 			DOMSource source = new DOMSource(serviceDoc);
 			transformer.transform(source, xmlResult);
-			log.info("Writing XML document for Help When Outdoor");
+			System.out.println("Writing XML document for Help When Outdoor");
 			return sw.toString();
 		} catch (TransformerConfigurationException e) {
 			e.printStackTrace();

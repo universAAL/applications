@@ -4,10 +4,10 @@
 		<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>D.0.1-SNAPSHOT</version>
+		<version>D.1.1-SNAPSHOT</version>
 		<relativePath>../hwo.pom</relativePath>
 	</parent>
-	<version>D.0.1-SNAPSHOT</version>
+	<version>D.1.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<artifactId>hwo.servlet</artifactId>
 	<name>Help When Outdoor</name>

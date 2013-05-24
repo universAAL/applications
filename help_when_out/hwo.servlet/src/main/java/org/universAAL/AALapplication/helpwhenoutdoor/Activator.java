@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.util.Properties;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.universAAL.AALapplication.helpwhenoutdoor.common.Agenda;
 import org.universAAL.AALapplication.helpwhenoutdoor.common.BundleProvider;
@@ -23,16 +21,15 @@ import org.universAAL.AALapplication.helpwhenoutdoor.impl.SMSGatewayImpl;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.context.ContextEvent;
-import org.universAAL.middleware.sodapop.msg.MessageContentSerializerEx;
 import org.universAAL.ontology.location.position.CoordinateSystem;
 import org.universAAL.ontology.location.position.Point;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ri.gateway.communicator.service.RemoteSpacesManager;
+import org.universAAL.ri.gateway.eimanager.ImportEntry;
 import org.universAAL.ri.servicegateway.GatewayPort;
 
 public class Activator implements BundleActivator, BundleProvider, Runnable {
 
-    private static final Logger log = LoggerFactory.getLogger(Activator.class);
     public static ModuleContext context = null;
     public static BundleContext osgiContext = null;
     private Agenda agenda;
@@ -66,7 +63,7 @@ public class Activator implements BundleActivator, BundleProvider, Runnable {
 		    + "help_when_outdoor.properties");
 	    config.load(propIS);
 	} catch (IOException e) {
-	    log.error("Cannot load helpwhenoutdoor.properties");
+	    System.out.println("Cannot load helpwhenoutdoor.properties");
 	}
 
 	agenda = new Agenda(context);
@@ -99,22 +96,23 @@ public class Activator implements BundleActivator, BundleProvider, Runnable {
 		new SMSGatewayImpl(null), null);
 	thread = new Thread(this, "Help When Outdoor WB");
 	thread.start();
-	log.info("Service Help When Outdoor STARTED");
+	System.out.println("Service Help When Outdoor STARTED");
 
 	remoteManager = (RemoteSpacesManager) context.getContainer()
 		.fetchSharedObject(context,
 			new Object[] { RemoteSpacesManager.class.getName() });
-	log.info("Sending remote context events request ...");
+	System.out.println("Sending remote context events request ...");
 	new Thread() {
 	    public void run() {
 		boolean result = false;
 		while (!result) {
 		    try{
-			result = remoteManager.importRemoteContextEvents(hwoconsumer,
+			ImportEntry rresult = remoteManager.importRemoteContextEvents(hwoconsumer,
 				    HwoConsumer.getContextSubscriptionParams());
+			result=rresult.isSuccess();//TODO or should I check !=null?
 			
 		    }catch (Exception e) {
-			log.error("AAL Space Gateway error :" + e.getLocalizedMessage());
+			System.out.println("AAL Space Gateway error :" + e.getLocalizedMessage());
 		    }finally{
 			try {
 			    Thread.sleep(5000);
@@ -123,9 +121,9 @@ public class Activator implements BundleActivator, BundleProvider, Runnable {
 			}
 		    }
 		    if (result){
-			log.info("Import succeded!!!");
+			System.out.println("Import succeded!!!");
 		    }else{
-			log.info("Retrying import request ...");
+			System.out.println("Retrying import request ...");
 		    }
 		}
 		
@@ -135,7 +133,7 @@ public class Activator implements BundleActivator, BundleProvider, Runnable {
     }
 
     public void stop(BundleContext arg0) throws Exception {
-	log.info("Service Help When Outdoor STOPPED");
+	System.out.println("Service Help When Outdoor STOPPED");
     }
 
     public Agenda getAgenda() {
