@@ -2,13 +2,10 @@ package org.universAAL.agenda.gui.osgi;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-
 import org.universAAL.agenda.gui.wrappers.SimpleServiceCallee;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.container.utils.LogUtils;
-import org.universAAL.middleware.util.Constants;
-import org.universAAL.ontology.profile.User;
 
 /**
  * @author kagnantis
@@ -16,7 +13,7 @@ import org.universAAL.ontology.profile.User;
  * 
  */
 public class Activator implements BundleActivator {
-    
+
     private static BundleContext bcontext;
 
     /**
@@ -72,6 +69,6 @@ public class Activator implements BundleActivator {
      * @return the mcontext
      */
     public static ModuleContext getMcontext() {
-        return mcontext;
+	return mcontext;
     }
 }

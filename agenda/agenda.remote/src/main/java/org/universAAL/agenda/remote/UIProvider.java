@@ -119,9 +119,7 @@ public class UIProvider extends UICaller {
 		handleSubmit(uiresponse);
 		submit = null;
 	    }
-	    // FIXME commented when transferring to UI Bus (no
-	    // InputEvent.uAAL_MAIN_MENU_REQUEST) related to: AgendaWebGUI line
-	    // 305
+
 	    else if (submit.equals("agenda_home")) {
 		LogUtils.logDebug(mcontext, this.getClass(),
 			"handleUIResponse",
@@ -191,15 +189,16 @@ public class UIProvider extends UICaller {
 
 		submit = null;
 
-	    } else if (submit.equals("google")) {
-		// TODO functionality
-		LogUtils.logInfo(mcontext, this.getClass(), "handleUIResponse",
-			new Object[] { "Running Google calendar" }, null);
-		Calendar cal = (Calendar) uiresponse
-			.getUserInput(new String[] { AgendaWebGUI.REF_CALENDAR });
-
-		showGoogleScreen(remoteLoggedUser, cal);
-		submit = null;
+		// } else if (submit.equals("google")) {
+		//
+		// LogUtils.logInfo(mcontext, this.getClass(),
+		// "handleUIResponse",
+		// new Object[] { "Running Google calendar" }, null);
+		// Calendar cal = (Calendar) uiresponse
+		// .getUserInput(new String[] { AgendaWebGUI.REF_CALENDAR });
+		//
+		// showGoogleScreen(remoteLoggedUser, cal);
+		// submit = null;
 	    } else {
 		LogUtils.logError(mcontext, this.getClass(),
 			"handleUIResponse", new Object[] {
@@ -378,6 +377,10 @@ public class UIProvider extends UICaller {
 		new Object[] { "Dialog aborted. Doing nothing..." }, null);
     }
 
+    /**
+     * @param remoteLoggedUser
+     *            {@link User} accessing the service
+     */
     public void showInitialScreen(User remoteLoggedUser) {
 	LogUtils
 		.logInfo(
@@ -434,17 +437,17 @@ public class UIProvider extends UICaller {
 	sendUIRequest(oe);
     }
 
-    // TODO show google screen, functionality not implemented yet
-    public void showGoogleScreen(User user, Calendar cal) {
-	LogUtils.logInfo(mcontext, this.getClass(), "showEventsScreen",
-		new Object[] {
-			"Sending UI Request: showGoogleScreen for user {}",
-			user.getURI() }, null);
-
-	Form f = webUI.getGoogleForm(cal);
-	UIRequest oe = new UIRequest(user, f, LevelRating.middle, Locale
-		.getDefault(), PrivacyLevel.insensible);
-	sendUIRequest(oe);
-    }
+    // showGoogleScreen
+    // public void showGoogleScreen(User user, Calendar cal) {
+    // LogUtils.logInfo(mcontext, this.getClass(), "showEventsScreen",
+    // new Object[] {
+    // "Sending UI Request: showGoogleScreen for user {}",
+    // user.getURI() }, null);
+    //
+    // Form f = webUI.getGoogleForm(cal);
+    // UIRequest oe = new UIRequest(user, f, LevelRating.middle, Locale
+    // .getDefault(), PrivacyLevel.insensible);
+    // sendUIRequest(oe);
+    // }
 
 }
