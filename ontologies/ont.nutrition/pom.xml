@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.nutrition</artifactId>
-	<version>1.3.2-SNAPSHOT</version>
+	<version>1.3.3-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>Nutritional Advisor Service - Ontology</name>
 	<description>Ontology for the services that manage Context History</description>
