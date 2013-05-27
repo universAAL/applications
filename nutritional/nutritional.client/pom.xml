@@ -78,7 +78,7 @@
 						<Bundle-Activator>org.universAAL.AALapplication.nutritional.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Private-package>na.*</Private-package>
+						<Export-Package></Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
