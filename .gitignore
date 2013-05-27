@@ -178,6 +178,10 @@ medication/medication.missing.services.simulation/.settings
 medication/medication.missing.services.simulation/target
 new_services.pom/.project
 new_services.pom/.settings
+nutritional/nutritional.client/.classpath
+nutritional/nutritional.client/.project
+nutritional/nutritional.client/.settings
+nutritional/nutritional.client/target
 nutritional/nutritional.democlient/target
 nutritional/nutritional.ontology/.classpath
 nutritional/nutritional.ontology/.project
