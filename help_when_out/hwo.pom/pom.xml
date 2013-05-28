@@ -1,16 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>D.0</version>
+		<version>D.3</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 
 	<artifactId>hwo.pom</artifactId>
-	<version>D.0.1-SNAPSHOT</version>
+	<version>D.3.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Help When Outdoor AAL Service</name>
