@@ -22,8 +22,10 @@
 		<module>../food_shopping/pom</module>
 		<module>../safety_home/pom</module>
 		<module>../medication/medication.manager.pom</module>
-		<module>../agenda/agenda.pom</module>
 		<module>../aal_eficiency/AALfficiency.pom</module>
+		<module>../agenda/agenda.pom</module>
+		<module>../nutritional/nutritional.pom</module>
+		<module>../help_when_out/hwo.pom</module>
 	</modules>
 
 	<properties>
