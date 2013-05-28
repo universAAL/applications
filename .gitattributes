@@ -3159,6 +3159,10 @@ medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/med
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/MedicationManagerUIException.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/ReminderDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/RequestMedicationInfoDialogProvider.java -text
+medication/medication.manager.user.management/pom.xml -text
+medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/Activator.java -text
+medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/Log.java -text
+medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/MedicationManagerUserManagementException.java -text
 medication/medication.missing.services.simulation/ASL2.0 -text
 medication/medication.missing.services.simulation/MITX.txt -text
 medication/medication.missing.services.simulation/NOTICE -text

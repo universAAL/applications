@@ -172,6 +172,8 @@ medication/medication.manager.ui/*.iml
 medication/medication.manager.ui/.project
 medication/medication.manager.ui/.settings
 medication/medication.manager.ui/target
+medication/medication.manager.user.management/*.iml
+medication/medication.manager.user.management/target
 medication/medication.missing.services.simulation/*.iml
 medication/medication.missing.services.simulation/.project
 medication/medication.missing.services.simulation/.settings
