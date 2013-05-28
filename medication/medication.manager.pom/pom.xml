@@ -66,6 +66,7 @@
     <module>../medication.manager.servlet.ui.base</module>
     <module>../medication.manager.servlet.ui.configuration</module>
     <module>../medication.manager.event.issuer</module>
+    <module>../medication.manager.user.management</module>
     <!--  <module>../medication.manager.integration.tests</module> -->
     <!--<module>../medication.manager.ui.runner</module>-->
   </modules>
