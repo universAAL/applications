@@ -3,11 +3,11 @@
   <parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>D.0.1-SNAPSHOT</version>
+		<version>D.3.1-SNAPSHOT</version>
 		<relativePath>../hwo.pom</relativePath>
   </parent>
   <artifactId>hwo.mobile</artifactId>
-  <version>D.0.1-SNAPSHOT</version>
+  <version>D.3.1-SNAPSHOT</version>
   <name>Help When Outdoor - Mobile application</name>
   <description/>
   <packaging>bundle</packaging>
