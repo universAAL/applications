@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.user.management.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.ontology.profile.AssistedPerson;
@@ -25,7 +26,7 @@ public final class Activator implements BundleActivator {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
 
-    UserManagerImpl userManager = new UserManagerImpl(mc);
+    UserManager userManager = new UserManagerImpl(mc);
 
 
     addUsers(userManager);
@@ -49,7 +50,7 @@ public final class Activator implements BundleActivator {
 
   }
 
-  private void addUsers(UserManagerImpl userManager) {
+  private void addUsers(UserManager userManager) {
 
     Caregiver caregiver = new Caregiver(USER_SPACE + "Said");
 
