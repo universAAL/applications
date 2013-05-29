@@ -4,8 +4,9 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.User;
-import org.universAAL.ontology.profile.UserProfile;
 
 import java.util.List;
 
@@ -26,22 +27,10 @@ public final class Activator implements BundleActivator {
 
     UserManagerImpl userManager = new UserManagerImpl(mc);
 
-   /* User caregiver = new User(USER_SPACE + "Nikola");
-    caregiver.setProperty(USER_SPACE + "username", "");
-    caregiver.setProperty(USER_SPACE + "password", "");
-    caregiver.setProperty(USER_SPACE + "userRole", "CAREGIVER");
-
-    String statusText = userManager.addUser(caregiver);
-
-    System.out.println("statusText = " + statusText);
 
 //    addUsers(userManager);
 
-    Set<User> userSet = userManager.getUsers();
-
-    System.out.println("userSet = " + userSet);*/
-
-    List <User> users = userManager.getAllUsers();
+    List<User> users = userManager.getAllUsers();
 
     if (users == null) {
       throw new MedicationManagerUserManagementException("Null result");
@@ -49,58 +38,29 @@ public final class Activator implements BundleActivator {
 
     for (User user : users) {
       System.out.println("user.getURI() = " + user.getURI());
-      String userProfile = userManager.getUserProfile(user);
-      System.out.println("userProfile = " + userProfile);
-      List usersubprofiles = userManager.getUserSubprofiles(new UserProfile(userProfile));
-      System.out.println("usersubprofiles = " + usersubprofiles);
-
-      User us = userManager.getUser(user.getURI());
-      System.out.println("us.getURI() = " + us.getURI());
+      if (user.getClass().equals(AssistedPerson.class)) {
+        System.out.println("The user is a AssistedPerson");
+      } else if (user.getClass().equals(Caregiver.class)) {
+        System.out.println("The user is a Caregiver");
+      }
 
     }
-
-
-
 
 
   }
 
   private void addUsers(UserManagerImpl userManager) {
-    User enduser = new User(USER_SPACE + "User");
-    enduser.setProperty(USER_SPACE + "username", "");
-    enduser.setProperty(USER_SPACE + "password", "");
-    //     enduser.setProperty(USER_SPACE+"confirmpassword", "");
-    enduser.setProperty(USER_SPACE + "userRole", new String("ENDUSER"));
+    Caregiver caregiver = new Caregiver(USER_SPACE + "Ivan");
 
-    User deployer = new User(USER_SPACE + "Deployer");
-    deployer.setProperty(USER_SPACE + "username", "");
-    deployer.setProperty(USER_SPACE + "password", "");
-    //     deployer.setProperty(USER_SPACE+"confirmpassword", "");
-    deployer.setProperty(USER_SPACE + "userRole", "DEPLOYER");
+    AssistedPerson assistedPerson = new AssistedPerson(USER_SPACE + "Dragan");
 
-    User tec = new User(USER_SPACE + "Technician");
-    tec.setProperty(USER_SPACE + "username", "");
-    tec.setProperty(USER_SPACE + "password", "");
-    //     tec.setProperty(USER_SPACE+"confirmpassword", "");
-    tec.setProperty(USER_SPACE + "userRole", "TECHNICIAN");
+    boolean success  = userManager.addUser(caregiver);
 
-    User care = new User(USER_SPACE + "Caregiver");
-    care.setProperty(USER_SPACE + "username", "");
-    care.setProperty(USER_SPACE + "password", "");
-    //     care.setProperty(USER_SPACE+"confirmpassword", "");
-    care.setProperty(USER_SPACE + "userRole", "CAREGIVER");
+    System.out.println("success = " + success);
 
-    User assisted = new User(USER_SPACE + "AssistedPerson");
-    assisted.setProperty(USER_SPACE + "username", "");
-    assisted.setProperty(USER_SPACE + "password", "");
-    //     assisted.setProperty(USER_SPACE+"confirmpassword", "");
-    assisted.setProperty(USER_SPACE + "userRole", "ASSISTEDPERSON");
+    success = userManager.addUser(assistedPerson);
 
-    userManager.addUser(enduser);
-    userManager.addUser(deployer);
-    userManager.addUser(tec);
-    userManager.addUser(care);
-    userManager.addUser(assisted);
+    System.out.println("success = " + success);
   }
 
   public void stop(BundleContext context) throws Exception {
