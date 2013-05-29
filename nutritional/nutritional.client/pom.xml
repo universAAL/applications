@@ -82,10 +82,11 @@
 						<Private-Package>
 						na.*,
 						org.universAAL.AALapplication.nutritional.*,
-						javax.xml.rpc,javax.xml.rpc.handler
+						javax.xml.rpc.*, javax.xml.soap
 						</Private-Package>
-						<Import-Package>javax.swing, javax.swing.border,
-						  javax.xml.datatype, javax.xml.namespace, javax.xml.rpc.encoding,
+						<Import-Package>javax.swing, javax.swing.border, javax.servlet.*,
+						  javax.activation, javax.xml.transform, org.w3c.dom,
+						  javax.xml.datatype, javax.xml.namespace, 
 						  org.apache.axis, org.apache.axis.client, org.apache.axis.constants,
 						  org.apache.axis.description, org.apache.axis.encoding,
 						  org.apache.axis.encoding.ser, org.apache.axis.soap,
