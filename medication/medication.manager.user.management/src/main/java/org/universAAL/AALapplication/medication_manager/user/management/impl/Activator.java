@@ -28,7 +28,7 @@ public final class Activator implements BundleActivator {
     UserManagerImpl userManager = new UserManagerImpl(mc);
 
 
-//    addUsers(userManager);
+    addUsers(userManager);
 
     List<User> users = userManager.getAllUsers();
 
@@ -50,17 +50,14 @@ public final class Activator implements BundleActivator {
   }
 
   private void addUsers(UserManagerImpl userManager) {
-    Caregiver caregiver = new Caregiver(USER_SPACE + "Ivan");
 
-    AssistedPerson assistedPerson = new AssistedPerson(USER_SPACE + "Dragan");
+    Caregiver caregiver = new Caregiver(USER_SPACE + "Said");
 
-    boolean success  = userManager.addUser(caregiver);
+    AssistedPerson assistedPerson = new AssistedPerson(USER_SPACE + "Venelin");
 
-    System.out.println("success = " + success);
+    userManager.addUser(caregiver);
+    userManager.addUser(assistedPerson);
 
-    success = userManager.addUser(assistedPerson);
-
-    System.out.println("success = " + success);
   }
 
   public void stop(BundleContext context) throws Exception {
