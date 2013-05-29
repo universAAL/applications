@@ -14,7 +14,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universAAL.ontology.impl;
+package org.universAAL.ontology;
 
 import org.universAAL.middleware.container.ModuleActivator;
 import org.universAAL.middleware.container.ModuleContext;
