@@ -26,7 +26,7 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
-import org.universAAL.ontology.impl.MedicationFactory;
+import org.universAAL.ontology.MedicationFactory;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.User;
@@ -35,7 +35,7 @@ import org.universaal.ontology.health.owl.Treatment;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import static org.universAAL.ontology.impl.MedicationFactory.*;
+import static org.universAAL.ontology.MedicationFactory.*;
 
 /**
  * @author George Fournadjiev
