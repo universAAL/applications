@@ -12,64 +12,67 @@ import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.service.ProfilingService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserManagerImpl {
 
   private static ServiceCaller caller = null;
 
-  private static final String OUTPUT_GETPROFILABLE = MedicationOntology.NAMESPACE
-      + "out1";
-  private static final String OUTPUT_GETUSERS = MedicationOntology.NAMESPACE
-      + "out3";
-  private static final String OUTPUT = MedicationOntology.NAMESPACE
-      + "outX";
+  private static final String OUTPUT_GET_ALL_USERS = MedicationOntology.NAMESPACE + "out";
 
   public UserManagerImpl(ModuleContext context) {
     caller = new DefaultServiceCaller(context);
   }
 
-  public boolean addUser(User user) {
-    Log.info("Add user with URI:%", getClass(), user.getURI());
+  public void addUser(User user) {
+    Log.info("Add user with URI:%s", getClass(), user.getURI());
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
     req.addAddEffect(new String[]{ProfilingService.PROP_CONTROLS}, user);
     ServiceResponse resp = caller.call(req);
     CallStatus callStatus = resp.getCallStatus();
-    Log.info("CallStatus:%", getClass(), callStatus.name());
+    Log.info("CallStatus: %s", getClass(), callStatus.name());
 
-    return CallStatus.succeeded.equals(callStatus);
+    if (!CallStatus.succeeded.equals(callStatus)) {
+      throw new MedicationManagerUserManagementException("Unable to add a user: " + user.getURI() + " to the CHE");
+    }
+
   }
 
   public List<User> getAllUsers() {
-    System.out.println("Profile Agent: getAllUsers");
+    Log.info("getAllUsers() from CHE", getClass());
+
+    List<User> users = new ArrayList<User>();
+
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
-    req.addRequiredOutput(OUTPUT_GETUSERS, new String[]{ProfilingService.PROP_CONTROLS});
+
+    req.addRequiredOutput(OUTPUT_GET_ALL_USERS, new String[]{ProfilingService.PROP_CONTROLS});
+
     ServiceResponse resp = caller.call(req);
+
     if (resp.getCallStatus() == CallStatus.succeeded) {
-      Object out = getReturnValue(resp.getOutputs(), OUTPUT_GETUSERS);
-      if (out != null) {
-        System.out.println(out.toString());
-        List<User> users = new ArrayList<User>();
-        List outl = (List) out;
-        for (int i = 0; i < outl.size(); i++) {
-          User ur = (User) outl.get(i);
-          users.add(ur);
-        }
-        return users;
-      } else {
-        System.out.println("NOTHING!");
-        return null;
-      }
+
+      handleSuccessfulResponse(users, resp);
+
     } else {
-      System.out.println("Other results: " + resp.getCallStatus().name());
-      return null;
+      Log.info("CallStatus: %s", getClass(), resp.getCallStatus().name());
+    }
+
+    return users;
+  }
+
+  private void handleSuccessfulResponse(List<User> users, ServiceResponse resp) {
+    List out = getReturnValue(resp.getOutputs(), OUTPUT_GET_ALL_USERS);
+    for (int i = 0; i < out.size(); i++) {
+      User ur = (User) out.get(i);
+      users.add(ur);
     }
   }
 
   private List getReturnValue(List outputs, String expectedOutput) {
 
     if (outputs == null) {
-      return null;
+      return Collections.emptyList();
     }
 
     List returnValue = null;
@@ -87,9 +90,9 @@ public class UserManagerImpl {
 
     if (output.getURI().equals(expectedOutput)) {
       returnValue = getReturnValue(returnValue, output);
-      Log.info("returnValue found: ", getClass(), returnValue);
+      Log.info("returnValue found: %s", getClass(), returnValue);
     } else {
-      Log.info("output ignored: ", getClass(), output.getURI());
+      Log.info("output ignored: %s", getClass(), output.getURI());
     }
     return returnValue;
   }
