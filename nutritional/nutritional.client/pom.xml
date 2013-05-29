@@ -79,7 +79,12 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package></Export-Package>
-						<Import-Package>javax.xml.rpc,javax.swing, javax.swing.border,
+						<Private-Package>
+						na.*,
+						org.universAAL.AALapplication.nutritional.*,
+						javax.xml.rpc,javax.xml.rpc.handler
+						</Private-Package>
+						<Import-Package>javax.swing, javax.swing.border,
 						  javax.xml.datatype, javax.xml.namespace, javax.xml.rpc.encoding,
 						  org.apache.axis, org.apache.axis.client, org.apache.axis.constants,
 						  org.apache.axis.description, org.apache.axis.encoding,
