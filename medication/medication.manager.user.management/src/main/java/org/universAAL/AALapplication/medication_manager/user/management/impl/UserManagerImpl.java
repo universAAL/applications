@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.user.management.impl;
 
+import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class UserManagerImpl {
+public class UserManagerImpl implements UserManager {
 
   private static ServiceCaller caller = null;
 
