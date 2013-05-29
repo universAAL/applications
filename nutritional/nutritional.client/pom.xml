@@ -79,6 +79,28 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package></Export-Package>
+						<Import-Package>javax.xml.rpc,javax.swing, javax.swing.border,
+						  javax.xml.datatype, javax.xml.namespace, javax.xml.rpc.encoding,
+						  org.apache.axis, org.apache.axis.client, org.apache.axis.constants,
+						  org.apache.axis.description, org.apache.axis.encoding,
+						  org.apache.axis.encoding.ser, org.apache.axis.soap,
+						  org.apache.axis.types, org.apache.axis.utils,
+						  org.apache.commons.logging, org.osgi.framework,
+						  org.universAAL.middleware.container,
+						  org.universAAL.middleware.container.osgi,
+						  org.universAAL.middleware.container.osgi.util,
+						  org.universAAL.middleware.container.utils,
+						  org.universAAL.middleware.owl, org.universAAL.middleware.owl.supply,
+						  org.universAAL.middleware.rdf, org.universAAL.middleware.rdf.impl,
+						  org.universAAL.middleware.service,
+						  org.universAAL.middleware.service.owl,
+						  org.universAAL.middleware.service.owls.process,
+						  org.universAAL.middleware.service.owls.profile,
+						  org.universAAL.middleware.ui, org.universAAL.middleware.ui.owl,
+						  org.universAAL.middleware.ui.rdf, org.universAAL.middleware.util,
+						  org.universAAL.ontology.medMgr, org.universAAL.ontology.nutrition,
+						  org.universAAL.ontology.nutrition.profile,
+						  org.universAAL.ontology.profile, org.xml.sax</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>
