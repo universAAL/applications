@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface UserManager {
 
-  void addUser(User user);
+  void loadDummyUsersIntoChe(); //temporary method
 
   List<User> getAllUsers();
 }

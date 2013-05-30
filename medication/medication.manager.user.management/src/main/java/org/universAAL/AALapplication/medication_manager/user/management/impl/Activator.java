@@ -29,13 +29,15 @@ public final class Activator implements BundleActivator {
     UserManager userManager = new UserManagerImpl(mc);
 
 
-    addUsers(userManager);
+    userManager.loadDummyUsersIntoChe();
 
+//    printUsers(userManager);
+
+
+  }
+
+  private void printUsers(UserManager userManager) {
     List<User> users = userManager.getAllUsers();
-
-    if (users == null) {
-      throw new MedicationManagerUserManagementException("Null result");
-    }
 
     for (User user : users) {
       System.out.println("user.getURI() = " + user.getURI());
@@ -46,11 +48,9 @@ public final class Activator implements BundleActivator {
       }
 
     }
-
-
   }
 
-  private void addUsers(UserManager userManager) {
+  /*private void addUsers(UserManager userManager) {
 
     Caregiver caregiver = new Caregiver(USER_SPACE + "Said");
 
@@ -59,7 +59,7 @@ public final class Activator implements BundleActivator {
     userManager.addUser(caregiver);
     userManager.addUser(assistedPerson);
 
-  }
+  }*/
 
   public void stop(BundleContext context) throws Exception {
 
