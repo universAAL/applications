@@ -41,9 +41,10 @@ public final class VCardPropertiesParser {
 
   }
 
+  private final Properties props = new Properties();
+
   public PersonalInformationSubprofile createSubprofile(String propertyFileName) {
     System.out.println("*********** Parsing the following VCard: " + propertyFileName + " ***************************");
-    Properties props = new Properties();
 
     loadProperties(propertyFileName, props);
 
@@ -53,6 +54,10 @@ public final class VCardPropertiesParser {
     System.out.println("*********** End of parsing: " + propertyFileName + " ***************************");
 
     return subprofile;
+  }
+
+  public Properties getProps() {
+    return props;
   }
 
   private void loadProperties(String propertyFileName, Properties props) {
@@ -71,8 +76,12 @@ public final class VCardPropertiesParser {
     checkForUnknownProperties(props);
     checkForUnImplementedProperties(props);
 
+    String userUri = props.getProperty(USER_URI);
     PersonalInformationSubprofile personalInformationSubprofile =
-        new PersonalInformationSubprofile(PersonalInformationSubprofile.MY_URI);
+        new PersonalInformationSubprofile(userUri + "InfoSubProf");
+
+    populateTextProperty(DISPLAY_NAME, props,
+            personalInformationSubprofile, PROP_DISPLAY_NAME);
 
     populateTextProperty(VCARD_VERSION, props,
         personalInformationSubprofile, PROP_VCARD_VERSION);
@@ -83,8 +92,7 @@ public final class VCardPropertiesParser {
     populateTextProperty(NICKNAME, props,
         personalInformationSubprofile, PROP_NICKNAME);
 
-    populateTextProperty(DISPLAY_NAME, props,
-        personalInformationSubprofile, PROP_DISPLAY_NAME);
+
 
     populateTextProperty(UCI_LABEL, props,
         personalInformationSubprofile, PROP_UCI_LABEL);
