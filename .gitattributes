@@ -2326,6 +2326,11 @@ nutritional/nutritional.democlient/.settings/org.eclipse.pde.core.prefs -text
 nutritional/nutritional.democlient/README.txt -text
 nutritional/nutritional.democlient/pom.xml -text
 nutritional/nutritional.democlient/src/main/java/org/universaal/application/nutritional/democlient/ProjectActivator.java -text
+nutritional/nutritional.feature/LICENSE.txt -text
+nutritional/nutritional.feature/NOTICE.txt -text
+nutritional/nutritional.feature/README.txt -text
+nutritional/nutritional.feature/pom.xml -text
+nutritional/nutritional.feature/src/main/features/na.xml -text
 nutritional/nutritional.ontology/Nutrition.di -text
 nutritional/nutritional.ontology/Nutrition.notation -text
 nutritional/nutritional.ontology/Nutrition.uml -text
