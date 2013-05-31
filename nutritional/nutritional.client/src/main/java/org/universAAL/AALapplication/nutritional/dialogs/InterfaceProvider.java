@@ -5,6 +5,7 @@ import java.util.Locale;
 import org.universAAL.AALapplication.nutritional.SharedResources;
 import org.universAAL.AALapplication.nutritional.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIRequest;
@@ -23,7 +24,10 @@ public class InterfaceProvider extends UICaller {
 
     public static final String MY_UI_NAMESPACE = SharedResources.CLIENT_NUTRITIONAL_UI_NAMESPACE
 	    + "UIProvider#";
-    public static final String IMG_URL = "http://127.0.0.1:8080/resources/nutritional.uiclient.basic/";
+    
+    private static String absolutePath = new BundleConfigHome("nutritional.client").getAbsolutePath();
+    
+    public static final String IMG_URL = "http://127.0.0.1:8080/resources/nutritional.client/";
 
     public InterfaceProvider(ModuleContext context) {
 	super(context);
