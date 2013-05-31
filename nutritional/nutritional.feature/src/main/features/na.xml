@@ -11,9 +11,11 @@
 		<!--feature>uAAL-WP2-Ontologies</feature> Once that feature is create we can remove them from belowq -->
 
 <!-- Third party dependency -->
-<bundle>mvn:axis/axis-pax/1.4</bundle>
-<bundle>mvn:org.apache.axis/axis-jaxrpc/1.4</bundle>
-<bundle>mvn:commons-discovery/commons-discovery/0.5</bundle>
+<bundle>wrap:mvn:axis/axis-pax/1.4</bundle>
+<bundle>wrap:mvn:axis/axis-wsdl4j</bundle>
+<bundle>wrap:mvn:commons-discovery/commons-discovery/0.5</bundle>
+<bundle>wrap:mvn:javax.mail/mail/1.4.1</bundle>
+<bundle>wrap:mvn:org.apache.axis/axis-jaxrpc/1.4</bundle>
 
 <!-- Ontologies -->
 
