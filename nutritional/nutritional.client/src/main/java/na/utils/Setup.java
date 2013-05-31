@@ -16,7 +16,7 @@ public class Setup {
     // protected static final String DEFAULT_PATH_Nutritional_DESCRIPTOR =
     // Constants.getSpaceConfRoot() + "/NutritionalAdvisor";
     private static String absolutePath = new BundleConfigHome(
-	    "nutritional.uiclient").getAbsolutePath();
+	    "nutritional.client").getAbsolutePath();
 
     protected static final String DEFAULT_PATH_Nutritional_DESCRIPTOR = absolutePath
 	    + "/NutritionalAdvisor";

@@ -8,7 +8,7 @@ import org.universAAL.ontology.profile.AssistedPerson;
 
 public class SharedResources {
 
-    public static final String CLIENT_NUTRITIONAL_UI_NAMESPACE = "urn:samples.nutrition.uiclient:";
+    public static final String CLIENT_NUTRITIONAL_UI_NAMESPACE = "urn:nutrition.client:";
 
     private static ModuleContext moduleContext;
 
