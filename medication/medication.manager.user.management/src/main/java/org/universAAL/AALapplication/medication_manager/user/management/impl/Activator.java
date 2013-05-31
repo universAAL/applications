@@ -31,7 +31,7 @@ public final class Activator implements BundleActivator {
 
     userManager.loadDummyUsersIntoChe();
 
-//    printUsers(userManager);
+    printUsers(userManager);
 
 
   }
