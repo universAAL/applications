@@ -1,6 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.user.management;
 
-import org.universAAL.ontology.profile.User;
+import org.universAAL.AALapplication.medication_manager.user.management.impl.UserInfo;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ public interface UserManager {
 
   void loadDummyUsersIntoChe(); //temporary method
 
-  List<User> getAllUsers();
+  List<UserInfo> getAllUsers();
 }
