@@ -175,9 +175,8 @@ public class UserManagerImpl implements UserManager {
     req.addRequiredOutput(OUTPUT_GET_SUBPROFILE, new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE});
     ServiceResponse resp = caller.call(req);
 
-
-    //TODO at the moment the CHE is not returning a sucessful response so we take the profile from the local cache
     if (resp.getCallStatus() == CallStatus.succeeded) {
+
       PersonalInformationSubprofile informationSubprofile = processOutput(OUTPUT_GET_SUBPROFILE, resp.getOutputs());
       if (informationSubprofile != null) {
 
@@ -186,10 +185,10 @@ public class UserManagerImpl implements UserManager {
         return informationSubprofile;
 
       } else {
-        System.out.println("&&&&&&&&&&&&&&&&&&&  !");
+        System.out.println("PersonalInformationSubprofile is null !");
       }
     } else {
-      System.out.println("&&&&&&&&&&&&&&&& Other results: " + resp.getCallStatus().name());
+      System.out.println("Other CallStatus results: " + resp.getCallStatus().name());
     }
 
     throw new MedicationManagerUserManagementException("Unsuccessful response");
