@@ -84,10 +84,10 @@ public class UserManagerImpl implements UserManager {
 
   }
 
-  public List<User> getAllUsers() {
+  public List<UserInfo> getAllUsers() {
     Log.info("getAllUsers() from CHE", getClass());
 
-    List<User> users = new ArrayList<User>();
+    List<UserInfo> users = new ArrayList<UserInfo>();
 
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
 
@@ -106,13 +106,20 @@ public class UserManagerImpl implements UserManager {
     return users;
   }
 
-  private void handleSuccessfulResponse(List<User> users, ServiceResponse resp) {
+  private void handleSuccessfulResponse(List<UserInfo> users, ServiceResponse resp) {
     List out = getReturnValue(resp.getOutputs(), OUTPUT_GET_ALL_USERS);
     for (int i = 0; i < out.size(); i++) {
-      User ur = (User) out.get(i);
-      PersonalInformationSubprofile subprofile = getUserSubprofiles(ur);
+      UserInfo ur = getUserInfo(out, i);
       users.add(ur);
     }
+  }
+
+  private UserInfo getUserInfo(List out, int i) {
+    User ur = (User) out.get(i);
+    PersonalInformationSubprofile subprofile = getUserSubprofiles(ur);
+
+
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   public void addProfile(User profilable, UserProfile profile) {

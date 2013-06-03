@@ -2172,10 +2172,13 @@ medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/med
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/ReminderDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/RequestMedicationInfoDialogProvider.java -text
 medication/medication.manager.user.management/pom.xml -text
+medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/AssistedPerson.java -text
+medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/Caregiver.java -text
 medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/UserManager.java -text
 medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/Activator.java -text
 medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/Log.java -text
 medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/MedicationManagerUserManagementException.java -text
+medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/UserInfo.java -text
 medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/UserManagerImpl.java -text
 medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/insert/dummy/users/BaseType.java -text
 medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/insert/dummy/users/EmailEnum.java -text

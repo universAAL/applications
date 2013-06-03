@@ -7,7 +7,6 @@ import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.Caregiver;
-import org.universAAL.ontology.profile.User;
 
 import java.util.List;
 
@@ -35,10 +34,10 @@ public final class Activator implements BundleActivator {
   }
 
   private void printUsers(UserManager userManager) {
-    List<User> users = userManager.getAllUsers();
+    List<UserInfo> users = userManager.getAllUsers();
 
-    for (User user : users) {
-      System.out.println("user.getURI() = " + user.getURI());
+    for (UserInfo user : users) {
+      System.out.println("user.getURI() = " + user.getUri());
       if (user.getClass().equals(AssistedPerson.class)) {
         System.out.println("The user is a AssistedPerson");
       } else if (user.getClass().equals(Caregiver.class)) {
