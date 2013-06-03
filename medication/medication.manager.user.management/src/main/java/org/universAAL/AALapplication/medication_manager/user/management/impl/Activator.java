@@ -19,8 +19,6 @@ public final class Activator implements BundleActivator {
 
   public static ModuleContext mc;
 
-  public static final String USER_SPACE = "urn:org.universAAL.aal_space:user_env#";
-  public static final String HOME_SPACE = "urn:org.universAAL.aal.space:home_env#my_home_space";
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
@@ -29,7 +27,7 @@ public final class Activator implements BundleActivator {
     UserManager userManager = new UserManagerImpl(mc);
 
 
-    userManager.loadDummyUsersIntoChe();
+//    userManager.loadDummyUsersIntoChe();
 
     printUsers(userManager);
 
@@ -50,36 +48,9 @@ public final class Activator implements BundleActivator {
     }
   }
 
-  /*private void addUsers(UserManager userManager) {
-
-    Caregiver caregiver = new Caregiver(USER_SPACE + "Said");
-
-    AssistedPerson assistedPerson = new AssistedPerson(USER_SPACE + "Venelin");
-
-    userManager.addUser(caregiver);
-    userManager.addUser(assistedPerson);
-
-  }*/
-
   public void stop(BundleContext context) throws Exception {
 
   }
 
-  public static void validateParameter(int parameter, String parameterName) {
-
-    if (parameter <= 0) {
-      throw new MedicationManagerUserManagementException("The parameter : " +
-          parameterName + " must be positive number");
-    }
-
-  }
-
-  public static void validateParameter(Object parameter, String parameterName) {
-
-    if (parameter == null) {
-      throw new MedicationManagerUserManagementException("The parameter : " + parameterName + " cannot be null");
-    }
-
-  }
 
 }

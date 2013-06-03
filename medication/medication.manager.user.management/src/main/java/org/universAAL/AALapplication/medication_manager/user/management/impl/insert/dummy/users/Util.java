@@ -33,12 +33,26 @@ public final class Util {
   public static final String ORG = "org";
   public static final String PHOTO = "photo";
   public static final String TEL = "tel";
+  public static final String TYPE = "type";
   public static final String NEW_VCARD_BILL_PROPERTIES = "newVCardBill.properties";
-  public static final String NEW_VCARD_GEORGE_PROPERTIES = "newVCardGeorge.properties";
+  public static final String NEW_VCARD_NIK_PROPERTIES = "newVCardNik.properties";
   public static final String NEW_VCARD_NIKOLA_PROPERTIES = "newVCardNikola.properties";
+  public static final String NEW_VCARD_JOHN_PROPERTIES = "newVCardJohn.properties";
+  public static final String NEW_VCARD_MARIA_PROPERTIES = "newVCardMaria.properties";
+  public static final String NEW_VCARD_IREN_PROPERTIES = "newVCardIren.properties";
+  public static final String ASSISTED_PERSON = "AssistedPerson";
+  public static final String CAREGIVER = "Caregiver";
   static DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
   static String[] UN_IMPLEMENTED_PROPERTIES;
   static String[] PROPERTIES;
+
+  static {
+    PROPERTIES = new String[]{USER_URI, VCARD_VERSION, LAST_REVISION, NICKNAME, DISPLAY_NAME, UCI_LABEL, UCI_ADDITIONAL_DATA,
+        BIRTHPLACE, ABOUT_ME, GENDER, BDAY, EMAIL, FN, N, ORG, PHOTO, TEL, TYPE};
+
+    UN_IMPLEMENTED_PROPERTIES = new String[]{BIRTHPLACE, GENDER, N, ORG, PHOTO};
+
+  }
 
   private Util() {
     // to prevent initialization, because this is util class
@@ -72,7 +86,7 @@ public final class Util {
   }
 
   public static Date getDateFromXMLGregorianCalendar(XMLGregorianCalendar calendar) {
-      return calendar.toGregorianCalendar().getTime();
+    return calendar.toGregorianCalendar().getTime();
 
   }
 

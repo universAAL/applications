@@ -2188,7 +2188,10 @@ medication/medication.manager.user.management/src/main/java/org/universAAL/AALap
 medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/insert/dummy/users/VCardBuilder.java -text
 medication/medication.manager.user.management/src/main/java/org/universAAL/AALapplication/medication_manager/user/management/impl/insert/dummy/users/VCardPropertiesParser.java -text
 medication/medication.manager.user.management/src/main/resources/newVCardBill.properties -text
-medication/medication.manager.user.management/src/main/resources/newVCardGeorge.properties -text
+medication/medication.manager.user.management/src/main/resources/newVCardIren.properties -text
+medication/medication.manager.user.management/src/main/resources/newVCardJohn.properties -text
+medication/medication.manager.user.management/src/main/resources/newVCardMaria.properties -text
+medication/medication.manager.user.management/src/main/resources/newVCardNik.properties -text
 medication/medication.manager.user.management/src/main/resources/newVCardNikola.properties -text
 medication/medication.missing.services.simulation/ASL2.0 -text
 medication/medication.missing.services.simulation/MITX.txt -text
