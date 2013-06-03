@@ -15,6 +15,16 @@
 	<url></url>
 	<dependencies>
 		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.agenda</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+			<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.agendaEventSelection</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>agenda.client</artifactId>
 			<version>${project.version}</version>
