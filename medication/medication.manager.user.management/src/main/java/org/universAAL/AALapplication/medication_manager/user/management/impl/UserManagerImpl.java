@@ -10,6 +10,8 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.medication.MedicationOntology;
+import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.PersonalInformationSubprofile;
 import org.universAAL.ontology.profile.Profilable;
 import org.universAAL.ontology.profile.Profile;
@@ -24,7 +26,6 @@ import java.util.List;
 import java.util.Properties;
 
 import static org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.Util.*;
-import static org.universAAL.ontology.profile.PersonalInformationSubprofile.*;
 
 public class UserManagerImpl implements UserManager {
 
@@ -42,8 +43,12 @@ public class UserManagerImpl implements UserManager {
     VCardPropertiesParser parser = new VCardPropertiesParser();
 
     insertDummyUser(parser, NEW_VCARD_BILL_PROPERTIES);
-    insertDummyUser(parser, NEW_VCARD_GEORGE_PROPERTIES);
+    insertDummyUser(parser, NEW_VCARD_NIK_PROPERTIES);
     insertDummyUser(parser, NEW_VCARD_NIKOLA_PROPERTIES);
+    insertDummyUser(parser, NEW_VCARD_JOHN_PROPERTIES);
+    insertDummyUser(parser, NEW_VCARD_MARIA_PROPERTIES);
+    insertDummyUser(parser, NEW_VCARD_IREN_PROPERTIES);
+
   }
 
   private void insertDummyUser(VCardPropertiesParser parser, String propertyFileName) {
@@ -51,20 +56,32 @@ public class UserManagerImpl implements UserManager {
     Properties properties = parser.getProps();
     String userUri = properties.getProperty(USER_URI);
     if (userUri == null) {
-      throw new MedicationManagerUserManagementException("The " + PROP_URL + " property is not set " +
+      throw new MedicationManagerUserManagementException("The " + USER_URI + " property is not set " +
           "to the PersonalInformationSubprofile instance");
     }
 
-    User user = new User(userUri); //TODO real class like Caregiver, AssistedPerson
+    String type = properties.getProperty(TYPE);
+    if (type == null) {
+      throw new MedicationManagerUserManagementException("The " + TYPE + " property is not set " +
+          "to the PersonalInformationSubprofile instance");
+    }
+
+    User user;
+    if (ASSISTED_PERSON.equals(type)) {
+      user = new AssistedPerson(userUri);
+    } else if (CAREGIVER.equals(type)) {
+      user = new Caregiver(userUri);
+    } else {
+      throw new MedicationManagerUserManagementException("Unknown type : " + type);
+    }
+
 
     addUser(user);
 
     UserProfile profile = new UserProfile(userUri + "Prof");
     addProfile(user, profile);
+    addUserSubprofile(user, subprofile);
 
-    String res = addUserSubprofile(user, subprofile);
-
-    System.out.println("res = " + res);
   }
 
   public List<User> getAllUsers() {
@@ -89,39 +106,32 @@ public class UserManagerImpl implements UserManager {
     return users;
   }
 
-  /*public String getUserSubprofiles(User user) {
-    System.out.println("Get all Subprofiles for user: " + user.getURI());
-    ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
-    req.addValueFilter(new String[]{ProfilingService.PROP_CONTROLS}, user);
-    req.addRequiredOutput(OUTPUT_GET_SUBPROFILES,
-        new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE});
-    ServiceResponse resp = caller.call(req);
-    if (resp.getCallStatus() == CallStatus.succeeded) {
-      Object out = getReturnValue(resp.getOutputs(), OUTPUT_GET_SUBPROFILES);
-      if (out != null) {
-        System.out.println(out.toString());
-        return out.toString();
-      } else {
-        System.out.println("NOTHING!");
-        return null;
-      }
-    } else {
-      System.out.println("Other results: " + resp.getCallStatus().name());
-      return null;
+  private void handleSuccessfulResponse(List<User> users, ServiceResponse resp) {
+    List out = getReturnValue(resp.getOutputs(), OUTPUT_GET_ALL_USERS);
+    for (int i = 0; i < out.size(); i++) {
+      User ur = (User) out.get(i);
+      PersonalInformationSubprofile subprofile = getUserSubprofiles(ur);
+      users.add(ur);
     }
   }
-*/
 
   public void addProfile(User profilable, UserProfile profile) {
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
     req.addValueFilter(new String[]{ProfilingService.PROP_CONTROLS}, profilable);
     req.addAddEffect(new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE}, profile);
     ServiceResponse resp = caller.call(req);
-    System.out.println("resp.getCallStatus().name() = " + resp.getCallStatus().name());
+    CallStatus callStatus = resp.getCallStatus();
+
+    Log.info("CallStatus: %s", getClass(), callStatus);
+
+    if (!CallStatus.succeeded.equals(callStatus)) {
+      throw new MedicationManagerUserManagementException("Unsuccessful add of a subprofile");
+    }
   }
 
-  public String getUserSubprofiles(User user) {
-    System.out.println("Get all Subprofiles for user: " + user.getURI());
+  public PersonalInformationSubprofile getUserSubprofiles(User user) {
+
+    Log.info("Get all Subprofiles for user: %s", getClass(), user.getURI());
 
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
 
@@ -134,24 +144,25 @@ public class UserManagerImpl implements UserManager {
     ServiceResponse resp = caller.call(req);
 
 
-    if (resp.getCallStatus() == CallStatus.succeeded) {
-      Object out = getReturnValue(resp.getOutputs(), OUTPUT_GET_SUBPROFILES);
-      if (out != null) {
-        tempMethod(out);
+    if (!CallStatus.succeeded.equals(resp.getCallStatus())) {
+      throw new MedicationManagerUserManagementException("Unsuccessful call status");
+    }
 
-        System.out.println(out.toString());
-        return out.toString();
-      } else {
-        System.out.println("NOTHING!");
-        return null;
-      }
+    Object out = getReturnValue(resp.getOutputs(), OUTPUT_GET_SUBPROFILES);
+    if (out != null) {
+      PersonalInformationSubprofile userSubprofile = getUserSubprofile(out, user);
+
+      Log.info("Found a PersonalInformationSubprofile : %s", getClass(), userSubprofile);
+
+      return userSubprofile;
     } else {
-      System.out.println("Other results: " + resp.getCallStatus().name());
+      Log.info("Problem with the response outputs!", getClass());
       return null;
     }
+
   }
 
-  private void tempMethod(Object out) {
+  private PersonalInformationSubprofile getUserSubprofile(Object out, User user) {
     List list = (List) out;
 
     PersonalInformationSubprofile subprofile = (PersonalInformationSubprofile) list.get(0);
@@ -159,17 +170,20 @@ public class UserManagerImpl implements UserManager {
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
     String uri = subprofile.getURI();
     System.out.println("uri = " + uri);
-    req.addValueFilter(new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE}, uri);
+    SubProfile subProfile = new SubProfile(uri);
+    req.addValueFilter(new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE}, subprofile);
     req.addRequiredOutput(OUTPUT_GET_SUBPROFILE, new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE});
     ServiceResponse resp = caller.call(req);
 
+
+    //TODO at the moment the CHE is not returning a sucessful response so we take the profile from the local cache
     if (resp.getCallStatus() == CallStatus.succeeded) {
-      Object o = getReturnValue(resp.getOutputs(), OUTPUT_GET_SUBPROFILE);
-      if (o != null) {
-        System.out.println(o.getClass());
-        PersonalInformationSubprofile informationSubprofile = (PersonalInformationSubprofile) o;
+      PersonalInformationSubprofile informationSubprofile = processOutput(OUTPUT_GET_SUBPROFILE, resp.getOutputs());
+      if (informationSubprofile != null) {
 
         System.out.println("informationSubprofile = " + informationSubprofile);
+
+        return informationSubprofile;
 
       } else {
         System.out.println("&&&&&&&&&&&&&&&&&&&  !");
@@ -177,9 +191,29 @@ public class UserManagerImpl implements UserManager {
     } else {
       System.out.println("&&&&&&&&&&&&&&&& Other results: " + resp.getCallStatus().name());
     }
+
+    throw new MedicationManagerUserManagementException("Unsuccessful response");
+
   }
 
-  private String addUserSubprofile(User user, SubProfile subProfile) {
+  private PersonalInformationSubprofile processOutput(String expectedOutput, List outputs) {
+
+    for (Object o : outputs) {
+      ProcessOutput output = (ProcessOutput) o;
+      if (output.getURI().equals(expectedOutput)) {
+        PersonalInformationSubprofile subprofile = (PersonalInformationSubprofile) output.getParameterValue();
+        Log.info("PersonalInformationSubprofile found: %s", getClass(), subprofile);
+        return subprofile;
+      } else {
+        Log.info("output ignored: %s", getClass(), output.getURI());
+      }
+    }
+
+
+    return null;
+  }
+
+  private void addUserSubprofile(User user, SubProfile subProfile) {
     Log.info("Add subProfile for user: %s and subprofile: %s", getClass(), user.getURI(), subProfile.toString());
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
     req.addValueFilter(new String[]{ProfilingService.PROP_CONTROLS}, user);
@@ -187,32 +221,12 @@ public class UserManagerImpl implements UserManager {
         ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE}, subProfile);
 
     ServiceResponse resp = caller.call(req);
-    return resp.getCallStatus().name();
-  }
+    CallStatus callStatus = resp.getCallStatus();
+    Log.info("CallStatus: %s", getClass(), callStatus);
 
-  public String addUserSubprofile(UserProfile userProfile, SubProfile subProfile) {
-    System.out.println("Profile Agent: add subprofile for userProfile: " + userProfile.getURI() + " subprofile: " + subProfile.toString());
-    ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
-    req.addValueFilter(new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE}, userProfile);
-    req.addAddEffect(new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE}, subProfile);
-    ServiceResponse resp = caller.call(req);
-    return resp.getCallStatus().name();
-  }
-
-  private void handleSuccessfulResponse(List<User> users, ServiceResponse resp) {
-    List out = getReturnValue(resp.getOutputs(), OUTPUT_GET_ALL_USERS);
-    for (int i = 0; i < out.size(); i++) {
-      User ur = (User) out.get(i);
-      temp(ur);
-      users.add(ur);
+    if (!CallStatus.succeeded.equals(callStatus)) {
+      throw new MedicationManagerUserManagementException("Unsuccessful add of a subprofile");
     }
-  }
-
-  private void temp(User ur) {
-
-    String sp = getUserSubprofiles(ur);
-
-    System.out.println("sp = " + sp);
   }
 
   private List getReturnValue(List outputs, String expectedOutput) {
