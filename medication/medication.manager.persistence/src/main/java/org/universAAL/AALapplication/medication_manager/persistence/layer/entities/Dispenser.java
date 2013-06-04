@@ -17,7 +17,7 @@ public final class Dispenser extends Entity {
   public Dispenser(int id, Person patient, String name, String dispenserUri, String instructionsFileName) {
     super(id);
 
-    validate(patient, name, dispenserUri, instructionsFileName);
+    validate(name, dispenserUri, instructionsFileName);
 
     this.patient = patient;
     this.name = name;
@@ -29,9 +29,8 @@ public final class Dispenser extends Entity {
     this(0, patient, name, dispenserUri, instructionsFileName);
   }
 
-  private void validate(Person patient, String name, String dispenserUri, String instructionsFileName) {
+  private void validate(String name, String dispenserUri, String instructionsFileName) {
 
-    validateParameter(patient, "patient");
     validateParameter(name, "name");
     validateParameter(dispenserUri, "dispenserUri");
     validateParameter(instructionsFileName, "instructionsFileName");

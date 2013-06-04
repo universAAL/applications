@@ -1,7 +1,5 @@
 package org.universAAL.AALapplication.medication_manager.user.management;
 
-import org.universAAL.AALapplication.medication_manager.user.management.impl.UserInfo;
-
 import static org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.Util.*;
 
 /**

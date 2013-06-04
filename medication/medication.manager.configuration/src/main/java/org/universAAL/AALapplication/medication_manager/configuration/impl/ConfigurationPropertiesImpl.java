@@ -22,6 +22,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "medication.manager.http.session.expire.timeout.in.minutes";
   private static final String HEALTH_TREATMENT_SERVICE_MOCKED = "medication.manager.health.treatment.service.mocked";
   private static final String LOAD_PRESCRIPTIONSDTOS = "medication.manager.load.prescriptionsdtos";
+  private static final String MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE = "medication.manager.insert.dummy.users.into.che";
   private static final String HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES =
       "medication.manager.http.session.timer.checker.interval.in.minutes";
 
@@ -109,6 +110,17 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     }
 
     return load.equalsIgnoreCase(ON);
+  }
+
+  public boolean isInsertDummyUsersIntoChe() {
+    String insert = System.getProperty(MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE);
+
+    if (insert == null) {
+      throw new MedicationManagerConfigurationException("Missing property: " +
+          MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE);
+    }
+
+    return insert.equalsIgnoreCase(ON);
   }
 
   public Properties getMedicationProperties() {

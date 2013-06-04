@@ -7,6 +7,10 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
+import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
+import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
+import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
+import org.universAAL.AALapplication.medication_manager.user.management.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +27,14 @@ public final class UserManagementForm extends ScriptForm {
   private final List<Person> physicians;
   private final List<Person> caregivers;
   private final PersistentService persistentService;
+  private final UserManager userManager;
 
-  public UserManagementForm(PersistentService persistentService) {
+  public UserManagementForm(PersistentService persistentService, UserManager userManager) {
     super();
 
 
     this.persistentService = persistentService;
+    this.userManager = userManager;
 
     PersonDao personDao = persistentService.getPersonDao();
     List<Person> persons = personDao.getAllPersonsWithoutAdmins();
@@ -36,6 +42,9 @@ public final class UserManagementForm extends ScriptForm {
     patients = getPersonInGivenRole(persons, PATIENT);
     physicians = getPersonInGivenRole(persons, PHYSICIAN);
     caregivers = getPersonInGivenRole(persons, CAREGIVER);
+
+    printUsers();
+
   }
 
   private List<Person> getPersonInGivenRole(List<Person> persons, Role role) {
@@ -48,6 +57,30 @@ public final class UserManagementForm extends ScriptForm {
     }
 
     return personList;
+  }
+
+  private void printUsers() {
+    List<UserInfo> users = userManager.getAllUsers();
+
+    for (UserInfo user : users) {
+      System.out.println("\n******** user *****************");
+      String uri = user.getUri();
+      System.out.println("user.getURI() = " + uri);
+      if (user.getClass().equals(AssistedPersonUserInfo.class)) {
+        System.out.println("The user is a AssistedPerson");
+      } else if (user.getClass().equals(CaregiverUserInfo.class)) {
+        System.out.println("The user is a Caregiver");
+      }
+
+      PersonDao personDao = persistentService.getPersonDao();
+      Person person = personDao.getPersonByPersonUri(uri);
+      boolean presentInDatabase = person != null;
+
+      System.out.println("presentInDatabase = " + presentInDatabase);
+
+      System.out.println("\n******** end *****************");
+
+    }
   }
 
   @Override

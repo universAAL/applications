@@ -81,6 +81,10 @@ public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber 
 
       Person person = dispenser.getPatient();
 
+      if (person == null) {
+        throw new MedicationManagerException("This device is not associated with any patient");
+      }
+
       User user = new User(person.getPersonUri());
 
       DispenserUpsideDownDialog dispenserUpsideDownDialog =
