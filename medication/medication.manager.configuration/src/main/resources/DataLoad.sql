@@ -9,20 +9,20 @@ values (2, 'George', 'urn:org.universAAL.aal_space:user_env#george', 'patient');
 insert into medication_manager.person (id, name, person_uri, role)
 values (3, 'Venelin', 'urn:org.universAAL.aal_space:user_env#venelin', 'patient');
 
-insert into medication_manager.person (id, name, person_uri, role, username, password)
-values (4, 'd-r Pencho Penchev', 'urn:org.universAAL.aal_space:user_env#pencho', 'physician', 'pencho', 'pass');
-
-insert into medication_manager.person (id, name, person_uri, role, username, password)
-values (5, 'd-r Ivan Ivanov', 'urn:org.universAAL.aal_space:user_env#ivan', 'physician', 'ivan', 'pass');
+insert into medication_manager.person (id, name, person_uri, role, username, password, caregiver_sms)
+values (4, 'd-r Pencho Penchev', 'urn:org.universAAL.aal_space:user_env#pencho', 'physician', 'pencho', 'pass', '+3598123987');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password, caregiver_sms)
-values (6, 'Simeon', 'urn:org.universAAL.aal_space:user_env#simeon', 'caregiver', 'simeon', 'pass', '+35988756123');
+values (5, 'd-r Ivan Ivanov', 'urn:org.universAAL.aal_space:user_env#ivan', 'physician', 'ivan', 'pass', '+3598654987');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password, caregiver_sms)
-values (7, 'Asparuh', 'urn:org.universAAL.aal_space:user_env#asparuh', 'caregiver', 'asparuh', 'pass', '+3598758789');
+values (6, 'Simeon', 'urn:org.universAAL.aal_space:user_env#simeon', 'caregiver', 'simeon', 'pass', '+3598654123');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password, caregiver_sms)
-values (8, 'Ivailo', 'urn:org.universaal.aal_space:test_env#ivailo', 'caregiver', 'ivailo', 'pass', '+3598912355');
+values (7, 'Asparuh', 'urn:org.universAAL.aal_space:user_env#asparuh', 'caregiver', 'asparuh', 'pass', '+3598654765');
+
+insert into medication_manager.person (id, name, person_uri, role, username, password, caregiver_sms)
+values (8, 'Ivailo', 'urn:org.universaal.aal_space:test_env#ivailo', 'caregiver', 'ivailo', 'pass', '+3598654159');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password)
 values (9, 'admin', 'urn:org.universaal.aal_space:test_env#admin', 'admin', 'admin', 'admin');
