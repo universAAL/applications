@@ -22,10 +22,10 @@ insert into medication_manager.person (id, name, person_uri, role, username, pas
 values (7, 'Asparuh', 'urn:org.universAAL.aal_space:user_env#asparuh', 'caregiver', 'asparuh', 'pass', '+3598654765');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password, caregiver_sms)
-values (8, 'Ivailo', 'urn:org.universaal.aal_space:test_env#ivailo', 'caregiver', 'ivailo', 'pass', '+3598654159');
+values (8, 'Ivailo', 'urn:org.universaal.aal_space:user_env#ivailo', 'caregiver', 'ivailo', 'pass', '+3598654159');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password)
-values (9, 'admin', 'urn:org.universaal.aal_space:test_env#admin', 'admin', 'admin', 'admin');
+values (9, 'admin', 'urn:org.universaal.aal_space:user_env#admin', 'admin', 'admin', 'admin');
 
 // patient_links table
 
@@ -61,6 +61,21 @@ values (1, 2, 'dispenser one', 'urn:org.universaal.aal_space:device_env#dispense
 
 insert into medication_manager.dispenser (id, patient_fk_id, name, dispenser_uri, instructions_file_name)
 values (2, 3, 'dispenser two', 'urn:org.universaal.aal_space:device_env#dispenser-2', 'instructions_2.txt');
+
+insert into medication_manager.dispenser (id, name, dispenser_uri, instructions_file_name)
+values (3, 'dispenser three', 'urn:org.universaal.aal_space:device_env#dispenser-3', 'instructions_3.txt');
+
+insert into medication_manager.dispenser (id, name, dispenser_uri, instructions_file_name)
+values (4, 'dispenser four', 'urn:org.universaal.aal_space:device_env#dispenser-4', 'instructions_4.txt');
+
+insert into medication_manager.dispenser (id, name, dispenser_uri, instructions_file_name)
+values (5, 'dispenser five', 'urn:org.universaal.aal_space:device_env#dispenser-5', 'instructions_5.txt');
+
+insert into medication_manager.dispenser (id, name, dispenser_uri, instructions_file_name)
+values (6, 'dispenser six', 'urn:org.universaal.aal_space:device_env#dispenser-6', 'instructions_6.txt');
+
+insert into medication_manager.dispenser (id, name, dispenser_uri, instructions_file_name)
+values (7, 'dispenser seven', 'urn:org.universaal.aal_space:device_env#dispenser-7', 'instructions_7.txt');
 
 // medicine_inventory table
 

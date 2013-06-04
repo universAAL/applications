@@ -3,16 +3,14 @@ package org.universAAL.AALapplication.medication_manager.user.management.impl;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
-import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
-import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author George Fournadjiev
@@ -34,35 +32,27 @@ public final class Activator implements BundleActivator {
     UserManager userManager = new UserManagerImpl(mc, persistentService);
 
 
-//    userManager.loadDummyUsersIntoChe();
+    context.registerService(UserManager.class.getName(),
+        userManager, null);
 
-    printUsers(userManager, persistentService);
 
+    ConfigurationProperties configurationProperties = getConfigurationProperties();
+
+    if (configurationProperties.isInsertDummyUsersIntoChe()) {
+      insertDummyUsers(userManager);
+    }
 
   }
 
-  private void printUsers(UserManager userManager, PersistentService persistentService) {
-    List<UserInfo> users = userManager.getAllUsers();
+  private void insertDummyUsers(final UserManager userManager) {
+    Timer timer = new Timer();
 
-    for (UserInfo user : users) {
-      System.out.println("\n******** user *****************");
-      String uri = user.getUri();
-      System.out.println("user.getURI() = " + uri);
-      if (user.getClass().equals(AssistedPersonUserInfo.class)) {
-        System.out.println("The user is a AssistedPerson");
-      } else if (user.getClass().equals(CaregiverUserInfo.class)) {
-        System.out.println("The user is a Caregiver");
+    timer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        userManager.loadDummyUsersIntoChe();
       }
-
-      PersonDao personDao = persistentService.getPersonDao();
-      Person person = personDao.getPersonByPersonUri(uri);
-      boolean presentInDatabase = person != null;
-
-      System.out.println("presentInDatabase = " + presentInDatabase);
-
-      System.out.println("\n******** end *****************");
-
-    }
+    }, 7 * 1000);
   }
 
   public void stop(BundleContext context) throws Exception {
@@ -86,6 +76,26 @@ public final class Activator implements BundleActivator {
       throw new MedicationManagerUserManagementException("The PersistentService is missing");
     }
     return persistentService;
+  }
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (bundleContext == null) {
+      throw new MedicationManagerUserManagementException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = bundleContext.getServiceReference(ConfigurationProperties.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerUserManagementException("The ServiceReference is null for ConfigurationProperties");
+    }
+
+    ConfigurationProperties service = (ConfigurationProperties) bundleContext.getService(srPS);
+
+    if (service == null) {
+      throw new MedicationManagerUserManagementException("The ConfigurationProperties is missing");
+    }
+
+    return service;
   }
 
 

@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.user.management.impl;
+package org.universAAL.AALapplication.medication_manager.user.management;
 
 import static org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.Util.*;
 

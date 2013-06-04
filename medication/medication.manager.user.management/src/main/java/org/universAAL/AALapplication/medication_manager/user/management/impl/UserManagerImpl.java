@@ -3,6 +3,7 @@ package org.universAAL.AALapplication.medication_manager.user.management.impl;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
+import org.universAAL.AALapplication.medication_manager.user.management.UserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.VCardPropertiesParser;
 import org.universAAL.middleware.container.ModuleContext;

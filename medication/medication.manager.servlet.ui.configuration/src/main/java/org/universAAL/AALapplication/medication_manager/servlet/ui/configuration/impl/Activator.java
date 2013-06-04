@@ -17,6 +17,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayUserManagementHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.LoginServlet;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
+import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -113,7 +114,7 @@ public final class Activator implements BundleActivator {
     displaySelectConfigActionHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
     displayUserManagementHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
-    displayErrorPageWriterServlet .setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    displayErrorPageWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
   }
 
@@ -149,6 +150,26 @@ public final class Activator implements BundleActivator {
     }
 
     return persistentService;
+  }
+
+  public static UserManager getUserManager() {
+    if (bundleContext == null) {
+      throw new MedicationManagerServletUIConfigurationException("The bundleContext is not set");
+    }
+
+    ServiceReference srPS = bundleContext.getServiceReference(UserManager.class.getName());
+
+    if (srPS == null) {
+      throw new MedicationManagerServletUIConfigurationException("The ServiceReference is null for UserManager");
+    }
+
+    UserManager userManager = (UserManager) bundleContext.getService(srPS);
+
+    if (userManager == null) {
+      throw new MedicationManagerServletUIConfigurationException("The UserManager is missing");
+    }
+
+    return userManager;
   }
 
   public static ConfigurationProperties getConfigurationProperties() {

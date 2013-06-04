@@ -1,7 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.user.management;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
-import org.universAAL.AALapplication.medication_manager.user.management.impl.UserInfo;
 
 /**
  * @author George Fournadjiev

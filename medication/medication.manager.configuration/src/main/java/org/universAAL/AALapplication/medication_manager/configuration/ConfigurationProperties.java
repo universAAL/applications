@@ -21,6 +21,8 @@ public interface ConfigurationProperties {
 
   boolean isLoadPrescriptionDTOs();
 
+  boolean isInsertDummyUsersIntoChe();
+
   Properties getMedicationProperties();
 
 }
