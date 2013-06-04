@@ -2,19 +2,29 @@ package org.universAAL.AALapplication.medication_manager.user.management;
 
 import org.universAAL.AALapplication.medication_manager.user.management.impl.UserInfo;
 
+import static org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.Util.*;
+
 /**
  * @author George Fournadjiev
  */
-public final class Caregiver extends UserInfo {
+public final class CaregiverUserInfo extends UserInfo {
 
   private boolean isDoctor;
   private final String username;
   private final String password;
+  private final String gsmNumber;
 
-  public Caregiver(int id, String uri, String name, String username, String password) {
+  public static final String PASS = "pass";
+
+  public CaregiverUserInfo(int id, String uri, String name, String username, String gsmNumber) {
     super(id, uri, name);
+
+    validateParameter(username, "username");
+    validateParameter(gsmNumber, "gsmNumber");
+
     this.username = username;
-    this.password = password;
+    this.gsmNumber = gsmNumber;
+    this.password = PASS; //TODO to be fixed when UniversAAL can provide username and password
   }
 
   public boolean isDoctor() {
@@ -33,6 +43,10 @@ public final class Caregiver extends UserInfo {
     return password;
   }
 
+  public String getGsmNumber() {
+    return gsmNumber;
+  }
+
   @Override
   public String toString() {
     return "Caregiver{" +
@@ -42,6 +56,7 @@ public final class Caregiver extends UserInfo {
         ", name=" + getName() +
         ", username='" + username + '\'' +
         ", password='" + password + '\'' +
+        ", gsmNumber='" + gsmNumber + '\'' +
         '}';
   }
 }

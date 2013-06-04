@@ -6,29 +6,29 @@ import org.universAAL.AALapplication.medication_manager.user.management.impl.Use
 /**
  * @author George Fournadjiev
  */
-public final class AssistedPerson extends UserInfo {
+public final class AssistedPersonUserInfo extends UserInfo {
 
-  private Caregiver caregiver;
-  private Caregiver doctor;
+  private CaregiverUserInfo caregiverUserInfo;
+  private CaregiverUserInfo doctor;
   private Dispenser dispenser;
 
-  public AssistedPerson(int id, String uri, String name) {
+  public AssistedPersonUserInfo(int id, String uri, String name) {
     super(id, uri, name);
   }
 
-  public Caregiver getCaregiver() {
-    return caregiver;
+  public CaregiverUserInfo getCaregiverUserInfo() {
+    return caregiverUserInfo;
   }
 
-  public void setCaregiver(Caregiver caregiver) {
-    this.caregiver = caregiver;
+  public void setCaregiverUserInfo(CaregiverUserInfo caregiverUserInfo) {
+    this.caregiverUserInfo = caregiverUserInfo;
   }
 
-  public Caregiver getDoctor() {
+  public CaregiverUserInfo getDoctor() {
     return doctor;
   }
 
-  public void setDoctor(Caregiver doctor) {
+  public void setDoctor(CaregiverUserInfo doctor) {
     this.doctor = doctor;
   }
 
@@ -43,7 +43,7 @@ public final class AssistedPerson extends UserInfo {
   @Override
   public String toString() {
     return "AssistedPerson{" +
-        "caregiver=" + caregiver +
+        "caregiver=" + caregiverUserInfo +
         ", id=" + getId() +
         ", uri=" + getUri() +
         ", name=" + getName() +

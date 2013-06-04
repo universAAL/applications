@@ -1,5 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.user.management.impl;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
+import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.VCardPropertiesParser;
 import org.universAAL.middleware.container.ModuleContext;
@@ -26,6 +29,7 @@ import java.util.List;
 import java.util.Properties;
 
 import static org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.Util.*;
+import static org.universAAL.ontology.profile.PersonalInformationSubprofile.*;
 
 public class UserManagerImpl implements UserManager {
 
@@ -34,8 +38,11 @@ public class UserManagerImpl implements UserManager {
   private static final String OUTPUT_GET_ALL_USERS = MedicationOntology.NAMESPACE + "out1";
   private static final String OUTPUT_GET_SUBPROFILES = MedicationOntology.NAMESPACE + "out2";
   private static final String OUTPUT_GET_SUBPROFILE = MedicationOntology.NAMESPACE + "out3";
+  private final PersistentService persistentService;
 
-  public UserManagerImpl(ModuleContext context) {
+  public UserManagerImpl(ModuleContext context, PersistentService persistentService) {
+
+    this.persistentService = persistentService;
     caller = new DefaultServiceCaller(context);
   }
 
@@ -118,8 +125,22 @@ public class UserManagerImpl implements UserManager {
     User ur = (User) out.get(i);
     PersonalInformationSubprofile subprofile = getUserSubprofiles(ur);
 
+    int id = persistentService.generateId();
+    String uri = ur.getURI();
+    String name = (String) subprofile.getProperty(PROP_FN);
 
-    throw new UnsupportedOperationException("Not implemented yet");
+    Class<? extends User> aClass = ur.getClass();
+    if (AssistedPerson.class.equals(aClass)) {
+      return new AssistedPersonUserInfo(id, uri, name);
+    } else if (Caregiver.class.equals(aClass)) {
+      String username = (String) subprofile.getProperty(PROP_NICKNAME); //TODO to be fixed to use real username
+      String gmsNumber = (String) subprofile.getProperty(PROP_UCI_ADDITIONAL_DATA); //TODO to use tel property when fixed by Alvaro
+      return new CaregiverUserInfo(id, uri, name, username, gmsNumber);
+    } else {
+      throw new MedicationManagerUserManagementException("Unknown User subclass: " + aClass);
+    }
+
+
   }
 
   public void addProfile(User profilable, UserProfile profile) {
@@ -176,7 +197,6 @@ public class UserManagerImpl implements UserManager {
 
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
     String uri = subprofile.getURI();
-    System.out.println("uri = " + uri);
     SubProfile subProfile = new SubProfile(uri);
     req.addValueFilter(new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE}, subprofile);
     req.addRequiredOutput(OUTPUT_GET_SUBPROFILE, new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE});
@@ -187,15 +207,15 @@ public class UserManagerImpl implements UserManager {
       PersonalInformationSubprofile informationSubprofile = processOutput(OUTPUT_GET_SUBPROFILE, resp.getOutputs());
       if (informationSubprofile != null) {
 
-        System.out.println("informationSubprofile = " + informationSubprofile);
+        Log.info("informationSubprofile = %s", getClass(), informationSubprofile);
 
         return informationSubprofile;
 
       } else {
-        System.out.println("PersonalInformationSubprofile is null !");
+        Log.info("PersonalInformationSubprofile is null !", getClass());
       }
     } else {
-      System.out.println("Other CallStatus results: " + resp.getCallStatus().name());
+      Log.info("Other CallStatus results: %s", getClass(), resp.getCallStatus().name());
     }
 
     throw new MedicationManagerUserManagementException("Unsuccessful response");
