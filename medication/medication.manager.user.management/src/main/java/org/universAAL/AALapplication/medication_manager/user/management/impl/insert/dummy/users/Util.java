@@ -40,6 +40,22 @@ public final class Util {
   public static final String NEW_VCARD_JOHN_PROPERTIES = "newVCardJohn.properties";
   public static final String NEW_VCARD_MARIA_PROPERTIES = "newVCardMaria.properties";
   public static final String NEW_VCARD_IREN_PROPERTIES = "newVCardIren.properties";
+  public static final String NEW_VCARD_ASPARUH_PROPERTIES = "newVCardAsparuh.properties";
+  public static final String NEW_VCARD_GEORGE_PROPERTIES = "newVCardGeorge.properties";
+  public static final String NEW_VCARD_IVAILO_PROPERTIES = "newVCardIvailo.properties";
+  public static final String NEW_VCARD_IVAN_PROPERTIES = "newVCardIvan.properties";
+  public static final String NEW_VCARD_PENCHO_PROPERTIES = "newVCardPencho.properties";
+  public static final String NEW_VCARD_SAID_PROPERTIES = "newVCardSaid.properties";
+  public static final String NEW_VCARD_SIMEON_PROPERTIES = "newVCardSimeon.properties";
+  public static final String NEW_VCARD_VENELIN_PROPERTIES = "newVCardVenelin.properties";
+  public static final String[] DUMMY_USERS_PROPERTIES = new String[]{
+      NEW_VCARD_BILL_PROPERTIES, NEW_VCARD_NIK_PROPERTIES, NEW_VCARD_NIKOLA_PROPERTIES,
+      NEW_VCARD_JOHN_PROPERTIES, NEW_VCARD_MARIA_PROPERTIES, NEW_VCARD_IREN_PROPERTIES,
+      NEW_VCARD_ASPARUH_PROPERTIES, NEW_VCARD_GEORGE_PROPERTIES, NEW_VCARD_IVAILO_PROPERTIES,
+      NEW_VCARD_IVAN_PROPERTIES, NEW_VCARD_PENCHO_PROPERTIES, NEW_VCARD_SAID_PROPERTIES,
+      NEW_VCARD_SIMEON_PROPERTIES, NEW_VCARD_VENELIN_PROPERTIES
+  };
+
   public static final String ASSISTED_PERSON = "AssistedPerson";
   public static final String CAREGIVER = "Caregiver";
   static DateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");

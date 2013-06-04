@@ -49,12 +49,9 @@ public class UserManagerImpl implements UserManager {
   public void loadDummyUsersIntoChe() {
     VCardPropertiesParser parser = new VCardPropertiesParser();
 
-    insertDummyUser(parser, NEW_VCARD_BILL_PROPERTIES);
-    insertDummyUser(parser, NEW_VCARD_NIK_PROPERTIES);
-    insertDummyUser(parser, NEW_VCARD_NIKOLA_PROPERTIES);
-    insertDummyUser(parser, NEW_VCARD_JOHN_PROPERTIES);
-    insertDummyUser(parser, NEW_VCARD_MARIA_PROPERTIES);
-    insertDummyUser(parser, NEW_VCARD_IREN_PROPERTIES);
+    for (String propertyFileName : DUMMY_USERS_PROPERTIES) {
+      insertDummyUser(parser, propertyFileName);
+    }
 
   }
 
