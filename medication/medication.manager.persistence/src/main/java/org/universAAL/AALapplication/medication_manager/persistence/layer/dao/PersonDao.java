@@ -89,6 +89,20 @@ public final class PersonDao extends AbstractDao {
     return getPerson(personRecordMap);
   }
 
+  public Person getPersonByPersonUri(String personUri) {
+    Log.info("Looking for the person with personUri=%s", getClass(), personUri);
+
+    String sql = "select * from MEDICATION_MANAGER.PERSON where UPPER(PERSON_URI) = UPPER('" + personUri + "')";
+
+    Map<String, Column> personRecordMap = executeQueryExpectedSingleRecord(TABLE_NAME, sql);
+
+    if (personRecordMap == null || personRecordMap.isEmpty()) {
+      return null;
+    }
+
+    return getPerson(personRecordMap);
+  }
+
   public Person findPersonByDeviceUri(String deviceUri) {
     Log.info("Looking for the person with deviceUri=%s", getClass(), deviceUri);
 

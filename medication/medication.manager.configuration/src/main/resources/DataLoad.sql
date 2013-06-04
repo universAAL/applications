@@ -1,28 +1,28 @@
 // person table
 
 insert into medication_manager.person (id, name, person_uri, role)
-values (1, 'Said', 'urn:org.universaal.aal_space:test_env#saied', 'patient');
+values (1, 'Said', 'urn:org.universAAL.aal_space:user_env#said', 'patient');
 
 insert into medication_manager.person (id, name, person_uri, role)
-values (2, 'George', 'urn:org.universaal.aal_space:test_env#george', 'patient');
+values (2, 'George', 'urn:org.universAAL.aal_space:user_env#george', 'patient');
 
 insert into medication_manager.person (id, name, person_uri, role)
-values (3, 'Venelin', 'urn:org.universaal.aal_space:test_env#venelin', 'patient');
+values (3, 'Venelin', 'urn:org.universAAL.aal_space:user_env#venelin', 'patient');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password)
-values (4, 'd-r Pencho Penchev', 'urn:org.universaal.aal_space:test_env#pencho', 'physician', 'pencho', 'pass');
+values (4, 'd-r Pencho Penchev', 'urn:org.universAAL.aal_space:user_env#pencho', 'physician', 'pencho', 'pass');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password)
-values (5, 'd-r Ivan Ivanov', 'urn:org.universaal.aal_space:test_env#ivan', 'physician', 'ivan', '123');
+values (5, 'd-r Ivan Ivanov', 'urn:org.universAAL.aal_space:user_env#ivan', 'physician', 'ivan', 'pass');
 
-insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
-values (6, 'Simeon', 'urn:org.universaal.aal_space:test_env#simeon', 'caregiver', '+35988756123');
+insert into medication_manager.person (id, name, person_uri, role, username, password, caregiver_sms)
+values (6, 'Simeon', 'urn:org.universAAL.aal_space:user_env#simeon', 'caregiver', 'simeon', 'pass', '+35988756123');
 
-insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
-values (7, 'Asparuh', 'urn:org.universaal.aal_space:test_env#aparuh', 'caregiver', '+3598758789');
+insert into medication_manager.person (id, name, person_uri, role, username, password, caregiver_sms)
+values (7, 'Asparuh', 'urn:org.universAAL.aal_space:user_env#asparuh', 'caregiver', 'asparuh', 'pass', '+3598758789');
 
-insert into medication_manager.person (id, name, person_uri, role, caregiver_sms)
-values (8, 'Ivailo', 'urn:org.universaal.aal_space:test_env#ivailo', 'caregiver', '+3598912355');
+insert into medication_manager.person (id, name, person_uri, role, username, password, caregiver_sms)
+values (8, 'Ivailo', 'urn:org.universaal.aal_space:test_env#ivailo', 'caregiver', 'ivailo', 'pass', '+3598912355');
 
 insert into medication_manager.person (id, name, person_uri, role, username, password)
 values (9, 'admin', 'urn:org.universaal.aal_space:test_env#admin', 'admin', 'admin', 'admin');
@@ -57,10 +57,10 @@ INSERT INTO MEDICATION_MANAGER.MEDICINE (ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_
 // dispenser table
 
 insert into medication_manager.dispenser (id, patient_fk_id, name, dispenser_uri, instructions_file_name)
-values (1, 2, 'dispenser one', 'urn:org.universaal.aal_space:test_env#dispenser-1', 'instructions_1.txt');
+values (1, 2, 'dispenser one', 'urn:org.universaal.aal_space:device_env#dispenser-1', 'instructions_1.txt');
 
 insert into medication_manager.dispenser (id, patient_fk_id, name, dispenser_uri, instructions_file_name)
-values (2, 3, 'dispenser two', 'urn:org.universaal.aal_space:test_env#dispenser-2', 'instructions_2.txt');
+values (2, 3, 'dispenser two', 'urn:org.universaal.aal_space:device_env#dispenser-2', 'instructions_2.txt');
 
 // medicine_inventory table
 

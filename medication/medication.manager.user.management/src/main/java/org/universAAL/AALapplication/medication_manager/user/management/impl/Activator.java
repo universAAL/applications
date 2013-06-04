@@ -4,6 +4,8 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
@@ -34,21 +36,31 @@ public final class Activator implements BundleActivator {
 
 //    userManager.loadDummyUsersIntoChe();
 
-    printUsers(userManager);
+    printUsers(userManager, persistentService);
 
 
   }
 
-  private void printUsers(UserManager userManager) {
+  private void printUsers(UserManager userManager, PersistentService persistentService) {
     List<UserInfo> users = userManager.getAllUsers();
 
     for (UserInfo user : users) {
-      System.out.println("user.getURI() = " + user.getUri());
+      System.out.println("\n******** user *****************");
+      String uri = user.getUri();
+      System.out.println("user.getURI() = " + uri);
       if (user.getClass().equals(AssistedPersonUserInfo.class)) {
         System.out.println("The user is a AssistedPerson");
       } else if (user.getClass().equals(CaregiverUserInfo.class)) {
         System.out.println("The user is a Caregiver");
       }
+
+      PersonDao personDao = persistentService.getPersonDao();
+      Person person = personDao.getPersonByPersonUri(uri);
+      boolean presentInDatabase = person != null;
+
+      System.out.println("presentInDatabase = " + presentInDatabase);
+
+      System.out.println("\n******** end *****************");
 
     }
   }
