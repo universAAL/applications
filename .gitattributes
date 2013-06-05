@@ -800,7 +800,6 @@ help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/me
 help_when_out/hwo.mobile/src/main/resources/org/universAAL/AALapplication/hwo/messages_es_ES.properties -text
 help_when_out/hwo.pom/pom.xml -text
 help_when_out/hwo.servlet/ASL2.0.txt -text
-help_when_out/hwo.servlet/MITX.txt -text
 help_when_out/hwo.servlet/NOTICE -text
 help_when_out/hwo.servlet/help_when_outdoor_1.2.1-SNAPSHOT.launch -text
 help_when_out/hwo.servlet/pom.xml -text
@@ -2226,7 +2225,6 @@ medication/medication.missing.services.simulation/src/main/java/org/universAAL/A
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/ProviderHealthPrescriptionService.java -text
 new_services.pom/pom.xml -text
 nutritional/nutritional.client/ASL2.0.txt -text
-nutritional/nutritional.client/MITX.txt -text
 nutritional/nutritional.client/NOTICE.txt -text
 nutritional/nutritional.client/pom.xml -text
 nutritional/nutritional.client/src/main/java/na/miniDao/Advise.java -text
@@ -2435,7 +2433,6 @@ nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/Service
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/tests/OntoFactory.class -text svneol=unset#unset
 nutritional/nutritional.simulator/src/main/java/uAAL/simulation_services/tests/OntoFactory.java -text
 nutritional/nutritional.uiclient.basic/ASL2.0.txt -text
-nutritional/nutritional.uiclient.basic/MITX.txt -text
 nutritional/nutritional.uiclient.basic/NOTICE.txt -text
 nutritional/nutritional.uiclient.basic/launchers/uAAL[!!-~]nueva[!!-~]UI.launch -text
 nutritional/nutritional.uiclient.basic/pom.xml -text
