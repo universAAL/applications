@@ -114,7 +114,7 @@ public final class Activator implements BundleActivator {
     displaySelectConfigActionHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
     displayUserManagementHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
-    displayErrorPageWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    displayUserManagementHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
   }
 

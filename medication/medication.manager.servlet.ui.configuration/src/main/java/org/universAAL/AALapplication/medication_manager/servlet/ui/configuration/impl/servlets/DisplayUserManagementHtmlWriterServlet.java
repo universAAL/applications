@@ -4,7 +4,6 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Persis
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.forms.UserManagementForm;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
@@ -74,13 +73,11 @@ public final class DisplayUserManagementHtmlWriterServlet extends BaseHtmlWriter
 
   private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
                               PersistentService persistentService, UserManager userManager) throws IOException {
-    try {
-      ScriptForm scriptForm = new UserManagementForm(persistentService, userManager);
-      sendResponse(req, resp, scriptForm);
 
-    } catch (Exception e) {
-      sendErrorResponse(req, resp, e);
-    }
+    UserManagementForm scriptForm = new UserManagementForm(persistentService, userManager);
+    scriptForm.prepareData();
+    sendResponse(req, resp, scriptForm);
+
   }
 
 

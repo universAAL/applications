@@ -118,6 +118,23 @@ public final class DispenserDao extends AbstractDao {
 
   }
 
+  public Dispenser getDispenserByPersonId(int id) {
+    Log.info("Looking for the dispenser with " + PATIENT_FK_ID + "=%s", getClass(), id);
+
+    Map<String, Column> columnMap = database.findDispenserByPerson(TABLE_NAME, PersonDao.TABLE_NAME, id);
+
+    if (columnMap == null || columnMap.isEmpty()) {
+      return null;
+    }
+
+    Dispenser dispenser = getDispenser(columnMap);
+
+    Log.info("Dispenser found: %s", getClass(), dispenser);
+
+    return dispenser;
+
+  }
+
   private Dispenser getDispenser(Person person, Map<String, Column> columnMap) {
     Column col = columnMap.get(ID);
     int id = (Integer) col.getValue();
