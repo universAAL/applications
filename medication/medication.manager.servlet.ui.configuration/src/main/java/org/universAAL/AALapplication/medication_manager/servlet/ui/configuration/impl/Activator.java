@@ -15,6 +15,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayLoginHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplaySelectConfigActionHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayUserManagementHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.HandleUserManagement;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.LoginServlet;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
@@ -88,8 +89,8 @@ public final class Activator implements BundleActivator {
 
     LoginServlet loginServlet = new LoginServlet(sessionTracking);
     httpService.registerServlet(LOGIN_SERVLET_ALIAS, loginServlet, null, null);
-    DisplayLoginHtmlWriterServlet displayServlet = new DisplayLoginHtmlWriterServlet(sessionTracking);
-    httpService.registerServlet(LOGIN_HTML_SERVLET_ALIAS, displayServlet, null, null);
+    DisplayLoginHtmlWriterServlet displayLoginServlet = new DisplayLoginHtmlWriterServlet(sessionTracking);
+    httpService.registerServlet(LOGIN_HTML_SERVLET_ALIAS, displayLoginServlet, null, null);
     DisplayErrorPageWriterServlet displayErrorPageWriterServlet = new DisplayErrorPageWriterServlet(sessionTracking);
     httpService.registerServlet(ERROR_PAGE_SERVLET_ALIAS, displayErrorPageWriterServlet, null, null);
     httpService.registerResources(JS_ALIAS, "/configuration/js", null);
@@ -100,21 +101,27 @@ public final class Activator implements BundleActivator {
     DisplayUserManagementHtmlWriterServlet displayUserManagementHtmlWriterServlet =
         new DisplayUserManagementHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(USER_MANAGEMENT, displayUserManagementHtmlWriterServlet, null, null);
+    HandleUserManagement handleUserManagement = new HandleUserManagement(sessionTracking);
+    httpService.registerServlet(HANDLE_USER, handleUserManagement, null, null);
 
 
     //set servlets
 
-    displayServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    displayLoginServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
-    loginServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
+    loginServlet.setDisplayLoginHtmlWriterServlet(displayLoginServlet);
     loginServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
     loginServlet.setDisplaySelectConfigActionHtmlWriterServlet(displaySelectConfigActionHtmlWriterServlet);
 
-    displaySelectConfigActionHtmlWriterServlet.setDisplayServlet(displayServlet);
+    displaySelectConfigActionHtmlWriterServlet.setDisplayServlet(displayLoginServlet);
     displaySelectConfigActionHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
-    displayUserManagementHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayServlet);
+    displayUserManagementHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayLoginServlet);
     displayUserManagementHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+
+    handleUserManagement.setDisplayLoginHtmlWriterServlet(displayLoginServlet);
+    handleUserManagement.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    handleUserManagement.setUserManagementHtmlWriterServlet(displayUserManagementHtmlWriterServlet);
 
   }
 

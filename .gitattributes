@@ -1956,12 +1956,14 @@ medication/medication.manager.servlet.ui.configuration/src/main/java/org/univers
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayLoginHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplaySelectConfigActionHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayUserManagementHtmlWriterServlet.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/HandleUserManagement.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/LoginServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/DispenserScriptArrayCreator.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/PersonScriptArrayCreator.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/SelectConfigActionForm.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/UserManagementForm.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/UsersJavaScriptArrayCreator.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/util/UserManagementParameterHandler.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/common.css -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/images/animated-overlay.gif -text
 medication/medication.manager.servlet.ui.configuration/src/main/resources/configuration/css/images/ui-bg_flat_0_aaaaaa_40x100.png -text

@@ -28,13 +28,6 @@ $(function () {
 
     });
 
-    $('table#patients button[name="delete"]').click(function (e) {
-        e.preventDefault();
-        var f=$('form[name="delete_patient"]');
-        f.find('input').val($(this).closest("tr").attr("id"));
-        f.submit();
-    });
-
     $('form button[name="cancel"]').click(function (e) {
         e.preventDefault();
         $('form>[name!="back"]').hide();

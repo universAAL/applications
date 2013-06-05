@@ -28,7 +28,8 @@ public abstract class BaseServlet extends HttpServlet {
   public static final String COOKIE_NAME = "medication_manager_session_id";
   public static final Random RANDOM = new Random();
   public static final String ERROR = "ERROR";
-  private DisplayErrorPageWriterServlet displayErrorPageWriterServlet;
+  protected DisplayErrorPageWriterServlet displayErrorPageWriterServlet;
+  protected DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet;
 
   private static String previousRequestedId;
 
@@ -41,6 +42,9 @@ public abstract class BaseServlet extends HttpServlet {
     this.displayErrorPageWriterServlet = displayErrorPageWriterServlet;
   }
 
+  public void setDisplayLoginHtmlWriterServlet(DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet) {
+    this.displayLoginHtmlWriterServlet = displayLoginHtmlWriterServlet;
+  }
 
   protected Session getSession(HttpServletRequest req, HttpServletResponse resp, Class cl) {
     String id = getId(req, resp, cl);

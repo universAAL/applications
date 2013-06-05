@@ -24,16 +24,11 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.config
 public final class DisplayUserManagementHtmlWriterServlet extends BaseHtmlWriterServlet {
 
   private final Object lock = new Object();
-  private DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet;
 
   private static final String USER_MANAGEMENT_FILE_NAME = "user_management.html";
 
   public DisplayUserManagementHtmlWriterServlet(SessionTracking sessionTracking) {
     super(USER_MANAGEMENT_FILE_NAME, sessionTracking);
-  }
-
-  public void setDisplayLoginHtmlWriterServlet(DisplayLoginHtmlWriterServlet displayLoginHtmlWriterServlet) {
-    this.displayLoginHtmlWriterServlet = displayLoginHtmlWriterServlet;
   }
 
   @Override
@@ -42,6 +37,7 @@ public final class DisplayUserManagementHtmlWriterServlet extends BaseHtmlWriter
     synchronized (lock) {
       try {
         isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
+        isServletSet(displayErrorPageWriterServlet, "displayErrorPageWriterServlet");
 
         Session session = getSession(req, resp, getClass());
         Person admin = (Person) session.getAttribute(LOGGED_ADMIN);
