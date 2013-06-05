@@ -7,19 +7,23 @@ import na.utils.ServiceInterface;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.universAAL.AALapplication.nutritional.SharedResources;
+import org.universAAL.middleware.container.utils.StringUtils;
+import org.universAAL.middleware.rdf.Resource;
 
 public class Login {
     private Log log = LogFactory.getLog(Login.class);
 
     /**
-     * Login user into the system using username, password and
+     * Login user into the external server using username, password and
      * preferredLanguage. Username and password retrieved from user.properties
      * file preferredLanguage from Profile.
      */
     public boolean logMeIn() {
 	// read credentials from file
-	String username = ProfileConnector.getInstance()
-		.getNutritionalUsername();
+	String username = SharedResources.user.getURI(); 
+	System.out.println("------------------------------> " + SharedResources.user.getURI());
+			//ProfileConnector.getInstance().getNutritionalUsername();
 	String password = ProfileConnector.getInstance()
 		.getNutritionalPassword();
 	String lang = ProfileConnector.getInstance().getScreenLanguage();
@@ -40,9 +44,8 @@ public class Login {
 		    TSFConnector.getInstance().setToken(token);
 		    return true;
 		} else {
-		    log.error("E R R O R: Fallo de autenticación");
+		    log.error("E R R O R: Authentication failure");
 		}
-		// log.info(" token recibido: "+TSFConnector.getInstance().getToken());
 	    } else {
 		log.fatal("Ami not available");
 	    }

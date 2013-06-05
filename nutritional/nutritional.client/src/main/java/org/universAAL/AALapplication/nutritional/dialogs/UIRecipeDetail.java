@@ -160,7 +160,7 @@ public class UIRecipeDetail {
 	    String id = uir.getSubmissionID();
 	    if (SUBMIT_GOBACK.equals(id)) {
 		Utils.println("UIRecipeDetail: submit go back"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
 			UIMenus.getForm(true), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
@@ -175,13 +175,13 @@ public class UIRecipeDetail {
 		Business business = new Business();
 		try {
 		    business.addRecipeToFavoritesWebServer(idItem);
-		    out = new UIRequest(SharedResources.testUser,
+		    out = new UIRequest(SharedResources.user,
 			    UIRecipeDetail.getForm(idItem), LevelRating.middle,
 			    Locale.ENGLISH, PrivacyLevel.insensible);
 		} catch (OASIS_ServiceUnavailable e) {
 		    e.printStackTrace();
 		    out = new UIRequest(
-			    SharedResources.testUser,
+			    SharedResources.user,
 			    Form.newMessage(
 				    Messages.getString("UIRecipeDetail.13"), //$NON-NLS-1$
 				    Messages.getString("UIRecipeDetail.14")), //$NON-NLS-1$
@@ -202,7 +202,7 @@ public class UIRecipeDetail {
 		ProfileConnector profConnect = ProfileConnector.getInstance();
 		profConnect.downloadProfileFromServer();
 		profConnect.addFood_Dislikes(idItem + "@food@" + nameItem);
-		out = new UIRequest(SharedResources.testUser,
+		out = new UIRequest(SharedResources.user,
 			UIRecipeDetail.getForm(idRecipe), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);

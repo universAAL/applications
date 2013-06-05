@@ -281,7 +281,7 @@ public class UIProfile {
 	    String id = uir.getSubmissionID();
 	    if (SUBMIT_GOBACK.equals(id)) {
 		Utils.println("UIProfile: submit go back"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
 			UIMenus.getForm(true), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
@@ -292,7 +292,7 @@ public class UIProfile {
 
 		Utils.println(" TODO UIProfile: submit saveprofile"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
-			SharedResources.testUser,
+			SharedResources.user,
 			Form.newMessage("", //$NON-NLS-1$
 				""), //$NON-NLS-1$
 			LevelRating.middle, Locale.ENGLISH,
@@ -303,7 +303,7 @@ public class UIProfile {
 	    }
 	    if (SUBMIT_FOODDISLIKES.equals(id)) {
 		Utils.println(" TODO UIProfile: submit fooddis"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIItemList.getForm(true), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -311,7 +311,7 @@ public class UIProfile {
 	    }
 	    if (SUBMIT_FAVRECIPES.equals(id)) {
 		Utils.println(" TODO UIProfile: submit favrec"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIItemList.getForm(false), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -319,7 +319,7 @@ public class UIProfile {
 	    }
 	    if (SUBMIT_MEDINTERACT.equals(id)) {
 		Utils.println(" TODO UIProfile: submit medinteract"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIMedication.getForm(), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);

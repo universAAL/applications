@@ -256,22 +256,22 @@ public class ProfileConnector {
 	return null;
     }
 
-    public User getPatientID() throws OASIS_ServiceUnavailable {
-	AmiConnector ami = AmiConnector.getAMI();
-	if (ami != null) {
-	    Object[] input = { "version 1.0", getNutritionalUsername(),
-		    getNutritionalPassword() };
-	    Object out = ami.invokeOperation(ServiceInterface.DOMAIN_Nutrition,
-		    ServiceInterface.OP_GetTokenX, input, false);
-
-	    if (out != null) {
-		return (User) out;
-	    } else {
-		log.info("Couldn't get the id");
-	    }
-	}
-	return null;
-    }
+//    public User getPatientID() throws OASIS_ServiceUnavailable {
+//	AmiConnector ami = AmiConnector.getAMI();
+//	if (ami != null) {
+//	    Object[] input = { "version 1.0", getNutritionalUsername(),
+//		    getNutritionalPassword() };
+//	    Object out = ami.invokeOperation(ServiceInterface.DOMAIN_Nutrition,
+//		    ServiceInterface.OP_GetTokenX, input, false);
+//
+//	    if (out != null) {
+//		return (User) out;
+//	    } else {
+//		log.info("Couldn't get the id");
+//	    }
+//	}
+//	return null;
+//    }
 
     private boolean setUserValue(String prop, int type, String propParent,
 	    String propChild, String value) throws OASIS_ServiceUnavailable {
@@ -807,20 +807,20 @@ public class ProfileConnector {
 	// return null;
     }
 
-    public String getUsername() {
-	String property = NP.Common.USERNAME;
-	UProperty myProperty = this.getUProperty(property);
-	return myProperty.getValues(0).getValue();
-	// UProperty myProperty = this.getUProperty(property);
-	// if (myProperty==null)
-	// myProperty = new UProperty();
-	// myProperty.setValue("David_Shopland");
-	// if (myProperty!=null && myProperty.getFirstValue()!=null &&
-	// myProperty.getFirstValue().length()>0)
-	// return myProperty.getFirstValue();
-	// else
-	// return null;
-    }
+//    public String getUsername() {
+//	String property = NP.Common.USERNAME;
+//	UProperty myProperty = this.getUProperty(property);
+//	return myProperty.getValues(0).getValue();
+//	// UProperty myProperty = this.getUProperty(property);
+//	// if (myProperty==null)
+//	// myProperty = new UProperty();
+//	// myProperty.setValue("David_Shopland");
+//	// if (myProperty!=null && myProperty.getFirstValue()!=null &&
+//	// myProperty.getFirstValue().length()>0)
+//	// return myProperty.getFirstValue();
+//	// else
+//	// return null;
+//    }
 
     public String getSocialCommunityUsername() {
 	String property = NP.External.Social.USERNAME;
@@ -845,13 +845,20 @@ public class ProfileConnector {
 	// else
 	// return null;
     }
+    
+    
+    
+    
+    
+    
+    
 
-    public String getNutritionalUsername() {
-	return "David_Shopland";
-	// String property = NP.Nutrition.USERNAME;
-	// UProperty myProperty = this.getUProperty(property);
-	// return myProperty.getValues(0).getValue();
-    }
+//    public String getNutritionalUsername() {
+//	return "David_Shopland";
+//	// String property = NP.Nutrition.USERNAME;
+//	// UProperty myProperty = this.getUProperty(property);
+//	// return myProperty.getValues(0).getValue();
+//    }
 
     public String getNutritionalPassword() {
 	return "5a019bc5dad45f1652c141bc9004598b";
@@ -860,6 +867,12 @@ public class ProfileConnector {
 	// return myProperty.getValues(0).getValue();
     }
 
+    
+    
+    
+    
+    
+    
     public int getCodeLang() {
 	if (codeLang == null)
 	    this.getScreenLanguage();

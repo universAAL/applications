@@ -112,7 +112,7 @@ public class UIHelp {
 	    String id = uir.getSubmissionID();
 	    if (SUBMIT_GOBACK.equals(id)) {
 		Utils.println("UIHelp: submit go back"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle,
 			UIMenus.getForm(true), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
@@ -121,7 +121,7 @@ public class UIHelp {
 	    }
 	    if (SUBMIT_TODAY.equals(id)) {
 		Utils.println("UIMEnus: submit today"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIMenus.getForm(true), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -130,7 +130,7 @@ public class UIHelp {
 	    if (SUBMIT_WEEK.equals(id)) {
 		Utils.println(" TODO UIMenus: submit week"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
-			SharedResources.testUser,
+			SharedResources.user,
 			Form.newMessage(Messages.getString("UIMenus.13"), //$NON-NLS-1$
 				Messages.getString("UIMenus.14")), //$NON-NLS-1$
 			LevelRating.middle, Locale.ENGLISH,
@@ -142,7 +142,7 @@ public class UIHelp {
 	    if (SUBMIT_TIPS.equals(id)) {
 		Utils.println(" TODO UImenus: submit tips"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
-			SharedResources.testUser,
+			SharedResources.user,
 			Form.newMessage(Messages.getString("UIMenus.13"), //$NON-NLS-1$
 				Messages.getString("UIMenus.14")), //$NON-NLS-1$
 			LevelRating.middle, Locale.ENGLISH,
@@ -153,7 +153,7 @@ public class UIHelp {
 	    }
 	    if (SUBMIT_SHOPPING.equals(id)) {
 		Utils.println("UIMain submit shopping"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIShopping.getForm(), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -161,7 +161,7 @@ public class UIHelp {
 	    }
 	    if (SUBMIT_PROFILE.equals(id)) {
 		Utils.println("UIMain submit profile"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIProfile.getForm(), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);

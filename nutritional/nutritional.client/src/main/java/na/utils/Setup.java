@@ -18,19 +18,18 @@ public class Setup {
     private static String absolutePath = new BundleConfigHome(
 	    "nutritional.client").getAbsolutePath();
 
-    protected static final String DEFAULT_PATH_Nutritional_DESCRIPTOR = absolutePath
-	    + "/NutritionalAdvisor";
+    protected static final String DEFAULT_PATH_Nutritional_DESCRIPTOR = absolutePath;
+	   // + "/NutritionalAdvisor";
     private static final int DEFAULT_DOWNLOAD_ADVICES_EVERY_MINUTES = 60;
     private static final int START_SCREENSAVER_DELAY_IN_SECONDS = 10;
     // private static final String AMI_UserID = "itaca_01";
-    public static String AMI_UserName = null;
+ //   public static String AMI_UserName = null;
     private static final String DEFAULT_LANGUAGE = "EN";
     private static final double DEFAULT_MAX_TEMPERATURE_VALUE = 25; // same as
 								    // InitialSetup.max_temp_value!!
     private static String useScheduler = null;
 
     private static String WEB_SERVICE_ADDRESS = null;
-    private static String setupFileName = null;
     private static String use_WS_toConnectToSocialCommunities = null;
     private static String token = null;
     private static int wait_to_download_advices = -1;
@@ -328,7 +327,7 @@ public class Setup {
     // return AMI_UserID;
     // }
 
-    public static String getAMI_UserName() {
+/*    public static String getAMI_UserName() {
 	if (AMI_UserName != null)
 	    return AMI_UserName;
 	// load file
@@ -346,7 +345,7 @@ public class Setup {
 	}
 	log.info("Default Ami user name");
 	return InitialSetup.AMI_USERNAME_VALUE;
-    }
+    }*/
 
     public static String getPrinterConfFile() {
 	// load file

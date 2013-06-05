@@ -25,7 +25,7 @@ public class InterfaceProvider extends UICaller {
     public static final String MY_UI_NAMESPACE = SharedResources.CLIENT_NUTRITIONAL_UI_NAMESPACE
 	    + "UIProvider#";
     
-    private static String absolutePath = new BundleConfigHome("nutritional.client").getAbsolutePath();
+   // private static String absolutePath = new BundleConfigHome("nutritional.client").getAbsolutePath();
     
     public static final String IMG_URL = "http://127.0.0.1:8080/resources/nutritional.client/";
 
@@ -50,6 +50,7 @@ public class InterfaceProvider extends UICaller {
     public void handleUIResponse(UIResponse uir) {
 	// This delivers the UI response to the right class. If you add a new UI
 	// class, add it here!
+    	
 	Utils.println("Received UI Submit ID: " + uir.getSubmissionID());
 	String id = uir.getSubmissionID();
 	if (uir != null) {
@@ -87,7 +88,7 @@ public class InterfaceProvider extends UICaller {
 
     public void startMainDialog() {
 	Utils.println("Start Main Dialog invoked");
-	UIRequest out = new UIRequest(SharedResources.testUser,
+	UIRequest out = new UIRequest(SharedResources.user,
 		// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
 		UIMenus.getForm(true), LevelRating.middle, Locale.ENGLISH,
 		PrivacyLevel.insensible);

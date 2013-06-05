@@ -3,8 +3,10 @@ package org.universAAL.AALapplication.nutritional;
 import org.universAAL.AALapplication.nutritional.dialogs.InterfaceProvider;
 import org.universAAL.AALapplication.nutritional.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.util.Constants;
 import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.User;
 
 public class SharedResources {
 
@@ -15,8 +17,9 @@ public class SharedResources {
     public static UIServiceProvider serviceProvider;
     public static InterfaceProvider uIProvider;
 
-    public static final AssistedPerson testUser = new AssistedPerson(
-	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+ //   public static final AssistedPerson testUser = new AssistedPerson(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+  
+    public static User user = null;
 
     public SharedResources(ModuleContext context) {
 	moduleContext = context;
@@ -30,9 +33,9 @@ public class SharedResources {
      * )
      */
     public void start() {
-	Utils.println("SharedResources starts running");
-	SharedResources.serviceProvider = new UIServiceProvider(moduleContext);
-	SharedResources.uIProvider = new InterfaceProvider(moduleContext);
+		Utils.println("SharedResources starts running");
+		SharedResources.serviceProvider = new UIServiceProvider(moduleContext);
+		SharedResources.uIProvider = new InterfaceProvider(moduleContext);
     }
 
     public static ModuleContext getMContext() {

@@ -85,7 +85,7 @@ public class UIShopping {
 	    String id = uir.getSubmissionID();
 	    if (SUBMIT_GOBACK.equals(id)) {
 		Utils.println("UIShopping: submit go back"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
 			UIMenus.getForm(true), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
@@ -96,7 +96,7 @@ public class UIShopping {
 	    if (SUBMIT_TODAY.equals(id)) {
 		Utils.println("TODO  UIShopping: submit today"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
-			SharedResources.testUser,
+			SharedResources.user,
 			Form.newMessage(Messages.getString("UIShopping.5"), //$NON-NLS-1$
 				Messages.getString("UIShopping.6")), //$NON-NLS-1$
 			LevelRating.middle, Locale.ENGLISH,
@@ -108,7 +108,7 @@ public class UIShopping {
 	    if (SUBMIT_TOMORROW.equals(id)) {
 		Utils.println("TODO  UIShopping: submit tomorrrrow"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
-			SharedResources.testUser,
+			SharedResources.user,
 			Form.newMessage(Messages.getString("UIShopping.5"), //$NON-NLS-1$
 				Messages.getString("UIShopping.6")), //$NON-NLS-1$
 			LevelRating.middle, Locale.ENGLISH,
@@ -120,7 +120,7 @@ public class UIShopping {
 	    if (SUBMIT_FAVOURITES.equals(id)) {
 		Utils.println("TODO UIShopping: submit favs"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
-			SharedResources.testUser,
+			SharedResources.user,
 			Form.newMessage(Messages.getString("UIShopping.5"), //$NON-NLS-1$
 				Messages.getString("UIShopping.6")), //$NON-NLS-1$
 			LevelRating.middle, Locale.ENGLISH,
