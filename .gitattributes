@@ -2905,7 +2905,6 @@ ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMes
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
 ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
 ontologies/ont.nutrition/ASL2.0.txt -text
-ontologies/ont.nutrition/MITX.txt -text
 ontologies/ont.nutrition/NOTICE.txt -text
 ontologies/ont.nutrition/Nutrition.di -text
 ontologies/ont.nutrition/Nutrition.notation -text
