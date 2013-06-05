@@ -3,7 +3,6 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.configuratio
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.HtmlParser;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,17 +29,10 @@ public abstract class BaseHtmlWriterServlet extends BaseServlet {
   public void sendResponse(HttpServletRequest req, HttpServletResponse resp,
                            ScriptForm scriptForm) throws IOException {
 
-    try {
+    String scriptText = scriptForm.createScriptText();
 
-      String scriptText = scriptForm.createScriptText();
+    sendSuccessfulResponse(resp, scriptText);
 
-      sendSuccessfulResponse(resp, scriptText);
-
-    } catch (Exception e) {
-      Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
-      sendErrorResponse(req,  resp, e);
-
-    }
 
   }
 

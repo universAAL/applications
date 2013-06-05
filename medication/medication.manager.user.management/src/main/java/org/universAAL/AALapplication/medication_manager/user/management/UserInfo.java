@@ -7,9 +7,10 @@ import static org.universAAL.AALapplication.medication_manager.user.management.i
  */
 public abstract class UserInfo {
 
-  private final int id;
+  private int id;
   private final String uri;
   private final String name;
+  private boolean presentInDatabase;
 
 
   protected UserInfo(int id, String uri, String name) {
@@ -30,6 +31,18 @@ public abstract class UserInfo {
     return id;
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public boolean isPresentInDatabase() {
+    return presentInDatabase;
+  }
+
+  public void setPresentInDatabase(boolean presentInDatabase) {
+    this.presentInDatabase = presentInDatabase;
+  }
+
   public String getUri() {
     return uri;
   }
@@ -44,6 +57,7 @@ public abstract class UserInfo {
         "id=" + id +
         ", uri='" + uri + '\'' +
         ", name='" + name + '\'' +
+        ", presentInDatabase=" + presentInDatabase +
         '}';
   }
 }

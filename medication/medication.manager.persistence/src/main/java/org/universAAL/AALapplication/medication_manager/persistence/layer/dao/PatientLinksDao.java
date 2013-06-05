@@ -122,6 +122,34 @@ public final class PatientLinksDao extends AbstractDao {
     }
   }
 
+  public List<PatientLinks> getAllPatientLinks() {
+
+    String sql = "select * from MEDICATION_MANAGER.PATIENT_LINKS";
+
+    PreparedStatement ps = null;
+
+    List<PatientLinks> patientLinks = new ArrayList<PatientLinks>();
+
+    try {
+      ps = getPreparedStatement(sql);
+      List<Map<String, Column>> patientLinksRecords = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
+      if (patientLinksRecords == null || patientLinksRecords.isEmpty()) {
+        return patientLinks;
+      }
+
+      for (Map<String, Column> columnMap : patientLinksRecords) {
+        PatientLinks p = getPatientLinks(columnMap);
+        patientLinks.add(p);
+      }
+
+      return patientLinks;
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
   private List<Person> getPatients(String sql, PreparedStatement ps) {
 
     try {

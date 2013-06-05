@@ -2,20 +2,21 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.configuratio
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.PatientLinks;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
 import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
-import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.AALapplication.medication_manager.user.management.UserInfo;
+import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Script.*;
 
 /**
@@ -23,9 +24,9 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.e
  */
 public final class UserManagementForm extends ScriptForm {
 
-  private final List<Person> patients;
-  private final List<Person> physicians;
-  private final List<Person> caregivers;
+  private final List<AssistedPersonUserInfo> patients;
+  private final List<CaregiverUserInfo> caregivers;
+  private final List<Dispenser> dispensers;
   private final PersistentService persistentService;
   private final UserManager userManager;
 
@@ -36,47 +37,127 @@ public final class UserManagementForm extends ScriptForm {
     this.persistentService = persistentService;
     this.userManager = userManager;
 
-    PersonDao personDao = persistentService.getPersonDao();
-    List<Person> persons = personDao.getAllPersonsWithoutAdmins();
-
-    patients = getPersonInGivenRole(persons, PATIENT);
-    physicians = getPersonInGivenRole(persons, PHYSICIAN);
-    caregivers = getPersonInGivenRole(persons, CAREGIVER);
-
-    printUsers();
-
+    patients = new ArrayList<AssistedPersonUserInfo>();
+    caregivers = new ArrayList<CaregiverUserInfo>();
+    dispensers = new ArrayList<Dispenser>();
   }
 
-  private List<Person> getPersonInGivenRole(List<Person> persons, Role role) {
-    List<Person> personList = new ArrayList<Person>();
+  public void prepareData() {
 
-    for (Person person : persons) {
-      if (person.getRole().equals(role)) {
-        personList.add(person);
+    fillUsers();
+
+    checkForDatabasePresence();
+
+    PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
+    List<PatientLinks> patientLinkses = patientLinksDao.getAllPatientLinks();
+
+    setDataToAssistedPersonUserInfoPresentInDatabase(patientLinkses);
+
+    DispenserDao dispenserDao = persistentService.getDispenserDao();
+    List<Dispenser> allDispensers = dispenserDao.getAllDispensers();
+
+    dispensers.addAll(allDispensers);
+  }
+
+  private void checkForDatabasePresence() {
+    PersonDao personDao = persistentService.getPersonDao();
+    List<Person> persons = personDao.getAllPersons();
+
+    for (AssistedPersonUserInfo assistedPersonUserInfo : patients) {
+      Person patient = getPatientFromDatabase(persons, assistedPersonUserInfo);
+      if (patient != null) {
+        assistedPersonUserInfo.setId(patient.getId());
+        assistedPersonUserInfo.setPresentInDatabase(true);
       }
     }
 
-    return personList;
+    for (CaregiverUserInfo caregiverUserInfo : caregivers) {
+      Person caregiver = getPatientFromDatabase(persons, caregiverUserInfo);
+      if (caregiver != null) {
+        caregiverUserInfo.setId(caregiver.getId());
+        caregiverUserInfo.setPresentInDatabase(true);
+      }
+    }
   }
 
-  private void printUsers() {
+  private Person getPatientFromDatabase(List<Person> databasePatients, UserInfo assistedPersonUserInfo) {
+
+    for (Person patient : databasePatients) {
+      if (patient.getPersonUri().equals(assistedPersonUserInfo.getUri())) {
+        return patient;
+      }
+    }
+
+    return null;
+  }
+
+  private void setDataToAssistedPersonUserInfoPresentInDatabase(List<PatientLinks> patientLinkses) {
+
+    for (AssistedPersonUserInfo assistedPersonUserInfo : patients) {
+      PatientLinks patientLinks = findPatientLinks(assistedPersonUserInfo, patientLinkses);
+      if (patientLinks != null) {
+        setData(patientLinks, assistedPersonUserInfo);
+      }
+    }
+
+  }
+
+  private void setData(PatientLinks patientLinks, AssistedPersonUserInfo assistedPersonUserInfo) {
+
+    Person caregiver = patientLinks.getCaregiver();
+
+    CaregiverUserInfo caregiverUserInfo = null;
+
+    for (CaregiverUserInfo userInfo : caregivers) {
+      if (userInfo.getUri().equals(caregiver.getPersonUri())) {
+        caregiverUserInfo = userInfo;
+      }
+    }
+
+    assistedPersonUserInfo.setCaregiverUserInfo(caregiverUserInfo);
+
+    Person doctor = patientLinks.getDoctor();
+
+    CaregiverUserInfo doctorUserInfo = null;
+    for (CaregiverUserInfo userInfo : caregivers) {
+      if (userInfo.getUri().equals(doctor.getPersonUri())) {
+        doctorUserInfo = userInfo;
+        doctorUserInfo.setDoctor(true);
+      }
+    }
+
+    assistedPersonUserInfo.setDoctor(doctorUserInfo);
+
+  }
+
+  private PatientLinks findPatientLinks(AssistedPersonUserInfo assistedPersonUserInfo, List<PatientLinks> patientLinkses) {
+
+    for (PatientLinks patientLinks : patientLinkses) {
+      Person patient = patientLinks.getPatient();
+      if (assistedPersonUserInfo.getUri().equals(patient.getPersonUri())) {
+        return patientLinks;
+      }
+    }
+
+    return null;
+  }
+
+  private void fillUsers() {
     List<UserInfo> users = userManager.getAllUsers();
 
     for (UserInfo user : users) {
       System.out.println("\n******** user *****************");
       String uri = user.getUri();
-      System.out.println("user.getURI() = " + uri);
+      Log.info("user.getURI() = %s | user.getName() = %s", getClass(), uri, user.getName());
       if (user.getClass().equals(AssistedPersonUserInfo.class)) {
-        System.out.println("The user is a AssistedPerson");
+        Log.info("The user is a AssistedPerson", getClass());
+        AssistedPersonUserInfo assistedPersonUserInfo = (AssistedPersonUserInfo) user;
+        patients.add(assistedPersonUserInfo);
       } else if (user.getClass().equals(CaregiverUserInfo.class)) {
-        System.out.println("The user is a Caregiver");
+        Log.info("The user is a Caregiver", getClass());
+        CaregiverUserInfo caregiverUserInfo = (CaregiverUserInfo) user;
+        caregivers.add(caregiverUserInfo);
       }
-
-      PersonDao personDao = persistentService.getPersonDao();
-      Person person = personDao.getPersonByPersonUri(uri);
-      boolean presentInDatabase = person != null;
-
-      System.out.println("presentInDatabase = " + presentInDatabase);
 
       System.out.println("\n******** end *****************");
 
@@ -116,8 +197,6 @@ public final class UserManagementForm extends ScriptForm {
   }
 
   private void createDispenserArray(StringBuffer sb) {
-    DispenserDao dispenserDao = persistentService.getDispenserDao();
-    List<Dispenser> dispensers = dispenserDao.getAllDispensers();
     DispenserScriptArrayCreator creator = new DispenserScriptArrayCreator(dispensers);
     sb.append("\n\t");
     String javaScriptArrayText = creator.createJavaScriptArrayText();
@@ -128,7 +207,7 @@ public final class UserManagementForm extends ScriptForm {
 
   private void createUsersJavascriptArray(StringBuffer sb) {
     UsersJavaScriptArrayCreator creator =
-        new UsersJavaScriptArrayCreator(persistentService, patients, physicians, caregivers);
+        new UsersJavaScriptArrayCreator(persistentService, patients, caregivers);
 
     String usersArrayText = creator.createUsersArrayText();
 
@@ -143,7 +222,7 @@ public final class UserManagementForm extends ScriptForm {
     sb.append(patientArrayText);
     sb.append('\n');
 
-    creator = new PersonScriptArrayCreator("physicians", physicians);
+    creator = new PersonScriptArrayCreator("physicians", caregivers);
     String physiciansArrayText = creator.createJavaScriptArrayText();
     sb.append(physiciansArrayText);
     sb.append('\n');

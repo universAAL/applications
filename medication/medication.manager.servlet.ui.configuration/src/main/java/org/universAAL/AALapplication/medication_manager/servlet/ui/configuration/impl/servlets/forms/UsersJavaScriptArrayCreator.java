@@ -2,10 +2,9 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.configuratio
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.PatientLinks;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
+import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
 
 import java.util.List;
 
@@ -15,16 +14,14 @@ import java.util.List;
 public final class UsersJavaScriptArrayCreator {
 
   private final PersistentService persistentService;
-  private final List<Person> patients;
-  private final List<Person> physicians;
-  private final List<Person> caregivers;
+  private final List<AssistedPersonUserInfo> patients;
+  private final List<CaregiverUserInfo> caregivers;
 
-  public UsersJavaScriptArrayCreator(PersistentService persistentService,
-                                     List<Person> patients, List<Person> physicians, List<Person> caregivers) {
+  public UsersJavaScriptArrayCreator(PersistentService persistentService, List<AssistedPersonUserInfo> patients,
+                                     List<CaregiverUserInfo> caregivers) {
 
     this.persistentService = persistentService;
     this.patients = patients;
-    this.physicians = physicians;
     this.caregivers = caregivers;
   }
 
@@ -34,7 +31,7 @@ public final class UsersJavaScriptArrayCreator {
     sb.append("\n\t\t");
     int size = patients.size();
     for (int i = 0; i < size; i++) {
-      Person patient = patients.get(i);
+      AssistedPersonUserInfo patient = patients.get(i);
       createTableRowData(patient, sb, i, size);
       sb.append("\n\t\t");
     }
@@ -46,14 +43,16 @@ public final class UsersJavaScriptArrayCreator {
 
   }
 
-  private void createTableRowData(Person patient, StringBuffer sb, int i, int size) {
+  private void createTableRowData(AssistedPersonUserInfo patient, StringBuffer sb, int i, int size) {
     sb.append('{');
 
     addPatient(patient, sb);
 
     addPhysicianAndCaregiver(patient, sb);
 
-    addDispenser(patient, sb);
+    if (patient.isPresentInDatabase()) {
+      addDispenser(patient, sb);
+    }
 
     addAlerts(patient, sb);
 
@@ -65,7 +64,7 @@ public final class UsersJavaScriptArrayCreator {
 
   }
 
-  private void addAlerts(Person patient, StringBuffer sb) {
+  private void addAlerts(AssistedPersonUserInfo patient, StringBuffer sb) {
     sb.append(",\n\t\t\t\t");
     sb.append("alerts:{");
 
@@ -77,13 +76,13 @@ public final class UsersJavaScriptArrayCreator {
 
   }
 
-  private void addDispenser(Person patient, StringBuffer sb) {
+  private void addDispenser(AssistedPersonUserInfo patient, StringBuffer sb) {
     sb.append(",\n\t\t\t\t");
     sb.append("dispenser:");
 
     DispenserDao dispenserDao = persistentService.getDispenserDao();
 
-    Dispenser dispenser = dispenserDao.getDispenserByPerson(patient);
+    Dispenser dispenser = dispenserDao.getDispenserByPersonId(patient.getId());
 
     if (dispenser != null) {
       String dispenserId = getNumberQuoted(dispenser.getId());
@@ -94,28 +93,34 @@ public final class UsersJavaScriptArrayCreator {
 
   }
 
-  private void addPatient(Person patient, StringBuffer sb) {
+  private void addPatient(AssistedPersonUserInfo patient, StringBuffer sb) {
     sb.append("\n\t\t\t\t");
     sb.append("patient:");
     String patientId = getNumberQuoted(patient.getId());
     sb.append(patientId);
   }
 
-  private void addPhysicianAndCaregiver(Person patient, StringBuffer sb) {
-    sb.append(",\n\t\t\t\t");
-    sb.append("physician:");
+  private void addPhysicianAndCaregiver(AssistedPersonUserInfo patient, StringBuffer sb) {
 
-    PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
-    PatientLinks patientLinks = patientLinksDao.getPatientLinksForPatient(patient);
+    CaregiverUserInfo doctor = patient.getDoctor();
 
-    String physicianId = getNumberQuoted(patientLinks.getDoctor().getId());
-    sb.append(physicianId);
+    if (doctor != null) {
+      sb.append(",\n\t\t\t\t");
+      sb.append("physician:");
 
-    sb.append(",\n\t\t\t\t");
-    sb.append("caregiver:");
+      String physicianId = getNumberQuoted(doctor.getId());
+      sb.append(physicianId);
+    }
 
-    String caregiverId = getNumberQuoted(patientLinks.getCaregiver().getId());
-    sb.append(caregiverId);
+    CaregiverUserInfo caregiverUserInfo = patient.getCaregiverUserInfo();
+
+    if (caregiverUserInfo != null) {
+      sb.append(",\n\t\t\t\t");
+      sb.append("caregiver:");
+
+      String caregiverId = getNumberQuoted(caregiverUserInfo.getId());
+      sb.append(caregiverId);
+    }
   }
 
   private String getNumberQuoted(int number) {

@@ -145,8 +145,8 @@ public final class PersonDao extends AbstractDao {
 
   }
 
-  public List<Person> getAllPersonsWithoutAdmins() {
-    String sql = "select * from MEDICATION_MANAGER.PERSON where UPPER(ROLE) <> ?";
+  public List<Person> getAllPersons() {
+    String sql = "select * from MEDICATION_MANAGER.PERSON";
 
     PreparedStatement ps = null;
 
@@ -154,7 +154,6 @@ public final class PersonDao extends AbstractDao {
 
     try {
       ps = getPreparedStatement(sql);
-      ps.setString(1, Role.ADMIN.getValue());
       List<Map<String, Column>> personRecords = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
       if (personRecords == null || personRecords.isEmpty()) {
         return persons;
