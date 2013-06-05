@@ -133,7 +133,7 @@ public class UIItemList {
 	    String id = uir.getSubmissionID();
 	    if (SUBMIT_GOBACK.equals(id)) {
 		Utils.println("UIRecipeDetail: submit go back"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIProfile.getForm(), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -149,7 +149,7 @@ public class UIItemList {
 		} else {
 		    removeRecipe(idItem);
 		}
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIItemList.getForm(flag), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);

@@ -110,7 +110,7 @@ public class UIMedication {
 	    String id = uir.getSubmissionID();
 	    if (SUBMIT_GOBACK.equals(id)) {
 		Utils.println("UIMedication: submit go back"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIProfile.getForm(), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);

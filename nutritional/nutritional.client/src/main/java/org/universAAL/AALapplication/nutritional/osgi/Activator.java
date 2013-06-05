@@ -19,23 +19,22 @@
  */
 package org.universAAL.AALapplication.nutritional.osgi;
 
+import na.oasisUtils.trustedSecurityNetwork.Login;
+import na.utils.InitialSetup;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.universAAL.AALapplication.nutritional.Arranque;
 import org.universAAL.AALapplication.nutritional.SharedResources;
 import org.universAAL.AALapplication.nutritional.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
-import org.universAAL.middleware.util.Constants;
-import org.universAAL.ontology.profile.User;
 
 public class Activator implements BundleActivator {
 
     SharedResources sr;
     private static ModuleContext moduleContext;
-    private Arranque arranque;
-    static final User testUser = new User(
-	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+   // private Starting starting;
+    //static final User testUser = new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
 
     public void start(BundleContext context) throws Exception {
 	Utils.println("STARTING NUTRITIONAL UI");
@@ -43,11 +42,10 @@ public class Activator implements BundleActivator {
 		.registerModule(new Object[] { context });
 
 	sr = new SharedResources(moduleContext);
-	arranque = new Arranque();
+	//starting = new Starting();
 	new Thread() {
 	    public void run() {
 		sr.start();
-		arranque.inicializar(testUser.getLocalName());
 	    }
 	}.start();
 

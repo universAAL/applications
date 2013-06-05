@@ -6,6 +6,8 @@ package na.utils;
 
 import javax.swing.JFrame;
 
+import org.universAAL.AALapplication.nutritional.SharedResources;
+
 public interface ServiceInterface {
 
     /*
@@ -22,7 +24,7 @@ public interface ServiceInterface {
     public static final String DIR_NUTRITIONAL_ROOT = Setup.DEFAULT_PATH_Nutritional_DESCRIPTOR
 	    + "/";
     public static final String DIR_NUTRITIONAL = Setup.DEFAULT_PATH_Nutritional_DESCRIPTOR
-	    + "/" + Setup.getAMI_UserName() + "/";
+	    + "/" + SharedResources.user + "/"; //Setup.getAMI_UserName() + "/";
     // public static final String DIR_NUTRITIONAL_USER = DIR_NUTRITIONAL +
     // Setup.getAMI_UserName()+"/";
     public static final String USER_PROFILE_FILENAME = "UserProfile.xml";
@@ -168,14 +170,9 @@ public interface ServiceInterface {
 
     // public static boolean stopThreads = false;
 
-    /**
-     * Sets the Service GUI on top of the parent widget Take into account the
-     * limited size
-     * 
-     * @param parent
-     */
-    public void showApplicationNutritional(
-	    na.widgets.panel.AdaptivePanel parent, JFrame frame);
+ 
+  //  public void showApplicationNutritional(
+//	    na.widgets.panel.AdaptivePanel parent, JFrame frame);
 
     // public void showRecipe(widgets.panel.AdaptivePanel parent, int recipeID);
 

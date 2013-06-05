@@ -193,7 +193,7 @@ public class UIMenus {
 	    String id = uir.getSubmissionID();
 	    if (SUBMIT_GOBACK.equals(id)) {
 		Utils.println("UIMenus: submit go back"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
 			UIMenus.getForm(true), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
@@ -203,7 +203,7 @@ public class UIMenus {
 
 	    if (SUBMIT_TODAY.equals(id)) {
 		Utils.println("UIMEnus: submit today"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIMenus.getForm(true), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -211,7 +211,7 @@ public class UIMenus {
 	    }
 	    if (SUBMIT_TOMORROW.equals(id)) {
 		Utils.println("UImenus: submit tomorrow"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIMenus.getForm(false), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -220,7 +220,7 @@ public class UIMenus {
 	    if (SUBMIT_WEEK.equals(id)) {
 		Utils.println(" TODO UIMenus: submit week"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
-			SharedResources.testUser,
+			SharedResources.user,
 			Form.newMessage(Messages.getString("UIMenus.13"), //$NON-NLS-1$
 				Messages.getString("UIMenus.14")), //$NON-NLS-1$
 			LevelRating.middle, Locale.ENGLISH,
@@ -232,7 +232,7 @@ public class UIMenus {
 	    if (SUBMIT_TIPS.equals(id)) {
 		Utils.println(" TODO UImenus: submit tips"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
-			SharedResources.testUser,
+			SharedResources.user,
 			Form.newMessage(Messages.getString("UIMenus.13"), //$NON-NLS-1$
 				Messages.getString("UIMenus.14")), //$NON-NLS-1$
 			LevelRating.middle, Locale.ENGLISH,
@@ -245,7 +245,7 @@ public class UIMenus {
 		String[] values = uir.getSubmissionID().split("@"); //$NON-NLS-1$
 		int idReceta = new Integer(values[1]);
 		Utils.println("UIMenus: submit details: " + idReceta); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIRecipeDetail.getForm(idReceta), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -264,7 +264,7 @@ public class UIMenus {
 	    // }
 	    if (SUBMIT_SHOPPING.equals(id)) {
 		Utils.println("UIMain submit shopping"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIShopping.getForm(), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -272,7 +272,7 @@ public class UIMenus {
 	    }
 	    if (SUBMIT_PROFILE.equals(id)) {
 		Utils.println("UIMain submit profile"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIProfile.getForm(), LevelRating.middle,
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
@@ -280,7 +280,7 @@ public class UIMenus {
 	    }
 	    if (SUBMIT_HELP.equals(id)) {
 		Utils.println("UIMain submit help"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.testUser,
+		UIRequest out = new UIRequest(SharedResources.user,
 			UIHelp.getForm(), LevelRating.middle, Locale.ENGLISH,
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);

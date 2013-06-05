@@ -18,9 +18,6 @@ public class InitialSetup {
     // $$uid 2746ed89-2f27-45a2-bc0b-45fadeaf8491
     private static Log log = LogFactory.getLog(InitialSetup.class);
 
-    private static final String OASIS_PATH_KEY = "oasis_path";
-    private static final String OASIS_PATH_VALUE = "C:\\OASIS\\";
-
     private static final String NUTRITIONAL_FOLDER_KEY = "nutritional_folder";
     private static final String NUTRITIONAL_FOLDER_VALUE = "NutritionalAdvisor";
 
@@ -89,8 +86,8 @@ public class InitialSetup {
     // protected static final String AMI_USERID_KEY = "ami_user_id";
     // private static final String AMI_USERID_VALUE = "itaca_01";
 
-    protected static final String AMI_USERNAME_KEY = "ami_user_name";
-    public static final String AMI_USERNAME_VALUE = "David_Shopland"; // "itaca_user"
+//    protected static final String AMI_USERNAME_KEY = "ami_user_name";
+//    public static final String AMI_USERNAME_VALUE = "value"; // "David_Shopland"
 
     protected static final String MAX_TEMPERATURE_KEY = "max_temperature";
     private static final String MAX_TEMPERATURE_VALUE = "25";
@@ -110,8 +107,7 @@ public class InitialSetup {
     public static final String TOKEN_VALUE = "";
 
     /**
-     * Inits the nutritional advisor folder. Creates ./NutritionalAdvisor and
-     * some needed files in it
+     * Inits the nutritional advisor folder. Creates default configuration of the service
      */
     public static void initNutriAdvisorFolder() {
 	log.info("Checking for nutritonal folder...");
@@ -125,21 +121,21 @@ public class InitialSetup {
 		    + " is not writable!");
 	} else {
 	    // check if NA directory exists
-	    String ruta = ServiceInterface.DIR_NUTRITIONAL;
-	    file = new File(ruta); // TODO
+	    String path = ServiceInterface.DIR_NUTRITIONAL;
+	    file = new File(path); // TODO
 	    if (!file.exists()) {
 		log.warn("File: " + file.getAbsolutePath()
 			+ " does not exist. Creating it...");
 		// Create NA directory
-		boolean success = (new File(ruta)).mkdirs();
+		boolean success = (new File(path)).mkdirs();
 		if (success) {
-		    log.info("Directory: " + ruta + " created");
+		    log.info("Directory: " + path + " created");
 		    // create basic files
 		    InitialSetup.createBasicFiles();
 		    InitialSetup.createSetupPropertyFile();
 		} else {
 		    log.fatal("Couldn't create Nutrional Advisor folder: "
-			    + ruta);
+			    + path);
 		}
 
 	    } else {
@@ -162,8 +158,6 @@ public class InitialSetup {
 		    ServiceInterface.SETUP_FILENAME,
 		    ServiceInterface.DIR_NUTRITIONAL_ROOT);
 	    if (created) {
-		InitialSetup.createProperty(file.getAbsolutePath(),
-			OASIS_PATH_KEY, OASIS_PATH_VALUE);
 		InitialSetup.createProperty(file.getAbsolutePath(),
 			NUTRITIONAL_FOLDER_KEY, NUTRITIONAL_FOLDER_VALUE);
 		InitialSetup.createProperty(file.getAbsolutePath(),
@@ -194,8 +188,8 @@ public class InitialSetup {
 			SHOW_EMTPY_CACHE_KEY, SHOW_EMPTY_CACHE_VALUE);
 		// InitialSetup.createProperty(file.getAbsolutePath(),
 		// AMI_USERID_KEY, AMI_USERID_VALUE);
-		InitialSetup.createProperty(file.getAbsolutePath(),
-			AMI_USERNAME_KEY, AMI_USERNAME_VALUE);
+//		InitialSetup.createProperty(file.getAbsolutePath(),
+//			AMI_USERNAME_KEY, AMI_USERNAME_VALUE);
 		InitialSetup.createProperty(file.getAbsolutePath(),
 			MAX_TEMPERATURE_KEY, MAX_TEMPERATURE_VALUE);
 		InitialSetup.createProperty(file.getAbsolutePath(), TSF_KEY,
