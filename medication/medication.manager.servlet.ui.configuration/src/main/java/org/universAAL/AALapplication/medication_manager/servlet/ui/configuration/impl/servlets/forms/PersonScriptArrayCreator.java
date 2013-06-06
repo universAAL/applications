@@ -2,7 +2,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.configuratio
 
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.JavaScriptObjectCreator;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
-import org.universAAL.AALapplication.medication_manager.user.management.UserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.UserInfo;
 
 import java.util.List;
 

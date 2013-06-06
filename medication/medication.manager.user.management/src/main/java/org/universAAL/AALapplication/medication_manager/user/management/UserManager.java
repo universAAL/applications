@@ -1,5 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.user.management;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.UserInfo;
+
 import java.util.List;
 
 /**

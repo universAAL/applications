@@ -1,10 +1,9 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.forms;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
-import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
-import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
 
 import java.util.List;
 
@@ -50,9 +49,7 @@ public final class UsersJavaScriptArrayCreator {
 
     addPhysicianAndCaregiver(patient, sb);
 
-    if (patient.isPresentInDatabase()) {
-      addDispenser(patient, sb);
-    }
+    addDispenser(patient, sb);
 
     addAlerts(patient, sb);
 
@@ -69,7 +66,6 @@ public final class UsersJavaScriptArrayCreator {
     sb.append("alerts:{");
 
 
-
     sb.append("}");
 
 //    "alerts":{"due":false, "missed":true, "successful":true, "upside":false}
@@ -80,9 +76,7 @@ public final class UsersJavaScriptArrayCreator {
     sb.append(",\n\t\t\t\t");
     sb.append("dispenser:");
 
-    DispenserDao dispenserDao = persistentService.getDispenserDao();
-
-    Dispenser dispenser = dispenserDao.getDispenserByPersonId(patient.getId());
+    Dispenser dispenser = patient.getDispenser();
 
     if (dispenser != null) {
       String dispenserId = getNumberQuoted(dispenser.getId());

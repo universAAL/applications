@@ -32,6 +32,11 @@ public final class Person extends Entity {
 
   }
 
+  public Person(int id, String name, String personUri, Role role) {
+      this(id, name, personUri, role, null);
+
+    }
+
   public Person(String name, String personUri, Role role, String caregiverSms) {
     this(0, name, personUri, role, caregiverSms);
   }
