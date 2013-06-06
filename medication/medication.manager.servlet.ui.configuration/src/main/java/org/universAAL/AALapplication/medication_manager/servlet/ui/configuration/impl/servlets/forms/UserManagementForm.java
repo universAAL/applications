@@ -10,9 +10,9 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
-import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
-import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
-import org.universAAL.AALapplication.medication_manager.user.management.UserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.UserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.ontology.profile.User;
 
@@ -72,15 +72,18 @@ public final class UserManagementForm extends ScriptForm {
     List<Person> persons = personDao.getAllPersons();
 
     for (AssistedPersonUserInfo assistedPersonUserInfo : patients) {
-      Person patient = getPatientFromDatabase(persons, assistedPersonUserInfo);
+      Person patient = getPersonFromDatabase(persons, assistedPersonUserInfo);
       if (patient != null) {
         assistedPersonUserInfo.setId(patient.getId());
         assistedPersonUserInfo.setPresentInDatabase(true);
+        DispenserDao dispenserDao = persistentService.getDispenserDao();
+        Dispenser dispenser = dispenserDao.getDispenserByPersonId(patient.getId());
+        assistedPersonUserInfo.setDispenser(dispenser);
       }
     }
 
     for (CaregiverUserInfo caregiverUserInfo : caregivers) {
-      Person caregiver = getPatientFromDatabase(persons, caregiverUserInfo);
+      Person caregiver = getPersonFromDatabase(persons, caregiverUserInfo);
       if (caregiver != null) {
         caregiverUserInfo.setId(caregiver.getId());
         caregiverUserInfo.setPresentInDatabase(true);
@@ -88,7 +91,7 @@ public final class UserManagementForm extends ScriptForm {
     }
   }
 
-  private Person getPatientFromDatabase(List<Person> databasePatients, UserInfo assistedPersonUserInfo) {
+  private Person getPersonFromDatabase(List<Person> databasePatients, UserInfo assistedPersonUserInfo) {
 
     for (Person patient : databasePatients) {
       if (patient.getPersonUri().equals(assistedPersonUserInfo.getUri())) {
@@ -155,7 +158,6 @@ public final class UserManagementForm extends ScriptForm {
     if (isCached()) {
       return;
     }
-
 
     List<UserInfo> users = userManager.getAllUsers();
 

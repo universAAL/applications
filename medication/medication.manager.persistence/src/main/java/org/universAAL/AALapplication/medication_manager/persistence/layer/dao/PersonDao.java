@@ -171,4 +171,8 @@ public final class PersonDao extends AbstractDao {
       closeStatement(ps);
     }
   }
+
+  public void savePerson(Person person) {
+     String sql = "insert into medication_manager.person (id, name, person_uri, role) values (?, ?, ?, ?)";
+  }
 }

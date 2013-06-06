@@ -1,13 +1,12 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.util;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.ComplexDao;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.MedicationManagerServletUIConfigurationException;
-import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
-import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
 
 import javax.servlet.ServletRequest;
 import java.util.List;
@@ -116,11 +115,14 @@ public final class UserManagementParameterHandler {
     patient.setCaregiverUserInfo(caregiver);
 
     PersistentService persistentService = getPersistentService();
+    ComplexDao complexDao = persistentService.getComplexDao();
 
-    DispenserDao dispenserDao = persistentService.getDispenserDao();
-    Dispenser dispenser = dispenserDao.getById(dispenserId);
+    complexDao.save(patient, doctor, caregiver, dispenserId);
 
-    patient.setDispenser(dispenser);
+    patient.setPresentInDatabase(true);
+    doctor.setPresentInDatabase(true);
+    caregiver.setPresentInDatabase(true);
+
   }
 
   private CaregiverUserInfo findCaregiver(List<CaregiverUserInfo> allCaregivers) {

@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.user.management;
+package org.universAAL.AALapplication.medication_manager.persistence.layer;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 

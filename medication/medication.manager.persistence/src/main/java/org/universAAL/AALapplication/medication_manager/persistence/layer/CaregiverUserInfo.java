@@ -1,6 +1,6 @@
-package org.universAAL.AALapplication.medication_manager.user.management;
+package org.universAAL.AALapplication.medication_manager.persistence.layer;
 
-import static org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.Util.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
  * @author George Fournadjiev

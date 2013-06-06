@@ -4,6 +4,7 @@ import org.universAAL.AALapplication.medication_manager.configuration.Configurat
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.ComplexDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.InventoryLogDao;
@@ -33,6 +34,7 @@ public final class PersistentServiceImpl implements PersistentService {
   private final TreatmentDao treatmentDao;
   private final PatientLinksDao patientLinksDao;
   private final MedicationPropertiesDao medicationPropertiesDao;
+  private final ComplexDao complexDao;
 
   public PersistentServiceImpl(Database database, ConfigurationProperties configurationProperties) {
     validateParameter(database, "database");
@@ -48,6 +50,7 @@ public final class PersistentServiceImpl implements PersistentService {
     this.treatmentDao = new TreatmentDao(database);
     this.patientLinksDao = new PatientLinksDao(database);
     this.medicationPropertiesDao = new MedicationPropertiesDao(database);
+    this.complexDao = new ComplexDao(database, personDao, dispenserDao);
 
     medicationPropertiesDao.setSystemPropertiesLoadedFromDatabase();
 
@@ -117,6 +120,10 @@ public final class PersistentServiceImpl implements PersistentService {
 
   public MedicationPropertiesDao getMedicationPropertiesDao() {
     return medicationPropertiesDao;
+  }
+
+  public ComplexDao getComplexDao() {
+    return complexDao;
   }
 
   public int generateId() {
