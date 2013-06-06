@@ -173,6 +173,22 @@ public final class PersonDao extends AbstractDao {
   }
 
   public void savePerson(Person person) {
-     String sql = "insert into medication_manager.person (id, name, person_uri, role) values (?, ?, ?, ?)";
+    String sql = "insert into medication_manager.person (id, name, person_uri, role) values (?, ?, ?, ?)";
+
+    PreparedStatement ps = null;
+
+
+        try {
+          ps = getPreparedStatement(sql);
+          ps.setInt(1, person.getId());
+          ps.setString(2, person.getName());
+          ps.setString(3, person.getPersonUri());
+          ps.setString(4, person.getRole().getValue());
+          ps.execute();
+        } catch (SQLException e) {
+          throw new MedicationManagerPersistenceException(e);
+        } finally {
+          closeStatement(ps);
+        }
   }
 }
