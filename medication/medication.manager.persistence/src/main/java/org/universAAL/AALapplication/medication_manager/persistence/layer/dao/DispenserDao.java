@@ -10,9 +10,12 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
@@ -222,7 +225,7 @@ public final class DispenserDao extends AbstractDao {
     boolean upsideDownAlert = (Boolean) col.getValue();
 
     return new Dispenser(id, person, name, dispenserUri, instructionsFileName, dueIntakeAlert,
-            successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
+        successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
   }
 
   public List<Dispenser> getAllDispensers() {
@@ -246,6 +249,24 @@ public final class DispenserDao extends AbstractDao {
       return dispensers;
     } catch (Exception e) {
       throw new MedicationManagerPersistenceException(e);
+    }
+  }
+
+  public void updateDispenser(int dispenserId, int patientId) {
+    String sql = "UPDATE MEDICATION_MANAGER.DISPENSER SET PATIENT_FK_ID = ? WHERE ID = ?";
+
+    PreparedStatement ps = null;
+
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, patientId);
+      ps.setInt(2, dispenserId);
+      ps.execute();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
     }
   }
 }

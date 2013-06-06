@@ -58,21 +58,25 @@ public final class ComplexDao extends AbstractDao {
     }
 
     if (!doctor.isPresentInDatabase()) {
-      saveInPersonTable(doctor);
+      saveInPersonTable(doctor, Role.PHYSICIAN);
     }
 
-    if (!doctor.isPresentInDatabase()) {
-      saveInPersonTable(doctor);
+    if (!caregiver.isPresentInDatabase()) {
+      saveInPersonTable(caregiver, Role.CAREGIVER);
+    }
+
+    if (dispenserId > 0) {
+      dispenserDao.updateDispenser(dispenserId, patient.getId());
     }
 
   }
 
-  private void saveInPersonTable(CaregiverUserInfo caregiverUserInfo) {
+  private void saveInPersonTable(CaregiverUserInfo caregiverUserInfo, Role role) {
     Person person = new Person(
         caregiverUserInfo.getId(),
         caregiverUserInfo.getName(),
         caregiverUserInfo.getUri(),
-        Role.PATIENT,
+        role,
         caregiverUserInfo.getGsmNumber()
     );
 
