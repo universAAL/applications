@@ -18,13 +18,17 @@ public final class ComplexDao extends AbstractDao {
   private final Database database;
   private final PersonDao personDao;
   private final DispenserDao dispenserDao;
+  private final PatientLinksDao patientLinksDao;
 
-  public ComplexDao(Database database, PersonDao personDao, DispenserDao dispenserDao) {
+  public ComplexDao(Database database, PersonDao personDao,
+                    DispenserDao dispenserDao, PatientLinksDao patientLinksDao) {
+
     super(database, "This is complex dao no specific table");
 
     this.database = database;
     this.personDao = personDao;
     this.dispenserDao = dispenserDao;
+    this.patientLinksDao = patientLinksDao;
   }
 
   @Override
@@ -67,8 +71,19 @@ public final class ComplexDao extends AbstractDao {
 
     if (dispenserId > 0) {
       dispenserDao.updateDispenser(dispenserId, patient.getId());
+    } else {
+      dispenserDao.updateDispenserRemovePatientForeignKey(patient.getId());
     }
 
+    updatePatientLinks(patient, doctor, caregiver);
+
+  }
+
+  private void updatePatientLinks(AssistedPersonUserInfo patient,
+                                  CaregiverUserInfo doctor, CaregiverUserInfo caregiver) {
+
+
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   private void saveInPersonTable(CaregiverUserInfo caregiverUserInfo, Role role) {
