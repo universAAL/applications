@@ -2308,7 +2308,6 @@ nutritional/nutritional.client/src/main/java/na/ws/extra/NutritionistServiceProx
 nutritional/nutritional.client/src/main/java/na/ws/extra/NutritionistServiceService.java -text
 nutritional/nutritional.client/src/main/java/na/ws/extra/NutritionistServiceServiceLocator.java -text
 nutritional/nutritional.client/src/main/java/na/ws/extra/User.java -text
-nutritional/nutritional.client/src/main/java/org/universAAL/AALapplication/nutritional/Arranque.java -text
 nutritional/nutritional.client/src/main/java/org/universAAL/AALapplication/nutritional/SharedResources.java -text
 nutritional/nutritional.client/src/main/java/org/universAAL/AALapplication/nutritional/UIServiceProvider.java -text
 nutritional/nutritional.client/src/main/java/org/universAAL/AALapplication/nutritional/dialogs/InterfaceProvider.java -text
