@@ -11,6 +11,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -262,6 +263,24 @@ public final class DispenserDao extends AbstractDao {
       ps = getPreparedStatement(sql);
       ps.setInt(1, patientId);
       ps.setInt(2, dispenserId);
+      ps.execute();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
+  public void updateDispenserRemovePatientForeignKey(int patientId) {
+    String sql = "UPDATE MEDICATION_MANAGER.DISPENSER SET PATIENT_FK_ID = ? WHERE PATIENT_FK_ID = ?";
+
+    PreparedStatement ps = null;
+
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setNull(1, Types.INTEGER);
+      ps.setInt(2, patientId);
       ps.execute();
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
