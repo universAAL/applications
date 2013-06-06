@@ -67,10 +67,11 @@ public final class HandleUserManagement extends BaseServlet {
           throw new MedicationManagerServletUIConfigurationException("Missing expected parameter : " + SAVE_PATIENT);
         }
 
-        UserManagementParameterHandler parameterHandler = new UserManagementParameterHandler(req);
+        UserManagementParameterHandler parameterHandler = new UserManagementParameterHandler(req, session);
 
-        parameterHandler.validateParameters();
+        parameterHandler.saveData();
 
+        userManagementHtmlWriterServlet.doGet(req, resp);
 
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());

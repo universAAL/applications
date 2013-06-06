@@ -26,6 +26,8 @@ public final class Util {
   public static final String ERROR = "ERROR";
   static final String JS_ALIAS = "/configuration/js";
   static final String CSS_ALIAS = "/configuration/css";
+  public static final String PATIENTS = "patients";
+  public static final String CAREGIVERS = "caregivers";
 
   private Util() {
   }

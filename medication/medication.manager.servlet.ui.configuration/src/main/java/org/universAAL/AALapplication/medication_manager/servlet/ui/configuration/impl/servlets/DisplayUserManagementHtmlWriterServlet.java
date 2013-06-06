@@ -51,7 +51,7 @@ public final class DisplayUserManagementHtmlWriterServlet extends BaseHtmlWriter
         PersistentService persistentService = getPersistentService();
         UserManager userManager = getUserManager();
 
-        handleResponse(req, resp, persistentService, userManager);
+        handleResponse(req, resp, persistentService, userManager, session);
 
 
       } catch (Exception e) {
@@ -67,10 +67,10 @@ public final class DisplayUserManagementHtmlWriterServlet extends BaseHtmlWriter
   }
 
 
-  private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
-                              PersistentService persistentService, UserManager userManager) throws IOException {
+  private void handleResponse(HttpServletRequest req, HttpServletResponse resp, PersistentService persistentService,
+                              UserManager userManager, Session session) throws IOException {
 
-    UserManagementForm scriptForm = new UserManagementForm(persistentService, userManager);
+    UserManagementForm scriptForm = new UserManagementForm(persistentService, userManager, session);
     scriptForm.prepareData();
     sendResponse(req, resp, scriptForm);
 
