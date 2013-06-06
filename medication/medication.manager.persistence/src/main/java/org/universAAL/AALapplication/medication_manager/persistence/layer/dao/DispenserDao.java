@@ -24,6 +24,10 @@ public final class DispenserDao extends AbstractDao {
   private static final String DISPENSER_URI = "DISPENSER_URI";
   private static final String ID = "ID";
   private static final String INSTRUCTIONS_FILE_NAME = "INSTRUCTIONS_FILE_NAME";
+  private static final String DUE_INTAKE_ALERT = "DUE_INTAKE_ALERT";
+  private static final String SUCCESSFUL_INTAKE_ALERT = "SUCCESSFUL_INTAKE_ALERT";
+  private static final String MISSED_INTAKE_ALERT = "MISSED_INTAKE_ALERT";
+  private static final String UPSIDE_DOWN_ALERT = "UPSIDE_DOWN_ALERT";
   private PersonDao personDao;
 
   private static final String TABLE_NAME = "DISPENSER";
@@ -64,7 +68,21 @@ public final class DispenserDao extends AbstractDao {
     col = columns.get(INSTRUCTIONS_FILE_NAME);
     String instructionsFileName = (String) col.getValue();
 
-    Dispenser dispenser = new Dispenser(id, person, name, dispenserUri, instructionsFileName);
+    col = columns.get(DUE_INTAKE_ALERT);
+    boolean dueIntakeAlert = (Boolean) col.getValue();
+
+    col = columns.get(SUCCESSFUL_INTAKE_ALERT);
+    boolean successfulIntakeAlert = (Boolean) col.getValue();
+
+    col = columns.get(MISSED_INTAKE_ALERT);
+    boolean missedIntakeAlert = (Boolean) col.getValue();
+
+    col = columns.get(UPSIDE_DOWN_ALERT);
+    boolean upsideDownAlert = (Boolean) col.getValue();
+
+
+    Dispenser dispenser = new Dispenser(id, person, name, dispenserUri, instructionsFileName, dueIntakeAlert,
+        successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
 
     Log.info("Dispenser found: %s", getClass(), dispenser);
 
@@ -148,7 +166,20 @@ public final class DispenserDao extends AbstractDao {
     col = columnMap.get(INSTRUCTIONS_FILE_NAME);
     String instructionsFileName = (String) col.getValue();
 
-    return new Dispenser(id, person, name, dispenserUri, instructionsFileName);
+    col = columnMap.get(DUE_INTAKE_ALERT);
+    boolean dueIntakeAlert = (Boolean) col.getValue();
+
+    col = columnMap.get(SUCCESSFUL_INTAKE_ALERT);
+    boolean successfulIntakeAlert = (Boolean) col.getValue();
+
+    col = columnMap.get(MISSED_INTAKE_ALERT);
+    boolean missedIntakeAlert = (Boolean) col.getValue();
+
+    col = columnMap.get(UPSIDE_DOWN_ALERT);
+    boolean upsideDownAlert = (Boolean) col.getValue();
+
+    return new Dispenser(id, person, name, dispenserUri, instructionsFileName, dueIntakeAlert,
+        successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
   }
 
   public Dispenser getByDispenserUri(String deviceUri) {
@@ -178,8 +209,20 @@ public final class DispenserDao extends AbstractDao {
     }
     Column instructionsFileNameColumn = dispenserRecordMap.get(INSTRUCTIONS_FILE_NAME);
     String instructionsFileName = (String) instructionsFileNameColumn.getValue();
+    Column col = dispenserRecordMap.get(DUE_INTAKE_ALERT);
+    boolean dueIntakeAlert = (Boolean) col.getValue();
 
-    return new Dispenser(id, person, name, dispenserUri, instructionsFileName);
+    col = dispenserRecordMap.get(SUCCESSFUL_INTAKE_ALERT);
+    boolean successfulIntakeAlert = (Boolean) col.getValue();
+
+    col = dispenserRecordMap.get(MISSED_INTAKE_ALERT);
+    boolean missedIntakeAlert = (Boolean) col.getValue();
+
+    col = dispenserRecordMap.get(UPSIDE_DOWN_ALERT);
+    boolean upsideDownAlert = (Boolean) col.getValue();
+
+    return new Dispenser(id, person, name, dispenserUri, instructionsFileName, dueIntakeAlert,
+            successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
   }
 
   public List<Dispenser> getAllDispensers() {
