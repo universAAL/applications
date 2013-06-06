@@ -7,17 +7,20 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.Pe
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.PatientLinks;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
 import org.universAAL.AALapplication.medication_manager.user.management.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.CaregiverUserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.UserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
+import org.universAAL.ontology.profile.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Script.*;
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -29,13 +32,15 @@ public final class UserManagementForm extends ScriptForm {
   private final List<Dispenser> dispensers;
   private final PersistentService persistentService;
   private final UserManager userManager;
+  private final Session session;
 
-  public UserManagementForm(PersistentService persistentService, UserManager userManager) {
+  public UserManagementForm(PersistentService persistentService, UserManager userManager, Session session) {
     super();
 
 
     this.persistentService = persistentService;
     this.userManager = userManager;
+    this.session = session;
 
     patients = new ArrayList<AssistedPersonUserInfo>();
     caregivers = new ArrayList<CaregiverUserInfo>();
@@ -57,6 +62,9 @@ public final class UserManagementForm extends ScriptForm {
     List<Dispenser> allDispensers = dispenserDao.getAllDispensers();
 
     dispensers.addAll(allDispensers);
+
+    session.setAttribute(PATIENTS, patients);
+    session.setAttribute(CAREGIVERS, caregivers);
   }
 
   private void checkForDatabasePresence() {
@@ -143,13 +151,19 @@ public final class UserManagementForm extends ScriptForm {
   }
 
   private void fillUsers() {
+
+    if (isCached()) {
+      return;
+    }
+
+
     List<UserInfo> users = userManager.getAllUsers();
 
     for (UserInfo user : users) {
       System.out.println("\n******** user *****************");
       String uri = user.getUri();
       Log.info("user.getURI() = %s | user.getName() = %s", getClass(), uri, user.getName());
-      if (user.getClass().equals(AssistedPersonUserInfo.class)) {
+      if (user.getClass().equals(AssistedPersonUserInfo.class) || user.getClass().equals(User.class)) {
         Log.info("The user is a AssistedPerson", getClass());
         AssistedPersonUserInfo assistedPersonUserInfo = (AssistedPersonUserInfo) user;
         patients.add(assistedPersonUserInfo);
@@ -162,6 +176,19 @@ public final class UserManagementForm extends ScriptForm {
       System.out.println("\n******** end *****************");
 
     }
+  }
+
+  private boolean isCached() {
+    boolean isCached = false;
+    List<AssistedPersonUserInfo> allPatients = (List<AssistedPersonUserInfo>) session.getAttribute(PATIENTS);
+    if (allPatients != null && !allPatients.isEmpty()) {
+      isCached = true;
+      List<CaregiverUserInfo> allCaregivers = (List<CaregiverUserInfo>) session.getAttribute(CAREGIVERS);
+      patients.addAll(allPatients);
+      caregivers.addAll(allCaregivers);
+    }
+
+    return isCached;
   }
 
   @Override
