@@ -254,17 +254,25 @@ public final class DispenserDao extends AbstractDao {
     }
   }
 
-  public void updateDispenser(int dispenserId, int patientId) {
+  public void updateDispenser(int dispenserId, int patientId, boolean dueIntakeAlert,
+                              boolean successfulIntakeAlert, boolean missedIntakeAlert, boolean upsideDownAlert) {
 
-    String sql = "UPDATE MEDICATION_MANAGER.DISPENSER SET PATIENT_FK_ID = ? WHERE ID = ?";
+    String sql = "UPDATE MEDICATION_MANAGER.DISPENSER SET PATIENT_FK_ID = ?, " +
+        "DUE_INTAKE_ALERT = ?, MISSED_INTAKE_ALERT = ?, SUCCESSFUL_INTAKE_ALERT = ?, " +
+        "UPSIDE_DOWN_ALERT = ? WHERE ID = ?";
 
     PreparedStatement ps = null;
 
+    updateDispenserRemovePatientForeignKey(patientId);
 
     try {
       ps = getPreparedStatement(sql);
       ps.setInt(1, patientId);
-      ps.setInt(2, dispenserId);
+      ps.setBoolean(2, dueIntakeAlert);
+      ps.setBoolean(3, missedIntakeAlert);
+      ps.setBoolean(4, successfulIntakeAlert);
+      ps.setBoolean(5, upsideDownAlert);
+      ps.setInt(6, dispenserId);
       ps.execute();
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
