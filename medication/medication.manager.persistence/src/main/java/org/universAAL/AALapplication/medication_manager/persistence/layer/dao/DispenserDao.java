@@ -10,6 +10,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -254,6 +255,7 @@ public final class DispenserDao extends AbstractDao {
   }
 
   public void updateDispenser(int dispenserId, int patientId) {
+
     String sql = "UPDATE MEDICATION_MANAGER.DISPENSER SET PATIENT_FK_ID = ? WHERE ID = ?";
 
     PreparedStatement ps = null;
@@ -271,7 +273,32 @@ public final class DispenserDao extends AbstractDao {
     }
   }
 
+  private boolean patientHasDispenser(int patientId) {
+
+    String sql = "SELECT * FROM MEDICATION_MANAGER.DISPENSER WHERE PATIENT_FK_ID = ?";
+
+    PreparedStatement ps = null;
+
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, patientId);
+      ResultSet rs = ps.executeQuery();
+      return rs.next();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+
+  }
+
   public void updateDispenserRemovePatientForeignKey(int patientId) {
+
+    if (!patientHasDispenser(patientId)) {
+      return;
+    }
+
     String sql = "UPDATE MEDICATION_MANAGER.DISPENSER SET PATIENT_FK_ID = ? WHERE PATIENT_FK_ID = ?";
 
     PreparedStatement ps = null;

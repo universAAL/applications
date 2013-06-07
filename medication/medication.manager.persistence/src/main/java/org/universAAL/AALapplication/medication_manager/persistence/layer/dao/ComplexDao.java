@@ -82,8 +82,9 @@ public final class ComplexDao extends AbstractDao {
   private void updatePatientLinks(AssistedPersonUserInfo patient,
                                   CaregiverUserInfo doctor, CaregiverUserInfo caregiver) {
 
+    int id = database.getNextIdFromIdGenerator();
+    patientLinksDao.saveOrUpdate(id, patient.getId(), doctor.getId(), caregiver.getId());
 
-    throw new UnsupportedOperationException("Not implemented yet");
   }
 
   private void saveInPersonTable(CaregiverUserInfo caregiverUserInfo, Role role) {

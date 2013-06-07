@@ -9,6 +9,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -167,6 +168,76 @@ public final class PatientLinksDao extends AbstractDao {
         return new ArrayList<Person>();
       }
       throw e;
+    }
+  }
+
+  public void saveOrUpdate(int id, int patientId, int doctorId, int caregiverId) {
+    if (patientHasRecord(patientId)) {
+      update(patientId, doctorId, caregiverId);
+    } else {
+      save(id, patientId, doctorId, caregiverId);
+    }
+  }
+
+  private void save(int id, int patientId, int doctorId, int caregiverId) {
+
+    String sql = "INSERT INTO MEDICATION_MANAGER.PATIENT_LINKS " +
+        "(ID, DOCTOR_FK_ID, PATIENT_FK_ID, CAREGIVER_FK_ID) VALUES (?, ?, ?, ?)";
+
+    PreparedStatement ps = null;
+
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, id);
+      ps.setInt(2, doctorId);
+      ps.setInt(3, patientId);
+      ps.setInt(4, caregiverId);
+      ps.execute();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+
+  }
+
+  private void update(int patientId, int doctorId, int caregiverId) {
+    String sql = "UPDATE MEDICATION_MANAGER.PATIENT_LINKS " +
+        "SET DOCTOR_FK_ID = ?, CAREGIVER_FK_ID = ?  " +
+        "WHERE PATIENT_FK_ID = ?";
+
+    PreparedStatement ps = null;
+
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, doctorId);
+      ps.setInt(2, caregiverId);
+      ps.setInt(3, patientId);
+      ps.execute();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
+  private boolean patientHasRecord(int patientId) {
+    String sql = "SELECT * FROM MEDICATION_MANAGER.PATIENT_LINKS WHERE PATIENT_FK_ID = ?";
+
+    PreparedStatement ps = null;
+
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, patientId);
+      ResultSet rs = ps.executeQuery();
+      return rs.next();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
     }
   }
 }
