@@ -37,12 +37,14 @@ public final class ComplexDao extends AbstractDao {
   }
 
   public void save(AssistedPersonUserInfo patient, CaregiverUserInfo doctor,
-                   CaregiverUserInfo caregiver, int dispenserId) {
+                   CaregiverUserInfo caregiver, int dispenserId, boolean dueIntakeAlert,
+                   boolean successfulIntakeAlert, boolean missedIntakeAlert, boolean upsideDownAlert) {
 
     Connection connection = database.getConnection();
     try {
       connection.setAutoCommit(false);
-      saveData(patient, doctor, caregiver, dispenserId);
+      saveData(patient, doctor, caregiver, dispenserId, dueIntakeAlert,
+          successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
       connection.commit();
     } catch (Exception e) {
       rollback(connection, e);
@@ -55,22 +57,27 @@ public final class ComplexDao extends AbstractDao {
   }
 
   private void saveData(AssistedPersonUserInfo patient, CaregiverUserInfo doctor,
-                        CaregiverUserInfo caregiver, int dispenserId) {
+                        CaregiverUserInfo caregiver, int dispenserId, boolean dueIntakeAlert,
+                        boolean successfulIntakeAlert, boolean missedIntakeAlert, boolean upsideDownAlert) {
 
     if (!patient.isPresentInDatabase()) {
       saveInPersonTable(patient);
+      patient.setPresentInDatabase(true);
     }
 
     if (!doctor.isPresentInDatabase()) {
       saveInPersonTable(doctor, Role.PHYSICIAN);
+      doctor.setPresentInDatabase(true);
     }
 
     if (!caregiver.isPresentInDatabase()) {
       saveInPersonTable(caregiver, Role.CAREGIVER);
+      caregiver.setPresentInDatabase(true);
     }
 
     if (dispenserId > 0) {
-      dispenserDao.updateDispenser(dispenserId, patient.getId());
+      dispenserDao.updateDispenser(dispenserId, patient.getId(), dueIntakeAlert,
+                successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
     } else {
       dispenserDao.updateDispenserRemovePatientForeignKey(patient.getId());
     }
@@ -96,7 +103,12 @@ public final class ComplexDao extends AbstractDao {
         caregiverUserInfo.getGsmNumber()
     );
 
-    personDao.savePerson(person);
+    try {
+      personDao.savePerson(person);
+    } catch (Exception e) {
+      caregiverUserInfo.setPresentInDatabase(false);
+      throw new MedicationManagerPersistenceException(e);
+    }
   }
 
 
@@ -110,7 +122,12 @@ public final class ComplexDao extends AbstractDao {
         Role.PATIENT
     );
 
-    personDao.savePerson(person);
+    try {
+      personDao.savePerson(person);
+    } catch (Exception e) {
+      patient.setPresentInDatabase(false);
+      throw new MedicationManagerPersistenceException(e);
+    }
   }
 
 }

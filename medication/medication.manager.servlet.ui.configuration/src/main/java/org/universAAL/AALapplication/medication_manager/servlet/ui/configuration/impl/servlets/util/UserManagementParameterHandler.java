@@ -117,11 +117,8 @@ public final class UserManagementParameterHandler {
     PersistentService persistentService = getPersistentService();
     ComplexDao complexDao = persistentService.getComplexDao();
 
-    complexDao.save(patient, doctor, caregiver, dispenserId);
-
-    patient.setPresentInDatabase(true);
-    doctor.setPresentInDatabase(true);
-    caregiver.setPresentInDatabase(true);
+    complexDao.save(patient, doctor, caregiver, dispenserId,
+        dueIntakeAlert, successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
 
   }
 

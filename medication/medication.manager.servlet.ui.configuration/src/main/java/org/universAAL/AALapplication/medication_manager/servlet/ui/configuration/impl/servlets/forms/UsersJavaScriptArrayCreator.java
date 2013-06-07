@@ -1,9 +1,11 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.forms;
 
-import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.JavaScriptObjectCreator;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
 
 import java.util.List;
 
@@ -63,18 +65,41 @@ public final class UsersJavaScriptArrayCreator {
 
   private void addAlerts(AssistedPersonUserInfo patient, StringBuffer sb) {
     sb.append(",\n\t\t\t\t");
-    sb.append("alerts:{");
+    sb.append("\"alerts\":");
 
+    Dispenser dispenser = patient.getDispenser();
 
-    sb.append("}");
+    if (dispenser != null) {
+      createAlertsArray(dispenser, sb);
+    } else {
+      sb.append("{\"due\":false, \"missed\":false, \"successful\":false, \"upside\":false}");
+    }
+
 
 //    "alerts":{"due":false, "missed":true, "successful":true, "upside":false}
 
   }
 
+  private void createAlertsArray(Dispenser dispenser, StringBuffer sb) {
+    JavaScriptObjectCreator creator = new JavaScriptObjectCreator();
+
+    Pair<Boolean> pair1 = new Pair<Boolean>("due", dispenser.isDueIntakeAlert(), true);
+    creator.addPair(pair1);
+    Pair<Boolean> pair2 = new Pair<Boolean>("missed", dispenser.isMissedIntakeAlert(), true);
+    creator.addPair(pair2);
+    Pair<Boolean> pair3 = new Pair<Boolean>("successful", dispenser.isSuccessfulIntakeAlert(), true);
+    creator.addPair(pair3);
+    Pair<Boolean> pair4 = new Pair<Boolean>("upside", dispenser.isUpsideDownAlert(), true);
+        creator.addPair(pair4);
+
+    String javascriptObject = creator.createJavascriptObject();
+
+    sb.append(javascriptObject);
+  }
+
   private void addDispenser(AssistedPersonUserInfo patient, StringBuffer sb) {
     sb.append(",\n\t\t\t\t");
-    sb.append("dispenser:");
+    sb.append("\"dispenser\":");
 
     Dispenser dispenser = patient.getDispenser();
 
@@ -89,7 +114,7 @@ public final class UsersJavaScriptArrayCreator {
 
   private void addPatient(AssistedPersonUserInfo patient, StringBuffer sb) {
     sb.append("\n\t\t\t\t");
-    sb.append("patient:");
+    sb.append("\"patient\":");
     String patientId = getNumberQuoted(patient.getId());
     sb.append(patientId);
   }
@@ -100,7 +125,7 @@ public final class UsersJavaScriptArrayCreator {
 
     if (doctor != null) {
       sb.append(",\n\t\t\t\t");
-      sb.append("physician:");
+      sb.append("\"physician\":");
 
       String physicianId = getNumberQuoted(doctor.getId());
       sb.append(physicianId);
@@ -110,7 +135,7 @@ public final class UsersJavaScriptArrayCreator {
 
     if (caregiverUserInfo != null) {
       sb.append(",\n\t\t\t\t");
-      sb.append("caregiver:");
+      sb.append("\"caregiver\":");
 
       String caregiverId = getNumberQuoted(caregiverUserInfo.getId());
       sb.append(caregiverId);

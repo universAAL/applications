@@ -66,6 +66,22 @@ public final class Dispenser extends Entity {
     return name;
   }
 
+  public boolean isDueIntakeAlert() {
+    return dueIntakeAlert;
+  }
+
+  public boolean isSuccessfulIntakeAlert() {
+    return successfulIntakeAlert;
+  }
+
+  public boolean isMissedIntakeAlert() {
+    return missedIntakeAlert;
+  }
+
+  public boolean isUpsideDownAlert() {
+    return upsideDownAlert;
+  }
+
   @Override
   public String toString() {
     return "Dispenser{" +
@@ -73,6 +89,10 @@ public final class Dispenser extends Entity {
         ", name='" + name + '\'' +
         ", dispenserUri='" + dispenserUri + '\'' +
         ", instructionsFileName='" + instructionsFileName + '\'' +
+        ", dueIntakeAlert=" + dueIntakeAlert +
+        ", successfulIntakeAlert=" + successfulIntakeAlert +
+        ", missedIntakeAlert=" + missedIntakeAlert +
+        ", upsideDownAlert=" + upsideDownAlert +
         '}';
   }
 }
