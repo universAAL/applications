@@ -36,20 +36,28 @@ public final class DisplayUserManagementHtmlWriterServlet extends BaseHtmlWriter
 
     synchronized (lock) {
       try {
+        Log.info("Called DisplayUserManagementHtmlWriterServlet", getClass());
+
         isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
         isServletSet(displayErrorPageWriterServlet, "displayErrorPageWriterServlet");
 
         Session session = getSession(req, resp, getClass());
         Person admin = (Person) session.getAttribute(LOGGED_ADMIN);
+        Log.info("Checking admin session attribute : %s", getClass(), admin);
 
         if (admin == null) {
+          Log.info("admin is not set. Redirecting to the log page!", getClass());
           debugSessions(session.getId(), "if(admin is null) the servlet doGet/doPost method", getClass());
           displayLoginHtmlWriterServlet.doGet(req, resp);
           return;
         }
 
+        Log.info("Trying to get PersistentService object and UserManager object", getClass());
+
         PersistentService persistentService = getPersistentService();
         UserManager userManager = getUserManager();
+
+        Log.info("Calling handleResponse(...) method ", getClass());
 
         handleResponse(req, resp, persistentService, userManager, session);
 
@@ -70,6 +78,7 @@ public final class DisplayUserManagementHtmlWriterServlet extends BaseHtmlWriter
   private void handleResponse(HttpServletRequest req, HttpServletResponse resp, PersistentService persistentService,
                               UserManager userManager, Session session) throws IOException {
 
+    Log.info("Creating UserManagementForm object", getClass());
     UserManagementForm scriptForm = new UserManagementForm(persistentService, userManager, session);
     scriptForm.prepareData();
     sendResponse(req, resp, scriptForm);

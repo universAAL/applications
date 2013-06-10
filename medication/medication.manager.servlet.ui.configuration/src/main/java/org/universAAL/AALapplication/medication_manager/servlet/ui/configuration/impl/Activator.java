@@ -140,6 +140,7 @@ public final class Activator implements BundleActivator {
   }
 
   public static PersistentService getPersistentService() {
+    Log.info("Trying to get PersistentService object", Activator.class);
     if (bundleContext == null) {
       throw new MedicationManagerServletUIConfigurationException("The bundleContext is not set");
     }
@@ -156,10 +157,13 @@ public final class Activator implements BundleActivator {
       throw new MedicationManagerServletUIConfigurationException("The PersistentService is missing");
     }
 
+    Log.info("The PersistentService object is found", Activator.class);
+
     return persistentService;
   }
 
   public static UserManager getUserManager() {
+    Log.info("Trying to get UserManager object", Activator.class);
     if (bundleContext == null) {
       throw new MedicationManagerServletUIConfigurationException("The bundleContext is not set");
     }
@@ -175,6 +179,8 @@ public final class Activator implements BundleActivator {
     if (userManager == null) {
       throw new MedicationManagerServletUIConfigurationException("The UserManager is missing");
     }
+
+    Log.info("The PersistentService object is found", Activator.class);
 
     return userManager;
   }

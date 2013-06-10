@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.forms;
 
+import org.universAAL.AALapplication.medication_manager.configuration.MedicationManagerConfigurationException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
@@ -49,7 +50,13 @@ public final class UserManagementForm extends ScriptForm {
 
   public void prepareData() {
 
+    Log.info("Prepare data required by the UserManagementForm", getClass());
+
     fillUsers();
+
+    if (patients.isEmpty()) {
+      throw new MedicationManagerConfigurationException("Missing patients!");
+    }
 
     checkForDatabasePresence();
 
@@ -61,6 +68,8 @@ public final class UserManagementForm extends ScriptForm {
     DispenserDao dispenserDao = persistentService.getDispenserDao();
     List<Dispenser> allDispensers = dispenserDao.getAllDispensers();
 
+    Log.info("Found dispensers (size): ", getClass(), allDispensers.size());
+
     dispensers.addAll(allDispensers);
 
     session.setAttribute(PATIENTS, patients);
@@ -68,12 +77,17 @@ public final class UserManagementForm extends ScriptForm {
   }
 
   private void checkForDatabasePresence() {
+
+    Log.info("Check users for database presence!", getClass());
+
     PersonDao personDao = persistentService.getPersonDao();
     List<Person> persons = personDao.getAllPersons();
 
     for (AssistedPersonUserInfo assistedPersonUserInfo : patients) {
+      Log.info("Check assistedPersonUserInfo: %s for database presence!", getClass(), assistedPersonUserInfo.getUri());
       Person patient = getPersonFromDatabase(persons, assistedPersonUserInfo);
       if (patient != null) {
+        Log.info("The assistedPersonUserInfo has database records", getClass());
         assistedPersonUserInfo.setId(patient.getId());
         assistedPersonUserInfo.setPresentInDatabase(true);
         DispenserDao dispenserDao = persistentService.getDispenserDao();
@@ -83,8 +97,10 @@ public final class UserManagementForm extends ScriptForm {
     }
 
     for (CaregiverUserInfo caregiverUserInfo : caregivers) {
+      Log.info("Check caregiverUserInfo: %s for database presence!", getClass(), caregiverUserInfo.getUri());
       Person caregiver = getPersonFromDatabase(persons, caregiverUserInfo);
       if (caregiver != null) {
+        Log.info("The caregiverUserInfo has database records", getClass());
         caregiverUserInfo.setId(caregiver.getId());
         caregiverUserInfo.setPresentInDatabase(true);
       }
@@ -105,8 +121,10 @@ public final class UserManagementForm extends ScriptForm {
   private void setDataToAssistedPersonUserInfoPresentInDatabase(List<PatientLinks> patientLinkses) {
 
     for (AssistedPersonUserInfo assistedPersonUserInfo : patients) {
+      Log.info("Check assistedPersonUserInfo: %s for PatientLinks!", getClass(), assistedPersonUserInfo.getUri());
       PatientLinks patientLinks = findPatientLinks(assistedPersonUserInfo, patientLinkses);
       if (patientLinks != null) {
+        Log.info("assistedPersonUserInfo: %s has PatientLinks!", getClass(), assistedPersonUserInfo.getUri());
         setData(patientLinks, assistedPersonUserInfo);
       }
     }
@@ -155,11 +173,23 @@ public final class UserManagementForm extends ScriptForm {
 
   private void fillUsers() {
 
+    Log.info("Trying to fill UserInfo Lists fields : patient and caregivers", getClass());
+
+    Log.info("Checking if the users are cached", getClass());
     if (isCached()) {
+      Log.info("Using cached users", getClass());
       return;
     }
 
+    Log.info("Trying to get UserInfo objects from the UserManager", getClass());
+
     List<UserInfo> users = userManager.getAllUsers();
+
+    if (users == null || users.isEmpty()) {
+      Log.info("The UserManager returned null or empty list with users", getClass());
+    }
+
+    Log.info("Trying to get UserInfo objects from the UserManager", getClass());
 
     for (UserInfo user : users) {
       System.out.println("\n******** user *****************");
