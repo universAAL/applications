@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users;
 
+import org.universAAL.AALapplication.medication_manager.user.management.impl.Log;
 import org.universAAL.AALapplication.medication_manager.user.management.impl.MedicationManagerUserManagementException;
 import org.universAAL.ontology.profile.PersonalInformationSubprofile;
 
@@ -51,6 +52,8 @@ public final class VCardPropertiesParser {
   }
 
   private PersonalInformationSubprofile createPersonalInformationSubprofile(Properties props) {
+
+    Log.info("Creating a PersonalInformationSubprofile object", getClass());
 
     checkForUnknownProperties(props);
     checkForUnImplementedProperties(props);
@@ -135,8 +138,10 @@ public final class VCardPropertiesParser {
                                     String propNameDestination) {
 
     String value = props.getProperty(propNameSource);
-
+    Log.info("Getting property in the property file: %s and the value: %s", getClass(), propNameSource, value);
     if (value != null) {
+      Log.info("Setting property to the PersonalInformationSubprofile object: name=%s and value=",
+          getClass(), propNameSource, value);
       XMLGregorianCalendar calendar = getXMLGregorianCalendar(value);
       personalInformationSubprofile.setProperty(propNameDestination, calendar);
     }
@@ -158,7 +163,11 @@ public final class VCardPropertiesParser {
 
     String value = props.getProperty(propNameSource);
 
+    Log.info("Getting property in the property file: %s and the value: %s", getClass(), propNameSource, value);
+
     if (value != null) {
+      Log.info("Setting property to the PersonalInformationSubprofile object: name=%s and value=",
+          getClass(), propNameSource, value);
       personalInformationSubprofile.setProperty(propNameDestination, value);
     }
 

@@ -94,25 +94,33 @@ public class UserManagerImpl implements UserManager {
 
     List<UserInfo> users = new ArrayList<UserInfo>();
 
+    Log.info("Calling ProfilingService in order to get Users objects from the CHE", getClass());
+
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
 
     req.addRequiredOutput(OUTPUT_GET_ALL_USERS, new String[]{ProfilingService.PROP_CONTROLS});
 
     ServiceResponse resp = caller.call(req);
 
-    if (resp.getCallStatus().equals(CallStatus.succeeded)) {
+    CallStatus callStatus = resp.getCallStatus();
+
+    Log.info("The response status is: %s", getClass(), callStatus);
+
+    if (callStatus.equals(CallStatus.succeeded)) {
 
       handleSuccessfulResponse(users, resp);
 
     } else {
-      Log.info("CallStatus: %s", getClass(), resp.getCallStatus().name());
+      Log.info("CallStatus: %s", getClass(), callStatus.name());
     }
 
     return users;
   }
 
   private void handleSuccessfulResponse(List<UserInfo> users, ServiceResponse resp) {
+    Log.info("Trying to get users from the ServiceResponse object", getClass());
     List out = getReturnValue(resp.getOutputs(), OUTPUT_GET_ALL_USERS);
+    Log.info("Received List with users object (out) : %s", getClass(), out);
     for (int i = 0; i < out.size(); i++) {
       UserInfo ur = getUserInfo(out, i);
       users.add(ur);
@@ -120,7 +128,10 @@ public class UserManagerImpl implements UserManager {
   }
 
   private UserInfo getUserInfo(List out, int i) {
+    Log.info("Creating UserInfo object from The User object", getClass());
     User ur = (User) out.get(i);
+    Log.info("User object uri is : %s", getClass(), ur.getURI());
+
     PersonalInformationSubprofile subprofile = getUserSubprofiles(ur);
 
     int id = persistentService.generateId();
@@ -142,6 +153,7 @@ public class UserManagerImpl implements UserManager {
   }
 
   public void addProfile(User profilable, UserProfile profile) {
+    Log.info("Sending UserProfile to the CHE for the user: %s", getClass(), profilable.getURI());
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
     req.addValueFilter(new String[]{ProfilingService.PROP_CONTROLS}, profilable);
     req.addAddEffect(new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE}, profile);
@@ -157,7 +169,7 @@ public class UserManagerImpl implements UserManager {
 
   public PersonalInformationSubprofile getUserSubprofiles(User user) {
 
-    Log.info("Get all Subprofiles for user: %s", getClass(), user.getURI());
+    Log.info("Trying to get PersonalInformationSubprofile for user: %s", getClass(), user.getURI());
 
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
 
@@ -169,20 +181,22 @@ public class UserManagerImpl implements UserManager {
 
     ServiceResponse resp = caller.call(req);
 
+    CallStatus callStatus = CallStatus.succeeded;
 
-    if (!CallStatus.succeeded.equals(resp.getCallStatus())) {
+    if (!callStatus.equals(resp.getCallStatus())) {
       throw new MedicationManagerUserManagementException("Unsuccessful call status");
     }
 
     Object out = getReturnValue(resp.getOutputs(), OUTPUT_GET_SUBPROFILES);
     if (out != null) {
+      Log.info("Found output with PersonalInformationSubprofile URI", getClass());
       PersonalInformationSubprofile userSubprofile = getUserSubprofile(out, user);
 
       Log.info("Found a PersonalInformationSubprofile : %s", getClass(), userSubprofile);
 
       return userSubprofile;
     } else {
-      Log.info("Problem with the response outputs!", getClass());
+      Log.info("Problem with the response outputs. Cannot get the PersonalInformationSubprofile object!", getClass());
       return null;
     }
 
@@ -191,7 +205,16 @@ public class UserManagerImpl implements UserManager {
   private PersonalInformationSubprofile getUserSubprofile(Object out, User user) {
     List list = (List) out;
 
+    Log.info("Trying to get PersonalInformationSubprofile URI from the list", getClass());
+
+    if (list.isEmpty()) {
+      throw new MedicationManagerUserManagementException("The List with PersonalInformationSubprofile URI is empty!");
+    }
+
     PersonalInformationSubprofile subprofile = (PersonalInformationSubprofile) list.get(0);
+
+    Log.info("Found PersonalInformationSubprofile object, which has only URI of our PersonalInformationSubprofile object." +
+        "So we need to ask CHE to give real PersonalInformationSubprofile object. Making ServiceRequest...", getClass());
 
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
     String uri = subprofile.getURI();
@@ -200,12 +223,15 @@ public class UserManagerImpl implements UserManager {
     req.addRequiredOutput(OUTPUT_GET_SUBPROFILE, new String[]{ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE});
     ServiceResponse resp = caller.call(req);
 
-    if (resp.getCallStatus() == CallStatus.succeeded) {
+    CallStatus callStatus = resp.getCallStatus();
+    Log.info("ServiceResponse status is : %s", getClass(), callStatus);
+
+    if (callStatus == CallStatus.succeeded) {
 
       PersonalInformationSubprofile informationSubprofile = processOutput(OUTPUT_GET_SUBPROFILE, resp.getOutputs());
       if (informationSubprofile != null) {
 
-        Log.info("informationSubprofile = %s", getClass(), informationSubprofile);
+        Log.info("Found informationSubprofile = %s", getClass(), informationSubprofile);
 
         return informationSubprofile;
 
@@ -213,7 +239,7 @@ public class UserManagerImpl implements UserManager {
         Log.info("PersonalInformationSubprofile is null !", getClass());
       }
     } else {
-      Log.info("Other CallStatus results: %s", getClass(), resp.getCallStatus().name());
+      Log.info("Other CallStatus results: %s", getClass(), callStatus.name());
     }
 
     throw new MedicationManagerUserManagementException("Unsuccessful response");
@@ -221,6 +247,12 @@ public class UserManagerImpl implements UserManager {
   }
 
   private PersonalInformationSubprofile processOutput(String expectedOutput, List outputs) {
+
+    Log.info("ProcessOutput method is called", getClass());
+
+    if (outputs == null) {
+      throw new MedicationManagerUserManagementException("The output List parameter is null");
+    }
 
     for (Object o : outputs) {
       ProcessOutput output = (ProcessOutput) o;
@@ -233,12 +265,11 @@ public class UserManagerImpl implements UserManager {
       }
     }
 
-
     return null;
   }
 
   private void addUserSubprofile(User user, SubProfile subProfile) {
-    Log.info("Add subProfile for user: %s and subprofile: %s", getClass(), user.getURI(), subProfile.toString());
+    Log.info("Add subProfile into the CHE for user: %s and subprofile: %s", getClass(), user.getURI(), subProfile.toString());
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
     req.addValueFilter(new String[]{ProfilingService.PROP_CONTROLS}, user);
     req.addAddEffect(new String[]{
@@ -254,18 +285,22 @@ public class UserManagerImpl implements UserManager {
   }
 
   private List getReturnValue(List outputs, String expectedOutput) {
-
+    Log.info("Getting outputs size for the following expectedOutput: %s", getClass(), expectedOutput);
     if (outputs == null) {
+      Log.info("Outputs are null. Returning empty List", getClass());
       return Collections.emptyList();
     }
 
+    Log.info("Outputs size is : ", getClass(), outputs.size());
     List returnValue = null;
 
     for (Object output1 : outputs) {
       ProcessOutput output = (ProcessOutput) output1;
+      Log.info("Getting ProcessOutput: %s", getClass(), output);
       returnValue = processOutput(expectedOutput, returnValue, output);
     }
 
+    Log.info("returnValue is", getClass(), returnValue);
 
     return returnValue;
   }
@@ -274,9 +309,9 @@ public class UserManagerImpl implements UserManager {
 
     if (output.getURI().equals(expectedOutput)) {
       returnValue = getReturnValue(returnValue, output);
-      Log.info("returnValue found: %s", getClass(), returnValue);
+      Log.info("returnValue found equals expectedOutput: %s", getClass(), returnValue);
     } else {
-      Log.info("output ignored: %s", getClass(), output.getURI());
+      Log.info("output ignored (not equal to the expectedOutput): %s", getClass(), output.getURI());
     }
     return returnValue;
   }
@@ -292,7 +327,7 @@ public class UserManagerImpl implements UserManager {
   }
 
   private void addUser(User user) {
-    Log.info("Add user with URI:%s", getClass(), user.getURI());
+    Log.info("Add user with URI to the CHE :%s", getClass(), user.getURI());
     ServiceRequest req = new ServiceRequest(new ProfilingService(), null);
     req.addAddEffect(new String[]{ProfilingService.PROP_CONTROLS}, user);
     ServiceResponse resp = caller.call(req);
