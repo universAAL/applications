@@ -1,4 +1,15 @@
 * text=auto !eol
+ZWaveInterface/ZWaveDataConsumer/.classpath -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/.project -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/.settings/org.eclipse.pde.core.prefs -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/pom.xml -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/src/main/java/org/universAAL/AALapplication/ZWaveDataConsumer/Activator.java -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/src/main/java/org/universAAL/AALapplication/ZWaveDataConsumer/ClosureSubscriber.java -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/src/main/java/org/universAAL/AALapplication/ZWaveDataConsumer/MotionSubscriber.java -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataConsumer/src/main/java/org/universAAL/AALapplication/ZWaveDataConsumer/PowerSubscriber.java -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/.classpath -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/.project -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
