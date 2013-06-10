@@ -1,4 +1,17 @@
 * text=auto !eol
+ZWaveInterface/ZWaveDataPublisher/.classpath -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/.project -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.pde.core.prefs -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/pom.xml -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Activator.java -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Motion/MotionSensorPublisher.java -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Motion/ZWaveEventListener.java -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/PowerConsumption/PowerPublisher.java -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/PowerConsumption/PowerReader.java -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Setup.java -text svneol=unset#text/plain
 aal_eficiency/AALfficiency.pom/AALfficiency.launch -text svneol=unset#text/plain
 aal_eficiency/AALfficiency.pom/pom.xml -text svneol=unset#text/plain
 aal_eficiency/AALfficiency.test/pom.xml -text svneol=unset#text/plain
