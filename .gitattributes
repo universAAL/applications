@@ -1,4 +1,5 @@
 * text=auto !eol
+ZWaveInterface/README.txt -text
 ZWaveInterface/ZWaveDataConsumer/.classpath -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataConsumer/.project -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataConsumer/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
