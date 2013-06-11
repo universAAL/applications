@@ -1,10 +1,15 @@
 package org.universAAL.AALapplication.medication_manager.configuration.impl;
 
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
+import org.universAAL.AALapplication.medication_manager.configuration.FormatEnum;
 import org.universAAL.AALapplication.medication_manager.configuration.MedicationManagerConfigurationException;
+import org.universAAL.AALapplication.medication_manager.configuration.PropertyInfo;
+import org.universAAL.AALapplication.medication_manager.configuration.TypeEnum;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -123,7 +128,129 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     return insert.equalsIgnoreCase(ON);
   }
 
-  public Properties getMedicationProperties() {
-    return medicationProperties;
+  public Map<String, PropertyInfo> getPropertyInfoMap() {
+
+    Map<String, PropertyInfo> propertyInfoMap = createPropertyInfoMap();
+
+
+    return propertyInfoMap;
+  }
+
+  private Map<String, PropertyInfo> createPropertyInfoMap() {
+    Map<String, PropertyInfo> propertyInfoMap = new HashMap<String, PropertyInfo>();
+
+    addReminderTimeout(propertyInfoMap);
+
+    addIntakeIntervalInMinutes(propertyInfoMap);
+
+    addHttpSessionExpireInMinutes(propertyInfoMap);
+
+    addHttpSessionTimerCheckerIntervalInMinutes(propertyInfoMap);
+
+    addIsDebugWriterOn(propertyInfoMap);
+
+    addTreatmentServiceMocked(propertyInfoMap);
+
+    addLoadPrescriptionDtos(propertyInfoMap);
+
+    addInsertDummyUsersInTheCHE(propertyInfoMap);
+
+    return propertyInfoMap;
+  }
+
+  private void addReminderTimeout(Map<String, PropertyInfo> propertyInfoMap) {
+    PropertyInfo reminderInterval = new PropertyInfo(
+        MEDICATION_REMINDER_TIMEOUT,
+        String.valueOf(getMedicationReminderTimeout()),
+        FormatEnum.SECONDS.getValue(),
+        TypeEnum.INTEGER.getValue(),
+        "Timeout for user response by clicking a button on a dialog"
+    );
+
+    propertyInfoMap.put(reminderInterval.getName(), reminderInterval);
+  }
+
+  private void addIntakeIntervalInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
+    PropertyInfo intakeInterval = new PropertyInfo(
+        MEDICATION_INTAKE_INTERVAL,
+        String.valueOf(getIntakeIntervalMinutes()),
+        FormatEnum.MINUTES.getValue(),
+        TypeEnum.INTEGER.getValue(),
+        "timestamp to closest intake in minutes tolerance (+/-)"
+    );
+
+    propertyInfoMap.put(intakeInterval.getName(), intakeInterval);
+  }
+
+  private void addHttpSessionExpireInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
+    PropertyInfo httpSessionExpireInMinutes = new PropertyInfo(
+        HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES,
+        String.valueOf(getHttpSessionExpireTimeoutInMinutes()),
+        FormatEnum.MINUTES.getValue(),
+        TypeEnum.INTEGER.getValue(),
+        "After this period the http session expire"
+    );
+
+    propertyInfoMap.put(httpSessionExpireInMinutes.getName(), httpSessionExpireInMinutes);
+  }
+
+  private void addHttpSessionTimerCheckerIntervalInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
+    PropertyInfo timerCheckerIntervalInMinutes = new PropertyInfo(
+        HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES,
+        String.valueOf(getHttpSessionTimerCheckerIntervalInMinutes()),
+        FormatEnum.MINUTES.getValue(),
+        TypeEnum.INTEGER.getValue(),
+        "The timer will check all session for expiration at this interval"
+    );
+
+    propertyInfoMap.put(timerCheckerIntervalInMinutes.getName(), timerCheckerIntervalInMinutes);
+  }
+
+  private void addIsDebugWriterOn(Map<String, PropertyInfo> propertyInfoMap) {
+    PropertyInfo debugerWriterOn = new PropertyInfo(
+        DEBUG_WRITE_FILE,
+        String.valueOf(isDebugWriterOn()),
+        FormatEnum.BOOLEAN.getValue(),
+        TypeEnum.BOOLEAN.getValue(),
+        "This turn on/off the http session debugging"
+    );
+
+    propertyInfoMap.put(debugerWriterOn.getName(), debugerWriterOn);
+  }
+
+  private void addTreatmentServiceMocked(Map<String, PropertyInfo> propertyInfoMap) {
+    PropertyInfo treatmentServiceMocked = new PropertyInfo(
+        HEALTH_TREATMENT_SERVICE_MOCKED,
+        String.valueOf(isHealthTreatmentServiceMocked()),
+        FormatEnum.BOOLEAN.getValue(),
+        TypeEnum.BOOLEAN.getValue(),
+        "This property switch between real and mocked implementation of the Health Treatment Service"
+    );
+
+    propertyInfoMap.put(treatmentServiceMocked.getName(), treatmentServiceMocked);
+  }
+
+  private void addLoadPrescriptionDtos(Map<String, PropertyInfo> propertyInfoMap) {
+    PropertyInfo loadPrescriptionDtos = new PropertyInfo(
+        LOAD_PRESCRIPTIONSDTOS,
+        String.valueOf(isLoadPrescriptionDTOs()),
+        FormatEnum.BOOLEAN.getValue(),
+        TypeEnum.BOOLEAN.getValue(),
+        "This property turn on/off loading all prescriptionDtos for performance at startup"
+    );
+
+    propertyInfoMap.put(loadPrescriptionDtos.getName(), loadPrescriptionDtos);
+  }
+
+  private void addInsertDummyUsersInTheCHE(Map<String, PropertyInfo> propertyInfoMap) {
+    PropertyInfo insertDummyUsers = new PropertyInfo(
+        MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE,
+        String.valueOf(isInsertDummyUsersIntoChe()),
+        FormatEnum.BOOLEAN.getValue(),
+        TypeEnum.BOOLEAN.getValue(),
+        "This property turn on/off loading inserting dummy users into CHE at startup"
+    );
+
+    propertyInfoMap.put(insertDummyUsers.getName(), insertDummyUsers);
   }
 }

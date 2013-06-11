@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.persistence.impl.databa
 
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.configuration.SqlScriptParser;
+import org.universAAL.AALapplication.medication_manager.configuration.PropertyInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
@@ -21,7 +22,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import static java.sql.Types.*;
@@ -234,8 +234,8 @@ public final class DerbyDatabase implements Database {
 
       createTables(statement);
       insertDataIntoTables(statement);
-      String sqlInsertIntoProperties = "insert into medication_manager.properties (id, name, value)\n" +
-          "values (?, ?, ?)";
+      String sqlInsertIntoProperties =
+          "insert into medication_manager.properties (id, name, value, format, type, description) values (?, ?, ?, ?, ?, ?)";
       ps = connection.prepareStatement(sqlInsertIntoProperties);
       populatePropertiesTable(ps);
 
@@ -249,23 +249,37 @@ public final class DerbyDatabase implements Database {
 
   }
 
-  private void populatePropertiesTable(PreparedStatement ps) throws SQLException {
-    Properties properties = configurationProperties.getMedicationProperties();
+  /*private void populatePropertiesTable(PreparedStatement ps) throws SQLException {
+    Properties properties = configurationProperties.getPropertyInfoMap();
     Set<String> keys = properties.stringPropertyNames();
     int id = 0;
     for (String key : keys) {
       id++;
       insertPropertyIntoTable(id, key, properties, ps);
     }
-  }
+  }*/
 
-  private void insertPropertyIntoTable(int id, String key,
-                                       Properties properties, PreparedStatement ps) throws SQLException {
+  private void populatePropertiesTable(PreparedStatement ps) throws SQLException {
+      Map<String,PropertyInfo> propertyInfoMap = configurationProperties.getPropertyInfoMap();
+      Set<String> keys = propertyInfoMap.keySet();
+      int id = 0;
+      for (String key : keys) {
+        id++;
+        insertPropertyIntoTable(id, key, propertyInfoMap, ps);
+      }
+    }
 
-    String value = properties.getProperty(key);
+  private void insertPropertyIntoTable(int id, String key, Map<String,PropertyInfo> propertyInfoMap,
+                                       PreparedStatement ps) throws SQLException {
+
+    PropertyInfo propertyInfo = propertyInfoMap.get(key);
+    String value = propertyInfo.getValue();
     ps.setInt(1, id);
     ps.setString(2, key);
     ps.setString(3, value);
+    ps.setString(4, propertyInfo.getFormat());
+    ps.setString(5, propertyInfo.getType());
+    ps.setString(6, propertyInfo.getDescription());
 
     ps.execute();
 

@@ -1868,8 +1868,11 @@ long_term_behav/ltba.ui/pom.xml -text
 medication/README.txt -text
 medication/medication.manager.configuration/pom.xml -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/ConfigurationProperties.java -text
+medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/FormatEnum.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/MedicationManagerConfigurationException.java -text
+medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/PropertyInfo.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/SqlScriptParser.java -text
+medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/TypeEnum.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/Activator.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/ConfigurationPropertiesImpl.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/CurrentDateInserter.java -text
