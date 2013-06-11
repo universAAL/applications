@@ -13,8 +13,10 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.h
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayErrorPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayLoginHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayParametersHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplaySelectConfigActionHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayUserManagementHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.HandleParameters;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.HandleUserManagement;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.LoginServlet;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
@@ -103,6 +105,11 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(USER_MANAGEMENT, displayUserManagementHtmlWriterServlet, null, null);
     HandleUserManagement handleUserManagement = new HandleUserManagement(sessionTracking);
     httpService.registerServlet(HANDLE_USER, handleUserManagement, null, null);
+    DisplayParametersHtmlWriterServlet displayParametersHtmlWriterServlet =
+        new DisplayParametersHtmlWriterServlet(sessionTracking);
+    httpService.registerServlet(PARAMETERS_HANDLER, displayParametersHtmlWriterServlet, null, null);
+    HandleParameters handleParameters = new HandleParameters(sessionTracking);
+    httpService.registerServlet(HANDLE_PARAMETERS, handleParameters, null, null);
 
 
     //set servlets
@@ -122,6 +129,13 @@ public final class Activator implements BundleActivator {
     handleUserManagement.setDisplayLoginHtmlWriterServlet(displayLoginServlet);
     handleUserManagement.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
     handleUserManagement.setUserManagementHtmlWriterServlet(displayUserManagementHtmlWriterServlet);
+
+    displayParametersHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayLoginServlet);
+    displayParametersHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+
+    handleParameters.setDisplayLoginHtmlWriterServlet(displayLoginServlet);
+    handleParameters.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    handleParameters.setDisplayParametersHtmlWriterServlet(displayParametersHtmlWriterServlet);
 
   }
 
