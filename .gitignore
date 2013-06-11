@@ -209,8 +209,17 @@ ontologies/ont.biomedicalsensors/.classpath
 ontologies/ont.biomedicalsensors/.project
 ontologies/ont.biomedicalsensors/.settings
 ontologies/ont.biomedicalsensors/target
+ontologies/ont.drools/.classpath
+ontologies/ont.drools/.project
+ontologies/ont.drools/.settings
 ontologies/ont.drools/target
+ontologies/ont.fitbitdata/.classpath
+ontologies/ont.fitbitdata/.project
+ontologies/ont.fitbitdata/.settings
 ontologies/ont.fitbitdata/target
+ontologies/ont.ltba/.classpath
+ontologies/ont.ltba/.project
+ontologies/ont.ltba/.settings
 ontologies/ont.ltba/target
 ontologies/ont.medication/*.iml
 ontologies/ont.medication/.classpath
@@ -232,6 +241,9 @@ ontologies/ont.questionnaireStrategy/.classpath
 ontologies/ont.questionnaireStrategy/.project
 ontologies/ont.questionnaireStrategy/.settings
 ontologies/ont.questionnaireStrategy/target
+ontologies/ont.readenergy/.classpath
+ontologies/ont.readenergy/.project
+ontologies/ont.readenergy/.settings
 ontologies/ont.readenergy/target
 ontologies/ont.safety/.classpath
 ontologies/ont.safety/.project

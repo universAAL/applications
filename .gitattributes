@@ -2763,7 +2763,6 @@ ontologies/ont.aalfficiencyscores/.settings/org.eclipse.jdt.core.prefs -text svn
 ontologies/ont.aalfficiencyscores/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.aalfficiencyscores/ASL2.0.txt -text svneol=unset#text/plain
-ontologies/ont.aalfficiencyscores/MITX.txt -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/NOTICE -text
 ontologies/ont.aalfficiencyscores/pom.xml -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/AalfficiencyScoresActivator.java -text svneol=unset#text/plain
@@ -2775,9 +2774,11 @@ ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalffici
 ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/Advice.java -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/Challenge.java -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/ElectricityScore.java -text svneol=unset#text/plain
+ontologies/ont.activity/ASL2.0.txt -text
 ontologies/ont.activity/Activity.di -text
 ontologies/ont.activity/Activity.notation -text
 ontologies/ont.activity/Activity.uml -text
+ontologies/ont.activity/NOTICE -text
 ontologies/ont.activity/pom.xml -text
 ontologies/ont.activity/src/main/java/org/universAAL/ontology/ActivityFactory.java -text
 ontologies/ont.activity/src/main/java/org/universAAL/ontology/activity/Activity.java -text
@@ -2804,7 +2805,6 @@ ontologies/ont.activity/src/main/java/org/universAAL/ontology/activity/ToothBrus
 ontologies/ont.activity/src/main/java/org/universAAL/ontology/activity/WakingUp.java -text
 ontologies/ont.activity/src/main/java/org/universAAL/ontology/osgi/Activator.java -text
 ontologies/ont.agenda/ASL2.0.txt -text
-ontologies/ont.agenda/MITX.txt -text
 ontologies/ont.agenda/NOTICE.txt -text
 ontologies/ont.agenda/pom.xml -text
 ontologies/ont.agenda/src/main/java/org/universAAL/ontology/AgendaActivator.java -text
@@ -2831,7 +2831,6 @@ ontologies/ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages
 ontologies/ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_nl.properties -text
 ontologies/ont.agenda/src/test/java/org/universAAL/ontology/test/ArtifactIntegrationTest.java -text
 ontologies/ont.agendaEventSelection/ASL2.0.txt -text
-ontologies/ont.agendaEventSelection/MITX.txt -text
 ontologies/ont.agendaEventSelection/NOTICE.txt -text
 ontologies/ont.agendaEventSelection/pom.xml -text
 ontologies/ont.agendaEventSelection/src/main/java/org/universAAL/ontology/AgendaEventSelectionActivator.java -text
@@ -2844,7 +2843,6 @@ ontologies/ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agenda
 ontologies/ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/service/EventSelectionToolService.java -text
 ontologies/ont.agendaEventSelection/src/test/java/org/universAAL/ontology/test/ArtifactIntegrationTest.java -text
 ontologies/ont.biomedicalsensors/ASL2.0 -text
-ontologies/ont.biomedicalsensors/MITX -text
 ontologies/ont.biomedicalsensors/NOTICE -text
 ontologies/ont.biomedicalsensors/pom.xml -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/BiomedicalSensorsActivator.java -text
@@ -2860,18 +2858,11 @@ ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedica
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/Scale.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/SensorType.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/Zephyr.java -text
-ontologies/ont.drools/.classpath -text
-ontologies/ont.drools/.project -text
-ontologies/ont.drools/.settings/org.eclipse.jdt.core.prefs -text
-ontologies/ont.drools/.settings/org.maven.ide.eclipse.prefs -text
+ontologies/ont.drools/ASL2.0.txt -text
+ontologies/ont.drools/NOTICE -text
 ontologies/ont.drools/artifact.composite -text
 ontologies/ont.drools/pom.xml -text
-ontologies/ont.fitbitdata/.classpath -text svneol=unset#text/plain
-ontologies/ont.fitbitdata/.project -text svneol=unset#text/plain
-ontologies/ont.fitbitdata/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
-ontologies/ont.fitbitdata/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
-ontologies/ont.fitbitdata/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
-ontologies/ont.fitbitdata/.settings/org.maven.ide.eclipse.prefs -text
+ontologies/ont.fitbitdata/ASL2.0.txt -text
 ontologies/ont.fitbitdata/NOTICE -text
 ontologies/ont.fitbitdata/fitbitdata.di -text
 ontologies/ont.fitbitdata/fitbitdata.notation -text
@@ -2883,13 +2874,10 @@ ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Activ
 ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitData.java -text svneol=unset#text/plain
 ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitdataOntology.java -text svneol=unset#text/plain
 ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Sleep.java -text svneol=unset#text/plain
-ontologies/ont.ltba/.classpath -text
-ontologies/ont.ltba/.project -text
-ontologies/ont.ltba/.settings/org.eclipse.jdt.core.prefs -text
-ontologies/ont.ltba/.settings/org.maven.ide.eclipse.prefs -text
+ontologies/ont.ltba/ASL2.0.txt -text
+ontologies/ont.ltba/NOTICE -text
 ontologies/ont.ltba/pom.xml -text
 ontologies/ont.medication/ASL2.0 -text
-ontologies/ont.medication/MITX.txt -text
 ontologies/ont.medication/NOTICE -text
 ontologies/ont.medication/pom.xml -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/Activator.java -text
@@ -2914,7 +2902,6 @@ ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/Precautio
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/Time.java -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/UserIDs.java -text
 ontologies/ont.message/ASL2.0 -text
-ontologies/ont.message/MITX.txt -text svneol=unset#text/plain
 ontologies/ont.message/MessageOntology.di -text
 ontologies/ont.message/MessageOntology.notation -text
 ontologies/ont.message/MessageOntology.uml -text
@@ -2961,19 +2948,13 @@ ontologies/ont.pom/composite/pom.xml -text
 ontologies/ont.pom/pom.xml -text
 ontologies/ont.pom/update.bat -text
 ontologies/ont.questionnaireStrategy/ASL2.0 -text
-ontologies/ont.questionnaireStrategy/MITX.txt -text svneol=unset#text/plain
 ontologies/ont.questionnaireStrategy/NOTICE -text
 ontologies/ont.questionnaireStrategy/pom.xml -text
 ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/Activator.java -text
 ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/QuestionnaireStrategyOntologyFactory.java -text
 ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/Questionnaire4TreatmentStrategy.java -text
 ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/QuestionnaireStrategyOntology.java -text
-ontologies/ont.readenergy/.classpath -text svneol=unset#text/plain
-ontologies/ont.readenergy/.project -text svneol=unset#text/plain
-ontologies/ont.readenergy/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
-ontologies/ont.readenergy/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
-ontologies/ont.readenergy/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
-ontologies/ont.readenergy/.settings/org.maven.ide.eclipse.prefs -text
+ontologies/ont.readenergy/ASL2.0.txt -text
 ontologies/ont.readenergy/NOTICE -text
 ontologies/ont.readenergy/ont.energy.reader.di -text
 ontologies/ont.readenergy/ont.energy.reader.notation -text
@@ -2986,7 +2967,6 @@ ontologies/ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/Re
 ontologies/ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/ReadEnergyDevice.java -text svneol=unset#text/plain
 ontologies/ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/ReadEnergyOntology.java -text svneol=unset#text/plain
 ontologies/ont.safety/ASL2.0 -text
-ontologies/ont.safety/MITX -text
 ontologies/ont.safety/NOTICE -text
 ontologies/ont.safety/pom.xml -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/Door.java -text
@@ -3001,7 +2981,6 @@ ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/Window.java -
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/SafetyActivator.java -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/SafetyFactory.java -text
 ontologies/ont.shopping/ASL2.0 -text
-ontologies/ont.shopping/MITX -text
 ontologies/ont.shopping/NOTICE -text
 ontologies/ont.shopping/pom.xml -text
 ontologies/ont.shopping/src/main/java/org/universAAL/ontology/Shopping/FoodItem.java -text
