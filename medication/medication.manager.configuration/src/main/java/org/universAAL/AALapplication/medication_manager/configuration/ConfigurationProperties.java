@@ -1,6 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.configuration;
 
-import java.util.Properties;
+import java.util.Map;
 
 /**
  * @author George Fournadjiev
@@ -23,6 +23,6 @@ public interface ConfigurationProperties {
 
   boolean isInsertDummyUsersIntoChe();
 
-  Properties getMedicationProperties();
+  Map<String, PropertyInfo> getPropertyInfoMap();
 
 }
