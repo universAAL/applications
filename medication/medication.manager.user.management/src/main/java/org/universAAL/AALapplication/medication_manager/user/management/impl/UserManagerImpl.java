@@ -121,6 +121,12 @@ public class UserManagerImpl implements UserManager {
     Log.info("Trying to get users from the ServiceResponse object", getClass());
     List out = getReturnValue(resp.getOutputs(), OUTPUT_GET_ALL_USERS);
     Log.info("Received List with users object (out) : %s", getClass(), out);
+
+    if (out == null) {
+      throw new MedicationManagerUserManagementException("Cannot get the users from resp.getOutputs(), despite the" +
+          "fact that the CallStatus is succeeded");
+    }
+
     for (int i = 0; i < out.size(); i++) {
       UserInfo ur = getUserInfo(out, i);
       users.add(ur);
@@ -291,7 +297,7 @@ public class UserManagerImpl implements UserManager {
       return Collections.emptyList();
     }
 
-    Log.info("Outputs size is : ", getClass(), outputs.size());
+    Log.info("Outputs size is : %s", getClass(), outputs.size());
     List returnValue = null;
 
     for (Object output1 : outputs) {
@@ -300,7 +306,7 @@ public class UserManagerImpl implements UserManager {
       returnValue = processOutput(expectedOutput, returnValue, output);
     }
 
-    Log.info("returnValue is", getClass(), returnValue);
+    Log.info("returnValue is: %s", getClass(), returnValue);
 
     return returnValue;
   }
