@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
- 	<parent>
+  <parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>D.0</version>
+		<version>D.3</version>
 		<relativePath>../new_services.pom/pom.xml</relativePath>
 	</parent>
-  	
-	<artifactId>AAlfficiency.pom</artifactId>
-	<version>D.0.1-SNAPSHOT</version>
+  
+ <artifactId>AAlfficiency.pom</artifactId>
 	<packaging>pom</packaging>
 	<name>The AAlfficiency POM file</name>
 	<description>The AAlfficiency POM file</description>
+	<version>D.3.1-SNAPSHOT</version>
 	<modules>
 		<module>../FitbitPublisher</module>
 		<module>../EnergyReaderPublisher</module>
@@ -38,5 +38,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
 </project>
