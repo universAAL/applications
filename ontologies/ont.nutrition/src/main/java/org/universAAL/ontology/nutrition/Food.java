@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 Itaca-TSB, http://www.tsb.upv.es
-	Tecnologías para la Salud y el Bienestar 
+	Tecnologï¿½as para la Salud y el Bienestar 
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -120,7 +120,8 @@ public class Food extends ManagedIndividual {
     }
 
     public void setFoodSubCategory(FoodSubCategory foodSubCategory) {
-	this.props.put(PROP_FOODSUBCATEGORY, foodSubCategory);
+    	if (foodSubCategory!=null)
+    		this.props.put(PROP_FOODSUBCATEGORY, foodSubCategory);
     }
 
     public String getClassURI() {
