@@ -5,7 +5,7 @@ package org.universAAL.AALapplication.medication_manager.configuration;
  */
 public enum TypeEnum {
 
-  INTEGER("integer"),
+  NUMBER("number"),
   BOOLEAN("boolean"),
   STRING("string");
 

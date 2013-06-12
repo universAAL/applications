@@ -30,6 +30,7 @@ public final class Util {
   static final String CSS_ALIAS = "/configuration/css";
   public static final String PATIENTS = "patients";
   public static final String CAREGIVERS = "caregivers";
+  public static final String IDS = "IDS";
 
   private Util() {
   }
