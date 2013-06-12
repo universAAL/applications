@@ -163,7 +163,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
         MEDICATION_REMINDER_TIMEOUT,
         String.valueOf(getMedicationReminderTimeout()),
         FormatEnum.SECONDS,
-        TypeEnum.INTEGER,
+        TypeEnum.NUMBER,
         "Timeout for user response by clicking a button on a dialog"
     );
 
@@ -175,7 +175,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
         MEDICATION_INTAKE_INTERVAL,
         String.valueOf(getIntakeIntervalMinutes()),
         FormatEnum.MINUTES,
-        TypeEnum.INTEGER,
+        TypeEnum.NUMBER,
         "timestamp to closest intake in minutes tolerance (+/-)"
     );
 
@@ -187,7 +187,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
         HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES,
         String.valueOf(getHttpSessionExpireTimeoutInMinutes()),
         FormatEnum.MINUTES,
-        TypeEnum.INTEGER,
+        TypeEnum.NUMBER,
         "After this period the http session expire"
     );
 
@@ -199,7 +199,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
         HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES,
         String.valueOf(getHttpSessionTimerCheckerIntervalInMinutes()),
         FormatEnum.MINUTES,
-        TypeEnum.INTEGER,
+        TypeEnum.NUMBER,
         "The timer will check all session for expiration at this interval"
     );
 

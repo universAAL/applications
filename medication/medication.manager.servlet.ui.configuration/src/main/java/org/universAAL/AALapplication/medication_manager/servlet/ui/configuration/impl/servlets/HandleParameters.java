@@ -1,5 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.configuration.Pair;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicationPropertiesDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
@@ -10,9 +13,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.ServletUtil.*;
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util.*;
 
 /**
@@ -20,6 +25,7 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.config
  */
 public final class HandleParameters extends BaseServlet {
 
+  public static final String FALSE = "false";
   private final Object lock = new Object();
   private DisplayParametersHtmlWriterServlet parametersHtmlWriterServlet;
 
@@ -61,18 +67,36 @@ public final class HandleParameters extends BaseServlet {
 
         debugSessions(session.getId(), "Servlet doGet/doPost method (admin is not null", getClass());
 
-        String savePatient = req.getParameter(SAVE);
+        String save = req.getParameter(SAVE);
 
-        if (savePatient == null) {
+        if (save == null) {
           throw new MedicationManagerServletUIConfigurationException("Missing expected parameter : " + SAVE);
         }
 
-        Enumeration en = req.getParameterNames();
-        while (en.hasMoreElements()) {
-          String name = (String) en.nextElement();
-          String value = req.getParameter(name);
-          System.out.println("name = " + name + " | value = " + value);
+        Set<Integer> ids = (Set<Integer>) session.getAttribute(IDS);
+
+        if (ids == null) {
+          throw new MedicationManagerServletUIConfigurationException("Missing IDS attribute");
         }
+
+        Set<Pair<Integer, String>> propertyValues = new HashSet<Pair<Integer, String>>();
+
+        for (int id : ids) {
+          String propValue = req.getParameter(String.valueOf(id));
+          if (propValue != null) {
+            Pair<Integer, String> pair = new Pair<Integer, String>(id, propValue);
+            propertyValues.add(pair);
+          } else {
+            Pair<Integer, String> pair = new Pair<Integer, String>(id, FALSE);
+            propertyValues.add(pair);
+          }
+        }
+
+        PersistentService persistentService = getPersistentService();
+
+        MedicationPropertiesDao medicationPropertiesDao = persistentService.getMedicationPropertiesDao();
+
+        medicationPropertiesDao.updatePropertiesValues(propertyValues);
 
         parametersHtmlWriterServlet.doGet(req, resp);
 

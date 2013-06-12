@@ -3,6 +3,7 @@ package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 import org.universAAL.AALapplication.medication_manager.configuration.FormatEnum;
 import org.universAAL.AALapplication.medication_manager.configuration.PropertyInfo;
 import org.universAAL.AALapplication.medication_manager.configuration.TypeEnum;
+import org.universAAL.AALapplication.medication_manager.configuration.Pair;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
@@ -142,6 +143,30 @@ public final class MedicationPropertiesDao extends AbstractDao {
     for (String key : keys) {
       String value = properties.get(key);
       System.setProperty(key, value);
+    }
+  }
+
+  public void updatePropertiesValues(Set<Pair<Integer, String>> propertyValues) {
+    for (Pair<Integer, String> pair : propertyValues) {
+       updatePropertyValues(pair);
+    }
+  }
+
+  private void updatePropertyValues(Pair<Integer, String> pair) {
+    String sql = "UPDATE MEDICATION_MANAGER.PROPERTIES SET VALUE = ? WHERE ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setString(1, pair.getSecond());
+      ps.setInt(2, pair.getFirst());
+
+      ps.execute();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
     }
   }
 }

@@ -9,9 +9,11 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.p
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.MedicationManagerServletUIConfigurationException;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Script.*;
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -57,22 +59,28 @@ public final class ParametersForm extends ScriptForm {
 
     Set<PropertyInfo> propertyInfos = medicationPropertiesDao.getAllProperties();
 
+    Set<Integer> ids = new HashSet<Integer>();
+
     int count = 0;
     for (PropertyInfo info : propertyInfos) {
       count++;
-      sb.append('\n');
+      sb.append("\n\t\t");
       addProperty(info, sb);
       if (count < propertyInfos.size()) {
         sb.append(',');
       }
       sb.append('\n');
+      ids.add(info.getId());
     }
+
+    session.setAttribute(IDS, ids);
 
   }
 
   private void addProperty(PropertyInfo info, StringBuffer sb) {
 
-    if (info.getId() <= 0) {
+    int id = info.getId();
+    if (id <= 0) {
       throw new MedicationManagerServletUIConfigurationException("Unexpected id of the PropertyInfo object : " + info);
     }
 
@@ -99,7 +107,7 @@ public final class ParametersForm extends ScriptForm {
     creator.addPair(pair);
 
     sb.append('\"');
-    sb.append(info.getId());
+    sb.append(id);
     sb.append("\":");
     sb.append(creator.createJavascriptObject());
 
@@ -115,37 +123,4 @@ public final class ParametersForm extends ScriptForm {
     throw new UnsupportedOperationException("Not implemented");
   }
 
-  /*
-  parameters = {
-          "id1":{
-              "name":'medication.reminder.timeout',
-              "value":100,
-              "type":"number",
-              "format":"seconds",
-              "description":"timeout for user response"
-          },
-          "id2":{
-              "name":'medication.intake.interval',
-              "value":1,
-              "type":"number",
-              "format":"minutes",
-              "description":"timestamp to closest intake in minutes tolerance (+/-)"
-          },
-          "id3":{
-              "name":'debug.write.file',
-              "value":false,
-              "type":"boolean",
-              "format":"on/off",
-              "description":""
-          },
-          "id4":{
-              "name":'debug.text.prefix',
-              "value":"Medication Manager Service:",
-              "type":"string",
-              "format":"text",
-              "description":""
-          }
-
-      };
-   */
 }

@@ -1,4 +1,4 @@
-package org.universAAL.AALapplication.medication_manager.configuration.impl;
+package org.universAAL.AALapplication.medication_manager.configuration;
 
 /**
  * @author George Fournadjiev

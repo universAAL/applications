@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.configuration.impl;
 
 import org.universAAL.AALapplication.medication_manager.configuration.MedicationManagerConfigurationException;
+import org.universAAL.AALapplication.medication_manager.configuration.Pair;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
