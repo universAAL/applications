@@ -50,10 +50,16 @@ public class FitbitDBInterface {
 	
 	public void createDB() throws Exception{
 		// load the h2-JDBC driver using the current class loader
-	    Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+	    //Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+	    new org.apache.derby.jdbc.EmbeddedDriver();
 	    String configFolderPath = System.getProperty(
                 BundleConfigHome.uAAL_CONF_ROOT_DIR, System
                         .getProperty("user.dir"));
+	    
+	    if(configFolderPath.substring(configFolderPath.length() - 1)!="/"){
+			configFolderPath+="/";
+		}
+	    System.out.print("*****************CONFIG "+configFolderPath);
         System.setProperty("derby.system.home", configFolderPath);
 
 		try {
@@ -98,6 +104,9 @@ public class FitbitDBInterface {
 			 String configFolderPath = System.getProperty(
 		                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
 		                        .getProperty("user.dir"));
+			 if(configFolderPath.substring(configFolderPath.length() - 1)!="/"){
+					configFolderPath+="/";
+				}
 		        System.setProperty("derby.system.home", configFolderPath);
 		        String dbURL = "jdbc:derby:" + configFolderPath
 	                    + "/FitbitPublisher/FitbitDB;create=true";
@@ -191,6 +200,9 @@ public class FitbitDBInterface {
 			 String configFolderPath = System.getProperty(
 		                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
 		                        .getProperty("user.dir"));
+			 if(configFolderPath.substring(configFolderPath.length() - 1)!="/"){
+					configFolderPath+="/";
+				}
 		        System.setProperty("derby.system.home", configFolderPath);
 		        String dbURL = "jdbc:derby:" + configFolderPath
 	                    + "/FitbitPublisher/FitbitDB;create=true";
@@ -230,6 +242,9 @@ public class FitbitDBInterface {
 			 String configFolderPath = System.getProperty(
 		                BundleConfigHome.uAAL_CONF_ROOT_DIR, System
 		                        .getProperty("user.dir"));
+			 if(configFolderPath.substring(configFolderPath.length() - 1)!="/"){
+					configFolderPath+="/";
+				}
 		        System.setProperty("derby.system.home", configFolderPath);
 		        String dbURL = "jdbc:derby:" + configFolderPath
 	                    + "/FitbitPublisher/FitbitDB;create=true";

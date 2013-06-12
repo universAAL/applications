@@ -40,11 +40,11 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 public class Activator implements BundleActivator {
     public static BundleContext osgiContext = null;
     public static ModuleContext context = null;
-    
-    public static Setup s = new Setup();
-    
-    
+       
     public void start(BundleContext bcontext) throws Exception {
+    	System.out.print("FILE FITBIT "+Setup.getSetupFileName());
+    	FitbitDBInterface db = new FitbitDBInterface();
+    	//db.createDB();
 	Activator.osgiContext = bcontext;
 	Activator.context = uAALBundleContainer.THE_CONTAINER
 		.registerModule(new Object[] { bcontext });
@@ -66,7 +66,7 @@ public class Activator implements BundleActivator {
            tomorrow.get(Calendar.MONTH),
            tomorrow.get(Calendar.DATE),
            13,
-           33
+           56
          );
          return result.getTime();
     }
