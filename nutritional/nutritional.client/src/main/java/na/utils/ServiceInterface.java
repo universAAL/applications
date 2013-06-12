@@ -24,7 +24,7 @@ public interface ServiceInterface {
     public static final String DIR_NUTRITIONAL_ROOT = Setup.DEFAULT_PATH_Nutritional_DESCRIPTOR
 	    + "/";
     public static final String DIR_NUTRITIONAL = Setup.DEFAULT_PATH_Nutritional_DESCRIPTOR
-	    + "/" + SharedResources.user + "/"; //Setup.getAMI_UserName() + "/";
+	    + "/" + SharedResources.user.getURI().replace(":", ".").replace("#", ".") + "/"; //Setup.getAMI_UserName() + "/";
     // public static final String DIR_NUTRITIONAL_USER = DIR_NUTRITIONAL +
     // Setup.getAMI_UserName()+"/";
     public static final String USER_PROFILE_FILENAME = "UserProfile.xml";
