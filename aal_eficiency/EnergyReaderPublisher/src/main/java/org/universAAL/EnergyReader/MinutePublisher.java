@@ -18,6 +18,8 @@
 	limitations under the License.
  */package org.universAAL.EnergyReader;
 
+ 
+
 /* More on how to use this class at: 
  * http://forge.universaal.org/wiki/support:Developer_Handbook_6#Publishing_context_events */
 import java.util.TimerTask;
@@ -41,17 +43,17 @@ import org.universAAL.ontology.energy.reader.EnergyMeasurement;
 import org.universAAL.ontology.energy.reader.ReadEnergy;
 import org.universAAL.ontology.energy.reader.ReadEnergyDevice;
 
-public class MinutePublisher extends TimerTask {
-
+public class MinutePublisher extends TimerTask{ 
+	
 	private ContextPublisher cp;
 	ContextProvider info = new ContextProvider();
 	ModuleContext mc;
 	public final static String NAMESPACE = "http://tsbtecnologias.es/ReadEnergy#";
-	private PowerReader reader;
+	private PowerReader reader; 
 	private ReadEnergyModel[] consumptions;
-
-	public MinutePublisher(BundleContext context) {
-		System.out.print("New Publisher\n");
+	   
+    public MinutePublisher(BundleContext context) {
+    	System.out.print("New Publisher\n");
 		info = new ContextProvider("http://tsbtecnologias.es#MyNewContext");
 		mc = uAALBundleContainer.THE_CONTAINER
 				.registerModule(new Object[] { context });
@@ -60,30 +62,27 @@ public class MinutePublisher extends TimerTask {
 				.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
 		cp = new DefaultContextPublisher(mc, info);
 	}
-
-	public void publishAnEvent(ReadEnergyModel consumption) {
-
-		// System.out.print("Publishing in the context bus\n");
-
-		ReadEnergyDevice device = new ReadEnergyDevice(NAMESPACE
-				+ consumption.getDevice().getName());
-		device.setName(consumption.getDevice().getName());
-		device.setDeviceType("Plug");
-		device.setPlace("Office");
-
-		EnergyMeasurement con = new EnergyMeasurement(NAMESPACE + "Measurement"
-				+ consumption.getMeasure().getMeasurement());
-		con.setUnit("w");
-		con.setValue(consumption.getMeasure().getMeasurement());
-
-		ReadEnergy energy = new ReadEnergy(NAMESPACE + "Energy"
-				+ consumption.getDevice().getName());
-		energy.setMeasurement(con);
-		energy.setDevice(device);
-		energy.setDaily("false");
-
-		cp.publish(new ContextEvent(energy, ReadEnergy.PROP_HAS_MEASUREMENT));
-
+    
+    public void publishAnEvent(ReadEnergyModel consumption) {
+    	
+    	System.out.print("Publishing in the context bus\n");
+    	
+    	ReadEnergyDevice device = new ReadEnergyDevice(NAMESPACE+consumption.getDevice().getName());
+    	device.setName(consumption.getDevice().getName());
+    	device.setDeviceType("Plug");
+    	device.setPlace("Office");
+    	
+    	EnergyMeasurement con = new EnergyMeasurement(NAMESPACE+"Measurement"+consumption.getMeasure().getMeasurement());
+    	con.setUnit("w");
+    	con.setValue(consumption.getMeasure().getMeasurement());
+    	
+    	ReadEnergy energy = new ReadEnergy(NAMESPACE+"Energy"+consumption.getDevice().getName());
+    	energy.setMeasurement(con);
+    	energy.setDevice(device);
+    	energy.setDaily("false");
+    	
+    	cp.publish(new ContextEvent(energy, ReadEnergy.PROP_HAS_MEASUREMENT));
+    	
 	}
 
 	@Override
@@ -91,19 +90,17 @@ public class MinutePublisher extends TimerTask {
 		reader = new PowerReader();
 		consumptions = reader.readEnergyConsumption();
 		EnergyReaderDBInterface db = new EnergyReaderDBInterface();
-
+		
 		try {
-
-			for (int i = 0; i < consumptions.length; i++) {
-				db.insertDailyMeasurement(
-						consumptions[i].getDevice().getName(), consumptions[i]
-								.getMeasure().getMeasurement());
+			
+			for (int i=0;i<consumptions.length;i++){
+				db.insertDailyMeasurement(consumptions[i].getDevice().getName(), consumptions[i].getMeasure().getMeasurement());
 				publishAnEvent(consumptions[i]);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+				
 	}
 }

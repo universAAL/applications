@@ -41,39 +41,14 @@ public class Setup {
 		}
 		File dir1 = new File(".");
 		try {
-			setupFileName = configFolderPath+"/EnergyReaderPublisher/"+SETUP_FILENAME;
-            System.out.println("Fichero: "+setupFileName);
+			if(configFolderPath.substring(configFolderPath.length() - 1)!="/"){
+				configFolderPath+="/";
+			}
+			setupFileName = configFolderPath+"EnergyReaderPublisher/"+SETUP_FILENAME;
+            System.out.println("FICHERO: "+setupFileName);
 			return setupFileName;
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public String getDBUser(){
-		
-		Properties properties = new Properties();
-		try {
-			String setup = getSetupFileName();
-//			System.out.println("setup is in: "+setup);
-		    properties.load(new FileInputStream(setup));
-		    String user = properties.getProperty("db_user");
-		    return user;
-		} catch (IOException e) {
-		}
-		return null;
-	}
-	
-	public String getDBPwd(){
-		
-		Properties properties = new Properties();
-		try {
-			String setup = getSetupFileName();
-//			System.out.println("setup is in: "+setup);
-		    properties.load(new FileInputStream(setup));
-		    String user = properties.getProperty("db_pwd");
-		    return user;
-		} catch (IOException e) {
 		}
 		return null;
 	}
