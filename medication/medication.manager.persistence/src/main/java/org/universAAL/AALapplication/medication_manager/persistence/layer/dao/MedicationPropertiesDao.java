@@ -1,5 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 
+import org.universAAL.AALapplication.medication_manager.configuration.FormatEnum;
+import org.universAAL.AALapplication.medication_manager.configuration.PropertyInfo;
+import org.universAAL.AALapplication.medication_manager.configuration.TypeEnum;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
@@ -10,6 +13,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +27,9 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
 public final class MedicationPropertiesDao extends AbstractDao {
 
   public static final String NAME = "NAME";
+  public static final String FORMAT = "FORMAT";
+  public static final String TYPE = "TYPE";
+  public static final String DESCRIPTION = "DESCRIPTION";
   public static final String VALUE = "VALUE";
 
   static final String TABLE_NAME = "PROPERTIES";
@@ -39,6 +46,58 @@ public final class MedicationPropertiesDao extends AbstractDao {
 
   }
 
+  public Set<PropertyInfo> getAllProperties() {
+    Log.info("Loading properties", getClass());
+
+    PreparedStatement ps = null;
+    try {
+      String sql = "select * from MEDICATION_MANAGER.PROPERTIES";
+
+      ps = getPreparedStatement(sql);
+
+      List<Map<String, Column>> propertiesList = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
+      Set<PropertyInfo> propertyInfos = new HashSet<PropertyInfo>();
+      for (Map<String, Column> columnMap : propertiesList) {
+        addProperty(columnMap, propertyInfos);
+      }
+
+      return propertyInfos;
+
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+
+  }
+
+  private void addProperty(Map<String, Column> columns, Set<PropertyInfo> propertyInfos) {
+
+    Column col = columns.get(ID);
+    int id = (Integer) col.getValue();
+
+    col = columns.get(NAME);
+    String name = (String) col.getValue();
+
+    col = columns.get(VALUE);
+    String value = (String) col.getValue();
+
+    col = columns.get(FORMAT);
+    String format = (String) col.getValue();
+    FormatEnum formatEnum = FormatEnum.getEnumFromValue(format);
+
+    col = columns.get(TYPE);
+    String type = (String) col.getValue();
+    TypeEnum typeEnum = TypeEnum.getEnumFromValue(type);
+
+    col = columns.get(DESCRIPTION);
+    String description = (String) col.getValue();
+
+    PropertyInfo info = new PropertyInfo(id, name, value, formatEnum, typeEnum, description);
+
+    propertyInfos.add(info);
+  }
+
   private void addProperty(Map<String, Column> columns, Map<String, String> properties) {
     Column col = columns.get(NAME);
     String name = (String) col.getValue();
@@ -50,7 +109,7 @@ public final class MedicationPropertiesDao extends AbstractDao {
 
   }
 
-  public Map<String, String> loadProperties() {
+  private Map<String, String> loadProperties() {
     Log.info("Loading properties", getClass());
 
     PreparedStatement ps = null;

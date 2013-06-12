@@ -277,8 +277,8 @@ public final class DerbyDatabase implements Database {
     ps.setInt(1, id);
     ps.setString(2, key);
     ps.setString(3, value);
-    ps.setString(4, propertyInfo.getFormat());
-    ps.setString(5, propertyInfo.getType());
+    ps.setString(4, propertyInfo.getFormat().getValue());
+    ps.setString(5, propertyInfo.getType().getValue());
     ps.setString(6, propertyInfo.getDescription());
 
     ps.execute();
