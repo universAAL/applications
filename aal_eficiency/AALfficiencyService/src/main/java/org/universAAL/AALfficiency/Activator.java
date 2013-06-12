@@ -21,6 +21,7 @@ package org.universAAL.AALfficiency;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.AALfficiency.utils.Setup;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -42,6 +43,7 @@ public class Activator implements BundleActivator {
 		    public void run() {
 			new AALfficiencyProvider(context);
 			new ScoresConsumer(context);
+			System.out.print("FILE AALFFICIENCY "+Setup.getSetupFileName());
 		    }
 		}.start();
 
@@ -52,5 +54,10 @@ public class Activator implements BundleActivator {
 		scallee.close();
 
     }
-
+    /**
+     * @return the mcontext
+     */
+    public static ModuleContext getMcontext() {
+        return context;
+    }
 }
