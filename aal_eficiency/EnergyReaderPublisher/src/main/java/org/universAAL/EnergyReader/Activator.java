@@ -27,33 +27,42 @@ import java.util.Timer;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.EnergyReader.database.EnergyReaderDBInterface;
+import org.universAAL.EnergyReader.utils.Setup;
 import org.universAAL.middleware.container.ModuleContext;
 
+
 public class Activator implements BundleActivator {
-	public static BundleContext osgiContext = null;
-	public static ModuleContext context = null;
-	private Timer t, t1;
+    public static BundleContext osgiContext = null;
+    public static ModuleContext context = null;
+    private Timer t,t1;
 
-	public void start(BundleContext bcontext) throws Exception {
-		t = new Timer();
-		t.schedule(new MinutePublisher(bcontext), 0, 5 * 1000);
+    public void start(BundleContext bcontext) throws Exception {
+    	System.out.print("ACTIVATOR");
+    	EnergyReaderDBInterface db = new EnergyReaderDBInterface();
+    	System.out.print("FILE ENERGY "+Setup.getSetupFileName());
+    	//db.createDB();
+    	t = new Timer();
+		t.schedule(new MinutePublisher(bcontext), 0, 60*1000);
 		t1 = new Timer();
-		t1.scheduleAtFixedRate(new DailyPublisher(bcontext), get1115am(),
-				1000 * 60 * 60 * 24);
-	}
+		t1.scheduleAtFixedRate(new DailyPublisher(bcontext), get1115am(), 1000*60*60*24);
+    }
 
-	public void stop(BundleContext arg0) throws Exception {
-		t.cancel();
-		t1.cancel();
-	}
+    public void stop(BundleContext arg0) throws Exception {
+    	t.cancel();
+    	t1.cancel();
+    }
 
-	private static Date get1115am() {
-		Calendar tomorrow = new GregorianCalendar();
-		tomorrow.add(Calendar.DATE, 0);
-		Calendar result = new GregorianCalendar(tomorrow.get(Calendar.YEAR),
-				tomorrow.get(Calendar.MONTH), tomorrow.get(Calendar.DATE), 13,
-				35);
-		return result.getTime();
-	}
-
+    private static Date get1115am(){
+        Calendar tomorrow = new GregorianCalendar();
+        tomorrow.add(Calendar.DATE, 0);
+        Calendar result = new GregorianCalendar(
+          tomorrow.get(Calendar.YEAR),
+          tomorrow.get(Calendar.MONTH),
+          tomorrow.get(Calendar.DATE),
+          13,
+          55
+        );
+        return result.getTime();
+      }
+    
 }
