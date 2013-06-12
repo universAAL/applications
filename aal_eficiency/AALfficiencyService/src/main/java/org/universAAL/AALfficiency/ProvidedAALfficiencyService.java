@@ -69,7 +69,7 @@ public class ProvidedAALfficiencyService extends AalfficiencyScores{
  	static final ServiceProfile[] profiles = new ServiceProfile[7];
  	
  	static{
- 		OntologyManagement.getInstance().register(
+ 		OntologyManagement.getInstance().register(Activator.getMcontext(),
 				new SimpleOntology(MY_URI, AalfficiencyScores.MY_URI,
 						new ResourceFactoryImpl() {
 							@Override

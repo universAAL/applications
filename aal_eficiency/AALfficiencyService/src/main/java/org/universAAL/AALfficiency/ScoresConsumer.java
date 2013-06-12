@@ -34,6 +34,7 @@ public class ScoresConsumer extends ContextSubscriber {
 			ContextEventPattern cep = new ContextEventPattern();
 			cep.addRestriction(MergedRestriction.getAllValuesRestriction(
 				ContextEvent.PROP_RDF_SUBJECT, AalfficiencyScores.MY_URI));
+			
 			return new ContextEventPattern[] { cep };
 		    }
 	
