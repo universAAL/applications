@@ -162,8 +162,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     PropertyInfo reminderInterval = new PropertyInfo(
         MEDICATION_REMINDER_TIMEOUT,
         String.valueOf(getMedicationReminderTimeout()),
-        FormatEnum.SECONDS.getValue(),
-        TypeEnum.INTEGER.getValue(),
+        FormatEnum.SECONDS,
+        TypeEnum.INTEGER,
         "Timeout for user response by clicking a button on a dialog"
     );
 
@@ -174,8 +174,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     PropertyInfo intakeInterval = new PropertyInfo(
         MEDICATION_INTAKE_INTERVAL,
         String.valueOf(getIntakeIntervalMinutes()),
-        FormatEnum.MINUTES.getValue(),
-        TypeEnum.INTEGER.getValue(),
+        FormatEnum.MINUTES,
+        TypeEnum.INTEGER,
         "timestamp to closest intake in minutes tolerance (+/-)"
     );
 
@@ -186,8 +186,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     PropertyInfo httpSessionExpireInMinutes = new PropertyInfo(
         HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES,
         String.valueOf(getHttpSessionExpireTimeoutInMinutes()),
-        FormatEnum.MINUTES.getValue(),
-        TypeEnum.INTEGER.getValue(),
+        FormatEnum.MINUTES,
+        TypeEnum.INTEGER,
         "After this period the http session expire"
     );
 
@@ -198,8 +198,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     PropertyInfo timerCheckerIntervalInMinutes = new PropertyInfo(
         HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES,
         String.valueOf(getHttpSessionTimerCheckerIntervalInMinutes()),
-        FormatEnum.MINUTES.getValue(),
-        TypeEnum.INTEGER.getValue(),
+        FormatEnum.MINUTES,
+        TypeEnum.INTEGER,
         "The timer will check all session for expiration at this interval"
     );
 
@@ -210,8 +210,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     PropertyInfo debugerWriterOn = new PropertyInfo(
         DEBUG_WRITE_FILE,
         String.valueOf(isDebugWriterOn()),
-        FormatEnum.BOOLEAN.getValue(),
-        TypeEnum.BOOLEAN.getValue(),
+        FormatEnum.BOOLEAN,
+        TypeEnum.BOOLEAN,
         "This turn on/off the http session debugging"
     );
 
@@ -222,8 +222,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     PropertyInfo treatmentServiceMocked = new PropertyInfo(
         HEALTH_TREATMENT_SERVICE_MOCKED,
         String.valueOf(isHealthTreatmentServiceMocked()),
-        FormatEnum.BOOLEAN.getValue(),
-        TypeEnum.BOOLEAN.getValue(),
+        FormatEnum.BOOLEAN,
+        TypeEnum.BOOLEAN,
         "This property switch between real and mocked implementation of the Health Treatment Service"
     );
 
@@ -234,8 +234,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     PropertyInfo loadPrescriptionDtos = new PropertyInfo(
         LOAD_PRESCRIPTIONSDTOS,
         String.valueOf(isLoadPrescriptionDTOs()),
-        FormatEnum.BOOLEAN.getValue(),
-        TypeEnum.BOOLEAN.getValue(),
+        FormatEnum.BOOLEAN,
+        TypeEnum.BOOLEAN,
         "This property turn on/off loading all prescriptionDtos for performance at startup"
     );
 
@@ -246,8 +246,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     PropertyInfo insertDummyUsers = new PropertyInfo(
         MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE,
         String.valueOf(isInsertDummyUsersIntoChe()),
-        FormatEnum.BOOLEAN.getValue(),
-        TypeEnum.BOOLEAN.getValue(),
+        FormatEnum.BOOLEAN,
+        TypeEnum.BOOLEAN,
         "This property turn on/off loading inserting dummy users into CHE at startup"
     );
 
