@@ -63,7 +63,8 @@ public final class MedicineDao extends AbstractDao {
 
     Medicine medicine = new Medicine(medicineId, medicineName, medicineInfo, sideEffects, incompliances, mealRelation);
 
-    Log.info("Medicine found: %s", getClass(), medicine);
+//    Log.info("Medicine found: %s", getClass(), medicine);
+    Log.info("Medicine found with id : %s", getClass(), medicine.getId());
 
     return medicine;
   }

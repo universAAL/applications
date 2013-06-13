@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.NotificationInfoComplexId;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.ServletUtil.*;
@@ -80,8 +82,7 @@ public final class HandleNotifications extends BaseServlet {
         }
 
         for (String id : complexIds) {
-          String param = getParameter(req, id);
-          System.out.println("id = " + id + " | param = " + param);
+          NotificationInfoComplexId info = getNotificationInfoComplexId(req, id);
         }
 
         displayNotificationsHtmlWriterServlet.doGet(req, resp);
@@ -96,23 +97,37 @@ public final class HandleNotifications extends BaseServlet {
 
   }
 
-  private String getParameter(HttpServletRequest req, String id) {
+  private NotificationInfoComplexId getNotificationInfoComplexId(HttpServletRequest req, String id) {
 
+    Set<String> params = getAllParametersForThatComplexId(req, id);
+
+    System.out.println("&&&&&&&&&&&&& NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");
+    for (String name : params) {
+      System.out.println("id = " + id + " | name = " + name);
+    }
+
+    System.out.println("&&&&&&&&&&&&& END of NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");
+
+    return null;
+
+  }
+
+  private Set<String> getAllParametersForThatComplexId(HttpServletRequest req, String id) {
+    Set<String> params = new HashSet<String>();
     try {
       Enumeration en = req.getParameterNames();
       while (en.hasMoreElements()) {
         String paramName = (String) en.nextElement();
         paramName = paramName.trim();
         if (paramName.startsWith(id)) {
-          return paramName;
+          params.add(paramName);
         }
       }
     } catch (Exception e) {
       throw new MedicationManagerServletUIConfigurationException(e);
     }
 
-    return null;
-
+    return params;
   }
 
   /*

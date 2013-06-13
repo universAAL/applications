@@ -69,7 +69,8 @@ public final class PersonDao extends AbstractDao {
 
     Person person = new Person(personId, name, personUri, role, caregiverSms);
 
-    Log.info("Person found: %s", getClass(), person);
+//    Log.info("Person found: %s", getClass(), person);
+    Log.info("Person found with id : %s", getClass(), person.getId());
 
     return person;
   }

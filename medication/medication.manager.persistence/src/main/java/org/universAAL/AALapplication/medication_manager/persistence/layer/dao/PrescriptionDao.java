@@ -164,7 +164,8 @@ public final class PrescriptionDao extends AbstractDao {
     Prescription prescription =
         new Prescription(prescriptionId, timeOfCreation, patient, physician, description, prescriptionStatus);
 
-    Log.info("Prescription found: %s", getClass(), prescription);
+//    Log.info("Prescription found: %s", getClass(), prescription);
+    Log.info("Prescription found with  id : %s", getClass(), prescription.getId());
 
     return prescription;
   }

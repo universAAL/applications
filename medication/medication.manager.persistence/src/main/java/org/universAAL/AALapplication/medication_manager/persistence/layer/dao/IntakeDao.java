@@ -113,7 +113,8 @@ public final class IntakeDao extends AbstractDao {
 
     Intake intake = new Intake(intakeId, treatment, quantity, unitClass, timePlan, timeTaken, dispenser);
 
-    Log.info("Intake found: %s", getClass(), intake);
+//    Log.info("Intake found: %s", getClass(), intake);
+    Log.info("Intake found with id : %s", getClass(), intake.getId());
     return intake;
   }
 
