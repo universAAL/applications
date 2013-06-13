@@ -13,9 +13,11 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.h
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayErrorPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayLoginHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayNotificationsHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayParametersHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplaySelectConfigActionHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.DisplayUserManagementHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.HandleNotifications;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.HandleParameters;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.HandleUserManagement;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.LoginServlet;
@@ -111,6 +113,12 @@ public final class Activator implements BundleActivator {
     HandleParameters handleParameters = new HandleParameters(sessionTracking);
     httpService.registerServlet(HANDLE_PARAMETERS, handleParameters, null, null);
 
+    DisplayNotificationsHtmlWriterServlet displayNotificationsHtmlWriterServlet =
+        new DisplayNotificationsHtmlWriterServlet(sessionTracking);
+    httpService.registerServlet(NOTIFICATIONS_HANDLER, displayNotificationsHtmlWriterServlet, null, null);
+    HandleNotifications handleNotifications= new HandleNotifications(sessionTracking);
+    httpService.registerServlet(HANDLE_NOTIFICATIONS, handleNotifications, null, null);
+
 
     //set servlets
 
@@ -136,6 +144,13 @@ public final class Activator implements BundleActivator {
     handleParameters.setDisplayLoginHtmlWriterServlet(displayLoginServlet);
     handleParameters.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
     handleParameters.setDisplayParametersHtmlWriterServlet(displayParametersHtmlWriterServlet);
+
+    displayNotificationsHtmlWriterServlet.setDisplayLoginHtmlWriterServlet(displayLoginServlet);
+    displayNotificationsHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+
+    handleNotifications.setDisplayLoginHtmlWriterServlet(displayLoginServlet);
+    handleNotifications.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    handleNotifications.setDisplayNotificationsHtmlWriterServlet(displayNotificationsHtmlWriterServlet);
 
   }
 
