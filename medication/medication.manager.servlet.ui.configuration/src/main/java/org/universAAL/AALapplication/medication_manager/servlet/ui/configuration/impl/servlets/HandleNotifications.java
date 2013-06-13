@@ -5,11 +5,14 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.MedicationManagerServletUIConfigurationException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.ServletUtil.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Activator.*;
@@ -23,6 +26,8 @@ public final class HandleNotifications extends BaseServlet {
   public static final String FALSE = "false";
   private final Object lock = new Object();
   private DisplayNotificationsHtmlWriterServlet displayNotificationsHtmlWriterServlet;
+
+  private final static String SAVE = "save";
 
   public HandleNotifications(SessionTracking sessionTracking) {
     super(sessionTracking);
@@ -60,10 +65,24 @@ public final class HandleNotifications extends BaseServlet {
 
         debugSessions(session.getId(), "Servlet doGet/doPost method (admin is not null", getClass());
 
+        String save = req.getParameter(SAVE);
+
+        if (save == null) {
+          throw new MedicationManagerServletUIConfigurationException("Missing expected parameter : " + SAVE);
+        }
 
         PersistentService persistentService = getPersistentService();
 
-        //TODO
+        Set<String> complexIds = (Set<String>) session.getAttribute(COMPLEX_IDS);
+
+        if (complexIds == null) {
+          throw new MedicationManagerServletUIConfigurationException("Missing the COMPLEX_IDS parameter");
+        }
+
+        for (String id : complexIds) {
+          String param = getParameter(req, id);
+          System.out.println("id = " + id + " | param = " + param);
+        }
 
         displayNotificationsHtmlWriterServlet.doGet(req, resp);
 
@@ -74,6 +93,25 @@ public final class HandleNotifications extends BaseServlet {
 
     }
 
+
+  }
+
+  private String getParameter(HttpServletRequest req, String id) {
+
+    try {
+      Enumeration en = req.getParameterNames();
+      while (en.hasMoreElements()) {
+        String paramName = (String) en.nextElement();
+        paramName = paramName.trim();
+        if (paramName.startsWith(id)) {
+          return paramName;
+        }
+      }
+    } catch (Exception e) {
+      throw new MedicationManagerServletUIConfigurationException(e);
+    }
+
+    return null;
 
   }
 

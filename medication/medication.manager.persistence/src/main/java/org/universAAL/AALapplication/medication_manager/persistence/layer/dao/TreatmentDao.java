@@ -14,8 +14,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.persistence.layer.entities.TreatmentStatus.*;
@@ -170,6 +172,29 @@ public final class TreatmentDao extends AbstractDao {
             patientId + " and medicineId: " + medicineId);
       }
       return getTreatment(result);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+  }
+
+  public Set<Treatment> getAllTreatments() {
+    String sql = "select * from MEDICATION_MANAGER.TREATMENT";
+
+    System.out.println("sql = " + sql);
+
+    Set<Treatment> treatmentSet = new HashSet<Treatment>();
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql);
+      List<Map<String, Column>> result = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, statement);
+      for (Map<String, Column> columnMap : result) {
+        Treatment treatment = getTreatment(columnMap);
+        treatmentSet.add(treatment);
+      }
+      return treatmentSet;
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
     } finally {

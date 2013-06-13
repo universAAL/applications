@@ -50,7 +50,7 @@ public final class PersistentServiceImpl implements PersistentService {
     this.treatmentDao = new TreatmentDao(database);
     this.patientLinksDao = new PatientLinksDao(database);
     this.medicationPropertiesDao = new MedicationPropertiesDao(database);
-    this.complexDao = new ComplexDao(database, personDao, dispenserDao, patientLinksDao);
+    this.complexDao = new ComplexDao(database, personDao, dispenserDao, patientLinksDao, treatmentDao, medicineInventoryDao);
 
     medicationPropertiesDao.setSystemPropertiesLoadedFromDatabase();
 
