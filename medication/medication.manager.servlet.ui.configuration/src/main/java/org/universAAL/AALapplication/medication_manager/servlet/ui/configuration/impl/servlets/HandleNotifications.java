@@ -103,7 +103,8 @@ public final class HandleNotifications extends BaseServlet {
 
     System.out.println("&&&&&&&&&&&&& NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");
     for (String name : params) {
-      System.out.println("id = " + id + " | name = " + name);
+      String value = req.getParameter(name);
+      System.out.println("id = " + id + " | name = " + name + " | value = " + value);
     }
 
     System.out.println("&&&&&&&&&&&&& END of NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");

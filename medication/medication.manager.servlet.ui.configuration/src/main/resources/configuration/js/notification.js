@@ -43,8 +43,9 @@ $(function () {
     $("form").submit(function () {
         var hasError = false;
         $.each($(".number"), function (i, element) {
-            var el = $(element);
-            if (!(el.spinner("value") >= 0)) {
+            var el = $(element),
+            val=el.spinner("value");
+            if (!($.isNumeric(val) && val >= 0)) {
                 hasError = true;
                 el.addClass("error");
             }
