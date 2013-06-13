@@ -1908,6 +1908,7 @@ medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplic
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/AssistedPersonUserInfo.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/CaregiverUserInfo.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/MedicineInventoryShortageCaregiverNotifier.java -text
+medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/NotificationsInfo.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/PersistentService.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/SqlUtility.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/UserInfo.java -text
@@ -1985,13 +1986,16 @@ medication/medication.manager.servlet.ui.configuration/src/main/java/org/univers
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/BaseServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayErrorPageWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayLoginHtmlWriterServlet.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayNotificationsHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayParametersHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplaySelectConfigActionHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/DisplayUserManagementHtmlWriterServlet.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/HandleNotifications.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/HandleParameters.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/HandleUserManagement.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/LoginServlet.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/DispenserScriptArrayCreator.java -text
+medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/NotificationForm.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/ParametersForm.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/PersonScriptArrayCreator.java -text
 medication/medication.manager.servlet.ui.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/configuration/impl/servlets/forms/SelectConfigActionForm.java -text

@@ -5,7 +5,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.forms.ParametersForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.forms.NotificationForm;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,14 +20,14 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.config
 /**
  * @author George Fournadjiev
  */
-public final class DisplayParametersHtmlWriterServlet extends BaseHtmlWriterServlet {
+public final class DisplayNotificationsHtmlWriterServlet extends BaseHtmlWriterServlet {
 
   private final Object lock = new Object();
 
-  private static final String PARAMETERS_FILE_NAME = "parameters.html";
+  private static final String NOTIFICATION_HTML = "notification.html";
 
-  public DisplayParametersHtmlWriterServlet(SessionTracking sessionTracking) {
-    super(PARAMETERS_FILE_NAME, sessionTracking);
+  public DisplayNotificationsHtmlWriterServlet(SessionTracking sessionTracking) {
+    super(NOTIFICATION_HTML, sessionTracking);
   }
 
   @Override
@@ -75,8 +75,8 @@ public final class DisplayParametersHtmlWriterServlet extends BaseHtmlWriterServ
   private void handleResponse(HttpServletRequest req, HttpServletResponse resp, PersistentService persistentService,
                               Session session) throws IOException {
 
-    Log.info("Creating ParametersForm object", getClass());
-    ParametersForm scriptForm = new ParametersForm(persistentService, session);
+    Log.info("Creating NotificationForm object", getClass());
+    NotificationForm scriptForm = new NotificationForm(persistentService, session);
     sendResponse(req, resp, scriptForm);
 
   }

@@ -5,10 +5,13 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.NotificationsInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 
 import java.sql.Connection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author George Fournadjiev
@@ -128,6 +131,38 @@ public final class ComplexDao extends AbstractDao {
       patient.setPresentInDatabase(false);
       throw new MedicationManagerPersistenceException(e);
     }
+  }
+
+  public Set<NotificationsInfo> getAllNotificationsInfo() {
+
+    Set<NotificationsInfo> infos = new HashSet<NotificationsInfo>();
+
+    NotificationsInfo notificationsInfo = new NotificationsInfo(
+        "1_12_21_43_15",
+        "Nobody",
+        "Placebo",
+        true,
+        7,
+        true,
+        true
+    );
+
+    infos.add(notificationsInfo);
+
+    notificationsInfo = new NotificationsInfo(
+            "211_12_221_43_15",
+            "Nobody1",
+            "Placebo1",
+            false,
+            5,
+            false,
+            true
+        );
+
+        infos.add(notificationsInfo);
+
+    return infos;
+
   }
 
 }

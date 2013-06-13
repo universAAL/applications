@@ -5,7 +5,6 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets.forms.ParametersForm;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,54 +15,23 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.e
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util.*;
 
-
 /**
  * @author George Fournadjiev
  */
-public final class DisplayParametersHtmlWriterServlet extends BaseHtmlWriterServlet {
+public final class HandleNotifications extends BaseServlet {
 
+  public static final String FALSE = "false";
   private final Object lock = new Object();
+  private DisplayNotificationsHtmlWriterServlet displayNotificationsHtmlWriterServlet;
 
-  private static final String PARAMETERS_FILE_NAME = "parameters.html";
-
-  public DisplayParametersHtmlWriterServlet(SessionTracking sessionTracking) {
-    super(PARAMETERS_FILE_NAME, sessionTracking);
+  public HandleNotifications(SessionTracking sessionTracking) {
+    super(sessionTracking);
   }
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void setDisplayNotificationsHtmlWriterServlet(
+      DisplayNotificationsHtmlWriterServlet displayNotificationsHtmlWriterServlet) {
 
-    synchronized (lock) {
-      try {
-        Log.info("Called DisplayParametersHtmlWriterServlet", getClass());
-
-        isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
-        isServletSet(displayErrorPageWriterServlet, "displayErrorPageWriterServlet");
-
-        Session session = getSession(req, resp, getClass());
-        Person admin = (Person) session.getAttribute(LOGGED_ADMIN);
-        Log.info("Checking admin session attribute : %s", getClass(), admin);
-
-        if (admin == null) {
-          Log.info("admin is not set. Redirecting to the login page!", getClass());
-          debugSessions(session.getId(), "if(admin is null) the servlet doGet/doPost method", getClass());
-          displayLoginHtmlWriterServlet.doGet(req, resp);
-          return;
-        }
-
-        Log.info("Trying to get PersistentService object", getClass());
-
-        PersistentService persistentService = getPersistentService();
-        Log.info("Calling handleResponse(...) method ", getClass());
-
-        handleResponse(req, resp, persistentService, session);
-
-
-      } catch (Exception e) {
-        Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
-        sendErrorResponse(req, resp, e);
-      }
-    }
+    this.displayNotificationsHtmlWriterServlet = displayNotificationsHtmlWriterServlet;
   }
 
   @Override
@@ -71,15 +39,54 @@ public final class DisplayParametersHtmlWriterServlet extends BaseHtmlWriterServ
     doGet(req, resp);
   }
 
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-  private void handleResponse(HttpServletRequest req, HttpServletResponse resp, PersistentService persistentService,
-                              Session session) throws IOException {
+    synchronized (lock) {
+      try {
+        isServletSet(displayLoginHtmlWriterServlet, "displayLoginHtmlWriterServlet");
+        isServletSet(displayErrorPageWriterServlet, "displayErrorPageWriterServlet");
+        isServletSet(displayNotificationsHtmlWriterServlet, "displayNotificationHtmlWriterServlet");
 
-    Log.info("Creating ParametersForm object", getClass());
-    ParametersForm scriptForm = new ParametersForm(persistentService, session);
-    sendResponse(req, resp, scriptForm);
+        Session session = getSession(req, resp, getClass());
+        debugSessions(session.getId(), "the servlet doGet/doPost method", getClass());
+        Person admin = (Person) session.getAttribute(LOGGED_ADMIN);
+
+        if (admin == null) {
+          debugSessions(session.getId(), "Servlet doGet/doPost method (admin is null)", getClass());
+          displayLoginHtmlWriterServlet.doGet(req, resp);
+          return;
+        }
+
+        debugSessions(session.getId(), "Servlet doGet/doPost method (admin is not null", getClass());
+
+
+        PersistentService persistentService = getPersistentService();
+
+        //TODO
+
+        displayNotificationsHtmlWriterServlet.doGet(req, resp);
+
+      } catch (Exception e) {
+        Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
+        sendErrorResponse(req, resp, e);
+      }
+
+    }
+
 
   }
 
+  /*
+  name = 1_12:missed | value = true
+  name = save | value = Save
+  name = 10_15:missed | value = true
+  name = 1_12:shortage | value = true
+  name = 10_15:shortage | value = true
+  name = 10_15:dose | value = true
+  name = 1_12:threshold | value = 5
+  name = 10_15:threshold | value = 10
+  name = 1_12:dose | value = true
+   */
 
 }
