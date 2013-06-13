@@ -8,9 +8,11 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.p
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Script.*;
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -56,6 +58,8 @@ public final class NotificationForm extends ScriptForm {
     ComplexDao complexDao = persistentService.getComplexDao();
     Set<NotificationsInfo> infos = complexDao.getAllNotificationsInfo();
 
+    Set<String> complexIds = new HashSet<String>();
+
     int count = 0;
     for (NotificationsInfo info : infos) {
       count++;
@@ -65,7 +69,10 @@ public final class NotificationForm extends ScriptForm {
         sb.append(',');
       }
       sb.append('\n');
+      complexIds.add(info.getComplexId());
     }
+
+    session.setAttribute(COMPLEX_IDS, complexIds);
 
   }
 

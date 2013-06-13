@@ -1908,6 +1908,7 @@ medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplic
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/AssistedPersonUserInfo.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/CaregiverUserInfo.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/MedicineInventoryShortageCaregiverNotifier.java -text
+medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/NotificationInfoComplexId.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/NotificationsInfo.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/PersistentService.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/SqlUtility.java -text

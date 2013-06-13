@@ -6,6 +6,9 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.middleware.service.ServiceResponse;
 
 import java.util.List;
+import java.util.StringTokenizer;
+
+import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
 
 /**
  * @author George Fournadjiev
@@ -15,7 +18,8 @@ public final class Util {
   private static final String CAREGIVER_NOTIFIER_NAMESPACE =
       "http://ontology.igd.fhg.de/CaregiverNotifier.owl#";
   public static final String OUTPUT_CAREGIVER_RECEIVED_MESSAGE =
-          CAREGIVER_NOTIFIER_NAMESPACE + "receivedMessage";
+      CAREGIVER_NOTIFIER_NAMESPACE + "receivedMessage";
+  public static final String UNDERSCORE = "_";
 
   private Util() {
   }
@@ -45,6 +49,38 @@ public final class Util {
     sb.append(msg);
 
     return sb.toString();
+  }
+
+  public static String encodeComplexId(int patientId, int treatmentId, int medicineInventoryId) {
+
+    validateParameter(patientId, "patientId");
+    validateParameter(treatmentId, "treatmentId");
+    validateParameter(medicineInventoryId, "medicineInventoryId");
+
+    return patientId + UNDERSCORE + treatmentId + UNDERSCORE + medicineInventoryId;
+  }
+
+  public static NotificationInfoComplexId decodeComplexId(String complexId) {
+
+    StringTokenizer st = new StringTokenizer(complexId, UNDERSCORE);
+
+    if (st.countTokens() != 3) {
+      throw new MedicationManagerPersistenceException("Incorrect complexId : " + complexId +
+          " It must have the following format: patientId_treatmentId_medicineInventoryId");
+    }
+
+    try {
+
+      int patientId = Integer.parseInt(st.nextToken());
+      int treatmentId = Integer.parseInt(st.nextToken());
+      int medicineInventoryId = Integer.parseInt(st.nextToken());
+
+      return new NotificationInfoComplexId(patientId, treatmentId, medicineInventoryId);
+
+    } catch (NumberFormatException e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
+
   }
 
 }

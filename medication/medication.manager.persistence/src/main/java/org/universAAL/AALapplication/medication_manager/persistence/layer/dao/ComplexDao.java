@@ -6,12 +6,20 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.NotificationsInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MedicineInventory;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -22,9 +30,12 @@ public final class ComplexDao extends AbstractDao {
   private final PersonDao personDao;
   private final DispenserDao dispenserDao;
   private final PatientLinksDao patientLinksDao;
+  private final TreatmentDao treatmentDao;
+  private final MedicineInventoryDao medicineInventoryDao;
 
   public ComplexDao(Database database, PersonDao personDao,
-                    DispenserDao dispenserDao, PatientLinksDao patientLinksDao) {
+                    DispenserDao dispenserDao, PatientLinksDao patientLinksDao,
+                    TreatmentDao treatmentDao, MedicineInventoryDao medicineInventoryDao) {
 
     super(database, "This is complex dao no specific table");
 
@@ -32,6 +43,8 @@ public final class ComplexDao extends AbstractDao {
     this.personDao = personDao;
     this.dispenserDao = dispenserDao;
     this.patientLinksDao = patientLinksDao;
+    this.treatmentDao = treatmentDao;
+    this.medicineInventoryDao = medicineInventoryDao;
   }
 
   @Override
@@ -80,7 +93,7 @@ public final class ComplexDao extends AbstractDao {
 
     if (dispenserId > 0) {
       dispenserDao.updateDispenser(dispenserId, patient.getId(), dueIntakeAlert,
-                successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
+          successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
     } else {
       dispenserDao.updateDispenserRemovePatientForeignKey(patient.getId());
     }
@@ -137,31 +150,71 @@ public final class ComplexDao extends AbstractDao {
 
     Set<NotificationsInfo> infos = new HashSet<NotificationsInfo>();
 
-    NotificationsInfo notificationsInfo = new NotificationsInfo(
-        "1_12_21_43_15",
-        "Nobody",
-        "Placebo",
-        true,
-        7,
-        true,
-        true
-    );
+    Set<Treatment> treatmentSet = treatmentDao.getAllTreatments();
 
-    infos.add(notificationsInfo);
+    Map<Person, List<MedicineInventory>> map = new HashMap<Person, List<MedicineInventory>>();
 
-    notificationsInfo = new NotificationsInfo(
-            "211_12_221_43_15",
-            "Nobody1",
-            "Placebo1",
-            false,
-            5,
-            false,
-            true
-        );
+    fillMap(map, treatmentSet);
 
-        infos.add(notificationsInfo);
+    for (Treatment treatment : treatmentSet) {
+      Person patient = treatment.getPrescription().getPatient();
+      List<MedicineInventory> inventories = map.get(patient);
+      NotificationsInfo notificationsInfo = createNotificationInfo(treatment, patient, inventories);
+      infos.add(notificationsInfo);
+    }
 
     return infos;
+
+  }
+
+  private void fillMap(Map<Person, List<MedicineInventory>> map,
+                       Set<Treatment> treatmentSet) {
+
+    for (Treatment treatment : treatmentSet) {
+      Person patient = treatment.getPrescription().getPatient();
+      if (!map.containsKey(patient)) {
+        List<MedicineInventory> allMedicineInventoriesForPatient =
+            medicineInventoryDao.getAllMedicineInventoriesForPatient(patient);
+        map.put(patient, allMedicineInventoriesForPatient);
+      }
+
+    }
+
+  }
+
+  private NotificationsInfo createNotificationInfo(Treatment treatment, Person patient,
+                                                   List<MedicineInventory> inventories) {
+
+    Medicine medicine = treatment.getMedicine();
+
+    MedicineInventory inventory= null;
+
+    for (MedicineInventory medicineInventory : inventories) {
+      Medicine med = medicineInventory.getMedicine();
+      if (medicine.getId() == med.getId()) {
+        inventory = medicineInventory;
+        break;
+      }
+    }
+
+    if (inventory == null) {
+      throw new MedicationManagerPersistenceException("Missing MedicineInventory for a patient with id:" +
+          patient.getId() + " for medicine with id: " + medicine.getId());
+    }
+
+    int threshold = inventory.getWarningThreshold();
+
+    String complexId = encodeComplexId(patient.getId(), treatment.getId(), inventory.getId());
+
+    return new NotificationsInfo(
+        complexId,
+        patient.getName(),
+        medicine.getMedicineName(),
+        treatment.isMissedIntakeAlert(),
+        threshold,
+        treatment.isShortageAlert(),
+        treatment.isNewDoseAlert()
+    );
 
   }
 

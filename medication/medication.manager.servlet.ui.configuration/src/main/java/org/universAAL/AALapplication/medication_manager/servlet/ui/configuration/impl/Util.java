@@ -33,6 +33,7 @@ public final class Util {
   public static final String PATIENTS = "patients";
   public static final String CAREGIVERS = "caregivers";
   public static final String IDS = "IDS";
+  public static final String COMPLEX_IDS = "COMPLEX_IDS";
 
   private Util() {
   }
