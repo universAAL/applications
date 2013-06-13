@@ -98,8 +98,12 @@ public final class MedicineInventoryDao extends AbstractDao {
     col = columns.get(WARNING_THRESHOLD);
     int warningThreshold = (Integer) col.getValue();
 
+    MedicineInventory medicineInventory =
+        new MedicineInventory(medicineInventoriId, patient, medicine, unitClass, quantity, warningThreshold);
 
-    return new MedicineInventory(medicineInventoriId, patient, medicine, unitClass, quantity, warningThreshold);
+    Log.info("MedicineInventory found with id : %s", getClass(), medicineInventory.getId());
+
+    return medicineInventory;
 
   }
 

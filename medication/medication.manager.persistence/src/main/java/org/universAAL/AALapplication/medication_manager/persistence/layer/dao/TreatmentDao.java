@@ -128,7 +128,8 @@ public final class TreatmentDao extends AbstractDao {
     Treatment treatment = new Treatment(treatmentId, prescription, medicine,
         missedIntakeAlert, newDoseAlert, shortageAlert, startDate, endDate, treatmentStatus);
 
-    Log.info("Treatment found: %s", getClass(), treatment);
+//    Log.info("Treatment found: %s", getClass(), treatment);
+    Log.info("Treatment found with id : %s", getClass(), treatment.getId());
 
     return treatment;
   }

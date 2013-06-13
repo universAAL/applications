@@ -89,7 +89,8 @@ public final class DispenserDao extends AbstractDao {
     Dispenser dispenser = new Dispenser(id, person, name, dispenserUri, instructionsFileName, dueIntakeAlert,
         successfulIntakeAlert, missedIntakeAlert, upsideDownAlert);
 
-    Log.info("Dispenser found: %s", getClass(), dispenser);
+//    Log.info("Dispenser found: %s", getClass(), dispenser);
+    Log.info("Dispenser found with id : %s", getClass(), dispenser.getId());
 
     return dispenser;
   }
@@ -112,7 +113,8 @@ public final class DispenserDao extends AbstractDao {
 
     Dispenser dispenser = getDispenser(person, columnMap);
 
-    Log.info("Dispenser found: %s", getClass(), dispenser);
+//    Log.info("Dispenser found: %s", getClass(), dispenser);
+    Log.info("Dispenser found with id : %s", getClass(), dispenser.getId());
 
     return dispenser;
 
@@ -135,7 +137,8 @@ public final class DispenserDao extends AbstractDao {
 
     Dispenser dispenser = getDispenser(person, columnMap);
 
-    Log.info("Dispenser found: %s", getClass(), dispenser);
+//    Log.info("Dispenser found: %s", getClass(), dispenser);
+    Log.info("Dispenser found with id : %s", getClass(), dispenser.getId());
 
     return dispenser;
 
@@ -152,7 +155,8 @@ public final class DispenserDao extends AbstractDao {
 
     Dispenser dispenser = getDispenser(columnMap);
 
-    Log.info("Dispenser found: %s", getClass(), dispenser);
+    //    Log.info("Dispenser found: %s", getClass(), dispenser);
+    Log.info("Dispenser found with id : %s", getClass(), dispenser.getId());
 
     return dispenser;
 

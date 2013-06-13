@@ -68,7 +68,8 @@ public final class PatientLinksDao extends AbstractDao {
 
     PatientLinks patientLinks = new PatientLinks(id, doctor, patient, caregiver);
 
-    Log.info("PatientLinks found: %s", getClass(), patientLinks);
+//    Log.info("PatientLinks found: %s", getClass(), patientLinks);
+    Log.info("PatientLinks found with id : %s", getClass(), patientLinks.getId());
 
     return patientLinks;
   }
