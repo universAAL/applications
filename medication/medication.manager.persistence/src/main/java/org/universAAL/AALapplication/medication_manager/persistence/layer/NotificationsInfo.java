@@ -1,13 +1,15 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
 
 /**
  * @author George Fournadjiev
  */
 public final class NotificationsInfo {
 
-  private final String complexId;
+  public static final String EMPTY = "";
+  private final NotificationInfoComplexId complexId;
   private final String patient;
   private final String medicine;
   private final boolean missed;
@@ -15,7 +17,7 @@ public final class NotificationsInfo {
   private final boolean shortage;
   private final boolean dose;
 
-  public NotificationsInfo(String complexId, String patient, String medicine, boolean missed,
+  public NotificationsInfo(NotificationInfoComplexId complexId, String patient, String medicine, boolean missed,
                            int threshold, boolean shortage, boolean dose) {
 
     validateParameter(complexId, "complexId");
@@ -32,7 +34,18 @@ public final class NotificationsInfo {
     this.dose = dose;
   }
 
-  public String getComplexId() {
+  public NotificationsInfo(NotificationInfoComplexId complexId, boolean missed,
+                           int threshold, boolean shortage, boolean dose) {
+
+    this(complexId, EMPTY, EMPTY, missed, threshold, shortage, dose);
+  }
+
+  public String getComplexIdAsText() {
+    return encodeComplexId(complexId.getPatientId(), complexId.getTreatmentId(), complexId.getMedicineInventoryId());
+  }
+
+
+  public NotificationInfoComplexId getComplexId() {
     return complexId;
   }
 

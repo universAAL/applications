@@ -1,7 +1,10 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.NotificationInfoComplexId;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.NotificationsInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.Util;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.ComplexDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
@@ -26,6 +29,10 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.config
 public final class HandleNotifications extends BaseServlet {
 
   public static final String FALSE = "false";
+  public static final String MISSED = "missed";
+  public static final String SHORTAGE = "shortage";
+  public static final String DOSE = "dose";
+  public static final String THRESHOLD = "threshold";
   private final Object lock = new Object();
   private DisplayNotificationsHtmlWriterServlet displayNotificationsHtmlWriterServlet;
 
@@ -75,6 +82,8 @@ public final class HandleNotifications extends BaseServlet {
 
         PersistentService persistentService = getPersistentService();
 
+        ComplexDao complexDao = persistentService.getComplexDao();
+
         Set<String> complexIds = (Set<String>) session.getAttribute(COMPLEX_IDS);
 
         if (complexIds == null) {
@@ -82,7 +91,8 @@ public final class HandleNotifications extends BaseServlet {
         }
 
         for (String id : complexIds) {
-          NotificationInfoComplexId info = getNotificationInfoComplexId(req, id);
+          NotificationsInfo info = getNotificationInfo(req, id);
+          complexDao.updateNotifications(info);
         }
 
         displayNotificationsHtmlWriterServlet.doGet(req, resp);
@@ -97,20 +107,62 @@ public final class HandleNotifications extends BaseServlet {
 
   }
 
-  private NotificationInfoComplexId getNotificationInfoComplexId(HttpServletRequest req, String id) {
+  private NotificationsInfo getNotificationInfo(HttpServletRequest req, String id) {
+    try {
+      Set<String> params = getAllParametersForThatComplexId(req, id);
+      System.out.println("&&&&&&&&&&&&& NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");
 
-    Set<String> params = getAllParametersForThatComplexId(req, id);
+      NotificationsInfo notificationsInfo = createNotificationsInfo(req, id, params);
 
-    System.out.println("&&&&&&&&&&&&& NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");
+
+      System.out.println("&&&&&&&&&&&&& END of NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");
+
+      return notificationsInfo;
+    } catch (Exception e) {
+      throw new MedicationManagerServletUIConfigurationException(e);
+    }
+  }
+
+  private NotificationsInfo createNotificationsInfo(HttpServletRequest req, String id, Set<String> params) {
+
+    if (params.isEmpty()) {
+      throw new MedicationManagerServletUIConfigurationException("Unable to create NotificationsInfo object for the" +
+          "following complexId : " + id);
+    }
+
+    boolean missed = false;
+    boolean shortage = false;
+    boolean dose = false;
+    int threshold = -1;
+
     for (String name : params) {
       String value = req.getParameter(name);
       System.out.println("id = " + id + " | name = " + name + " | value = " + value);
+      if (name.contains(MISSED)) {
+        missed = Boolean.valueOf(value);
+      } else if (name.contains(SHORTAGE)) {
+        shortage = Boolean.valueOf(value);
+      } else if (name.contains(DOSE)) {
+        dose = Boolean.valueOf(value);
+      } else if (name.contains(THRESHOLD)) {
+        threshold = getThreshold(value);
+      } else {
+        throw new MedicationManagerServletUIConfigurationException("Unexpected parameter name : " + name);
+      }
+
     }
 
-    System.out.println("&&&&&&&&&&&&& END of NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");
+    NotificationInfoComplexId complexId = Util.decodeComplexId(id);
 
-    return null;
+    return new NotificationsInfo(complexId, missed, threshold, shortage, dose);
+  }
 
+  private int getThreshold(String value) {
+    int threshold = Integer.parseInt(value);
+    if (threshold < 0) {
+      throw new MedicationManagerServletUIConfigurationException("The threshold parameter must be positive number");
+    }
+    return threshold;
   }
 
   private Set<String> getAllParametersForThatComplexId(HttpServletRequest req, String id) {
@@ -130,17 +182,5 @@ public final class HandleNotifications extends BaseServlet {
 
     return params;
   }
-
-  /*
-  name = 1_12:missed | value = true
-  name = save | value = Save
-  name = 10_15:missed | value = true
-  name = 1_12:shortage | value = true
-  name = 10_15:shortage | value = true
-  name = 10_15:dose | value = true
-  name = 1_12:threshold | value = 5
-  name = 10_15:threshold | value = 10
-  name = 1_12:dose | value = true
-   */
 
 }

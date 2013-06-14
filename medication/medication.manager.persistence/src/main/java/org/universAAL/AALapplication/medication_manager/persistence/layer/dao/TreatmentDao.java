@@ -202,4 +202,28 @@ public final class TreatmentDao extends AbstractDao {
       closeStatement(statement);
     }
   }
+
+  public void updateTreatmentTable(int treatmentId, boolean missed,
+                                   boolean shortage, boolean dose) throws SQLException {
+
+    Log.info("Setting new alerts values for a medicineInventory with id: %s - missed : %s, shortage : %s, dose : %s, ",
+        getClass(), treatmentId, missed, shortage, dose);
+
+    String sql = "update MEDICATION_MANAGER.TREATMENT " +
+        "set MISSED_INTAKE_ALERT = ?, SHORTAGE_ALERT = ?, NEW_DOSE_ALERT = ? where ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setBoolean(1, missed);
+      ps.setBoolean(2, shortage);
+      ps.setBoolean(3, dose);
+      ps.setInt(4, treatmentId);
+      ps.execute();
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
 }

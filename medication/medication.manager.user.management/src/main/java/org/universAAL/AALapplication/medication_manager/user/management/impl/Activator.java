@@ -36,15 +36,7 @@ public final class Activator implements BundleActivator {
         userManager, null);
 
 
-    ConfigurationProperties configurationProperties = getConfigurationProperties();
-
-    boolean insertDummyUsersIntoChe = configurationProperties.isInsertDummyUsersIntoChe();
-
-    Log.info("Checking the configuration property for loading dummy users into CHE", getClass(), insertDummyUsersIntoChe);
-
-    if (insertDummyUsersIntoChe) {
-      insertDummyUsers(userManager);
-    }
+    insertDummyUsers(userManager);
 
   }
 
@@ -54,8 +46,14 @@ public final class Activator implements BundleActivator {
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
-        Log.info("Inserting dummy users into CHE ", getClass());
-        userManager.loadDummyUsersIntoChe();
+        ConfigurationProperties configurationProperties = getConfigurationProperties();
+        boolean insertDummyUsersIntoChe = configurationProperties.isInsertDummyUsersIntoChe();
+
+        Log.info("Checking the configuration property for loading dummy users into CHE", getClass(), insertDummyUsersIntoChe);
+        if (insertDummyUsersIntoChe) {
+          Log.info("Inserting dummy users into CHE ", getClass());
+          userManager.loadDummyUsersIntoChe();
+        }
       }
     }, 7 * 1000);
   }
