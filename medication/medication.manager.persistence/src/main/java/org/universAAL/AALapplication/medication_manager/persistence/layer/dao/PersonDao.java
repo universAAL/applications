@@ -11,6 +11,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -174,7 +175,8 @@ public final class PersonDao extends AbstractDao {
   }
 
   public void savePerson(Person person) {
-    String sql = "insert into medication_manager.person (id, name, person_uri, role) values (?, ?, ?, ?)";
+    String sql = "insert into medication_manager.person " +
+        "(id, name, person_uri, role, caregiver_sms) values (?, ?, ?, ?, ?)";
 
     PreparedStatement ps = null;
 
@@ -185,6 +187,15 @@ public final class PersonDao extends AbstractDao {
           ps.setString(2, person.getName());
           ps.setString(3, person.getPersonUri());
           ps.setString(4, person.getRole().getValue());
+
+          String gsmNumber = person.getCaregiverSms();
+
+          if (gsmNumber != null) {
+            ps.setString(5, gsmNumber);
+          } else {
+            ps.setNull(5, Types.VARCHAR);
+          }
+
           ps.execute();
         } catch (SQLException e) {
           throw new MedicationManagerPersistenceException(e);
