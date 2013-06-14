@@ -32,7 +32,7 @@ import static org.universAAL.AALapplication.medication_manager.shell.commands.im
  */
 public final class UsecaseDisplayDispenserInstruction extends Usecase {
 
-  private static final String PARAMETER_MESSAGE = "Expected one additional parameter (except usecase id), which is: DeviceId." +
+  private static final String PARAMETER_MESSAGE = "Expected one additional parameter (except usecase id), which is: personId." +
         " Please check the dispenser table for the valid ids";
 
   private static final String USECASE_ID = "UC06";
