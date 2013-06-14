@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 /**
  * @author George Fournadjiev
@@ -21,7 +20,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private final Properties medicationProperties = new Properties();
 
   private static final String DEBUG_WRITE_FILE = "medication.manager.debug.write.file";
-  private static final String ON = "ON";
+  private static final String ON = "true";
   private static final String MEDICATION_REMINDER_TIMEOUT = "medication.manager.reminder.timeout";
   private static final String MEDICATION_INTAKE_INTERVAL = "medication.manager.intake.interval";
   private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "medication.manager.http.session.expire.timeout.in.minutes";
@@ -44,15 +43,6 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
         ConfigurationPropertiesImpl.class.getClassLoader().getResourceAsStream("medication.properties");
     medicationProperties.load(inputStream);
     inputStream.close();
-    setSystemProperties();
-  }
-
-  private void setSystemProperties() {
-    Set<String> keys = medicationProperties.stringPropertyNames();
-    for (String key : keys) {
-      String value = medicationProperties.getProperty(key);
-      System.setProperty(key, value);
-    }
   }
 
   public int getMedicationReminderTimeout() {
@@ -159,9 +149,10 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   private void addReminderTimeout(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(MEDICATION_REMINDER_TIMEOUT);
     PropertyInfo reminderInterval = new PropertyInfo(
         MEDICATION_REMINDER_TIMEOUT,
-        String.valueOf(getMedicationReminderTimeout()),
+         value,
         FormatEnum.SECONDS,
         TypeEnum.NUMBER,
         "Timeout for user response by clicking a button on a dialog"
@@ -171,9 +162,10 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   private void addIntakeIntervalInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(MEDICATION_INTAKE_INTERVAL);
     PropertyInfo intakeInterval = new PropertyInfo(
         MEDICATION_INTAKE_INTERVAL,
-        String.valueOf(getIntakeIntervalMinutes()),
+        value,
         FormatEnum.MINUTES,
         TypeEnum.NUMBER,
         "timestamp to closest intake in minutes tolerance (+/-)"
@@ -183,9 +175,10 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   private void addHttpSessionExpireInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES);
     PropertyInfo httpSessionExpireInMinutes = new PropertyInfo(
         HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES,
-        String.valueOf(getHttpSessionExpireTimeoutInMinutes()),
+        value,
         FormatEnum.MINUTES,
         TypeEnum.NUMBER,
         "After this period the http session expire"
@@ -195,9 +188,10 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   private void addHttpSessionTimerCheckerIntervalInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES);
     PropertyInfo timerCheckerIntervalInMinutes = new PropertyInfo(
         HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES,
-        String.valueOf(getHttpSessionTimerCheckerIntervalInMinutes()),
+        value,
         FormatEnum.MINUTES,
         TypeEnum.NUMBER,
         "The timer will check all session for expiration at this interval"
@@ -207,9 +201,10 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   private void addIsDebugWriterOn(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(DEBUG_WRITE_FILE);
     PropertyInfo debugerWriterOn = new PropertyInfo(
         DEBUG_WRITE_FILE,
-        String.valueOf(isDebugWriterOn()),
+        value,
         FormatEnum.BOOLEAN,
         TypeEnum.BOOLEAN,
         "This turn on/off the http session debugging"
@@ -219,9 +214,10 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   private void addTreatmentServiceMocked(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(HEALTH_TREATMENT_SERVICE_MOCKED);
     PropertyInfo treatmentServiceMocked = new PropertyInfo(
         HEALTH_TREATMENT_SERVICE_MOCKED,
-        String.valueOf(isHealthTreatmentServiceMocked()),
+        value,
         FormatEnum.BOOLEAN,
         TypeEnum.BOOLEAN,
         "This property switch between real and mocked implementation of the Health Treatment Service"
@@ -231,9 +227,10 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   private void addLoadPrescriptionDtos(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(LOAD_PRESCRIPTIONSDTOS);
     PropertyInfo loadPrescriptionDtos = new PropertyInfo(
         LOAD_PRESCRIPTIONSDTOS,
-        String.valueOf(isLoadPrescriptionDTOs()),
+        value,
         FormatEnum.BOOLEAN,
         TypeEnum.BOOLEAN,
         "This property turn on/off loading all prescriptionDtos for performance at startup"
@@ -243,9 +240,10 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   private void addInsertDummyUsersInTheCHE(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE);
     PropertyInfo insertDummyUsers = new PropertyInfo(
         MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE,
-        String.valueOf(isInsertDummyUsersIntoChe()),
+        value,
         FormatEnum.BOOLEAN,
         TypeEnum.BOOLEAN,
         "This property turn on/off loading inserting dummy users into CHE at startup"

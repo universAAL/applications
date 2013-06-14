@@ -69,7 +69,7 @@ public final class NotificationForm extends ScriptForm {
         sb.append(',');
       }
       sb.append('\n');
-      complexIds.add(info.getComplexId());
+      complexIds.add(info.getComplexIdAsText());
     }
 
     session.setAttribute(COMPLEX_IDS, complexIds);
@@ -78,7 +78,7 @@ public final class NotificationForm extends ScriptForm {
 
   private void addRule(NotificationsInfo info, StringBuffer sb) {
 
-    String id = info.getComplexId();
+    String id = info.getComplexIdAsText();
 
 
     JavaScriptObjectCreator creator = new JavaScriptObjectCreator();

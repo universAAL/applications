@@ -1,10 +1,12 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.NotificationInfoComplexId;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.NotificationsInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MedicineInventory;
@@ -13,13 +15,12 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -187,7 +188,7 @@ public final class ComplexDao extends AbstractDao {
 
     Medicine medicine = treatment.getMedicine();
 
-    MedicineInventory inventory= null;
+    MedicineInventory inventory = null;
 
     for (MedicineInventory medicineInventory : inventories) {
       Medicine med = medicineInventory.getMedicine();
@@ -204,7 +205,8 @@ public final class ComplexDao extends AbstractDao {
 
     int threshold = inventory.getWarningThreshold();
 
-    String complexId = encodeComplexId(patient.getId(), treatment.getId(), inventory.getId());
+    NotificationInfoComplexId complexId =
+        new NotificationInfoComplexId(patient.getId(), treatment.getId(), inventory.getId());
 
     return new NotificationsInfo(
         complexId,
@@ -217,5 +219,33 @@ public final class ComplexDao extends AbstractDao {
     );
 
   }
+
+  public void updateNotifications(NotificationsInfo info) {
+    Log.info("Updating the following NotificationsInfo : %s", getClass(), info);
+
+    Connection connection = database.getConnection();
+    try {
+      connection.setAutoCommit(false);
+      updateTables(info);
+      connection.commit();
+      Log.info("Successfully commited", getClass());
+    } catch (Exception e) {
+      rollback(connection, e);
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      setAutoCommitToTrue(connection);
+    }
+
+  }
+
+  private void updateTables(NotificationsInfo info) throws SQLException {
+    NotificationInfoComplexId complexId = info.getComplexId();
+
+    medicineInventoryDao.updateMedicineInventoryTable(complexId.getMedicineInventoryId(),
+        complexId.getPatientId(), info.getThreshold());
+
+    treatmentDao.updateTreatmentTable(complexId.getTreatmentId(), info.isMissed(), info.isShortage(), info.isDose());
+  }
+
 
 }

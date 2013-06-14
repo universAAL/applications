@@ -223,4 +223,24 @@ public final class MedicineInventoryDao extends AbstractDao {
 
     return medicineInventories;
   }
+
+  public void updateMedicineInventoryTable(int medicineInventoryId, int patientId, int threshold) throws SQLException{
+
+    Log.info("Setting new threshold for a medicineInventory with id: %s and new threshold: %s",
+        getClass(), medicineInventoryId, threshold);
+
+    String sql = "update MEDICATION_MANAGER.MEDICINE_INVENTORY " +
+        "set WARNING_THRESHOLD = ? where ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, threshold);
+      ps.setInt(2, medicineInventoryId);
+      ps.execute();
+    } finally {
+      closeStatement(ps);
+    }
+  }
 }

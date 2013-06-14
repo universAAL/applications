@@ -1,8 +1,8 @@
 package org.universAAL.AALapplication.medication_manager.user.management.impl;
 
-import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.UserInfo;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.VCardPropertiesParser;
@@ -122,11 +122,6 @@ public class UserManagerImpl implements UserManager {
     List out = getReturnValue(resp.getOutputs(), OUTPUT_GET_ALL_USERS);
     Log.info("Received List with users object (out) : %s", getClass(), out);
 
-    if (out == null) {
-      throw new MedicationManagerUserManagementException("Cannot get the users from resp.getOutputs(), despite the" +
-          "fact that the CallStatus is succeeded");
-    }
-
     for (int i = 0; i < out.size(); i++) {
       UserInfo ur = getUserInfo(out, i);
       users.add(ur);
@@ -193,29 +188,23 @@ public class UserManagerImpl implements UserManager {
       throw new MedicationManagerUserManagementException("Unsuccessful call status");
     }
 
-    Object out = getReturnValue(resp.getOutputs(), OUTPUT_GET_SUBPROFILES);
-    if (out != null) {
+    List out = getReturnValue(resp.getOutputs(), OUTPUT_GET_SUBPROFILES);
+    if (!out.isEmpty()) {
       Log.info("Found output with PersonalInformationSubprofile URI", getClass());
       PersonalInformationSubprofile userSubprofile = getUserSubprofile(out, user);
 
       Log.info("Found a PersonalInformationSubprofile : %s", getClass(), userSubprofile);
 
       return userSubprofile;
-    } else {
-      Log.info("Problem with the response outputs. Cannot get the PersonalInformationSubprofile object!", getClass());
-      return null;
     }
+
+    throw new MedicationManagerUserManagementException("Problem with the response outputs." +
+        " Cannot get the PersonalInformationSubprofile object for the user : " + user.getURI());
 
   }
 
-  private PersonalInformationSubprofile getUserSubprofile(Object out, User user) {
-    List list = (List) out;
-
+  private PersonalInformationSubprofile getUserSubprofile(List list, User user) {
     Log.info("Trying to get PersonalInformationSubprofile URI from the list", getClass());
-
-    if (list.isEmpty()) {
-      throw new MedicationManagerUserManagementException("The List with PersonalInformationSubprofile URI is empty!");
-    }
 
     PersonalInformationSubprofile subprofile = (PersonalInformationSubprofile) list.get(0);
 
@@ -307,6 +296,10 @@ public class UserManagerImpl implements UserManager {
     }
 
     Log.info("returnValue is: %s", getClass(), returnValue);
+
+    if (returnValue == null) {
+      returnValue = new ArrayList();
+    }
 
     return returnValue;
   }
