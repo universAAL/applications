@@ -90,7 +90,7 @@ public class InterfaceProvider extends UICaller {
 	Utils.println("Start Main Dialog invoked");
 	UIRequest out = new UIRequest(SharedResources.user,
 		// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
-		UIMenus.getForm(true), LevelRating.middle, Locale.ENGLISH,
+		UIMenus.getForm(true), LevelRating.middle, Locale.getDefault(),
 		PrivacyLevel.insensible);
 	sendUIRequest(out);
     }

@@ -36,6 +36,11 @@ public class NutritionalAdvisorWSConnector {
     public Object invokeOperation(String operationName, int uniqueID,
 	    Object[] input3) throws RemoteException {
 	Object[] input = input3;
+	
+	for(int i=0; i<input.length; i++)
+		System.out.println("\n\n\n\n\n ------>INPUT i " + i + " = " + input[i].toString());
+	
+	
 	if (operationName.compareTo(ServiceInterface.OP_GetTodayMenu) == 0) {
 	    return this.getTodayMenu((String) input[0]);
 	} else if (operationName.compareTo(ServiceInterface.OP_GetTomorrowMenu) == 0) {
@@ -94,6 +99,8 @@ public class NutritionalAdvisorWSConnector {
 		    Integer.parseInt((String) input[1]),
 		    Integer.parseInt((String) input[2]));
 	} else if (operationName.compareTo(ServiceInterface.OP_GetToken) == 0) {
+		System.out.println("GET TOKENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+		
 	    return this.getToken((String) input[0], (String) input[1],
 		    Integer.parseInt((String) input[2]));
 	} else if (operationName.compareTo(ServiceInterface.OP_GetMyAdvises) == 0) {

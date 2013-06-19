@@ -7,9 +7,9 @@ public class TSFConnector {
     private String token = "";
     private static TSFConnector instance;
 
-    private String socialNetwork_name = null; // "davidshopland";
-    // public static String socialNetwork_name = "itaca";
-    private String socialNetwork_pass = null; // = "oasis10";
+    private String socialNetwork_name = null;
+
+    private String socialNetwork_pass = null; 
 
     private TSFConnector() {
 

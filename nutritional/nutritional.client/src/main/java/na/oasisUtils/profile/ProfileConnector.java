@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import na.miniDao.profile.PatientList;
@@ -114,7 +115,7 @@ public class ProfileConnector {
     // }
 
     public String getScreenLanguage() {
-	this.codeLang = "GB";
+	this.codeLang = Locale.getDefault().getLanguage().toUpperCase();
 	return this.codeLang;
 	// if (this.codeLang!=null)
 	// return this.codeLang;
@@ -867,6 +868,9 @@ public class ProfileConnector {
 	// return myProperty.getValues(0).getValue();
     }
 
+
+    
+    
     
     
     
@@ -874,8 +878,17 @@ public class ProfileConnector {
     
     
     public int getCodeLang() {
-	if (codeLang == null)
-	    this.getScreenLanguage();
+//	    codeLang = Locale.getDefault().getLanguage();
+//		if (codeLang.compareTo("en") == 0 || codeLang.compareTo("gb") == 0) {
+//		    return 2;
+//		} else if (codeLang.compareTo("es") == 0) {
+//		    return 1;
+//		} else if (codeLang.compareTo("bg") == 0) {
+//		    return 7;
+//		}
+//		return 2;
+	
+	if (codeLang == null)  this.getScreenLanguage();
 	if (codeLang.compareTo("EN") == 0 || codeLang.compareTo("GB") == 0) {
 	    return 2;
 	} else if (codeLang.compareTo("ES") == 0) {
@@ -884,6 +897,7 @@ public class ProfileConnector {
 	    return 7;
 	}
 	return 2;
+
     }
 
     // public String getUserID() {

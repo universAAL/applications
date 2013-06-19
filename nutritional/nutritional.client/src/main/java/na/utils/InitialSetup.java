@@ -71,8 +71,8 @@ public class InitialSetup {
     protected static final String CHECK_ADVISES_DELAY_MINUTES_KEY = "check_advises_delay_minutes";
     private static final String CHECK_ADVISES_DELAY_MINUTES_VALUE = "60";
 
-    protected static final String LANGUAGE_INTERFACE_KEY = "language_interface";
-    private static final String LANGUAGE_INTERFACE_VALUE = "EN";
+//    protected static final String LANGUAGE_INTERFACE_KEY = "language_interface";
+//    private static final String LANGUAGE_INTERFACE_VALUE = "EN";
 
     protected static final String AVOID_AMI_KEY = "avoid_ami";
     private static final String AVOID_AMI_VALUE = "yes";
@@ -177,8 +177,8 @@ public class InitialSetup {
 		InitialSetup.createProperty(file.getAbsolutePath(),
 			CHECK_ADVISES_DELAY_MINUTES_KEY,
 			CHECK_ADVISES_DELAY_MINUTES_VALUE);
-		InitialSetup.createProperty(file.getAbsolutePath(),
-			LANGUAGE_INTERFACE_KEY, LANGUAGE_INTERFACE_VALUE);
+//		InitialSetup.createProperty(file.getAbsolutePath(),
+//			LANGUAGE_INTERFACE_KEY, LANGUAGE_INTERFACE_VALUE);
 		InitialSetup.createProperty(file.getAbsolutePath(),
 			AVOID_AMI_KEY, AVOID_AMI_VALUE);
 		InitialSetup.createProperty(file.getAbsolutePath(),
