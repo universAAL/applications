@@ -4,11 +4,13 @@ import na.oasisUtils.ami.AmiConnector;
 import na.oasisUtils.profile.ProfileConnector;
 import na.utils.OASIS_ServiceUnavailable;
 import na.utils.ServiceInterface;
+import na.utils.Utils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.universAAL.AALapplication.nutritional.SharedResources;
 import org.universAAL.middleware.container.utils.StringUtils;
+import org.universAAL.middleware.interfaces.utils.Util;
 import org.universAAL.middleware.rdf.Resource;
 
 public class Login {
@@ -22,18 +24,14 @@ public class Login {
     public boolean logMeIn() {
 	// read credentials from file
 	String username = SharedResources.user.getURI(); 
-	System.out.println("------------------------------> " + SharedResources.user.getURI());
-			//ProfileConnector.getInstance().getNutritionalUsername();
 	String password = ProfileConnector.getInstance()
 		.getNutritionalPassword();
 	String lang = ProfileConnector.getInstance().getScreenLanguage();
-	log.info("Lang es: " + lang);
 	int preferredLanguage = ProfileConnector.getInstance().getCodeLang();
-
 	try {
 	    // ask login
-	    log.info("asking login with username: " + username + " lang: "
-		    + preferredLanguage);
+	    Utils.println("------>  asking login with username: " + username + " lang: "
+		    + lang);
 	    String[] input = { username, password, "" + preferredLanguage };
 	    AmiConnector ami = AmiConnector.getAMI();
 	    if (ami != null) {

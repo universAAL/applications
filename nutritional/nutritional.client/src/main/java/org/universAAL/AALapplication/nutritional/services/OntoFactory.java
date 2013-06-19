@@ -196,7 +196,6 @@ public class OntoFactory {
 	    // KCAL
 	    f.setKilocalories(food.getKCal());
 	    // FOOD SubCATEGORY
-	    Utils.println(">>>>>>>>>>> LA SUBCATEGORY ES: "+ref.getFoodSubCategoryID());
 	    f.setFoodSubCategory(OntoFactory.getFoodSubCategory(ref
 		    .getFoodSubCategoryID()));
 	} catch (OASIS_ServiceUnavailable e) {

@@ -12,6 +12,7 @@
 
 	<artifactId>nutritional.client</artifactId>
 	<packaging>bundle</packaging>
+	<name>NUTRITIONAL JUANITO</name>
 
 	<dependencies>
 		<dependency>

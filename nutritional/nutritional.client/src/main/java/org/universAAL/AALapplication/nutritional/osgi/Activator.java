@@ -19,6 +19,8 @@
  */
 package org.universAAL.AALapplication.nutritional.osgi;
 
+import java.util.Locale;
+
 import na.oasisUtils.trustedSecurityNetwork.Login;
 import na.utils.InitialSetup;
 

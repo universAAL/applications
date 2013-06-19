@@ -77,7 +77,6 @@ public class UIHelp {
 		PROP_PATH_REF1, null, null);
 	new SimpleOutput(groupIdont, null, null,
 		Messages.getString("UIHelp.12")); //$NON-NLS-1$
-
 	// add a go back button for quitting the dialog
 
 	new Submit(f.getSubmits(), new Label(

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
@@ -24,7 +25,7 @@ public class Setup {
     private static final int START_SCREENSAVER_DELAY_IN_SECONDS = 10;
     // private static final String AMI_UserID = "itaca_01";
  //   public static String AMI_UserName = null;
-    private static final String DEFAULT_LANGUAGE = "EN";
+//    private static final String DEFAULT_LANGUAGE = "EN";
     private static final double DEFAULT_MAX_TEMPERATURE_VALUE = 25; // same as
 								    // InitialSetup.max_temp_value!!
     private static String useScheduler = null;
@@ -248,23 +249,25 @@ public class Setup {
 	return START_SCREENSAVER_DELAY_IN_SECONDS;
     }
 
-    public static String getLanguage() {
-	// return "BU";
-	// load file
-	Properties properties = new Properties();
-	try {
-	    String setup = getSetupFileName();
-	    properties.load(new FileInputStream(setup));
-	    String lang = properties
-		    .getProperty(InitialSetup.LANGUAGE_INTERFACE_KEY);
-	    if (lang != null)
-		return lang;
-	} catch (IOException e) {
-	    log.error("Error, couldn't read file: " + e.toString());
-	}
-	log.info("Default language");
-	return DEFAULT_LANGUAGE;
-    }
+//    public static String getLanguage() {
+//	// return "BU";
+//	// load file
+//    
+//	Properties properties = new Properties();
+//	try {
+//	    String setup = getSetupFileName();
+//	    properties.load(new FileInputStream(setup));
+////	    String lang = properties
+////		    .getProperty(InitialSetup.LANGUAGE_INTERFACE_KEY);
+//	    String lang = System.getProperty(Locale.getDefault().getLanguage());
+//	    if (lang != null)
+//		return lang;
+//	} catch (IOException e) {
+//	    log.error("Error, couldn't read file: " + e.toString());
+//	}
+//	log.info("Default language");
+//	return DEFAULT_LANGUAGE;
+//    }
 
     static public boolean getAvoidOASIS_AMI() {
 	// load file

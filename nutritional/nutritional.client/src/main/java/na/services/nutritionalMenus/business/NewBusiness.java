@@ -57,6 +57,7 @@ public class NewBusiness {
 	AmiConnector ami = AmiConnector.getAMI();
 	if (ami != null) {
 	    String[] input = { TSFConnector.getInstance().getToken() };
+	        
 	    na.miniDao.DayMenu menus = (na.miniDao.DayMenu) ami
 		    .invokeOperation(ServiceInterface.DOMAIN_Nutrition,
 			    operation, input, false);
@@ -64,7 +65,6 @@ public class NewBusiness {
 	    if (menus != null) {
 		log.info("Business, UsersMenus found ID: "
 			+ menus.getUsersMenusID());
-
 		if (menus.getMeals() != null) {
 		    if (menus.getMeals().length == 0) {
 			log.info("Business, no meals found!");
@@ -178,7 +178,7 @@ public class NewBusiness {
     }
 
     public byte[] getTipPicture(int tipID) throws OASIS_ServiceUnavailable {
-	// busca imagen local, si no la encuentra, las descarga y la guarda
+	// try to find the image locally, if not found then download and keep it
 	String recipeFileName = "tip_img_" + tipID + ".data";
 	String fullPath = ServiceInterface.PATH_TIP_PICTURES + recipeFileName;
 	try {

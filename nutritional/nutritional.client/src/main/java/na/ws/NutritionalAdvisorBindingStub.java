@@ -2517,28 +2517,38 @@ public class NutritionalAdvisorBindingStub extends org.apache.axis.client.Stub
 	setRequestHeaders(_call);
 	setAttachments(_call);
 	try {
+	
 	    java.lang.Object _resp = _call
 		    .invoke(new java.lang.Object[] { token });
-
+System.out.println("1");
 	    if (_resp instanceof java.rmi.RemoteException) {
+	    	
+	    	System.out.println("REMOTE EXCEPTION "+_resp.toString());
 		throw (java.rmi.RemoteException) _resp;
 	    } else {
+	    	System.out.println("3");
 		extractAttachments(_call);
+		System.out.println("4");
 		try {
+			System.out.println("5");
 		    return (na.miniDao.DayMenu) _resp;
 		} catch (java.lang.Exception _exception) {
+			System.out.println("6");
 		    return (na.miniDao.DayMenu) org.apache.axis.utils.JavaUtils
 			    .convert(_resp, na.miniDao.DayMenu.class);
 		}
 	    }
 	} catch (org.apache.axis.AxisFault axisFaultException) {
+		System.out.println("7");
 	    if (axisFaultException.detail != null) {
 		if (axisFaultException.detail instanceof java.rmi.RemoteException) {
 		    throw (java.rmi.RemoteException) axisFaultException.detail;
 		}
+		System.out.println("8");
 		if (axisFaultException.detail instanceof na.ws.NutriSecurityException) {
 		    throw (na.ws.NutriSecurityException) axisFaultException.detail;
 		}
+		System.out.println("9");
 		if (axisFaultException.detail instanceof na.ws.TokenExpiredException) {
 		    throw (na.ws.TokenExpiredException) axisFaultException.detail;
 		}

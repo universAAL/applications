@@ -60,7 +60,7 @@ public class AmiConnector {
 	    Object[] input3, boolean forceWebServiceCall)
 	    throws OASIS_ServiceUnavailable {
 	if (Setup.getAvoidOASIS_AMI() || forceWebServiceCall) {
-	    log.info("AMI:  invoking operation avoiding AMI: " + operationName);
+	    Utils.println("---------------------------------------------------------->AMI:  invoking operation avoiding AMI: " + operationName);
 	    return this.directWSInvokeOperation(domain, operationName, input3);
 	} else {
 	    log.fatal("AMI:  invoking operation through AMI: " + operationName);
@@ -115,7 +115,7 @@ public class AmiConnector {
 		    } else
 			log.error("AMI: No output found.");
 		} catch (Exception e) {
-		    log.info("AMI: Ha ocurrido una EXCEPTION!");
+		    log.info("AMI: EXCEPTION!");
 		    e.printStackTrace();
 		}
 	    }
