@@ -116,7 +116,7 @@ public class ProfileConnector {
 
     public String getScreenLanguage() {
     	// TODO: Language is hardcoded to "GB because for a strange reason corrupts the database when it is changed to other language
-	this.codeLang = "GB";
+	this.codeLang = "GB"; // System.getProperty("user.language", "en");
 	return this.codeLang;
 	// if (this.codeLang!=null)
 	// return this.codeLang;
