@@ -115,7 +115,8 @@ public class ProfileConnector {
     // }
 
     public String getScreenLanguage() {
-	this.codeLang = Locale.getDefault().getLanguage().toUpperCase();
+    	// TODO: Language is hardcoded to "GB because for a strange reason corrupts the database when it is changed to other language
+	this.codeLang = "GB";
 	return this.codeLang;
 	// if (this.codeLang!=null)
 	// return this.codeLang;
@@ -868,9 +869,6 @@ public class ProfileConnector {
 	// return myProperty.getValues(0).getValue();
     }
 
-
-    
-    
     
     
     
@@ -878,17 +876,8 @@ public class ProfileConnector {
     
     
     public int getCodeLang() {
-//	    codeLang = Locale.getDefault().getLanguage();
-//		if (codeLang.compareTo("en") == 0 || codeLang.compareTo("gb") == 0) {
-//		    return 2;
-//		} else if (codeLang.compareTo("es") == 0) {
-//		    return 1;
-//		} else if (codeLang.compareTo("bg") == 0) {
-//		    return 7;
-//		}
-//		return 2;
-	
-	if (codeLang == null)  this.getScreenLanguage();
+	if (codeLang == null)
+	    this.getScreenLanguage();
 	if (codeLang.compareTo("EN") == 0 || codeLang.compareTo("GB") == 0) {
 	    return 2;
 	} else if (codeLang.compareTo("ES") == 0) {
@@ -897,7 +886,6 @@ public class ProfileConnector {
 	    return 7;
 	}
 	return 2;
-
     }
 
     // public String getUserID() {

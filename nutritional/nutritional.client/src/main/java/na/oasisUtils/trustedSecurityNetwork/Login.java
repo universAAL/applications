@@ -4,7 +4,6 @@ import na.oasisUtils.ami.AmiConnector;
 import na.oasisUtils.profile.ProfileConnector;
 import na.utils.OASIS_ServiceUnavailable;
 import na.utils.ServiceInterface;
-import na.utils.Utils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,6 +11,8 @@ import org.universAAL.AALapplication.nutritional.SharedResources;
 import org.universAAL.middleware.container.utils.StringUtils;
 import org.universAAL.middleware.interfaces.utils.Util;
 import org.universAAL.middleware.rdf.Resource;
+
+import edu.emory.mathcs.backport.java.util.concurrent.helpers.Utils;
 
 public class Login {
     private Log log = LogFactory.getLog(Login.class);
@@ -24,14 +25,17 @@ public class Login {
     public boolean logMeIn() {
 	// read credentials from file
 	String username = SharedResources.user.getURI(); 
+			//ProfileConnector.getInstance().getNutritionalUsername();
 	String password = ProfileConnector.getInstance()
 		.getNutritionalPassword();
 	String lang = ProfileConnector.getInstance().getScreenLanguage();
+	System.out.println("\n-------------------------------->Language is: " + lang +"\n");
 	int preferredLanguage = ProfileConnector.getInstance().getCodeLang();
+
 	try {
 	    // ask login
-	    Utils.println("------>  asking login with username: " + username + " lang: "
-		    + lang);
+	    log.info("asking login with username: " + username + " lang: "
+		    + preferredLanguage);
 	    String[] input = { username, password, "" + preferredLanguage };
 	    AmiConnector ami = AmiConnector.getAMI();
 	    if (ami != null) {
