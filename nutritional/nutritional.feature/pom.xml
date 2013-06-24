@@ -5,11 +5,10 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>nutritional.pom</artifactId>
-		<version>D.3.1-SNAPSHOT</version>
+		<version>E.0.1-SNAPSHOT</version>
 		<relativePath>../nutritional.pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>nutritional.feature</artifactId>
-		<version>D.3.1-SNAPSHOT</version>
 	<name>Nutritional Advisor AAL Service Karaf Feature</name>
 	<description>Artifact representing representing the Karaf feature for the Nutritional Advisor AAL Service</description>
 
