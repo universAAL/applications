@@ -18,6 +18,12 @@ public class TimeSleepingController implements ActionListener {
 	private String serverIp;
 	private String userCode;
 	private static float gtbTime;
+	/**
+	 * The device ID. When the user management be made, the DEVICE_ID must
+	 * content a reference to the user, in orden to not crossing the same device
+	 * with different users. (TODO).
+	 */
+	private final String DEVICE_ID = "BEDROOM_DET";
 
 	private TimeSleepingController() {
 		super();
@@ -58,7 +64,7 @@ public class TimeSleepingController implements ActionListener {
 				+ calculateSleepTime() + " and times>" + times);
 		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
 				"123456", "SLEEPING", "SLEEP_HOURS",
-				new String("" + calculateSleepTime()));
+				new String("" + calculateSleepTime()),DEVICE_ID);
 		wuTime = 0;
 	}
 

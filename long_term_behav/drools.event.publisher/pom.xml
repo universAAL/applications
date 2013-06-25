@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>ltba.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>C.0.1-SNAPSHOT</version>
+		<version>D.0.1-SNAPSHOT</version>
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>drools.event.publisher</artifactId>
@@ -77,4 +77,6 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
+	<modules>
+	</modules>
 </project>

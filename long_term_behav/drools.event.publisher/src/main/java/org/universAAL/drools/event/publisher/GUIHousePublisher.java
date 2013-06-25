@@ -43,6 +43,7 @@ import javax.swing.event.ChangeListener;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 /**
  * @author Miguel Llorente (mllorente)
@@ -189,14 +190,14 @@ public class GUIHousePublisher extends JFrame {
 		bDay = new JButton("Generate Day");
 		bDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Generate day pressed");
+				LogUtils.logDebug(mc, getClass(), "init", new String[]{"Generate day pressed"}, null);
 				// dsg.generateDaySecuence(1);
 			}
 		});
 		bWeek = new JButton("Generate Week");
 		bWeek.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Generate week pressed");
+				LogUtils.logDebug(mc, getClass(), "init", new String[]{"Generate week pressed"}, null);
 				// dsg.generateDaySecuence(7);
 			}
 		});
@@ -204,7 +205,7 @@ public class GUIHousePublisher extends JFrame {
 		bMonth.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Generate month pressed");
+				LogUtils.logDebug(mc, getClass(), "init", new String[]{"Generate month pressed"}, null);
 				// dsg.generateDaySecuence(31);
 			}
 		});
@@ -227,7 +228,6 @@ public class GUIHousePublisher extends JFrame {
 					Date d = (Date) sClock.getValue();
 					pseudoClockDiff = d.getTime()
 							- Calendar.getInstance().getTimeInMillis();
-					// System.out.println(d);
 					updateSimuClockLabel(lClock, d.getTime());
 					// ConsequenceListener.getInstance().setTimeForDebug(
 					// ((Date) sClock.getValue()).getTime());
@@ -242,7 +242,6 @@ public class GUIHousePublisher extends JFrame {
 					Date d = (Date) sClock.getValue();
 					pseudoClockDiff = d.getTime()
 							- Calendar.getInstance().getTimeInMillis();
-					// System.out.println(d);
 					updateSimuClockLabel(lClock, d.getTime());
 					// ConsequenceListener.getInstance().setTimeForDebug(
 					// ((Date) sClock.getValue()).getTime());
@@ -301,7 +300,7 @@ public class GUIHousePublisher extends JFrame {
 					dKitchen = resetLabel(dKitchen);
 					updateLabel(lKitchen, dKitchen);
 					if (!tKitchen.isRunning()) {
-						System.out.println("STARTING TIMER...");
+						LogUtils.logDebug(mc, getClass(), "initButtonListener", new String[]{"Generate day pressed"}, null);
 						tKitchen.start();
 					}
 				} else if (src.equals(bBathroom)) {
@@ -354,7 +353,6 @@ public class GUIHousePublisher extends JFrame {
 		tClock = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// dBathroom = addSecondToCounter(dBathroom);
-				// System.out.println(Calendar.getInstance().getTimeInMillis());
 				updateSimuClockLabel(lClock, pseudoClockDiff
 						+ Calendar.getInstance().getTimeInMillis());
 			}
@@ -401,7 +399,6 @@ public class GUIHousePublisher extends JFrame {
 
 	protected static void updateSimuClockLabel(JLabel label, long timeInMillis) {
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-		// System.out.println(timeInMillis);
 		label.setText(simulatedTime + format.format(new Date(timeInMillis)));
 	}
 

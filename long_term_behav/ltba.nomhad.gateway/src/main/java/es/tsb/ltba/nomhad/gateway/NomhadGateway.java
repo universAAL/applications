@@ -1,22 +1,24 @@
 package es.tsb.ltba.nomhad.gateway;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.http.client.ClientProtocolException;
-import org.osgi.framework.BundleContext;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 import es.tsb.ltba.nomhad.httpclient.NomhadHttpClient;
 
 public class NomhadGateway {
 
 	private static NomhadGateway INSTANCE;
+
 	private static final String NOMHAD_URL_HEADER = "https://localhost:8443/nomhad/rest/2/cmr/patient/";
 	private static final String OBSERVATIONS_REQUEST = "/observations";
 	private static final String DEVICE_ID = "\"35-209900-176148-1\"";
+	private ModuleContext moduleContext = null;
 	private static final String BODY = "{" +
 
 	"\"meassurement\": {" + "\"indicatorsGroup\": \"INDICATOR_GROUP\","
@@ -30,7 +32,7 @@ public class NomhadGateway {
 			+ "}            ";
 
 	private NomhadGateway() {
-
+		INSTANCE = this;
 	}
 
 	public static NomhadGateway getInstance() {
@@ -40,9 +42,33 @@ public class NomhadGateway {
 			return INSTANCE;
 	}
 
+	public void setModuleContext(ModuleContext mc) {
+		moduleContext = mc;
+	}
+
+	/**
+	 * Put a measurement in a specific time in the future or in the past. This
+	 * time is indicated in milliseconds.
+	 * 
+	 * @param server
+	 *            IP of the server.
+	 * @param usr
+	 *            user code.
+	 * @param pwd
+	 *            user password.
+	 * @param indicatorGroup
+	 *            indicator group where the measurement will be place.
+	 * @param indicator
+	 *            indicator corresponding to the measurement.
+	 * @param measurement
+	 *            measured value.
+	 * @param timeInMillis
+	 *            Time where the measurement was taken.
+	 * @return response from the server.
+	 */
 	public String putMeasurement(String server, String usr, String pwd,
 			String indicatorGroup, String indicator, String measurement,
-			long timeInMillis) {
+			long timeInMillis, String deviceId) {
 
 		SimpleDateFormat beforeT = new java.text.SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat afterT = new SimpleDateFormat("hhmmss");
@@ -55,9 +81,29 @@ public class NomhadGateway {
 				measurement, timestamp);
 	}
 
+	/**
+	 * Put a measurement in Nomhad Server with a correctly formatted date.
+	 * 
+	 * @param server
+	 *            IP of the server.
+	 * @param usr
+	 *            user code.
+	 * @param pwd
+	 *            user password.
+	 * @param indicatorGroup
+	 *            indicator group where the measurement will be place.
+	 * @param indicator
+	 *            indicator corresponding to the measurement.
+	 * @param measurement
+	 *            measured value.
+	 * @param formattedate
+	 *            Time formated according to the Nomhad requisites.
+	 *            YYYYMMDD'T'HHmmSS'+0100'
+	 * @return response from the server.
+	 */
 	public String putMeasurement(String server, String usr, String pwd,
 			String indicatorGroup, String indicator, String measurement,
-			String formattedate) {
+			String formattedate, String deviceId) {
 
 		StringBuilder uri = new StringBuilder();
 		String header = new String(NOMHAD_URL_HEADER);
@@ -66,14 +112,26 @@ public class NomhadGateway {
 		if (server.contains(":")) {
 			header.replace("localhost:8443", server);
 		} else {
-			// System.out.println("Replacing localhost for " + server);
+			LogUtils
+					.logDebug(
+							moduleContext,
+							getClass(),
+							"putMeasurement",
+							new String[] { "Replacing 'localhost' by " + server },
+							null);
 			header = header.replace("localhost", server);
-			// System.out.println(header);
+			LogUtils.logDebug(moduleContext, getClass(), "putMeasurement",
+					new String[] { "New header: " + header }, null);
 		}
-//		System.out.println("DEPLOYED PROPERTY"
-//				+ System.getProperty("es.tsbtecnologias.nomhad.ltba.deployed"));
-		if (System.getProperty("es.tsbtecnologias.nomhad.ltba.deployed").equalsIgnoreCase("true")) {
-//			System.out.println("REPLACING...");
+		if (System.getProperty("es.tsbtecnologias.nomhad.ltba.deployed")
+				.equalsIgnoreCase("true")) {
+			LogUtils
+					.logDebug(
+							moduleContext,
+							getClass(),
+							"putMeasurement",
+							new String[] { "Remote server is a deployed server (PRE or PRO but no DEV)" },
+							null);
 			header = header.replace("nomhad", "ltba");
 		}
 		uri.append(header);
@@ -84,13 +142,14 @@ public class NomhadGateway {
 		body = body.replace("INDICATOR_MEASURED", indicator);
 		body = body.replace("VALUE_MEASURED", measurement);
 		body = body.replace("19520723T120000+0100", formattedate);
+		body = body.replace(DEVICE_ID, deviceId);
 
 		NomhadHttpClient nhc = new NomhadHttpClient(usr, pwd);
 		try {
-			System.out.println(">>>>>>>>>NOMHAD POST<<<<<<<<<<<");
-			System.out.println("URI: " + uri.toString());
-			System.out.println("BODY: " + body.toString());
-			System.out.println(nhc.post(uri.toString(), body));
+			LogUtils.logInfo(moduleContext, getClass(), "putMeasurement",
+					new String[] { "-------------POSTING TO NOMHAD-------------\nURI: "
+							+ uri.toString() + "\nBODY: " + body.toString()
+							+ "\nSERVER RESPONSE:" + nhc.post(uri.toString(), body) }, null);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -101,17 +160,31 @@ public class NomhadGateway {
 
 	}
 
+	/**
+	 * Put measurement with no date. The date taken for the measurement is the
+	 * current time.
+	 * 
+	 * @param server
+	 * @param usr
+	 * @param pwd
+	 * @param indicatorGroup
+	 * @param indicator
+	 * @param measurement
+	 * @return response from the server.
+	 */
 	public String putMeasurement(String server, String usr, String pwd,
-			String indicatorGroup, String indicator, String measurement) {
+			String indicatorGroup, String indicator, String measurement,
+			String deviceId) {
 
 		SimpleDateFormat beforeT = new java.text.SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat afterT = new SimpleDateFormat("HHmmss");
 		String date = beforeT.format(Calendar.getInstance().getTime());
 		String hour = afterT.format(Calendar.getInstance().getTime());
 		String timestamp = date + "T" + hour + "+0100";
-		System.out.println(timestamp);
+		LogUtils.logDebug(moduleContext, getClass(), "putMeasurement",
+				new String[] { "Current timestamp: " + timestamp }, null);
 		return putMeasurement(server, usr, pwd, indicatorGroup, indicator,
-				measurement, timestamp);
-
+				measurement, timestamp, deviceId);
 	}
+
 }

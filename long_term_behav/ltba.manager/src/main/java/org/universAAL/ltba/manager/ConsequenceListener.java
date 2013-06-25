@@ -23,12 +23,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.osgi.framework.BundleContext;
-import org.universAAL.ltba.activity.ActivityIntensity;
 import org.universAAL.ltba.activity.ActivityLogger;
-import org.universAAL.ltba.activity.Room;
 import org.universAAL.ltba.activity.representation.GraphicReporter;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
@@ -37,8 +36,6 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
-
-import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
 /**
  * @author mllorente
@@ -52,7 +49,7 @@ public class ConsequenceListener extends ContextSubscriber {
 	public Calendar debuggingCalendar = Calendar.getInstance();
 	private boolean debugTime = false;
 	private BundleContext bc;
-	private ModuleContext mc;
+	private ModuleContext moduleContext;
 
 	private static ContextEventPattern[] getContextSuscriptionsParam() {
 		ContextEventPattern cep = new ContextEventPattern();
@@ -71,7 +68,7 @@ public class ConsequenceListener extends ContextSubscriber {
 
 	protected ConsequenceListener(ModuleContext context) {
 		super(context, getContextSuscriptionsParam());
-		mc = context;
+		moduleContext = context;
 		activityLogger = new ActivityLogger(context);
 		INSTANCE = this;
 	}
@@ -121,17 +118,13 @@ public class ConsequenceListener extends ContextSubscriber {
 
 	@Override
 	public void handleContextEvent(ContextEvent event) {
-		// System.out.println("HANDLING IN CONSEQUENCE-LISTENER");
+
 		if (getStatus()) {
 			Consequence csq = (Consequence) event.getRDFObject();
-			// System.out.println("LOLEOLOELOLOE");
-			// System.out.println("DEBUG TIME: " + debugTime);
-			// System.out.println("THIS CALENDAR (CONSEQUENCE HANDLER): "
-			// + debuggingCalendar);
-			// System.out.println("LOLEOLOELOLOE");
-
-			System.out.println("Consequence listenede: ");
-			System.out.println(csq.getURI());
+			LogUtils.logInfo(moduleContext, getClass(), "handleContextEvent",
+					new String[] { "Handling consequence" }, null);
+			LogUtils.logDebug(moduleContext, getClass(), "handleContextEvent",
+					new String[] { csq.getURI() }, null);
 			ConsequenceProperty[] consequenceArray = csq.getProperties();
 
 			String source = null;
@@ -144,36 +137,15 @@ public class ConsequenceListener extends ContextSubscriber {
 				else if (consequenceProperty.getKey() == "Intensity") {
 					intensity = consequenceProperty.getValue();
 				}
-//				System.out.println(consequenceProperty.getKey() + "--"
-//						+ consequenceProperty.getValue());
 			}
-			/*
-			 * System.out.println("<<<<<<EXECUTING NOMHAD PROTOCOL>>>>>>>>");
-			 * int meas = 0; if (intensity.equalsIgnoreCase("null")) { meas = 0;
-			 * } else if (intensity.equalsIgnoreCase("low")) { meas = 1; } else
-			 * if (intensity.equalsIgnoreCase("medium")) { meas = 3; } else if
-			 * (intensity.equalsIgnoreCase("high")) { meas = 5; } if
-			 * (!debugTime) {
-			 * NomhadGateway.getInstance().putMeasurement("localhost", "A100",
-			 * "123456", "HEALTH_INDICATORS_GROUP_WEEK",
-			 * "AAL_HEALTH_INDEX_WEEK", Integer.toString(meas));
-			 * activityLogger.putEntry(Calendar.getInstance()
-			 * .getTimeInMillis(), Room.getRoomByString(source),
-			 * ActivityIntensity.getIntensityByString(intensity));
-			 * 
-			 * } else { NomhadGateway.getInstance().putMeasurement("localhost",
-			 * "A100", "123456", "HEALTH_INDICATORS_GROUP_WEEK",
-			 * "AAL_HEALTH_INDEX_WEEK", Integer.toString(meas),
-			 * debuggingCalendar.getTimeInMillis());
-			 * activityLogger.putEntry(debuggingCalendar.getTimeInMillis(),
-			 * Room.getRoomByString(source), ActivityIntensity
-			 * .getIntensityByString(intensity)); }
-			 */}
+		}
 
 	}
 
 	public void setStatus(boolean status) {
-		System.out.println("SETTING THE STATUS OF AVAILABILITY TO " + status);
+		LogUtils.logInfo(moduleContext, getClass(), "setStatus",
+				new String[] { "SETTING THE STATUS OF AVAILABILITY TO "
+						+ status }, null);
 		this.status = status;
 	}
 
@@ -183,20 +155,22 @@ public class ConsequenceListener extends ContextSubscriber {
 
 	// TODO dont use ConsequenceListener for showing reports!!!!!!!
 	public void printDayReport(Resource inputUser) {
-		GraphicReporter
-				.showDayReport(new Date(), activityLogger, mc, inputUser);
+		GraphicReporter.showDayReport(new Date(), activityLogger,
+				moduleContext, inputUser);
 		// activityLogger.printReport();
 	}
 
 	// TODO dont use ConsequenceListener for showing reports!!!!!!!
 	public void printMonthReport(Resource inputUser) {
-		GraphicReporter.showMonthReport(activityLogger, mc, inputUser);
+		GraphicReporter.showMonthReport(activityLogger, moduleContext,
+				inputUser);
 		// activityLogger.printReport();
 	}
 
 	// TODO dont use ConsequenceListener for showing reports!!!!!!!
 	public void printWeekReport(Resource inputUser) {
-		GraphicReporter.showWeekReport(activityLogger, mc, inputUser);
+		GraphicReporter
+				.showWeekReport(activityLogger, moduleContext, inputUser);
 		// activityLogger.printReport();
 	}
 
@@ -212,4 +186,18 @@ public class ConsequenceListener extends ContextSubscriber {
 		debuggingCalendar.setTimeInMillis(time);
 	}
 
+	/**
+	 * @return the moduleContext
+	 */
+	public ModuleContext getModuleContext() {
+		return moduleContext;
+	}
+
+	/**
+	 * @param moduleContext
+	 *            the moduleContext to set
+	 */
+	public void setModuleContext(ModuleContext moduleContext) {
+		this.moduleContext = moduleContext;
+	}
 }

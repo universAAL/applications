@@ -1,6 +1,8 @@
 package org.universAAL.ltba.pir;
 
 import org.universAAL.ltba.activity.Room;
+import org.universAAL.ltba.manager.ConsequenceListener;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
@@ -10,6 +12,13 @@ public class CurrentActivityController {
 	private final String INDICATOR = "CURRENT_ACTIVITY_LEVEL";
 	private String serverIp = "192.168.238.40";
 	private String userCode = "A100";
+	/**
+	 * The device ID. When the user management be made, the DEVICE_ID must
+	 * content a reference to the user, in orden to not crossing the same device
+	 * with different users. (TODO).
+	 */
+	private final String DEVICE_ID_ALL = "ALL_DET";
+	private final String DEVICE_ID_ROOM = "_DET";
 
 	private static CurrentActivityController INSTANCE;
 
@@ -34,19 +43,28 @@ public class CurrentActivityController {
 	}
 
 	public void activityDetected(String index) {
+		LogUtils.logDebug(ConsequenceListener.getInstance().getModuleContext(),
+				getClass(), "ActivityDetected(generic)",
+				new String[] { "Printing value: " + index }, null);
 		System.out.println("Imprimiendo el valor: " + index);
 		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
-				"123456", INDICATOR_GROUP, INDICATOR, new String(index));
+				"123456", INDICATOR_GROUP, INDICATOR, new String(index),
+				DEVICE_ID_ALL);
 	}
 
 	public void activityDetected(String index, Room room) {
 		if (room != null) {
-			System.out.println("Imprimiendo el valor: " + index + " en "
+			LogUtils.logDebug(ConsequenceListener.getInstance()
+					.getModuleContext(), getClass(),
+					"ActivityDetected(by room)",
+					new String[] { "Printing value: " + index }, null);
+			System.out.println("Printing value: " + index + " in "
 					+ room.getRoomStringNoBlanks());
 			NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
 					"123456", INDICATOR_GROUP,
 					INDICATOR + "_" + room.getRoomStringNoBlanks(),
-					new String(index));
+					new String(index),
+					room.getRoomStringNoBlanks() + DEVICE_ID_ROOM);
 		} else {
 			activityDetected(index);
 		}

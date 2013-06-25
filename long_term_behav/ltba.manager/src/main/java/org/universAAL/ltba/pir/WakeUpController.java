@@ -17,6 +17,12 @@ public class WakeUpController implements ActionListener {
 	private Timer t;
 	private String serverIp;
 	private String userCode;
+	/**
+	 * The device ID. When the user management be made, the DEVICE_ID must
+	 * content a reference to the user, in orden to not crossing the same device
+	 * with different users. (TODO).
+	 */
+	private final String DEVICE_ID = "BEDROOM_DET";
 
 	private WakeUpController() {
 		super();
@@ -56,7 +62,8 @@ public class WakeUpController implements ActionListener {
 		System.out.println("Sending to Nomhad time>" + wuTime + " and times>"
 				+ times);
 		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
-				"123456", "SLEEPING", "GETTING_UP", new String("" + wuTime));
+				"123456", "SLEEPING", "GETTING_UP", new String("" + wuTime),
+				DEVICE_ID);
 		TimeSleepingController.getInstance().setWUTime((float) wuTime);
 		wuTime = 0;
 	}

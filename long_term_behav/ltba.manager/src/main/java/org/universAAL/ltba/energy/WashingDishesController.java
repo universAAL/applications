@@ -16,6 +16,12 @@ public class WashingDishesController implements ActionListener {
 	private int times;
 	private static WashingDishesController INSTANCE;
 	private Timer t;
+	/**
+	 * The device ID. When the user management be made, the DEVICE_ID must
+	 * content a reference to the user, in orden to not crossing the same device
+	 * with different users. (TODO).
+	 */
+	private final String DEVICE_ID = "DW_PLUG";
 
 	private WashingDishesController() {
 		super();
@@ -58,9 +64,9 @@ public class WashingDishesController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Sending to Nomhad time>" + time + " and times>"
 				+ times);
-		NomhadGateway.getInstance()
-				.putMeasurement("192.168.238.40", "A100", "123456",
-						"ACTIVITIES", "WASHING_DISHES", new String("" + time));
+		NomhadGateway.getInstance().putMeasurement("192.168.238.40", "A100",
+				"123456", "ACTIVITIES", "WASHING_DISHES",
+				new String("" + time), DEVICE_ID);
 		time = 0;
 		times = 0;
 	}
