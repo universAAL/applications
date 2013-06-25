@@ -16,6 +16,12 @@ public class WatchingTVController implements ActionListener {
 	private int times;
 	private static WatchingTVController INSTANCE;
 	private Timer t;
+	/**
+	 * The device ID. When the user management be made, the DEVICE_ID must
+	 * content a reference to the user, in orden to not crossing the same device
+	 * with different users. (TODO).
+	 */
+	private final String DEVICE_ID = "TV_PLUG";
 
 	private WatchingTVController() {
 		super();
@@ -60,7 +66,7 @@ public class WatchingTVController implements ActionListener {
 				+ times);
 		NomhadGateway.getInstance().putMeasurement("192.168.238.40", "A100",
 				"123456", "ACTIVITIES", "TIME_WATCHING_TV",
-				new String("" + time));
+				new String("" + time),DEVICE_ID);
 		time = 0;
 		times = 0;
 	}

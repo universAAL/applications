@@ -172,6 +172,8 @@ public final class RulesEngine {
 		}
 
 		ksession = kbase.newStatefulKnowledgeSession();
+		ksession.addEventListener(new CustomAgendaEventListener());
+		ksession.addEventListener(new CustomWorkingMemoryEventListener());
 		// //Brand new
 		// initKnowledgeSession();
 		Runnable runnable = new Runnable() {

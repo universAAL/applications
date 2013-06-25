@@ -1809,7 +1809,6 @@ help_when_out/hwo.servlet/src/main/resources/helpwhenoutdoor/whereis.html -text
 help_when_out/hwo.servlet/src/main/resources/helpwhenoutdoor/whereis.js -text
 long_term_behav/Drools[!!-~]Reasoner[!!-~]QuickGuide[!!-~]v1.docx -text
 long_term_behav/drools.event.publisher/ASL2.0.txt -text
-long_term_behav/drools.event.publisher/MITX.txt -text
 long_term_behav/drools.event.publisher/NOTICE.txt -text
 long_term_behav/drools.event.publisher/paxLaunchers/LTBA_Publisher_B.0.1.launch -text
 long_term_behav/drools.event.publisher/paxLaunchers/LTBA_Publisher_B.0.1_OSGI_enterprise.launch -text
@@ -1820,7 +1819,6 @@ long_term_behav/drools.event.publisher/pom.xml -text
 long_term_behav/drools.pom/pom.xml -text
 long_term_behav/drools.reasoner/ASL2.0.txt -text
 long_term_behav/drools.reasoner/META-INF/persistence.xml -text
-long_term_behav/drools.reasoner/MITX.txt -text
 long_term_behav/drools.reasoner/NOTICE.txt -text
 long_term_behav/drools.reasoner/artifact.composite -text
 long_term_behav/drools.reasoner/paxLaunchers/DroolsSafetyHome.launch -text
@@ -1828,13 +1826,8 @@ long_term_behav/drools.reasoner/paxLaunchers/Drools_basic_step_by_step.launch -t
 long_term_behav/drools.reasoner/paxLaunchers/LTBA_Publisher_B.0.1_OSGI_enterprise.launch -text
 long_term_behav/drools.reasoner/paxLaunchers/OSGi_Enterprise.launch -text
 long_term_behav/drools.reasoner/paxLaunchers/PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch -text
-long_term_behav/drools.reasoner/persistence.xml -text
 long_term_behav/drools.reasoner/pom.xml -text
-long_term_behav/drools.reasoner/src/main/resources/META-INF/persistence.xml -text
 long_term_behav/drools.reasoner/src/main/resources/droolsWorkshop1.drl -text
-long_term_behav/drools.reasoner/src/main/resources/jndi.properties -text
-long_term_behav/drools.reasoner/src/main/resources/log4j.xml -text
-long_term_behav/drools.reasoner/src/main/resources/persistence.xml -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerAuxClasses.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerRaw.drl -text
@@ -1846,7 +1839,6 @@ long_term_behav/drools.reasoner/src/main/resources/users/droolsWorkshop1.drl -te
 long_term_behav/ltba.manager/ASL2.0.txt -text
 long_term_behav/ltba.manager/LTBA_Demo_B.0.1.launch -text
 long_term_behav/ltba.manager/LTBA_Demo_B.0.1_with_reasoner_UI_Services_DIRTYDRAFT.launch -text
-long_term_behav/ltba.manager/MITX.txt -text
 long_term_behav/ltba.manager/NOTICE.txt -text
 long_term_behav/ltba.manager/pom.xml -text
 long_term_behav/ltba.nomhad.gateway/pom.xml -text
@@ -1856,12 +1848,10 @@ long_term_behav/ltba.publisher/LTBA_Publisher_B.0.1.launch -text
 long_term_behav/ltba.publisher/LTBA_Publisher_B.0.1_OSGI_enterprise.launch -text
 long_term_behav/ltba.publisher/LTBA_Publisher_B.0.1_with_reasoner.launch -text
 long_term_behav/ltba.publisher/LTBA_Publisher_B.0.1_with_reasoner_UI.launch -text
-long_term_behav/ltba.publisher/MITX.txt -text
 long_term_behav/ltba.publisher/NOTICE.txt -text
 long_term_behav/ltba.publisher/OSGi_Enterprise_LTBA.launch -text
 long_term_behav/ltba.publisher/pom.xml -text
 long_term_behav/ltba.ui/ASL2.0.txt -text
-long_term_behav/ltba.ui/MITX.txt -text
 long_term_behav/ltba.ui/NOTICE.txt -text
 long_term_behav/ltba.ui/artifact.composite -text
 long_term_behav/ltba.ui/pom.xml -text

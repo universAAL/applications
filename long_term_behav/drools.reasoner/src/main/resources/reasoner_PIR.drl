@@ -43,9 +43,13 @@ awake: boolean
 atHome: boolean
 end
 
-declare UserAwaken
+declare UserAwake
 @role(event)
 //@expires(1s)
+end
+
+declare UserAsleep
+@role(event)
 end
 
 declare SleepDisturbance
@@ -168,7 +172,7 @@ salience -1
 	then		
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Source","Intensity"},new String[]{"ACTIVITY",$p,$i});
 end
-
+/*
 rule "ActivityIndex - Hour Average"
 dialect "java"
 no-loop true
@@ -285,7 +289,7 @@ timer(int: 0 5m)
 	then
 	RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Room","Index"},new String[]{"Current",new String($r),new String(""+$c.getIndex())});	
 end
-
+*/
 
 rule "Null activity - room"
 salience 2
@@ -304,7 +308,7 @@ salience 1
 		System.out.println("NULL ACTIVITY IN ALL THE (CONTROLLED) HOUSE"+" "+java.util.Calendar.getInstance().getTime());
 		insert(new NullActivity("ALL"));		
 end
-
+/*
 rule "Went out"
 	when
 		$us:UserStatus(atHome==true)
@@ -333,7 +337,7 @@ rule "Back from shopping"
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType"},new String[]{"BackFromShopping"});
 		System.out.println("BACK FROM SHOPPING");
 end
-
+*/
 rule "Null coincidence"
 	when
 		$e:NullActivity(room=="KITCHEN");
@@ -345,21 +349,68 @@ end
 rule "Going to bed"
 salience 1
 	when
-		$a:NullActivity($r:room=="KITCHEN")
-		not ContextEvent( this after [1ms,30s] $a, ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" )
-		$uS:UserStatus(awake == true)
+		$a:NullActivity($r:room=="KITCHEN") and $uS:UserStatus(awake==true)
+		(and(not ContextEvent( this after [1ms,30s] $a, ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" )))
 	then		
 		modify($uS){setAwake(false)}
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Device"},new String[]{"GoingToBed","BEDROOM"});
 		System.out.println("GOING TO BED"+" "+$r+" "+java.util.Calendar.getInstance().getTime());
+		insert(new UserAsleep());
 		retract($a);
 end
 
+//LOOK AT THE WINDOW TIME LENGHT
+rule "Sleeping observer - No activity" 
+no-loop
+	when
+	   not UserAsleep()
+	   $sd:SleepDisturbance()	
+	   UserStatus(awake == false)	
+       and Number($i:intValue == 0) from accumulate ($c: ContextEvent( ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected") over window:time(1m),count($c)) 
+	then
+		insert(new UserAsleep());
+		retract($sd);
+		System.out.println("No activity");		
+end
+
+//LOOK AT THE WINDOW TIME LENGHT
+rule "Sleeping observer - Some activity" 
+no-loop
+	when
+		$uA:UserAsleep()
+		not SleepDisturbance()
+	   UserStatus(awake == false)	
+       and Number($i:intValue == 1) from accumulate ($c: ContextEvent( ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected") over window:time(1m),count($c)) 
+	then
+		retract($uA);
+		insert(new SleepDisturbance());
+		System.out.println("Some activity");		
+end
+
+/*
+
+//LOOK AT THE WINDOW TIME LENGHT
+rule "Waking Up according to SleepDisturbances"
+no-loop
+	when
+	   $uS:UserStatus(awake == false)	
+       and Number($i:intValue == 1) from accumulate ($c:SleepDisturbance() over window:time(20m),count($c)) 
+	then
+	modify($uS){setAwake(true)}	
+	System.out.println("Waking Up");		
+end
+
+
+	
+*/
+
 rule "Awakening"
 	when
-		$c:ContextEvent( getRoom(RDFSubject.getURI())=="KITCHEN" )
+	$uA: UserAsleep()
+		$c:ContextEvent( getRoom(RDFSubject.getURI())=="KITCHEN",((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected"  ,this after $uA)
 		//not ContextEvent( this before [1ms,30s] $c)
-		NullActivity(room == "ALL", this after [1ms, 1h] $c)
+		$n:NullActivity(room == "ALL", this after [1ms, 1h] $c)
+		NullActivity(room == "KITCHEN", this coincides $n)
 		$uS:UserStatus(awake == false)
 	then
 		//modify($uS){setAwake(true)}
@@ -368,11 +419,30 @@ rule "Awakening"
 		//System.out.println("AWAKENING "+java.util.Calendar.getInstance().getTime());	
 end
 
+//Rule 1 -- No Null Activity since an SleepDisturbance()
+rule "WakingUp Long Disturbance"
+	when
+		$sd:SleepDisturbance()
+		not UserAsleep(this after [2m] $sd)
+	then
+		System.out.println("Too much time with activity, user woke up!!!");
+end
+//Rule 2 -- Sleep disturbances exeed a threshold
+rule "Waking Up Several Disturbances"
+	when
+		$uS:UserStatus(awake == false)	
+       and Number($i:intValue > 3) from accumulate ($c:SleepDisturbance() over window:time(60m),count($c))
+	then
+		System.out.println("Too much disturbances, user woke up");
+end
+
+/*
 rule "Waking up"
 	when
-		$c:ContextEvent( getRoom(RDFSubject.getURI())=="KITCHEN" )
+		$c:ContextEvent( getRoom(RDFSubject.getURI())=="KITCHEN",((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected"  ,this after $uA)
 		//not ContextEvent( this before [1ms,30s] $c)
-		not NullActivity(room == "ALL", this after [1ms, 1h] $c)
+		$n:NullActivity(room == "ALL", this after [1ms, 1h] $c)
+		NullActivity(room == "KITCHEN", this coincides $n)
 		$uS:UserStatus(awake == false)
 	then
 		modify($uS){setAwake(true)}
@@ -381,7 +451,8 @@ rule "Waking up"
 		//System.out.println("WAKE UP "+java.util.Calendar.getInstance().getTime());
 			
 end
-
+*/
+/*
 rule "Presence in kitchen start"
 	when
 		ContextEvent( getRoom(RDFSubject.getURI())=="KITCHEN", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" )
@@ -412,7 +483,7 @@ rule "Presence in bathroom stop"
 		System.out.println("PRESENCE IN BATHROOM STOP");
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Phase"},new String[]{"PresenceInBath","Stop"});
 end
-
+*/
 /*
 //LOOK AT THE WINDOW TIME LENGHT
 rule "Disturbances counter with accumulate" 

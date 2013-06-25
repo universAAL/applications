@@ -18,6 +18,12 @@ public class AwakeningController implements ActionListener {
 	private final String INDICATOR = "AWAKENING_COUNT";
 	private String serverIp = "192.168.238.40";
 	private String userCode = "A100";
+	/**
+	 * The device ID. When the user management be made, the DEVICE_ID must
+	 * content a reference to the user, in orden to not crossing the same device
+	 * with different users. (TODO).
+	 */
+	private final String DEVICE_ID = "BEDROOM_DET";
 
 	private int times;
 	private static AwakeningController INSTANCE;
@@ -59,7 +65,7 @@ public class AwakeningController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Sending to Nomhad awakening times>" + times);
 		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
-				"123456", INDICATOR_GROUP, INDICATOR, new String("" + times));
+				"123456", INDICATOR_GROUP, INDICATOR, new String("" + times),DEVICE_ID);
 		times = 0;
 	}
 
