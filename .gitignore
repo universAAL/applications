@@ -133,6 +133,8 @@ medication/medication.manager.event.issuer/target
 medication/medication.manager.integration.tests/*.iml
 medication/medication.manager.integration.tests/*.log
 medication/medication.manager.integration.tests/target
+medication/medication.manager.karaf.feature/*.iml
+medication/medication.manager.karaf.feature/target
 medication/medication.manager.persistence/*.iml
 medication/medication.manager.persistence/target
 medication/medication.manager.pom/*.idea

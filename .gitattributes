@@ -1883,6 +1883,10 @@ medication/medication.manager.integration.tests/pom.xml -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Log.java -text
 medication/medication.manager.integration.tests/src/test/java/org/universAAL/AALapplication/medication_manager/client/impl/MedicationTest.java -text
+medication/medication.manager.karaf.feature/LICENSE.txt -text
+medication/medication.manager.karaf.feature/NOTICE.txt -text
+medication/medication.manager.karaf.feature/pom.xml -text
+medication/medication.manager.karaf.feature/src/features/universAAL-MedicationManager.xml -text
 medication/medication.manager.persistence/pom.xml -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/impl/Activator.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/impl/Log.java -text
