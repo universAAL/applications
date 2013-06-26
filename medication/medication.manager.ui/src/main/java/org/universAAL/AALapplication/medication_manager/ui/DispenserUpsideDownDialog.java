@@ -70,7 +70,8 @@ public class DispenserUpsideDownDialog extends UICaller {
       //...
       new Submit(f.getSubmits(), new Label("Done", null), DISPENSER_UPSIDE_DOWN_FORM);
       //stop of form model
-      UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
+      //TODO to remove SAIED user and to return inputUser variable
+      UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
       this.sendUIRequest(req);
     } catch (Exception e) {
       Log.error(e, "Error while trying to show dialog", getClass());

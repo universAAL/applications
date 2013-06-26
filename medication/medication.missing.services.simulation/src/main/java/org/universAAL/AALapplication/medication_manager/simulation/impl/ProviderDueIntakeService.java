@@ -44,7 +44,7 @@ public final class ProviderDueIntakeService extends DueIntake {
 
     //Register
 
-    OntologyManagement.getInstance().register(
+    OntologyManagement.getInstance().register(Activator.mc,
         new SimpleOntology(MY_URI, DueIntake.MY_URI,
             new ResourceFactoryImpl() {
               @Override

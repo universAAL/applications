@@ -19,9 +19,7 @@ package org.universAAL.AALapplication.medication_manager.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
@@ -35,7 +33,8 @@ public class Activator implements BundleActivator {
 
   public static ModuleContext mc;
   public static BundleContext bundleContext;
-  public static final Logger LOGGER = LoggerFactory.getLogger(Activator.class);
+  private static ServiceTracker configurationPropertiesServiceTracker;
+  private static ServiceTracker persistenceServiceTracker;
 
   /*
     * (non-Javadoc)
@@ -48,6 +47,13 @@ public class Activator implements BundleActivator {
     mc = uAALBundleContainer.THE_CONTAINER
         .registerModule(new Object[]{context});
     Log.info("Starting %s", getClass(), "Starting the Medication Service");
+
+    configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
+    persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
+
+    configurationPropertiesServiceTracker.open();
+    persistenceServiceTracker.open();
+
     new Thread() {
       public void run() {
         new PrecautionProvider(mc);
@@ -76,7 +82,7 @@ public class Activator implements BundleActivator {
     bundleContext = null;
   }
 
-  public static PersistentService getPersistentService() {
+  /*public static PersistentService getPersistentService() {
     if (bundleContext == null) {
       throw new MedicationManagerException("The bundleContext is not set");
     }
@@ -111,6 +117,30 @@ public class Activator implements BundleActivator {
     if (service == null) {
       throw new MedicationManagerException("The ConfigurationProperties is missing");
     }
+    return service;
+  }*/
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (configurationPropertiesServiceTracker == null) {
+      throw new MedicationManagerException("The ConfigurationProperties ServiceTracker is not set");
+    }
+    ConfigurationProperties service = (ConfigurationProperties) configurationPropertiesServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerException("The ConfigurationProperties is missing");
+    }
+
+    return service;
+  }
+
+  public static PersistentService getPersistentService() {
+    if (persistenceServiceTracker == null) {
+      throw new MedicationManagerException("The PersistentService ServiceTracker is not set");
+    }
+    PersistentService service = (PersistentService) persistenceServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerException("The PersistentService is missing");
+    }
+
     return service;
   }
 

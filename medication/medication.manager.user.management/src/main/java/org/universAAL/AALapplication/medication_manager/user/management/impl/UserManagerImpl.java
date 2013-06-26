@@ -13,7 +13,7 @@ import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
-import org.universAAL.ontology.medication.MedicationOntology;
+import org.universAAL.ontology.medMgr.MedicationOntology;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.PersonalInformationSubprofile;
@@ -124,19 +124,28 @@ public class UserManagerImpl implements UserManager {
 
     for (int i = 0; i < out.size(); i++) {
       UserInfo ur = getUserInfo(out, i);
-      users.add(ur);
+      if (ur != null) {
+        users.add(ur);
+      }
     }
   }
 
   private UserInfo getUserInfo(List out, int i) {
     Log.info("Creating UserInfo object from The User object", getClass());
-    User ur = (User) out.get(i);
-    Log.info("User object uri is : %s", getClass(), ur.getURI());
+    Object o = out.get(i);
+    System.out.println("o.getClass().getName() = " + o.getClass().getName());
+    System.out.println("o.getClass().getClassLoader() = " + o.getClass().getClassLoader());
+    System.out.println("User.class.getClassLoader() = " + User.class.getClassLoader());
+    User ur = (User) o;
+    String uri = ur.getURI();
+    Log.info("User object uri is : %s", getClass(), uri);
+
+    if ("urn:org.universAAL.aal_space:test_environment#saied".equalsIgnoreCase(uri)) {
+      return null;
+    }
 
     PersonalInformationSubprofile subprofile = getUserSubprofiles(ur);
-
     int id = persistentService.generateId();
-    String uri = ur.getURI();
     String name = (String) subprofile.getProperty(PROP_FN);
 
     Class<? extends User> aClass = ur.getClass();

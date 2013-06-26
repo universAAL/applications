@@ -19,7 +19,7 @@ package org.universAAL.AALapplication.medication_manager.simulation.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.simulation.export.DispenserUpsideDownContextProvider;
@@ -37,6 +37,8 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 public class Activator implements BundleActivator {
 
   public static ModuleContext mc;
+  private static ServiceTracker configurationPropertiesServiceTracker;
+  private static ServiceTracker persistenceServiceTracker;
 
   static BundleContext bc;
 
@@ -47,6 +49,12 @@ public class Activator implements BundleActivator {
   public void start(final BundleContext context) throws Exception {
     bc = context;
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
+
+    configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
+    persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
+
+    configurationPropertiesServiceTracker.open();
+    persistenceServiceTracker.open();
 
     new Thread() {
       public void run() {
@@ -98,7 +106,7 @@ public class Activator implements BundleActivator {
 
   }
 
-  public static ConfigurationProperties getConfigurationProperties() {
+  /*public static ConfigurationProperties getConfigurationProperties() {
     if (bc == null) {
       throw new MedicationManagerSimulationServicesException("The bundleContext is not set");
     }
@@ -134,5 +142,29 @@ public class Activator implements BundleActivator {
       throw new MedicationManagerSimulationServicesException("The PersistentService is missing");
     }
     return persistentService;
+  }*/
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (configurationPropertiesServiceTracker == null) {
+      throw new MedicationManagerSimulationServicesException("The ConfigurationProperties ServiceTracker is not set");
+    }
+    ConfigurationProperties service = (ConfigurationProperties) configurationPropertiesServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerSimulationServicesException("The ConfigurationProperties is missing");
+    }
+
+    return service;
+  }
+
+  public static PersistentService getPersistentService() {
+    if (persistenceServiceTracker == null) {
+      throw new MedicationManagerSimulationServicesException("The PersistentService ServiceTracker is not set");
+    }
+    PersistentService service = (PersistentService) persistenceServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerSimulationServicesException("The PersistentService is missing");
+    }
+
+    return service;
   }
 }

@@ -139,6 +139,7 @@ medication/medication.manager.persistence/*.iml
 medication/medication.manager.persistence/target
 medication/medication.manager.pom/*.idea
 medication/medication.manager.pom/*.iml
+medication/medication.manager.pom/*.log
 medication/medication.manager.pom/.clover
 medication/medication.manager.pom/.project
 medication/medication.manager.pom/.settings
@@ -153,6 +154,7 @@ medication/medication.manager.service/target
 medication/medication.manager.servlet.ui.base/*.iml
 medication/medication.manager.servlet.ui.base/target
 medication/medication.manager.servlet.ui.configuration/*.iml
+medication/medication.manager.servlet.ui.configuration/*.log
 medication/medication.manager.servlet.ui.configuration/target
 medication/medication.manager.servlet.ui/*.iml
 medication/medication.manager.servlet.ui/target
@@ -167,10 +169,12 @@ medication/medication.manager.ui.runner/runner/felix/cache
 medication/medication.manager.ui.runner/runner/log
 medication/medication.manager.ui.runner/target
 medication/medication.manager.ui/*.iml
+medication/medication.manager.ui/*.log
 medication/medication.manager.ui/.project
 medication/medication.manager.ui/.settings
 medication/medication.manager.ui/target
 medication/medication.manager.user.management/*.iml
+medication/medication.manager.user.management/*.rar
 medication/medication.manager.user.management/target
 medication/medication.missing.services.simulation/*.iml
 medication/medication.missing.services.simulation/.project

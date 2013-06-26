@@ -24,6 +24,7 @@ public final class Activator implements BundleActivator {
 
   public void stop(BundleContext context) throws Exception {
 
+
   }
 
   public static void validateParameter(int parameter, String parameterName) {

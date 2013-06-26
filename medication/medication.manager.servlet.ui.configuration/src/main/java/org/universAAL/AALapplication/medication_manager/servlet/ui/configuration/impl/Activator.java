@@ -2,9 +2,9 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.configuratio
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
+import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.DebugWriter;
@@ -39,11 +39,28 @@ public final class Activator implements BundleActivator {
 
   public static ModuleContext mc;
   public static BundleContext bundleContext;
+  private static ServiceTracker configurationPropertiesServiceTracker;
+  private static ServiceTracker persistenceServiceTracker;
+  private static ServiceTracker httpServiceTracker;
+  private static ServiceTracker newPrescriptionHandlerTracker;
+  private static ServiceTracker userManagerTracker;
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
     bundleContext = context;
+
+    configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
+    persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
+    httpServiceTracker = new ServiceTracker(context, HttpService.class.getName(), null);
+    newPrescriptionHandlerTracker = new ServiceTracker(context, NewPrescriptionHandler.class.getName(), null);
+    userManagerTracker = new ServiceTracker(context, UserManager.class.getName(), null);
+
+    configurationPropertiesServiceTracker.open();
+    persistenceServiceTracker.open();
+    httpServiceTracker.open();
+    newPrescriptionHandlerTracker.open();
+    userManagerTracker.open();
 
     ConfigurationProperties configurationProperties = getConfigurationProperties();
 
@@ -60,7 +77,7 @@ public final class Activator implements BundleActivator {
   public void stop(BundleContext context) throws Exception {
 
     bundleContext = null;
-    HttpService service = getHttpService(context);
+    HttpService service = getHttpService();
 
     service.unregister(LOGIN_SERVLET_ALIAS);
     service.unregister(LOGIN_HTML_SERVLET_ALIAS);
@@ -78,7 +95,7 @@ public final class Activator implements BundleActivator {
       throws ServletException, NamespaceException {
 
 
-    HttpService httpService = getHttpService(context);
+    HttpService httpService = getHttpService();
 
 
     DebugWriter debugWriter;
@@ -116,7 +133,7 @@ public final class Activator implements BundleActivator {
     DisplayNotificationsHtmlWriterServlet displayNotificationsHtmlWriterServlet =
         new DisplayNotificationsHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(NOTIFICATIONS_HANDLER, displayNotificationsHtmlWriterServlet, null, null);
-    HandleNotifications handleNotifications= new HandleNotifications(sessionTracking);
+    HandleNotifications handleNotifications = new HandleNotifications(sessionTracking);
     httpService.registerServlet(HANDLE_NOTIFICATIONS, handleNotifications, null, null);
 
 
@@ -154,7 +171,7 @@ public final class Activator implements BundleActivator {
 
   }
 
-  private HttpService getHttpService(BundleContext context) {
+  /*private HttpService getHttpService(BundleContext context) {
     ServiceReference sr = context.getServiceReference(HttpService.class.getName());
     if (sr == null) {
       throw new MedicationManagerServletUIConfigurationException("Missing ServiceReference for service: HttpService");
@@ -232,7 +249,7 @@ public final class Activator implements BundleActivator {
     }
 
     return service;
-  }
+  }*/
 
   public static File getMedicationManagerConfigurationDirectory() {
 
@@ -259,7 +276,7 @@ public final class Activator implements BundleActivator {
     return directory;
   }
 
-  public static NewPrescriptionHandler getNewPrescriptionHandler() {
+ /* public static NewPrescriptionHandler getNewPrescriptionHandler() {
     if (bundleContext == null) {
       throw new MedicationManagerServletUIConfigurationException("The bundleContext is not set");
     }
@@ -275,6 +292,66 @@ public final class Activator implements BundleActivator {
       throw new MedicationManagerServletUIConfigurationException("The NewPrescriptionHandler service is missing");
     }
     return newPrescriptionHandler;
+  }*/
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (configurationPropertiesServiceTracker == null) {
+      throw new MedicationManagerServletUIConfigurationException("The ConfigurationProperties ServiceTracker is not set");
+    }
+    ConfigurationProperties service = (ConfigurationProperties) configurationPropertiesServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerServletUIConfigurationException("The ConfigurationProperties is missing");
+    }
+
+    return service;
+  }
+
+  public static PersistentService getPersistentService() {
+    if (persistenceServiceTracker == null) {
+      throw new MedicationManagerServletUIConfigurationException("The PersistentService ServiceTracker is not set");
+    }
+    PersistentService service = (PersistentService) persistenceServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerServletUIConfigurationException("The PersistentService is missing");
+    }
+
+    return service;
+  }
+
+  private static HttpService getHttpService() {
+    if (httpServiceTracker == null) {
+      throw new MedicationManagerServletUIConfigurationException("The HttpService ServiceTracker is not set");
+    }
+    HttpService service = (HttpService) httpServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerServletUIConfigurationException("The HttpService is missing");
+    }
+
+    return service;
+  }
+
+  public static NewPrescriptionHandler getNewPrescriptionHandler() {
+    if (newPrescriptionHandlerTracker == null) {
+      throw new MedicationManagerServletUIConfigurationException("The NewPrescriptionHandler ServiceTracker is not set");
+    }
+    NewPrescriptionHandler service = (NewPrescriptionHandler) newPrescriptionHandlerTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerServletUIConfigurationException("The NewPrescriptionHandler is missing");
+    }
+
+    return service;
+  }
+
+  public static UserManager getUserManager() {
+    if (userManagerTracker == null) {
+      throw new MedicationManagerServletUIConfigurationException("The UserManager ServiceTracker is not set");
+    }
+    UserManager service = (UserManager) userManagerTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerServletUIConfigurationException("The UserManager is missing");
+    }
+
+    return service;
   }
 
 }

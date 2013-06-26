@@ -47,7 +47,7 @@ public final class ProviderCaregiverNotificationService extends CaregiverNotifie
 
     //Register
 
-    OntologyManagement.getInstance().register(
+    OntologyManagement.getInstance().register(Activator.mc,
         new SimpleOntology(MY_URI, CaregiverNotifier.MY_URI,
             new ResourceFactoryImpl() {
               @Override

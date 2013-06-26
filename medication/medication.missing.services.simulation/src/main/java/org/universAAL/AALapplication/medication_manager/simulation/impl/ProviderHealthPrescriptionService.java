@@ -47,7 +47,7 @@ public final class ProviderHealthPrescriptionService extends NewMedicationTreatm
 
     //Register
 
-    OntologyManagement.getInstance().register(
+    OntologyManagement.getInstance().register(Activator.mc,
         new SimpleOntology(MY_URI, NewMedicationTreatmentNotifier.MY_URI,
             new ResourceFactoryImpl() {
               @Override

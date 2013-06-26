@@ -27,21 +27,21 @@ import org.universAAL.ontology.medMgr.MedicationOntology;
 
 public class Activator implements ModuleActivator {
 
-    public static ModuleContext mc;
-    MedicationOntology medicationOntology = new MedicationOntology();
+  public static ModuleContext mc;
+  MedicationOntology medicationOntology = new MedicationOntology();
 
-    public void start(ModuleContext mcontext) throws Exception {
-	// Activator.context = context;
-	// mc = uAALBundleContainer.THE_CONTAINER
-	// .registerModule(new Object[]{mcontext});
-	// Log.info("Registering %s", Activator.class,
-	// "The medication ontology");
-	OntologyManagement.getInstance().register(mcontext, medicationOntology);
-    }
+  public void start(ModuleContext mcontext) throws Exception {
+    // Activator.context = context;
+    // mc = uAALBundleContainer.THE_CONTAINER
+    // .registerModule(new Object[]{mcontext});
+    // Log.info("Registering %s", Activator.class,
+    // "The medication ontology");
+    OntologyManagement.getInstance().register(mcontext, medicationOntology);
+  }
 
-    public void stop(ModuleContext mcontext) throws Exception {
-	OntologyManagement.getInstance().unregister(mcontext,
-		medicationOntology);
-    }
+  public void stop(ModuleContext mcontext) throws Exception {
+    OntologyManagement.getInstance().unregister(mcontext,
+        medicationOntology);
+  }
 
 }

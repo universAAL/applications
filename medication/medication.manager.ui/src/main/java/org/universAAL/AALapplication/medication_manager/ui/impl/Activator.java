@@ -19,10 +19,11 @@ package org.universAAL.AALapplication.medication_manager.ui.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.ontology.profile.User;
 
 import java.io.File;
 
@@ -33,12 +34,17 @@ public class Activator implements BundleActivator {
 
   static ModuleContext mc;
   static BundleContext context;
+  static ServiceTracker persistenceServiceTracker;
   public MedicationManagerServiceButtonProvider medicationManagerServiceButtonProvider;
+  public static final User SAIED = new User("urn:org.universAAL.aal_space:test_environment#saied");
 
   public void start(BundleContext bundleContext) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER
         .registerModule(new Object[]{bundleContext});
     context = bundleContext;
+    persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
+    persistenceServiceTracker.open();
+
     ReminderDialogProvider reminderDialogProvider = new ReminderDialogProvider(mc);
     medicationManagerServiceButtonProvider = new MedicationManagerServiceButtonProvider(mc);
     RequestMedicationInfoDialogProvider requestMedicationInfoDialogProvider = new RequestMedicationInfoDialogProvider(mc);
@@ -57,7 +63,7 @@ public class Activator implements BundleActivator {
 
   }
 
-  public static PersistentService getPersistentService() {
+  /*public static PersistentService getPersistentService() {
     if (context == null) {
       throw new MedicationManagerUIException("The bundleContext is not set");
     }
@@ -74,6 +80,18 @@ public class Activator implements BundleActivator {
       throw new MedicationManagerUIException("The PersistentService is missing");
     }
     return persistentService;
+  }*/
+
+  public static PersistentService getPersistentService() {
+    if (persistenceServiceTracker == null) {
+      throw new MedicationManagerUIException("The PersistentService ServiceTracker is not set");
+    }
+    PersistentService service = (PersistentService) persistenceServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerUIException("The PersistentService is missing");
+    }
+
+    return service;
   }
 
   public static File getMedicationManagerConfigurationDirectory() {

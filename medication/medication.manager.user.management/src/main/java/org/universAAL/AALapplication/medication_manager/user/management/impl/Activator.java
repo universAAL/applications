@@ -2,7 +2,7 @@ package org.universAAL.AALapplication.medication_manager.user.management.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
@@ -20,12 +20,20 @@ public final class Activator implements BundleActivator {
 
   public static ModuleContext mc;
   public static BundleContext bundleContext;
+  static ServiceTracker configurationPropertiesServiceTracker;
+  static ServiceTracker persistenceServiceTracker;
 
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
     bundleContext = context;
+
+    configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
+    persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
+
+    configurationPropertiesServiceTracker.open();
+    persistenceServiceTracker.open();
 
     PersistentService persistentService = getPersistentService();
 
@@ -62,7 +70,7 @@ public final class Activator implements BundleActivator {
 
   }
 
-  public static PersistentService getPersistentService() {
+ /* public static PersistentService getPersistentService() {
     if (bundleContext == null) {
       throw new MedicationManagerUserManagementException("The bundleContext is not set");
     }
@@ -96,6 +104,30 @@ public final class Activator implements BundleActivator {
 
     if (service == null) {
       throw new MedicationManagerUserManagementException("The ConfigurationProperties is missing");
+    }
+
+    return service;
+  }*/
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (configurationPropertiesServiceTracker == null) {
+      throw new MedicationManagerUserManagementException("The ConfigurationProperties ServiceTracker is not set");
+    }
+    ConfigurationProperties service = (ConfigurationProperties) configurationPropertiesServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerUserManagementException("The ConfigurationProperties is missing");
+    }
+
+    return service;
+  }
+
+  public static PersistentService getPersistentService() {
+    if (persistenceServiceTracker == null) {
+      throw new MedicationManagerUserManagementException("The PersistentService ServiceTracker is not set");
+    }
+    PersistentService service = (PersistentService) persistenceServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerUserManagementException("The PersistentService is missing");
     }
 
     return service;
