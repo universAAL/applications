@@ -51,6 +51,7 @@ public class RequestMedicationInfoDialog extends UICaller {
   private final ModuleContext moduleContext;
   private final Time time;
   private MedicinesInfo medicinesInfo;
+  private User currentUser; //TODO to be removed (hack for saied user)
 
   private static final String CLOSE_BUTTON = "closeButton";
   private static final String INFO_BUTTON = "infoButton";
@@ -80,7 +81,11 @@ public class RequestMedicationInfoDialog extends UICaller {
   @Override
   public void handleUIResponse(UIResponse input) {
     try {
+      //TODO to be removed (hack for saied user)
       User user = (User) input.getUser();
+      if (user.getURI().equals(SAIED.getURI())) {
+        user = currentUser;
+      }
       if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
         ReminderDialog reminderDialog = new ReminderDialog(moduleContext, time);
         reminderDialog.showDialog(user);
@@ -100,6 +105,9 @@ public class RequestMedicationInfoDialog extends UICaller {
     try {
       validateParameter(inputUser, "inputUser");
 
+      //TODO to be removed (hack for saied user)
+      currentUser = inputUser;
+
       Form f = Form.newDialog("Medication Manager UI", new Resource());
       //start of the form model
 
@@ -111,7 +119,8 @@ public class RequestMedicationInfoDialog extends UICaller {
       new Submit(f.getSubmits(), new Label("close", null), CLOSE_BUTTON);
       new Submit(f.getSubmits(), new Label("info", null), INFO_BUTTON);
       //stop of form model
-      UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
+      //TODO to remove SAIED user and to return inputUser variable
+      UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
       this.sendUIRequest(req);
     } catch (Exception e) {
       Log.error(e, "Error while trying to show dialog", getClass());
@@ -131,7 +140,7 @@ public class RequestMedicationInfoDialog extends UICaller {
 
   public MedicinesInfo getMedicinesInfo() {
     if (medicinesInfo == null) {
-       throw new MedicationManagerUIException("The MedicineInfo field is not set");
+      throw new MedicationManagerUIException("The MedicineInfo field is not set");
     }
     return medicinesInfo;
   }

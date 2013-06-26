@@ -60,7 +60,7 @@ public class ReminderDialog extends UICaller {
   private final List<Intake> intakes;
   private final PersistentService persistentService;
   private final ServiceCaller serviceCaller;
-
+  private User currentUser; //TODO to be removed (hack for saied user)
   private boolean userActed;
 
   private static final String CLOSE_BUTTON = "closeButton";
@@ -106,7 +106,12 @@ public class ReminderDialog extends UICaller {
       if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
         System.out.println("close");
       } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
-        showRequestMedicationInfoDialog((User) input.getUser());
+        //TODO to be removed (hack for saied user)
+        User user = (User) input.getUser();
+        if (user.getURI().equals(SAIED.getURI())) {
+          user = currentUser;
+        }
+        showRequestMedicationInfoDialog(user);
       } else if (REQUEST_NEW_DOSE_BUTTON.equals(input.getSubmissionID())) {
         decreaseInventory();
         String newDoseMessage = createMessage();
@@ -222,6 +227,9 @@ public class ReminderDialog extends UICaller {
     try {
       validateParameter(inputUser, "inputUser");
 
+      //TODO to be removed (hack for saied user)
+      currentUser = inputUser;
+
       Form f = Form.newDialog("Medication Manager UI", new Resource());
 
       //start of the form model
@@ -240,7 +248,8 @@ public class ReminderDialog extends UICaller {
       new Submit(f.getSubmits(), new Label("Info", null), INFO_BUTTON);
       new Submit(f.getSubmits(), new Label("New dose", null), REQUEST_NEW_DOSE_BUTTON);
       //stop of form model
-      UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
+      //TODO to remove SAIED user and to return inputUser variable
+      UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
       this.sendUIRequest(req);
     } catch (Exception e) {
       Log.error(e, "Error while trying to show dialog", getClass());

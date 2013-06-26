@@ -19,9 +19,8 @@ package org.universAAL.AALapplication.medication_manager.shell.commands.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.osgi.service.http.HttpService;
+import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationConsoleCommands;
@@ -46,8 +45,13 @@ public class Activator implements BundleActivator {
   public static ModuleContext mc;
   public static BundleContext bundleContext;
   public static File medicationManagerConfigurationDirectory;
+  private static ServiceTracker medicationReminderContextProviderTracker;
+  private static ServiceTracker persistenceServiceTracker;
+  private static ServiceTracker httpServiceTracker;
+  private static ServiceTracker newPrescriptionHandlerTracker;
+  private static ServiceTracker dispenserUpsideDownContextProviderTracker;
+  private static ServiceTracker missedIntakeContextProviderTracker;
 
-  public static final Logger logger = LoggerFactory.getLogger(Activator.class);
   private static final String OSGI_COMMAND_SCOPE = "osgi.command.scope";
   private static final String OSGI_COMMAND_FUNCTION = "osgi.command.function";
 
@@ -58,6 +62,21 @@ public class Activator implements BundleActivator {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
     bundleContext = context;
+
+    medicationReminderContextProviderTracker = new ServiceTracker(context, MedicationReminderContextProvider.class.getName(), null);
+    persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
+    httpServiceTracker = new ServiceTracker(context, HttpService.class.getName(), null);
+    newPrescriptionHandlerTracker = new ServiceTracker(context, NewPrescriptionHandler.class.getName(), null);
+    missedIntakeContextProviderTracker = new ServiceTracker(context, MissedIntakeContextProvider.class.getName(), null);
+    dispenserUpsideDownContextProviderTracker =
+        new ServiceTracker(context, DispenserUpsideDownContextProvider.class.getName(), null);
+
+    medicationReminderContextProviderTracker.open();
+    persistenceServiceTracker.open();
+    httpServiceTracker.open();
+    newPrescriptionHandlerTracker.open();
+    missedIntakeContextProviderTracker.open();
+    dispenserUpsideDownContextProviderTracker.open();
 
     Hashtable props = new Hashtable();
     props.put(OSGI_COMMAND_SCOPE, MedicationConsoleCommands.COMMAND_PREFIX);
@@ -103,7 +122,7 @@ public class Activator implements BundleActivator {
     return directory;
   }
 
-  public static PersistentService getPersistentService() {
+  /*public static PersistentService getPersistentService() {
     if (bundleContext == null) {
       throw new MedicationManagerShellException("The bundleContext is not set");
     }
@@ -196,5 +215,80 @@ public class Activator implements BundleActivator {
     }
     return service;
   }
+*/
 
+  public static MedicationReminderContextProvider getMedicationReminderContextProvider() {
+    if (medicationReminderContextProviderTracker == null) {
+      throw new MedicationManagerShellException("The MedicationReminderContextProvider ServiceTracker is not set");
+    }
+    MedicationReminderContextProvider service =
+        (MedicationReminderContextProvider) medicationReminderContextProviderTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerShellException("The MedicationReminderContextProvider is missing");
+    }
+
+    return service;
+  }
+
+  public static DispenserUpsideDownContextProvider getDispenserUpsideDownContextProvider() {
+    if (dispenserUpsideDownContextProviderTracker == null) {
+      throw new MedicationManagerShellException("The DispenserUpsideDownContextProvider ServiceTracker is not set");
+    }
+    DispenserUpsideDownContextProvider service =
+        (DispenserUpsideDownContextProvider) dispenserUpsideDownContextProviderTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerShellException("The DispenserUpsideDownContextProvider is missing");
+    }
+
+    return service;
+  }
+
+  public static MissedIntakeContextProvider getMissedIntakeContextProvider() {
+    if (missedIntakeContextProviderTracker == null) {
+      throw new MedicationManagerShellException("The MissedIntakeContextProvider ServiceTracker is not set");
+    }
+    MissedIntakeContextProvider service =
+        (MissedIntakeContextProvider) missedIntakeContextProviderTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerShellException("The MissedIntakeContextProvider is missing");
+    }
+
+    return service;
+  }
+
+  public static PersistentService getPersistentService() {
+    if (persistenceServiceTracker == null) {
+      throw new MedicationManagerShellException("The PersistentService ServiceTracker is not set");
+    }
+    PersistentService service = (PersistentService) persistenceServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerShellException("The PersistentService is missing");
+    }
+
+    return service;
+  }
+
+  private static HttpService getHttpService() {
+    if (httpServiceTracker == null) {
+      throw new MedicationManagerShellException("The HttpService ServiceTracker is not set");
+    }
+    HttpService service = (HttpService) httpServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerShellException("The HttpService is missing");
+    }
+
+    return service;
+  }
+
+  public static NewPrescriptionHandler getNewPrescriptionHandler() {
+    if (newPrescriptionHandlerTracker == null) {
+      throw new MedicationManagerShellException("The NewPrescriptionHandler ServiceTracker is not set");
+    }
+    NewPrescriptionHandler service = (NewPrescriptionHandler) newPrescriptionHandlerTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerShellException("The NewPrescriptionHandler is missing");
+    }
+
+    return service;
+  }
 }

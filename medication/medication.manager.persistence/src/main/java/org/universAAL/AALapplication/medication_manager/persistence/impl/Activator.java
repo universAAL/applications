@@ -21,6 +21,7 @@ import org.apache.derby.jdbc.ResourceAdapterImpl;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.DerbyDatabase;
@@ -44,24 +45,42 @@ public class Activator implements BundleActivator {
   private Connection connection = null;
   public static ModuleContext mc;
   public static BundleContext bundleContext;
+  private static ServiceTracker tracker;
 
   public void start(final BundleContext context) throws Exception {
     //this method call is used to help maven bnd plugin to generate corrrect import-package statements
     dummyMethodToHelpMavenBmdPlugin();
 
     bundleContext = context;
-    mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
-    connection = getConnection();
-    ConfigurationProperties configurationProperties = getConfigurationProperties();
-    Database derbyDatabase = new DerbyDatabase(connection, configurationProperties);
+    try {
+      ServiceReference[] allServiceReferences = context.getAllServiceReferences(ConfigurationProperties.class.getName(), null);
 
-    derbyDatabase.initDatabase();
+      mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
-    PersistentService persistentService = new PersistentServiceImpl(derbyDatabase, configurationProperties);
+      tracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
 
-    context.registerService(PersistentService.class.getName(),
-        persistentService, null);
+      tracker.open();
+
+      connection = getConnection();
+      ServiceReference sr = allServiceReferences[0];
+      Object service = context.getService(sr);
+      System.out.println("service.getClass().getClassLoader() = " + service.getClass().getClassLoader());
+      System.out.println("service = " + (service instanceof ConfigurationProperties));
+      System.out.println("ConfigurationProperties.class.getClassLoader() = " + ConfigurationProperties.class.getClassLoader());
+      ConfigurationProperties configurationProperties = getConfigurationProperties();
+      Database derbyDatabase = new DerbyDatabase(connection, configurationProperties);
+
+      derbyDatabase.initDatabase();
+
+      PersistentService persistentService = new PersistentServiceImpl(derbyDatabase, configurationProperties);
+
+      context.registerService(PersistentService.class.getName(),
+          persistentService, null);
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new MedicationManagerPersistenceException(e);
+    }
 
   }
 
@@ -74,8 +93,20 @@ public class Activator implements BundleActivator {
     Class dummyClass = ResourceAdapterImpl.class;
   }
 
-  private Connection getConnection() throws SQLException {
-    return DriverManager.getConnection("jdbc:derby:" + MEDICATION_MANAGER + ";create=true;");
+  private Connection getConnection() {
+    Connection con = null;
+    try {
+      System.out.println("in");
+      Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+      System.out.println("ok");
+      new org.apache.derby.jdbc.EmbeddedDriver();
+      System.out.println("ok 2");
+      con = DriverManager.getConnection("jdbc:derby:" + MEDICATION_MANAGER + ";create=true;");
+    } catch (Exception e) {
+      e.printStackTrace();
+      throw new MedicationManagerPersistenceException(e);
+    }
+    return con;
   }
 
   public static void closeStatement(Statement statement) {
@@ -108,7 +139,7 @@ public class Activator implements BundleActivator {
 
   }
 
-  public static ConfigurationProperties getConfigurationProperties() {
+  /*public static ConfigurationProperties getConfigurationProperties() {
     if (bundleContext == null) {
       throw new MedicationManagerPersistenceException("The bundleContext is not set");
     }
@@ -124,6 +155,18 @@ public class Activator implements BundleActivator {
     if (service == null) {
       throw new MedicationManagerPersistenceException("The ConfigurationProperties is missing");
     }
+    return service;
+  }*/
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (tracker == null) {
+      throw new MedicationManagerPersistenceException("The ConfigurationProperties ServiceTracker is not set");
+    }
+    ConfigurationProperties service = (ConfigurationProperties) tracker.getService();
+    if (service == null) {
+      throw new MedicationManagerPersistenceException("The ConfigurationProperties is missing");
+    }
+
     return service;
   }
 }
