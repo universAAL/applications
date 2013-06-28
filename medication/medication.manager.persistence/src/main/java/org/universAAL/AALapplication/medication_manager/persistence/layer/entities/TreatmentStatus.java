@@ -8,6 +8,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.Medicat
 public enum TreatmentStatus {
 
   INACTIVE("N"),
+  PENDING("P"),
   ACTIVE("Y");
 
   private String value;

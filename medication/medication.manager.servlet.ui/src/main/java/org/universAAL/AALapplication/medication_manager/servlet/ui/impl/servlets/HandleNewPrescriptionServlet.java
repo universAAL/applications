@@ -126,7 +126,7 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
 
     Log.info("Creating PrescriptionDTO object from NewPrescriptionView object: %s", getClass(), prescriptionView);
 
-    Date startDate = getDate(prescriptionView.getStartDate());
+    Date startDate = getDatePlusOneDayDelay(prescriptionView.getStartDate());
     PrescriptionDTO prescriptionDTO = new PrescriptionDTO(
         prescriptionView.getNotes(),
         startDate,

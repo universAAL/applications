@@ -150,7 +150,7 @@ public abstract class NewPrescriptionHandler {
 
     List<MedicationTreatment> medicationTreatmentList = new ArrayList<MedicationTreatment>();
     TreatmentDao treatmentDao = persistentService.getTreatmentDao();
-    List<Treatment> treatments = treatmentDao.getByPrescriptionAndActive(prescriptionDTO.getPrescriptionId());
+    List<Treatment> treatments = treatmentDao.getByPrescriptionAndNotInActive(prescriptionDTO.getPrescriptionId());
     for (Treatment tr : treatments) {
       handleTreatment(prescriptionDTO, medicationTreatmentList, tr);
     }

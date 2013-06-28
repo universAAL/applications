@@ -150,7 +150,7 @@ public final class PrecautionProvider extends ServiceCallee {
     List<Treatment> treatmentList = new ArrayList<Treatment>();
 
     for (Prescription pr : prescriptions) {
-      List<Treatment> treatments = treatmentDao.getByPrescriptionAndActive(pr.getId());
+      List<Treatment> treatments = treatmentDao.getByPrescriptionAndNotInActive(pr.getId());
       addTreatments(treatmentList, treatments);
     }
 

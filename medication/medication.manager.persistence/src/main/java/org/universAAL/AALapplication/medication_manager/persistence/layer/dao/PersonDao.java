@@ -176,31 +176,38 @@ public final class PersonDao extends AbstractDao {
 
   public void savePerson(Person person) {
     String sql = "insert into medication_manager.person " +
-        "(id, name, person_uri, role, caregiver_sms) values (?, ?, ?, ?, ?)";
+        "(id, name, person_uri, role, username, password, caregiver_sms) values (?, ?, ?, ?, ?, ?, ?)";
 
     PreparedStatement ps = null;
 
 
-        try {
-          ps = getPreparedStatement(sql);
-          ps.setInt(1, person.getId());
-          ps.setString(2, person.getName());
-          ps.setString(3, person.getPersonUri());
-          ps.setString(4, person.getRole().getValue());
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, person.getId());
+      ps.setString(2, person.getName());
+      ps.setString(3, person.getPersonUri());
+      ps.setString(4, person.getRole().getValue());
+      String username = person.getUsername();
+      setPossibleNullString(ps, username, 5);
+      String password = person.getPassword();
+      setPossibleNullString(ps, password, 6);
+      String gsmNumber = person.getCaregiverSms();
+      setPossibleNullString(ps, gsmNumber, 7);
 
-          String gsmNumber = person.getCaregiverSms();
+      ps.execute();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+  }
 
-          if (gsmNumber != null) {
-            ps.setString(5, gsmNumber);
-          } else {
-            ps.setNull(5, Types.VARCHAR);
-          }
+  private void setPossibleNullString(PreparedStatement ps, String value, int index) throws SQLException {
 
-          ps.execute();
-        } catch (SQLException e) {
-          throw new MedicationManagerPersistenceException(e);
-        } finally {
-          closeStatement(ps);
-        }
+    if (value != null) {
+      ps.setString(index, value);
+    } else {
+      ps.setNull(index, Types.VARCHAR);
+    }
   }
 }
