@@ -130,6 +130,54 @@ values (16, 3, 1193, 'pill', 5, 2);
 
 // inventory_log table
 
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (1, 'current_date0 00:00:00', 1, 1150, 45, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (2, 'current_date0 00:00:00', 1, 1151, 10, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (3, 'current_date0 00:00:00', 1, 1149, 5, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (4, 'current_date0 00:00:00', 1, 1008, 30, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (5, 'current_date0 00:00:00', 1, 1007, 15, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (6, 'current_date0 00:00:00', 1, 1046, 15, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (7, 'current_date0 00:00:00', 2, 1071, 10, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (8, 'current_date0 00:00:00', 2, 1070, 30, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (9, 'current_date0 00:00:00', 2, 1193, 5, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (10, 'current_date0 00:00:00', 2, 1008, 15, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (11, 'current_date0 00:00:00', 2, 1046, 15, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (12, 'current_date0 00:00:00', 3, 1046, 15, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (13, 'current_date0 00:00:00', 3, 1210, 15, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (14, 'current_date0 00:00:00', 3, 1209, 150, 'drops', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (15, 'current_date0 00:00:00', 3, 1008, 15, 'pill', 'refill');
+
+insert into medication_manager.inventory_log (id, time_of_creation, patient_fk_id, medicine_fk_id, change_quantity, units, reference)
+values (16, 'current_date0 00:00:00', 3, 1193, 5, 'pill', 'refill');
+
 
 
 // prescription table
