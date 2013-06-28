@@ -47,7 +47,7 @@ public final class NewPrescriptionView {
   }
 
   public void setStartDate(String startDate) {
-    getDate(startDate);
+    getDatePlusOneDayDelay(startDate);
 
     this.startDate = startDate;
   }

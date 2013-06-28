@@ -195,6 +195,29 @@ public final class MedicineInventoryDao extends AbstractDao {
 
   }
 
+  public boolean hasMedicineInventory(int patientId, int medicineId) {
+    String sql = "select * from MEDICATION_MANAGER.MEDICINE_INVENTORY where " +
+        "PATIENT_FK_ID = ? and MEDICINE_FK_ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, patientId);
+      ps.setInt(2, medicineId);
+      Map<String, Column> records = executeQueryExpectedSingleRecord(TABLE_NAME, ps);
+      if (records == null || records.isEmpty()) {
+        return false;
+      }
+      MedicineInventory medicineInventory = getMedicineInventory(records);
+      return medicineInventory.getQuantity() > 0;
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
   public List<MedicineInventory> getAllMedicineInventoriesForPatient(Person patient) {
     String sql = "select * from MEDICATION_MANAGER.MEDICINE_INVENTORY where " +
         "PATIENT_FK_ID = ?";
@@ -224,7 +247,7 @@ public final class MedicineInventoryDao extends AbstractDao {
     return medicineInventories;
   }
 
-  public void updateMedicineInventoryTable(int medicineInventoryId, int patientId, int threshold) throws SQLException{
+  public void updateMedicineInventoryTable(int medicineInventoryId, int patientId, int threshold) throws SQLException {
 
     Log.info("Setting new threshold for a medicineInventory with id: %s and new threshold: %s",
         getClass(), medicineInventoryId, threshold);

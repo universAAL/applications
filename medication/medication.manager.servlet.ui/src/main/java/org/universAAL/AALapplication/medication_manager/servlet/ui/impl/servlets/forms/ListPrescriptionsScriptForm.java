@@ -53,7 +53,7 @@ public final class ListPrescriptionsScriptForm extends ScriptForm {
 
     PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
 
-    List<PrescriptionDTO> prescriptionDTOs = prescriptionDao.getPrescriptionDTO(patient, doctor);
+    List<PrescriptionDTO> prescriptionDTOs = prescriptionDao.getPrescriptionDTO(patient);
 
     Collections.sort(prescriptionDTOs);
 

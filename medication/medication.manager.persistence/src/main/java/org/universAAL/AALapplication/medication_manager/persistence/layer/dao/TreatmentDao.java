@@ -61,8 +61,8 @@ public final class TreatmentDao extends AbstractDao {
     this.medicineDao = medicineDao;
   }
 
-  public List<Treatment> getByPrescriptionAndActive(int prescriptionId) {
-    String sql = "select * from MEDICATION_MANAGER.TREATMENT where PRESCRIPTION_FK_ID = ? and UPPER(STATUS) = ?";
+  public List<Treatment> getByPrescriptionAndNotInActive(int prescriptionId) {
+    String sql = "select * from MEDICATION_MANAGER.TREATMENT where PRESCRIPTION_FK_ID = ? and UPPER(STATUS) <> ?";
 
     System.out.println("sql = " + sql);
 
@@ -137,7 +137,7 @@ public final class TreatmentDao extends AbstractDao {
   private List<Treatment> getTreatments(int prescriptionId, String sql,
                                         PreparedStatement statement) throws SQLException {
     statement.setInt(1, prescriptionId);
-    statement.setString(2, ACTIVE.getValue().toUpperCase());
+    statement.setString(2, INACTIVE.getValue().toUpperCase());
     List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
     return createTreatments(results);
   }
@@ -173,6 +173,30 @@ public final class TreatmentDao extends AbstractDao {
             patientId + " and medicineId: " + medicineId);
       }
       return getTreatment(result);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+  }
+
+  public Set<Treatment> getAllActiveTreatments() {
+    String sql = "select * from MEDICATION_MANAGER.TREATMENT where UPPER(STATUS) = ?";
+
+    System.out.println("sql = " + sql);
+
+    Set<Treatment> treatmentSet = new HashSet<Treatment>();
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql);
+      statement.setString(1, TreatmentStatus.ACTIVE.getValue());
+      List<Map<String, Column>> result = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, statement);
+      for (Map<String, Column> columnMap : result) {
+        Treatment treatment = getTreatment(columnMap);
+        treatmentSet.add(treatment);
+      }
+      return treatmentSet;
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
     } finally {

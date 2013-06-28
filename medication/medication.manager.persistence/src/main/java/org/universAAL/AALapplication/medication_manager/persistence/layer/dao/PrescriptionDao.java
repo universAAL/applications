@@ -47,6 +47,7 @@ public final class PrescriptionDao extends AbstractDao {
   private MedicineDao medicineDao;
   private TreatmentDao treatmentDao;
   private IntakeDao intakeDao;
+  private MedicineInventoryDao medicineInventoryDao;
 
   private static boolean isPrescriptionDTOLoaded = false;
   private static final SoftCache<Integer, PrescriptionDTO> SOFT_CACHE = new SoftCache<Integer, PrescriptionDTO>();
@@ -98,6 +99,10 @@ public final class PrescriptionDao extends AbstractDao {
 
   public void setIntakeDao(IntakeDao intakeDao) {
     this.intakeDao = intakeDao;
+  }
+
+  public void setMedicineInventoryDao(MedicineInventoryDao medicineInventoryDao) {
+    this.medicineInventoryDao = medicineInventoryDao;
   }
 
   public List<Prescription> getByPerson(int personId) {
@@ -173,6 +178,7 @@ public final class PrescriptionDao extends AbstractDao {
   public void save(PrescriptionDTO prescriptionDTO) {
 
     checkForSetDao(medicineDao, "medicineDao");
+    checkForSetDao(medicineInventoryDao, "medicineInventoryDao");
 
     Connection connection = null;
     try {
@@ -205,7 +211,7 @@ public final class PrescriptionDao extends AbstractDao {
       psPrescription = connection.prepareStatement(sql);
       prescriptionDTO.setPrescriptionId(prescriptionId);
       insertRecordIntoPrescriptionTable(prescriptionId, prescriptionDTO, psPrescription);
-      insertMedicineDTOs(prescriptionDTO, connection, prescriptionId);
+      insertMedicineDTOs(prescriptionDTO, connection, prescriptionId, prescriptionDTO.getPatient().getId());
     } finally {
       closeStatement(psPrescription);
     }
@@ -213,21 +219,21 @@ public final class PrescriptionDao extends AbstractDao {
   }
 
   private void insertMedicineDTOs(PrescriptionDTO prescriptionDTO,
-                                  Connection connection, int prescriptionId) throws SQLException {
+                                  Connection connection, int prescriptionId, int patientId) throws SQLException {
 
     Set<MedicineDTO> medicineDTOSet = prescriptionDTO.getMedicineDTOSet();
     List<Medicine> medicines = medicineDao.getMedicinesWithName(medicineDTOSet);
     insertMissingRecordsIntoMedicineTable(medicineDTOSet, connection, medicines);
-    insertIntoTreatments(medicineDTOSet, connection, prescriptionId);
+    insertIntoTreatments(medicineDTOSet, connection, prescriptionId, patientId);
   }
 
 
   private void insertIntoTreatments(Set<MedicineDTO> medicineDTOSet,
-                                    Connection connection, int prescriptionId) throws SQLException {
+                                    Connection connection, int prescriptionId, int patientId) throws SQLException {
 
     for (MedicineDTO med : medicineDTOSet) {
       int treatmentId = database.getNextIdFromIdGenerator();
-      persistTreatment(med, connection, prescriptionId, treatmentId);
+      persistTreatment(med, connection, prescriptionId, treatmentId, patientId);
       persistIntakesDTO(med, treatmentId, connection);
     }
   }
@@ -330,7 +336,7 @@ public final class PrescriptionDao extends AbstractDao {
   }
 
   private void persistTreatment(MedicineDTO med, Connection connection,
-                                int prescriptionId, int id) throws SQLException {
+                                int prescriptionId, int id, int patientId) throws SQLException {
 
     String sql = "INSERT INTO MEDICATION_MANAGER.TREATMENT " +
         "(ID, PRESCRIPTION_FK_ID, MEDICINE_FK_ID, START_DATE, END_DATE, STATUS, " +
@@ -341,14 +347,14 @@ public final class PrescriptionDao extends AbstractDao {
 
     try {
       ps = connection.prepareStatement(sql);
-      insertRecordIntoTreatmentTable(med, ps, prescriptionId, id);
+      insertRecordIntoTreatmentTable(med, ps, prescriptionId, id, patientId);
     } finally {
       closeStatement(ps);
     }
   }
 
   private void insertRecordIntoTreatmentTable(MedicineDTO med, PreparedStatement ps,
-                                              int prescriptionId, int id) throws SQLException {
+                                              int prescriptionId, int id, int patientId) throws SQLException {
 
     ps.setInt(1, id);
     ps.setInt(2, prescriptionId);
@@ -359,13 +365,29 @@ public final class PrescriptionDao extends AbstractDao {
     Date treatmentEndDate = med.getTreatmentEndDate();
     java.sql.Date endDate = new java.sql.Date(treatmentEndDate.getTime());
     ps.setDate(5, endDate);
-    ps.setString(6, TreatmentStatus.ACTIVE.getValue());
+    String aTreatmentStatusACTIVEValue = getTreatmentStatusValue(med.getMedicineId(), patientId);
+    ps.setString(6, aTreatmentStatusACTIVEValue);
     ps.setBoolean(7, med.isMissedIntakeAlert());
     ps.setBoolean(8, med.isNewDoseAlert());
     ps.setBoolean(9, med.isShortageAlert());
 
     ps.execute();
 
+  }
+
+  private String getTreatmentStatusValue(int medicineId, int patientId) {
+
+    boolean hasInventory = medicineInventoryDao.hasMedicineInventory(patientId, medicineId);
+
+    TreatmentStatus status;
+
+    if (hasInventory) {
+      status = TreatmentStatus.ACTIVE;
+    } else {
+      status = TreatmentStatus.PENDING;
+    }
+
+    return status.getValue();
   }
 
   private void insertMissingRecordsIntoMedicineTable(Set<MedicineDTO> medicineDTOSet,
@@ -432,8 +454,8 @@ public final class PrescriptionDao extends AbstractDao {
                                                  PreparedStatement ps) throws SQLException {
 
     ps.setInt(1, id);
-    Date now = new Date();
-    long time = now.getTime();
+    Date startDate = prescriptionDTO.getStartDate();
+    long time = startDate.getTime();
     Timestamp timeOfCreation = new Timestamp(time);
     ps.setTimestamp(2, timeOfCreation);
     ps.setInt(3, prescriptionDTO.getPatient().getId());
@@ -453,15 +475,15 @@ public final class PrescriptionDao extends AbstractDao {
     }
   }
 
-  public List<PrescriptionDTO> getPrescriptionDTO(Person patient, Person doctor) {
+  public List<PrescriptionDTO> getPrescriptionDTO(Person patient) {
 
-    List<PrescriptionDTO> prescriptionDTOs = getFromCache(patient.getId(), doctor.getId());
+    List<PrescriptionDTO> prescriptionDTOs = getFromCache(patient.getId());
     if (!prescriptionDTOs.isEmpty()) {
       return prescriptionDTOs;
     }
 
     try {
-      List<Prescription> prescriptions = getByPersonAndDoctor(patient.getId(), doctor.getId());
+      List<Prescription> prescriptions = getByPerson(patient.getId());
       List<PrescriptionDTO> prescriptionDTOList = convertToDTO(prescriptions);
       for (PrescriptionDTO dto : prescriptionDTOList) {
         SOFT_CACHE.put(dto.getPrescriptionId(), dto);
@@ -478,7 +500,7 @@ public final class PrescriptionDao extends AbstractDao {
 
   }
 
-  private List<PrescriptionDTO> getFromCache(int patientId, int doctorId) {
+  private List<PrescriptionDTO> getFromCache(int patientId) {
     List<PrescriptionDTO> prescriptionDTOs = new ArrayList<PrescriptionDTO>();
 
     List<PrescriptionDTO> values = new ArrayList<PrescriptionDTO>(SOFT_CACHE.values());
@@ -487,7 +509,7 @@ public final class PrescriptionDao extends AbstractDao {
       if (dto == null) {
         continue;
       }
-      if (dto.getPatient().getId() == patientId && dto.getPhysician().getId() == doctorId) {
+      if (dto.getPatient().getId() == patientId) {
         prescriptionDTOs.add(dto);
       }
     }
@@ -512,7 +534,7 @@ public final class PrescriptionDao extends AbstractDao {
     checkForSetDao(treatmentDao, "treatmentDao");
     checkForSetDao(intakeDao, "intakeDao");
 
-    List<Treatment> treatments = treatmentDao.getByPrescriptionAndActive(prescription.getId());
+    List<Treatment> treatments = treatmentDao.getByPrescriptionAndNotInActive(prescription.getId());
     Date startDate = treatments.get(0).getStartDate();
 
     List<Intake> intakes = intakeDao.getByTreatments(treatments);
@@ -682,33 +704,6 @@ public final class PrescriptionDao extends AbstractDao {
     }
     return (int) ((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
   }
-
-  private List<Prescription> getByPersonAndDoctor(int personId, int doctorId) {
-    String sql = "select * from MEDICATION_MANAGER.PRESCRIPTION where " +
-        "PATIENT_FK_ID = ? and PHYSICIAN_FK_ID = ? and UPPER(STATUS) = ?";
-
-    System.out.println("sql = " + sql);
-
-    PreparedStatement statement = null;
-    try {
-      statement = getPreparedStatement(sql);
-      return getPrescriptions(personId, doctorId, sql, statement);
-    } catch (SQLException e) {
-      throw new MedicationManagerPersistenceException(e);
-    } finally {
-      closeStatement(statement);
-    }
-  }
-
-  private List<Prescription> getPrescriptions(int personId, int doctorId, String sql,
-                                              PreparedStatement statement) throws SQLException {
-    statement.setInt(1, personId);
-    statement.setInt(2, doctorId);
-    statement.setString(3, ACTIVE.getType().toUpperCase());
-    List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
-    return createPrescriptions(results);
-  }
-
 
   private List<PrescriptionDTO> getAllActivePrescriptions() {
     String sql = "select * from MEDICATION_MANAGER.PRESCRIPTION  where UPPER(STATUS) = ?";

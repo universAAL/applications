@@ -14,7 +14,9 @@ import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * @author George Fournadjiev
@@ -103,9 +105,14 @@ public final class Util {
 
   }
 
-  public static Date getDate(String textDate) {
+  public static Date getDatePlusOneDayDelay(String textDate) {
     try {
-      return SIMPLE_DATE_FORMAT.parse(textDate);
+      Date date = SIMPLE_DATE_FORMAT.parse(textDate);
+      GregorianCalendar calendar = new GregorianCalendar();
+      calendar.setTime(date);
+      calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+      return calendar.getTime();
     } catch (ParseException e) {
       throw new MedicationManagerServletUIException("The provided text date:" + textDate + " is not a valid date");
     }

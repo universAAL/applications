@@ -117,6 +117,8 @@ public final class ComplexDao extends AbstractDao {
         caregiverUserInfo.getName(),
         caregiverUserInfo.getUri(),
         role,
+        caregiverUserInfo.getUsername(),
+        caregiverUserInfo.getPassword(),
         caregiverUserInfo.getGsmNumber()
     );
 
@@ -151,7 +153,7 @@ public final class ComplexDao extends AbstractDao {
 
     Set<NotificationsInfo> infos = new HashSet<NotificationsInfo>();
 
-    Set<Treatment> treatmentSet = treatmentDao.getAllTreatments();
+    Set<Treatment> treatmentSet = treatmentDao.getAllActiveTreatments();
 
     Map<Person, List<MedicineInventory>> map = new HashMap<Person, List<MedicineInventory>>();
 
