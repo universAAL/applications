@@ -7,9 +7,11 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.MedicineInventoryShortageCaregiverNotifier;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.InventoryLog;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MedicineInventory;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Reference;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
 
@@ -17,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +36,7 @@ public final class MedicineInventoryDao extends AbstractDao {
   private MedicineDao medicineDao;
   private PatientLinksDao patientLinksDao;
   private TreatmentDao treatmentDao;
+  private InventoryLogDao inventoryLogDao;
   private final MedicineInventoryShortageCaregiverNotifier notifier;
 
   private static final String TABLE_NAME = "MEDICINE_INVENTORY";
@@ -62,6 +66,10 @@ public final class MedicineInventoryDao extends AbstractDao {
 
   public void setTreatmentDao(TreatmentDao treatmentDao) {
     this.treatmentDao = treatmentDao;
+  }
+
+  public void setInventoryLogDao(InventoryLogDao inventoryLogDao) {
+    this.inventoryLogDao = inventoryLogDao;
   }
 
   @Override
@@ -108,6 +116,8 @@ public final class MedicineInventoryDao extends AbstractDao {
   }
 
   public void decreaseInventory(Person patient, List<Intake> intakes) {
+
+    checkForSetDao(inventoryLogDao, "inventoryLogDao");
 
     Connection connection = database.getConnection();
 
@@ -167,9 +177,25 @@ public final class MedicineInventoryDao extends AbstractDao {
       ps.setInt(1, (medicineInventory.getQuantity() - quantity));
       ps.setInt(2, medicineInventory.getId());
       ps.execute();
+      writeToInventoryLog(medicineInventory, quantity);
     } finally {
       closeStatement(ps);
     }
+
+  }
+
+  private void writeToInventoryLog(MedicineInventory medicineInventory, int quantity) {
+    InventoryLog inventoryLog = new InventoryLog(
+        database.getNextIdFromIdGenerator(),
+        new Date(),
+        medicineInventory.getPatient(),
+        medicineInventory.getMedicine(),
+        quantity,
+        medicineInventory.getUnitClass(),
+        Reference.INTAKE
+        );
+
+    inventoryLogDao.save(inventoryLog);
 
   }
 
@@ -247,7 +273,8 @@ public final class MedicineInventoryDao extends AbstractDao {
     return medicineInventories;
   }
 
-  public void updateMedicineInventoryTable(int medicineInventoryId, int patientId, int threshold) throws SQLException {
+  public void updateMedicineInventoryTableWithNewThreshold(int medicineInventoryId,
+                                                           int patientId, int threshold) throws SQLException {
 
     Log.info("Setting new threshold for a medicineInventory with id: %s and new threshold: %s",
         getClass(), medicineInventoryId, threshold);

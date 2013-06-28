@@ -243,7 +243,7 @@ public final class ComplexDao extends AbstractDao {
   private void updateTables(NotificationsInfo info) throws SQLException {
     NotificationInfoComplexId complexId = info.getComplexId();
 
-    medicineInventoryDao.updateMedicineInventoryTable(complexId.getMedicineInventoryId(),
+    medicineInventoryDao.updateMedicineInventoryTableWithNewThreshold(complexId.getMedicineInventoryId(),
         complexId.getPatientId(), info.getThreshold());
 
     treatmentDao.updateTreatmentTable(complexId.getTreatmentId(), info.isMissed(), info.isShortage(), info.isDose());

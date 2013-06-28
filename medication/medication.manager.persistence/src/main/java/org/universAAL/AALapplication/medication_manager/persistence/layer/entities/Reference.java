@@ -16,6 +16,10 @@ public enum Reference {
     this.type = type;
   }
 
+  public String getType() {
+    return type;
+  }
+
   public static Reference getEnumValueFor(String referenceText) {
 
     for (Reference referenceEnum : values()) {
