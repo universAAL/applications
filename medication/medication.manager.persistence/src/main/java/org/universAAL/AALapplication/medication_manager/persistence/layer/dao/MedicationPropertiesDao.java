@@ -1,9 +1,9 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 
 import org.universAAL.AALapplication.medication_manager.configuration.FormatEnum;
+import org.universAAL.AALapplication.medication_manager.configuration.Pair;
 import org.universAAL.AALapplication.medication_manager.configuration.PropertyInfo;
 import org.universAAL.AALapplication.medication_manager.configuration.TypeEnum;
-import org.universAAL.AALapplication.medication_manager.configuration.Pair;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
@@ -148,7 +148,7 @@ public final class MedicationPropertiesDao extends AbstractDao {
 
   public void updatePropertiesValues(Set<Pair<Integer, String>> propertyValues) {
     for (Pair<Integer, String> pair : propertyValues) {
-       updatePropertyValues(pair);
+      updatePropertyValues(pair);
     }
   }
 
@@ -168,5 +168,7 @@ public final class MedicationPropertiesDao extends AbstractDao {
     } finally {
       closeStatement(ps);
     }
+
+    setSystemPropertiesLoadedFromDatabase();
   }
 }
