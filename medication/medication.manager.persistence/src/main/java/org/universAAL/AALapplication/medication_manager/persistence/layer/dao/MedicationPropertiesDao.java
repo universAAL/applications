@@ -150,6 +150,8 @@ public final class MedicationPropertiesDao extends AbstractDao {
     for (Pair<Integer, String> pair : propertyValues) {
       updatePropertyValues(pair);
     }
+
+    setSystemPropertiesLoadedFromDatabase();
   }
 
   private void updatePropertyValues(Pair<Integer, String> pair) {
@@ -168,7 +170,5 @@ public final class MedicationPropertiesDao extends AbstractDao {
     } finally {
       closeStatement(ps);
     }
-
-    setSystemPropertiesLoadedFromDatabase();
   }
 }
