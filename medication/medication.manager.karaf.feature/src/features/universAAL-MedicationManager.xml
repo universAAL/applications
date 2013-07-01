@@ -18,15 +18,9 @@
   install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.servlet.ui.base/target/medication.manager.servlet.ui.base-D.3-SNAPSHOT.jar
   install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.servlet.ui/target/medication.manager.servlet.ui-D.3-SNAPSHOT.jar
   install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.servlet.ui.configuration/target/medication.manager.servlet.ui.configuration-D.3-SNAPSHOT.jar
+  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.servlet.ui.acquire.medicine/target/medication.manager.servlet.ui.acquire.medicine-D.3-SNAPSHOT.jar
 
-     1. medication.manager.configuration
-     2. Medication Ontology
-     3. Medication Persistence
-     4. Medication User Management
-     5. Missing Services Simulation
-     6. Manager UI
-     7. Medication Manager Service
-     8.
+    features:install MedicationManager
 
 
     -->
@@ -101,6 +95,10 @@
     </bundle>
 
     <bundle start-level='97' start='true'>
+      mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.acquire.medicine/D.3-SNAPSHOT
+    </bundle>
+
+    <bundle start-level='98' start='true'>
       mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.configuration/D.3-SNAPSHOT
     </bundle>
 
