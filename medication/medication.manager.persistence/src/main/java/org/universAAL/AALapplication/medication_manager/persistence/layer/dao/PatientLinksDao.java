@@ -94,6 +94,26 @@ public final class PatientLinksDao extends AbstractDao {
 
   }
 
+  public List<Person> findCaregiverPatients(Person caregiver) {
+    Log.info("Looking for the caregiver =%s patients", getClass(), caregiver);
+
+    String sql = "select * from MEDICATION_MANAGER.PATIENT_LINKS where CAREGIVER_FK_ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, caregiver.getId());
+      return getPatients(sql, ps);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+
+
+  }
+
   public Person findPatientCaregiver(Person patient) {
     PatientLinks patientLinks = getPatientLinksForPatient(patient);
     return patientLinks.getCaregiver();

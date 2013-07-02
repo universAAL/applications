@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 public final class Util {
 
 
-  public static final String LOGGED_DOCTOR = "Doctor";
+  public static final String LOGGED_CAREGIVER = "Caregiver";
   public static final String LOGIN_HTML_SERVLET_ALIAS = "/acquire/login.html";
   public static final String LOGIN_SERVLET_ALIAS = "/acquire/login";
   public static final String SELECT_USER_SERVLET_ALIAS = "/acquire/select_user";
