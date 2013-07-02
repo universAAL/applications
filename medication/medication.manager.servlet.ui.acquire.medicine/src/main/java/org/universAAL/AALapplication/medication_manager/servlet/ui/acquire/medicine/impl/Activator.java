@@ -9,7 +9,10 @@ import org.universAAL.AALapplication.medication_manager.configuration.Configurat
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.DisplayErrorPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.DisplayLoginHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.HandleSelectMedicineServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.HandleSelectUserServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.LoginServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.SelectMedicineHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.SelectUserHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.DebugWriter;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.DebugWriterDummy;
@@ -101,6 +104,13 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(LOGIN_HTML_SERVLET_ALIAS, displayServlet, null, null);
     DisplayErrorPageWriterServlet displayErrorPageWriterServlet = new DisplayErrorPageWriterServlet(sessionTracking);
     httpService.registerServlet(ERROR_PAGE_SERVLET_ALIAS, displayErrorPageWriterServlet, null, null);
+    HandleSelectUserServlet handleSelectUserServlet = new HandleSelectUserServlet(sessionTracking);
+    httpService.registerServlet(HANDLE_USER_SERVLET_ALIAS, handleSelectUserServlet, null, null);
+    SelectMedicineHtmlWriterServlet selectMedicineHtmlWriterServlet = new SelectMedicineHtmlWriterServlet(sessionTracking);
+    httpService.registerServlet(SELECT_MED_SERVLET_ALIAS, selectMedicineHtmlWriterServlet, null, null);
+    HandleSelectMedicineServlet handleSelectMedicineServlet = new HandleSelectMedicineServlet(sessionTracking);
+    httpService.registerServlet(HANDLE_MED_SERVLET_ALIAS, handleSelectMedicineServlet, null, null);
+
     httpService.registerResources(JS_ALIAS, "js", null);
     httpService.registerResources(CSS_ALIAS, "css", null);
 
@@ -115,6 +125,16 @@ public final class Activator implements BundleActivator {
 
     selectUserServlet.setDisplayServlet(displayServlet);
     selectUserServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+
+    handleSelectUserServlet.setDisplayServlet(displayServlet);
+    handleSelectUserServlet.setSelectMedicineServlet(selectMedicineHtmlWriterServlet);
+    handleSelectUserServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+
+    selectMedicineHtmlWriterServlet.setDisplayServlet(displayServlet);
+    selectMedicineHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+
+    handleSelectMedicineServlet.setDisplayServlet(displayServlet);
+    handleSelectMedicineServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
 
   }

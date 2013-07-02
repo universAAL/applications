@@ -1,9 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets;
 
-import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
@@ -13,28 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Util.*;
 
 
 /**
  * @author George Fournadjiev
  */
-public final class LoginServlet extends BaseServlet {
+public final class HandleSelectUserServlet extends BaseServlet {
 
 
-  private static final String USERNAME = "username";
-  private static final String PASSWORD = "password";
   private final Object lock = new Object();
-  private SelectUserHtmlWriterServlet selectUserServlet;
+  private SelectMedicineHtmlWriterServlet selectMedicineServlet;
   private DisplayLoginHtmlWriterServlet displayServlet;
 
-  public LoginServlet(SessionTracking sessionTracking) {
+  public HandleSelectUserServlet(SessionTracking sessionTracking) {
     super(sessionTracking);
   }
 
-  public void setSelectUserServlet(SelectUserHtmlWriterServlet selectUserServlet) {
-    this.selectUserServlet = selectUserServlet;
+  public void setSelectMedicineServlet(SelectMedicineHtmlWriterServlet selectUserServlet) {
+    this.selectMedicineServlet = selectUserServlet;
   }
 
   public void setDisplayServlet(DisplayLoginHtmlWriterServlet displayServlet) {
@@ -51,12 +45,12 @@ public final class LoginServlet extends BaseServlet {
 
     synchronized (lock) {
       try {
-        isServletSet(selectUserServlet, "selectUserServlet");
+        isServletSet(selectMedicineServlet, "selectMedicineServlet");
         isServletSet(displayServlet, "displayServlet");
 
         Session session = getSession(req, resp, getClass());
         debugSessions(session.getId(), "the servlet doGet/doPost method", getClass());
-        Person caregiver = findCaregiver(req, session);
+        Person caregiver = (Person) session.getAttribute(LOGGED_CAREGIVER);
 
         String cancel = req.getParameter(CANCEL);
 
@@ -69,7 +63,8 @@ public final class LoginServlet extends BaseServlet {
 
         if (caregiver != null) {
           debugSessions(session.getId(), "End of the servlet doGet/doPost method (caregiver is not null", getClass());
-          selectUserServlet.doGet(req, resp);
+          selectMedicineServlet.doGet(req, resp);
+          return;
         } else {
           debugSessions(session.getId(), "End of the servlet doGet/doPost method (caregiver is null)", getClass());
           displayServlet.doGet(req, resp);
@@ -84,39 +79,5 @@ public final class LoginServlet extends BaseServlet {
 
   }
 
-  private Person findCaregiver(HttpServletRequest req, Session session) {
-
-    String username = req.getParameter(USERNAME);
-    String password = req.getParameter(PASSWORD);
-
-    if (!validateParameters(username, password)) {
-      return null;
-    }
-
-    Person person = findPerson(username, password);
-
-    if (person != null) {
-      session.setAttribute(LOGGED_CAREGIVER, person);
-    } else {
-      session.setAttribute(LOGIN_ERROR, LOGIN_ERROR);
-    }
-
-    return person;
-  }
-
-  private boolean validateParameters(String username, String password) {
-
-    boolean usernameCheck = username != null && !username.trim().isEmpty();
-    boolean passwordCheck = password != null && !password.trim().isEmpty();
-
-    return usernameCheck && passwordCheck;
-  }
-
-  private Person findPerson(String username, String password) {
-    PersistentService persistentService = getPersistentService();
-    PersonDao personDao = persistentService.getPersonDao();
-
-    return personDao.findPerson(username, password, Role.CAREGIVER);
-  }
 
 }

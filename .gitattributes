@@ -1964,8 +1964,12 @@ medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/univ
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/BaseServlet.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/DisplayErrorPageWriterServlet.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/DisplayLoginHtmlWriterServlet.java -text
+medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/HandleSelectMedicineServlet.java -text
+medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/HandleSelectUserServlet.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/LoginServlet.java -text
+medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/SelectMedicineHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/SelectUserHtmlWriterServlet.java -text
+medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/forms/MedicineSelectScriptForm.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/forms/UserSelectScriptForm.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css/common.css -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css/images/animated-overlay.gif -text
@@ -1986,6 +1990,7 @@ medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css/images/ui-icons_d8e7f3_256x240.png -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css/jquery-ui-1.10.2.custom.min.css -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css/login.css -text
+medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css/medicine.css -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css/reset-min.css -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css/style.css -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/css/user.css -text
@@ -1994,8 +1999,10 @@ medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/js/
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/js/jquery-1.7.2.min.js -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/js/jquery-ui-1.10.2.custom.min.js -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/js/login.js -text
+medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/js/medicine.js -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/js/user.js -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/login.html -text
+medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/medicine.html -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/resources/user.html -text
 medication/medication.manager.servlet.ui.base/pom.xml -text
 medication/medication.manager.servlet.ui.base/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/base/export/helpers/DebugWriter.java -text

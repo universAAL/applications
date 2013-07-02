@@ -1,11 +1,10 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.MedicationManagerAcquireMedicineException;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.forms.UserSelectScriptForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.forms.MedicineSelectScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
@@ -23,22 +22,20 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.acquir
 /**
  * @author George Fournadjiev
  */
-public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
+public final class SelectMedicineHtmlWriterServlet extends BaseHtmlWriterServlet {
 
   private final Object lock = new Object();
   private DisplayLoginHtmlWriterServlet displayServlet;
 
-  private static final String USER_HTML_FILE_NAME = "user.html";
+  private static final String MEDICINE_HTML_FILE_NAME = "medicine.html";
 
-  public SelectUserHtmlWriterServlet(SessionTracking sessionTracking) {
-    super(USER_HTML_FILE_NAME, sessionTracking);
+  public SelectMedicineHtmlWriterServlet(SessionTracking sessionTracking) {
+    super(MEDICINE_HTML_FILE_NAME, sessionTracking);
   }
 
   public void setDisplayServlet(DisplayLoginHtmlWriterServlet displayServlet) {
     this.displayServlet = displayServlet;
   }
-
-
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -63,7 +60,15 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
           return;
         }
 
-        handleResponse(req, resp, caregiver, session);
+        List<Person> patients = (List<Person>) session.getAttribute(PATIENTS);
+
+        if (patients == null) {
+          debugSessions(session.getId(), "if(patients attribute is null) the servlet doGet/doPost method", getClass());
+          displayServlet.doGet(req, resp);
+          return;
+        }
+
+        handleResponse(req, resp, caregiver, patients);
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
         sendErrorResponse(req, resp, e);
@@ -78,14 +83,11 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
 
 
   private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
-                              Person caregiver, Session session) throws IOException {
+                              Person caregiver, List<Person> patients) throws IOException {
 
     PersistentService persistentService = getPersistentService();
-    PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
-    List<Person> patients =patientLinksDao.findCaregiverPatients(caregiver);
-    session.setAttribute(PATIENTS, patients);
     if (patients != null && !patients.isEmpty()) {
-      ScriptForm scriptForm = new UserSelectScriptForm(patients);
+      ScriptForm scriptForm = new MedicineSelectScriptForm(patients, persistentService);
       sendResponse(req, resp, scriptForm);
     } else {
       throw new MedicationManagerAcquireMedicineException("Missing patients for the following caregiver: " + caregiver);

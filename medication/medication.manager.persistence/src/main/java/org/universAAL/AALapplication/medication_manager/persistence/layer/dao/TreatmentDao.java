@@ -6,6 +6,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Column;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Prescription;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.TreatmentStatus;
@@ -250,4 +251,57 @@ public final class TreatmentDao extends AbstractDao {
     }
   }
 
+  public Set<Treatment> findTreatments(List<Person> patients) {
+
+    if (patients == null || patients.isEmpty()) {
+      throw new MedicationManagerPersistenceException("patient parameter is null or empty");
+    }
+
+    StringBuffer sb = new StringBuffer();
+    sb.append("SELECT\n" +
+        "  *\n" +
+        "FROM\n" +
+        "    MEDICATION_MANAGER.TREATMENT AS tr,\n" +
+        "    MEDICATION_MANAGER.PRESCRIPTION AS p\n" +
+        "\n" +
+        "WHERE tr.PRESCRIPTION_FK_ID = p.ID\n" +
+        "      AND p.PATIENT_FK_ID IN ");
+
+    sb.append('(');
+
+    int counter = 0;
+    int size = patients.size();
+    for (Person person : patients) {
+      counter++;
+      int id = person.getId();
+      sb.append(id);
+      if (counter < size) {
+        sb.append(',');
+      }
+    }
+
+    sb.append(')');
+
+
+    String sql = sb.toString();
+
+    System.out.println("sql = " + sql);
+
+    Set<Treatment> treatmentSet = new HashSet<Treatment>();
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql);
+      List<Map<String, Column>> result = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
+      for (Map<String, Column> columnMap : result) {
+        Treatment treatment = getTreatment(columnMap);
+        treatmentSet.add(treatment);
+      }
+      return treatmentSet;
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+  }
 }
