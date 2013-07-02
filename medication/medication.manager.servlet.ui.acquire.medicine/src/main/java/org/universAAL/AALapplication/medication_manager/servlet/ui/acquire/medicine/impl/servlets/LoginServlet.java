@@ -97,7 +97,7 @@ public final class LoginServlet extends BaseServlet {
     Person person = findPerson(username, password);
 
     if (person != null) {
-      session.setAttribute(LOGGED_DOCTOR, person);
+      session.setAttribute(LOGGED_CAREGIVER, person);
     } else {
       session.setAttribute(LOGIN_ERROR, LOGIN_ERROR);
     }
@@ -117,7 +117,7 @@ public final class LoginServlet extends BaseServlet {
     PersistentService persistentService = getPersistentService();
     PersonDao personDao = persistentService.getPersonDao();
 
-    return personDao.findPerson(username, password, Role.PHYSICIAN);
+    return personDao.findPerson(username, password, Role.CAREGIVER);
   }
 
 }

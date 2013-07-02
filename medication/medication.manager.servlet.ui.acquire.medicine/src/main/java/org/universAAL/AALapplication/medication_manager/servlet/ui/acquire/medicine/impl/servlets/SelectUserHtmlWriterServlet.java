@@ -1,7 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.MedicationManagerAcquireMedicineException;
@@ -47,7 +47,7 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
         isServletSet(displayServlet, "displayServlet");
 
         Session session = getSession(req, resp, getClass());
-        Person caregiver = (Person) session.getAttribute(LOGGED_DOCTOR);
+        Person caregiver = (Person) session.getAttribute(LOGGED_CAREGIVER);
 
         if (caregiver == null) {
           debugSessions(session.getId(), "if(caregiver is null) the servlet doGet/doPost method", getClass());
@@ -57,9 +57,7 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
 
         String cancel = req.getParameter(CANCEL);
         if (cancel != null && TRUE.equalsIgnoreCase(cancel)) {
-          debugSessions(session.getId(), "cancel (removing XXX   " +
-              "the servlet doGet/doPost method", getClass());
-// TODO         session.removeAttribute(PRESCRIPTION_VIEW);
+          debugSessions(session.getId(), "cancel the servlet doGet/doPost method", getClass());
           displayServlet.doGet(req, resp);
           return;
         }
@@ -79,16 +77,16 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
 
 
   private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
-                              Person doctor, Session session) throws IOException {
+                              Person caregiver, Session session) throws IOException {
 
     PersistentService persistentService = getPersistentService();
-    PersonDao personDao = persistentService.getPersonDao();
-    List<Person> patients = personDao.getAllPatients();
-    if (patients != null && patients.size() > 1) {
+    PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
+    List<Person> patients =patientLinksDao.findCaregiverPatients(caregiver);
+    if (patients != null && !patients.isEmpty()) {
       ScriptForm scriptForm = new UserSelectScriptForm(patients);
       sendResponse(req, resp, scriptForm);
     } else {
-      throw new MedicationManagerAcquireMedicineException("Missing patients : " + doctor);
+      throw new MedicationManagerAcquireMedicineException("Missing patients for the following caregiver: " + caregiver);
     }
 
   }
