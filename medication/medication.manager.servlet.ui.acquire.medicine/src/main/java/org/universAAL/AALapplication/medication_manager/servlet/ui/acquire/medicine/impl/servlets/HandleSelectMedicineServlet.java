@@ -20,14 +20,19 @@ public final class HandleSelectMedicineServlet extends BaseServlet {
 
 
   private final Object lock = new Object();
-  private DisplayLoginHtmlWriterServlet displayServlet;
+  private SelectUserHtmlWriterServlet selectUserHtmlWriterServlet;
+  private DisplayLoginHtmlWriterServlet displayLogin;
 
   public HandleSelectMedicineServlet(SessionTracking sessionTracking) {
     super(sessionTracking);
   }
 
-  public void setDisplayServlet(DisplayLoginHtmlWriterServlet displayServlet) {
-    this.displayServlet = displayServlet;
+  public void setSelectUserHtmlWriterServlet(SelectUserHtmlWriterServlet selectUserHtmlWriterServlet) {
+    this.selectUserHtmlWriterServlet = selectUserHtmlWriterServlet;
+  }
+
+  public void setDisplayLogin(DisplayLoginHtmlWriterServlet displayLogin) {
+    this.displayLogin = displayLogin;
   }
 
   @Override
@@ -40,18 +45,17 @@ public final class HandleSelectMedicineServlet extends BaseServlet {
 
     synchronized (lock) {
       try {
-        isServletSet(displayServlet, "displayServlet");
+        isServletSet(selectUserHtmlWriterServlet, "selectUserHtmlWriterServlet");
 
         Session session = getSession(req, resp, getClass());
         debugSessions(session.getId(), "the servlet doGet/doPost method", getClass());
         Person caregiver = (Person) session.getAttribute(LOGGED_CAREGIVER);
 
-        String cancel = req.getParameter(CANCEL);
+        String back = req.getParameter(BACK);
 
-        if (cancel != null && cancel.equalsIgnoreCase(TRUE)) {
+        if (back != null && back.equalsIgnoreCase(TRUE)) {
           debugSessions(session.getId(), "cancel button (invalidate) the servlet doGet/doPost method", getClass());
-          invalidateSession(req, resp);
-          displayServlet.doGet(req, resp);
+          selectUserHtmlWriterServlet.doGet(req, resp);
           return;
         }
 
@@ -60,7 +64,8 @@ public final class HandleSelectMedicineServlet extends BaseServlet {
           resp.getWriter().println("uraaaaaaaaaaa");
         } else {
           debugSessions(session.getId(), "End of the servlet doGet/doPost method (caregiver is null)", getClass());
-          displayServlet.doGet(req, resp);
+          invalidateSession(req, resp);
+          displayLogin.doGet(req, resp);
         }
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
@@ -71,6 +76,5 @@ public final class HandleSelectMedicineServlet extends BaseServlet {
 
 
   }
-
 
 }

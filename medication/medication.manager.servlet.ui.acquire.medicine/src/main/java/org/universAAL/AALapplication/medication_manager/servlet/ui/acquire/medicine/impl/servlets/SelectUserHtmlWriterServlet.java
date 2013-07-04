@@ -83,7 +83,6 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
     PersistentService persistentService = getPersistentService();
     PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
     List<Person> patients =patientLinksDao.findCaregiverPatients(caregiver);
-    session.setAttribute(PATIENTS, patients);
     if (patients != null && !patients.isEmpty()) {
       ScriptForm scriptForm = new UserSelectScriptForm(patients);
       sendResponse(req, resp, scriptForm);

@@ -133,7 +133,8 @@ public final class Activator implements BundleActivator {
     selectMedicineHtmlWriterServlet.setDisplayServlet(displayServlet);
     selectMedicineHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
-    handleSelectMedicineServlet.setDisplayServlet(displayServlet);
+    handleSelectMedicineServlet.setDisplayLogin(displayServlet);
+    handleSelectMedicineServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
     handleSelectMedicineServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
 
 

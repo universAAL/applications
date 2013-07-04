@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.impl.servlets;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.IntakeDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.PrescriptionDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
@@ -172,7 +173,8 @@ public final class HandleNewPrescriptionServlet extends BaseServlet {
         medicineView.getSideeffects(),
         medicineView.getIncompliances(),
         medicineView.getMealRelationDTO(),
-        medicineView.getIntakeDTOSet()
+        medicineView.getIntakeDTOSet(),
+        IntakeDTO.Unit.getEnumValueFor(medicineView.getUnit())
     );
     medicineDTO.setMedicineIdId(persistentService.generateId());
 

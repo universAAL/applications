@@ -1,7 +1,10 @@
 package org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Log;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.MedicationManagerAcquireMedicineException;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Util.*;
 
 
@@ -62,6 +66,7 @@ public final class HandleSelectUserServlet extends BaseServlet {
         }
 
         if (caregiver != null) {
+          setPatient(req, session);
           debugSessions(session.getId(), "End of the servlet doGet/doPost method (caregiver is not null", getClass());
           selectMedicineServlet.doGet(req, resp);
           return;
@@ -77,6 +82,23 @@ public final class HandleSelectUserServlet extends BaseServlet {
     }
 
 
+  }
+
+  private void setPatient(HttpServletRequest req, Session session) {
+    String idText = req.getParameter(USER);
+    if (idText == null) {
+      throw new MedicationManagerAcquireMedicineException("Missing expected parameter : " + USER);
+    }
+
+    try {
+      int id = Integer.parseInt(idText);
+      PersistentService persistentService = getPersistentService();
+      PersonDao personDao = persistentService.getPersonDao();
+      Person patient = personDao.getById(id);
+      session.setAttribute(PATIENT, patient);
+    } catch (NumberFormatException e) {
+      throw new MedicationManagerAcquireMedicineException(e);
+    }
   }
 
 

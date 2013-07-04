@@ -82,6 +82,11 @@ public final class IntakeDTO {
         }
       }
 
+      //hack to be fixed
+      if ("pills".equalsIgnoreCase(unitText)) {
+        return PILL;
+      }
+
       throw new MedicationException("Unknown Unit enum value: " + unitText);
     }
 

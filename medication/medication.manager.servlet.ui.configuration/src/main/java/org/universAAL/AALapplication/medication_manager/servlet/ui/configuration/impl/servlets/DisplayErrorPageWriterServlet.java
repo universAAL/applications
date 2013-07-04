@@ -5,12 +5,15 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.h
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.DisplayErrorScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Log;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.MedicationManagerServletUIConfigurationException;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.io.PrintWriter;
+import java.io.StringReader;
 
 /**
  * @author George Fournadjiev
@@ -35,6 +38,8 @@ public final class DisplayErrorPageWriterServlet extends BaseHtmlWriterServlet {
         if (message == null) {
           message = "Internal error";
         }
+
+        message = escapeNewLinesAndSingleQuotes(message);
 
         handleResponse(resp, message);
       } catch (Exception e) {
@@ -81,6 +86,29 @@ public final class DisplayErrorPageWriterServlet extends BaseHtmlWriterServlet {
 
     resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, sb.toString());
   }
+
+  private String escapeNewLinesAndSingleQuotes(String description) {
+      StringBuffer sb = new StringBuffer();
+      StringReader reader = new StringReader(description);
+      LineNumberReader lineNumberReader = new LineNumberReader(reader);
+
+      try {
+        String line = lineNumberReader.readLine();
+        while (line != null) {
+          line = line.replace("'", "\\'");
+          sb.append(line);
+          line = lineNumberReader.readLine();
+          if (line != null) {
+            sb.append("\\n");
+          }
+        }
+
+        return sb.toString();
+      } catch (IOException e) {
+        throw new MedicationManagerServletUIConfigurationException(e);
+      }
+
+    }
 
 
 }

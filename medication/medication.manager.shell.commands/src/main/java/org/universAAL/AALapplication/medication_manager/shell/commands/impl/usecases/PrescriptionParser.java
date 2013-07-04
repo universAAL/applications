@@ -290,10 +290,12 @@ public final class PrescriptionParser {
 
     Log.info("mealRelationDTO = %s", PrescriptionParser.class, mealRelationDTO);
 
+    IntakeDTO.Unit unit = getUnit(nodeList);
+
     Set<IntakeDTO> intakeDTOSet = getIntakeSet(node.getChildNodes());
 
     return new MedicineDTO(name, startDate, days, missedIntakeAlert, newDoseAlert, shortageAlert, description,
-        sideffects, incompliances, mealRelationDTO, intakeDTOSet);
+        sideffects, incompliances, mealRelationDTO, intakeDTOSet, unit);
 
   }
 

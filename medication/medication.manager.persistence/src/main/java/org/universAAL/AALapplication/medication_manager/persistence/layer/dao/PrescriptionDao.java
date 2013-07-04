@@ -422,8 +422,8 @@ public final class PrescriptionDao extends AbstractDao {
   private int persistMedicineDTO(MedicineDTO medicineDTO,
                                  Connection connection) throws SQLException {
     String sql = "INSERT INTO MEDICATION_MANAGER.MEDICINE " +
-        "(ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION) " +
-        "VALUES (?, ?, ?, ?, ?, ?)";
+        "(ID, MEDICINE_NAME, MEDICINE_INFO, SIDE_EFFECTS, INCOMPLIANCES, MEAL_RELATION, UNITS) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     PreparedStatement ps = null;
     int medicineId = database.getNextIdFromIdGenerator();
@@ -447,6 +447,7 @@ public final class PrescriptionDao extends AbstractDao {
     ps.setString(4, medicineDTO.getSideeffects());
     ps.setString(5, medicineDTO.getIncompliances());
     ps.setString(6, medicineDTO.getMealRelationDTO().getValue());
+    ps.setString(7, medicineDTO.getUnit().getValue());
     ps.execute();
   }
 
@@ -582,8 +583,14 @@ public final class PrescriptionDao extends AbstractDao {
         medicine.getMedicineSideEffects(),
         medicine.getIncompliances(),
         getMealRelation(medicine),
-        getIntakeDTOSet(intakes, tr)
+        getIntakeDTOSet(intakes, tr),
+        getUnitClass(medicine)
     );
+  }
+
+  private IntakeDTO.Unit getUnitClass(Medicine medicine) {
+    UnitClass unitClass = medicine.getUnitClass();
+    return IntakeDTO.Unit.getEnumValueFor(unitClass.getType());
   }
 
   private Set<IntakeDTO> getIntakeDTOSet(List<Intake> intakes, Treatment tr) {
