@@ -31,8 +31,9 @@ public final class Util {
   public static final String ERROR_FILE_NAME = "error.html";
   public static final String EMPTY = "";
   public static final String CANCEL = "cancel";
+  public static final String BACK = "back";
   public static final String TRUE = "true";
-  public static final String PATIENTS = "PATIENTS";
+  public static final String PATIENT = "PATIENT";
   public static final Pair<String> EMPTY_PAIR = new Pair<String>(null, null);
 
   private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");

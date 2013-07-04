@@ -43,16 +43,18 @@ public final class MedicineDTO {
   private final String sideeffects;
   private final String incompliances;
   private final MealRelationDTO mealRelationDTO;
+  private final IntakeDTO.Unit unit;
   private final Set<IntakeDTO> intakeDTOSet;
 
   public MedicineDTO(String name, Date startDate, int days, boolean missedIntakeAlert, boolean newDoseAlert,
                      boolean shortageAlert, String description, String sideeffects, String incompliances,
-                     MealRelationDTO mealRelationDTO, Set<IntakeDTO> intakeDTOSet) {
+                     MealRelationDTO mealRelationDTO, Set<IntakeDTO> intakeDTOSet, IntakeDTO.Unit unit) {
 
     validateParameter(name, "name");
     validateParameter(startDate, "startDate");
     validateParameter(mealRelationDTO, "mealRelationDTO");
     validateParameter(intakeDTOSet, "intakeDTOSet");
+    validateParameter(unit, "unit");
 
     this.name = name;
     this.treatmentStartDate = startDate;
@@ -66,6 +68,7 @@ public final class MedicineDTO {
     this.incompliances = incompliances;
     this.mealRelationDTO = mealRelationDTO;
     this.intakeDTOSet = intakeDTOSet;
+    this.unit = unit;
   }
 
   public int getMedicineId() {
@@ -136,6 +139,11 @@ public final class MedicineDTO {
     return intakeDTOSet;
   }
 
+  public IntakeDTO.Unit getUnit() {
+    return unit;
+  }
+
+
   @Override
   public String toString() {
     return "MedicineDTO{" +
@@ -146,10 +154,12 @@ public final class MedicineDTO {
         ", treatmentEndDate=" + treatmentEndDate +
         ", missedIntakeAlert=" + missedIntakeAlert +
         ", newDoseAlert=" + newDoseAlert +
+        ", shortageAlert=" + shortageAlert +
         ", description='" + description + '\'' +
         ", sideeffects='" + sideeffects + '\'' +
         ", incompliances='" + incompliances + '\'' +
         ", mealRelationDTO=" + mealRelationDTO +
+        ", unit=" + unit +
         ", intakeDTOSet=" + intakeDTOSet +
         '}';
   }

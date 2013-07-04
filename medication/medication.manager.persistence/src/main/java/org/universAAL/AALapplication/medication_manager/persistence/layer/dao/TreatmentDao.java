@@ -251,39 +251,21 @@ public final class TreatmentDao extends AbstractDao {
     }
   }
 
-  public Set<Treatment> findTreatments(List<Person> patients) {
+  public Set<Treatment> findTreatments(Person patient) {
 
-    if (patients == null || patients.isEmpty()) {
-      throw new MedicationManagerPersistenceException("patient parameter is null or empty");
+    if (patient == null) {
+      throw new MedicationManagerPersistenceException("patient parameter is null");
     }
 
-    StringBuffer sb = new StringBuffer();
-    sb.append("SELECT\n" +
-        "  *\n" +
+    String sql = "SELECT tr.*\n" +
+        "\n" +
         "FROM\n" +
         "    MEDICATION_MANAGER.TREATMENT AS tr,\n" +
         "    MEDICATION_MANAGER.PRESCRIPTION AS p\n" +
         "\n" +
         "WHERE tr.PRESCRIPTION_FK_ID = p.ID\n" +
-        "      AND p.PATIENT_FK_ID IN ");
-
-    sb.append('(');
-
-    int counter = 0;
-    int size = patients.size();
-    for (Person person : patients) {
-      counter++;
-      int id = person.getId();
-      sb.append(id);
-      if (counter < size) {
-        sb.append(',');
-      }
-    }
-
-    sb.append(')');
-
-
-    String sql = sb.toString();
+        "      AND p.PATIENT_FK_ID = ?\n" +
+        "      AND (UPPER(tr.STATUS) = ? OR UPPER(tr.STATUS) = ?)";
 
     System.out.println("sql = " + sql);
 
@@ -292,7 +274,10 @@ public final class TreatmentDao extends AbstractDao {
     PreparedStatement statement = null;
     try {
       statement = getPreparedStatement(sql);
-      List<Map<String, Column>> result = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, statement);
+      statement.setInt(1, patient.getId());
+      statement.setString(2, TreatmentStatus.ACTIVE.getValue());
+      statement.setString(3, TreatmentStatus.PENDING.getValue());
+      List<Map<String, Column>> result = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, statement);
       for (Map<String, Column> columnMap : result) {
         Treatment treatment = getTreatment(columnMap);
         treatmentSet.add(treatment);

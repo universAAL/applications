@@ -39,6 +39,8 @@ public final class DisplayErrorPageWriterServlet extends BaseHtmlWriterServlet {
           message = "Internal error";
         }
 
+        message = escapeNewLinesAndSingleQuotes(message);
+
         handleResponse(resp, message);
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());

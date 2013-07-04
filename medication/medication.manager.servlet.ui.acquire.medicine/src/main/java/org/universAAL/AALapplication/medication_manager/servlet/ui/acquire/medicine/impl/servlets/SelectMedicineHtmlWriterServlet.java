@@ -3,7 +3,6 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medi
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Log;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.MedicationManagerAcquireMedicineException;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.forms.MedicineSelectScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
@@ -13,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Util.*;
@@ -60,15 +58,15 @@ public final class SelectMedicineHtmlWriterServlet extends BaseHtmlWriterServlet
           return;
         }
 
-        List<Person> patients = (List<Person>) session.getAttribute(PATIENTS);
+        Person patient = (Person) session.getAttribute(PATIENT);
 
-        if (patients == null) {
-          debugSessions(session.getId(), "if(patients attribute is null) the servlet doGet/doPost method", getClass());
+        if (patient == null) {
+          debugSessions(session.getId(), "if(patient attribute is null) the servlet doGet/doPost method", getClass());
           displayServlet.doGet(req, resp);
           return;
         }
 
-        handleResponse(req, resp, caregiver, patients);
+        handleResponse(req, resp, caregiver, patient);
       } catch (Exception e) {
         Log.error(e.fillInStackTrace(), "Unexpected Error occurred", getClass());
         sendErrorResponse(req, resp, e);
@@ -83,16 +81,11 @@ public final class SelectMedicineHtmlWriterServlet extends BaseHtmlWriterServlet
 
 
   private void handleResponse(HttpServletRequest req, HttpServletResponse resp,
-                              Person caregiver, List<Person> patients) throws IOException {
+                              Person caregiver, Person patient) throws IOException {
 
     PersistentService persistentService = getPersistentService();
-    if (patients != null && !patients.isEmpty()) {
-      ScriptForm scriptForm = new MedicineSelectScriptForm(patients, persistentService);
+      ScriptForm scriptForm = new MedicineSelectScriptForm(patient, persistentService);
       sendResponse(req, resp, scriptForm);
-    } else {
-      throw new MedicationManagerAcquireMedicineException("Missing patients for the following caregiver: " + caregiver);
-    }
-
   }
 
 

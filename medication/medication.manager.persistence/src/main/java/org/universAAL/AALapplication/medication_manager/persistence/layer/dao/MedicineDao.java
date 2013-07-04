@@ -7,6 +7,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.databas
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dto.MedicineDTO;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MealRelation;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public final class MedicineDao extends AbstractDao {
   private static final String SIDE_EFFECTS = "SIDE_EFFECTS";
   private static final String INCOMPLIANCES = "INCOMPLIANCES";
   private static final String MEAL_RELATION = "MEAL_RELATION";
+  private static final String UNITS = "UNITS";
 
   public MedicineDao(Database database) {
     super(database, TABLE_NAME);
@@ -61,7 +63,19 @@ public final class MedicineDao extends AbstractDao {
     String mealRelationText = (String) col.getValue();
     MealRelation mealRelation = MealRelation.getEnumValueFor(mealRelationText);
 
-    Medicine medicine = new Medicine(medicineId, medicineName, medicineInfo, sideEffects, incompliances, mealRelation);
+    col = columns.get(UNITS);
+    String units = (String) col.getValue();
+    UnitClass unitClass = UnitClass.getEnumValueFor(units);
+
+    Medicine medicine = new Medicine(
+        medicineId,
+        medicineName,
+        medicineInfo,
+        unitClass,
+        sideEffects,
+        incompliances,
+        mealRelation
+    );
 
 //    Log.info("Medicine found: %s", getClass(), medicine);
     Log.info("Medicine found with id : %s", getClass(), medicine.getId());
