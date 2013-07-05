@@ -33,10 +33,11 @@ public final class ComplexDao extends AbstractDao {
   private final PatientLinksDao patientLinksDao;
   private final TreatmentDao treatmentDao;
   private final MedicineInventoryDao medicineInventoryDao;
+  private final InventoryLogDao inventoryLogDao;
 
-  public ComplexDao(Database database, PersonDao personDao,
-                    DispenserDao dispenserDao, PatientLinksDao patientLinksDao,
-                    TreatmentDao treatmentDao, MedicineInventoryDao medicineInventoryDao) {
+  public ComplexDao(Database database, PersonDao personDao, DispenserDao dispenserDao,
+                    PatientLinksDao patientLinksDao, TreatmentDao treatmentDao,
+                    MedicineInventoryDao medicineInventoryDao, InventoryLogDao inventoryLogDao) {
 
     super(database, "This is complex dao no specific table");
 
@@ -46,6 +47,7 @@ public final class ComplexDao extends AbstractDao {
     this.patientLinksDao = patientLinksDao;
     this.treatmentDao = treatmentDao;
     this.medicineInventoryDao = medicineInventoryDao;
+    this.inventoryLogDao = inventoryLogDao;
   }
 
   @Override
@@ -230,7 +232,7 @@ public final class ComplexDao extends AbstractDao {
       connection.setAutoCommit(false);
       updateTables(info);
       connection.commit();
-      Log.info("Successfully commited", getClass());
+      Log.info("Successfully committed", getClass());
     } catch (Exception e) {
       rollback(connection, e);
       throw new MedicationManagerPersistenceException(e);
@@ -250,4 +252,32 @@ public final class ComplexDao extends AbstractDao {
   }
 
 
+  public void saveAcquiredMedicine(Person patient, Medicine medicine, int quantity) {
+
+    Connection connection = database.getConnection();
+    try {
+      connection.setAutoCommit(false);
+      persistAcquiredMedicine(patient, medicine, quantity);
+      connection.commit();
+      Log.info("Successfully committed", getClass());
+    } catch (Exception e) {
+      rollback(connection, e);
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      setAutoCommitToTrue(connection);
+    }
+
+
+  }
+
+  private void persistAcquiredMedicine(Person patient, Medicine medicine, int quantity) {
+    medicineInventoryDao.saveMedicineInventory(patient, medicine, quantity);
+    List<Treatment> treatments = treatmentDao.getPendingTreatments(patient, medicine);
+    if (treatments.isEmpty()) {
+      return;
+    }
+
+    treatmentDao.changeStatusFromPendingToActive(treatments);
+
+  }
 }

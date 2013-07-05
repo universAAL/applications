@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 
+import org.universAAL.AALapplication.medication_manager.configuration.Pair;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
@@ -45,6 +46,7 @@ public final class MedicineInventoryDao extends AbstractDao {
   private static final String UNIT_CLASS = "UNIT_CLASS";
   private static final String QUANTITY = "QUANTITY";
   private static final String WARNING_THRESHOLD = "WARNING_THRESHOLD";
+  public static final int DEFAULT_WARNING_THRESHOLD = 1;
 
   public MedicineInventoryDao(Database database) {
     super(database, TABLE_NAME);
@@ -177,14 +179,14 @@ public final class MedicineInventoryDao extends AbstractDao {
       ps.setInt(1, (medicineInventory.getQuantity() - quantity));
       ps.setInt(2, medicineInventory.getId());
       ps.execute();
-      writeToInventoryLog(medicineInventory, quantity);
+      writeToInventoryLog(medicineInventory, quantity, Reference.INTAKE);
     } finally {
       closeStatement(ps);
     }
 
   }
 
-  private void writeToInventoryLog(MedicineInventory medicineInventory, int quantity) {
+  private void writeToInventoryLog(MedicineInventory medicineInventory, int quantity, Reference reference) {
     InventoryLog inventoryLog = new InventoryLog(
         database.getNextIdFromIdGenerator(),
         new Date(),
@@ -192,14 +194,14 @@ public final class MedicineInventoryDao extends AbstractDao {
         medicineInventory.getMedicine(),
         quantity,
         medicineInventory.getUnitClass(),
-        Reference.INTAKE
-        );
+        reference
+    );
 
     inventoryLogDao.save(inventoryLog);
 
   }
 
-  public MedicineInventory findInventory(Person patient, Medicine medicine, int quantity) throws SQLException {
+  private MedicineInventory findInventory(Person patient, Medicine medicine, int quantity) throws SQLException {
     Log.info("Checking for enough inventory for patient:%s and medicine:%s to decrease it with quantity:%s",
         getClass(), patient, medicine, quantity);
 
@@ -213,6 +215,10 @@ public final class MedicineInventoryDao extends AbstractDao {
       ps.setInt(1, patient.getId());
       ps.setInt(2, medicine.getId());
       Map<String, Column> columnMap = executeQueryExpectedSingleRecord(TABLE_NAME, ps);
+      if (columnMap == null || columnMap.isEmpty()) {
+        throw new MedicationManagerPersistenceException("Missing the record in the table:" +
+            TABLE_NAME + " for the following sql:\n" + sql, MedicationManagerPersistenceException.MISSING_RECORD);
+      }
       return getMedicineInventory(columnMap);
     } finally {
       closeStatement(ps);
@@ -289,6 +295,114 @@ public final class MedicineInventoryDao extends AbstractDao {
       ps.setInt(1, threshold);
       ps.setInt(2, medicineInventoryId);
       ps.execute();
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
+  public Pair<Boolean, MedicineInventory> hasMedicineInventoryRecord(int patientId, int medicineId) {
+    String sql = "select * from MEDICATION_MANAGER.MEDICINE_INVENTORY where " +
+        "PATIENT_FK_ID = ? and MEDICINE_FK_ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, patientId);
+      ps.setInt(2, medicineId);
+      Map<String, Column> records = executeQueryExpectedSingleRecord(TABLE_NAME, ps);
+      if (records == null || records.isEmpty()) {
+        return new Pair<Boolean, MedicineInventory>(false, null);
+      }
+      MedicineInventory medicineInventory = getMedicineInventory(records);
+      return new Pair<Boolean, MedicineInventory>(true, medicineInventory);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
+  public void saveMedicineInventory(Person patient, Medicine medicine, int quantity) {
+    try {
+      Pair<Boolean, MedicineInventory> inventoryPair = hasMedicineInventoryRecord(patient.getId(), medicine.getId());
+      MedicineInventory medicineInventory;
+      if (inventoryPair.getFirst()) {
+        medicineInventory = updateQuantity(inventoryPair.getSecond(), quantity);
+      } else {
+        medicineInventory = insertNewRecord(patient, medicine, quantity);
+      }
+
+      writeToInventoryLog(medicineInventory, quantity, Reference.REFILL);
+
+    } catch (Exception e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
+  }
+
+  private MedicineInventory insertNewRecord(Person patient, Medicine medicine, int quantity) {
+
+    MedicineInventory inventory = new MedicineInventory(
+        database.getNextIdFromIdGenerator(),
+        patient,
+        medicine,
+        medicine.getUnitClass(),
+        quantity,
+        DEFAULT_WARNING_THRESHOLD
+    );
+
+    String sql = "insert into medication_manager.MEDICINE_INVENTORY " +
+        "(id, patient_fk_id, medicine_fk_id, unit_class, quantity, warning_threshold)" +
+        "values (?, ?, ?, ?, ?, ?)";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, inventory.getId());
+      ps.setInt(2, inventory.getPatient().getId());
+      ps.setInt(3, inventory.getMedicine().getId());
+      ps.setString(4, inventory.getUnitClass().getType());
+      ps.setInt(5, inventory.getQuantity());
+      ps.setInt(6, inventory.getWarningThreshold());
+
+      ps.execute();
+
+      return inventory;
+
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
+  private MedicineInventory updateQuantity(MedicineInventory medicineInventory, int quantity) throws SQLException {
+    Log.info("Increasing quantity for a medicineInventory with id: %s with: %s quantity",
+        getClass(), medicineInventory.getId(), quantity);
+
+    int quant = medicineInventory.getQuantity() + quantity;
+
+    MedicineInventory inventory = new MedicineInventory(
+        medicineInventory.getId(),
+        medicineInventory.getPatient(),
+        medicineInventory.getMedicine(),
+        medicineInventory.getUnitClass(),
+        quant,
+        medicineInventory.getWarningThreshold()
+    );
+
+    String sql = "update MEDICATION_MANAGER.MEDICINE_INVENTORY " +
+        "set quantity = ? where ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setInt(1, inventory.getQuantity());
+      ps.setInt(2, medicineInventory.getId());
+      ps.execute();
+      return inventory;
     } finally {
       closeStatement(ps);
     }
