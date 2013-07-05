@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -11,8 +9,10 @@
 	</parent>
 
 	<artifactId>nutritional.client</artifactId>
+	<version>E.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
-	<name>Nutritional Advisor</name>
+	<name>Nutritional Advisor Service</name>
+	<!-- changes name description of the service at pom file and updated versions of the referred bundles at feature file -->
 
 	<dependencies>
 		<dependency>
@@ -23,15 +23,10 @@
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation.osgi</artifactId>
 		</dependency>
-		<!--<dependency> <groupId>org.universAAL.middleware</groupId> <artifactId>mw.bus.model.osgi</artifactId> 
-			</dependency> <dependency> <groupId>org.universAAL.middleware</groupId> <artifactId>mw.container.xfaces.osgi</artifactId> 
-			</dependency> -->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.container.osgi</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.universAAL.middleware</groupId> <artifactId>mw.bus.context.osgi</artifactId> 
-			</dependency> -->
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.ui.osgi</artifactId>
@@ -47,12 +42,12 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.nutrition</artifactId>
-			<version>1.3.3-SNAPSHOT</version>
+			<version>2.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.medication</artifactId>
-			<version>1.3.3-SNAPSHOT</version>
+			<version>2.0.0</version>
 		</dependency>
 
 		<!-- Nutritional own libs -->
@@ -87,7 +82,7 @@
 						<Bundle-Activator>org.universAAL.AALapplication.nutritional.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Export-Package></Export-Package>
+						<Export-Package/>
 						<Private-Package>
 							na.*,
 							org.universAAL.AALapplication.nutritional.*
@@ -121,7 +116,7 @@
 					</instructions>
 				</configuration>
 			</plugin>
-		</plugins>
+		<plugin><groupId>org.apache.karaf.tooling</groupId><artifactId>features-maven-plugin</artifactId><version>2.3.1</version></plugin></plugins>
 	</build>
 
 </project>
