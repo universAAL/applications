@@ -12,6 +12,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medic
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.DisplaySuccessfulPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.HandleSelectMedicineServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.HandleSelectUserServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.HandleSuccessMedicineServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.LoginServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.SelectMedicineHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.SelectUserHtmlWriterServlet;
@@ -113,6 +114,8 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(HANDLE_MED_SERVLET_ALIAS, handleSelectMedicineServlet, null, null);
     DisplaySuccessfulPageWriterServlet successfulPageWriterServlet = new DisplaySuccessfulPageWriterServlet(sessionTracking);
     httpService.registerServlet(SUCCESS_PAGE_SERVLET_ALIAS, successfulPageWriterServlet, null, null);
+    HandleSuccessMedicineServlet handleSuccessMedicineServlet= new HandleSuccessMedicineServlet(sessionTracking);
+    httpService.registerServlet(HANDLE_SUCCESS_PAGE_SERVLET_ALIAS, handleSuccessMedicineServlet, null, null);
 
     httpService.registerResources(JS_ALIAS, "js", null);
     httpService.registerResources(CSS_ALIAS, "css", null);
@@ -141,6 +144,9 @@ public final class Activator implements BundleActivator {
     handleSelectMedicineServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
     handleSelectMedicineServlet.setSuccessfulPageWriterServlet(successfulPageWriterServlet);
 
+    handleSuccessMedicineServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    handleSuccessMedicineServlet.setDisplayLogin(displayServlet);
+    handleSuccessMedicineServlet.setSelectMedicineHtmlWriterServlet(selectMedicineHtmlWriterServlet);
 
   }
 

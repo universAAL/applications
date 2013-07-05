@@ -1972,6 +1972,7 @@ medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/univ
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/DisplaySuccessfulPageWriterServlet.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/HandleSelectMedicineServlet.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/HandleSelectUserServlet.java -text
+medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/HandleSuccessMedicineServlet.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/LoginServlet.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/SelectMedicineHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.acquire.medicine/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/acquire/medicine/impl/servlets/SelectUserHtmlWriterServlet.java -text

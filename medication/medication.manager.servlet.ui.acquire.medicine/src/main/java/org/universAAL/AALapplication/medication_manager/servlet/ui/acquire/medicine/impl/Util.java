@@ -26,6 +26,7 @@ public final class Util {
   public static final String HANDLE_MED_SERVLET_ALIAS = "/acquire/handle_med";
   public static final String ERROR_PAGE_SERVLET_ALIAS = "/acquire/error";
   public static final String SUCCESS_PAGE_SERVLET_ALIAS = "/acquire/success";
+  public static final String HANDLE_SUCCESS_PAGE_SERVLET_ALIAS = "/acquire/handle_success";
   public static final String LOGIN_ERROR = "LOGIN_ERROR";
   public static final String LOGIN_FILE_NAME = "login.html";
   public static final String ERROR_FILE_NAME = "error.html";
