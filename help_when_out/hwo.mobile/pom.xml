@@ -3,11 +3,11 @@
   <parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>D.3.1-SNAPSHOT</version>
+		<version>E.0</version>
 		<relativePath>../hwo.pom</relativePath>
   </parent>
   <artifactId>hwo.mobile</artifactId>
-  <version>D.3.1-SNAPSHOT</version>
+  <version>E.0</version>
   <name>Help When Outdoor - Mobile application</name>
   <description/>
   <packaging>bundle</packaging>
@@ -28,10 +28,10 @@
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service.osgi</artifactId>
 		</dependency>
-		<dependency> <!--  añadido sms handler  -->
+		<!--<dependency>   añadido sms handler  
 			<groupId>org.universAAL.ui</groupId>
 			<artifactId>ui.handler.sms</artifactId>
-		</dependency>
+		</dependency>-->
 	 <!--	<dependency>  añadido personal safety sms  
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>personal_safety.sms</artifactId>
@@ -54,8 +54,26 @@
 			 <artifactId>mw.container.osgi</artifactId>
 		</dependency>
 		<dependency>
-			 <groupId>org.universAAL.middleware</groupId>
-			 <artifactId>mw.container.xfaces.osgi</artifactId>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.container.xfaces.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-api</artifactId>
+			<version>1.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-service</artifactId>
+			<version>1.4</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
     <build>
