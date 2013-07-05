@@ -3,13 +3,14 @@
 		<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>D.3.1-SNAPSHOT</version>
+		<version>E.0</version>
 		<relativePath>../hwo.pom</relativePath>
 	</parent>
-	<version>D.3.1-SNAPSHOT</version>
+
 	<packaging>bundle</packaging>
 	<artifactId>hwo.servlet</artifactId>
-	<name>Help When Outdoor</name>
+	<version>E.0.1-SNAPSHOT</version>
+	<name>Help When Outdoor Servlet Service</name>
 	<description/>
 	<dependencies>
 		<dependency>
