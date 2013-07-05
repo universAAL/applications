@@ -72,7 +72,7 @@ public final class HandleSelectMedicineServlet extends BaseServlet {
         String back = req.getParameter(BACK);
 
         if (back != null && back.equalsIgnoreCase(TRUE)) {
-          debugSessions(session.getId(), "cancel button (invalidate) the servlet doGet/doPost method", getClass());
+          debugSessions(session.getId(), "back button (invalidate) the servlet doGet/doPost method", getClass());
           selectUserHtmlWriterServlet.doGet(req, resp);
           return;
         }
