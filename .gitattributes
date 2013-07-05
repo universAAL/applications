@@ -2417,9 +2417,10 @@ nutritional/nutritional.client/src/main/resources/org/universAAL/AALapplication/
 nutritional/nutritional.client/src/main/resources/org/universAAL/AALapplication/nutritional/dialogs/messages_en.properties -text
 nutritional/nutritional.client/src/main/resources/org/universAAL/AALapplication/nutritional/dialogs/messages_es.properties -text
 nutritional/nutritional.client/src/test/java/org/universAAL/AALapplication/nutritional/OntoFactoryTester.java -text
+nutritional/nutritional.feature/ASL2.0.txt -text
 nutritional/nutritional.feature/LICENSE.txt -text
+nutritional/nutritional.feature/NOTICE -text
 nutritional/nutritional.feature/NOTICE.txt -text
-nutritional/nutritional.feature/README.txt -text
 nutritional/nutritional.feature/pom.xml -text
 nutritional/nutritional.feature/src/main/features/na.xml -text
 nutritional/nutritional.pom/pom.xml -text
