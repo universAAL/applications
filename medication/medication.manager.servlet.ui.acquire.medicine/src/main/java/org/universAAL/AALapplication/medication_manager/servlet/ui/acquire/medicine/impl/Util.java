@@ -25,9 +25,11 @@ public final class Util {
   public static final String SELECT_MED_SERVLET_ALIAS = "/acquire/select_med";
   public static final String HANDLE_MED_SERVLET_ALIAS = "/acquire/handle_med";
   public static final String ERROR_PAGE_SERVLET_ALIAS = "/acquire/error";
+  public static final String SUCCESS_PAGE_SERVLET_ALIAS = "/acquire/success";
   public static final String LOGIN_ERROR = "LOGIN_ERROR";
   public static final String LOGIN_FILE_NAME = "login.html";
   public static final String ERROR_FILE_NAME = "error.html";
+  public static final String SUCCESS_FILE_NAME = "success.html";
   public static final String EMPTY = "";
   public static final String CANCEL = "cancel";
   public static final String BACK = "back";
@@ -37,6 +39,7 @@ public final class Util {
 
   private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
   public static final String ERROR = "ERROR";
+  public static final String MSG = "MSG";
   public static final String USER = "user";
 
   private Util() {

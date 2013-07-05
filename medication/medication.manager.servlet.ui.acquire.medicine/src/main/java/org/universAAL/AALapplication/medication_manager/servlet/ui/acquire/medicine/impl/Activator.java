@@ -9,6 +9,7 @@ import org.universAAL.AALapplication.medication_manager.configuration.Configurat
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.DisplayErrorPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.DisplayLoginHtmlWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.DisplaySuccessfulPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.HandleSelectMedicineServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.HandleSelectUserServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.servlets.LoginServlet;
@@ -110,6 +111,8 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(SELECT_MED_SERVLET_ALIAS, selectMedicineHtmlWriterServlet, null, null);
     HandleSelectMedicineServlet handleSelectMedicineServlet = new HandleSelectMedicineServlet(sessionTracking);
     httpService.registerServlet(HANDLE_MED_SERVLET_ALIAS, handleSelectMedicineServlet, null, null);
+    DisplaySuccessfulPageWriterServlet successfulPageWriterServlet = new DisplaySuccessfulPageWriterServlet(sessionTracking);
+    httpService.registerServlet(SUCCESS_PAGE_SERVLET_ALIAS, successfulPageWriterServlet, null, null);
 
     httpService.registerResources(JS_ALIAS, "js", null);
     httpService.registerResources(CSS_ALIAS, "css", null);
@@ -136,6 +139,7 @@ public final class Activator implements BundleActivator {
     handleSelectMedicineServlet.setDisplayLogin(displayServlet);
     handleSelectMedicineServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
     handleSelectMedicineServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    handleSelectMedicineServlet.setSuccessfulPageWriterServlet(successfulPageWriterServlet);
 
 
   }
