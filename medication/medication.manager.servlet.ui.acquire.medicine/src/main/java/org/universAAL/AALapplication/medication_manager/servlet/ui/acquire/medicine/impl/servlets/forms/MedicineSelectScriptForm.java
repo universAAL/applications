@@ -60,10 +60,22 @@ public final class MedicineSelectScriptForm extends ScriptForm {
 
     for (Treatment treatment : treatments) {
       Medicine med = treatment.getMedicine();
-      medicines.add(med);
+      if (okToInsert(medicines, med)) {
+        medicines.add(med);
+      }
     }
 
     return medicines;
+  }
+
+  private boolean okToInsert(Set<Medicine> medicines, Medicine med) {
+    for (Medicine medicine : medicines) {
+      if (medicine.getId() == med.getId()) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
 }

@@ -3,7 +3,6 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medi
 
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
 
-import javax.servlet.http.HttpServlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,12 +40,6 @@ public final class Util {
   public static final String USER = "user";
 
   private Util() {
-  }
-
-  public static void isServletSet(HttpServlet servlet, String servletName) {
-    if (servlet == null) {
-      throw new MedicationManagerAcquireMedicineException("The " + servletName + " is not set");
-    }
   }
 
   public static String getHtml(String resourcePath) {

@@ -231,7 +231,7 @@ public final class TreatmentDao extends AbstractDao {
   public void updateTreatmentTable(int treatmentId, boolean missed,
                                    boolean shortage, boolean dose) throws SQLException {
 
-    Log.info("Setting new alerts values for a medicineInventory with id: %s - missed : %s, shortage : %s, dose : %s, ",
+    Log.info("Setting new alerts values for a treatments with id: %s - missed : %s, shortage : %s, dose : %s, ",
         getClass(), treatmentId, missed, shortage, dose);
 
     String sql = "update MEDICATION_MANAGER.TREATMENT " +
@@ -289,4 +289,73 @@ public final class TreatmentDao extends AbstractDao {
       closeStatement(statement);
     }
   }
+
+  public List<Treatment> getPendingTreatments(Person patient, Medicine medicine) {
+    String sql = "SELECT * " +
+        "FROM MEDICATION_MANAGER.TREATMENT TR," +
+        "MEDICATION_MANAGER.PRESCRIPTION P" +
+        " WHERE " +
+        " P.PATIENT_FK_ID = ? " +
+        " AND TR.PRESCRIPTION_FK_ID = P.ID " +
+        " AND TR.MEDICINE_FK_ID = ? " +
+        " AND UPPER(TR.STATUS) = ?";
+
+    System.out.println("sql = " + sql);
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql);
+      return getPendingTreatments(patient.getId(), medicine.getId(), sql, statement);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+  }
+
+  private List<Treatment> getPendingTreatments(int patientId, int medicineId,
+                                               String sql, PreparedStatement statement) throws SQLException {
+    statement.setInt(1, patientId);
+    statement.setInt(2, medicineId);
+    statement.setString(3, PENDING.getValue().toUpperCase());
+    List<Map<String, Column>> results = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, statement);
+
+    return createTreatments(results);
+  }
+
+  public void changeStatusFromPendingToActive(List<Treatment> treatments) {
+
+    try {
+
+      for (Treatment treatment : treatments) {
+        updateTreatmentStatusToActive(treatment);
+      }
+
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
+
+  }
+
+  private void updateTreatmentStatusToActive(Treatment treatment) throws SQLException {
+    Log.info("Setting status from PENDING to ACTIVE for the following treatment with id : %s",
+        getClass(), treatment);
+
+    String sql = "update MEDICATION_MANAGER.TREATMENT " +
+        "set STATUS = ? where ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setString(1, TreatmentStatus.ACTIVE.getValue());
+      ps.setInt(2, treatment.getId());
+
+      ps.execute();
+    } finally {
+      closeStatement(ps);
+    }
+  }
+
+
 }
