@@ -7,7 +7,6 @@
 		<relativePath>../hwo.pom</relativePath>
   </parent>
   <artifactId>hwo.mobile</artifactId>
-  <version>E.0</version>
   <name>Help When Outdoor - Mobile application</name>
   <description/>
   <packaging>bundle</packaging>
