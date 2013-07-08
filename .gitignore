@@ -158,6 +158,8 @@ medication/medication.manager.servlet.ui.base/target
 medication/medication.manager.servlet.ui.configuration/*.iml
 medication/medication.manager.servlet.ui.configuration/*.log
 medication/medication.manager.servlet.ui.configuration/target
+medication/medication.manager.servlet.ui.review/*.iml
+medication/medication.manager.servlet.ui.review/target
 medication/medication.manager.servlet.ui/*.iml
 medication/medication.manager.servlet.ui/target
 medication/medication.manager.shell.commands/*.iml
