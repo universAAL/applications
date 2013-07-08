@@ -88,7 +88,8 @@ public final class SelectUserHtmlWriterServlet extends BaseHtmlWriterServlet {
       ScriptForm scriptForm = new UserSelectScriptForm(patients);
       sendResponse(req, resp, scriptForm);
     } else {
-      throw new MedicationManagerAcquireMedicineException("Missing patients for the following caregiver: " + caregiver);
+      throw new MedicationManagerAcquireMedicineException("Missing patients for the following caregiver: " +
+          caregiver.getName());
     }
 
   }

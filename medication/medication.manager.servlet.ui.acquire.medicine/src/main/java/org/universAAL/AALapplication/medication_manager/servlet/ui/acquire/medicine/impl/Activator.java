@@ -74,6 +74,12 @@ public final class Activator implements BundleActivator {
     service.unregister(LOGIN_SERVLET_ALIAS);
     service.unregister(SELECT_USER_SERVLET_ALIAS);
     service.unregister(LOGIN_HTML_SERVLET_ALIAS);
+    service.unregister(ERROR_PAGE_SERVLET_ALIAS);
+    service.unregister(HANDLE_USER_SERVLET_ALIAS);
+    service.unregister(SELECT_MED_SERVLET_ALIAS);
+    service.unregister(HANDLE_MED_SERVLET_ALIAS);
+    service.unregister(SUCCESS_PAGE_SERVLET_ALIAS);
+    service.unregister(HANDLE_SUCCESS_PAGE_SERVLET_ALIAS);
     service.unregister(JS_ALIAS);
     service.unregister(CSS_ALIAS);
 
