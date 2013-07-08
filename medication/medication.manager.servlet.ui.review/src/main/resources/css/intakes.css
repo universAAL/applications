@@ -1,6 +1,8 @@
-form { text-align: left; float: left; display: block; width: 100%; }
-
-table { width: 100; }
-table tr td, table tr th { vertical-align: middle; }
+body table.t1 { width: 100%; text-align: left; float: left; }
+body table tr td, table tr th { vertical-align: middle; }
 .red{color:red}
 .green{color:green}
+body .left { float: left; }
+body .right { float: right; }
+body .leftupper { float: left; }
+body .rightupper { float: right; }
