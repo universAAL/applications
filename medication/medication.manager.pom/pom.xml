@@ -64,6 +64,7 @@
     <module>../medication.manager.ui</module>
     <module>../medication.manager.servlet.ui</module>
     <module>../medication.manager.servlet.ui.acquire.medicine</module>
+    <module>../medication.manager.servlet.ui.review</module>
     <module>../medication.manager.servlet.ui.base</module>
     <module>../medication.manager.servlet.ui.configuration</module>
     <module>../medication.manager.event.issuer</module>

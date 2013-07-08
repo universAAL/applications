@@ -102,5 +102,9 @@
       mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.configuration/D.3-SNAPSHOT
     </bundle>
 
+    <bundle start-level='99' start='true'>
+      mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.review/D.3-SNAPSHOT
+    </bundle>
+
   </feature>
 </features>
