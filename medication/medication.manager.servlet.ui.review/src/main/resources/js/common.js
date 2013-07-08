@@ -5,7 +5,6 @@ isStatic = false;
 var LOGIN_SERVLET_ALIAS = "/review/login",
         SELECT_USER_SERVLET_ALIAS = "/review/select_user",
         HANDLE_SELECT_USER_SERVLET_ALIAS = "/review/handle_user",
-        HANDLE_SUCCESS_SERVLET_ALIAS = "/review/handle_success",
         CANCEL = "?cancel=true";
         BACK = "?back=true";
 
