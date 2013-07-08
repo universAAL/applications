@@ -2124,13 +2124,16 @@ medication/medication.manager.servlet.ui.review/src/main/resources/css/images/ui
 medication/medication.manager.servlet.ui.review/src/main/resources/css/images/ui-icons_cd0a0a_256x240.png -text
 medication/medication.manager.servlet.ui.review/src/main/resources/css/images/ui-icons_d82424_256x240.png -text
 medication/medication.manager.servlet.ui.review/src/main/resources/css/images/ui-icons_d8e7f3_256x240.png -text
+medication/medication.manager.servlet.ui.review/src/main/resources/css/intakes.css -text
 medication/medication.manager.servlet.ui.review/src/main/resources/css/jquery-ui-1.10.2.custom.min.css -text
 medication/medication.manager.servlet.ui.review/src/main/resources/css/login.css -text
 medication/medication.manager.servlet.ui.review/src/main/resources/css/reset-min.css -text
 medication/medication.manager.servlet.ui.review/src/main/resources/css/style.css -text
 medication/medication.manager.servlet.ui.review/src/main/resources/css/user.css -text
 medication/medication.manager.servlet.ui.review/src/main/resources/error.html -text
+medication/medication.manager.servlet.ui.review/src/main/resources/intakes.html -text
 medication/medication.manager.servlet.ui.review/src/main/resources/js/common.js -text
+medication/medication.manager.servlet.ui.review/src/main/resources/js/intakes.js -text
 medication/medication.manager.servlet.ui.review/src/main/resources/js/jquery-1.7.2.min.js -text
 medication/medication.manager.servlet.ui.review/src/main/resources/js/jquery-ui-1.10.2.custom.min.js -text
 medication/medication.manager.servlet.ui.review/src/main/resources/js/login.js -text
