@@ -4,7 +4,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Persis
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.Session;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.DisplayIntakesScriptForm;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.DisplayIntakesScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.Log;
 

@@ -14,10 +14,14 @@
     <link href="css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/common.css" type="text/css">
     <link rel="stylesheet" href="css/intakes.css" type="text/css">
+
 </head>
 
 <body>
-<script type="text/javascript">
+<!--<script type="text/javascript">
+
+    var user = "Saied";
+
     /*
      define intakes, example:
      */
@@ -26,7 +30,7 @@
             "date": '23.03.2013',
             "time": '15:30',
             "medication": "Aspirin Super",
-            "status": "-"
+            "status": "coming"
         },
         "id2": {
             "date": '23.03.2013',
@@ -42,14 +46,20 @@
         }
 
     };
-</script>
+</script>-->
 <div class="cont">
     <div>
         <h1>universAAL<br/>Medication Manager Service<br/>
-            Intakes</h1>
+            Intakes for
 
-        <button class="rightupper" name="logout"> &lt;&lt;week</button>
-        <button name="back" class="leftupper">&gt;&gt;week</button>
+            <script type="text/javascript">
+                document.write(user);
+            </script>
+
+        </h1>
+
+        <button name="logout" class="rightupper">&gt;&gt;week</button>
+        <button name="back" class="leftupper">week&lt;&lt;</button>
 
         <table id="intakes" class="t1">
             <tr>
