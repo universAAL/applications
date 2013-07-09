@@ -2025,6 +2025,7 @@ medication/medication.manager.servlet.ui.base/src/main/java/org/universAAL/AALap
 medication/medication.manager.servlet.ui.base/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/base/export/parser/script/Pair.java -text
 medication/medication.manager.servlet.ui.base/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/base/export/parser/script/Script.java -text
 medication/medication.manager.servlet.ui.base/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/base/export/parser/script/forms/DisplayErrorScriptForm.java -text
+medication/medication.manager.servlet.ui.base/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/base/export/parser/script/forms/DisplayIntakesScriptForm.java -text
 medication/medication.manager.servlet.ui.base/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/base/export/parser/script/forms/DisplayLoginScriptForm.java -text
 medication/medication.manager.servlet.ui.base/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/base/export/parser/script/forms/ScriptForm.java -text
 medication/medication.manager.servlet.ui.base/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/base/impl/Activator.java -text
@@ -2102,6 +2103,7 @@ medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AAL
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/BaseHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/BaseServlet.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/DisplayErrorPageWriterServlet.java -text
+medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/DisplayIntakesHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/DisplayLoginHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/HandleSelectUserServlet.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/LoginServlet.java -text

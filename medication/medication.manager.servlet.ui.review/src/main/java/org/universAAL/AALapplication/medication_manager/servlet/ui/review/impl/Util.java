@@ -23,10 +23,11 @@ public final class Util {
   public static final String SELECT_USER_SERVLET_ALIAS = "/review/select_user";
   public static final String HANDLE_USER_SERVLET_ALIAS = "/review/handle_user";
   public static final String ERROR_PAGE_SERVLET_ALIAS = "/review/error";
+  public static final String INTAKES_PAGE_SERVLET_ALIAS = "/review/intakes";
   public static final String LOGIN_ERROR = "LOGIN_ERROR";
   public static final String LOGIN_FILE_NAME = "login.html";
   public static final String ERROR_FILE_NAME = "error.html";
-  public static final String SUCCESS_FILE_NAME = "success.html";
+  public static final String INTAKES_FILE_NAME = "intakes.html";
   public static final String EMPTY = "";
   public static final String CANCEL = "cancel";
   public static final String BACK = "back";

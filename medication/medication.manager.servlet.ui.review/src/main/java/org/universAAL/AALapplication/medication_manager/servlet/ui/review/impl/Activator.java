@@ -12,6 +12,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.h
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.DebugWriterImpl;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.helpers.SessionTracking;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.DisplayErrorPageWriterServlet;
+import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.DisplayIntakesHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.DisplayLoginHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.HandleSelectUserServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.LoginServlet;
@@ -70,6 +71,9 @@ public final class Activator implements BundleActivator {
     service.unregister(LOGIN_SERVLET_ALIAS);
     service.unregister(SELECT_USER_SERVLET_ALIAS);
     service.unregister(LOGIN_HTML_SERVLET_ALIAS);
+    service.unregister(ERROR_PAGE_SERVLET_ALIAS);
+    service.unregister(HANDLE_USER_SERVLET_ALIAS);
+    service.unregister(INTAKES_PAGE_SERVLET_ALIAS);
     service.unregister(JS_ALIAS);
     service.unregister(CSS_ALIAS);
 
@@ -104,6 +108,8 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(ERROR_PAGE_SERVLET_ALIAS, displayErrorPageWriterServlet, null, null);
     HandleSelectUserServlet handleSelectUserServlet = new HandleSelectUserServlet(sessionTracking);
     httpService.registerServlet(HANDLE_USER_SERVLET_ALIAS, handleSelectUserServlet, null, null);
+    DisplayIntakesHtmlWriterServlet displayIntakesHtmlWriterServlet = new DisplayIntakesHtmlWriterServlet(sessionTracking);
+    httpService.registerServlet(INTAKES_PAGE_SERVLET_ALIAS, displayIntakesHtmlWriterServlet, null, null);
 
 
     httpService.registerResources(JS_ALIAS, "js", null);
@@ -123,6 +129,10 @@ public final class Activator implements BundleActivator {
 
     handleSelectUserServlet.setDisplayServlet(displayServlet);
     handleSelectUserServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    handleSelectUserServlet.setDisplayIntakesHtmlWriterServlet(displayIntakesHtmlWriterServlet);
+
+    displayIntakesHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
+    displayIntakesHtmlWriterServlet.setDisplayServlet(displayServlet);
 
   }
 

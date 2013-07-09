@@ -26,6 +26,7 @@ public final class HandleSelectUserServlet extends BaseServlet {
 
   private final Object lock = new Object();
   private DisplayLoginHtmlWriterServlet displayServlet;
+  private DisplayIntakesHtmlWriterServlet displayIntakesHtmlWriterServlet;
 
   public HandleSelectUserServlet(SessionTracking sessionTracking) {
     super(sessionTracking);
@@ -34,6 +35,11 @@ public final class HandleSelectUserServlet extends BaseServlet {
   public void setDisplayServlet(DisplayLoginHtmlWriterServlet displayServlet) {
     this.displayServlet = displayServlet;
   }
+
+  public void setDisplayIntakesHtmlWriterServlet(DisplayIntakesHtmlWriterServlet displayIntakesHtmlWriterServlet) {
+      this.displayIntakesHtmlWriterServlet = displayIntakesHtmlWriterServlet;
+    }
+
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,6 +52,7 @@ public final class HandleSelectUserServlet extends BaseServlet {
     synchronized (lock) {
       try {
         isServletSet(displayServlet, "displayServlet");
+        isServletSet(displayIntakesHtmlWriterServlet, "displayIntakesHtmlWriterServlet");
 
         Session session = getSession(req, resp, getClass());
         debugSessions(session.getId(), "the servlet doGet/doPost method", getClass());
@@ -63,7 +70,7 @@ public final class HandleSelectUserServlet extends BaseServlet {
         if (caregiver != null) {
           setPatient(req, session);
           debugSessions(session.getId(), "End of the servlet doGet/doPost method (caregiver is not null", getClass());
-          resp.getWriter().println("uraaaaaaaaaaa");
+          displayIntakesHtmlWriterServlet.doGet(req, resp);
           return;
         } else {
           debugSessions(session.getId(), "End of the servlet doGet/doPost method (caregiver is null)", getClass());
