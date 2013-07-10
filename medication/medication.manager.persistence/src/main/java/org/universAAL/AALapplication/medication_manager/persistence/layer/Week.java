@@ -1,10 +1,10 @@
-package org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl;
+package org.universAAL.AALapplication.medication_manager.persistence.layer;
+
+import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
-
-import static org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -17,8 +17,8 @@ public final class Week {
 
   private Week(Timestamp begin, Timestamp end, Timestamp now) {
 
-    validateParameter(begin, "begin");
-    validateParameter(end, "end");
+//    validateParameter(begin, "begin");
+//    validateParameter(end, "end");
 
     this.begin = begin;
     this.end = end;
@@ -49,7 +49,7 @@ public final class Week {
   public static Week createWeek(Calendar selectedWeekStartDay) {
 
     if (selectedWeekStartDay.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
-      throw new MedicationManagerReviewException("The currentWeekMonday parameter is not MONDAY");
+      throw new MedicationManagerPersistenceException("The currentWeekMonday parameter is not MONDAY");
     }
 
     selectedWeekStartDay.set(Calendar.HOUR, 0);
@@ -65,7 +65,7 @@ public final class Week {
     endCalendar.add(Calendar.DAY_OF_YEAR, 6);
 
     if (endCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
-      throw new MedicationManagerReviewException("The endCalendar is not SUNDAY");
+      throw new MedicationManagerPersistenceException("The endCalendar is not SUNDAY");
     }
 
     endCalendar.set(Calendar.HOUR, 23);
