@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.IntakeInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.JavaScriptObjectCreator;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Pair;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.forms.ScriptForm;
@@ -17,11 +18,15 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.e
 public final class DisplayIntakesScriptForm extends ScriptForm {
 
   private final PersistentService persistentService;
+  private final Person patient;
+  private final Week selectedWeek;
 
-  public DisplayIntakesScriptForm(PersistentService persistentService) {
+  public DisplayIntakesScriptForm(PersistentService persistentService,
+                                  Person patient, Week selectedWeek) {
 
     this.persistentService = persistentService;
-
+    this.patient = patient;
+    this.selectedWeek = selectedWeek;
   }
 
   @Override
@@ -46,12 +51,15 @@ public final class DisplayIntakesScriptForm extends ScriptForm {
 
     sb.append("\n\t");
 
-    String username = "Saied"; //TODO to be removed
-
     sb.append("var user = \"");
 
-    sb.append(username);
-
+    sb.append(patient.getName());
+    sb.append("<br> WEEK <br> begin = ");
+    sb.append(selectedWeek.getBegin());
+    sb.append("<br> now = ");
+    sb.append(selectedWeek.getNow());
+    sb.append("<br> end = ");
+    sb.append(selectedWeek.getEnd());
     sb.append("\";");
 
     sb.append('\n');
