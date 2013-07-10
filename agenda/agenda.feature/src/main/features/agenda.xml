@@ -14,10 +14,10 @@
 <bundle>wrap:mvn:activesoap/jaxp-api/1.3</bundle>
 
 <!-- Ontologies -->
-<bundle>mvn:org.universAAL.ontology/ont.phWorld/1.3.2-SNAPSHOT</bundle>
-<bundle>mvn:org.universAAL.ontology/ont.profile/1.3.3-SNAPSHOT</bundle>
-<bundle>mvn:org.universAAL.ontology/ont.agenda/1.3.3-SNAPSHOT</bundle>
-<bundle>mvn:org.universAAL.ontology/ont.agendaEventSelection/1.3.3-SNAPSHOT</bundle>
+<bundle>mvn:org.universAAL.ontology/ont.phWorld/${platform.version}</bundle>
+<bundle>mvn:org.universAAL.ontology/ont.profile/${platform.version}</bundle>
+<bundle>mvn:org.universAAL.ontology/ont.agenda/${platform.version}</bundle>
+<bundle>mvn:org.universAAL.ontology/ont.agendaEventSelection/${platform.version}</bundle>
 
 <!-- Service -->
 <bundle>mvn:org.universAAL.AALapplication/agenda.client/${project.version}</bundle>
