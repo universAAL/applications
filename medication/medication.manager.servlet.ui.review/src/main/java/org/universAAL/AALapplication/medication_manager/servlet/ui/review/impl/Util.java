@@ -119,7 +119,7 @@ public final class Util {
 
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(date);
-    calendar.set(Calendar.HOUR, 0);
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
     calendar.set(Calendar.MINUTE, 0);
     calendar.set(Calendar.SECOND, 0);
     calendar.set(Calendar.MILLISECOND, 0);
@@ -131,10 +131,21 @@ public final class Util {
 
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(date);
-    int hour = calendar.get(Calendar.HOUR);
-    int minutes = calendar.get(Calendar.MINUTE);
+    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+    String hourText = String.valueOf(hour);
 
-    return hour + ":" + minutes;
+    if (hour < 10) {
+      hourText = '0' + hourText;
+    }
+
+    int minutes = calendar.get(Calendar.MINUTE);
+    String minutesText = String.valueOf(minutes);
+
+    if (minutes < 10) {
+      minutesText = '0' + minutesText;
+    }
+
+    return hourText + ':' + minutesText;
   }
 
 }
