@@ -1,7 +1,9 @@
-﻿var intakes = {};//all params
+﻿var intakes = {},
+    user = "";
+
 
 $(function () {
-
+    $("h1 .name").html(user);
     var tableSelector = 'table';
     var templSelector = tableSelector + ' tr.templ';
     if ($.isEmptyObject(intakes)) {
