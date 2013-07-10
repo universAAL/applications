@@ -24,6 +24,7 @@ public final class Util {
   public static final String HANDLE_USER_SERVLET_ALIAS = "/review/handle_user";
   public static final String ERROR_PAGE_SERVLET_ALIAS = "/review/error";
   public static final String INTAKES_PAGE_SERVLET_ALIAS = "/review/intakes";
+  public static final String HANDLE_INTAKES_SERVLET_ALIAS = "/review/handle_intakes";
   public static final String LOGIN_ERROR = "LOGIN_ERROR";
   public static final String LOGIN_FILE_NAME = "login.html";
   public static final String ERROR_FILE_NAME = "error.html";
@@ -31,6 +32,8 @@ public final class Util {
   public static final String EMPTY = "";
   public static final String CANCEL = "cancel";
   public static final String BACK = "back";
+  public static final String PREV = "prev";
+  public static final String NEXT = "next";
   public static final String TRUE = "true";
   public static final String PATIENT = "PATIENT";
   public static final Pair<String> EMPTY_PAIR = new Pair<String>(null, null);
