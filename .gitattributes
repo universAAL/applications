@@ -74,21 +74,18 @@ aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model/SleepModel.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/utils/Setup.java -text svneol=unset#text/plain
 agenda/agenda.client/ASL2.0.txt -text
-agenda/agenda.client/MITX.txt -text
 agenda/agenda.client/NOTICE.txt -text
 agenda/agenda.client/pom.xml -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/AgendaConsumer.java -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/ServiceRequestCreator.java -text
 agenda/agenda.client/src/main/java/org/universAAL/agenda/client/osgi/Activator.java -text
 agenda/agenda.eventSelection.client/ASL2.0.txt -text
-agenda/agenda.eventSelection.client/MITX.txt -text
 agenda/agenda.eventSelection.client/NOTICE.txt -text
 agenda/agenda.eventSelection.client/pom.xml -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolConsumer.java -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/EventSelectionToolServiceRequestCreator.java -text
 agenda/agenda.eventSelection.client/src/main/java/org/universAAL/agendaEventSelectionTool/client/osgi/Activator.java -text
 agenda/agenda.eventSelection.server/ASL2.0.txt -text
-agenda/agenda.eventSelection.server/MITX.txt -text
 agenda/agenda.eventSelection.server/NOTICE.txt -text
 agenda/agenda.eventSelection.server/pom.xml -text
 agenda/agenda.eventSelection.server/src/main/java/org/universAAL/agendaEventSelectionTool/database/EventSelectionToolDBInterface.java -text
@@ -112,7 +109,6 @@ agenda/agenda.feature/README.txt svneol=native#text/plain
 agenda/agenda.feature/pom.xml svneol=native#text/xml
 agenda/agenda.feature/src/main/features/agenda.xml svneol=native#text/xml
 agenda/agenda.gui/ASL2.0.txt -text
-agenda/agenda.gui/MITX.txt -text
 agenda/agenda.gui/NOTICE.txt -text
 agenda/agenda.gui/pom.xml -text
 agenda/agenda.gui/src/main/java/org/universAAL/agenda/gui/AnalogClock.java -text
@@ -198,12 +194,10 @@ agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_it.
 agenda/agenda.gui/src/main/resources/org/universAAL/agenda/gui/util/messages_nl.properties -text
 agenda/agenda.gui/src/test/resources/icon_danger_small.gif -text
 agenda/agenda.pom/composite/ASL2.0.txt -text
-agenda/agenda.pom/composite/MITX.txt -text
 agenda/agenda.pom/composite/NOTICE.txt -text
 agenda/agenda.pom/composite/pom.xml -text
 agenda/agenda.pom/pom.xml -text
 agenda/agenda.remote/ASL2.0.txt -text
-agenda/agenda.remote/MITX.txt -text
 agenda/agenda.remote/NOTICE.txt -text
 agenda/agenda.remote/documentation/agenda.remote.PNG -text
 agenda/agenda.remote/documentation/agenda.remote.ucls -text
@@ -222,7 +216,6 @@ agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_el
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_en.properties -text
 agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es.properties -text
 agenda/agenda.runner/ASL2.0.txt -text
-agenda/agenda.runner/MITX.txt -text
 agenda/agenda.runner/NOTICE.txt -text
 agenda/agenda.runner/Run.bat -text
 agenda/agenda.runner/dbSchemaRepository/AgendaDBwithInitialTestCalendar.sql -text
@@ -341,7 +334,6 @@ agenda/agenda.runner/runner/felix/system.properties -text
 agenda/agenda.runner/runner/remoteDebug.bat -text
 agenda/agenda.runner/runner/run.bat -text
 agenda/agenda.server/ASL2.0.txt -text
-agenda/agenda.server/MITX.txt -text
 agenda/agenda.server/NOTICE.txt -text
 agenda/agenda.server/documentation/agenda.server.PNG -text
 agenda/agenda.server/documentation/agenda.server.ucls -text
