@@ -8,7 +8,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.p
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.DisplayIntakesScriptForm;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.Log;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.MedicationManagerReviewException;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.Week;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.Week;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

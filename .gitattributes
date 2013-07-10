@@ -1906,6 +1906,7 @@ medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplic
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/SqlUtility.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/UserInfo.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/Util.java -text
+medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/Week.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/dao/ComplexDao.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/dao/DispenserDao.java -text
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/dao/IntakeDao.java -text
@@ -2093,7 +2094,6 @@ medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AAL
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/Log.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/MedicationManagerReviewException.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/Util.java -text
-medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/Week.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/BaseHtmlWriterServlet.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/BaseServlet.java -text
 medication/medication.manager.servlet.ui.review/src/main/java/org/universAAL/AALapplication/medication_manager/servlet/ui/review/impl/servlets/DisplayErrorPageWriterServlet.java -text

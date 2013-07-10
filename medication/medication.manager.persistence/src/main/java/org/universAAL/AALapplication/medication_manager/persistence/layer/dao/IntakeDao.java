@@ -6,6 +6,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.Medicat
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Column;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.Week;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
@@ -308,6 +309,47 @@ public final class IntakeDao extends AbstractDao {
 
 
     return sqlBuffer.toString();
+  }
+
+  public List<Intake> getIntakesByPatientInWeek(Person patient, Week week) {
+    String sql = "SELECT INTA.* \n" +
+        "  FROM MEDICATION_MANAGER.INTAKE INTA,\n" +
+        "  MEDICATION_MANAGER.TREATMENT TR,\n" +
+        "  MEDICATION_MANAGER.PRESCRIPTION PR,\n" +
+        "      MEDICATION_MANAGER.PERSON P\n" +
+        "    \n" +
+        "  WHERE UPPER(P.PERSON_URI) = ? \n" +
+        "  AND INTA.TREATMENT_FK_ID = TR.ID \n" +
+        "  AND UPPER(TR.STATUS) = ? \n" +
+        "  AND TR.PRESCRIPTION_FK_ID = PR.ID \n" +
+        "  AND PR.PATIENT_FK_ID = P.ID \n" +
+        "  AND INTA.TIME_PLAN >= ? \n" +
+        "  AND INTA.TIME_PLAN <= ? ";
+
+    System.out.println("sql = " + sql);
+    System.out.println("week = " + week);
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql, statement);
+      return getIntakes(patient, week, sql, statement);
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+
+  }
+
+  private List<Intake> getIntakes(Person patient, Week week, String sql,
+                                  PreparedStatement statement) throws SQLException {
+
+    statement.setString(1, patient.getPersonUri().toUpperCase());
+    statement.setString(2, ACTIVE.getValue().toUpperCase());
+    statement.setTimestamp(3, week.getBegin());
+    statement.setTimestamp(4, week.getEnd());
+    List<Map<String, Column>> results = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, statement);
+    return createIntakes(results);
   }
 
 
