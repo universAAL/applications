@@ -14,7 +14,6 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.h
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.DisplayErrorPageWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.DisplayIntakesHtmlWriterServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.DisplayLoginHtmlWriterServlet;
-import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.HandleIntakesServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.HandleSelectUserServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.LoginServlet;
 import org.universAAL.AALapplication.medication_manager.servlet.ui.review.impl.servlets.SelectUserHtmlWriterServlet;
@@ -111,9 +110,6 @@ public final class Activator implements BundleActivator {
     httpService.registerServlet(HANDLE_USER_SERVLET_ALIAS, handleSelectUserServlet, null, null);
     DisplayIntakesHtmlWriterServlet displayIntakesHtmlWriterServlet = new DisplayIntakesHtmlWriterServlet(sessionTracking);
     httpService.registerServlet(INTAKES_PAGE_SERVLET_ALIAS, displayIntakesHtmlWriterServlet, null, null);
-    HandleIntakesServlet handleIntakesServlet = new HandleIntakesServlet(sessionTracking);
-    httpService.registerServlet(HANDLE_INTAKES_SERVLET_ALIAS, handleIntakesServlet, null, null);
-
 
     httpService.registerResources(JS_ALIAS, "js", null);
     httpService.registerResources(CSS_ALIAS, "css", null);
@@ -136,11 +132,7 @@ public final class Activator implements BundleActivator {
 
     displayIntakesHtmlWriterServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
     displayIntakesHtmlWriterServlet.setDisplayServlet(displayServlet);
-
-    handleIntakesServlet.setDisplayIntakesHtmlWriterServlet(displayIntakesHtmlWriterServlet);
-    handleIntakesServlet.setDisplayErrorPageWriterServlet(displayErrorPageWriterServlet);
-    handleIntakesServlet.setDisplayServlet(displayServlet);
-    handleIntakesServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
+    displayIntakesHtmlWriterServlet.setSelectUserHtmlWriterServlet(selectUserServlet);
 
   }
 
