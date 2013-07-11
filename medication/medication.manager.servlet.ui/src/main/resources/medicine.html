@@ -1,19 +1,19 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb">
 <head>
 
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-	<title>universALL - Medication Medical Service: Add Medicine</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>universALL - Medication Medical Service: Add Medicine</title>
 
-	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-	<script src="js/jquery-ui-1.10.2.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
 
-	<link href="css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/medicine.js"></script>
-	<link rel="stylesheet" href="css/common.css" type="text/css"/>
-	<link rel="stylesheet" href="css/medicine.css" type="text/css"/>
+    <link href="css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/medicine.js"></script>
+    <link rel="stylesheet" href="css/common.css" type="text/css"/>
+    <link rel="stylesheet" href="css/medicine.css" type="text/css"/>
 </head>
 
 <body>
@@ -39,63 +39,77 @@
   medicineObj.hours=[1,13, 22, 24];*/
 
 </script>-->
-<div class="cont"><div>
-	<h1>universAAL<br/>Medication Medical Service</h1>
+<div class="cont">
+    <div>
+        <h1>universAAL<br/>Medication Medical Service</h1>
 
-	<h2>Add medicine</h2>
+        <h2>Add medicine</h2>
 
-	<form name="save_medicine" action="" method="post">
+        <form name="save_medicine" action="" method="post">
 
-		<table id="medicine" class="t1">
-			<tr>
-				<th>Medicine Name</th>
-				<td>
-						<input type="hidden" name="id" value=""/>
-						<input type="hidden" name="prescriptionId" value=""/>
-						<input type="text" name="name" class="all" value=""/></td>
-			</tr>
-			<tr>
-				<th>Description</th>
-				<td><textarea name="description" rows="3" class="all" value=""></textarea></td>
-			</tr>
-			<tr>
-				<th>Side Effects</th>
-				<td><textarea name="side_effects" rows="3" class="all" value=""></textarea></td>
-			</tr>
-			<tr>
-				<th>Incompliances</th>
-				<td><textarea name="incompliances" rows="3" class="all" value=""></textarea></td>
-			</tr>
-			<tr>
-				<th>Days to be taken</th>
-				<td><input type="text" name="days" size="3"/></td>
-			</tr>
-			<tr>
-				<th>Dose per intake</th>
-				<td>
-					<input type="text" name="dose" size="3"/>
-				  <input type="radio" id="pills" name="unit" value="pills" checked/> <label for="pills">pills</label>
-					<input type="radio" id="drops" name="unit" value="drops"/> <label for="drops">drops</label>
-					<select name="meal_relation">
-					</select>
-				</td>
-			</tr>
-		</table>
+            <table id="medicine" class="t1">
+                <tr>
+                    <th>Medicine Name</th>
+                    <td>
+                        <input type="hidden" name="id" value=""/>
+                        <input type="hidden" name="prescriptionId" value=""/>
+                        <input type="text" name="name" class="all" value=""/></td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td><textarea name="description" rows="3" class="all" value=""></textarea></td>
+                </tr>
+                <tr>
+                    <th>Side Effects</th>
+                    <td><textarea name="side_effects" rows="3" class="all" value=""></textarea></td>
+                </tr>
+                <tr>
+                    <th>Incompliances</th>
+                    <td><textarea name="incompliances" rows="3" class="all" value=""></textarea></td>
+                </tr>
+                <tr>
+                    <th>Days to be taken</th>
+                    <td><input type="text" name="days" size="3"/></td>
+                </tr>
+                <tr>
+                    <th>Dose per intake</th>
+                    <td>
+                        <input type="text" name="dose" size="3"/>
+                        <input type="radio" id="pills" name="unit" value="pills" checked/> <label
+                            for="pills">pills</label>
+                        <input type="radio" id="drops" name="unit" value="drops"/> <label for="drops">drops</label>
+                        <select name="meal_relation">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Alerts</th>
+                    <td>
+                        <input type="checkbox" id="missed" name="missed" value="missed" checked/>
+                        <label for="missed">missed intake alert</label>
+                        <input type="checkbox" id="new_dose" name="new_dose" value="new_dose" checked/>
+                        <label for="new_dose">new dose alert</label>
+                        <input type="checkbox" id="shortage" name="shortage" value="shortage" checked/>
+                        <label for="shortage">shortage alert</label>
+                    </td>
+                </tr>
+            </table>
 
-		<table class="t1 days">
-			<tr>
-				<th rowspan="2">Intake<br/>hours</th>
-			</tr>
-			<tr></tr>
-		</table>
+            <table class="t1 days">
+                <tr>
+                    <th rowspan="2">Intake<br/>hours</th>
+                </tr>
+                <tr></tr>
+            </table>
 
 
-		<input type="submit" name="save_medicine" value="Save Medicine" class="button"/>
-		<button name="delete" class="right">Delete</button>
-        <button name="back" class="right">Cancel</button>
-	</form>
+            <input type="submit" name="save_medicine" value="Save Medicine" class="button"/>
+            <button name="delete" class="right">Delete</button>
+            <button name="back" class="right">Cancel</button>
+        </form>
 
-</div></div>
+    </div>
+</div>
 
 </body>
 </html>

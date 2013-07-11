@@ -42,6 +42,10 @@ public final class Util {
   public static final String TRUE = "true";
   public static final String PATIENT = "PATIENT";
   public static final Pair<String> EMPTY_PAIR = new Pair<String>(null, null);
+  public static final String ALERT = "alert";
+  public static final String MISSED = "missed";
+  public static final String NEW_DOSE = "new_dose";
+  public static final String SHORTAGE = "shortage";
 
   private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
   public static final String PRESCRIPTION_VIEW = "prescription_view";

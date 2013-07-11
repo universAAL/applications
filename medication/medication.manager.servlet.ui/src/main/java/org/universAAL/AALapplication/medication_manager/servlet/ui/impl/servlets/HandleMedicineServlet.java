@@ -156,10 +156,30 @@ public final class HandleMedicineServlet extends BaseServlet {
     String unitText = getNotNullParameter(req, UNIT);
     String doseText = getNotNullParameter(req, "dose");
     int dose = getPositiveNumber(doseText, "doseText");
+    String missed = req.getParameter(MISSED);
+
+    if (MISSED.equals(missed)) {
+      medicineView.setMissedIntakeAlert(true);
+    }
+
+    String doseAlert = req.getParameter(NEW_DOSE);
+
+    if (NEW_DOSE.equals(doseAlert)) {
+      medicineView.setNewDoseAlert(true);
+    }
+
+    String shortage = req.getParameter(SHORTAGE);
+
+    if (SHORTAGE.equals(shortage)) {
+      medicineView.setShortageAlert(true);
+    }
+
+
     String[] hours = req.getParameterValues(HOURS);
     if (hours == null) {
       throw new MedicationManagerServletUIException("Missing parameter with the following name: " + HOURS);
     }
+
     medicineView.fillIntakeDTOSet(dose, hours, unitText);
 
   }
