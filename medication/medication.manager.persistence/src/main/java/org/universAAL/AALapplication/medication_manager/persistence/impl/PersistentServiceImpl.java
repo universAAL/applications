@@ -56,6 +56,7 @@ public final class PersistentServiceImpl implements PersistentService {
         dispenserDao,
         patientLinksDao,
         treatmentDao,
+        intakeDao,
         medicineInventoryDao,
         inventoryLogDao
     );
