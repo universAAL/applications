@@ -63,25 +63,6 @@ public class Activator implements BundleActivator {
 
   }
 
-  /*public static PersistentService getPersistentService() {
-    if (context == null) {
-      throw new MedicationManagerUIException("The bundleContext is not set");
-    }
-
-    ServiceReference srPS = context.getServiceReference(PersistentService.class.getName());
-
-    if (srPS == null) {
-      throw new MedicationManagerUIException("The ServiceReference is null for PersistentService");
-    }
-
-    PersistentService persistentService = (PersistentService) context.getService(srPS);
-
-    if (persistentService == null) {
-      throw new MedicationManagerUIException("The PersistentService is missing");
-    }
-    return persistentService;
-  }*/
-
   public static PersistentService getPersistentService() {
     if (persistenceServiceTracker == null) {
       throw new MedicationManagerUIException("The PersistentService ServiceTracker is not set");
