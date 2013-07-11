@@ -1,13 +1,17 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer.dao;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.IntakeComparator;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.AbstractDao;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.IntakeInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.NotificationInfoComplexId;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.NotificationsInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.Week;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MedicineInventory;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
@@ -16,11 +20,18 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.IntakeInfo.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -34,9 +45,10 @@ public final class ComplexDao extends AbstractDao {
   private final TreatmentDao treatmentDao;
   private final MedicineInventoryDao medicineInventoryDao;
   private final InventoryLogDao inventoryLogDao;
+  private final IntakeDao intakeDao;
 
   public ComplexDao(Database database, PersonDao personDao, DispenserDao dispenserDao,
-                    PatientLinksDao patientLinksDao, TreatmentDao treatmentDao,
+                    PatientLinksDao patientLinksDao, TreatmentDao treatmentDao, IntakeDao intakeDao,
                     MedicineInventoryDao medicineInventoryDao, InventoryLogDao inventoryLogDao) {
 
     super(database, "This is complex dao no specific table");
@@ -46,6 +58,7 @@ public final class ComplexDao extends AbstractDao {
     this.dispenserDao = dispenserDao;
     this.patientLinksDao = patientLinksDao;
     this.treatmentDao = treatmentDao;
+    this.intakeDao = intakeDao;
     this.medicineInventoryDao = medicineInventoryDao;
     this.inventoryLogDao = inventoryLogDao;
   }
@@ -280,4 +293,66 @@ public final class ComplexDao extends AbstractDao {
     treatmentDao.changeStatusFromPendingToActive(treatments);
 
   }
+
+  public Set<IntakeInfo> getIntakeInfos(Person patient, Week selectedWeek) {
+
+    List<Intake> intakes = intakeDao.getIntakesByPatientInWeek(patient, selectedWeek);
+
+    if (intakes.isEmpty()) {
+      return new HashSet<IntakeInfo>();
+    }
+
+    Collections.sort(intakes, new IntakeComparator());
+
+    return createIntakeInfos(intakes);
+
+  }
+
+  private Set<IntakeInfo> createIntakeInfos(List<Intake> intakes) {
+    Set<IntakeInfo> intakeInfos = new LinkedHashSet<IntakeInfo>();
+
+    int count = 1;
+    for (Intake intake : intakes) {
+      String medication = intake.getTreatment().getMedicine().getMedicineName();
+      String date = getDateText(intake.getTimePlan());
+      String time = getTimeText(intake.getTimePlan());
+      String status = getStatus(intake);
+      IntakeInfo info = new IntakeInfo(date, time, medication, status);
+      intakeInfos.add(info);
+      count++;
+      if (count == 4) {
+        count = 1;
+      }
+    }
+
+    return intakeInfos;
+  }
+
+  private String getStatus(Intake intake) {
+    Calendar now = Calendar.getInstance();
+    now.setTime(new Date());
+
+    Calendar timePlan = Calendar.getInstance();
+    timePlan.setTime(intake.getTimePlan());
+
+    Date timeTaken = intake.getTimeTaken();
+    String status;
+    if (timeTaken == null) {
+      status = getStatusFromMissingTimeTaken(now, timePlan);
+    } else {
+      status = TAKEN;
+    }
+
+    return status;
+
+  }
+
+  private String getStatusFromMissingTimeTaken(Calendar now, Calendar timePlan) {
+    if (now.after(timePlan)) {
+      return MISSED;
+    }
+
+    return COMING;
+  }
+
 }

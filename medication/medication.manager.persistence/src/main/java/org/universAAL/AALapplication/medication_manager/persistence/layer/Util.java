@@ -5,6 +5,9 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.Pa
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.middleware.service.ServiceResponse;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -20,6 +23,8 @@ public final class Util {
   public static final String OUTPUT_CAREGIVER_RECEIVED_MESSAGE =
       CAREGIVER_NOTIFIER_NAMESPACE + "receivedMessage";
   public static final String UNDERSCORE = "_";
+
+  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
   private Util() {
   }
@@ -81,6 +86,39 @@ public final class Util {
       throw new MedicationManagerPersistenceException(e);
     }
 
+  }
+
+  public static String getDateText(Date date) {
+
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(date);
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
+    calendar.set(Calendar.MINUTE, 0);
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+
+    return SIMPLE_DATE_FORMAT.format(calendar.getTime());
+  }
+
+  public static String getTimeText(Date date) {
+
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(date);
+    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+    String hourText = String.valueOf(hour);
+
+    if (hour < 10) {
+      hourText = '0' + hourText;
+    }
+
+    int minutes = calendar.get(Calendar.MINUTE);
+    String minutesText = String.valueOf(minutes);
+
+    if (minutes < 10) {
+      minutesText = '0' + minutesText;
+    }
+
+    return hourText + ':' + minutesText;
   }
 
 }

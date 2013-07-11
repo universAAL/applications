@@ -9,9 +9,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.StringReader;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * @author George Fournadjiev
@@ -40,7 +37,6 @@ public final class Util {
   public static final String PATIENT = "PATIENT";
   public static final Pair<String> EMPTY_PAIR = new Pair<String>(null, null);
 
-  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
   public static final String ERROR = "ERROR";
   public static final String USER = "user";
 
@@ -113,39 +109,6 @@ public final class Util {
       throw new MedicationManagerReviewException(e);
     }
 
-  }
-
-  public static String getDateText(Date date) {
-
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTime(date);
-    calendar.set(Calendar.HOUR_OF_DAY, 0);
-    calendar.set(Calendar.MINUTE, 0);
-    calendar.set(Calendar.SECOND, 0);
-    calendar.set(Calendar.MILLISECOND, 0);
-
-    return SIMPLE_DATE_FORMAT.format(calendar.getTime());
-  }
-
-  public static String getTimeText(Date date) {
-
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTime(date);
-    int hour = calendar.get(Calendar.HOUR_OF_DAY);
-    String hourText = String.valueOf(hour);
-
-    if (hour < 10) {
-      hourText = '0' + hourText;
-    }
-
-    int minutes = calendar.get(Calendar.MINUTE);
-    String minutesText = String.valueOf(minutes);
-
-    if (minutes < 10) {
-      minutesText = '0' + minutesText;
-    }
-
-    return hourText + ':' + minutesText;
   }
 
 }
