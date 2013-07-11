@@ -1,14 +1,16 @@
 ﻿var intakes = {},
-    user = "";
+        user = "";
 
 
 $(function () {
     $("h1 .name").html(user);
     var tableSelector = 'table';
+    var msgSelector = '.msg';
     var templSelector = tableSelector + ' tr.templ';
     if ($.isEmptyObject(intakes)) {
         $(templSelector).remove();
-        $("input:submit").hide();
+        $(tableSelector).hide();
+        $(msgSelector).show();
         return;
     }
     var $trTempl = $(templSelector).clone(true).show();
@@ -33,5 +35,7 @@ $(function () {
     $(tableSelector + " tr:even").addClass("even");
     $(tableSelector + " tr:first").removeClass(" odd even");
 
+    $(msgSelector).hide();
+    $(tableSelector).show();
 
 });

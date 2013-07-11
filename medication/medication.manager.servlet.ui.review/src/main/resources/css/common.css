@@ -24,8 +24,6 @@ body .cont { margin: 20px auto; text-align: center; padding: 40px; }
 body .cont > div { display: table; margin: 0 auto; }
 body .cont .error_msg { background: #fef1ec; border: 1px solid #cd0a0a; color: #cd0a0a; padding: 1em 0.7em; margin: 10px; }
 body .cont .error_msg.left { text-align: left; }
-body .cont .msg { background: #C6D9F1;border: 1px solid #2A4463;color: #2A4463; padding: 1em 0.7em; margin: 10px; }
-body .cont .msg.left { text-align: left; }
 body h1 { font-size: 26px; line-height: 40px; }
 body h2 { font-size: 22px; color: #c6d9f1; }
 body h1, body h2 { margin: 0 15px 15px; }
