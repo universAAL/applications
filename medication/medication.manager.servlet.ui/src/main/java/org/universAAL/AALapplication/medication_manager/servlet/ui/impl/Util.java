@@ -25,15 +25,15 @@ public final class Util {
 
 
   public static final String LOGGED_DOCTOR = "Doctor";
-  public static final String LOGIN_HTML_SERVLET_ALIAS = "/login.html";
-  public static final String LOGIN_SERVLET_ALIAS = "/login";
-  public static final String SELECT_USER_SERVLET_ALIAS = "/select_user";
-  public static final String LIST_PRESCRIPTIONS_SERVLET_ALIAS = "/display_prescriptions";
-  public static final String NEW_PRESCRIPTION_SERVLET_ALIAS = "/display_new_prescription";
-  public static final String HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS = "/handle_new_prescription";
-  public static final String MEDICINE_SERVLET_ALIAS = "/display_new_medicine";
-  public static final String HANDLE_MEDICINE_SERVLET_ALIAS = "/handle_new_medicine";
-  public static final String ERROR_PAGE_SERVLET_ALIAS = "/error";
+  public static final String LOGIN_HTML_SERVLET_ALIAS = "/prescription/login.html";
+  public static final String LOGIN_SERVLET_ALIAS = "/prescription/login";
+  public static final String SELECT_USER_SERVLET_ALIAS = "/prescription/select_user";
+  public static final String LIST_PRESCRIPTIONS_SERVLET_ALIAS = "/prescription/display_prescriptions";
+  public static final String NEW_PRESCRIPTION_SERVLET_ALIAS = "/prescription/display_new_prescription";
+  public static final String HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS = "/prescription/handle_new_prescription";
+  public static final String MEDICINE_SERVLET_ALIAS = "/prescription/display_new_medicine";
+  public static final String HANDLE_MEDICINE_SERVLET_ALIAS = "/prescription/handle_new_medicine";
+  public static final String ERROR_PAGE_SERVLET_ALIAS = "/prescription/error";
   public static final String LOGIN_ERROR = "LOGIN_ERROR";
   public static final String LOGIN_FILE_NAME = "login.html";
   public static final String ERROR_FILE_NAME = "error.html";

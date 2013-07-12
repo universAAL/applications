@@ -2,13 +2,13 @@
 isStatic = false;
 
 //Servlet aliases:
-var LOGIN_SERVLET_ALIAS = "/login",
-        SELECT_USER_SERVLET_ALIAS = "/select_user",
-        LIST_PRESCRIPTIONS_SERVLET_ALIAS = "/display_prescriptions",
-        NEW_PRESCRIPTION_SERVLET_ALIAS = "/display_new_prescription",
-        HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS = "/handle_new_prescription",
-        NEW_MEDICINE_SERVLET_ALIAS = "/display_new_medicine",
-        HANDLE_NEW_MEDICINE_SERVLET_ALIAS = "/handle_new_medicine",
+var LOGIN_SERVLET_ALIAS = "/prescription/login",
+        SELECT_USER_SERVLET_ALIAS = "/prescription/select_user",
+        LIST_PRESCRIPTIONS_SERVLET_ALIAS = "/prescription/display_prescriptions",
+        NEW_PRESCRIPTION_SERVLET_ALIAS = "/prescription/display_new_prescription",
+        HANDLE_NEW_PRESCRIPTION_SERVLET_ALIAS = "/prescription/handle_new_prescription",
+        NEW_MEDICINE_SERVLET_ALIAS = "/prescription/display_new_medicine",
+        HANDLE_NEW_MEDICINE_SERVLET_ALIAS = "/prescription/handle_new_medicine",
         CANCEL = "?cancel=true";
 
 $(function () {
