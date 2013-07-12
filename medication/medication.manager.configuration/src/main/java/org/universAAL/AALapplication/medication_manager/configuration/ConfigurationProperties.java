@@ -9,6 +9,8 @@ public interface ConfigurationProperties {
 
   int getMedicationReminderTimeout();
 
+  int getMedicationUpsideDownTimeout();
+
   int getIntakeIntervalMinutes();
 
   long getHttpSessionExpireTimeoutInMinutes();

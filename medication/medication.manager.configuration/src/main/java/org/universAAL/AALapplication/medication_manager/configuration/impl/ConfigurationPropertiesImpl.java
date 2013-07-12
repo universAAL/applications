@@ -22,6 +22,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private static final String DEBUG_WRITE_FILE = "medication.manager.debug.write.file";
   private static final String ON = "true";
   private static final String MEDICATION_REMINDER_TIMEOUT = "medication.manager.reminder.timeout";
+  private static final String MEDICATION_UPSIDE_DOWN_TIMEOUT = "medication.manager.upside.down.timeout";
   private static final String MEDICATION_INTAKE_INTERVAL = "medication.manager.intake.interval";
   private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "medication.manager.http.session.expire.timeout.in.minutes";
   private static final String HEALTH_TREATMENT_SERVICE_MOCKED = "medication.manager.health.treatment.service.mocked";
@@ -47,6 +48,11 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
 
   public int getMedicationReminderTimeout() {
     return getInt(MEDICATION_REMINDER_TIMEOUT);
+
+  }
+
+  public int getMedicationUpsideDownTimeout() {
+    return getInt(MEDICATION_UPSIDE_DOWN_TIMEOUT);
 
   }
 
@@ -131,6 +137,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
 
     addReminderTimeout(propertyInfoMap);
 
+    addUpsideDownTimeout(propertyInfoMap);
+
     addIntakeIntervalInMinutes(propertyInfoMap);
 
     addHttpSessionExpireInMinutes(propertyInfoMap);
@@ -152,13 +160,26 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     String value = medicationProperties.getProperty(MEDICATION_REMINDER_TIMEOUT);
     PropertyInfo reminderInterval = new PropertyInfo(
         MEDICATION_REMINDER_TIMEOUT,
-         value,
+        value,
         FormatEnum.SECONDS,
         TypeEnum.NUMBER,
-        "Timeout for user response by clicking a button on a dialog"
+        "Timeout for user response by clicking a button on a reminder dialog"
     );
 
     propertyInfoMap.put(reminderInterval.getName(), reminderInterval);
+  }
+
+  private void addUpsideDownTimeout(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(MEDICATION_UPSIDE_DOWN_TIMEOUT);
+    PropertyInfo upsideDownInterval = new PropertyInfo(
+        MEDICATION_UPSIDE_DOWN_TIMEOUT,
+        value,
+        FormatEnum.SECONDS,
+        TypeEnum.NUMBER,
+        "Timeout for user response by clicking a button on a dispenser upside down dialog"
+    );
+
+    propertyInfoMap.put(upsideDownInterval.getName(), upsideDownInterval);
   }
 
   private void addIntakeIntervalInMinutes(Map<String, PropertyInfo> propertyInfoMap) {

@@ -17,8 +17,10 @@
 
 package org.universAAL.AALapplication.medication_manager.impl;
 
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.DispenserDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PatientLinksDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Dispenser;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.ui.DispenserUpsideDownDialog;
@@ -30,6 +32,9 @@ import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.medMgr.DispenserUpsideDown;
 import org.universAAL.ontology.profile.User;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
 
 /**
@@ -38,6 +43,7 @@ import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
 public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber {
 
   private final ModuleContext moduleContext;
+  private final UpsideDownCaregiverNotifier notifyCaregiver;
 
   private static ContextEventPattern[] getContextEventPatterns() {
     ContextEventPattern cep = new ContextEventPattern();
@@ -55,6 +61,7 @@ public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber 
     super(context, getContextEventPatterns());
 
     this.moduleContext = context;
+    notifyCaregiver = new UpsideDownCaregiverNotifier();
   }
 
   public void communicationChannelBroken() {
@@ -79,21 +86,54 @@ public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber 
         throw new MedicationManagerException("Missing dispenser with deviceUri: " + deviceUri);
       }
 
-      Person person = dispenser.getPatient();
+      Person patient = dispenser.getPatient();
 
-      if (person == null) {
+      if (patient == null) {
         throw new MedicationManagerException("This device is not associated with any patient");
       }
 
-      User user = new User(person.getPersonUri());
+      User user = new User(patient.getPersonUri());
 
       DispenserUpsideDownDialog dispenserUpsideDownDialog =
           new DispenserUpsideDownDialog(moduleContext);
 
       dispenserUpsideDownDialog.showDialog(user);
+      if (dispenser.isUpsideDownAlert()) {
+        setTimeOut(dispenserUpsideDownDialog, patient);
+      }
     } catch (MedicationManagerException e) {
       Log.error(e, "Error while processing the the context event", getClass());
     }
 
   }
+
+  private void setTimeOut(final DispenserUpsideDownDialog upsideDownDialog, final Person patient) {
+
+      ConfigurationProperties properties = getConfigurationProperties();
+
+      final int timeoutSeconds = properties.getMedicationReminderTimeout();
+
+      final Timer timer = new Timer();
+      timer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+          try {
+            boolean userActed = upsideDownDialog.isUserActed();
+            Log.info("Is the user made a UI response(true/false): %s", getClass(), userActed);
+            if (!userActed) {
+              PersistentService persistentService = getPersistentService();
+              PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
+              notifyCaregiver.notifyCaregiverForUpsiseDown(patient, patientLinksDao);
+            }
+
+            timer.cancel();
+          } catch (Exception e) {
+            Log.error(e, "Error while processing the timeout", getClass());
+          }
+        }
+
+      }, timeoutSeconds * 1000);
+
+
+    }
 }
