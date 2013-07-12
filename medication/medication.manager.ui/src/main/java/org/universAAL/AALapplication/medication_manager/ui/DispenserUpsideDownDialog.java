@@ -37,10 +37,16 @@ import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator
 
 public class DispenserUpsideDownDialog extends UICaller {
 
+  private boolean userActed;
+
   private static final String DISPENSER_UPSIDE_DOWN_FORM = "DispenserUpsideDownFor";
 
   public DispenserUpsideDownDialog(ModuleContext context) {
     super(context);
+  }
+
+  public boolean isUserActed() {
+    return userActed;
   }
 
   @Override
@@ -53,7 +59,8 @@ public class DispenserUpsideDownDialog extends UICaller {
 
   @Override
   public void handleUIResponse(UIResponse input) {
-    // TODO Auto-generated method stub
+    userActed = true;
+
   }
 
   public void showDialog(User inputUser) {

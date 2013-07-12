@@ -48,7 +48,6 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
   private final ModuleContext moduleContext;
   private final MissedIntakeContextProvider missedIntakeEventSubscriber;
-  private final int timeoutSeconds;
 
   private static ContextEventPattern[] getContextEventPatterns() {
     ContextEventPattern cep = new ContextEventPattern();
@@ -68,9 +67,6 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
     this.moduleContext = context;
     this.missedIntakeEventSubscriber = missedIntakeEventSubscriber;
 
-    ConfigurationProperties properties = getConfigurationProperties();
-
-    this.timeoutSeconds = properties.getMedicationReminderTimeout();
   }
 
   public void communicationChannelBroken() {
@@ -134,6 +130,10 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
                           final MedicineInventoryDao medicineInventoryDao, final IntakeDao intakeDao,
                           final User user, final List<Intake> intakes, final Person patient) {
 
+    ConfigurationProperties properties = getConfigurationProperties();
+
+    final int timeoutSeconds = properties.getMedicationReminderTimeout();
+
     final Timer timer = new Timer();
     timer.schedule(new TimerTask() {
       @Override
@@ -145,7 +145,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
             medicineInventoryDao.decreaseInventory(patient, intakes);
             intakeDao.setTimeTakenColumn(intakes);
           } else {
-            publishMissedIntakeEvent(dueIntake, user);
+            publishMissedIntakeEvent(dueIntake, user, timeoutSeconds);
           }
           timer.cancel();
         } catch (Exception e) {
@@ -158,7 +158,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
   }
 
-  private void publishMissedIntakeEvent(DueIntake dueIntake, User user) {
+  private void publishMissedIntakeEvent(DueIntake dueIntake, User user, int timeoutSeconds) {
     Log.info("The user didn't respond in the required time: %s. " +
         "Publishing missed intake event", getClass(), timeoutSeconds);
 
