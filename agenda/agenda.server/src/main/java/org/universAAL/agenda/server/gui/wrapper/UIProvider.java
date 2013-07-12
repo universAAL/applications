@@ -184,13 +184,4 @@ public class UIProvider extends UICaller {
 	// TODO Auto-generated method stub
     }
 
-    // removed when transferring from IO to UI Bus
-    // void subscribe(String dialogID) {
-    // addNewRegParams(dialogID);
-    // }
-    //
-    // void unsubscribe(String dialogID) {
-    // removeMatchingRegParams(dialogID);
-    // }
-
 }
