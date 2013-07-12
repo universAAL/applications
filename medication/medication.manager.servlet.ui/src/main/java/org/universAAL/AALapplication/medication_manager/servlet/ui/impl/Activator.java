@@ -42,8 +42,8 @@ public final class Activator implements BundleActivator {
   private static ServiceTracker httpServiceTracker;
   private static ServiceTracker newPrescriptionHandlerTracker;
 
-  private static final String JS_ALIAS = "/js";
-  private static final String CSS_ALIAS = "/css";
+  private static final String JS_ALIAS = "/prescription/js";
+  private static final String CSS_ALIAS = "/prescription/css";
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
