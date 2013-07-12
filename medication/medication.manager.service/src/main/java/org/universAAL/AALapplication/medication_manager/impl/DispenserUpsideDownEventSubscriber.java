@@ -110,7 +110,7 @@ public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber 
 
     ConfigurationProperties properties = getConfigurationProperties();
 
-    final int timeoutSeconds = properties.getMedicationReminderTimeout();
+    final int timeoutSeconds = properties.getMedicationUpsideDownTimeout();
 
     final Timer timer = new Timer();
     timer.schedule(new TimerTask() {
