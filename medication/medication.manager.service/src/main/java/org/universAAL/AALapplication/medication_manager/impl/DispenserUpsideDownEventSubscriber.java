@@ -98,42 +98,41 @@ public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber 
           new DispenserUpsideDownDialog(moduleContext);
 
       dispenserUpsideDownDialog.showDialog(user);
-      if (dispenser.isUpsideDownAlert()) {
-        setTimeOut(dispenserUpsideDownDialog, patient);
-      }
+      setTimeOut(dispenserUpsideDownDialog, patient, dispenser);
     } catch (MedicationManagerException e) {
       Log.error(e, "Error while processing the the context event", getClass());
     }
 
   }
 
-  private void setTimeOut(final DispenserUpsideDownDialog upsideDownDialog, final Person patient) {
+  private void setTimeOut(final DispenserUpsideDownDialog upsideDownDialog,
+                          final Person patient, final Dispenser dispenser) {
 
-      ConfigurationProperties properties = getConfigurationProperties();
+    ConfigurationProperties properties = getConfigurationProperties();
 
-      final int timeoutSeconds = properties.getMedicationReminderTimeout();
+    final int timeoutSeconds = properties.getMedicationReminderTimeout();
 
-      final Timer timer = new Timer();
-      timer.schedule(new TimerTask() {
-        @Override
-        public void run() {
-          try {
-            boolean userActed = upsideDownDialog.isUserActed();
-            Log.info("Is the user made a UI response(true/false): %s", getClass(), userActed);
-            if (!userActed) {
-              PersistentService persistentService = getPersistentService();
-              PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
-              notifyCaregiver.notifyCaregiverForUpsiseDown(patient, patientLinksDao);
-            }
-
-            timer.cancel();
-          } catch (Exception e) {
-            Log.error(e, "Error while processing the timeout", getClass());
+    final Timer timer = new Timer();
+    timer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        try {
+          boolean userActed = upsideDownDialog.isUserActed();
+          Log.info("Is the user made a UI response(true/false): %s", getClass(), userActed);
+          if (dispenser.isUpsideDownAlert() && !userActed) {
+            PersistentService persistentService = getPersistentService();
+            PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
+            notifyCaregiver.notifyCaregiverForUpsiseDown(patient, patientLinksDao);
           }
+
+          timer.cancel();
+        } catch (Exception e) {
+          Log.error(e, "Error while processing the timeout", getClass());
         }
+      }
 
-      }, timeoutSeconds * 1000);
+    }, timeoutSeconds * 1000);
 
 
-    }
+  }
 }
