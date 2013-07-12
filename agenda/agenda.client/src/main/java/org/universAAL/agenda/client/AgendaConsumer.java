@@ -209,7 +209,7 @@ public class AgendaConsumer extends ContextSubscriber {
      * @return list of calendars
      */
     public List<Calendar> getAllCalendarsService() {
-	List <Calendar> allCalendars = new ArrayList<Calendar>();
+	List<Calendar> allCalendars = new ArrayList<Calendar>();
 
 	long endTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(serviceRequestCreator
