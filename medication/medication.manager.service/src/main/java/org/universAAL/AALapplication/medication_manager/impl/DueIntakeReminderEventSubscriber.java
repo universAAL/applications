@@ -140,7 +140,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
       public void run() {
         try {
           boolean userActed = reminderDialog.isUserActed();
-          Log.info("Is the user made a UI response(true/false): %s", getClass(), userActed);
+          Log.info("Did the user responded in time?: %s", getClass(), userActed);
           if (userActed) {
             medicineInventoryDao.decreaseInventory(patient, intakes);
             intakeDao.setTimeTakenColumn(intakes);

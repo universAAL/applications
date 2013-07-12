@@ -118,7 +118,7 @@ public final class DispenserUpsideDownEventSubscriber extends ContextSubscriber 
       public void run() {
         try {
           boolean userActed = upsideDownDialog.isUserActed();
-          Log.info("Is the user made a UI response(true/false): %s", getClass(), userActed);
+          Log.info("Did the user responded in time?: %s", getClass(), userActed);
           if (dispenser.isUpsideDownAlert() && !userActed) {
             PersistentService persistentService = getPersistentService();
             PatientLinksDao patientLinksDao = persistentService.getPatientLinksDao();
