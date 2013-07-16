@@ -12,7 +12,7 @@
 	</parent>
 
 	<artifactId>nutritional.pom</artifactId>
-	<version>E.0</version>
+	<version>E.0.1-SNAPSHOT</version>
 	<name>Nutritional Advisor AAL Service</name>
 	<packaging>pom</packaging>
 
