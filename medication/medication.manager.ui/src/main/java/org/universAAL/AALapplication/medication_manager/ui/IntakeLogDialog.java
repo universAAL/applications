@@ -210,7 +210,7 @@ public class IntakeLogDialog extends UICaller {
     }
 
     if (counter == 0) {
-      sb.append("There is no intake log/plan for that week");
+      sb.append("There is no intakes for this week");
     }
 
     sb.append('\n');

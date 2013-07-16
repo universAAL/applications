@@ -10,7 +10,7 @@
   <groupId>org.universAAL.AALapplication</groupId>
   <artifactId>medication.manager.karaf.feature</artifactId>
   <packaging>jar</packaging>
-  <version>D.3-SNAPSHOT</version>
+  <version>E.0-SNAPSHOT</version>
   <name>Medication Manager Karaf Feature</name>
 
   <properties>
