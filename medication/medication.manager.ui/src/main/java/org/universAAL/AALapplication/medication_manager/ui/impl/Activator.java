@@ -46,6 +46,7 @@ public class Activator implements BundleActivator {
     persistenceServiceTracker.open();
 
     ReminderDialogProvider reminderDialogProvider = new ReminderDialogProvider(mc);
+    IntakeLogDialogProvider intakeLogDialogProvider = new IntakeLogDialogProvider(mc);
     medicationManagerServiceButtonProvider = new MedicationManagerServiceButtonProvider(mc);
     RequestMedicationInfoDialogProvider requestMedicationInfoDialogProvider = new RequestMedicationInfoDialogProvider(mc);
     MainMedicationManagerMenu mainMedicationManagerMenu = new MainMedicationManagerMenu(mc);

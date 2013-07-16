@@ -2217,6 +2217,7 @@ medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapp
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/Usecase.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/UsecaseDispenserUpsideDown.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/UsecaseDisplayDispenserInstruction.java -text
+medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/UsecaseIntakeLogReview.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/UsecaseInventoryStatusReview.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/UsecaseMedicationReminder.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/usecases/UsecaseMissedIntake.java -text
@@ -2292,6 +2293,7 @@ medication/medication.manager.ui/NOTICE -text
 medication/medication.manager.ui/pom.xml -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/DispenserDisplayInstructionsDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/DispenserUpsideDownDialog.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/IntakeLogDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/InventoryStatusDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/MedicationInfoDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/ReminderDialog.java -text
@@ -2299,6 +2301,7 @@ medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/med
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Activator.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/DispenserDisplayInstructionsDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/DispenserUpsideDownDialogProvider.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/IntakeLogDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/InventoryStatusDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/InventoryStatusHelper.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Log.java -text
