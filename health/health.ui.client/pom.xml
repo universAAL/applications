@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>health.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>D.1.1-SNAPSHOT</version>
+		<version>E.0.1-SNAPSHOT</version>
 		<relativePath>../health.pom/</relativePath>
 	</parent>
 

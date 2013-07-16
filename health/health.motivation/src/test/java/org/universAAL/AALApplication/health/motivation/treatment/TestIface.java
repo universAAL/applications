@@ -11,6 +11,8 @@ import org.universAAL.AALApplication.health.motivation.SendMotivationMessageIfac
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageManager;
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
+import org.universAAL.container.JUnit.JUnitModuleContext;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
@@ -45,21 +47,22 @@ public class TestIface implements SendMotivationMessageIface, MotivationServiceR
 
 	public static void registerClassesNeeded() {
 
-		OntologyManagement.getInstance().register(new DataRepOntology());
-		OntologyManagement.getInstance().register(new ServiceBusOntology());
-		OntologyManagement.getInstance().register(new UIBusOntology());
-		OntologyManagement.getInstance().register(new LocationOntology());
-		OntologyManagement.getInstance().register(new ShapeOntology());
-		OntologyManagement.getInstance().register(new PhThingOntology());
-		OntologyManagement.getInstance().register(new SpaceOntology());
-		OntologyManagement.getInstance().register(new VCardOntology());
-		OntologyManagement.getInstance().register(new ProfileOntology());
-		OntologyManagement.getInstance().register(new QuestionnaireOntology());
-		OntologyManagement.getInstance().register(new DiseaseOntology());
-		OntologyManagement.getInstance().register(new HealthMeasurementOntology());
-		OntologyManagement.getInstance().register(new HealthOntology());
-		OntologyManagement.getInstance().register(new MessageOntology());
-		OntologyManagement.getInstance().register(new QuestionnaireStrategyOntology());
+		ModuleContext mc = new JUnitModuleContext();
+		OntologyManagement.getInstance().register(mc,new DataRepOntology());
+		OntologyManagement.getInstance().register(mc,new ServiceBusOntology());
+		OntologyManagement.getInstance().register(mc,new UIBusOntology());
+		OntologyManagement.getInstance().register(mc,new LocationOntology());
+		OntologyManagement.getInstance().register(mc,new ShapeOntology());
+		OntologyManagement.getInstance().register(mc,new PhThingOntology());
+		OntologyManagement.getInstance().register(mc,new SpaceOntology());
+		OntologyManagement.getInstance().register(mc,new VCardOntology());
+		OntologyManagement.getInstance().register(mc,new ProfileOntology());
+		OntologyManagement.getInstance().register(mc,new QuestionnaireOntology());
+		OntologyManagement.getInstance().register(mc,new DiseaseOntology());
+		OntologyManagement.getInstance().register(mc,new HealthMeasurementOntology());
+		OntologyManagement.getInstance().register(mc,new HealthOntology());
+		OntologyManagement.getInstance().register(mc,new MessageOntology());
+		OntologyManagement.getInstance().register(mc,new QuestionnaireStrategyOntology());
 	}
 
 	public static void resetMessagesSent(){

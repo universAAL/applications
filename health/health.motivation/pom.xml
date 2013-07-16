@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>health.pom</artifactId>
-		<version>D.1.1-SNAPSHOT</version>
+		<version>E.0.1-SNAPSHOT</version>
 		<relativePath>../health.pom/</relativePath>
 	</parent>
 
@@ -19,6 +19,18 @@
 		<maven.compile.source>1.5</maven.compile.source>
 		<maven.compile.target>1.5</maven.compile.target>
 	</properties>
+	
+<!-- 	delete when updated -->
+	<dependencyManagement>
+		<dependencies>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.container.junit</artifactId>
+			<version>2.0.1-SNAPSHOT</version>
+		</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.universAAL.support</groupId>
@@ -31,6 +43,11 @@
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.container.junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>

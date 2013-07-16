@@ -21,6 +21,9 @@ package org.universAAL.AALapplication.health.treat.manager.osgi;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.AALapplication.health.treat.manager.TreatmentManagerProvider;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 /**
  * @author amedrano
@@ -28,11 +31,16 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator implements BundleActivator {
 
+	private ModuleContext context;
+	private TreatmentManagerProvider tmp;
+
 	/* (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
-	public void start(BundleContext context) throws Exception {
-		// TODO Auto-generated method stub
+	public void start(BundleContext arg0) throws Exception {
+		context = uAALBundleContainer.THE_CONTAINER
+                .registerModule(new Object[] {arg0});	
+		tmp = new TreatmentManagerProvider(context);
 
 	}
 
@@ -40,8 +48,7 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext Context) throws Exception {
-		// TODO Auto-generated method stub
-
+		tmp.close();
 	}
 
 }
