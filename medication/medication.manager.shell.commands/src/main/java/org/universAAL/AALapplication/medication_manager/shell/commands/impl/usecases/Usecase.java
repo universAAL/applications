@@ -38,7 +38,8 @@ public abstract class Usecase {
     USECASE_MAP.put(usecaseMedicationReminder.getUsecaseId(), usecaseMedicationReminder);
     UsecaseDispenserUpsideDown usecaseDispenserUpsideDown = new UsecaseDispenserUpsideDown();
     USECASE_MAP.put(usecaseDispenserUpsideDown.getUsecaseId(), usecaseDispenserUpsideDown);
-    USECASE_MAP.put(new UsecaseMissedIntake().getUsecaseId(), new UsecaseMissedIntake());
+    UsecaseMissedIntake usecaseMissedIntake = new UsecaseMissedIntake();
+    USECASE_MAP.put(usecaseMissedIntake.getUsecaseId(), usecaseMissedIntake);
     UsecaseDisplayDispenserInstruction usecaseDisplayDispenserInstruction = new UsecaseDisplayDispenserInstruction();
     USECASE_MAP.put(usecaseDisplayDispenserInstruction.getUsecaseId(), usecaseDisplayDispenserInstruction);
     UsecaseNewPrescription usecaseNewPrescription = new UsecaseNewPrescription();
@@ -47,6 +48,8 @@ public abstract class Usecase {
     USECASE_MAP.put(usecaseInventoryStatusReview.getUsecaseId(), usecaseInventoryStatusReview);
     UsecasePrecaution usecasePrecaution = new UsecasePrecaution();
     USECASE_MAP.put(usecasePrecaution.getUsecaseId(), usecasePrecaution);
+    UsecaseIntakeLogReview usecaseIntakeLogReview = new UsecaseIntakeLogReview();
+    USECASE_MAP.put(usecaseIntakeLogReview.getUsecaseId(), usecaseIntakeLogReview);
   }
 
   protected Usecase(String usecaseId) {

@@ -88,4 +88,15 @@ public final class Week {
 
     return new Week(begin, end, now);
   }
+
+  public static Calendar getMondayOfTheCurrentWeek() {
+    Calendar now = Calendar.getInstance();
+    now.setFirstDayOfWeek(Calendar.MONDAY);
+    now.setTime(new Date());
+    int weekday = now.get(Calendar.DAY_OF_WEEK);
+    if (weekday != Calendar.MONDAY) {
+      now.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+    }
+    return now;
+  }
 }
