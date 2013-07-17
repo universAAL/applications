@@ -230,7 +230,7 @@ public class ReminderDialog extends UICaller {
       //TODO to be removed (hack for saied user)
       currentUser = inputUser;
 
-      Form f = Form.newDialog("Medication Manager UI", new Resource());
+      Form f = Form.newDialog("Medication Manager", new Resource());
 
       //start of the form model
 

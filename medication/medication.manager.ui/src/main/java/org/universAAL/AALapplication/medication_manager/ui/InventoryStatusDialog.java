@@ -71,7 +71,7 @@ public class InventoryStatusDialog extends UICaller {
 
       Log.info("Request a InventoryStatusDialog for user %s", getClass(), inputUser);
 
-      Form f = Form.newDialog("Medication Manager UI", new Resource());
+      Form f = Form.newDialog("Medication Manager", new Resource());
       //start of the form model
       PersistentService persistentService = getPersistentService();
       PersonDao personDao = persistentService.getPersonDao();
