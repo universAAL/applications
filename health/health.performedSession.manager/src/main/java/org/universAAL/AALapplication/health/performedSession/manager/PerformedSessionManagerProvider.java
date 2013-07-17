@@ -58,8 +58,8 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 	static final ServiceProfile[] profiles = new ServiceProfile[5];
 	
 	// define profiles
-	static {
-		OntologyManagement.getInstance().register(new PerformedSessionServiceProfilesOnt());
+	static void registerOnt(ModuleContext mc){
+		OntologyManagement.getInstance().register(mc,new PerformedSessionServiceProfilesOnt());
     	profiles[0] = new SessionPerformedService().getProfile();		
     	profiles[1] = new ListPerformedSessionService().getProfile();
     	profiles[2] = new ListPerformedSessionBetweenTimeStampsService().getProfile();
@@ -81,6 +81,7 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
      */
     protected PerformedSessionManagerProvider(ModuleContext context, ServiceProfile[] realizedServices) {
 		super(context, realizedServices);
+		registerOnt(context);
     }
 	
     /**
@@ -94,7 +95,7 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
     	// this in turn requires that we introduce which services we would like
     	// to provide to the universAAL-based AAL Space
 		super(context, profiles);
-
+		registerOnt(context);
 		// the actual implementation of the performed session manager
 		performedSessionManager = new ProfileServerPerformedSessionManager(context);
 	}

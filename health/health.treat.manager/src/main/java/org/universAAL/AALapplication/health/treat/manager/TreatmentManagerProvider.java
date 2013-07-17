@@ -54,16 +54,6 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	
     static final ServiceProfile[] profiles = new ServiceProfile[5];
 	
-	// define profiles
-	static {
-		OntologyManagement.getInstance().register(new TreatmentManagerProfilesOnt());
-    	profiles[0] = new NewTreatmentService().getProfile();		
-    	profiles[1] = new RemoveTreatmentService().getProfile();
-    	profiles[2] = new EditTreatmentService().getProfile();
-    	profiles[3] = new ListTreatmentService().getProfile();
-    	profiles[4] = new ListTreatmentBetweenTimeStampsService().getProfile();
-	}
-	
     // prepare a standard error message for later use
     private static final ServiceResponse invalidInput = new ServiceResponse(
 	    CallStatus.serviceSpecificFailure);
@@ -92,10 +82,21 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		// as a service providing component, we have to extend ServiceCallee
     	// this in turn requires that we introduce which services we would like
     	// to provide to the universAAL-based AAL Space
-		super(context, profiles);
+		super(context, initProfiles(context));
 
 		// the actual implementation of the treatment manager
 		treatmentManager = new ProfileServerTreatmentManager(context);
+	}
+	
+	private static ServiceProfile[] initProfiles(ModuleContext mc){
+
+		OntologyManagement.getInstance().register(mc,new TreatmentManagerProfilesOnt());
+    	profiles[0] = new NewTreatmentService().getProfile();		
+    	profiles[1] = new RemoveTreatmentService().getProfile();
+    	profiles[2] = new EditTreatmentService().getProfile();
+    	profiles[3] = new ListTreatmentService().getProfile();
+    	profiles[4] = new ListTreatmentBetweenTimeStampsService().getProfile();
+    	return profiles;
 	}
 
 	public void communicationChannelBroken() {
