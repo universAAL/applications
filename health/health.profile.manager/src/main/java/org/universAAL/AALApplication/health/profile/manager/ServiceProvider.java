@@ -59,6 +59,8 @@ public class ServiceProvider extends ServiceCallee {
 	protected ServiceProvider(ModuleContext context,
 			ServiceProfile[] realizedServices) {
 		super(context, realizedServices);
+		GetProfileService.registerOnts(context);
+		UpdateProfileService.registerOnt(context);
 		psm = new ProfileServerHealthProfileProvider(context);
 	}
 	
@@ -133,8 +135,8 @@ public class ServiceProvider extends ServiceCallee {
 	    //OUTPUT PARAMETERS URI    
 		public static final String OUTPUT_PROFILE = HealthOntology.NAMESPACE + "matchingHealthProfile";
 		
-		static {
-			OntologyManagement.getInstance().register(
+		static void registerOnts(ModuleContext mc){
+			OntologyManagement.getInstance().register(mc,
 					new SimpleOntology(MY_URI, ProfileManagementService.MY_URI, 
 							new ResourceFactory() {
 						
@@ -202,8 +204,8 @@ public class ServiceProvider extends ServiceCallee {
 		//INPUT PARAMETERS URI
 		public static final String INPUT_PROFILE      = HealthOntology.NAMESPACE + "healthProfile";
 
-		static {
-			OntologyManagement.getInstance().register(
+		static void registerOnt(ModuleContext mc){
+			OntologyManagement.getInstance().register(mc,
 					new SimpleOntology(MY_URI, ProfileManagementService.MY_URI, 
 							new ResourceFactory() {
 						
