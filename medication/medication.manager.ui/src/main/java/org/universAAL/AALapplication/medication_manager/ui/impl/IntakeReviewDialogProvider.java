@@ -21,7 +21,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Persis
 import org.universAAL.AALapplication.medication_manager.persistence.layer.Week;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.ui.IntakeLogDialog;
+import org.universAAL.AALapplication.medication_manager.ui.IntakeReviewDialog;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -37,7 +37,7 @@ import java.util.Date;
 
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
 
-public class IntakeLogDialogProvider extends ServiceCallee {
+public class IntakeReviewDialogProvider extends ServiceCallee {
 
   private static final String NAMESPACE = "http://ontologies.universAAL.com/Medication.owl#";
   private static final String MY_URI = NAMESPACE + "IntakeLogPlanDialogService";
@@ -49,12 +49,12 @@ public class IntakeLogDialogProvider extends ServiceCallee {
 
   private ModuleContext ctxt;
 
-  public IntakeLogDialogProvider(ModuleContext context, ServiceProfile[] realizedServices) {
+  public IntakeReviewDialogProvider(ModuleContext context, ServiceProfile[] realizedServices) {
     super(context, realizedServices);
     this.ctxt = context;
   }
 
-  public IntakeLogDialogProvider(ModuleContext context) {
+  public IntakeReviewDialogProvider(ModuleContext context) {
     this(context, getProfiles());
   }
 
@@ -85,7 +85,7 @@ public class IntakeLogDialogProvider extends ServiceCallee {
       PersistentService persistentService = getPersistentService();
       PersonDao personDao = persistentService.getPersonDao();
       Person patient = personDao.findPersonByPersonUri(((User) inputUser).getURI());
-      new IntakeLogDialog(this.ctxt, persistentService, currentWeek, patient).showDialog(user);
+      new IntakeReviewDialog(this.ctxt, persistentService, currentWeek, patient).showDialog(user);
       return new ServiceResponse(CallStatus.succeeded);
     } catch (Exception e) {
       Log.error(e, "Error while processing the client call", getClass());
