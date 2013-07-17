@@ -68,8 +68,8 @@ values (3, 'dispenser three', 'urn:org.universaal.aal_space:device_env#dispenser
 insert into medication_manager.dispenser (id, name, dispenser_uri, instructions_file_name, upside_down_alert, successful_intake_alert, missed_intake_alert, due_intake_alert)
 values (4, 'dispenser four', 'urn:org.universaal.aal_space:device_env#dispenser-4', 'instructions_4.txt', true, true, true, true);
 
-insert into medication_manager.dispenser (id, name, dispenser_uri, instructions_file_name, upside_down_alert, successful_intake_alert, missed_intake_alert, due_intake_alert)
-values (5, 'dispenser five', 'urn:org.universaal.aal_space:device_env#dispenser-5', 'instructions_5.txt', true, true, true, true);
+insert into medication_manager.dispenser (id, patient_fk_id, name, dispenser_uri, instructions_file_name, upside_down_alert, successful_intake_alert, missed_intake_alert, due_intake_alert)
+values (5, 1, 'dispenser five', 'urn:org.universaal.aal_space:device_env#dispenser-5', 'instructions_5.txt', true, true, true, true);
 
 insert into medication_manager.dispenser (id, name, dispenser_uri, instructions_file_name, upside_down_alert, successful_intake_alert, missed_intake_alert, due_intake_alert)
 values (6, 'dispenser six', 'urn:org.universaal.aal_space:device_env#dispenser-6', 'instructions_6.txt', true, true, true, true);

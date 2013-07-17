@@ -23,7 +23,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.Pe
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.Log;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.MedicationManagerShellException;
-import org.universAAL.AALapplication.medication_manager.ui.IntakeLogDialog;
+import org.universAAL.AALapplication.medication_manager.ui.IntakeReviewDialog;
 import org.universAAL.ontology.profile.User;
 
 import java.util.Calendar;
@@ -71,7 +71,7 @@ public final class UsecaseIntakeLogReview extends Usecase {
       Log.info("Executing the " + USECASE_TITLE + ". The current week is : " +
                currentWeek + " for user with id=" + personId, getClass());
 
-      IntakeLogDialog dialog = new IntakeLogDialog(mc, persistentService, currentWeek, person);
+      IntakeReviewDialog dialog = new IntakeReviewDialog(mc, persistentService, currentWeek, person);
       User user = new User(person.getPersonUri());
       dialog.showDialog(user);
 

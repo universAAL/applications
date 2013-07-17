@@ -43,7 +43,7 @@ import java.util.Set;
 
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
 
-public class IntakeLogDialog extends UICaller {
+public class IntakeReviewDialog extends UICaller {
 
   private final ModuleContext moduleContext;
   private Week currentWeek;
@@ -56,8 +56,8 @@ public class IntakeLogDialog extends UICaller {
   private static final String PREV_BUTTON = "previousWeekButton";
   private static final String NEXT_BUTTON = "nextWeekButton";
 
-  public IntakeLogDialog(ModuleContext context, PersistentService persistentService,
-                         Week currentWeek, Person patient) {
+  public IntakeReviewDialog(ModuleContext context, PersistentService persistentService,
+                            Week currentWeek, Person patient) {
 
     super(context);
 
@@ -116,7 +116,7 @@ public class IntakeLogDialog extends UICaller {
     currentWeekStartDate.add(Calendar.DAY_OF_YEAR, 7);
     currentWeek = Week.createWeek(currentWeekStartDate);
 
-    IntakeLogDialog dialog = new IntakeLogDialog(moduleContext, persistentService, currentWeek, patient);
+    IntakeReviewDialog dialog = new IntakeReviewDialog(moduleContext, persistentService, currentWeek, patient);
     dialog.showDialog(user);
 
   }
@@ -129,7 +129,7 @@ public class IntakeLogDialog extends UICaller {
     currentWeekStartDate.add(Calendar.DAY_OF_YEAR, -7);
     currentWeek = Week.createWeek(currentWeekStartDate);
 
-    IntakeLogDialog dialog = new IntakeLogDialog(moduleContext, persistentService, currentWeek, patient);
+    IntakeReviewDialog dialog = new IntakeReviewDialog(moduleContext, persistentService, currentWeek, patient);
     dialog.showDialog(user);
 
   }

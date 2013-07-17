@@ -17,6 +17,13 @@
 
 package org.universAAL.AALapplication.medication_manager.ui.impl;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.Week;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.ui.DispenserDisplayInstructionsDialog;
+import org.universAAL.AALapplication.medication_manager.ui.IntakeReviewDialog;
+import org.universAAL.AALapplication.medication_manager.ui.InventoryStatusDialog;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
@@ -28,54 +35,103 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.profile.User;
 
+import java.util.Calendar;
 import java.util.Locale;
+
+import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
 
 public class MainMedicationManagerMenu extends UICaller {
 
   private static final String WELCOME_TO_THE_MEDICATION_MANAGER_SERVICE = "Welcome To the MedicationManager Service!";
-  private static final String INTAKE_PLAN_FORM = "intakePlanForm";
-  private static final String INTAKE_LOG_FORM = "intakeLogForm";
-  private static final String INVENTORY_STATUS_FORM = "inventoryStatusForm";
-  private static final String REFILL_OF_DISPENSER_FORM = "refillOfDispenserForm";
-  private static final String CALL_A_CONTACT_FORM = "callAContactForm";
-  private static final String FEEDBACK_FORM = "feedbackForm";
-  private static final String NEW_DOSE_FORM = "NewDoseForm";
-  private static final String SETTINGS_FORM = "settingsForm";
-  private static final String CLOSE_FORM = "closeForm";
+  private static final String INTAKE_REVIEW_BUTTON = "intakeReview";
+  private static final String INVENTORY_STATUS_BUTTON = "inventoryStatus";
+  private static final String DISPENSER_INSTRUCTIONS_BUTTON = "dispenserInstructions";
+  private static final String CLOSE_BUTTON = "close";
 
   protected MainMedicationManagerMenu(ModuleContext context) {
-		super(context);
-	}
+    super(context);
+  }
 
-	@Override
-	public void communicationChannelBroken() {	}
+  @Override
+  public void communicationChannelBroken() {
+  }
 
-	@Override
-	public void dialogAborted(String dialogID) {	}
+  @Override
+  public void dialogAborted(String dialogID) {
+  }
 
-	@Override
-	public void handleUIResponse(UIResponse input) {
-		// TODO Auto-generated method stub
-	}
-	
-	public void showDialog(Resource inputUser){
-		Form f = Form.newDialog("simple UI", new Resource());
-		//start of the form model
-		new SimpleOutput(f.getIOControls(), null, null, WELCOME_TO_THE_MEDICATION_MANAGER_SERVICE);
-		//...
-		new Submit(f.getSubmits(), new Label("intake Plan", null), INTAKE_PLAN_FORM);
-		new Submit(f.getSubmits(), new Label("intake Log", null), INTAKE_LOG_FORM);
-		new Submit(f.getSubmits(), new Label("Inventory Status", null), INVENTORY_STATUS_FORM);
-		new Submit(f.getSubmits(), new Label("Refill of Dispenser", null), REFILL_OF_DISPENSER_FORM);
-		new Submit(f.getSubmits(), new Label("Call a Contact", null), CALL_A_CONTACT_FORM);
-		new Submit(f.getSubmits(), new Label("Feedback", null), FEEDBACK_FORM);
-		new Submit(f.getSubmits(), new Label("New Dose", null), NEW_DOSE_FORM);
-		new Submit(f.getSubmits(), new Label("Settings", null), SETTINGS_FORM);
-		new Submit(f.getSubmits(), new Label("Close", null), CLOSE_FORM);
-		//stop of form model
-		UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
-		this.sendUIRequest(req);
-	}
+  @Override
+  public void handleUIResponse(UIResponse input) {
+    try {
+      PersistentService persistentService = getPersistentService();
+      User user = getUser(input, persistentService);
+      if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
+        System.out.println("close");
+      } else if (INTAKE_REVIEW_BUTTON.equals(input.getSubmissionID())) {
+        showIntakeReviewDialog(user, persistentService);
+      } else if (INVENTORY_STATUS_BUTTON.equals(input.getSubmissionID())) {
+        showInventoryStatusDialog(user);
+      } else if (DISPENSER_INSTRUCTIONS_BUTTON.equals(input.getSubmissionID())) {
+        showDispenserInstructionDialog(user);
+      } else {
+        throw new MedicationManagerUIException("Unknown button clicked");
+      }
+    } catch (Exception e) {
+      Log.error(e, "Error while handling UI response", getClass());
+    }
+
+  }
+
+  private User getUser(UIResponse input, PersistentService persistentService) {
+    User user = (User) input.getUser();
+
+    String uri = user.getURI();
+    Log.info("User object uri is : %s", getClass(), uri);
+
+    //TODO hack to be removed (replace the test user Saied with our mock user saied
+
+    if ("urn:org.universAAL.aal_space:test_environment#saied".equalsIgnoreCase(uri)) {
+      PersonDao personDao = persistentService.getPersonDao();
+      Person patient = personDao.getById(1);
+      return new User(patient.getPersonUri());
+    }
+
+    return user;
+  }
+
+  private void showDispenserInstructionDialog(User user) {
+    DispenserDisplayInstructionsDialog dialog = new DispenserDisplayInstructionsDialog(mc);
+    dialog.showDialog(user);
+  }
+
+  private void showInventoryStatusDialog(User user) {
+    InventoryStatusDialog dialog = new InventoryStatusDialog(mc);
+    dialog.showDialog(user);
+  }
+
+  private void showIntakeReviewDialog(User user, PersistentService persistentService) {
+    PersonDao personDao = persistentService.getPersonDao();
+    Person patient = personDao.findPersonByPersonUri(user.getURI());
+    Calendar startOfTheCurrentWeek = Week.getMondayOfTheCurrentWeek();
+    Week currentWeek = Week.createWeek(startOfTheCurrentWeek);
+    IntakeReviewDialog dialog = new IntakeReviewDialog(mc, persistentService, currentWeek, patient);
+    dialog.showDialog(user);
+  }
+
+  public void showDialog(Resource inputUser) {
+    Form f = Form.newDialog("Medication Manager Main Menu", new Resource());
+    //start of the form model
+    new SimpleOutput(f.getIOControls(), null, null, WELCOME_TO_THE_MEDICATION_MANAGER_SERVICE);
+    //...
+    new Submit(f.getSubmits(), new Label("Intake Review", null), INTAKE_REVIEW_BUTTON);
+    new Submit(f.getSubmits(), new Label("Inventory Status", null), INVENTORY_STATUS_BUTTON);
+    new Submit(f.getSubmits(), new Label("Dispenser Instructions", null), DISPENSER_INSTRUCTIONS_BUTTON);
+    new Submit(f.getSubmits(), new Label("Close", null), CLOSE_BUTTON);
+    //stop of form model
+    UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
+    this.sendUIRequest(req);
+  }
 
 }
