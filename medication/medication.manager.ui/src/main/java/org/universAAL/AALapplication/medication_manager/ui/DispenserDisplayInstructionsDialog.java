@@ -75,7 +75,7 @@ public class DispenserDisplayInstructionsDialog extends UICaller {
 
       Log.info("Request a DispenserDisplayInstructionsDialog for user %s", getClass(), inputUser);
 
-      Form f = Form.newDialog("Medication Manager UI", new Resource());
+      Form f = Form.newDialog("Medication Manager", new Resource());
       //start of the form model
       String message = getInstructionText(inputUser);
       new SimpleOutput(f.getIOControls(), null, null, message);

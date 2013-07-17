@@ -72,7 +72,7 @@ public class MedicationInfoDialog extends UICaller {
     try {
       validateParameter(inputUser, "inputUser");
 
-      Form f = Form.newDialog("Medication Manager UI", new Resource());
+      Form f = Form.newDialog("Medication Manager", new Resource());
 
       //start of the form model
 
