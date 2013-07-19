@@ -765,6 +765,7 @@ health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/t
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/profiles/NewTreatmentService.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/profiles/RemoveTreatmentService.java -text
 health/health.treat.manager/src/main/java/org/universAAL/AALapplication/health/treat/manager/profiles/TreatmentManagerProfilesOnt.java -text svneol=unset#text/plain
+health/health.treat.manager/src/test/java/org/universAAL/tests/OntologyTest.java -text svneol=unset#text/plain
 health/health.ui.client/ASL2.0 -text
 health/health.ui.client/MITX.txt -text svneol=unset#text/plain
 health/health.ui.client/NOTICE -text

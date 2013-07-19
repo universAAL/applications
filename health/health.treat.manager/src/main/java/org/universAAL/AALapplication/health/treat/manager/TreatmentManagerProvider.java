@@ -3,7 +3,7 @@
 	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -91,11 +91,11 @@ public class TreatmentManagerProvider extends ServiceCallee {
 	private static ServiceProfile[] initProfiles(ModuleContext mc){
 
 		OntologyManagement.getInstance().register(mc,new TreatmentManagerProfilesOnt());
-    	profiles[0] = new NewTreatmentService().getProfile();		
-    	profiles[1] = new RemoveTreatmentService().getProfile();
-    	profiles[2] = new EditTreatmentService().getProfile();
-    	profiles[3] = new ListTreatmentService().getProfile();
-    	profiles[4] = new ListTreatmentBetweenTimeStampsService().getProfile();
+    	profiles[0] = new NewTreatmentService(TreatmentManagerProfilesOnt.NAMESPACE+"newTreatment").getProfile();		
+    	profiles[1] = new RemoveTreatmentService(TreatmentManagerProfilesOnt.NAMESPACE+"delTreatment").getProfile();
+    	profiles[2] = new EditTreatmentService(TreatmentManagerProfilesOnt.NAMESPACE+"editTreatment").getProfile();
+    	profiles[3] = new ListTreatmentService(TreatmentManagerProfilesOnt.NAMESPACE+"listTreatment").getProfile();
+    	profiles[4] = new ListTreatmentBetweenTimeStampsService(TreatmentManagerProfilesOnt.NAMESPACE+"listTimeTreatment").getProfile();
     	return profiles;
 	}
 
