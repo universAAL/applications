@@ -20,6 +20,7 @@ import org.universAAL.middleware.owl.OntClassInfoSetup;
 import org.universAAL.middleware.owl.Ontology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.ResourceFactory;
+import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 /**
@@ -28,7 +29,7 @@ import org.universaal.ontology.health.owl.services.TreatmentManagementService;
  */
 public class TreatmentManagerProfilesOnt extends Ontology {
 
-	  public static final String NAMESPACE ="http://health.ontology.universaal.org/TreatmentManagementOntology#";
+	  public static final String NAMESPACE ="http://ontology.universaal.org/TreatmentManagementOntology.owl#";
 	
 	  private static final ResourceFactory factory = new Factory();
 	  
@@ -39,6 +40,8 @@ public class TreatmentManagerProfilesOnt extends Ontology {
 	/** {@inheritDoc} */
 	@Override
 	public void create() {
+		addImport(HealthOntology.NAMESPACE);
+		
 		OntClassInfoSetup oci;
 		
 		oci = createNewOntClassInfo(EditTreatmentService.MY_URI, factory, 0);
