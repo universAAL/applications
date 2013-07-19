@@ -3,7 +3,7 @@
 	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -60,9 +60,9 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 	// define profiles
 	static void registerOnt(ModuleContext mc){
 		OntologyManagement.getInstance().register(mc,new PerformedSessionServiceProfilesOnt());
-    	profiles[0] = new SessionPerformedService().getProfile();		
-    	profiles[1] = new ListPerformedSessionService().getProfile();
-    	profiles[2] = new ListPerformedSessionBetweenTimeStampsService().getProfile();
+    	profiles[0] = new SessionPerformedService(PerformedSessionServiceProfilesOnt.NAMESPACE+"newSession").getProfile();		
+    	profiles[1] = new ListPerformedSessionService(PerformedSessionServiceProfilesOnt.NAMESPACE+"listSession").getProfile();
+    	profiles[2] = new ListPerformedSessionBetweenTimeStampsService(PerformedSessionServiceProfilesOnt.NAMESPACE+"listTimeSession").getProfile();
 	}
 	
     // prepare a standard error message for later use
