@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>nutritional.pom</artifactId>
-		<version>E.0</version>
+		<version>E.0.1-SNAPSHOT</version>
 		<relativePath>../nutritional.pom</relativePath>
 	</parent>
 
