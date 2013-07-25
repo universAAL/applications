@@ -1,4 +1,8 @@
+aal_eficiency/AALfficiency.pom/target
 aal_eficiency/AALfficiency.test/target
+aal_eficiency/AALfficiencyService/target
+aal_eficiency/EnergyReaderPublisher/target
+aal_eficiency/FitbitPublisher/target
 agenda/agenda.client/.classpath
 agenda/agenda.client/.project
 agenda/agenda.client/.settings
@@ -104,6 +108,7 @@ health/health.performedSession.manager/.settings
 health/health.performedSession.manager/target
 health/health.pom/.project
 health/health.pom/.settings
+health/health.pom/target
 health/health.profile.manager/.classpath
 health/health.profile.manager/.project
 health/health.profile.manager/.settings
@@ -122,6 +127,7 @@ help_when_out/hwo.mobile/.settings
 help_when_out/hwo.mobile/target
 help_when_out/hwo.pom/.project
 help_when_out/hwo.pom/.settings
+help_when_out/hwo.pom/target
 help_when_out/hwo.servlet/.classpath
 help_when_out/hwo.servlet/.project
 help_when_out/hwo.servlet/.settings
@@ -170,6 +176,7 @@ medication/medication.manager.pom/Medication_Manager
 medication/medication.manager.pom/atlassian-ide-plugin.xml
 medication/medication.manager.pom/medication.manager.pom.ipr
 medication/medication.manager.pom/out
+medication/medication.manager.pom/target
 medication/medication.manager.service/*.iml
 medication/medication.manager.service/.project
 medication/medication.manager.service/.settings
@@ -209,12 +216,14 @@ medication/medication.missing.services.simulation/.settings
 medication/medication.missing.services.simulation/target
 new_services.pom/.project
 new_services.pom/.settings
+new_services.pom/target
 nutritional/nutritional.client/.classpath
 nutritional/nutritional.client/.project
 nutritional/nutritional.client/.settings
 nutritional/nutritional.client/target
 nutritional/nutritional.pom/.project
 nutritional/nutritional.pom/.settings
+nutritional/nutritional.pom/target
 ontologies/ont.aalfficiencyscores/target
 ontologies/ont.activity/.classpath
 ontologies/ont.activity/.project

@@ -16,15 +16,15 @@
 	<description>Contains repository, deployment, and other info for all AALapplications</description>
 
 	<modules>
-	<!--	<module>../ontologies/ont.pom</module>
+		<module>../ontologies/ont.pom</module>
 		<module>../health/health.pom</module> 
 		<module>../personal_safety/personal_safety.pom</module> 
-		<module>../food_shopping/pom</module>
-		<module>../safety_home/pom</module>
+		<module>../food_shopping/shopping.pom</module>
+		<module>../safety_home/safety.pom</module>
 		<module>../medication/medication.manager.pom</module>
 		<module>../aal_eficiency/AALfficiency.pom</module>
 		<module>../help_when_out/hwo.pom</module>
-		<module>../agenda/agenda.pom</module>-->
+		<module>../agenda/agenda.pom</module>
 		<module>../nutritional/nutritional.pom</module>
 	</modules>
 
