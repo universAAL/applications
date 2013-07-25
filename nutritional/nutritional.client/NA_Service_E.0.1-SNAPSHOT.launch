@@ -10,14 +10,14 @@
 <booleanAttribute key="default" value="true"/>
 <booleanAttribute key="default_auto_start" value="true"/>
 <intAttribute key="default_start_level" value="100"/>
-<stringAttribute key="deselected_workspace_plugins" value="org.universAAL.tools.ucc,org.universaal.tools.buildPlugin,ri.soap.cxf.service,test1,ucc.karaf.feature*1.0.0.qualifier,ucc.karaf.feature*1.0.0.qualifier"/>
+<stringAttribute key="deselected_workspace_plugins" value="org.universaal.tools.buildPlugin,ri.soap.cxf.service,test1,ucc.configuration.configdefinitionregistry,ucc.configuration.configinstancestorage,ucc.configuration.configurator,ucc.configuration.model,ucc.controller,ucc.database,ucc.deploymanagerservice,ucc.deploymanagerservice.impl,ucc.frontend,ucc.karaf.feature*1.0.0.qualifier,ucc.karaf.feature*1.0.0.qualifier,ucc.model,ucc.profile.agent,ucc.vaadin.themes"/>
 <booleanAttribute key="includeOptional" value="true"/>
 <stringAttribute key="org.eclipse.debug.core.source_locator_id" value="org.eclipse.pde.ui.launcher.PDESourceLookupDirector"/>
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-console --obrRepositories=http://a1gforge.igd.fraunhofer.de/nexus/content/repositories/snapshots/repository.xml,http://a1gforge.igd.fraunhofer.de/nexus/content/repositories/releases/repository.xml,http://bundles.osgi.org/obr/browse?_xml=1&amp;amp;cmd=repository --org.ops4j.pax.url.mvn.repositories=+http://a1gforge.igd.fraunhofer.de/nexus/content/groups/public,http://a1gforge.igd.fraunhofer.de/nexus/content/repositories/snapshots@snapshots@noreleases --log=DEBUG"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dosgi.noShutdown=true -Dfelix.log.level=4 -Dorg.universAAL.middleware.peer.is_coordinator=true -Dorg.universAAL.middleware.peer.member_of=urn:org.universAAL.aal_space:test_environment -Dbundles.configuration.location=${workspace_loc}/rundir/confadmin  -Djava.net.preferIPv4Stack=true"/>
-<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc}/rundir/demo.config"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:nutritional.client}"/>
 <booleanAttribute key="org.ops4j.pax.cursor.hotDeployment" value="false"/>
 <stringAttribute key="org.ops4j.pax.cursor.logLevel" value="INFO"/>
 <booleanAttribute key="org.ops4j.pax.cursor.overwrite" value="false"/>
