@@ -110,5 +110,9 @@
       mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.review/E.0-SNAPSHOT
     </bundle>
 
+    <bundle start-level='99' start='true'>
+      mvn:org.universAAL.AALapplication/medication.manager.event.issuer/E.0-SNAPSHOT
+    </bundle>
+
   </feature>
 </features>

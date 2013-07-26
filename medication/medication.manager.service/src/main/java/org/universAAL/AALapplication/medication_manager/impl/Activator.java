@@ -82,44 +82,6 @@ public class Activator implements BundleActivator {
     bundleContext = null;
   }
 
-  /*public static PersistentService getPersistentService() {
-    if (bundleContext == null) {
-      throw new MedicationManagerException("The bundleContext is not set");
-    }
-
-    ServiceReference srPS = bundleContext.getServiceReference(PersistentService.class.getName());
-
-    if (srPS == null) {
-      throw new MedicationManagerException("The ServiceReference is null for PersistentService");
-    }
-
-    PersistentService persistentService = (PersistentService) bundleContext.getService(srPS);
-
-    if (persistentService == null) {
-      throw new MedicationManagerException("The PersistentService is missing");
-    }
-    return persistentService;
-  }
-
-  public static ConfigurationProperties getConfigurationProperties() {
-    if (bundleContext == null) {
-      throw new MedicationManagerException("The bundleContext is not set");
-    }
-
-    ServiceReference srPS = bundleContext.getServiceReference(ConfigurationProperties.class.getName());
-
-    if (srPS == null) {
-      throw new MedicationManagerException("The ServiceReference is null for ConfigurationProperties");
-    }
-
-    ConfigurationProperties service = (ConfigurationProperties) bundleContext.getService(srPS);
-
-    if (service == null) {
-      throw new MedicationManagerException("The ConfigurationProperties is missing");
-    }
-    return service;
-  }*/
-
   public static ConfigurationProperties getConfigurationProperties() {
     if (configurationPropertiesServiceTracker == null) {
       throw new MedicationManagerException("The ConfigurationProperties ServiceTracker is not set");

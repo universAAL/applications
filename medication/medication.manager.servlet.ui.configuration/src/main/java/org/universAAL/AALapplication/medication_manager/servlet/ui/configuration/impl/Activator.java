@@ -171,86 +171,6 @@ public final class Activator implements BundleActivator {
 
   }
 
-  /*private HttpService getHttpService(BundleContext context) {
-    ServiceReference sr = context.getServiceReference(HttpService.class.getName());
-    if (sr == null) {
-      throw new MedicationManagerServletUIConfigurationException("Missing ServiceReference for service: HttpService");
-    }
-
-    HttpService httpService = (HttpService) context.getService(sr);
-
-    if (httpService == null) {
-      throw new MedicationManagerServletUIConfigurationException("Missing HttpService service");
-    }
-    return httpService;
-  }
-
-  public static PersistentService getPersistentService() {
-    Log.info("Trying to get PersistentService object", Activator.class);
-    if (bundleContext == null) {
-      throw new MedicationManagerServletUIConfigurationException("The bundleContext is not set");
-    }
-
-    ServiceReference srPS = bundleContext.getServiceReference(PersistentService.class.getName());
-
-    if (srPS == null) {
-      throw new MedicationManagerServletUIConfigurationException("The ServiceReference is null for PersistentService");
-    }
-
-    PersistentService persistentService = (PersistentService) bundleContext.getService(srPS);
-
-    if (persistentService == null) {
-      throw new MedicationManagerServletUIConfigurationException("The PersistentService is missing");
-    }
-
-    Log.info("The PersistentService object is found", Activator.class);
-
-    return persistentService;
-  }
-
-  public static UserManager getUserManager() {
-    Log.info("Trying to get UserManager object", Activator.class);
-    if (bundleContext == null) {
-      throw new MedicationManagerServletUIConfigurationException("The bundleContext is not set");
-    }
-
-    ServiceReference srPS = bundleContext.getServiceReference(UserManager.class.getName());
-
-    if (srPS == null) {
-      throw new MedicationManagerServletUIConfigurationException("The ServiceReference is null for UserManager");
-    }
-
-    UserManager userManager = (UserManager) bundleContext.getService(srPS);
-
-    if (userManager == null) {
-      throw new MedicationManagerServletUIConfigurationException("The UserManager is missing");
-    }
-
-    Log.info("The PersistentService object is found", Activator.class);
-
-    return userManager;
-  }
-
-  public static ConfigurationProperties getConfigurationProperties() {
-    if (bundleContext == null) {
-      throw new MedicationManagerServletUIConfigurationException("The bundleContext is not set");
-    }
-
-    ServiceReference srPS = bundleContext.getServiceReference(ConfigurationProperties.class.getName());
-
-    if (srPS == null) {
-      throw new MedicationManagerServletUIConfigurationException("The ServiceReference is null for ConfigurationProperties");
-    }
-
-    ConfigurationProperties service = (ConfigurationProperties) bundleContext.getService(srPS);
-
-    if (service == null) {
-      throw new MedicationManagerServletUIConfigurationException("The ConfigurationProperties is missing");
-    }
-
-    return service;
-  }*/
-
   public static File getMedicationManagerConfigurationDirectory() {
 
     String pathToMedicationManagerConfigurationDirectory;
@@ -276,23 +196,6 @@ public final class Activator implements BundleActivator {
     return directory;
   }
 
- /* public static NewPrescriptionHandler getNewPrescriptionHandler() {
-    if (bundleContext == null) {
-      throw new MedicationManagerServletUIConfigurationException("The bundleContext is not set");
-    }
-
-    ServiceReference sr = bundleContext.getServiceReference(NewPrescriptionHandler.class.getName());
-
-    if (sr == null) {
-      throw new MedicationManagerServletUIConfigurationException("The ServiceReference is null for NewPrescriptionHandler");
-    }
-
-    NewPrescriptionHandler newPrescriptionHandler = (NewPrescriptionHandler) bundleContext.getService(sr);
-    if (newPrescriptionHandler == null) {
-      throw new MedicationManagerServletUIConfigurationException("The NewPrescriptionHandler service is missing");
-    }
-    return newPrescriptionHandler;
-  }*/
 
   public static ConfigurationProperties getConfigurationProperties() {
     if (configurationPropertiesServiceTracker == null) {

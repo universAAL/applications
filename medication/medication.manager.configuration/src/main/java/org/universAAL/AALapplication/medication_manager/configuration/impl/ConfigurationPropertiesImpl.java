@@ -24,6 +24,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private static final String MEDICATION_REMINDER_TIMEOUT = "medication.manager.reminder.timeout";
   private static final String MEDICATION_UPSIDE_DOWN_TIMEOUT = "medication.manager.upside.down.timeout";
   private static final String MEDICATION_INTAKE_INTERVAL = "medication.manager.intake.interval";
+  private static final String MEDICATION_MANAGER_ISSUER_INTERVAL_MINUTES = "medication.manager.issuer.interval.minutes";
   private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "medication.manager.http.session.expire.timeout.in.minutes";
   private static final String HEALTH_TREATMENT_SERVICE_MOCKED = "medication.manager.health.treatment.service.mocked";
   private static final String LOAD_PRESCRIPTIONSDTOS = "medication.manager.load.prescriptionsdtos";
@@ -124,6 +125,11 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     return insert.equalsIgnoreCase(ON);
   }
 
+  public int getMedicationManagerIssuerIntervalInMinutes() {
+
+    return getInt(MEDICATION_MANAGER_ISSUER_INTERVAL_MINUTES);
+  }
+
   public Map<String, PropertyInfo> getPropertyInfoMap() {
 
     Map<String, PropertyInfo> propertyInfoMap = createPropertyInfoMap();
@@ -140,6 +146,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     addUpsideDownTimeout(propertyInfoMap);
 
     addIntakeIntervalInMinutes(propertyInfoMap);
+
+    addMedicationManagerIssuerIntervalInMinutes(propertyInfoMap);
 
     addHttpSessionExpireInMinutes(propertyInfoMap);
 
@@ -193,6 +201,20 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(intakeInterval.getName(), intakeInterval);
+  }
+
+  private void addMedicationManagerIssuerIntervalInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(MEDICATION_MANAGER_ISSUER_INTERVAL_MINUTES);
+    PropertyInfo issuerInterval = new PropertyInfo(
+        MEDICATION_MANAGER_ISSUER_INTERVAL_MINUTES,
+        value,
+        FormatEnum.MINUTES,
+        TypeEnum.NUMBER,
+        "Event issuer predefined interval in minutes in which it will check fo upcoming intakes and " +
+            "will start a timer for every intake in that interval"
+    );
+
+    propertyInfoMap.put(issuerInterval.getName(), issuerInterval);
   }
 
   private void addHttpSessionExpireInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
