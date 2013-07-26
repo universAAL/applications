@@ -1878,6 +1878,8 @@ medication/medication.manager.event.issuer/src/main/java/org/universAAL/AALappli
 medication/medication.manager.event.issuer/src/main/java/org/universAAL/AALapplication/medication_manager/event/issuer/impl/Log.java -text
 medication/medication.manager.event.issuer/src/main/java/org/universAAL/AALapplication/medication_manager/event/issuer/impl/MedicationManagerEventIssuerException.java -text
 medication/medication.manager.event.issuer/src/main/java/org/universAAL/AALapplication/medication_manager/event/issuer/impl/TimerScheduler.java -text
+medication/medication.manager.integration.tests/ASL2.0 -text
+medication/medication.manager.integration.tests/NOTICE -text
 medication/medication.manager.integration.tests/artifact.composite -text
 medication/medication.manager.integration.tests/pom.xml -text
 medication/medication.manager.integration.tests/src/main/java/org/universAAL/AALapplication/medication_manager/client/impl/Activator.java -text

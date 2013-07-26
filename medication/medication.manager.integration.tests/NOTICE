@@ -1,0 +1,42 @@
+universAAL Medication Manager Integration Tests Module
+
+Copyright 2012-2014 http://www.prosyst.com - ProSyst Software GmbH
+
+
+
+I. Included Software
+first version of artifact by ProSyst Software GmbH within the universAAL project.
+
+II. Used Software
+
+This product uses software developed at
+The Apache Software Foundation (http://www.apache.org/).
+Licensed under the Apache License 2.0.
+
+This product uses software developed at
+Junit (http://www.junit.org/).
+Licensed under Common Public License 1.0.
+
+This product uses software developed at
+The OPS4J (http://www.ops4j.org)
+Licensed under the Apache License 2.0.
+This product uses software developed at
+JBoss (http://www.jboss.org/)
+Licensed under the Apache License 2.0.
+
+This product uses software developed at
+SourceForge (http://sourceforge.net/projects/javacsv/)
+Licensed under the GNU Library 
+or Lesser General Public License version 2.0 (LGPLv2)
+
+This product uses software developed at
+iCal4j (http://wiki.modularity.net.au/ical4j/)
+Licensed under the iCal4j - License (http://build.mnode.org/projects/ical4j/license.html)
+
+III. License Summary
+- Apache License 2.0
+- MIT License
+- Common Public License 1.0
+- JGCL - Java Geometry Class Library
+- LGPLv2
+- iCal4j
