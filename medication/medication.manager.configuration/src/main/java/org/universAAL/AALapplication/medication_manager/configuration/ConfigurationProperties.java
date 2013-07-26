@@ -25,6 +25,8 @@ public interface ConfigurationProperties {
 
   boolean isInsertDummyUsersIntoChe();
 
+  int getMedicationManagerIssuerIntervalInMinutes();
+
   Map<String, PropertyInfo> getPropertyInfoMap();
 
 }

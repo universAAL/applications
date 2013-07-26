@@ -139,25 +139,6 @@ public class Activator implements BundleActivator {
 
   }
 
-  /*public static ConfigurationProperties getConfigurationProperties() {
-    if (bundleContext == null) {
-      throw new MedicationManagerPersistenceException("The bundleContext is not set");
-    }
-
-    ServiceReference srPS = bundleContext.getServiceReference(ConfigurationProperties.class.getName());
-
-    if (srPS == null) {
-      throw new MedicationManagerPersistenceException("The ServiceReference is null for ConfigurationProperties");
-    }
-
-    ConfigurationProperties service = (ConfigurationProperties) bundleContext.getService(srPS);
-
-    if (service == null) {
-      throw new MedicationManagerPersistenceException("The ConfigurationProperties is missing");
-    }
-    return service;
-  }*/
-
   public static ConfigurationProperties getConfigurationProperties() {
     if (tracker == null) {
       throw new MedicationManagerPersistenceException("The ConfigurationProperties ServiceTracker is not set");

@@ -39,9 +39,7 @@ public final class UsecaseNewPrescription extends Usecase {
   private final File prescriptionDirectory;
 
   public static final String PARAMETER_MESSAGE =
-      "This command expects 3  additional parameters (except usecase id), which are: " +
-          "1. usecase id and" +
-          "2. the file name." +
+      "This command expects 1  additional parameter (except usecase id), which is: fileName" +
           " Please check the file name in the prescriptions configuration directory";
 
   private static final String USECASE_ID = "UC08";
