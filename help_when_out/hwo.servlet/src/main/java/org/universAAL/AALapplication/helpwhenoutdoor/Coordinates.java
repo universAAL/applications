@@ -16,6 +16,7 @@ public class Coordinates { //As this is an internal class, we won't be adding it
 	}
 	
 	public double getlatit(){
+		
 		return Latitude;
 	}
 }
