@@ -21,6 +21,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationReminderContextProvider;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -36,12 +37,17 @@ public final class Activator implements BundleActivator {
 
   private Timer timer;
 
+  private static ServiceTracker medicationReminderContextProviderTracker;
   private static ServiceTracker serviceTrackerProperties;
   private static ServiceTracker serviceTrackerPersistence;
   public static ModuleContext mc;
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
+
+    medicationReminderContextProviderTracker =
+        new ServiceTracker(context, MedicationReminderContextProvider.class.getName(), null);
+    medicationReminderContextProviderTracker.open();
 
     serviceTrackerProperties = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
     serviceTrackerProperties.open();
@@ -88,6 +94,19 @@ public final class Activator implements BundleActivator {
     ConfigurationProperties configurationProperties = getConfigurationProperties();
 
     return configurationProperties.getMedicationManagerIssuerIntervalInMinutes();
+  }
+
+  public static MedicationReminderContextProvider getMedicationReminderContextProvider() {
+    if (medicationReminderContextProviderTracker == null) {
+      throw new MedicationManagerEventIssuerException("The MedicationReminderContextProvider ServiceTracker is not set");
+    }
+    MedicationReminderContextProvider service =
+        (MedicationReminderContextProvider) medicationReminderContextProviderTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerEventIssuerException("The MedicationReminderContextProvider is missing");
+    }
+
+    return service;
   }
 
 }

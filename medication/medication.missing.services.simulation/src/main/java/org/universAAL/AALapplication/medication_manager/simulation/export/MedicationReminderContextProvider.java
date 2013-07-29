@@ -76,6 +76,14 @@ public final class MedicationReminderContextProvider {
     contextPublisher.publish(contextEvent);
   }
 
+  public void dueIntakeReminderPersonUriEvent(String personUri, Time time) {
+    DueIntake dueIntake = new DueIntake();
+    dueIntake.setPersonUri(personUri);
+    dueIntake.setTime(time);
+    ContextEvent contextEvent = new ContextEvent(dueIntake, DueIntake.PROP_PERSON_URI);
+    contextPublisher.publish(contextEvent);
+  }
+
   public String getClassURI() {
     return MY_URI;
   }

@@ -368,5 +368,37 @@ public final class IntakeDao extends AbstractDao {
     return createIntakes(results);
   }
 
+  public List<Intake> getActiveIntakesByPeriod(Timestamp begin, Timestamp end) {
+    String sql = "SELECT INTA.* \n" +
+        "  FROM MEDICATION_MANAGER.INTAKE INTA,\n" +
+        "  MEDICATION_MANAGER.TREATMENT TR\n" +
+        "    \n" +
+        "  WHERE INTA.TREATMENT_FK_ID = TR.ID \n" +
+        "  AND UPPER(TR.STATUS) = ? \n" +
+        "  AND INTA.TIME_PLAN >= ? \n" +
+        "  AND INTA.TIME_PLAN <= ? ";
+
+    System.out.println("sql = " + sql);
+
+    PreparedStatement statement = null;
+    try {
+      statement = getPreparedStatement(sql, statement);
+
+      statement.setString(1, ACTIVE.getValue().toUpperCase());
+      statement.setTimestamp(2, begin);
+      statement.setTimestamp(3, end);
+
+      List<Map<String, Column>> results = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, statement);
+
+      return createIntakes(results);
+
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(statement);
+    }
+
+  }
+
 
 }
