@@ -1840,6 +1840,8 @@ long_term_behav/ltba.ui/NOTICE.txt -text
 long_term_behav/ltba.ui/artifact.composite -text
 long_term_behav/ltba.ui/pom.xml -text
 medication/README.txt -text
+medication/medication.manager.configuration/ASL2.0 -text
+medication/medication.manager.configuration/NOTICE -text
 medication/medication.manager.configuration/pom.xml -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/ConfigurationProperties.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/FormatEnum.java -text
@@ -1863,6 +1865,8 @@ medication/medication.manager.configuration/src/main/resources/medication_manage
 medication/medication.manager.configuration/src/main/resources/medication_manager/dispenser_instructions/instructions_6.txt -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/dispenser_instructions/instructions_7.txt -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/prescriptions/1.xml -text
+medication/medication.manager.event.issuer/ASL2.0 -text
+medication/medication.manager.event.issuer/NOTICE -text
 medication/medication.manager.event.issuer/pom.xml -text
 medication/medication.manager.event.issuer/src/main/java/org/universAAL/AALapplication/medication_manager/event/issuer/impl/Activator.java -text
 medication/medication.manager.event.issuer/src/main/java/org/universAAL/AALapplication/medication_manager/event/issuer/impl/EventIssuer.java -text
