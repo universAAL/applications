@@ -779,6 +779,10 @@ health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manag
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentNewForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/MainMenu.java -text
+help_when_out/hwo.karaf.feature/ASL2.0.txt -text
+help_when_out/hwo.karaf.feature/NOTICE -text
+help_when_out/hwo.karaf.feature/pom.xml -text
+help_when_out/hwo.karaf.feature/src/main/features/hwo.xml -text
 help_when_out/hwo.mobile/ASL2.0.txt -text
 help_when_out/hwo.mobile/NOTICE -text
 help_when_out/hwo.mobile/pom.xml -text
