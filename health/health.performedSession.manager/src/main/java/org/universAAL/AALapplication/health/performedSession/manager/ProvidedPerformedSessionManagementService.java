@@ -71,7 +71,7 @@ public static final String NAMESPACE = "http://ontology.lst.tfo.upm.es/Performed
 
 	    
 		String[] ppManages = new String[] {PerformedSessionManagementService.PROP_MANAGES_SESSION};
-		String[] ppTreat = new String[] {PerformedSessionManagementService.PROP_ASSOCIATED_TREATMENT};
+//		String[] ppTreat = new String[] {PerformedSessionManagementService.PROP_ASSOCIATED_TREATMENT};
 		
 		addRestriction((MergedRestriction) PerformedSessionManagementService
 				.getClassRestrictionsOnProperty(PerformedSessionManagementService.MY_URI,

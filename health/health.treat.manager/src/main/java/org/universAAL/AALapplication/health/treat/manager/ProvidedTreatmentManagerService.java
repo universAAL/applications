@@ -51,12 +51,9 @@ public class ProvidedTreatmentManagerService extends TreatmentManagementService 
 		public static final String OUTPUT_TREATMENTS = HealthOntology.NAMESPACE + "matchingTreatments";
 	
 	static final ServiceProfile[] profiles = new ServiceProfile[5];
-    private static Hashtable serverLightingRestrictions = new Hashtable();
+    private static Hashtable serverRestrictions = new Hashtable();
     static {
-	// we need to register all classes in the ontology for the serialization
-	// of the object
-	// OntologyManagement.getInstance().register(new SimpleOntology(MY_URI,
-	// Lighting.MY_URI));
+
 	OntologyManagement.getInstance().register(Activator.context,
 		new SimpleOntology(MY_URI, TreatmentManagementService.MY_URI,
 			new ResourceFactory() {
@@ -71,7 +68,7 @@ public class ProvidedTreatmentManagerService extends TreatmentManagementService 
 		addRestriction((MergedRestriction) TreatmentManagementService
 			.getClassRestrictionsOnProperty(TreatmentManagementService.MY_URI,
 				TreatmentManagementService.PROP_MANAGES_TREATMENT).copy(), ppManages ,
-			serverLightingRestrictions);
+			serverRestrictions);
 		
 		//Edit
 		ProvidedTreatmentManagerService edit = new ProvidedTreatmentManagerService(SERVICE_EDIT);
