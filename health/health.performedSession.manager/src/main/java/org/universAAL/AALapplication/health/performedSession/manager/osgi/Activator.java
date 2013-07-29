@@ -3,7 +3,7 @@
 	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -25,6 +25,7 @@ package org.universAAL.AALapplication.health.performedSession.manager.osgi;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.health.performedSession.manager.PerformedSessionManagerProvider;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 /**
@@ -33,16 +34,16 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
  */
 public class Activator implements BundleActivator {
 
-	public static BundleContext context = null;
+	public static ModuleContext context = null;
 	private PerformedSessionManagerProvider provider = null;
 	
 	/* (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
-		Activator.context=context;
-		provider = new PerformedSessionManagerProvider(uAALBundleContainer.THE_CONTAINER
-				.registerModule(new BundleContext[] { context }));
+		Activator.context=uAALBundleContainer.THE_CONTAINER
+				.registerModule(new BundleContext[] { context });
+		provider = new PerformedSessionManagerProvider(Activator.context);
 	}
 
 	/* (non-Javadoc)
