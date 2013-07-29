@@ -25,14 +25,7 @@ package org.universAAL.AALapplication.health.treat.manager;
 import java.util.List;
 
 import org.universAAL.AALapplication.health.treat.manager.impl.ProfileServerTreatmentManager;
-import org.universAAL.AALapplication.health.treat.manager.profiles.EditTreatmentService;
-import org.universAAL.AALapplication.health.treat.manager.profiles.ListTreatmentBetweenTimeStampsService;
-import org.universAAL.AALapplication.health.treat.manager.profiles.ListTreatmentService;
-import org.universAAL.AALapplication.health.treat.manager.profiles.NewTreatmentService;
-import org.universAAL.AALapplication.health.treat.manager.profiles.RemoveTreatmentService;
-import org.universAAL.AALapplication.health.treat.manager.profiles.TreatmentManagerProfilesOnt;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -82,22 +75,12 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		// as a service providing component, we have to extend ServiceCallee
     	// this in turn requires that we introduce which services we would like
     	// to provide to the universAAL-based AAL Space
-		super(context, initProfiles(context));
+		super(context, ProvidedTreatmentManagerService.profiles);
 
 		// the actual implementation of the treatment manager
 		treatmentManager = new ProfileServerTreatmentManager(context);
 	}
 	
-	private static ServiceProfile[] initProfiles(ModuleContext mc){
-
-		OntologyManagement.getInstance().register(mc,new TreatmentManagerProfilesOnt());
-    	profiles[0] = new NewTreatmentService(TreatmentManagerProfilesOnt.NAMESPACE+"newTreatment").getProfile();		
-    	profiles[1] = new RemoveTreatmentService(TreatmentManagerProfilesOnt.NAMESPACE+"delTreatment").getProfile();
-    	profiles[2] = new EditTreatmentService(TreatmentManagerProfilesOnt.NAMESPACE+"editTreatment").getProfile();
-    	profiles[3] = new ListTreatmentService(TreatmentManagerProfilesOnt.NAMESPACE+"listTreatment").getProfile();
-    	profiles[4] = new ListTreatmentBetweenTimeStampsService(TreatmentManagerProfilesOnt.NAMESPACE+"listTimeTreatment").getProfile();
-    	return profiles;
-	}
 
 	public void communicationChannelBroken() {
 		// TODO Auto-generated method stub
@@ -120,19 +103,19 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		if(operation == null)
 		    return null;
 
-		User userInput = (User) call.getInputValue(NewTreatmentService.INPUT_USER);
+		User userInput = (User) call.getInputValue(ProvidedTreatmentManagerService.INPUT_USER);
 		if(userInput == null)
 		    return null;
 
-		if(operation.startsWith(ListTreatmentService.MY_URI))
+		if(operation.startsWith(ProvidedTreatmentManagerService.MY_URI))
 			return getAllTreatments(userInput);
 
-		if(operation.startsWith(ListTreatmentBetweenTimeStampsService.MY_URI)) {
+		if(operation.startsWith(ProvidedTreatmentManagerService.MY_URI)) {
 			Object timestampFromInput = call
-					.getInputValue(ListTreatmentBetweenTimeStampsService.INPUT_TIMESTAMP_FROM);
+					.getInputValue(ProvidedTreatmentManagerService.INPUT_TIMESTAMP_FROM);
 
 			Object timestampToInput = call
-					.getInputValue(ListTreatmentBetweenTimeStampsService.INPUT_TIMESTAMP_TO);	
+					.getInputValue(ProvidedTreatmentManagerService.INPUT_TIMESTAMP_TO);	
 			if (timestampFromInput != null && timestampToInput != null) {
 				return getTreatmentsBetweenTimestamps(
 						userInput, ((Long)timestampFromInput).longValue(), 
@@ -143,9 +126,9 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		}
 		    
 
-		if(operation.startsWith(NewTreatmentService.MY_URI)) {
+		if(operation.startsWith(ProvidedTreatmentManagerService.MY_URI)) {
 			Object treatmentInput = call
-			.getInputValue(NewTreatmentService.INPUT_TREATMENT);
+			.getInputValue(ProvidedTreatmentManagerService.INPUT_TREATMENT);
 			if (treatmentInput != null) {
 				return newTreatment(userInput, (Treatment)treatmentInput);
 			} else {
@@ -153,8 +136,8 @@ public class TreatmentManagerProvider extends ServiceCallee {
 			}
 		}
 		
-		if(operation.startsWith(RemoveTreatmentService.MY_URI)) {
-			Object treatmentInput = call.getInputValue(RemoveTreatmentService.INPUT_TREATMENT);
+		if(operation.startsWith(ProvidedTreatmentManagerService.MY_URI)) {
+			Object treatmentInput = call.getInputValue(ProvidedTreatmentManagerService.INPUT_TREATMENT);
 			if (treatmentInput != null) {
 				return deleteTreatment(userInput, (Treatment) treatmentInput);
 			} else {
@@ -162,9 +145,9 @@ public class TreatmentManagerProvider extends ServiceCallee {
 			}
 		}
 		
-		if(	operation.startsWith(EditTreatmentService.MY_URI)) {
+		if(	operation.startsWith(ProvidedTreatmentManagerService.MY_URI)) {
 			Object treatmentInput = call
-					.getInputValue(EditTreatmentService.INPUT_TREATMENT);
+					.getInputValue(ProvidedTreatmentManagerService.INPUT_TREATMENT);
 
 			if (treatmentInput != null) {
 				return editTreatment(userInput, (Treatment)treatmentInput);
@@ -188,7 +171,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		
 		List treatmentsList = treatmentManager.getAllTreatments(user);
 		sr.addOutput(new ProcessOutput(
-				ListTreatmentService.OUTPUT_TREATMENTS, treatmentsList));
+				ProvidedTreatmentManagerService.OUTPUT_TREATMENTS, treatmentsList));
 		
 		return sr;		
 	}
@@ -209,7 +192,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		List treatmentsList = treatmentManager.getTreatmentsBetweenTimestamps(
 				user, timestampFrom, timestampTo);
 		sr.addOutput(new ProcessOutput(
-				ListTreatmentBetweenTimeStampsService.OUTPUT_TREATMENTS, treatmentsList));
+				ProvidedTreatmentManagerService.OUTPUT_TREATMENTS, treatmentsList));
 		
 		return sr;
 	}
