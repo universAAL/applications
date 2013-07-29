@@ -29,7 +29,7 @@
 
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
-      <artifactId>medication.manager.persistence</artifactId>
+      <artifactId>medication.missing.services.simulation</artifactId>
       <version>E.0-SNAPSHOT</version>
     </dependency>
 

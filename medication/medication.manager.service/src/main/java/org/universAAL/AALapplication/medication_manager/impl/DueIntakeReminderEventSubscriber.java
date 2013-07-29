@@ -79,8 +79,6 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
       DueIntake dueIntake = (DueIntake) event.getRDFSubject();
 
-      validateDueIntake(dueIntake);
-
       Time time = dueIntake.getTime();
 
       Log.info("Time %s", getClass(), time);
@@ -89,10 +87,15 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
       Log.info("DeviceUri %s", getClass(), deviceUri);
 
-      PersistentService persistentService = getPersistentService();
-      PersonDao personDao = persistentService.getPersonDao();
+      String personUri = dueIntake.getPersonUri();
 
-      Person patient = personDao.findPersonByDeviceUri(deviceUri);
+      Log.info("PersonUri %s", getClass(), personUri);
+
+      validateDueIntake(dueIntake);
+
+      PersistentService persistentService = getPersistentService();
+
+      Person patient = getPerson(deviceUri, personUri, persistentService);
 
       User user = new User(patient.getPersonUri());
 
@@ -114,14 +117,29 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
   }
 
+  private Person getPerson(String deviceUri, String personUri, PersistentService persistentService) {
+    if (deviceUri != null) {
+      PersonDao personDao = persistentService.getPersonDao();
+
+      return personDao.findPersonByDeviceUri(deviceUri);
+    }
+
+    PersonDao personDao = persistentService.getPersonDao();
+    return personDao.findPersonByPersonUri(personUri);
+  }
+
   private void validateDueIntake(DueIntake dueIntake) {
 
     if (dueIntake.getTime() == null) {
       throw new MedicationManagerException("The time property is not set in the dueIntake event object");
     }
 
-    if (dueIntake.getDeviceUri() == null) {
-      throw new MedicationManagerException("The deviceUri property is not set in the dueIntake event object");
+    if (dueIntake.getDeviceUri() == null && dueIntake.getPersonUri() == null) {
+      throw new MedicationManagerException("The deviceUri or personUri property is not set in the dueIntake event object");
+    }
+
+    if (dueIntake.getDeviceUri() != null && dueIntake.getPersonUri() != null) {
+      throw new MedicationManagerException("The deviceUri and personUri property cannot be set in the same time");
     }
 
   }
