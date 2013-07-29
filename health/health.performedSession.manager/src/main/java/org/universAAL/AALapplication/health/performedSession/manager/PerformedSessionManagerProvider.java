@@ -25,20 +25,13 @@ package org.universAAL.AALapplication.health.performedSession.manager;
 import java.util.List;
 
 import org.universAAL.AALapplication.health.performedSession.manager.impl.ProfileServerPerformedSessionManager;
-import org.universAAL.AALapplication.health.performedSession.manager.profiles.ListPerformedSessionBetweenTimeStampsService;
-import org.universAAL.AALapplication.health.performedSession.manager.profiles.ListPerformedSessionService;
-import org.universAAL.AALapplication.health.performedSession.manager.profiles.PerformedSessionServiceProfilesOnt;
-import org.universAAL.AALapplication.health.performedSession.manager.profiles.SessionPerformedService;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
-import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.PerformedSession;
 import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
@@ -52,18 +45,7 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 
 	// the actual performed session manager 
 	private PerformedSessionManager performedSessionManager = null;
-
-	public static final String INPUT_USER = HealthOntology.NAMESPACE + "user";
 	
-	static final ServiceProfile[] profiles = new ServiceProfile[5];
-	
-	// define profiles
-	static void registerOnt(ModuleContext mc){
-		OntologyManagement.getInstance().register(mc,new PerformedSessionServiceProfilesOnt());
-    	profiles[0] = new SessionPerformedService(PerformedSessionServiceProfilesOnt.NAMESPACE+"newSession").getProfile();		
-    	profiles[1] = new ListPerformedSessionService(PerformedSessionServiceProfilesOnt.NAMESPACE+"listSession").getProfile();
-    	profiles[2] = new ListPerformedSessionBetweenTimeStampsService(PerformedSessionServiceProfilesOnt.NAMESPACE+"listTimeSession").getProfile();
-	}
 	
     // prepare a standard error message for later use
     private static final ServiceResponse invalidInput = new ServiceResponse(
@@ -71,17 +53,6 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
     static {
     	invalidInput.addOutput(new ProcessOutput(
     			ServiceResponse.PROP_SERVICE_SPECIFIC_ERROR, "Invalid input!"));
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param context
-     * @param realizedServices
-     */
-    protected PerformedSessionManagerProvider(ModuleContext context, ServiceProfile[] realizedServices) {
-		super(context, realizedServices);
-		registerOnt(context);
     }
 	
     /**
@@ -94,8 +65,7 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 		// as a service providing component, we have to extend ServiceCallee
     	// this in turn requires that we introduce which services we would like
     	// to provide to the universAAL-based AAL Space
-		super(context, profiles);
-		registerOnt(context);
+		super(context, ProvidedPerformedSessionManagementService.profiles);
 		// the actual implementation of the performed session manager
 		performedSessionManager = new ProfileServerPerformedSessionManager(context);
 	}
@@ -121,27 +91,27 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 		if(operation == null)
 		    return null;
 
-		User userInput = (User) call.getInputValue(PerformedSessionManagerProvider.INPUT_USER);
+		User userInput = (User) call.getInputValue(ProvidedPerformedSessionManagementService.INPUT_USER);
 		if(userInput == null)
 		    return null;
 
-		if(operation.startsWith(ListPerformedSessionService.MY_URI)) {
-			Object treatmentInput = call.getInputValue(ListPerformedSessionService.INPUT_TREATMENT);
+		if(operation.startsWith(ProvidedPerformedSessionManagementService.MY_URI)) {
+			Object treatmentInput = call.getInputValue(ProvidedPerformedSessionManagementService.INPUT_TREATMENT);
 			if(treatmentInput == null)
 				return null;
 			return getAllPerformedsessions(userInput, (Treatment) treatmentInput);
 		}
 		
-		if(operation.startsWith(ListPerformedSessionBetweenTimeStampsService.MY_URI)) {
+		if(operation.startsWith(ProvidedPerformedSessionManagementService.MY_URI)) {
 		Object timestampFromInput = call
-			.getInputValue(ListPerformedSessionBetweenTimeStampsService.INPUT_TIMESTAMP_FROM);
+			.getInputValue(ProvidedPerformedSessionManagementService.INPUT_TIMESTAMP_FROM);
 
 		Object timestampToInput = call
-			.getInputValue(ListPerformedSessionBetweenTimeStampsService.INPUT_TIMESTAMP_TO);
+			.getInputValue(ProvidedPerformedSessionManagementService.INPUT_TIMESTAMP_TO);
 			
 			if (timestampFromInput != null && timestampToInput != null) {
 
-				Object treatmentInput = call.getInputValue(ListPerformedSessionService.INPUT_TREATMENT);
+				Object treatmentInput = call.getInputValue(ProvidedPerformedSessionManagementService.INPUT_TREATMENT);
 				return getPerformedSessionsBetweenTimestamps(
 		    		userInput, (Treatment) treatmentInput, 
 		    		((Long)timestampFromInput).longValue(), 
@@ -154,9 +124,9 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 
 		
 
-		if(operation.startsWith(SessionPerformedService.MY_URI)) {
+		if(operation.startsWith(ProvidedPerformedSessionManagementService.MY_URI)) {
 			Object performedSessionInput = call
-					.getInputValue(SessionPerformedService.INPUT_PERFORMED_SESSION);
+					.getInputValue(ProvidedPerformedSessionManagementService.INPUT_PERFORMED_SESSION);
 			if (performedSessionInput != null)
 				return sessionPerformed(userInput,
 		    		(PerformedSession)performedSessionInput);
