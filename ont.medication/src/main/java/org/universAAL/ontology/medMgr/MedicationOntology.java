@@ -135,6 +135,10 @@ public final class MedicationOntology extends Ontology {
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(
             DueIntake.PROP_TIME, Time.MY_URI, 1, 1));
+    oci.addDatatypeProperty(DueIntake.PROP_PERSON_URI);
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            DueIntake.PROP_PERSON_URI, TypeMapper.getDatatypeURI(String.class), 1, 1));
 
     // load DispenserUpsideDown
     oci = createNewOntClassInfo(DispenserUpsideDown.MY_URI, FACTORY, DISPENSER_UPSIDE_DOWN_FACTORY_INDEX);
