@@ -33,8 +33,9 @@ import org.universAAL.ontology.activityhub.ContactClosureSensor;
 import org.universAAL.ontology.activityhub.ContactClosureSensorEvent;
 import org.universAAL.ontology.activityhub.MotionSensor;
 import org.universAAL.ontology.activityhub.MotionSensorEvent;
+import org.universAAL.ontology.device.Sensor;
 import org.universAAL.ontology.location.Location;
-import org.universAAL.ontology.phThing.Sensor;
+import org.universAAL.ontology.phThing.Device;
 
 /**
  * Publisher of context events.
