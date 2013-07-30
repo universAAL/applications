@@ -19,6 +19,7 @@
  */
 package org.universAAL.ltba.service;
 
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
@@ -26,12 +27,15 @@ import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.process.ProcessInput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ltba.manager.Activator;
 import org.universAAL.ontology.drools.DroolsReasoning;
 import org.universAAL.ontology.ltba.LTBAService;
 
 public class ProvidedLTBAService extends LTBAService {
+
 	public ProvidedLTBAService(String uri) {
 		super(uri);
+
 	}
 
 	public static final String LTBA_NAMESPACE = "http:www.tsbtecnologias.es/LTBA.owl#";
@@ -58,6 +62,7 @@ public class ProvidedLTBAService extends LTBAService {
 
 	static {
 		OntologyManagement.getInstance().register(
+				Activator.mc,
 				new SimpleOntology(MY_URI, DroolsReasoning.MY_URI,
 						new ResourceFactoryImpl() {
 							@Override
@@ -145,22 +150,23 @@ public class ProvidedLTBAService extends LTBAService {
 		// printReport.myProfile.addAddEffect(
 		// new String[] { LTBAService.PROP_HAS_TEXT_REPORT }, null);
 		profiles[4] = showMonth.myProfile;
-		
-//		ProvidedLTBAService showMonth = new ProvidedLTBAService(
-//				SERVICE_SHOW_MONTH);
-//
-//		ProcessInput inputReport = new ProcessInput(INPUT_REPORT);
-//		inputReport.setParameterType(ActivityReportType.MY_URI);
-//		showMonth.addFilteringInput(INPUT_REPORT, ActivityReportType.MY_URI, 1,
-//				1, new String[] { LTBAService.PROP_HAS_ACTIVITY_REPORT,
-//						ActivityReportType.MY_URI });
-//		showWeek.myProfile.addAddEffect(
-//				new String[] { LTBAService.PROP_HAS_ACTIVITY_REPORT,
-//						ActivityReportType.MY_URI }, inputReport);
-//
-//		// printReport.myProfile.addAddEffect(
-//		// new String[] { LTBAService.PROP_HAS_TEXT_REPORT }, null);
-//		profiles[4] = showMonth.myProfile;
+
+		// ProvidedLTBAService showMonth = new ProvidedLTBAService(
+		// SERVICE_SHOW_MONTH);
+		//
+		// ProcessInput inputReport = new ProcessInput(INPUT_REPORT);
+		// inputReport.setParameterType(ActivityReportType.MY_URI);
+		// showMonth.addFilteringInput(INPUT_REPORT, ActivityReportType.MY_URI,
+		// 1,
+		// 1, new String[] { LTBAService.PROP_HAS_ACTIVITY_REPORT,
+		// ActivityReportType.MY_URI });
+		// showWeek.myProfile.addAddEffect(
+		// new String[] { LTBAService.PROP_HAS_ACTIVITY_REPORT,
+		// ActivityReportType.MY_URI }, inputReport);
+		//
+		// // printReport.myProfile.addAddEffect(
+		// // new String[] { LTBAService.PROP_HAS_TEXT_REPORT }, null);
+		// profiles[4] = showMonth.myProfile;
 
 	}
 

@@ -34,9 +34,10 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 public class Activator implements BundleActivator {
 
 	private LTBAProvider provider;
+	public static ModuleContext mc;
 
 	public void start(BundleContext context) throws Exception {
-		ModuleContext mc = uAALBundleContainer.THE_CONTAINER
+		mc = uAALBundleContainer.THE_CONTAINER
 				.registerModule(new Object[] { context });
 		ConsequenceListener listener = new ConsequenceListener(mc);
 		EnergyConsequenceListener ecl = new EnergyConsequenceListener(mc);

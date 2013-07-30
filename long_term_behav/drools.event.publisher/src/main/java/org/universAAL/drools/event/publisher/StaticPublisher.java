@@ -34,7 +34,6 @@ import org.universAAL.ontology.activityhub.MotionSensor;
 import org.universAAL.ontology.activityhub.MotionSensorEvent;
 import org.universAAL.ontology.location.Location;
 import org.universAAL.ontology.phThing.Device;
-import org.universAAL.ontology.phThing.Sensor;
 
 /**
  * Static class for publish context events.
@@ -79,10 +78,10 @@ public class StaticPublisher {
 				+ "MotionSensorEvent.owl#MotionSensorEvent");
 		Location motionSensorLocation = new Location(TSB_NAMESPACE
 				+ "Location.owl#MotionSensorTestLocation", location);
-		ms.setLocation(motionSensorLocation);
-		ms.setProperty(MotionSensor.PROP_MEASURED_VALUE, mse.motion_detected);
-
-		cp.publish(new ContextEvent(ms, Sensor.PROP_MEASURED_VALUE));
+//		ms.setLocation(motionSensorLocation);
+//		ms.setProperty(MotionSensor.PROP_MEASURED_VALUE, mse.motion_detected);
+//
+//		cp.publish(new ContextEvent(ms, Sensor.PROP_MEASURED_VALUE));
 	}
 
 	private static void initHelperClasses(BundleContext theContext) {
