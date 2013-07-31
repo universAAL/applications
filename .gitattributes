@@ -670,6 +670,8 @@ health/health.biomedicalsensors.uiclient/src/main/java/org/universAAL/AALapplica
 health/health.biomedicalsensors.uiclient/src/main/java/org/universAAL/AALapplication/biomedicalsensors/uiclient/SharedResources.java -text
 health/health.biomedicalsensors.uiclient/src/main/java/org/universAAL/AALapplication/biomedicalsensors/uiclient/UIProvider.java -text
 health/health.biomedicalsensors.uiclient/src/main/java/org/universAAL/AALapplication/biomedicalsensors/uiclient/osgi/Activator.java -text
+health/health.feature/pom.xml -text svneol=unset#text/plain
+health/health.feature/src/main/features/health.xml -text svneol=unset#text/plain
 health/health.motivation/ASL2.0 -text
 health/health.motivation/MITX.txt -text svneol=unset#text/plain
 health/health.motivation/NOTICE -text
