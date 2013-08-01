@@ -16,6 +16,8 @@
 
 package org.universAAL.AALapplication.safety_home.service.uiclient;
 
+import org.universAAL.ontology.lighting.LightSource;
+import org.universAAL.ontology.lighting.Lighting;
 import org.universAAL.ontology.phThing.Device;
 
 import java.io.File;
@@ -29,7 +31,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import org.universAAL.AALapplication.safety_home.service.uiclient.SoundEffect.Volume;
 import org.universAAL.AALapplication.safety_home.service.uiclient.dialogs.door.FrontDoorControl;
 import org.universAAL.AALapplication.safety_home.service.uiclient.dialogs.environmental.EnvironmentalControl;
 import org.universAAL.middleware.container.ModuleContext;
@@ -39,11 +40,14 @@ import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.ontology.Safety.DoorBell;
+import org.universAAL.ontology.Safety.FanHeater;
 import org.universAAL.ontology.Safety.SafetyManagement;
 import org.universAAL.ontology.Safety.Door;
 import org.universAAL.ontology.Safety.Window;
@@ -98,7 +102,11 @@ public class SafetyClient extends ContextSubscriber {
 		cep7.addRestriction(MergedRestriction.getAllValuesRestriction(
 				ContextEvent.PROP_RDF_SUBJECT, SmokeSensor.MY_URI));
 
-		return new ContextEventPattern[] { cep1, cep2, cep3, cep4, cep5, cep6, cep7 };
+		ContextEventPattern cep8 = new ContextEventPattern();
+		cep7.addRestriction(MergedRestriction.getAllValuesRestriction(
+				ContextEvent.PROP_RDF_SUBJECT, DoorBell.MY_URI));
+
+		return new ContextEventPattern[] { cep1, cep2, cep3, cep4, cep5, cep6, cep7, cep8 };
 	}
 
 	SafetyClient(ModuleContext context) {
@@ -267,7 +275,104 @@ public class SafetyClient extends ContextSubscriber {
 		}
 	}
 
-	public static boolean open(String deviceURI) {
+    public static boolean turnOn(String lampURI) {
+
+		if ((lampURI == null) || !(lampURI instanceof String))
+		    return false;
+	
+		ServiceResponse sr = caller.call(turnOnLampRequest(lampURI));
+	
+		if (sr.getCallStatus() == CallStatus.succeeded) {
+		    System.out.println("SafetyClient: SUCCESS: the lamp was turned on: " + lampURI);
+		    return true;
+		} else {
+		    System.out.println("SafetyClient: the lamp couldn't turned on in turnOn(String lampURI)");
+		    return false;
+		}
+    }
+
+    private static ServiceRequest turnOnLampRequest(String lampURI) {
+		ServiceRequest turnOnLamp = new ServiceRequest(new SafetyManagement(), null);
+		System.out.println("TURN ON "+lampURI);
+		turnOnLamp.addValueFilter(new String[] { SafetyManagement.PROP_LAMP_CONTROLS }, new LightSource(lampURI));
+		turnOnLamp.addChangeEffect(new String[] { SafetyManagement.PROP_LAMP_CONTROLS, LightSource.PROP_SOURCE_BRIGHTNESS }, new Integer(102));
+		
+		return turnOnLamp;
+    }
+    
+    public static boolean turnOff(String lampURI) {
+		if ((lampURI == null) || !(lampURI instanceof String))
+		    return false;
+
+		ServiceResponse sr = caller.call(turnOffLampRequest(lampURI));
+		if (sr.getCallStatus() == CallStatus.succeeded) {
+		    System.out.println("SafetyClient: SUCCESS: the lamp was turned off!");
+		    return true;
+		} else {
+		    System.out.println("SafetyClient: the lamp couldn't turned off!");
+		    return false;
+		}
+    }
+
+    private static ServiceRequest turnOffLampRequest(String lampURI) {
+		ServiceRequest turnOffLamp = new ServiceRequest(new SafetyManagement(), null);
+		System.out.println("TURN OFF "+lampURI);
+
+		turnOffLamp.addValueFilter(new String[] { SafetyManagement.PROP_LAMP_CONTROLS }, new LightSource(lampURI));
+		turnOffLamp.addChangeEffect(new String[] { SafetyManagement.PROP_LAMP_CONTROLS, LightSource.PROP_SOURCE_BRIGHTNESS }, new Integer(-2));
+		
+		return turnOffLamp;
+    }
+
+    public static boolean turnOnHeating(String heatingURI) {
+
+		if ((heatingURI == null) || !(heatingURI instanceof String))
+		    return false;
+	
+		ServiceResponse sr = caller.call(turnOnHeatingRequest(heatingURI));
+		if (sr.getCallStatus() == CallStatus.succeeded) {
+		    System.out.println("SafetyClient: SUCCESS: the heating was turned on!");
+		    return true;
+		} else {
+		    System.out.println("SafetyClient: the heating couldn't turned on!");
+		    return false;
+		}
+    }
+
+    private static ServiceRequest turnOnHeatingRequest(String heatingURI) {
+		ServiceRequest turnOnHeating = new ServiceRequest(new SafetyManagement(), null);
+		System.out.println("TURN ON "+heatingURI);
+		turnOnHeating.addValueFilter(new String[] { SafetyManagement.PROP_HEATING_CONTROLS }, new FanHeater(heatingURI));
+		turnOnHeating.addChangeEffect(new String[] { SafetyManagement.PROP_HEATING_CONTROLS, FanHeater.PROP_IS_ENABLED }, new Boolean(true));
+		
+		return turnOnHeating;
+    }
+
+    public static boolean turnOffHeating(String heatingURI) {
+		if ((heatingURI == null) || !(heatingURI instanceof String))
+		    return false;
+
+		ServiceResponse sr = caller.call(turnOffHeatingRequest(heatingURI));
+		if (sr.getCallStatus() == CallStatus.succeeded) {
+		    System.out.println("SafetyClient: SUCCESS: the heating was turned off!");
+		    return true;
+		} else {
+		    System.out.println("SafetyClient: the heating couldn't turned off!");
+		    return false;
+		}
+    }
+
+    private static ServiceRequest turnOffHeatingRequest(String heatingURI) {
+		ServiceRequest turnOffHeating = new ServiceRequest(new SafetyManagement(), null);
+		System.out.println("TURN OFF "+heatingURI);
+		turnOffHeating.addValueFilter(new String[] { SafetyManagement.PROP_HEATING_CONTROLS }, new FanHeater(heatingURI));
+		turnOffHeating.addChangeEffect(new String[] { SafetyManagement.PROP_HEATING_CONTROLS, FanHeater.PROP_IS_ENABLED }, new Boolean(false));
+
+		return turnOffHeating;
+    }
+
+    
+    public static boolean open(String deviceURI) {
 
 		if ((deviceURI == null) || !(deviceURI instanceof String)) {
 			LogUtils.logWarn(SharedResources.moduleContext,	SafetyClient.class,	"open",
@@ -353,6 +458,10 @@ public class SafetyClient extends ContextSubscriber {
     	ec.startSmokeDialog(smoke);
     }
 
+    public void doorBell(boolean isEnabled) {
+    	fdc.startDoorBellDialog(isEnabled);
+    }
+
     public void handleContextEvent(ContextEvent event) {
 
 /*		System.out.println("############### EVENT RECEIVED ###############");
@@ -380,6 +489,8 @@ public class SafetyClient extends ContextSubscriber {
 			motionValue(((Double)event.getRDFObject()).doubleValue());
 		if (((String)event.getSubjectTypeURI()).indexOf("Smoke")!=-1)
 			smokeValue(((Boolean)event.getRDFObject()).booleanValue());
+		if (((String)event.getSubjectTypeURI()).indexOf("DoorBell")!=-1)
+			doorBell(((Boolean)event.getRDFObject()).booleanValue());
 	}
 
 	public void communicationChannelBroken() {

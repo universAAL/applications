@@ -46,7 +46,7 @@ public class DoorOpen {
 		} 
 		catch (DomoticsException e) { 
 			//e.printStackTrace(); 
-			return false; 
+			return true; 
 		}
 		System.out.println("finished!");
 		return true;

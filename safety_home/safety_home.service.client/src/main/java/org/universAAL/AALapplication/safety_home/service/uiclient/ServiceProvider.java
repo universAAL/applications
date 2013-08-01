@@ -47,15 +47,15 @@ public class ServiceProvider extends ServiceCallee {
     }
 
     public ServiceResponse handleCall(ServiceCall call) {
-	if (call != null) {
-	    String operation = call.getProcessURI();
-	    if (operation != null && operation.startsWith(START_URI)) {
-			System.out.println("-- Safety and Security UI Client Main Menu --");
-			SharedResources.uIProvider.startMainDialog();
-			ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
-			return sr;
-	    }
-	}
-	return null;
+		if (call != null) {
+		    String operation = call.getProcessURI();
+		    if (operation != null && operation.startsWith(START_URI)) {
+				System.out.println("-- Safety and Security UI Client Main Menu --");
+				SharedResources.uIProvider.startMainDialog();
+				ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
+				return sr;
+		    }
+		}
+		return null;
     }
 }

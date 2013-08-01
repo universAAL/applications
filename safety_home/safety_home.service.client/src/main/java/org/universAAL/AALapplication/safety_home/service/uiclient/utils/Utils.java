@@ -17,6 +17,7 @@
 package org.universAAL.AALapplication.safety_home.service.uiclient.utils;
 
 import org.universAAL.AALapplication.safety_home.service.uiclient.SharedResources;
+import org.universAAL.AALapplication.safety_home.service.uiclient.osgi.Activator;
 import org.universAAL.middleware.container.utils.LogUtils;
 
 /**
@@ -28,7 +29,7 @@ public class Utils {
 
 	
 	public static void println(String msg) {
-	    LogUtils.logDebug(SharedResources.moduleContext, Utils.class, "Safety and Security", new Object[]{msg},null);
+	    LogUtils.logDebug(Activator.getModuleContext(), Utils.class, "Safety and Security", new Object[]{msg},null);
 	}
 	
 }

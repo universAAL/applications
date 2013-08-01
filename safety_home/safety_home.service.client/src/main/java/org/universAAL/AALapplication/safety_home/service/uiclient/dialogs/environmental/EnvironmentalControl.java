@@ -28,6 +28,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import org.universAAL.AALapplication.safety_home.service.uiclient.SafetyClient;
 import org.universAAL.AALapplication.safety_home.service.uiclient.SharedResources;
 import org.universAAL.AALapplication.safety_home.service.uiclient.UIProvider;
 import org.universAAL.AALapplication.safety_home.service.uiclient.utils.Utils;
@@ -74,7 +75,6 @@ enum SoundEffect {
 	    	  //File soundFile = new File(soundFileName);
 	    	  //AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 	    	  /* Open input stream and create audio input stream  */
-
 	    	  String curDir = System.getProperty("user.dir");
 	    	  //System.out.println("*** "+curDir);
 	    	  File confHome = new File(new BundleConfigHome("safety").getAbsolutePath());
@@ -132,7 +132,15 @@ public class EnvironmentalControl extends UICaller {
     static final String SUBMISSION_TEMPERATURE = MY_UI_NAMESPACE + "temperature";
     static final String SUBMISSION_HUMIDITY = MY_UI_NAMESPACE + "humidity";
     static final String SUBMISSION_MOTION = MY_UI_NAMESPACE + "motion";
+    static final String SUBMISSION_LAMP = MY_UI_NAMESPACE + "lamp";
+    static final String SUBMISSION_HEATING = MY_UI_NAMESPACE + "heating";
 	static final String SUBMISSION_GOBACK = MY_UI_NAMESPACE + "back";
+    static final String SUBMISSION_TURN_ON_LAMP = MY_UI_NAMESPACE + "turnonlamp";
+    static final String SUBMISSION_TURN_OFF_LAMP = MY_UI_NAMESPACE + "turnofflamp";
+    static final String SUBMISSION_TURN_ON_HEATING = MY_UI_NAMESPACE + "turnonheating";
+    static final String SUBMISSION_TURN_OFF_HEATING = MY_UI_NAMESPACE + "turnoffheating";
+    static String lampURI = "http://ontology.universaal.org/SafetyServer.owl#controlledLamp0";
+    static String heatingURI = "http://ontology.universaal.org/SafetyServer.owl#controlledHeating0";
 
 	private Form mainDialog = null;
 	private Form windowDialog = null;
@@ -141,6 +149,8 @@ public class EnvironmentalControl extends UICaller {
 	private Form tempDialog = null;
 	private Form humidityDialog = null;
 	private Form motionDialog = null;
+	private Form lampDialog = null;
+	private Form heatingDialog = null;
 	private String active = ""; 
 	
 	private int lightStatus = 0;
@@ -151,6 +161,8 @@ public class EnvironmentalControl extends UICaller {
 	private boolean smoke = false;
 	private String motionVal = "Motion sensor";
 	private int motionWarnings = 0;
+	private int lampStatus = 0;
+	private int heatingStatus = 0;
 	
 	public EnvironmentalControl(ModuleContext context) {
 		super(context);
@@ -184,6 +196,76 @@ public class EnvironmentalControl extends UICaller {
 				this.active="motion";
 				this.startMotionDialog();
 			} 
+			else if (SUBMISSION_LAMP.equals(uir.getSubmissionID())) {
+				this.active="lamp";
+				this.startLampDialog();
+			} 
+			else if (SUBMISSION_TURN_ON_LAMP.equals(uir.getSubmissionID())) {
+				this.active="lamp";
+			
+				new Thread() {
+					public void run() {
+						// Turn on the Lamp
+						boolean b = SafetyClient.turnOn(lampURI);
+						if (b)
+							lampStatus = 1;
+					}
+				}.start();
+
+				this.lampStatus = 1;
+				this.startLampDialog();
+			} 
+			else if (SUBMISSION_TURN_OFF_LAMP.equals(uir.getSubmissionID())) {
+				this.active="lamp";
+			
+				new Thread() {
+					public void run() {
+						// Turn off the Lamp
+						boolean b = SafetyClient.turnOff(lampURI);
+						if (b)
+							lampStatus = 0;
+
+					}
+				}.start();
+
+				this.lampStatus = 0;
+				this.startLampDialog();
+			} 
+			else if (SUBMISSION_HEATING.equals(uir.getSubmissionID())) {
+				this.active="heating";
+				this.startHeatingDialog();
+			} 
+			else if (SUBMISSION_TURN_ON_HEATING.equals(uir.getSubmissionID())) {
+				this.active="heating";
+			
+				new Thread() {
+					public void run() {
+						// Turn on the Heating
+						boolean b = SafetyClient.turnOnHeating(heatingURI);
+						if (b)
+							heatingStatus = 1;
+					}
+				}.start();
+
+				this.heatingStatus = 1;
+				this.startHeatingDialog();
+			} 
+			else if (SUBMISSION_TURN_OFF_HEATING.equals(uir.getSubmissionID())) {
+				this.active="heating";
+			
+				new Thread() {
+					public void run() {
+						// Turn off the Heating
+						boolean b = SafetyClient.turnOffHeating(heatingURI);
+						if (b)
+							heatingStatus = 0;
+
+					}
+				}.start();
+
+				this.heatingStatus = 0;
+				this.startHeatingDialog();
+			} 
 		}
 		Utils.println(window + " Continues");
 	    //startMainDialog();
@@ -201,15 +283,18 @@ public class EnvironmentalControl extends UICaller {
 	private Form windowMainDialog() {
 		Utils.println(window + "createWindowMainDialog");
 		Form f = Form.newDialog("Window", new Resource());
-		//Form f = Form.newSubdialog("Window", mainDialog.getURI());
 		
 		if (this.windowStatus==0){
-			new MediaObject(f.getIOControls(), new Label("Window is closed", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/closed_window.jpg")).toString());
+			Group g1 = new Group(f.getIOControls(), new Label("Window",
+				      (String) null), null, null, (Resource) null);
+			new MediaObject(g1, new Label("Window is closed", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/closed_window.png")).toString());
 		}
 		if (this.windowStatus==100){
-			new MediaObject(f.getIOControls(), new Label("Window is open", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/opened_window.jpg")).toString());
+			Group g1 = new Group(f.getIOControls(), new Label("Window",
+				      (String) null), null, null, (Resource) null);
+			new MediaObject(g1, new Label("Window is open", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/opened_window.png")).toString());
 		}
 		
 		f = submitButtons(f);
@@ -223,7 +308,13 @@ public class EnvironmentalControl extends UICaller {
 		windowDialog = windowMainDialog(this.windowStatus);
 
 		if (windowDialog!=null){
-			SoundEffect.WINDOW.play();
+			new Thread() {
+				public void run() {
+					// Window is open sound
+					SoundEffect.WINDOW.play();
+				}
+			}.start();
+			
 			UIRequest out = new UIRequest(SharedResources.testUser, windowDialog,
 					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 			sendUIRequest(out);
@@ -235,8 +326,8 @@ public class EnvironmentalControl extends UICaller {
 		
 		if (status==100){
 			Form f = Form.newMessage("Window Alert Message", "Window is open");
-			new MediaObject(f.getIOControls(), new Label("Window", null), "image/jpeg",
-					((java.net.URL)UIProvider.class.getResource("/images/opened_window.jpg")).toString());
+			new MediaObject(f.getIOControls(), new Label("Window", null), "image/png",
+					((java.net.URL)UIProvider.class.getResource("/images/opened_window.png")).toString());
 			return f;
 		}
 		
@@ -270,12 +361,16 @@ public class EnvironmentalControl extends UICaller {
 		//Form f = Form.newSubdialog("Lights", mainDialog.getURI());
 		
 		if (this.lightStatus==0){
-			new MediaObject(f.getIOControls(), new Label("Lights", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/light_off.jpg")).toString());
+			Group g1 = new Group(f.getIOControls(), new Label("Lights",
+				      (String) null), null, null, (Resource) null);
+			new MediaObject(g1, new Label("Lights", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/light_off.png")).toString());
 		}
 		if (this.lightStatus==1000){
-			new MediaObject(f.getIOControls(), new Label("Lights", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/light_on.jpg")).toString());
+			Group g1 = new Group(f.getIOControls(), new Label("Lights",
+				      (String) null), null, null, (Resource) null);
+			new MediaObject(g1, new Label("Lights", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/light_on.png")).toString());
 		}
 
 		f = submitButtons(f);
@@ -288,8 +383,8 @@ public class EnvironmentalControl extends UICaller {
 		
 		if (status==1000){
 			Form f = Form.newMessage("Lights Alert Message", "Lights are on");
-			new MediaObject(f.getIOControls(), new Label("", null), "image/jpeg",
-					((java.net.URL)UIProvider.class.getResource("/images/light_on.jpg")).toString());
+			new MediaObject(f.getIOControls(), new Label("", null), "image/png",
+					((java.net.URL)UIProvider.class.getResource("/images/light_on.png")).toString());
 			return f;
 		}
 		return null;
@@ -307,36 +402,19 @@ public class EnvironmentalControl extends UICaller {
 	private Form temperatureMainDialog() {
 		Utils.println(window + "createTemperatureMainDialog");
 		Form f = Form.newDialog("Temperature", new Resource());
-		//Form f = Form.newSubdialog("Temperature", mainDialog.getURI());
-/*
-		Group g1 = new Group(f.getIOControls(), new Label("Normal group 1",
-			      (String) null), null, null, (Resource) null);
-		new MediaObject(g1, new Label("", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/temperature.jpg")).toString());
 		
-		Group g2 = new Group(f.getIOControls(), new Label("Normal group 2",
-			      (String) null), null, null, (Resource) null);
-		new MediaObject(g2, new Label("", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/closed_window.jpg")).toString());
-
-		Group g3 = new Group(f.getIOControls(), new Label("Normal group 3",
-			      (String) null), null, null, (Resource) null);
-		new MediaObject(g3, new Label("", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/motion.jpg")).toString());
-		
-		Group g4 = new Group(f.getIOControls(), new Label("Normal group 4",
-			      (String) null), null, null, (Resource) null);
-		new MediaObject(g4, new Label("", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/light_on.jpg")).toString());
-*/		
-		
-		if (this.temperature!=0)
-			new MediaObject(f.getIOControls(), new Label("Temperature is "+this.temperature, null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/temperature.jpg")).toString());
-		else
-			new MediaObject(f.getIOControls(), new Label("Temperature", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/temperature.jpg")).toString());
-			
+		if (this.temperature!=0){
+			Group g1 = new Group(f.getIOControls(), new Label("Temperature",
+				      (String) null), null, null, (Resource) null);
+			new MediaObject(g1, new Label("Temperature is "+this.temperature, null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/temperature.png")).toString());
+		}
+		else{
+			Group g1 = new Group(f.getIOControls(), new Label("Temperature",
+				      (String) null), null, null, (Resource) null);
+			new MediaObject(g1, new Label("", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/temperature.png")).toString());
+		}
 		f = submitButtons(f);
 		
 		return f;
@@ -355,13 +433,78 @@ public class EnvironmentalControl extends UICaller {
 		Utils.println(window + "createHumidityMainDialog");
 		Form f = Form.newDialog("Humidity", new Resource());
 		//Form f = Form.newSubdialog("Humidity", mainDialog.getURI());
-		if (this.humidity!=0)
-			new MediaObject(f.getIOControls(), new Label("Humidity is "+this.humidity, null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/humidity.jpg")).toString());
-		else
-			new MediaObject(f.getIOControls(), new Label("Humidity", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/humidity.jpg")).toString());
-			
+		if (this.humidity!=0){
+			Group g1 = new Group(f.getIOControls(), new Label("Humidity",
+				      (String) null), null, null, (Resource) null);
+			new MediaObject(g1, new Label("Humidity is "+this.humidity, null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/humidity.png")).toString());
+		}
+		else{
+			Group g1 = new Group(f.getIOControls(), new Label("Humidity",
+				      (String) null), null, null, (Resource) null);
+			new MediaObject(g1, new Label("Humidity", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/humidity.png")).toString());
+		}
+		f = submitButtons(f);
+		
+		return f;
+	}
+	
+	public void startHeatingDialog() {
+		Utils.println(window + "startHeatingDialog");
+		heatingDialog = heatingMainDialog();
+		
+		UIRequest out = new UIRequest(SharedResources.testUser, heatingDialog,
+				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+		sendUIRequest(out);
+	}
+
+	private Form heatingMainDialog() {
+		Utils.println(window + "createHeatingMainDialog");
+		Form f = Form.newDialog("Heating", new Resource());
+		
+		if (heatingStatus==0){
+			Group g2 = new Group(f.getIOControls(), new Label("Heating",
+				      (String) null), null, null, (Resource) null);
+			Submit turnOff = new Submit(g2, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/heating_off.png")).toString()), SUBMISSION_TURN_ON_HEATING);
+		}
+		else if (heatingStatus==1){
+			Group g1 = new Group(f.getIOControls(), new Label("Heating",
+				      (String) null), null, null, (Resource) null);
+			Submit turnOn = new Submit(g1, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/heating_on.png")).toString()), SUBMISSION_TURN_OFF_HEATING);
+		}
+		
+		f = submitButtons(f);
+		
+		return f;
+	}
+	
+	public void startLampDialog() {
+		Utils.println(window + "startLampDialog");
+		lampDialog = lampMainDialog();
+		
+		UIRequest out = new UIRequest(SharedResources.testUser, lampDialog,
+				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+		sendUIRequest(out);
+	}
+
+	private Form lampMainDialog() {
+		Utils.println(window + "createLampMainDialog");
+		Form f = Form.newDialog("Lamp", new Resource());
+		
+		if (lampStatus==0){
+			Group g2 = new Group(f.getIOControls(), new Label("Lamp",
+				      (String) null), null, null, (Resource) null);
+			Submit turnOff = new Submit(g2, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/light_off.png")).toString()), SUBMISSION_TURN_ON_LAMP);
+			//Submit turnOff = new Submit(g2, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/light_off.png")).toString()), SUBMISSION_TURN_OFF_LAMP);
+		}
+		else if (lampStatus==1){
+			Group g1 = new Group(f.getIOControls(), new Label("Lamp",
+				      (String) null), null, null, (Resource) null);
+			Submit turnOn = new Submit(g1, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/light_on.png")).toString()), SUBMISSION_TURN_OFF_LAMP);
+			//Submit turnOn = new Submit(g1, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/light_on.png")).toString()), SUBMISSION_TURN_ON_LAMP);
+		}
+		
 		f = submitButtons(f);
 		
 		return f;
@@ -370,7 +513,6 @@ public class EnvironmentalControl extends UICaller {
 	public void startMotionDialog() {
 		Utils.println(window + "startMotionDialog");
 		motionDialog = motionMainDialog();
-
 		
 		UIRequest out = new UIRequest(SharedResources.testUser, motionDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
@@ -380,10 +522,11 @@ public class EnvironmentalControl extends UICaller {
 	private Form motionMainDialog() {
 		Utils.println(window + "createMotionMainDialog");
 		Form f = Form.newDialog("Motion", new Resource());
-		//Form f = Form.newSubdialog("Motion", mainDialog.getURI());
-		
-		new MediaObject(f.getIOControls(), new Label(this.motionVal, null), "image/jpeg",
-			((java.net.URL)UIProvider.class.getResource("/images/motion.jpg")).toString());
+
+		Group g1 = new Group(f.getIOControls(), new Label("Motion Detection",
+			      (String) null), null, null, (Resource) null);
+		new MediaObject(g1, new Label(this.motionVal, null), "image/png",
+			((java.net.URL)UIProvider.class.getResource("/images/motion.png")).toString());
 
 		f = submitButtons(f);
 		
@@ -405,10 +548,16 @@ public class EnvironmentalControl extends UICaller {
 		Utils.println(window + "createMotionAlertMainDialog");
 		
 		if (this.motionWarnings==1){
-			SoundEffect.MOTION.play();
+			new Thread() {
+				public void run() {
+					// Motion detection sound
+					SoundEffect.MOTION.play();
+				}
+			}.start();
+
 			Form f = Form.newMessage("Motion Alert Message", "Motion detected.");
-			new MediaObject(f.getIOControls(), new Label(this.motionVal, null), "image/jpeg",
-					((java.net.URL)UIProvider.class.getResource("/images/motion.jpg")).toString());
+			new MediaObject(f.getIOControls(), new Label(this.motionVal, null), "image/png",
+					((java.net.URL)UIProvider.class.getResource("/images/motion.png")).toString());
 
 			return f;
 		}
@@ -421,7 +570,13 @@ public class EnvironmentalControl extends UICaller {
 		smokeDialog = smokeMainDialog(this.smoke);
 
 		if (smokeDialog!=null){
-			SoundEffect.SMOKE.play();
+			new Thread() {
+				public void run() {
+					// Smoke detection sound
+					SoundEffect.SMOKE.play();
+				}
+			}.start();
+			
 			UIRequest out = new UIRequest(SharedResources.testUser, smokeDialog,
 					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 			sendUIRequest(out);
@@ -433,8 +588,8 @@ public class EnvironmentalControl extends UICaller {
 		
 		if (status){
 			Form f = Form.newMessage("Smoke Alert Message", "Smoke Detection");
-			new MediaObject(f.getIOControls(), new Label("", null), "image/jpeg",
-					((java.net.URL)UIProvider.class.getResource("/images/smoke.jpg")).toString());
+			new MediaObject(f.getIOControls(), new Label("", null), "image/png",
+					((java.net.URL)UIProvider.class.getResource("/images/smoke.png")).toString());
 			return f;
 		}
 		return null;
@@ -446,6 +601,8 @@ public class EnvironmentalControl extends UICaller {
 		new Submit(f.getSubmits(), new Label("Temperature", null), SUBMISSION_TEMPERATURE);
 		new Submit(f.getSubmits(), new Label("Humidity", null), SUBMISSION_HUMIDITY);
 		new Submit(f.getSubmits(), new Label("Motion", null), SUBMISSION_MOTION);
+		new Submit(f.getSubmits(), new Label("Lamp Control", null), SUBMISSION_LAMP);
+		new Submit(f.getSubmits(), new Label("Heating Control", null), SUBMISSION_HEATING);
 		new Submit(f.getSubmits(), new Label("Go back", null), SUBMISSION_GOBACK);
 		
 		return f;
@@ -506,7 +663,7 @@ public class EnvironmentalControl extends UICaller {
 			this.motionWarnings = 0;
 
 		if (motion > 0)
-			this.motionVal = "Motion detected before " + hours + "hours " + min + "min. " + sec + "sec.";
+			this.motionVal = "Motion detected before \n" + hours + "hours " + min + "min. " + sec + "sec.";
 		else
 			this.motionVal = "Motion has not been detected\n";
 	}

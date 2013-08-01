@@ -59,6 +59,8 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 
 	static final String DEVICE_URI_PREFIX = SafetyService.SAFETY_SERVER_NAMESPACE + "controlledDevice";
 	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
+    static final String LAMP_URI_PREFIX = SafetyService.SAFETY_SERVER_NAMESPACE + "controlledLamp";
+    static final String HEATING_URI_PREFIX = SafetyService.SAFETY_SERVER_NAMESPACE + "controlledHeating";
 
     private static String constructDeviceURIfromLocalID(int localID) {
     	return DEVICE_URI_PREFIX + localID;
@@ -253,10 +255,12 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 	}
 */	
 	public ServiceResponse handleCall(ServiceCall call) {
+		System.out.println("=====================================");
 		if (call == null)
 			return null;
 
 		String operation = call.getProcessURI();
+		System.out.println("OPERATION ==== "+operation);
 		if (operation == null)
 			return null;
 		if (operation.startsWith(SafetyService.SERVICE_GET_CONTROLLED_DEVICES)){
@@ -264,8 +268,17 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 			return getControlledDevices();
 		}
 		Object input = call.getInputValue(SafetyService.INPUT_DEVICE_URI);
-		if (input == null)
-			return null;
+		System.out.println("Input Door="+input);
+		if (input == null){
+			input = call.getInputValue(SafetyService.INPUT_LAMP_URI);
+			System.out.println("Input Lamp="+input);
+			if (input == null){
+				input = call.getInputValue(SafetyService.INPUT_HEATING_URI);
+				System.out.println("Input FanHeater="+input);
+				if (input == null)
+					return null;
+			}
+		}
 		if (operation.startsWith(SafetyService.SERVICE_GET_DEVICE_INFO)){
 			System.out.println("Server requested for: SERVICE_GET_DEVICE_INFO");
 			return getDeviceInfo(input.toString());
@@ -285,6 +298,22 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 		if (operation.startsWith(SafetyService.SERVICE_CLOSE)){
 			System.out.println("Server requested for: DOOR CLOSE");
 			return close(input.toString());
+		}
+		if (operation.startsWith(SafetyService.SERVICE_TURN_OFF_LAMP)){
+			System.out.println("Server requested for: LAMP TURN OFF");
+		    return turnOffLamp(input.toString());
+		}
+		if (operation.startsWith(SafetyService.SERVICE_TURN_ON_LAMP)){
+			System.out.println("Server requested for: LAMP TURN ON");
+		    return turnOnLamp(input.toString());
+		}
+		if (operation.startsWith(SafetyService.SERVICE_TURN_OFF_HEATING)){
+			System.out.println("Server requested for: HEATING TURN OFF");
+		    return turnOffHeating(input.toString());
+		}
+		if (operation.startsWith(SafetyService.SERVICE_TURN_ON_HEATING)){
+			System.out.println("Server requested for: HEATING TURN ON");
+		    return turnOnHeating(input.toString());
 		}
 		
 		return null;
@@ -362,6 +391,16 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 				return new ServiceResponse(CallStatus.serviceSpecificFailure);
 */			
 			// Living Lab lock
+/*
+			boolean res = true;
+			new Thread() {
+				public void run() {
+					theServer.lock();
+				}
+			}.start();
+			res = theServer.lock(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length())));
+*/			
+			/* Original Implementation */
 			boolean res = true;
 			if (theServer.lock(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length()))))
 				res = theServer.lock();
@@ -390,9 +429,20 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 			}
 */
 			// Living Lab unlock	
+/*			
+			boolean res = true;
+			new Thread() {
+				public void run() {
+					theServer.unlock();
+				}
+			}.start();
+			res = theServer.unlock(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length())));
+*/			
+			/* Original Implementation */
 			boolean res = true;
 			if (theServer.unlock(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length()))))
 				res = theServer.unlock();
+			
 			if (res)
 				return new ServiceResponse(CallStatus.succeeded);
 			else
@@ -415,8 +465,17 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 */
 			// Living Lab open
 			boolean isOpen = true;
-			if (theServer.open(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length()))))
-				isOpen = theServer.open();
+			/* Implementation in order to overcome UI problem */
+			new Thread() {
+				public void run() {
+					theServer.open();
+				}
+			}.start();
+			isOpen = theServer.open(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length())));
+
+			/* Original implementation */
+			//if (theServer.open(Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length()))))
+				//isOpen = theServer.open();
 			if (isOpen)
 				return new ServiceResponse(CallStatus.succeeded);	
 			else
@@ -439,8 +498,56 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 			return invalidInput;
 		}
 	}
+	
+    private ServiceResponse turnOffLamp(String lampURI) {
+		try {
+		    theServer.turnOffLamp(extractLocalIDfromLampURI(lampURI));
+		    return new ServiceResponse(CallStatus.succeeded);
+		} 
+		catch (Exception e) {
+		    return invalidInput;
+		}
+    }
 
-	/*
+    private ServiceResponse turnOnLamp(String lampURI) {
+		try {
+		    theServer.turnOnLamp(extractLocalIDfromLampURI(lampURI));
+		    return new ServiceResponse(CallStatus.succeeded);
+		} 
+		catch (Exception e) {
+		    return invalidInput;
+		}
+    }
+
+    private ServiceResponse turnOffHeating(String heatingURI) {
+		try {
+		    theServer.turnOffHeating(extractLocalIDfromHeatingURI(heatingURI));
+		    return new ServiceResponse(CallStatus.succeeded);
+		} 
+		catch (Exception e) {
+		    return invalidInput;
+		}
+    }
+
+    private ServiceResponse turnOnHeating(String heatingURI) {
+		try {
+		    theServer.turnOnHeating(extractLocalIDfromHeatingURI(heatingURI));
+		    return new ServiceResponse(CallStatus.succeeded);
+		} 
+		catch (Exception e) {
+		    return invalidInput;
+		}
+    }
+
+    private static int extractLocalIDfromLampURI(String lampURI) {
+    	return Integer.parseInt(lampURI.substring(LAMP_URI_PREFIX.length()));
+    }
+
+    private static int extractLocalIDfromHeatingURI(String heatingURI) {
+    	return Integer.parseInt(heatingURI.substring(HEATING_URI_PREFIX.length()));
+    }
+
+    /*
 	 * 
 	 * Context Publisher functionality - Publishing Context events 
 	 *	

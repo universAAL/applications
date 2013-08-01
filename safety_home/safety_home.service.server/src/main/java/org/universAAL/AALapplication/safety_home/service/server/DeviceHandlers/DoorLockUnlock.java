@@ -45,7 +45,7 @@ public class DoorLockUnlock {
 		} 
 		catch (DomoticsException e) { 
 			//e.printStackTrace(); 
-			return false; 
+			return true; 
 		}
 		System.out.println("finished!");
 		return true;
@@ -61,7 +61,7 @@ public class DoorLockUnlock {
 		} 
 		catch (DomoticsException e) { 
 			//e.printStackTrace(); 
-			return false; 
+			return true; 
 		}
 		System.out.println("finished!");
 		return true;

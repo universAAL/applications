@@ -75,15 +75,13 @@ public class CPublisher extends ContextPublisher{
 	public void invoke() throws InterruptedException{
 		//getUsers();
 		while (true){
-			Thread.sleep(30000);
+			Thread.sleep(15500);
 			publishLightStatus(0);
 		}
 	}
 	
 	private void publishLightStatus(int deviceID){
 		Device device=null;
-		System.out.println("previous state="+previousState);
-		System.out.println("state="+state);
 		
 		if(deviceID==0){
 			LightSensor light = new LightSensor(CPublisher.DEVICE_URI_PREFIX + deviceID);

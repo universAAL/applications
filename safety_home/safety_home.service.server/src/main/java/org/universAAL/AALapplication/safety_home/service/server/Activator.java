@@ -47,4 +47,8 @@ public class Activator implements BundleActivator {
 		    provider = null;
 		}
 	}
+	
+	public static ModuleContext getMc() {
+		return mc;
+	}
 }
