@@ -28,17 +28,33 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
  */
 
 public class Activator implements BundleActivator {
-
+	private static ModuleContext moduleContext;
     SharedResources sr;
 
     public void start(BundleContext context) throws Exception {
-    	SharedResources.moduleContext = uAALBundleContainer.THE_CONTAINER
-		.registerModule(new Object[] { context });
+    	moduleContext = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { context });
+		sr = new SharedResources(moduleContext);
+    	new Thread() {
+   		    public void run() {
+   			try {
+				sr.start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+   		    }
+   		}.start();
 
-		sr = new SharedResources();
-		sr.start();
+    	//SharedResources.moduleContext = uAALBundleContainer.THE_CONTAINER
+		//.registerModule(new Object[] { context });
+		//sr = new SharedResources();
+		//sr.start();
     }
 
     public void stop(BundleContext context) throws Exception {
     }
+    
+    public static ModuleContext getModuleContext() {
+		return moduleContext;
+	}
 }
