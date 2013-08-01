@@ -9,7 +9,8 @@
 	</parent>
 
 	<artifactId>health.performedSession.manager</artifactId>
-
+	<packaging>bundle</packaging>
+	
 	<name>Health Performed Session Mananger</name>
 	<description>Enables Storage, and Listing of sessions that the assisted person has performed</description>
 
