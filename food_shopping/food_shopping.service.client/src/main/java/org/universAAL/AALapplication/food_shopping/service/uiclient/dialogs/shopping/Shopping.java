@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
@@ -192,7 +193,14 @@ public class Shopping extends UICaller {
 				this.shoppingItems = null;
 				Object o1 = uir.getUserInput(PROP_PATH_SHOPPING_ITEMS.getThePath());
 				if (o1!=null){
-					ArrayList al = (ArrayList)o1;
+					ArrayList alTmp = (ArrayList)o1;
+					ArrayList al = new ArrayList();
+					for (int i=0; i<alTmp.size(); i++){
+						if (alTmp.get(i)!=null){
+							al.add(alTmp.get(i));
+						}
+					}
+
 					int previousItems=0;
 					if (this.shoppingLists.containsKey(this.shoppingListName)){
 						FoodItem[] itemList = (FoodItem[])shoppingLists.get(shoppingListName);
@@ -205,7 +213,7 @@ public class Shopping extends UICaller {
 						shoppingItems[i] = (al.get(i)).toString();
 						FoodItem fi = splitNutritionString(shoppingItems[i]);
 						newItemList[i]=fi;
-						System.out.println("*** shoppingItems="+shoppingItems[i]);						
+						System.out.println("*** shoppingItems="+shoppingItems[i]);
 					}
 					if (this.shoppingLists.containsKey(this.shoppingListName)){
 						FoodItem[] itemList = (FoodItem[])shoppingLists.get(shoppingListName);
@@ -242,7 +250,13 @@ public class Shopping extends UICaller {
 				this.shoppingItems = null;
 				Object o1 = uir.getUserInput(PROP_PATH_SHOPPING_ITEMS.getThePath());
 				if (o1!=null){
-					ArrayList al = (ArrayList)o1;
+					ArrayList alTmp = (ArrayList)o1;
+					ArrayList al = new ArrayList();
+					for (int i=0; i<alTmp.size(); i++){
+						if (alTmp.get(i)!=null){
+							al.add(alTmp.get(i));
+						}
+					}
 					int previousItems=0;
 					if (this.shoppingLists.containsKey(this.shoppingListName)){
 						FoodItem[] itemList = (FoodItem[])shoppingLists.get(shoppingListName);
@@ -251,7 +265,7 @@ public class Shopping extends UICaller {
 						System.out.println("to be removed="+al.size());
 
 						if (previousItems>0 && previousItems>al.size()){
-							shoppingItems = new String[previousItems-al.size()];
+							shoppingItems = new String[previousItems-(al.size())];
 							FoodItem[] newItemList = new FoodItem[previousItems-al.size()];
 							String[] toBeRemoved = new String[al.size()];
 							for (int i=0; i<al.size(); i++){
@@ -358,10 +372,21 @@ public class Shopping extends UICaller {
 					shoppingListName = o1.toString();
 				Object o2 = uir.getUserInput(PROP_PATH_SELECTED_ITEMS.getThePath());
 				if (o2!=null){
-					ArrayList al = (ArrayList)o2;
+					ArrayList alTmp = (ArrayList)o2;
+					ArrayList al = new ArrayList();
+					for (int i=0; i<alTmp.size(); i++){
+						if (alTmp.get(i)!=null){
+							al.add(alTmp.get(i));
+						}
+					}
+
 					shoppingItems = new String[al.size()];
-					for (int i=0; i<al.size(); i++)
+					System.out.println("SHOPPING ITEMS="+shoppingItems);
+					System.out.println("SHOPPING ITEMS SIZE="+al.size());
+					for (int i=0; i<al.size(); i++){
+						System.out.println(al.get(i));
 						shoppingItems[i] = (al.get(i)).toString();
+					}
 				}
 				if (shoppingListName!=null && shoppingItems!=null){
 					new Thread() {
