@@ -547,7 +547,6 @@ food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALappli
 food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALapplication/food_shopping/service/server/unit_impl/DeviceStateListener.java -text
 food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALapplication/food_shopping/service/server/unit_impl/MyDevices.java -text
 food_shopping/shopping.pom/ASL2.0 -text
-food_shopping/shopping.pom/MITX -text
 food_shopping/shopping.pom/NOTICE -text
 food_shopping/shopping.pom/pom.xml -text
 food_shopping/utils/database/food_shopping/food_create.dat -text
