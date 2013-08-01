@@ -468,7 +468,6 @@ food_shopping/food_shopping.service.RFidProvider/src/main/java/org/universAAL/AA
 food_shopping/food_shopping.service.RFidProvider/src/main/java/org/universAAL/AALapplication/food_shopping/service/db/utils/statements/SelectStatement.java -text
 food_shopping/food_shopping.service.RFidProvider/src/main/java/org/universAAL/AALapplication/food_shopping/service/db/utils/statements/UpdateStatement.java -text
 food_shopping/food_shopping.service.client/ASL2.0 -text
-food_shopping/food_shopping.service.client/MITX -text
 food_shopping/food_shopping.service.client/NOTICE -text
 food_shopping/food_shopping.service.client/pom.xml -text
 food_shopping/food_shopping.service.client/src/main/java/org/universAAL/AALapplication/food_shopping/service/uiclient/FoodManagementClient.java -text
