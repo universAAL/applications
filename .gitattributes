@@ -3011,6 +3011,7 @@ safety_home/safety_home.service.windowProvider/src/main/java/org/universAAL/AALa
 safety_home/safety_home.service.windowProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/windowProvider/Activator.java -text
 safety_home/safety_home.service.windowProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/windowProvider/CPublisher.java -text
 safety_home/safety_home.service.windowProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/windowSoapClient/SOAPClient.java -text
+safety_home/utils/Safety_Service_E.0.1-SNAPSHOT.launch -text
 safety_home/utils/app.properties -text
 safety_home/utils/database/safety_security/safety_create.dat -text
 safety_home/utils/database/safety_security/safety_home.sql -text
@@ -3044,6 +3045,12 @@ safety_home/utils/ui.dm/main_menu_saied_en.txt -text
 safety_home/utils/ui.dm/messages.properties -text
 safety_home/utils/ui.dm/messages_de.properties -text
 safety_home/utils/ui.dm/messages_en.properties -text
+safety_home/utils/ui.dm/persistency/null.dlg -text
+safety_home/utils/ui.dm/persistency/null.msg -text
+safety_home/utils/ui.dm/persistency/saeid.dlg -text
+safety_home/utils/ui.dm/persistency/saeid.msg -text
+safety_home/utils/ui.dm/persistency/saied.dlg -text
+safety_home/utils/ui.dm/persistency/saied.msg -text
 samples/heating/pom.xml -text
 samples/heating/src/main/java/org/universAAL/samples/heating/Activator.java -text
 samples/heating/src/main/java/org/universAAL/samples/heating/CSubscriber.java -text
