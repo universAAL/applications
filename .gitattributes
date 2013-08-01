@@ -2895,6 +2895,12 @@ safety_home/safety_home.service.client/src/main/resources/sounds/door_unlock.wav
 safety_home/safety_home.service.client/src/main/resources/sounds/motion_detection.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/smoke_detection.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/window_open.wav -text
+safety_home/safety_home.service.doorBellProvider/ASL2.0 -text
+safety_home/safety_home.service.doorBellProvider/NOTICE -text
+safety_home/safety_home.service.doorBellProvider/pom.xml -text
+safety_home/safety_home.service.doorBellProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/doorBellProvider/Activator.java -text
+safety_home/safety_home.service.doorBellProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/doorBellProvider/CPublisher.java -text
+safety_home/safety_home.service.doorBellProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/doorBellSoapClient/SOAPClient.java -text
 safety_home/safety_home.service.humiditySensorProvider/ASL2.0 -text
 safety_home/safety_home.service.humiditySensorProvider/LICENSE.txt -text
 safety_home/safety_home.service.humiditySensorProvider/MITX -text
