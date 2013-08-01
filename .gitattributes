@@ -2948,6 +2948,7 @@ safety_home/safety_home.service.server/LICENSE.txt -text
 safety_home/safety_home.service.server/MITX -text
 safety_home/safety_home.service.server/NOTICE -text
 safety_home/safety_home.service.server/pom.xml -text
+safety_home/safety_home.service.server/src/main/java/org/universAAL/AALapplication/safety_home/service/lampSoapClient/SOAPClient.java -text
 safety_home/safety_home.service.server/src/main/java/org/universAAL/AALapplication/safety_home/service/server/Activator.java -text
 safety_home/safety_home.service.server/src/main/java/org/universAAL/AALapplication/safety_home/service/server/DeviceHandlers/DoorLockUnlock.java -text
 safety_home/safety_home.service.server/src/main/java/org/universAAL/AALapplication/safety_home/service/server/DeviceHandlers/DoorOpen.java -text
