@@ -29,7 +29,7 @@
 	</feature>
 	
 	<!-- Health UI -->
-	<feature name="health.core" version="${platform.version}">
+	<feature name="health.ui" version="${platform.version}">
 		<feature version='2.0.0'>uAAL-MW</feature>
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/E.0.1-SNAPSHOT</bundle>
 	</feature>
