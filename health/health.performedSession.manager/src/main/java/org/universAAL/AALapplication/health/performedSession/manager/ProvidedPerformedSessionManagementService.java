@@ -73,10 +73,10 @@ public static final String NAMESPACE = "http://ontology.lst.tfo.upm.es/Performed
 		String[] ppManages = new String[] {PerformedSessionManagementService.PROP_MANAGES_SESSION};
 //		String[] ppTreat = new String[] {PerformedSessionManagementService.PROP_ASSOCIATED_TREATMENT};
 		
-		addRestriction((MergedRestriction) PerformedSessionManagementService
-				.getClassRestrictionsOnProperty(PerformedSessionManagementService.MY_URI,
-						PerformedSessionManagementService.PROP_MANAGES_SESSION).copy(), ppManages ,
-				serverRestrictions);
+//		addRestriction((MergedRestriction) PerformedSessionManagementService
+//				.getClassRestrictionsOnProperty(PerformedSessionManagementService.MY_URI,
+//						PerformedSessionManagementService.PROP_MANAGES_SESSION).copy(), ppManages ,
+//				serverRestrictions);
 		
 		//List 
 		ProvidedPerformedSessionManagementService list = new ProvidedPerformedSessionManagementService(SERVICE_LIST);

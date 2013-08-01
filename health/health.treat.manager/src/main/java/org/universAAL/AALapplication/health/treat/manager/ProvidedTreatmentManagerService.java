@@ -65,10 +65,10 @@ public class ProvidedTreatmentManagerService extends TreatmentManagementService 
 
 		String[] ppManages = new String[] {TreatmentManagementService.PROP_MANAGES_TREATMENT};
 		
-		addRestriction((MergedRestriction) TreatmentManagementService
-			.getClassRestrictionsOnProperty(TreatmentManagementService.MY_URI,
-				TreatmentManagementService.PROP_MANAGES_TREATMENT).copy(), ppManages ,
-			serverRestrictions);
+//		addRestriction((MergedRestriction) TreatmentManagementService
+//			.getClassRestrictionsOnProperty(TreatmentManagementService.MY_URI,
+//				TreatmentManagementService.PROP_MANAGES_TREATMENT).copy(), ppManages ,
+//			serverRestrictions);
 		
 		//Edit
 		ProvidedTreatmentManagerService edit = new ProvidedTreatmentManagerService(SERVICE_EDIT);
