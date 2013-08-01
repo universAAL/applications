@@ -10,26 +10,25 @@ import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
+import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
-import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
+import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universaal.ontology.health.owl.HealthProfile;
 
-public class MainMenu extends UICaller{
+public class weigthMeasurement extends UICaller{
 
 	//TODO: internationalization!
-		private static final String MESSAGE_LABEL = "Messages";
-		private static final String MESSAGE_ICON = null;
-		private static final String TREATMENT_LABEL = "Treatment";
-		private static final String TREATMENT_ICON = null;
-		private static final String PREFERENCES_LABEL = "Preferences";
-		private static final String PREFERENCES_ICON = null;
+		
 		static final LevelRating PRIORITY = LevelRating.low;
 		static final PrivacyLevel PRIVACY = PrivacyLevel.insensible;
-		private static final String HOME_LABEL = "Go Back";
-		private static final String HOME_ICON = null;
+		private static final String DONE_ICON = null;
+		private static final String DONE_LABEL = null;
+		private static final String CANCEL_LABEL = null;
+		private static final String CANCEL_ICON = null;
+		
 	
-	public MainMenu(ModuleContext context) {
+	public weigthMeasurement(ModuleContext context) {
 		super(context);
 	}
 
@@ -55,22 +54,32 @@ public class MainMenu extends UICaller{
 		HealthProfile hp;
 		hp = null;
 		// Create Dialog
-		Form f = Form.newDialog("Health Manager AAL Service", hp);
-		new SubdialogTrigger(f.getSubmits(), 
-				new Label(MESSAGE_LABEL, MESSAGE_ICON),
-				MESSAGE_LABEL);
-		new SubdialogTrigger(f.getSubmits(), 
-				new Label(TREATMENT_LABEL, TREATMENT_ICON),
-				TREATMENT_LABEL);
-		new SubdialogTrigger(f.getSubmits(), 
-				new Label(PREFERENCES_LABEL, PREFERENCES_ICON),
-				PREFERENCES_LABEL);
-		// add home submit
-		new Submit(f.getSubmits(), new Label(HOME_LABEL, HOME_ICON), HOME_LABEL );
-		// TODO Welcome Pane in IOControls
+		Form f = Form.newDialog("Weight", hp);
+		
+		InputField i=new InputField(f.getIOControls(), new Label("Kg", null),null,null, inputUser);
+		new Submit(f.getSubmits(), 
+				new Label(DONE_LABEL, DONE_ICON),
+				DONE_LABEL);
+		new Submit(f.getSubmits(), 
+				new Label(CANCEL_LABEL, CANCEL_ICON),
+				CANCEL_LABEL);
+		
+
+		
 		
 		this.sendUIRequest(new UIRequest(inputUser, 
 				f, LevelRating.low, Locale.ENGLISH, PrivacyLevel.insensible));
+	}
+	
+	public void ShowUncorrectMessage(){
+		Form f = Form.newMessage("Weight", null);
+		new SimpleOutput(f.getIOControls(), null, null, "Your Measure is not correct");
+		
+		
+	}
+	
+	public void checkUserInput (Resource i){
+		//TODO Check InputField is a correct number
 	}
 
 }
