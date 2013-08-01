@@ -511,7 +511,6 @@ food_shopping/food_shopping.service.client/src/main/resources/images/icons_shLst
 food_shopping/food_shopping.service.client/src/main/resources/images/icons_shLstName_small.png -text
 food_shopping/food_shopping.service.client/src/main/resources/images/icons_shopList_small.png -text
 food_shopping/food_shopping.service.server/ASL2.0 -text
-food_shopping/food_shopping.service.server/MITX -text
 food_shopping/food_shopping.service.server/NOTICE -text
 food_shopping/food_shopping.service.server/README.txt -text
 food_shopping/food_shopping.service.server/pom.xml -text

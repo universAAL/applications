@@ -82,8 +82,7 @@ public class ProvidedFoodManagementService extends FoodManagement {
 
     static {
 	// we need to register all classes in the ontology for the serialization of the object
-	// OntologyManagement.getInstance().register(new SimpleOntology(MY_URI,	FoodManagement.MY_URI));
-	OntologyManagement.getInstance().register(
+	OntologyManagement.getInstance().register(Activator.getMc(),
 		new SimpleOntology(MY_URI, FoodManagement.MY_URI,
 			new ResourceFactoryImpl() {
 			    @Override

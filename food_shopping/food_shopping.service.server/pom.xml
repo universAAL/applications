@@ -4,7 +4,7 @@
   <parent>
   	<groupId>org.universAAL.AALapplication</groupId>
   	<artifactId>shopping.pom</artifactId>
-  	<version>D.0.1-SNAPSHOT</version>
+  	<version>E.0.1-SNAPSHOT</version>
   	<relativePath>../shopping.pom/</relativePath>
   </parent>
   
@@ -25,14 +25,36 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.shopping</artifactId>
-			<version>1.3.1-SNAPSHOT</version>
+			<version>2.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.universAAL.food.database</groupId>
+			<artifactId>mysql.connector.java</artifactId>
+			<version>5.1.18</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.universAAL.control.foodDevices.RFid</groupId>
+			<artifactId>control.foodDevices.MetratecReaderLibrary</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.control.foodDevices.RFid</groupId>
+			<artifactId>control.foodDevices.RXTXcomm</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.control.foodDevices.RFid</groupId>
+			<artifactId>control.foodDevices.jd2xx_20602</artifactId>
+			<version>1.1</version>
+		</dependency>
+		
+<!-- 		
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>food_shopping.service.RFidProvider</artifactId>
 			<version>1.0.6-SNAPSHOT</version>
 		</dependency>
-	
+-->	
 	</dependencies>
     <build>
 		<plugins>
