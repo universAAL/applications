@@ -19,6 +19,7 @@ package org.universAAL.AALapplication.safety_home.service.uiclient.osgi;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.safety_home.service.uiclient.SharedResources;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 /**
@@ -27,17 +28,38 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
  */
 
 public class Activator implements BundleActivator {
-
+	private static ModuleContext moduleContext;
     SharedResources sr;
 
-    public void start(BundleContext context) throws Exception {
-    	SharedResources.moduleContext = uAALBundleContainer.THE_CONTAINER
-		.registerModule(new Object[] { context });
+    public void start(final BundleContext context) throws Exception {
+    	
+    	moduleContext = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { context });
+   		sr = new SharedResources(moduleContext);
 
-		sr = new SharedResources();
-		sr.start();
+   		new Thread() {
+   		    public void run() {
+   			try {
+				sr.start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+   		    }
+   		}.start();
+
+
+   		
+   		//SharedResources.moduleContext = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { context });
+   		//sr = new SharedResources();
+		//sr.start();
     }
 
     public void stop(BundleContext context) throws Exception {
     }
+
+	public static ModuleContext getModuleContext() {
+		return moduleContext;
+	}
+    
+    
 }

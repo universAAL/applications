@@ -22,7 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Locale;
 
-import javax.media.j3d.MediaContainer;
+//import javax.media.j3d.MediaContainer;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -145,6 +145,10 @@ public class FrontDoorControl extends UICaller {
 	static final String SUBMISSION_GOBACK = MY_UI_NAMESPACE + "back";
 
     public static String deviceURI = "http://ontology.universaal.org/SafetyServer.owl#controlledDevice0";
+    public boolean unlockDoor = false;
+    public boolean lockDoor = false;
+    public boolean openDoor = false;
+    public boolean closeDoor = false;
 	private Form mainDialog = null;
 	private Form unlockDialog = null;
 	private Form lockDialog = null;
@@ -153,6 +157,7 @@ public class FrontDoorControl extends UICaller {
 	private Form visitorDialog = null;
 	private Form statusDialog = null;
 	private Form errorDialog = null;
+	private Form doorBellDialog = null;
 	private String active = ""; 
 	private String status = ""; 
 	private String visitorText = "";
@@ -172,41 +177,57 @@ public class FrontDoorControl extends UICaller {
 				return; 
 			}
 			if (SUBMISSION_UNLOCK.equals(uir.getSubmissionID())) {
-				if (SafetyClient.unlock(deviceURI)){
-					this.active=this.status="unlock";
-					startUnlockDialog();
-/*
-					new Thread() {
-						public void run() {
-							success = SafetyClient.unlock(deviceURI);
-						}
-					}.start();
-*/
-				}
-				else
-					startErrorDialog(1);
-				
+				this.active=this.status="unlock";
+				startUnlockDialog();
+			
+				new Thread() {
+					public void run() {
+						// Unlock the door
+						unlockDoor = SafetyClient.unlock(deviceURI);
+					}
+				}.start();
+				lockDoor = false;
+				unlockDoor = true;
 			} 
 			else if (SUBMISSION_LOCK.equals(uir.getSubmissionID())) {
-				if (SafetyClient.lock(deviceURI)){
+				if ((closeDoor || unlockDoor)&&(!openDoor)){
 			    	this.active=this.status="lock";
 					startLockDialog();
+					new Thread() {
+						public void run() {
+							// Lock the door
+							lockDoor = SafetyClient.lock(deviceURI);
+						}
+					}.start();
+					unlockDoor = false;
+					lockDoor = true;
 				}
 				else
-					startErrorDialog(2);
+					startErrorDialog(2);				
 			} 
 			else if (SUBMISSION_OPEN.equals(uir.getSubmissionID())) {
-				if (SafetyClient.open(deviceURI)){
+				if (unlockDoor && !lockDoor){
 					this.active=this.status="open";
 					startOpenDialog();
+					closeDoor = false;
+					new Thread() {
+						public void run() {
+							// Open the door
+							openDoor = SafetyClient.open(deviceURI);
+						}
+					}.start();
+					openDoor = true;
+					closeDoor = false;
 				}
 				else
-					startErrorDialog(3);
+					startErrorDialog(3);				
 			} 
 			else if (SUBMISSION_CLOSE.equals(uir.getSubmissionID())) {
 				if (SafetyClient.close(deviceURI)){
 					this.active=this.status="close";
 					startCloseDialog();
+					closeDoor = true;
+					openDoor = false;
 				}
 				else
 					startErrorDialog(4);
@@ -220,8 +241,6 @@ public class FrontDoorControl extends UICaller {
 				startStatusDialog();
 			} 
 		}
-		if (this.active.equals(""))
-			startMainDialog();
 		Utils.println(window + " Continues");
 	}
 	
@@ -252,20 +271,20 @@ public class FrontDoorControl extends UICaller {
 			SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null, "Welcome to the Front Door Control application.\n\n");
 		}
 		else if (this.status.equals("unlock")){
-			new MediaObject(f.getIOControls(), new Label("Unlocked Door", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/door_unlock.jpg")).toString());
+			new MediaObject(f.getIOControls(), new Label("Unlocked Door", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/door_unlock.png")).toString());
 		}
 		else if (this.status.equals("lock")){
-			new MediaObject(f.getIOControls(), new Label("Locked Door", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/door_lock.jpg")).toString());
+			new MediaObject(f.getIOControls(), new Label("Locked Door", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/door_lock.png")).toString());
 		}
 		else if (this.status.equals("open")){
-			new MediaObject(f.getIOControls(), new Label("Open Door", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/door_open.jpg")).toString());
+			new MediaObject(f.getIOControls(), new Label("Open Door", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/door_open.png")).toString());
 		}
 		else if (this.status.equals("close")){
-			new MediaObject(f.getIOControls(), new Label("Closed Door", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/door_close.jpg")).toString());
+			new MediaObject(f.getIOControls(), new Label("Closed Door", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/door_close.png")).toString());
 		}
 
 		f = submitButtons(f);
@@ -288,7 +307,6 @@ public class FrontDoorControl extends UICaller {
 
 		UIRequest out = new UIRequest(SharedResources.testUser, unlockDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
-		
 		sendUIRequest(out);
 	}
 
@@ -368,10 +386,20 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "createUnlockMainDialog");
 		Form f = Form.newDialog("Unlock Front Door", new Resource());
 		
-		new MediaObject(f.getIOControls(), new Label("Unlocked Door", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/door_unlock.jpg")).toString());
-		SoundEffect.UNLOCK.play();
+		Group g1 = new Group(f.getIOControls(), new Label("Door",
+			      (String) null), null, null, (Resource) null);
+		new MediaObject(g1, new Label("Unlocked Door", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/door_unlock.png")).toString());
+		//new MediaObject(f.getIOControls(), new Label("", null), "audio/wav",
+		//		((java.net.URL)UIProvider.class.getResource("/sounds/door_unlock.wav")).toString());
 		
+		new Thread() {
+			public void run() {
+				// Unlock the door sound
+				SoundEffect.UNLOCK.play();
+			}
+		}.start();
+
 		f = submitButtons(f);
 		
 		return f;
@@ -381,9 +409,19 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "createLockMainDialog");
 		Form f = Form.newDialog("Lock Front Door", new Resource());
 		
-		new MediaObject(f.getIOControls(), new Label("Locked Door", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/door_lock.jpg")).toString());
-		SoundEffect.LOCK.play();
+		Group g1 = new Group(f.getIOControls(), new Label("Door",
+			      (String) null), null, null, (Resource) null);
+		new MediaObject(g1, new Label("Locked Door", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/door_lock.png")).toString());
+		//new MediaObject(f.getIOControls(), new Label("", null), "audio/wav",
+		//		((java.net.URL)UIProvider.class.getResource("/sounds/door_lock.wav")).toString());
+		
+		new Thread() {
+			public void run() {
+				// Lock the door sound
+				SoundEffect.LOCK.play();
+			}
+		}.start();		
 
 		f = submitButtons(f);
 		
@@ -394,9 +432,19 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "createOpenMainDialog");
 		Form f = Form.newDialog("Open Front Door", new Resource());
 		
-		new MediaObject(f.getIOControls(), new Label("Open Door", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/door_open.jpg")).toString());
-		SoundEffect.OPEN.play();
+		Group g1 = new Group(f.getIOControls(), new Label("Door",
+			      (String) null), null, null, (Resource) null);
+		new MediaObject(g1, new Label("Open Door", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/door_open.png")).toString());
+		//new MediaObject(f.getIOControls(), new Label("", null), "audio/wav",
+		//		((java.net.URL)UIProvider.class.getResource("/sounds/door_open.wav")).toString());
+		
+		new Thread() {
+			public void run() {
+				// Open the door sound
+				SoundEffect.OPEN.play();
+			}
+		}.start();		
 
 		f = submitButtons(f);
 		
@@ -407,16 +455,57 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "createCloseMainDialog");
 		Form f = Form.newDialog("Close Front Door", new Resource());
 		
-		MediaObject closeIcon = new MediaObject(f.getIOControls(), new Label("Close Door", null), "image/jpeg",
-				((java.net.URL)UIProvider.class.getResource("/images/door_close.jpg")).toString());
-		//closeIcon.setPreferredResolution(500, 500);
-		SoundEffect.CLOSE.play();
+		Group g1 = new Group(f.getIOControls(), new Label("Door",
+			      (String) null), null, null, (Resource) null);
+		MediaObject closeIcon = new MediaObject(g1, new Label("Close Door", null), "image/png",
+				((java.net.URL)UIProvider.class.getResource("/images/door_close.png")).toString());
+		//new MediaObject(f.getIOControls(), new Label("", null), "audio/wav",
+		//		((java.net.URL)UIProvider.class.getResource("/sounds/door_close.wav")).toString());
+		
+		new Thread() {
+			public void run() {
+				// Close the door sound
+				SoundEffect.CLOSE.play();
+			}
+		}.start();		
 		
 		f = submitButtons(f);
 		
 		return f;
 	}
 
+	public void startDoorBellDialog(boolean isEnabled) {
+		Utils.println(window + "startDoorBellAlertDialog");
+		doorBellDialog = doorBellMainDialog(isEnabled);
+
+		if (doorBellDialog!=null){
+			new Thread() {
+				public void run() {
+					// Door bell sound
+					SoundEffect.DOORBELL.play();
+				}
+			}.start();
+			
+			UIRequest out = new UIRequest(SharedResources.testUser, doorBellDialog,
+					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+			sendUIRequest(out);
+		}
+	}
+
+	private Form doorBellMainDialog(boolean isEnabled) {
+		Utils.println(window + "createDoorBellAlertMainDialog");
+		
+		if (isEnabled){
+			Form f = Form.newMessage("Door Alert Message", "Door Bell");
+			new MediaObject(f.getIOControls(), new Label("", null), "image/png",
+					((java.net.URL)UIProvider.class.getResource("/images/door_bell.png")).toString());
+			return f;
+		}
+		
+		return null;
+	}
+
+	
 	private Form errorMainDialog(int action) {
 		Utils.println(window + "createErrorMainDialog");
 		Form f = Form.newDialog("Error Front Door", new Resource());
@@ -424,6 +513,14 @@ public class FrontDoorControl extends UICaller {
 		if (action==4){
 			SimpleOutput errormsg = new SimpleOutput(f.getIOControls(), null, null, "The operation failed.\n\n" +
 					"You have to open the door first.");
+		}
+		else if (action==3){
+			SimpleOutput errormsg = new SimpleOutput(f.getIOControls(), null, null, "The operation failed.\n\n" +
+					"You have to unlock the door first.");
+		}
+		else if (action==2){
+			SimpleOutput errormsg = new SimpleOutput(f.getIOControls(), null, null, "The operation failed.\n\n" +
+					"You have to close the door first.");
 		}
 		else{
 			SimpleOutput errormsg = new SimpleOutput(f.getIOControls(), null, null, "The operation failed.\n\n" +

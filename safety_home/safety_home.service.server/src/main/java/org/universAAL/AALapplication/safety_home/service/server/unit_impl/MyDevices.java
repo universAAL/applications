@@ -19,8 +19,11 @@ package org.universAAL.AALapplication.safety_home.service.server.unit_impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.universAAL.AALapplication.safety_home.service.lampSoapClient.SOAPClient;
+import org.universAAL.AALapplication.safety_home.service.server.Activator;
 import org.universAAL.AALapplication.safety_home.service.server.DeviceHandlers.DoorLockUnlock;
 import org.universAAL.AALapplication.safety_home.service.server.DeviceHandlers.DoorOpen;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 /**
  * @author dimokas
@@ -45,11 +48,33 @@ public class MyDevices {
 		}
 	}
 	
+	private class Lamp {
+		String loc;
+		boolean isOn;
+
+		Lamp(String loc, boolean isOn) {
+		    this.loc = loc;
+		    this.isOn = isOn;
+		}
+	}
+
+	private class Heating {
+		String loc;
+		boolean isOn;
+
+		Heating(String loc, boolean isOn) {
+		    this.loc = loc;
+		    this.isOn = isOn;
+		}
+	}
+
 	private Device[] myDeviceDB = new Device[] {
 			new Device("loc1", false), new Device("loc2", false), new Device("loc3", false), 
 			new Device("loc4", false), new Device("loc5", false), new Device("loc6", false)
 	};
-	
+	private Lamp[] myLamp = new Lamp[] { new Lamp("loc1", false)	};
+	private Heating[] myHeating = new Heating[] { new Heating("loc1", false)	};
+
 	private ArrayList listeners = new ArrayList();
 	
 	public MyDevices() {}
@@ -128,7 +153,7 @@ public class MyDevices {
 	}
 
 	public boolean close(int deviceID) {
-		if (myDeviceDB[deviceID].isOn) {
+		if (myDeviceDB[deviceID].isOpen) {
 			myDeviceDB[deviceID].isOpen = false;
 			//LogUtils.logInfo(Activator.logger, "MyDevices", "open", 
 			//		new Object[] {"Device in ", myDeviceDB[deviceID].loc, " opened!"}, null);
@@ -165,4 +190,45 @@ public class MyDevices {
 	}
 
 	/* End of Living Lab Door Management */
+	
+	/* Lamp Management */
+	
+    public void turnOffLamp(int lampID) {
+		//if (SOAPClient.isLampEnabled()) {
+		    myLamp[lampID].isOn = false;
+		    SOAPClient.turnOffLamp();
+		    LogUtils.logDebug(Activator.mc, MyDevices.class, "Safety and Security", new Object[] { "Lamp turned off!" },null);
+		//}
+    }
+
+    public void turnOnLamp(int lampID) {
+		//if (!SOAPClient.isLampEnabled()) {
+		    myLamp[lampID].isOn = true;
+		    SOAPClient.turnOnLamp();
+		    LogUtils.logDebug(Activator.mc, MyDevices.class, "Safety and Security", new Object[] { "Lamp turned on!" },null);
+		//}
+    }
+
+	/* End of Lamp Management */
+
+	/* Heating Management */
+	
+    public void turnOffHeating(int heatingID) {
+		//if (SOAPClient.isHeatingEnabled()) {
+		    myHeating[heatingID].isOn = false;
+		    SOAPClient.turnOffHeating();
+		    LogUtils.logDebug(Activator.mc, MyDevices.class, "Safety and Security", new Object[] { "Heating turned off!" },null);
+		//}
+    }
+
+    public void turnOnHeating(int heatingID) {
+		//if (!SOAPClient.isHeatingEnabled()) {
+    		myHeating[heatingID].isOn = true;
+		    SOAPClient.turnOnHeating();
+		    LogUtils.logDebug(Activator.mc, MyDevices.class, "Safety and Security", new Object[] { "Heating turned on!" },null);
+		//}
+    }
+
+	/* End of Heating Management */
+
 }

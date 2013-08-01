@@ -82,29 +82,25 @@ public class CPublisher extends ContextPublisher{
 	private void publishWindowStatus(int deviceID){
 		Device device=null;
 		
-		//System.out.println("previous state="+previousState);
-		//System.out.println("state="+state);
-		//if (previousState != state){
-			if(deviceID==0){
-				Window window = new Window(CPublisher.DEVICE_URI_PREFIX + deviceID);
-				device=(Device)window;
-				window.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "window"));
-				if (SOAPClient.isWindowClosed()){
-					window.setSensorStatus(new Integer(0));
-					state = 0;
-				}
-				else{
-					window.setSensorStatus(new Integer(100));
-					state = 1;
-				}
-				if (previousState != state){
-					System.out.println("############### PUBLISHING EVENT ###############");
-					cp.publish(new ContextEvent(window, Window.PROP_SENSOR_STATUS));
-					System.out.println("################################################");
-					this.previousState = state;
-				}
+		if(deviceID==0){
+			Window window = new Window(CPublisher.DEVICE_URI_PREFIX + deviceID);
+			device=(Device)window;
+			window.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "window"));
+			if (SOAPClient.isWindowClosed()){
+				window.setSensorStatus(new Integer(0));
+				state = 0;
 			}
-		//}
+			else{
+				window.setSensorStatus(new Integer(100));
+				state = 1;
+			}
+			if (previousState != state){
+				System.out.println("############### PUBLISHING EVENT ###############");
+				cp.publish(new ContextEvent(window, Window.PROP_SENSOR_STATUS));
+				System.out.println("################################################");
+				this.previousState = state;
+			}
+		}
 	}
 
 	 private static ContextProvider getProviderInfo() {

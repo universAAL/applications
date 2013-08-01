@@ -43,6 +43,9 @@ public class CPublisher extends ContextPublisher{
 	
 	private ContextPublisher cp;
 	
+	private float previousHum = -100;
+	private float currentHum = -20;
+
 	protected CPublisher(ModuleContext context, ContextProvider providerInfo) {
 		super(context, providerInfo);
 	}
@@ -57,20 +60,7 @@ public class CPublisher extends ContextPublisher{
 			e.printStackTrace();
 		}
 	}
-/*
-	protected CPublisher(ModuleContext context) {
-		super(context, getProviderInfo());
-		try{
-			ContextProvider info = new ContextProvider(SAFETY_HUMIDITY_PROVIDER_NAMESPACE + "HumidityContextProvider");
-			info.setType(ContextProviderType.controller);
-			cp = new DefaultContextPublisher(context, info);
-			invoke();
-		}
-		catch (InterruptedException e){
-			e.printStackTrace();
-		}
-	}
-*/
+
 	public CPublisher(ModuleContext context, ContextProvider providerInfo, ContextPublisher cp) {
 		super(context, providerInfo);
 		try{
@@ -92,15 +82,22 @@ public class CPublisher extends ContextPublisher{
 	
 	private void publishHumidity(int deviceID){
 		Device device=null;
+		//System.out.println("previous Humidity="+previousHum);
+		//System.out.println("current Humidity="+currentHum);
+		
 		if(deviceID==0){
 			HumiditySensor humidity = new HumiditySensor(CPublisher.DEVICE_URI_PREFIX + deviceID);
 			device=(Device)humidity;
 			humidity.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "humidity"));
-			humidity.setHumidity(SOAPClient.getHumidity());
+			currentHum=SOAPClient.getHumidity();
+			humidity.setHumidity(currentHum);
 			
-			System.out.println("############### PUBLISHING EVENT ###############");
-			cp.publish(new ContextEvent(humidity, HumiditySensor.PROP_HUMIDITY));
-			System.out.println("################################################");
+			if (previousHum != currentHum){
+				System.out.println("############### PUBLISHING EVENT ###############");
+				cp.publish(new ContextEvent(humidity, HumiditySensor.PROP_HUMIDITY));
+				System.out.println("################################################");
+				previousHum=currentHum;
+			}
 		}
 	}
 

@@ -43,7 +43,10 @@ public class CPublisher extends ContextPublisher{
 	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
 	
 	private ContextPublisher cp;
-	
+
+	private float previousTemp = -100;
+	private float currentTemp = -20;
+
 	protected CPublisher(ModuleContext context, ContextProvider providerInfo) {
 		super(context, providerInfo);
 	}
@@ -73,22 +76,29 @@ public class CPublisher extends ContextPublisher{
 	public void invoke() throws InterruptedException{
 		//getUsers();
 		while(true){
-			Thread.sleep(15000);
+			Thread.sleep(14500);
 			publishTemperature(0);
 		}
 	}
 	
 	private void publishTemperature(int deviceID){
 		Device device=null;
+		//System.out.println("previous Temperature="+previousTemp);
+		//System.out.println("current Temperature="+currentTemp);
+		
 		if(deviceID==0){
 			TemperatureSensor temperature = new TemperatureSensor(CPublisher.DEVICE_URI_PREFIX + deviceID);
 			device=(Device)temperature;
 			temperature.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "temperature"));
-			temperature.setTemperature(SOAPClient.getTemperature());
+			currentTemp = SOAPClient.getTemperature();
+			temperature.setTemperature(currentTemp);
 			
-			System.out.println("############### PUBLISHING EVENT ###############");
-			cp.publish(new ContextEvent(temperature, TemperatureSensor.PROP_TEMPERATURE));
-			System.out.println("################################################");
+			if (previousTemp != currentTemp){
+				System.out.println("############### PUBLISHING EVENT ###############");
+				cp.publish(new ContextEvent(temperature, TemperatureSensor.PROP_TEMPERATURE));
+				System.out.println("################################################");
+				previousTemp=currentTemp;
+			}
 		}
 	}
 

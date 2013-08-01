@@ -20,7 +20,8 @@ import org.universAAL.AALapplication.safety_home.service.uiclient.dialogs.door.F
 import org.universAAL.AALapplication.safety_home.service.uiclient.dialogs.environmental.EnvironmentalControl;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.util.Constants;
-import org.universAAL.ontology.profile.AssistedPerson;;
+import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.User;
 
 /**
  * @author dimokas
@@ -28,15 +29,20 @@ import org.universAAL.ontology.profile.AssistedPerson;;
  */
 public class SharedResources {
 
-    public static final String CLIENT_SAFETY_UI_NAMESPACE = "urn:samples.safety.uiclient:";
-
+    //public static final String CLIENT_SAFETY_UI_NAMESPACE = "urn:samples.safety.uiclient:";
+	public static final String CLIENT_SAFETY_UI_NAMESPACE = "urn:safety:";
+	
     public static ModuleContext moduleContext;
 
     public static ServiceProvider serviceProvider;
     public static UIProvider uIProvider;
 
-    public static final AssistedPerson testUser = new AssistedPerson(
-	    Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+    //public static final AssistedPerson testUser = new AssistedPerson(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+    public static User testUser = new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+    
+    public SharedResources(ModuleContext context) {
+    	moduleContext = context;
+    }
 
     public void start() throws Exception {
 	new Thread() {
