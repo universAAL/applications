@@ -2728,6 +2728,8 @@ ontologies/ont.safety/ASL2.0 -text
 ontologies/ont.safety/NOTICE -text
 ontologies/ont.safety/pom.xml -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/Door.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/DoorBell.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/FanHeater.java -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/HumiditySensor.java -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/LightSensor.java -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/MotionSensor.java -text

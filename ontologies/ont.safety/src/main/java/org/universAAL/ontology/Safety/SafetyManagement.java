@@ -24,29 +24,28 @@ import org.universAAL.ontology.Safety.SafetyOntology;
  * 
  */
 public class SafetyManagement extends Service {
-    public static final String MY_URI = SafetyOntology.NAMESPACE
-	    + "SafetyManagement";
-    public static final String PROP_CONTROLS = SafetyOntology.NAMESPACE
-	    + "controls";
+	public static final String MY_URI = SafetyOntology.NAMESPACE + "SafetyManagement";
+	public static final String PROP_CONTROLS = SafetyOntology.NAMESPACE + "controls";
+	public static final String PROP_LAMP_CONTROLS = SafetyOntology.NAMESPACE + "controlsLamp";
+	public static final String PROP_HEATING_CONTROLS = SafetyOntology.NAMESPACE + "controlsHeating";
 
-    public SafetyManagement() {
-	super();
-    }
+	public SafetyManagement() {
+		super();
+	}
 
-    public SafetyManagement(String uri) {
-	super(uri);
-    }
+	public SafetyManagement(String uri) {
+		super(uri);
+	}
 
-    public String getClassURI() {
-	return MY_URI;
-    }
+	public String getClassURI() {
+		return MY_URI;
+	}
 
-    public int getPropSerializationType(String propURI) {
-	return PROP_CONTROLS.equals(propURI) ? PROP_SERIALIZATION_FULL : super
-		.getPropSerializationType(propURI);
-    }
+	public int getPropSerializationType(String propURI) {
+		return PROP_SERIALIZATION_FULL;
+	}
 
-    public boolean isWellFormed() {
-	return true;
-    }
+	public boolean isWellFormed() {
+		return true;
+	}
 }

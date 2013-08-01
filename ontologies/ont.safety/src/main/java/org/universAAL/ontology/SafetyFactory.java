@@ -26,6 +26,8 @@ import org.universAAL.ontology.Safety.SafetyManagement;
 import org.universAAL.ontology.Safety.SmokeSensor;
 import org.universAAL.ontology.Safety.TemperatureSensor;
 import org.universAAL.ontology.Safety.Window;
+import org.universAAL.ontology.Safety.FanHeater;
+import org.universAAL.ontology.Safety.DoorBell;
 
 /**
  * @author dimokas
@@ -39,25 +41,29 @@ public class SafetyFactory extends ResourceFactoryImpl {
 
     public Resource createInstance(String classURI, String instanceURI,
 	    int factoryIndex) {
-	switch (factoryIndex) {
-	case 0:
-	    return new Door(instanceURI);
-	case 1:
-	    return new HumiditySensor(instanceURI);
-	case 2:
-	    return new LightSensor(instanceURI);
-	case 3:
-	    return new MotionSensor(instanceURI);
-	case 4:
-	    return new SmokeSensor(instanceURI);
-	case 5:
-	    return new TemperatureSensor(instanceURI);
-	case 6:
-	    return new Window(instanceURI);
-	case 7:
-	    return new SafetyManagement(instanceURI);
-	}
+		switch (factoryIndex) {
+		case 0:
+		    return new DoorBell(instanceURI);
+		case 1:
+		    return new Door(instanceURI);
+		case 2:
+		    return new HumiditySensor(instanceURI);
+		case 3:
+		    return new LightSensor(instanceURI);
+		case 4:
+		    return new MotionSensor(instanceURI);
+		case 5:
+		    return new SmokeSensor(instanceURI);
+		case 6:
+		    return new TemperatureSensor(instanceURI);
+		case 7:
+		    return new Window(instanceURI);
+		case 8:
+		    return new FanHeater(instanceURI);
+		case 9:
+		    return new SafetyManagement(instanceURI);
+		}
 
-	return null;
+		return null;
     }
 }
