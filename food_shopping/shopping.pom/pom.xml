@@ -3,12 +3,12 @@
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>new_services.pom</artifactId>
-    <version>D.0</version>
+    <version>E.0</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   
   <artifactId>shopping.pom</artifactId>
-  <version>D.0.1-SNAPSHOT</version>  
+  <version>E.0.1-SNAPSHOT</version>  
   <packaging>pom</packaging>
   <name>Food Shopping AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Food_Shopping_universAAL_service</url>
