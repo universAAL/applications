@@ -549,6 +549,7 @@ food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALappli
 food_shopping/shopping.pom/ASL2.0 -text
 food_shopping/shopping.pom/NOTICE -text
 food_shopping/shopping.pom/pom.xml -text
+food_shopping/utils/Shopping_Service_E.0.1-SNAPSHOT.launch -text
 food_shopping/utils/database/food_shopping/food_create.dat -text
 food_shopping/utils/database/food_shopping/food_shopping.jpg -text
 food_shopping/utils/database/food_shopping/food_shopping.sql -text
@@ -564,6 +565,16 @@ food_shopping/utils/foodShopping_v1.0.5_mw1.2.0.launch -text
 food_shopping/utils/food_shopping.properties -text
 food_shopping/utils/foodshopping_UI_mw1.3.0.launch -text
 food_shopping/utils/install.bat -text
+food_shopping/utils/ui.dm/main_menu.txt -text
+food_shopping/utils/ui.dm/main_menu_saied.txt -text
+food_shopping/utils/ui.dm/main_menu_saied_en.txt -text
+food_shopping/utils/ui.dm/messages.properties -text
+food_shopping/utils/ui.dm/persistency/null.dlg -text
+food_shopping/utils/ui.dm/persistency/null.msg -text
+food_shopping/utils/ui.dm/persistency/saeid.dlg -text
+food_shopping/utils/ui.dm/persistency/saeid.msg -text
+food_shopping/utils/ui.dm/persistency/saied.dlg -text
+food_shopping/utils/ui.dm/persistency/saied.msg -text
 health/PhysicalActivityMonitorModule/INSTALLATION[!!-~]&[!!-~]TESTING.txt -text
 health/PhysicalActivityMonitorModule/PAM.drl -text
 health/PhysicalActivityMonitorModule/README.txt -text

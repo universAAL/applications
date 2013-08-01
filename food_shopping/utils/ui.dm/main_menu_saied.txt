@@ -1,0 +1,1 @@
+/Food and Shopping|http://www.certh.gr|http://ontology.universAAL.org/FoodManagement.owl#FoodManagement|app/Food_Shop.png
