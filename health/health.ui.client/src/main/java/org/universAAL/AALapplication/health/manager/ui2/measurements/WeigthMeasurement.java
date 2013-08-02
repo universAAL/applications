@@ -1,12 +1,8 @@
-package org.universAAL.AALapplication.health.manager.ui2;
+package org.universAAL.AALapplication.health.manager.ui2.measurements;
 
-import java.util.Locale;
-
+import org.universAAL.AALapplication.health.manager.ui2.AbstractHealthForm;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
-import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.ui.UICaller;
-import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -14,9 +10,11 @@ import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthProfile;
+import org.universaal.ontology.healthmeasurement.owl.PersonWeight;
 
-public class HeartRateMeasurement extends UICaller{
+public class WeigthMeasurement extends AbstractHealthForm{
 
 	//TODO: internationalization!
 		
@@ -26,21 +24,12 @@ public class HeartRateMeasurement extends UICaller{
 		private static final String DONE_LABEL = null;
 		private static final String CANCEL_LABEL = null;
 		private static final String CANCEL_ICON = null;
+		private PersonWeight measurement;
 		
 	
-	public HeartRateMeasurement(ModuleContext context) {
-		super(context);
-	}
-
-	@Override
-	public void communicationChannelBroken() {
-		// nothing
-	}
-
-	@Override
-	public void dialogAborted(String dialogID) {
-		// nothing
-		
+	public WeigthMeasurement(ModuleContext context, User inpuUser, PersonWeight hm) {
+		super(context,inpuUser);
+		this.measurement = hm;
 	}
 
 	@Override
@@ -49,37 +38,26 @@ public class HeartRateMeasurement extends UICaller{
 		
 	}
 	
-	public void show(Resource inputUser) {
-		//get HealthProfile
-		HealthProfile hp;
-		hp = null;
+	public void show() {
 		// Create Dialog
-		Form f = Form.newDialog("Heart Rate", hp);
+		Form f = Form.newDialog("Weight", measurement);
 		
-		InputField i=new InputField(f.getIOControls(), new Label("puls/min", null),null,null, inputUser);
+		InputField i = new InputField(f.getIOControls(), new Label("Kg", null),null,null, inputUser);
 		new Submit(f.getSubmits(), 
 				new Label(DONE_LABEL, DONE_ICON),
 				DONE_LABEL);
 		new Submit(f.getSubmits(), 
 				new Label(CANCEL_LABEL, CANCEL_ICON),
 				CANCEL_LABEL);
-		
 
-		
-		
-		this.sendUIRequest(new UIRequest(inputUser, 
-				f, LevelRating.low, Locale.ENGLISH, PrivacyLevel.insensible));
+		sendForm(f);
 	}
 	
 	public void ShowUncorrectMessage(){
-		Form f = Form.newMessage("Heart Rate", null);
+		Form f = Form.newMessage("Weight", null);
 		new SimpleOutput(f.getIOControls(), null, null, "Your Measure is not correct");
 		
 		
 	}
 	
-	public void checkUserInput (Resource i){
-		//TODO Check InputField is a correct number
-	}
-
 }

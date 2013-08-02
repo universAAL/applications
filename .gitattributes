@@ -787,13 +787,15 @@ health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manag
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentNewForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
-health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/BloodPreasureMeasurement.java -text svneol=unset#text/plain
-health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/HeartRateMeasurement.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/AbstractHealthForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/MainMenu.java -text
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/MeasurementForm.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/NotReady.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/TreatmentForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/TreatmentViewForm.java -text svneol=unset#text/plain
-health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/weigthMeasurement.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/measurements/BloodPreasureMeasurement.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/measurements/HeartRateMeasurement.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui2/measurements/WeigthMeasurement.java -text svneol=unset#text/plain
 help_when_out/hwo.karaf.feature/ASL2.0.txt -text
 help_when_out/hwo.karaf.feature/NOTICE -text
 help_when_out/hwo.karaf.feature/pom.xml -text
