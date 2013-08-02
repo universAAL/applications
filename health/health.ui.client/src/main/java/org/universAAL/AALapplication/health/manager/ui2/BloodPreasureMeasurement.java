@@ -66,7 +66,7 @@ public class BloodPreasureMeasurement extends UICaller{
 				CANCEL_LABEL);
 		
 
-		
+		// TODO 
 		
 		this.sendUIRequest(new UIRequest(inputUser, 
 				f, LevelRating.low, Locale.ENGLISH, PrivacyLevel.insensible));
@@ -78,9 +78,20 @@ public class BloodPreasureMeasurement extends UICaller{
 		
 		
 	}
-	
-	public void checkUserInput (Resource i){
-		//TODO Check InputField is a correct number
-	}
 
+	
+	public boolean checkUserInput (Resource i){
+		//TODO Check InputField is a correct number
+		while (i.isWellFormed()){
+			return true;
+			}
+		ShowUncorrectMessage();
+		return false;
+		}
+	
 }
+
+
+	
+
+
