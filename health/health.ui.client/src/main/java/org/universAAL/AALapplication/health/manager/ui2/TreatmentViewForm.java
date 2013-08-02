@@ -17,25 +17,17 @@
  ******************************************************************************/
 package org.universAAL.AALapplication.health.manager.ui2;
 
-import java.util.Locale;
-
-import org.universAAL.AALapplication.health.manager.ui.InputListener;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.PropertyPath;
-import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.ui.UICaller;
-import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
-import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Group;
 import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Repeat;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
-import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.Treatment;
 
@@ -43,29 +35,20 @@ import org.universaal.ontology.health.owl.Treatment;
  * @author amedrano
  *
  */
-public class TreatmentViewForm extends UICaller {
+public class TreatmentViewForm extends AbstractHealthForm {
 
 	private static final String DELETE_ICON = null;
-	private static final String DELETE_LABEL = null;
-	private static final String EDIT_LABEL = null;
+	private static final String DELETE_LABEL = "Delete";
+	private static final String EDIT_LABEL = "Edit";
 	private static final String EDIT_ICON = null;
-	private static final String BACK_LABEL = null;
+	private static final String BACK_LABEL = "Back";
 	private static final String BACK_ICON = null;
 
-	protected TreatmentViewForm(ModuleContext context) {
-		super(context);
-		// TODO Auto-generated constructor stub
+	public TreatmentViewForm(ModuleContext context, User inputUser) {
+		super(context, inputUser);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
-	 */
-	
-	
-
-	
-
-	public void show(Resource inputUser, Treatment treat) {
+	public void show(Treatment treat) {
 		
 		// Create Dialog
 		Form f = Form.newDialog("Treatment Details", treat);
@@ -73,7 +56,7 @@ public class TreatmentViewForm extends UICaller {
 		Group details= new Group(f.getIOControls(), new Label("Details", null), null, null, null);
 
 		InputField  i = new InputField(details, new Label("Name", null), new PropertyPath(null, false, 
-				new String [] {Treatment.PROP_NAME}), null, "treatment Name");
+				new String [] {Treatment.PROP_NAME}), null, "Treatment Name");
 		i.setHelpString("input a Treatment name");
 		i.setHintString("take medicine");
 		
@@ -103,10 +86,11 @@ public class TreatmentViewForm extends UICaller {
 			new String [] {Treatment.PROP_HAS_TREATMENT_PLANNING}), null);
 		new Submit(nextSession, new Label("Perform now", null), "Now");
 		
-		new SubdialogTrigger(f.getSubmits(), 
+		
+		new Submit(f.getSubmits(), 
 				new Label(DELETE_LABEL, DELETE_ICON),
 				DELETE_LABEL);
-		new SubdialogTrigger(f.getSubmits(), 
+		new Submit(f.getSubmits(), 
 				new Label(EDIT_LABEL, EDIT_ICON),
 			EDIT_LABEL);
 		
@@ -114,27 +98,21 @@ public class TreatmentViewForm extends UICaller {
 		new Submit(f.getSubmits(), new Label(BACK_LABEL, BACK_ICON), BACK_LABEL );
 		
 		
-		sendUIRequest(new UIRequest(inputUser, f, LevelRating.low, Locale.ENGLISH, PrivacyLevel.insensible));
-		
-		
-		
-	}
-
-	@Override
-	public void communicationChannelBroken() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dialogAborted(String arg0) {
-		// TODO Auto-generated method stub
-		
+		sendForm(f);
 	}
 
 	@Override
 	public void handleUIResponse(UIResponse arg0) {
-		// TODO Auto-generated method stub
-		
+		String cmd = arg0.getSubmissionID();
+		if (cmd.equalsIgnoreCase(BACK_ICON)){
+			new TreatmentForm(context, inputUser).show();
+		}
+		if (cmd.equalsIgnoreCase(DELETE_LABEL)){
+			//TODO: DELETE
+		}
+		if (cmd.equalsIgnoreCase(EDIT_LABEL)){
+			//TODO: Update Treatment
+			show((Treatment) arg0.getSubmittedData());
+		}
 	}
 }

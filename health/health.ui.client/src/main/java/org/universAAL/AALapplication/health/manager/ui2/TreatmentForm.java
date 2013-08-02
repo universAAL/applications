@@ -17,9 +17,8 @@
  ******************************************************************************/
 package org.universAAL.AALapplication.health.manager.ui2;
 
-import org.universAAL.AALapplication.health.manager.ui.InputListener;
+import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.rdf.PropertyPath;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Group;
@@ -27,6 +26,7 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Repeat;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.health.owl.Treatment;
@@ -35,19 +35,15 @@ import org.universaal.ontology.health.owl.Treatment;
  * @author amedrano
  *
  */
-public class TreatmentForm extends InputListener {
+public class TreatmentForm extends AbstractHealthForm {
 
 	private static final String TREATMENT_EXAPAND = HealthOntology.NAMESPACE + "subdialogTreatmentExpand";
 	private HealthProfile hp;
 
-	/* (non-Javadoc)
-	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
-	 */
-	@Override
-	public Form getDialog() {
-		return null;
-		//return new TreatmentFollowForm().getDialog();
+	public TreatmentForm(ModuleContext context, User inputUser) {
+		super(context, inputUser);
 	}
+
 
 	public void handleUIResponse(UIResponse input) {
 		// TODO Manage Submit Detail
@@ -56,11 +52,12 @@ public class TreatmentForm extends InputListener {
 		if (cmd.startsWith(TREATMENT_EXAPAND)){
 			// user has selected a detail Treatment
 			int index = Integer.parseInt(cmd.substring(TREATMENT_EXAPAND.length()));
+			new TreatmentViewForm(context, inputUser).show(hp.getTreatments()[index]);
 		}
 		
 	}
 	
-	public void show(Resource inputUser) {
+	public void show() {
 		hp = null;
 		// Create Dialog
 		Form f = Form.newDialog("Treatment List", hp);
@@ -77,12 +74,7 @@ public class TreatmentForm extends InputListener {
 		SubdialogTrigger sdt = new SubdialogTrigger(row, new Label("Detail", null), TREATMENT_EXAPAND);
 		sdt.setRepeatableIDPrefix(TREATMENT_EXAPAND);
 	
-		
-		
+		sendForm(f);
 	}
-
-	/* (non-Javadoc)
-	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#handleEvent(org.universAAL.middleware.input.InputEvent)
-	 */
 	
 }

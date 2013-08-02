@@ -4,8 +4,6 @@ import java.util.Locale;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
-import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
@@ -13,11 +11,16 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthProfile;
 
-public class MainMenu extends UICaller{
+public class MainMenu extends AbstractHealthForm{
 
-	//TODO: internationalization!
+	public MainMenu(ModuleContext context, User inputUser) {
+		super(context, inputUser);
+	}
+
+		//TODO: internationalization!
 		private static final String MESSAGE_LABEL = "Messages";
 		private static final String MESSAGE_ICON = null;
 		private static final String TREATMENT_LABEL = "Treatment";
@@ -28,49 +31,57 @@ public class MainMenu extends UICaller{
 		static final PrivacyLevel PRIVACY = PrivacyLevel.insensible;
 		private static final String HOME_LABEL = "Go Back";
 		private static final String HOME_ICON = null;
+		private static final String MESSAGE_CMD = "openMessages";
+		private static final String MEASUREMENT_LABEL = "Take a Treatment Now";
+		private static final String MEASUREMENT_ICON = null;
+		private static final String MEASUREMENT_CMD = "takeMeasurement";
+		private static final String TREATMENT_CMD = "manageTreatments";
+		private static final String PREFERENCES_CMD = "managePrefferences";
 	
-	public MainMenu(ModuleContext context) {
-		super(context);
-	}
-
-	@Override
-	public void communicationChannelBroken() {
-		// nothing
-	}
-
-	@Override
-	public void dialogAborted(String dialogID) {
-		// nothing
-		
-	}
 
 	@Override
 	public void handleUIResponse(UIResponse input) {
-		// TODO Auto-generated method stub
-		
+		String cmd = input.getSubmissionID();
+		if (cmd.equalsIgnoreCase(MESSAGE_CMD)){
+			//TODO: message Managing
+			new NotReady(context,inputUser).show();
+		}
+		if (cmd.equalsIgnoreCase(MEASUREMENT_CMD)){
+			new MeasurementForm(context, inputUser).show();
+		}
+		if (cmd.equalsIgnoreCase(TREATMENT_CMD)){
+			new TreatmentForm(context, inputUser).show();
+		}
+		if (cmd.equalsIgnoreCase(PREFERENCES_CMD)){
+			//TODO: Prefferences Managing
+			new NotReady(context, inputUser).show();
+		}
 	}
 	
-	public void show(Resource inputUser) {
+	public void show() {
 		//get HealthProfile
 		HealthProfile hp;
 		hp = null;
 		// Create Dialog
 		Form f = Form.newDialog("Health Manager AAL Service", hp);
-		new SubdialogTrigger(f.getSubmits(), 
+		new Submit(f.getSubmits(), 
 				new Label(MESSAGE_LABEL, MESSAGE_ICON),
-				MESSAGE_LABEL);
-		new SubdialogTrigger(f.getSubmits(), 
+				MESSAGE_CMD);
+		new Submit(f.getSubmits(), 
+				new Label(MEASUREMENT_LABEL, MEASUREMENT_ICON),
+				MEASUREMENT_CMD);
+		new Submit(f.getSubmits(), 
 				new Label(TREATMENT_LABEL, TREATMENT_ICON),
-				TREATMENT_LABEL);
-		new SubdialogTrigger(f.getSubmits(), 
+				TREATMENT_CMD);
+		new Submit(f.getSubmits(), 
 				new Label(PREFERENCES_LABEL, PREFERENCES_ICON),
-				PREFERENCES_LABEL);
+				PREFERENCES_CMD);
 		// add home submit
 		new Submit(f.getSubmits(), new Label(HOME_LABEL, HOME_ICON), HOME_LABEL );
+		
 		// TODO Welcome Pane in IOControls
 		
-		this.sendUIRequest(new UIRequest(inputUser, 
-				f, LevelRating.low, Locale.ENGLISH, PrivacyLevel.insensible));
+		sendForm(f);
 	}
 
 }

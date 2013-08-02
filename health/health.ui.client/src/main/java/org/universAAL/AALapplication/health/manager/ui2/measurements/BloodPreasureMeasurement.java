@@ -1,12 +1,10 @@
-package org.universAAL.AALapplication.health.manager.ui2;
+package org.universAAL.AALapplication.health.manager.ui2.measurements;
 
-import java.util.Locale;
-
+import org.universAAL.AALapplication.health.manager.ui2.AbstractHealthForm;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
+import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.ui.UICaller;
-import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -14,50 +12,49 @@ import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
-import org.universaal.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.profile.User;
+import org.universaal.ontology.healthmeasurement.owl.BloodPressure;
 
-public class BloodPreasureMeasurement extends UICaller{
+public class BloodPreasureMeasurement extends AbstractHealthForm{
+
 
 	//TODO: internationalization!
 		
 		static final LevelRating PRIORITY = LevelRating.low;
 		static final PrivacyLevel PRIVACY = PrivacyLevel.insensible;
 		private static final String DONE_ICON = null;
-		private static final String DONE_LABEL = null;
+		private static final String DONE_LABEL = "Done";
 		private static final String CANCEL_LABEL = null;
-		private static final String CANCEL_ICON = null;
+		private static final String CANCEL_ICON = "Cancell";
+		private BloodPressure measurement;
 		
 	
-	public BloodPreasureMeasurement(ModuleContext context) {
-		super(context);
+	public BloodPreasureMeasurement(ModuleContext context, User inputUser, BloodPressure hm) {
+		super(context, inputUser);
+		this.measurement = hm;
 	}
 
-	@Override
-	public void communicationChannelBroken() {
-		// nothing
-	}
+	
 
-	@Override
-	public void dialogAborted(String dialogID) {
-		// nothing
-		
-	}
-
-	@Override
 	public void handleUIResponse(UIResponse input) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public void show(Resource inputUser) {
-		//get HealthProfile
-		HealthProfile hp;
-		hp = null;
+	public void show() {
 		// Create Dialog
-		Form f = Form.newDialog("Heart Rate", hp);
+		Form f = Form.newDialog("Heart Rate", measurement);
 		
-		InputField s=new InputField(f.getIOControls(), new Label("Systolic", null),null,null, inputUser);
-		InputField d=new InputField(f.getIOControls(), new Label("Diastolic", null),null,null, inputUser);
+		InputField s = new InputField(
+				f.getIOControls(), new Label("Systolic", null),
+				//TODO: put correct Property.
+				new PropertyPath(null, false, new String[]{BloodPressure.PROP_MEASURED_BY}),null, null);
+		
+		InputField d = new InputField(
+				f.getIOControls(), new Label("Diastolic", null),
+				//TODO: put correct Property.
+				new PropertyPath(null, false, new String[]{BloodPressure.PROP_MEASURED_BY}),null, null);
+		
 		new Submit(f.getSubmits(), 
 				new Label(DONE_LABEL, DONE_ICON),
 				DONE_LABEL);
@@ -65,17 +62,12 @@ public class BloodPreasureMeasurement extends UICaller{
 				new Label(CANCEL_LABEL, CANCEL_ICON),
 				CANCEL_LABEL);
 		
-
-		// TODO 
-		
-		this.sendUIRequest(new UIRequest(inputUser, 
-				f, LevelRating.low, Locale.ENGLISH, PrivacyLevel.insensible));
+		sendForm(f);
 	}
 	
 	public void ShowUncorrectMessage(){
 		Form f = Form.newMessage("Blood Preasure", null);
 		new SimpleOutput(f.getIOControls(), null, null, "Your Measure is not correct");
-		
 		
 	}
 
