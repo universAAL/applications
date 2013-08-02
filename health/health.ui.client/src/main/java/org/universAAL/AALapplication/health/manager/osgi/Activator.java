@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011 Universidad Politécnica de Madrid
+ * Copyright 2011 Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,9 @@ package org.universAAL.AALapplication.health.manager.osgi;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.AALapplication.health.manager.MainButtonProvider;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
 /**
  * @author amedrano
@@ -24,20 +27,25 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator implements BundleActivator {
 
-	/* (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext arg0) throws Exception {
-		// TODO Auto-generated method stub
+	static ModuleContext context;
+	public MainButtonProvider service;
 
+	public void start(BundleContext arg0) throws Exception {	
+		context = uAALBundleContainer.THE_CONTAINER
+                .registerModule(new Object[] {arg0});	
+		context.logDebug("simple.ui","Initialising Project", null);
+
+		/*
+		 * uAAL stuff
+		 */
+		service = new MainButtonProvider(context);
+		
+		context.logInfo("simple.ui","Project started", null);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext arg0) throws Exception {
-		// TODO Auto-generated method stub
 
+	public void stop(BundleContext arg0) throws Exception {
+		service.close();
 	}
 
 }
