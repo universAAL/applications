@@ -20,7 +20,9 @@
 	<feature name="health.core" version="${platform.version}">
 		<feature version='2.0.0'>uAAL-MW</feature>
 		<feature>uAAL-ctxt.che</feature>
-		<bundle start-level='93'>mvn:org.universAAL.ontology/ont.health.measurement/2.0.0</bundle>
+		<bundle start-level='93'>mvn:org.universAAL.ontology/ont.unit/2.0.1-SNAPSHOT</bundle>
+		<bundle start-level='93'>mvn:org.universAAL.ontology/ont.measurement/2.0.1-SNAPSHOT</bundle>
+		<bundle start-level='93'>mvn:org.universAAL.ontology/ont.health.measurement/2.0.1-SNAPSHOT</bundle>
 		<bundle start-level='93'>mvn:org.universAAL.ontology/ont.health.disease/2.0.0</bundle>
 		<bundle start-level='94'>mvn:org.universAAL.ontology/ont.profile.health/2.0.0</bundle>
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.profile.manager/E.0.1-SNAPSHOT</bundle>
