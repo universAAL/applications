@@ -17,7 +17,6 @@ package org.universAAL.AALapplication.health.manager;
 
 import org.universAAL.AALapplication.health.manager.ui2.MainMenu;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -25,6 +24,7 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.profile.User;
 
 public class MainButtonProvider extends ServiceCallee {
 
@@ -48,8 +48,8 @@ public class MainButtonProvider extends ServiceCallee {
 		ServiceProfile initDP = InitialServiceDialog
 				.createInitialDialogProfile(
 						MY_URI,
-						"http://depot.universAAL.com",
-						"simple UI",
+						"http://lst.tfo.upm.es",
+						"Health Manager UI",
 						START_UI);
 		return new ServiceProfile[] {initDP};
 	}
@@ -64,7 +64,7 @@ public class MainButtonProvider extends ServiceCallee {
 	public ServiceResponse handleCall(ServiceCall call) {
 		Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
 		//new SimpleUI(this.ctxt).showDialog((Resource) inputUser);
-		new MainMenu(ctxt).show((Resource) inputUser);
+		new MainMenu(ctxt, (User) inputUser).show();
 		return new ServiceResponse(CallStatus.succeeded);
 	}
 

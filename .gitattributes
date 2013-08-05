@@ -769,8 +769,6 @@ health/health.ui.client/ASL2.0 -text
 health/health.ui.client/MITX.txt -text svneol=unset#text/plain
 health/health.ui.client/NOTICE -text
 health/health.ui.client/pom.xml -text
-health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/HealthManager.java -text svneol=unset#text/plain
-health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ISubscriber.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/MainButtonProvider.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/osgi/Activator.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/InputListener.java -text svneol=unset#text/plain

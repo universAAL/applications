@@ -11,7 +11,6 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthProfile;
 import org.universaal.ontology.healthmeasurement.owl.PersonWeight;
 
 public class WeigthMeasurement extends AbstractHealthForm{
@@ -41,8 +40,10 @@ public class WeigthMeasurement extends AbstractHealthForm{
 	public void show() {
 		// Create Dialog
 		Form f = Form.newDialog("Weight", measurement);
-		
-		InputField i = new InputField(f.getIOControls(), new Label("Kg", null),null,null, inputUser);
+		//TODO: add units from actual prefix and unit.
+		InputField i = new InputField(f.getIOControls(), new Label("Weight ", null),null,null, inputUser);
+		i.setHelpString("Insert Your Weight in Kg.");
+		i.setHintString("64.5");
 		new Submit(f.getSubmits(), 
 				new Label(DONE_LABEL, DONE_ICON),
 				DONE_LABEL);

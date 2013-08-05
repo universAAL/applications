@@ -91,7 +91,7 @@ public class MeasurementForm extends AbstractHealthForm {
 		}
 		if (cmd.equalsIgnoreCase(SELECTED_TREATMENT)){
 			HealthMeasurement hm = (HealthMeasurement) arg0.getUserInput(new String[]{SELECTED_TREATMENT});
-			// TODO: Change to service call...
+			// TODO: create a service in ont.health and call the service accordingly
 			if (hm instanceof PersonWeight){
 				new WeigthMeasurement(context, inputUser, (PersonWeight) hm).show();
 			}

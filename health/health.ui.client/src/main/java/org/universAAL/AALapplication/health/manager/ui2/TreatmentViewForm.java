@@ -37,8 +37,8 @@ import org.universaal.ontology.health.owl.Treatment;
  */
 public class TreatmentViewForm extends AbstractHealthForm {
 
-	private static final String DELETE_ICON = null;
 	private static final String DELETE_LABEL = "Delete";
+	private static final String DELETE_ICON = null;
 	private static final String EDIT_LABEL = "Edit";
 	private static final String EDIT_ICON = null;
 	private static final String BACK_LABEL = "Back";
@@ -86,10 +86,11 @@ public class TreatmentViewForm extends AbstractHealthForm {
 			new String [] {Treatment.PROP_HAS_TREATMENT_PLANNING}), null);
 		new Submit(nextSession, new Label("Perform now", null), "Now");
 		
-		
+		//TODO: delete only if user has permission to delete
 		new Submit(f.getSubmits(), 
 				new Label(DELETE_LABEL, DELETE_ICON),
 				DELETE_LABEL);
+		//TODO: edit only if user has permission to edit
 		new Submit(f.getSubmits(), 
 				new Label(EDIT_LABEL, EDIT_ICON),
 			EDIT_LABEL);

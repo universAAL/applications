@@ -42,8 +42,11 @@ public class HeartRateMeasurement extends AbstractHealthForm{
 	public void show() {
 		// Create Dialog
 		Form f = Form.newDialog("Heart Rate", measurement);
-		
-		InputField i=new InputField(f.getIOControls(), new Label("puls/min", null),null,null, inputUser);
+
+		//TODO: add units from actual prefix and unit.
+		InputField i=new InputField(f.getIOControls(), new Label("HeartRate" , null),null,null, inputUser);
+		i.setHelpString("Insert Your heart rate in beats per minute.");
+		i.setHintString("90");
 		new Submit(f.getSubmits(), 
 				new Label(DONE_LABEL, DONE_ICON),
 				DONE_LABEL);
