@@ -3,7 +3,7 @@
 	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -180,6 +180,8 @@ public class ProfileServerPerformedSessionManager
 				HealthMeasurement hm = ((PerformedMeasurementSession) session)
 						.getHealthMeasurement();
 				profile.updateHealthMeasurement(hm);
+				//TODO: check for possible irregularities in the measurements and warn in that case.
+				
 				needsUpdate = true;
 			}
 			treatment = session.getAssociatedTreatment();
