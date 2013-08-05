@@ -58,7 +58,7 @@ public class TreatmentForm extends AbstractHealthForm {
 	}
 	
 	public void show() {
-		hp = null;
+		hp = getHealthProfile();
 		// Create Dialog
 		Form f = Form.newDialog("Treatment List", hp);
 		

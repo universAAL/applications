@@ -60,8 +60,7 @@ public class MainMenu extends AbstractHealthForm{
 	
 	public void show() {
 		//get HealthProfile
-		HealthProfile hp;
-		hp = null;
+		HealthProfile hp = getHealthProfile();
 		// Create Dialog
 		Form f = Form.newDialog("Health Manager AAL Service", hp);
 		new Submit(f.getSubmits(), 

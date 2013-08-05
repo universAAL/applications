@@ -12,6 +12,7 @@ import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.measurement.Measurement;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.healthmeasurement.owl.BloodPressure;
 
@@ -43,17 +44,19 @@ public class BloodPreasureMeasurement extends AbstractHealthForm{
 	
 	public void show() {
 		// Create Dialog
-		Form f = Form.newDialog("Heart Rate", measurement);
+		Form f = Form.newDialog("Blood Preasure", measurement);
 		
 		InputField s = new InputField(
-				f.getIOControls(), new Label("Systolic", null),
-				//TODO: put correct Property.
-				new PropertyPath(null, false, new String[]{BloodPressure.PROP_MEASURED_BY}),null, null);
+				f.getIOControls(), new Label("Systolic preassure (mmHg)", null),
+				new PropertyPath(null, false, new String[]{BloodPressure.PROP_SYSTOLIC, Measurement.PROP_VALUE}),null, null);
+		s.setHelpString("Systolic Preasure, Marked as SYS, it is the maximum preassure reading.");
+		s.setHintString("100");
 		
 		InputField d = new InputField(
-				f.getIOControls(), new Label("Diastolic", null),
-				//TODO: put correct Property.
-				new PropertyPath(null, false, new String[]{BloodPressure.PROP_MEASURED_BY}),null, null);
+				f.getIOControls(), new Label("Diastolic preassure (mmHg)", null),
+				new PropertyPath(null, false, new String[]{BloodPressure.PROP_DIASTOLIC, Measurement.PROP_VALUE}),null, null);
+		d.setHelpString("Diastolic Preasure, Marked as DIA, it is the minimum preassure reading.");
+		d.setHintString("70");
 		
 		new Submit(f.getSubmits(), 
 				new Label(DONE_LABEL, DONE_ICON),
