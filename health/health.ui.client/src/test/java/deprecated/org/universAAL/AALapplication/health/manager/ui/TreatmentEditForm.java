@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011 Universidad Politécnica de Madrid
+ * Copyright 2011 Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.AALapplication.health.manager.ui;
+package deprecated.org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -22,14 +22,14 @@ import org.universAAL.middleware.ui.rdf.Form;
  * @author amedrano
  *
  */
-public class TreatmentNewForm extends InputListener {
+public class TreatmentEditForm extends InputListener {
 
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
 	 */
 	@Override
 	public Form getDialog() {
-		// TODO create Form
+		// TODO Create Form
 		return null;
 	}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011 Universidad Politécnica de Madrid
+ * Copyright 2011 Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.AALapplication.health.manager.ui;
+package deprecated.org.universAAL.AALapplication.health.manager.ui;
 
-import org.universAAL.AALapplication.health.manager.HealthManager;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
 
@@ -23,14 +22,24 @@ import org.universAAL.middleware.ui.rdf.Form;
  * @author amedrano
  *
  */
-public abstract class InputListener {
-	
-	protected void listenTo(String DialogID){
-		HealthManager.getInstance().getIsubcriber().registerUI(DialogID,this);
+public class PreferencesAccessForm extends InputListener {
+
+	/* (non-Javadoc)
+	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
+	 */
+	@Override
+	public Form getDialog() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	abstract public Form getDialog();
+
+	/* (non-Javadoc)
+	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#handleEvent(org.universAAL.middleware.input.InputEvent)
+	 */
+	@Override
 	public void handleEvent(UIResponse ie) {
-		HealthManager.getInstance().getIsubcriber().unresgisterUI(ie.getDialogID());
+		// TODO Auto-generated method stub
+
 	}
+
 }
