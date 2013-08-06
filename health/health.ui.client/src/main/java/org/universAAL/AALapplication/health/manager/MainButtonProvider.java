@@ -15,7 +15,7 @@
  ******************************************************************************/
 package org.universAAL.AALapplication.health.manager;
 
-import org.universAAL.AALapplication.health.manager.ui2.MainMenu;
+import org.universAAL.AALapplication.health.manager.ui.MainMenu;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;

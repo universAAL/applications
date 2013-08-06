@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.AALapplication.health.manager.ui2;
+package org.universAAL.AALapplication.health.manager.ui;
 
 import java.util.Set;
 
-import org.universAAL.AALapplication.health.manager.ui2.measurements.BloodPreasureMeasurement;
-import org.universAAL.AALapplication.health.manager.ui2.measurements.HeartRateMeasurement;
-import org.universAAL.AALapplication.health.manager.ui2.measurements.WeigthMeasurement;
+import org.universAAL.AALapplication.health.manager.ui.measurements.BloodPreasureMeasurement;
+import org.universAAL.AALapplication.health.manager.ui.measurements.HeartRateMeasurement;
+import org.universAAL.AALapplication.health.manager.ui.measurements.WeigthMeasurement;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.rdf.PropertyPath;

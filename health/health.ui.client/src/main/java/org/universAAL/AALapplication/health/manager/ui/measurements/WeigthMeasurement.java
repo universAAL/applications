@@ -1,6 +1,6 @@
-package org.universAAL.AALapplication.health.manager.ui2.measurements;
+package org.universAAL.AALapplication.health.manager.ui.measurements;
 
-import org.universAAL.AALapplication.health.manager.ui2.AbstractHealthForm;
+import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.ui.UIResponse;

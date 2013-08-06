@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.AALapplication.health.manager.ui2;
+package org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.rdf.PropertyPath;
