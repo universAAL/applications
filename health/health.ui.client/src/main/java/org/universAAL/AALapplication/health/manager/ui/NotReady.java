@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.universAAL.AALapplication.health.manager.ui2;
+package org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.rdf.Resource;

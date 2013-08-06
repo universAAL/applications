@@ -15,9 +15,11 @@
  ******************************************************************************/
 package deprecated.org.universAAL.AALapplication.health.manager.ui;
 
-import org.universAAL.AALapplication.health.manager.HealthManager;
+
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
+
+import deprecated.HealthManager;
 
 /**
  * @author amedrano

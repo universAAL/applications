@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.universAAL.AALapplication.health.manager.ui2;
+package org.universAAL.AALapplication.health.manager.ui;
 
 import java.util.Locale;
 import java.util.Map;

@@ -15,7 +15,6 @@
  ******************************************************************************/
 package deprecated.org.universAAL.AALapplication.health.manager.ui;
 
-import org.universAAL.AALapplication.health.manager.HealthManager;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIRequest;
@@ -24,6 +23,8 @@ import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
+
+import deprecated.HealthManager;
 
 /**
  * @author amedrano
