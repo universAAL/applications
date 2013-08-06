@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011 Universidad Politécnica de Madrid
+ * Copyright 2011 Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.AALapplication.health.manager.ui;
+package deprecated.org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -22,24 +22,15 @@ import org.universAAL.middleware.ui.rdf.Form;
  * @author amedrano
  *
  */
-public class MessagesListForm extends MessagesForm {
-
-	
-	private static final String LISTFORM_TITLE = "List of Messages";
+public class TreatmentFollowForm extends InputListener {
 
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
 	 */
 	@Override
 	public Form getDialog() {
-		Form f = Form.newSubdialog(LISTFORM_TITLE, MainForm.DIALOG_ID);
-		addSubdialogs(f.getSubmits());
-		/*
-		 *  TODO add Table of messages
-		 *  |read (Icon)| subject| from| date
-		 */
-		listenTo(f.getDialogID());
-		return f;
+		// TODO Create Form
+		return null;
 	}
 
 	/* (non-Javadoc)
@@ -47,7 +38,7 @@ public class MessagesListForm extends MessagesForm {
 	 */
 	@Override
 	public void handleEvent(UIResponse ie) {
-		super.handleEvent(ie);
+		// TODO Auto-generated method stub
 
 	}
 

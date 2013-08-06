@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2011 Universidad Politécnica de Madrid
+ * Copyright 2011 Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.AALapplication.health.manager.ui;
+package deprecated.org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.AALapplication.health.manager.HealthManager;
+import org.universAAL.middleware.owl.supply.LevelRating;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
+import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
-import org.universAAL.middleware.ui.rdf.Group;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
 
@@ -27,39 +29,43 @@ import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
  * @author amedrano
  *
  */
-public class TreatmentForm extends InputListener {
+public class MainForm extends InputListener {
 
-	private static final String FOLLOW_LABEL = "Follow Treatment";
-	private static final String FOLLOW_ICON = null;
-	private static final String NEW_LABEL = "Add New Treatment";
-	private static final String NEW_ICON = null;
-	private static final String VIEW_LABEL = "View Treatment Record";
-	private static final String VIEW_ICON = null;
-	private static final String EDIT_LABEL = "Edit Treatment";
-	private static final String EDIT_ICON = null;
+	//TODO: internationalization!
+	private static final String MESSAGE_LABEL = "Messages";
+	private static final String MESSAGE_ICON = null;
+	private static final String TREATMENT_LABEL = "Treatment";
+	private static final String TREATMENT_ICON = null;
+	private static final String PREFERENCES_LABEL = "Preferences";
+	private static final String PREFERENCES_ICON = null;
+	static final LevelRating PRIORITY = LevelRating.low;
+	static final PrivacyLevel PRIVACY = PrivacyLevel.insensible;
+	
+	static String DIALOG_ID;
+	
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#getDialog()
 	 */
 	@Override
 	public Form getDialog() {
-		return new TreatmentFollowForm().getDialog();
+		// Create Dialog
+		Form f = Form.newDialog("Health Manager AAL Service", (Resource)null);
+		new SubdialogTrigger(f.getSubmits(), 
+				new Label(MESSAGE_LABEL, MESSAGE_ICON),
+				MESSAGE_LABEL);
+		new SubdialogTrigger(f.getSubmits(), 
+				new Label(TREATMENT_LABEL, TREATMENT_ICON),
+				TREATMENT_LABEL);
+		new SubdialogTrigger(f.getSubmits(), 
+				new Label(PREFERENCES_LABEL, PREFERENCES_ICON),
+				PREFERENCES_LABEL);
+		DIALOG_ID = f.getDialogID();
+		listenTo(DIALOG_ID);
+		// TODO add home submit
+		// TODO Welcome Pane in IOControls
+		return f;
 	}
 
-	void addSubdialogs(Group g) {
-		//TODO CHECK the User has permission to access each
-		new SubdialogTrigger(g, 
-				new Label(FOLLOW_LABEL,FOLLOW_ICON),
-				FOLLOW_LABEL);
-		new SubdialogTrigger(g, 
-				new Label(VIEW_LABEL,VIEW_ICON),
-				VIEW_LABEL);
-		new SubdialogTrigger(g, 
-				new Label(NEW_LABEL,NEW_ICON),
-				NEW_LABEL);		
-		new SubdialogTrigger(g, 
-				new Label(EDIT_LABEL,EDIT_ICON),
-				EDIT_LABEL);
-	}
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALapplication.health.manager.ui.InputListener#handleEvent(org.universAAL.middleware.input.InputEvent)
 	 */
@@ -68,33 +74,26 @@ public class TreatmentForm extends InputListener {
 		// listen to event for the Form and act Accordingly
 		super.handleEvent(ie);
 		UIRequest e = null;
-		if (ie.getSubmissionID() == FOLLOW_LABEL) {
+		if (ie.getSubmissionID() == MESSAGE_LABEL) {
 			e = new UIRequest(ie.getUser(),
-					new TreatmentFollowForm().getDialog(),
-					MainForm.PRIORITY,
+					new MessagesForm().getDialog(),
+					PRIORITY,
 					HealthManager.getLanguage(),
-					MainForm.PRIVACY);
+					PRIVACY);
 		}
-		if (ie.getSubmissionID() == VIEW_LABEL) {
+		if (ie.getSubmissionID() == TREATMENT_LABEL) {
 			e = new UIRequest(ie.getUser(),
-					new TreatmentViewForm().getDialog(),
-					MainForm.PRIORITY,
+					new TreatmentForm().getDialog(),
+					PRIORITY,
 					HealthManager.getLanguage(),
-					MainForm.PRIVACY);
+					PRIVACY);
 		}
-		if (ie.getSubmissionID() == NEW_LABEL) {
+		if (ie.getSubmissionID() == PREFERENCES_LABEL) {
 			e = new UIRequest(ie.getUser(),
-					new TreatmentNewForm().getDialog(),
-					MainForm.PRIORITY,
+					new PreferencesFrom().getDialog(),
+					PRIORITY,
 					HealthManager.getLanguage(),
-					MainForm.PRIVACY);
-		}
-		if (ie.getSubmissionID() == EDIT_LABEL) {
-			e = new UIRequest(ie.getUser(),
-					new TreatmentEditForm().getDialog(),
-					MainForm.PRIORITY,
-					HealthManager.getLanguage(),
-					MainForm.PRIVACY);
+					PRIVACY);
 		}
 		HealthManager.getInstance().getIsubcriber().sendUIRequest(e);
 	}
