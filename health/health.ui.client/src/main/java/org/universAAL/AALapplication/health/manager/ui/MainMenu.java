@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
@@ -57,6 +58,11 @@ public class MainMenu extends AbstractHealthForm{
 	public void show() {
 		//get HealthProfile
 		HealthProfile hp = getHealthProfile();
+		if (hp == null){
+			//WARN
+			LogUtils.logError(context, getClass(), "show", "No Health Profile Found!!");
+			return;
+		}
 		// Create Dialog
 		Form f = Form.newDialog("Health Manager AAL Service", hp);
 		new Submit(f.getSubmits(), 

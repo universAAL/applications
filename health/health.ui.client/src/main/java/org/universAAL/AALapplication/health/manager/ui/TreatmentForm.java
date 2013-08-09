@@ -18,6 +18,7 @@
 package org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -59,6 +60,11 @@ public class TreatmentForm extends AbstractHealthForm {
 	
 	public void show() {
 		hp = getHealthProfile();
+		if (hp == null){
+			//WARN
+			LogUtils.logError(context, getClass(), "show", "No Health Profile Found!!");
+			return;
+		}
 		// Create Dialog
 		Form f = Form.newDialog("Treatment List", hp);
 		
