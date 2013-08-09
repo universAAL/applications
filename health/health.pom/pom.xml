@@ -45,27 +45,27 @@
 			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>health.performedSession.manager</artifactId>
-				<version>${project.version}</version>
+				<version>E.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>health.treat.manager</artifactId>
-				<version>${project.version}</version>
+				<version>E.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>health.profile.manager</artifactId>
-				<version>${project.version}</version>
+				<version>E.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>health.biomedicalsensors.server</artifactId>
-				<version>${project.version}</version>
+				<version>E.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>health.biomedicalsensors.uiclient</artifactId>
-				<version>${project.version}</version>
+				<version>E.0.1-SNAPSHOT</version>
 			</dependency>
 			<!-- 	delete when updated -->
 			<dependency>
