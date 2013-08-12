@@ -27,6 +27,7 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Repeat;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
+import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.profile.User;
 import org.universaal.ontology.health.owl.HealthOntology;
 import org.universaal.ontology.health.owl.HealthProfile;
@@ -39,6 +40,7 @@ import org.universaal.ontology.health.owl.Treatment;
 public class TreatmentForm extends AbstractHealthForm {
 
 	private static final String TREATMENT_EXAPAND = HealthOntology.NAMESPACE + "subdialogTreatmentExpand";
+	private static final String NEW_TREATMENT = HealthOntology.NAMESPACE + "newTreatmentUI";
 	private HealthProfile hp;
 
 	public TreatmentForm(ModuleContext context, User inputUser) {
@@ -56,6 +58,9 @@ public class TreatmentForm extends AbstractHealthForm {
 			new TreatmentViewForm(context, inputUser).show(hp.getTreatments()[index]);
 		}
 		
+		if (cmd.startsWith(NEW_TREATMENT)){
+			//TODO New Treatment type Select form
+		}
 	}
 	
 	public void show() {
@@ -79,6 +84,8 @@ public class TreatmentForm extends AbstractHealthForm {
 				new PropertyPath(null, false, new String[] {Treatment.PROP_DESCRIPTION}), null);
 		SubdialogTrigger sdt = new SubdialogTrigger(row, new Label("Detail", null), TREATMENT_EXAPAND);
 		sdt.setRepeatableIDPrefix(TREATMENT_EXAPAND);
+		
+		new Submit(f.getSubmits(), new Label("Add New", null), NEW_TREATMENT);
 	
 		sendForm(f);
 	}

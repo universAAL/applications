@@ -43,6 +43,10 @@ public class TreatmentViewForm extends AbstractHealthForm {
 	private static final String EDIT_ICON = null;
 	private static final String BACK_LABEL = "Back";
 	private static final String BACK_ICON = null;
+	private static final String NEW_LABEL = "Add";
+	private static final String NEW_ICON = null;
+	private static final String NEW_ID = "addNewTreatment";
+	private boolean newT;
 
 	public TreatmentViewForm(ModuleContext context, User inputUser) {
 		super(context, inputUser);
@@ -86,20 +90,29 @@ public class TreatmentViewForm extends AbstractHealthForm {
 			new String [] {Treatment.PROP_HAS_TREATMENT_PLANNING}), null);
 		new Submit(nextSession, new Label("Perform now", null), "Now");
 		
-		//TODO: delete only if user has permission to delete
-		new Submit(f.getSubmits(), 
-				new Label(DELETE_LABEL, DELETE_ICON),
-				DELETE_LABEL);
-		//TODO: edit only if user has permission to edit
-		new Submit(f.getSubmits(), 
-				new Label(EDIT_LABEL, EDIT_ICON),
-			EDIT_LABEL);
-		
+		if (newT){
+			new Submit(f.getSubmits(), new Label(NEW_LABEL, NEW_ICON), NEW_ID);
+		}
+		else {
+			//TODO: delete only if user has permission to delete
+			new Submit(f.getSubmits(), 
+					new Label(DELETE_LABEL, DELETE_ICON),
+					DELETE_LABEL);
+			//TODO: edit only if user has permission to edit
+			new Submit(f.getSubmits(), 
+					new Label(EDIT_LABEL, EDIT_ICON),
+					EDIT_LABEL);
+		}
 		// add home submit
 		new Submit(f.getSubmits(), new Label(BACK_LABEL, BACK_ICON), BACK_LABEL );
 		
 		
 		sendForm(f);
+	}
+	
+	public void newTreatmentShow(Treatment t){
+		this.newT = true;
+		show(t);
 	}
 
 	@Override
@@ -114,6 +127,12 @@ public class TreatmentViewForm extends AbstractHealthForm {
 		if (cmd.equalsIgnoreCase(EDIT_LABEL)){
 			//TODO: Update Treatment
 			show((Treatment) arg0.getSubmittedData());
+		}
+		if (cmd.startsWith(NEW_ID)){
+			//Add new Treatment
+			//TODO: service call
+			
+			new TreatmentForm(context, inputUser).show();
 		}
 	}
 }

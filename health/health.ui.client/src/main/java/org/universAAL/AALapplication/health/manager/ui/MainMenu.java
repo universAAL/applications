@@ -44,7 +44,7 @@ public class MainMenu extends AbstractHealthForm{
 			new NotReady(context,inputUser).show();
 		}
 		if (cmd.equalsIgnoreCase(MEASUREMENT_CMD)){
-			new MeasurementForm(context, inputUser).show();
+			new MeasurementTypeForm(context, inputUser).show();
 		}
 		if (cmd.equalsIgnoreCase(TREATMENT_CMD)){
 			new TreatmentForm(context, inputUser).show();
