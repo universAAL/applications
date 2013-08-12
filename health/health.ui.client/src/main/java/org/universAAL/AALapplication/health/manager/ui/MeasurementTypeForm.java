@@ -41,7 +41,7 @@ import org.universaal.ontology.healthmeasurement.owl.PersonWeight;
  * @author amedrano
  *
  */
-public class MeasurementForm extends AbstractHealthForm {
+public class MeasurementTypeForm extends AbstractHealthForm {
 
 	private static final String CANCEL_LABEL = "Cancel";
 	private static final String SELECTED_TREATMENT = HealthOntology.NAMESPACE + "uiMeasurementSelected";
@@ -49,7 +49,7 @@ public class MeasurementForm extends AbstractHealthForm {
 	private static final String OK_LABEL = null;
 	private static final String CANCELL_ICON = null;
 
-	public MeasurementForm(ModuleContext context, User inputUser) {
+	public MeasurementTypeForm(ModuleContext context, User inputUser) {
 		super(context, inputUser);
 	}
 	
