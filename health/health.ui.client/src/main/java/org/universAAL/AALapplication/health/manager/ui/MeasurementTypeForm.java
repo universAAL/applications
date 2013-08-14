@@ -69,7 +69,7 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 		for (String type : typesOfMeasurement) {
 			HealthMeasurement m = (HealthMeasurement) OntologyManagement
 					.getInstance().getResource(type, Resource.generateAnonURI());
-			String name = m.getName();
+			String name = m.getOrConstructLabel(null);
 			s.addChoiceItem(new ChoiceItem(name, null, m));
 		}
 		
