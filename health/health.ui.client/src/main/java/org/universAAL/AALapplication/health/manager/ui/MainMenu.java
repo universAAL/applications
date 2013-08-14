@@ -50,7 +50,7 @@ public class MainMenu extends AbstractHealthForm{
 			new TreatmentForm(context, inputUser).show();
 		}
 		if (cmd.equalsIgnoreCase(PREFERENCES_CMD)){
-			//TODO: Prefferences Managing
+			//TODO: Preferences Managing
 			new NotReady(context, inputUser).show();
 		}
 	}

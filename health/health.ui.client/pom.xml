@@ -27,6 +27,8 @@
 	<artifactId>health.ui.client</artifactId>
 	<name>Health UI interface</name>
 	<description>UI interface for health service</description>
+	
+	<packaging>bundle</packaging>
 
 	<licenses>
 		<license>
