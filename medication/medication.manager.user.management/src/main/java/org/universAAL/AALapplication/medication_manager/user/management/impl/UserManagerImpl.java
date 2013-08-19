@@ -57,6 +57,23 @@ public class UserManagerImpl implements UserManager {
   private static final String OUTPUT_GET_SUBPROFILE = MedicationOntology.NAMESPACE + "out3";
   private final PersistentService persistentService;
 
+  private final static String[] DUMMY_USERS_URI = {
+      "urn:org.universAAL.aal_space:user_env#asparuh",
+      "urn:org.universAAL.aal_space:user_env#bill",
+      "urn:org.universAAL.aal_space:user_env#george",
+      "urn:org.universAAL.aal_space:user_env#iren",
+      "urn:org.universAAL.aal_space:user_env#ivailo",
+      "urn:org.universAAL.aal_space:user_env#ivan",
+      "urn:org.universAAL.aal_space:user_env#john",
+      "urn:org.universAAL.aal_space:user_env#maria",
+      "urn:org.universAAL.aal_space:user_env#nik",
+      "urn:org.universAAL.aal_space:user_env#nikola",
+      "urn:org.universAAL.aal_space:user_env#pencho",
+      "urn:org.universAAL.aal_space:user_env#said",
+      "urn:org.universAAL.aal_space:user_env#simeon",
+      "urn:org.universAAL.aal_space:user_env#venelin"
+  };
+
   public UserManagerImpl(ModuleContext context, PersistentService persistentService) {
 
     this.persistentService = persistentService;
@@ -156,7 +173,7 @@ public class UserManagerImpl implements UserManager {
     String uri = ur.getURI();
     Log.info("User object uri is : %s", getClass(), uri);
 
-    if ("urn:org.universAAL.aal_space:test_environment#saied".equalsIgnoreCase(uri)) {
+    if (skipUser(uri)) {
       return null;
     }
 
@@ -176,6 +193,17 @@ public class UserManagerImpl implements UserManager {
     }
 
 
+  }
+
+  private boolean skipUser(String uri) {
+
+    for (String dummyUserUri : DUMMY_USERS_URI) {
+      if (dummyUserUri.equalsIgnoreCase(uri)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public void addProfile(User profilable, UserProfile profile) {
@@ -231,7 +259,18 @@ public class UserManagerImpl implements UserManager {
   private PersonalInformationSubprofile getUserSubprofile(List list, User user) {
     Log.info("Trying to get PersonalInformationSubprofile URI from the list", getClass());
 
-    PersonalInformationSubprofile subprofile = (PersonalInformationSubprofile) list.get(0);
+    PersonalInformationSubprofile subprofile = null;
+    for (int i = 0; i < list.size(); i++) {
+      Object obj = list.get(i);
+      if (obj instanceof PersonalInformationSubprofile) {
+        subprofile = (PersonalInformationSubprofile) obj;
+      }
+
+    }
+
+    if (subprofile == null) {
+      throw new MedicationManagerUserManagementException("Missing PersonalInformationSubprofile for the user: " + user.getURI());
+    }
 
     Log.info("Found PersonalInformationSubprofile object, which has only URI of our PersonalInformationSubprofile object." +
         "So we need to ask CHE to give real PersonalInformationSubprofile object. Making ServiceRequest...", getClass());
