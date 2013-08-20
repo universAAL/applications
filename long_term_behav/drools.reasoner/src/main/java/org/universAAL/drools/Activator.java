@@ -26,6 +26,7 @@ import org.universAAL.drools.engine.Suscriber;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.container.utils.LogUtils;
+import org.universAAL.middleware.container.ModuleActivator;
 
 /**
  * Activator for the rules engine.

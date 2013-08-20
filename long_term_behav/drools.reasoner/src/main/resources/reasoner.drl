@@ -6,7 +6,7 @@ import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.drools.engine.RulesEngine;
 import org.universAAL.ontology.location.Location;
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.ontology.phThing.Sensor;
+import org.universAAL.ontology.device.Sensor;
 import org.universAAL.drools.models.Fact;
 import org.universAAL.drools.models.FactProperty;
 import java.util.Hashtable;
@@ -38,7 +38,7 @@ return "HIGH";
 rule "Activity insertionante"
 //agenda-group "MAIN"
     when
-    	ContextEvent(eval( RDFSubject instanceof Sensor), $s:(((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)))
+    	$c:ContextEvent(eval(RDFSubject instanceof Sensor), $s:(((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)))
         not Activity ( place matches $s )
     then
         System.out.println("Inserting activity...");
