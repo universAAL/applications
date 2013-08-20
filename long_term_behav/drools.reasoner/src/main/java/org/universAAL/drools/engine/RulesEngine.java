@@ -38,6 +38,7 @@ import org.drools.conf.AssertBehaviorOption;
 import org.drools.conf.EventProcessingOption;
 import org.drools.definition.KnowledgePackage;
 import org.drools.io.Resource;
+import org.universAAL.ontology.activityhub.ActivityHubSensor;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.ConsequenceException;
@@ -54,7 +55,6 @@ import org.universAAL.middleware.context.owl.ContextProviderType;
 import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
-import org.universAAL.ontology.phThing.Sensor;
 
 //import bitronix.tm.TransactionManagerServices;
 //import bitronix.tm.resource.jdbc.PoolingDataSource;
@@ -218,24 +218,21 @@ public final class RulesEngine {
 		if (!testMode) {
 			props.setProperty("drools.dialect.java.compiler", "JANINO");
 			KnowledgeBuilderConfiguration cfg = KnowledgeBuilderFactory
-					.newKnowledgeBuilderConfiguration(props, ClassLoader
-							.getSystemClassLoader());
+					.newKnowledgeBuilderConfiguration(props,
+							ClassLoader.getSystemClassLoader());
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(cfg);
 			// System.out.println(ResourceFactory.newClassPathResource(".//").toString());
-			// System.out.println(rulesEngineBundleContext.getBundle().getResource("reasoner.drl"));
-			kbuilder
-					.add(ResourceFactory
-							.newUrlResource(rulesEngineBundleContext
-									.getBundle()
-									.getResource("reasoner_PIR.drl")),
-							ResourceType.DRL);
+			// System.out.println(rulesEngineBundleContext.getBundle()
+			// .getResource("reasoner.drl").getPath());
+			kbuilder.add(ResourceFactory
+					.newUrlResource(rulesEngineBundleContext.getBundle()
+							.getResource("reasoner.drl")), ResourceType.DRL);
 		} else {
 			// props.setProperty("drools.dialect.java.compiler", "JANINO");
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 			// System.out.println(ResourceFactory.newClassPathResource(".//").toString());
 			// System.out.println(rulesEngineContext.getBundle().getResource("reasoner.drl"));
-			kbuilder.add(ResourceFactory
-					.newClassPathResource("droolsWorkshop1.drl"),
+			kbuilder.add(ResourceFactory.newClassPathResource("reasoner.drl"),
 					ResourceType.DRL);
 		}
 		if (kbuilder.hasErrors()) {
@@ -267,14 +264,17 @@ public final class RulesEngine {
 	 */
 	public void insertContextEvent(Object event) {
 		if (event instanceof ContextEvent) {
-			if (((ContextEvent) event).getRDFSubject() instanceof Sensor) {
+			if (((ContextEvent) event).getRDFSubject() instanceof ActivityHubSensor) {
 				ksession.insert(event);
+				
 			} else {
 				// Not a sensor (genius)
 			}
+
 		} else {
 			// Not a contextEvent
 		}
+
 		// It has been decided to insert always. The rule ALWAYS must check if
 		// it's being
 		// received the correct class in order to made a cast from Object to a
@@ -366,8 +366,7 @@ public final class RulesEngine {
 				"http://www.tsbtecnologias.es/ContextProvider.owl#ReasonerNotifier");
 
 		info.setType(ContextProviderType.reasoner);
-		info
-				.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
+		info.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
 		cp = new DefaultContextPublisher(rulesEngineModuleContext, info);
 		DroolsReasoning dr = new DroolsReasoning(
 				"http://www.tsbtecnologias.es/DroolsReasoning.owl#ReasoningConsequence");
@@ -410,8 +409,8 @@ public final class RulesEngine {
 		KnowledgeBuilder auxkbuilder;
 		props.setProperty("drools.dialect.java.compiler", "JANINO");
 		KnowledgeBuilderConfiguration cfg = KnowledgeBuilderFactory
-				.newKnowledgeBuilderConfiguration(props, ClassLoader
-						.getSystemClassLoader());
+				.newKnowledgeBuilderConfiguration(props,
+						ClassLoader.getSystemClassLoader());
 		auxkbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(cfg);
 
 		final Resource res = ResourceFactory
@@ -579,7 +578,7 @@ public final class RulesEngine {
 	// }
 	// }catch (IOException ex) {ex.printStackTrace();}
 	// System.out.println(str1);
-	//        
+	//
 	// ClassLoader tccl = Thread.currentThread().getContextClassLoader();
 	// Thread.currentThread().setContextClassLoader(MysqlXADataSource.class.getClassLoader());
 	// try {
@@ -588,17 +587,17 @@ public final class RulesEngine {
 	// System.out.println("No se encuentra");
 	// e.printStackTrace();
 	// }
-	//        
+	//
 	// dataSource.setClassName("com.mysql.jdbc.jdbc2.optional.MysqlXADataSource");
 	// dataSource.setMaxPoolSize(3);
 	// dataSource.getDriverProperties().put("user", "root");
 	// dataSource.getDriverProperties().put("password", "Soluciones_TSB");
 	// dataSource.getDriverProperties().put("databaseName", "uaal_ltba");
 	// dataSource.getDriverProperties().put("serverName", "localhost");
-	//        
-	//        
+	//
+	//
 	// dataSource.init();
-	//        
+	//
 	// FileReader entrada=null;
 	// StringBuffer str=new StringBuffer();
 	// try {
@@ -610,12 +609,12 @@ public final class RulesEngine {
 	// }
 	// }catch (IOException ex) {ex.printStackTrace();}
 	// System.out.println(str);
-	//        
-	//        
+	//
+	//
 	// Properties prop = System.getProperties();
 	// //prop.setProperty("java.class.path", prop.getProperty("java.class.path",
 	// null));
-	//        
+	//
 	// System.out.println(prop.getProperty("java.class.path", null));
 	// try {
 	// addFile("C:\\Desarrollo\\universAAL\\svn\\new_services\\sandboxes\\mllorente\\drools.reasoner\\META-INF");
@@ -629,19 +628,19 @@ public final class RulesEngine {
 	// // TODO Auto-generated catch block
 	// e.printStackTrace();
 	// }
-	//			
-	//			
-	//			
 	//
-	//        
-	//			
-	//			
-	//        
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 	// //Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
-	//        
+	//
 	// System.out.println(prop.getProperty("java.class.path", null));
-	//        
-	//        
+	//
+	//
 	// env = KnowledgeBaseFactory.newEnvironment();
 	// emf = Persistence.createEntityManagerFactory("o");
 	// env.set(EnvironmentName.ENTITY_MANAGER_FACTORY, emf);
@@ -649,9 +648,9 @@ public final class RulesEngine {
 	// TransactionManagerServices.getTransactionManager());
 	// Thread.currentThread().setContextClassLoader(tccl);
 	// }
-	//    
+	//
 	// private void initKnowledgeSession(){
-	//    	
+	//
 	// try{
 	// ksession = JPAKnowledgeService.loadStatefulKnowledgeSession(1, kbase,
 	// null, env);
@@ -659,9 +658,9 @@ public final class RulesEngine {
 	// System.out.println("No KnowledgeSession previously created. Creating one from scratch.");
 	// ksession = kbase.newStatefulKnowledgeSession();
 	// }
-	//    	    	
+	//
 	// }
-	//    
+	//
 	// public static void addFile(String s) throws IOException {
 	// File f = new File(s);
 	// addFile(f);
@@ -688,6 +687,6 @@ public final class RulesEngine {
 	// }//end try catch
 	//
 	// }//end method
-	//	
+	//
 
 }

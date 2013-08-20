@@ -26,29 +26,29 @@
 <mapEntry key="wrap:mvn:ch.ethz.iks.r-osgi/remote/1.0.0.RC4" value="true@true@4@false"/>
 <mapEntry key="wrap:mvn:jp.go.ipa/jgcl/1.0" value="true@true@5@false"/>
 <mapEntry key="mvn:org.universAAL.AALapplication/ltba.publisher/D.0.1-SNAPSHOT" value="true@false@36@true"/>
-<mapEntry key="mvn:org.universAAL.lddi/lddi.knx.devicemanager/1.3.2-SNAPSHOT " value="true@false@null@false"/>
 <mapEntry key="mvn:org.universAAL.lddi/lddi.iso11073.library/1.3.2-SNAPSHOT " value="true@true@null@false"/>
-<mapEntry key="mvn:org.universAAL.ontology/ont.activityhub/1.3.1-SNAPSHOT" value="true@true@34@false"/>
+<mapEntry key="mvn:org.universAAL.lddi/lddi.knx.devicemanager/1.3.2-SNAPSHOT " value="true@false@null@false"/>
 <mapEntry key="mvn:org.apache.felix/org.apache.felix.gogo.runtime/0.10.0" value="true@true@null@false"/>
-<mapEntry key="mvn:org.apache.httpcomponents/httpcore-osgi/4.2.3" value="true@true@null@false"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.activityhub/1.3.1-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="wrap:mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2" value="true@true@2@false"/>
+<mapEntry key="mvn:org.apache.httpcomponents/httpcore-osgi/4.2.3" value="true@true@null@false"/>
 <mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.javax.xml.stream-1.0.1.jar" value="true@true@null@false"/>
 <mapEntry key="mvn:org.ops4j.pax.web/pax-web-spi/1.0.5" value="true@true@2@false"/>
-<mapEntry key="wrap:mvn:com.sun.codemodel/codemodel/2.6" value="true@true@null@false"/>
 <mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.org.xmlpull-1.1.4.c.jar" value="true@true@null@false"/>
+<mapEntry key="wrap:mvn:com.sun.codemodel/codemodel/2.6" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.remote/ri.servicegateway/1.3.1-SNAPSHOT" value="true@true@36@false"/>
 <mapEntry key="mvn:org.universAAL.middleware/mw.data.representation.osgi/1.3.1-SNAPSHOT" value="true@true@23@false"/>
-<mapEntry key="mvn:org.universAAL.AALapplication/ltba.manager/D.0.1-SNAPSHOT" value="true@true@35@true"/>
 <mapEntry key="mvn:org.universAAL.ui/ui.handler.gui.swing/1.3.1-SNAPSHOT" value="true@true@39@false"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/ltba.manager/D.0.1-SNAPSHOT" value="true@true@35@true"/>
 <mapEntry key="mvn:org.openrdf.sesame/sesame-runtime-osgi/2.6.0" value="true@true@8@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.profile/1.3.1-SNAPSHOT" value="true@true@30@false"/>
 <mapEntry key="wrap:mvn:com.sun.xml.bind/jaxb-impl/2.2.5" value="true@true@null@false"/>
-<mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.org.antlr-3.1.3.jar" value="true@true@null@false"/>
 <mapEntry key="mvn:org.apache.felix/org.apache.felix.dependencymanager.lddi/3.0.0" value="true@true@null@false"/>
+<mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.org.antlr-3.1.3.jar" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.readenergy/1.3.1-SNAPSHOT" value="true@true@null@true"/>
 <mapEntry key="mvn:org.universAAL.AALapplication/drools.reasoner/D.0.1-SNAPSHOT" value="true@true@null@true"/>
-<mapEntry key="mvn:org.drools/drools-compiler/5.3.0.Final" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.profile.userid/1.3.1-SNAPSHOT" value="true@true@34@false"/>
+<mapEntry key="mvn:org.drools/drools-compiler/5.3.0.Final" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.questionnaire/1.3.1-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="mvn:org.ops4j.pax.web/pax-web-api/1.0.5" value="true@true@2@false"/>
 <mapEntry key="mvn:org.universAAL.ui/ui.resource.server/1.3.1-SNAPSHOT" value="true@true@37@false"/>
@@ -56,31 +56,31 @@
 <mapEntry key="mvn:org.universAAL.middleware/mw.container.osgi/1.3.1-SNAPSHOT" value="true@true@17@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.ltba/1.3.1-SNAPSHOT" value="true@true@34@true"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.che/1.3.1-SNAPSHOT" value="true@true@33@false"/>
-<mapEntry key="mvn:org.universAAL.ontology/ont.weather/1.3.1-SNAPSHOT" value="true@true@34@false"/>
-<mapEntry key="mvn:org.apache.httpcomponents/httpclient-osgi/4.2.3" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.lddi/lddi.knx.dpt1refinementdriver.iso11073/1.3.2-SNAPSHOT " value="true@true@null@false"/>
+<mapEntry key="mvn:org.apache.httpcomponents/httpclient-osgi/4.2.3" value="true@true@null@false"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.weather/1.3.1-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="mvn:org.universAAL.AALapplication/ltba.ui/D.0.1-SNAPSHOT" value="true@true@null@true"/>
 <mapEntry key="wrap:mvn:java3d/j3d-core/1.3.1" value="true@true@6@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.aalfficiencyscores" value="true@true@34@true"/>
 <mapEntry key="mvn:org.universAAL.middleware/mw.acl.interfaces.osgi/1.3.1-SNAPSHOT" value="true@true@18@false"/>
-<mapEntry key="wrap:mvn:org.universAAL.ui/gui.swing.waveLAF/1.2.2-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="mvn:org.universAAL.AALapplication/ltba.nomhad.gateway/D.0.1-SNAPSHOT" value="true@true@null@true"/>
+<mapEntry key="wrap:mvn:org.universAAL.ui/gui.swing.waveLAF/1.2.2-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.av/1.3.1-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.powersocket/1.3.1-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.aalfficiency/1.3.1-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/mvel2-2.1.0.drools4.jar" value="true@true@null@false"/>
-<mapEntry key="wrap:mvn:com.sun.xml.bind/jaxb-xjc/2.1.6" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.device.extra/1.3.1-SNAPSHOT" value="true@true@34@false"/>
+<mapEntry key="wrap:mvn:com.sun.xml.bind/jaxb-xjc/2.1.6" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.security/security.authorizator/1.3.1-SNAPSHOT" value="true@true@35@false"/>
 <mapEntry key="mvn:org.universAAL.lddi/lddi.knx.networkdriver/1.3.2-SNAPSHOT " value="true@true@null@false"/>
 <mapEntry key="wrap:mvn:org.universAAL.ui/ui.handler.swing.modern/0.1.1-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.risk/1.3.1-SNAPSHOT" value="true@true@34@false"/>
-<mapEntry key="mvn:org.universAAL.ontology/ont.profile.health/1.3.1-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.furniture/1.3.1-SNAPSHOT" value="true@true@34@false"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.profile.health/1.3.1-SNAPSHOT" value="true@true@34@false"/>
 <mapEntry key="mvn:org.ops4j.pax.logging/pax-logging-api/1.6.3" value="true@true@2@false"/>
 <mapEntry key="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.org.codehaus.janino-2.5.15.jar" value="true@true@null@false"/>
-<mapEntry key="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4" value="true@true@1@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.medication/1.3.1-SNAPSHOT" value="true@true@34@false"/>
+<mapEntry key="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4" value="true@true@1@false"/>
 <mapEntry key="wrap:mvn:org.universAAL.ui/ui.handler.swing.classic/0.1.2-SNAPSHOT" value="true@true@14@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.measurement/1.3.1-SNAPSHOT" value="true@true@32@false"/>
 <mapEntry key="mvn:org.universAAL.AALapplication/EnergyReaderPublisher/D.0" value="true@false@34@true"/>
@@ -89,12 +89,12 @@
 <mapEntry key="mvn:org.apache.felix/org.apache.felix.devicemanager/0.9.0-SNAPSHOT " value="true@true@null@false"/>
 <mapEntry key="wrap:mvn:java3d/vecmath/1.3.1" value="true@true@7@false"/>
 <mapEntry key="mvn:org.ops4j.pax.logging/pax-logging-service/1.6.3" value="true@true@2@false"/>
-<mapEntry key="mvn:javax.xml.bind/jaxb-api-osgi/2.2.1" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.middleware/mw.acl.rosgi/1.2.1-SNAPSHOT" value="true@true@20@false"/>
+<mapEntry key="mvn:javax.xml.bind/jaxb-api-osgi/2.2.1" value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.lddi/lddi.hw.exporter.activityhub/1.3.2-SNAPSHOT " value="true@true@null@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.profile.uipreferences/1.3.1-SNAPSHOT" value="true@true@34@false"/>
-<mapEntry key="mvn:org.universAAL.middleware/mw.bus.service.osgi/1.3.1-SNAPSHOT" value="true@true@25@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.lighting/1.3.1-SNAPSHOT" value="true@true@34@false"/>
+<mapEntry key="mvn:org.universAAL.middleware/mw.bus.service.osgi/1.3.1-SNAPSHOT" value="true@true@25@false"/>
 <mapEntry key="mvn:org.universAAL.ui/ui.dm/1.2.12-SNAPSHOT" value="true@false@38@false"/>
 <mapEntry key="mvn:org.universAAL.ontology/ont.unit/1.3.1-SNAPSHOT" value="true@true@31@false"/>
 <mapEntry key="mvn:org.universAAL.middleware/mw.container.xfaces.osgi/1.3.1-SNAPSHOT" value="true@true@16@false"/>
@@ -136,29 +136,29 @@
 <listEntry value="wrap:mvn:ch.ethz.iks.r-osgi/remote/1.0.0.RC4@4"/>
 <listEntry value="wrap:mvn:jp.go.ipa/jgcl/1.0@5"/>
 <listEntry value="mvn:org.universAAL.AALapplication/ltba.publisher/D.0.1-SNAPSHOT@36@nostart@update"/>
-<listEntry value="mvn:org.universAAL.lddi/lddi.knx.devicemanager/1.3.2-SNAPSHOT @nostart"/>
 <listEntry value="mvn:org.universAAL.lddi/lddi.iso11073.library/1.3.2-SNAPSHOT "/>
-<listEntry value="mvn:org.universAAL.ontology/ont.activityhub/1.3.1-SNAPSHOT@34"/>
+<listEntry value="mvn:org.universAAL.lddi/lddi.knx.devicemanager/1.3.2-SNAPSHOT @nostart"/>
 <listEntry value="mvn:org.apache.felix/org.apache.felix.gogo.runtime/0.10.0"/>
-<listEntry value="mvn:org.apache.httpcomponents/httpcore-osgi/4.2.3"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.activityhub/1.3.1-SNAPSHOT@34"/>
 <listEntry value="wrap:mvn:org.ops4j.pax.confman/pax-confman-propsloader/0.2.2@2"/>
+<listEntry value="mvn:org.apache.httpcomponents/httpcore-osgi/4.2.3"/>
 <listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.javax.xml.stream-1.0.1.jar"/>
 <listEntry value="mvn:org.ops4j.pax.web/pax-web-spi/1.0.5@2"/>
-<listEntry value="wrap:mvn:com.sun.codemodel/codemodel/2.6"/>
 <listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.org.xmlpull-1.1.4.c.jar"/>
+<listEntry value="wrap:mvn:com.sun.codemodel/codemodel/2.6"/>
 <listEntry value="mvn:org.universAAL.remote/ri.servicegateway/1.3.1-SNAPSHOT@36"/>
 <listEntry value="mvn:org.universAAL.middleware/mw.data.representation.osgi/1.3.1-SNAPSHOT@23"/>
-<listEntry value="mvn:org.universAAL.AALapplication/ltba.manager/D.0.1-SNAPSHOT@35@update"/>
 <listEntry value="mvn:org.universAAL.ui/ui.handler.gui.swing/1.3.1-SNAPSHOT@39"/>
+<listEntry value="mvn:org.universAAL.AALapplication/ltba.manager/D.0.1-SNAPSHOT@35@update"/>
 <listEntry value="mvn:org.openrdf.sesame/sesame-runtime-osgi/2.6.0@8"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.profile/1.3.1-SNAPSHOT@30"/>
 <listEntry value="wrap:mvn:com.sun.xml.bind/jaxb-impl/2.2.5"/>
-<listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.org.antlr-3.1.3.jar"/>
 <listEntry value="mvn:org.apache.felix/org.apache.felix.dependencymanager.lddi/3.0.0"/>
+<listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.org.antlr-3.1.3.jar"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.readenergy/1.3.1-SNAPSHOT@update"/>
 <listEntry value="mvn:org.universAAL.AALapplication/drools.reasoner/D.0.1-SNAPSHOT@update"/>
-<listEntry value="mvn:org.drools/drools-compiler/5.3.0.Final"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.profile.userid/1.3.1-SNAPSHOT@34"/>
+<listEntry value="mvn:org.drools/drools-compiler/5.3.0.Final"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.questionnaire/1.3.1-SNAPSHOT@34"/>
 <listEntry value="mvn:org.ops4j.pax.web/pax-web-api/1.0.5@2"/>
 <listEntry value="mvn:org.universAAL.ui/ui.resource.server/1.3.1-SNAPSHOT@37"/>
@@ -166,31 +166,31 @@
 <listEntry value="mvn:org.universAAL.middleware/mw.container.osgi/1.3.1-SNAPSHOT@17"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.ltba/1.3.1-SNAPSHOT@34@update"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.che/1.3.1-SNAPSHOT@33"/>
-<listEntry value="mvn:org.universAAL.ontology/ont.weather/1.3.1-SNAPSHOT@34"/>
-<listEntry value="mvn:org.apache.httpcomponents/httpclient-osgi/4.2.3"/>
 <listEntry value="mvn:org.universAAL.lddi/lddi.knx.dpt1refinementdriver.iso11073/1.3.2-SNAPSHOT "/>
+<listEntry value="mvn:org.apache.httpcomponents/httpclient-osgi/4.2.3"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.weather/1.3.1-SNAPSHOT@34"/>
 <listEntry value="mvn:org.universAAL.AALapplication/ltba.ui/D.0.1-SNAPSHOT@update"/>
 <listEntry value="wrap:mvn:java3d/j3d-core/1.3.1@6"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.aalfficiencyscores@34@update"/>
 <listEntry value="mvn:org.universAAL.middleware/mw.acl.interfaces.osgi/1.3.1-SNAPSHOT@18"/>
-<listEntry value="wrap:mvn:org.universAAL.ui/gui.swing.waveLAF/1.2.2-SNAPSHOT@34"/>
 <listEntry value="mvn:org.universAAL.AALapplication/ltba.nomhad.gateway/D.0.1-SNAPSHOT@update"/>
+<listEntry value="wrap:mvn:org.universAAL.ui/gui.swing.waveLAF/1.2.2-SNAPSHOT@34"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.av/1.3.1-SNAPSHOT@34"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.powersocket/1.3.1-SNAPSHOT@34"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.aalfficiency/1.3.1-SNAPSHOT@34"/>
 <listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/mvel2-2.1.0.drools4.jar"/>
-<listEntry value="wrap:mvn:com.sun.xml.bind/jaxb-xjc/2.1.6"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.device.extra/1.3.1-SNAPSHOT@34"/>
+<listEntry value="wrap:mvn:com.sun.xml.bind/jaxb-xjc/2.1.6"/>
 <listEntry value="mvn:org.universAAL.security/security.authorizator/1.3.1-SNAPSHOT@35"/>
 <listEntry value="mvn:org.universAAL.lddi/lddi.knx.networkdriver/1.3.2-SNAPSHOT "/>
 <listEntry value="wrap:mvn:org.universAAL.ui/ui.handler.swing.modern/0.1.1-SNAPSHOT@34"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.risk/1.3.1-SNAPSHOT@34"/>
-<listEntry value="mvn:org.universAAL.ontology/ont.profile.health/1.3.1-SNAPSHOT@34"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.furniture/1.3.1-SNAPSHOT@34"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.profile.health/1.3.1-SNAPSHOT@34"/>
 <listEntry value="mvn:org.ops4j.pax.logging/pax-logging-api/1.6.3@2"/>
 <listEntry value="scan-bundle:file:/C:/Desarrollo/universAAL/svn/new_services/sandboxes/mllorente/doolsDeps/com.springsource.org.codehaus.janino-2.5.15.jar"/>
-<listEntry value="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4@1"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.medication/1.3.1-SNAPSHOT@34"/>
+<listEntry value="mvn:org.apache.felix/org.apache.felix.configadmin/1.2.4@1"/>
 <listEntry value="wrap:mvn:org.universAAL.ui/ui.handler.swing.classic/0.1.2-SNAPSHOT@14"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.measurement/1.3.1-SNAPSHOT@32"/>
 <listEntry value="mvn:org.universAAL.AALapplication/EnergyReaderPublisher/D.0@34@nostart@update"/>
@@ -199,12 +199,12 @@
 <listEntry value="mvn:org.apache.felix/org.apache.felix.devicemanager/0.9.0-SNAPSHOT "/>
 <listEntry value="wrap:mvn:java3d/vecmath/1.3.1@7"/>
 <listEntry value="mvn:org.ops4j.pax.logging/pax-logging-service/1.6.3@2"/>
-<listEntry value="mvn:javax.xml.bind/jaxb-api-osgi/2.2.1"/>
 <listEntry value="mvn:org.universAAL.middleware/mw.acl.rosgi/1.2.1-SNAPSHOT@20"/>
+<listEntry value="mvn:javax.xml.bind/jaxb-api-osgi/2.2.1"/>
 <listEntry value="mvn:org.universAAL.lddi/lddi.hw.exporter.activityhub/1.3.2-SNAPSHOT "/>
 <listEntry value="mvn:org.universAAL.ontology/ont.profile.uipreferences/1.3.1-SNAPSHOT@34"/>
-<listEntry value="mvn:org.universAAL.middleware/mw.bus.service.osgi/1.3.1-SNAPSHOT@25"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.lighting/1.3.1-SNAPSHOT@34"/>
+<listEntry value="mvn:org.universAAL.middleware/mw.bus.service.osgi/1.3.1-SNAPSHOT@25"/>
 <listEntry value="mvn:org.universAAL.ui/ui.dm/1.2.12-SNAPSHOT@38@nostart"/>
 <listEntry value="mvn:org.universAAL.ontology/ont.unit/1.3.1-SNAPSHOT@31"/>
 <listEntry value="mvn:org.universAAL.middleware/mw.container.xfaces.osgi/1.3.1-SNAPSHOT@16"/>

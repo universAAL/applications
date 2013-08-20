@@ -83,7 +83,7 @@ public class ProvidedDroolsReasonerService extends DroolsReasoning {
 	// private static Hashtable droolsReasonerRestrictions = new Hashtable();
 	// Registration -- not so sure of what the following code actually does.
 	static {
-		OntologyManagement.getInstance().register(
+		OntologyManagement.getInstance().register(Activator.mc,
 				new SimpleOntology(MY_URI, DroolsReasoning.MY_URI,
 						new ResourceFactoryImpl() {
 							@Override

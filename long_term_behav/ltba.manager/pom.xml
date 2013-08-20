@@ -4,8 +4,8 @@
 	<parent>
 		<artifactId>ltba.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>D.3.1</version>
 		<relativePath>../ltba.pom</relativePath>
+		<version>E.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>ltba.manager</artifactId>
 	<version>${parent.version}</version>
