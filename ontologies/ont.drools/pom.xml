@@ -11,9 +11,8 @@
 	</parent>
 	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.drools</artifactId>
-	<version>2.0.0</version>
 	<packaging>bundle</packaging>
-	<name>Personal Safety Service - Drools Ontology</name>
+	<name>Drools Ontology</name>
 	<licenses>
 		<license>
 			<name>ASL 2.0</name>
@@ -43,7 +42,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
-						<Bundle-Activator>org.universAAL.ontology.Activator</Bundle-Activator>
+<!-- 						<Bundle-Activator>org.universAAL.ontology.Activator</Bundle-Activator> -->
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package>org.universAAL.ontology.drools,org.universAAL.ontology.drools.service</Export-Package>
