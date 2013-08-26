@@ -218,6 +218,7 @@ agenda/agenda.remote/src/main/resources/org/universAAL/agenda/remote/messages_es
 agenda/agenda.runner/ASL2.0.txt -text
 agenda/agenda.runner/NOTICE.txt -text
 agenda/agenda.runner/Run.bat -text
+agenda/agenda.runner/database/agenda.sql -text
 agenda/agenda.runner/dbSchemaRepository/AgendaDBwithInitialTestCalendar.sql -text
 agenda/agenda.runner/dbSchemaRepository/AgendaUniversAAL_MySQL_WorkbenchModel.mwb -text
 agenda/agenda.runner/dbSchemaRepository/Er[!!-~]model.png -text
