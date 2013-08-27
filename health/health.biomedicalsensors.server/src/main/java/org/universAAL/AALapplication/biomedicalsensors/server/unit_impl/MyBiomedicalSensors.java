@@ -30,7 +30,7 @@ import org.universAAL.ontology.biomedicalsensors.Zephyr;
 
 /**
  * @author billyk, joemoul
- *  
+ * 
  * 
  */
 public class MyBiomedicalSensors {
@@ -53,7 +53,7 @@ public class MyBiomedicalSensors {
 		}
 	}
 
-	//Array of the "available" sensors
+	// Array of the "available" sensors
 	private BioSensor[] myBioSensorDB = new BioSensor[] {
 			new BioSensor(ConnectionsList.bt, BPmonitor.brand1_bp_monitor, "",
 					true),

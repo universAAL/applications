@@ -18,6 +18,11 @@
  */
 package org.universAAL.AALapplication.biomedicalsensors.server;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
@@ -37,14 +42,16 @@ import org.universAAL.ontology.drools.DroolsReasoning;
 public class BiomedicalSensorsServerContextSubscriber extends ContextSubscriber {
 
 	private static ServiceCaller caller;
-
 	private static final String BIOMEDICALSENSORS_CONSUMER_NAMESPACE = "http://ontology.universaal.org/BiomedicalSensorsCaller.owl#";
-
 	private static final String OUTPUT_LIST_OF_SENSORS = BIOMEDICALSENSORS_CONSUMER_NAMESPACE
 			+ "controlledBiomedicalSensors";
 	private static final String OUTPUT_SENSOR_TYPE = CompositeBiomedicalSensor.PROP_SENSOR_TYPE;
 	private static final String OUTPUT_SENSOR_BTURL = CompositeBiomedicalSensor.PROP_DISCOVERED_BT_SERVICE;
 	private static final String OUTPUT_SENSOR_MEASUREMENTS = CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS;
+
+	Map<String, Long> map = new HashMap<String, Long>();
+	String ruleExpTime;
+	long lruleExpTime;
 
 	private static ContextEventPattern[] getContextSubscriptionParams() {
 
@@ -71,44 +78,89 @@ public class BiomedicalSensorsServerContextSubscriber extends ContextSubscriber 
 	 */
 	public void handleContextEvent(ContextEvent event) {
 
-		System.out.println("I got the event" + event.getRDFObject().toString());
-		System.out.println("I got the event subject"
-				+ event.getRDFSubject().toString());
-		System.out.println("I got the event Predicate"
-				+ event.getRDFPredicate().toString());
-		DroolsReasoning c = (DroolsReasoning) event.getRDFSubject();
+		
+		  System.out .println("I got the event " +
+		  event.getRDFObject().toString());
+		  System.out.println("I got the event subject " +
+		  event.getRDFSubject().toString());
+		  System.out.println("I got the event Predicate " +
+		  event.getRDFPredicate().toString());
+		 
 		Consequence csq = (Consequence) event.getRDFObject();
-		System.out.println("Consequence listened: ");
 
 		ConsequenceProperty[] consequenceArray = csq.getProperties();
-		String source = null;
-		String intensity = null;
+
 		boolean pAlert = false;
-		boolean alertState = false;
+
 		for (ConsequenceProperty consequenceProperty : consequenceArray) {
 
-			if ((consequenceProperty.getKey() == "Alert")
-					&& (consequenceProperty.getValue() == "PostureAlert"))
-				pAlert = true;
-
-			if ((consequenceProperty.getKey() == "State")
-					&& (consequenceProperty.getValue() == "true"))
-				alertState = true;
-
-			if ((consequenceProperty.getKey() == "State")
-					&& (consequenceProperty.getValue() == "false")) {
-				alertState = false;
-				pAlert = false;
+			if ((consequenceProperty.getKey() == "Info_Type")) {
+				consequenceProperty.getValue();
 			}
 
-			System.out.println(consequenceProperty.getKey() + "--"
-					+ consequenceProperty.getValue());
-			if ((pAlert) && (alertState)) {
-				BiomedicalSensorsCallee.postureRuleFired = true;
-			} else {
-				BiomedicalSensorsCallee.postureRuleFired = false;
+			if ((consequenceProperty.getKey() == "State")) {
+				consequenceProperty.getValue();
+			}
+
+			if ((consequenceProperty.getKey() == "Title")) {
+				BiomedicalSensorsCallee.ruleTitle = consequenceProperty
+						.getValue();
+			}
+
+			if ((consequenceProperty.getKey() == "Description")) {
+				BiomedicalSensorsCallee.ruleDesc = consequenceProperty
+						.getValue();
+			}
+
+			if ((consequenceProperty.getKey() == "Intensity")) {
+				BiomedicalSensorsCallee.ruleIntensity = consequenceProperty
+						.getValue();
+			}
+
+			if (consequenceProperty.getKey() == "expirationTime") {
+				ruleExpTime = consequenceProperty.getValue();
+			}
+
+			if (consequenceProperty.getKey() == "rule_ID") {
+
+				BiomedicalSensorsCallee.ruleID = consequenceProperty.getValue();
 			}
 		}
+		Date today = Calendar.getInstance().getTime();
+		long nowtime = Math.abs(today.getTime() / 1000);
+
+		if (ruleExpTime != null) {
+			lruleExpTime = Long.parseLong(ruleExpTime.trim());
+			ruleExpTime = null;
+		}
+		if (map.get(BiomedicalSensorsCallee.ruleID) == null) {
+			map.put(BiomedicalSensorsCallee.ruleID, nowtime);
+			pAlert = true;
+		} else {
+			if (nowtime - ((Long) map.get(BiomedicalSensorsCallee.ruleID)) > lruleExpTime) {
+				pAlert = true;
+				map.put(BiomedicalSensorsCallee.ruleID, nowtime);
+			} else {
+				pAlert = false;
+			}
+		}
+
+		System.out
+				.println("///////////////////////////////////////////////////////////");
+		System.out.println("hashmap: " + map);
+		System.out.println("lruleExpTime: " + lruleExpTime);
+		System.out.println("nowtime: " + nowtime + " ALERT should print "
+				+ pAlert);
+		System.out.println("time difference: "
+				+ (nowtime - ((Long) map.get(BiomedicalSensorsCallee.ruleID))));
+		System.out.println(BiomedicalSensorsCallee.ruleID + ":ruleTitle:"
+				+ BiomedicalSensorsCallee.ruleTitle);
+		System.out
+				.println("Intensity:" + BiomedicalSensorsCallee.ruleIntensity);
+		System.out
+				.println("///////////////////////////////////////////////////////////");
+
+		BiomedicalSensorsCallee.ruleFired = pAlert;
 
 	}
 

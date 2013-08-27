@@ -66,6 +66,7 @@ public class BiomedicalSensorsServiceProfiles extends BiomedicalSensorService {
 	static {
 		// Registration of all classes in the ontology
 		OntologyManagement.getInstance().register(
+				Activator.mc,
 				new SimpleOntology(MY_URI, BiomedicalSensorService.MY_URI,
 						new ResourceFactoryImpl() {
 							@Override
