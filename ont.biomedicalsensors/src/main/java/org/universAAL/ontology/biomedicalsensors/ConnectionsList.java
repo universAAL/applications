@@ -27,8 +27,13 @@ public class ConnectionsList extends ConnectionType {
     public static final int WIFI = 1;
     public static final int CABLE = 2;
 
+<<<<<<< .mine
+	private static final String[] connectionMethod = { "Bluetooth", "WiFi",
+			"Cable" };
+=======
     private static final String[] connectionMethod = { "Bluetooth", "WiFi",
 	    "Cable" };
+>>>>>>> .r1661
 
     public static final ConnectionsList bt = new ConnectionsList(BLUETOOTH);
     public static final ConnectionsList wifi = new ConnectionsList(WIFI);
