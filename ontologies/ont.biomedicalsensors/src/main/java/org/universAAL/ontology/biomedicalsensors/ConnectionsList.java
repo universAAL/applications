@@ -20,77 +20,72 @@ package org.universAAL.ontology.biomedicalsensors;
 
 public class ConnectionsList extends ConnectionType {
 
-    public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
-	    + "ConnectionsList";
+	public static final String MY_URI = BiomedicalSensorsOntology.NAMESPACE
+			+ "ConnectionsList";
 
-    public static final int BLUETOOTH = 0;
-    public static final int WIFI = 1;
-    public static final int CABLE = 2;
+	public static final int BLUETOOTH = 0;
+	public static final int WIFI = 1;
+	public static final int CABLE = 2;
 
-<<<<<<< .mine
 	private static final String[] connectionMethod = { "Bluetooth", "WiFi",
 			"Cable" };
-=======
-    private static final String[] connectionMethod = { "Bluetooth", "WiFi",
-	    "Cable" };
->>>>>>> .r1661
 
-    public static final ConnectionsList bt = new ConnectionsList(BLUETOOTH);
-    public static final ConnectionsList wifi = new ConnectionsList(WIFI);
-    public static final ConnectionsList cable = new ConnectionsList(CABLE);
+	public static final ConnectionsList bt = new ConnectionsList(BLUETOOTH);
+	public static final ConnectionsList wifi = new ConnectionsList(WIFI);
+	public static final ConnectionsList cable = new ConnectionsList(CABLE);
 
-    public String getClassURI() {
-	return MY_URI;
-    }
-
-    public static ConnectionsList getConnectionTypeByOrder(int order) {
-	switch (order) {
-	case BLUETOOTH:
-	    return bt;
-	case WIFI:
-	    return wifi;
-	case CABLE:
-	    return cable;
-	default:
-	    return null;
+	public String getClassURI() {
+		return MY_URI;
 	}
-    }
 
-    public static final ConnectionsList valueOf(String name) {
-	if (name == null)
-	    return null;
+	public static ConnectionsList getConnectionTypeByOrder(int order) {
+		switch (order) {
+		case BLUETOOTH:
+			return bt;
+		case WIFI:
+			return wifi;
+		case CABLE:
+			return cable;
+		default:
+			return null;
+		}
+	}
 
-	if (name.startsWith(BiomedicalSensorsOntology.NAMESPACE))
-	    name = name.substring(BiomedicalSensorsOntology.NAMESPACE.length());
+	public static final ConnectionsList valueOf(String name) {
+		if (name == null)
+			return null;
 
-	for (int i = BLUETOOTH; i <= CABLE; i++)
-	    if (connectionMethod[i].equals(name))
-		return getConnectionTypeByOrder(i);
+		if (name.startsWith(BiomedicalSensorsOntology.NAMESPACE))
+			name = name.substring(BiomedicalSensorsOntology.NAMESPACE.length());
 
-	return null;
-    }
+		for (int i = BLUETOOTH; i <= CABLE; i++)
+			if (connectionMethod[i].equals(name))
+				return getConnectionTypeByOrder(i);
 
-    private int order;
+		return null;
+	}
 
-    private ConnectionsList(int order) {
-	super(BiomedicalSensorsOntology.NAMESPACE + connectionMethod[order]);
-	this.order = order;
-    }
+	private int order;
 
-    public int getPropSerializationType(String propURI) {
-	return PROP_SERIALIZATION_OPTIONAL;
+	private ConnectionsList(int order) {
+		super(BiomedicalSensorsOntology.NAMESPACE + connectionMethod[order]);
+		this.order = order;
+	}
 
-    }
+	public int getPropSerializationType(String propURI) {
+		return PROP_SERIALIZATION_OPTIONAL;
 
-    public boolean isWellFormed() {
-	return true;
-    }
+	}
 
-    public String name() {
-	return connectionMethod[order];
-    }
+	public boolean isWellFormed() {
+		return true;
+	}
 
-    public int ord() {
-	return order;
-    }
+	public String name() {
+		return connectionMethod[order];
+	}
+
+	public int ord() {
+		return order;
+	}
 }
