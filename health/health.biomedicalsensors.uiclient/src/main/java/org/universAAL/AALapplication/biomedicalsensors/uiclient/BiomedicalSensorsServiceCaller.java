@@ -19,12 +19,7 @@
 package org.universAAL.AALapplication.biomedicalsensors.uiclient;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -56,19 +51,18 @@ import org.universAAL.ontology.biomedicalsensors.Zephyr;
 public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 
 	public static AlertUI al = new AlertUI(SharedResources.moduleContext);
-	public static boolean orangeAlertActive = false;
-	public static boolean redAlertActive = false;
-	public static String orangeAlertTime = "";
-	public static String orangeAlertPostureValue = "";
+
+
+
+	public static String alertDesc="";
 	private static ServiceCaller caller;
-
 	private static final String BIOMEDICALSENSORS_CONSUMER_NAMESPACE = "http://ontology.universaal.org/BiomedicalSensorsCaller.owl#";
-
 	private static final String OUTPUT_LIST_OF_SENSORS = BIOMEDICALSENSORS_CONSUMER_NAMESPACE
 			+ "controlledBiomedicalSensors";
 	private static final String OUTPUT_SENSOR_TYPE = CompositeBiomedicalSensor.PROP_SENSOR_TYPE;
 	private static final String OUTPUT_SENSOR_BTURL = CompositeBiomedicalSensor.PROP_DISCOVERED_BT_SERVICE;
 	private static final String OUTPUT_SENSOR_MEASUREMENTS = CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS;
+	
 
 	private static ContextEventPattern[] getContextSubscriptionParams() {
 
@@ -112,10 +106,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 				CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS },
 				new Boolean(true));
 
-		getMeasSR.addRequiredOutput(
-
-		OUTPUT_SENSOR_MEASUREMENTS,
-
+		getMeasSR.addRequiredOutput(OUTPUT_SENSOR_MEASUREMENTS,
 		new String[] { BiomedicalSensorService.PROP_CONTROLS,
 				CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS });
 		return getMeasSR;
@@ -226,7 +217,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 			LogUtils.logWarn(SharedResources.moduleContext,
 					BiomedicalSensorsServiceCaller.class,
 					"getControlledSensors",
-					new Object[] { "callstatus is not succeeded" }, null);
+					new Object[] { "Call status is not succeeded" }, null);
 			return null;
 		}
 	}
@@ -355,18 +346,23 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 		String formatedTime = "";
 		String postureValue = "";
 		String tempValue = "";
-		boolean alertActive = false;
+		String alertType = "";
+		String measDesc="";
+		
 		MeasuredEntity me[] = (MeasuredEntity[]) event.getRDFObject();
 		List<Double> posturePlotData = new ArrayList<Double>();
 		List<Double> activityPlotData = new ArrayList<Double>();
 		List<Double> hrPlotData = new ArrayList<Double>();
-		System.out.println("Received A context event containing");
+	/*	System.out.println("**Received a Context Event containing: "+me.length+" messages");
 		for (int i = 0; i < me.length; i++) {
-			System.out.println("Measurement: "
-					+ me[i].getMeasurementName() + ": "
+			measDesc = me[i].getMeasurementName();
+			System.out.println("**Measurement: "
+					+ measDesc + ": "
 					+ me[i].getMeasurementValue() + " "
 					+ me[i].getMeasurementUnit() + " at "
 					+ me[i].getMeasurementTime());
+		}*/
+			for (int i = 0; i < me.length; i++) {
 			if (me[i].getMeasurementName().equals("Posture")) {
 				postureValue = me[i].getMeasurementValue();
 				posturePlotData.add(Double.valueOf(postureValue));
@@ -377,164 +373,41 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 				tempValue = me[i].getMeasurementValue();
 				activityPlotData.add(Double.valueOf(tempValue));
 			}
-
-			if (me[i].getMeasurementName().equals("Posture Alert")) {
+			
+			if (me[i].getMeasurementName().equals("ALERT")) {
+			//	System.out.println("*-*-*ORANGE Context Event containing: "+me.length+" messages "+i);
 				formatedTime = me[i].getMeasurementTime();
-				if (me[i].getMeasurementValue().equals("true")) {
-					alertActive = true;
-				} else {
-					alertActive = false;
-					orangeAlertTime = "";
-				}
-				System.out.println("Orange Alert Active: " + orangeAlertActive
-						+ " Red Alert Active: " + redAlertActive
-						+ " Alert Active: " + alertActive);
-			}
-		}
-
-		String alertType = "";
-		if ((redAlertActive) && (alertActive)) {
-			// When Red Alert is active a Sound Alert is played to inform the
-			// user (if the sound file is stored locally)
-			/*
-			 * AePlayWave aw = new AePlayWave("C:\\siren.wav"); aw.start();
-			 */
-		} else if ((!orangeAlertActive) && (alertActive)) {
-			orangeAlertTime = formatedTime;
-			orangeAlertPostureValue = postureValue;
+				alertDesc = me[i+1].getMeasurementValue();
+				alertType = me[i].getMeasurementValue();
+			
 			double[] ppData = convertDoubles(posturePlotData);
 			double[] alData = convertDoubles(activityPlotData);
-			double[] hrData = convertDoubles(hrPlotData);
-			alertType = "Orange";
-			
-			try {
-				new ImagePlot(
-						new File(
-								"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
-								+ alertType + "Posture.png", ppData,
-						"Last Posture Measurements", "Measurement", "Degrees",
-						350, 250);
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-			try {
-				new ImagePlot(
-						new File(
-								"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
-								+ alertType + "Activity.png", alData,
-						"Last Activity Level Measurements", "Measurement", "",
-						350, 250);
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-			try {
-				new ImagePlot(
-						new File(
-								"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
-								+ alertType + "Heartrate.png", hrData,
-						"Last Heart Rate Measurements", "Measurement",
-						"beats/min", 350, 250);
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-			Form f = al.startOrangeDialog(alertType, LevelRating.high);
-			orangeAlertActive = true;
-
-		} else if ((orangeAlertActive) && (alertActive)) {
-			Date alDate = new Date(), newAlDate = new Date();
-			DateFormat fm;
-			fm = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-			if (orangeAlertTime.equals("")) {
-				orangeAlertTime = formatedTime;
-			}
-			try {
-				alDate = (Date) fm.parse(orangeAlertTime);
-			} catch (ParseException e1) {
-
-				e1.printStackTrace();
-			}
-			try {
-				newAlDate = (Date) fm.parse(formatedTime);
-			} catch (ParseException e1) {
-
-				e1.printStackTrace();
-			}
-			double timeDiff = (Math.abs(newAlDate.getTime() - alDate.getTime()) / 1000);
-			System.out.println("Seconds from orange alert:" + timeDiff);
-			if (timeDiff > 20.0) {
-
-				double[] ppData = convertDoubles(posturePlotData);
-
-				double[] alData = convertDoubles(activityPlotData);
-				double[] hrData = convertDoubles(hrPlotData);
-				alertType = "RED";
-				
-				  /*new ImagePlot(
-				  "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
-				  +alertType+"posture.png", ppData,
-				  "Last Posture Measurements", "Measurement", "Degrees", 350,
-				  250); new ImagePlot(
-				  "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
-				  +alertType+"activity.png", alData,
-				  "Last Activity Level Measurements", "Measurement", "", 350,
-				  250); new ImagePlot(
-				  "C:\\uaal\\workspace\\rundir\\confadmin\\ui.handler.gui.swing\\images\\"
-				  +alertType+"heartrate.png", hrData,
-				  "Last Heart Rate Measurements", "Measurement", "beats/min",
-				  350, 250);*/
-				 
-
-				try {
+			double[] hrData = convertDoubles(hrPlotData);	
 					new ImagePlot(
-							new File(
-									"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
+							new File("../../rundir/confadmin/ui.handler.gui.swing/images/Alert_image_")
+									//"C:\\Users\\joemoul\\workspace_uaal_indigo\\rundir\\confadmin\\ui.handler.gui.swing\\images\\Alert_image_").getCanonicalPath()
 									+ alertType + "Posture.png", ppData,
-							"Last Posture Measurements", "Measurement",
-							"Degrees", 350, 250);
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				}
-				try {
+							"Last Posture Measurements", "Measurement", "Degrees",
+							350, 250);
 					new ImagePlot(
-							new File(
-									"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
+							new File("../../rundir/confadmin/ui.handler.gui.swing/images/Alert_image_")
+									//"C:\\Users\\joemoul\\workspace_uaal_indigo\\rundir\\confadmin\\ui.handler.gui.swing\\images\\Alert_image_").getCanonicalPath()
 									+ alertType + "Activity.png", alData,
-							"Last Activity Level Measurements", "Measurement",
-							"", 350, 250);
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				}
-				try {
+							"Last Activity Level Measurements", "Measurement", "",
+							350, 250);
 					new ImagePlot(
-							new File(
-									"../health.biomedicalsensors.uiclient/Alert_image_").getCanonicalPath()
+							new File("../../rundir/confadmin/ui.handler.gui.swing/images/Alert_image_")
+									//"C:\\Users\\joemoul\\workspace_uaal_indigo\\rundir\\confadmin\\ui.handler.gui.swing\\images\\Alert_image_").getCanonicalPath()
 									+ alertType + "Heartrate.png", hrData,
 							"Last Heart Rate Measurements", "Measurement",
 							"beats/min", 350, 250);
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				}
-
-				Form f = al.startOrangeDialog(alertType, LevelRating.full);
-				redAlertActive = true;
-				// When Red Alert is active a Sound Alert is played to inform
-				// the
-				// user (if the sound file is stored locally)
-				AePlayWave aw = new AePlayWave(
-						"../health.biomedicalsensors.uiclient/siren.wav");
-				aw.start();
-
+					Form f = al.startOrangeDialog(alertType, LevelRating.high);
+					
 			}
-		}
-		// abortDialog();
-
+			}		
 	}
+					
+	
 
 	public static double[] convertDoubles(List<Double> integers) {
 		double[] ret = new double[integers.size()];

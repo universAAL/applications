@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>health.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>D.0.1-SNAPSHOT</version>
+		<version>E.0.1-SNAPSHOT</version>
 		<relativePath>../health.pom</relativePath>
 	</parent>
 
@@ -26,10 +26,6 @@
 			<artifactId>mw.composite</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.drools</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>gr.certh.AALApplicationUtils</groupId>
@@ -46,6 +42,10 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.biomedicalsensors</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.drools</artifactId>
 		</dependency>
 	</dependencies>
 

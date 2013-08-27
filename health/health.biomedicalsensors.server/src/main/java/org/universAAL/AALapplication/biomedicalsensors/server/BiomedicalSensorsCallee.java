@@ -53,7 +53,13 @@ import org.universAAL.ontology.biomedicalsensors.Zephyr;
  */
 public class BiomedicalSensorsCallee extends ServiceCallee implements
 		BiomedicalSensorStateListener {
-	static boolean postureRuleFired = false;
+	static boolean ruleFired = false;
+	static String ruleID;
+	static String ruleInfoType;
+	static String ruleTitle;
+	static String ruleDesc;
+	static String ruleIntensity;
+
 	// Thread Specific vars
 	Thread echo;
 	CallStatus cs;
@@ -142,7 +148,7 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 		return new ContextEventPattern[] { cep2 };
 	}
 
-	private static ContextEventPattern[] droolsprovidedEvents() {
+	private static ContextEventPattern[] droolsProvidedEvents() {
 
 		MergedRestriction subjectRestriction = MergedRestriction
 				.getAllValuesRestrictionWithCardinality(
@@ -192,13 +198,13 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 		cp = new DefaultContextPublisher(context, info);
 
 		// create context event that publishes measurements when they are
-		// recieved to be used by drools reasoner and others
+		// received to be used by drools reasoner and others
 		// preparation for publishing context events
-		ContextProvider droolsinfo = new ContextProvider(
+		ContextProvider droolsInfo = new ContextProvider(
 				BiomedicalSensorsOntology.NAMESPACE + "droolsContextProvider");
-		droolsinfo.setType(ContextProviderType.controller);
-		droolsinfo.setProvidedEvents(droolsprovidedEvents());
-		droolscp = new DefaultContextPublisher(context, droolsinfo);
+		droolsInfo.setType(ContextProviderType.controller);
+		droolsInfo.setProvidedEvents(droolsProvidedEvents());
+		droolscp = new DefaultContextPublisher(context, droolsInfo);
 		// listen to the changes on the server side
 		theServer.addListener(this);
 	}
@@ -250,7 +256,7 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 		try {
 			// collect the needed data
 			int bsID = extractLocalIDfromSensorURI(bsURI);
-			System.out.println("local ID: " + bsID);
+			// System.out.println("local ID: " + bsID);
 			SensorType sensorType = theServer.getBioSensorType(bsID);
 
 			// bluetooth service URL
@@ -316,10 +322,10 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 			Thread echo = new Thread() {
 				public void run() {
 					int j = 0;
-					boolean postureAlert = false;
+					// boolean postureAlert = false;
 
 					// Arraylist to store last measurements in order to handle
-					// rules requiring more than just the las set.
+					// rules requiring more than just the last set.
 					ArrayList<MeasuredEntity[]> last10 = new ArrayList<MeasuredEntity[]>();
 					while (cronJob) {
 						j++;
@@ -347,58 +353,70 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 							droolscp.publish(new ContextEvent(
 									droolscbs,
 									CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS));
+							// System.out.println("SEND DROOLS CP");
 
-							System.out.println("SEND DROOLS CP");
 							// add this set to the Arraylist
 							last10.add(me);
 
-							for (int i = 0; i < me.length; i++) {
-								System.out.println("SERVER MEASUREMENT: "
-										+ me[i].getMeasurementName() + ":"
-										+ me[i].getMeasurementValue()
-										+ me[i].getMeasurementUnit());
-							}
+							/*
+							 * for (int i = 0; i < me.length; i++) {
+							 * System.out.println("SERVER MEASUREMENT: " +
+							 * me[i].getMeasurementName() + ":" +
+							 * me[i].getMeasurementValue() +
+							 * me[i].getMeasurementUnit()); }
+							 */
 
 							// RULES to fire alert
-							if (postureRuleFired) {
-
+							if (ruleFired) {
+								ruleFired = false; // wait for the next context
+													// event
 								Format formatter;
 								Date date = new Date();
-
 								formatter = new SimpleDateFormat(
 										"dd-MM-yyy HH:mm:ss");
 								String formattedTimeNow = formatter
 										.format(date);
 
 								// Flag posture alert as true
-								postureAlert = true;
+								// postureAlert = true;
 
-								int measHistory = 4; // meanhistory+2 is the max
-														// number of
-														// measurements to send
-														// upon alert
+								// meanhistory+2 is the max number of
+								// measurements to send upon alert
+								int measHistory = 13; // 4
 								// Changing last measurement to include at most
 								// meanhistory+2 last measurement sets.
 								theServer.setLastMeasurements(
 										last10.get(Math.max(0, last10.size()
 												- measHistory)), bsID);
-								System.out.println("debug! max: "
-										+ Math.max(0, last10.size()
-												- measHistory));
 
-								for (int k = Math.max(0, last10.size()
-										- measHistory - 1); k < last10.size(); k++) {
-									for (int l = 0; l < 5; l++) {
-										theServer.addLastMeasurement(
-												last10.get(k)[l], bsID);
+								if (last10.size() > 1)
+									for (int k = Math.max(1, last10.size()
+											- measHistory + 1); k < last10
+											.size(); k++) {
+										for (int l = 0; l < 5; l++) {
+											theServer.addLastMeasurement(
+													last10.get(k)[l], bsID);
+										}
 									}
-								}
 
-								MeasuredEntity alertME = new MeasuredEntity(
-										MeasuredEntity.MY_URI, "Posture Alert",
+								MeasuredEntity alertType = new MeasuredEntity(
+										MeasuredEntity.MY_URI, ruleTitle,
 										"true", "", "", formattedTimeNow, "",
 										"");
-								theServer.addLastMeasurement(alertME, bsID);
+								theServer.addLastMeasurement(alertType, bsID);
+
+								MeasuredEntity alertIntensity = new MeasuredEntity(
+										MeasuredEntity.MY_URI, "ALERT",
+										ruleIntensity, "", "",
+										formattedTimeNow, "", "");
+								theServer.addLastMeasurement(alertIntensity,
+										bsID);
+
+								MeasuredEntity alertID = new MeasuredEntity(
+										MeasuredEntity.MY_URI, "DESC",
+										ruleDesc, "", "", formattedTimeNow, "",
+										"");
+								theServer.addLastMeasurement(alertID, bsID);
 
 								CompositeBiomedicalSensor cbs = new CompositeBiomedicalSensor(
 										bsURI,
@@ -412,45 +430,14 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 											cbs,
 											CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS));
 
-							} else {
-
-								if (postureAlert) {
-									postureAlert = false; // since there is no
-															// reason to alert
-															// any more
-									Format formatter;
-									Date date = new Date();
-
-									formatter = new SimpleDateFormat(
-											"dd-MM-yyy HH:mm:ss");
-									String formattedTimeNow = formatter
-											.format(date);
-
-									MeasuredEntity alertME = new MeasuredEntity(
-											MeasuredEntity.MY_URI,
-											"Posture Alert", "false", "", "",
-											formattedTimeNow, "", "");
-									theServer.addLastMeasurement(alertME, bsID);
-									CompositeBiomedicalSensor cbs = new CompositeBiomedicalSensor(
-											bsURI,
-											theServer
-													.getBioSensorConnectionType(bsID),
-											theServer.getBioSensorType(bsID),
-											theServer.getserviceURL(bsID),
-											true, theServer
-													.getLastMeasurements(bsID));
-									if (cronJob)
-										cp.publish(new ContextEvent(
-												cbs,
-												CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS));
-								}
-
 							}
 
 							cs = CallStatus.succeeded;
 
-							System.out.println("WAITING FOR ALERTS(" + j
-									+ " for local ID: " + bsID);
+							/*
+							 * System.out.println("WAITING FOR ALERTS " + j +
+							 * " for local ID: " + bsID);
+							 */
 						} else {
 							cs = CallStatus.serviceSpecificFailure;
 							System.out
@@ -473,10 +460,9 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 	private ServiceResponse stopWaitForAlerts(String bsURI) {
 		try {
 			// collect the needed data
-
 			int bsID = extractLocalIDfromSensorURI(bsURI);
 			cronJob = false;
-			System.out.println("STOPPED WAITING FOR ALERTS for local ID: "
+			System.out.println("STOPPED WAITING FOR ALERTS FOR LOCAL ID: "
 					+ bsID);
 
 			ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
@@ -543,7 +529,7 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 	// then assign them to the SERVER with setLastMeasurements
 	private ServiceResponse getMeasurements(String bsURI) {
 		int bsID = extractLocalIDfromSensorURI(bsURI);
-		System.out.println("local ID: " + bsID);
+		// System.out.println("LOCAL ID: " + bsID);
 		SensorType sensorType = theServer.getBioSensorType(bsID);
 		if (sensorType.equals(Zephyr.zephyr)) {
 			try {
@@ -558,14 +544,16 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 							.getserviceURL(extractLocalIDfromSensorURI(bsURI)));
 					if (gotres) {
 						ArrayList<MeasuredEntity> al = new ArrayList(2);
-						System.out.println("Activity level: "
-								+ zeph.activityLevel);
-						System.out.println("Heart Rate: " + zeph.heartRate);
-						System.out.println("Posture: " + zeph.posture);
-						System.out.println("Breathing Rate: "
-								+ zeph.breathingRate);
-						System.out.println("Date - Time: "
-								+ zeph.formattedTimeNow);
+						/*
+						 * System.out.println("Activity level: " +
+						 * zeph.activityLevel);
+						 * System.out.println("Heart Rate: " + zeph.heartRate);
+						 * System.out.println("Posture: " + zeph.posture);
+						 * System.out.println("Breathing Rate: " +
+						 * zeph.breathingRate);
+						 * System.out.println("Date - Time: " +
+						 * zeph.formattedTimeNow);
+						 */
 						ServiceResponse sr = new ServiceResponse(
 								CallStatus.succeeded);
 
@@ -597,10 +585,11 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 								"http://purl.bioontology.org/ontology/LOINC");
 
 						al.add(me);
+						al.add(me1);
 						al.add(me2);
 						al.add(me3);
 						al.add(me4);
-						al.add(me1);
+
 						sr.addOutput(new ProcessOutput(
 								BiomedicalSensorsServiceProfiles.OUTPUT_SENSOR_MEASUREMENTS,
 								al));

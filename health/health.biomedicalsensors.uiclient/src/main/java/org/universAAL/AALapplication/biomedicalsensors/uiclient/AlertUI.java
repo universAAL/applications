@@ -18,6 +18,10 @@
  */
 package org.universAAL.AALapplication.biomedicalsensors.uiclient;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import org.universAAL.middleware.container.ModuleContext;
@@ -38,39 +42,38 @@ import org.universAAL.middleware.ui.rdf.Submit;
  * 
  */
 public class AlertUI extends UICaller {
-
+private static int timessend=0;
 	private Form mainDialog = null;
 
 	protected AlertUI(ModuleContext context) {
 		super(context);
-		
+
 	}
 
 	@Override
 	public void communicationChannelBroken() {
-		
+
 		System.out.println("-----Channel Broken--------");
 
 	}
 
 	@Override
 	public void dialogAborted(String dialogID) {
-		
+
 		System.out.println("----!-DIALOG ABORTED--------");
 
 	}
 
 	@Override
 	public void handleUIResponse(UIResponse uir) {
-		
-		System.out.println("-----DIALOG RESPONSE RECEIVED--------");
+
+	//	System.out.println("-----DIALOG RESPONSE RECEIVED--------");
 		if (uir != null) {
 
 			// button
 			if ("STOP".equals(uir.getSubmissionID())) {
 				// System.out.println("-----STOPPED PRESSED FOR--------"+SharedResources.uIProvider.bsURI);
-				BiomedicalSensorsServiceCaller.orangeAlertActive = false;
-				BiomedicalSensorsServiceCaller.redAlertActive = false;
+
 				BiomedicalSensorsServiceCaller
 						.stopWaitForAlerts(SharedResources.uIProvider.bsURI);
 
@@ -78,11 +81,16 @@ public class AlertUI extends UICaller {
 						.startMainDialog(SharedResources.uIProvider
 								.getbsIDFromURI(SharedResources.uIProvider.bsURI));
 			} else if ("OK".equals(uir.getSubmissionID())) {
-				BiomedicalSensorsServiceCaller.orangeAlertActive = false;
-				BiomedicalSensorsServiceCaller.redAlertActive = false;
+
+				/*
+				 * SharedResources.uIProvider
+				 * .startMainDialog(SharedResources.uIProvider
+				 * .getbsIDFromURI(SharedResources.uIProvider.bsURI));
+				 */
+
 				SharedResources.uIProvider
-						.startMainDialog(SharedResources.uIProvider
-								.getbsIDFromURI(SharedResources.uIProvider.bsURI));
+						.abortDialog(SharedResources.uIProvider.bsURI);
+
 				// BiomedicalSensorsServiceCaller.getMeasurements(bsURI);
 			}
 
@@ -94,16 +102,23 @@ public class AlertUI extends UICaller {
 
 		Form f = Form.newDialog(alertType + " ALERT!", new Resource());
 
+		DateFormat tf = new SimpleDateFormat("HH:mm:ss");
+		Date today = Calendar.getInstance().getTime();
+		String alertTime = tf.format(today);
+		new SimpleOutput(f.getIOControls(), null, null, ""
+				+ BiomedicalSensorsServiceCaller.alertDesc + " received at: "
+				+ alertTime);
+
 		new MediaObject(f.getIOControls(), new Label("", null), "image/png",
 				alertType + "alert.png");
 		new MediaObject(f.getIOControls(), new Label("", null), "image/png",
-				alertType + "posture.png");
+				"Alert_image_" + alertType + "Posture.png");
 		new SimpleOutput(f.getIOControls(), null, null, "");
 		new MediaObject(f.getIOControls(), new Label("", null), "image/png",
-				alertType + "heartrate.png");
+				"Alert_image_" + alertType + "Heartrate.png");
 		new SimpleOutput(f.getIOControls(), null, null, "");
 		new MediaObject(f.getIOControls(), new Label("", null), "image/png",
-				alertType + "activity.png");
+				"Alert_image_" + alertType + "Activity.png");
 		new Submit(f.getSubmits(), new Label("I'm OK", null), "OK");
 		new Submit(f.getSubmits(), new Label("Stop Monitoring", null), "STOP");
 
@@ -111,7 +126,8 @@ public class AlertUI extends UICaller {
 	}
 
 	public Form startOrangeDialog(String alertType, LevelRating lr) {
-
+		timessend++;
+System.out.println("~"+timessend);
 		mainDialog = initMainDialog(alertType);
 
 		UIRequest out = new UIRequest(SharedResources.testUser, mainDialog, lr,

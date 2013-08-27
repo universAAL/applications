@@ -147,6 +147,8 @@ public class DEMOBluetoothDeviceDiscovery {
 	double postureLow;
 	double postureHigh;
 
+	static int ctr = 0;
+
 	/*-
 	 * 
 	 *  ---- Bluetooth attributes ----
@@ -240,8 +242,17 @@ public class DEMOBluetoothDeviceDiscovery {
 		float rand = Integer.valueOf(formatter.format(date));
 		posture = 60 + (int) rand;
 		activityLevel = 2 + (int) rand;
-		//heartRate = 100 - rand;
-		heartRate=100;
+		// heartRate = 100 - rand;
+
+		int[] hr = { 60, 63, 72, 64, 72, 75, 79, 72, 77, 73, 73, 71, 70, 50,
+				70, 177, 173, 171, 111, 145, 145, 143, 143, 141, 145, 143, 143,
+				141, 141, 145, 145, 143, 143, 141, 145, 143, 143, 141 };
+		if (ctr > hr.length - 1) {
+			ctr = 0;
+		}
+
+		heartRate = hr[ctr];
+		ctr++;
 		breathingRate = 23 - rand / 10;
 		bluetoothOpen = false;
 
