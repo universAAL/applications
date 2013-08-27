@@ -46,14 +46,9 @@ public final class BiomedicalSensorsOntology extends Ontology {
 	super(NAMESPACE);
     }
 
-<<<<<<< .mine
-	public void create() {
-		Resource r = getInfo();
-		r.setResourceComment("The upper ontology defining  concepts from the Biomedical Sensors realm.");
-		r.setResourceLabel("Biomedical Sensor");
-		addImport(DataRepOntology.NAMESPACE);
-		addImport(PhThingOntology.NAMESPACE);
-=======
+
+
+
     public void create() {
 	Resource r = getInfo();
 	r
@@ -61,7 +56,7 @@ public final class BiomedicalSensorsOntology extends Ontology {
 	r.setResourceLabel("Biomedical Sensor");
 	addImport(DataRepOntology.NAMESPACE);
 	addImport(PhThingOntology.NAMESPACE);
->>>>>>> .r1661
+
 
 	OntClassInfoSetup oci;
 
