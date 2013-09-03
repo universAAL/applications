@@ -62,11 +62,11 @@
 			<artifactId>axis-jaxrpc</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- <dependency>
+		<!-- --><dependency>
 			<groupId>commons-discovery</groupId>
 			<artifactId>commons-discovery</artifactId>
 			<version>0.5</version>
-		</dependency>-->
+		</dependency>
 
 	</dependencies>
 

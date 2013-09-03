@@ -17,7 +17,7 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 
 /**
- * The UI class that builds the Help Form and hadnles its associated response
+ * The UI class that builds the Help Form and handles its associated response
  * submits.
  * 
  * @author alfiva
@@ -49,6 +49,7 @@ public class UIHelp {
 	Form f = Form.newDialog(Messages.getString("UIHelp.1"), new Resource()); //$NON-NLS-1$
 	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
 		"vertical,left");// For Classic LaF
+	
 
 	Group groupIntro = new Group(
 		f.getIOControls(),
@@ -100,7 +101,7 @@ public class UIHelp {
     /**
      * The main InterfaceProvider delegates calls to the handleUIResponse of the
      * UICaller to this one if the prefix of the pressed submit ID matches this
-     * class´ one (it´s one of its submits).
+     * classï¿½ one (itï¿½s one of its submits).
      * 
      * @param uir
      *            The UI Response to handle.

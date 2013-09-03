@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 Itaca-TSB, http://www.tsb.upv.es
-	Tecnologías para la Salud y el Bienestar
+	Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -47,18 +47,21 @@ public class ServiceGetTodayMenuCallee extends ServiceCallee {
     public ServiceGetTodayMenuCallee(ModuleContext context) {
 	// The parent need to know the profiles of the available functions to
 	// register them
+    
 	super(context, ServiceGetTodayMenu.profiles);
+	System.out.println("SERVICE CALLEEEEEE 2");
 	Utils.println("Constructor: getMenuDayCallee");
-	/*
-	 * // prepare for context publishing ContextProvider info = new
-	 * ContextProvider(
-	 * GetRecipeProvidedService.NUTRITIONAL_SERVER_NAMESPACE +
-	 * "NutritionContextProvider");
-	 * info.setType(ContextProviderType.controller); //
-	 * info.setProvidedEvents(providedEvents(null)); cp = new
-	 * DefaultContextPublisher(context, info);
-	 */
+	
+	 // prepare for context publishing ContextProvider info = new
+//	 ContextProvider(
+//	 GetRecipeProvidedService.NUTRITIONAL_SERVER_NAMESPACE +
+//	 "NutritionContextProvider");
+//	 info.setType(ContextProviderType.controller); //
+//	 info.setProvidedEvents(providedEvents(null)); cp = new
+//	 DefaultContextPublisher(context, info);
+	 
 	Utils.println("Constructor: ServiceGetMenuDayCallee done");
+	System.out.println("SERVICE CALLEEEEEE 3");
     }
 
     public ServiceResponse handleCall(ServiceCall call) {

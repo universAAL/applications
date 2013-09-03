@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 Itaca-TSB, http://www.tsb.upv.es
-	Tecnologías para la Salud y el Bienestar
+	Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -19,11 +19,6 @@
  */
 package org.universAAL.AALapplication.nutritional.osgi;
 
-import java.util.Locale;
-
-import na.oasisUtils.trustedSecurityNetwork.Login;
-import na.utils.InitialSetup;
-
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.nutritional.SharedResources;
@@ -35,8 +30,6 @@ public class Activator implements BundleActivator {
 
     SharedResources sr;
     private static ModuleContext moduleContext;
-   // private Starting starting;
-    //static final User testUser = new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
 
     public void start(BundleContext context) throws Exception {
 	Utils.println("STARTING NUTRITIONAL UI");
@@ -44,7 +37,6 @@ public class Activator implements BundleActivator {
 		.registerModule(new Object[] { context });
 
 	sr = new SharedResources(moduleContext);
-	//starting = new Starting();
 	new Thread() {
 	    public void run() {
 		sr.start();
@@ -59,7 +51,8 @@ public class Activator implements BundleActivator {
 	}
 
 	public void stop(BundleContext context) throws Exception {
-	Utils.println("STOPPING NUTRITIONAL UI");
+		sr.stop();
+		Utils.println("STOPPING NUTRITIONAL UI");
     }
 
 }
