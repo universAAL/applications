@@ -55,6 +55,7 @@ public class UIServiceProvider extends ServiceCallee {
 		Utils.println("-- New Nutritional Main Menu --");
 		if (SharedResources.user==null) {
 			SharedResources.user = (User)call.getInvolvedUser();
+			System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------   user " + SharedResources.user);
 			if (!done){
 				InitialSetup.initNutriAdvisorFolder();
 				Login login = new Login();

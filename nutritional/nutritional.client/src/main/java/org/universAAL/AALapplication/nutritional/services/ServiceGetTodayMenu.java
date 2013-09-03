@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 Itaca-TSB, http://www.tsb.upv.es
-	Tecnologías para la Salud y el Bienestar
+	Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -26,7 +26,7 @@ import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.nutrition.MenuDay;
 import org.universAAL.ontology.nutrition.NutritionOntology;
@@ -53,8 +53,7 @@ public class ServiceGetTodayMenu extends NutritionService {
     static {
 	OntologyManagement.getInstance().register(Activator.getModuleContext(),
 		new SimpleOntology(MY_URI, NutritionService.MY_URI,
-			new ResourceFactoryImpl() {
-			    @Override
+			new ResourceFactory() {
 			    public Resource createInstance(String classURI,
 				    String instanceURI, int factoryIndex) {
 				return new ServiceGetTodayMenu(instanceURI);

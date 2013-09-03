@@ -42,7 +42,7 @@ public class UIMenus {
     static final String SUBMIT_TODAY = PREFIX + "today"; //$NON-NLS-1$
     static final String SUBMIT_TOMORROW = PREFIX + "tomorrow"; //$NON-NLS-1$
     static final String SUBMIT_WEEK = PREFIX + "week"; //$NON-NLS-1$
-    static final String SUBMIT_TIPS = PREFIX + "tips"; //$NON-NLS-1$
+   static final String SUBMIT_TIPS = PREFIX + "tips"; //$NON-NLS-1$
     static final String SUBMIT_SEE_DETAILS = PREFIX + "seeDetails@"; //$NON-NLS-1$
     //    static final String SUBMIT_CHANGEMEAL = PREFIX + "changeMeal"; //$NON-NLS-1$
     //    static final String SUBMIT_ACTIONS = PREFIX + "actions"; //$NON-NLS-1$
@@ -55,7 +55,8 @@ public class UIMenus {
     // static final PropertyPath PROP_PATH_SELECTED_LAMP = new
     // PropertyPath(null,
     // false, new String[] { USER_INPUT_REF1 });
-    static final String SUBMIT_SHOPPING = PREFIX + "shopping"; //$NON-NLS-1$
+    
+   static final String SUBMIT_SHOPPING = PREFIX + "shopping"; //$NON-NLS-1$
     static final String SUBMIT_PROFILE = PREFIX + "profile"; //$NON-NLS-1$
     static final String SUBMIT_HELP = PREFIX + "help"; //$NON-NLS-1$
     static final String SUBMIT_EXIT = PREFIX + "exit"; //$NON-NLS-1$
@@ -165,7 +166,7 @@ public class UIMenus {
 		Messages.getString("UIMenus.10"), null), SUBMIT_WEEK); //$NON-NLS-1$
 	new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIMenus.11"), null), SUBMIT_TIPS); //$NON-NLS-1$
-	new Submit(f.getSubmits(), new Label(
+new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIMain.6"), null), //$NON-NLS-1$
 		SUBMIT_SHOPPING);
 	new Submit(f.getSubmits(), new Label(
@@ -182,7 +183,7 @@ public class UIMenus {
     /**
      * The main InterfaceProvider delegates calls to the handleUIResponse of the
      * UICaller to this one if the prefix of the pressed submit ID matches this
-     * class´ one (it´s one of its submits).
+     * classï¿½ one (itï¿½s one of its submits).
      * 
      * @param uir
      *            The UI Response to handle.
@@ -217,7 +218,7 @@ public class UIMenus {
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
-	    if (SUBMIT_WEEK.equals(id)) {
+	   if (SUBMIT_WEEK.equals(id)) {
 		Utils.println(" TODO UIMenus: submit week"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
 			SharedResources.user,
