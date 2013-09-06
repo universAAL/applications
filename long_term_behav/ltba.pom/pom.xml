@@ -22,22 +22,23 @@
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.activityhub</artifactId>
-				<version>1.3.0</version>
+				<version>${platform.version}</version>
 			</dependency>
 			<dependency>
 				<artifactId>ont.profile</artifactId>
 				<groupId>org.universAAL.ontology</groupId>
-				<version>1.3.0</version>
+				<version>${platform.version}</version>
 			</dependency>
 			<dependency>
 				<artifactId>ont.drools</artifactId>
 				<groupId>org.universAAL.ontology</groupId>
-				<version>1.3.1-SNAPSHOT</version>
+				<version>${platform.version}</version>
+
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.ltba</artifactId>
-				<version>1.3.1-SNAPSHOT</version>
+				<version>${platform.version}</version>
 			</dependency>
 			<dependency>
 				<artifactId>drools.reasoner</artifactId>
