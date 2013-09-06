@@ -2,8 +2,6 @@ package org.universAAL.drools.test;
 
 import junit.framework.TestCase;
 
-import org.universAAL.drools.engine.RulesEngine;
-
 public class RulesEngineTest extends TestCase {
 
 	public void testCreation() {
