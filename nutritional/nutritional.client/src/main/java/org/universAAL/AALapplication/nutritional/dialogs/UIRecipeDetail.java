@@ -39,8 +39,8 @@ public class UIRecipeDetail {
     static final String SUBMIT_GOBACK = PREFIX + "back"; //$NON-NLS-1$
     static final String SUBMIT_TODAY = PREFIX + "today"; //$NON-NLS-1$
     static final String SUBMIT_TOMORROW = PREFIX + "tomorrow"; //$NON-NLS-1$
-    static final String SUBMIT_WEEK = PREFIX + "week"; //$NON-NLS-1$
-    static final String SUBMIT_TIPS = PREFIX + "tips"; //$NON-NLS-1$
+   // static final String SUBMIT_WEEK = PREFIX + "week"; //$NON-NLS-1$
+   // static final String SUBMIT_TIPS = PREFIX + "tips"; //$NON-NLS-1$
     static final String SUBMIT_ADDTOFAV = PREFIX + "addToFav"; //$NON-NLS-1$
     static final String SUBMIT_ADDDISLIKE = PREFIX + "rem"; //$NON-NLS-1$
 
@@ -104,7 +104,7 @@ public class UIRecipeDetail {
 		    RecipeIngredient ingredient = ingredients[indexIngredient];
 		    if (ingredient != null) {
 			new SimpleOutput(groupIngredients,
-				new Label("·", null), null,
+				new Label("ï¿½", null), null,
 				ingredient.getDescription());
 			new Submit(groupIngredients, new Label(
 				Messages.getString("UIItemList.3"), null),
@@ -149,7 +149,7 @@ public class UIRecipeDetail {
     /**
      * The main InterfaceProvider delegates calls to the handleUIResponse of the
      * UICaller to this one if the prefix of the pressed submit ID matches this
-     * class´ one (it´s one of its submits).
+     * classï¿½ one (itï¿½s one of its submits).
      * 
      * @param uir
      *            The UI Response to handle.

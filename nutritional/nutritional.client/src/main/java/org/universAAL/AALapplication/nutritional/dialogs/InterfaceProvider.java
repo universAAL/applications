@@ -63,14 +63,14 @@ public class InterfaceProvider extends UICaller {
 		UIRecipeDetail.handleUIResponse(uir);
 		return;
 	    }
-	    if (id.startsWith(UIShopping.PREFIX)) {
+	 /*   if (id.startsWith(UIShopping.PREFIX)) {
 		UIShopping.handleUIResponse(uir);
 		return;
 	    }
 	    if (id.startsWith(UIMedication.PREFIX)) {
 		UIMedication.handleUIResponse(uir);
 		return;
-	    }
+	    }*/
 	    if (id.startsWith(UIItemList.PREFIX)) {
 		UIItemList.handleUIResponse(uir);
 		return;

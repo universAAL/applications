@@ -66,7 +66,6 @@ public class UIServiceProvider extends ServiceCallee {
 		else Utils.println("[ " + SharedResources.user + " ] user is login in the system.......");
 		
 		SharedResources.uIProvider.startMainDialog();
-
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		return sr;
 	    }
