@@ -41,8 +41,8 @@ public class UIMenus {
     static final String SUBMIT_GOBACK = PREFIX + "back"; //$NON-NLS-1$
     static final String SUBMIT_TODAY = PREFIX + "today"; //$NON-NLS-1$
     static final String SUBMIT_TOMORROW = PREFIX + "tomorrow"; //$NON-NLS-1$
-    static final String SUBMIT_WEEK = PREFIX + "week"; //$NON-NLS-1$
-   static final String SUBMIT_TIPS = PREFIX + "tips"; //$NON-NLS-1$
+ //   static final String SUBMIT_WEEK = PREFIX + "week"; //$NON-NLS-1$
+ //  static final String SUBMIT_TIPS = PREFIX + "tips"; //$NON-NLS-1$
     static final String SUBMIT_SEE_DETAILS = PREFIX + "seeDetails@"; //$NON-NLS-1$
     //    static final String SUBMIT_CHANGEMEAL = PREFIX + "changeMeal"; //$NON-NLS-1$
     //    static final String SUBMIT_ACTIONS = PREFIX + "actions"; //$NON-NLS-1$
@@ -56,7 +56,7 @@ public class UIMenus {
     // PropertyPath(null,
     // false, new String[] { USER_INPUT_REF1 });
     
-   static final String SUBMIT_SHOPPING = PREFIX + "shopping"; //$NON-NLS-1$
+ //  static final String SUBMIT_SHOPPING = PREFIX + "shopping"; //$NON-NLS-1$
     static final String SUBMIT_PROFILE = PREFIX + "profile"; //$NON-NLS-1$
     static final String SUBMIT_HELP = PREFIX + "help"; //$NON-NLS-1$
     static final String SUBMIT_EXIT = PREFIX + "exit"; //$NON-NLS-1$
@@ -162,13 +162,13 @@ public class UIMenus {
 	    new Submit(f.getSubmits(), new Label(
 		    Messages.getString("UIMenus.8"), null), SUBMIT_TODAY); //$NON-NLS-1$
 	}
-	new Submit(f.getSubmits(), new Label(
+/*	new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIMenus.10"), null), SUBMIT_WEEK); //$NON-NLS-1$
 	new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIMenus.11"), null), SUBMIT_TIPS); //$NON-NLS-1$
 new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIMain.6"), null), //$NON-NLS-1$
-		SUBMIT_SHOPPING);
+		SUBMIT_SHOPPING);**************/
 	new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIMain.7"), null), SUBMIT_PROFILE); //$NON-NLS-1$
 	new Submit(f.getSubmits(), new Label(
@@ -218,7 +218,7 @@ new Submit(f.getSubmits(), new Label(
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
-	   if (SUBMIT_WEEK.equals(id)) {
+	/*    if (SUBMIT_WEEK.equals(id)) {
 		Utils.println(" TODO UIMenus: submit week"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
 			SharedResources.user,
@@ -241,7 +241,7 @@ new Submit(f.getSubmits(), new Label(
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 		// TODO
-	    }
+	    }*/
 	    if (id.startsWith(SUBMIT_SEE_DETAILS)) {
 		String[] values = uir.getSubmissionID().split("@"); //$NON-NLS-1$
 		int idReceta = new Integer(values[1]);
@@ -263,7 +263,7 @@ new Submit(f.getSubmits(), new Label(
 	    // SharedResources.uIProvider.sendUIRequest(out);
 	    // return;
 	    // }
-	    if (SUBMIT_SHOPPING.equals(id)) {
+	  /*  if (SUBMIT_SHOPPING.equals(id)) {
 		Utils.println("UIMain submit shopping"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIShopping.getForm(), LevelRating.middle,
@@ -278,7 +278,7 @@ new Submit(f.getSubmits(), new Label(
 			Locale.ENGLISH, PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
-	    }
+	    }*/
 	    if (SUBMIT_HELP.equals(id)) {
 		Utils.println("UIMain submit help"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
