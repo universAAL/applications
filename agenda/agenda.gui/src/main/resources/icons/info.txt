@@ -1,0 +1,18 @@
+http://dabuttonfactory.com/
+
+rounded corners 15
+
+
+blue: 150, 206, 255
+96ceff
+
+white 250, 247, 247
+
+grey 181, 181, 181
+b5b5b5
+
+shadow black 1
+
+big button 200:140 px
+medium button 160:80 px
+small button 100:60 px

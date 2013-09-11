@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>agenda.pom</artifactId>
+		<version>E.0</version>
+		<relativePath>../agenda.pom/pom.xml</relativePath>
+	</parent>
+	
+	<artifactId>agenda.gui</artifactId>
+	<packaging>bundle</packaging>
+	<name>Agenda AAL Service GUI</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.profile</artifactId>
+		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>junit</groupId>-->
+		<!--			<artifactId>junit</artifactId>-->
+		<!--		</dependency>-->
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.context.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.service.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.data.representation.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.phWorld</artifactId>
+		</dependency>
+	<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.agenda</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.agendaEventSelection</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>agenda.client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>agenda.eventSelection.client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Activator>org.universAAL.agenda.gui.osgi.Activator</Bundle-Activator>
+						<Export-Package>org.universAAL.agenda.gui.wrappers,org.universAAL.agenda.gui</Export-Package>
+						<Private-Package>org.universAAL.agenda.gui.util,
+							org.universAAL.agenda.gui.impl,
+							org.universAAL.agenda.gui.components,
+							org.universAAL.agenda.gui.osgi</Private-Package>
+<!--						<Import-Package>-->
+<!--							org.universAAL.middleware.rdf,-->
+<!--							org.universAAL.middleware.owl,-->
+<!--							org.universAAL.middleware.rdf.impl,-->
+<!--							org.universAAL.middleware.util,-->
+<!--							org.universAAL.middleware.container,-->
+<!--							org.universAAL.middleware.container.osgi,-->
+<!--							org.universAAL.middleware.container.utils,-->
+<!--							org.universAAL.middleware.context,-->
+<!--							org.universAAL.middleware.service.owl,-->
+<!--							org.universAAL.middleware.service.owls.profile,-->
+<!--							org.universAAL.middleware.service,-->
+<!--							org.universAAL.agenda.client,-->
+<!--							org.universAAL.agenda.client.osgi,-->
+<!--							org.universAAL.ontology.profile,-->
+<!--							org.universAAL.ontology.agenda,-->
+<!--							org.universAAL.ontology.agendaEventSelection,-->
+<!--							org.universAAL.agendaEventSelectionTool.client,-->
+<!--							org.universAAL.ontology.agenda.service,-->
+<!--							org.universAAL.ontology.location.address,-->
+<!--							javax.xml.datatype,-->
+<!--							javax.swing,-->
+<!--							org.osgi.framework,-->
+<!--							*</Import-Package>-->
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
