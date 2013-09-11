@@ -65,3 +65,10 @@ agenda/agenda.server/.classpath
 agenda/agenda.server/.project
 agenda/agenda.server/.settings
 agenda/agenda.server/target
+nutritional/nutritional.client/.classpath
+nutritional/nutritional.client/.project
+nutritional/nutritional.client/.settings
+nutritional/nutritional.client/target
+nutritional/nutritional.pom/.project
+nutritional/nutritional.pom/.settings
+nutritional/nutritional.pom/target
