@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>nutritional.pom</artifactId>
+		<version>E.0.1-SNAPSHOT</version>
+		<relativePath>../nutritional.pom</relativePath>
+	</parent>
+
+	<artifactId>nutritional.client</artifactId>
+	<version>E.0.1-SNAPSHOT</version>
+	<packaging>bundle</packaging>
+	<name>Nutritional Advisor Service</name>
+	<!-- changes name description of the service at pom file and updated versions of the referred bundles at feature file -->
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.data.representation.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.container.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.ui.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.middleware</groupId>
+			<artifactId>mw.bus.service.osgi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.profile</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.medication</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.nutrition</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+		<!-- Nutritional own libs -->
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- Axis has problem with OPS4J logging. Use our axis/axis-pax/1.4 instead when running-->
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis-jaxrpc</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- --><dependency>
+			<groupId>commons-discovery</groupId>
+			<artifactId>commons-discovery</artifactId>
+			<version>0.5</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Activator>org.universAAL.AALapplication.nutritional.osgi.Activator</Bundle-Activator>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Export-Package/>
+						<Private-Package>
+							na.*,
+							org.universAAL.AALapplication.nutritional.*
+						</Private-Package>
+						<Import-Package>javax.swing, javax.swing.border,
+							javax.xml.datatype, javax.xml.namespace,
+							javax.xml.rpc, javax.xml.rpc.encoding, org.apache.axis, org.apache.axis.client,
+							org.apache.axis.constants, org.apache.axis.description,
+							org.apache.axis.encoding,
+							org.apache.axis.encoding.ser, org.apache.axis.soap, org.apache.axis.types,
+							org.apache.axis.utils,
+							org.apache.commons.logging, org.osgi.framework, org.universAAL.middleware.container,
+							org.universAAL.middleware.container.osgi,
+							org.universAAL.middleware.container.osgi.util,
+							org.universAAL.middleware.container.utils,
+							org.universAAL.middleware.owl,
+							org.universAAL.middleware.owl.supply,
+							org.universAAL.middleware.rdf,
+							org.universAAL.middleware.rdf.impl,
+							org.universAAL.middleware.service.owl,
+							org.universAAL.middleware.service,
+							org.universAAL.middleware.service.owls.process,
+							org.universAAL.middleware.service.owls.profile,
+							org.universAAL.middleware.ui, org.universAAL.middleware.ui.owl,
+							org.universAAL.middleware.ui.rdf,
+							org.universAAL.middleware.util, org.universAAL.ontology.medMgr,
+							org.universAAL.ontology.nutrition,
+							org.universAAL.ontology.nutrition.profile,
+							org.universAAL.ontology.profile, org.xml.sax
+						</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		<plugin><groupId>org.apache.karaf.tooling</groupId><artifactId>features-maven-plugin</artifactId><version>2.3.1</version></plugin></plugins>
+	</build>
+
+</project>
