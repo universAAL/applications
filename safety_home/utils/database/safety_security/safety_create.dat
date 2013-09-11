@@ -1,0 +1,64 @@
+CREATE TABLE device (
+	device_id INT NOT NULL, 
+	name varchar(50),
+	location varchar(50),
+	manufacturer varchar(10),
+	PRIMARY KEY(device_id)
+) ENGINE=INNODB;
+
+CREATE TABLE users (
+	users_id INT NOT NULL, 
+	firstname varchar(50),
+	lastname varchar(50),
+	age int,
+	job varchar(100),
+	email varchar(70),
+	username varchar(20),
+	password varchar(10),
+	PRIMARY KEY(users_id)
+) ENGINE=INNODB;
+
+CREATE TABLE smartcard (
+	smartcard_id INT NOT NULL, 
+	shortdescription varchar(20),
+	description varchar(150),
+	PRIMARY KEY(smartcard_id)
+) ENGINE=INNODB;
+
+CREATE TABLE device_to_users_to_smartcard (
+	device_to_users_to_smartcard_id INT NOT NULL,
+	device_id INT NOT NULL, 
+	users_id INT NOT NULL,
+	smartcard_id INT NOT NULL,
+	PRIMARY KEY(device_to_users_to_smartcard_id),
+	INDEX (device_id),
+     FOREIGN KEY (device_id) REFERENCES device(device_id)
+	ON UPDATE CASCADE ON DELETE RESTRICT,
+	INDEX (users_id),
+     FOREIGN KEY (users_id) REFERENCES users(users_id)
+	ON UPDATE CASCADE ON DELETE RESTRICT,
+	INDEX (smartcard_id),
+     FOREIGN KEY (smartcard_id) REFERENCES smartcard(smartcard_id)
+	ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=INNODB;
+
+CREATE TABLE role (
+	role_id INT NOT NULL, 
+	name varchar(20),
+	description varchar(100),
+	PRIMARY KEY(role_id)
+) ENGINE=INNODB;
+
+CREATE TABLE users_to_role (
+	users_to_role_id INT NOT NULL,
+	users_id INT NOT NULL,
+	role_id INT NOT NULL,
+	PRIMARY KEY(users_to_role_id),
+	INDEX (users_id),
+     FOREIGN KEY (users_id) REFERENCES users(users_id)
+	ON UPDATE CASCADE ON DELETE RESTRICT,
+	INDEX (role_id),
+     FOREIGN KEY (role_id) REFERENCES role(role_id)
+	ON UPDATE CASCADE ON DELETE RESTRICT
+) ENGINE=INNODB;
+
