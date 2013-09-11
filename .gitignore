@@ -77,6 +77,16 @@ common/contact_manager/contact.manager.service/*.iml
 common/contact_manager/contact.manager.service/target
 common/contact_manager/contact.manager.shell.commands/*.iml
 common/contact_manager/contact.manager.shell.commands/target
+food_shopping/food_shopping.service.RFidProvider/.project
+food_shopping/food_shopping.service.RFidProvider/.settings
+food_shopping/food_shopping.service.client/.classpath
+food_shopping/food_shopping.service.client/.project
+food_shopping/food_shopping.service.client/.settings
+food_shopping/food_shopping.service.client/target
+food_shopping/food_shopping.service.server/.classpath
+food_shopping/food_shopping.service.server/.project
+food_shopping/food_shopping.service.server/.settings
+food_shopping/food_shopping.service.server/target
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/.classpath
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/.project
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/.settings
