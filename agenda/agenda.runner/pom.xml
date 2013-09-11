@@ -5,7 +5,7 @@
   <groupId>org.universAAL.AALapplication</groupId>
   <artifactId>agenda.runner</artifactId>
   <packaging>jar</packaging>  
-  <version>E.0</version>
+  <version>E.1</version>
   <name>Agenda AAL Service Runner</name>
 
   <build>
@@ -65,71 +65,71 @@
 <!--						<provision>mvn:org.apache.derby/derby/10.7.1.1</provision>-->
 
 					<!-- MW -->
-						<provision>mvn:org.universAAL.middleware/mw.schemas/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.container.xfaces.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.container.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.interfaces.osgi/2.0.0</provision>
+						<provision>mvn:org.universAAL.middleware/mw.schemas/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.container.xfaces.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.container.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.interfaces.osgi/2.0.1-SNAPSHOT</provision>
 						
 <!--					respect the order: in general it is: connectors, modules, control broker and managers.-->
 					
-						<provision>mvn:org.universAAL.middleware/mw.connectors.api.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.connectors.communication.jgroups.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.connectors.discovery.slp.osgi/2.0.0</provision>
-							<!-- <provision>mvn:org.universAAL.middleware/mw.connectors.deploy.karaf.osgi/2.0.0@83</provision> -->
+						<provision>mvn:org.universAAL.middleware/mw.connectors.api.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.connectors.communication.jgroups.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.connectors.discovery.slp.osgi/2.0.1-SNAPSHOT</provision>
+							<!-- <provision>mvn:org.universAAL.middleware/mw.connectors.deploy.karaf.osgi/2.0.1-SNAPSHOT@83</provision> -->
 							
-						<provision>mvn:org.universAAL.middleware/mw.modules.api.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.modules.communication.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.modules.aalspace.osgi/2.0.0</provision>
+						<provision>mvn:org.universAAL.middleware/mw.modules.api.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.modules.communication.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.modules.aalspace.osgi/2.0.1-SNAPSHOT</provision>
 													
-						<provision>mvn:org.universAAL.middleware/mw.brokers.api.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.brokers.control.osgi/2.0.0</provision>
+						<provision>mvn:org.universAAL.middleware/mw.brokers.api.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.brokers.control.osgi/2.0.1-SNAPSHOT</provision>
 						
-						<provision>mvn:org.universAAL.middleware/mw.managers.api.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.managers.aalspace.osgi/2.0.0</provision>
-<!--						<provision>mvn:org.universAAL.middleware/mw.managers.deploy.osgi/2.0.0</provision> under development-->
+						<provision>mvn:org.universAAL.middleware/mw.managers.api.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.managers.aalspace.osgi/2.0.1-SNAPSHOT</provision>
+<!--						<provision>mvn:org.universAAL.middleware/mw.managers.deploy.osgi/2.0.1-SNAPSHOT</provision> under development-->
 
-						<provision>mvn:org.universAAL.middleware/mw.data.representation.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.data.serialization.osgi/2.0.0</provision>
+						<provision>mvn:org.universAAL.middleware/mw.data.representation.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.data.serialization.osgi/2.0.1-SNAPSHOT</provision>
 						
-						<provision>mvn:org.universAAL.middleware/mw.bus.model.osgi/2.0.0</provision> 
-						<provision>mvn:org.universAAL.middleware/mw.bus.service.osgi/2.0.0</provision>
-						<provision>mvn:org.universAAL.middleware/mw.bus.context.osgi/2.0.0</provision> 
-						<provision>mvn:org.universAAL.middleware/mw.bus.ui.osgi/2.0.0</provision> 
-						<provision>mvn:org.universAAL.middleware/mw.bus.tracker.osgi/2.0.0</provision>
+						<provision>mvn:org.universAAL.middleware/mw.bus.model.osgi/2.0.1-SNAPSHOT</provision> 
+						<provision>mvn:org.universAAL.middleware/mw.bus.service.osgi/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.middleware/mw.bus.context.osgi/2.0.1-SNAPSHOT</provision> 
+						<provision>mvn:org.universAAL.middleware/mw.bus.ui.osgi/2.0.1-SNAPSHOT</provision> 
+						<provision>mvn:org.universAAL.middleware/mw.bus.tracker.osgi/2.0.1-SNAPSHOT</provision>
 											
-				<!-- <provision>mvn:org.universAAL.middleware/mw.karaf.shell.universAAL.osgi/2.0.0</provision>
+				<!-- <provision>mvn:org.universAAL.middleware/mw.karaf.shell.universAAL.osgi/2.0.1-SNAPSHOT</provision>
 -->
 					<!-- Ontologies -->
 							<!-- Platform -->
-						<provision>mvn:org.universAAL.ontology/ont.phWorld/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.profile/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.che/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.impairment/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.furniture/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.health.measurement/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.health.disease/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.profile.health/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.device/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.languages/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.profile.ui.preferences/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.profile.userid/2.0.0</provision>
-						<provision>mvn:org.universAAL.ontology/ont.profile.ui.mainmenu/2.0.0</provision>
+						<provision>mvn:org.universAAL.ontology/ont.phWorld/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.profile/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.che/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.impairment/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.furniture/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.health.measurement/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.health.disease/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.profile.health/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.device/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.languages/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.profile.ui.preferences/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.profile.userid/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.ontology/ont.profile.ui.mainmenu/2.0.1-SNAPSHOT</provision>
 
 					<!-- Context -->				
-						<provision>mvn:org.universAAL.context/ctxt.che/2.0.0</provision>
-						<provision>mvn:org.universAAL.context/ctxt.prof.server/2.0.0</provision>
+						<provision>mvn:org.universAAL.context/ctxt.che/2.0.1-SNAPSHOT</provision>
+						<provision>mvn:org.universAAL.context/ctxt.prof.server/2.0.1-SNAPSHOT</provision>
 					<!-- Security -->
-						<provision>mvn:org.universAAL.security/security.authorizator/2.0.0</provision>
+						<provision>mvn:org.universAAL.security/security.authorizator/2.0.1-SNAPSHOT</provision>
 					<!-- RI -->
-					<provision>mvn:org.universAAL.remote/ri.servicegateway/2.0.0</provision>
+					<provision>mvn:org.universAAL.remote/ri.servicegateway/2.0.1-SNAPSHOT</provision>
 
 					
 					<!-- UIFW -->
-						<provision>mvn:org.universAAL.ui/ui.dm/2.0.0</provision>
+						<provision>mvn:org.universAAL.ui/ui.dm/2.0.1-SNAPSHOT</provision>
 <!--						fragments like ui.handler.gui.swing.bluesteelLAF cannot be started so leaving them in resolved state is enough-->
-						<provision>wrap:mvn:org.universAAL.ui/ui.handler.gui.swing.bluesteelLAF/2.0.0@nostart</provision>
-						<provision>mvn:org.universAAL.ui/ui.handler.gui.swing/2.0.0@nostart</provision>				
-						<provision>mvn:org.universAAL.ui/ui.handler.web/2.0.0</provision>
+						<provision>wrap:mvn:org.universAAL.ui/ui.handler.gui.swing.bluesteelLAF/2.0.1-SNAPSHOT@nostart</provision>
+						<provision>mvn:org.universAAL.ui/ui.handler.gui.swing/2.0.1-SNAPSHOT@nostart</provision>				
+						<provision>mvn:org.universAAL.ui/ui.handler.web/2.0.1-SNAPSHOT</provision>
           
 						
 							<!-- Databases -->
@@ -137,7 +137,7 @@
 <!--						<provision>mvn:org.apache.derby/derby/10.7.1.1</provision>-->
 					
 					<!-- Agenda AAL Service -->
-					<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/E.0/composite</provision>          
+					<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/E.1/composite</provision>          
           
           
     <!--  agenda D.0.1-SNAPSHOT  more compact run configuration with platform components wrapped inside composites also-->
