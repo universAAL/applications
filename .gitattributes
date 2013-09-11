@@ -1,0 +1,237 @@
+* text=auto !eol
+ont.aalfficiencyscores/.classpath -text svneol=unset#text/plain
+ont.aalfficiencyscores/.project -text svneol=unset#text/plain
+ont.aalfficiencyscores/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+ont.aalfficiencyscores/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+ont.aalfficiencyscores/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+ont.aalfficiencyscores/.settings/org.maven.ide.eclipse.prefs -text
+ont.aalfficiencyscores/ASL2.0.txt -text svneol=unset#text/plain
+ont.aalfficiencyscores/NOTICE -text
+ont.aalfficiencyscores/pom.xml -text svneol=unset#text/plain
+ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/AalfficiencyScoresActivator.java -text svneol=unset#text/plain
+ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/AalfficiencyScoresFactory.java -text svneol=unset#text/plain
+ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/AalfficiencyAdvices.java -text svneol=unset#text/plain
+ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/AalfficiencyScores.java -text svneol=unset#text/plain
+ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/AalfficiencyScoresOntology.java -text svneol=unset#text/plain
+ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/ActivityScore.java -text svneol=unset#text/plain
+ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/Advice.java -text svneol=unset#text/plain
+ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/Challenge.java -text svneol=unset#text/plain
+ont.aalfficiencyscores/src/main/java/org/universAAL/ontology/aalfficiency/scores/ElectricityScore.java -text svneol=unset#text/plain
+ont.activity/ASL2.0.txt -text
+ont.activity/Activity.di -text
+ont.activity/Activity.notation -text
+ont.activity/Activity.uml -text
+ont.activity/NOTICE -text
+ont.activity/pom.xml -text
+ont.activity/src/main/java/org/universAAL/ontology/ActivityFactory.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/Activity.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/ActivityOntology.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/BathroomUsage.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/Cooking.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/DishWashing.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/Eating.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/Exercice.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/HouseHoldActivity.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/IndoorActivity.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/Laundry.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/LeisureActivity.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/MedicalComplianceActivity.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/MedicationIntake.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/Monitoring.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/OutdoorActivity.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/PersonalHygeneActivity.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/RadioListening.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/Showering.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/Sleep.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/TVViewing.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/ToothBrushing.java -text
+ont.activity/src/main/java/org/universAAL/ontology/activity/WakingUp.java -text
+ont.activity/src/main/java/org/universAAL/ontology/osgi/Activator.java -text
+ont.agenda/ASL2.0.txt -text
+ont.agenda/NOTICE.txt -text
+ont.agenda/pom.xml -text
+ont.agenda/src/main/java/org/universAAL/ontology/AgendaActivator.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/AgendaOntologyFactory.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/AgendaOntology.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/CEType.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/Calendar.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/Event.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/EventDetails.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/ExternalCalendar.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/Messages.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/Reminder.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/ReminderType.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/TimeInterval.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/service/CalendarAgenda.java -text
+ont.agenda/src/main/java/org/universAAL/ontology/agenda/service/CalendarUIService.java -text
+ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages.properties -text
+ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_da.properties -text
+ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_de.properties -text
+ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_en.properties -text
+ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_es.properties -text
+ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_hr.properties -text
+ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_it.properties -text
+ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_nl.properties -text
+ont.agenda/src/test/java/org/universAAL/ontology/test/ArtifactIntegrationTest.java -text
+ont.agendaEventSelection/ASL2.0.txt -text
+ont.agendaEventSelection/NOTICE.txt -text
+ont.agendaEventSelection/pom.xml -text
+ont.agendaEventSelection/src/main/java/org/universAAL/ontology/AgendaEventSelectionActivator.java -text
+ont.agendaEventSelection/src/main/java/org/universAAL/ontology/AgendaEventSelectionOntologyFactory.java -text
+ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/AgendaEventSelectionOntology.java -text
+ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/EventComparator.java -text
+ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/EventSelectionTool.java -text
+ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/FilterParams.java -text
+ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/TimeSearchType.java -text
+ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/service/EventSelectionToolService.java -text
+ont.agendaEventSelection/src/test/java/org/universAAL/ontology/test/ArtifactIntegrationTest.java -text
+ont.biomedicalsensors/ASL2.0 -text
+ont.biomedicalsensors/NOTICE -text
+ont.biomedicalsensors/pom.xml -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/BiomedicalSensorsActivator.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/BiomedicalSensorsFactory.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/AlertService.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/BPmonitor.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/BiomedicalSensorService.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/BiomedicalSensorsOntology.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/CompositeBiomedicalSensor.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/ConnectionType.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/ConnectionsList.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/MeasuredEntity.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/Scale.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/SensorType.java -text
+ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/Zephyr.java -text
+ont.drools/ASL2.0.txt -text
+ont.drools/NOTICE -text
+ont.drools/artifact.composite -text
+ont.drools/pom.xml -text
+ont.fitbitdata/ASL2.0.txt -text
+ont.fitbitdata/NOTICE -text
+ont.fitbitdata/fitbitdata.di -text
+ont.fitbitdata/fitbitdata.notation -text
+ont.fitbitdata/fitbitdata.uml -text svneol=unset#text/plain
+ont.fitbitdata/pom.xml -text svneol=unset#text/plain
+ont.fitbitdata/src/main/java/org/universAAL/ontology/FitbitDataActivator.java -text svneol=unset#text/plain
+ont.fitbitdata/src/main/java/org/universAAL/ontology/FitbitdataFactory.java -text svneol=unset#text/plain
+ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Activity.java -text svneol=unset#text/plain
+ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitData.java -text svneol=unset#text/plain
+ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitdataOntology.java -text svneol=unset#text/plain
+ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Sleep.java -text svneol=unset#text/plain
+ont.ltba/ASL2.0.txt -text
+ont.ltba/NOTICE -text
+ont.ltba/pom.xml -text
+ont.medication/ASL2.0 -text
+ont.medication/NOTICE -text
+ont.medication/pom.xml -text
+ont.medication/src/main/java/org/universAAL/ontology/Activator.java -text
+ont.medication/src/main/java/org/universAAL/ontology/Log.java -text
+ont.medication/src/main/java/org/universAAL/ontology/MedicationFactory.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/CaregiverNotifier.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/CaregiverNotifierData.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/DispenserUpsideDown.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/DueIntake.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/Intake.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/IntakeUnit.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/MealRelation.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/MedicationException.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/MedicationOntology.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/MedicationTreatment.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/Medicine.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/MedicinesInfo.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/MissedIntake.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/NewMedicationTreatmentNotifier.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/NewPrescription.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/Precaution.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/Time.java -text
+ont.medication/src/main/java/org/universAAL/ontology/medMgr/UserIDs.java -text
+ont.message/ASL2.0 -text
+ont.message/MessageOntology.di -text
+ont.message/MessageOntology.notation -text
+ont.message/MessageOntology.uml -text
+ont.message/NOTICE -text
+ont.message/pom.xml -text svneol=unset#application/octet-stream
+ont.message/src/main/java/org/universaal/ontology/MessageActivator.java -text svneol=unset#application/octet-stream
+ont.message/src/main/java/org/universaal/ontology/MessageOntologyFactory.java -text svneol=unset#application/octet-stream
+ont.message/src/main/java/org/universaal/ontology/owl/Message.java -text svneol=unset#application/octet-stream
+ont.message/src/main/java/org/universaal/ontology/owl/MessageOntology.java -text svneol=unset#application/octet-stream
+ont.message/src/main/java/org/universaal/ontology/owl/MessageService.java -text
+ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessage.java -text svneol=unset#application/octet-stream
+ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageClassification.java -text svneol=unset#application/octet-stream
+ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageSubclassification.java -text
+ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
+ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
+ont.nutrition/ASL2.0.txt -text
+ont.nutrition/NOTICE.txt -text
+ont.nutrition/Nutrition.di -text
+ont.nutrition/Nutrition.notation -text
+ont.nutrition/Nutrition.uml -text
+ont.nutrition/pom.xml -text
+ont.nutrition/src/main/java/org/universAAL/ontology/NutritionActivator.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/NutritionFactory.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/DayOfWeek.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Dish.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/DishCategory.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Food.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/FoodCategory.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/FoodSubCategory.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Ingredient.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Meal.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/MealCategory.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/MeasureUnit.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/MenuDay.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/NutritionOntology.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/NutritionService.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/Recipe.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/ShoppingList.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/DietType.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/NutritionalHabits.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/NutritionalPreferences.java -text
+ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/NutritionalSubProfile.java -text
+ont.pom/composite/pom.xml -text
+ont.pom/pom.xml -text
+ont.pom/update.bat -text
+ont.questionnaireStrategy/ASL2.0 -text
+ont.questionnaireStrategy/NOTICE -text
+ont.questionnaireStrategy/pom.xml -text
+ont.questionnaireStrategy/src/main/java/org/universaal/ontology/Activator.java -text
+ont.questionnaireStrategy/src/main/java/org/universaal/ontology/QuestionnaireStrategyOntologyFactory.java -text
+ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/Questionnaire4TreatmentStrategy.java -text
+ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/QuestionnaireStrategyOntology.java -text
+ont.readenergy/ASL2.0.txt -text
+ont.readenergy/NOTICE -text
+ont.readenergy/ont.energy.reader.di -text
+ont.readenergy/ont.energy.reader.notation -text
+ont.readenergy/ont.energy.reader.uml -text svneol=unset#text/plain
+ont.readenergy/pom.xml -text svneol=unset#text/plain
+ont.readenergy/src/main/java/org/universAAL/ontology/ReadEnergyActivator.java -text svneol=unset#text/plain
+ont.readenergy/src/main/java/org/universAAL/ontology/ReadEnergyFactory.java -text svneol=unset#text/plain
+ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/EnergyMeasurement.java -text svneol=unset#text/plain
+ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/ReadEnergy.java -text svneol=unset#text/plain
+ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/ReadEnergyDevice.java -text svneol=unset#text/plain
+ont.readenergy/src/main/java/org/universAAL/ontology/energy/reader/ReadEnergyOntology.java -text svneol=unset#text/plain
+ont.safety/ASL2.0 -text
+ont.safety/NOTICE -text
+ont.safety/pom.xml -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/Door.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/DoorBell.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/FanHeater.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/HumiditySensor.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/LightSensor.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/MotionSensor.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/SafetyManagement.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/SafetyOntology.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/SmokeSensor.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/TemperatureSensor.java -text
+ont.safety/src/main/java/org/universAAL/ontology/Safety/Window.java -text
+ont.safety/src/main/java/org/universAAL/ontology/SafetyActivator.java -text
+ont.safety/src/main/java/org/universAAL/ontology/SafetyFactory.java -text
+ont.shopping/ASL2.0 -text
+ont.shopping/NOTICE -text
+ont.shopping/pom.xml -text
+ont.shopping/src/main/java/org/universAAL/ontology/Shopping/FoodItem.java -text
+ont.shopping/src/main/java/org/universAAL/ontology/Shopping/FoodManagement.java -text
+ont.shopping/src/main/java/org/universAAL/ontology/Shopping/Refrigerator.java -text
+ont.shopping/src/main/java/org/universAAL/ontology/Shopping/ShoppingList.java -text
+ont.shopping/src/main/java/org/universAAL/ontology/Shopping/ShoppingOntology.java -text
+ont.shopping/src/main/java/org/universAAL/ontology/ShoppingActivator.java -text
+ont.shopping/src/main/java/org/universAAL/ontology/ShoppingFactory.java -text
