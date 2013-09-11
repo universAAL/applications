@@ -339,6 +339,8 @@ personal_safety/smp.test-location.publisher/.classpath
 personal_safety/smp.test-location.publisher/.project
 personal_safety/smp.test-location.publisher/.settings
 personal_safety/smp.test-location.publisher/target
+safety_home/safety.pom/.project
+safety_home/safety.pom/.settings
 safety_home/safety_home.service.client/.classpath
 safety_home/safety_home.service.client/.project
 safety_home/safety_home.service.client/.settings
@@ -363,3 +365,15 @@ safety_home/safety_home.service.smartCardProvider/.classpath
 safety_home/safety_home.service.smartCardProvider/.project
 safety_home/safety_home.service.smartCardProvider/.settings
 safety_home/safety_home.service.smartCardProvider/target
+safety_home/safety_home.service.smokeDetectionProvider/.classpath
+safety_home/safety_home.service.smokeDetectionProvider/.project
+safety_home/safety_home.service.smokeDetectionProvider/.settings
+safety_home/safety_home.service.smokeDetectionProvider/target
+safety_home/safety_home.service.temperatureSensorProvider/.classpath
+safety_home/safety_home.service.temperatureSensorProvider/.project
+safety_home/safety_home.service.temperatureSensorProvider/.settings
+safety_home/safety_home.service.temperatureSensorProvider/target
+safety_home/safety_home.service.windowProvider/.classpath
+safety_home/safety_home.service.windowProvider/.project
+safety_home/safety_home.service.windowProvider/.settings
+safety_home/safety_home.service.windowProvider/target
