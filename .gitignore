@@ -291,6 +291,7 @@ ontologies/ont.nutrition/.settings
 ontologies/ont.nutrition/target
 ontologies/ont.pom/.project
 ontologies/ont.pom/.settings
+ontologies/ont.pom/composite/target
 ontologies/ont.pom/target
 ontologies/ont.questionnaireStrategy/.classpath
 ontologies/ont.questionnaireStrategy/.project
