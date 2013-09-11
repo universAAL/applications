@@ -135,9 +135,13 @@ health/health.ui.client/.classpath
 health/health.ui.client/.project
 health/health.ui.client/.settings
 health/health.ui.client/target
+help_when_out/hwo.karaf.feature/.project
+help_when_out/hwo.karaf.feature/.settings
+help_when_out/hwo.karaf.feature/target
 help_when_out/hwo.mobile/.classpath
 help_when_out/hwo.mobile/.project
 help_when_out/hwo.mobile/.settings
+help_when_out/hwo.mobile/bin
 help_when_out/hwo.mobile/target
 help_when_out/hwo.pom/.project
 help_when_out/hwo.pom/.settings
