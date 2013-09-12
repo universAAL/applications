@@ -23,10 +23,6 @@
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.service.osgi</artifactId>
 		</dependency>
@@ -40,22 +36,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.phWorld</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
 		</dependency>
-	<dependency>
+		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.agenda</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.agendaEventSelection</artifactId>
-		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
