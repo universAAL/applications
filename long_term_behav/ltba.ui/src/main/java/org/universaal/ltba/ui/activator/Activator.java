@@ -24,34 +24,36 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universaal.ltba.ui.impl.common.LTBAUIProvider;
+
 /**
  * Bundle activator.
+ * 
  * @author mllorente
- *
+ * 
  */
 public class Activator implements BundleActivator {
 
-	private ModuleContext context;
-	private LTBAUIProvider service;
+    private ModuleContext context;
+    private LTBAUIProvider service;
 
-	public void start(BundleContext context) throws Exception {
+    public void start(BundleContext context) throws Exception {
 
-		this.context = uAALBundleContainer.THE_CONTAINER
-				.registerModule(new Object[] { context });
-		this.context.logDebug("","Initialising Project", null);
+	this.context = uAALBundleContainer.THE_CONTAINER
+		.registerModule(new Object[] { context });
+	this.context.logDebug("", "Initialising Project", null);
 
-		/*
-		 * uAAL stuff
-		 */
-		service = new LTBAUIProvider(this.context);
+	/*
+	 * uAAL stuff
+	 */
+	service = new LTBAUIProvider(this.context);
 
-		this.context.logInfo("","Project started", null);
+	this.context.logInfo("", "Project started", null);
 
-	}
+    }
 
-	public void stop(BundleContext arg0) throws Exception {
-		// TODO Auto-generated method stub
+    public void stop(BundleContext arg0) throws Exception {
+	service.close();
 
-	}
+    }
 
 }

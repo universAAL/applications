@@ -35,7 +35,6 @@ import org.universAAL.ontology.activityhub.MotionSensor;
 import org.universAAL.ontology.activityhub.MotionSensorEvent;
 import org.universAAL.ontology.device.Sensor;
 import org.universAAL.ontology.location.Location;
-import org.universAAL.ontology.phThing.Device;
 
 /**
  * Publisher of context events.
@@ -44,73 +43,73 @@ import org.universAAL.ontology.phThing.Device;
  * 
  */
 public class StaticPublisher {
-	private static final String TSB_NAMESPACE = "http://www.tsbtecnologias.es/";
-	private static ContextPublisher cp;
-	private static ContextProvider info = new ContextProvider();
-	private static ModuleContext mc;
+    private static final String TSB_NAMESPACE = "http://www.tsbtecnologias.es/";
+    private static ContextPublisher cp;
+    private static ContextProvider info = new ContextProvider();
+    private static ModuleContext mc;
 
-	public static void publishStaticScript(BundleContext theContext) {
+    public static void publishStaticScript(BundleContext theContext) {
 
-		if (cp == null)
-			initHelperClasses(theContext);
+	if (cp == null)
+	    initHelperClasses(theContext);
 
-		// parseScript();
+	// parseScript();
+    }
+
+    public static void publishMotionEventDetected(String location,
+	    BundleContext theContext) {
+	if (cp == null)
+	    initHelperClasses(theContext);
+	MotionSensor ms = new MotionSensor(
+		"http://www.tsbtecnologias.es/MotionSensor.owl#MotionSensor");
+	MotionSensorEvent mse = new MotionSensorEvent(TSB_NAMESPACE
+		+ "MotionSensorEvent.owl#MotionSensorEvent");
+	Location motionSensorLocation = new Location(TSB_NAMESPACE
+		+ "Location.owl#MotionSensorTestLocation", location);
+	ms.setLocation(motionSensorLocation);
+	ms.setProperty(MotionSensor.PROP_MEASURED_VALUE, mse.motion_detected);
+
+	cp.publish(new ContextEvent(ms, Sensor.PROP_MEASURED_VALUE));
+    }
+
+    public static void publishMagneticContactEventDetected(String name,
+	    Boolean open, BundleContext theContext) {
+	if (cp == null)
+	    initHelperClasses(theContext);
+	ContactClosureSensor ccs = new ContactClosureSensor(
+		"http://www.tsbtecnologias.es/MotionSensor.owl#ContactClosureSensor");
+	ContactClosureSensorEvent ccse = new ContactClosureSensorEvent(
+		TSB_NAMESPACE + "ContactClosureSensorEvent.owl#ContactEvent");
+	Location ccsLocation = new Location(TSB_NAMESPACE
+		+ "Location.owl#ContactClosureSensorTestLocation", name);
+	ccs.setLocation(ccsLocation);
+	if (open) {
+	    ccs.setProperty(ContactClosureSensor.PROP_MEASURED_VALUE,
+		    ccse.contact_opened);
+	} else {
+	    ccs.setProperty(ContactClosureSensor.PROP_MEASURED_VALUE,
+		    ccse.contact_closed);
 	}
+	cp.publish(new ContextEvent(ccs, Sensor.PROP_MEASURED_VALUE));
+    }
 
-	public static void publishMotionEventDetected(String location,
-			BundleContext theContext) {
-		if (cp == null)
-			initHelperClasses(theContext);
-		MotionSensor ms = new MotionSensor(
-				"http://www.tsbtecnologias.es/MotionSensor.owl#MotionSensor");
-		MotionSensorEvent mse = new MotionSensorEvent(TSB_NAMESPACE
-				+ "MotionSensorEvent.owl#MotionSensorEvent");
-		Location motionSensorLocation = new Location(TSB_NAMESPACE
-				+ "Location.owl#MotionSensorTestLocation", location);
-		ms.setLocation(motionSensorLocation);
-		ms.setProperty(MotionSensor.PROP_MEASURED_VALUE, mse.motion_detected);
+    private static void initHelperClasses(BundleContext theContext) {
 
-		cp.publish(new ContextEvent(ms, Sensor.PROP_MEASURED_VALUE));
-	}
+	info = new ContextProvider(
+		"http://www.tsbtecnologias.es/ContextProvider.owl#ScriptPublisher");
+	mc = uAALBundleContainer.THE_CONTAINER
+		.registerModule(new Object[] { theContext });
+	info.setType(ContextProviderType.gauge);
+	info
+		.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
+	cp = new DefaultContextPublisher(mc, info);
+    }
 
-	public static void publishMagneticContactEventDetected(String name,
-			Boolean open, BundleContext theContext) {
-		if (cp == null)
-			initHelperClasses(theContext);
-		ContactClosureSensor ccs = new ContactClosureSensor(
-				"http://www.tsbtecnologias.es/MotionSensor.owl#ContactClosureSensor");
-		ContactClosureSensorEvent ccse = new ContactClosureSensorEvent(
-				TSB_NAMESPACE + "ContactClosureSensorEvent.owl#ContactEvent");
-		Location ccsLocation = new Location(TSB_NAMESPACE
-				+ "Location.owl#ContactClosureSensorTestLocation", name);
-		ccs.setLocation(ccsLocation);
-		if (open) {
-			ccs.setProperty(ContactClosureSensor.PROP_MEASURED_VALUE,
-					ccse.contact_opened);
-		} else {
-			ccs.setProperty(ContactClosureSensor.PROP_MEASURED_VALUE,
-					ccse.contact_closed);
-		}
-		cp.publish(new ContextEvent(ccs, Sensor.PROP_MEASURED_VALUE));
-	}
+    private static void parseScript() {
 
-	private static void initHelperClasses(BundleContext theContext) {
+	Resource r;
+	ContextEvent ce;
 
-		info = new ContextProvider(
-				"http://www.tsbtecnologias.es/ContextProvider.owl#ScriptPublisher");
-		mc = uAALBundleContainer.THE_CONTAINER
-				.registerModule(new Object[] { theContext });
-		info.setType(ContextProviderType.gauge);
-		info
-				.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
-		cp = new DefaultContextPublisher(mc, info);
-	}
-
-	private static void parseScript() {
-
-		Resource r;
-		ContextEvent ce;
-
-	}
+    }
 
 }
