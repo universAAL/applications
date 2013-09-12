@@ -39,6 +39,7 @@ import org.universAAL.ontology.Shopping.FoodItem;
 import org.universAAL.ontology.Shopping.FoodManagement;
 import org.universAAL.ontology.Shopping.Refrigerator;
 import org.universAAL.ontology.Shopping.ShoppingList;
+//import org.universAAL.ontology.nutrition.NutritionService;
 import org.universAAL.ontology.phThing.Device;
 
 
@@ -150,16 +151,23 @@ public class FoodManagementClient extends ContextSubscriber {
 	private static ServiceRequest changeTempRequest(String deviceURI, int temp) {
 		// Instantiate a ServiceRequest upon the Service Ontology we used
 		ServiceRequest changeTemp = new ServiceRequest(new FoodManagement(), null);
-		// We add an input. It´s a filtering input: The device we want to set the temperature for
+		// We add an input. Itï¿½s a filtering input: The device we want to set the temperature for
 		changeTemp.addValueFilter(new String[] { FoodManagement.PROP_FRIDGE_CONTROLS }, new Refrigerator(deviceURI));
 		changeTemp.addChangeEffect(new String[] { FoodManagement.PROP_FRIDGE_CONTROLS,Refrigerator.PROP_TEMPERATURE },new Integer(temp));
 		return changeTemp;
 	}
 
 	private static ServiceRequest addShoppingListRequest(String shoppingURI, String shoppingListName, String shoppingListDate, String[] shoppingItems) {
+/*
+		ServiceRequest service = new ServiceRequest(new NutritionService(), null);
+		System.out.println("SHOPPING ITEMS = "+shoppingItems.length);
+
+		service.addRequiredOutput(NutritionService.SERVICE_GET_TODAY_MENU_OUTPUT, new String[] { NutritionService.PROP_OBTAINS_MENU });
+		return service;
+*/		
+		
 		ServiceRequest addShoppingList = new ServiceRequest(new FoodManagement(), null);
 		
-		//FoodItem anItem = new FoodItem(FoodItem.MY_URI,name,quantity,size,company,tagID,insDate,expDate);
 		System.out.println("SHOPPING ITEMS = "+shoppingItems.length);
 		ArrayList al = new ArrayList(shoppingItems.length);
 		for (int i = 0; i < shoppingItems.length; i++){
@@ -249,6 +257,18 @@ public class FoodManagementClient extends ContextSubscriber {
     }
 
 	private static ServiceRequest getShoppingListsRequest() {
+		ServiceRequest getShoppingLists = new ServiceRequest(new FoodManagement(), null);
+		getShoppingLists.addRequiredOutput(OUTPUT_SHOPPING_LISTS, new String[] {FoodManagement.PROP_SHOPPINGLIST_CONTROLS,ShoppingList.PROP_NAME });
+		return getShoppingLists;
+    }
+
+	private static ServiceRequest getTodayMenuRequest() {
+		ServiceRequest getShoppingLists = new ServiceRequest(new FoodManagement(), null);
+		getShoppingLists.addRequiredOutput(OUTPUT_SHOPPING_LISTS, new String[] {FoodManagement.PROP_SHOPPINGLIST_CONTROLS,ShoppingList.PROP_NAME });
+		return getShoppingLists;
+    }
+
+	private static ServiceRequest getWeeklyMenuRequest() {
 		ServiceRequest getShoppingLists = new ServiceRequest(new FoodManagement(), null);
 		getShoppingLists.addRequiredOutput(OUTPUT_SHOPPING_LISTS, new String[] {FoodManagement.PROP_SHOPPINGLIST_CONTROLS,ShoppingList.PROP_NAME });
 		return getShoppingLists;
@@ -645,6 +665,24 @@ public class FoodManagementClient extends ContextSubscriber {
 		}
 	}
 
+	public static boolean getTodayMenu() {
+		ServiceResponse sr = caller.call(getTodayMenuRequest());
+
+		if (sr.getCallStatus() == CallStatus.succeeded)
+			return true;
+		else
+			return false;
+    }
+
+	public static boolean getWeeklyMenu() {
+		ServiceResponse sr = caller.call(getWeeklyMenuRequest());
+
+		if (sr.getCallStatus() == CallStatus.succeeded)
+			return true;
+		else
+			return false;
+    }
+	
 	public void handleContextEvent(ContextEvent event) {
 /*
 		LogUtils.logInfo(Activator.logger, "FoodManagementConsumer",
