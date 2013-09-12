@@ -2956,9 +2956,12 @@ safety_home/safety_home.service.client/src/main/resources/images/window_open.jpg
 safety_home/safety_home.service.client/src/main/resources/sounds/door_bell.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/door_close.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/door_close_old.wav -text
+safety_home/safety_home.service.client/src/main/resources/sounds/door_is_open.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/door_lock.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/door_open.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/door_unlock.wav -text
+safety_home/safety_home.service.client/src/main/resources/sounds/humidity_is_over_50.wav -text
+safety_home/safety_home.service.client/src/main/resources/sounds/lights_are_on.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/motion_detection.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/smoke_detection.wav -text
 safety_home/safety_home.service.client/src/main/resources/sounds/window_open.wav -text
