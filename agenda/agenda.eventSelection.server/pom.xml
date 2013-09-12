@@ -25,10 +25,6 @@
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context.osgi</artifactId>
 		</dependency>
@@ -38,17 +34,9 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.ui.osgi</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.data.representation.osgi</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.profile</artifactId>
-		</dependency>
-	<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.agenda</artifactId>
 		</dependency>
@@ -56,16 +44,14 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.agendaEventSelection</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.17</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 
-<!--		for javax.xml.datatype.XMLGregorianCalendar; pass compiler arguments to the javac compiler-->
+			<!--
+				for javax.xml.datatype.XMLGregorianCalendar; pass compiler arguments
+				to the javac compiler
+			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

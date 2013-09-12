@@ -30,10 +30,6 @@
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context.osgi</artifactId>
 		</dependency>
@@ -57,11 +53,11 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.agenda</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.17</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>mysql</groupId>-->
+<!--			<artifactId>mysql-connector-java</artifactId>-->
+<!--			<version>5.1.17</version>-->
+<!--		</dependency>-->
 		<!--		dependency for javax.xml.datatype-->
 		<dependency>
 			<groupId>activesoap</groupId>
