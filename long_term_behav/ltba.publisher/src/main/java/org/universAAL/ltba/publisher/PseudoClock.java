@@ -73,7 +73,7 @@ public class PseudoClock {
 	}
 
 	public void setTime(Date date) {
-		clock.setTime(date);
-	}
+	clock.setTime(date);
+    }
 
 }

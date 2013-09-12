@@ -62,430 +62,430 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
  */
 public class GUIHousePublisher extends JFrame {
 
-	private final static long BASE_DATE = 82800000;
+    private final static long BASE_DATE = 82800000;
 
-	private static BundleContext context;
-	private static ModuleContext mc;
-	private static GUIHousePublisher INSTANCE = null;
-	private static Timer tKitchen, tBedroom, tBathroom, tLivingRoom, tHall,
-			tGarden, tClock;
-	private static JButton bKitchen, bBedroom, bBathroom, bLivingRoom, bHall,
-			bGarden, bDay, bWeek, bMonth;
-	// Magnetic contacts
-	private static JToggleButton bKMCWindow, bKMCDoor, bKMCDrawerCuttery,
-			bkMCDrawerDishes;
-	// Electric current sensors
-	private static JButton bKECSDishwasher, bKECSWashingMachine, bKECSOven,
-			bKECSMicorwaveOven;
-	private static JLabel lKitchen, lBedroom, lBathroom, lLivingRoom, lHall,
-			lGarden, lClock;
-	private static long dKitchen, dBedroom, dBathroom, dLivingRoom, dHall,
-			dGarden;
-	private static ActionListener buttonListener;
+    private static BundleContext context;
+    private static ModuleContext mc;
+    private static GUIHousePublisher INSTANCE = null;
+    private static Timer tKitchen, tBedroom, tBathroom, tLivingRoom, tHall,
+	    tGarden, tClock;
+    private static JButton bKitchen, bBedroom, bBathroom, bLivingRoom, bHall,
+	    bGarden, bDay, bWeek, bMonth;
+    // Magnetic contacts
+    private static JToggleButton bKMCWindow, bKMCDoor, bKMCDrawerCuttery,
+	    bkMCDrawerDishes;
+    // Electric current sensors
+    private static JButton bKECSDishwasher, bKECSWashingMachine, bKECSOven,
+	    bKECSMicorwaveOven;
+    private static JLabel lKitchen, lBedroom, lBathroom, lLivingRoom, lHall,
+	    lGarden, lClock;
+    private static long dKitchen, dBedroom, dBathroom, dLivingRoom, dHall,
+	    dGarden;
+    private static ActionListener buttonListener;
 
-	private static JSpinner sClock;
+    private static JSpinner sClock;
 
-	private static JButton bClock;
+    private static JButton bClock;
 
-	private static JCheckBox cClock;
+    private static JCheckBox cClock;
 
-	private final static String sinceLast = "since last detection.";
-	private final static String simulatedTime = "Simulated time: ";
-	private final static JLabel nothing = new JLabel();
-	private static long pseudoClockDiff = 0;
+    private final static String sinceLast = "since last detection.";
+    private final static String simulatedTime = "Simulated time: ";
+    private final static JLabel nothing = new JLabel();
+    private static long pseudoClockDiff = 0;
 
-	private static ActionListener mcListener;
+    private static ActionListener mcListener;
 
-	/**
-	 * Serializable
-	 */
-	private static final long serialVersionUID = -3561358927431152303L;
+    /**
+     * Serializable
+     */
+    private static final long serialVersionUID = -3561358927431152303L;
 
-	private GUIHousePublisher() {
-		super();
-		INSTANCE = this;
+    private GUIHousePublisher() {
+	super();
+	INSTANCE = this;
+    }
+
+    private static GUIHousePublisher getInstance() {
+	if (INSTANCE == null) {
+	    return new GUIHousePublisher();
+	} else {
+	    return INSTANCE;
 	}
+    }
 
-	private static GUIHousePublisher getInstance() {
-		if (INSTANCE == null) {
-			return new GUIHousePublisher();
-		} else {
-			return INSTANCE;
+    public static void init(BundleContext ctx) {
+
+	context = ctx;
+
+	mc = uAALBundleContainer.THE_CONTAINER
+		.registerModule(new Object[] { context });
+
+	lKitchen = new JLabel("00:00:00 " + sinceLast);
+	lBathroom = new JLabel("00:00:00 " + sinceLast);
+	lLivingRoom = new JLabel("00:00:00 " + sinceLast);
+	lBedroom = new JLabel("00:00:00 " + sinceLast);
+	lGarden = new JLabel("00:00:00 " + sinceLast);
+	lHall = new JLabel("00:00:00 " + sinceLast);
+	lClock = new JLabel(simulatedTime + " 00:00:00");
+	// SNIPPER
+	Calendar auxCalendar = Calendar.getInstance();
+	auxCalendar.add(Calendar.YEAR, -10);
+	Date initDate = auxCalendar.getTime();
+	auxCalendar.add(Calendar.YEAR, 20);
+	Date endDate = auxCalendar.getTime();
+	SpinnerModel mod = new SpinnerDateModel(Calendar.getInstance()
+		.getTime(), initDate, endDate, Calendar.DAY_OF_MONTH);
+	sClock = new JSpinner(mod);
+	sClock
+		.setEditor(new JSpinner.DateEditor(sClock,
+			"HH:mm:ss dd/MM/yyyy"));
+	sClock.setValue(Calendar.getInstance().getTime());
+	// CLOCK CHECKBOX
+	cClock = new JCheckBox("Submit enabled", false);
+
+	initTimers();
+	initPresenceDetectorListener();
+	initMagneticContactListener();
+	initGUIElements();
+
+	GUIHousePublisher ghp = getInstance();
+	ghp.setSize(640, 540);
+
+	// Magnetic Contacts
+
+	ButtonGroup bg = new ButtonGroup();
+	bKMCWindow = new JToggleButton("Window");
+	bKMCWindow.addActionListener(mcListener);
+
+	bKMCDoor = new JToggleButton("Door");
+	bKMCDoor.addActionListener(mcListener);
+	bkMCDrawerDishes = new JToggleButton("Drawer dishes");
+	bkMCDrawerDishes.addActionListener(mcListener);
+	bKMCDrawerCuttery = new JToggleButton("Drawer cuttery");
+	bKMCDrawerCuttery.addActionListener(mcListener);
+
+	JPanel pKMC = new JPanel();
+	pKMC.setBorder(BorderFactory.createTitledBorder("Magnetic contacts"));
+
+	// bg.add(bKMCDoor);
+	// bg.add(bKMCWindow);
+	// bg.add(bKMCDrawerCuttery);
+	// bg.add(bkMCDrawerDishes);
+
+	pKMC.add(bKMCDoor);
+	pKMC.add(bKMCWindow);
+	pKMC.add(bkMCDrawerDishes);
+	pKMC.add(bKMCDrawerCuttery);
+
+	bKitchen = new JButton("PRESENCE DETECTOR");
+
+	JPanel pKitchen = new JPanel(new GridLayout(2, 1, 7, 7));
+	pKitchen.setBorder(BorderFactory.createTitledBorder("Kitchen"));
+	pKitchen.add(pKMC);
+	// pKitchen.add(lKitchen);
+	pKitchen.add(bKitchen);
+
+	bBathroom = new JButton("PRESENCE DETECTOR");
+
+	JPanel pBathroom = new JPanel(new GridLayout(2, 1, 7, 7));
+	pBathroom.setBorder(BorderFactory.createTitledBorder("Bathroom"));
+	pBathroom.add(lBathroom);
+	pBathroom.add(bBathroom);
+
+	bLivingRoom = new JButton("PRESENCE DETECTOR");
+
+	JPanel pLivingRoom = new JPanel(new GridLayout(2, 1, 7, 7));
+	pLivingRoom.setBorder(BorderFactory.createTitledBorder("LivingRoom"));
+	pLivingRoom.add(lLivingRoom);
+	pLivingRoom.add(bLivingRoom);
+
+	bBedroom = new JButton("PRESENCE DETECTOR");
+
+	JPanel pBedroom = new JPanel(new GridLayout(2, 1, 7, 7));
+	pBedroom.setBorder(BorderFactory.createTitledBorder("Bedroom"));
+	pBedroom.add(lBedroom);
+	pBedroom.add(bBedroom);
+
+	bGarden = new JButton("PRESENCE DETECTOR");
+
+	JPanel pGarden = new JPanel(new GridLayout(2, 1, 7, 7));
+	pGarden.add(lGarden);
+	pGarden.add(bGarden);
+	pGarden.setBorder(BorderFactory.createTitledBorder("Garden"));
+
+	bHall = new JButton("PRESENCE DETECTOR");
+
+	JPanel pHall = new JPanel(new GridLayout(2, 1, 7, 7));
+	pHall.setBorder(BorderFactory.createTitledBorder("Hall"));
+	pHall.add(lHall);
+	pHall.add(bHall);
+
+	// Random activity generators
+
+	final DaySequenceGenerator dsg = new DaySequenceGenerator(mc);
+	bDay = new JButton("Generate Day");
+	bDay.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		System.out.println("Generate day pressed");
+		dsg.generateDaySecuence(1);
+	    }
+	});
+	bWeek = new JButton("Generate Week");
+	bWeek.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		System.out.println("Generate week pressed");
+		dsg.generateDaySecuence(7);
+	    }
+	});
+	bMonth = new JButton("Generate Month");
+	bMonth.addActionListener(new ActionListener() {
+
+	    public void actionPerformed(ActionEvent e) {
+		System.out.println("Generate month pressed");
+		dsg.generateDaySecuence(31);
+	    }
+	});
+
+	JPanel pGenerators = new JPanel();
+	pGenerators.add(bDay);
+	pGenerators.add(bWeek);
+	pGenerators.add(bMonth);
+
+	// LABEL
+
+	JPanel pClockL = new JPanel(new GridLayout(3, 2, 14, 7));
+	JPanel pClockR = new JPanel(new GridLayout(3, 2, 14, 7));
+	// BUTTON
+	bClock = new JButton("Submit");
+	bClock.addActionListener(new ActionListener() {
+
+	    public void actionPerformed(ActionEvent e) {
+		if (cClock.isSelected()) {
+		    Date d = (Date) sClock.getValue();
+		    pseudoClockDiff = d.getTime()
+			    - Calendar.getInstance().getTimeInMillis();
+		    // System.out.println(d);
+		    updateSimuClockLabel(lClock, d.getTime());
+		    ConsequenceListener.getInstance().setTimeForDebug(
+			    ((Date) sClock.getValue()).getTime());
 		}
-	}
+	    }
+	});
 
-	public static void init(BundleContext ctx) {
+	sClock.addChangeListener(new ChangeListener() {
 
-		context = ctx;
+	    public void stateChanged(ChangeEvent e) {
+		if (!cClock.isSelected()) {
+		    Date d = (Date) sClock.getValue();
+		    pseudoClockDiff = d.getTime()
+			    - Calendar.getInstance().getTimeInMillis();
+		    // System.out.println(d);
+		    updateSimuClockLabel(lClock, d.getTime());
+		    ConsequenceListener.getInstance().setTimeForDebug(
+			    ((Date) sClock.getValue()).getTime());
+		}
 
-		mc = uAALBundleContainer.THE_CONTAINER
-				.registerModule(new Object[] { context });
+	    }
+	});
 
-		lKitchen = new JLabel("00:00:00 " + sinceLast);
-		lBathroom = new JLabel("00:00:00 " + sinceLast);
-		lLivingRoom = new JLabel("00:00:00 " + sinceLast);
-		lBedroom = new JLabel("00:00:00 " + sinceLast);
-		lGarden = new JLabel("00:00:00 " + sinceLast);
-		lHall = new JLabel("00:00:00 " + sinceLast);
-		lClock = new JLabel(simulatedTime + " 00:00:00");
-		// SNIPPER
-		Calendar auxCalendar = Calendar.getInstance();
-		auxCalendar.add(Calendar.YEAR, -10);
-		Date initDate = auxCalendar.getTime();
-		auxCalendar.add(Calendar.YEAR, 20);
-		Date endDate = auxCalendar.getTime();
-		SpinnerModel mod = new SpinnerDateModel(Calendar.getInstance()
-				.getTime(), initDate, endDate, Calendar.DAY_OF_MONTH);
-		sClock = new JSpinner(mod);
-		sClock
-				.setEditor(new JSpinner.DateEditor(sClock,
-						"HH:mm:ss dd/MM/yyyy"));
-		sClock.setValue(Calendar.getInstance().getTime());
-		// CLOCK CHECKBOX
-		cClock = new JCheckBox("Submit enabled", false);
+	pClockL.add(nothing);
+	pClockL.add(sClock);
+	pClockL.add(bClock);
 
-		initTimers();
-		initPresenceDetectorListener();
-		initMagneticContactListener();
-		initGUIElements();
+	pClockR.add(lClock);
+	pClockR.add(cClock);
+	pClockR.add(nothing);
 
-		GUIHousePublisher ghp = getInstance();
-		ghp.setSize(640, 540);
+	bKitchen.addActionListener(buttonListener);
+	bBathroom.addActionListener(buttonListener);
+	bBedroom.addActionListener(buttonListener);
+	bLivingRoom.addActionListener(buttonListener);
+	bGarden.addActionListener(buttonListener);
+	bHall.addActionListener(buttonListener);
 
-		// Magnetic Contacts
+	JPanel pGeneral = new JPanel(new GridLayout(5, 2, 30, 20));
+	pGeneral.add(pClockL);
+	pGeneral.add(pClockR);
+	pGeneral.add(pKitchen);
+	pGeneral.add(pLivingRoom);
+	pGeneral.add(pBathroom);
+	pGeneral.add(pBedroom);
+	pGeneral.add(pGarden);
+	pGeneral.add(pHall);
+	pGeneral.add(pGenerators);
 
-		ButtonGroup bg = new ButtonGroup();
-		bKMCWindow = new JToggleButton("Window");
-		bKMCWindow.addActionListener(mcListener);
+	ghp.setLayout(new FlowLayout(FlowLayout.CENTER, 25, 25));
+	ghp.add(pGeneral);
+	ghp.setVisible(true);
+	// ghp.pack();
+	ghp.repaint();
+    }
 
-		bKMCDoor = new JToggleButton("Door");
-		bKMCDoor.addActionListener(mcListener);
-		bkMCDrawerDishes = new JToggleButton("Drawer dishes");
-		bkMCDrawerDishes.addActionListener(mcListener);
-		bKMCDrawerCuttery = new JToggleButton("Drawer cuttery");
-		bKMCDrawerCuttery.addActionListener(mcListener);
+    private static void initGUIElements() {
+	// TODO Auto-generated method stub
 
-		JPanel pKMC = new JPanel();
-		pKMC.setBorder(BorderFactory.createTitledBorder("Magnetic contacts"));
+    }
 
-		// bg.add(bKMCDoor);
-		// bg.add(bKMCWindow);
-		// bg.add(bKMCDrawerCuttery);
-		// bg.add(bkMCDrawerDishes);
+    private static void initPresenceDetectorListener() {
+	ConsequenceListener.getInstance().startDebugTime();
 
-		pKMC.add(bKMCDoor);
-		pKMC.add(bKMCWindow);
-		pKMC.add(bkMCDrawerDishes);
-		pKMC.add(bKMCDrawerCuttery);
+	buttonListener = new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		Object src = e.getSource();
+		if (src.equals(bKitchen)) {
+		    StaticPublisher.publishMotionEventDetected("Kitchen",
+			    context);
+		    dKitchen = resetLabel(dKitchen);
+		    updateLabel(lKitchen, dKitchen);
+		    if (!tKitchen.isRunning()) {
+			System.out.println("STARTING TIMER...");
+			tKitchen.start();
+		    }
+		} else if (src.equals(bBathroom)) {
+		    StaticPublisher.publishMotionEventDetected("Bathroom",
+			    context);
+		    dBathroom = resetLabel(dBathroom);
+		    updateLabel(lBathroom, dBathroom);
+		    if (!tBathroom.isRunning()) {
+			tBathroom.start();
+		    }
+		} else if (src.equals(bBedroom)) {
+		    StaticPublisher.publishMotionEventDetected("Bedroom",
+			    context);
+		    dBedroom = resetLabel(dBedroom);
+		    updateLabel(lBedroom, dBedroom);
+		    if (!tBedroom.isRunning()) {
+			tBedroom.start();
+		    }
+		} else if (src.equals(bLivingRoom)) {
+		    StaticPublisher.publishMotionEventDetected("Living Room",
+			    context);
+		    dLivingRoom = resetLabel(dLivingRoom);
+		    updateLabel(lLivingRoom, dLivingRoom);
+		    if (!tLivingRoom.isRunning()) {
+			tLivingRoom.start();
+		    }
+		} else if (src.equals(bHall)) {
+		    StaticPublisher.publishMotionEventDetected("Hall", context);
+		    dHall = resetLabel(dHall);
+		    updateLabel(lHall, dHall);
+		    if (!tHall.isRunning()) {
+			tHall.start();
+		    }
+		} else if (src.equals(bGarden)) {
+		    StaticPublisher.publishMotionEventDetected("Garden",
+			    context);
+		    dGarden = resetLabel(dGarden);
+		    updateLabel(lGarden, dGarden);
+		    if (!tGarden.isRunning()) {
+			tGarden.start();
+		    }
+		}
+	    }
+	};
+    }
 
-		bKitchen = new JButton("PRESENCE DETECTOR");
+    private static void initMagneticContactListener() {
+	ConsequenceListener.getInstance().startDebugTime();
+	mcListener = new ActionListener() {
 
-		JPanel pKitchen = new JPanel(new GridLayout(2, 1, 7, 7));
-		pKitchen.setBorder(BorderFactory.createTitledBorder("Kitchen"));
-		pKitchen.add(pKMC);
-		// pKitchen.add(lKitchen);
-		pKitchen.add(bKitchen);
+	    public void actionPerformed(ActionEvent e) {
 
-		bBathroom = new JButton("PRESENCE DETECTOR");
+		if (e.getSource().equals(bKMCDoor)) {
+		    StaticPublisher.publishMagneticContactEventDetected(
+			    "Door@Kitchen", ((JToggleButton) e.getSource())
+				    .isSelected(), context);
+		} else if (e.getSource().equals(bKMCWindow)) {
+		    StaticPublisher.publishMagneticContactEventDetected(
+			    "Window@Kitchen", ((JToggleButton) e.getSource())
+				    .isSelected(), context);
+		} else if (e.getSource().equals(bKMCDrawerCuttery)) {
+		    StaticPublisher.publishMagneticContactEventDetected(
+			    "DrawerCuttery@Kitchen", ((JToggleButton) e
+				    .getSource()).isSelected(), context);
+		} else if (e.getSource().equals(bkMCDrawerDishes)) {
+		    StaticPublisher.publishMagneticContactEventDetected(
+			    "DrawerDishes@Kitchen", ((JToggleButton) e
+				    .getSource()).isSelected(), context);
+		}
+	    }
 
-		JPanel pBathroom = new JPanel(new GridLayout(2, 1, 7, 7));
-		pBathroom.setBorder(BorderFactory.createTitledBorder("Bathroom"));
-		pBathroom.add(lBathroom);
-		pBathroom.add(bBathroom);
+	};
+    }
 
-		bLivingRoom = new JButton("PRESENCE DETECTOR");
+    // One timer for updating all!!!
+    private static void initTimers() {
 
-		JPanel pLivingRoom = new JPanel(new GridLayout(2, 1, 7, 7));
-		pLivingRoom.setBorder(BorderFactory.createTitledBorder("LivingRoom"));
-		pLivingRoom.add(lLivingRoom);
-		pLivingRoom.add(bLivingRoom);
+	tClock = new Timer(1000, new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		// dBathroom = addSecondToCounter(dBathroom);
+		// System.out.println(Calendar.getInstance().getTimeInMillis());
+		updateSimuClockLabel(lClock, pseudoClockDiff
+			+ Calendar.getInstance().getTimeInMillis());
+	    }
+	});
+	tClock.start();
+	tBathroom = new Timer(1000, new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		dBathroom = addSecondToCounter(dBathroom);
+		updateLabel(lBathroom, dBathroom);
+	    }
+	});
+	tBedroom = new Timer(1000, new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		dBedroom = addSecondToCounter(dBedroom);
+		updateLabel(lBedroom, dBedroom);
+	    }
+	});
+	tLivingRoom = new Timer(1000, new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		dLivingRoom = addSecondToCounter(dLivingRoom);
+		updateLabel(lLivingRoom, dLivingRoom);
+	    }
+	});
+	tHall = new Timer(1000, new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		dHall = addSecondToCounter(dHall);
+		updateLabel(lHall, dHall);
+	    }
+	});
+	tGarden = new Timer(1000, new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		dGarden = addSecondToCounter(dGarden);
+		updateLabel(lGarden, dGarden);
+	    }
+	});
+	tKitchen = new Timer(1000, new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		dKitchen = addSecondToCounter(dKitchen);
+		updateLabel(lKitchen, dKitchen);
+	    }
+	});
 
-		bBedroom = new JButton("PRESENCE DETECTOR");
+    }
 
-		JPanel pBedroom = new JPanel(new GridLayout(2, 1, 7, 7));
-		pBedroom.setBorder(BorderFactory.createTitledBorder("Bedroom"));
-		pBedroom.add(lBedroom);
-		pBedroom.add(bBedroom);
+    protected static void updateSimuClockLabel(JLabel label, long timeInMillis) {
+	SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+	// System.out.println(timeInMillis);
+	label.setText(simulatedTime + format.format(new Date(timeInMillis)));
+    }
 
-		bGarden = new JButton("PRESENCE DETECTOR");
+    private static long addSecondToCounter(long d) {
 
-		JPanel pGarden = new JPanel(new GridLayout(2, 1, 7, 7));
-		pGarden.add(lGarden);
-		pGarden.add(bGarden);
-		pGarden.setBorder(BorderFactory.createTitledBorder("Garden"));
+	return d + 1000;
 
-		bHall = new JButton("PRESENCE DETECTOR");
+    }
 
-		JPanel pHall = new JPanel(new GridLayout(2, 1, 7, 7));
-		pHall.setBorder(BorderFactory.createTitledBorder("Hall"));
-		pHall.add(lHall);
-		pHall.add(bHall);
+    private static long resetLabel(long d) {
+	return BASE_DATE;
+    }
 
-		// Random activity generators
+    private static void updateLabel(JLabel label, long d) {
 
-		final DaySequenceGenerator dsg = new DaySequenceGenerator(mc);
-		bDay = new JButton("Generate Day");
-		bDay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Generate day pressed");
-				dsg.generateDaySecuence(1);
-			}
-		});
-		bWeek = new JButton("Generate Week");
-		bWeek.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Generate week pressed");
-				dsg.generateDaySecuence(7);
-			}
-		});
-		bMonth = new JButton("Generate Month");
-		bMonth.addActionListener(new ActionListener() {
+	SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+	label.setText(format.format(new Date(d)) + " " + sinceLast);
 
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Generate month pressed");
-				dsg.generateDaySecuence(31);
-			}
-		});
-
-		JPanel pGenerators = new JPanel();
-		pGenerators.add(bDay);
-		pGenerators.add(bWeek);
-		pGenerators.add(bMonth);
-
-		// LABEL
-
-		JPanel pClockL = new JPanel(new GridLayout(3, 2, 14, 7));
-		JPanel pClockR = new JPanel(new GridLayout(3, 2, 14, 7));
-		// BUTTON
-		bClock = new JButton("Submit");
-		bClock.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				if (cClock.isSelected()) {
-					Date d = (Date) sClock.getValue();
-					pseudoClockDiff = d.getTime()
-							- Calendar.getInstance().getTimeInMillis();
-					// System.out.println(d);
-					updateSimuClockLabel(lClock, d.getTime());
-					ConsequenceListener.getInstance().setTimeForDebug(
-							((Date) sClock.getValue()).getTime());
-				}
-			}
-		});
-
-		sClock.addChangeListener(new ChangeListener() {
-
-			public void stateChanged(ChangeEvent e) {
-				if (!cClock.isSelected()) {
-					Date d = (Date) sClock.getValue();
-					pseudoClockDiff = d.getTime()
-							- Calendar.getInstance().getTimeInMillis();
-					// System.out.println(d);
-					updateSimuClockLabel(lClock, d.getTime());
-					ConsequenceListener.getInstance().setTimeForDebug(
-							((Date) sClock.getValue()).getTime());
-				}
-
-			}
-		});
-
-		pClockL.add(nothing);
-		pClockL.add(sClock);
-		pClockL.add(bClock);
-
-		pClockR.add(lClock);
-		pClockR.add(cClock);
-		pClockR.add(nothing);
-
-		bKitchen.addActionListener(buttonListener);
-		bBathroom.addActionListener(buttonListener);
-		bBedroom.addActionListener(buttonListener);
-		bLivingRoom.addActionListener(buttonListener);
-		bGarden.addActionListener(buttonListener);
-		bHall.addActionListener(buttonListener);
-
-		JPanel pGeneral = new JPanel(new GridLayout(5, 2, 30, 20));
-		pGeneral.add(pClockL);
-		pGeneral.add(pClockR);
-		pGeneral.add(pKitchen);
-		pGeneral.add(pLivingRoom);
-		pGeneral.add(pBathroom);
-		pGeneral.add(pBedroom);
-		pGeneral.add(pGarden);
-		pGeneral.add(pHall);
-		pGeneral.add(pGenerators);
-
-		ghp.setLayout(new FlowLayout(FlowLayout.CENTER, 25, 25));
-		ghp.add(pGeneral);
-		ghp.setVisible(true);
-		// ghp.pack();
-		ghp.repaint();
-	}
-
-	private static void initGUIElements() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private static void initPresenceDetectorListener() {
-		ConsequenceListener.getInstance().startDebugTime();
-
-		buttonListener = new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Object src = e.getSource();
-				if (src.equals(bKitchen)) {
-					StaticPublisher.publishMotionEventDetected("Kitchen",
-							context);
-					dKitchen = resetLabel(dKitchen);
-					updateLabel(lKitchen, dKitchen);
-					if (!tKitchen.isRunning()) {
-						System.out.println("STARTING TIMER...");
-						tKitchen.start();
-					}
-				} else if (src.equals(bBathroom)) {
-					StaticPublisher.publishMotionEventDetected("Bathroom",
-							context);
-					dBathroom = resetLabel(dBathroom);
-					updateLabel(lBathroom, dBathroom);
-					if (!tBathroom.isRunning()) {
-						tBathroom.start();
-					}
-				} else if (src.equals(bBedroom)) {
-					StaticPublisher.publishMotionEventDetected("Bedroom",
-							context);
-					dBedroom = resetLabel(dBedroom);
-					updateLabel(lBedroom, dBedroom);
-					if (!tBedroom.isRunning()) {
-						tBedroom.start();
-					}
-				} else if (src.equals(bLivingRoom)) {
-					StaticPublisher.publishMotionEventDetected("Living Room",
-							context);
-					dLivingRoom = resetLabel(dLivingRoom);
-					updateLabel(lLivingRoom, dLivingRoom);
-					if (!tLivingRoom.isRunning()) {
-						tLivingRoom.start();
-					}
-				} else if (src.equals(bHall)) {
-					StaticPublisher.publishMotionEventDetected("Hall", context);
-					dHall = resetLabel(dHall);
-					updateLabel(lHall, dHall);
-					if (!tHall.isRunning()) {
-						tHall.start();
-					}
-				} else if (src.equals(bGarden)) {
-					StaticPublisher.publishMotionEventDetected("Garden",
-							context);
-					dGarden = resetLabel(dGarden);
-					updateLabel(lGarden, dGarden);
-					if (!tGarden.isRunning()) {
-						tGarden.start();
-					}
-				}
-			}
-		};
-	}
-
-	private static void initMagneticContactListener() {
-		ConsequenceListener.getInstance().startDebugTime();
-		mcListener = new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-
-				if (e.getSource().equals(bKMCDoor)) {
-					StaticPublisher.publishMagneticContactEventDetected(
-							"Door@Kitchen", ((JToggleButton) e.getSource())
-									.isSelected(), context);
-				} else if (e.getSource().equals(bKMCWindow)) {
-					StaticPublisher.publishMagneticContactEventDetected(
-							"Window@Kitchen", ((JToggleButton) e.getSource())
-									.isSelected(), context);
-				} else if (e.getSource().equals(bKMCDrawerCuttery)) {
-					StaticPublisher.publishMagneticContactEventDetected(
-							"DrawerCuttery@Kitchen", ((JToggleButton) e
-									.getSource()).isSelected(), context);
-				} else if (e.getSource().equals(bkMCDrawerDishes)) {
-					StaticPublisher.publishMagneticContactEventDetected(
-							"DrawerDishes@Kitchen", ((JToggleButton) e
-									.getSource()).isSelected(), context);
-				}
-			}
-
-		};
-	}
-
-	// One timer for updating all!!!
-	private static void initTimers() {
-
-		tClock = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// dBathroom = addSecondToCounter(dBathroom);
-				// System.out.println(Calendar.getInstance().getTimeInMillis());
-				updateSimuClockLabel(lClock, pseudoClockDiff
-						+ Calendar.getInstance().getTimeInMillis());
-			}
-		});
-		tClock.start();
-		tBathroom = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dBathroom = addSecondToCounter(dBathroom);
-				updateLabel(lBathroom, dBathroom);
-			}
-		});
-		tBedroom = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dBedroom = addSecondToCounter(dBedroom);
-				updateLabel(lBedroom, dBedroom);
-			}
-		});
-		tLivingRoom = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dLivingRoom = addSecondToCounter(dLivingRoom);
-				updateLabel(lLivingRoom, dLivingRoom);
-			}
-		});
-		tHall = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dHall = addSecondToCounter(dHall);
-				updateLabel(lHall, dHall);
-			}
-		});
-		tGarden = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dGarden = addSecondToCounter(dGarden);
-				updateLabel(lGarden, dGarden);
-			}
-		});
-		tKitchen = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dKitchen = addSecondToCounter(dKitchen);
-				updateLabel(lKitchen, dKitchen);
-			}
-		});
-
-	}
-
-	protected static void updateSimuClockLabel(JLabel label, long timeInMillis) {
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-		// System.out.println(timeInMillis);
-		label.setText(simulatedTime + format.format(new Date(timeInMillis)));
-	}
-
-	private static long addSecondToCounter(long d) {
-
-		return d + 1000;
-
-	}
-
-	private static long resetLabel(long d) {
-		return BASE_DATE;
-	}
-
-	private static void updateLabel(JLabel label, long d) {
-
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-		label.setText(format.format(new Date(d)) + " " + sinceLast);
-
-	}
+    }
 
 }
