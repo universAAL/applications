@@ -3,7 +3,7 @@
   <parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>E.0</version>
+		<version>E.1</version>
 		<relativePath>../hwo.pom</relativePath>
   </parent>
   <artifactId>hwo.mobile</artifactId>
@@ -94,14 +94,6 @@
 	</build>
 	<repositories>
 		<repository>
-			<id>central</id>
-			<name>Central Maven Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
 			<id>apache-snapshots</id>
 			<name>Apache Snapshots</name>
 			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
@@ -111,22 +103,6 @@
 			<snapshots>
 				<updatePolicy>daily</updatePolicy>
 			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal</id>
-			<name>universAAL Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal-snapshots</id>
-			<name>universAAL Snapshot Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
 		</repository>
 	</repositories>
 </project>

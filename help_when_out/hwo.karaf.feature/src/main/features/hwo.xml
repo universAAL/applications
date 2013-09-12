@@ -5,9 +5,9 @@
 		version="${platform.version}" resolver='(obr)'>
 	
 		<!-- Remote Interoperability -->
-		<bundle>mvn:org.universAAL.middleware/mw.bus.tracker.osgi/2.0.0</bundle>	
-		<bundle>mvn:org.universAAL.remote/ri.servicegateway/2.0.0</bundle>
-		<bundle>mvn:org.universAAL.remote/ri.gateway.communicator/2.0.0</bundle>
+		<bundle>mvn:org.universAAL.middleware/mw.bus.tracker.osgi/2.0.1-SNAPSHOT</bundle>	
+		<bundle>mvn:org.universAAL.remote/ri.servicegateway/2.0.1-SNAPSHOT</bundle>
+		<bundle>mvn:org.universAAL.remote/ri.gateway.communicator/2.0.1-SNAPSHOT</bundle>
 		
 		<!-- Service -->
 		<bundle>mvn:org.universAAL.AALapplication/hwo.servlet/${project.version}</bundle>
