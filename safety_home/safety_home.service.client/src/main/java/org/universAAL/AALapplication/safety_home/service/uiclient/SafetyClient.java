@@ -428,27 +428,27 @@ public class SafetyClient extends ContextSubscriber {
     }
 	
     public void windowStatus(int status) {
-    	//SafetyUIClient.setWindowStatus(status);
     	ec.startWindowDialog(status);
     }
 
+    public void doorStatus(int status) {
+    	fdc.startDoorDialog(status);
+    }
+
     public void lightStatus(int status) {
-    	//SafetyUIClient.setLightStatus(status);
     	ec.startLightsDialog(status);
     }
 
     public void temperatureValue(float temperature) {
-    	//SafetyUIClient.setTemperatureValue(temperature);
     	ec.setTemperature(temperature);
     }
 
     public void humidityValue(float humidity) {
-    	//SafetyUIClient.setHumidityValue(humidity);
     	ec.setHumidity(humidity);
+    	ec.startHumidityDialog(humidity);
     }
 
     public void motionValue(double motion) {
-    	//SafetyUIClient.setMotionValue(motion);
     	ec.setMotion(motion);
     	ec.startMotionDialog(ec.getMotionWarnings());
     }
@@ -473,8 +473,14 @@ public class SafetyClient extends ContextSubscriber {
 		);
 		System.out.println("################################################");*/
 		if (((String)event.getSubjectTypeURI()).indexOf("Door")!=-1){
+			System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
 			if (event.getRDFPredicate().indexOf("deviceRfid")!=-1){
+				System.out.println("------ DEVICE RFID ------");
 				whoIsKnocking((String)event.getRDFObject());
+			}
+			if (event.getRDFPredicate().indexOf("doorStatus")!=-1){
+				System.out.println("------ DOOR STATUS ------");
+				doorStatus(((Integer)event.getRDFObject()).intValue());
 			}
 		}
 		if (((String)event.getSubjectTypeURI()).indexOf("Window")!=-1)
