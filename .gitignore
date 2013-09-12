@@ -349,6 +349,10 @@ safety_home/safety_home.service.client/.classpath
 safety_home/safety_home.service.client/.project
 safety_home/safety_home.service.client/.settings
 safety_home/safety_home.service.client/target
+safety_home/safety_home.service.doorBellProvider/.classpath
+safety_home/safety_home.service.doorBellProvider/.project
+safety_home/safety_home.service.doorBellProvider/.settings
+safety_home/safety_home.service.doorBellProvider/target
 safety_home/safety_home.service.humiditySensorProvider/.classpath
 safety_home/safety_home.service.humiditySensorProvider/.project
 safety_home/safety_home.service.humiditySensorProvider/.settings

@@ -2847,12 +2847,10 @@ personal_safety/smp.test-location.publisher/pom.xml -text
 personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/Activator.java -text
 personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/GUIPanel.java -text
 safety_home/safety.pom/ASL2.0 -text
-safety_home/safety.pom/MITX -text
 safety_home/safety.pom/NOTICE -text
 safety_home/safety.pom/pom.xml -text
 safety_home/safety_home.service.client/ASL2.0 -text
 safety_home/safety_home.service.client/LICENSE.txt -text
-safety_home/safety_home.service.client/MITX -text
 safety_home/safety_home.service.client/NOTICE -text
 safety_home/safety_home.service.client/pom.xml -text
 safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplication/safety_home/service/client/Activator.java -text
@@ -2945,7 +2943,6 @@ safety_home/safety_home.service.doorBellProvider/src/main/java/org/universAAL/AA
 safety_home/safety_home.service.doorBellProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/doorBellSoapClient/SOAPClient.java -text
 safety_home/safety_home.service.humiditySensorProvider/ASL2.0 -text
 safety_home/safety_home.service.humiditySensorProvider/LICENSE.txt -text
-safety_home/safety_home.service.humiditySensorProvider/MITX -text
 safety_home/safety_home.service.humiditySensorProvider/NOTICE -text
 safety_home/safety_home.service.humiditySensorProvider/pom.xml -text
 safety_home/safety_home.service.humiditySensorProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/humiditySensorProvider/Activator.java -text
@@ -2953,7 +2950,6 @@ safety_home/safety_home.service.humiditySensorProvider/src/main/java/org/univers
 safety_home/safety_home.service.humiditySensorProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/humiditySensorSoapClient/SOAPClient.java -text
 safety_home/safety_home.service.lightSensorProvider/ASL2.0 -text
 safety_home/safety_home.service.lightSensorProvider/LICENSE.txt -text
-safety_home/safety_home.service.lightSensorProvider/MITX -text
 safety_home/safety_home.service.lightSensorProvider/NOTICE -text
 safety_home/safety_home.service.lightSensorProvider/pom.xml -text
 safety_home/safety_home.service.lightSensorProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/lightSensorProvider/Activator.java -text
@@ -2961,7 +2957,6 @@ safety_home/safety_home.service.lightSensorProvider/src/main/java/org/universAAL
 safety_home/safety_home.service.lightSensorProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/lightSensorSoapClient/SOAPClient.java -text
 safety_home/safety_home.service.motionSensorProvider/ASL2.0 -text
 safety_home/safety_home.service.motionSensorProvider/LICENSE.txt -text
-safety_home/safety_home.service.motionSensorProvider/MITX -text
 safety_home/safety_home.service.motionSensorProvider/NOTICE -text
 safety_home/safety_home.service.motionSensorProvider/pom.xml -text
 safety_home/safety_home.service.motionSensorProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/motionSensorProvider/Activator.java -text
@@ -2969,7 +2964,6 @@ safety_home/safety_home.service.motionSensorProvider/src/main/java/org/universAA
 safety_home/safety_home.service.motionSensorProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/motionSensorSoapClient/SOAPClient.java -text
 safety_home/safety_home.service.server/ASL2.0 -text
 safety_home/safety_home.service.server/LICENSE.txt -text
-safety_home/safety_home.service.server/MITX -text
 safety_home/safety_home.service.server/NOTICE -text
 safety_home/safety_home.service.server/pom.xml -text
 safety_home/safety_home.service.server/src/main/java/org/universAAL/AALapplication/safety_home/service/lampSoapClient/SOAPClient.java -text
@@ -2982,7 +2976,6 @@ safety_home/safety_home.service.server/src/main/java/org/universAAL/AALapplicati
 safety_home/safety_home.service.server/src/main/java/org/universAAL/AALapplication/safety_home/service/server/unit_impl/MyDevices.java -text
 safety_home/safety_home.service.smartCardProvider/ASL2.0 -text
 safety_home/safety_home.service.smartCardProvider/LICENSE.txt -text
-safety_home/safety_home.service.smartCardProvider/MITX -text
 safety_home/safety_home.service.smartCardProvider/NOTICE -text
 safety_home/safety_home.service.smartCardProvider/pom.xml -text
 safety_home/safety_home.service.smartCardProvider/src/main/java/org/universAAL/AALapplication/db/Derby/DerbyInterface.java -text
@@ -3012,7 +3005,6 @@ safety_home/safety_home.service.smartCardProvider/src/main/java/org/universAAL/A
 safety_home/safety_home.service.smartCardProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/smartCardProvider/Activator.java -text
 safety_home/safety_home.service.smartCardProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/smartCardProvider/CPublisher.java -text
 safety_home/safety_home.service.smokeDetectionProvider/ASL2.0 -text
-safety_home/safety_home.service.smokeDetectionProvider/MITX -text
 safety_home/safety_home.service.smokeDetectionProvider/NOTICE -text
 safety_home/safety_home.service.smokeDetectionProvider/pom.xml -text
 safety_home/safety_home.service.smokeDetectionProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/smokeDetectionProvider/Activator.java -text
@@ -3020,7 +3012,6 @@ safety_home/safety_home.service.smokeDetectionProvider/src/main/java/org/univers
 safety_home/safety_home.service.smokeDetectionProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/smokeDetectionSoapClient/SOAPClient.java -text
 safety_home/safety_home.service.temperatureSensorProvider/ASL2.0 -text
 safety_home/safety_home.service.temperatureSensorProvider/LICENSE.txt -text
-safety_home/safety_home.service.temperatureSensorProvider/MITX -text
 safety_home/safety_home.service.temperatureSensorProvider/NOTICE -text
 safety_home/safety_home.service.temperatureSensorProvider/pom.xml -text
 safety_home/safety_home.service.temperatureSensorProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/temperatureSensorProvider/Activator.java -text
@@ -3028,7 +3019,6 @@ safety_home/safety_home.service.temperatureSensorProvider/src/main/java/org/univ
 safety_home/safety_home.service.temperatureSensorProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/temperatureSensorSoapClient/SOAPClient.java -text
 safety_home/safety_home.service.windowProvider/ASL2.0 -text
 safety_home/safety_home.service.windowProvider/LICENSE.txt -text
-safety_home/safety_home.service.windowProvider/MITX -text
 safety_home/safety_home.service.windowProvider/NOTICE -text
 safety_home/safety_home.service.windowProvider/pom.xml -text
 safety_home/safety_home.service.windowProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/soapClient/SOAPClient.java -text
