@@ -4,7 +4,7 @@
   <parent>
   	<groupId>org.universAAL.AALapplication</groupId>
   	<artifactId>safety.pom</artifactId>
-  	<version>E.0.1-SNAPSHOT</version>
+  	<version>E.1</version>
   	<relativePath>../safety.pom/</relativePath>
   </parent>
  
@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.safety</artifactId>
-			<version>2.0.0</version>
+			<version>2.0.1-SNAPSHOT</version>
 		</dependency>		
 		<dependency>
       		<groupId>org.apache.derby</groupId>
@@ -69,14 +69,6 @@
 	</build>
 		<repositories>
 			<repository>
-				<id>central</id>
-				<name>Central Maven Repository</name>
-				<url>http://repo1.maven.org/maven2</url>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-			</repository>
-			<repository>
 				<id>apache-snapshots</id>
 				<name>Apache Snapshots</name>
 				<url>http://people.apache.org/repo/m2-snapshot-repository</url>
@@ -86,22 +78,6 @@
 				<snapshots>
 					<updatePolicy>daily</updatePolicy>
 				</snapshots>
-			</repository>
-			<repository>
-				<id>uaal</id>
-				<name>universAAL Repositories</name>
-				<url>http://depot.universaal.org/maven-repo/releases/</url>
-				<snapshots>
-					<enabled>false</enabled>
-				</snapshots>
-			</repository>
-			<repository>
-				<id>uaal-snapshots</id>
-				<name>universAAL Snapshot Repositories</name>
-				<url>http://depot.universaal.org/maven-repo/snapshots/</url>
-				<releases>
-					<enabled>false</enabled>
-				</releases>
 			</repository>
 		</repositories>
 </project>
