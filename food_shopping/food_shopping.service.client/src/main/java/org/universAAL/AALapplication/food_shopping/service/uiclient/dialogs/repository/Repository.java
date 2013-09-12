@@ -61,6 +61,7 @@ public class Repository extends UICaller {
 	private final static String window = "UIRepository#";
 	static final String MY_UI_NAMESPACE = SharedResources.CLIENT_SHOPPING_UI_NAMESPACE + window;
 	static final String SUBMISSION_GOBACK = MY_UI_NAMESPACE + "back";
+    public final static String IMG_URL = "http://127.0.0.1:8080/resources/shopping/images/";
 
 	private Form mainDialog = null;
 	private FoodItem[] fooditems = null;
@@ -217,7 +218,7 @@ public class Repository extends UICaller {
 	
 	private Form submitButtons(Form f){
 		//new Submit(f.getSubmits(), new Label("Go back", null), SUBMISSION_GOBACK);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_back_small.png")).toString()), SUBMISSION_GOBACK);
+		new Submit(f.getSubmits(), new Label("", IMG_URL + "icons_back_small.png"), SUBMISSION_GOBACK);
 		
 		return f;
 	}
