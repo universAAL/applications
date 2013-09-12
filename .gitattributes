@@ -551,6 +551,7 @@ food_shopping/shopping.pom/ASL2.0 -text
 food_shopping/shopping.pom/NOTICE -text
 food_shopping/shopping.pom/pom.xml -text
 food_shopping/utils/Shopping_Service_E.0.1-SNAPSHOT.launch -text
+food_shopping/utils/Shopping_Service_E.1.launch -text
 food_shopping/utils/database/food_shopping/food_create.dat -text
 food_shopping/utils/database/food_shopping/food_shopping.jpg -text
 food_shopping/utils/database/food_shopping/food_shopping.sql -text
