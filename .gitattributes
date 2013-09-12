@@ -2421,6 +2421,7 @@ medication/medication.missing.services.simulation/src/main/java/org/universAAL/A
 new_services.pom/pom.xml -text
 nutritional/nutritional.client/ASL2.0.txt -text
 nutritional/nutritional.client/NA_Service_E.0.1-SNAPSHOT.launch -text
+nutritional/nutritional.client/NA_Service_E.1.launch -text
 nutritional/nutritional.client/NOTICE.txt -text
 nutritional/nutritional.client/pom.xml -text
 nutritional/nutritional.client/src/main/java/na/miniDao/Advise.java -text

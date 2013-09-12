@@ -241,6 +241,7 @@ nutritional/nutritional.client/.classpath
 nutritional/nutritional.client/.project
 nutritional/nutritional.client/.settings
 nutritional/nutritional.client/target
+nutritional/nutritional.karaf.feature/.classpath
 nutritional/nutritional.karaf.feature/.project
 nutritional/nutritional.karaf.feature/.settings
 nutritional/nutritional.karaf.feature/target

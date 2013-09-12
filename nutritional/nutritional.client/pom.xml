@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>nutritional.pom</artifactId>
-		<version>E.0.1-SNAPSHOT</version>
+		<version>E.1</version>
 		<relativePath>../nutritional.pom</relativePath>
 	</parent>
 
 	<artifactId>nutritional.client</artifactId>
-	<version>E.0.1-SNAPSHOT</version>
+	<version>E.1</version>
 	<packaging>bundle</packaging>
 	<name>Nutritional Advisor Service</name>
 	<!-- changes name description of the service at pom file and updated versions of the referred bundles at feature file -->
@@ -42,12 +42,12 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.medication</artifactId>
-			<version>2.0.0</version>
+			<version>2.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.nutrition</artifactId>
-			<version>2.0.0</version>
+			<version>2.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<!-- Nutritional own libs -->
