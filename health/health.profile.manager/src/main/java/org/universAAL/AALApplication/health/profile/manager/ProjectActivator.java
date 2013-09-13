@@ -26,6 +26,8 @@ public class ProjectActivator implements BundleActivator {
 	static ModuleContext context;
 
 	private static final String MODULE = "health.profile.manager";
+
+	private ServiceProvider sCallee;
 	
 	public void start(BundleContext arg0) throws Exception {	
 		context = uAALBundleContainer.THE_CONTAINER
@@ -35,13 +37,13 @@ public class ProjectActivator implements BundleActivator {
 		/*
 		 * uAAL stuff
 		 */
+		sCallee = new ServiceProvider(context);
 		context.logInfo(MODULE, "Project started", null);
 	}
 
 
 	public void stop(BundleContext arg0) throws Exception {
-		// TODO Auto-generated method stub
-
+		sCallee.close();
 	}
 
 }
