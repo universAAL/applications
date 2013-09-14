@@ -1,9 +1,6 @@
 package org.universAAL.AALapplication.food_shopping.service.db.utils;
 
-import org.universAAL.AALapplication.food_shopping.service.db.manager.entities.*;
-
 import java.sql.ResultSet;
-
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -11,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
+
+import org.universAAL.AALapplication.food_shopping.service.db.manager.entities.Entity;
 
 //import org.postgresql.PGResultSetMetaData;
 
