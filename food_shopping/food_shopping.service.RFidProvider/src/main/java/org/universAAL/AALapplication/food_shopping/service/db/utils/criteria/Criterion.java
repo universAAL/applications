@@ -1,8 +1,9 @@
 package org.universAAL.AALapplication.food_shopping.service.db.utils.criteria;
 
-import org.universAAL.AALapplication.food_shopping.service.db.utils.*;
-
 import java.util.Vector;
+
+import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
 
 public abstract class Criterion{
     

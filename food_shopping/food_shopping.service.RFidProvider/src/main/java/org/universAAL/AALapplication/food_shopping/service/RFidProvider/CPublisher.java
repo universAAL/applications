@@ -15,9 +15,17 @@
  *****************************************************************************************/
 package org.universAAL.AALapplication.food_shopping.service.RFidProvider;
 
-import org.osgi.framework.BundleContext;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
+
 import org.universAAL.AALapplication.food_shopping.service.db.manager.entitymanagers.UserManager;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.ConnectionManager;
 import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.ArithmeticCriterion;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.Criterion;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextPublisher;
@@ -25,29 +33,9 @@ import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
 import org.universAAL.ontology.Shopping.FoodItem;
-import org.universAAL.ontology.location.indoor.Room;
 import org.universAAL.ontology.phThing.Device;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.sql.*;
-import javax.sql.*;
-import java.util.Vector;
-import java.util.ArrayList;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.ArithmeticCriterion;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.Criterion;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.ConnectionManager;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.ResultRow;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
-
 import com.metratec.lib.rfidreader.UHFReader;
-
-import java.net.*;
 
 /**
  * @author dimokas

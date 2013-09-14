@@ -1,6 +1,7 @@
 package org.universAAL.AALapplication.food_shopping.service.db.utils.criteria;
 
-import org.universAAL.AALapplication.food_shopping.service.db.utils.*;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
 
 public class BooleanCriterion extends Criterion{
 
