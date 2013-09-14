@@ -20,7 +20,6 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -29,10 +28,6 @@ import java.util.Vector;
 
 import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
 import org.universAAL.AALapplication.food_shopping.service.db.utils.ResultRow;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.ArithmeticCriterion;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.Criterion;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.statements.SelectStatement;
 import org.universAAL.AALapplication.food_shopping.service.server.Activator;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.container.utils.LogUtils;

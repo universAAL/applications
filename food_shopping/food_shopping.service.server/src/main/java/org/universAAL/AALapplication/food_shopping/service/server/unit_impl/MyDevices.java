@@ -17,18 +17,12 @@
 package org.universAAL.AALapplication.food_shopping.service.server.unit_impl;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.StringTokenizer;
 import java.util.Vector;
 
-import org.universAAL.middleware.container.utils.LogUtils;
-import org.universAAL.ontology.Shopping.FoodItem;
-import org.universAAL.ontology.Shopping.ShoppingList;
-import org.universAAL.AALapplication.food_shopping.service.RFidProvider.CPublisher;
 import org.universAAL.AALapplication.food_shopping.service.db.Derby.DerbyInterface;
 import org.universAAL.AALapplication.food_shopping.service.db.manager.entitymanagers.UserManager;
 import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
@@ -37,8 +31,10 @@ import org.universAAL.AALapplication.food_shopping.service.db.utils.ResultRow;
 import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
 import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.ArithmeticCriterion;
 import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.Criterion;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.StringCriterion;
 import org.universAAL.AALapplication.food_shopping.service.server.Activator;
+import org.universAAL.middleware.container.utils.LogUtils;
+import org.universAAL.ontology.Shopping.FoodItem;
+import org.universAAL.ontology.Shopping.ShoppingList;
 
 /**
  * @author dimokas

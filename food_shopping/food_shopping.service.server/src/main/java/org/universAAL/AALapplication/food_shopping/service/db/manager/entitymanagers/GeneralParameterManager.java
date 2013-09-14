@@ -1,13 +1,6 @@
 package org.universAAL.AALapplication.food_shopping.service.db.manager.entitymanagers;
 
-import org.universAAL.AALapplication.food_shopping.service.db.manager.entities.Entity;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.*;
-
-import org.universAAL.AALapplication.food_shopping.service.db.utils.statements.*;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.*;
-
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.Vector;

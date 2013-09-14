@@ -1,10 +1,9 @@
 package org.universAAL.AALapplication.food_shopping.service.db.utils.statements;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.sql.Connection;
-
-import java.sql.SQLException;
 
 import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
 import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
