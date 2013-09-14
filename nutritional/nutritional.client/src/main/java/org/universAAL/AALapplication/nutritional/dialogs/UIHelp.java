@@ -10,11 +10,16 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
+import org.universAAL.middleware.ui.owl.Recommendation;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Group;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.recommendations.HorizontalAlignment;
+import org.universAAL.ontology.recommendations.HorizontalLayout;
+import org.universAAL.ontology.recommendations.VerticalAlignment;
+import org.universAAL.ontology.recommendations.VerticalLayout;
 
 /**
  * The UI class that builds the Help Form and handles its associated response
@@ -47,35 +52,47 @@ public class UIHelp {
     public static Form getForm() {
 	Utils.println(Messages.getString("UIHelp.0")); //$NON-NLS-1$
 	Form f = Form.newDialog(Messages.getString("UIHelp.1"), new Resource()); //$NON-NLS-1$
-	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
-		"vertical,left");// For Classic LaF
+	 f.addAppearanceRecommendation(new VerticalLayout());
+	    f.addAppearanceRecommendation(HorizontalAlignment.left);
+//	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
+//		"vertical,left");// For Classic LaF
 	
 
 	Group groupIntro = new Group(
 		f.getIOControls(),
 		new Label(Messages.getString("UIHelp.2"), null), PROP_PATH_REF1, null, null); //$NON-NLS-1$
 	//	new SimpleOutput(groupIntro, null, null, Messages.getString("UIHelp.3")); //$NON-NLS-1$
+	groupIntro.addAppearanceRecommendation(new HorizontalLayout());
+	groupIntro.addAppearanceRecommendation(HorizontalAlignment.left);
 	new SimpleOutput(groupIntro, null, null, Messages.getString("UIHelp.4")); //$NON-NLS-1$
 
 	Group groupHow = new Group(f.getIOControls(), new Label(
 		Messages.getString("UIHelp.5"), null), //$NON-NLS-1$
 		PROP_PATH_REF1, null, null);
+	groupHow.addAppearanceRecommendation(new HorizontalLayout());
+	groupHow.addAppearanceRecommendation(HorizontalAlignment.left);
 	new SimpleOutput(groupHow, null, null, Messages.getString("UIHelp.6")); //$NON-NLS-1$
 
 	Group groupWhat = new Group(f.getIOControls(), new Label(
 		Messages.getString("UIHelp.7"), null), //$NON-NLS-1$
 		PROP_PATH_REF1, null, null);
+	groupWhat.addAppearanceRecommendation(new HorizontalLayout());
+	groupWhat.addAppearanceRecommendation(HorizontalAlignment.left);
 	new SimpleOutput(groupWhat, null, null, Messages.getString("UIHelp.8")); //$NON-NLS-1$
 
 	Group groupHowNutri = new Group(f.getIOControls(), new Label(
 		Messages.getString("UIHelp.9"), null), //$NON-NLS-1$
 		PROP_PATH_REF1, null, null);
+	groupHowNutri.addAppearanceRecommendation(new HorizontalLayout());
+	groupHowNutri.addAppearanceRecommendation(HorizontalAlignment.left);
 	new SimpleOutput(groupHowNutri, null, null,
 		Messages.getString("UIHelp.10")); //$NON-NLS-1$
 
 	Group groupIdont = new Group(f.getIOControls(), new Label(
 		Messages.getString("UIHelp.11"), null), //$NON-NLS-1$
 		PROP_PATH_REF1, null, null);
+	groupIdont.addAppearanceRecommendation(new HorizontalLayout());
+	groupIdont.addAppearanceRecommendation(HorizontalAlignment.left);
 	new SimpleOutput(groupIdont, null, null,
 		Messages.getString("UIHelp.12")); //$NON-NLS-1$
 	// add a go back button for quitting the dialog
