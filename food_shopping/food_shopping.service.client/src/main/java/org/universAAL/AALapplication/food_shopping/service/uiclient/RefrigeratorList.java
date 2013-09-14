@@ -16,26 +16,25 @@
 
 package org.universAAL.AALapplication.food_shopping.service.uiclient;
 
-import java.io.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Vector;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.datatransfer.*;
-import java.awt.dnd.*;
-import javax.swing.*;
-import javax.swing.border.Border;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 
-import org.universAAL.middleware.service.CallStatus;
-import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.Shopping.FoodItem;
-import org.universAAL.ontology.phThing.Device;
 
 /**
  * @author dimokas

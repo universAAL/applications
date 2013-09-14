@@ -18,7 +18,6 @@ package org.universAAL.AALapplication.food_shopping.service.uiclient;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.util.Constants;
-import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
 /**
