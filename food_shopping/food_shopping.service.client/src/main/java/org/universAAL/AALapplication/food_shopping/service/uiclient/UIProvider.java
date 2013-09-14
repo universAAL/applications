@@ -20,7 +20,6 @@ import java.util.Locale;
 
 import org.universAAL.AALapplication.food_shopping.service.uiclient.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.container.utils.StringUtils;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UICaller;
@@ -29,8 +28,6 @@ import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
-import org.universAAL.middleware.ui.rdf.MediaObject;
-import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.phThing.Device;

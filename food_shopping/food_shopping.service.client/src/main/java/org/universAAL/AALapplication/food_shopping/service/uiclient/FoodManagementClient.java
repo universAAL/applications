@@ -19,13 +19,11 @@ package org.universAAL.AALapplication.food_shopping.service.uiclient;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.Vector;
 
 import org.universAAL.AALapplication.food_shopping.service.uiclient.dialogs.repository.Repository;
 import org.universAAL.AALapplication.food_shopping.service.uiclient.dialogs.shopping.Shopping;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
@@ -39,7 +37,6 @@ import org.universAAL.ontology.Shopping.FoodItem;
 import org.universAAL.ontology.Shopping.FoodManagement;
 import org.universAAL.ontology.Shopping.Refrigerator;
 import org.universAAL.ontology.Shopping.ShoppingList;
-//import org.universAAL.ontology.nutrition.NutritionService;
 import org.universAAL.ontology.phThing.Device;
 
 
