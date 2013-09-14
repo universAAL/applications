@@ -30,7 +30,7 @@
   	<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/food_shopping</developerConnection>
   </scm>
   <modules>
-  	<module>../ont.shopping</module>
+<!--  	<module>../ont.shopping</module>-->
   	<module>../food_shopping.service.RFidProvider</module>
   	<module>../food_shopping.service.client</module>
   	<module>../food_shopping.service.server</module>
