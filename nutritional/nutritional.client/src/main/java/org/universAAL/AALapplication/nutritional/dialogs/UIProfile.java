@@ -33,6 +33,9 @@ import org.universAAL.ontology.nutrition.profile.DietType;
 import org.universAAL.ontology.nutrition.profile.NutritionalHabits;
 import org.universAAL.ontology.nutrition.profile.NutritionalPreferences;
 import org.universAAL.ontology.nutrition.profile.NutritionalSubProfile;
+import org.universAAL.ontology.recommendations.HorizontalAlignment;
+import org.universAAL.ontology.recommendations.HorizontalLayout;
+import org.universAAL.ontology.recommendations.VerticalLayout;
 
 /**
  * The UI class that builds the Profile Form and handles its associated response
@@ -137,15 +140,21 @@ public class UIProfile {
 	// }
 
 	f = Form.newDialog(Messages.getString("UIProfile.2"), new Resource()); //$NON-NLS-1$
-	f.setProperty(
-		"http://ontology.itaca.es/ClassicGUI.owl#layout", "alternate,vertical,right"); //$NON-NLS-1$ //$NON-NLS-2$
+	 f.addAppearanceRecommendation(new VerticalLayout());
+	    f.addAppearanceRecommendation(HorizontalAlignment.right);
+//	f.setProperty(
+//		"http://ontology.itaca.es/ClassicGUI.owl#layout", "alternate,vertical,right"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	Group nutrHabits = new Group(
 		f.getIOControls(),
 		new Label(Messages.getString("UIProfile.14"), null), PROP_PATH_REF1, null, null); //$NON-NLS-1$
+	nutrHabits.addAppearanceRecommendation(new HorizontalLayout());
+	nutrHabits.addAppearanceRecommendation(HorizontalAlignment.right);
 	// TODO AM PM stuff
 	Group hours = new Group(nutrHabits,
 		new Label("", null), PROP_PATH_REF2, null, null); //$NON-NLS-1$
+	hours.addAppearanceRecommendation(new VerticalLayout());
+	hours.addAppearanceRecommendation(HorizontalAlignment.right);
 	Select1 s1 = new Select1(
 		hours,
 		new Label(Messages.getString("UIProfile.15"), (String) null), PROP_PATH_REF3, null, null); //$NON-NLS-1$
@@ -198,6 +207,8 @@ public class UIProfile {
 
 	Group misc = new Group(nutrHabits,
 		new Label("", null), PROP_PATH_REF11, null, null); //$NON-NLS-1$
+	misc.addAppearanceRecommendation(new VerticalLayout());
+	misc.addAppearanceRecommendation(HorizontalAlignment.right);
 	new InputField(
 		misc,
 		new Label(Messages.getString("UIProfile.23"), (String) null), PROP_PATH_REF12, //$NON-NLS-1$
@@ -270,7 +281,7 @@ public class UIProfile {
     /**
      * The main InterfaceProvider delegates calls to the handleUIResponse of the
      * UICaller to this one if the prefix of the pressed submit ID matches this
-     * class´ one (it´s one of its submits).
+     * classï¿½ one (itï¿½s one of its submits).
      * 
      * @param uir
      *            The UI Response to handle.

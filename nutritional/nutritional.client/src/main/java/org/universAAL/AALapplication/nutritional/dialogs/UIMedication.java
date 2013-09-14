@@ -18,6 +18,9 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.medMgr.Precaution;
 import org.universAAL.ontology.medMgr.UserIDs;
+import org.universAAL.ontology.recommendations.HorizontalAlignment;
+import org.universAAL.ontology.recommendations.HorizontalLayout;
+import org.universAAL.ontology.recommendations.VerticalLayout;
 
 /**
  * The UI class that builds the Profile Form and handles its associated response
@@ -59,12 +62,16 @@ public class UIMedication {
 	if (p != null) {
 	    f = Form.newDialog(
 		    Messages.getString("UIProfile.2"), new Resource()); //$NON-NLS-1$
-	    f.setProperty(
-		    "http://ontology.itaca.es/ClassicGUI.owl#layout", "constant,vertical,left"); //$NON-NLS-1$ //$NON-NLS-2$
+	    f.addAppearanceRecommendation(new VerticalLayout());
+	    f.addAppearanceRecommendation(HorizontalAlignment.left);
+//	    f.setProperty(
+//		    "http://ontology.itaca.es/ClassicGUI.owl#layout", "constant,vertical,left"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	    Group medications = new Group(
 		    f.getIOControls(),
 		    new Label(Messages.getString("UIProfile.3"), null), PROP_PATH_REF1, null, null); //$NON-NLS-1$
+	    medications.addAppearanceRecommendation(new VerticalLayout());
+	    medications.addAppearanceRecommendation(HorizontalAlignment.left);
 
 	    Utils.println("Tester: sideeffect: " + p.getSideEffect() //$NON-NLS-1$
 		    + " incompliance: " + p.getIncompliance()); //$NON-NLS-1$
@@ -72,6 +79,8 @@ public class UIMedication {
 	    Group sideeffects = new Group(
 		    medications,
 		    new Label(Messages.getString("UIProfile.4"), null), PROP_PATH_REF2, null, null); //$NON-NLS-1$
+	    sideeffects.addAppearanceRecommendation(new VerticalLayout());
+	    sideeffects.addAppearanceRecommendation(HorizontalAlignment.left);
 	    new SimpleOutput(sideeffects, new Label("", null), null, //$NON-NLS-1$
 		    p.getSideEffect());
 
@@ -82,6 +91,8 @@ public class UIMedication {
 	    Group incompl = new Group(
 		    medications,
 		    new Label(Messages.getString("UIProfile.6"), null), PROP_PATH_REF3, null, null); //$NON-NLS-1$
+	    incompl.addAppearanceRecommendation(new VerticalLayout());
+	    incompl.addAppearanceRecommendation(HorizontalAlignment.left);
 	    new SimpleOutput(incompl, new Label("", null), //$NON-NLS-1$
 		    null, incompliance);
 	    // add an exit button for quitting the dialog
@@ -99,7 +110,7 @@ public class UIMedication {
     /**
      * The main InterfaceProvider delegates calls to the handleUIResponse of the
      * UICaller to this one if the prefix of the pressed submit ID matches this
-     * class´ one (it´s one of its submits).
+     * classï¿½ one (itï¿½s one of its submits).
      * 
      * @param uir
      *            The UI Response to handle.

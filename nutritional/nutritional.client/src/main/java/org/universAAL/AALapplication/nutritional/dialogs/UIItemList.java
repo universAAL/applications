@@ -25,6 +25,9 @@ import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.nutrition.Food;
 import org.universAAL.ontology.nutrition.profile.NutritionalPreferences;
 import org.universAAL.ontology.nutrition.profile.NutritionalSubProfile;
+import org.universAAL.ontology.recommendations.HorizontalAlignment;
+import org.universAAL.ontology.recommendations.HorizontalLayout;
+import org.universAAL.ontology.recommendations.VerticalLayout;
 
 
 
@@ -55,8 +58,10 @@ public class UIItemList {
 		.newDialog(
 			dislikeInsteadOfRecipe ? Messages
 				.getString("UIItemList.0") : Messages.getString("UIItemList.1"), new Resource()); //$NON-NLS-1$ //$NON-NLS-2$
-	f.setProperty(
-		"http://ontology.itaca.es/ClassicGUI.owl#layout", "vertical,right");//$NON-NLS-1$ //$NON-NLS-2$
+	 f.addAppearanceRecommendation(new VerticalLayout());
+	    f.addAppearanceRecommendation(HorizontalAlignment.right);
+//	f.setProperty(
+//		"http://ontology.itaca.es/ClassicGUI.owl#layout", "vertical,right");//$NON-NLS-1$ //$NON-NLS-2$
 
 	if (dislikeInsteadOfRecipe) {
 	    ProfileConnector profConnect = ProfileConnector.getInstance();
@@ -76,6 +81,8 @@ public class UIItemList {
 			new PropertyPath(null, false,
 				new String[] { USER_INPUT_REF1 + k }), null,
 			null);
+		row.addAppearanceRecommendation(new HorizontalLayout());
+		row.addAppearanceRecommendation(HorizontalAlignment.right);
 		new SimpleOutput(row, new Label("", null), null, i.getName());
 		new Submit(row, new Label(Messages.getString("UIItemList.3"),
 			null), SUBMIT_REMOVE + k + "@" + dislikeInsteadOfRecipe
@@ -97,6 +104,8 @@ public class UIItemList {
 			    new Label("", null), new PropertyPath(null, false,
 				    new String[] { USER_INPUT_REF1 + k }),
 			    null, null);
+		    row.addAppearanceRecommendation(new HorizontalLayout());
+		    row.addAppearanceRecommendation(HorizontalAlignment.right);
 		    new SimpleOutput(row, new Label("", null), null,
 			    i.getCourse());
 		    new Submit(row, new Label(
@@ -122,7 +131,7 @@ public class UIItemList {
     /**
      * The main InterfaceProvider delegates calls to the handleUIResponse of the
      * UICaller to this one if the prefix of the pressed submit ID matches this
-     * class´ one (it´s one of its submits).
+     * classï¿½ one (itï¿½s one of its submits).
      * 
      * @param uir
      *            The UI Response to handle.

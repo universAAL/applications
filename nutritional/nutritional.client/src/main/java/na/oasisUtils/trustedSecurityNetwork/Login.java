@@ -8,11 +8,11 @@ import na.utils.ServiceInterface;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.universAAL.AALapplication.nutritional.SharedResources;
-import org.universAAL.middleware.container.utils.StringUtils;
-import org.universAAL.middleware.interfaces.utils.Util;
-import org.universAAL.middleware.rdf.Resource;
+//import org.universAAL.middleware.container.utils.StringUtils;
+//import org.universAAL.middleware.interfaces.utils.Util;
+//import org.universAAL.middleware.rdf.Resource;
 
-import edu.emory.mathcs.backport.java.util.concurrent.helpers.Utils;
+//import edu.emory.mathcs.backport.java.util.concurrent.helpers.Utils;
 
 public class Login {
     private Log log = LogFactory.getLog(Login.class);

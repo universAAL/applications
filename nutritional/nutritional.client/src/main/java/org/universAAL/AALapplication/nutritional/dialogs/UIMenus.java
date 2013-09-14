@@ -25,6 +25,9 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.MediaObject;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.recommendations.HorizontalAlignment;
+import org.universAAL.ontology.recommendations.HorizontalLayout;
+import org.universAAL.ontology.recommendations.VerticalLayout;
 
 /**
  * The UI class that builds the Menus Form and handles its associated response
@@ -74,8 +77,10 @@ public class UIMenus {
 		.newDialog(
 			Messages.getString("UIMenus.0") //$NON-NLS-1$
 				+ (today ? Messages.getString("UIMenus.1") : Messages.getString("UIMenus.2")), new Resource()); //$NON-NLS-1$ //$NON-NLS-2$
-	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
-		"vertical,left");
+	 f.addAppearanceRecommendation(new VerticalLayout());
+	    f.addAppearanceRecommendation(HorizontalAlignment.left);
+//	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
+//		"vertical,left");
 	// Group groupActions = new Group(f.getIOControls(), new
 	// Label("Actions",
 	// null), PROP_PATH_REF1, null, null);
@@ -104,6 +109,8 @@ public class UIMenus {
 		    String category = meal.getCategory();
 		    Group groupMeal = new Group(f.getIOControls(), new Label(
 			    category, null), PROP_PATH_REF1, null, null);
+		    groupMeal.addAppearanceRecommendation(new HorizontalLayout());
+		    groupMeal.addAppearanceRecommendation(HorizontalAlignment.left);
 		    int num_dishes = meal.getDishes().length;
 
 		    // Sort dishes
@@ -114,6 +121,8 @@ public class UIMenus {
 			/* Messages.getString("UIMenus.3") */, null),
 				PROP_PATH_REF1, null, //$NON-NLS-1$
 				null);
+			 groupDish.addAppearanceRecommendation(new VerticalLayout());
+			 groupDish.addAppearanceRecommendation(HorizontalAlignment.left);
 			Dish dish = sortedDishes[index_dishes];
 			if (dish == null) {
 			    Utils.println("UIMenus: dish is null, index: " //$NON-NLS-1$
@@ -126,6 +135,7 @@ public class UIMenus {
 			    new SimpleOutput(groupDish,
 				    new Label(""/*Messages.getString("UIMenus.5")*/, null), null, //$NON-NLS-1$
 				    dish.getDescription());
+			    
 			    if (dish.getImage() != null
 				    && dish.getImage().length() > 0) {
 				new MediaObject(groupDish, new Label(

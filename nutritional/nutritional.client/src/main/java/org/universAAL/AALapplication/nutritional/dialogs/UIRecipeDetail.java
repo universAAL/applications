@@ -23,6 +23,8 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.MediaObject;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.recommendations.HorizontalAlignment;
+import org.universAAL.ontology.recommendations.VerticalLayout;
 
 /**
  * The UI class that builds the Recipe Form and handles its associated response
@@ -67,8 +69,10 @@ public class UIRecipeDetail {
 	Utils.println(Messages.getString("UIRecipeDetail.0")); //$NON-NLS-1$
 	Form f = Form.newDialog(
 		Messages.getString("UIRecipeDetail.1"), new Resource()); //$NON-NLS-1$
-	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
-		"constant,vertical,left");
+	 f.addAppearanceRecommendation(new VerticalLayout());
+	    f.addAppearanceRecommendation(HorizontalAlignment.left);
+//	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
+//		"constant,vertical,left");
 	Recipe recipe = getRecipe(idRecipe);
 	if (recipe != null) {
 	    String recipeName = recipe.getCourse();
@@ -79,6 +83,8 @@ public class UIRecipeDetail {
 	    Group groupDesc = new Group(f.getIOControls(), new Label(
 		    Messages.getString("UIRecipeDetail.16"), null), //$NON-NLS-1$
 		    PROP_PATH_RECIPE_NAME, null, null);
+	    groupDesc.addAppearanceRecommendation(new VerticalLayout());
+	    groupDesc.addAppearanceRecommendation(HorizontalAlignment.left);
 	    if (recipeName != null && !recipeName.isEmpty()) {
 		new SimpleOutput(groupDesc, new Label(
 			Messages.getString("UIRecipeDetail.2"), null), //$NON-NLS-1$
@@ -98,6 +104,8 @@ public class UIRecipeDetail {
 	    Group groupIngredients = new Group(
 		    f.getIOControls(),
 		    new Label(Messages.getString("UIRecipeDetail.4"), null), PROP_PATH_RECIPE_CATEGORY, null, null); //$NON-NLS-1$
+	    groupIngredients.addAppearanceRecommendation(new VerticalLayout());
+	    groupIngredients.addAppearanceRecommendation(HorizontalAlignment.left);
 	    RecipeIngredient[] ingredients = recipe.getRecipeIngredients();
 	    if (ingredients != null && ingredients.length > 0) {
 		for (int indexIngredient = 0; indexIngredient < ingredients.length; indexIngredient++) {
@@ -123,6 +131,8 @@ public class UIRecipeDetail {
 	    Group groupProcedure = new Group(
 		    f.getIOControls(),
 		    new Label(Messages.getString("UIRecipeDetail.5"), null), PROP_PATH_RECIPE_CATEGORY, null, null); //$NON-NLS-1$
+	    groupProcedure.addAppearanceRecommendation(new VerticalLayout());
+	    groupProcedure.addAppearanceRecommendation(HorizontalAlignment.left);
 	    new SimpleOutput(groupProcedure,
 		    new Label("", null), //$NON-NLS-1$
 		    PROP_PATH_RECIPE_PROCEDURE,

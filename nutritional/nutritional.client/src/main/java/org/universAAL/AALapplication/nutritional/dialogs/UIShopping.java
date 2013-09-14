@@ -16,6 +16,8 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.middleware.ui.rdf.TextArea;
+import org.universAAL.ontology.recommendations.HorizontalAlignment;
+import org.universAAL.ontology.recommendations.VerticalLayout;
 
 /**
  * The UI class that builds the Shopping Form and handles its associated
@@ -49,8 +51,10 @@ public class UIShopping {
 	Utils.println("UI Shopping Form"); //$NON-NLS-1$
 	Form f = Form.newDialog(
 		Messages.getString("UIShopping.0"), new Resource()); //$NON-NLS-1$
-	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
-		"vertical,left");
+	f.addAppearanceRecommendation(new VerticalLayout());
+	f.addAppearanceRecommendation(HorizontalAlignment.left);
+//	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
+//		"vertical,left");
 	InputField in = new InputField(
 		f.getIOControls(),
 		new Label(Messages.getString("UIShopping.1"), null), PROP_PATH_REF1, null, //$NON-NLS-1$
@@ -74,7 +78,7 @@ public class UIShopping {
     /**
      * The main InterfaceProvider delegates calls to the handleUIResponse of the
      * UICaller to this one if the prefix of the pressed submit ID matches this
-     * class´ one (it´s one of its submits).
+     * classï¿½ one (itï¿½s one of its submits).
      * 
      * @param uir
      *            The UI Response to handle.
