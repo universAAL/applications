@@ -16,10 +16,6 @@
 
 package org.universAAL.AALapplication.food_shopping.service.server.unit_impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import org.universAAL.AALapplication.food_shopping.service.server.Activator;
-import org.universAAL.middleware.container.utils.LogUtils;
 
 /**
  * @author dimokas

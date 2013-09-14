@@ -1,11 +1,11 @@
 package org.universAAL.AALapplication.food_shopping.service.db.utils.statements;
 
-import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.*;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Vector;
+
+import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.Criterion;
 
 public class DeleteStatement extends EntityStatement{
 

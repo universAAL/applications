@@ -18,8 +18,11 @@ package org.universAAL.AALapplication.food_shopping.service.server;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-//import java.util.Enumeration;
 
+import org.universAAL.AALapplication.food_shopping.service.RFidProvider.CPublisher;
+import org.universAAL.AALapplication.food_shopping.service.server.unit_impl.DeviceFoodItem;
+import org.universAAL.AALapplication.food_shopping.service.server.unit_impl.DeviceStateListener;
+import org.universAAL.AALapplication.food_shopping.service.server.unit_impl.MyDevices;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
@@ -41,12 +44,6 @@ import org.universAAL.ontology.Shopping.FoodItem;
 import org.universAAL.ontology.Shopping.Refrigerator;
 import org.universAAL.ontology.Shopping.ShoppingList;
 import org.universAAL.ontology.location.indoor.Room;
-//import org.universAAL.ontology.phThing.Device;
-import org.universAAL.AALapplication.food_shopping.service.server.unit_impl.CodeFoodItem;
-import org.universAAL.AALapplication.food_shopping.service.server.unit_impl.DeviceFoodItem;
-import org.universAAL.AALapplication.food_shopping.service.server.unit_impl.DeviceStateListener;
-import org.universAAL.AALapplication.food_shopping.service.server.unit_impl.MyDevices;
-import org.universAAL.AALapplication.food_shopping.service.RFidProvider.CPublisher;
 
 /**
  * @author dimokas
