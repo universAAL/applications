@@ -4,7 +4,7 @@
   <parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>D.3</version>
+		<version>E.1</version>
 		<relativePath>../new_services.pom/pom.xml</relativePath>
 	</parent>
   
@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 	<name>The AAlfficiency POM file</name>
 	<description>The AAlfficiency POM file</description>
-	<version>D.3.1-SNAPSHOT</version>
+	<version>E.0.1-SNAPSHOT</version>
 	<modules>
 		<module>../FitbitPublisher</module>
 		<module>../EnergyReaderPublisher</module>
@@ -24,17 +24,14 @@
 			<dependency>
 				<artifactId>ont.fitbitdata</artifactId>
 				<groupId>org.universaal.ontology</groupId>
-				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<artifactId>ont.aalfficiencyscores</artifactId>
 				<groupId>org.universaal.ontology</groupId>
-				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<artifactId>ont.readenergy</artifactId>
 				<groupId>org.universaal.ontology</groupId>
-				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
