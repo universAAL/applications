@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -32,9 +32,10 @@ public class ScoresConsumer extends ContextSubscriber {
 
 	 private static ContextEventPattern[] getContextSubscriptionParams() {
 			ContextEventPattern cep = new ContextEventPattern();
-			cep.addRestriction(MergedRestriction.getAllValuesRestriction(
-				ContextEvent.PROP_RDF_SUBJECT, AalfficiencyScores.MY_URI));
-			
+			cep.addRestriction(MergedRestriction.getFixedValueRestriction(
+					ContextEvent.PROP_RDF_PREDICATE, AalfficiencyScores.PROP_ELECTRICITY_SCORE));
+			cep.addRestriction(MergedRestriction.getFixedValueRestriction(
+					ContextEvent.PROP_RDF_PREDICATE, AalfficiencyScores.PROP_ACTIVITY_SCORE));
 			return new ContextEventPattern[] { cep };
 		    }
 	
@@ -57,11 +58,12 @@ public class ScoresConsumer extends ContextSubscriber {
 
 	@Override
 	public void handleContextEvent(ContextEvent event) {
+		System.out.println("HOOA");
 		Setup s = new Setup();
 		// TODO Auto-generated method stub
 		//ElectricityData e = (ElectricityData)event.getRDFSubject();
 		
-		System.out.println("ELECTRICITY SCORES \n  ----------------\n" + " sub="
+		System.out.println("SCORES \n  ----------------\n" + " sub="
 				+ event.getSubjectURI() + "\n pred=" + event.getRDFPredicate()
 				+ "\n obj=" + event.getRDFObject() + "\n tst="
 				+ event.getTimestamp());
@@ -82,11 +84,8 @@ public class ScoresConsumer extends ContextSubscriber {
 					int total = e.getTodayElectricityScore();
 					s.setTotalElectricScore(String.valueOf(total));
 				}
-				
-				
 			}
 		}
-		
 		else if (event.getRDFObject() instanceof ActivityScore){
 			ActivityScore a = (ActivityScore) event.getRDFObject();
 			s.setActivityChallengeDescription(a.getChallenge().getDescription());
