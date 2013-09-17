@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -38,7 +38,7 @@ public class Activator implements BundleActivator {
 
     public void start(BundleContext bcontext) throws Exception {
     	System.out.print("ACTIVATOR");
-    	EnergyReaderDBInterface db = new EnergyReaderDBInterface();
+    	//EnergyReaderDBInterface db = new EnergyReaderDBInterface();
     	System.out.print("FILE ENERGY "+Setup.getSetupFileName());
     	//db.createDB();
     	t = new Timer();
@@ -59,8 +59,8 @@ public class Activator implements BundleActivator {
           tomorrow.get(Calendar.YEAR),
           tomorrow.get(Calendar.MONTH),
           tomorrow.get(Calendar.DATE),
-          13,
-          55
+          11,
+          46
         );
         return result.getTime();
       }

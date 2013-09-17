@@ -318,13 +318,13 @@ public class EnergyReaderDBInterface {
 						//If it's been a week since the challenge started, change active challenge for the next one
 						else{
 							//Calculate how many challenges there are to know which one is the next one
-							resultSet2 = statement2.executeQuery("SELECT COUNT(*) FROM challenge");
+							resultSet2 = statement2.executeQuery("SELECT COUNT(*) FROM "+DBNAME+".challenge");
 							if (resultSet2.next()){
 								int num = resultSet2.getInt(1);
 								//if current challenge has a lower order than number of challenges, the new one is the next
 								if (c.getOrder()<num){
-									statement3.executeUpdate("UPDATE "+DBNAME+".challenge SET `IsActive`=false WHERE `id`='"+c.getId()+"'");
-									String sta = "UPDATE challenge SET IsActive=true, StartDate='"+String.valueOf(new java.sql.Date(d.getTime()))+"' WHERE Orden="+(c.getOrder()+1);
+									statement3.executeUpdate("UPDATE "+DBNAME+".challenge SET IsActive=false WHERE id="+c.getId()+"");
+									String sta = "UPDATE "+DBNAME+".challenge SET IsActive=true, StartDate='"+String.valueOf(new java.sql.Date(d.getTime()))+"' WHERE Orden="+(c.getOrder()+1);
 									statement3.executeUpdate(sta);
 									resultSet3 = statement3
 											.executeQuery("select * from "+DBNAME+".challenge where IsActive = true");
