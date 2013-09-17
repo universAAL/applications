@@ -5,7 +5,7 @@ import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
 import org.universAAL.middleware.owl.MergedRestriction;
-import org.universAAL.ontology.powersocket.Powersocket;
+import org.universAAL.ontology.device.DimmerSensor;
 
 public class PowerSubscriber extends ContextSubscriber {
 
@@ -15,8 +15,8 @@ public class PowerSubscriber extends ContextSubscriber {
 	}
 	private static ContextEventPattern[] getContextSubscriptionParams() {
 		ContextEventPattern cep = new ContextEventPattern();
-		cep.addRestriction(MergedRestriction.getFixedValueRestriction(
-			ContextEvent.PROP_RDF_PREDICATE, Powersocket.PROP_SOCKET_VALUE));
+		//cep.addRestriction(MergedRestriction.getFixedValueRestriction(
+			//ContextEvent.PROP_RDF_PREDICATE, DimmerSensor.PROP_HAS_VALUE));
 		return new ContextEventPattern[] { cep };
 	}
 

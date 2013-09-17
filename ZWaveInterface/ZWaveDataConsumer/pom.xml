@@ -4,13 +4,13 @@
   <parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>D.3</version>
+		<version>E.0</version>
 		<relativePath>../new_services.pom/pom.xml</relativePath>
 	</parent>
   
   <artifactId>ZWaveDataConsumer</artifactId>
   <name></name>
-  <version>D.3.1-SNAPSHOT</version>
+  <version>E.0.1-SNAPSHOT</version>
   <description/>
 	<packaging>bundle</packaging>
 	<dependencies>
@@ -40,19 +40,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.phWorld</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.profile</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.activityhub</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.powersocket</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
