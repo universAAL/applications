@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -25,13 +25,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSetMetaData;
 import java.util.Date;
 
-import org.universAAL.FitbitPublisher.model.*;
+import org.universAAL.FitbitPublisher.model.ChallengeModel;
 import org.universAAL.FitbitPublisher.utils.Setup;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
-import org.universAAL.ontology.aalfficiency.scores.Challenge;
 
 public class FitbitDBInterface {
 	private Setup s = new Setup();

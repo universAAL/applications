@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -19,10 +19,6 @@
  */
 package org.universAAL.FitbitPublisher;
 
-import java.util.ArrayList;
-
-import java.util.List;
-import java.util.Date;
 import java.util.TimerTask;
 
 import org.json.simple.JSONArray;
@@ -32,11 +28,9 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.FitbitPublisher.FitbitAPI.FitbitException;
 import org.universAAL.FitbitPublisher.FitbitAPI.FitbitService;
 import org.universAAL.FitbitPublisher.database.FitbitDBInterface;
-import org.universAAL.FitbitPublisher.model.*;
-import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.container.osgi.uAALBundleContainer;
-import org.universAAL.middleware.context.ContextPublisher;
-import org.universAAL.middleware.context.owl.ContextProvider;
+import org.universAAL.FitbitPublisher.model.ActivityModel;
+import org.universAAL.FitbitPublisher.model.ChallengeModel;
+import org.universAAL.FitbitPublisher.model.SleepModel;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.context.ContextEvent;
@@ -88,18 +82,17 @@ public class FitbitPublisher extends TimerTask {
 			
 			ActivityModel a = formatActivities(activities);
 		
-						
 			Activity ac = new Activity();
 			
-			ac.setCalories(String.valueOf(a.caloriesOut));
-			ac.setSteps(String.valueOf(a.steps));
+			ac.setCalories(String.valueOf(160));
+			ac.setSteps(String.valueOf(25));
 		
 			SleepModel sleeptime = formatSleep(sleep);
 			Sleep sp = new Sleep();
 			
-			sp.setIsMainSleep(String.valueOf(sleeptime.isMainSleep));
-			sp.setMinutesAsleep(String.valueOf(sleeptime.minutesAsleep));
-			sp.setTimeInBed(String.valueOf(sleeptime.timeInBed));
+			sp.setIsMainSleep(String.valueOf(1));
+			sp.setMinutesAsleep(String.valueOf(850));
+			sp.setTimeInBed(String.valueOf(920));
 			
 			fitbitData.setSleep(sp);
 			fitbitData.setActivity(ac);
