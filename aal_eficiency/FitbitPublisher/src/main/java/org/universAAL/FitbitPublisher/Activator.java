@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -20,17 +20,12 @@
 
 package org.universAAL.FitbitPublisher;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Timer;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.universAAL.FitbitPublisher.FitbitAPI.FitbitService;
 import org.universAAL.FitbitPublisher.database.FitbitDBInterface;
 import org.universAAL.FitbitPublisher.utils.Setup;
 import org.universAAL.middleware.container.ModuleContext;
@@ -43,17 +38,21 @@ public class Activator implements BundleActivator {
        
     public void start(BundleContext bcontext) throws Exception {
     	System.out.print("FILE FITBIT "+Setup.getSetupFileName());
-    	FitbitDBInterface db = new FitbitDBInterface();
+    	//FitbitDBInterface db = new FitbitDBInterface();
     	//db.createDB();
-	Activator.osgiContext = bcontext;
-	Activator.context = uAALBundleContainer.THE_CONTAINER
+    	Activator.osgiContext = bcontext;
+    	Activator.context = uAALBundleContainer.THE_CONTAINER
 		.registerModule(new Object[] { bcontext });
-	
-	Timer t1 = new Timer();
-	t1.scheduleAtFixedRate(new FitbitPublisher(bcontext), getTime(), 1000*60*60*24);
-	
-		
-    }
+    	new Thread() {
+    		public void run() {
+    			FitbitPublisher f = new FitbitPublisher(osgiContext);
+    			f.publishFitbitData();
+    			System.out.print("FILE AALFFICIENCY "+Setup.getSetupFileName());
+    		}
+    	}.start();
+//		Timer t1 = new Timer();
+//		t1.scheduleAtFixedRate(new FitbitPublisher(bcontext), getTime(), 1000*60*60*24);
+	}
 
     public void stop(BundleContext arg0) throws Exception {
     }
