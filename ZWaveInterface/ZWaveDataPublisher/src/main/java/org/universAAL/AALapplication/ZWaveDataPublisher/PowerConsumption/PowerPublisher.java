@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -28,18 +28,14 @@ import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
-import org.universAAL.ontology.activityhub.ContactClosureSensor;
-import org.universAAL.ontology.activityhub.ContactClosureSensorEvent;
-import org.universAAL.ontology.activityhub.MotionSensor;
-import org.universAAL.ontology.activityhub.MotionSensorEvent;
-import org.universAAL.ontology.powersocket.Powersocket;
+import org.universAAL.ontology.device.DimmerSensor;
 
 public class PowerPublisher {
 	
 	private ContextPublisher cp;
 	ContextProvider info = new ContextProvider();
 	ModuleContext mc;
-	public final static String NAMESPACE = "http://tsbtecnologias.es/PoweConsumptionPublisher#";	
+	public final static String NAMESPACE = "http://tsbtecnologias.es/PowerConsumptionPublisher#";	
 	
 	public PowerPublisher(BundleContext context) {
     	System.out.print("New Publisher\n");
@@ -54,9 +50,10 @@ public class PowerPublisher {
 	}
 	
 	public void publishPowerConsumption(String name, int value){
-		Powersocket ps = new Powersocket(NAMESPACE+name);
-		ps.setValue(value);
-		cp.publish(new ContextEvent(ps, Powersocket.PROP_SOCKET_VALUE));
+		DimmerSensor ds = new DimmerSensor(NAMESPACE+name);
+		ds.setValue(value);
+		System.out.print("Publishing Power Values for "+NAMESPACE+name+" = "+ds.getValue()+"\n");
+		cp.publish(new ContextEvent(ds, DimmerSensor.PROP_HAS_VALUE));
 	}
 
 }
