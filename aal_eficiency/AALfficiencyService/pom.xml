@@ -4,13 +4,13 @@
   <parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>D.3</version>
+		<version>E.0</version>
 	<!--	<relativePath>../new_services.pom/pom.xml</relativePath> -->
 	</parent>
   
   <artifactId>AALfficiencyService</artifactId>
-  <name></name>
-  <version>D.3.1-SNAPSHOT</version>
+  <name>uAAL AALfficiency Service</name>
+  <version>E.0.1-SNAPSHOT</version>
   <description/>
 	<packaging>bundle</packaging>
 	<dependencies>
@@ -45,10 +45,6 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.powersocket</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
