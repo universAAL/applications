@@ -91,9 +91,6 @@ public class DailyPublisher extends TimerTask{
 	}
     
     public void publishEnergyScore(EnergyScoreModel energy) {
-    	
-    	
-    	
     	Challenge c = new Challenge(NAMESPACE+"ElectricityDataChallenge");
     	c.setDescription(energy.getChallenge().getDescription());
     	c.setGoal(energy.getChallenge().getGoal());
@@ -107,8 +104,11 @@ public class DailyPublisher extends TimerTask{
     	sc.setElectricityScore(e);
     	
     	System.out.print("Publishing scores the context bus\n");
+    	ContextEvent ce = new ContextEvent(sc, AalfficiencyScores.PROP_ELECTRICITY_SCORE);
+    	System.out.print(ce.getRDFPredicate()+"\n");
     	System.out.print("--------------------------------\n");
-    	cp.publish(new ContextEvent(sc, AalfficiencyScores.PROP_ELECTRICITY_SCORE));
+    	
+    	cp.publish(ce);
     	
 	}
     
