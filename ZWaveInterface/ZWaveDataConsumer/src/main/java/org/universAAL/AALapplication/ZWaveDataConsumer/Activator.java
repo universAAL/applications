@@ -28,12 +28,11 @@ public class Activator implements BundleActivator {
 			    }
 			}.start();
 			new Thread() {
-			    public void run() {
-			    	new PowerSubscriber(context);
-			    }
+				public void run() {
+					new PowerSubscriber(context);
+				}
 			}.start();
-
-	}
+			}
 
 	public void stop(BundleContext arg0) throws Exception {
 		csubscriber.close();
