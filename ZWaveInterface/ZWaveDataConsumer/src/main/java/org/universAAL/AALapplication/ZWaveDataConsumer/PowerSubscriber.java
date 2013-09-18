@@ -15,8 +15,8 @@ public class PowerSubscriber extends ContextSubscriber {
 	}
 	private static ContextEventPattern[] getContextSubscriptionParams() {
 		ContextEventPattern cep = new ContextEventPattern();
-		//cep.addRestriction(MergedRestriction.getFixedValueRestriction(
-			//ContextEvent.PROP_RDF_PREDICATE, DimmerSensor.PROP_HAS_VALUE));
+		cep.addRestriction(MergedRestriction.getFixedValueRestriction(
+			ContextEvent.PROP_RDF_PREDICATE, DimmerSensor.PROP_HAS_VALUE));
 		return new ContextEventPattern[] { cep };
 	}
 
