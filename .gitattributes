@@ -75,6 +75,7 @@ aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/utils/Setup.java -text svneol=unset#text/plain
 aal_eficiency/Properties[!!-~]Files/AALfficiencyService.properties -text
 aal_eficiency/Properties[!!-~]Files/EnergyReaderPublisher.properties -text
+aal_eficiency/Properties[!!-~]Files/FitbitPublisher.properties -text
 agenda/agenda.client/ASL2.0.txt -text
 agenda/agenda.client/NOTICE.txt -text
 agenda/agenda.client/pom.xml -text
