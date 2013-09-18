@@ -73,6 +73,7 @@ aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model/ChallengeModel.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/model/SleepModel.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/src/main/java/org/universAAL/FitbitPublisher/utils/Setup.java -text svneol=unset#text/plain
+aal_eficiency/Properties[!!-~]Files/AALfficiencyService.properties -text
 agenda/agenda.client/ASL2.0.txt -text
 agenda/agenda.client/NOTICE.txt -text
 agenda/agenda.client/pom.xml -text
