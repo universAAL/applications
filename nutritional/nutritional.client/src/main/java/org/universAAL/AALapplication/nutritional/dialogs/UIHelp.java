@@ -52,8 +52,8 @@ public class UIHelp {
     public static Form getForm() {
 	Utils.println(Messages.getString("UIHelp.0")); //$NON-NLS-1$
 	Form f = Form.newDialog(Messages.getString("UIHelp.1"), new Resource()); //$NON-NLS-1$
-	 f.addAppearanceRecommendation(new VerticalLayout());
-	    f.addAppearanceRecommendation(HorizontalAlignment.left);
+	 f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
+	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.left);
 //	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
 //		"vertical,left");// For Classic LaF
 	

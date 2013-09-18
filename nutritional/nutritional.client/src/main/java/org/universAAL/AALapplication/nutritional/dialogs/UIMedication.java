@@ -62,8 +62,8 @@ public class UIMedication {
 	if (p != null) {
 	    f = Form.newDialog(
 		    Messages.getString("UIProfile.2"), new Resource()); //$NON-NLS-1$
-	    f.addAppearanceRecommendation(new VerticalLayout());
-	    f.addAppearanceRecommendation(HorizontalAlignment.left);
+	    f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
+	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.left);
 //	    f.setProperty(
 //		    "http://ontology.itaca.es/ClassicGUI.owl#layout", "constant,vertical,left"); //$NON-NLS-1$ //$NON-NLS-2$
 

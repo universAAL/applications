@@ -69,8 +69,8 @@ public class UIRecipeDetail {
 	Utils.println(Messages.getString("UIRecipeDetail.0")); //$NON-NLS-1$
 	Form f = Form.newDialog(
 		Messages.getString("UIRecipeDetail.1"), new Resource()); //$NON-NLS-1$
-	 f.addAppearanceRecommendation(new VerticalLayout());
-	    f.addAppearanceRecommendation(HorizontalAlignment.left);
+	 f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
+	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.left);
 //	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
 //		"constant,vertical,left");
 	Recipe recipe = getRecipe(idRecipe);

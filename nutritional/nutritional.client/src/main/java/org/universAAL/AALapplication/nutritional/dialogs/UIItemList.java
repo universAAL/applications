@@ -58,8 +58,8 @@ public class UIItemList {
 		.newDialog(
 			dislikeInsteadOfRecipe ? Messages
 				.getString("UIItemList.0") : Messages.getString("UIItemList.1"), new Resource()); //$NON-NLS-1$ //$NON-NLS-2$
-	 f.addAppearanceRecommendation(new VerticalLayout());
-	    f.addAppearanceRecommendation(HorizontalAlignment.right);
+	 f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
+	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.right);
 //	f.setProperty(
 //		"http://ontology.itaca.es/ClassicGUI.owl#layout", "vertical,right");//$NON-NLS-1$ //$NON-NLS-2$
 
