@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -62,7 +62,7 @@ public class MotionSensorPublisher {
         	   MotionSensorEvent mse = MotionSensorEvent.motion_detected;
         	   MotionSensor ms = new MotionSensor(msURL);
         	   ms.setMeasuredValue(mse);
-           
+           System.out.print("Publishing motion\n");
         	   cp.publish(new ContextEvent(ms, MotionSensor.PROP_MEASURED_VALUE));
            }
            else if (veraResponse[0].compareTo("Contact")==0){
@@ -71,6 +71,7 @@ public class MotionSensorPublisher {
         	   ContactClosureSensorEvent cce = ContactClosureSensorEvent.contact_opened;
         	   ContactClosureSensor cc = new ContactClosureSensor(msURL);
         	   cc.setMeasuredValue(cce);
+        	   System.out.print("Publishing contact\n");
         	   cp.publish(new ContextEvent(cc, ContactClosureSensor.PROP_MEASURED_VALUE));        	   
            }
 	}
