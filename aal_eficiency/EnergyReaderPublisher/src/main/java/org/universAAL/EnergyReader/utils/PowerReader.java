@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -29,7 +29,10 @@ import java.net.URL;
 import org.universAAL.EnergyReader.model.*;
 
 public class PowerReader {
-void EnergyReader(){}
+	
+	private Setup s = new Setup();
+	
+	void EnergyReader(){}
 	
 	public ReadEnergyModel[] readEnergyConsumption(){
 		ReadEnergyModel[] consumption;
@@ -42,7 +45,7 @@ void EnergyReader(){}
             String[] data;
             try
             {
-                url = new URL(Constants.gatewayURL);
+                url = new URL(s.getGatewayURL());
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
                 connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
