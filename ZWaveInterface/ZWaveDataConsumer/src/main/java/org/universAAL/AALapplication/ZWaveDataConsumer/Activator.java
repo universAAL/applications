@@ -22,11 +22,11 @@ public class Activator implements BundleActivator {
 			    	new MotionSubscriber(context);
 			    }
 			}.start();
-			new Thread() {
-			    public void run() {
-			    	new ClosureSubscriber(context);
-			    }
-			}.start();
+//			new Thread() {
+//			    public void run() {
+//			    	new ClosureSubscriber(context);
+//			    }
+//			}.start();
 			new Thread() {
 				public void run() {
 					new PowerSubscriber(context);
