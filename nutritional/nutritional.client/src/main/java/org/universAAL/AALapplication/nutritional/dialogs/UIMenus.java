@@ -77,8 +77,8 @@ public class UIMenus {
 		.newDialog(
 			Messages.getString("UIMenus.0") //$NON-NLS-1$
 				+ (today ? Messages.getString("UIMenus.1") : Messages.getString("UIMenus.2")), new Resource()); //$NON-NLS-1$ //$NON-NLS-2$
-	 f.addAppearanceRecommendation(new VerticalLayout());
-	    f.addAppearanceRecommendation(HorizontalAlignment.left);
+	 f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
+	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.left);
 //	f.setProperty("http://ontology.itaca.es/ClassicGUI.owl#layout",
 //		"vertical,left");
 	// Group groupActions = new Group(f.getIOControls(), new

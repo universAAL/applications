@@ -140,8 +140,8 @@ public class UIProfile {
 	// }
 
 	f = Form.newDialog(Messages.getString("UIProfile.2"), new Resource()); //$NON-NLS-1$
-	 f.addAppearanceRecommendation(new VerticalLayout());
-	    f.addAppearanceRecommendation(HorizontalAlignment.right);
+	 f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
+	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.right);
 //	f.setProperty(
 //		"http://ontology.itaca.es/ClassicGUI.owl#layout", "alternate,vertical,right"); //$NON-NLS-1$ //$NON-NLS-2$
 
