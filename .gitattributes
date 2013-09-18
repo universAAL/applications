@@ -57,7 +57,6 @@ aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/mo
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/model/EnergyScoreModel.java -text svneol=unset#text/plain
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/model/MeasurementModel.java -text svneol=unset#text/plain
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/model/ReadEnergyModel.java -text svneol=unset#text/plain
-aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/utils/Constants.java -text svneol=unset#text/plain
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/utils/PowerReader.java -text svneol=unset#text/plain
 aal_eficiency/EnergyReaderPublisher/src/main/java/org/universAAL/EnergyReader/utils/Setup.java -text svneol=unset#text/plain
 aal_eficiency/FitbitPublisher/FitbitPublisher.launch -text svneol=unset#text/plain
