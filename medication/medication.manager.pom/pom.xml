@@ -57,7 +57,7 @@
   <modules>
     <module>../medication.manager.configuration</module>
     <module>../medication.manager.persistence</module>
-    <!--<module>../../ontologies/ont.medication</module>-->
+    <module>../../ontologies/ont.medication</module>
     <module>../medication.manager.service</module>
     <module>../medication.manager.shell.commands</module>
     <module>../medication.missing.services.simulation</module>
