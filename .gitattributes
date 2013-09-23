@@ -2748,6 +2748,10 @@ ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile
 ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/NutritionalPreferences.java -text
 ontologies/ont.nutrition/src/main/java/org/universAAL/ontology/nutrition/profile/NutritionalSubProfile.java -text
 ontologies/ont.pom/composite/pom.xml -text
+ontologies/ont.pom/karaf.feature/ASL2.0.txt -text
+ontologies/ont.pom/karaf.feature/NOTICE.txt -text
+ontologies/ont.pom/karaf.feature/pom.xml -text
+ontologies/ont.pom/karaf.feature/src/features/features.xml -text
 ontologies/ont.pom/pom.xml -text
 ontologies/ont.pom/update.bat -text
 ontologies/ont.questionnaireStrategy/ASL2.0 -text
