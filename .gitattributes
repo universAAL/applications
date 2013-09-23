@@ -2559,12 +2559,6 @@ nutritional/nutritional.karaf.feature/NOTICE -text
 nutritional/nutritional.karaf.feature/pom.xml -text
 nutritional/nutritional.karaf.feature/src/main/features/na.xml -text
 nutritional/nutritional.pom/pom.xml -text
-ontologies/ont.aalfficiencyscores/.classpath -text svneol=unset#text/plain
-ontologies/ont.aalfficiencyscores/.project -text svneol=unset#text/plain
-ontologies/ont.aalfficiencyscores/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
-ontologies/ont.aalfficiencyscores/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
-ontologies/ont.aalfficiencyscores/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
-ontologies/ont.aalfficiencyscores/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.aalfficiencyscores/ASL2.0.txt -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/NOTICE -text
 ontologies/ont.aalfficiencyscores/pom.xml -text svneol=unset#text/plain
