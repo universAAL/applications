@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -12,7 +14,8 @@
 	<version>E.1</version>
 	<packaging>bundle</packaging>
 	<name>Nutritional Advisor Service</name>
-	<!-- changes name description of the service at pom file and updated versions of the referred bundles at feature file -->
+	<!-- changes name description of the service at pom file and updated versions 
+		of the referred bundles at feature file -->
 
 	<dependencies>
 		<dependency>
@@ -42,16 +45,14 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.medication</artifactId>
-			<version>2.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.nutrition</artifactId>
-			<version>2.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-		<groupId>org.universAAL.ontology</groupId>
-		<artifactId>ont.recommendations</artifactId>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.recommendations</artifactId>
 		</dependency>
 
 		<!-- Nutritional own libs -->
@@ -60,13 +61,15 @@
 			<artifactId>axis</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- Axis has problem with OPS4J logging. Use our axis/axis-pax/1.4 instead when running-->
+		<!-- Axis has problem with OPS4J logging. Use our axis/axis-pax/1.4 instead 
+			when running -->
 		<dependency>
 			<groupId>org.apache.axis</groupId>
 			<artifactId>axis-jaxrpc</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- --><dependency>
+		<!-- -->
+		<dependency>
 			<groupId>commons-discovery</groupId>
 			<artifactId>commons-discovery</artifactId>
 			<version>0.5</version>
@@ -86,19 +89,22 @@
 						<Bundle-Activator>org.universAAL.AALapplication.nutritional.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Export-Package/>
+						<Export-Package />
 						<Private-Package>
 							na.*,
 							org.universAAL.AALapplication.nutritional.*
 						</Private-Package>
 						<Import-Package>javax.swing, javax.swing.border,
 							javax.xml.datatype, javax.xml.namespace,
-							javax.xml.rpc, javax.xml.rpc.encoding, org.apache.axis, org.apache.axis.client,
+							javax.xml.rpc,
+							javax.xml.rpc.encoding, org.apache.axis, org.apache.axis.client,
 							org.apache.axis.constants, org.apache.axis.description,
 							org.apache.axis.encoding,
-							org.apache.axis.encoding.ser, org.apache.axis.soap, org.apache.axis.types,
+							org.apache.axis.encoding.ser,
+							org.apache.axis.soap, org.apache.axis.types,
 							org.apache.axis.utils,
-							org.apache.commons.logging, org.osgi.framework, org.universAAL.middleware.container,
+							org.apache.commons.logging,
+							org.osgi.framework, org.universAAL.middleware.container,
 							org.universAAL.middleware.container.osgi,
 							org.universAAL.middleware.container.osgi.util,
 							org.universAAL.middleware.container.utils,
@@ -112,15 +118,22 @@
 							org.universAAL.middleware.service.owls.profile,
 							org.universAAL.middleware.ui, org.universAAL.middleware.ui.owl,
 							org.universAAL.middleware.ui.rdf,
-							org.universAAL.middleware.util, org.universAAL.ontology.medMgr,
+							org.universAAL.middleware.util,
+							org.universAAL.ontology.medMgr,
 							org.universAAL.ontology.nutrition,
 							org.universAAL.ontology.nutrition.profile,
-							org.universAAL.ontology.profile, org.xml.sax, org.universAAL.ontology.recommendations
+							org.universAAL.ontology.profile, org.xml.sax,
+							org.universAAL.ontology.recommendations
 						</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>
-		<plugin><groupId>org.apache.karaf.tooling</groupId><artifactId>features-maven-plugin</artifactId><version>2.3.1</version></plugin></plugins>
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>features-maven-plugin</artifactId>
+				<version>2.3.1</version>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>
