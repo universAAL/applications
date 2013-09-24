@@ -1,118 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+<features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+	
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.1-SNAPSHOT/xml/features</repository>
+	
+	<feature name="uAAL-Service-MedicationManager"
+		description="The universAAL Medication Manager based on the Middleware 2.0"
+		version="${platform.version}" resolver='(obr)'>
 
-  <!--features:removeUrl mvn:org.universAAL.AALapplication/medication.manager.karaf.feature/E.0-SNAPSHOT/xml/features-->
-  <!--features:addUrl mvn:org.universAAL.AALapplication/medication.manager.karaf.feature/E.0-SNAPSHOT/xml/features-->
-
-  <!--
-
-  install file:\\\D:/universAAL/svn/new_services/trunk/ontologies/ont.medication/target/ont.medication-2.0.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.configuration/target/medication.manager.configuration-E.0-SNAPSHOT.jar
-  install file:\\\C:/Users/fournadjiev/.m2/repository/org/apache/derby/derby/10.7.1.1/derby-10.7.1.1.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.persistence/target/medication.manager.persistence-E.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.user.management/target/medication.manager.user.management-E.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.missing.services.simulation/target/medication.missing.services.simulation-E.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.ui/target/medication.manager.ui-E.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.service/target/medication.manager.service-E.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.shell.commands/target/medication.manager.shell.commands-E.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.servlet.ui.base/target/medication.manager.servlet.ui.base-E.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.servlet.ui/target/medication.manager.servlet.ui-E.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.servlet.ui.configuration/target/medication.manager.servlet.ui.configuration-E.0-SNAPSHOT.jar
-  install file:\\\D:/universAAL/svn/new_services/trunk/medication/medication.manager.servlet.ui.acquire.medicine/target/medication.manager.servlet.ui.acquire.medicine-E.0-SNAPSHOT.jar
-
-    features:install MedicationManager
+		<feature>uAAL-Ont.Medication</feature>
 
 
-    -->
+		<bundle start-level='88' start='true'>
+			mvn:org.apache.derby/derby/10.7.1.1
+		</bundle>
+		
+		<bundle start-level='87' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.configuration/E.1-SNAPSHOT</bundle>
 
-  <feature name="MedicationManager"
-           description="The universAAL Medication Manager based on the Middleware 2.0"
-           version="0.0.3" resolver='(obr)'>
 
-    <!-- Medication Manager bunldes -->
-    <bundle start-level='80' start='true'>
-      mvn:org.universAAL.ontology/ont.phWorld/2.0.0
-    </bundle>
+		<bundle start-level='89' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.persistence/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='81' start='true'>
-      mvn:org.universAAL.ontology/ont.profile/2.0.0
-    </bundle>
+		<bundle start-level='90' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.user.management/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='82' start='true'>
-      mvn:org.universAAL.ontology/ont.health.measurement/2.0.0
-    </bundle>
+		<bundle start-level='91' start='true'>
+			mvn:org.universAAL.AALapplication/medication.missing.services.simulation/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='83' start='true'>
-      mvn:org.universAAL.ontology/ont.health.disease/2.0.0
-    </bundle>
+		<bundle start-level='92' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.ui/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='84' start='true'>
-      mvn:org.universAAL.ontology/ont.profile.health/2.0.0
-    </bundle>
+		<bundle start-level='93' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.service/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='86' start='true'>
-      mvn:org.universAAL.ontology/ont.medication/2.0.0-SNAPSHOT
-    </bundle>
+		<bundle start-level='94' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.shell.commands/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='87' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.configuration/E.0-SNAPSHOT
-    </bundle>
+		<bundle start-level='95' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.base/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='88' start='true'>
-      mvn:org.apache.derby/derby/10.7.1.1
-    </bundle>
+		<bundle start-level='96' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui/E.1-SNAPSHOT
+		</bundle>
 
-    <!--<bundle start-level='88' start='true'>
-      mvn:org.universAAL.AALapplication/health.treat.manager/E.0.1-SNAPSHOT
-    </bundle>-->
+		<bundle start-level='97' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.acquire.medicine/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='89' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.persistence/E.0-SNAPSHOT
-    </bundle>
+		<bundle start-level='98' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.configuration/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='90' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.user.management/E.0-SNAPSHOT
-    </bundle>
+		<bundle start-level='99' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.review/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='91' start='true'>
-      mvn:org.universAAL.AALapplication/medication.missing.services.simulation/E.0-SNAPSHOT
-    </bundle>
+		<bundle start-level='99' start='true'>
+			mvn:org.universAAL.AALapplication/medication.manager.event.issuer/E.1-SNAPSHOT
+		</bundle>
 
-    <bundle start-level='92' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.ui/E.0-SNAPSHOT
-    </bundle>
-
-    <bundle start-level='93' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.service/E.0-SNAPSHOT
-    </bundle>
-
-    <bundle start-level='94' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.shell.commands/E.0-SNAPSHOT
-    </bundle>
-
-    <bundle start-level='95' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.base/E.0-SNAPSHOT
-    </bundle>
-
-    <bundle start-level='96' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.servlet.ui/E.0-SNAPSHOT
-    </bundle>
-
-    <bundle start-level='97' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.acquire.medicine/E.0-SNAPSHOT
-    </bundle>
-
-    <bundle start-level='98' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.configuration/E.0-SNAPSHOT
-    </bundle>
-
-    <bundle start-level='99' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.review/E.0-SNAPSHOT
-    </bundle>
-
-    <bundle start-level='99' start='true'>
-      mvn:org.universAAL.AALapplication/medication.manager.event.issuer/E.0-SNAPSHOT
-    </bundle>
-
-  </feature>
+	</feature>
 </features>
