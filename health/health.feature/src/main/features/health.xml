@@ -11,15 +11,15 @@
 	<!-- Health Core -->
 	<feature name="health.core" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.profile.manager/E.0.1-SNAPSHOT</bundle>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.treat.manager/E.0.1-SNAPSHOT</bundle>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.performedSession.manager/E.0.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.profile.manager/E.1.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.treat.manager/E.1.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.performedSession.manager/E.1.1-SNAPSHOT</bundle>
 	</feature>
 	
 	<!-- Health UI -->
 	<feature name="health.ui" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/E.0.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/E.1.1-SNAPSHOT</bundle>
 	</feature>
 	
 	

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es 
- * Universidad Politécnica de Madrid
+ * Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,8 @@ public class ProjectActivator implements BundleActivator {
 		/*
 		 * uAAL stuff
 		 */
-		sCallee = new ServiceProvider(context);
+		HealthProfileService.initialize(context);
+		sCallee = new ServiceProvider(context,HealthProfileService.profs);
 		context.logInfo(MODULE, "Project started", null);
 	}
 

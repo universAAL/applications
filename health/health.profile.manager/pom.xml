@@ -1,87 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-    
   <parent>
-  	<groupId>org.universAAL.AALapplication</groupId>
-  	<artifactId>health.pom</artifactId>
-  	<version>E.0.1-SNAPSHOT</version>
-  	<relativePath>../health.pom</relativePath>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <artifactId>health.pom</artifactId>
+    <version>E.1.1-SNAPSHOT</version>
+    <relativePath>../health.pom</relativePath>
   </parent>
-
   <artifactId>health.profile.manager</artifactId>
+  <version>E.1.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
-
   <dependencies>
-  	<dependency>
-  		<groupId>org.universAAL.support</groupId>
-  		<artifactId>itests</artifactId>
-  	</dependency>  	
-  	<dependency>
-  		<groupId>org.universAAL.middleware</groupId>
-  		<artifactId>mw.bus.service.core</artifactId>
-  	</dependency>  	
-  	<dependency>
-  		<groupId>org.universAAL.ontology</groupId>
-  		<artifactId>ont.profile</artifactId>
-  	</dependency>   		
-  	<dependency>
-  		<groupId>org.universAAL.ontology</groupId>
-  		<artifactId>ont.profile.health</artifactId>
-  	</dependency>  	 	
-  	<dependency>
-  		<groupId>org.universAAL.middleware</groupId>
-  		<artifactId>mw.container.osgi</artifactId>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.apache.felix</groupId>
-  		<artifactId>org.osgi.core</artifactId>
-  	</dependency>
+    <dependency>
+      <groupId>org.universAAL.support</groupId>
+      <artifactId>itests</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.universAAL.middleware</groupId>
+      <artifactId>mw.bus.service.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.universAAL.ontology</groupId>
+      <artifactId>ont.profile</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.universAAL.ontology</groupId>
+      <artifactId>ont.profile.health</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.universAAL.middleware</groupId>
+      <artifactId>mw.container.osgi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+    </dependency>
   </dependencies>
-  
-  	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-Activator>org.universAAL.AALApplication.health.profile.manager.ProjectActivator</Bundle-Activator>
-						<Export-Package>org.universAAL.AALApplication.health.profile.manager</Export-Package>
-					</instructions>
-				</configuration>
-			</plugin>
-		      <plugin>
-		        <groupId>org.universAAL.support</groupId>
-		        <artifactId>uaal-maven-plugin</artifactId>
-		      </plugin>
-		      <plugin>
-		        <groupId>org.codehaus.mojo</groupId>
-		        <artifactId>build-helper-maven-plugin</artifactId>
-		        <configuration>
-		          <skipAttach>false</skipAttach>
-		        </configuration>
-		      </plugin>
-		</plugins>
-	</build>
-    <profiles>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Activator>org.universAAL.AALApplication.health.profile.manager.ProjectActivator</Bundle-Activator>
+            <Export-Package>org.universAAL.AALApplication.health.profile.manager</Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.universAAL.support</groupId>
+        <artifactId>uaal-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <configuration>
+          <skipAttach>false</skipAttach>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
     <profile>
       <id>uAAL-Runtime</id>
       <dependencies>
-	  	<dependency>
-	  		<groupId>org.universAAL.context</groupId>
-	  		<artifactId>ctxt.che</artifactId>
-            <!--
-            <scope>provided</scope>
-            -->
-	  	</dependency>
         <dependency>
-        	<groupId>org.universAAL.context</groupId>
-            <artifactId>ctxt.prof.server</artifactId>
-            <!--
-            <scope>provided</scope>
-            -->
+          <groupId>org.universAAL.context</groupId>
+          <artifactId>ctxt.che</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.universAAL.context</groupId>
+          <artifactId>ctxt.prof.server</artifactId>
         </dependency>
       </dependencies>
     </profile>

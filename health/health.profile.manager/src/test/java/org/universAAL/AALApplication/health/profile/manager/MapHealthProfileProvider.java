@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es 
- * Universidad Politécnica de Madrid
+ * Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import org.universaal.ontology.health.owl.HealthProfile;
  * @author amedrano
  *
  */
-public class MapHealthProfileProvider implements HealthProfileProvider {
+public class MapHealthProfileProvider implements IHealthProfileProvider {
 
 	private TreeMap<String, HealthProfile> healthProfileDB;
 	
