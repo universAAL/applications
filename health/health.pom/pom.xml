@@ -1,91 +1,77 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
-	<parent>
-		<artifactId>new_services.pom</artifactId>
-		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.0</version>
-		<relativePath>../../new_services.pom</relativePath>
-	</parent>
-
-	<artifactId>health.pom</artifactId>
-	<version>E.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-
-	<name>Health Management AAL Service</name>
-
-	<url>http://forge.universaal.org/wiki/new_services:Health_Management_universAAL_service</url>
-
-	<issueManagement>
-		<system>GForge - Tracker</system>
-		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=228</url>
-	</issueManagement>
-	<inceptionYear>2010</inceptionYear>
-
-	<!-- Remember to rename health.pom folder (and super pom module reference) -->
-
-	<scm>
-		<connection>${svn.base}/health/${project.artifactId}</connection>
-		<developerConnection>${svn.base}/health/${project.artifactId}</developerConnection>
-	</scm>
-
-	<modules>
-		<module>../health.profile.manager</module>
-		<module>../health.performedSession.manager</module>
-		<module>../health.treat.manager</module>
-<!-- 		<module>../health.biomedicalsensors.server</module> -->
-<!-- 		<module>../health.biomedicalsensors.uiclient</module> -->
-		<module>../health.motivation</module>
-		<module>../health.ui.client</module>
-	</modules>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
-				<artifactId>health.performedSession.manager</artifactId>
-				<version>E.0.1-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
-				<artifactId>health.treat.manager</artifactId>
-				<version>E.0.1-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
-				<artifactId>health.profile.manager</artifactId>
-				<version>E.0.1-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
-				<artifactId>health.biomedicalsensors.server</artifactId>
-				<version>E.0.1-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
-				<artifactId>health.biomedicalsensors.uiclient</artifactId>
-				<version>E.0.1-SNAPSHOT</version>
-			</dependency>
-			<!-- 	delete when updated -->
-			<dependency>
-				<groupId>org.universAAL.middleware</groupId>
-				<artifactId>mw.container.junit</artifactId>
-				<version>2.0.1-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.ontology</groupId>
-				<artifactId>ont.health.measurement</artifactId>
-				<version>2.0.1-SNAPSHOT</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	
-	<repositories>
-        <repository>
-            <id>JBossRepo</id>
-            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
-    
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <artifactId>new_services.pom</artifactId>
+    <version>E.1</version>
+    <relativePath>../../new_services.pom</relativePath>
+  </parent>
+  <artifactId>health.pom</artifactId>
+  <version>E.1.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Health Management AAL Service</name>
+  <url>http://forge.universaal.org/wiki/new_services:Health_Management_universAAL_service</url>
+  <inceptionYear>2010</inceptionYear>
+  <modules>
+    <module>../health.profile.manager</module>
+    <module>../health.performedSession.manager</module>
+    <module>../health.treat.manager</module>
+    <module>../health.motivation</module>
+    <module>../health.ui.client</module>
+  </modules>
+  <scm>
+    <connection>${svn.base}/health/${project.artifactId}</connection>
+    <developerConnection>${svn.base}/health/${project.artifactId}</developerConnection>
+  </scm>
+  <issueManagement>
+    <system>GForge - Tracker</system>
+    <url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=228</url>
+  </issueManagement>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.universAAL.AALapplication</groupId>
+        <artifactId>health.performedSession.manager</artifactId>
+        <version>E.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.AALapplication</groupId>
+        <artifactId>health.treat.manager</artifactId>
+        <version>E.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.AALapplication</groupId>
+        <artifactId>health.profile.manager</artifactId>
+        <version>E.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.AALapplication</groupId>
+        <artifactId>health.biomedicalsensors.server</artifactId>
+        <version>E.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.AALapplication</groupId>
+        <artifactId>health.biomedicalsensors.uiclient</artifactId>
+        <version>E.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.middleware</groupId>
+        <artifactId>mw.container.junit</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.ontology</groupId>
+        <artifactId>ont.health.measurement</artifactId>
+        <version>2.0.1-SNAPSHOT</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <repositories>
+    <repository>
+      <id>JBossRepo</id>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+    </repository>
+  </repositories>
 </project>

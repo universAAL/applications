@@ -3,7 +3,7 @@
 	Universidad Politï¿½cnica de Madrdid
 
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -20,11 +20,12 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
  */
-package org.universAAL.AALApplication.health.profile.manager;
+package org.universAAL.AALApplication.health.profile.manager.impl;
 
 import java.util.Iterator;
 import java.util.List;
 
+import org.universAAL.AALApplication.health.profile.manager.IHealthProfileProvider;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
@@ -50,7 +51,7 @@ import org.universaal.ontology.health.owl.HealthProfile;
  * @author amedrano
  *
  */
-public class ProfileServerHealthProfileProvider implements HealthProfileProvider {
+public class ProfileServerHealthProfileProvider implements IHealthProfileProvider {
 
 	private static final String ARG_OUT = HealthOntology.NAMESPACE + "argOut";
 

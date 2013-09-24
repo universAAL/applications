@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2012 UPM, http://www.upm.es - Universidad Politécnica de Madrid
+ * Copyright 2012 UPM, http://www.upm.es - Universidad Politï¿½cnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ package org.universAAL.AALApplication.health.profile.manager;
 
 import org.universaal.ontology.health.owl.HealthProfile;
 
-public interface HealthProfileProvider {
+public interface IHealthProfileProvider {
 
 	/**
 	 * Returns the {org.universAAL.ontology.profile.health.HealthProfile} of the
