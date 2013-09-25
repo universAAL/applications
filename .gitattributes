@@ -1886,6 +1886,7 @@ long_term_behav/drools.reasoner/src/main/resources/reasoner_PIR_Energy.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner_e.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner_energy.drl -text
 long_term_behav/drools.reasoner/src/main/resources/snippet/Snippet.java -text
+long_term_behav/drools.reasoner/src/main/resources/uAALrules.drl -text
 long_term_behav/drools.reasoner/src/main/resources/users/droolsWorkshop1.drl -text
 long_term_behav/ltba.manager/ASL2.0.txt -text
 long_term_behav/ltba.manager/LTBA_Demo_B.0.1.launch -text
