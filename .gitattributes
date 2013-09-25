@@ -2665,6 +2665,10 @@ ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedica
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/Scale.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/SensorType.java -text
 ontologies/ont.biomedicalsensors/src/main/java/org/universAAL/ontology/biomedicalsensors/Zephyr.java -text
+ontologies/ont.drools/.settings/org.eclipse.core.resources.prefs -text
+ontologies/ont.drools/.settings/org.eclipse.jdt.core.prefs -text
+ontologies/ont.drools/.settings/org.eclipse.m2e.core.prefs -text
+ontologies/ont.drools/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.drools/ASL2.0.txt -text
 ontologies/ont.drools/NOTICE -text
 ontologies/ont.drools/artifact.composite -text
