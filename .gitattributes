@@ -1851,7 +1851,9 @@ help_when_out/hwo.servlet/src/main/resources/helpwhenoutdoor/whereis.js -text
 long_term_behav/Drools[!!-~]Reasoner[!!-~]QuickGuide[!!-~]v1.docx -text
 long_term_behav/drools.event.publisher/.classpath -text
 long_term_behav/drools.event.publisher/.project -text
+long_term_behav/drools.event.publisher/.settings/org.eclipse.core.resources.prefs -text
 long_term_behav/drools.event.publisher/.settings/org.eclipse.jdt.core.prefs -text
+long_term_behav/drools.event.publisher/.settings/org.eclipse.m2e.core.prefs -text
 long_term_behav/drools.event.publisher/.settings/org.maven.ide.eclipse.prefs -text
 long_term_behav/drools.event.publisher/ASL2.0.txt -text
 long_term_behav/drools.event.publisher/NOTICE.txt -text
