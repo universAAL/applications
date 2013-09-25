@@ -1,4 +1,3 @@
-#created on: 25-abr-2012
 package org.universAAL.AALapplication
 dialect "java" 
 
@@ -6,7 +5,10 @@ import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.drools.engine.RulesEngine;
 import org.universAAL.ontology.location.Location;
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.ontology.device.Sensor;
+//import org.universAAL.ontology.device.Sensor;
+import org.universAAL.ontology.activityhub.ActivityHubSensor;
+import org.universAAL.ontology.activityhub.MotionSensor;
+import org.universAAL.ontology.activityhub.ContactClosureSensor;
 import org.universAAL.drools.models.Fact;
 import org.universAAL.drools.models.FactProperty;
 import java.util.Hashtable;
@@ -38,7 +40,7 @@ return "HIGH";
 rule "Activity insertionante"
 //agenda-group "MAIN"
     when
-    	$c:ContextEvent(eval(RDFSubject instanceof Sensor), $s:(((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)))
+    	$c:ContextEvent(eval(RDFSubject instanceof MotionSensor), $s:(((MotionSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME)))
         not Activity ( place matches $s )
     then
         System.out.println("Inserting activity...");
@@ -65,7 +67,7 @@ no-loop
 //auto-focus true
 	when
 	   $a:Activity( $place : place )		
-       and Number($i:intValue ) from accumulate ($c: ContextEvent( ((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME) matches $place) over window:time(20s),count($c)) 
+       and Number($i:intValue ) from accumulate ($c: ContextEvent( ((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME) matches $place) over window:time(20s),count($c)) 
 	then
 		System.out.println("Counter value changing...");
 		String st = intensityUpdater($i);		
@@ -80,7 +82,7 @@ no-loop
 //auto-focus true
 	when
 	   $f:Fact( $place : getAttribute("ROOM"))		
-       and Number($i:intValue ) from accumulate ($c: ContextEvent( ((Sensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME) matches $place) over window:time(20s),count($c)) 
+       and Number($i:intValue ) from accumulate ($c: ContextEvent( ((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME) matches $place) over window:time(20s),count($c)) 
 	then
 		System.out.println("Counter FACTS changing...");
 		String st = intensityUpdater($i);		
