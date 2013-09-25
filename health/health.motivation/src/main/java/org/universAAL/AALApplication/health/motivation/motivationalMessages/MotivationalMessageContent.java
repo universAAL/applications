@@ -1,6 +1,6 @@
 package org.universAAL.AALApplication.health.motivation.motivationalMessages;
 
-import org.universaal.ontology.owl.MotivationalMessage;
+import org.universAAL.ontology.owl.MotivationalMessage;
 
 public interface MotivationalMessageContent {
 	

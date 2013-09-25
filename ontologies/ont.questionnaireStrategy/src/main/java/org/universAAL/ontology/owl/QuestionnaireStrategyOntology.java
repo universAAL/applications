@@ -15,7 +15,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universaal.ontology.owl;
+package org.universAAL.ontology.owl;
 
 import org.universAAL.middleware.owl.DataRepOntology;
 import org.universAAL.middleware.owl.ManagedIndividual;
@@ -24,11 +24,11 @@ import org.universAAL.middleware.owl.OntClassInfoSetup;
 import org.universAAL.middleware.owl.Ontology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
+import org.universAAL.ontology.QuestionnaireStrategyOntologyFactory;
 import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.ProfileOntology;
-import org.universaal.ontology.QuestionnaireStrategyOntologyFactory;
 
 public class QuestionnaireStrategyOntology extends Ontology {
 

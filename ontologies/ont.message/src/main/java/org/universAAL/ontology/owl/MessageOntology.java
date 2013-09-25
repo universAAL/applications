@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universaal.ontology.owl;
+package org.universAAL.ontology.owl;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -25,12 +25,12 @@ import org.universAAL.middleware.owl.Ontology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
+import org.universAAL.ontology.MessageOntologyFactory;
+import org.universAAL.ontology.health.owl.MotivationalStatusType;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.questionnaire.Questionnaire;
-import org.universaal.ontology.MessageOntologyFactory;
-import org.universaal.ontology.health.owl.MotivationalStatusType;
 
 /**
  * @author AAL Studio

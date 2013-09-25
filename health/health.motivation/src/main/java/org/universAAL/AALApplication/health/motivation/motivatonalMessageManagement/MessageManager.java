@@ -37,11 +37,11 @@ import org.universAAL.AALApplication.health.motivation.motivationalMessages.Moti
 import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
 import org.universAAL.ontology.health.owl.MotivationalStatusType;
 import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.owl.MotivationalMessage;
+import org.universAAL.ontology.owl.MotivationalMessageClassification;
+import org.universAAL.ontology.owl.MotivationalMessageSubclassification;
 import org.universAAL.ontology.questionnaire.Question;
 import org.universAAL.ontology.questionnaire.Questionnaire;
-import org.universaal.ontology.owl.MotivationalMessage;
-import org.universaal.ontology.owl.MotivationalMessageClassification;
-import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 
 import com.csvreader.CsvReader;
 

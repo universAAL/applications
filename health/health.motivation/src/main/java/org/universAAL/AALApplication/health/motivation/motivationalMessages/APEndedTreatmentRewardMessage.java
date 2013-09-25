@@ -3,10 +3,10 @@ package org.universAAL.AALApplication.health.motivation.motivationalMessages;
 import org.universAAL.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
 import org.universAAL.ontology.health.owl.MotivationalStatusType;
 import org.universAAL.ontology.health.owl.Treatment;
-import org.universaal.ontology.owl.MotivationalMessage;
-import org.universaal.ontology.owl.MotivationalMessageClassification;
-import org.universaal.ontology.owl.MotivationalMessageSubclassification;
-import org.universaal.ontology.owl.MotivationalPlainMessage;
+import org.universAAL.ontology.owl.MotivationalMessage;
+import org.universAAL.ontology.owl.MotivationalMessageClassification;
+import org.universAAL.ontology.owl.MotivationalMessageSubclassification;
+import org.universAAL.ontology.owl.MotivationalPlainMessage;
 
 public class APEndedTreatmentRewardMessage implements MotivationalMessageContent{
 	String content = "Congratulations $userName! Today you just finished your treatment, $treatmentName. You should be proud of it, because you have performed all the sessions, contributing to improve your health status." + 

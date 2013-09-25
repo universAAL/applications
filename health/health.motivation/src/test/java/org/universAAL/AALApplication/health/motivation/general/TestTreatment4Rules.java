@@ -23,9 +23,9 @@ import org.universAAL.ontology.health.owl.MotivationalStatusType;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.TreatmentPlanning;
 import org.universAAL.ontology.health.owl.Walking;
+import org.universAAL.ontology.owl.MotivationalMessageClassification;
+import org.universAAL.ontology.owl.MotivationalMessageSubclassification;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.owl.MotivationalMessageClassification;
-import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 
 public class TestTreatment4Rules extends TestIface{
 	

@@ -25,6 +25,11 @@ import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.measurement.MeasurementOntology;
+import org.universAAL.ontology.owl.MessageOntology;
+import org.universAAL.ontology.owl.MotivationalMessage;
+import org.universAAL.ontology.owl.MotivationalMessageClassification;
+import org.universAAL.ontology.owl.MotivationalMessageSubclassification;
+import org.universAAL.ontology.owl.QuestionnaireStrategyOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.User;
@@ -34,11 +39,6 @@ import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
 import org.universAAL.ontology.unit.UnitOntology;
 import org.universAAL.ontology.vcard.VCardOntology;
-import org.universaal.ontology.owl.MessageOntology;
-import org.universaal.ontology.owl.MotivationalMessage;
-import org.universaal.ontology.owl.MotivationalMessageClassification;
-import org.universaal.ontology.owl.MotivationalMessageSubclassification;
-import org.universaal.ontology.owl.QuestionnaireStrategyOntology;
 
 public class TestIface implements SendMotivationMessageIface, MotivationServiceRequirementsIface {
 

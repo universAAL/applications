@@ -13,24 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universaal.ontology;
+package org.universAAL.ontology;
 
-import org.universAAL.middleware.container.ModuleActivator;
-import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.owl.OntologyManagement;
-import org.universaal.ontology.owl.MessageOntology;
+import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.ontology.owl.*;
 
-public class MessageActivator implements ModuleActivator {
+public class MessageOntologyFactory extends ResourceFactoryImpl {
 
-    static ModuleContext context = null;
-    MessageOntology ontology = new MessageOntology();
+    public Resource createInstance(String classURI, String instanceURI,
+	    int factoryIndex) {
 
-    public void start(ModuleContext mcontext) throws Exception {
-	MessageActivator.context = mcontext;
-	OntologyManagement.getInstance().register(mcontext, ontology);
-    }
-
-    public void stop(ModuleContext mcontext) throws Exception {
-	OntologyManagement.getInstance().unregister(mcontext, ontology);
+	switch (factoryIndex) {
+	case 0:
+	    return new MotivationalQuestionnaire(instanceURI);
+	case 1:
+	    return new Message(instanceURI);
+	case 2:
+	    return new MotivationalPlainMessage(instanceURI);
+	case 3:
+	    return new MotivationalMessage(instanceURI);
+	}
+	return null;
     }
 }

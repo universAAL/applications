@@ -4,9 +4,9 @@ import java.util.Locale;
 
 import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.health.owl.MotivationalStatusType;
+import org.universAAL.ontology.owl.MotivationalMessage;
+import org.universAAL.ontology.owl.MotivationalMessageClassification;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.owl.MotivationalMessage;
-import org.universaal.ontology.owl.MotivationalMessageClassification;
 
 public interface MotivationInterface {
 	

@@ -2705,16 +2705,16 @@ ontologies/ont.message/MessageOntology.notation -text
 ontologies/ont.message/MessageOntology.uml -text
 ontologies/ont.message/NOTICE -text
 ontologies/ont.message/pom.xml -text svneol=unset#application/octet-stream
-ontologies/ont.message/src/main/java/org/universaal/ontology/MessageActivator.java -text svneol=unset#application/octet-stream
-ontologies/ont.message/src/main/java/org/universaal/ontology/MessageOntologyFactory.java -text svneol=unset#application/octet-stream
-ontologies/ont.message/src/main/java/org/universaal/ontology/owl/Message.java -text svneol=unset#application/octet-stream
-ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MessageOntology.java -text svneol=unset#application/octet-stream
-ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MessageService.java -text
-ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessage.java -text svneol=unset#application/octet-stream
-ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageClassification.java -text svneol=unset#application/octet-stream
-ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalMessageSubclassification.java -text
-ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
-ontologies/ont.message/src/main/java/org/universaal/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universAAL/ontology/MessageActivator.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universAAL/ontology/MessageOntologyFactory.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universAAL/ontology/owl/Message.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universAAL/ontology/owl/MessageOntology.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universAAL/ontology/owl/MessageService.java -text
+ontologies/ont.message/src/main/java/org/universAAL/ontology/owl/MotivationalMessage.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universAAL/ontology/owl/MotivationalMessageClassification.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universAAL/ontology/owl/MotivationalMessageSubclassification.java -text
+ontologies/ont.message/src/main/java/org/universAAL/ontology/owl/MotivationalPlainMessage.java -text svneol=unset#application/octet-stream
+ontologies/ont.message/src/main/java/org/universAAL/ontology/owl/MotivationalQuestionnaire.java -text svneol=unset#application/octet-stream
 ontologies/ont.nutrition/ASL2.0.txt -text
 ontologies/ont.nutrition/NOTICE.txt -text
 ontologies/ont.nutrition/Nutrition.di -text
@@ -2752,10 +2752,10 @@ ontologies/ont.pom/update.bat -text
 ontologies/ont.questionnaireStrategy/ASL2.0 -text
 ontologies/ont.questionnaireStrategy/NOTICE -text
 ontologies/ont.questionnaireStrategy/pom.xml -text
-ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/Activator.java -text
-ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/QuestionnaireStrategyOntologyFactory.java -text
-ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/Questionnaire4TreatmentStrategy.java -text
-ontologies/ont.questionnaireStrategy/src/main/java/org/universaal/ontology/owl/QuestionnaireStrategyOntology.java -text
+ontologies/ont.questionnaireStrategy/src/main/java/org/universAAL/ontology/Activator.java -text
+ontologies/ont.questionnaireStrategy/src/main/java/org/universAAL/ontology/QuestionnaireStrategyOntologyFactory.java -text
+ontologies/ont.questionnaireStrategy/src/main/java/org/universAAL/ontology/owl/Questionnaire4TreatmentStrategy.java -text
+ontologies/ont.questionnaireStrategy/src/main/java/org/universAAL/ontology/owl/QuestionnaireStrategyOntology.java -text
 ontologies/ont.readenergy/ASL2.0.txt -text
 ontologies/ont.readenergy/NOTICE -text
 ontologies/ont.readenergy/ont.energy.reader.di -text

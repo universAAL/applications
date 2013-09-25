@@ -1,8 +1,8 @@
-package org.universaal.ontology.owl;
+package org.universAAL.ontology.owl;
 
 import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.owl.QuestionnaireStrategyOntology;
 import org.universAAL.ontology.questionnaire.*;
-import org.universaal.ontology.owl.QuestionnaireStrategyOntology;
 
 public class Questionnaire4TreatmentStrategy extends Questionnaire {
 
