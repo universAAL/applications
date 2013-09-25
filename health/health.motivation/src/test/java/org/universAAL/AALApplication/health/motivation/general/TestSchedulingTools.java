@@ -26,10 +26,10 @@ import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagem
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.SchedulingTools;
 import org.universAAL.AALApplication.health.motivation.treatment.TestIface;
-import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.TreatmentPlanning;
-import org.universaal.ontology.health.owl.Walking;
+import org.universAAL.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.TreatmentPlanning;
+import org.universAAL.ontology.health.owl.Walking;
 
 public class TestSchedulingTools  extends TestIface{
 

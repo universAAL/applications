@@ -25,9 +25,9 @@ import net.fortuna.ical4j.model.property.Summary;
 
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.DetectedTreatments;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification;
-import org.universaal.ontology.health.owl.PerformedSession;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.TreatmentPlanning;
+import org.universAAL.ontology.health.owl.PerformedSession;
+import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.TreatmentPlanning;
 
 public class SchedulingTools {
 

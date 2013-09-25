@@ -24,11 +24,11 @@ import org.universAAL.middleware.owl.OntClassInfoSetup;
 import org.universAAL.middleware.owl.Ontology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.ProfileOntology;
 import org.universaal.ontology.QuestionnaireStrategyOntologyFactory;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.Treatment;
 
 public class QuestionnaireStrategyOntology extends Ontology {
 
@@ -50,7 +50,7 @@ public class QuestionnaireStrategyOntology extends Ontology {
 	addImport(PhThingOntology.NAMESPACE);
 	addImport(ServiceBusOntology.NAMESPACE);
 	addImport(ProfileOntology.NAMESPACE);
-	addImport(HealthOntology.NAMESPACE);
+	addImport(HealthProfileOntology.NAMESPACE);
 
 	OntClassInfoSetup oci;
 

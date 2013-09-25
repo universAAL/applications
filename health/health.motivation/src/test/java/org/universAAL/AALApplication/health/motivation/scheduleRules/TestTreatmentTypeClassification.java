@@ -27,13 +27,13 @@ import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagem
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.TreatmentTypeClassification;
 import org.universAAL.AALApplication.health.motivation.treatment.TestIface;
+import org.universAAL.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.TreatmentPlanning;
+import org.universAAL.ontology.health.owl.Walking;
+import org.universAAL.ontology.health.owl.WeightMeasurementTreatment;
+import org.universAAL.ontology.health.owl.WeightRequirement;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.TreatmentPlanning;
-import org.universaal.ontology.health.owl.Walking;
-import org.universaal.ontology.health.owl.WeightMeasurementTreatment;
-import org.universaal.ontology.health.owl.WeightRequirement;
 
 public class TestTreatmentTypeClassification extends TestIface{
 	
@@ -88,8 +88,8 @@ public class TestTreatmentTypeClassification extends TestIface{
 		GregorianCalendar startDate = new GregorianCalendar();
 		GregorianCalendar endDate = new GregorianCalendar();
 		
-		startDate.add(Calendar.DAY_OF_YEAR, -10); //comenzó hace 10 días
-		endDate.add(Calendar.DAY_OF_YEAR, -10); // terminó (la primera sesión) hace 10 días
+		startDate.add(Calendar.DAY_OF_YEAR, -10); //comenzï¿½ hace 10 dï¿½as
+		endDate.add(Calendar.DAY_OF_YEAR, -10); // terminï¿½ (la primera sesiï¿½n) hace 10 dï¿½as
 		
 		XMLGregorianCalendar firstEventStartDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(startDate);
 		XMLGregorianCalendar firstEventEndDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(endDate);
@@ -97,7 +97,7 @@ public class TestTreatmentTypeClassification extends TestIface{
 		firstEventStartDate.setTime(20, 0, 0);
 		firstEventEndDate.setTime(20, 30, 0);
 		
-		String recurrence = "FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20121231T235959"; // las sesiones serán los lunes, miércoles y viernes hasta fin de año, en total, 4 meses de tratamiento.
+		String recurrence = "FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20121231T235959"; // las sesiones serï¿½n los lunes, miï¿½rcoles y viernes hasta fin de aï¿½o, en total, 4 meses de tratamiento.
 		String description = "These treatment sessions consists of walking 30 minutes at a moderate step";
 		
 		TreatmentPlanning tp = new TreatmentPlanning(firstEventStartDate, firstEventEndDate, recurrence, description);

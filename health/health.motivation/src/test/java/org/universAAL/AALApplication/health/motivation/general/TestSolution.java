@@ -9,6 +9,10 @@ import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
 import org.universAAL.middleware.ui.owl.UIBusOntology;
+import org.universAAL.ontology.disease.owl.DiseaseOntology;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.phThing.PhThingOntology;
 import org.universAAL.ontology.profile.ProfileOntology;
@@ -20,10 +24,6 @@ import org.universAAL.ontology.questionnaire.QuestionnaireOntology;
 import org.universAAL.ontology.questionnaire.SingleChoiceQuestion;
 import org.universAAL.ontology.shape.ShapeOntology;
 import org.universAAL.ontology.space.SpaceOntology;
-import org.universaal.ontology.disease.owl.DiseaseOntology;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.healthmeasurement.owl.HealthMeasurementOntology;
 import org.universaal.ontology.owl.MessageOntology;
 
 public class TestSolution implements MotivationInterface{
@@ -56,7 +56,7 @@ public class TestSolution implements MotivationInterface{
 		OntologyManagement.getInstance().register(mc,new QuestionnaireOntology());//hay otra
 		OntologyManagement.getInstance().register(mc,new DiseaseOntology());
 		OntologyManagement.getInstance().register(mc,new HealthMeasurementOntology());
-		OntologyManagement.getInstance().register(mc,new HealthOntology());
+		OntologyManagement.getInstance().register(mc,new HealthProfileOntology());
 		OntologyManagement.getInstance().register(mc,new MessageOntology());
 		
 		

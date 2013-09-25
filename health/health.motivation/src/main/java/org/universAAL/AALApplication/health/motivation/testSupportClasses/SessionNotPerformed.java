@@ -2,7 +2,7 @@ package org.universAAL.AALApplication.health.motivation.testSupportClasses;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.universaal.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.Treatment;
 
 public class SessionNotPerformed {
 	
@@ -30,6 +30,6 @@ public class SessionNotPerformed {
 		return sNotPerformedTreatment;
 	}
 
-//métodos para insertar la sesión no realizada en el array que corresponda, según el estado motivacional
+//mï¿½todos para insertar la sesiï¿½n no realizada en el array que corresponda, segï¿½n el estado motivacional
 
 }

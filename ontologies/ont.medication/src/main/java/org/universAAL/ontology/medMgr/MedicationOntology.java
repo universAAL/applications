@@ -27,11 +27,11 @@ import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
 import org.universAAL.ontology.MedicationFactory;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.Treatment;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -60,7 +60,7 @@ public final class MedicationOntology extends Ontology {
     addImport(ServiceBusOntology.NAMESPACE);
     addImport(LocationOntology.NAMESPACE);
     addImport(ProfileOntology.NAMESPACE);
-    addImport(HealthOntology.NAMESPACE);
+    addImport(HealthProfileOntology.NAMESPACE);
 
     OntClassInfoSetup oci;
 

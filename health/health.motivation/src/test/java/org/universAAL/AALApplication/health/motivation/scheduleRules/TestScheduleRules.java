@@ -29,11 +29,11 @@ import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagem
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.Treatment4Rules;
 import org.universAAL.AALApplication.health.motivation.treatment.TestIface;
+import org.universAAL.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universAAL.ontology.health.owl.PerformedSession;
+import org.universAAL.ontology.health.owl.TreatmentPlanning;
+import org.universAAL.ontology.health.owl.Walking;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.health.owl.PerformedSession;
-import org.universaal.ontology.health.owl.TreatmentPlanning;
-import org.universaal.ontology.health.owl.Walking;
 
 public class TestScheduleRules extends TestIface{
 	
@@ -170,14 +170,14 @@ public class TestScheduleRules extends TestIface{
 	public void testPerformedSessionInRightIntervalOfTime() throws Exception{
 		
 		Treatment4Rules treatment = generateDailyTreatment4Test(50, 5, 10);
-		//empezó hace 50 minutos y como las sesiones son de 60 minutos, aun faltan 10 minutos para acabar (estamos en performing interval)
+		//empezï¿½ hace 50 minutos y como las sesiones son de 60 minutos, aun faltan 10 minutos para acabar (estamos en performing interval)
 		
 		GregorianCalendar startTime = new GregorianCalendar();
 		GregorianCalendar endTime = new GregorianCalendar();
 
 		startTime.add(Calendar.DAY_OF_YEAR, 0);
 		startTime.add(Calendar.MINUTE, -20);
-		endTime.add(Calendar.DAY_OF_YEAR, 0); // no importa cuando termina, sólo necesitamos el momento en el que comienza la ps
+		endTime.add(Calendar.DAY_OF_YEAR, 0); // no importa cuando termina, sï¿½lo necesitamos el momento en el que comienza la ps
 		endTime.add(Calendar.MINUTE, 10);
 		
 		XMLGregorianCalendar psStartTime = DatatypeFactory.newInstance().newXMLGregorianCalendar(startTime);
@@ -197,7 +197,7 @@ public class TestScheduleRules extends TestIface{
 	
 	
 	@Test
-	//de momento la comprobación es sólo visual
+	//de momento la comprobaciï¿½n es sï¿½lo visual
 	public void testSessionNotPerformed() throws Exception{
 		
 		GregorianCalendar startTime = new GregorianCalendar();

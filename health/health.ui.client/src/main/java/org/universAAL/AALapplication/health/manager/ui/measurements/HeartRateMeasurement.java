@@ -11,8 +11,8 @@ import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.healthmeasurement.owl.HeartRate;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.healthmeasurement.owl.HeartRate;
 
 public class HeartRateMeasurement extends AbstractHealthForm{
 

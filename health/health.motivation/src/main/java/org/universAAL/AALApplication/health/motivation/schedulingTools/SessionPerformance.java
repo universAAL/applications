@@ -6,8 +6,8 @@ import java.util.TreeMap;
 
 import net.fortuna.ical4j.model.Date;
 
-import org.universaal.ontology.health.owl.PerformedSession;
-import org.universaal.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.PerformedSession;
+import org.universAAL.ontology.health.owl.Treatment;
 
 public class SessionPerformance {
 

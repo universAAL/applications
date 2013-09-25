@@ -12,9 +12,9 @@ import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.healthmeasurement.owl.BloodPressure;
 import org.universAAL.ontology.measurement.Measurement;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.healthmeasurement.owl.BloodPressure;
 
 public class BloodPreasureMeasurement extends AbstractHealthForm{
 

@@ -10,10 +10,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.component.VEvent;
 
-import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.TreatmentPlanning;
-import org.universaal.ontology.health.owl.Walking;
+import org.universAAL.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.TreatmentPlanning;
+import org.universAAL.ontology.health.owl.Walking;
 
 /**
  * An extension of the Treatment that adds methods used for rules.

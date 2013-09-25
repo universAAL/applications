@@ -15,7 +15,7 @@
  ******************************************************************************/
 package org.universAAL.AALApplication.health.profile.manager;
 
-import org.universaal.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.HealthProfile;
 
 public interface IHealthProfileProvider {
 

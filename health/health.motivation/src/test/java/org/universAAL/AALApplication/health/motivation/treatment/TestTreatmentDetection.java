@@ -33,13 +33,13 @@ import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagem
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.testSupportClasses.DetectedTreatments;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.health.owl.Diet;
-import org.universaal.ontology.health.owl.MotivationalStatusType;
-import org.universaal.ontology.health.owl.Treatment;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
 import org.universaal.ontology.owl.MotivationalQuestionnaire;
+import org.universAAL.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universAAL.ontology.health.owl.Diet;
+import org.universAAL.ontology.health.owl.MotivationalStatusType;
+import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.questionnaire.*;
 
 /**

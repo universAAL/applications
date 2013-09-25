@@ -18,7 +18,7 @@ package org.universAAL.AALApplication.health.profile.manager;
 
 import java.util.TreeMap;
 
-import org.universaal.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.HealthProfile;
 
 /**
  * @author amedrano

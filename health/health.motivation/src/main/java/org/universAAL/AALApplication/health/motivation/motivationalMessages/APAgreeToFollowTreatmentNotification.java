@@ -1,8 +1,8 @@
 package org.universAAL.AALApplication.health.motivation.motivationalMessages;
 
-import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.health.owl.MotivationalStatusType;
-import org.universaal.ontology.health.owl.Treatment;
+import org.universAAL.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universAAL.ontology.health.owl.MotivationalStatusType;
+import org.universAAL.ontology.health.owl.Treatment;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 import org.universaal.ontology.owl.MotivationalMessageSubclassification;
@@ -10,7 +10,7 @@ import org.universaal.ontology.owl.MotivationalPlainMessage;
 
 public class APAgreeToFollowTreatmentNotification implements MotivationalMessageContent{
 
-	// Crear un mensaje de notificación para el caregiver en el que se le notifique de que
+	// Crear un mensaje de notificaciï¿½n para el caregiver en el que se le notifique de que
 	// el assisted person va a seguir un tratamiento.
 	
 	String content = "Good $partOfDay $caregiverName! $userName has agreeded to follow the treatment $treatmentName."+

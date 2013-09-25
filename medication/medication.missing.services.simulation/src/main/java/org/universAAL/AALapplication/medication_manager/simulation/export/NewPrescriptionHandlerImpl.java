@@ -23,18 +23,18 @@ import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.services.TreatmentManagementService;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 /**
  * @author George Fournadjiev
  */
 public final class NewPrescriptionHandlerImpl extends NewPrescriptionHandler {
 
-  public static final String INPUT_USER = HealthOntology.NAMESPACE + "user";
-  public static final String INPUT_TREATMENT = HealthOntology.NAMESPACE + "treatment";
+  public static final String INPUT_USER = HealthProfileOntology.NAMESPACE + "user";
+  public static final String INPUT_TREATMENT = HealthProfileOntology.NAMESPACE + "treatment";
 
   public NewPrescriptionHandlerImpl(ModuleContext context, NewPrescriptionContextProvider contextProvider) {
     super(context, contextProvider);
