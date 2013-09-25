@@ -8,7 +8,7 @@
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 	<artifactId>drools.pom</artifactId>
-	<version>E.1</version>
+	<version>E.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>The Drools Reasoner POM file</name>
 	<description>The Drools Reasoner POM file</description>
