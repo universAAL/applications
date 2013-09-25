@@ -191,10 +191,6 @@ medication/medication.manager.configuration/.classpath
 medication/medication.manager.configuration/.project
 medication/medication.manager.configuration/.settings
 medication/medication.manager.configuration/target
-medication/medication.manager.configuration/target/classes
-medication/medication.manager.configuration/target/generated-sources
-medication/medication.manager.configuration/target/medication.manager.configuration-C.0.1-SNAPSHOT.jar
-medication/medication.manager.configuration/target/surefire
 medication/medication.manager.event.issuer/*.iml
 medication/medication.manager.event.issuer/.classpath
 medication/medication.manager.event.issuer/.project
