@@ -30,12 +30,12 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.healthmeasurement.owl.BloodPressure;
+import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
+import org.universAAL.ontology.healthmeasurement.owl.HeartRate;
+import org.universAAL.ontology.healthmeasurement.owl.PersonWeight;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.healthmeasurement.owl.BloodPressure;
-import org.universaal.ontology.healthmeasurement.owl.HealthMeasurement;
-import org.universaal.ontology.healthmeasurement.owl.HeartRate;
-import org.universaal.ontology.healthmeasurement.owl.PersonWeight;
 
 /**
  * @author amedrano
@@ -44,7 +44,7 @@ import org.universaal.ontology.healthmeasurement.owl.PersonWeight;
 public class MeasurementTypeForm extends AbstractHealthForm {
 
 	private static final String CANCEL_LABEL = "Cancel";
-	private static final String SELECTED_TREATMENT = HealthOntology.NAMESPACE + "uiMeasurementSelected";
+	private static final String SELECTED_TREATMENT = HealthProfileOntology.NAMESPACE + "uiMeasurementSelected";
 	private static final String OK_ICON = null;
 	private static final String OK_LABEL = null;
 	private static final String CANCELL_ICON = null;

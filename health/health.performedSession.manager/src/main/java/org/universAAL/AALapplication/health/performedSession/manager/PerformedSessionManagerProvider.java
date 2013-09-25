@@ -31,10 +31,10 @@ import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
+import org.universAAL.ontology.health.owl.PerformedSession;
+import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.PerformedSession;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
 
 /**
  * This class provides the performed sessions manager services.

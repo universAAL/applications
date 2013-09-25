@@ -16,9 +16,9 @@ import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
+import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.services.ProfileManagementService;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.health.owl.services.ProfileManagementService;
 
 /**
  * @author amedrano

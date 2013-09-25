@@ -37,6 +37,7 @@ import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.ontology.health.owl.TreatmentPlanning;
 import org.universAAL.ontology.medMgr.CaregiverNotifier;
 import org.universAAL.ontology.medMgr.CaregiverNotifierData;
 import org.universAAL.ontology.medMgr.Intake;
@@ -46,7 +47,6 @@ import org.universAAL.ontology.medMgr.MedicationException;
 import org.universAAL.ontology.medMgr.MedicationTreatment;
 import org.universAAL.ontology.medMgr.NewPrescription;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.TreatmentPlanning;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;

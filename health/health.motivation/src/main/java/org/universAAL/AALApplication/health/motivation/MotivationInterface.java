@@ -2,9 +2,9 @@ package org.universAAL.AALApplication.health.motivation;
 
 import java.util.Locale;
 
+import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.MotivationalStatusType;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.health.owl.MotivationalStatusType;
 import org.universaal.ontology.owl.MotivationalMessage;
 import org.universaal.ontology.owl.MotivationalMessageClassification;
 

@@ -3,7 +3,7 @@
 	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -32,11 +32,11 @@ import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.TreatmentPlanning;
+import org.universAAL.ontology.health.owl.services.ProfileManagementService;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.TreatmentPlanning;
-import org.universaal.ontology.health.owl.services.ProfileManagementService;
 
 /**
  * This class actually implements the 

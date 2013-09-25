@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import org.universaal.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.Treatment;
 
 public class TreatmentTypeClassification {
 
@@ -45,7 +45,7 @@ public class TreatmentTypeClassification {
 	// CONSTRUCTORS
 	public TreatmentTypeClassification(ByDuration dur, ByRecurrence recur, ByMeasurement measurement){
 		//cuando detectemos un treatment, sabremos si necesita o no medidas, y en base al treatment planning
-		//conoceremos la duración y la recurrencia
+		//conoceremos la duraciï¿½n y la recurrencia
 		this.setTreatmentByDuration(dur);
 		this.setTreatmentByRecurrence(recur);
 		this.setTreatmentByMeasurement(tmeasure);

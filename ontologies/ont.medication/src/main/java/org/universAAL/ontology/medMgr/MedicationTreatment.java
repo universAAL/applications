@@ -17,7 +17,7 @@
 
 package org.universAAL.ontology.medMgr;
 
-import org.universaal.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.Treatment;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 

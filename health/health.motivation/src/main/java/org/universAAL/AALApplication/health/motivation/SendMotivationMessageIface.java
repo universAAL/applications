@@ -2,7 +2,7 @@ package org.universAAL.AALApplication.health.motivation;
 
 import java.util.ArrayList;
 
-import org.universaal.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.Treatment;
 import org.universaal.ontology.owl.MotivationalMessage;
 
 /**

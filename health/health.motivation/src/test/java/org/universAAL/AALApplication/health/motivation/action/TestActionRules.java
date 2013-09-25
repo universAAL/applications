@@ -29,14 +29,14 @@ import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagem
 import org.universAAL.AALApplication.health.motivation.motivatonalMessageManagement.MessageVariables;
 import org.universAAL.AALApplication.health.motivation.schedulingTools.Treatment4Rules;
 import org.universAAL.AALApplication.health.motivation.treatment.TestIface;
+import org.universAAL.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
+import org.universAAL.ontology.health.owl.Diet;
+import org.universAAL.ontology.health.owl.MotivationalStatusType;
+import org.universAAL.ontology.health.owl.PerformedSession;
+import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.TreatmentPlanning;
+import org.universAAL.ontology.health.owl.Walking;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.ICD10CirculatorySystemDiseases.owl.HeartFailure;
-import org.universaal.ontology.health.owl.Diet;
-import org.universaal.ontology.health.owl.MotivationalStatusType;
-import org.universaal.ontology.health.owl.PerformedSession;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.TreatmentPlanning;
-import org.universaal.ontology.health.owl.Walking;
 
 public class TestActionRules extends TestIface{
 		
@@ -186,7 +186,7 @@ public class TestActionRules extends TestIface{
 			
 			Assert.assertTrue(treatment.getCompleteness() == 5/10);
 			
-			// Enviar un mensaje a la AP según corresponda
+			// Enviar un mensaje a la AP segï¿½n corresponda
 		}
 		
 }

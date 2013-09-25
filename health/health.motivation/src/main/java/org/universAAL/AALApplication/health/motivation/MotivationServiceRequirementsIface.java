@@ -1,7 +1,7 @@
 package org.universAAL.AALApplication.health.motivation;
 
+import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthProfile;
 
 public interface MotivationServiceRequirementsIface {
 	

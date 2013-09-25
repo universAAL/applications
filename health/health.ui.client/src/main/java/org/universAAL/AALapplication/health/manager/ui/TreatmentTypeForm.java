@@ -15,10 +15,10 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.healthmeasurement.owl.HealthMeasurement;
 
 /**
  * @author amedrano
@@ -27,7 +27,7 @@ import org.universaal.ontology.healthmeasurement.owl.HealthMeasurement;
 public class TreatmentTypeForm extends AbstractHealthForm {
 	
 	private static final String CANCEL_LABEL = "Cancel";
-	private static final String SELECTED_TREATMENT = HealthOntology.NAMESPACE + "uiTreatmentSelected";
+	private static final String SELECTED_TREATMENT = HealthProfileOntology.NAMESPACE + "uiTreatmentSelected";
 	private static final String OK_ICON = null;
 	private static final String OK_LABEL = null;
 	private static final String CANCELL_ICON = null;

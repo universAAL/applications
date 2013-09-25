@@ -28,10 +28,10 @@ import org.universAAL.middleware.ui.rdf.Repeat;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.health.owl.Treatment;
 
 /**
  * @author amedrano
@@ -39,8 +39,8 @@ import org.universaal.ontology.health.owl.Treatment;
  */
 public class TreatmentForm extends AbstractHealthForm {
 
-	private static final String TREATMENT_EXAPAND = HealthOntology.NAMESPACE + "subdialogTreatmentExpand";
-	private static final String NEW_TREATMENT = HealthOntology.NAMESPACE + "newTreatmentUI";
+	private static final String TREATMENT_EXAPAND = HealthProfileOntology.NAMESPACE + "subdialogTreatmentExpand";
+	private static final String NEW_TREATMENT = HealthProfileOntology.NAMESPACE + "newTreatmentUI";
 	private HealthProfile hp;
 
 	public TreatmentForm(ModuleContext context, User inputUser) {

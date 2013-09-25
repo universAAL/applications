@@ -32,14 +32,14 @@ import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.Profilable;
 import org.universAAL.ontology.profile.Profile;
 import org.universAAL.ontology.profile.SubProfile;
 import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.service.ProfilingService;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.HealthProfile;
 
 /**
  * This class provides useful methods for accessing the health profile by using 
@@ -53,7 +53,7 @@ import org.universaal.ontology.health.owl.HealthProfile;
  */
 public class ProfileServerHealthProfileProvider implements IHealthProfileProvider {
 
-	private static final String ARG_OUT = HealthOntology.NAMESPACE + "argOut";
+	private static final String ARG_OUT = HealthProfileOntology.NAMESPACE + "argOut";
 
 	/**
 	 * Needed for making service requests

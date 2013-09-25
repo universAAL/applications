@@ -27,9 +27,9 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Repeat;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.health.owl.Treatment;
 
 /**
  * @author amedrano

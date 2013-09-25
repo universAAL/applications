@@ -22,10 +22,10 @@ import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.services.ProfileManagementService;
 import org.universAAL.ontology.profile.AssistedPerson;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.HealthProfile;
-import org.universaal.ontology.health.owl.services.ProfileManagementService;
 
 /**
  * @author amedrano

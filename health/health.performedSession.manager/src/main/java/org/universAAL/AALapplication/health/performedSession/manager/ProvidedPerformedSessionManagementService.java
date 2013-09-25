@@ -13,10 +13,10 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.PerformedSession;
+import org.universAAL.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.PerformedSession;
-import org.universaal.ontology.health.owl.services.PerformedSessionManagementService;
 
 /**
  * @author amedrano
@@ -47,13 +47,13 @@ public static final String NAMESPACE = "http://ontology.lst.tfo.upm.es/Performed
 	public static final String SERVICE_NEW = NAMESPACE +"newPerSes";
 	
 	//PARAMETERS URI
-	public static final String INPUT_USER      = HealthOntology.NAMESPACE + "user";
-	public static final String INPUT_TREATMENT = HealthOntology.NAMESPACE + "associatedTreatment";
-	public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "psTimestampFrom";
-	public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "psTimestampTo";
-	public static final String INPUT_PERFORMED_SESSION = HealthOntology.NAMESPACE + "performedSession";
+	public static final String INPUT_USER      = HealthProfileOntology.NAMESPACE + "user";
+	public static final String INPUT_TREATMENT = HealthProfileOntology.NAMESPACE + "associatedTreatment";
+	public static final String INPUT_TIMESTAMP_FROM = HealthProfileOntology.NAMESPACE + "psTimestampFrom";
+	public static final String INPUT_TIMESTAMP_TO   = HealthProfileOntology.NAMESPACE + "psTimestampTo";
+	public static final String INPUT_PERFORMED_SESSION = HealthProfileOntology.NAMESPACE + "performedSession";
 
-	public static final String OUTPUT_PERFORMED_SESSIONS = HealthOntology.NAMESPACE + "matchingPerformedSessions";
+	public static final String OUTPUT_PERFORMED_SESSIONS = HealthProfileOntology.NAMESPACE + "matchingPerformedSessions";
 	
 	
 	static final ServiceProfile[] profiles = new ServiceProfile[3];

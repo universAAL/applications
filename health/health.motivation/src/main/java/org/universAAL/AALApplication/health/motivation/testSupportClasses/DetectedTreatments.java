@@ -1,7 +1,8 @@
 package org.universAAL.AALApplication.health.motivation.testSupportClasses;
 
 import java.util.ArrayList;
-import org.universaal.ontology.health.owl.Treatment;
+
+import org.universAAL.ontology.health.owl.Treatment;
 
 /**
  * The purpose of this class is to manage the already detected treatments.  

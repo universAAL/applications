@@ -1,9 +1,9 @@
 /*	
 	Copyright 2010-2014 UPM http://www.upm.es
-	Universidad Politécnica de Madrdid
+	Universidad Politï¿½cnica de Madrdid
 	
 	OCO Source Materials
-	© Copyright IBM Corp. 2011
+	ï¿½ Copyright IBM Corp. 2011
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -24,9 +24,9 @@ package org.universAAL.AALapplication.health.performedSession.manager;
 
 import java.util.List;
 
+import org.universAAL.ontology.health.owl.PerformedSession;
+import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.PerformedSession;
-import org.universaal.ontology.health.owl.Treatment;
 
 /**
  * Interface for the actual performed sessions storage and retrieval.

@@ -4,7 +4,7 @@
 package org.universAAL.AALApplication.health.profile.manager;
 
 import org.universAAL.itests.IntegrationTest;
-import org.universaal.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.HealthProfile;
 
 /**
  * @author amedrano

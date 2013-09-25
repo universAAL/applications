@@ -24,7 +24,7 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universaal.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.HealthProfile;
 
 /**
  * @author amedrano

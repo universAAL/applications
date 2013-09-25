@@ -13,10 +13,10 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
+import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.services.TreatmentManagementService;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.HealthOntology;
-import org.universaal.ontology.health.owl.Treatment;
-import org.universaal.ontology.health.owl.services.TreatmentManagementService;
 
 /**
  * @author amedrano
@@ -44,11 +44,11 @@ public class ProvidedTreatmentManagerService extends TreatmentManagementService 
 	public static final String SERVICE_REMOVE = NAMESPACE +"removeTreatment";
 	
 	//INPUT PARAMETERS URI
-		public static final String INPUT_USER      = HealthOntology.NAMESPACE + "user";
-		public static final String INPUT_TREATMENT      = HealthOntology.NAMESPACE + "treatment";
-		public static final String INPUT_TIMESTAMP_FROM = HealthOntology.NAMESPACE + "timestampFrom";
-		public static final String INPUT_TIMESTAMP_TO   = HealthOntology.NAMESPACE + "timestampTo";
-		public static final String OUTPUT_TREATMENTS = HealthOntology.NAMESPACE + "matchingTreatments";
+		public static final String INPUT_USER      = HealthProfileOntology.NAMESPACE + "user";
+		public static final String INPUT_TREATMENT      = HealthProfileOntology.NAMESPACE + "treatment";
+		public static final String INPUT_TIMESTAMP_FROM = HealthProfileOntology.NAMESPACE + "timestampFrom";
+		public static final String INPUT_TIMESTAMP_TO   = HealthProfileOntology.NAMESPACE + "timestampTo";
+		public static final String OUTPUT_TREATMENTS = HealthProfileOntology.NAMESPACE + "matchingTreatments";
 	
 	static final ServiceProfile[] profiles = new ServiceProfile[5];
     private static Hashtable serverRestrictions = new Hashtable();

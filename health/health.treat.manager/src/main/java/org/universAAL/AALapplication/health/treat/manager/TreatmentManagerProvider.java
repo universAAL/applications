@@ -32,8 +32,8 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.health.owl.Treatment;
 
 /**
  * This class provides the treatment manager services.
