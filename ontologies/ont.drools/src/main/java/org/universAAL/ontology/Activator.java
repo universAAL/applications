@@ -1,6 +1,6 @@
 /*
 	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -25,15 +25,15 @@ import org.universAAL.middleware.owl.OntologyManagement;
 
 public class Activator implements ModuleActivator {
 
-    DroolsReasoningOntology dro = new DroolsReasoningOntology();
+	DroolsReasoningOntology dro = new DroolsReasoningOntology();
 
-    public void start(ModuleContext mc) throws Exception {
-	OntologyManagement.getInstance().register(mc, dro);
-    }
+	public void start(ModuleContext mc) throws Exception {
+		OntologyManagement.getInstance().register(mc, dro);
+	}
 
-    public void stop(ModuleContext mc) throws Exception {
-	OntologyManagement.getInstance().unregister(mc, dro);
+	public void stop(ModuleContext mc) throws Exception {
+		OntologyManagement.getInstance().unregister(mc, dro);
 
-    }
+	}
 
 }
