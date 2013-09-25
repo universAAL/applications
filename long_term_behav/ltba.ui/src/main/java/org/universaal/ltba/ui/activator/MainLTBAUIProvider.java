@@ -1,6 +1,6 @@
 /*
 	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -95,16 +95,16 @@ public class MainLTBAUIProvider extends UICaller {
 			new Submit(f.getIOControls(), new Label(">ltbaOff<", null),
 					SUBMISSION_OFF);
 		}
-		new Submit(f.getSubmits(), new Label("Day Report", null),
-				SUBMISSION_SHOW);
-		new Submit(f.getSubmits(), new Label("Week Report", null),
-				SUBMISSION_WEEK);
-		new Submit(f.getSubmits(), new Label("Month Report", null),
-				SUBMISSION_MONTH);
+//		new Submit(f.getSubmits(), new Label("Day Report", null),
+//				SUBMISSION_SHOW);
+//		new Submit(f.getSubmits(), new Label("Week Report", null),
+//				SUBMISSION_WEEK);
+//		new Submit(f.getSubmits(), new Label("Month Report", null),
+//				SUBMISSION_MONTH);
 		if (inputUser == null) {
 			System.out.println("NULL INPUT USER");
 		}
-		new Submit(f.getSubmits(), new Label("Donete", null), "doneForm");
+		new Submit(f.getSubmits(), new Label("Done", null), "doneForm");
 
 		/**
 		 * TODO There is a bug. Despite when the service request is created, a
