@@ -8,7 +8,7 @@
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.manager</artifactId>
-	<version>E.1</version>
+	<version>E.1.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>LTBA manager</name>
 	<description>LTBA main module for coordinating all the LTBA components.</description>

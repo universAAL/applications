@@ -2,43 +2,39 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
 		<version>E.1</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 	<artifactId>ltba.pom</artifactId>
-	<version>E.1</version>
+	<version>E.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>POM file for LTBA project</name>
 	<description>POM file for LTBA project</description>
 	<modules>
-		<module>../ltba.nomhad.gateway</module>
-		<module>../ltba.ui</module>
 		<module>../ltba.manager</module>
 		<module>../ltba.publisher</module>
+		<module>../ltba.ui</module>
+		<module>../ltba.nomhad.gateway</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
-				<artifactId>ltba.nomhad.gateway</artifactId>
-				<version>${project.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.activityhub</artifactId>
 				<version>${platform.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.profile</artifactId>
+				<groupId>org.universAAL.ontology</groupId>
 				<version>${platform.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.drools</artifactId>
+				<groupId>org.universAAL.ontology</groupId>
 				<version>${platform.version}</version>
+
 			</dependency>
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
@@ -46,8 +42,8 @@
 				<version>${platform.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.universAAL.AALapplication</groupId>
 				<artifactId>drools.reasoner</artifactId>
+				<groupId>org.universAAL.AALapplication</groupId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
