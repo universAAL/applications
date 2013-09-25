@@ -138,7 +138,7 @@ public class LTBACaller {
 			return true;
 		else {
 			System.out
-					.println("LTBA Service: the service couldn't swiched on in switchOn()");
+					.println("LTBA Service: the service couldn't be swiched on in switchOn()");
 			return false;
 		}
 	}
