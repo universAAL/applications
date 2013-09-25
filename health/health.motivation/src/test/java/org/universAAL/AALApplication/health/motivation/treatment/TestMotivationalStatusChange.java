@@ -43,12 +43,12 @@ import org.universAAL.ontology.health.owl.TreatmentPlanning;
 import org.universAAL.ontology.health.owl.Walking;
 import org.universAAL.ontology.health.owl.WeightMeasurementTreatment;
 import org.universAAL.ontology.health.owl.WeightRequirement;
+import org.universAAL.ontology.owl.MotivationalMessage;
+import org.universAAL.ontology.owl.MotivationalMessageClassification;
+import org.universAAL.ontology.owl.MotivationalMessageSubclassification;
+import org.universAAL.ontology.owl.MotivationalQuestionnaire;
+import org.universAAL.ontology.owl.Questionnaire4TreatmentStrategy;
 import org.universAAL.ontology.profile.User;
-import org.universaal.ontology.owl.MotivationalMessage;
-import org.universaal.ontology.owl.MotivationalMessageClassification;
-import org.universaal.ontology.owl.MotivationalMessageSubclassification;
-import org.universaal.ontology.owl.MotivationalQuestionnaire;
-import org.universaal.ontology.owl.Questionnaire4TreatmentStrategy;
 import org.universAAL.ontology.questionnaire.*;
 
 public class TestMotivationalStatusChange extends TestIface{

@@ -8,8 +8,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.DateTime;
 
-import org.universaal.ontology.owl.MotivationalMessage;
-import org.universaal.ontology.owl.Message;
+import org.universAAL.ontology.owl.Message;
+import org.universAAL.ontology.owl.MotivationalMessage;
 
 public class SchedulingMessagesSent {
 

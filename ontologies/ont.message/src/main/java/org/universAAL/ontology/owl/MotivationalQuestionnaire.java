@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universaal.ontology.owl;
+package org.universAAL.ontology.owl;
 
+import org.universAAL.ontology.health.owl.MotivationalStatusType;
 import org.universAAL.ontology.questionnaire.Questionnaire;
-import org.universaal.ontology.health.owl.MotivationalStatusType;
 
 public class MotivationalQuestionnaire extends MotivationalMessage {
 

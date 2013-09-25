@@ -1,4 +1,4 @@
-package org.universaal.ontology.owl;
+package org.universAAL.ontology.owl;
 
 import org.universAAL.middleware.owl.ManagedIndividual;
 

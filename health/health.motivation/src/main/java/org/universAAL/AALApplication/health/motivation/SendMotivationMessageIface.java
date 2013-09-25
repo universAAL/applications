@@ -3,7 +3,7 @@ package org.universAAL.AALApplication.health.motivation;
 import java.util.ArrayList;
 
 import org.universAAL.ontology.health.owl.Treatment;
-import org.universaal.ontology.owl.MotivationalMessage;
+import org.universAAL.ontology.owl.MotivationalMessage;
 
 /**
  * Implements the mechanism that sends the message to the platform.

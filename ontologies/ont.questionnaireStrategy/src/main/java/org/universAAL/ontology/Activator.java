@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright 2012 UPM, http://www.upm.es 
- Universidad Politécnica de Madrid
+ Universidad Politecnica de Madrid
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universaal.ontology;
+package org.universAAL.ontology;
 
-import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
-import org.universaal.ontology.owl.*;
+import org.universAAL.middleware.container.ModuleActivator;
+import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.owl.OntologyManagement;
+import org.universAAL.ontology.owl.QuestionnaireStrategyOntology;
 
-public class QuestionnaireStrategyOntologyFactory extends ResourceFactoryImpl {
+public class Activator implements ModuleActivator {
 
-    public Resource createInstance(String classURI, String instanceURI,
-	    int factoryIndex) {
+    QuestionnaireStrategyOntology ontology = new QuestionnaireStrategyOntology();
 
-	switch (factoryIndex) {
-	case 0:
-	    return new Questionnaire4TreatmentStrategy(instanceURI);
-	}
-	return null;
+    public void start(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().register(mcontext, ontology);
+    }
+
+    public void stop(ModuleContext mcontext) throws Exception {
+	OntologyManagement.getInstance().unregister(mcontext, ontology);
     }
 }
