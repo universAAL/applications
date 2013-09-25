@@ -1,6 +1,6 @@
 /*
 	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -32,13 +32,13 @@ import org.drools.KnowledgeBaseConfiguration;
 import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.KnowledgeBuilder;
 import org.drools.builder.KnowledgeBuilderConfiguration;
+import org.drools.builder.KnowledgeBuilderError;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.conf.AssertBehaviorOption;
 import org.drools.conf.EventProcessingOption;
 import org.drools.definition.KnowledgePackage;
 import org.drools.io.Resource;
-import org.universAAL.ontology.activityhub.ActivityHubSensor;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.ConsequenceException;
@@ -52,6 +52,7 @@ import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.ontology.activityhub.ActivityHubSensor;
 import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
@@ -216,17 +217,25 @@ public final class RulesEngine {
 		Properties props = new Properties();
 		KnowledgeBuilder kbuilder;
 		if (!testMode) {
+			System.setProperty("drools.dialect.mvel.strict", "false");
+			System.setProperty("drools.dialect.java.compiler", "JANINO");
+			props.setProperty("drools.dialect.mvel.strict", "false");
 			props.setProperty("drools.dialect.java.compiler", "JANINO");
 			KnowledgeBuilderConfiguration cfg = KnowledgeBuilderFactory
 					.newKnowledgeBuilderConfiguration(props,
 							ClassLoader.getSystemClassLoader());
+
+			// DROOLS 5.3.0
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(cfg);
+			// DROOLS 6
+			// kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+
 			// System.out.println(ResourceFactory.newClassPathResource(".//").toString());
 			// System.out.println(rulesEngineBundleContext.getBundle()
 			// .getResource("reasoner.drl").getPath());
 			kbuilder.add(ResourceFactory
 					.newUrlResource(rulesEngineBundleContext.getBundle()
-							.getResource("reasoner.drl")), ResourceType.DRL);
+							.getResource("uAALrules.drl")), ResourceType.DRL);
 		} else {
 			// props.setProperty("drools.dialect.java.compiler", "JANINO");
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
@@ -236,18 +245,28 @@ public final class RulesEngine {
 					ResourceType.DRL);
 		}
 		if (kbuilder.hasErrors()) {
-			throw new Exception(
-					"Knowledge builder has errors in its inicialization. Do you have a *.drl rule base file in the resources folder?"
-							+ kbuilder.getErrors().toString()
-							+ " "
-							+ kbuilder.getErrors().toArray().length
-							+ " ERRORS!!");
+			int nErrors = kbuilder.getErrors().toArray().length;
+			StringBuilder sb = new StringBuilder();
+			sb.append("Knowledge builder has errors in its inicialization. Do you have a *.drl rule base file in the resources folder?");
+			sb.append("\n" + nErrors + " detected:");
+
+			for (int i = 0; i < nErrors; i++) {
+
+				sb.append("\n"
+						+ (i + 1)
+						+ ") "
+						+ ((KnowledgeBuilderError) kbuilder.getErrors()
+								.toArray()[i]).getMessage());
+
+			}
+			throw new Exception(sb.toString());
 		}
 		final KnowledgeBaseConfiguration config = KnowledgeBaseFactory
 				.newKnowledgeBaseConfiguration();
 		config.setOption(EventProcessingOption.STREAM);
 		config.setOption(AssertBehaviorOption.EQUALITY);
 		config.setProperty("drools.dialect.java.compiler", "JANINO");
+		config.setProperty("drools.dialect.mvel.strict", "false");
 		final Collection<KnowledgePackage> kpkgs = kbuilder
 				.getKnowledgePackages();
 		final KnowledgeBase kb = KnowledgeBaseFactory.newKnowledgeBase(config);
@@ -266,7 +285,6 @@ public final class RulesEngine {
 		if (event instanceof ContextEvent) {
 			if (((ContextEvent) event).getRDFSubject() instanceof ActivityHubSensor) {
 				ksession.insert(event);
-				
 			} else {
 				// Not a sensor (genius)
 			}

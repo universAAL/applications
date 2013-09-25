@@ -1879,6 +1879,7 @@ long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/engine/Custo
 long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/engine/CustomWorkingMemoryEventListener.java -text
 long_term_behav/drools.reasoner/src/main/resources/droolsWorkshop1.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner.drl -text
+long_term_behav/drools.reasoner/src/main/resources/reasoner2.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerAuxClasses.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasonerRaw.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner_PIR.drl -text

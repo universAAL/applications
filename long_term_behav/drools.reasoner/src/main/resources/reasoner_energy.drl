@@ -86,8 +86,9 @@ rule "Energy measurement with dynamic classes"
 salience 13
 dialect "mvel" 
 	when
-		$c:ContextEvent(eval( RDFSubject instanceof ReadEnergy), $s: ((ReadEnergy)RDFSubject).getDevice().getName(),$o:RDFObject)
-		not $d: PoweredDevice( device matches $s )
+		//$c:ContextEvent(eval( RDFSubject instanceof ReadEnergy), $s: ((ReadEnergy)RDFSubject).getDevice().getName(),$o:RDFObject)
+		$c:ContextEvent(eval( RDFSubject instanceof ReadEnergy), $s: ((ReadEnergy)RDFSubject),$o:RDFObject)
+		not $d: PoweredDevice( device matches $s.getDevice().getName() )
 	then
 		PoweredDevice pd = new PoweredDevice($s, 0,5000,0.1,0,"OFF","OFF",new java.util.LinkedList());
 		insert(pd);
