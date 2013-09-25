@@ -7,17 +7,32 @@
 		<version>E.1</version>
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
-	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>ltba.publisher</artifactId>
-	<version>${parent.version}</version>
 	<packaging>bundle</packaging>
 	<name>LTBA raw events publisher</name>
 	<description>Event publisher for simulating real sensors in real conditions.			</description>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Bundle-Activator>org.universAAL.ltba.publisher.Activator</Bundle-Activator>
+						<Bundle-Description>${project.description}</Bundle-Description>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
-			<version>1.4.0</version>
+<!-- 			<version>1.4.0</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
@@ -36,24 +51,12 @@
 			<artifactId>ltba.manager</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>ltba.ui</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-Name>${project.name}</Bundle-Name>
-						<Bundle-Activator>org.universAAL.ltba.publisher.Activator</Bundle-Activator>
-						<Bundle-Description>${project.description}</Bundle-Description>
-						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-					</instructions>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 	<developers>
 		<developer>
 			<id>mllorente</id>
@@ -74,5 +77,6 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
-
+	<version>E.1.1-SNAPSHOT</version>
+	<groupId>org.universAAL.AALapplication</groupId>
 </project>
