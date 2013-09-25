@@ -1875,6 +1875,7 @@ long_term_behav/drools.reasoner/paxLaunchers/DroolsSafetyHome.launch -text
 long_term_behav/drools.reasoner/paxLaunchers/Drools_basic_step_by_step.launch -text
 long_term_behav/drools.reasoner/paxLaunchers/LTBA_Publisher_B.0.1_OSGI_enterprise.launch -text
 long_term_behav/drools.reasoner/paxLaunchers/OSGi_Enterprise.launch -text
+long_term_behav/drools.reasoner/paxLaunchers/PROTOTYPE_VERSION.launch -text
 long_term_behav/drools.reasoner/paxLaunchers/PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch -text
 long_term_behav/drools.reasoner/pom.xml -text
 long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/engine/CustomAgendaEventListener.java -text
