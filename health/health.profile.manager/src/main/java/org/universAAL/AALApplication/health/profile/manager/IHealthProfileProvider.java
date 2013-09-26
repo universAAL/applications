@@ -15,6 +15,7 @@
  ******************************************************************************/
 package org.universAAL.AALApplication.health.profile.manager;
 
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.ontology.health.owl.HealthProfile;
 
 public interface IHealthProfileProvider {
@@ -64,7 +65,7 @@ public interface IHealthProfileProvider {
 		}
 	}
 	 */
-	public abstract HealthProfile getHealthProfile(String userURI);
+	public abstract HealthProfile getHealthProfile(Resource userURI);
 
 	/**
 	 * Updates the {org.universAAL.ontology.profile.health.HealthProfile}.

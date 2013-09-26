@@ -18,6 +18,7 @@ package org.universAAL.AALApplication.health.profile.manager;
 
 import java.util.TreeMap;
 
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.ontology.health.owl.HealthProfile;
 
 /**
@@ -35,7 +36,7 @@ public class MapHealthProfileProvider implements IHealthProfileProvider {
 	/* (non-Javadoc)
 	 * @see org.universAAL.AALApplication.health.profile.manager.HealthProfileProvider#getHealthProfile(java.lang.String)
 	 */
-	public HealthProfile getHealthProfile(String userURI) {
+	public HealthProfile getHealthProfile(Resource userURI) {
 		if (healthProfileDB.containsKey(userURI)) {
 			return healthProfileDB.get(userURI);
 		}
