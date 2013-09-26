@@ -18,6 +18,8 @@ package org.universAAL.AALApplication.health.profile.manager;
 
 import org.universAAL.AALApplication.health.profile.manager.impl.ProfileServerHealthProfileProvider;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
@@ -25,6 +27,7 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.profile.AssistedPerson;
 
 /**
  * @author amedrano
@@ -75,11 +78,17 @@ public class ServiceProvider extends ServiceCallee {
 		    return invalidInput;
 
 		Object userInput = call.getInputValue(HealthProfileService.INPUT_USER);
+		LogUtils.logDebug(owner,
+				getClass(),
+				"handleCall",
+				new Object[]{"user Received ", userInput},
+				null);
+		
 		if(userInput == null)
 		    return invalidInput;
 		
 		if(operation.startsWith(HealthProfileService.GET_HEALTH_PROFILE))
-			return getProfile((String)userInput);
+			return getProfile(((AssistedPerson)userInput));
 		
 		HealthProfile profile = (HealthProfile) call.getInputValue(HealthProfileService.INPUT_PROFILE);
 		if(operation.startsWith(HealthProfileService.UPDATE_HEALTH_PROFILE) && profile!= null)
@@ -93,9 +102,12 @@ public class ServiceProvider extends ServiceCallee {
 		return new ServiceResponse(CallStatus.succeeded);
 	}
 
-	private ServiceResponse getProfile(String userInput) {
+	private ServiceResponse getProfile(Resource userInput) {
+		LogUtils.logDebug(owner, getClass(), "getProfile", "getting profile");
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 		sr.addOutput(new ProcessOutput(HealthProfileService.OUTPUT_PROFILE, psm.getHealthProfile(userInput)));
+
+		LogUtils.logDebug(owner, getClass(), "getProfile", "profile gotten");
 		return sr;
 	}
 

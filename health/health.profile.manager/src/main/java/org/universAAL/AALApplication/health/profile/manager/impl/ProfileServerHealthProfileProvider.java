@@ -27,18 +27,18 @@ import java.util.List;
 
 import org.universAAL.AALApplication.health.profile.manager.IHealthProfileProvider;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.Profilable;
 import org.universAAL.ontology.profile.Profile;
 import org.universAAL.ontology.profile.SubProfile;
-import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.service.ProfilingService;
 
 /**
@@ -76,10 +76,10 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 	}
 
 	/** {@inheritDoc} */
-	public HealthProfile getHealthProfile(String userURI) {
+	public HealthProfile getHealthProfile(Resource user) {
 
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
-		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, new User(userURI));
+		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, user);
 		req.addRequiredOutput(ARG_OUT, new String[] { 
 				ProfilingService.PROP_CONTROLS, 
 				Profilable.PROP_HAS_PROFILE, 
@@ -91,7 +91,7 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 		    	List<?> subProfiles = sr.getOutput(ARG_OUT, true);
 		    	if(subProfiles == null || subProfiles.size() == 0) {
 		    		moduleContext.logInfo(this.getClass().getName(),"there are no sub profiles, creating default health subprofile", null);
-		    		return newHealthProfile(userURI);
+		    		return newHealthProfile(user);
 		    	}
 		    	moduleContext.logDebug(getClass().getName(), "searching in " + subProfiles.size() + " suprofiles", null);
 		    	Iterator<?> iter = subProfiles.iterator();
@@ -102,7 +102,7 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 		    		}
 		    	}
 	    		moduleContext.logInfo(this.getClass().getName(),"there is no health profile, creating default one", null);
-	    		return newHealthProfile(userURI);
+	    		return newHealthProfile(user);
 			} catch(Exception e) {
 				moduleContext.logError(this.getClass().getName(), "got exception", e);
 				return null;
@@ -113,10 +113,11 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 		}
 	}
 
-	private HealthProfile newHealthProfile(String uri) {
-		HealthProfile hp = new HealthProfile(uri+"HealthSubprofile");
-		AssistedPerson ap = new AssistedPerson(uri);
-		hp.assignHealthProfileToAP(ap);
+	private HealthProfile newHealthProfile(Resource ap) {
+		HealthProfile hp = new HealthProfile(ap.getURI()+"HealthSubprofile");
+		if (ap instanceof AssistedPerson){
+			hp.assignHealthProfileToAP((AssistedPerson) ap);
+		}
 		
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null),
 				null);
