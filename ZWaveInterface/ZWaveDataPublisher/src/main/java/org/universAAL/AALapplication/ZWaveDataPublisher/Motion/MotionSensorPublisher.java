@@ -32,47 +32,56 @@ import org.universAAL.ontology.activityhub.MotionSensorEvent;
 import org.universAAL.ontology.activityhub.MotionSensor;
 import org.universAAL.ontology.activityhub.ContactClosureSensorEvent;
 import org.universAAL.ontology.activityhub.ContactClosureSensor;
+import org.universAAL.ontology.location.Location;
 
 public class MotionSensorPublisher {
 
 	private ContextPublisher cp;
 	ContextProvider info = new ContextProvider();
 	ModuleContext mc;
-	public final static String NAMESPACE = "http://tsbtecnologias.es/MotionSensorPublisher#";	
-	
+	public final static String NAMESPACE = "http://tsbtecnologias.es/MotionSensorPublisher#";
+
 	public MotionSensorPublisher(BundleContext context) {
-    	System.out.print("New Publisher\n");
-    	info = new ContextProvider(
+		System.out.print("New Publisher\n");
+		info = new ContextProvider(
 				"http://www.tsbtecnologias.es/ContextProvider.owl#ZWaveEventPublisher");
 		mc = uAALBundleContainer.THE_CONTAINER
 				.registerModule(new Object[] { context });
 		info.setType(ContextProviderType.gauge);
-		info
-				.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
+		info.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
 		cp = new DefaultContextPublisher(mc, info);
 	}
-	
-	public void publishMotionDetection(String message){
 
-           String[] veraResponse = message.split(" ");
-           
-           if (veraResponse[0].compareTo("Motion")==0){
-        	   String msURL = NAMESPACE + veraResponse[1];
-          
-        	   MotionSensorEvent mse = MotionSensorEvent.motion_detected;
-        	   MotionSensor ms = new MotionSensor(msURL);
-        	   ms.setMeasuredValue(mse);
-           System.out.print("Publishing motion\n");
-        	   cp.publish(new ContextEvent(ms, MotionSensor.PROP_MEASURED_VALUE));
-           }
-           else if (veraResponse[0].compareTo("Contact")==0){
-        	   String msURL = NAMESPACE + veraResponse[1];
-        	   
-        	   ContactClosureSensorEvent cce = ContactClosureSensorEvent.contact_opened;
-        	   ContactClosureSensor cc = new ContactClosureSensor(msURL);
-        	   cc.setMeasuredValue(cce);
-        	   System.out.print("Publishing contact\n");
-        	   cp.publish(new ContextEvent(cc, ContactClosureSensor.PROP_MEASURED_VALUE));        	   
-           }
+	public void publishMotionDetection(String message) {
+		System.out.println("DA MESSAGE-------------------->>>" + message);
+		String[] veraResponse = message.split(" ");
+
+		if (veraResponse[0].compareTo("Motion") == 0) {
+			String msURL = NAMESPACE + veraResponse[1];
+
+			MotionSensorEvent mse = MotionSensorEvent.motion_detected;
+			MotionSensor ms = new MotionSensor(msURL);
+			ms.setMeasuredValue(mse);
+			ms.setLocation(new Location(NAMESPACE
+					+ "ZWaveMotionDetectorLocation", veraResponse[2]));
+			System.out.print("Publishing motion\n");
+			cp.publish(new ContextEvent(ms, MotionSensor.PROP_MEASURED_VALUE));
+		} else if (veraResponse[0].compareTo("Contact") == 0) {
+			String msURL = NAMESPACE + veraResponse[1];
+			ContactClosureSensorEvent cce;
+			if (veraResponse[1].equalsIgnoreCase("DoorOpen")) {
+				cce = ContactClosureSensorEvent.contact_opened;
+			} else {
+				cce = ContactClosureSensorEvent.contact_closed;
+			}
+
+			ContactClosureSensor cc = new ContactClosureSensor(msURL);
+			cc.setLocation(new Location(NAMESPACE
+					+ "ZWaveContactClosureLocation", veraResponse[2]));
+			cc.setMeasuredValue(cce);
+			System.out.print("Publishing contact\n");
+			cp.publish(new ContextEvent(cc,
+					ContactClosureSensor.PROP_MEASURED_VALUE));
+		}
 	}
 }
