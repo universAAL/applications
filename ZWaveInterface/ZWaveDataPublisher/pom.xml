@@ -4,13 +4,13 @@
   <parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.0</version>
-		<relativePath>../new_services.pom/pom.xml</relativePath>
+		<version>E.1</version>
+		<relativePath>../../new_services.pom/pom.xml</relativePath>
 	</parent>
   
   <artifactId>ZWaveDataPublisher</artifactId>
   <name></name>
-  <version>E.0.2-SNAPSHOT</version>
+  <version>E.1</version>
   <description/>
 	<packaging>bundle</packaging>
 	<dependencies>
