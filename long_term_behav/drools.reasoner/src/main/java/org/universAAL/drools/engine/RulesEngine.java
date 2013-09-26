@@ -46,12 +46,14 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.drools.models.RuleModel;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.middleware.datarep.SharedResources;
 import org.universAAL.ontology.activityhub.ActivityHubSensor;
 import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
@@ -222,8 +224,8 @@ public final class RulesEngine {
 			props.setProperty("drools.dialect.mvel.strict", "false");
 			props.setProperty("drools.dialect.java.compiler", "JANINO");
 			KnowledgeBuilderConfiguration cfg = KnowledgeBuilderFactory
-					.newKnowledgeBuilderConfiguration(props,
-							ClassLoader.getSystemClassLoader());
+					.newKnowledgeBuilderConfiguration(props, ClassLoader
+							.getSystemClassLoader());
 
 			// DROOLS 5.3.0
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(cfg);
@@ -233,9 +235,28 @@ public final class RulesEngine {
 			// System.out.println(ResourceFactory.newClassPathResource(".//").toString());
 			// System.out.println(rulesEngineBundleContext.getBundle()
 			// .getResource("reasoner.drl").getPath());
-			kbuilder.add(ResourceFactory
-					.newUrlResource(rulesEngineBundleContext.getBundle()
-							.getResource("uAALrules.drl")), ResourceType.DRL);
+
+			// SUPERTEST DEL EVEREST
+			// kbuilder.add(ResourceFactory.newUrlResource(rulesEngineBundleContext.getBundle().getResource("uAALrules.drl")),
+			// ResourceType.DRL);
+
+//			System.out
+//					.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LOS PATHS DEL METAAL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//			System.out.println(ResourceFactory
+//					.newUrlResource(rulesEngineBundleContext.getBundle()
+//							.getResource("uAALrules.drl")));
+			String home = new BundleConfigHome("drools.reasoner")
+					.getAbsolutePath();
+//			String modHome = home.replace("\\", "/");
+//			String pathToHome = "path=file:/"
+//					+ modHome.substring(modHome.indexOf(":") + 1)
+//					+ "/uAALrules.drl";
+//			System.out.println(pathToHome);
+//			System.out.println(new BundleConfigHome("drools.reasoner")
+//					.getAbsolutePath());						
+			kbuilder.add(ResourceFactory.newFileResource(home
+					+ "/uAALrules.drl"), ResourceType.DRL);
+
 		} else {
 			// props.setProperty("drools.dialect.java.compiler", "JANINO");
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
@@ -247,7 +268,8 @@ public final class RulesEngine {
 		if (kbuilder.hasErrors()) {
 			int nErrors = kbuilder.getErrors().toArray().length;
 			StringBuilder sb = new StringBuilder();
-			sb.append("Knowledge builder has errors in its inicialization. Do you have a *.drl rule base file in the resources folder?");
+			sb
+					.append("Knowledge builder has errors in its inicialization. Do you have a *.drl rule base file in the resources folder?");
 			sb.append("\n" + nErrors + " detected:");
 
 			for (int i = 0; i < nErrors; i++) {
@@ -384,7 +406,8 @@ public final class RulesEngine {
 				"http://www.tsbtecnologias.es/ContextProvider.owl#ReasonerNotifier");
 
 		info.setType(ContextProviderType.reasoner);
-		info.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
+		info
+				.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
 		cp = new DefaultContextPublisher(rulesEngineModuleContext, info);
 		DroolsReasoning dr = new DroolsReasoning(
 				"http://www.tsbtecnologias.es/DroolsReasoning.owl#ReasoningConsequence");
@@ -427,8 +450,8 @@ public final class RulesEngine {
 		KnowledgeBuilder auxkbuilder;
 		props.setProperty("drools.dialect.java.compiler", "JANINO");
 		KnowledgeBuilderConfiguration cfg = KnowledgeBuilderFactory
-				.newKnowledgeBuilderConfiguration(props,
-						ClassLoader.getSystemClassLoader());
+				.newKnowledgeBuilderConfiguration(props, ClassLoader
+						.getSystemClassLoader());
 		auxkbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(cfg);
 
 		final Resource res = ResourceFactory
