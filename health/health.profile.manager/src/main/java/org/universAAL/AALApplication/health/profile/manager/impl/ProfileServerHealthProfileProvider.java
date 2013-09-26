@@ -105,11 +105,11 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 	    		return newHealthProfile(user);
 			} catch(Exception e) {
 				moduleContext.logError(this.getClass().getName(), "got exception", e);
-				return null;
+	    		return newHealthProfile(user);
 		    }
 		} else {
-			moduleContext.logWarn(this.getClass().getName(),"callstatus is not succeeded", null);
-			return null;
+			moduleContext.logWarn(this.getClass().getName(),"callstatus is not succeeded; creating new profile", null);
+			return newHealthProfile(user);
 		}
 	}
 
