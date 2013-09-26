@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
@@ -70,7 +71,14 @@ public abstract class AbstractHealthForm extends UICaller {
 		
 		ServiceResponse sr = new DefaultServiceCaller(this.context).call(req);
 		if (sr.getCallStatus() == CallStatus.succeeded) {
-			return (HealthProfile) sr.getOutput(REQ_OUTPUT_PROFILE, false).get(0);
+			if (sr.getOutput(REQ_OUTPUT_PROFILE, false) != null){
+				return (HealthProfile) sr.getOutput(REQ_OUTPUT_PROFILE, false).get(0);
+			}
+			else {
+				LogUtils.logError(context, getClass(), "getHealthProfile", "output form call getUser is null!");
+			}
+		} else {
+			LogUtils.logError(context, getClass(), "getHealthProfile", "Call getUser, is not succeded");
 		}
 		
 		return null;
