@@ -3091,10 +3091,15 @@ safety_home/utils/external-jars/safety_home/commons-pool-1.1.jar -text
 safety_home/utils/external-jars/safety_home/mysql-connector-java-5.1.18-bin.jar -text
 safety_home/utils/install.bat -text
 safety_home/utils/safety/images/Kostas_Kalogirou.jpg -text
+safety_home/utils/safety/images/Kostas_Kalogirou.png -text
 safety_home/utils/safety/images/Nikos_Dimokas.jpg -text
+safety_home/utils/safety/images/Nikos_Dimokas.png -text
 safety_home/utils/safety/images/Olga_Gkaitatzi.jpg -text
+safety_home/utils/safety/images/Olga_Gkaitatzi.png -text
 safety_home/utils/safety/images/Paulos_Spanidis.jpg -text
+safety_home/utils/safety/images/Paulos_Spanidis.png -text
 safety_home/utils/safety/images/Taxiarchis_Tsaprounis.jpg -text
+safety_home/utils/safety/images/Taxiarchis_Tsaprounis.png -text
 safety_home/utils/safety/images/Unknown_Person.jpg -text
 safety_home/utils/safety/images/Unknown_Person.png -text
 safety_home/utils/safety/images/backup/door_unlock.jpg -text
@@ -3110,8 +3115,10 @@ safety_home/utils/safety/images/heating_on.png -text
 safety_home/utils/safety/images/humidity.png -text
 safety_home/utils/safety/images/light_off.png -text
 safety_home/utils/safety/images/light_on.png -text
+safety_home/utils/safety/images/light_on_s.png -text
 safety_home/utils/safety/images/motion.png -text
 safety_home/utils/safety/images/opened_window.png -text
+safety_home/utils/safety/images/opened_window_s.png -text
 safety_home/utils/safety/images/smoke.png -text
 safety_home/utils/safety/images/temperature.png -text
 safety_home/utils/safety/sounds/door_bell.wav -text
