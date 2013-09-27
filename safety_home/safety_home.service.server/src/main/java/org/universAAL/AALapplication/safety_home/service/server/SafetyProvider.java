@@ -74,7 +74,7 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
     	return Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length()));
     }
     
-	private MyDevices theServer;
+	private static MyDevices theServer;
 	private ModuleContext context;
 	private ContextPublisher cp;
 	private ContextPublisher lightPublisher;
@@ -134,61 +134,18 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 		return result;
     }
 	
-	SafetyProvider(ModuleContext context) {
+	SafetyProvider(final ModuleContext context) {
 		super(context, SafetyService.profiles);
 		this.context = context;
 		theServer = new MyDevices();
 		theServer.addListener(this);
-/*
-		// start humidity context publisher 
-		this.humidityInfo = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE + "HumidityContextProvider");
-		this.humidityInfo.setType(ContextProviderType.controller);
-		this.humidityInfo.setProvidedEvents(providedEvents(theServer));
-		this.humidityPublisher = new DefaultContextPublisher(context, this.humidityInfo);
-		this.humidityModule();
-
-		// start light context publisher 
-		this.lightInfo = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE + "LightContextProvider");
-		this.lightInfo.setType(ContextProviderType.controller);
-		this.lightInfo.setProvidedEvents(providedEvents(theServer));
-		this.lightPublisher = new DefaultContextPublisher(context, this.lightInfo);
-		this.lightModule();
-
-		// start motion context publisher 
-		this.motionInfo = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE + "MotionContextProvider");
-		this.motionInfo.setType(ContextProviderType.controller);
-		this.motionInfo.setProvidedEvents(providedEvents(theServer));
-		this.motionPublisher = new DefaultContextPublisher(context, this.motionInfo);
-		this.motionModule();
-
-		// start smart card context publisher 
-		this.smartCardInfo = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE + "SmartCardContextProvider");
-		this.smartCardInfo.setType(ContextProviderType.controller);
-		this.smartCardInfo.setProvidedEvents(providedEvents(theServer));
-		this.smartCardPublisher = new DefaultContextPublisher(context, this.smartCardInfo);
-		this.smartCardModule();
-
-		// start smoke detection context publisher 
-		this.smokeDetectionInfo = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE + "SmokeDetectionContextProvider");
-		this.smokeDetectionInfo.setType(ContextProviderType.controller);
-		this.smokeDetectionInfo.setProvidedEvents(providedEvents(theServer));
-		this.smokeDetectionPublisher = new DefaultContextPublisher(context, this.smokeDetectionInfo);
-		this.smokeModule();
-
-		// start temperature context publisher 
-		this.temperatureSensorInfo = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE + "TemperatureSensorContextProvider");
-		this.temperatureSensorInfo.setType(ContextProviderType.controller);
-		this.temperatureSensorInfo.setProvidedEvents(providedEvents(theServer));
-		this.temperatureSensorPublisher = new DefaultContextPublisher(context, this.temperatureSensorInfo);
-		this.temperatureModule();
-
-		// start window context publisher 
-		this.windowInfo = new ContextProvider(SafetyService.SAFETY_SERVER_NAMESPACE + "WindowContextProvider");
-		this.windowInfo.setType(ContextProviderType.controller);
-		this.windowInfo.setProvidedEvents(providedEvents(theServer));
-		this.windowPublisher = new DefaultContextPublisher(context, this.windowInfo);
-		this.windowModule();
-*/
+		
+		new Thread() {
+			public void run() {
+				new CPublisher(context);
+			}
+		}.start();
+		
 	}
 /*
 	public void humidityModule() {
@@ -361,7 +318,7 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 			// collect the needed data
 			int deviceID = Integer.parseInt(deviceURI.substring(DEVICE_URI_PREFIX.length()));
 			String loc = theServer.getDeviceLocation(deviceID);
-			int state = theServer.isOn(deviceID) ? 100 : 0;
+			int state = theServer.isUnLocked(deviceID) ? 100 : 0;
 			// We assume that the Service-Call always succeeds because we only simulate the device
 			ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 			// create and add a ProcessOutput-Event that binds the output URI to the state of the device
@@ -571,5 +528,9 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 			// subject and the property that changed as predicate
 			//cp.publish(new ContextEvent(door, Door.PROP_DEVICE_STATUS));
 		}	
+	}
+	
+	public static MyDevices getTheServer() {
+		return theServer;
 	}
 }

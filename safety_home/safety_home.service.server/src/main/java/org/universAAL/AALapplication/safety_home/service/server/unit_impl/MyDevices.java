@@ -19,7 +19,7 @@ package org.universAAL.AALapplication.safety_home.service.server.unit_impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.universAAL.AALapplication.safety_home.service.lampSoapClient.SOAPClient;
+import org.universAAL.AALapplication.safety_home.service.remoteDevicesClient.RemoteDevicesClient;
 import org.universAAL.AALapplication.safety_home.service.server.Activator;
 import org.universAAL.AALapplication.safety_home.service.server.DeviceHandlers.DoorLockUnlock;
 import org.universAAL.AALapplication.safety_home.service.server.DeviceHandlers.DoorOpen;
@@ -34,16 +34,16 @@ import org.universAAL.middleware.container.utils.LogUtils;
 public class MyDevices {
 	private class Device {
 		String loc;
-		boolean isOn;
+		boolean isUnLocked;
 		boolean isOpen;
 		
-		Device(String loc, boolean isOn) {
+		Device(String loc, boolean isUnLocked) {
 			this.loc = loc;
-			this.isOn = isOn;
+			this.isUnLocked = isUnLocked;
 		}
-		Device(String loc, boolean isOn, boolean isOpen) {
+		Device(String loc, boolean isUnLocked, boolean isOpen) {
 			this.loc = loc;
-			this.isOn = isOn;
+			this.isUnLocked = isUnLocked;
 			this.isOpen = isOpen;
 		}
 	}
@@ -69,8 +69,7 @@ public class MyDevices {
 	}
 
 	private Device[] myDeviceDB = new Device[] {
-			new Device("loc1", false), new Device("loc2", false), new Device("loc3", false), 
-			new Device("loc4", false), new Device("loc5", false), new Device("loc6", false)
+			new Device("loc1", false, false)
 	};
 	private Lamp[] myLamp = new Lamp[] { new Lamp("loc1", false)	};
 	private Heating[] myHeating = new Heating[] { new Heating("loc1", false)	};
@@ -94,8 +93,8 @@ public class MyDevices {
 		return myDeviceDB[deviceID].loc;
 	}
 	
-	public boolean isOn(int deviceID) {
-		return myDeviceDB[deviceID].isOn;
+	public boolean isUnLocked(int deviceID) {
+		return myDeviceDB[deviceID].isUnLocked;
 	}
 
 	public boolean isOpen(int deviceID) {
@@ -109,8 +108,8 @@ public class MyDevices {
 	/* Virtual Door Management */
 
 	public boolean lock(int deviceID) {
-		if (myDeviceDB[deviceID].isOn) {
-			myDeviceDB[deviceID].isOn = false;
+		if (myDeviceDB[deviceID].isUnLocked) {
+			myDeviceDB[deviceID].isUnLocked = false;
 			//LogUtils.logInfo(Activator.logger, "MyDevices", "lock", 
 			//		new Object[] {"Device in ", myDeviceDB[deviceID].loc, " locked!"}, null);
 			for (Iterator i=listeners.iterator(); i.hasNext();)
@@ -124,8 +123,8 @@ public class MyDevices {
 	}
 	
 	public boolean unlock(int deviceID) {
-		if (!myDeviceDB[deviceID].isOn) {
-			myDeviceDB[deviceID].isOn = true;
+		if (!myDeviceDB[deviceID].isUnLocked) {
+			myDeviceDB[deviceID].isUnLocked = true;
 			//LogUtils.logInfo(Activator.logger, "MyDevices", "unlock", 
 			//		new Object[] {"Device in ", myDeviceDB[deviceID].loc, " unlocked!"}, null);
 			for (Iterator i=listeners.iterator(); i.hasNext();)
@@ -139,7 +138,7 @@ public class MyDevices {
 	}
 
 	public boolean open(int deviceID) {
-		if (myDeviceDB[deviceID].isOn) {
+		if (myDeviceDB[deviceID].isUnLocked) {
 			myDeviceDB[deviceID].isOpen = true;
 			//LogUtils.logInfo(Activator.logger, "MyDevices", "open", 
 			//		new Object[] {"Device in ", myDeviceDB[deviceID].loc, " opened!"}, null);
@@ -196,7 +195,7 @@ public class MyDevices {
     public void turnOffLamp(int lampID) {
 		//if (SOAPClient.isLampEnabled()) {
 		    myLamp[lampID].isOn = false;
-		    SOAPClient.turnOffLamp();
+		    RemoteDevicesClient.turnOffLamp();
 		    LogUtils.logDebug(Activator.mc, MyDevices.class, "Safety and Security", new Object[] { "Lamp turned off!" },null);
 		//}
     }
@@ -204,7 +203,7 @@ public class MyDevices {
     public void turnOnLamp(int lampID) {
 		//if (!SOAPClient.isLampEnabled()) {
 		    myLamp[lampID].isOn = true;
-		    SOAPClient.turnOnLamp();
+		    RemoteDevicesClient.turnOnLamp();
 		    LogUtils.logDebug(Activator.mc, MyDevices.class, "Safety and Security", new Object[] { "Lamp turned on!" },null);
 		//}
     }
@@ -216,7 +215,7 @@ public class MyDevices {
     public void turnOffHeating(int heatingID) {
 		//if (SOAPClient.isHeatingEnabled()) {
 		    myHeating[heatingID].isOn = false;
-		    SOAPClient.turnOffHeating();
+		    RemoteDevicesClient.turnOffHeating();
 		    LogUtils.logDebug(Activator.mc, MyDevices.class, "Safety and Security", new Object[] { "Heating turned off!" },null);
 		//}
     }
@@ -224,7 +223,7 @@ public class MyDevices {
     public void turnOnHeating(int heatingID) {
 		//if (!SOAPClient.isHeatingEnabled()) {
     		myHeating[heatingID].isOn = true;
-		    SOAPClient.turnOnHeating();
+		    RemoteDevicesClient.turnOnHeating();
 		    LogUtils.logDebug(Activator.mc, MyDevices.class, "Safety and Security", new Object[] { "Heating turned on!" },null);
 		//}
     }

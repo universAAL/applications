@@ -51,7 +51,22 @@ public class DoorOpen {
 		System.out.println("finished!");
 		return true;
 	}
-	
+/*	
+	public boolean isDoorOpen(){
+		boolean isDoorOpen = false;
+
+		try {
+			isDoorOpen = d.getHS485().isDoorOpened();
+            System.out.println(">>> IS DOOR OPEN="+d.getHS485().isDoorOpened());
+		} 
+		catch (DomoticsException e) { 
+			//e.printStackTrace(); 
+			return false; 
+		}
+
+		return isDoorOpen;
+	}
+*/
 	public static void main(String[] args) throws HTTPException {
 		
 		DoorOpen door = new DoorOpen();
