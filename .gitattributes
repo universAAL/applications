@@ -2908,6 +2908,7 @@ safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplicati
 safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplication/safety_home/service/uiclient/ServiceProvider.java -text
 safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplication/safety_home/service/uiclient/SharedResources.java -text
 safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplication/safety_home/service/uiclient/UIProvider.java -text
+safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplication/safety_home/service/uiclient/db/DerbyInterface.java -text
 safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplication/safety_home/service/uiclient/dialogs/door/FrontDoorControl.java -text
 safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplication/safety_home/service/uiclient/dialogs/environmental/EnvironmentalControl.java -text
 safety_home/safety_home.service.client/src/main/java/org/universAAL/AALapplication/safety_home/service/uiclient/osgi/Activator.java -text
