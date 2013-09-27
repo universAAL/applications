@@ -34,7 +34,7 @@
 		<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/safety_home</developerConnection>
 	</scm>
 	<modules>
-<!--		<module>../ont.safety</module>-->
+		<module>../ont.safety</module>
 		<module>../safety_home.service.smartCardProvider</module>
 		<module>../safety_home.service.windowProvider</module>
 		<module>../safety_home.service.lightSensorProvider</module>
