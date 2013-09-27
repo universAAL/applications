@@ -70,9 +70,9 @@ public class CPublisher extends ContextPublisher{
 	}
 
 	public void invoke() throws InterruptedException{
-		//getUsers();
 		while (true){
 			Thread.sleep(133000);
+			//Thread.sleep(90000);
 			publishSmoke(0);
 		}
 	}
@@ -85,6 +85,7 @@ public class CPublisher extends ContextPublisher{
 				device=(Device)smoke;
 				smoke.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "smoke"));
 				smoke.setSmoke(SOAPClient.getSmoke());
+				//smoke.setSmoke(true);
 				
 				System.out.println("############### PUBLISHING EVENT ###############");
 				cp.publish(new ContextEvent(smoke, SmokeSensor.PROP_SMOKE));
