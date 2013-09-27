@@ -75,7 +75,7 @@ public class CPublisher extends ContextPublisher{
 	public void invoke() throws InterruptedException{
 		//getUsers();
 		while (true){
-			Thread.sleep(15500);
+			Thread.sleep(18500);
 			publishLightStatus(0);
 		}
 	}
@@ -99,13 +99,11 @@ public class CPublisher extends ContextPublisher{
 			if (previousState != state){
 				System.out.println("############### PUBLISHING LIGHT EVENT ###############");
 				cp.publish(new ContextEvent(light, LightSensor.PROP_SENSOR_STATUS));
-				System.out.println("################################################");
 				previousState = state;
 			}
 		}
 	}
 
-	
 	private static ContextProvider getProviderInfo() {
 		ContextEventPattern cep3 = new ContextEventPattern();
 		cep3.addRestriction(MergedRestriction.getAllValuesRestriction(ContextEvent.PROP_RDF_SUBJECT, LightSensor.MY_URI));
