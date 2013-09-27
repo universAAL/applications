@@ -28,7 +28,7 @@ public class Door extends Device {
 	//public static final String SAFETY_NAMESPACE = "http://ontology.universaal.org/Safety.owl#";
 	public static final String MY_URI = SafetyOntology.NAMESPACE + "Door"; 
 	//public static final String PROP_DEVICE_LOCATION = SafetyOntology.NAMESPACE + "deviceLocation";
-	public static final String PROP_DEVICE_STATUS = SafetyOntology.NAMESPACE + "deviceStatus";
+	public static final String PROP_DEVICE_STATUS = SafetyOntology.NAMESPACE + "doorStatus";
 	public static final String PROP_DEVICE_RFID = SafetyOntology.NAMESPACE + "deviceRfid";
 	public static final String PROP_HAS_DOORBELL = SafetyOntology.NAMESPACE + "doorBell";
 	
@@ -94,7 +94,7 @@ public class Door extends Device {
 		return (Location) props.get(PROP_PHYSICAL_LOCATION);
 	}
 	public void setStatus(int state) {
-		if (state > -1 && state < 101)
+		if (state >= -1 && state <= 101)
 		    props.put(PROP_DEVICE_STATUS, new Integer(state));
 	}
 	

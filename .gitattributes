@@ -2795,6 +2795,7 @@ ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/FanHeater.jav
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/HumiditySensor.java -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/LightSensor.java -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/MotionSensor.java -text
+ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/Notification.java -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/SafetyManagement.java -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/SafetyOntology.java -text
 ontologies/ont.safety/src/main/java/org/universAAL/ontology/Safety/SmokeSensor.java -text

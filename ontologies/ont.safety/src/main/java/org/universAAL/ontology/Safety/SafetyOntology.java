@@ -17,6 +17,7 @@
 package org.universAAL.ontology.Safety;
 
 import org.universAAL.middleware.owl.DataRepOntology;
+import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.OntClassInfoSetup;
 import org.universAAL.middleware.owl.Ontology;
@@ -84,12 +85,13 @@ public final class SafetyOntology extends Ontology {
 	oci.addObjectProperty(Door.PROP_HAS_DOORBELL).setFunctional();
 	oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
 			Door.PROP_DEVICE_STATUS, TypeMapper.getDatatypeURI(Integer.class), 1, 1));
+			//Door.PROP_DEVICE_STATUS, Door.MY_URI, 1, 1));
 			//.addRestriction( new BoundedValueRestriction(Door.PROP_DEVICE_STATUS,new Integer(0), true, new Integer(100), true)));
 	oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
 			Door.PROP_DEVICE_RFID, Door.MY_URI, 1, 1));
 	oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
 			Door.PROP_HAS_DOORBELL, DoorBell.MY_URI, 1, -1));
-
+	
 	// load Humidity Sensor
 	oci = createNewOntClassInfo(HumiditySensor.MY_URI, factory, 2);
 	oci.setResourceComment("The class of Humidity Sensor");
@@ -177,9 +179,23 @@ public final class SafetyOntology extends Ontology {
 	oci.addRestriction(MergedRestriction.getAllValuesRestrictionWithCardinality(
 			FanHeater.PROP_IS_ENABLED, FanHeater.MY_URI, 1, 1));
 
+	// load FoodItem
+	oci = createNewOntClassInfo(Notification.MY_URI, factory, 9);
+	oci.setResourceComment("The class of notifications");
+	oci.setResourceLabel("Notification");
+	oci.addSuperClass(ManagedIndividual.MY_URI);
+	oci.addDatatypeProperty(Notification.PROP_MESSAGE).setFunctional();
+	oci.addDatatypeProperty(Notification.PROP_DATE).setFunctional();
+	oci.addDatatypeProperty(Notification.PROP_TIME).setFunctional();
+	oci.addRestriction(MergedRestriction.getCardinalityRestriction(
+			Notification.PROP_MESSAGE, 1, 1));
+	oci.addRestriction(MergedRestriction.getCardinalityRestriction(
+			Notification.PROP_DATE, 1, 1));
+	oci.addRestriction(MergedRestriction.getCardinalityRestriction(
+			Notification.PROP_TIME, 1, 1));
 
 	// load SafetyManagement
-	oci = createNewOntClassInfo(SafetyManagement.MY_URI, factory, 9);
+	oci = createNewOntClassInfo(SafetyManagement.MY_URI, factory, 10);
 	oci.setResourceComment("The class of services controling safety items");
 	oci.setResourceLabel("SafetyManagement");
 	oci.addSuperClass(Service.MY_URI);

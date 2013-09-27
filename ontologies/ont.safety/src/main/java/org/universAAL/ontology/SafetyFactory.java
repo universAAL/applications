@@ -22,6 +22,7 @@ import org.universAAL.ontology.Safety.Door;
 import org.universAAL.ontology.Safety.HumiditySensor;
 import org.universAAL.ontology.Safety.LightSensor;
 import org.universAAL.ontology.Safety.MotionSensor;
+import org.universAAL.ontology.Safety.Notification;
 import org.universAAL.ontology.Safety.SafetyManagement;
 import org.universAAL.ontology.Safety.SmokeSensor;
 import org.universAAL.ontology.Safety.TemperatureSensor;
@@ -61,6 +62,8 @@ public class SafetyFactory extends ResourceFactoryImpl {
 		case 8:
 		    return new FanHeater(instanceURI);
 		case 9:
+		    return new Notification(instanceURI);
+		case 10:
 		    return new SafetyManagement(instanceURI);
 		}
 
