@@ -2893,6 +2893,7 @@ personal_safety/personal_safety.sw.panic/src/main/java/org/universAAL/Applicatio
 personal_safety/smp.test-location.publisher/pom.xml -text
 personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/Activator.java -text
 personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/GUIPanel.java -text
+safety_home/README.txt -text
 safety_home/safety.pom/ASL2.0 -text
 safety_home/safety.pom/NOTICE -text
 safety_home/safety.pom/pom.xml -text
