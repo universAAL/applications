@@ -39,6 +39,8 @@ public class Activator implements BundleActivator {
 				provider = new SafetyProvider(mc);
 			}
 		}.start();
+		
+		//context.registerService(DataValidatorFactory.class.getName(), new DataValidatorFactory(), null);
 	}
 
 	public void stop(BundleContext context) throws Exception {
