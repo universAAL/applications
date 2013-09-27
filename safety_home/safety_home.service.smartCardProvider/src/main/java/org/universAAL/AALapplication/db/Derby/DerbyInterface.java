@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSetMetaData;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
@@ -85,25 +86,25 @@ public class DerbyInterface {
 		    
 		    String createTableDevice = "CREATE TABLE  "+DBNAME+".device ( " +
 		    		"device_id integer PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
-		    		"name varchar(50), " +
+		    		"name varchar(50) NOT NULL, " +
 		    		"location varchar(50), " +
-		    		"manufacturer varchar(10))";
+		    		"manufacturer varchar(50))";
 		    String createTableUsers = "CREATE TABLE  "+DBNAME+".users ( " +
 		    		"users_id integer PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
-		    		"firstname varchar(50), " +
-		    		"lastname varchar(50), " +
+		    		"firstname varchar(50) NOT NULL, " +
+		    		"lastname varchar(50) NOT NULL, " +
 		    		"age integer, " +
-		    		"job varchar(100), " +
+		    		"job varchar(100) , " +
 		    		"email varchar(70), " +
-		    		"username varchar(20), " +
-		    		"password varchar(10))";
+		    		"username varchar(20) NOT NULL, " +
+		    		"password varchar(10) NOT NULL)";
 		    String createTableSmartcard = "CREATE TABLE  "+DBNAME+".smartcard ( " +
 		    		"smartcard_id integer PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
-		    		"shortdescription varchar(20), " +
+		    		"shortdescription varchar(20) NOT NULL, " +
 		    		"description varchar(150))";
 		    String createTableRole = "CREATE TABLE  "+DBNAME+".role ( " +
 		    		"role_id integer PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
-		    		"name varchar(20), " +
+		    		"name varchar(20) NOT NULL, " +
 		    		"description varchar(100))";
     		String createTableDevice_to_users_to_smartcard = "CREATE TABLE  "+DBNAME+".device_to_users_to_smartcard ( " +
     				"device_to_users_to_smartcard_id integer PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), " +
@@ -119,7 +120,7 @@ public class DerbyInterface {
     				"role_id integer, " +
     				"CONSTRAINT users2_fk FOREIGN KEY (users_id) REFERENCES "+DBNAME+".users(users_id)," +
     				"CONSTRAINT role_fk FOREIGN KEY(role_id)  REFERENCES "+DBNAME+".role(role_id))";
-
+    		
     		//create tables   
 		    statement.executeUpdate(createTableDevice);
 		    statement.executeUpdate(createTableUsers);
@@ -156,6 +157,8 @@ public class DerbyInterface {
 		    statement.executeUpdate("insert into "+DBNAME+".users_to_role (users_id, role_id) values (5,1)");
 		    statement.executeUpdate("insert into "+DBNAME+".users_to_role (users_id, role_id) values (1,3)");
 		    statement.executeUpdate("insert into "+DBNAME+".users_to_role (users_id, role_id) values (2,2)");
+		    
+		    
 		}
 		catch (Exception e) {
 			throw e;
@@ -164,7 +167,7 @@ public class DerbyInterface {
 		}
 		
 	}
-	
+
 	public Vector getUserBySmartCardUsingDerby(String tagUid) throws Exception {
         Vector result = new Vector();
 		try {
@@ -196,7 +199,6 @@ public class DerbyInterface {
         
         return result;
 	}
-
 	
 	private void close() {
 		try {
