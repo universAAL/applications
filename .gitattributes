@@ -3079,6 +3079,7 @@ safety_home/safety_home.service.windowProvider/src/main/java/org/universAAL/AALa
 safety_home/safety_home.service.windowProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/windowProvider/CPublisher.java -text
 safety_home/safety_home.service.windowProvider/src/main/java/org/universAAL/AALapplication/safety_home/service/windowSoapClient/SOAPClient.java -text
 safety_home/utils/Safety_Service_E.0.1-SNAPSHOT.launch -text
+safety_home/utils/Safety_Service_E.1.launch -text
 safety_home/utils/app.properties -text
 safety_home/utils/database/safety_security/safety_create.dat -text
 safety_home/utils/database/safety_security/safety_home.sql -text
