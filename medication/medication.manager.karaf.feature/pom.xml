@@ -8,7 +8,7 @@
 		<version>E.1-SNAPSHOT</version>
 		<relativePath>../medication.manager.pom/pom.xml</relativePath>
 	</parent>
-  <artifactId>medication.manager.karaf.feature</artifactId>
+  <artifactId>medication.karaf.feature</artifactId>
   <packaging>jar</packaging>
   <version>2.0.1-SNAPSHOT</version>
   <name>Medication Manager Karaf Feature</name>
