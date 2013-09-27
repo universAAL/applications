@@ -71,27 +71,11 @@ public class CPublisher extends ContextPublisher{
 	}
 	
 	public void invoke() throws InterruptedException{
-		//getUsers();
 		while (true){
-			Thread.sleep(20000);
+			Thread.sleep(20500);
 			publishMotionDetection(0);
 		}
 	}
-/*	
-	private void publishMotionDetection(int deviceID){
-		Device device=null;
-		if(deviceID==0){
-			MotionSensor motion = new MotionSensor(CPublisher.DEVICE_URI_PREFIX + deviceID);
-			device=(Device)motion;
-			motion.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "humidity"));
-			motion.setMotion(SOAPClient.getMotionDetection());
-			
-			System.out.println("############### PUBLISHING EVENT ###############");
-			cp.publish(new ContextEvent(motion, MotionSensor.PROP_MOTION));
-			System.out.println("################################################");
-		}
-	}
-*/
 
 	private void publishMotionDetection(int deviceID){
 		Device device=null;		
@@ -99,10 +83,8 @@ public class CPublisher extends ContextPublisher{
 		device=(Device)motion;
 		double m = SOAPClient.getMotionDetection();
 		if (m>0.0){
-			motion.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "humidity"));
+			motion.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "motion"));
 			motion.setMotion(m);
-			System.out.println("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
-			System.out.println("m="+m);
 			System.out.println("############### PUBLISHING EVENT ###############");
 			cp.publish(new ContextEvent(motion, MotionSensor.PROP_MOTION));
 			System.out.println("################################################");
