@@ -1,2 +1,0 @@
-/Safety and Security AAL service UI Client|http://www.certh.gr|http://ontology.universAAL.org/Safety.owl#SafetyManagement
-/FORM UI Client|http://ontology.universAAL.org/Tests.owl#startUI
