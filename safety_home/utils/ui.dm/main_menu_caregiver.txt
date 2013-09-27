@@ -1,0 +1,1 @@
+/Safety and Security|http://www.certh.gr|http://ontology.universAAL.org/Safety.owl#SafetyManagement|app/Safety_Home.png
