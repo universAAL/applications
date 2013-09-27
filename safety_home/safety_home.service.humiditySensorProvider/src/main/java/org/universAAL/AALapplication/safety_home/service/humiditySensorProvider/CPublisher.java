@@ -76,6 +76,7 @@ public class CPublisher extends ContextPublisher{
 		//getUsers();
 		while (true){
 			Thread.sleep(115000);
+			//Thread.sleep(11500);
 			publishHumidity(0);
 		}
 	}
