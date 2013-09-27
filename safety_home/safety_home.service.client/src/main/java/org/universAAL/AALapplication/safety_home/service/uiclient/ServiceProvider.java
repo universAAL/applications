@@ -16,6 +16,7 @@
 
 package org.universAAL.AALapplication.safety_home.service.uiclient;
 
+import org.universAAL.AALapplication.safety_home.service.uiclient.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.ServiceCall;
@@ -49,8 +50,17 @@ public class ServiceProvider extends ServiceCallee {
     public ServiceResponse handleCall(ServiceCall call) {
 		if (call != null) {
 		    String operation = call.getProcessURI();
+		    if ((call.getInvolvedUser()).getURI().equals(SharedResources.testUser.getURI())){
+				Utils.println("Assisted Person is using the service");
+				SharedResources.currentUser = SharedResources.testUser;
+		    }
+		    if ((call.getInvolvedUser()).getURI().equals(SharedResources.caregiver.getURI())){
+				Utils.println("Caregiver is using the service");
+				SharedResources.currentUser = SharedResources.caregiver;
+		    }
+
 		    if (operation != null && operation.startsWith(START_URI)) {
-				System.out.println("-- Safety and Security UI Client Main Menu --");
+				Utils.println("Safety and Security UI Client Main Menu");
 				SharedResources.uIProvider.startMainDialog();
 				ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 				return sr;

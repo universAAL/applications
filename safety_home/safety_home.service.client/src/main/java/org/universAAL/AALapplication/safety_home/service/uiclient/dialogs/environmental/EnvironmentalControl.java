@@ -32,6 +32,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.universAAL.AALapplication.safety_home.service.uiclient.SafetyClient;
 import org.universAAL.AALapplication.safety_home.service.uiclient.SharedResources;
 import org.universAAL.AALapplication.safety_home.service.uiclient.UIProvider;
+import org.universAAL.AALapplication.safety_home.service.uiclient.db.DerbyInterface;
 import org.universAAL.AALapplication.safety_home.service.uiclient.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
@@ -47,6 +48,7 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.MediaObject;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.Safety.SafetyManagement;
 
 /**
  * @author dimokas
@@ -134,6 +136,11 @@ public class EnvironmentalControl extends UICaller {
     static final String SUBMISSION_TURN_OFF_LAMP = MY_UI_NAMESPACE + "turnofflamp";
     static final String SUBMISSION_TURN_ON_HEATING = MY_UI_NAMESPACE + "turnonheating";
     static final String SUBMISSION_TURN_OFF_HEATING = MY_UI_NAMESPACE + "turnoffheating";
+    static final String SUBMISSION_OK_WINDOW = MY_UI_NAMESPACE + "okwindow";
+    static final String SUBMISSION_OK_LIGHTS = MY_UI_NAMESPACE + "oklights";
+    static final String SUBMISSION_OK_HUMIDITY = MY_UI_NAMESPACE + "okhumidity";
+    static final String SUBMISSION_OK_MOTION = MY_UI_NAMESPACE + "okmotion";
+    static final String SUBMISSION_OK_SMOKE = MY_UI_NAMESPACE + "oksmoke";
     static String lampURI = "http://ontology.universaal.org/SafetyServer.owl#controlledLamp0";
     static String heatingURI = "http://ontology.universaal.org/SafetyServer.owl#controlledHeating0";
 
@@ -166,7 +173,11 @@ public class EnvironmentalControl extends UICaller {
 	private int heatingStatus = 0;
 	private int doorStatus = 0;
 
-	private int lightsAlertCnt = 0;
+	private int windowNotificationID = 0;
+	private int lightsNotificationID = 0;
+	private int humidityNotificationID = 0;
+	private int motionNotificationID = 0;
+	private int smokeNotificationID = 0;
 	
 	public EnvironmentalControl(ModuleContext context) {
 		super(context);
@@ -270,16 +281,62 @@ public class EnvironmentalControl extends UICaller {
 				this.heatingStatus = 0;
 				this.startHeatingDialog();
 			} 
+			
+			else if (SUBMISSION_OK_WINDOW.equals(uir.getSubmissionID())) {
+				DerbyInterface di = new DerbyInterface(); 
+				try{
+					di.init();
+					di.modifyNotificationState(this.windowNotificationID);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+				startMainDialog();
+			} 
+			else if (SUBMISSION_OK_LIGHTS.equals(uir.getSubmissionID())) {
+				DerbyInterface di = new DerbyInterface();
+				try{
+					di.init();
+					di.modifyNotificationState(this.lightsNotificationID);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+				startMainDialog();
+			} 
+			else if (SUBMISSION_OK_HUMIDITY.equals(uir.getSubmissionID())) {
+				DerbyInterface di = new DerbyInterface();
+				try{
+					di.init();
+					di.modifyNotificationState(this.humidityNotificationID);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+				startMainDialog();
+			} 
+			else if (SUBMISSION_OK_MOTION.equals(uir.getSubmissionID())) {
+				DerbyInterface di = new DerbyInterface();
+				try{
+					di.init();
+					di.modifyNotificationState(this.motionNotificationID);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+				startMainDialog();
+			} 
+			else if (SUBMISSION_OK_SMOKE.equals(uir.getSubmissionID())) {
+				DerbyInterface di = new DerbyInterface();
+				try{
+					di.init();
+					di.modifyNotificationState(this.smokeNotificationID);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+				startMainDialog();
+			} 
+
 		}
 		Utils.println(window + " Continues");
-	    //startMainDialog();
 	}
 	
 	public void startWindowDialog() {
 		Utils.println(window + "startWindowDialog");
 		windowDialog = windowMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, windowDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, windowDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -322,23 +379,36 @@ public class EnvironmentalControl extends UICaller {
 				}
 			}.start();
 			
-			UIRequest out = new UIRequest(SharedResources.testUser, windowAlertDialog,
-					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+			UIRequest out = new UIRequest(SharedResources.currentUser, windowAlertDialog,
+					LevelRating.high, Locale.ENGLISH, PrivacyLevel.getMinValue());
+			
 			sendUIRequest(out);
 		}
 	}
 
 	private Form windowMainDialog(int status) {
 		Utils.println(window + "createWindowAlertMainDialog");
-		
 		if (status==100){
+			Form f = Form.newSubdialog("Window Alert Message", null);
+			new MediaObject(f.getIOControls(), new Label("Window is open", null), "image/png", IMG_URL+"opened_window.png");
+			Submit ok = new Submit(f.getSubmits(), new Label("OK", null),SUBMISSION_OK_WINDOW);
+			if (SharedResources.currentUser == SharedResources.testUser){
+				DerbyInterface di = new DerbyInterface(); 
+				try{
+					di.init();
+					this.windowNotificationID = di.addNotification("Window is open", 0, SafetyClient.WINDOW_NOTIFICATION);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+			}
+			
+/* Message Popup			
 			Form f = Form.newMessage("Window Alert Message", "Window is open");
-			new MediaObject(f.getIOControls(), new Label("Window", null), "image/png", IMG_URL+"opened_window.png");
-			//new MediaObject(f.getIOControls(), new Label("Window", null), "image/png", ((java.net.URL)UIProvider.class.getResource("/images/opened_window.png")).toString());
+			new MediaObject(f.getIOControls(), new Label("Window", null), "image/png", IMG_URL+"opened_window_s.png");
+*/			
 			return f;
 		}
-		
-		return null;
+		else
+			return null;
 	}
 
 	public void startHumidityDialog(float value) {
@@ -346,8 +416,8 @@ public class EnvironmentalControl extends UICaller {
 		humidityAlertDialog = humidityAlertMainDialog(value);
 
 		if (humidityAlertDialog!=null){
-			UIRequest out = new UIRequest(SharedResources.testUser, humidityAlertDialog,
-					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+			UIRequest out = new UIRequest(SharedResources.currentUser, humidityAlertDialog,
+					LevelRating.high, Locale.ENGLISH, PrivacyLevel.insensible);
 			sendUIRequest(out);
 		}
 	}
@@ -363,55 +433,42 @@ public class EnvironmentalControl extends UICaller {
 				}
 			}.start();
 
-			Form f = Form.newMessage("Humidity Alert Message", "Humidity is over 50%");
-			new MediaObject(f.getIOControls(), new Label("Humidity", null), "image/png",
-					IMG_URL+"humidity.png");
-					//((java.net.URL)UIProvider.class.getResource("/images/humidity.png")).toString());
+			Form f = Form.newSubdialog("Humidity Alert Message", null);
+			new MediaObject(f.getIOControls(), new Label("Humidity is over 50%", null), "image/png",IMG_URL+"humidity.png");
+			Submit ok = new Submit(f.getSubmits(), new Label("OK", null),SUBMISSION_OK_HUMIDITY);
+			if (SharedResources.currentUser == SharedResources.testUser){
+				DerbyInterface di = new DerbyInterface(); 
+				try{
+					di.init();
+					this.humidityNotificationID = di.addNotification("Humidity is over 50%", 0, SafetyClient.HUMIDITY_NOTIFICATION);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+			}
+			
 			return f;
 		}
-		
-		return null;
+		else
+			return null;
 	}
 
 	public void startLightsDialog() {
 		Utils.println(window + "startLightsDialog");
 		lightsDialog = lightsMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, lightsDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, lightsDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
-	}
-
-	public void startLightsDialog(int status) {
-		Utils.println(window + "startLightsAlertDialog");
-		this.lightStatus = status;
-		lightsAlertDialog = lightsMainDialog(this.lightStatus);
-
-		if (lightsAlertDialog!=null){
-			UIRequest out = new UIRequest(SharedResources.testUser, lightsAlertDialog,
-					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
-			sendUIRequest(out);
-		}
 	}
 
 	private Form lightsMainDialog() {
 		Utils.println(window + "createLightsMainDialog");
 		Form f = Form.newDialog("Lights", new Resource());
-		//Form f = Form.newSubdialog("Lights", mainDialog.getURI());
 		
 		if (this.lightStatus==0){
-			//Group g1 = new Group(f.getIOControls(), new Label("Lights",
-			//	      (String) null), null, null, (Resource) null);
-			new MediaObject(f.getIOControls(), new Label("Lights", null), "image/png",
-				IMG_URL+"light_off.png");
-				//((java.net.URL)UIProvider.class.getResource("/images/light_off.png")).toString());
+			new MediaObject(f.getIOControls(), new Label("Lights", null), "image/png", IMG_URL+"light_off.png");
 		}
-		if (this.lightStatus==1000){
-			//Group g1 = new Group(f.getIOControls(), new Label("Lights",
-			//	      (String) null), null, null, (Resource) null);
-			new MediaObject(f.getIOControls(), new Label("Lights", null), "image/png",
-				IMG_URL+"light_on.png");
-				//((java.net.URL)UIProvider.class.getResource("/images/light_on.png")).toString());
+		else if (this.lightStatus==1000){
+			new MediaObject(f.getIOControls(), new Label("Lights", null), "image/png", IMG_URL+"light_on.png");
 		}
 
 		f = submitButtons(f);
@@ -419,32 +476,54 @@ public class EnvironmentalControl extends UICaller {
 		return f;
 	}
 
-	private Form lightsMainDialog(int status) {
-		Utils.println(window + "createLightsAlertMainDialog");
+	public void startLightsDialog(int status) {
+		Utils.println(window + "startLightsAlertDialog");
 		
-		if (status==1000){
+		this.lightStatus = status;
+		lightsAlertDialog = lightsMainDialog(this.lightStatus);
+
+		if (lightsAlertDialog!=null){
 			new Thread() {
 				public void run() {
 					// Lights are on
 					SoundEffect.LIGHTSON.play();
 				}
 			}.start();
-			Form f = Form.newMessage("Lights Alert Message "+this.lightsAlertCnt, "Lights are on");
-			new MediaObject(f.getIOControls(), new Label("Lights", null), "image/png",
-					IMG_URL+"light_on.png");
-					//((java.net.URL)UIProvider.class.getResource("/images/light_on.png")).toString());
-			this.lightsAlertCnt++;
+
+			UIRequest out = new UIRequest(SharedResources.currentUser, lightsAlertDialog,
+					LevelRating.high, Locale.ENGLISH, PrivacyLevel.insensible);
 			
+			sendUIRequest(out);
+		}
+	}
+
+	private Form lightsMainDialog(int status) {
+		Utils.println(window + "createLightsAlertMainDialog");
+		
+		if (status==1000){
+			Form f = Form.newSubdialog("Lights Alert Message", null);
+			new MediaObject(f.getIOControls(), new Label("Lights are on", null), "image/png", IMG_URL+"light_on.png");
+			Submit ok = new Submit(f.getSubmits(), new Label("OK", null),SUBMISSION_OK_LIGHTS);
+			if (SharedResources.currentUser == SharedResources.testUser){
+				DerbyInterface di = new DerbyInterface(); 
+				try{
+					di.init();
+					this.lightsNotificationID = di.addNotification("Lights are on", 0, SafetyClient.LIGHTS_NOTIFICATION);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+			}
+
 			return f;
 		}
-		return null;
+		else
+			return null;
 	}
 
 	public void startTemperatureDialog() {
 		Utils.println(window + "startTemperatureDialog");
 		tempDialog = temperatureMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, tempDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, tempDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -472,7 +551,7 @@ public class EnvironmentalControl extends UICaller {
 		Utils.println(window + "startHumidityDialog");
 		humidityDialog = humidityMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, humidityDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, humidityDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -500,7 +579,7 @@ public class EnvironmentalControl extends UICaller {
 		Utils.println(window + "startHeatingDialog");
 		heatingDialog = heatingMainDialog();
 		
-		UIRequest out = new UIRequest(SharedResources.testUser, heatingDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, heatingDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -529,7 +608,7 @@ public class EnvironmentalControl extends UICaller {
 		Utils.println(window + "startLampDialog");
 		lampDialog = lampMainDialog();
 		
-		UIRequest out = new UIRequest(SharedResources.testUser, lampDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, lampDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -562,7 +641,7 @@ public class EnvironmentalControl extends UICaller {
 		Utils.println(window + "startMotionDialog");
 		motionDialog = motionMainDialog();
 		
-		UIRequest out = new UIRequest(SharedResources.testUser, motionDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, motionDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -573,8 +652,7 @@ public class EnvironmentalControl extends UICaller {
 
 		//Group g1 = new Group(f.getIOControls(), new Label("Motion Detection",
 		//	      (String) null), null, null, (Resource) null);
-		new MediaObject(f.getIOControls(), new Label(this.motionVal, null), "image/png",
-			IMG_URL+"motion.png");
+		new MediaObject(f.getIOControls(), new Label(this.motionVal, null), "image/png", IMG_URL+"motion.png");
 			//((java.net.URL)UIProvider.class.getResource("/images/motion.png")).toString());
 
 		f = submitButtons(f);
@@ -587,8 +665,8 @@ public class EnvironmentalControl extends UICaller {
 		motionDialog = motionMainDialog(warning);
 
 		if (motionDialog!=null){
-			UIRequest out = new UIRequest(SharedResources.testUser, motionDialog,
-				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+			UIRequest out = new UIRequest(SharedResources.currentUser, motionDialog,
+				LevelRating.high, Locale.ENGLISH, PrivacyLevel.insensible);
 			sendUIRequest(out);
 		}
 	}
@@ -604,10 +682,18 @@ public class EnvironmentalControl extends UICaller {
 				}
 			}.start();
 
-			Form f = Form.newMessage("Motion Alert Message", "Motion detected.");
+			Form f = Form.newSubdialog("Motion Alert Message", null);
 			new MediaObject(f.getIOControls(), new Label(this.motionVal, null), "image/png",
 					IMG_URL+"motion.png");
-					//((java.net.URL)UIProvider.class.getResource("/images/motion.png")).toString());
+			Submit ok = new Submit(f.getSubmits(), new Label("OK", null),SUBMISSION_OK_MOTION);
+			if (SharedResources.currentUser == SharedResources.testUser){
+				DerbyInterface di = new DerbyInterface(); 
+				try{
+					di.init();
+					this.motionNotificationID = di.addNotification("Motion detected", 0, SafetyClient.MOTION_NOTIFICATION);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+			}
 
 			return f;
 		}
@@ -627,8 +713,8 @@ public class EnvironmentalControl extends UICaller {
 				}
 			}.start();
 			
-			UIRequest out = new UIRequest(SharedResources.testUser, smokeDialog,
-					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+			UIRequest out = new UIRequest(SharedResources.currentUser, smokeDialog,
+					LevelRating.high, Locale.ENGLISH, PrivacyLevel.insensible);
 			sendUIRequest(out);
 		}
 	}
@@ -637,10 +723,18 @@ public class EnvironmentalControl extends UICaller {
 		Utils.println(window + "createSmokeAlertMainDialog");
 		
 		if (status){
-			Form f = Form.newMessage("Smoke Alert Message", "Smoke Detection");
-			new MediaObject(f.getIOControls(), new Label("", null), "image/png",
-					IMG_URL+"smoke.png");
-					//((java.net.URL)UIProvider.class.getResource("/images/smoke.png")).toString());
+			Form f = Form.newSubdialog("Smoke Alert Message", null);
+			new MediaObject(f.getIOControls(), new Label("Smoke Detection", null), "image/png", IMG_URL+"smoke.png");
+			Submit ok = new Submit(f.getSubmits(), new Label("OK", null),SUBMISSION_OK_SMOKE);
+			if (SharedResources.currentUser == SharedResources.testUser){
+				DerbyInterface di = new DerbyInterface(); 
+				try{
+					di.init();
+					this.smokeNotificationID = di.addNotification("Smoke Detection", 0, SafetyClient.SMOKE_NOTIFICATION);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+			}
+			
 			return f;
 		}
 		return null;
@@ -665,7 +759,7 @@ public class EnvironmentalControl extends UICaller {
 			mainDialog = initMainDialog();
 		}
 		
-		UIRequest out = new UIRequest(SharedResources.testUser, mainDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, mainDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}

@@ -39,6 +39,8 @@ public class SharedResources {
 
     //public static final AssistedPerson testUser = new AssistedPerson(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
     public static User testUser = new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+    public static User caregiver = new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "caregiver");
+    public static User currentUser = null;
     
     public SharedResources(ModuleContext context) {
     	moduleContext = context;

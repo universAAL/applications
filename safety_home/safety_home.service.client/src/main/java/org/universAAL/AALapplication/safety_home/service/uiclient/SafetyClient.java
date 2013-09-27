@@ -33,6 +33,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.universAAL.AALapplication.safety_home.service.uiclient.dialogs.door.FrontDoorControl;
 import org.universAAL.AALapplication.safety_home.service.uiclient.dialogs.environmental.EnvironmentalControl;
+import org.universAAL.AALapplication.safety_home.service.uiclient.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.container.utils.LogUtils;
@@ -72,6 +73,16 @@ public class SafetyClient extends ContextSubscriber {
     private static final String OUTPUT_DEVICE_LOCATION = SAFETY_CONSUMER_NAMESPACE + "location";
     private static final String OUTPUT_DEVICE_STATUS = SAFETY_CONSUMER_NAMESPACE + "status";
     private static Vector values = new Vector(); 
+
+    public static final int WINDOW_NOTIFICATION = 1;
+    public static final int LIGHTS_NOTIFICATION = 2;
+    public static final int HUMIDITY_NOTIFICATION = 3;
+    public static final int MOTION_NOTIFICATION = 4;
+    public static final int SMOKE_NOTIFICATION = 5;
+    public static final int DOORBELL_NOTIFICATION = 6;
+    public static final int DOOROPEN_NOTIFICATION = 7;
+
+    private static final int AP_ID = 5;
     
 	private static ContextEventPattern[] getContextSubscriptionParams() {
 		ContextEventPattern cep1 = new ContextEventPattern();
@@ -463,23 +474,21 @@ public class SafetyClient extends ContextSubscriber {
     }
 
     public void handleContextEvent(ContextEvent event) {
-
-/*		System.out.println("############### EVENT RECEIVED ###############");
-		System.out.println("Received context event:\n"+"    Subject     = "+
+		Utils.println("############### EVENT RECEIVED ###############");
+		Utils.println("Received context event:\n"+"    Subject     = "+
 				event.getSubjectURI()+"\n"+"    Subject type= "+
 				event.getSubjectTypeURI()+ "\n"+"    Predicate   = "+
 				event.getRDFPredicate()+"\n"+"    Object      = "+
 				event.getRDFObject()		
 		);
-		System.out.println("################################################");*/
+		Utils.println("################################################");
 		if (((String)event.getSubjectTypeURI()).indexOf("Door")!=-1){
-			System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
 			if (event.getRDFPredicate().indexOf("deviceRfid")!=-1){
-				System.out.println("------ DEVICE RFID ------");
+				Utils.println("DEVICE RFID");
 				whoIsKnocking((String)event.getRDFObject());
 			}
-			if (event.getRDFPredicate().indexOf("doorStatus")!=-1){
-				System.out.println("------ DOOR STATUS ------");
+			else if (event.getRDFPredicate().indexOf("doorStatus")!=-1){
+				Utils.println("DOOR STATUS");
 				doorStatus(((Integer)event.getRDFObject()).intValue());
 			}
 		}

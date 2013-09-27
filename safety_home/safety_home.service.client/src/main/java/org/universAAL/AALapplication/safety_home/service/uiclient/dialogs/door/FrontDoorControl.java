@@ -34,6 +34,7 @@ import javax.swing.ImageIcon;
 import org.universAAL.AALapplication.safety_home.service.uiclient.SafetyUIClient;
 import org.universAAL.AALapplication.safety_home.service.uiclient.SharedResources;
 import org.universAAL.AALapplication.safety_home.service.uiclient.UIProvider;
+import org.universAAL.AALapplication.safety_home.service.uiclient.db.DerbyInterface;
 import org.universAAL.AALapplication.safety_home.service.uiclient.utils.Utils;
 import org.universAAL.AALapplication.safety_home.service.uiclient.SafetyClient;
 import org.universAAL.middleware.container.ModuleContext;
@@ -136,6 +137,8 @@ public class FrontDoorControl extends UICaller {
     static final String SUBMISSION_VISITOR = MY_UI_NAMESPACE + "visitor";
     static final String SUBMISSION_STATUS = MY_UI_NAMESPACE + "status";
 	static final String SUBMISSION_GOBACK = MY_UI_NAMESPACE + "back";
+    static final String SUBMISSION_OK_DOORBELL = MY_UI_NAMESPACE + "okdoorbell";
+    static final String SUBMISSION_OK_DOOROPEN = MY_UI_NAMESPACE + "okdooropen";
 
     public static String deviceURI = "http://ontology.universaal.org/SafetyServer.owl#controlledDevice0";
     public boolean unlockDoor = false;
@@ -158,6 +161,9 @@ public class FrontDoorControl extends UICaller {
 	private String person = null;
 	private int doorStatus = 0;
 	private static boolean success = false;
+
+	private int doorbellNotificationID = 0;
+	private int dooropenNotificationID = 0;
 	
 	public FrontDoorControl(ModuleContext context) {
 		super(context);
@@ -235,6 +241,24 @@ public class FrontDoorControl extends UICaller {
 				this.active="status";
 				startStatusDialog();
 			} 
+			else if (SUBMISSION_OK_DOORBELL.equals(uir.getSubmissionID())) {
+				DerbyInterface di = new DerbyInterface();
+				try{
+					di.init();
+					di.modifyNotificationState(this.doorbellNotificationID);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+				startMainDialog();
+			} 
+			else if (SUBMISSION_OK_DOOROPEN.equals(uir.getSubmissionID())) {
+				DerbyInterface di = new DerbyInterface();
+				try{
+					di.init();
+					di.modifyNotificationState(this.dooropenNotificationID);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+				startMainDialog();
+			} 
 		}
 		Utils.println(window + " Continues");
 	}
@@ -244,7 +268,7 @@ public class FrontDoorControl extends UICaller {
 		if (mainDialog == null)
 			mainDialog = initMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, mainDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, mainDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -253,7 +277,7 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "startStatusDialog");
 		statusDialog = statusMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, statusDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, statusDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -296,7 +320,7 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "startVisitorDialog");
 		visitorDialog = visitorMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, visitorDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, visitorDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -305,7 +329,7 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "startUnlockDialog");
 		unlockDialog = unlockMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, unlockDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, unlockDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -314,7 +338,7 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "startLockDialog");
 		lockDialog = lockMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, lockDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, lockDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -323,7 +347,7 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "startOpenDialog");
 		openDialog = openMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, openDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, openDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -332,7 +356,7 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "startCloseDialog");
 		closeDialog = closeMainDialog();
 
-		UIRequest out = new UIRequest(SharedResources.testUser, closeDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, closeDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -341,7 +365,7 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "startErrorDialog");
 		errorDialog = errorMainDialog(action);
 
-		UIRequest out = new UIRequest(SharedResources.testUser, errorDialog,
+		UIRequest out = new UIRequest(SharedResources.currentUser, errorDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
 	}
@@ -370,9 +394,7 @@ public class FrontDoorControl extends UICaller {
 			SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null, "There are no visitors yet.\n\n");
 		}
 		else{
-			new MediaObject(f.getIOControls(), new Label(this.visitorText, null), "image/jpeg",
-				IMG_URL+person+".jpg");					
-				//((java.net.URL)UIProvider.class.getResource("/images/"+person+".jpg")).toString());
+			new MediaObject(f.getIOControls(), new Label(this.visitorText, null), "image/png", IMG_URL+person+".png");					
 			
 			SoundEffect.DOORBELL.play();
 		}
@@ -491,8 +513,8 @@ public class FrontDoorControl extends UICaller {
 				}
 			}.start();
 			
-			UIRequest out = new UIRequest(SharedResources.testUser, doorBellDialog,
-					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+			UIRequest out = new UIRequest(SharedResources.currentUser, doorBellDialog,
+					LevelRating.high, Locale.ENGLISH, PrivacyLevel.insensible);
 			sendUIRequest(out);
 		}
 	}
@@ -501,10 +523,18 @@ public class FrontDoorControl extends UICaller {
 		Utils.println(window + "createDoorBellAlertMainDialog");
 		
 		if (isEnabled){
-			Form f = Form.newMessage("Door Alert Message", "Door Bell");
-			new MediaObject(f.getIOControls(), new Label("", null), "image/png",
-					IMG_URL+"door_bell.png");					
-					//((java.net.URL)UIProvider.class.getResource("/images/door_bell.png")).toString());
+			Form f = Form.newSubdialog("Door Alert Message", null);
+			new MediaObject(f.getIOControls(), new Label("Door Bell", null), "image/png", IMG_URL+"door_bell.png");					
+			Submit ok = new Submit(f.getSubmits(), new Label("OK", null),SUBMISSION_OK_DOORBELL);
+			if (SharedResources.currentUser == SharedResources.testUser){
+				DerbyInterface di = new DerbyInterface(); 
+				try{
+					di.init();
+					this.doorbellNotificationID = di.addNotification("Door Bell", 0, SafetyClient.DOORBELL_NOTIFICATION);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+			}
+
 			return f;
 		}
 		
@@ -542,18 +572,17 @@ public class FrontDoorControl extends UICaller {
 		visitorDialog = visitorMainDialog(status);
 
 		if (visitorDialog!=null){
-			UIRequest out = new UIRequest(SharedResources.testUser, visitorDialog,
-					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+			UIRequest out = new UIRequest(SharedResources.currentUser, visitorDialog,
+					LevelRating.high, Locale.ENGLISH, PrivacyLevel.insensible);
 			sendUIRequest(out);
 		}
 	}
 
 	private Form visitorMainDialog(int status) {
 		Utils.println(window + "createVisitorAlertMainDialog");
-		
+		System.out.println("Visitor Alert Message");
 		Form f = Form.newMessage("Visitor Alert Message", this.visitorText);
-		new MediaObject(f.getIOControls(), new Label("", null), "image/jpeg",
-				IMG_URL+person+".jpg");					
+		new MediaObject(f.getIOControls(), new Label("", null), "image/png", IMG_URL+person+".png");					
 				//((java.net.URL)UIProvider.class.getResource("/images/"+person+".jpg")).toString());
 
 		return f;
@@ -572,24 +601,32 @@ public class FrontDoorControl extends UICaller {
 				}
 			}.start();
 			
-			UIRequest out = new UIRequest(SharedResources.testUser, doorDialog,
-					LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
+			UIRequest out = new UIRequest(SharedResources.currentUser, doorDialog,
+					LevelRating.high, Locale.ENGLISH, PrivacyLevel.insensible);
 			sendUIRequest(out);
 		}
 	}
 
 	private Form doorMainDialog(int status) {
 		Utils.println(window + "createDoorAlertMainDialog");
-		
 		if (status==101){
-			Form f = Form.newMessage("Door Alert Message", "Door is open");
-			new MediaObject(f.getIOControls(), new Label("Door", null), "image/png",
+			Form f = Form.newSubdialog("Door Open Alert Message", null);
+			new MediaObject(f.getIOControls(), new Label("Door is open", null), "image/png",
 					IMG_URL+"door_open.png");					
-					//((java.net.URL)UIProvider.class.getResource("/images/door_open.png")).toString());
+			Submit ok = new Submit(f.getSubmits(), new Label("OK", null),SUBMISSION_OK_DOOROPEN);
+			if (SharedResources.currentUser == SharedResources.testUser){
+				DerbyInterface di = new DerbyInterface(); 
+				try{
+					di.init();
+					this.dooropenNotificationID = di.addNotification("Door is open", 0, SafetyClient.DOOROPEN_NOTIFICATION);
+				}
+				catch(Exception e){ e.printStackTrace(); }
+			}
+
 			return f;
 		}
-		
-		return null;
+		else
+			return null;
 	}
 
 	

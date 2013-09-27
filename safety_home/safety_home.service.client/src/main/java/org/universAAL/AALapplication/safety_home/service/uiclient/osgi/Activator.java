@@ -21,6 +21,8 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.safety_home.service.uiclient.SharedResources;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
+import org.universAAL.AALapplication.safety_home.service.uiclient.db.*;
 
 /**
  * @author dimokas
@@ -30,12 +32,21 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 public class Activator implements BundleActivator {
 	private static ModuleContext moduleContext;
     SharedResources sr;
+    private DerbyInterface db = new DerbyInterface();
 
     public void start(final BundleContext context) throws Exception {
-    	
     	moduleContext = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { context });
    		sr = new SharedResources(moduleContext);
 
+		db.init();
+		if (!db.exist()){
+			LogUtils.logInfo(moduleContext,	DerbyInterface.class, "createDB",
+					new Object[] { "Create database started ..." }, null);
+			db.createDB();
+			LogUtils.logInfo(moduleContext,	DerbyInterface.class, "createDB",
+					new Object[] { "Database creation completed ..." }, null);
+		}
+		
    		new Thread() {
    		    public void run() {
    			try {
@@ -46,12 +57,6 @@ public class Activator implements BundleActivator {
 			}
    		    }
    		}.start();
-
-
-   		
-   		//SharedResources.moduleContext = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { context });
-   		//sr = new SharedResources();
-		//sr.start();
     }
 
     public void stop(BundleContext context) throws Exception {
