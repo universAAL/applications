@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<features name="universAAL-${platform.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+<features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.1-SNAPSHOT/xml/features
 	</repository>
 
@@ -21,7 +21,7 @@
 		<feature>uAAL-Ont.Nutrition</feature>
 
 		<!-- Service -->
-		<bundle start-level='70' start='true'>mvn:org.universAAL.AALapplication/nutritional.client/E.1
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/nutritional.client/E.1
 		</bundle>
 	</feature>
 </features>
