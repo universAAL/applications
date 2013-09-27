@@ -27,7 +27,6 @@ import org.universAAL.middleware.context.owl.ContextProviderType;
 import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.ontology.location.indoor.Room;
 import org.universAAL.ontology.phThing.Device;
-import org.universAAL.ontology.Safety.HumiditySensor;
 import org.universAAL.ontology.Safety.Window;
 
 /**
@@ -38,8 +37,7 @@ import org.universAAL.ontology.Safety.Window;
 public class CPublisher extends ContextPublisher{
 	public static final String SAFETY_WINDOW_PROVIDER_NAMESPACE = "http://ontology.universaal.org/SafetyWindowProvider.owl#";
 	public static final String MY_URI = SAFETY_WINDOW_PROVIDER_NAMESPACE + "Window";
-	static final String DEVICE_URI_PREFIX = CPublisher.SAFETY_WINDOW_PROVIDER_NAMESPACE
-			+ "controlledDevice";
+	static final String DEVICE_URI_PREFIX = CPublisher.SAFETY_WINDOW_PROVIDER_NAMESPACE	+ "controlledDevice";
 	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
 	
 	private ContextPublisher cp;
