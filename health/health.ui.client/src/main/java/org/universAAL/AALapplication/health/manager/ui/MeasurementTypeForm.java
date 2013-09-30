@@ -79,7 +79,8 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 		
 		Submit su = new Submit(f.getSubmits(), new Label(CANCEL_LABEL, CANCELL_ICON), CANCEL_LABEL );
 		su.addMandatoryInput(s);
-
+		
+		sendForm(f);
 	}
 
 

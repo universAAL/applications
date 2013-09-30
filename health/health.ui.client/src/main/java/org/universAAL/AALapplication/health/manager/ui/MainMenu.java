@@ -39,6 +39,7 @@ public class MainMenu extends AbstractHealthForm{
 	@Override
 	public void handleUIResponse(UIResponse input) {
 		String cmd = input.getSubmissionID();
+		LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling: " + cmd);
 		if (cmd.equalsIgnoreCase(MESSAGE_CMD)){
 			//TODO: message Managing
 			new NotReady(context,inputUser).show();
