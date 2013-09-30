@@ -80,6 +80,8 @@ public class TreatmentTypeForm extends AbstractHealthForm {
 				CANCEL_LABEL );
 		
 		su.addMandatoryInput(s);
+		
+		sendForm(f);
 	}
 
 }

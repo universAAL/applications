@@ -4,6 +4,7 @@
 package org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -33,11 +34,15 @@ public final class NotReady extends AbstractHealthForm {
 	}
 	
 	public void show(){
+		LogUtils.logDebug(context, getClass(), "show", "SHOWING: NOT READY");
+		
 		Form f = Form.newDialog("Functionality not available", new Resource());
 		
 		new SimpleOutput(f.getIOControls(), null, null,
 				"Sorry this functionality is not yet ready. Press \"Back\" to got to Main menu");
 		new Submit(f.getSubmits(), new Label("Back", null), GO_HOME);
+		
+		sendForm(f);
 	}
 
 }
