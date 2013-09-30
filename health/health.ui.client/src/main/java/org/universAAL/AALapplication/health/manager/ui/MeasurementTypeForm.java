@@ -43,11 +43,11 @@ import org.universAAL.ontology.profile.User;
  */
 public class MeasurementTypeForm extends AbstractHealthForm {
 
-	private static final String CANCEL_LABEL = "Cancel";
 	private static final String SELECTED_TREATMENT = HealthProfileOntology.NAMESPACE + "uiMeasurementSelected";
+	private static final String OK_LABEL = "Select";
 	private static final String OK_ICON = null;
-	private static final String OK_LABEL = null;
-	private static final String CANCELL_ICON = null;
+	private static final String CANCEL_LABEL = "Cancel";
+	private static final String CANCEL_ICON = null;
 
 	public MeasurementTypeForm(ModuleContext context, User inputUser) {
 		super(context, inputUser);
@@ -77,7 +77,7 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 				new Label(OK_LABEL, OK_ICON),
 				OK_LABEL);
 		
-		Submit su = new Submit(f.getSubmits(), new Label(CANCEL_LABEL, CANCELL_ICON), CANCEL_LABEL );
+		Submit su = new Submit(f.getSubmits(), new Label(CANCEL_LABEL, CANCEL_ICON), CANCEL_LABEL );
 		su.addMandatoryInput(s);
 		
 		sendForm(f);

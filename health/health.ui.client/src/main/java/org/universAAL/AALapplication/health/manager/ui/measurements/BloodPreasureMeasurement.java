@@ -26,7 +26,7 @@ public class BloodPreasureMeasurement extends AbstractHealthForm{
 		private static final String DONE_ICON = null;
 		private static final String DONE_LABEL = "Done";
 		private static final String CANCEL_LABEL = null;
-		private static final String CANCEL_ICON = "Cancell";
+		private static final String CANCEL_ICON = "Cancel";
 		private BloodPressure measurement;
 		
 	

@@ -20,8 +20,8 @@ public class WeigthMeasurement extends AbstractHealthForm{
 		static final LevelRating PRIORITY = LevelRating.low;
 		static final PrivacyLevel PRIVACY = PrivacyLevel.insensible;
 		private static final String DONE_ICON = null;
-		private static final String DONE_LABEL = null;
-		private static final String CANCEL_LABEL = null;
+		private static final String DONE_LABEL = "Done";
+		private static final String CANCEL_LABEL = "Cancell";
 		private static final String CANCEL_ICON = null;
 		private PersonWeight measurement;
 		

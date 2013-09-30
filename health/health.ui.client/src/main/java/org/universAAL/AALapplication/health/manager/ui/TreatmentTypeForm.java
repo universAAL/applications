@@ -17,7 +17,6 @@ import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.health.owl.Treatment;
-import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -29,8 +28,8 @@ public class TreatmentTypeForm extends AbstractHealthForm {
 	private static final String CANCEL_LABEL = "Cancel";
 	private static final String SELECTED_TREATMENT = HealthProfileOntology.NAMESPACE + "uiTreatmentSelected";
 	private static final String OK_ICON = null;
-	private static final String OK_LABEL = null;
-	private static final String CANCELL_ICON = null;
+	private static final String OK_LABEL = "Ok";
+	private static final String CANCEL_ICON = null;
 
 	/**
 	 * @param context
@@ -76,7 +75,7 @@ public class TreatmentTypeForm extends AbstractHealthForm {
 				OK_LABEL);
 		
 		Submit su = new Submit(f.getSubmits(),
-				new Label(CANCEL_LABEL, CANCELL_ICON),
+				new Label(CANCEL_LABEL, CANCEL_ICON),
 				CANCEL_LABEL );
 		
 		su.addMandatoryInput(s);
