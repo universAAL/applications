@@ -68,10 +68,10 @@ public class BloodPreasureMeasurement extends AbstractHealthForm{
 		sendForm(f);
 	}
 	
-	public void ShowUncorrectMessage(){
+	public void ShowIncorrectMessage(){
 		Form f = Form.newMessage("Blood Preasure", null);
 		new SimpleOutput(f.getIOControls(), null, null, "Your Measure is not correct");
-		
+		sendForm(f);
 	}
 
 	
@@ -80,7 +80,7 @@ public class BloodPreasureMeasurement extends AbstractHealthForm{
 		while (i.isWellFormed()){
 			return true;
 			}
-		ShowUncorrectMessage();
+		ShowIncorrectMessage();
 		return false;
 		}
 	

@@ -57,10 +57,10 @@ public class HeartRateMeasurement extends AbstractHealthForm{
 		sendForm(f);
 	}
 	
-	public void ShowUncorrectMessage(){
+	public void ShowIncorrectMessage(){
 		Form f = Form.newMessage("Heart Rate", null);
 		new SimpleOutput(f.getIOControls(), null, null, "Your Measure is not correct");
-		
+		sendForm(f);
 		
 	}
 	

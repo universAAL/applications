@@ -54,11 +54,10 @@ public class WeigthMeasurement extends AbstractHealthForm{
 		sendForm(f);
 	}
 	
-	public void ShowUncorrectMessage(){
+	public void ShowIncorrectMessage(){
 		Form f = Form.newMessage("Weight", null);
 		new SimpleOutput(f.getIOControls(), null, null, "Your Measure is not correct");
-		
-		
+		sendForm(f);		
 	}
 	
 }
