@@ -1,31 +1,34 @@
-
 /*
-	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
-	
-	See the NOTICE file distributed with this work for additional 
-	information regarding copyright ownership
-	
-	Licensed under the Apache License, Version 2.0 (the "License");
-	you may not use this file except in compliance with the License.
-	You may obtain a copy of the License at
-	
-	  http://www.apache.org/licenses/LICENSE-2.0
-	
-	Unless required by applicable law or agreed to in writing, software
-	distributed under the License is distributed on an "AS IS" BASIS,
-	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the License for the specific language governing permissions and
-	limitations under the License.
+ Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
+ TSB - Tecnologï¿½as para la Salud y el Bienestar
+
+ See the NOTICE file distributed with this work for additional 
+ information regarding copyright ownership
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
  */package es.tsb.ltba.nomhad.gateway;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 
 import org.apache.http.client.ClientProtocolException;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.container.utils.LogUtils;
 
 import es.tsb.ltba.nomhad.httpclient.NomhadHttpClient;
@@ -38,6 +41,11 @@ public class NomhadGateway {
 	private static final String OBSERVATIONS_REQUEST = "/observations";
 	private static final String DEVICE_ID = "\"35-209900-176148-1\"";
 	private ModuleContext moduleContext = null;
+	private final String HOME_FOLDER = "nomhad.gateway";
+	private final String PROPERTIES_FILE = "nomhad.properties";
+	private String home = new BundleConfigHome(HOME_FOLDER).getAbsolutePath();
+	private Properties properties = new Properties();
+	private String isDeployed;
 	private static final String BODY = "{" +
 
 	"\"meassurement\": {" + "\"indicatorsGroup\": \"INDICATOR_GROUP\","
@@ -142,8 +150,16 @@ public class NomhadGateway {
 			LogUtils.logDebug(moduleContext, getClass(), "putMeasurement",
 					new String[] { "New header: " + header }, null);
 		}
-		if (System.getProperty("es.tsbtecnologias.nomhad.ltba.deployed")
-				.equalsIgnoreCase("true")) {
+		try {
+			properties.load(new FileInputStream(home+"/"+PROPERTIES_FILE));
+			isDeployed = properties
+					.getProperty("es.tsbtecnologias.nomhad.ltba.deployed");
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		if (isDeployed.equalsIgnoreCase("true")) {
 			LogUtils
 					.logDebug(
 							moduleContext,
@@ -165,10 +181,17 @@ public class NomhadGateway {
 
 		NomhadHttpClient nhc = new NomhadHttpClient(usr, pwd);
 		try {
-			LogUtils.logInfo(moduleContext, getClass(), "putMeasurement",
-					new String[] { "-------------POSTING TO NOMHAD-------------\nURI: "
-							+ uri.toString() + "\nBODY: " + body.toString()
-							+ "\nSERVER RESPONSE:" + nhc.post(uri.toString(), body) }, null);
+			LogUtils
+					.logInfo(
+							moduleContext,
+							getClass(),
+							"putMeasurement",
+							new String[] { "------<>-------POSTING TO NOMHAD-------------\nURI: "
+									+ uri.toString()
+									+ "\nBODY: "
+									+ body.toString()
+									+ "\nSERVER RESPONSE:"
+									+ nhc.post(uri.toString(), body) }, null);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

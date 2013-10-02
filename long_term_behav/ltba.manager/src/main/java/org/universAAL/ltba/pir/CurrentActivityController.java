@@ -6,12 +6,12 @@ import org.universAAL.middleware.container.utils.LogUtils;
 
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class CurrentActivityController {
+public class CurrentActivityController extends PIRController {
 
 	private final String INDICATOR_GROUP = "CURRENT_ACTIVITY_INDICATORS_GROUP";
 	private final String INDICATOR = "CURRENT_ACTIVITY_LEVEL";
-	private String serverIp = "192.168.238.40";
-	private String userCode = "A100";
+	// private String serverURL = "192.168.238.40";
+	// private String userCode = "A100";
 	/**
 	 * The device ID. When the user management be made, the DEVICE_ID must
 	 * content a reference to the user, in orden to not crossing the same device
@@ -25,14 +25,14 @@ public class CurrentActivityController {
 	private CurrentActivityController() {
 		super();
 		INSTANCE = this;
-		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
-		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
-		if (ip != null) {
-			serverIp = ip;
-		}
-		if (usr != null) {
-			userCode = usr;
-		}
+//		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
+//		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
+//		if (ip != null) {
+//			serverURL = ip;
+//		}
+//		if (usr != null) {
+//			userCode = usr;
+//		}
 	}
 
 	public static CurrentActivityController getInstance() {
@@ -47,7 +47,7 @@ public class CurrentActivityController {
 				getClass(), "ActivityDetected(generic)",
 				new String[] { "Printing value: " + index }, null);
 		System.out.println("Imprimiendo el valor: " + index);
-		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
+		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
 				"123456", INDICATOR_GROUP, INDICATOR, new String(index),
 				DEVICE_ID_ALL);
 	}
@@ -60,7 +60,7 @@ public class CurrentActivityController {
 					new String[] { "Printing value: " + index }, null);
 			System.out.println("Printing value: " + index + " in "
 					+ room.getRoomStringNoBlanks());
-			NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
+			NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
 					"123456", INDICATOR_GROUP,
 					INDICATOR + "_" + room.getRoomStringNoBlanks(),
 					new String(index),
