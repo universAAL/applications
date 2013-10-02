@@ -1892,6 +1892,15 @@ long_term_behav/drools.reasoner/src/main/resources/reasoner_energy.drl -text
 long_term_behav/drools.reasoner/src/main/resources/snippet/Snippet.java -text
 long_term_behav/drools.reasoner/src/main/resources/uAALrules.drl -text
 long_term_behav/drools.reasoner/src/main/resources/users/droolsWorkshop1.drl -text
+long_term_behav/ltba.feature/.classpath -text svneol=unset#text/plain
+long_term_behav/ltba.feature/.project -text svneol=unset#text/plain
+long_term_behav/ltba.feature/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+long_term_behav/ltba.feature/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+long_term_behav/ltba.feature/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+long_term_behav/ltba.feature/ASL2.0.txt -text svneol=unset#text/plain
+long_term_behav/ltba.feature/NOTICE -text
+long_term_behav/ltba.feature/pom.xml -text svneol=unset#text/plain
+long_term_behav/ltba.feature/src/main/features/ltba.xml -text svneol=unset#text/plain
 long_term_behav/ltba.manager/ASL2.0.txt -text
 long_term_behav/ltba.manager/LTBA_Demo_B.0.1.launch -text
 long_term_behav/ltba.manager/LTBA_Demo_B.0.1_with_reasoner_UI_Services_DIRTYDRAFT.launch -text
