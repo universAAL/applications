@@ -281,7 +281,7 @@ timer(int: 1m 8h)
 	then
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Index"},new String[]{"AverageDay",new String(""+$d.getIndex())});
 end
-
+*/
 rule "Get 5 minutes Average"
 timer(int: 0 5m)
 	when
@@ -289,7 +289,7 @@ timer(int: 0 5m)
 	then
 	RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Room","Index"},new String[]{"Current",new String($r),new String(""+$c.getIndex())});	
 end
-*/
+
 
 rule "Null activity - room"
 salience 2

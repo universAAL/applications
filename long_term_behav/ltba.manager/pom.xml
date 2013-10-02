@@ -11,7 +11,7 @@
 	<version>E.1.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>LTBA manager</name>
-	<description>LTBA main module for coordinating all the LTBA components.</description>
+	<description>LTBA main module for coordinating all the LTBA componentos.</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
