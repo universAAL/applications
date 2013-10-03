@@ -10,7 +10,7 @@
   
   <artifactId>ZWaveDataConsumer</artifactId>
   <name></name>
-  <version>E.01</version>
+  <version>E.1</version>
   <description/>
 	<packaging>bundle</packaging>
 	<dependencies>
