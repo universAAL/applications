@@ -35,6 +35,7 @@
 		<bundle start-level='79' start='true'>mvn:org.universAAL.AALapplication/ZWaveDataPublisher/E.1</bundle>
 		<bundle start-level='79' start='true'>mvn:org.universAAL.AALapplication/drools.reasoner/E.1.1-SNAPSHOT</bundle>
 		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.nomhad.gateway/E.1.1-SNAPSHOT</bundle>
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.ui/E.1.1-SNAPSHOT</bundle>		
 		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.manager/E.1.1-SNAPSHOT</bundle>
 		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.publisher/E.1.1-SNAPSHOT</bundle>
 	</feature>
