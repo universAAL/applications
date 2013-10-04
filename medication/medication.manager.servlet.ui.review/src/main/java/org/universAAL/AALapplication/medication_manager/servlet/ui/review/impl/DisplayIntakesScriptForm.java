@@ -71,12 +71,8 @@ public final class DisplayIntakesScriptForm extends ScriptForm {
     sb.append("var user = \"");
 
     sb.append(patient.getName());
-    sb.append("<br> WEEK <br> begin = ");
-    sb.append(selectedWeek.getBegin());
-    sb.append("<br> now = ");
-    sb.append(selectedWeek.getNow());
-    sb.append("<br> end = ");
-    sb.append(selectedWeek.getEnd());
+    sb.append("<br> WEEK <br> ");
+    sb.append(Week.getFormatedTextWeek(selectedWeek));
     sb.append("\";");
 
     sb.append('\n');
