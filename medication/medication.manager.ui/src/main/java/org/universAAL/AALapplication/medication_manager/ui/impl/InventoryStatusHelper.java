@@ -20,10 +20,8 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Persis
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MedicineInventory;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
-import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 
 import java.util.List;
 
@@ -80,31 +78,13 @@ public final class InventoryStatusHelper {
   private String createRow(MedicineInventory medicineInventory, List<Intake> intakes) {
     StringBuffer sb = new StringBuffer();
 
-    sb.append("Medicine: ");
     sb.append(medicineInventory.getMedicine().getMedicineName());
-    sb.append(", units: ");
-    sb.append(medicineInventory.getUnitClass().getType());
-    sb.append(", quantity: ");
+    sb.append(" available ");
     sb.append(medicineInventory.getQuantity());
-    sb.append(", threshold: ");
-    sb.append(medicineInventory.getWarningThreshold());
-    sb.append(", needed quantity: ");
-    sb.append(getNeededQuantity(medicineInventory.getMedicine(), intakes));
+    sb.append(' ');
+    sb.append(medicineInventory.getUnitClass().getType());
 
     return sb.toString();
   }
 
-  private int getNeededQuantity(Medicine medicine, List<Intake> intakes) {
-    int quantity = 0;
-
-    for (Intake intake : intakes) {
-      Treatment treatment = intake.getTreatment();
-      Medicine med = treatment.getMedicine();
-      if (med.getId() == medicine.getId()) {
-         quantity = quantity + intake.getQuantity();
-      }
-    }
-
-    return quantity;
-  }
 }
