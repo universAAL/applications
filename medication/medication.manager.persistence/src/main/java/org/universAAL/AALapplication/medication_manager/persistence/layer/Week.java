@@ -19,8 +19,11 @@ package org.universAAL.AALapplication.medication_manager.persistence.layer;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 
 import java.sql.Timestamp;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author George Fournadjiev
@@ -30,6 +33,9 @@ public final class Week {
   private final Timestamp begin;
   private final Timestamp now;
   private final Timestamp end;
+
+  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("d.M.yyyy");
+  private static final SimpleDateFormat SIMPLE_DATE_FORMAT_FULL = new SimpleDateFormat("d.M.yyyy HH:mm");
 
   private Week(Timestamp begin, Timestamp end, Timestamp now) {
 
@@ -55,11 +61,51 @@ public final class Week {
 
   @Override
   public String toString() {
-    return "Week{" +
-        "begin=" + begin +
-        ", now=" + now +
-        ", end=" + end +
-        '}';
+    return getFormatedTextWeek(this);
+  }
+
+  public static String getFormatedTextWeek(Week week) {
+    Date startDate = week.getBegin();
+    Date endDate = week.getEnd();
+
+
+    StringBuffer sb = new StringBuffer();
+    sb.append("Start date: Monday ");
+    String startDayText = SIMPLE_DATE_FORMAT.format(startDate);
+    sb.append(startDayText);
+
+    sb.append("; End date: Sunday ");
+    String endDayText = SIMPLE_DATE_FORMAT.format(endDate);
+    sb.append(endDayText);
+
+    sb.append("; Current time: ");
+
+    String dayOfWeek = getCurrentDayOfWeek();
+
+    sb.append(dayOfWeek);
+    sb.append(' ');
+
+    Date now = new Date();
+
+    sb.append(SIMPLE_DATE_FORMAT_FULL.format(now));
+
+    return sb.toString();
+
+
+  }
+
+  private static String getCurrentDayOfWeek() {
+
+    DateFormatSymbols dfs = new DateFormatSymbols(Locale.ENGLISH);
+    String weekdays[] = dfs.getWeekdays();
+
+    Calendar cal = Calendar.getInstance();
+    int day = cal.get(Calendar.DAY_OF_WEEK);
+
+    String nameOfDay = weekdays[day];
+
+    return nameOfDay;
+
   }
 
   public static Week createWeek(Calendar selectedWeekStartDay) {
