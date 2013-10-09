@@ -17,20 +17,24 @@
 
 package org.universAAL.ontology.medMgr;
 
-import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.middleware.owl.ManagedIndividual;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * @author George Fournadjiev
  */
-public class MedicationTreatment extends Treatment {
+public class MedicationTreatment extends ManagedIndividual {
 
   public static final String MY_URI = MedicationOntology.NAMESPACE + "MedicationTreatment";
   public static final String PROP_PRESCRIPTION_ID = MedicationOntology.NAMESPACE + "prescription_id";
   public static final String PROP_DOCTOR_NAME = MedicationOntology.NAMESPACE + "doctorName";
+  public static final String PROP_NAME = MedicationOntology.NAMESPACE + "name";
+  public static final String PROP_DESCRIPTION = MedicationOntology.NAMESPACE + "prescription";
   public static final String PROP_MEDICATION_TREATMENT_START_DATE = MedicationOntology.NAMESPACE + "medicationTreatmentStartDate";
+  public static final String PROP_MEDICATION_TREATMENT_END_DATE = MedicationOntology.NAMESPACE + "medicationTreatmentEndDate";
   public static final String PROP_MEDICINE = MedicationOntology.NAMESPACE + "medicine";
+  public static final String PROP_STATUS = MedicationOntology.NAMESPACE + "status";
 
   public MedicationTreatment() {
     super();
@@ -60,6 +64,23 @@ public class MedicationTreatment extends Treatment {
     setProperty(PROP_DOCTOR_NAME, doctorName);
   }
 
+  public String getName() {
+    return (String) getProperty(PROP_NAME);
+  }
+
+  public void setName(String name) {
+    setProperty(PROP_NAME, name);
+  }
+
+  public String getDescription() {
+    return (String) getProperty(PROP_DESCRIPTION);
+  }
+
+  public void setDescription(String prescription) {
+    setProperty(PROP_DESCRIPTION, prescription);
+  }
+
+
   public XMLGregorianCalendar getMedicationTreatmentStartDate() {
     return (XMLGregorianCalendar) getProperty(PROP_MEDICATION_TREATMENT_START_DATE);
   }
@@ -68,12 +89,28 @@ public class MedicationTreatment extends Treatment {
     setProperty(PROP_MEDICATION_TREATMENT_START_DATE, startDate);
   }
 
+  public XMLGregorianCalendar getMedicationTreatmentEndDate() {
+    return (XMLGregorianCalendar) getProperty(PROP_MEDICATION_TREATMENT_END_DATE);
+  }
+
+  public void setMedicationTreatmentEndDate(XMLGregorianCalendar endDate) {
+    setProperty(PROP_MEDICATION_TREATMENT_END_DATE, endDate);
+  }
+
   public Medicine getMedicine() {
     return (Medicine) getProperty(PROP_MEDICINE);
   }
 
   public void setMedicine(Medicine medicine) {
     setProperty(PROP_MEDICINE, medicine);
+  }
+
+  public Boolean getStatus() {
+    return (Boolean) getProperty(PROP_STATUS);
+  }
+
+  public void setStatus(Boolean status) {
+    setProperty(PROP_STATUS, status);
   }
 
   public boolean isWellFormed() {

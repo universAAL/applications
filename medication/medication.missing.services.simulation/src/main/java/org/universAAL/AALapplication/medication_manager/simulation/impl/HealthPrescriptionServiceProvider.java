@@ -113,9 +113,9 @@ public final class HealthPrescriptionServiceProvider extends ServiceCallee {
     Log.info("medicationTreatment.getMedicationTreatmentStartDate() = %s",
         HealthPrescriptionServiceProvider.class, medicationTreatment.getMedicationTreatmentStartDate());
     Log.info("medicationTreatment.getTreatmentPlanning().getStartDate() = %s",
-        HealthPrescriptionServiceProvider.class, medicationTreatment.getTreatmentPlanning().getStartDate());
+        HealthPrescriptionServiceProvider.class, medicationTreatment.getMedicationTreatmentStartDate());
     Log.info("medicationTreatment.getTreatmentPlanning().getEndDate() = %s",
-        HealthPrescriptionServiceProvider.class, medicationTreatment.getTreatmentPlanning().getEndDate());
+        HealthPrescriptionServiceProvider.class, medicationTreatment.getMedicationTreatmentEndDate());
 //   List<Medicine> medicines = medicationTreatment.getMedicine();
     Medicine medicine = medicationTreatment.getMedicine();
     Log.info("Printing medicine", HealthPrescriptionServiceProvider.class);

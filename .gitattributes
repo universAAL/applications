@@ -2467,7 +2467,6 @@ medication/medication.missing.services.simulation/src/main/java/org/universAAL/A
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/export/MedicationConsumer.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/export/MedicationReminderContextProvider.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/export/NewPrescriptionHandler.java -text
-medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/export/NewPrescriptionHandlerImpl.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/export/NewPrescriptionHandlerMocked.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/Activator.java -text
 medication/medication.missing.services.simulation/src/main/java/org/universAAL/AALapplication/medication_manager/simulation/impl/CaregiverNotificationProvider.java -text

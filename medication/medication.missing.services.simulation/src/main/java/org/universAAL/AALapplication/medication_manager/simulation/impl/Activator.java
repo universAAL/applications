@@ -26,7 +26,6 @@ import org.universAAL.AALapplication.medication_manager.simulation.export.Dispen
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationConsumer;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationReminderContextProvider;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
-import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandlerImpl;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandlerMocked;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -66,30 +65,13 @@ public class Activator implements BundleActivator {
         registerService(dispenserUpsideDownContextProvider, context);
         new HealthPrescriptionServiceProvider(mc);
         NewPrescriptionContextProvider newPrescriptionContextProvider = new NewPrescriptionContextProvider(mc);
-        NewPrescriptionHandler newPrescriptionHandler = getNewPrescriptionHandler(newPrescriptionContextProvider);
+        NewPrescriptionHandler newPrescriptionHandler = new NewPrescriptionHandlerMocked(mc, newPrescriptionContextProvider);
 
         context.registerService(NewPrescriptionHandler.class.getName(), newPrescriptionHandler, null);
       }
     }.start();
 
 
-  }
-
-  private NewPrescriptionHandler getNewPrescriptionHandler(NewPrescriptionContextProvider provider) {
-
-    ConfigurationProperties configurationProperties = getConfigurationProperties();
-
-    boolean isMocked = configurationProperties.isHealthTreatmentServiceMocked();
-
-    NewPrescriptionHandler newPrescriptionHandler;
-
-    if (isMocked) {
-      newPrescriptionHandler = new NewPrescriptionHandlerMocked(mc, provider);
-    } else {
-      newPrescriptionHandler = new NewPrescriptionHandlerImpl(mc, provider);
-    }
-
-    return newPrescriptionHandler;
   }
 
   private void registerService(Object service, BundleContext context) {

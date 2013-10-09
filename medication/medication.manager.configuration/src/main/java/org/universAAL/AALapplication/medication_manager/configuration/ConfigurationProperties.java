@@ -37,8 +37,6 @@ public interface ConfigurationProperties {
 
   boolean isDebugOn();
 
-  boolean isHealthTreatmentServiceMocked();
-
   boolean isLoadPrescriptionDTOs();
 
   boolean isInsertDummyUsersIntoChe();
