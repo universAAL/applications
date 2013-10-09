@@ -85,7 +85,6 @@ public class IntakeReviewDialog extends UICaller {
     try {
       userActed = true;
       if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
-        System.out.println("close");
       } else if (PREV_BUTTON.equals(input.getSubmissionID())) {
         //TODO to be removed (hack for saied user)
         User user = (User) input.getUser();

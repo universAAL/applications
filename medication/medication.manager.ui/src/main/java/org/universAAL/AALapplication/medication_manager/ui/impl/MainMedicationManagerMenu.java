@@ -68,7 +68,6 @@ public class MainMedicationManagerMenu extends UICaller {
       PersistentService persistentService = getPersistentService();
       User user = getUser(input, persistentService);
       if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
-        System.out.println("close");
       } else if (INTAKE_REVIEW_BUTTON.equals(input.getSubmissionID())) {
         showIntakeReviewDialog(user, persistentService);
       } else if (INVENTORY_STATUS_BUTTON.equals(input.getSubmissionID())) {

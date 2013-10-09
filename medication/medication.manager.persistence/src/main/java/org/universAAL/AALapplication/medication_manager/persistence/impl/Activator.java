@@ -65,9 +65,6 @@ public class Activator implements BundleActivator {
       connection = getConnection();
       ServiceReference sr = allServiceReferences[0];
       Object service = context.getService(sr);
-      System.out.println("service.getClass().getClassLoader() = " + service.getClass().getClassLoader());
-      System.out.println("service = " + (service instanceof ConfigurationProperties));
-      System.out.println("ConfigurationProperties.class.getClassLoader() = " + ConfigurationProperties.class.getClassLoader());
       ConfigurationProperties configurationProperties = getConfigurationProperties();
       Database derbyDatabase = new DerbyDatabase(connection, configurationProperties);
 
@@ -96,11 +93,8 @@ public class Activator implements BundleActivator {
   private Connection getConnection() {
     Connection con = null;
     try {
-      System.out.println("in");
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-      System.out.println("ok");
       new org.apache.derby.jdbc.EmbeddedDriver();
-      System.out.println("ok 2");
       con = DriverManager.getConnection("jdbc:derby:" + MEDICATION_MANAGER + ";create=true;");
     } catch (Exception e) {
       e.printStackTrace();

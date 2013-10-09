@@ -21,6 +21,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.http.HttpService;
 import org.osgi.util.tracker.ServiceTracker;
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.AALapplication.medication_manager.shell.commands.impl.commands.MedicationConsoleCommands;
@@ -51,6 +52,7 @@ public class Activator implements BundleActivator {
   private static ServiceTracker newPrescriptionHandlerTracker;
   private static ServiceTracker dispenserUpsideDownContextProviderTracker;
   private static ServiceTracker missedIntakeContextProviderTracker;
+  private static ServiceTracker configurationPropertiesServiceTracker;
 
   private static final String OSGI_COMMAND_SCOPE = "osgi.command.scope";
   private static final String OSGI_COMMAND_FUNCTION = "osgi.command.function";
@@ -70,6 +72,7 @@ public class Activator implements BundleActivator {
     missedIntakeContextProviderTracker = new ServiceTracker(context, MissedIntakeContextProvider.class.getName(), null);
     dispenserUpsideDownContextProviderTracker =
         new ServiceTracker(context, DispenserUpsideDownContextProvider.class.getName(), null);
+    configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
 
     medicationReminderContextProviderTracker.open();
     persistenceServiceTracker.open();
@@ -77,6 +80,7 @@ public class Activator implements BundleActivator {
     newPrescriptionHandlerTracker.open();
     missedIntakeContextProviderTracker.open();
     dispenserUpsideDownContextProviderTracker.open();
+    configurationPropertiesServiceTracker.open();
 
     Hashtable props = new Hashtable();
     props.put(OSGI_COMMAND_SCOPE, MedicationConsoleCommands.COMMAND_PREFIX);
@@ -192,6 +196,18 @@ public class Activator implements BundleActivator {
     NewPrescriptionHandler service = (NewPrescriptionHandler) newPrescriptionHandlerTracker.getService();
     if (service == null) {
       throw new MedicationManagerShellException("The NewPrescriptionHandler is missing");
+    }
+
+    return service;
+  }
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (configurationPropertiesServiceTracker == null) {
+      throw new MedicationManagerShellException("The ConfigurationProperties ServiceTracker is not set");
+    }
+    ConfigurationProperties service = (ConfigurationProperties) configurationPropertiesServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerShellException("The ConfigurationProperties is missing");
     }
 
     return service;

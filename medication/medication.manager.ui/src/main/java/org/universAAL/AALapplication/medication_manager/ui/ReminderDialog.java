@@ -104,7 +104,6 @@ public class ReminderDialog extends UICaller {
     try {
       userActed = true;
       if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
-        System.out.println("close");
       } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
         //TODO to be removed (hack for saied user)
         User user = (User) input.getUser();

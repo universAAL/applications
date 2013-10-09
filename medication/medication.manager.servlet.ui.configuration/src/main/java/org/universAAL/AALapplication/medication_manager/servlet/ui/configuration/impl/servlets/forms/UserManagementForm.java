@@ -208,7 +208,6 @@ public final class UserManagementForm extends ScriptForm {
     Log.info("Trying to get UserInfo objects from the UserManager", getClass());
 
     for (UserInfo user : users) {
-      System.out.println("\n******** user *****************");
       String uri = user.getUri();
       Log.info("user.getURI() = %s | user.getName() = %s", getClass(), uri, user.getName());
       if (user.getClass().equals(AssistedPersonUserInfo.class) || user.getClass().equals(User.class)) {
@@ -220,8 +219,6 @@ public final class UserManagementForm extends ScriptForm {
         CaregiverUserInfo caregiverUserInfo = (CaregiverUserInfo) user;
         caregivers.add(caregiverUserInfo);
       }
-
-      System.out.println("\n******** end *****************");
 
     }
   }

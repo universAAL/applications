@@ -40,14 +40,10 @@ public final class VCardPropertiesParser {
   private final Properties props = new Properties();
 
   public PersonalInformationSubprofile createSubprofile(String propertyFileName) {
-    System.out.println("*********** Parsing the following VCard: " + propertyFileName + " ***************************");
-
     loadProperties(propertyFileName, props);
 
     PersonalInformationSubprofile subprofile = createPersonalInformationSubprofile(props);
 
-
-    System.out.println("*********** End of parsing: " + propertyFileName + " ***************************");
 
     return subprofile;
   }

@@ -37,7 +37,6 @@ public final class CurrentDateInserter {
   public String insertCurrentDate(String sqlStatement) {
 
     if (!sqlStatement.contains(CURRENT_DATE)) {
-      System.out.println("skipping");
       return sqlStatement;
     }
 
@@ -49,7 +48,6 @@ public final class CurrentDateInserter {
 
       String textToReplace = pair.getFirst();
       sqlStatement = sqlStatement.replace(textToReplace, dateToInsert);
-      System.out.println("sqlStatement = " + sqlStatement);
     }
 
     return sqlStatement;

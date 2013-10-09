@@ -198,8 +198,6 @@ public final class PrescriptionParser {
       PersonDao personDao = persistentService.getPersonDao();
       Person person = personDao.getById(id);
 
-      System.out.println("person = " + person);
-
       return person;
 
     } catch (NumberFormatException e) {

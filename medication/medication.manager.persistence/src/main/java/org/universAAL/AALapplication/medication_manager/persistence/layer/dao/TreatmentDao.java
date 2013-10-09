@@ -81,8 +81,6 @@ public final class TreatmentDao extends AbstractDao {
   public List<Treatment> getByPrescriptionAndNotInActive(int prescriptionId) {
     String sql = "select * from MEDICATION_MANAGER.TREATMENT where PRESCRIPTION_FK_ID = ? and UPPER(STATUS) <> ?";
 
-    System.out.println("sql = " + sql);
-
     PreparedStatement statement = null;
     try {
       statement = getPreparedStatement(sql);
@@ -176,8 +174,6 @@ public final class TreatmentDao extends AbstractDao {
         "where MEDICINE_FK_ID = ? and UPPER(STATUS) = ?\n" +
         " and PRESCRIPTION_FK_ID IN (select ID from MEDICATION_MANAGER.PRESCRIPTION where PATIENT_FK_ID = ?)";
 
-    System.out.println("sql = " + sql);
-
     PreparedStatement statement = null;
     try {
       statement = getPreparedStatement(sql);
@@ -200,8 +196,6 @@ public final class TreatmentDao extends AbstractDao {
   public Set<Treatment> getAllActiveTreatments() {
     String sql = "select * from MEDICATION_MANAGER.TREATMENT where UPPER(STATUS) = ?";
 
-    System.out.println("sql = " + sql);
-
     Set<Treatment> treatmentSet = new HashSet<Treatment>();
 
     PreparedStatement statement = null;
@@ -223,8 +217,6 @@ public final class TreatmentDao extends AbstractDao {
 
   public Set<Treatment> getAllTreatments() {
     String sql = "select * from MEDICATION_MANAGER.TREATMENT";
-
-    System.out.println("sql = " + sql);
 
     Set<Treatment> treatmentSet = new HashSet<Treatment>();
 
@@ -283,8 +275,6 @@ public final class TreatmentDao extends AbstractDao {
         "      AND p.PATIENT_FK_ID = ?\n" +
         "      AND (UPPER(tr.STATUS) = ? OR UPPER(tr.STATUS) = ?)";
 
-    System.out.println("sql = " + sql);
-
     Set<Treatment> treatmentSet = new HashSet<Treatment>();
 
     PreparedStatement statement = null;
@@ -315,8 +305,6 @@ public final class TreatmentDao extends AbstractDao {
         " AND TR.PRESCRIPTION_FK_ID = P.ID " +
         " AND TR.MEDICINE_FK_ID = ? " +
         " AND UPPER(TR.STATUS) = ?";
-
-    System.out.println("sql = " + sql);
 
     PreparedStatement statement = null;
     try {

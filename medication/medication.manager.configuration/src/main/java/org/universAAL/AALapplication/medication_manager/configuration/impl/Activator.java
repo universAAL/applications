@@ -30,12 +30,16 @@ public final class Activator implements BundleActivator {
 
 
   public static ModuleContext mc;
+  public static ConfigurationPropertiesImpl configurationProperties;
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
+    configurationProperties = new ConfigurationPropertiesImpl();
     context.registerService(ConfigurationProperties.class.getName(),
-        new ConfigurationPropertiesImpl(), null);
+        configurationProperties, null);
+
+
   }
 
   public void stop(BundleContext context) throws Exception {

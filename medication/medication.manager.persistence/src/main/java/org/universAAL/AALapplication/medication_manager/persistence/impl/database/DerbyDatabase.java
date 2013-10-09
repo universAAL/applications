@@ -364,11 +364,6 @@ public final class DerbyDatabase implements Database {
 
   private boolean checkIfTablesNotExists() throws SQLException {
     Set<String> tableNames = getDBTables(connection);
-    System.out.println("tableNames = " + tableNames);
-    for (String name : tableNames) {
-      System.out.println("name = " + name);
-    }
-
     return tableNames.isEmpty();
   }
 

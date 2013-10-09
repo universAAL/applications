@@ -37,16 +37,14 @@ public class Activator implements BundleActivator {
   private static ServiceTracker persistenceServiceTracker;
 
   /*
-    * (non-Javadoc)
-    * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-    */
+      * (non-Javadoc)
+      * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+      */
   public void start(final BundleContext context) throws Exception {
-
     bundleContext = context;
 
     mc = uAALBundleContainer.THE_CONTAINER
         .registerModule(new Object[]{context});
-    Log.info("Starting %s", getClass(), "Starting the Medication Service");
 
     configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
     persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
