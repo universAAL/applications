@@ -124,8 +124,6 @@ public final class PrescriptionDao extends AbstractDao {
   public List<Prescription> getByPerson(int personId) {
     String sql = "select * from MEDICATION_MANAGER.PRESCRIPTION where PATIENT_FK_ID = ? and UPPER(STATUS) = ?";
 
-    System.out.println("sql = " + sql);
-
     PreparedStatement statement = null;
     try {
       statement = getPreparedStatement(sql);
@@ -730,8 +728,6 @@ public final class PrescriptionDao extends AbstractDao {
 
   private List<PrescriptionDTO> getAllActivePrescriptions() {
     String sql = "select * from MEDICATION_MANAGER.PRESCRIPTION  where UPPER(STATUS) = ?";
-
-    System.out.println("sql = " + sql);
 
     PreparedStatement statement = null;
     try {

@@ -166,9 +166,6 @@ public class UserManagerImpl implements UserManager {
   private UserInfo getUserInfo(List out, int i) {
     Log.info("Creating UserInfo object from The User object", getClass());
     Object o = out.get(i);
-    System.out.println("o.getClass().getName() = " + o.getClass().getName());
-    System.out.println("o.getClass().getClassLoader() = " + o.getClass().getClassLoader());
-    System.out.println("User.class.getClassLoader() = " + User.class.getClassLoader());
     User ur = (User) o;
     String uri = ur.getURI();
     Log.info("User object uri is : %s", getClass(), uri);

@@ -35,6 +35,8 @@ public interface ConfigurationProperties {
 
   boolean isDebugWriterOn();
 
+  boolean isDebugOn();
+
   boolean isHealthTreatmentServiceMocked();
 
   boolean isLoadPrescriptionDTOs();

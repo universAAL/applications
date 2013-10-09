@@ -37,6 +37,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private final Properties medicationProperties = new Properties();
 
   private static final String DEBUG_WRITE_FILE = "medication.manager.debug.write.file";
+  private static final String DEBUG = "medication.manager.debug";
   private static final String ON = "true";
   private static final String MEDICATION_REMINDER_TIMEOUT = "medication.manager.reminder.timeout";
   private static final String MEDICATION_UPSIDE_DOWN_TIMEOUT = "medication.manager.upside.down.timeout";
@@ -48,20 +49,18 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private static final String MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE = "medication.manager.insert.dummy.users.into.che";
   private static final String HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES =
       "medication.manager.http.session.timer.checker.interval.in.minutes";
+  private final Map<String, PropertyInfo> propertyInfoMap;
 
   public ConfigurationPropertiesImpl() {
     try {
-      loadProperties();
+      InputStream inputStream =
+          ConfigurationPropertiesImpl.class.getClassLoader().getResourceAsStream("medication.properties");
+      medicationProperties.load(inputStream);
+      inputStream.close();
     } catch (IOException e) {
       throw new MedicationManagerConfigurationException(e);
     }
-  }
-
-  private void loadProperties() throws IOException {
-    InputStream inputStream =
-        ConfigurationPropertiesImpl.class.getClassLoader().getResourceAsStream("medication.properties");
-    medicationProperties.load(inputStream);
-    inputStream.close();
+    propertyInfoMap = createPropertyInfoMap();
   }
 
   public int getMedicationReminderTimeout() {
@@ -111,6 +110,18 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     return debug.equalsIgnoreCase(ON);
   }
 
+  public boolean isDebugOn() {
+
+    String debug = System.getProperty(DEBUG);
+
+    if (debug == null) {
+      throw new MedicationManagerConfigurationException("Missing property: " + DEBUG);
+    }
+
+    return debug.equalsIgnoreCase(ON);
+
+  }
+
   public boolean isHealthTreatmentServiceMocked() {
     String mocked = System.getProperty(HEALTH_TREATMENT_SERVICE_MOCKED);
 
@@ -149,9 +160,6 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
 
   public Map<String, PropertyInfo> getPropertyInfoMap() {
 
-    Map<String, PropertyInfo> propertyInfoMap = createPropertyInfoMap();
-
-
     return propertyInfoMap;
   }
 
@@ -171,6 +179,8 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     addHttpSessionTimerCheckerIntervalInMinutes(propertyInfoMap);
 
     addIsDebugWriterOn(propertyInfoMap);
+
+    addIsDebugOn(propertyInfoMap);
 
     addTreatmentServiceMocked(propertyInfoMap);
 
@@ -192,6 +202,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(reminderInterval.getName(), reminderInterval);
+    System.setProperty(MEDICATION_REMINDER_TIMEOUT, value);
   }
 
   private void addUpsideDownTimeout(Map<String, PropertyInfo> propertyInfoMap) {
@@ -205,6 +216,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(upsideDownInterval.getName(), upsideDownInterval);
+    System.setProperty(MEDICATION_UPSIDE_DOWN_TIMEOUT, value);
   }
 
   private void addIntakeIntervalInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
@@ -218,6 +230,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(intakeInterval.getName(), intakeInterval);
+    System.setProperty(MEDICATION_INTAKE_INTERVAL, value);
   }
 
   private void addMedicationManagerIssuerIntervalInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
@@ -232,6 +245,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(issuerInterval.getName(), issuerInterval);
+    System.setProperty(MEDICATION_MANAGER_ISSUER_INTERVAL_MINUTES, value);
   }
 
   private void addHttpSessionExpireInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
@@ -245,6 +259,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(httpSessionExpireInMinutes.getName(), httpSessionExpireInMinutes);
+    System.setProperty(HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES, value);
   }
 
   private void addHttpSessionTimerCheckerIntervalInMinutes(Map<String, PropertyInfo> propertyInfoMap) {
@@ -258,6 +273,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(timerCheckerIntervalInMinutes.getName(), timerCheckerIntervalInMinutes);
+    System.setProperty(HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES, value);
   }
 
   private void addIsDebugWriterOn(Map<String, PropertyInfo> propertyInfoMap) {
@@ -271,6 +287,21 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(debugerWriterOn.getName(), debugerWriterOn);
+    System.setProperty(DEBUG_WRITE_FILE, value);
+  }
+
+  private void addIsDebugOn(Map<String, PropertyInfo> propertyInfoMap) {
+    String value = medicationProperties.getProperty(DEBUG);
+    PropertyInfo debugOn = new PropertyInfo(
+        DEBUG,
+        value,
+        FormatEnum.BOOLEAN,
+        TypeEnum.BOOLEAN,
+        "This turn on/off the medication manager debugging"
+    );
+
+    propertyInfoMap.put(debugOn.getName(), debugOn);
+    System.setProperty(DEBUG, value);
   }
 
   private void addTreatmentServiceMocked(Map<String, PropertyInfo> propertyInfoMap) {
@@ -284,6 +315,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(treatmentServiceMocked.getName(), treatmentServiceMocked);
+    System.setProperty(HEALTH_TREATMENT_SERVICE_MOCKED, value);
   }
 
   private void addLoadPrescriptionDtos(Map<String, PropertyInfo> propertyInfoMap) {
@@ -297,6 +329,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(loadPrescriptionDtos.getName(), loadPrescriptionDtos);
+    System.setProperty(LOAD_PRESCRIPTIONSDTOS, value);
   }
 
   private void addInsertDummyUsersInTheCHE(Map<String, PropertyInfo> propertyInfoMap) {
@@ -310,5 +343,6 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     );
 
     propertyInfoMap.put(insertDummyUsers.getName(), insertDummyUsers);
+    System.setProperty(MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE, value);
   }
 }

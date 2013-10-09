@@ -18,6 +18,8 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.base.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -36,13 +38,15 @@ public final class Activator implements BundleActivator {
 
   public static ModuleContext mc;
   public static BundleContext bundleContext;
-
+  private static ServiceTracker configurationPropertiesServiceTracker;
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
     bundleContext = context;
 
+    configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
+    configurationPropertiesServiceTracker.open();
 
   }
 
@@ -88,33 +92,44 @@ public final class Activator implements BundleActivator {
   }
 
   public static String getHtml(String resourcePath) {
-     InputStream inputStream = Activator.class.getClassLoader().getResourceAsStream(resourcePath);
+    InputStream inputStream = Activator.class.getClassLoader().getResourceAsStream(resourcePath);
 
-     if (inputStream == null) {
-       throw new MedicationManagerServletUIBaseException("The resource: " + resourcePath + " cannot be found");
-     }
+    if (inputStream == null) {
+      throw new MedicationManagerServletUIBaseException("The resource: " + resourcePath + " cannot be found");
+    }
 
-     BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+    BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
-     return getHtmlText(br);
-   }
+    return getHtmlText(br);
+  }
 
-   private static String getHtmlText(BufferedReader br) {
-     StringBuffer sb = new StringBuffer();
-     try {
-       String line = br.readLine();
-       while (line != null) {
-         sb.append(line);
-         sb.append('\n');
-         line = br.readLine();
-       }
-     } catch (IOException e) {
-       throw new MedicationManagerServletUIBaseException(e);
-     }
+  private static String getHtmlText(BufferedReader br) {
+    StringBuffer sb = new StringBuffer();
+    try {
+      String line = br.readLine();
+      while (line != null) {
+        sb.append(line);
+        sb.append('\n');
+        line = br.readLine();
+      }
+    } catch (IOException e) {
+      throw new MedicationManagerServletUIBaseException(e);
+    }
 
-     return sb.toString();
-   }
+    return sb.toString();
+  }
 
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (configurationPropertiesServiceTracker == null) {
+      throw new MedicationManagerServletUIBaseException("The ConfigurationProperties ServiceTracker is not set");
+    }
+    ConfigurationProperties service = (ConfigurationProperties) configurationPropertiesServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerServletUIBaseException("The ConfigurationProperties is missing");
+    }
+
+    return service;
+  }
 
 
 }

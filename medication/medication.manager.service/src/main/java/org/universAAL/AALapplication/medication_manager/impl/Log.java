@@ -17,15 +17,24 @@
 
 package org.universAAL.AALapplication.medication_manager.impl;
 
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.middleware.container.utils.LogUtils;
 
 public class Log {
 
+  private static final ConfigurationProperties CONFIGURATION_PROPERTIES;
+
+  static {
+    CONFIGURATION_PROPERTIES = Activator.getConfigurationProperties();
+  }
 
   /**
    * Helper method for logging.
    */
   public static void info(String format, Class aClass, Object... args) {
+    if (!CONFIGURATION_PROPERTIES.isDebugOn()) {
+      return;
+    }
     StackTraceElement callingMethod = Thread.currentThread().getStackTrace()[2];
     LogUtils.logInfo(Activator.mc, aClass, callingMethod.getMethodName(),
         new Object[]{formatMsg(format, args)}, null);

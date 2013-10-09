@@ -20,6 +20,7 @@ package org.universAAL.AALapplication.medication_manager.ui.impl;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -35,6 +36,7 @@ public class Activator implements BundleActivator {
   static ModuleContext mc;
   static BundleContext context;
   static ServiceTracker persistenceServiceTracker;
+  private static ServiceTracker configurationPropertiesServiceTracker;
   public MedicationManagerServiceButtonProvider medicationManagerServiceButtonProvider;
   public static final User SAIED = new User("urn:org.universAAL.aal_space:test_environment#saied");
 
@@ -43,7 +45,10 @@ public class Activator implements BundleActivator {
         .registerModule(new Object[]{bundleContext});
     context = bundleContext;
     persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
+    configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
+
     persistenceServiceTracker.open();
+    configurationPropertiesServiceTracker.open();
 
     ReminderDialogProvider reminderDialogProvider = new ReminderDialogProvider(mc);
     IntakeReviewDialogProvider intakeReviewDialogProvider = new IntakeReviewDialogProvider(mc);
@@ -117,6 +122,18 @@ public class Activator implements BundleActivator {
       throw new MedicationManagerUIException("The parameter : " + parameterName + " cannot be null");
     }
 
+  }
+
+  public static ConfigurationProperties getConfigurationProperties() {
+    if (configurationPropertiesServiceTracker == null) {
+      throw new MedicationManagerUIException("The ConfigurationProperties ServiceTracker is not set");
+    }
+    ConfigurationProperties service = (ConfigurationProperties) configurationPropertiesServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerUIException("The ConfigurationProperties is missing");
+    }
+
+    return service;
   }
 
 }

@@ -126,12 +126,8 @@ public final class HandleNotifications extends BaseServlet {
   private NotificationsInfo getNotificationInfo(HttpServletRequest req, String id) {
     try {
       Set<String> params = getAllParametersForThatComplexId(req, id);
-      System.out.println("&&&&&&&&&&&&& NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");
 
       NotificationsInfo notificationsInfo = createNotificationsInfo(req, id, params);
-
-
-      System.out.println("&&&&&&&&&&&&& END of NotificationInfoComplexId &&&&&&&&&&&&&&&&&&&&&&");
 
       return notificationsInfo;
     } catch (Exception e) {
@@ -153,7 +149,6 @@ public final class HandleNotifications extends BaseServlet {
 
     for (String name : params) {
       String value = req.getParameter(name);
-      System.out.println("id = " + id + " | name = " + name + " | value = " + value);
       if (name.contains(MISSED)) {
         missed = Boolean.valueOf(value);
       } else if (name.contains(SHORTAGE)) {

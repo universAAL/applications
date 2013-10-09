@@ -148,7 +148,7 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
                           final MedicineInventoryDao medicineInventoryDao, final IntakeDao intakeDao,
                           final User user, final List<Intake> intakes, final Person patient) {
 
-    ConfigurationProperties properties = getConfigurationProperties();
+      ConfigurationProperties properties = getConfigurationProperties();
 
     final int timeoutSeconds = properties.getMedicationReminderTimeout();
 

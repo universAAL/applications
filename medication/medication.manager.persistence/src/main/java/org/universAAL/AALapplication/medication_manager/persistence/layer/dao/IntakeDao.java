@@ -147,8 +147,6 @@ public final class IntakeDao extends AbstractDao {
         "  AND PR.PATIENT_FK_ID = ? \n" +
         "  AND INTA.TIME_PLAN > ? \n";
 
-    System.out.println("sql = " + sql);
-
     PreparedStatement statement = null;
     try {
       statement = getPreparedStatement(sql, statement);
@@ -186,9 +184,6 @@ public final class IntakeDao extends AbstractDao {
         "  AND PR.PATIENT_FK_ID = P.ID \n" +
         "  AND INTA.TIME_PLAN > ? \n" +
         "  AND INTA.TIME_PLAN < ? ";
-
-    System.out.println("sql = " + sql);
-    System.out.println("time = " + time);
 
     PreparedStatement statement = null;
     try {
@@ -229,8 +224,6 @@ public final class IntakeDao extends AbstractDao {
     Date date = calendar.getTime();
 
     Timestamp sqlDate = new Timestamp(date.getTime());
-
-    System.out.println("sqlDate = " + sqlDate);
 
     return sqlDate;
   }
@@ -342,9 +335,6 @@ public final class IntakeDao extends AbstractDao {
         "  AND INTA.TIME_PLAN >= ? \n" +
         "  AND INTA.TIME_PLAN <= ? ";
 
-    System.out.println("sql = " + sql);
-    System.out.println("week = " + week);
-
     PreparedStatement statement = null;
     try {
       statement = getPreparedStatement(sql, statement);
@@ -377,8 +367,6 @@ public final class IntakeDao extends AbstractDao {
         "  AND UPPER(TR.STATUS) = ? \n" +
         "  AND INTA.TIME_PLAN >= ? \n" +
         "  AND INTA.TIME_PLAN <= ? ";
-
-    System.out.println("sql = " + sql);
 
     PreparedStatement statement = null;
     try {

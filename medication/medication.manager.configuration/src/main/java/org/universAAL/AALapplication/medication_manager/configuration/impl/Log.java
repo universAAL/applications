@@ -28,6 +28,9 @@ public class Log {
    * Helper method for logging.
    */
   public static void info(String format, Class aClass, Object... args) {
+    if (!configurationProperties.isDebugOn()) {
+      return;
+    }
     StackTraceElement callingMethod = Thread.currentThread().getStackTrace()[2];
     LogUtils.logInfo(mc, aClass, callingMethod.getMethodName(),
         new Object[]{formatMsg(format, args)}, null);
