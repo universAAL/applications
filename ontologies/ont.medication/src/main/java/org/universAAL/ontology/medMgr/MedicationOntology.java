@@ -27,8 +27,6 @@ import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.service.owl.Service;
 import org.universAAL.middleware.service.owl.ServiceBusOntology;
 import org.universAAL.ontology.MedicationFactory;
-import org.universAAL.ontology.health.owl.HealthProfileOntology;
-import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.location.LocationOntology;
 import org.universAAL.ontology.profile.ProfileOntology;
 import org.universAAL.ontology.profile.User;
@@ -60,7 +58,6 @@ public final class MedicationOntology extends Ontology {
     addImport(ServiceBusOntology.NAMESPACE);
     addImport(LocationOntology.NAMESPACE);
     addImport(ProfileOntology.NAMESPACE);
-    addImport(HealthProfileOntology.NAMESPACE);
 
     OntClassInfoSetup oci;
 
@@ -206,9 +203,9 @@ public final class MedicationOntology extends Ontology {
         .getAllValuesRestriction(Medicine.PROP_INTAKES, Intake.MY_URI));
 
     // load MedicationTreatment
-    oci = extendExistingOntClassInfo(Treatment.MY_URI);
+    oci = extendExistingOntClassInfo(ManagedIndividual.MY_URI);
     oci = createNewOntClassInfo(MedicationTreatment.MY_URI, FACTORY, MEDICATION_TREATMENT_FACTORY_INDEX);
-    oci.addSuperClass(Treatment.MY_URI);
+    oci.addSuperClass(ManagedIndividual.MY_URI);
     oci.setResourceComment("The type of a MedicationTreatment");
     oci.setResourceLabel("MedicationTreatment");
     oci.addDatatypeProperty(MedicationTreatment.PROP_PRESCRIPTION_ID);
@@ -226,6 +223,22 @@ public final class MedicationOntology extends Ontology {
     oci.addObjectProperty(MedicationTreatment.PROP_MEDICINE);
     oci.addRestriction(MergedRestriction
         .getAllValuesRestrictionWithCardinality(MedicationTreatment.PROP_MEDICINE, Medicine.MY_URI, 1, 1));
+    oci.addDatatypeProperty(MedicationTreatment.PROP_DESCRIPTION);
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(
+            MedicationTreatment.PROP_DESCRIPTION, TypeMapper.getDatatypeURI(String.class), 1, 1));
+    oci.addDatatypeProperty(MedicationTreatment.PROP_MEDICATION_TREATMENT_END_DATE).setFunctional();
+    oci.addRestriction(MergedRestriction
+        .getAllValuesRestrictionWithCardinality(MedicationTreatment.PROP_MEDICATION_TREATMENT_END_DATE,
+            TypeMapper.getDatatypeURI(XMLGregorianCalendar.class), 1, 1));
+    oci.addDatatypeProperty(MedicationTreatment.PROP_NAME);
+        oci.addRestriction(MergedRestriction
+            .getAllValuesRestrictionWithCardinality(
+                MedicationTreatment.PROP_NAME, TypeMapper.getDatatypeURI(String.class), 1, 1));
+    oci.addDatatypeProperty(MedicationTreatment.PROP_STATUS);
+            oci.addRestriction(MergedRestriction
+                .getAllValuesRestrictionWithCardinality(
+                    MedicationTreatment.PROP_STATUS, TypeMapper.getDatatypeURI(Boolean.class), 1, 1));
 
     // load NewMedicationTreatmentNotifier
     oci = createNewOntClassInfo(NewMedicationTreatmentNotifier.MY_URI, FACTORY, NEW_MEDICATION_TREATMENT_NOTIFIER_FACTORY_INDEX);

@@ -37,7 +37,6 @@ import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
-import org.universAAL.ontology.health.owl.TreatmentPlanning;
 import org.universAAL.ontology.medMgr.CaregiverNotifier;
 import org.universAAL.ontology.medMgr.CaregiverNotifierData;
 import org.universAAL.ontology.medMgr.Intake;
@@ -232,9 +231,10 @@ public abstract class NewPrescriptionHandler {
     GregorianCalendar gregorianCalendar = new GregorianCalendar();
     gregorianCalendar.setTime(startDate);
     XMLGregorianCalendar date = (DatatypeFactory.newInstance()).newXMLGregorianCalendar(gregorianCalendar);
-    medicationTreatment.checkStatus(date);
     medicationTreatment.setMedicationTreatmentStartDate(date);
-    setTreatmentPlaning(medicationTreatment, date, gregorianCalendar, prescriptionDTO);
+    XMLGregorianCalendar endDate = getEndDate(gregorianCalendar, prescriptionDTO);
+    medicationTreatment.setMedicationTreatmentEndDate(endDate);
+    medicationTreatment.setStatus(true);
 
     return medicationTreatment;
   }
@@ -245,17 +245,6 @@ public abstract class NewPrescriptionHandler {
     return (DatatypeFactory.newInstance()).newXMLGregorianCalendar(gregorianCalendar);
   }
 
-
-  private void setTreatmentPlaning(MedicationTreatment medicationTreatment, XMLGregorianCalendar startDate,
-                                   GregorianCalendar gregorianCalendar,
-                                   PrescriptionDTO prescriptionDTO) throws DatatypeConfigurationException {
-
-    TreatmentPlanning treatmentPlanning = new TreatmentPlanning();
-    treatmentPlanning.setStartDate(startDate);
-    XMLGregorianCalendar endDate = getEndDate(gregorianCalendar, prescriptionDTO);
-    treatmentPlanning.setEndDate(endDate);
-    medicationTreatment.setTreatmentPlanning(treatmentPlanning);
-  }
 
   private XMLGregorianCalendar getEndDate(GregorianCalendar gregorianCalendar,
                                           PrescriptionDTO prescriptionDTO) throws DatatypeConfigurationException {

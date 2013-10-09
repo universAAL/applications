@@ -44,7 +44,6 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private static final String MEDICATION_INTAKE_INTERVAL = "medication.manager.intake.interval";
   private static final String MEDICATION_MANAGER_ISSUER_INTERVAL_MINUTES = "medication.manager.issuer.interval.minutes";
   private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "medication.manager.http.session.expire.timeout.in.minutes";
-  private static final String HEALTH_TREATMENT_SERVICE_MOCKED = "medication.manager.health.treatment.service.mocked";
   private static final String LOAD_PRESCRIPTIONSDTOS = "medication.manager.load.prescriptionsdtos";
   private static final String MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE = "medication.manager.insert.dummy.users.into.che";
   private static final String HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES =
@@ -122,16 +121,6 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
 
   }
 
-  public boolean isHealthTreatmentServiceMocked() {
-    String mocked = System.getProperty(HEALTH_TREATMENT_SERVICE_MOCKED);
-
-    if (mocked == null) {
-      throw new MedicationManagerConfigurationException("Missing property: " + HEALTH_TREATMENT_SERVICE_MOCKED);
-    }
-
-    return mocked.equalsIgnoreCase(ON);
-  }
-
   public boolean isLoadPrescriptionDTOs() {
     String load = System.getProperty(LOAD_PRESCRIPTIONSDTOS);
 
@@ -181,8 +170,6 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
     addIsDebugWriterOn(propertyInfoMap);
 
     addIsDebugOn(propertyInfoMap);
-
-    addTreatmentServiceMocked(propertyInfoMap);
 
     addLoadPrescriptionDtos(propertyInfoMap);
 
@@ -302,20 +289,6 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
 
     propertyInfoMap.put(debugOn.getName(), debugOn);
     System.setProperty(DEBUG, value);
-  }
-
-  private void addTreatmentServiceMocked(Map<String, PropertyInfo> propertyInfoMap) {
-    String value = medicationProperties.getProperty(HEALTH_TREATMENT_SERVICE_MOCKED);
-    PropertyInfo treatmentServiceMocked = new PropertyInfo(
-        HEALTH_TREATMENT_SERVICE_MOCKED,
-        value,
-        FormatEnum.BOOLEAN,
-        TypeEnum.BOOLEAN,
-        "This property switch between real and mocked implementation of the Health Treatment Service"
-    );
-
-    propertyInfoMap.put(treatmentServiceMocked.getName(), treatmentServiceMocked);
-    System.setProperty(HEALTH_TREATMENT_SERVICE_MOCKED, value);
   }
 
   private void addLoadPrescriptionDtos(Map<String, PropertyInfo> propertyInfoMap) {
