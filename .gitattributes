@@ -2066,6 +2066,7 @@ medication/medication.manager.service/src/main/java/org/universAAL/AALapplicatio
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/Log.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MedicationManagerException.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MissedIntakeEventSubscriber.java -text
+medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/MissedIntakeNotifierImpl.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/PrecautionProvider.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/ProviderPrecautionService.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/UpsideDownCaregiverNotifier.java -text
@@ -2414,9 +2415,11 @@ medication/medication.manager.ui/NOTICE -text
 medication/medication.manager.ui/pom.xml -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/DispenserDisplayInstructionsDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/DispenserUpsideDownDialog.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/DueIntakeTimer.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/IntakeReviewDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/InventoryStatusDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/MedicationInfoDialog.java -text
+medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/MissedIntakeNotifier.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/ReminderDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/RequestMedicationInfoDialog.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/Activator.java -text

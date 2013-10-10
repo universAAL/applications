@@ -18,6 +18,7 @@
 package org.universAAL.AALapplication.medication_manager.ui;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
@@ -46,6 +47,7 @@ import org.universAAL.ontology.medMgr.CaregiverNotifierData;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,15 +62,19 @@ public class ReminderDialog extends UICaller {
   private final List<Intake> intakes;
   private final PersistentService persistentService;
   private final ServiceCaller serviceCaller;
+  private final IntakeDao intakeDao;
+  private final MedicineInventoryDao medicineInventoryDao;
   private User currentUser; //TODO to be removed (hack for saied user)
   private boolean userActed;
+  private DueIntakeTimer dueIntakeTimer;
 
-  private static final String CLOSE_BUTTON = "closeButton";
+  private static final String TAKEN_BUTTON = "takenButton";
+  private static final String MISSED_BUTTON = "missedButton";
   private static final String INFO_BUTTON = "reminderButton";
   private static final String REQUEST_NEW_DOSE_BUTTON = "requestNewDoseButton";
 
-  public ReminderDialog(ModuleContext context, Time time, Person patient,
-                        List<Intake> intakes, PersistentService persistentService) {
+  public ReminderDialog(ModuleContext context, Time time, Person patient, List<Intake> intakes,
+                        PersistentService persistentService, IntakeDao intakeDao, MedicineInventoryDao medicineInventoryDao) {
     super(context);
 
     validateParameter(context, "context");
@@ -81,14 +87,16 @@ public class ReminderDialog extends UICaller {
     this.intakes = intakes;
     this.persistentService = persistentService;
     this.serviceCaller = new DefaultServiceCaller(context);
+    this.intakeDao = intakeDao;
+    this.medicineInventoryDao = medicineInventoryDao;
   }
 
   public ReminderDialog(ModuleContext context) {
-    this(context, null, null, null, null);
+    this(context, null, null, null, null, null, null);
   }
 
   public ReminderDialog(ModuleContext context, Time time) {
-    this(context, time, null, null, null);
+    this(context, time, null, null, null, null, null);
   }
 
   @Override
@@ -101,32 +109,110 @@ public class ReminderDialog extends UICaller {
 
   @Override
   public void handleUIResponse(UIResponse input) {
+    validateDueIntakeTimerIsSet();
     try {
       userActed = true;
-      if (CLOSE_BUTTON.equals(input.getSubmissionID())) {
-      } else if (INFO_BUTTON.equals(input.getSubmissionID())) {
-        //TODO to be removed (hack for saied user)
-        User user = (User) input.getUser();
-        if (user.getURI().equals(SAIED.getURI())) {
-          user = currentUser;
-        }
-        showRequestMedicationInfoDialog(user);
-      } else if (REQUEST_NEW_DOSE_BUTTON.equals(input.getSubmissionID())) {
-        decreaseInventory();
-        String newDoseMessage = createMessage();
-        if (newDoseMessage != null) {
-          notifyCaregiver(newDoseMessage);
-        }
-      } else {
-        System.out.println("unknown");
+      //TODO to be removed (hack for saied user)
+      User user = (User) input.getUser();
+      if (user.getURI().equals(SAIED.getURI())) {
+        user = currentUser;
       }
+      String submissionID = input.getSubmissionID();
+      handleUIResponse(submissionID, user);
     } catch (Exception e) {
       Log.error(e, "Error while handling UI response", getClass());
     }
 
+    userActed = false;
   }
 
-  private void notifyCaregiver(String newDoseMessage) {
+  private void handleUIResponse(String submissionID, User user) {
+
+    if (TAKEN_BUTTON.equals(submissionID)) {
+      handleTakenButton();
+    } else if (MISSED_BUTTON.equals(submissionID)) {
+      handleMissedButton();
+    } else if (INFO_BUTTON.equals(submissionID)) {
+      handleInfoButton(user);
+    } else if (REQUEST_NEW_DOSE_BUTTON.equals(submissionID)) {
+      intakeDao.setTimeTakenColumn(intakes);
+      medicineInventoryDao.decreaseInventory(patient, intakes);
+      medicineInventoryDao.decreaseInventory(patient, intakes);
+      String newDoseMessage = createMessage();
+      if (newDoseMessage != null) {
+        String smsText = getSmsText(time, patient, newDoseMessage);
+        notifyCaregiver(smsText);
+      }
+      if (!dueIntakeTimer.isTimeoutExpired()) {
+        dueIntakeTimer.cancel();
+      }
+    } else {
+      Log.info("Unknown button %s\n", getClass(), submissionID);
+    }
+  }
+
+  private void handleInfoButton(User user) {
+    showRequestMedicationInfoDialog(user);
+    if (!dueIntakeTimer.isTimeoutExpired()) {
+      takenIntakeDatabaseRecords();
+      dueIntakeTimer.cancel();
+    }
+  }
+
+  private void handleTakenButton() {
+    takenIntakeDatabaseRecords();
+
+    if (dueIntakeTimer.isTimeoutExpired()) {
+      String smsText = createDeferredTakenMessage();
+      notifyCaregiver(smsText);
+    } else {
+      dueIntakeTimer.cancel();
+    }
+  }
+
+  private void takenIntakeDatabaseRecords() {
+    medicineInventoryDao.decreaseInventory(patient, intakes);
+    intakeDao.setTimeTakenColumn(intakes);
+  }
+
+  private void handleMissedButton() {
+    if (!dueIntakeTimer.isTimeoutExpired()) {
+      String smsText = createMissedMessage();
+      notifyCaregiver(smsText);
+      dueIntakeTimer.cancel();
+    }
+  }
+
+  private String createDeferredTakenMessage() {
+    StringBuffer sb = new StringBuffer();
+
+    sb.append(patient.getName());
+    sb.append(" has taken the medicine scheduled for ");
+    String timeText = getTimeText(time);
+    sb.append(timeText);
+    sb.append(" with a delay at ");
+    Calendar now = Calendar.getInstance();
+    Time t = new Time(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
+        now.get(Calendar.DAY_OF_MONTH), now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE));
+    sb.append(getTimeText(t));
+    sb.append(".\n");
+
+    return sb.toString();
+  }
+
+  private String createMissedMessage() {
+    StringBuffer sb = new StringBuffer();
+
+    sb.append(patient.getName());
+    sb.append(" missed to take the intake at");
+    String timeText = getTimeText(time);
+    sb.append(timeText);
+    sb.append(".\n");
+
+    return sb.toString();
+  }
+
+  private void notifyCaregiver(String smsText) {
 
     User involvedHumanUser = new User(patient.getPersonUri());
     ServiceRequest serviceRequest = new ServiceRequest(new CaregiverNotifier(), involvedHumanUser);
@@ -134,7 +220,6 @@ public class ReminderDialog extends UICaller {
     CaregiverNotifierData caregiverNotifierData = new CaregiverNotifierData();
     String smsNumber = getCaregiverSms(patient, persistentService.getPatientLinksDao());
     caregiverNotifierData.setSmsNumber(smsNumber);
-    String smsText = getSmsText(time, patient, newDoseMessage);
     caregiverNotifierData.setSmsText(smsText);
 
 
@@ -202,14 +287,6 @@ public class ReminderDialog extends UICaller {
     return sb.toString();
   }
 
-  private void decreaseInventory() {
-    MedicineInventoryDao medicineInventoryDao = persistentService.getMedicineInventoryDao();
-    if (medicineInventoryDao == null || patient == null || intakes == null) {
-      throw new MedicationManagerUIException("There are fields in the ReminderDialog class which are null");
-    }
-    medicineInventoryDao.decreaseInventory(patient, intakes);
-  }
-
   private void showRequestMedicationInfoDialog(User user) {
 
     if (time == null) {
@@ -223,9 +300,10 @@ public class ReminderDialog extends UICaller {
 
   public void showDialog(User inputUser) {
 
-    try {
-      validateParameter(inputUser, "inputUser");
+    validateParameter(inputUser, "inputUser");
+    validateDueIntakeTimerIsSet();
 
+    try {
       //TODO to be removed (hack for saied user)
       currentUser = inputUser;
 
@@ -233,25 +311,38 @@ public class ReminderDialog extends UICaller {
 
       //start of the form model
 
-      String timeText;
-      if (time != null) {
-        timeText = '<' + time.getDailyTextFormat() + '>';
-      } else {
-        timeText = "";
-      }
+      String timeText = getTimeText(time);
       String reminderMessage = getUserfriendlyName(inputUser) + ",\nit is time " + timeText + " to get your medicine.";
 
       new SimpleOutput(f.getIOControls(), null, null, reminderMessage);
       //...
-      new Submit(f.getSubmits(), new Label("Close", null), CLOSE_BUTTON);
+      new Submit(f.getSubmits(), new Label("Taken", null), TAKEN_BUTTON);
+      new Submit(f.getSubmits(), new Label("Missed", null), MISSED_BUTTON);
       new Submit(f.getSubmits(), new Label("Info", null), INFO_BUTTON);
       new Submit(f.getSubmits(), new Label("New dose", null), REQUEST_NEW_DOSE_BUTTON);
       //stop of form model
       //TODO to remove SAIED user and to return inputUser variable
       UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
       this.sendUIRequest(req);
+      dueIntakeTimer.setTimeOut();
     } catch (Exception e) {
       Log.error(e, "Error while trying to show dialog", getClass());
+    }
+  }
+
+  private String getTimeText(Time t) {
+    String timeText;
+    if (t != null) {
+      timeText = '<' + t.getDailyTextFormat() + '>';
+    } else {
+      timeText = "";
+    }
+    return timeText;
+  }
+
+  private void validateDueIntakeTimerIsSet() {
+    if (dueIntakeTimer == null) {
+      throw new MedicationManagerUIException("The DueIntakeTimer has not been set");
     }
   }
 
@@ -269,4 +360,9 @@ public class ReminderDialog extends UICaller {
   public boolean isUserActed() {
     return userActed;
   }
+
+  public void setDueIntakeTimer(DueIntakeTimer dueIntakeTimer) {
+    this.dueIntakeTimer = dueIntakeTimer;
+  }
+
 }
