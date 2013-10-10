@@ -1,5 +1,6 @@
 package org.universAAL.AALapplication.health.manager.ui;
 
+import org.universAAL.AALapplication.health.manager.ui.measurements.Motivation;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.supply.LevelRating;
@@ -42,7 +43,8 @@ public class MainMenu extends AbstractHealthForm{
 		LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling: " + cmd);
 		if (cmd.equalsIgnoreCase(MESSAGE_CMD)){
 			//TODO: message Managing
-			new NotReady(context,inputUser).show();
+//			new NotReady(context,inputUser).show();
+			new Motivation(context, inputUser).show();
 		}
 		if (cmd.equalsIgnoreCase(MEASUREMENT_CMD)){
 			new MeasurementTypeForm(context, inputUser).show();
