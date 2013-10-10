@@ -821,7 +821,10 @@ health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manag
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/measurements/BloodPreasureMeasurement.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/measurements/HeartRateMeasurement.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/measurements/HowToBloodPreasure.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/measurements/Motivation.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/measurements/WeigthMeasurement.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/resources/Monitor[!!-~]presion.jpg -text
 health/health.ui.client/src/test/java/deprecated/HealthManager.java -text svneol=unset#text/plain
 health/health.ui.client/src/test/java/deprecated/ISubscriber.java -text svneol=unset#text/plain
 health/health.ui.client/src/test/java/deprecated/org/universAAL/AALapplication/health/manager/ui/InputListener.java -text svneol=unset#text/plain
