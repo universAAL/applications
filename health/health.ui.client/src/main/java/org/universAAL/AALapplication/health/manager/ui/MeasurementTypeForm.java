@@ -19,6 +19,8 @@ import java.util.Set;
 
 import org.universAAL.AALapplication.health.manager.ui.measurements.BloodPreasureMeasurement;
 import org.universAAL.AALapplication.health.manager.ui.measurements.HeartRateMeasurement;
+import org.universAAL.AALapplication.health.manager.ui.measurements.HowToBloodPreasure;
+import org.universAAL.AALapplication.health.manager.ui.measurements.Motivation;
 import org.universAAL.AALapplication.health.manager.ui.measurements.WeigthMeasurement;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
@@ -97,6 +99,7 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 				new WeigthMeasurement(context, inputUser, (PersonWeight) hm).show();
 			}
 			else if (hm instanceof BloodPressure){
+				new Motivation(context, inputUser).show();
 				new BloodPreasureMeasurement(context, inputUser, (BloodPressure) hm).show();
 			}
 			else if (hm instanceof HeartRate){

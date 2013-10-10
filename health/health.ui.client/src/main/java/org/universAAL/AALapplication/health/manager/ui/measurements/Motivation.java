@@ -8,6 +8,7 @@ import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
+import org.universAAL.middleware.ui.rdf.MediaObject;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.profile.User;
@@ -18,7 +19,7 @@ import org.universAAL.ontology.profile.User;
  */
 public final class Motivation extends AbstractHealthForm {
 
-	private static final String GO_HOME = "goHome";
+	private static final String WELL_DONE = "well done";
 
 	/* (non-Javadoc)
 	 * @see org.universAAL.middleware.ui.UICaller#handleUIResponse(org.universAAL.middleware.ui.UIResponse)
@@ -35,11 +36,11 @@ public final class Motivation extends AbstractHealthForm {
 	public void show(){
 		LogUtils.logDebug(context, getClass(), "show", "SHOWING: WELL DONE");
 		
-		Form f = Form.newMessage("Motivation Message",  GO_HOME);
+		Form f = Form.newMessage("Motivation Message",  WELL_DONE);
 		new SimpleOutput(f.getIOControls(), null, null,
-				"Make sure you are relaxed and comfortable and make sure your blood presure is correctly.");
-		new Submit(f.getSubmits(), new Label("Back", null), GO_HOME);
-		
+				"Well done. Your pressure levels are ok");
+		new MediaObject(f.getIOControls(), new Label("Image", (String) null),
+				"image", "../Accept.png");		
 		sendForm(f);
 	}
 
