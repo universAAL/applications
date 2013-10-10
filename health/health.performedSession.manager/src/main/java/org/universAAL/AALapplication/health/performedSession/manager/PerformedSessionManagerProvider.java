@@ -68,6 +68,7 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 		super(context, ProvidedPerformedSessionManagementService.profiles);
 		// the actual implementation of the performed session manager
 		performedSessionManager = new ProfileServerPerformedSessionManager(context);
+		
 	}
 
 	public void communicationChannelBroken() {

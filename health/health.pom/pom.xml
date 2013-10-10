@@ -18,7 +18,7 @@
     <module>../health.profile.manager</module>
     <module>../health.performedSession.manager</module>
     <module>../health.treat.manager</module>
-    <module>../health.motivation</module>
+    <!-- <module>../health.motivation</module> -->
     <module>../health.ui.client</module>
   </modules>
   <scm>

@@ -6,7 +6,6 @@ package org.universAAL.AALapplication.health.performedSession.manager;
 import java.util.Hashtable;
 
 import org.universAAL.AALapplication.health.performedSession.manager.osgi.Activator;
-import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
