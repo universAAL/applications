@@ -17,7 +17,6 @@
 
 package org.universAAL.AALapplication.medication_manager.impl;
 
-import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.IntakeDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicineInventoryDao;
@@ -25,6 +24,8 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.Pe
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
+import org.universAAL.AALapplication.medication_manager.ui.DueIntakeTimer;
+import org.universAAL.AALapplication.medication_manager.ui.MissedIntakeNotifier;
 import org.universAAL.AALapplication.medication_manager.ui.ReminderDialog;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
@@ -36,8 +37,6 @@ import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static org.universAAL.AALapplication.medication_manager.impl.Activator.*;
 
@@ -106,11 +105,16 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
       List<Intake> intakes = intakeDao.getIntakesByUserAndTime(user, time);
 
       ReminderDialog reminderDialog =
-          new ReminderDialog(moduleContext, time, patient, intakes, persistentService);
+          new ReminderDialog(moduleContext, time, patient, intakes, persistentService, intakeDao, medicineInventoryDao);
+
+      MissedIntakeNotifier missedIntakeNotifier = new MissedIntakeNotifierImpl(missedIntakeEventSubscriber);
+
+      DueIntakeTimer dueIntakeTimer = new DueIntakeTimer(reminderDialog, dueIntake, user, patient, missedIntakeNotifier);
+
+      reminderDialog.setDueIntakeTimer(dueIntakeTimer);
 
       reminderDialog.showDialog(user);
 
-      setTimeOut(reminderDialog, dueIntake, medicineInventoryDao, intakeDao, user, intakes, patient);
     } catch (Exception e) {
       Log.error(e, "Error while processing the context event", getClass());
     }
@@ -144,45 +148,6 @@ public final class DueIntakeReminderEventSubscriber extends ContextSubscriber {
 
   }
 
-  private void setTimeOut(final ReminderDialog reminderDialog, final DueIntake dueIntake,
-                          final MedicineInventoryDao medicineInventoryDao, final IntakeDao intakeDao,
-                          final User user, final List<Intake> intakes, final Person patient) {
-
-      ConfigurationProperties properties = getConfigurationProperties();
-
-    final int timeoutSeconds = properties.getMedicationReminderTimeout();
-
-    final Timer timer = new Timer();
-    timer.schedule(new TimerTask() {
-      @Override
-      public void run() {
-        try {
-          boolean userActed = reminderDialog.isUserActed();
-          Log.info("Did the user responded in time?: %s", getClass(), userActed);
-          if (userActed) {
-            medicineInventoryDao.decreaseInventory(patient, intakes);
-            intakeDao.setTimeTakenColumn(intakes);
-          } else {
-            publishMissedIntakeEvent(dueIntake, user, timeoutSeconds);
-          }
-          timer.cancel();
-        } catch (Exception e) {
-          Log.error(e, "Error while processing the timeout", getClass());
-        }
-      }
-
-    }, timeoutSeconds * 1000);
 
 
-  }
-
-  private void publishMissedIntakeEvent(DueIntake dueIntake, User user, int timeoutSeconds) {
-    Log.info("The user didn't respond in the required time: %s. " +
-        "Publishing missed intake event", getClass(), timeoutSeconds);
-
-    Time time = dueIntake.getTime();
-
-    missedIntakeEventSubscriber.missedIntakeTimeEvent(time, user);
-
-  }
 }
