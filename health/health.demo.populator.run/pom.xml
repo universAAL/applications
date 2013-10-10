@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>health.demo.populator.run</artifactId>
+	<packaging>jar</packaging>
+	<version>E.1.1-SNAPSHOT</version>
+	<!-- version is here equal to the level of version of the middleware -->
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.ops4j</groupId>
+				<artifactId>maven-pax-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<args>pax.configuration</args>
+					<provision>
+						<!-- MW -->
+							<provision>scan-composite:mvn:org.universAAL.middleware/mw.composite/2.0.1-SNAPSHOT/composite</provision>
+						<!-- Ontologies -->
+							<provision>scan-composite:mvn:org.universAAL.ontology/ont.composite/2.0.1-SNAPSHOT/composite</provision>
+						<!-- Platform -->
+							<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che/2.0.1-SNAPSHOT/composite</provision> -->
+							<!-- <provision>scan-composite:mvn:org.universAAL.context/ctxt.che.mobile/2.0.1-SNAPSHOT/composite</provision> -->
+							<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.dm/2.0.1-SNAPSHOT/composite</provision> -->
+							<provision>scan-composite:mvn:org.universAAL.ui/ui.dm.mobile/2.0.1-SNAPSHOT/composite</provision>
+							<!-- <provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/2.0.1-SNAPSHOT/composite</provision> -->
+ 							<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.gui.swing/2.0.1-SNAPSHOT/composite</provision>
+
+						<!-- Services -->
+							<provision>mvn:org.universAAL.samples/simple.ui/2.0.1-SNAPSHOT</provision>
+							<!-- <provision>scan-composite:mvn:org.universAAL.samples/smp.lighting.server/2.0.1-SNAPSHOT/composite</provision> -->
+							<!-- <provision>scan-composite:mvn:org.universAAL.samples/smp.lighting.client/2.0.1-SNAPSHOT/composite</provision> -->
+							<!-- <provision>scan-composite:mvn:org.universAAL.samples/smp.heating/2.0.1-SNAPSHOT/composite</provision> -->
+						<!-- Whatever you want, like: -->
+							<!-- <provision>{opt:wrap}:mvn:{groupId}/{artifactId}/{version}@{opt:#level | nostart | noupdate}</provision> -->
+
+	  				</provision>
+				</configuration>	
+			</plugin>    	
+		</plugins>
+	</build>
+	<pluginRepositories>
+  	  <pluginRepository>
+    	  <id>ops4j.releases</id>
+     	 <url>http://repository.ops4j.org/maven2</url>
+     	 <snapshots>
+      	  <enabled>false</enabled>
+      	</snapshots>
+    	</pluginRepository>
+  </pluginRepositories>
+	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>health.pom</artifactId>
+		<version>E.1.1-SNAPSHOT</version>
+		<relativePath>../health.pom</relativePath>
+	</parent>
+	<name>Demo populator</name>
+	<description>Populator of the Health DB for demos</description>
+</project>
