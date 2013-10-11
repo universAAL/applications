@@ -1,12 +1,13 @@
 package org.universAAL.AALapplication.food_shopping.service.db.config;
 
+import org.universAAL.AALapplication.food_shopping.service.db.config.FileLoader;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
+import java.lang.System;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-
-import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 
 public class Configuration {
 

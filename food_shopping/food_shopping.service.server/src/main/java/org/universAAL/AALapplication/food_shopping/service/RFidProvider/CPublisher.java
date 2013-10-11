@@ -16,28 +16,46 @@
 
 package org.universAAL.AALapplication.food_shopping.service.RFidProvider;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import org.osgi.framework.BundleContext;
+import org.universAAL.AALapplication.food_shopping.service.db.Derby.DerbyInterface;
+import org.universAAL.AALapplication.food_shopping.service.db.manager.entitymanagers.UserManager;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
+import org.universAAL.middleware.context.ContextEvent;
+import org.universAAL.middleware.context.ContextPublisher;
+import org.universAAL.middleware.context.DefaultContextPublisher;
+import org.universAAL.middleware.context.owl.ContextProvider;
+import org.universAAL.middleware.context.owl.ContextProviderType;
+import org.universAAL.middleware.owl.ManagedIndividual;
+import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.ontology.Shopping.FoodItem;
+import org.universAAL.ontology.Shopping.FoodManagement;
+import org.universAAL.ontology.Shopping.Refrigerator;
+import org.universAAL.ontology.location.indoor.Room;
+import org.universAAL.ontology.phThing.Device;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.sql.*;
+import javax.sql.*;
+
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
-
-import org.universAAL.AALapplication.food_shopping.service.db.Derby.DerbyInterface;
-import org.universAAL.AALapplication.food_shopping.service.db.manager.entitymanagers.UserManager;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.ResultRow;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
+import java.util.ArrayList;
 import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.ArithmeticCriterion;
 import org.universAAL.AALapplication.food_shopping.service.db.utils.criteria.Criterion;
-import org.universAAL.middleware.context.ContextEvent;
-import org.universAAL.middleware.context.ContextPublisher;
-import org.universAAL.middleware.context.owl.ContextProvider;
-import org.universAAL.ontology.Shopping.FoodItem;
-import org.universAAL.ontology.Shopping.Refrigerator;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.ConnectionManager;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.ResultRow;
 
 import com.metratec.lib.connection.CommConnectionException;
 import com.metratec.lib.rfidreader.UHFReader;
+
+import java.net.*;
 
 /**
  * @author dimokas
@@ -169,14 +187,14 @@ public class CPublisher{
 			}
         }
         catch (CommConnectionException cce) {
-            //System.err.println("1. Couldn't get I/O for the connection to: 160.40.60.210");
+            System.err.println("1. Couldn't get I/O for the connection to: 160.40.60.210");
         	populateAndPublishFoodItems();
-            //e.printStackTrace();
+            //cce.printStackTrace();
             //System.exit(1);
         }
         catch (Exception e) {
-            //System.err.println("2. Couldn't get I/O for the connection to: 160.40.60.210");
-            e.printStackTrace();
+            System.err.println("2. Couldn't get I/O for the connection to: 160.40.60.210");
+            //e.printStackTrace();
             //System.exit(1);
         }
         

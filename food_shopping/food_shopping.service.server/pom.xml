@@ -1,20 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
-	<parent>
-		<groupId>org.universAAL.AALapplication</groupId>
-		<artifactId>shopping.pom</artifactId>
-		<version>E.1</version>
-		<relativePath>../shopping.pom/</relativePath>
-	</parent>
-
-	<artifactId>food_shopping.service.server</artifactId>
-	<name>Food Shopping Service</name>
-	<description>Food Shopping Server Service</description>
-	<packaging>bundle</packaging>
-	<inceptionYear>2011</inceptionYear>
-	<dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+  	<groupId>org.universAAL.AALapplication</groupId>
+  	<artifactId>shopping.pom</artifactId>
+  	<version>E.1</version>
+  	<relativePath>../shopping.pom/</relativePath>
+  </parent>
+  
+  <artifactId>food_shopping.service.server</artifactId>
+  <name>Food Shopping Service</name>
+  <description>Food Shopping Server Service</description>
+  <packaging>bundle</packaging>
+  <inceptionYear>2011</inceptionYear>
+    <dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -26,13 +25,12 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.shopping</artifactId>
-			<version>2.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.food.database</groupId>
 			<artifactId>mysql.connector.java</artifactId>
 			<version>5.1.18</version>
-		</dependency>
+		</dependency>	
 		<dependency>
 			<groupId>org.universAAL.control.foodDevices.RFid</groupId>
 			<artifactId>control.foodDevices.MetratecReaderLibrary</artifactId>
@@ -48,13 +46,16 @@
 			<artifactId>control.foodDevices.jd2xx_20602</artifactId>
 			<version>1.1</version>
 		</dependency>
-		<!--
-			<dependency> <groupId>org.universAAL.AALapplication</groupId>
+
+<!-- 		
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>food_shopping.service.RFidProvider</artifactId>
-			<version>1.0.6-SNAPSHOT</version> </dependency>
-		-->
+			<version>1.0.6-SNAPSHOT</version>
+		</dependency>
+-->	
 	</dependencies>
-	<build>
+    <build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -67,55 +68,13 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Export-Package>
-							org.universAAL.AALapplication.food_shopping.service.server,
-							org.universAAL.AALapplication.food_shopping.service.db.config,
-							org.universAAL.AALapplication.food_shopping.service.db.manager.entities,
-							org.universAAL.AALapplication.food_shopping.service.db.manager.entitymanagers,
-							org.universAAL.AALapplication.food_shopping.service.db.utils.criteria,
-							org.universAAL.AALapplication.food_shopping.service.db.utils.statements,
-							org.universAAL.AALapplication.food_shopping.service.RFidProvider,
-							org.universAAL.AALapplication.food_shopping.service.unit_impl</Export-Package>
+						org.universAAL.AALapplication.food_shopping.service.server, org.universAAL.AALapplication.food_shopping.service.db.config, 
+						org.universAAL.AALapplication.food_shopping.service.db.manager.entities, org.universAAL.AALapplication.food_shopping.service.db.manager.entitymanagers, org.universAAL.AALapplication.food_shopping.service.db.utils.criteria, 
+						org.universAAL.AALapplication.food_shopping.service.db.utils.statements, org.universAAL.AALapplication.food_shopping.service.RFidProvider, org.universAAL.AALapplication.food_shopping.service.unit_impl</Export-Package>
 						<Import-Package>org.apache.derby.jdbc,*</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>central</id>
-			<name>Central Maven Repository</name>
-			<url>http://repo1.maven.org/maven2</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>apache-snapshots</id>
-			<name>Apache Snapshots</name>
-			<url>http://people.apache.org/repo/m2-snapshot-repository</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<updatePolicy>daily</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal</id>
-			<name>universAAL Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/releases/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal-snapshots</id>
-			<name>universAAL Snapshot Repositories</name>
-			<url>http://depot.universaal.org/maven-repo/snapshots/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-	</repositories>
 </project>
