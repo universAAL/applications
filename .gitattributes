@@ -2034,6 +2034,7 @@ medication/medication.manager.configuration/src/main/java/org/universAAL/AALappl
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/Log.java -text
 medication/medication.manager.configuration/src/main/resources/CreateTables.sql -text
 medication/medication.manager.configuration/src/main/resources/DataLoad.sql -text
+medication/medication.manager.configuration/src/main/resources/DataLoadFull.sql -text
 medication/medication.manager.configuration/src/main/resources/medication.properties -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/dispenser_instructions/instructions_1.txt -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/dispenser_instructions/instructions_2.txt -text
@@ -2401,6 +2402,7 @@ medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapp
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/MedicationManagerShellException.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/commands/ConsoleCommand.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/commands/HelpConsoleCommand.java -text
+medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/commands/InsertUserConsoleCommand.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/commands/ListidsConsoleCommand.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/commands/MedicationConsoleCommands.java -text
 medication/medication.manager.shell.commands/src/main/java/org/universAAL/AALapplication/medication_manager/shell/commands/impl/commands/MedicationManagerCommands.java -text
@@ -2532,7 +2534,7 @@ medication/medication.manager.user.management/src/main/resources/newVCardMaria.p
 medication/medication.manager.user.management/src/main/resources/newVCardNik.properties -text
 medication/medication.manager.user.management/src/main/resources/newVCardNikola.properties -text
 medication/medication.manager.user.management/src/main/resources/newVCardPencho.properties -text
-medication/medication.manager.user.management/src/main/resources/newVCardSaid.properties -text
+medication/medication.manager.user.management/src/main/resources/newVCardSaied.properties -text
 medication/medication.manager.user.management/src/main/resources/newVCardSimeon.properties -text
 medication/medication.manager.user.management/src/main/resources/newVCardVenelin.properties -text
 medication/medication.missing.services.simulation/ASL2.0 -text

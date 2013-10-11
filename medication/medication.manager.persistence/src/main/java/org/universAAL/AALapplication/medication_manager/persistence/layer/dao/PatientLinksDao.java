@@ -170,7 +170,7 @@ public final class PatientLinksDao extends AbstractDao {
 
     try {
       ps = getPreparedStatement(sql);
-      List<Map<String, Column>> patientLinksRecords = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
+      List<Map<String, Column>> patientLinksRecords = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, ps);
       if (patientLinksRecords == null || patientLinksRecords.isEmpty()) {
         return patientLinks;
       }

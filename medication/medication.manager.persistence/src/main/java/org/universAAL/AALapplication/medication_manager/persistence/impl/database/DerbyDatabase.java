@@ -59,7 +59,7 @@ public final class DerbyDatabase implements Database {
     validateParameter(configurationProperties, "configurationProperties");
 
     this.connection = connection;
-    this.sqlUtility = new DerbySqlUtility(connection);
+    this.sqlUtility = new DerbySqlUtility(connection, configurationProperties);
     this.configurationProperties = configurationProperties;
   }
 
@@ -249,7 +249,7 @@ public final class DerbyDatabase implements Database {
       statement = connection.createStatement();
 
       createTables(statement);
-      insertDataIntoTables(statement);
+      insertDataIntoTables(statement, configurationProperties);
       String sqlInsertIntoProperties =
           "insert into medication_manager.properties (id, name, value, format, type, description) values (?, ?, ?, ?, ?, ?)";
       ps = connection.prepareStatement(sqlInsertIntoProperties);
@@ -264,16 +264,6 @@ public final class DerbyDatabase implements Database {
     }
 
   }
-
-  /*private void populatePropertiesTable(PreparedStatement ps) throws SQLException {
-    Properties properties = configurationProperties.getPropertyInfoMap();
-    Set<String> keys = properties.stringPropertyNames();
-    int id = 0;
-    for (String key : keys) {
-      id++;
-      insertPropertyIntoTable(id, key, properties, ps);
-    }
-  }*/
 
   private void populatePropertiesTable(PreparedStatement ps) throws SQLException {
       Map<String,PropertyInfo> propertyInfoMap = configurationProperties.getPropertyInfoMap();
@@ -328,15 +318,25 @@ public final class DerbyDatabase implements Database {
     }
   }
 
-  private void createTables(Statement statement) throws SQLException {
+  static void createTables(Statement statement) throws SQLException {
     executeSqlStatementsFromSqlFile("CreateTables.sql", statement);
   }
 
-  private void insertDataIntoTables(Statement statement) throws SQLException {
-    executeSqlStatementsFromSqlFile("DataLoad.sql", statement);
+  static void insertDataIntoTables(Statement statement,
+                                   ConfigurationProperties configurationProperties) throws SQLException {
+
+    String dataLoadFileName;
+
+    if (configurationProperties.isTestMode()) {
+       dataLoadFileName = "DataLoadFull.sql";
+    } else {
+      dataLoadFileName = "DataLoad.sql";
+    }
+
+    executeSqlStatementsFromSqlFile(dataLoadFileName, statement);
   }
 
-  private void executeSqlStatementsFromSqlFile(String sqlFileName, Statement statement) throws SQLException {
+  static void executeSqlStatementsFromSqlFile(String sqlFileName, Statement statement) throws SQLException {
     SqlScriptParser sqlScriptParser = new SqlScriptParser();
     sqlScriptParser.parseSqlFile(sqlFileName);
     executeStatements(statement, sqlScriptParser);
@@ -350,7 +350,7 @@ public final class DerbyDatabase implements Database {
     executeStatements(statement, sqlScriptParser);
   }
 
-  private static void executeStatements(Statement statement, SqlScriptParser sqlScriptParser) throws SQLException {
+  static void executeStatements(Statement statement, SqlScriptParser sqlScriptParser) throws SQLException {
     Map<Integer, String> sqlTablesMap = sqlScriptParser.getSqlStatementMap();
 
     int counter = 0;

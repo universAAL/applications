@@ -32,7 +32,7 @@ public final class JavaScriptObjectCreator {
 
   public String createJavascriptObject() {
     if (objectPairs.isEmpty()) {
-      return null;
+      return "{}";
     }
 
     StringBuffer sb = new StringBuffer();

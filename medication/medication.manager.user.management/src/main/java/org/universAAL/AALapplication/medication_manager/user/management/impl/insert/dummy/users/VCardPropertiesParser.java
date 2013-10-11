@@ -21,6 +21,8 @@ import org.universAAL.AALapplication.medication_manager.user.management.impl.Med
 import org.universAAL.ontology.profile.PersonalInformationSubprofile;
 
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -40,7 +42,16 @@ public final class VCardPropertiesParser {
   private final Properties props = new Properties();
 
   public PersonalInformationSubprofile createSubprofile(String propertyFileName) {
-    loadProperties(propertyFileName, props);
+    loadProperties(propertyFileName);
+
+    PersonalInformationSubprofile subprofile = createPersonalInformationSubprofile(props);
+
+
+    return subprofile;
+  }
+
+  public PersonalInformationSubprofile createSubprofile(File propertyFile) {
+    loadProperties(propertyFile);
 
     PersonalInformationSubprofile subprofile = createPersonalInformationSubprofile(props);
 
@@ -52,10 +63,20 @@ public final class VCardPropertiesParser {
     return props;
   }
 
-  private void loadProperties(String propertyFileName, Properties props) {
+  private void loadProperties(String propertyFileName) {
     try {
       InputStream inputStream =
           VCardPropertiesParser.class.getClassLoader().getResourceAsStream(propertyFileName);
+      props.load(inputStream);
+      inputStream.close();
+    } catch (IOException e) {
+      throw new MedicationManagerUserManagementException(e);
+    }
+  }
+
+  private void loadProperties(File propertyFile) {
+    try {
+      InputStream inputStream = new FileInputStream(propertyFile);
       props.load(inputStream);
       inputStream.close();
     } catch (IOException e) {

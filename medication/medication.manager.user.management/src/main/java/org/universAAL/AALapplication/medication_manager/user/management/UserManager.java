@@ -18,6 +18,7 @@ package org.universAAL.AALapplication.medication_manager.user.management;
 
 import org.universAAL.AALapplication.medication_manager.persistence.layer.UserInfo;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -28,4 +29,7 @@ public interface UserManager {
   void loadDummyUsersIntoChe(); //temporary method
 
   List<UserInfo> getAllUsers();
+
+  void insertUserFromVCard(File propertyFile);
+
 }

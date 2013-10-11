@@ -44,6 +44,7 @@ import static org.universAAL.AALapplication.medication_manager.servlet.ui.config
  */
 public final class UserManagementForm extends ScriptForm {
 
+  public static final String NULL = "null";
   private final List<AssistedPersonUserInfo> patients;
   private final List<CaregiverUserInfo> caregivers;
   private final List<Dispenser> dispensers;
@@ -291,17 +292,23 @@ public final class UserManagementForm extends ScriptForm {
   private void createPersonArrays(StringBuffer sb) {
     PersonScriptArrayCreator creator = new PersonScriptArrayCreator("patients", patients);
     String patientArrayText = creator.createJavaScriptArrayText();
-    sb.append(patientArrayText);
+    if (!NULL.equalsIgnoreCase(patientArrayText)) {
+      sb.append(patientArrayText);
+    }
     sb.append('\n');
 
     creator = new PersonScriptArrayCreator("physicians", caregivers);
     String physiciansArrayText = creator.createJavaScriptArrayText();
-    sb.append(physiciansArrayText);
+    if (!NULL.equalsIgnoreCase(physiciansArrayText)) {
+      sb.append(physiciansArrayText);
+    }
     sb.append('\n');
 
     creator = new PersonScriptArrayCreator("caregivers", caregivers);
     String caregiversArrayText = creator.createJavaScriptArrayText();
-    sb.append(caregiversArrayText);
+    if (!NULL.equalsIgnoreCase(caregiversArrayText)) {
+      sb.append(caregiversArrayText);
+    }
     sb.append('\n');
   }
 

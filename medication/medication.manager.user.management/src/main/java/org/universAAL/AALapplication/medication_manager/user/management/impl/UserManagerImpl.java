@@ -16,6 +16,7 @@
 
 package org.universAAL.AALapplication.medication_manager.user.management.impl;
 
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.AssistedPersonUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
@@ -40,6 +41,7 @@ import org.universAAL.ontology.profile.User;
 import org.universAAL.ontology.profile.UserProfile;
 import org.universAAL.ontology.profile.service.ProfilingService;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,6 +58,7 @@ public class UserManagerImpl implements UserManager {
   private static final String OUTPUT_GET_SUBPROFILES = MedicationOntology.NAMESPACE + "out2";
   private static final String OUTPUT_GET_SUBPROFILE = MedicationOntology.NAMESPACE + "out3";
   private final PersistentService persistentService;
+  private final ConfigurationProperties configurationProperties;
 
   private final static String[] DUMMY_USERS_URI = {
       "urn:org.universAAL.aal_space:user_env#asparuh",
@@ -69,28 +72,37 @@ public class UserManagerImpl implements UserManager {
       "urn:org.universAAL.aal_space:user_env#nik",
       "urn:org.universAAL.aal_space:user_env#nikola",
       "urn:org.universAAL.aal_space:user_env#pencho",
-      "urn:org.universAAL.aal_space:user_env#said",
+      "urn:org.universAAL.aal_space:test_environment#saied",
       "urn:org.universAAL.aal_space:user_env#simeon",
       "urn:org.universAAL.aal_space:user_env#venelin"
   };
+  private final VCardPropertiesParser parser;
 
-  public UserManagerImpl(ModuleContext context, PersistentService persistentService) {
+  public UserManagerImpl(ModuleContext context, PersistentService persistentService,
+                         ConfigurationProperties configurationProperties) {
 
     this.persistentService = persistentService;
+    this.configurationProperties = configurationProperties;
     caller = new DefaultServiceCaller(context);
+    parser = new VCardPropertiesParser();
   }
 
   public void loadDummyUsersIntoChe() {
-    VCardPropertiesParser parser = new VCardPropertiesParser();
 
-    for (String propertyFileName : DUMMY_USERS_PROPERTIES) {
-      insertDummyUser(parser, propertyFileName);
+    for (String propertyFileName : getDummyUsersProperties(configurationProperties)) {
+      PersonalInformationSubprofile subprofile = parser.createSubprofile(propertyFileName);
+      insertUserFromVCard(subprofile);
     }
 
   }
 
-  private void insertDummyUser(VCardPropertiesParser parser, String propertyFileName) {
-    PersonalInformationSubprofile subprofile = parser.createSubprofile(propertyFileName);
+  public void insertUserFromVCard(File propertyFile) {
+    PersonalInformationSubprofile subprofile = parser.createSubprofile(propertyFile);
+    insertUserFromVCard(subprofile);
+  }
+
+  private void insertUserFromVCard(PersonalInformationSubprofile subprofile) {
+
     Properties properties = parser.getProps();
     String userUri = properties.getProperty(USER_URI);
     if (userUri == null) {

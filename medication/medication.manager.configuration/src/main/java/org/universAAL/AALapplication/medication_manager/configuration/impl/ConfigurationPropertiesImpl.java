@@ -38,6 +38,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
 
   private static final String DEBUG_WRITE_FILE = "medication.manager.debug.write.file";
   private static final String DEBUG = "medication.manager.debug";
+  private static final String TEST_MODE = "medication.manager.test.mode";
   private static final String ON = "true";
   private static final String MEDICATION_REMINDER_TIMEOUT = "medication.manager.reminder.timeout";
   private static final String MEDICATION_UPSIDE_DOWN_TIMEOUT = "medication.manager.upside.down.timeout";
@@ -145,6 +146,16 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   public int getMedicationManagerIssuerIntervalInMinutes() {
 
     return getInt(MEDICATION_MANAGER_ISSUER_INTERVAL_MINUTES);
+  }
+
+  public boolean isTestMode() {
+    String testMode = medicationProperties.getProperty(TEST_MODE);
+
+    if (testMode == null) {
+      throw new MedicationManagerConfigurationException("Missing property: " + TEST_MODE);
+    }
+
+    return testMode.equalsIgnoreCase(ON);
   }
 
   public Map<String, PropertyInfo> getPropertyInfoMap() {
