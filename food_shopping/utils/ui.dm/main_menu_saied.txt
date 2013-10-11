@@ -1,1 +1,2 @@
 /Food and Shopping|http://www.certh.gr|http://ontology.universAAL.org/FoodManagement.owl#FoodManagement|app/Food_Shop.png
+/Nutritional Advisor|http://www.tsb.upv.es/|http://ontology.universAAL.org/Nutrition.owl#NutritionService|app/Nutritional_Advisor.png

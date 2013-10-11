@@ -1,74 +1,118 @@
 
-@prefix ns: <http://ontology.universAAL.org/UI.owl#> .
+@prefix ns: <urn:org.universAAL.aal_space:test_environment#> .
+@prefix ns1: <http://ontology.universAAL.org/UI.owl#> .
 @prefix pvn: <http://ontology.universAAL.org/uAAL.owl#> .
-@prefix ns1: <http://ontology.universAAL.org/Language.owl#> .
+@prefix ns2: <http://ontology.universAAL.org/Language.owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ns2: <http://ui.universAAL.org/dmFileStorage.owl#> .
+@prefix ns3: <http://ui.universAAL.org/dmFileStorage.owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix ns3: <http://ontology.universAAL.org/FoodManagement.owl#> .
+@prefix ns4: <http://ontology.universAAL.org/FoodManagement.owl#> .
 @prefix psn: <http://ontology.universAAL.org/Service.owl#> .
-@prefix ns4: <http://ontology.universaal.org/InteractionPreferencesProfile.owl#> .
-@prefix ns5: <urn:org.universAAL.shopping:test_environment#> .
+@prefix ns5: <http://ontology.universaal.org/InteractionPreferencesProfile.owl#> .
 @prefix ns6: <urn:shoppingUIRepository#> .
 @prefix ns7: <http://ontology.universaal.org/language.owl#> .
 @prefix : <http://ontology.universAAL.org/Dialog.owl#> .
-_:BN000009 ns2:suspended [
-      ns4:interactionPreferences ns5:saiedSubprofileUIPreferencesGeneralInteractionPreferences ;
-      ns:altPresentationModality pvn:voice ;
-      ns4:visualPreferences ns5:saiedSubprofileUIPreferencesVisualPreferences ;
-      ns:dialogLanguage "en"^^xsd:language ;
-      ns:presentationModality pvn:gui ;
-      a ns:UIRequest ;
-      ns:dialogForm <http://ontology.universAAL.org/Dialog.owl#_:a0283cedf0410a24:1393> ;
-      ns:dialogPrivacyLevel pvn:insensible ;
-      ns4:audioPreferences ns5:saiedSubprofileUIPreferencesAuditoryPreferences ;
-      ns4:alertPreferences ns5:saiedSubprofileUIPreferencesAlertPreferences ;
-      ns:addressedUser ns5:saied ;
-      ns4:accessMode ns5:saiedSubprofileUIPreferencesAccessMode ;
-      ns:dialogPriority pvn:middle
+_:BN000029 ns3:suspended [
+      ns5:interactionPreferences ns:saiedSubprofileUIPreferencesGeneralInteractionPreferences ;
+      ns1:altPresentationModality pvn:voice ;
+      ns5:visualPreferences ns:saiedSubprofileUIPreferencesVisualPreferences ;
+      ns1:dialogLanguage "en"^^xsd:language ;
+      ns1:presentationModality pvn:gui ;
+      a ns1:UIRequest ;
+      ns1:dialogForm <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1856> ;
+      ns1:dialogPrivacyLevel pvn:insensible ;
+      ns5:audioPreferences ns:saiedSubprofileUIPreferencesAuditoryPreferences ;
+      ns5:alertPreferences ns:saiedSubprofileUIPreferencesAlertPreferences ;
+      ns1:addressedUser ns:saied ;
+      ns5:accessMode ns:saiedSubprofileUIPreferencesAccessMode ;
+      ns1:dialogPriority pvn:middle
     ] ;
-  ns2:active [
-      ns4:interactionPreferences ns5:saiedSubprofileUIPreferencesGeneralInteractionPreferences ;
-      ns:altPresentationModality pvn:voice ;
-      ns4:visualPreferences ns5:saiedSubprofileUIPreferencesVisualPreferences ;
-      ns:dialogLanguage "en"^^xsd:language ;
-      ns:presentationModality pvn:gui ;
-      a ns:UIRequest ;
-      ns:dialogForm <http://ontology.universAAL.org/Dialog.owl#_:a0283cedf0410a24:1662> ;
-      ns:dialogPrivacyLevel pvn:insensible ;
-      ns4:audioPreferences ns5:saiedSubprofileUIPreferencesAuditoryPreferences ;
-      ns4:alertPreferences ns5:saiedSubprofileUIPreferencesAlertPreferences ;
-      ns:addressedUser ns5:saied ;
-      ns4:accessMode ns5:saiedSubprofileUIPreferencesAccessMode ;
-      ns:dialogPriority pvn:middle
+  ns3:active [
+      ns5:interactionPreferences ns:saiedSubprofileUIPreferencesGeneralInteractionPreferences ;
+      ns1:altPresentationModality pvn:voice ;
+      ns5:visualPreferences ns:saiedSubprofileUIPreferencesVisualPreferences ;
+      ns1:dialogLanguage "en"^^xsd:language ;
+      ns1:presentationModality pvn:gui ;
+      a ns1:UIRequest ;
+      ns1:dialogForm <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1b48> ;
+      ns1:dialogPrivacyLevel pvn:insensible ;
+      ns5:audioPreferences ns:saiedSubprofileUIPreferencesAuditoryPreferences ;
+      ns5:alertPreferences ns:saiedSubprofileUIPreferencesAlertPreferences ;
+      ns1:addressedUser ns:saied ;
+      ns5:accessMode ns:saiedSubprofileUIPreferencesAccessMode ;
+      ns1:dialogPriority pvn:middle
+    ] ,
+    [
+      ns5:interactionPreferences ns:saiedSubprofileUIPreferencesGeneralInteractionPreferences ;
+      ns1:altPresentationModality pvn:voice ;
+      ns5:visualPreferences ns:saiedSubprofileUIPreferencesVisualPreferences ;
+      ns1:dialogLanguage "en"^^xsd:language ;
+      ns1:presentationModality pvn:gui ;
+      a ns1:UIRequest ;
+      ns1:dialogForm <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1bd7> ;
+      ns1:dialogPrivacyLevel pvn:insensible ;
+      ns5:audioPreferences ns:saiedSubprofileUIPreferencesAuditoryPreferences ;
+      ns5:alertPreferences ns:saiedSubprofileUIPreferencesAlertPreferences ;
+      ns1:addressedUser ns:saied ;
+      ns5:accessMode ns:saiedSubprofileUIPreferencesAccessMode ;
+      ns1:dialogPriority pvn:middle
+    ] ,
+    [
+      ns5:interactionPreferences ns:saiedSubprofileUIPreferencesGeneralInteractionPreferences ;
+      ns1:altPresentationModality pvn:voice ;
+      ns5:visualPreferences ns:saiedSubprofileUIPreferencesVisualPreferences ;
+      ns1:dialogLanguage "en"^^xsd:language ;
+      ns1:presentationModality pvn:gui ;
+      a ns1:UIRequest ;
+      ns1:dialogForm <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1d4f> ;
+      ns1:dialogPrivacyLevel pvn:insensible ;
+      ns5:audioPreferences ns:saiedSubprofileUIPreferencesAuditoryPreferences ;
+      ns5:alertPreferences ns:saiedSubprofileUIPreferencesAlertPreferences ;
+      ns1:addressedUser ns:saied ;
+      ns5:accessMode ns:saiedSubprofileUIPreferencesAccessMode ;
+      ns1:dialogPriority pvn:middle
+    ] ,
+    [
+      ns5:interactionPreferences ns:saiedSubprofileUIPreferencesGeneralInteractionPreferences ;
+      ns1:altPresentationModality pvn:voice ;
+      ns5:visualPreferences ns:saiedSubprofileUIPreferencesVisualPreferences ;
+      ns1:dialogLanguage "en"^^xsd:language ;
+      ns1:presentationModality pvn:gui ;
+      a ns1:UIRequest ;
+      ns1:dialogForm <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1e04> ;
+      ns1:dialogPrivacyLevel pvn:insensible ;
+      ns5:audioPreferences ns:saiedSubprofileUIPreferencesAuditoryPreferences ;
+      ns5:alertPreferences ns:saiedSubprofileUIPreferencesAlertPreferences ;
+      ns1:addressedUser ns:saied ;
+      ns5:accessMode ns:saiedSubprofileUIPreferencesAccessMode ;
+      ns1:dialogPriority pvn:middle
+    ] ,
+    [
+      ns5:interactionPreferences ns:saiedSubprofileUIPreferencesGeneralInteractionPreferences ;
+      ns1:altPresentationModality pvn:voice ;
+      ns5:visualPreferences ns:saiedSubprofileUIPreferencesVisualPreferences ;
+      ns1:dialogLanguage "en"^^xsd:language ;
+      ns1:presentationModality pvn:gui ;
+      a ns1:UIRequest ;
+      ns1:dialogForm <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:23c3> ;
+      ns1:dialogPrivacyLevel pvn:insensible ;
+      ns5:audioPreferences ns:saiedSubprofileUIPreferencesAuditoryPreferences ;
+      ns5:alertPreferences ns:saiedSubprofileUIPreferencesAlertPreferences ;
+      ns1:addressedUser ns:saied ;
+      ns5:accessMode ns:saiedSubprofileUIPreferencesAccessMode ;
+      ns1:dialogPriority pvn:middle
     ] .
-_:BN000000 :groupChildren [
-      pvn:submissionID "urn:shoppingUIRepository#back"^^xsd:string ;
-      :parentControl _:BN000000 ;
-      a :Submit ;
-      :controlLabel [
-        a :Label ;
-        rdfs:label ""^^xsd:string ;
-        :iconURL "bundle://1.0:1/images/icons_back_small.png"^^xsd:string
-      ]
-    ] ;
-  :parentControl _:BN000003 ;
-  a :Group ;
+_:BN000021 :groupChildren _:BN000020 ;
+  :parentControl _:BN000027 ;
+  a :Repeat ;
   :controlLabel [
     a :Label ;
-    rdfs:label "submitsGroup"^^xsd:string
-  ] .
-ns4:overlap a ns4:WindowLayoutType .
-_:BN000001 :groupChildren _:BN00000b ;
-  :parentControl _:BN000003 ;
-  a :Group ;
-  :controlLabel [
-    a :Label ;
-    rdfs:label "ioControlsGroup"^^xsd:string
-  ] .
-_:BN000002 :groupChildren [
+    rdfs:label "Repository"^^xsd:string
+  ] ;
+  :controlRef _:BN000005 .
+_:BN00000a :groupChildren [
       pvn:submissionID "urn:ui.dm:UICaller:switchTo#0"^^xsd:string ;
-      :parentControl _:BN000002 ;
+      :parentControl _:BN00000a ;
       a :Submit ;
       :ctrlHelp "Open the dialog again"^^xsd:string ;
       :controlLabel [
@@ -76,75 +120,23 @@ _:BN000002 :groupChildren [
         rdfs:label "Update Repository"^^xsd:string
       ]
     ] ;
-  :parentControl _:BN000005 ;
+  :parentControl _:BN000016 ;
   a :Group ;
   :controlLabel [
     a :Label ;
     rdfs:label "Pending Dialogs"^^xsd:string
   ] .
-ns4:high a ns4:Intensity .
-_:BN000003 :groupChildren _:BN000000 ,
-    _:BN00000c ,
-    _:BN000001 ;
-  :parentControl <http://ontology.universAAL.org/Dialog.owl#_:a0283cedf0410a24:1393> ;
-  a :Group ;
-  :controlLabel [
-    a :Label ;
-    rdfs:label "Update Repository"^^xsd:string
-  ] .
-ns4:lightBlue a ns4:ColorType .
-pvn:middle a pvn:LevelRating .
-pvn:insensible a pvn:PrivacyLevel .
-ns4:detailed a ns4:ContentDensityType .
-_:BN000004 :groupChildren [
-      :choices [
-          a :ChoiceItem ;
-          rdfs:label "Fresh Milk , 1 Lt , M E V G A L"^^xsd:string ;
-          :choiceItemValue "Fresh Milk, 1lt, MEVGAL"^^xsd:string
-        ] ,
-        [
-          a :ChoiceItem ;
-          rdfs:label "Fresh Milk , 1 Lt , D E L T A"^^xsd:string ;
-          :choiceItemValue "Fresh Milk, 1lt, DELTA"^^xsd:string
-        ] ,
-        [
-          a :ChoiceItem ;
-          rdfs:label "Fresh Milk , 1 Lt , F A G E"^^xsd:string ;
-          :choiceItemValue "Fresh Milk, 1lt, FAGE"^^xsd:string
-        ] ;
-      :parentControl _:BN000004 ;
-      a :Select ;
-      :controlLabel [
-        a :Label ;
-        rdfs:label "Food Items"^^xsd:string
-      ] ;
-      :controlRef [
-        a psn:PropertyPath ;
-        psn:thePath (
-          <urn:shoppingUIShopping#ShoppingItems>
-        )
-      ]
-    ] ,
-    [
-      pvn:submissionID "urn:shoppingUIShopping#removeshoppinglist"^^xsd:string ;
-      :parentControl _:BN000004 ;
-      a :Submit ;
-      :controlLabel [
-        a :Label ;
-        rdfs:label ""^^xsd:string ;
-        :iconURL "bundle://1.0:1/images/icons_remove_small.png"^^xsd:string
-      ]
-    ] ;
-  :parentControl _:BN000007 ;
-  a :Group ;
-  :controlLabel [
-    a :Label ;
-    rdfs:label "Shopping List Items"^^xsd:string
-  ] .
-pvn:gui a pvn:Modality .
-_:BN000005 :groupChildren [
+<http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1e04> :creationTimestamp "2013-10-09T17:35:16.081+03:00"^^xsd:dateTime ;
+  :dialogType pvn:std_dialog ;
+  a :Form ;
+  :dialogDataRoot [
+    ns6:RepositoryItems ns4:FoodItem ,
+      ns4:FoodItem
+  ] ;
+  :rootGroup _:BN000009 .
+_:BN000022 :groupChildren [
       pvn:submissionID "urn:ui.dm:UICaller#showMainMenu"^^xsd:string ;
-      :parentControl _:BN000005 ;
+      :parentControl _:BN000022 ;
       a :Submit ;
       :ctrlHelp "Open the Main Menu"^^xsd:string ;
       :controlLabel [
@@ -153,115 +145,130 @@ _:BN000005 :groupChildren [
         :iconURL "system/Home.png"^^xsd:string
       ]
     ] ,
-    [
-      pvn:submissionID "urn:ui.dm:UICaller#showMessages"^^xsd:string ;
-      :parentControl _:BN000005 ;
-      a :Submit ;
-      :ctrlHelp "List Pending Messages"^^xsd:string ;
-      :controlLabel [
-        a :Label ;
-        rdfs:label "Pending Messages"^^xsd:string ;
-        :iconURL "system/PendingMsg.png"^^xsd:string
-      ]
-    ] ,
-    _:BN000002 ;
-  :parentControl _:BN000008 ;
+    _:BN00001b ;
+  :parentControl _:BN000028 ;
   a :Group ;
   :controlLabel [
     a :Label ;
     rdfs:label "stdButtonsGroup"^^xsd:string
   ] .
-ns3:FoodItem ns3:foodItemInsertionDate "2012-03-26"^^xsd:string ;
-  ns3:foodItemCompany "MEVGAL"^^xsd:string ;
-  ns3:foodItemExpirationDate "2012-04-29"^^xsd:string ;
-  a ns3:FoodItem ;
-  ns3:foodItemSize "1lt"^^xsd:string ;
-  ns3:foodItemName "Fresh Milk"^^xsd:string ;
-  ns3:foodItemCode 1 ;
-  ns3:foodItemQuantity 1.0 ;
-  ns3:foodItemTag "E2003411B802011665038137"^^xsd:string .
-<http://ontology.universAAL.org/Dialog.owl#_:a0283cedf0410a24:1662> :creationTimestamp "2013-07-31T16:20:41.986+03:00"^^xsd:dateTime ;
-  :dialogType pvn:std_dialog ;
-  a :Form ;
-  :dialogDataRoot [] ;
-  :rootGroup _:BN000008 .
-_:BN000006 :groupChildren [
-      pvn:submissionID "urn:shoppingUIShopping#backbrowse"^^xsd:string ;
-      :parentControl _:BN000006 ;
+ns5:overlap a ns5:WindowLayoutType .
+ns5:high a ns5:Intensity .
+ns:saiedSubprofileUIPreferencesAccessMode ns5:auditoryModeStatus ns5:on ;
+  ns5:olfactoryModeStatus ns5:off ;
+  a ns5:AccessMode ;
+  ns5:textualModeStatus ns5:on ;
+  ns5:tactileModeStatus ns5:off ;
+  ns5:visualModeStatus ns5:on .
+ns:saiedSubprofileUIPreferencesAlertPreferences ns5:alertOption ns5:visualAndAudio ;
+  a ns5:AlertPreferences .
+ns5:lightBlue a ns5:ColorType .
+_:BN00000b :groupChildren [
+      pvn:submissionID "urn:shoppingUIRepository#back"^^xsd:string ;
+      :parentControl _:BN00000b ;
       a :Submit ;
       :controlLabel [
         a :Label ;
         rdfs:label ""^^xsd:string ;
-        :iconURL "bundle://1.0:1/images/icons_back_small.png"^^xsd:string
+        :iconURL "http://127.0.0.1:8080/resources/shopping/images/icons_back_small.png"^^xsd:string
       ]
     ] ;
-  :parentControl _:BN000008 ;
+  :parentControl _:BN00000d ;
   a :Group ;
   :controlLabel [
     a :Label ;
     rdfs:label "submitsGroup"^^xsd:string
   ] .
-_:BN000007 :groupChildren _:BN000004 ;
-  :parentControl _:BN000008 ;
+_:BN00000e :groupChildren _:BN000007 ;
+  :parentControl _:BN000011 ;
+  a :Repeat ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Repository"^^xsd:string
+  ] ;
+  :controlRef _:BN000005 .
+<http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1d4f> :creationTimestamp "2013-10-09T17:34:55.351+03:00"^^xsd:dateTime ;
+  :dialogType pvn:std_dialog ;
+  a :Form ;
+  :dialogDataRoot [
+    ns6:RepositoryItems ns4:FoodItem ,
+      ns4:FoodItem
+  ] ;
+  :rootGroup _:BN000012 .
+_:BN00000c :groupChildren _:BN000014 ;
+  :parentControl _:BN00000d ;
   a :Group ;
   :controlLabel [
     a :Label ;
     rdfs:label "ioControlsGroup"^^xsd:string
   ] .
-_:BN000008 :groupChildren _:BN000006 ,
-    _:BN000005 ,
-    _:BN000007 ;
-  :parentControl <http://ontology.universAAL.org/Dialog.owl#_:a0283cedf0410a24:1662> ;
+ns:saied a <http://ontology.universAAL.org/Profile.owl#User> ,
+    <http://ontology.universaal.org/PhThing.owl#PhysicalThing> .
+_:BN00000f :groupChildren [
+      pvn:submissionID "urn:ui.dm:UICaller#showMainMenu"^^xsd:string ;
+      :parentControl _:BN00000f ;
+      a :Submit ;
+      :ctrlHelp "Open the Main Menu"^^xsd:string ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Main Menu"^^xsd:string ;
+        :iconURL "system/Home.png"^^xsd:string
+      ]
+    ] ,
+    _:BN000006 ;
+  :parentControl _:BN000012 ;
   a :Group ;
   :controlLabel [
     a :Label ;
-    rdfs:label "Browse Shopping List"^^xsd:string
+    rdfs:label "stdButtonsGroup"^^xsd:string
   ] .
-ns7:greek ns1:englishLabel "Greek, Modern"^^xsd:string ;
-  a ns1:Greek ;
-  ns1:iso639code "el"^^xsd:string ;
-  ns1:nativeLabel "ελληνικά"^^xsd:string .
-ns5:saiedSubprofileUIPreferencesAlertPreferences ns4:alertOption ns4:visualAndAudio ;
-  a ns4:AlertPreferences .
-ns5:saiedSubprofileUIPreferencesAuditoryPreferences a ns4:AuditoryPreferences ;
-  ns4:pitch ns4:medium ;
-  ns4:keySound ns4:off ;
-  ns4:volume ns4:medium ;
-  ns4:systemSounds ns4:on ;
-  ns4:speechRate ns4:medium ;
-  ns4:voiceGender ns4:female .
-ns5:saied a <http://ontology.universAAL.org/Profile.owl#User> ,
-    <http://ontology.universaal.org/PhThing.owl#PhysicalThing> .
-ns4:white a ns4:ColorType .
-ns5:saiedSubprofileUIPreferencesVisualPreferences ns4:fontColor ns4:black ;
-  ns4:componentSpacing ns4:medium ;
-  ns4:highlightColor ns4:white ;
-  ns4:screenSaverUsage ns4:off ;
-  ns4:screenResolution ns4:medium ;
-  ns4:fontSize ns4:medium ;
-  ns4:dayNightMode ns4:on ;
-  a ns4:VisualPreferences ;
-  ns4:contentContrast ns4:high ;
-  ns4:backgroundColor ns4:lightBlue ;
-  ns4:flashingResources ns4:on ;
-  ns4:fontFamily ns4:serif ;
-  ns4:brightness ns4:medium ;
-  ns4:windowLayout ns4:overlap ;
-  ns4:cursorSize ns4:medium .
-ns5:saiedSubprofileUIPreferencesGeneralInteractionPreferences ns4:secondaryLanguage ns7:greek ;
-  ns4:secondaryModality pvn:voice ;
-  a ns4:GeneralInteractionPreferences ;
-  ns4:contentDensity ns4:detailed ;
-  ns4:preferredLanguage ns7:greek ;
-  ns4:preferredModality pvn:gui .
-ns4:black a ns4:ColorType .
-ns4:female a ns4:VoiceGender .
-ns4:on a ns4:Status .
-pvn:std_dialog a pvn:DialogType .
-ns4:serif a ns4:GenericFontFamily .
-ns4:medium a ns4:Intensity .
-_:BN00000a :groupChildren [
-      :parentControl _:BN00000a ;
+_:BN00000d :groupChildren _:BN00000c ,
+    _:BN00000b ,
+    _:BN000015 ;
+  :parentControl <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1b48> ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Update Repository"^^xsd:string
+  ] .
+_:BN000010 :groupChildren [
+      pvn:submissionID "urn:shoppingUIRepository#back"^^xsd:string ;
+      :parentControl _:BN000010 ;
+      a :Submit ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label ""^^xsd:string ;
+        :iconURL "http://127.0.0.1:8080/resources/shopping/images/icons_back_small.png"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN000012 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "submitsGroup"^^xsd:string
+  ] .
+_:BN000011 :groupChildren _:BN00000e ;
+  :parentControl _:BN000012 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "ioControlsGroup"^^xsd:string
+  ] .
+pvn:middle a pvn:LevelRating .
+_:BN000012 :groupChildren _:BN000011 ,
+    _:BN000010 ,
+    _:BN00000f ;
+  :parentControl <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1d4f> ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Update Repository"^^xsd:string
+  ] .
+pvn:insensible a pvn:PrivacyLevel .
+ns5:detailed a ns5:ContentDensityType .
+pvn:gui a pvn:Modality .
+_:BN000013 :groupChildren [
+      :parentControl _:BN000013 ;
       a :SimpleOutput ;
       :controlLabel [
         a :Label ;
@@ -270,12 +277,12 @@ _:BN00000a :groupChildren [
       :controlRef [
         a psn:PropertyPath ;
         psn:thePath (
-          ns3:foodItemName
+          ns4:foodItemName
         )
       ]
     ] ,
     [
-      :parentControl _:BN00000a ;
+      :parentControl _:BN000013 ;
       a :SimpleOutput ;
       :controlLabel [
         a :Label ;
@@ -284,12 +291,12 @@ _:BN00000a :groupChildren [
       :controlRef [
         a psn:PropertyPath ;
         psn:thePath (
-          ns3:foodItemSize
+          ns4:foodItemSize
         )
       ]
     ] ,
     [
-      :parentControl _:BN00000a ;
+      :parentControl _:BN000013 ;
       a :SimpleOutput ;
       :controlLabel [
         a :Label ;
@@ -298,12 +305,12 @@ _:BN00000a :groupChildren [
       :controlRef [
         a psn:PropertyPath ;
         psn:thePath (
-          ns3:foodItemCompany
+          ns4:foodItemCompany
         )
       ]
     ] ,
     [
-      :parentControl _:BN00000a ;
+      :parentControl _:BN000013 ;
       a :SimpleOutput ;
       :controlLabel [
         a :Label ;
@@ -312,12 +319,12 @@ _:BN00000a :groupChildren [
       :controlRef [
         a psn:PropertyPath ;
         psn:thePath (
-          ns3:foodItemQuantity
+          ns4:foodItemQuantity
         )
       ]
     ] ,
     [
-      :parentControl _:BN00000a ;
+      :parentControl _:BN000013 ;
       a :SimpleOutput ;
       :controlLabel [
         a :Label ;
@@ -326,12 +333,12 @@ _:BN00000a :groupChildren [
       :controlRef [
         a psn:PropertyPath ;
         psn:thePath (
-          ns3:foodItemInsertionDate
+          ns4:foodItemInsertionDate
         )
       ]
     ] ,
     [
-      :parentControl _:BN00000a ;
+      :parentControl _:BN000013 ;
       a :SimpleOutput ;
       :controlLabel [
         a :Label ;
@@ -340,12 +347,12 @@ _:BN00000a :groupChildren [
       :controlRef [
         a psn:PropertyPath ;
         psn:thePath (
-          ns3:foodItemExpirationDate
+          ns4:foodItemExpirationDate
         )
       ]
     ] ,
     [
-      :parentControl _:BN00000a ;
+      :parentControl _:BN000013 ;
       a :SimpleOutput ;
       :controlLabel [
         a :Label ;
@@ -354,28 +361,46 @@ _:BN00000a :groupChildren [
       :controlRef [
         a psn:PropertyPath ;
         psn:thePath (
-          ns3:foodItemTag
+          ns4:foodItemTag
         )
       ]
     ] ;
-  :parentControl _:BN00000b ;
+  :parentControl _:BN000014 ;
   a :Group .
-_:BN00000b :groupChildren _:BN00000a ;
-  :parentControl _:BN000001 ;
+_:BN000026 :groupChildren [
+      pvn:submissionID "urn:shoppingUIRepository#back"^^xsd:string ;
+      :parentControl _:BN000026 ;
+      a :Submit ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label ""^^xsd:string ;
+        :iconURL "http://127.0.0.1:8080/resources/shopping/images/icons_back_small.png"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN000028 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "submitsGroup"^^xsd:string
+  ] .
+_:BN000014 :groupChildren _:BN000013 ;
+  :parentControl _:BN00000c ;
   a :Repeat ;
   :controlLabel [
     a :Label ;
     rdfs:label "Repository"^^xsd:string
   ] ;
-  :controlRef [
-    a psn:PropertyPath ;
-    psn:thePath (
-      ns6:RepositoryItems
-    )
+  :controlRef _:BN000005 .
+_:BN000027 :groupChildren _:BN000021 ;
+  :parentControl _:BN000028 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "ioControlsGroup"^^xsd:string
   ] .
-_:BN00000c :groupChildren [
+_:BN000015 :groupChildren [
       pvn:submissionID "urn:ui.dm:UICaller#showMainMenu"^^xsd:string ;
-      :parentControl _:BN00000c ;
+      :parentControl _:BN000015 ;
       a :Submit ;
       :ctrlHelp "Open the Main Menu"^^xsd:string ;
       :controlLabel [
@@ -384,37 +409,841 @@ _:BN00000c :groupChildren [
         :iconURL "system/Home.png"^^xsd:string
       ]
     ] ,
-    [
-      pvn:submissionID "urn:ui.dm:UICaller#showMessages"^^xsd:string ;
-      :parentControl _:BN00000c ;
-      a :Submit ;
-      :ctrlHelp "List Pending Messages"^^xsd:string ;
-      :controlLabel [
-        a :Label ;
-        rdfs:label "Pending Messages"^^xsd:string ;
-        :iconURL "system/PendingMsg.png"^^xsd:string
-      ]
-    ] ;
-  :parentControl _:BN000003 ;
+    _:BN000004 ;
+  :parentControl _:BN00000d ;
   a :Group ;
   :controlLabel [
     a :Label ;
     rdfs:label "stdButtonsGroup"^^xsd:string
   ] .
-ns4:off a ns4:Status .
-pvn:voice a pvn:Modality .
-<http://ontology.universAAL.org/Dialog.owl#_:a0283cedf0410a24:1393> :creationTimestamp "2013-07-31T16:18:53.247+03:00"^^xsd:dateTime ;
+_:BN000028 :groupChildren _:BN000026 ,
+    _:BN000022 ,
+    _:BN000027 ;
+  :parentControl <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:23c3> ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Repository"^^xsd:string
+  ] .
+ns:saiedSubprofileUIPreferencesAuditoryPreferences a ns5:AuditoryPreferences ;
+  ns5:pitch ns5:medium ;
+  ns5:keySound ns5:off ;
+  ns5:volume ns5:medium ;
+  ns5:systemSounds ns5:on ;
+  ns5:speechRate ns5:medium ;
+  ns5:voiceGender ns5:female .
+ns4:FoodItem ns4:foodItemInsertionDate "2012-03-26"^^xsd:string ;
+  ns4:foodItemCompany "MEVGAL"^^xsd:string ;
+  ns4:foodItemExpirationDate "2012-04-29"^^xsd:string ;
+  a ns4:FoodItem ;
+  ns4:foodItemSize "1lt"^^xsd:string ;
+  ns4:foodItemName "Fresh Milk"^^xsd:string ;
+  ns4:foodItemCode "1"^^xsd:int ;
+  ns4:foodItemQuantity "1.0"^^xsd:double ;
+  ns4:foodItemTag "E2003411B802011665038137"^^xsd:string .
+_:BN00001d :groupChildren [
+      pvn:submissionID "urn:ui.dm:UICaller#showMainMenu"^^xsd:string ;
+      :parentControl _:BN00001d ;
+      a :Submit ;
+      :ctrlHelp "Open the Main Menu"^^xsd:string ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Main Menu"^^xsd:string ;
+        :iconURL "system/Home.png"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN000025 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "stdButtonsGroup"^^xsd:string
+  ] .
+_:BN00001e :groupChildren [
+      pvn:submissionID "urn:shoppingUIRepository#back"^^xsd:string ;
+      :parentControl _:BN00001e ;
+      a :Submit ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label ""^^xsd:string ;
+        :iconURL "http://127.0.0.1:8080/resources/shopping/images/icons_back_small.png"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN000025 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "submitsGroup"^^xsd:string
+  ] .
+_:BN00001f :groupChildren _:BN000024 ;
+  :parentControl _:BN000025 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "ioControlsGroup"^^xsd:string
+  ] .
+_:BN000016 :groupChildren [
+      pvn:submissionID "urn:ui.dm:UICaller#showMainMenu"^^xsd:string ;
+      :parentControl _:BN000016 ;
+      a :Submit ;
+      :ctrlHelp "Open the Main Menu"^^xsd:string ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Main Menu"^^xsd:string ;
+        :iconURL "system/Home.png"^^xsd:string
+      ]
+    ] ,
+    _:BN00000a ;
+  :parentControl _:BN00001c ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "stdButtonsGroup"^^xsd:string
+  ] .
+<http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:23c3> :creationTimestamp "2013-10-09T17:38:52.378+03:00"^^xsd:dateTime ;
   :dialogType pvn:std_dialog ;
   a :Form ;
   :dialogDataRoot [
-    ns6:RepositoryItems ns3:FoodItem ,
-      ns3:FoodItem
+    ns6:RepositoryItems ns4:FoodItem ,
+      ns4:FoodItem
   ] ;
-  :rootGroup _:BN000003 .
-ns5:saiedSubprofileUIPreferencesAccessMode ns4:auditoryModeStatus ns4:on ;
-  ns4:olfactoryModeStatus ns4:off ;
-  a ns4:AccessMode ;
-  ns4:textualModeStatus ns4:on ;
-  ns4:tactileModeStatus ns4:off ;
-  ns4:visualModeStatus ns4:on .
-ns4:visualAndAudio a ns4:AlertType .
+  :rootGroup _:BN000028 .
+_:BN000017 :groupChildren [
+      pvn:submissionID "urn:shoppingUIRepository#back"^^xsd:string ;
+      :parentControl _:BN000017 ;
+      a :Submit ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label ""^^xsd:string ;
+        :iconURL "http://127.0.0.1:8080/resources/shopping/images/icons_back_small.png"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN00001c ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "submitsGroup"^^xsd:string
+  ] .
+_:BN000018 :groupChildren _:BN00001a ;
+  :parentControl _:BN00001c ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "ioControlsGroup"^^xsd:string
+  ] .
+_:BN000005 a psn:PropertyPath ;
+  psn:thePath (
+    ns6:RepositoryItems
+  ) .
+ns:saiedSubprofileUIPreferencesGeneralInteractionPreferences ns5:secondaryLanguage ns7:greek ;
+  ns5:secondaryModality pvn:voice ;
+  a ns5:GeneralInteractionPreferences ;
+  ns5:contentDensity ns5:detailed ;
+  ns5:preferredLanguage ns7:greek ;
+  ns5:preferredModality pvn:gui .
+_:BN00002a :groupChildren [
+      pvn:submissionID "urn:ui.dm:UICaller:switchTo#0"^^xsd:string ;
+      :parentControl _:BN00002a ;
+      a :Submit ;
+      :ctrlHelp "Open the dialog again"^^xsd:string ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Update Repository"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN000002 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Pending Dialogs"^^xsd:string
+  ] .
+_:BN000023 :groupChildren [
+      :parentControl _:BN000023 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Name"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemName
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000023 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Size"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemSize
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000023 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Company"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemCompany
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000023 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Quantity"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemQuantity
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000023 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Insertion"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemInsertionDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000023 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Expiration"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemExpirationDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000023 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Tag"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemTag
+        )
+      ]
+    ] ;
+  :parentControl _:BN000024 ;
+  a :Group .
+_:BN000024 :groupChildren _:BN000023 ;
+  :parentControl _:BN00001f ;
+  a :Repeat ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Repository"^^xsd:string
+  ] ;
+  :controlRef _:BN000005 .
+<http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1b48> :creationTimestamp "2013-10-09T17:34:14.151+03:00"^^xsd:dateTime ;
+  :dialogType pvn:std_dialog ;
+  a :Form ;
+  :dialogDataRoot [
+    ns6:RepositoryItems ns4:FoodItem
+  ] ;
+  :rootGroup _:BN00000d .
+_:BN000019 :groupChildren [
+      :parentControl _:BN000019 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Name"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemName
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000019 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Size"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemSize
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000019 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Company"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemCompany
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000019 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Quantity"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemQuantity
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000019 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Insertion"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemInsertionDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000019 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Expiration"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemExpirationDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000019 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Tag"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemTag
+        )
+      ]
+    ] ;
+  :parentControl _:BN00001a ;
+  a :Group .
+_:BN00001a :groupChildren _:BN000019 ;
+  :parentControl _:BN000018 ;
+  a :Repeat ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Repository"^^xsd:string
+  ] ;
+  :controlRef _:BN000005 .
+ns7:greek ns2:englishLabel "Greek, Modern"^^xsd:string ;
+  a ns2:Greek ;
+  ns2:iso639code "el"^^xsd:string ;
+  ns2:nativeLabel "ελληνικά"^^xsd:string .
+_:BN000025 :groupChildren _:BN00001e ,
+    _:BN00001d ,
+    _:BN00001f ;
+  :parentControl <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1856> ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Update Repository"^^xsd:string
+  ] .
+_:BN00001c :groupChildren _:BN000018 ,
+    _:BN000017 ,
+    _:BN000016 ;
+  :parentControl <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1bd7> ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Update Repository"^^xsd:string
+  ] .
+ns5:white a ns5:ColorType .
+<http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1856> :creationTimestamp "2013-10-09T17:33:53.565+03:00"^^xsd:dateTime ;
+  :dialogType pvn:std_dialog ;
+  a :Form ;
+  :dialogDataRoot [
+    ns6:RepositoryItems ns4:FoodItem ,
+      ns4:FoodItem
+  ] ;
+  :rootGroup _:BN000025 .
+ns5:black a ns5:ColorType .
+<http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1bd7> :creationTimestamp "2013-10-09T17:34:34.725+03:00"^^xsd:dateTime ;
+  :dialogType pvn:std_dialog ;
+  a :Form ;
+  :dialogDataRoot [
+    ns6:RepositoryItems ns4:FoodItem
+  ] ;
+  :rootGroup _:BN00001c .
+ns5:female a ns5:VoiceGender .
+ns5:on a ns5:Status .
+_:BN000000 :groupChildren [
+      :parentControl _:BN000000 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Name"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemName
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000000 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Size"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemSize
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000000 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Company"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemCompany
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000000 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Quantity"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemQuantity
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000000 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Insertion"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemInsertionDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000000 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Expiration"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemExpirationDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000000 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Tag"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemTag
+        )
+      ]
+    ] ;
+  :parentControl _:BN000001 ;
+  a :Group .
+_:BN000001 :groupChildren _:BN000000 ;
+  :parentControl _:BN000008 ;
+  a :Repeat ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Repository"^^xsd:string
+  ] ;
+  :controlRef _:BN000005 .
+pvn:std_dialog a pvn:DialogType .
+_:BN000002 :groupChildren [
+      pvn:submissionID "urn:ui.dm:UICaller#showMainMenu"^^xsd:string ;
+      :parentControl _:BN000002 ;
+      a :Submit ;
+      :ctrlHelp "Open the Main Menu"^^xsd:string ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Main Menu"^^xsd:string ;
+        :iconURL "system/Home.png"^^xsd:string
+      ]
+    ] ,
+    _:BN00002a ;
+  :parentControl _:BN000009 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "stdButtonsGroup"^^xsd:string
+  ] .
+_:BN00001b :groupChildren [
+      pvn:submissionID "urn:ui.dm:UICaller:switchTo#0"^^xsd:string ;
+      :parentControl _:BN00001b ;
+      a :Submit ;
+      :ctrlHelp "Open the dialog again"^^xsd:string ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Update Repository"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN000022 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Pending Dialogs"^^xsd:string
+  ] .
+_:BN000003 :groupChildren [
+      pvn:submissionID "urn:shoppingUIRepository#back"^^xsd:string ;
+      :parentControl _:BN000003 ;
+      a :Submit ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label ""^^xsd:string ;
+        :iconURL "http://127.0.0.1:8080/resources/shopping/images/icons_back_small.png"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN000009 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "submitsGroup"^^xsd:string
+  ] .
+ns5:serif a ns5:GenericFontFamily .
+ns5:medium a ns5:Intensity .
+_:BN000004 :groupChildren [
+      pvn:submissionID "urn:ui.dm:UICaller:switchTo#0"^^xsd:string ;
+      :parentControl _:BN000004 ;
+      a :Submit ;
+      :ctrlHelp "Open the dialog again"^^xsd:string ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Update Repository"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN000015 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Pending Dialogs"^^xsd:string
+  ] .
+_:BN000006 :groupChildren [
+      pvn:submissionID "urn:ui.dm:UICaller:switchTo#0"^^xsd:string ;
+      :parentControl _:BN000006 ;
+      a :Submit ;
+      :ctrlHelp "Open the dialog again"^^xsd:string ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Update Repository"^^xsd:string
+      ]
+    ] ;
+  :parentControl _:BN00000f ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Pending Dialogs"^^xsd:string
+  ] .
+ns5:off a ns5:Status .
+pvn:voice a pvn:Modality .
+_:BN000008 :groupChildren _:BN000001 ;
+  :parentControl _:BN000009 ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "ioControlsGroup"^^xsd:string
+  ] .
+_:BN000007 :groupChildren [
+      :parentControl _:BN000007 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Name"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemName
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000007 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Size"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemSize
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000007 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Company"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemCompany
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000007 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Quantity"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemQuantity
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000007 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Insertion"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemInsertionDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000007 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Expiration"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemExpirationDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000007 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Tag"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemTag
+        )
+      ]
+    ] ;
+  :parentControl _:BN00000e ;
+  a :Group .
+_:BN000009 :groupChildren _:BN000008 ,
+    _:BN000003 ,
+    _:BN000002 ;
+  :parentControl <http://ontology.universAAL.org/Dialog.owl#_:a0283ced4d7b001:1e04> ;
+  a :Group ;
+  :controlLabel [
+    a :Label ;
+    rdfs:label "Update Repository"^^xsd:string
+  ] .
+ns5:visualAndAudio a ns5:AlertType .
+_:BN000020 :groupChildren [
+      :parentControl _:BN000020 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Name"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemName
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000020 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Size"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemSize
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000020 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Company"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemCompany
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000020 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Quantity"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemQuantity
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000020 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Insertion"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemInsertionDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000020 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Expiration"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemExpirationDate
+        )
+      ]
+    ] ,
+    [
+      :parentControl _:BN000020 ;
+      a :SimpleOutput ;
+      :controlLabel [
+        a :Label ;
+        rdfs:label "Tag"^^xsd:string
+      ] ;
+      :controlRef [
+        a psn:PropertyPath ;
+        psn:thePath (
+          ns4:foodItemTag
+        )
+      ]
+    ] ;
+  :parentControl _:BN000021 ;
+  a :Group .
+ns:saiedSubprofileUIPreferencesVisualPreferences ns5:fontColor ns5:black ;
+  ns5:componentSpacing ns5:medium ;
+  ns5:highlightColor ns5:white ;
+  ns5:screenSaverUsage ns5:off ;
+  ns5:screenResolution ns5:medium ;
+  ns5:fontSize ns5:medium ;
+  ns5:dayNightMode ns5:on ;
+  a ns5:VisualPreferences ;
+  ns5:contentContrast ns5:high ;
+  ns5:backgroundColor ns5:lightBlue ;
+  ns5:flashingResources ns5:on ;
+  ns5:fontFamily ns5:serif ;
+  ns5:brightness ns5:medium ;
+  ns5:windowLayout ns5:overlap ;
+  ns5:cursorSize ns5:medium .
