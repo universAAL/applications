@@ -1,18 +1,15 @@
 package org.universAAL.AALapplication.food_shopping.service.db.manager.entities;
 
+import org.universAAL.AALapplication.food_shopping.service.db.utils.*;
+import org.universAAL.AALapplication.food_shopping.service.db.utils.statements.*;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+
 import java.util.Hashtable;
 import java.util.Vector;
-
-import org.universAAL.AALapplication.food_shopping.service.db.utils.Column;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.Value;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.statements.DeleteStatement;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.statements.InsertStatement;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.statements.SelectStatement;
-import org.universAAL.AALapplication.food_shopping.service.db.utils.statements.UpdateStatement;
 
 public class Entity {
 	Connection connection;
