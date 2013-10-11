@@ -14,6 +14,8 @@
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.profile.manager/E.1.1-SNAPSHOT</bundle>
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.treat.manager/E.1.1-SNAPSHOT</bundle>
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.performedSession.manager/E.1.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.demo.populator/E.1.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.demo.populator.run/E.1.1-SNAPSHOT</bundle>
 	</feature>
 	
 	<!-- Health UI -->
