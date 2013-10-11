@@ -27,15 +27,25 @@ public final class MedicationConsoleCommands {
   public static final String HELP_COMMMAND = "help";
   public static final String LISTIDS_COMMMAND = "listids";
   public static final String SQL_COMMMAND = "sql";
+  public static final String INSERT_USER_COMMMAND = "insert";
   private static final ConsoleCommand[] CONSOLE_COMMANDS;
 
   static {
-    CONSOLE_COMMANDS = new ConsoleCommand[4];
+    CONSOLE_COMMANDS = new ConsoleCommand[5];
     ListidsConsoleCommand listidsCommand = createListidsCommand();
     CONSOLE_COMMANDS[0] = createUseCaseCommand(listidsCommand);
     CONSOLE_COMMANDS[1] = listidsCommand;
     CONSOLE_COMMANDS[2] = createHelpCommand();
     CONSOLE_COMMANDS[3] = createSqlCommand();
+    CONSOLE_COMMANDS[4] = createInsertUserCommand();
+  }
+
+  private static ConsoleCommand createInsertUserCommand() {
+    String name = COMMAND_PREFIX + ':' + INSERT_USER_COMMMAND;
+    String description = "This command triggers the corresponding insert user from vcard action";
+
+    return new InsertUserConsoleCommand(name, description);
+
   }
 
   private static ConsoleCommand createSqlCommand() {
@@ -86,6 +96,10 @@ public final class MedicationConsoleCommands {
 
   public static synchronized ConsoleCommand getSqlConsoleCommand() {
     return CONSOLE_COMMANDS[3];
+  }
+
+  public static synchronized ConsoleCommand getInsertUserConsoleCommand() {
+    return CONSOLE_COMMANDS[4];
   }
 
 }

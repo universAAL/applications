@@ -29,6 +29,7 @@ import org.universAAL.AALapplication.medication_manager.shell.commands.impl.comm
 import org.universAAL.AALapplication.medication_manager.simulation.export.DispenserUpsideDownContextProvider;
 import org.universAAL.AALapplication.medication_manager.simulation.export.MedicationReminderContextProvider;
 import org.universAAL.AALapplication.medication_manager.simulation.export.NewPrescriptionHandler;
+import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -53,6 +54,7 @@ public class Activator implements BundleActivator {
   private static ServiceTracker dispenserUpsideDownContextProviderTracker;
   private static ServiceTracker missedIntakeContextProviderTracker;
   private static ServiceTracker configurationPropertiesServiceTracker;
+  private static ServiceTracker userManagerTracker;
 
   private static final String OSGI_COMMAND_SCOPE = "osgi.command.scope";
   private static final String OSGI_COMMAND_FUNCTION = "osgi.command.function";
@@ -73,6 +75,7 @@ public class Activator implements BundleActivator {
     dispenserUpsideDownContextProviderTracker =
         new ServiceTracker(context, DispenserUpsideDownContextProvider.class.getName(), null);
     configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
+    userManagerTracker = new ServiceTracker(context, UserManager.class.getName(), null);
 
     medicationReminderContextProviderTracker.open();
     persistenceServiceTracker.open();
@@ -81,6 +84,7 @@ public class Activator implements BundleActivator {
     missedIntakeContextProviderTracker.open();
     dispenserUpsideDownContextProviderTracker.open();
     configurationPropertiesServiceTracker.open();
+    userManagerTracker.open();
 
     Hashtable props = new Hashtable();
     props.put(OSGI_COMMAND_SCOPE, MedicationConsoleCommands.COMMAND_PREFIX);
@@ -88,6 +92,7 @@ public class Activator implements BundleActivator {
         MedicationConsoleCommands.HELP_COMMMAND,
         MedicationConsoleCommands.LISTIDS_COMMMAND,
         MedicationConsoleCommands.USECASE_COMMMAND,
+        MedicationConsoleCommands.INSERT_USER_COMMMAND,
         MedicationConsoleCommands.SQL_COMMMAND}
     );
     context.registerService(MedicationManagerCommands.class.getName(),
@@ -208,6 +213,18 @@ public class Activator implements BundleActivator {
     ConfigurationProperties service = (ConfigurationProperties) configurationPropertiesServiceTracker.getService();
     if (service == null) {
       throw new MedicationManagerShellException("The ConfigurationProperties is missing");
+    }
+
+    return service;
+  }
+
+  public static UserManager getUserManager() {
+    if (userManagerTracker == null) {
+      throw new MedicationManagerShellException("The UserManager ServiceTracker is not set");
+    }
+    UserManager service = (UserManager) userManagerTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerShellException("The UserManager is missing");
     }
 
     return service;

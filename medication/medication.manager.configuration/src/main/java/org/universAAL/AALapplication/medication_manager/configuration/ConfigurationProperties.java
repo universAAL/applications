@@ -43,6 +43,8 @@ public interface ConfigurationProperties {
 
   int getMedicationManagerIssuerIntervalInMinutes();
 
+  boolean isTestMode();
+
   Map<String, PropertyInfo> getPropertyInfoMap();
 
 }

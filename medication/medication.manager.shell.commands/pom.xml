@@ -47,6 +47,12 @@
       <version>E.1-SNAPSHOT</version>
     </dependency>
 
+    <dependency>
+         <groupId>org.universAAL.AALapplication</groupId>
+         <artifactId>medication.manager.user.management</artifactId>
+         <version>E.1-SNAPSHOT</version>
+       </dependency>
+
   </dependencies>
 
   <build>

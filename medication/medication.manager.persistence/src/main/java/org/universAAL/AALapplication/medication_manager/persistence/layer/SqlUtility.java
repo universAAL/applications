@@ -36,4 +36,6 @@ public interface SqlUtility {
   int generateId();
 
   public Set<String> getDBColumns(String tableName) throws SQLException;
+
+  void resetMedicationManagerDB();
 }

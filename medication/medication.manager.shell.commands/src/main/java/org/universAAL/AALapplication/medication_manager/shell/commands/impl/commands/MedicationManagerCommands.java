@@ -74,6 +74,22 @@ public class MedicationManagerCommands {
     consoleCommand.execute(parameters);
   }
 
+  @Descriptor("Trigger insert user from vcard action")
+  public void insert(@Descriptor("parameters") String... parameters) {
+
+    InsertUserConsoleCommand consoleCommand =
+        (InsertUserConsoleCommand) MedicationConsoleCommands.getInsertUserConsoleCommand();
+
+    if (parameters == null || parameters.length != 2) {
+      throw new MedicationManagerShellException(consoleCommand.getParametersInfo());
+    }
+
+    Log.info("Executing medication:insert command with the following parameters: %s, %s",
+        getClass(), parameters[0], parameters[1]);
+
+    consoleCommand.execute(parameters);
+  }
+
 
 }
 

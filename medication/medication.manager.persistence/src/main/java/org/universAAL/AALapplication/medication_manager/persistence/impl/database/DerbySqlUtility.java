@@ -16,6 +16,7 @@
 
 package org.universAAL.AALapplication.medication_manager.persistence.impl.database;
 
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.Log;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.SqlUtility;
@@ -40,10 +41,12 @@ import static org.universAAL.AALapplication.medication_manager.persistence.impl.
 public final class DerbySqlUtility implements SqlUtility {
 
   private final Connection connection;
+  private final ConfigurationProperties configurationProperties;
 
-  public DerbySqlUtility(Connection connection) {
+  public DerbySqlUtility(Connection connection, ConfigurationProperties configurationProperties) {
 
     this.connection = connection;
+    this.configurationProperties = configurationProperties;
   }
 
   public int generateId() {
@@ -240,6 +243,49 @@ public final class DerbySqlUtility implements SqlUtility {
     printTable(statement, tableName);
 
     closeStatement(statement);
+  }
+
+
+//  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+  public void resetMedicationManagerDB() {
+    boolean autoCommit = true;
+    Statement statement = null;
+    try {
+      autoCommit = connection.getAutoCommit();
+      connection.setAutoCommit(false);
+      statement = connection.createStatement();
+      Log.info("Reset the Medication manager database.", getClass());
+      dropTables(statement);
+      createTables(statement);
+      insertDataIntoTables(statement, configurationProperties);
+      connection.commit();
+      Log.info("The Medication manager database has been recreated.", getClass());
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      handleFinally(connection, statement, null, autoCommit);
+    }
+  }
+
+  private void dropTables(Statement statement) throws SQLException {
+
+    dropTable("PROPERTIES", statement);
+    dropTable("INTAKE", statement);
+    dropTable("TREATMENT", statement);
+    dropTable("PRESCRIPTION", statement);
+    dropTable("INVENTORY_LOG", statement);
+    dropTable("MEDICINE_INVENTORY", statement);
+    dropTable("DISPENSER", statement);
+    dropTable("MEDICINE", statement);
+    dropTable("PATIENT_LINKS", statement);
+    dropTable("PERSON", statement);
+  }
+
+  private void dropTable(String name, Statement statement) throws SQLException {
+    String sql = "DROP TABLE MEDICATION_MANAGER." + name;
+
+    statement.execute(sql);
   }
 
 }

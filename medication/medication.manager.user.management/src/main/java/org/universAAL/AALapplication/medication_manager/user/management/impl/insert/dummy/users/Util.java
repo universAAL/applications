@@ -17,6 +17,7 @@
 package org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users;
 
 
+import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.user.management.impl.MedicationManagerUserManagementException;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -61,14 +62,14 @@ public final class Util {
   public static final String NEW_VCARD_IVAILO_PROPERTIES = "newVCardIvailo.properties";
   public static final String NEW_VCARD_IVAN_PROPERTIES = "newVCardIvan.properties";
   public static final String NEW_VCARD_PENCHO_PROPERTIES = "newVCardPencho.properties";
-  public static final String NEW_VCARD_SAID_PROPERTIES = "newVCardSaid.properties";
+  public static final String NEW_VCARD_SAIED_PROPERTIES = "newVCardSaied.properties";
   public static final String NEW_VCARD_SIMEON_PROPERTIES = "newVCardSimeon.properties";
   public static final String NEW_VCARD_VENELIN_PROPERTIES = "newVCardVenelin.properties";
-  public static final String[] DUMMY_USERS_PROPERTIES = new String[]{
+  private static final String[] DUMMY_USERS_PROPERTIES = new String[]{
       NEW_VCARD_BILL_PROPERTIES, NEW_VCARD_NIK_PROPERTIES, NEW_VCARD_NIKOLA_PROPERTIES,
       NEW_VCARD_JOHN_PROPERTIES, NEW_VCARD_MARIA_PROPERTIES, NEW_VCARD_IREN_PROPERTIES,
       NEW_VCARD_ASPARUH_PROPERTIES, NEW_VCARD_GEORGE_PROPERTIES, NEW_VCARD_IVAILO_PROPERTIES,
-      NEW_VCARD_IVAN_PROPERTIES, NEW_VCARD_PENCHO_PROPERTIES, NEW_VCARD_SAID_PROPERTIES,
+      NEW_VCARD_IVAN_PROPERTIES, NEW_VCARD_PENCHO_PROPERTIES, NEW_VCARD_SAIED_PROPERTIES,
       NEW_VCARD_SIMEON_PROPERTIES, NEW_VCARD_VENELIN_PROPERTIES
   };
 
@@ -122,4 +123,11 @@ public final class Util {
 
   }
 
+  public static String[] getDummyUsersProperties(ConfigurationProperties configurationProperties) {
+    if (configurationProperties.isTestMode()) {
+      return DUMMY_USERS_PROPERTIES;
+    }
+
+    return new String[]{NEW_VCARD_SAIED_PROPERTIES};
+  }
 }

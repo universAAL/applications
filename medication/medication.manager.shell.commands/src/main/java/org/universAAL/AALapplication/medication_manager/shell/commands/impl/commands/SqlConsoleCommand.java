@@ -40,6 +40,7 @@ public final class SqlConsoleCommand extends ConsoleCommand {
   private static final String PRINT = "print";
   private static final String FILE = "file";
   private static final String EXECUTE = "execute";
+  private static final String RESET = "reset";
   private static final String ALL_TABLES = "allTables";
   private static final String SQL = "sql";
 
@@ -48,7 +49,8 @@ public final class SqlConsoleCommand extends ConsoleCommand {
           "\n\t \n\t - " + PRINT + " " + ALL_TABLES + " (will print all tables records sorted by table)" +
           "\n\t \n\t - " + PRINT + " tableName" + " (will print all the records for a particular table)" +
           "\n\t \n\t - " + FILE + " fileName" + " (will execute sql statements from file)" +
-          "\n\t \n\t - " + EXECUTE + " sqlStatement (will execute any sql statement)";
+          "\n\t \n\t - " + EXECUTE + " sqlStatement (will execute any sql statement)" +
+          "\n\t \n\t - " + RESET + " database (will reset the database)";
 
   public SqlConsoleCommand(String name, String description) {
     super(name, description);
@@ -86,12 +88,12 @@ public final class SqlConsoleCommand extends ConsoleCommand {
     Log.info("Checking the first param %s", getClass(), firstParam);
 
 
-    boolean ok = PRINT.equalsIgnoreCase(firstParam) ||
+    boolean ok = PRINT.equalsIgnoreCase(firstParam) || RESET.equalsIgnoreCase(firstParam)  ||
         FILE.equalsIgnoreCase(firstParam) || EXECUTE.equalsIgnoreCase(firstParam);
 
     if (!ok) {
       throw new MedicationManagerShellException("The first parameter must be one of the following : " +
-          PRINT + ", " + EXECUTE + ", " + FILE);
+          PRINT + ", " + EXECUTE + ", " + FILE + ", " + RESET);
     }
 
   }
@@ -114,6 +116,8 @@ public final class SqlConsoleCommand extends ConsoleCommand {
     } else if (EXECUTE.equalsIgnoreCase(firstParam)) {
       String selectStatement = getSelectStatement(secondParam);
       sqlUtility.executeSqlStatement(selectStatement);
+    } else if (RESET.equalsIgnoreCase(firstParam)) {
+      sqlUtility.resetMedicationManagerDB();
     } else {
       throw new MedicationManagerShellException("Unexpected pair of parameters");
     }

@@ -53,11 +53,12 @@ public final class Activator implements BundleActivator {
 
     PersistentService persistentService = getPersistentService();
 
-    UserManager userManager = new UserManagerImpl(mc, persistentService);
+    ConfigurationProperties configurationProperties = getConfigurationProperties();
+
+    UserManager userManager = new UserManagerImpl(mc, persistentService, configurationProperties);
 
 
-    context.registerService(UserManager.class.getName(),
-        userManager, null);
+    context.registerService(UserManager.class.getName(), userManager, null);
 
 
     insertDummyUsers(userManager);
