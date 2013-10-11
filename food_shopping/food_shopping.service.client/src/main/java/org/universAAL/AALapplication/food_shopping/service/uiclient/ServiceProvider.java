@@ -22,7 +22,7 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.Shopping.FoodManagement;
+import org.universAAL.ontology.Shopping.*;
 
 /**
  * @author dimokas

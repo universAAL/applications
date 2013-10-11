@@ -25,15 +25,11 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.shopping</artifactId>
-			<version>2.0.1-SNAPSHOT</version>
 		</dependency>		
-<!-- 		
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.nutrition</artifactId>
-			<version>2.0.0</version>
 		</dependency>
--->				
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.profile</artifactId>

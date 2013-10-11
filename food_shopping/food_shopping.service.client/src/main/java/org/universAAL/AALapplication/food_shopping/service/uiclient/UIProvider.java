@@ -20,6 +20,7 @@ import java.util.Locale;
 
 import org.universAAL.AALapplication.food_shopping.service.uiclient.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.StringUtils;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UICaller;
@@ -28,6 +29,8 @@ import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
+import org.universAAL.middleware.ui.rdf.MediaObject;
+import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.phThing.Device;
@@ -38,6 +41,7 @@ import org.universAAL.ontology.phThing.Device;
  */
 public class UIProvider extends UICaller {
 
+    public final static String IMG_URL = "http://127.0.0.1:8080/resources/shopping/images/";
 	private final static String window = "UIProvider#";
 	static final String MY_UI_NAMESPACE = SharedResources.CLIENT_SHOPPING_UI_NAMESPACE + window;
     static final String SUBMIT_SHOPPING = MY_UI_NAMESPACE + "shopping";
@@ -59,11 +63,17 @@ public class UIProvider extends UICaller {
 		Form f = Form.newDialog("Food and Shopping",	new Resource());
 		new SimpleOutput(f.getIOControls(), null, null,"Welcome to Food and Shopping service.");
 
+		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shopList_small.png"), SUBMIT_SHOPPING);
+		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodRepos_small.png"), SUBMIT_REPOSITORY);
+		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_help_small.png"), SUBMIT_HELP);
+		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_exit_small.png"), SUBMIT_EXIT);
+
+/*
 		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_shopList_small.png")).toString()), SUBMIT_SHOPPING);
 		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodRepos_small.png")).toString()), SUBMIT_REPOSITORY);
 		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_help_small.png")).toString()), SUBMIT_HELP);
 		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_exit_small.png")).toString()), SUBMIT_EXIT);
-
+*/
 /*
 		new Submit(f.getSubmits(), new Label("Shopping List", null), SUBMIT_SHOPPING);
 		new Submit(f.getSubmits(), new Label("Food Repository", null), SUBMIT_REPOSITORY);

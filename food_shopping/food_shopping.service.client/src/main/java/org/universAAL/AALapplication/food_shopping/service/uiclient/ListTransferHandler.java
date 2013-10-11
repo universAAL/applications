@@ -16,16 +16,11 @@
 
 package org.universAAL.AALapplication.food_shopping.service.uiclient;
 
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.TransferHandler;
+import java.io.*;
+import java.awt.*;
+import java.awt.datatransfer.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 class ListTransferHandler extends TransferHandler {
 

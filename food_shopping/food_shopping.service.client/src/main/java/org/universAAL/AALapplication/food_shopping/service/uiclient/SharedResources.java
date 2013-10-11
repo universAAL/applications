@@ -18,6 +18,7 @@ package org.universAAL.AALapplication.food_shopping.service.uiclient;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.util.Constants;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -36,6 +37,8 @@ public class SharedResources {
     //public static final AssistedPerson testUser = new AssistedPerson(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
 
     public static User testUser = new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
+    public static User caregiver = new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "caregiver");
+    public static User currentUser = null;
     
     public SharedResources(ModuleContext context) {
     	moduleContext = context;
