@@ -19,11 +19,13 @@ package org.universAAL.AALapplication.food_shopping.service.uiclient;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import org.universAAL.AALapplication.food_shopping.service.uiclient.dialogs.repository.Repository;
 import org.universAAL.AALapplication.food_shopping.service.uiclient.dialogs.shopping.Shopping;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
@@ -37,6 +39,13 @@ import org.universAAL.ontology.Shopping.FoodItem;
 import org.universAAL.ontology.Shopping.FoodManagement;
 import org.universAAL.ontology.Shopping.Refrigerator;
 import org.universAAL.ontology.Shopping.ShoppingList;
+//import org.universAAL.ontology.nutrition.NutritionService;
+import org.universAAL.ontology.nutrition.Dish;
+import org.universAAL.ontology.nutrition.Ingredient;
+import org.universAAL.ontology.nutrition.Meal;
+import org.universAAL.ontology.nutrition.MenuDay;
+import org.universAAL.ontology.nutrition.NutritionService;
+import org.universAAL.ontology.nutrition.Recipe;
 import org.universAAL.ontology.phThing.Device;
 
 
@@ -60,7 +69,9 @@ public class FoodManagementClient extends ContextSubscriber {
     private static final String OUTPUT_SHOPPINGLIST_ITEMS = FOODMANAGEMENT_CONSUMER_NAMESPACE + "shoppingListItems";
     private static final String OUTPUT_DEVICE_LOCATION = FOODMANAGEMENT_CONSUMER_NAMESPACE + "location";
     private static final String OUTPUT_DEVICE_STATUS = FOODMANAGEMENT_CONSUMER_NAMESPACE + "status";
-
+    private static final String OUTPUT_GET_MENUDAY = NutritionService.SERVICE_GET_TODAY_MENU_OUTPUT;
+    private static final String OUTPUT_GET_RECIPE = NutritionService.SERVICE_GET_RECIPE_OUTPUT;
+    
     private static Vector values = new Vector(); 
     private static Vector items = new Vector();
 	private static Vector quantities = new Vector();
@@ -260,10 +271,17 @@ public class FoodManagementClient extends ContextSubscriber {
     }
 
 	private static ServiceRequest getTodayMenuRequest() {
-		ServiceRequest getShoppingLists = new ServiceRequest(new FoodManagement(), null);
-		getShoppingLists.addRequiredOutput(OUTPUT_SHOPPING_LISTS, new String[] {FoodManagement.PROP_SHOPPINGLIST_CONTROLS,ShoppingList.PROP_NAME });
-		return getShoppingLists;
+		ServiceRequest getTodayMenu = new ServiceRequest( new NutritionService(), null);
+		getTodayMenu.addRequiredOutput(NutritionService.SERVICE_GET_TODAY_MENU_OUTPUT, new String[] { NutritionService.PROP_OBTAINS_MENU });
+		return getTodayMenu;
     }
+
+	private static ServiceRequest getRecipeRequest(int recipeID) {
+		ServiceRequest getRecipe = new ServiceRequest( new NutritionService(), null); 
+		getRecipe.addValueFilter(new String[] { NutritionService.PROP_OBTAINS_RECIPE, Recipe.PROP_ID }, new Integer(recipeID)); 
+		getRecipe.addRequiredOutput(NutritionService.SERVICE_GET_RECIPE_OUTPUT, new String[] { NutritionService.PROP_OBTAINS_RECIPE });
+		return getRecipe;
+	}
 
 	private static ServiceRequest getWeeklyMenuRequest() {
 		ServiceRequest getShoppingLists = new ServiceRequest(new FoodManagement(), null);
@@ -663,14 +681,86 @@ public class FoodManagementClient extends ContextSubscriber {
 	}
 
 	public static boolean getTodayMenu() {
-		ServiceResponse sr = caller.call(getTodayMenuRequest());
+		Shopping.recipes = new Hashtable();
 
-		if (sr.getCallStatus() == CallStatus.succeeded)
+		ServiceResponse sr = caller.call(getTodayMenuRequest());
+		System.out.println("sr.getCallStatus()="+sr.getCallStatus());
+		if (sr.getCallStatus() == CallStatus.succeeded){
+			List al = sr.getOutput(OUTPUT_GET_MENUDAY, true);
+			if (al == null || al.size() == 0){
+				return false;
+			}
+			try{
+				//System.out.println("shoppingItemsList="+shoppingItemsList);
+				if (al.get(0) instanceof MenuDay){
+					MenuDay todayMenu = (MenuDay)al.get(0);
+					if (todayMenu!=null){
+						System.out.println(todayMenu.getDayOfWeek());
+						Meal[] listMeals = todayMenu.getMeals();
+						for (int i=0; i<listMeals.length; i++){
+							System.out.println("Meal id is: "+listMeals[i].getID());
+							Dish[] dish = listMeals[i].getDishes();
+							for (int j=0; j<dish.length; j++){
+								System.out.println("Dish name is: "+dish[j].getName());
+								Recipe recipe = dish[j].getRecipe();
+								System.out.println("Recipe is: "+recipe.getID());
+								int recipeID = recipe.getID();
+
+								getRecipe(recipeID);
+							}
+						}
+					}
+					
+				}
+			}
+			catch (Exception e){
+				e.printStackTrace();
+				return false;
+			}
 			return true;
+		}
 		else
 			return false;
     }
 
+	public static boolean getRecipe(int recipeID) {
+		try{
+			ServiceResponse sr2 = caller.call(getRecipeRequest(recipeID));
+			System.out.println("sr2.getCallStatus()="+sr2.getCallStatus());
+			if (sr2.getCallStatus() == CallStatus.succeeded){
+				List recipeList = sr2.getOutput(OUTPUT_GET_RECIPE, true);
+				if (recipeList == null || recipeList.size() == 0){
+					return false;
+				}
+				if (recipeList.get(0) instanceof Recipe){
+					System.out.println("recipeList size="+recipeList.size());
+					Recipe r = (Recipe)recipeList.get(0);
+					if (r!=null){
+						Ingredient[] ingredients = r.getIngredients();
+						System.out.println("Recipe Name="+r.getName());
+						Shopping.recipes.put(r.getName(), ingredients);
+						/*
+						for (int m=0; m<ingredients.length; m++){
+							System.out.println("Ingredient= "+ingredients[m].getLocalName());
+							System.out.println("Ingredient= "+ingredients[m].getResourceComment());
+							System.out.println("Resource Label= "+ingredients[m].getResourceLabel());
+							System.out.println("Quantity= "+ingredients[m].getQuantity());
+						}
+						*/
+					}
+				}
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+			
+	}
+					
+
+	
 	public static boolean getWeeklyMenu() {
 		ServiceResponse sr = caller.call(getWeeklyMenuRequest());
 

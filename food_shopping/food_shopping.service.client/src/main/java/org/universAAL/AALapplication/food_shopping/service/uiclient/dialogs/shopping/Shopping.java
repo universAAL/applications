@@ -16,17 +16,30 @@
 
 package org.universAAL.AALapplication.food_shopping.service.uiclient.dialogs.shopping;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import org.universAAL.AALapplication.food_shopping.service.uiclient.FoodManagementClient;
 import org.universAAL.AALapplication.food_shopping.service.uiclient.SharedResources;
+import org.universAAL.AALapplication.food_shopping.service.uiclient.UIProvider;
 import org.universAAL.AALapplication.food_shopping.service.uiclient.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
@@ -38,11 +51,13 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Group;
 import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
+import org.universAAL.middleware.ui.rdf.MediaObject;
 import org.universAAL.middleware.ui.rdf.Select;
 import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.Shopping.FoodItem;
+import org.universAAL.ontology.nutrition.Ingredient;
 
 /**
  * @author dimokas
@@ -50,8 +65,9 @@ import org.universAAL.ontology.Shopping.FoodItem;
  */
 public class Shopping extends UICaller {
 
-	private final static String window = "UIShopping#";
+	// NA server location - http://158.42.166.200:8080/
     public final static String IMG_URL = "http://127.0.0.1:8080/resources/shopping/images/";
+	private final static String window = "UIShopping#";
 
     static final String MY_UI_NAMESPACE = SharedResources.CLIENT_SHOPPING_UI_NAMESPACE + window;
     static final String SUBMISSION_CREATE = MY_UI_NAMESPACE + "create";
@@ -108,6 +124,7 @@ public class Shopping extends UICaller {
 	public static String shoppingListName = null;
 	public static String previousShoppingListName = null;
 	public static String uri = org.universAAL.ontology.Shopping.ShoppingList.MY_URI;
+	public static Hashtable recipes = null;
 
 	public Shopping(ModuleContext context) {
 		super(context);
@@ -396,22 +413,11 @@ public class Shopping extends UICaller {
 				}
 				this.startCreateDialog();
 			}
-/*			
+			
 			else if (SUBMISSION_TODAY_SHOPPING_LIST.equals(uir.getSubmissionID())) {
 				this.active="Today";
-				// Get today menu from NA
-				System.out.println("############################ BEGIN #################################");
-				boolean todayMenu = FoodManagementClient.getTodayMenu();
-				System.out.println("############################ END #################################");
 				this.startCreateNADialog(this.active);
 			} 
-			else if (SUBMISSION_WEEKLY_SHOPPING_LIST.equals(uir.getSubmissionID())) {
-				this.active="Weekly";
-				// Get today menu from NA
-				boolean todayMenu = FoodManagementClient.getWeeklyMenu();
-				this.startCreateNADialog(this.active);
-			}
-*/			 
 		}
 		Utils.println(window + " Continues");
 	}
@@ -449,7 +455,7 @@ public class Shopping extends UICaller {
 		}
 		return code;
 	}	
-/*
+
 	public void startCreateNADialog(String status) {
 		Utils.println(window + "startNADialog");
 		createNADialog = createNAMainDialog(status);
@@ -463,21 +469,28 @@ public class Shopping extends UICaller {
 		Utils.println(window + "createCreateNAMainDialog");
 		Form f = Form.newDialog(status+" Shopping List", new Resource());
 
-		//Group g1 = new Group(f.getIOControls(), new Label("Create Shopping List",
-		//	      (String) null), null, null, (Resource) null);
-		Select ms1 = new Select(f.getIOControls(), new Label("Food Items",null), PROP_PATH_SELECTED_ITEMS, null, (Resource) null);
-		ms1.generateChoices(this.getCreateShoppingListItems());
-		InputField in1 = new InputField(f.getIOControls(), new Label("Shopping List Name",null), PROP_PATH_SHOPPING_LIST_NAME, null, (Resource) null);
+		if (this.recipes.size()>0){
+			Enumeration en = recipes.keys();
+			String output = "The Shopping List based on today menu contains:\n\n";
+			while (en.hasMoreElements()){
+				String key = (String)en.nextElement();
+				System.out.println("### Recipe: "+key);
+				Ingredient[] ingredients = (Ingredient[])recipes.get(key);
+				for (int i=0; i<ingredients.length; i++)
+					output += "- " + ingredients[i].getFood().getName() + "\n";
+					//output += "- " + ingredients[i].getFood().getName() + "\t" + ingredients[i].getQuantity() + "\n";
+			}
+			SimpleOutput todayMenuPage = new SimpleOutput(f.getIOControls(), null, null, output);
+		}
+		else{
+			SimpleOutput todayMenuPage = new SimpleOutput(f.getIOControls(), null, null, "There are no items in today menu yet.\n\n");
+		}
 		
-		Submit save = new Submit(f.getIOControls(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_save_small.png")).toString()), SUBMISSION_SAVE);
-		save.addMandatoryInput(in1);
-		save.addMandatoryInput(ms1);
-
 		f = submitButtons(f);
 		
 		return f;
 	}
-*/
+
 	public void startCreateDialog() {
 		Utils.println(window + "startCreateDialog");
 		createDialog = createMainDialog();
@@ -497,11 +510,18 @@ public class Shopping extends UICaller {
 		ms1.generateChoices(this.getCreateShoppingListItems());
 		InputField in1 = new InputField(g1, new Label("Shopping List Name",null), PROP_PATH_SHOPPING_LIST_NAME, null, (Resource) null);
 		
-		//Submit save = new Submit(g1, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_save_small.png")).toString()), SUBMISSION_SAVE);
 		Submit save = new Submit(g1, new Label("", IMG_URL+"icons_save_small.png"), SUBMISSION_SAVE);
 		save.addMandatoryInput(in1);
 		save.addMandatoryInput(ms1);
-
+/*
+		Select ms1 = new Select(f.getIOControls(), new Label("Food Items",null), PROP_PATH_SELECTED_ITEMS, null, (Resource) null);
+		ms1.generateChoices(this.getCreateShoppingListItems());
+		InputField in1 = new InputField(f.getIOControls(), new Label("Shopping List Name",null), PROP_PATH_SHOPPING_LIST_NAME, null, (Resource) null);
+		
+		Submit save = new Submit(f.getIOControls(), new Label("", IMG_URL+"icons_save_small.png"), SUBMISSION_SAVE);
+		save.addMandatoryInput(in1);
+		save.addMandatoryInput(ms1);
+*/
 		f = submitButtons(f);
 		
 		return f;
@@ -786,6 +806,13 @@ public class Shopping extends UICaller {
 			mainDialog = initMainDialog();
 		}
 		
+		new Thread() {
+			public void run() {
+				// Get today menu from NA
+				boolean todayMenu = FoodManagementClient.getTodayMenu();
+			}
+		}.start();
+		
 		UIRequest out = new UIRequest(SharedResources.testUser, mainDialog,
 				LevelRating.middle, Locale.ENGLISH, PrivacyLevel.insensible);
 		sendUIRequest(out);
@@ -795,27 +822,27 @@ public class Shopping extends UICaller {
 		Utils.println(window + "createMenusMainDialog");
 		Form f = Form.newDialog("Shopping List", new Resource());
 
-		SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null, "Welcome to the Shopping List.\n\n");
-
+		SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null, "Welcome to the Shopping List application.\n\n" +
+		"- Press the button \"Create Shopping List\" to create a shopping list.\n"+
+		"- Press the button \"Browse Shopping List\" to browse or remove a shopping list.\n"+
+		"- Press the button \"Edit Shopping List\" to edit a shopping list.\n"+
+		"- Press the button \"Today Shopping List\" to create a shopping list based on today menu.\n"+
+		"- Press the button \"Back\" to return to previous page.\n");		
+		
 		f = submitButtons(f);
 		
 		return f;
 	}
 
 	private Form submitButtons(Form f){
+		
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstCreate_small.png"),SUBMISSION_CREATE);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstBrowse_small.png"), SUBMISSION_BROWSE);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstEdit_small.png"), SUBMISSION_EDIT);
+		new Submit(f.getSubmits(), new Label("", IMG_URL+"icon_list_today.png"), SUBMISSION_TODAY_SHOPPING_LIST);
+		//new Submit(f.getSubmits(), new Label("", IMG_URL+"icon_list_week.png"), SUBMISSION_WEEKLY_SHOPPING_LIST);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_back_small.png"), SUBMISSION_GOBACK);
 
-/*
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_shLstCreate_small.png")).toString()),SUBMISSION_CREATE);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_shLstBrowse_small.png")).toString()), SUBMISSION_BROWSE);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_shLstEdit_small.png")).toString()), SUBMISSION_EDIT);
-		//new Submit(f.getSubmits(), new Label("Today Shopping List", null), SUBMISSION_TODAY_SHOPPING_LIST);
-		//new Submit(f.getSubmits(), new Label("Weekly Shopping List", null), SUBMISSION_WEEKLY_SHOPPING_LIST);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_back_small.png")).toString()), SUBMISSION_GOBACK);
-*/		
 		return f;
 	}
 
