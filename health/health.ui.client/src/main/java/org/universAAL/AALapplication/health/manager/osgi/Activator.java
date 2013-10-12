@@ -18,8 +18,11 @@ package org.universAAL.AALapplication.health.manager.osgi;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.health.manager.MainButtonProvider;
+import org.universAAL.AALapplication.health.manager.service.GenericTreatmentDisplayService;
+import org.universAAL.AALapplication.health.manager.service.GenericTreatmentDisplayer;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 /**
  * @author amedrano
@@ -29,23 +32,29 @@ public class Activator implements BundleActivator {
 
 	static ModuleContext context;
 	public MainButtonProvider service;
+	public GenericTreatmentDisplayer gds;
 
 	public void start(BundleContext arg0) throws Exception {	
 		context = uAALBundleContainer.THE_CONTAINER
                 .registerModule(new Object[] {arg0});	
-		context.logDebug("simple.ui","Initialising Project", null);
+		LogUtils.logInfo(context, getClass(), "start", "Starting Health UI");
 
 		/*
 		 * uAAL stuff
 		 */
 		service = new MainButtonProvider(context);
 		
-		context.logInfo("simple.ui","Project started", null);
+		GenericTreatmentDisplayService.initialize(context);
+		gds = new GenericTreatmentDisplayer(context,GenericTreatmentDisplayService.profs);
+		
+		LogUtils.logInfo(context, getClass(), "start", "Health UI started");
 	}
 
 
 	public void stop(BundleContext arg0) throws Exception {
 		service.close();
+		gds.close();
+		LogUtils.logInfo(context, getClass(), "stop", "stoped Health UI");
 	}
 
 }

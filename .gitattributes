@@ -883,6 +883,11 @@ health/health.ui.client/NOTICE -text
 health/health.ui.client/pom.xml -text
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/MainButtonProvider.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/osgi/Activator.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/GenericTreatmentDisplayService.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/GenericTreatmentDisplayer.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/genericUIs/EditTreatmentForm.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/genericUIs/NewTreatmentForm.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/genericUIs/RemoveConfirmation.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/AbstractHealthForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/MainMenu.java -text
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/MeasurementTypeForm.java -text svneol=unset#text/plain

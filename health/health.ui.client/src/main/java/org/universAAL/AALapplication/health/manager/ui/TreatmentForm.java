@@ -20,6 +20,9 @@ package org.universAAL.AALapplication.health.manager.ui;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.PropertyPath;
+import org.universAAL.middleware.service.DefaultServiceCaller;
+import org.universAAL.middleware.service.ServiceCaller;
+import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Group;
@@ -31,6 +34,7 @@ import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -55,11 +59,17 @@ public class TreatmentForm extends AbstractHealthForm {
 		if (cmd.startsWith(TREATMENT_EXAPAND)){
 			// user has selected a detail Treatment
 			int index = Integer.parseInt(cmd.substring(TREATMENT_EXAPAND.length()));
-			new TreatmentViewForm(context, inputUser).show(hp.getTreatments()[index]);
+			// service call the most specific DisplayTreatmentService available.
+			ServiceCaller sc = new DefaultServiceCaller(context);
+			ServiceRequest sr = new ServiceRequest(new DisplayTreatmentService(null), inputUser);
+			sr.addChangeEffect(new String[]{DisplayTreatmentService.PROP_TREATMENT}, 
+					hp.getTreatments()[index]);
+			sc.call(sr);
 		}
 		
 		if (cmd.startsWith(NEW_TREATMENT)){
-			//TODO New Treatment type Select form
+			// New Treatment type Select form
+			new TreatmentTypeForm(context, inputUser).show();
 		}
 	}
 	
@@ -84,6 +94,10 @@ public class TreatmentForm extends AbstractHealthForm {
 				new PropertyPath(null, false, new String[] {Treatment.PROP_DESCRIPTION}), null);
 		SubdialogTrigger sdt = new SubdialogTrigger(row, new Label("Detail", null), TREATMENT_EXAPAND);
 		sdt.setRepeatableIDPrefix(TREATMENT_EXAPAND);
+		
+		// TODO add completiviness
+		// TODO add more info. according to user (if Careguiver, then more info...)
+		// Add remove Treatment button?
 		
 		new Submit(f.getSubmits(), new Label("Add New", null), NEW_TREATMENT);
 	

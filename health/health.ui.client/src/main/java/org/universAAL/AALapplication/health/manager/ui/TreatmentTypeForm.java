@@ -9,6 +9,9 @@ import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.middleware.service.DefaultServiceCaller;
+import org.universAAL.middleware.service.ServiceCaller;
+import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.ChoiceItem;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -17,6 +20,7 @@ import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -37,7 +41,6 @@ public class TreatmentTypeForm extends AbstractHealthForm {
 	 */
 	public TreatmentTypeForm(ModuleContext context, User inputUser) {
 		super(context, inputUser);
-		// TODO Auto-generated constructor stub
 	}
 
 	/* (non-Javadoc)
@@ -47,8 +50,16 @@ public class TreatmentTypeForm extends AbstractHealthForm {
 	public void handleUIResponse(UIResponse arg0) {
 		Resource res = (Resource) arg0.getUserInput(new String[]{SELECTED_TREATMENT});
 		if (arg0.getSubmissionID().startsWith(OK_LABEL)){
-			//TODO service call
-//			if (res)
+			// service call the most specific DisplayTreatmentService available.
+			ServiceCaller sc = new DefaultServiceCaller(context);
+			ServiceRequest sr = new ServiceRequest(new DisplayTreatmentService(null), inputUser);
+			sr.addAddEffect(new String[]{DisplayTreatmentService.PROP_TREATMENT}, 
+					arg0.getUserInput(new String[]{SELECTED_TREATMENT}));
+			sc.call(sr);
+		}
+		if (arg0.getSubmissionID().startsWith(CANCEL_LABEL)){
+			//Back
+			new TreatmentForm(context, inputUser).show();
 		}
 	}
 	
