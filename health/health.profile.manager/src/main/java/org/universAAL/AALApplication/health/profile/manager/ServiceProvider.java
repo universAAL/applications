@@ -99,6 +99,7 @@ public class ServiceProvider extends ServiceCallee {
 
 	private ServiceResponse updateProfile(HealthProfile profile) {
 		psm.updateHealthProfile(profile);
+		//TODO check it wass udpated
 		return new ServiceResponse(CallStatus.succeeded);
 	}
 
@@ -108,6 +109,7 @@ public class ServiceProvider extends ServiceCallee {
 		sr.addOutput(new ProcessOutput(HealthProfileService.OUTPUT_PROFILE, psm.getHealthProfile(userInput)));
 
 		LogUtils.logDebug(owner, getClass(), "getProfile", "profile gotten");
+		// TODO check get is not null
 		return sr;
 	}
 
