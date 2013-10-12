@@ -116,7 +116,9 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 	private HealthProfile newHealthProfile(Resource ap) {
 		HealthProfile hp = new HealthProfile(ap.getURI()+"HealthSubprofile");
 		if (ap instanceof AssistedPerson){
-			hp.assignHealthProfileToAP((AssistedPerson) ap);
+//			hp.setAssignedAssistedPerson((AssistedPerson) ap);
+			// Bug #378
+			hp.setAssignedAssistedPerson(new AssistedPerson(ap.getURI()));
 		}
 		
 		ServiceRequest req = new ServiceRequest(new ProfilingService(null),
