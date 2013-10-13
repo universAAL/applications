@@ -21,6 +21,7 @@
 	<!-- Health UI -->
 	<feature name="health.ui" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
+		<feature>uAAL-Ont.Recommendation</feature>
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/E.1.1-SNAPSHOT</bundle>
 	</feature>
 	
