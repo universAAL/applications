@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.universAAL.AALApplication.health.profile.manager.IHealthProfileProvider;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
@@ -86,14 +87,14 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 				Profile.PROP_HAS_SUB_PROFILE });
 
 		ServiceResponse sr = caller.call(req);
-		if(sr.getCallStatus() == CallStatus.succeeded) {
+		if(sr.getCallStatus().equals(CallStatus.succeeded)) {
 			try {
 		    	List<?> subProfiles = sr.getOutput(ARG_OUT, true);
 		    	if(subProfiles == null || subProfiles.size() == 0) {
-		    		moduleContext.logInfo(this.getClass().getName(),"there are no sub profiles, creating default health subprofile", null);
+		    		LogUtils.logInfo(moduleContext, getClass(), "getHealthProfile", "there are no sub profiles, creating default health subprofile");
 		    		return newHealthProfile(user);
 		    	}
-		    	moduleContext.logDebug(getClass().getName(), "searching in " + subProfiles.size() + " suprofiles", null);
+		    	LogUtils.logDebug(moduleContext, getClass(), "getHealthProfile", "searching in " + subProfiles.size() + " suprofiles");
 		    	Iterator<?> iter = subProfiles.iterator();
 		    	while(iter.hasNext()) {
 		    		SubProfile subProfile = (SubProfile)iter.next();
@@ -101,14 +102,14 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 		    			return (HealthProfile)subProfile;
 		    		}
 		    	}
-	    		moduleContext.logInfo(this.getClass().getName(),"there is no health profile, creating default one", null);
+		    	LogUtils.logInfo(moduleContext, getClass(), "getHealthProfile", "there is no health profile, creating default one");
 	    		return newHealthProfile(user);
 			} catch(Exception e) {
-				moduleContext.logError(this.getClass().getName(), "got exception", e);
+				LogUtils.logError(moduleContext, getClass(), "getHealthProfile", new String[]{"Got Exception"}, e);
 	    		return newHealthProfile(user);
 		    }
 		} else {
-			moduleContext.logWarn(this.getClass().getName(),"callstatus is not succeeded; creating new profile", null);
+			LogUtils.logWarn(moduleContext, getClass(), "getHealthProfile", "callstatus is not succeeded; creating new profile");
 			return newHealthProfile(user);
 		}
 	}
@@ -129,11 +130,11 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 				hp);
 		ServiceResponse resp = caller.call(req);
 		if (resp.getCallStatus().equals(CallStatus.succeeded)) {
-			moduleContext.logDebug(this.getClass().getName(),"Added new Health Profile", null);
+			LogUtils.logDebug(moduleContext, getClass(), "newHealthProfile", "added new HealthProfile");
 			return hp;
 		}
 		else {
-			moduleContext.logWarn(this.getClass().getName(),"callstatus is not succeeded, subprofile not added", null);
+			LogUtils.logWarn(moduleContext, getClass(), "newHealthProfile", "callstatus is not succeeded, subprofile not added");
 			return null;
 		}
 	}
@@ -149,7 +150,7 @@ public class ProfileServerHealthProfileProvider implements IHealthProfileProvide
 
 		 ServiceResponse sr = caller.call(req);
 		 if(sr.getCallStatus() != CallStatus.succeeded) {
-			 moduleContext.logWarn(this.getClass().getName(),"callstatus is not succeeded", null);
+			 LogUtils.logWarn(moduleContext, getClass(), "updateHealthProfile", "callstatus is not suceeded, profile not updated.");
 		 }
 	}
 	
