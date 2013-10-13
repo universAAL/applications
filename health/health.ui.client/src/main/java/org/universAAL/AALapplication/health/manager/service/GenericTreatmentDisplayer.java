@@ -83,6 +83,7 @@ public class GenericTreatmentDisplayer extends ServiceCallee {
 		if (operation.startsWith(GenericTreatmentDisplayService.SHOW_TREATMENT_LIST)) {
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing list of Treatments");
 			new TreatmentForm(owner, (User) user).show();
+			return new ServiceResponse(CallStatus.succeeded);
 		}
 			
 		Treatment t = (Treatment) call.getInputValue(GenericTreatmentDisplayService.INPUT_TREATMENT);
@@ -95,6 +96,7 @@ public class GenericTreatmentDisplayer extends ServiceCallee {
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for new Treatment");
 			// Form to add Treatment
 			new NewTreatmentForm(owner,(User) user).show(t);
+			return new ServiceResponse(CallStatus.succeeded);
 		}
 		
 
@@ -102,12 +104,14 @@ public class GenericTreatmentDisplayer extends ServiceCallee {
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for Editing Treatment");
 			// Form that updates treatment
 			new EditTreatmentForm(owner, (User) user);
+			return new ServiceResponse(CallStatus.succeeded);
 		}
 
 		if (operation.startsWith(GenericTreatmentDisplayService.REMOVE_GENERIC_TREATMENT)){
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing confirmation for removing Treatment");
 			// Form that confirms Treatment Remove.
 			new RemoveConfirmation(owner, (User) user);
+			return new ServiceResponse(CallStatus.succeeded);
 		}
 		
 		return invalidInput;

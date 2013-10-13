@@ -33,6 +33,7 @@ import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
 import org.universAAL.ontology.health.owl.services.TreatmentManagementService;
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.recommendations.VerticalLayout;
 
 public class NewTreatmentForm extends AbstractHealthForm{
 
@@ -95,6 +96,8 @@ public class NewTreatmentForm extends AbstractHealthForm{
 		df.setAlertString("Description must be a valid Aphanumeric Value");
 		df.setHelpString("set a description for this treatment");
 		df.setHintString("every day, in the morning climb on the scale and tell the system your weight.");
+		
+		f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
 		return f;
 	}
 	
