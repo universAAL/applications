@@ -65,7 +65,7 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 		
 		Select1 s = new Select1(f.getIOControls(),
 				new Label("Select Measurement Type", null),
-				new PropertyPath(SELECTED_TREATMENT, false),
+				new PropertyPath(Resource.generateAnonURI(), false, new String[]{SELECTED_TREATMENT}),
 				null, null);
 		
 		for (String type : typesOfMeasurement) {
