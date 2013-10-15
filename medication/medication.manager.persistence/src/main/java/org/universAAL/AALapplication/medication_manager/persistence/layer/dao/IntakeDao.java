@@ -165,7 +165,7 @@ public final class IntakeDao extends AbstractDao {
     Date now = new Date();
     Timestamp timestamp = new Timestamp(now.getTime());
     ps.setTimestamp(3, timestamp);
-    List<Map<String, Column>> results = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
+    List<Map<String, Column>> results = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, ps);
     return createIntakes(results);
   }
 

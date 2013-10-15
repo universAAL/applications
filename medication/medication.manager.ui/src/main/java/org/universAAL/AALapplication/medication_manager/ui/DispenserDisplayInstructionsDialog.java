@@ -95,7 +95,12 @@ public class DispenserDisplayInstructionsDialog extends UICaller {
     PersonDao personDao = persistentService.getPersonDao();
     Person patient = personDao.findPersonByPersonUri(inputUser.getURI());
     DispenserDao dispenserDao = persistentService.getDispenserDao();
-    Dispenser dispenser = dispenserDao.findByPerson(patient);
+    Dispenser dispenser = dispenserDao.getDispenserByPerson(patient);
+
+    if (dispenser == null) {
+      return "This user does not have pill dispenser. The pill dispenser could be set via the configuration web application";
+    }
+
     String instructionsFile = dispenser.getInstructionsFileName();
 
     return getDispenserInstructions(instructionsFile);
