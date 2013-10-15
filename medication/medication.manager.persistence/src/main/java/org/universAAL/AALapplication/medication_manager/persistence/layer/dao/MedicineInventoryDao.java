@@ -275,7 +275,7 @@ public final class MedicineInventoryDao extends AbstractDao {
     try {
       ps = getPreparedStatement(sql);
       ps.setInt(1, patient.getId());
-      List<Map<String, Column>> records = executeQueryExpectedMultipleRecord(TABLE_NAME, sql, ps);
+      List<Map<String, Column>> records = executeQueryMultipleRecordsPossible(TABLE_NAME, sql, ps);
       return getMedicineInventories(records);
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
