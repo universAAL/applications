@@ -22,6 +22,7 @@ package org.universAAL.AALapplication.ZWaveDataPublisher.PowerConsumption;
 import org.osgi.framework.BundleContext;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextPublisher;
@@ -53,6 +54,7 @@ public class PowerPublisher {
 		DimmerSensor ds = new DimmerSensor(NAMESPACE+name);
 		ds.setValue(value);
 		System.out.print("Publishing Power Values for "+NAMESPACE+name+" = "+ds.getValue()+"\n");
+		LogUtils.logTrace(mc, getClass(), "publishPowerConsumption", "Publishing Power Values for "+NAMESPACE+name+" = "+ds.getValue());
 		cp.publish(new ContextEvent(ds, DimmerSensor.PROP_HAS_VALUE));
 	}
 

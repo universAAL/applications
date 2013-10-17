@@ -33,6 +33,7 @@ import org.universAAL.ontology.activityhub.MotionSensor;
 import org.universAAL.ontology.activityhub.ContactClosureSensorEvent;
 import org.universAAL.ontology.activityhub.ContactClosureSensor;
 import org.universAAL.ontology.location.Location;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 public class MotionSensorPublisher {
 
@@ -53,7 +54,7 @@ public class MotionSensorPublisher {
 	}
 
 	public void publishMotionDetection(String message) {
-		System.out.println("DA MESSAGE-------------------->>>" + message);
+
 		String[] veraResponse = message.split(" ");
 
 		if (veraResponse[0].compareTo("Motion") == 0) {
@@ -65,6 +66,7 @@ public class MotionSensorPublisher {
 			ms.setLocation(new Location(NAMESPACE
 					+ "ZWaveMotionDetectorLocation", veraResponse[2]));
 			System.out.print("Publishing motion\n");
+			LogUtils.logDebug(mc, getClass(), "publishMotionDetection", "Motion Detected: "+veraResponse[2]);
 			cp.publish(new ContextEvent(ms, MotionSensor.PROP_MEASURED_VALUE));
 		} else if (veraResponse[0].compareTo("Contact") == 0) {
 			String msURL = NAMESPACE + veraResponse[1];
@@ -80,6 +82,7 @@ public class MotionSensorPublisher {
 					+ "ZWaveContactClosureLocation", veraResponse[2]));
 			cc.setMeasuredValue(cce);
 			System.out.print("Publishing contact\n");
+			LogUtils.logDebug(mc, getClass(), "publishMotionDetection", "Open Door Detected: "+veraResponse[2]);
 			cp.publish(new ContextEvent(cc,
 					ContactClosureSensor.PROP_MEASURED_VALUE));
 		}
