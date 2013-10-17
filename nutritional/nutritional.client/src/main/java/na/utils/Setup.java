@@ -4,20 +4,25 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
+import org.universAAL.ucc.configuration.model.ConfigOptionRegistry;
+import org.universAAL.ucc.configuration.model.ConfigurationOption;
+import org.universAAL.ucc.configuration.model.interfaces.OnConfigurationChangedListener;
 
-public class Setup {
+public class Setup implements OnConfigurationChangedListener{
     private static Log log = LogFactory.getLog(Setup.class);
     // default values
     // protected static final String DEFAULT_PATH_Nutritional_DESCRIPTOR =
     // Constants.getSpaceConfRoot() + "/NutritionalAdvisor";
     private static String absolutePath = new BundleConfigHome(
 	    "nutritional.client").getAbsolutePath();
+    private static String optIP=null;
+    private static Integer optPORT=null;
+    private static String optSERV=null;
 
     protected static final String DEFAULT_PATH_Nutritional_DESCRIPTOR = absolutePath;
 	   // + "/NutritionalAdvisor";
@@ -67,6 +72,7 @@ public class Setup {
     }
 
     static public String getServerIP() {
+	if(optIP!=null)return optIP;
 	// load file
 	Properties properties = new Properties();
 	try {
@@ -89,6 +95,11 @@ public class Setup {
     }
 
     static public String getWebServiceAddress() {
+	if(optIP!=null && optPORT!=null && optSERV!=null){
+	    String res="http://" + optIP + ":" + optPORT + "/" + optSERV;
+	    log.debug("Building server addres from uCC options: "+res);
+	    return res;
+	}
 	if (Setup.WEB_SERVICE_ADDRESS != null)
 	    return Setup.WEB_SERVICE_ADDRESS;
 	else {
@@ -515,6 +526,24 @@ public class Setup {
 	    log.info("Error, writing token to setup file: " + e.toString());
 	}
 
+    }
+
+    public void configurationChanged(ConfigOptionRegistry reg,
+	    ConfigurationOption opt) {
+	try {
+	    ConfigurationOption optionip = reg.getConfigOptionForId("ip");
+	    if (optionip != null)
+		optIP = optionip.getValue();
+	    ConfigurationOption optionport = reg.getConfigOptionForId("port");
+	    if (optionport != null)
+		optPORT = Integer.parseInt(optionport.getValue());
+	    ConfigurationOption optionserv = reg
+		    .getConfigOptionForId("service");
+	    if (optionserv != null)
+		optSERV = optionserv.getValue();
+	} catch (Exception e) {
+	    log.error("Could not parse options from uCC", e);
+	}
     }
 
 }
