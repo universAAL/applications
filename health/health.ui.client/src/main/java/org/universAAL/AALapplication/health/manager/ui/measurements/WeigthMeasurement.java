@@ -3,6 +3,7 @@ package org.universAAL.AALapplication.health.manager.ui.measurements;
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
+import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -11,6 +12,7 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.healthmeasurement.owl.PersonWeight;
+import org.universAAL.ontology.measurement.Measurement;
 import org.universAAL.ontology.profile.User;
 
 public class WeigthMeasurement extends AbstractHealthForm{
@@ -41,7 +43,8 @@ public class WeigthMeasurement extends AbstractHealthForm{
 		// Create Dialog
 		Form f = Form.newDialog("Weight", measurement);
 		//TODO: add units from actual prefix and unit.
-		InputField i = new InputField(f.getIOControls(), new Label("Weight ", null),null,null, inputUser);
+		InputField i = new InputField(f.getIOControls(), new Label("Weight ", null),
+				new PropertyPath(PropertyPath.generateAnonURI(), true, new String[]{Measurement.PROP_VALUE}),null, Float.valueOf(64.5f));
 		i.setHelpString("Insert Your Weight in Kg.");
 		i.setHintString("64.5");
 		new Submit(f.getSubmits(), 

@@ -2,7 +2,9 @@ package org.universAAL.AALapplication.health.manager.ui.measurements;
 
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.owl.MergedRestriction;
 import org.universAAL.middleware.owl.supply.LevelRating;
+import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
@@ -12,6 +14,7 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.healthmeasurement.owl.HeartRate;
+import org.universAAL.ontology.measurement.Measurement;
 import org.universAAL.ontology.profile.User;
 
 public class HeartRateMeasurement extends AbstractHealthForm{
@@ -44,7 +47,8 @@ public class HeartRateMeasurement extends AbstractHealthForm{
 		Form f = Form.newDialog("Heart Rate", measurement);
 
 		//TODO: add units from actual prefix and unit.
-		InputField i=new InputField(f.getIOControls(), new Label("HeartRate" , null),null,null, inputUser);
+		InputField i=new InputField(f.getIOControls(), new Label("HeartRate" , null),
+				new PropertyPath(PropertyPath.generateAnonURI(), true, new String[]{Measurement.PROP_VALUE}),null, Integer.valueOf(90));
 		i.setHelpString("Insert Your heart rate in beats per minute.");
 		i.setHintString("90");
 		new Submit(f.getSubmits(), 

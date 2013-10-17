@@ -45,6 +45,7 @@ public class TreatmentForm extends AbstractHealthForm {
 
 	private static final String TREATMENT_EXAPAND = HealthProfileOntology.NAMESPACE + "subdialogTreatmentExpand";
 	private static final String NEW_TREATMENT = HealthProfileOntology.NAMESPACE + "newTreatmentUI";
+	private static final String BACK = HealthProfileOntology.NAMESPACE + "back";
 	private HealthProfile hp;
 
 	public TreatmentForm(ModuleContext context, User inputUser) {
@@ -70,6 +71,9 @@ public class TreatmentForm extends AbstractHealthForm {
 		if (cmd.startsWith(NEW_TREATMENT)){
 			// New Treatment type Select form
 			new TreatmentTypeForm(context, inputUser).show();
+		}
+		if (cmd.startsWith(BACK)){
+			new MainMenu(context, inputUser).show();
 		}
 	}
 	
@@ -101,6 +105,8 @@ public class TreatmentForm extends AbstractHealthForm {
 		
 		new Submit(f.getSubmits(), new Label("Add New", null), NEW_TREATMENT);
 	
+		new Submit(f.getSubmits(), new Label("Back", null), BACK);
+		
 		sendForm(f);
 	}
 	
