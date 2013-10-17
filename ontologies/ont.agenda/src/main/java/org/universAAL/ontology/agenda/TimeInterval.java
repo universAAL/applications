@@ -166,7 +166,7 @@ public class TimeInterval extends ManagedIndividual {
 
     public boolean isWellFormed() {
 	return (props.containsKey(PROP_START_TIME) && props
-		.contains(PROP_END_TIME));
+		.containsKey(PROP_END_TIME));
     }
 
     public String toString(String fieldSeperator) {
