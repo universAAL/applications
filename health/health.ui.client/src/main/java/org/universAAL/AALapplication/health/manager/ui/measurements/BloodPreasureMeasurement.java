@@ -48,13 +48,14 @@ public class BloodPreasureMeasurement extends AbstractHealthForm{
 		
 		InputField s = new InputField(
 				f.getIOControls(), new Label("Systolic preassure (mmHg)", null),
-				new PropertyPath(null, false, new String[]{BloodPressure.PROP_SYSTOLIC, Measurement.PROP_VALUE}),null, null);
+				new PropertyPath(null, false, new String[]{BloodPressure.PROP_SYSTOLIC, Measurement.PROP_VALUE}),
+				null, Integer.valueOf(100));
 		s.setHelpString("Systolic Preasure, Marked as SYS, it is the maximum preassure reading.");
 		s.setHintString("100");
 		
 		InputField d = new InputField(
 				f.getIOControls(), new Label("Diastolic preassure (mmHg)", null),
-				new PropertyPath(null, false, new String[]{BloodPressure.PROP_DIASTOLIC, Measurement.PROP_VALUE}),null, null);
+				new PropertyPath(null, false, new String[]{BloodPressure.PROP_DIASTOLIC, Measurement.PROP_VALUE}),null, Integer.valueOf(70));
 		d.setHelpString("Diastolic Preasure, Marked as DIA, it is the minimum preassure reading.");
 		d.setHintString("70");
 		

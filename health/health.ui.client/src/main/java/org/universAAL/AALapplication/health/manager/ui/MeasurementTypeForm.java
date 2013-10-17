@@ -23,6 +23,7 @@ import org.universAAL.AALapplication.health.manager.ui.measurements.HowToBloodPr
 import org.universAAL.AALapplication.health.manager.ui.measurements.Motivation;
 import org.universAAL.AALapplication.health.manager.ui.measurements.WeigthMeasurement;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
@@ -92,9 +93,10 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 		if (cmd.equalsIgnoreCase(CANCEL_LABEL)){
 			new MainMenu(context, inputUser).show();
 		}
-		if (cmd.equalsIgnoreCase(SELECTED_TREATMENT)){
+		if (cmd.equalsIgnoreCase(OK_LABEL)){
 			HealthMeasurement hm = (HealthMeasurement) arg0.getUserInput(new String[]{SELECTED_TREATMENT});
 			// TODO: create a service in ont.health and call the service accordingly
+			LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling Treatment of type:" + hm.getClassURI());
 			if (hm instanceof PersonWeight){
 				new WeigthMeasurement(context, inputUser, (PersonWeight) hm).show();
 			}
