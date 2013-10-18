@@ -4,11 +4,11 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>ltba.pom</artifactId>
-		<version>E.1</version>
+		<version>E.1.1-SNAPSHOT</version>
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.manager</artifactId>
-	<version>E.1.1-SNAPSHOT</version>
+	<version>${parent.version}</version>
 	<packaging>bundle</packaging>
 	<name>LTBA manager</name>
 	<description>LTBA main module for coordinating all the LTBA componentos.</description>
@@ -22,11 +22,11 @@
 			<groupId>org.universAAL.middleware</groupId>
 			<artifactId>mw.bus.context.osgi</artifactId>
 		</dependency>
-		<!--		<dependency>-->
-		<!--			<groupId>org.universAAL.middleware</groupId>-->
-		<!--			<artifactId>data.representation.osgi</artifactId>-->
-		<!--			<version>2.0.1-SNAPSHOT</version>-->
-		<!--		</dependency>-->
+		<!-- <dependency> -->
+		<!-- <groupId>org.universAAL.middleware</groupId> -->
+		<!-- <artifactId>data.representation.osgi</artifactId> -->
+		<!-- <version>2.0.1-SNAPSHOT</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.drools</artifactId>
@@ -42,6 +42,7 @@
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>ltba.nomhad.gateway</artifactId>
+			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -61,9 +62,7 @@
 						<Bundle-Activator>org.universAAL.ltba.manager.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<!--
-							<Import-Package>*,org.universaal.ltba.ui.impl.main</Import-Package>
-						-->
+						<!-- <Import-Package>*,org.universaal.ltba.ui.impl.main</Import-Package> -->
 					</instructions>
 				</configuration>
 			</plugin>
@@ -79,11 +78,11 @@
 					<artifactId>ui.handler.gui.swing.bluesteelLAF</artifactId>
 					<version>2.0.1-SNAPSHOT</version>
 				</dependency>
-				<!--		<dependency>-->
-				<!--			<groupId>org.universAAL.AALapplication</groupId>-->
-				<!--			<artifactId>EnergyReaderPublisher</artifactId>-->
-				<!--			<version>D.0</version>-->
-				<!--		</dependency>-->
+				<!-- <dependency> -->
+				<!-- <groupId>org.universAAL.AALapplication</groupId> -->
+				<!-- <artifactId>EnergyReaderPublisher</artifactId> -->
+				<!-- <version>D.0</version> -->
+				<!-- </dependency> -->
 			</dependencies>
 		</profile>
 	</profiles>
