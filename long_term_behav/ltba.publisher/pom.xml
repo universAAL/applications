@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>ltba.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.1</version>
+		<version>E.1.1-SNAPSHOT</version>
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.publisher</artifactId>
@@ -77,6 +77,5 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
-	<version>E.1.1-SNAPSHOT</version>
 	<groupId>org.universAAL.AALapplication</groupId>
 </project>
