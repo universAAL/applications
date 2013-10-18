@@ -1,6 +1,6 @@
 /*
 	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -89,8 +89,9 @@ public class ConsequenceListener extends ContextSubscriber {
 	 */
 	public static ConsequenceListener getInstance(BundleContext context) {
 		if (INSTANCE == null)
-			return new ConsequenceListener(uAALBundleContainer.THE_CONTAINER
-					.registerModule(new Object[] { context }));
+			return new ConsequenceListener(
+					uAALBundleContainer.THE_CONTAINER
+							.registerModule(new Object[] { context }));
 		else
 			return INSTANCE;
 	}
@@ -119,7 +120,7 @@ public class ConsequenceListener extends ContextSubscriber {
 	@Override
 	public void handleContextEvent(ContextEvent event) {
 
-		if (getStatus()) {
+		if (getStatus() && (event.getRDFObject() instanceof Consequence)) {
 			Consequence csq = (Consequence) event.getRDFObject();
 			LogUtils.logInfo(moduleContext, getClass(), "handleContextEvent",
 					new String[] { "Handling consequence" }, null);
