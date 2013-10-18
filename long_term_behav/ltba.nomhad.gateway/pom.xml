@@ -4,11 +4,10 @@
 	<parent>
 		<artifactId>ltba.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.1</version>
+		<version>E.1.1-SNAPSHOT</version>
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.nomhad.gateway</artifactId>
-	<version>E.1.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>LTBA to Nomhad gateway</name>
 	<description>		</description>
@@ -26,9 +25,7 @@
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 
-						<!--
-							<Import-Package>*,org.universaal.ltba.ui.impl.main</Import-Package>
-						-->
+						<!-- <Import-Package>*,org.universaal.ltba.ui.impl.main</Import-Package> -->
 
 					</instructions>
 				</configuration>
