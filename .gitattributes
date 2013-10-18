@@ -1965,6 +1965,7 @@ long_term_behav/drools.reasoner/paxLaunchers/OSGi_Enterprise.launch -text
 long_term_behav/drools.reasoner/paxLaunchers/PROTOTYPE_VERSION.launch -text
 long_term_behav/drools.reasoner/paxLaunchers/PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch -text
 long_term_behav/drools.reasoner/pom.xml -text
+long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/DevelopingRulesUI.java -text svneol=unset#text/plain
 long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/engine/CustomAgendaEventListener.java -text
 long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/engine/CustomWorkingMemoryEventListener.java -text
 long_term_behav/drools.reasoner/src/main/resources/droolsWorkshop1.drl -text
