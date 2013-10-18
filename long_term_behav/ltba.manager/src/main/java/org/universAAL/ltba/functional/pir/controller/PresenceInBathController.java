@@ -1,4 +1,4 @@
-package org.universAAL.ltba.pir;
+package org.universAAL.ltba.functional.pir.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,26 +7,17 @@ import java.util.GregorianCalendar;
 
 import javax.swing.Timer;
 
-import es.tsb.ltba.nomhad.gateway.NomhadGateway;
+import org.universAAL.ltba.functional.pir.LTBAController;
 
-public class PresenceInBathController implements ActionListener {
+public class PresenceInBathController extends LTBAController implements
+		ActionListener {
 
 	private static PresenceInBathController INSTANCE;
 	private Timer t;
-	private String userCode;
-	private String serverIp;
 
 	private PresenceInBathController() {
 		super();
 		INSTANCE = this;
-		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
-		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
-		if (ip != null) {
-			serverIp = ip;
-		}
-		if (usr != null) {
-			userCode = usr;
-		}
 		t = new Timer(24 * 60 * 60 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
@@ -52,9 +43,9 @@ public class PresenceInBathController implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-//		NomhadGateway.getInstance().putMeasurement("192.168.238.40", "A100",
-//				"123456", "SLEEPING", "GOING_TO_BED", new String("" + gtbTime));
-//		TimeSleepingController.setGTBTime((float) gtbTime);
+		// NomhadGateway.getInstance().putMeasurement("192.168.238.40", "A100",
+		// "123456", "SLEEPING", "GOING_TO_BED", new String("" + gtbTime));
+		// TimeSleepingController.setGTBTime((float) gtbTime);
 	}
 
 }

@@ -1,6 +1,6 @@
 /*
 	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -17,7 +17,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
  */
-package org.universAAL.ltba.energy;
+package org.universAAL.ltba.functional.energy;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +25,7 @@ import java.util.Date;
 import org.osgi.framework.BundleContext;
 import org.universAAL.ltba.activity.ActivityLogger;
 import org.universAAL.ltba.activity.representation.GraphicReporter;
+import org.universAAL.ltba.functional.energy.controller.WatchingTVController;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.context.ContextEvent;

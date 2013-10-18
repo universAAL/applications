@@ -1,12 +1,13 @@
-package org.universAAL.ltba.pir;
+package org.universAAL.ltba.functional.pir.controller;
 
 import org.universAAL.ltba.activity.Room;
+import org.universAAL.ltba.functional.pir.LTBAController;
 import org.universAAL.ltba.manager.ConsequenceListener;
 import org.universAAL.middleware.container.utils.LogUtils;
 
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class CurrentActivityController extends PIRController {
+public class CurrentActivityController extends LTBAController {
 
 	private final String INDICATOR_GROUP = "CURRENT_ACTIVITY_INDICATORS_GROUP";
 	private final String INDICATOR = "CURRENT_ACTIVITY_LEVEL";
@@ -25,14 +26,14 @@ public class CurrentActivityController extends PIRController {
 	private CurrentActivityController() {
 		super();
 		INSTANCE = this;
-//		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
-//		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
-//		if (ip != null) {
-//			serverURL = ip;
-//		}
-//		if (usr != null) {
-//			userCode = usr;
-//		}
+		// String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
+		// String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
+		// if (ip != null) {
+		// serverURL = ip;
+		// }
+		// if (usr != null) {
+		// userCode = usr;
+		// }
 	}
 
 	public static CurrentActivityController getInstance() {

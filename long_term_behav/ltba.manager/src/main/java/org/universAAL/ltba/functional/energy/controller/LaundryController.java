@@ -1,4 +1,4 @@
-package org.universAAL.ltba.energy;
+package org.universAAL.ltba.functional.energy.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,10 +7,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.Timer;
-import org.osgi.framework.BundleContext;
+
+import org.universAAL.ltba.functional.pir.LTBAController;
+
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class LaundryController implements ActionListener {
+public class LaundryController extends LTBAController implements ActionListener {
 
 	private double time;
 	private int times;
@@ -64,8 +66,8 @@ public class LaundryController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Sending to Nomhad time>" + time + " and times>"
 				+ times);
-		NomhadGateway.getInstance().putMeasurement("192.168.238.40", "A100",
-				"123456", "ACTIVITIES", "LAUNDRY", new String("" + time),
+		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
+				userPassword, "ACTIVITIES", "LAUNDRY", new String("" + time),
 				DEVICE_ID);
 		time = 0;
 		times = 0;

@@ -1,9 +1,18 @@
-package org.universAAL.ltba.pir;
+package org.universAAL.ltba.functional.pir;
 
 import java.util.Calendar;
 
 import org.osgi.framework.BundleContext;
 import org.universAAL.ltba.activity.Room;
+import org.universAAL.ltba.functional.pir.controller.ActivityIndexController;
+import org.universAAL.ltba.functional.pir.controller.AwakeningController;
+import org.universAAL.ltba.functional.pir.controller.CurrentActivityController;
+import org.universAAL.ltba.functional.pir.controller.GoingToBedController;
+import org.universAAL.ltba.functional.pir.controller.OutOfHomeController;
+import org.universAAL.ltba.functional.pir.controller.PresenceInBathController;
+import org.universAAL.ltba.functional.pir.controller.PresenceInKitchenController;
+import org.universAAL.ltba.functional.pir.controller.ShoppingController;
+import org.universAAL.ltba.functional.pir.controller.WakeUpController;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.context.ContextEvent;
@@ -59,8 +68,9 @@ public class PIRConsequenceListener extends ContextSubscriber {
 	 */
 	public static PIRConsequenceListener getInstance(BundleContext context) {
 		if (INSTANCE == null)
-			return new PIRConsequenceListener(uAALBundleContainer.THE_CONTAINER
-					.registerModule(new Object[] { context }));
+			return new PIRConsequenceListener(
+					uAALBundleContainer.THE_CONTAINER
+							.registerModule(new Object[] { context }));
 		else
 			return INSTANCE;
 	}

@@ -68,4 +68,44 @@ public class Setup {
 		}
 		return null;
 	}
+
+	public static int getAwakeningUpdatePeriod() {
+		Properties properties = new Properties();
+		try {
+			String home = getSetupFileName();
+			properties.load(new FileInputStream(home + "/" + PROPERTIES_FILE));
+			return Integer.parseInt(properties
+					.getProperty("awakening.update.period"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static int getReportHour() {
+		Properties properties = new Properties();
+		try {
+			String home = getSetupFileName();
+			properties.load(new FileInputStream(home + "/" + PROPERTIES_FILE));
+			return Integer.parseInt(properties
+					.getProperty("awakening.report.hour"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public static int getReportMinutes() {
+		Properties properties = new Properties();
+		try {
+			String home = getSetupFileName();
+			properties.load(new FileInputStream(home + "/" + PROPERTIES_FILE));
+			return Integer.parseInt(properties
+					.getProperty("awakening.report.minutes"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 }

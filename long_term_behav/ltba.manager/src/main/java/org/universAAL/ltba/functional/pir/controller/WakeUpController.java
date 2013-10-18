@@ -1,4 +1,4 @@
-package org.universAAL.ltba.pir;
+package org.universAAL.ltba.functional.pir.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,16 +7,17 @@ import java.util.GregorianCalendar;
 
 import javax.swing.Timer;
 
+import org.universAAL.ltba.functional.pir.LTBAController;
+
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class WakeUpController implements ActionListener {
+public class WakeUpController extends LTBAController implements ActionListener {
 
 	private double wuTime;
 	private int times;
 	private static WakeUpController INSTANCE;
 	private Timer t;
-	private String serverIp;
-	private String userCode;
+
 	/**
 	 * The device ID. When the user management be made, the DEVICE_ID must
 	 * content a reference to the user, in orden to not crossing the same device
@@ -27,14 +28,6 @@ public class WakeUpController implements ActionListener {
 	private WakeUpController() {
 		super();
 		INSTANCE = this;
-		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
-		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
-		if (ip != null) {
-			serverIp = ip;
-		}
-		if (usr != null) {
-			userCode = usr;
-		}
 		t = new Timer(24 * 60 * 60 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
@@ -61,7 +54,7 @@ public class WakeUpController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Sending to Nomhad time>" + wuTime + " and times>"
 				+ times);
-		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
+		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
 				"123456", "SLEEPING", "GETTING_UP", new String("" + wuTime),
 				DEVICE_ID);
 		TimeSleepingController.getInstance().setWUTime((float) wuTime);
