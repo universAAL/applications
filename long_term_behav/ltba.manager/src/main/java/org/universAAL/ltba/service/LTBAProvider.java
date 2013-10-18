@@ -79,21 +79,21 @@ public class LTBAProvider extends ServiceCallee {
 			} else if (operation
 					.startsWith(ProvidedLTBAService.SERVICE_SWITCH_ON)) {
 				// System.out.println("SWITCHING ON IN HANDLERe");
-				LogUtils.logTrace(mctx, getClass(), "ServiceProvided",
-						new String[] { "SWITCHING ON..." }, null);
+				LogUtils.logInfo(mctx, getClass(), "ServiceProvided",
+						new String[] { "SWITCHING ON LTBA..." }, null);
 				listener.setStatus(true);
 				return new ServiceResponse(CallStatus.succeeded);
 			} else if (operation
 					.startsWith(ProvidedLTBAService.SERVICE_SWITCH_OFF)) {
 				// System.out.println("SWITCHING OFF IN HANDLER");
-				LogUtils.logTrace(
+				LogUtils.logInfo(
 						mctx,
 						getClass(),
 						"ServiceProvided",
 						new String[] { "SWITCHING OFF...THE LTBA WILL BE OPERATIVE AGAIN IN 8 HOURS" },
 						null);
 				listener.setStatus(false);
-				restartLTBA();
+				// restartLTBA();
 				return new ServiceResponse(CallStatus.succeeded);
 			} else if (operation
 					.startsWith(ProvidedLTBAService.SERVICE_PRINT_REPORT)) {
@@ -131,7 +131,7 @@ public class LTBAProvider extends ServiceCallee {
 		}
 		restartTimer = new Timer(EIGHT_HOURS, new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {
 				ServiceRequest switchOn = new ServiceRequest(new LTBAService(),
 						inputUser);
 				switchOn.addAddEffect(
