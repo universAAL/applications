@@ -19,6 +19,8 @@
  */
 package org.universAAL.drools.engine;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,6 +45,7 @@ import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.rule.ConsequenceException;
 import org.osgi.framework.BundleContext;
+import org.universAAL.drools.DevelopingRulesUI;
 import org.universAAL.drools.models.RuleModel;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -53,8 +56,8 @@ import org.universAAL.middleware.context.ContextPublisher;
 import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
-import org.universAAL.middleware.datarep.SharedResources;
 import org.universAAL.ontology.activityhub.ActivityHubSensor;
+import org.universAAL.ontology.device.Sensor;
 import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
@@ -78,12 +81,15 @@ import org.universAAL.ontology.drools.DroolsReasoning;
 public final class RulesEngine {
 
 	private static StatefulKnowledgeSession ksession;
-	private KnowledgeBase kbase;
+	private static KnowledgeBase kbase;
 	private static boolean testMode = false;
+	// TODO get test mode out to a config file
 	private static BundleContext rulesEngineBundleContext = null;
 	private static ModuleContext rulesEngineModuleContext = null;
 	private static RulesEngine INSTANCE;
 	private static final UUID uuid = UUID.randomUUID();
+	private static final String HOME_FOLDER = "drools.reasoner";
+	private static final String PROPERTIES_FILE = "reasoner.properties";
 
 	// private PoolingDataSource dataSource;
 	// private EntityManagerFactory emf;
@@ -109,7 +115,44 @@ public final class RulesEngine {
 			e.printStackTrace();
 		}
 		INSTANCE = this;
+		System.out
+				.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSTARTING WINDOW\n\n\n\n\n\n\n\n\n\n");
+		if (getDevelopingStatus()) {
+			new DevelopingRulesUI(context);
+		}
+		setTestStatus();
+	}
 
+	private void setTestStatus() {
+		String homePath = new BundleConfigHome(HOME_FOLDER).getAbsolutePath();
+
+		Properties properties = new Properties();
+		try {
+			properties.load(new FileInputStream(homePath + "/"
+					+ PROPERTIES_FILE));
+			if (Boolean.parseBoolean(properties.getProperty("mode.test"))) {
+				enableTestMode();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private boolean getDevelopingStatus() {
+
+		String homePath = new BundleConfigHome(HOME_FOLDER).getAbsolutePath();
+
+		Properties properties = new Properties();
+		try {
+			properties.load(new FileInputStream(homePath + "/"
+					+ PROPERTIES_FILE));
+			return Boolean.parseBoolean(properties
+					.getProperty("developing.rules"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**
@@ -139,7 +182,7 @@ public final class RulesEngine {
 	 *         runtime. This instance is not valid over universAAL and OSGi.
 	 */
 	public static RulesEngine getInstance() {
-		testMode = true;
+		// testMode = true;
 		if (INSTANCE == null) {
 			return new RulesEngine(null);
 		} else {
@@ -163,7 +206,7 @@ public final class RulesEngine {
 	 * 
 	 * @throws Exception
 	 */
-	private void initializeDrools() throws Exception {
+	private static void initializeDrools() throws Exception {
 		// //Brand new
 		// setUpPersistence();
 		try {
@@ -208,8 +251,8 @@ public final class RulesEngine {
 	 * 
 	 * @return Knowledge Base
 	 */
-	private KnowledgeBase loadKnowledgeBaseFromPackages() throws Exception,
-			Throwable {
+	private static KnowledgeBase loadKnowledgeBaseFromPackages()
+			throws Exception, Throwable {
 		// KnowledgeBuilderConfiguration cfg =
 		// KnowledgeBuilderFactory.newKnowledgeBuilderConfiguration();
 		// cfg.setProperty("drools.dialect.java.compiler", "JANINO");
@@ -224,8 +267,8 @@ public final class RulesEngine {
 			props.setProperty("drools.dialect.mvel.strict", "false");
 			props.setProperty("drools.dialect.java.compiler", "JANINO");
 			KnowledgeBuilderConfiguration cfg = KnowledgeBuilderFactory
-					.newKnowledgeBuilderConfiguration(props, ClassLoader
-							.getSystemClassLoader());
+					.newKnowledgeBuilderConfiguration(props,
+							ClassLoader.getSystemClassLoader());
 
 			// DROOLS 5.3.0
 			kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(cfg);
@@ -240,22 +283,23 @@ public final class RulesEngine {
 			// kbuilder.add(ResourceFactory.newUrlResource(rulesEngineBundleContext.getBundle().getResource("uAALrules.drl")),
 			// ResourceType.DRL);
 
-//			System.out
-//					.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LOS PATHS DEL METAAL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-//			System.out.println(ResourceFactory
-//					.newUrlResource(rulesEngineBundleContext.getBundle()
-//							.getResource("uAALrules.drl")));
+			// System.out
+			// .println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<LOS PATHS DEL METAAL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			// System.out.println(ResourceFactory
+			// .newUrlResource(rulesEngineBundleContext.getBundle()
+			// .getResource("uAALrules.drl")));
 			String home = new BundleConfigHome("drools.reasoner")
 					.getAbsolutePath();
-//			String modHome = home.replace("\\", "/");
-//			String pathToHome = "path=file:/"
-//					+ modHome.substring(modHome.indexOf(":") + 1)
-//					+ "/uAALrules.drl";
-//			System.out.println(pathToHome);
-//			System.out.println(new BundleConfigHome("drools.reasoner")
-//					.getAbsolutePath());						
-			kbuilder.add(ResourceFactory.newFileResource(home
-					+ "/uAALrules.drl"), ResourceType.DRL);
+			// String modHome = home.replace("\\", "/");
+			// String pathToHome = "path=file:/"
+			// + modHome.substring(modHome.indexOf(":") + 1)
+			// + "/uAALrules.drl";
+			// System.out.println(pathToHome);
+			// System.out.println(new BundleConfigHome("drools.reasoner")
+			// .getAbsolutePath());
+			kbuilder.add(
+					ResourceFactory.newFileResource(home + "/uAALrules.drl"),
+					ResourceType.DRL);
 
 		} else {
 			// props.setProperty("drools.dialect.java.compiler", "JANINO");
@@ -268,8 +312,7 @@ public final class RulesEngine {
 		if (kbuilder.hasErrors()) {
 			int nErrors = kbuilder.getErrors().toArray().length;
 			StringBuilder sb = new StringBuilder();
-			sb
-					.append("Knowledge builder has errors in its inicialization. Do you have a *.drl rule base file in the resources folder?");
+			sb.append("Knowledge builder has errors in its inicialization. Do you have a *.drl rule base file in the resources folder?");
 			sb.append("\n" + nErrors + " detected:");
 
 			for (int i = 0; i < nErrors; i++) {
@@ -306,11 +349,13 @@ public final class RulesEngine {
 	public void insertContextEvent(Object event) {
 		if (event instanceof ContextEvent) {
 			if (((ContextEvent) event).getRDFSubject() instanceof ActivityHubSensor) {
-				ksession.insert(event);
+				
 			} else {
+				ContextEvent c;
+				// c.setpro
 				// Not a sensor (genius)
 			}
-
+			ksession.insert(event);
 		} else {
 			// Not a contextEvent
 		}
@@ -406,8 +451,7 @@ public final class RulesEngine {
 				"http://www.tsbtecnologias.es/ContextProvider.owl#ReasonerNotifier");
 
 		info.setType(ContextProviderType.reasoner);
-		info
-				.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
+		info.setProvidedEvents(new ContextEventPattern[] { new ContextEventPattern() });
 		cp = new DefaultContextPublisher(rulesEngineModuleContext, info);
 		DroolsReasoning dr = new DroolsReasoning(
 				"http://www.tsbtecnologias.es/DroolsReasoning.owl#ReasoningConsequence");
@@ -431,11 +475,26 @@ public final class RulesEngine {
 	}
 
 	public static void startRulesEngine() {
+		try {
+			initializeDrools();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Rules engine started from method!!!");
 	}
 
 	public static void stopRulesEngine() {
+		if (ksession != null) {
+			ksession.halt();
+		}
+		ksession = null;
 		System.out.println("Rules engine stopped from method!!!");
+	}
+
+	public void restartRulesEngine() {
+		stopRulesEngine();
+		startRulesEngine();
 	}
 
 	/**
@@ -450,8 +509,8 @@ public final class RulesEngine {
 		KnowledgeBuilder auxkbuilder;
 		props.setProperty("drools.dialect.java.compiler", "JANINO");
 		KnowledgeBuilderConfiguration cfg = KnowledgeBuilderFactory
-				.newKnowledgeBuilderConfiguration(props, ClassLoader
-						.getSystemClassLoader());
+				.newKnowledgeBuilderConfiguration(props,
+						ClassLoader.getSystemClassLoader());
 		auxkbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder(cfg);
 
 		final Resource res = ResourceFactory
@@ -669,13 +728,6 @@ public final class RulesEngine {
 	// // TODO Auto-generated catch block
 	// e.printStackTrace();
 	// }
-	//
-	//
-	//
-	//
-	//
-	//
-	//
 	//
 	// //Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
 	//

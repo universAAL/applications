@@ -151,6 +151,18 @@ rule "Activity insertion"
    		//insert(f);    	
 end
 
+rule "ZWave Motion detected "
+    when
+    	$ce:ContextEvent($p:Provider eval( RDFSubject instanceof Sensor), $s:(((Sensor)RDFSubject)))
+    	eval($p.toString() == "http://www.tsbtecnologias.es/ContextProvider.owl#ZWaveEventPublisher")
+		not Activity ( place matches $s.getLocation().getProperty("http://ontology.universAAL.org/Location.owl#hasName"))
+    then
+    	System.out.println("Inserting activity from ZWave Event");   	
+    	Activity act = new Activity(new String($s.getLocation().getProperty("http://ontology.universAAL.org/Location.owl#hasName")),"NULL",0);
+    	insert(act);
+    	System.out.println("MOTION EVENT DETECTED IN ROOM: "+$s.getLocation().getProperty("http://ontology.universAAL.org/Location.owl#hasName"));
+end
+
 //LOOK AT THE WINDOW TIME LENGHT
 rule "Activity counter with accumulate" 
 no-loop
@@ -172,7 +184,7 @@ salience -1
 	then		
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Source","Intensity"},new String[]{"ACTIVITY",$p,$i});
 end
-/*
+
 rule "ActivityIndex - Hour Average"
 dialect "java"
 no-loop true
@@ -281,7 +293,7 @@ timer(int: 1m 8h)
 	then
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Index"},new String[]{"AverageDay",new String(""+$d.getIndex())});
 end
-*/
+
 rule "Get 5 minutes Average"
 timer(int: 0 5m)
 	when
