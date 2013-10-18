@@ -4,11 +4,10 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>ltba.pom</artifactId>
-		<version>E.1</version>
+		<version>E.1.1-SNAPSHOT</version>
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.ui</artifactId>
-	<version>E.1.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>LTBA user interface.</name>
 	<description>The LTBA service user interface</description>
