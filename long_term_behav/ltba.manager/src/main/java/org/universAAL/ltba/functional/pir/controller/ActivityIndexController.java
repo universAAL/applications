@@ -1,20 +1,15 @@
-package org.universAAL.ltba.pir;
+package org.universAAL.ltba.functional.pir.controller;
 
-import org.universAAL.ltba.manager.CommonUtils;
+import org.universAAL.ltba.functional.pir.LTBAController;
 import org.universAAL.ltba.manager.ConsequenceListener;
-import org.universAAL.ltba.manager.Setup;
 import org.universAAL.middleware.container.utils.LogUtils;
 
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class ActivityIndexController extends PIRController {
+public class ActivityIndexController extends LTBAController {
 
 	private final String INDICATOR_GROUP = "INDEXES";
 	private final String INDICATOR = "ACTIVITY_LEVEL";
-	// private String serverIp = "192.168.238.40";
-	// private String userCode = "A100";
-	// private String serverIp = null;
-	// private String userCode = null;
 
 	private static ActivityIndexController INSTANCE;
 	/**
@@ -56,8 +51,8 @@ public class ActivityIndexController extends PIRController {
 						+ index }, null);
 		System.out.println("Sending to Nomhad activityIndex>" + index);
 		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-				CommonUtils.NOMHAD_DEVICE_CODE, INDICATOR_GROUP, INDICATOR,
-				new String(index), DEVICE_ID);
+				userPassword, INDICATOR_GROUP, INDICATOR, new String(index),
+				DEVICE_ID);
 	}
 
 }

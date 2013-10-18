@@ -1,4 +1,4 @@
-package org.universAAL.ltba.pir;
+package org.universAAL.ltba.functional.pir.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,26 +7,19 @@ import java.util.GregorianCalendar;
 
 import javax.swing.Timer;
 
+import org.universAAL.ltba.functional.pir.LTBAController;
+
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class OutOfHomeController implements ActionListener {
+public class PresenceInKitchenController extends LTBAController implements
+		ActionListener {
 
-	private static OutOfHomeController INSTANCE;
+	private static PresenceInKitchenController INSTANCE;
 	private Timer t;
-	private String serverIp;
-	private String userCode;
 
-	private OutOfHomeController() {
+	private PresenceInKitchenController() {
 		super();
 		INSTANCE = this;
-		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
-		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
-		if (ip != null) {
-			serverIp = ip;
-		}
-		if (usr != null) {
-			userCode = usr;
-		}
 		t = new Timer(24 * 60 * 60 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
@@ -36,18 +29,18 @@ public class OutOfHomeController implements ActionListener {
 		t.start();
 	}
 
-	public static OutOfHomeController getInstance() {
+	public static PresenceInKitchenController getInstance() {
 		if (INSTANCE == null)
-			return new OutOfHomeController();
+			return new PresenceInKitchenController();
 		else
 			return INSTANCE;
 	}
 
-	public void outOfHomeStart(float hour) {
+	public void presenceInBathStart(float hour) {
 		// TODO
 	}
 
-	public void outOfHomeStop(float hour) {
+	public void presenceInBathStop(float hour) {
 		// TODO
 	}
 

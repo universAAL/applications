@@ -1,4 +1,4 @@
-package org.universAAL.ltba.pir;
+package org.universAAL.ltba.functional.pir.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,9 +7,12 @@ import java.util.GregorianCalendar;
 
 import javax.swing.Timer;
 
+import org.universAAL.ltba.functional.pir.LTBAController;
+
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class TimeSleepingController implements ActionListener {
+public class TimeSleepingController extends LTBAController implements
+		ActionListener {
 
 	private static float wuTime;
 	private int times;
@@ -28,14 +31,6 @@ public class TimeSleepingController implements ActionListener {
 	private TimeSleepingController() {
 		super();
 		INSTANCE = this;
-		String ip = System.getProperty("es.tsbtecnologias.nomhad.server.ip");
-		String usr = System.getProperty("es.tsbtecnologias.nomhad.usercode");
-		if (ip != null) {
-			serverIp = ip;
-		}
-		if (usr != null) {
-			userCode = usr;
-		}
 		t = new Timer(24 * 60 * 60 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
@@ -64,7 +59,7 @@ public class TimeSleepingController implements ActionListener {
 				+ calculateSleepTime() + " and times>" + times);
 		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
 				"123456", "SLEEPING", "SLEEP_HOURS",
-				new String("" + calculateSleepTime()),DEVICE_ID);
+				new String("" + calculateSleepTime()), DEVICE_ID);
 		wuTime = 0;
 	}
 

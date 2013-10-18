@@ -1,6 +1,6 @@
 /*
 	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -21,8 +21,8 @@ package org.universAAL.ltba.manager;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.universAAL.ltba.energy.EnergyConsequenceListener;
-import org.universAAL.ltba.pir.PIRConsequenceListener;
+import org.universAAL.ltba.functional.energy.EnergyConsequenceListener;
+import org.universAAL.ltba.functional.pir.PIRConsequenceListener;
 import org.universAAL.ltba.service.LTBAProvider;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
