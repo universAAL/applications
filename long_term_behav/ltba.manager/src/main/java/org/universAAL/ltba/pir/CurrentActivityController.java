@@ -48,7 +48,7 @@ public class CurrentActivityController extends PIRController {
 				new String[] { "Printing value: " + index }, null);
 		System.out.println("Imprimiendo el valor: " + index);
 		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-				"123456", INDICATOR_GROUP, INDICATOR, new String(index),
+				userPassword, INDICATOR_GROUP, INDICATOR, new String(index),
 				DEVICE_ID_ALL);
 	}
 
@@ -61,7 +61,7 @@ public class CurrentActivityController extends PIRController {
 			System.out.println("Printing value: " + index + " in "
 					+ room.getRoomStringNoBlanks());
 			NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-					"123456", INDICATOR_GROUP,
+					userPassword, INDICATOR_GROUP,
 					INDICATOR + "_" + room.getRoomStringNoBlanks(),
 					new String(index),
 					room.getRoomStringNoBlanks() + DEVICE_ID_ROOM);

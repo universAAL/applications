@@ -56,4 +56,16 @@ public class Setup {
 		}
 		return null;
 	}
+
+	static public String getUserPassword() {
+		Properties properties = new Properties();
+		try {
+			String home = getSetupFileName();
+			properties.load(new FileInputStream(home + "/" + PROPERTIES_FILE));
+			return properties.getProperty("nomhad.user.password");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
