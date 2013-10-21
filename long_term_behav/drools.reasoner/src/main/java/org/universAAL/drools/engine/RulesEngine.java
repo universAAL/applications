@@ -61,6 +61,7 @@ import org.universAAL.ontology.device.Sensor;
 import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
+import org.universAAL.ontology.phThing.Device;
 
 //import bitronix.tm.TransactionManagerServices;
 //import bitronix.tm.resource.jdbc.PoolingDataSource;
@@ -348,14 +349,14 @@ public final class RulesEngine {
 	 */
 	public void insertContextEvent(Object event) {
 		if (event instanceof ContextEvent) {
-			if (((ContextEvent) event).getRDFSubject() instanceof ActivityHubSensor) {
-				
+			if (((ContextEvent) event).getRDFSubject() instanceof ActivityHubSensor
+					|| ((ContextEvent) event).getRDFSubject() instanceof Device) {
+				ksession.insert(event);
 			} else {
 				ContextEvent c;
 				// c.setpro
 				// Not a sensor (genius)
 			}
-			ksession.insert(event);
 		} else {
 			// Not a contextEvent
 		}
