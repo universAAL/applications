@@ -19,43 +19,43 @@
  */
 package org.universAAL.AALapplication.nutritional.osgi;
 
-import java.net.URL;
+//import java.net.URL;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceEvent;
-import org.osgi.framework.ServiceListener;
-import org.osgi.framework.ServiceReference;
+//import org.osgi.framework.ServiceEvent;
+//import org.osgi.framework.ServiceListener;
+//import org.osgi.framework.ServiceReference;
 import org.universAAL.AALapplication.nutritional.SharedResources;
 import org.universAAL.AALapplication.nutritional.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
-import org.universAAL.ucc.configuration.configdefinitionregistry.interfaces.ConfigurationDefinitionRegistry;
+//import org.universAAL.ucc.configuration.configdefinitionregistry.interfaces.ConfigurationDefinitionRegistry;
 
-public class Activator implements BundleActivator, ServiceListener {
+public class Activator implements BundleActivator/*, ServiceListener */{
 
     SharedResources sr;
-    private BundleContext osgiContext;
+//    private BundleContext osgiContext;
     private static ModuleContext moduleContext;
-    private static ConfigurationDefinitionRegistry configReg;
+//    private static ConfigurationDefinitionRegistry configReg;
 
     public void start(BundleContext context) throws Exception {
 	Utils.println("STARTING NUTRITIONAL UI");
-	osgiContext=context;
+//	osgiContext=context;
 	moduleContext = uAALBundleContainer.THE_CONTAINER
 		.registerModule(new Object[] { context });
-	URL configURL = this.getClass().getResource("/config/nutritional.client.conf.xml");
+//	URL configURL = this.getClass().getResource("/config/nutritional.client.conf.xml");
 
-	String filter = "(objectclass="
-		+ ConfigurationDefinitionRegistry.class.getName() + ")";
-	context.addServiceListener(this, filter);
-	ServiceReference[] references = context.getServiceReferences(null,
-		filter);
-	for (int i = 0; references != null && i < references.length; i++) {
-	    this.serviceChanged(new ServiceEvent(ServiceEvent.REGISTERED,
-		    references[i]));
-	}
-	configReg.registerConfigurationDefinition(configURL);
+//	String filter = "(objectclass="
+//		+ ConfigurationDefinitionRegistry.class.getName() + ")";
+//	context.addServiceListener(this, filter);
+//	ServiceReference[] references = context.getServiceReferences(null,
+//		filter);
+//	for (int i = 0; references != null && i < references.length; i++) {
+//	    this.serviceChanged(new ServiceEvent(ServiceEvent.REGISTERED,
+//		    references[i]));
+//	}
+//	configReg.registerConfigurationDefinition(configURL);
 
 	sr = new SharedResources(moduleContext);
 	new Thread() {
@@ -76,23 +76,23 @@ public class Activator implements BundleActivator, ServiceListener {
 	Utils.println("STOPPING NUTRITIONAL UI");
     }
 
-    public void serviceChanged(ServiceEvent event) {
-	// Update the parser of Hub (& store)
-	switch (event.getType()) {
-	case ServiceEvent.REGISTERED:
-	    configReg = (ConfigurationDefinitionRegistry) osgiContext
-	    .getService(event.getServiceReference());
-	    break;
-	case ServiceEvent.MODIFIED:
-	    configReg = (ConfigurationDefinitionRegistry) osgiContext
-		    .getService(event.getServiceReference());
-	    break;
-	case ServiceEvent.UNREGISTERING:
-	    configReg = null;
-	    break;
-	default:
-	    break;
-	}
-    }
+//    public void serviceChanged(ServiceEvent event) {
+//	// Update the parser of Hub (& store)
+//	switch (event.getType()) {
+//	case ServiceEvent.REGISTERED:
+//	    configReg = (ConfigurationDefinitionRegistry) osgiContext
+//	    .getService(event.getServiceReference());
+//	    break;
+//	case ServiceEvent.MODIFIED:
+//	    configReg = (ConfigurationDefinitionRegistry) osgiContext
+//		    .getService(event.getServiceReference());
+//	    break;
+//	case ServiceEvent.UNREGISTERING:
+//	    configReg = null;
+//	    break;
+//	default:
+//	    break;
+//	}
+//    }
 
 }

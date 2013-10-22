@@ -75,7 +75,7 @@
 			<version>0.5</version>
 		</dependency>
 		
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>org.universAAL.tools.ucc</groupId>
 			<artifactId>ucc.configuration.configurator</artifactId>
 			<version>2.0.1-SNAPSHOT</version>
@@ -86,7 +86,7 @@
 			<artifactId>ucc.configuration.model</artifactId>
 			<version>2.0.1-SNAPSHOT</version>
 		</dependency>
-
+	-->
 	</dependencies>
 
 	<build>
@@ -135,10 +135,10 @@
 							org.universAAL.ontology.nutrition,
 							org.universAAL.ontology.nutrition.profile,
 							org.universAAL.ontology.profile, org.xml.sax,
-							org.universAAL.ontology.recommendations,
+							org.universAAL.ontology.recommendations<!-- ,
 							org.universAAL.ucc.configuration.configdefinitionregistry.interfaces,
 							org.universAAL.ucc.configuration.model.interfaces,
-							org.universAAL.ucc.configuration.model
+							org.universAAL.ucc.configuration.model-->
 						</Import-Package>
 					</instructions>
 				</configuration>
