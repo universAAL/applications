@@ -30,9 +30,7 @@ import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * @author George Fournadjiev
@@ -125,14 +123,9 @@ public final class Util {
 
   }
 
-  public static Date getDatePlusOneDayDelay(String textDate) {
+  public static Date getDate(String textDate) {
     try {
-      Date date = SIMPLE_DATE_FORMAT.parse(textDate);
-      GregorianCalendar calendar = new GregorianCalendar();
-      calendar.setTime(date);
-      calendar.add(Calendar.DAY_OF_MONTH, 1);
-
-      return calendar.getTime();
+      return SIMPLE_DATE_FORMAT.parse(textDate);
     } catch (ParseException e) {
       throw new MedicationManagerServletUIException("The provided text date:" + textDate + " is not a valid date");
     }

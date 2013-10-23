@@ -44,7 +44,6 @@ import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator
 
 public class MainMedicationManagerMenu extends UICaller {
 
-  private static final String WELCOME_TO_THE_MEDICATION_MANAGER_SERVICE = "Welcome To the MedicationManager Service!";
   private static final String INTAKE_REVIEW_BUTTON = "intakeReview";
   private static final String INVENTORY_STATUS_BUTTON = "inventoryStatus";
   private static final String DISPENSER_INSTRUCTIONS_BUTTON = "dispenserInstructions";
@@ -122,12 +121,12 @@ public class MainMedicationManagerMenu extends UICaller {
   public void showDialog(Resource inputUser) {
     Form f = Form.newDialog("Medication Manager Main Menu", new Resource());
     //start of the form model
-    new SimpleOutput(f.getIOControls(), null, null, WELCOME_TO_THE_MEDICATION_MANAGER_SERVICE);
+    new SimpleOutput(f.getIOControls(), null, null, getMessage("medication.manager.ui.welcome"));
     //...
-    new Submit(f.getSubmits(), new Label("Intake Review", null), INTAKE_REVIEW_BUTTON);
-    new Submit(f.getSubmits(), new Label("Inventory Status", null), INVENTORY_STATUS_BUTTON);
-    new Submit(f.getSubmits(), new Label("Dispenser Instructions", null), DISPENSER_INSTRUCTIONS_BUTTON);
-    new Submit(f.getSubmits(), new Label("Close", null), CLOSE_BUTTON);
+    new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.intake.review"), null), INTAKE_REVIEW_BUTTON);
+    new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.intake.inventory.status"), null), INVENTORY_STATUS_BUTTON);
+    new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.intake.dispenser.instructions"), null), DISPENSER_INSTRUCTIONS_BUTTON);
+    new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.close"), null), CLOSE_BUTTON);
     //stop of form model
     UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
     this.sendUIRequest(req);

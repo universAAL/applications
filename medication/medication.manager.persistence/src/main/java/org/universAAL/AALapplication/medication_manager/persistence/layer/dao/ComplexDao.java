@@ -330,10 +330,11 @@ public final class ComplexDao extends AbstractDao {
     int count = 1;
     for (Intake intake : intakes) {
       String medication = intake.getTreatment().getMedicine().getMedicineName();
-      String date = getDateText(intake.getTimePlan());
-      String time = getTimeText(intake.getTimePlan());
+      Date timePlan = intake.getTimePlan();
+      String date = getDateText(timePlan);
+      String time = getTimeText(timePlan);
       String status = getStatus(intake);
-      IntakeInfo info = new IntakeInfo(date, time, medication, status);
+      IntakeInfo info = new IntakeInfo(date, time, medication, status, timePlan);
       intakeInfos.add(info);
       count++;
       if (count == 4) {

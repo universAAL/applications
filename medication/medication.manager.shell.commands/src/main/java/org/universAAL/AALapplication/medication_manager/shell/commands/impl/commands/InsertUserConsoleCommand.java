@@ -98,10 +98,10 @@ public final class InsertUserConsoleCommand extends ConsoleCommand {
 
 
   private File getFile(String vcard) {
-
+    Log.info("The vCardFilesDirectory is: %s", getClass(), vCardFilesDirectory.getAbsolutePath());
     if (!vCardFilesDirectory.isDirectory()) {
       throw new MedicationManagerShellException("The required directory does not exists: vcard under the" +
-          "***/runner/configurations/medication_manager");
+          "***/runner/etc/medication_manager");
     }
 
     Log.info("The Medication Manager will look for the file " + vcard +

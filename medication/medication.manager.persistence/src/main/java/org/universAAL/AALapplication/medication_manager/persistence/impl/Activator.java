@@ -118,9 +118,9 @@ public class Activator implements BundleActivator {
 
   public static void validateParameter(int parameter, String parameterName) {
 
-    if (parameter <= 0) {
+    if (parameter < 0) {
       throw new MedicationManagerPersistenceException("The parameter : " +
-          parameterName + " must be positive number");
+          parameterName + " must be positive number or 0");
     }
 
   }

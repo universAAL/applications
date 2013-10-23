@@ -2032,6 +2032,8 @@ medication/medication.manager.configuration/pom.xml -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/ConfigurationProperties.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/FormatEnum.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/MedicationManagerConfigurationException.java -text
+medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/Message.java -text
+medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/MessageCreator.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/Pair.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/PropertyInfo.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/SqlScriptParser.java -text
@@ -2040,6 +2042,8 @@ medication/medication.manager.configuration/src/main/java/org/universAAL/AALappl
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/ConfigurationPropertiesImpl.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/CurrentDateInserter.java -text
 medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/Log.java -text
+medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/MessageCreatorImpl.java -text
+medication/medication.manager.configuration/src/main/java/org/universAAL/AALapplication/medication_manager/configuration/impl/MessageImpl.java -text
 medication/medication.manager.configuration/src/main/resources/CreateTables.sql -text
 medication/medication.manager.configuration/src/main/resources/DataLoad.sql -text
 medication/medication.manager.configuration/src/main/resources/DataLoadFull.sql -text
@@ -2149,6 +2153,7 @@ medication/medication.manager.service/src/main/java/org/universAAL/AALapplicatio
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/ProviderPrecautionService.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/impl/UpsideDownCaregiverNotifier.java -text
 medication/medication.manager.service/src/main/java/org/universAAL/AALapplication/medication_manager/providers/MissedIntakeContextProvider.java -text
+medication/medication.manager.service/src/main/resources/medication-service.properties -text
 medication/medication.manager.servlet.ui.acquire.medicine/ASL2.0 -text
 medication/medication.manager.servlet.ui.acquire.medicine/NOTICE -text
 medication/medication.manager.servlet.ui.acquire.medicine/pom.xml -text
@@ -2513,6 +2518,8 @@ medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/med
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/MedicationManagerUIException.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/ReminderDialogProvider.java -text
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/RequestMedicationInfoDialogProvider.java -text
+medication/medication.manager.ui/src/main/resources/medication-ui.properties -text
+medication/medication.manager.ui/src/main/resources/medication-ui_de.properties -text
 medication/medication.manager.user.management/ASL2.0 -text
 medication/medication.manager.user.management/NOTICE -text
 medication/medication.manager.user.management/pom.xml -text

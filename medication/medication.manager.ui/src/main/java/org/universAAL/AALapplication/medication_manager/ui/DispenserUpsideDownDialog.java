@@ -17,6 +17,8 @@
 
 package org.universAAL.AALapplication.medication_manager.ui;
 
+import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.ui.impl.Activator;
 import org.universAAL.AALapplication.medication_manager.ui.impl.Log;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
@@ -33,6 +35,7 @@ import org.universAAL.ontology.profile.User;
 
 import java.util.Locale;
 
+import static org.universAAL.AALapplication.medication_manager.ui.IntakeReviewDialog.*;
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
 
 public class DispenserUpsideDownDialog extends UICaller {
@@ -70,12 +73,12 @@ public class DispenserUpsideDownDialog extends UICaller {
 
       Log.info("Request a DispenserUpsideDownDialog for user %s", getClass(), inputUser);
 
-      Form f = Form.newDialog("Medication Manager", new Resource());
+      Form f = Form.newDialog("medication.manager.ui.title", new Resource());
       //start of the form model
       String message = getMessage(inputUser);
       new SimpleOutput(f.getIOControls(), null, null, message);
       //...
-      new Submit(f.getSubmits(), new Label("Done", null), DISPENSER_UPSIDE_DOWN_FORM);
+      new Submit(f.getSubmits(), new Label(Activator.getMessage("medication.manager.ui.done"), null), DISPENSER_UPSIDE_DOWN_FORM);
       //stop of form model
       //TODO to remove SAIED user and to return inputUser variable
       UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
@@ -87,16 +90,11 @@ public class DispenserUpsideDownDialog extends UICaller {
 
   private String getMessage(User user) {
 
-    StringBuilder sb = new StringBuilder();
-    String userFriendlyname = ReminderDialog.getUserfriendlyName(user);
-    sb.append(userFriendlyname);
-    sb.append(',');
-    sb.append("the dispenser is placed upside down.");
-    sb.append(" Please put it in the right position");
-    sb.append('\n');
-    sb.append('\n');
+    PersistentService persistentService = getPersistentService();
 
-    return sb.toString();
+    String name = getName(persistentService, user);
+
+    return Activator.getMessage("medication.manager.ui.upside.down", name);
   }
 
 }

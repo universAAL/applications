@@ -21,6 +21,8 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
+import org.universAAL.AALapplication.medication_manager.configuration.Message;
+import org.universAAL.AALapplication.medication_manager.configuration.MessageCreator;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -37,6 +39,8 @@ public class Activator implements BundleActivator {
   static BundleContext context;
   static ServiceTracker persistenceServiceTracker;
   private static ServiceTracker configurationPropertiesServiceTracker;
+  private static ServiceTracker messageServiceTracker;
+  private static Message message;
   public MedicationManagerServiceButtonProvider medicationManagerServiceButtonProvider;
   public static final User SAIED = new User("urn:org.universAAL.aal_space:test_environment#saied");
 
@@ -46,9 +50,13 @@ public class Activator implements BundleActivator {
     context = bundleContext;
     persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
     configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
+    messageServiceTracker = new ServiceTracker(context, MessageCreator.class.getName(), null);
 
     persistenceServiceTracker.open();
     configurationPropertiesServiceTracker.open();
+    messageServiceTracker.open();
+
+    message = getMessage();
 
     ReminderDialogProvider reminderDialogProvider = new ReminderDialogProvider(mc);
     IntakeReviewDialogProvider intakeReviewDialogProvider = new IntakeReviewDialogProvider(mc);
@@ -134,6 +142,24 @@ public class Activator implements BundleActivator {
     }
 
     return service;
+  }
+
+  private static Message getMessage() {
+    if (messageServiceTracker == null) {
+      throw new MedicationManagerUIException("The MessageServiceTracker is not set");
+    }
+    MessageCreator service = (MessageCreator) messageServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerUIException("The MessageCreator is missing");
+    }
+
+
+    return service.createMessage(Activator.class.getClassLoader(), "medication-ui");
+
+  }
+
+  public static String getMessage(String key, Object... objects) {
+    return message.getMessage(key, objects);
   }
 
 }

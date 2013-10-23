@@ -21,7 +21,9 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Intake
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.Week;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.ComplexDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.ui.impl.Activator;
 import org.universAAL.AALapplication.medication_manager.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.ui.impl.MedicationManagerUIException;
 import org.universAAL.middleware.container.ModuleContext;
@@ -37,7 +39,10 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.profile.User;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 
@@ -55,6 +60,9 @@ public class IntakeReviewDialog extends UICaller {
   private static final String CLOSE_BUTTON = "closeButton";
   private static final String PREV_BUTTON = "previousWeekButton";
   private static final String NEXT_BUTTON = "nextWeekButton";
+  private static final DateFormat DATE_FORMATTER = DateFormat.getDateInstance(DateFormat.DEFAULT);
+  private static final DateFormat TIME_FORMATTER = DateFormat.getTimeInstance(DateFormat.SHORT);
+  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("MMMM d, yyyy");
 
   public IntakeReviewDialog(ModuleContext context, PersistentService persistentService,
                             Week currentWeek, Person patient) {
@@ -141,7 +149,7 @@ public class IntakeReviewDialog extends UICaller {
       //TODO to be removed (hack for saied user)
       currentUser = inputUser;
 
-      Form f = Form.newDialog("Medication Manager", new Resource());
+      Form f = Form.newDialog(Activator.getMessage("medication.manager.ui.title"), new Resource());
 
       //start of the form model
 
@@ -150,9 +158,9 @@ public class IntakeReviewDialog extends UICaller {
 
       new SimpleOutput(f.getIOControls(), null, null, message);
       //...
-      new Submit(f.getSubmits(), new Label("Close", null), CLOSE_BUTTON);
-      new Submit(f.getSubmits(), new Label("Previous Week", null), PREV_BUTTON);
-      new Submit(f.getSubmits(), new Label("Next Week", null), NEXT_BUTTON);
+      new Submit(f.getSubmits(), new Label(Activator.getMessage("medication.manager.ui.close"), null), CLOSE_BUTTON);
+      new Submit(f.getSubmits(), new Label(Activator.getMessage("medication.manager.ui.previous.week"), null), PREV_BUTTON);
+      new Submit(f.getSubmits(), new Label(Activator.getMessage("medication.manager.ui.next.week"), null), NEXT_BUTTON);
       //stop of form model
       //TODO to remove SAIED user and to return inputUser variable
       UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
@@ -164,9 +172,12 @@ public class IntakeReviewDialog extends UICaller {
 
   private String getMessage(User inputUser) {
     StringBuffer sb = new StringBuffer();
-    sb.append(getUserfriendlyName(inputUser));
-    sb.append(",\nIntake log/plan for the following week: ");
-    sb.append(currentWeek);
+
+    String name = getName(persistentService, inputUser);
+
+    String title = Activator.getMessage("medication.manager.ui.intake.review.log.title", name, currentWeek.toString());
+
+    sb.append(title);
 
     ComplexDao complexDao = persistentService.getComplexDao();
     Set<IntakeInfo> intakeInfos = complexDao.getIntakeInfos(patient, currentWeek);
@@ -177,15 +188,12 @@ public class IntakeReviewDialog extends UICaller {
     return sb.toString();
   }
 
-  public static String getUserfriendlyName(User inputUser) {
-    String fullUserUriName = inputUser.toString();
-    int index = fullUserUriName.lastIndexOf('#');
-    if (index == -1) {
-      throw new MedicationManagerUIException("Expected # symbol in the user.getUri() format like: \n" +
-          "urn:org.universAAL.aal_space:test_env#saied");
-    }
-    String firstLetter = fullUserUriName.substring(index + 1).toUpperCase();
-    return firstLetter.charAt(0) + fullUserUriName.substring(index + 2);
+  public static String getName(PersistentService persistentService, User inputUser) {
+    PersonDao personDao = persistentService.getPersonDao();
+
+    Person person = personDao.findPersonByPersonUri(inputUser.getURI());
+
+    return person.getName();
   }
 
   public boolean isUserActed() {
@@ -203,13 +211,22 @@ public class IntakeReviewDialog extends UICaller {
       Log.info("Added single medicineInventory row: %s", getClass(), row);
       sb.append("\n\n\t");
       counter++;
-      sb.append(counter);
+     /* sb.append(counter);
       sb.append(". ");
-      sb.append(row);
+      sb.append(row);*/
+
+
+      Date realDate = intakeInfo.getRealDate();
+      String dateFormat = DATE_FORMATTER.format(realDate);
+      String timeFormat = TIME_FORMATTER.format(realDate);
+      String rowMessage = Activator.getMessage("medication.manager.ui.intake.review.log.row",
+          counter, dateFormat, timeFormat, intakeInfo.getMedication(), intakeInfo.getStatus());
+
+      sb.append(rowMessage);
     }
 
     if (counter == 0) {
-      sb.append("There is no intakes for this week");
+      sb.append(Activator.getMessage("medication.manager.ui.intake.review.log.no"));
     }
 
     sb.append('\n');

@@ -20,6 +20,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
 import org.universAAL.AALapplication.medication_manager.configuration.MedicationManagerConfigurationException;
+import org.universAAL.AALapplication.medication_manager.configuration.MessageCreator;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 
@@ -31,6 +32,7 @@ public final class Activator implements BundleActivator {
 
   public static ModuleContext mc;
   public static ConfigurationPropertiesImpl configurationProperties;
+  public static MessageCreatorImpl messageCreator;
 
   public void start(final BundleContext context) throws Exception {
     mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
@@ -39,6 +41,9 @@ public final class Activator implements BundleActivator {
     context.registerService(ConfigurationProperties.class.getName(),
         configurationProperties, null);
 
+    messageCreator = new MessageCreatorImpl();
+        context.registerService(MessageCreator.class.getName(),
+            messageCreator, null);
 
   }
 
