@@ -156,9 +156,8 @@ public class AgendaWebGUI {
 	Group controls = f.getIOControls();
 	Group submits = f.getSubmits();
 
-	new SimpleOutput(controls, new org.universAAL.middleware.ui.rdf.Label(
-		Messages.getString("AgendaWebGUI.SelectCalendar"),
-		(String) null), null, null);
+	new org.universAAL.middleware.ui.rdf.Label(Messages
+		.getString("AgendaWebGUI.SelectCalendar"), (String) null);
 
 	List calendars = Activator.sCaller.getCalendarsByOwnerService(calOwner);
 
@@ -195,10 +194,8 @@ public class AgendaWebGUI {
 	    Group invisiblegroupdate = new Group(dategroup, null, null, null,
 		    (Resource) null);// This group is for ordering inputs
 	    // vertically
-	    new SimpleOutput(invisiblegroupdate,
-		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.SelectDate"),
-			    (String) null), null, null);
+	    new org.universAAL.middleware.ui.rdf.Label(Messages
+		    .getString("AgendaWebGUI.SelectDate"), (String) null);
 	    // Day
 	    new InputField(invisiblegroupdate,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
@@ -255,10 +252,8 @@ public class AgendaWebGUI {
 	    Group invisiblegroup = new Group(infogroup, null, null, null,
 		    (Resource) null);// This group is for ordering inputs
 	    // vertically
-	    new SimpleOutput(invisiblegroup,
-		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.Details"), (String) null),
-		    null, null);
+	    new org.universAAL.middleware.ui.rdf.Label(Messages
+		    .getString("AgendaWebGUI.Details"), (String) null);
 	    new InputField(invisiblegroup, new Label(Messages
 		    .getString("AgendaWebGUI.Type"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_TYPE }),
@@ -286,10 +281,8 @@ public class AgendaWebGUI {
 
 	    // This group is for ordering inputs vertically
 	    // Message
-	    new SimpleOutput(invisiblegroup2,
-		    new org.universAAL.middleware.ui.rdf.Label(Messages
-			    .getString("AgendaWebGUI.InfoToSetReminder"),
-			    (String) null), null, null);
+	    new org.universAAL.middleware.ui.rdf.Label(Messages
+		    .getString("AgendaWebGUI.InfoToSetReminder"), (String) null);
 	    InputField remMsg = new InputField(
 		    invisiblegroup2,
 		    new Label(Messages.getString("AgendaWebGUI.Message"),
