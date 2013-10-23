@@ -19,7 +19,9 @@
 	as it sends queries to the DBMS and returns results to all other components.  
 	It communicates with Agenda Remote Service and Agenda GUI Service.
 	</description>
-
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
 	<dependencies>
 		<!--		<dependency>-->
 		<!--			<groupId>junit</groupId>-->
