@@ -21,6 +21,8 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
+import org.universAAL.AALapplication.medication_manager.configuration.Message;
+import org.universAAL.AALapplication.medication_manager.configuration.MessageCreator;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.providers.MissedIntakeContextProvider;
 import org.universAAL.middleware.container.ModuleContext;
@@ -35,6 +37,8 @@ public class Activator implements BundleActivator {
   public static BundleContext bundleContext;
   private static ServiceTracker configurationPropertiesServiceTracker;
   private static ServiceTracker persistenceServiceTracker;
+  private static ServiceTracker messageServiceTracker;
+  private static Message message;
 
   /*
       * (non-Javadoc)
@@ -48,9 +52,13 @@ public class Activator implements BundleActivator {
 
     configurationPropertiesServiceTracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
     persistenceServiceTracker = new ServiceTracker(context, PersistentService.class.getName(), null);
+    messageServiceTracker = new ServiceTracker(context, MessageCreator.class.getName(), null);
 
     configurationPropertiesServiceTracker.open();
     persistenceServiceTracker.open();
+    messageServiceTracker.open();
+
+    message = getMessage();
 
     new Thread() {
       public void run() {
@@ -102,6 +110,24 @@ public class Activator implements BundleActivator {
     }
 
     return service;
+  }
+
+  private static Message getMessage() {
+    if (messageServiceTracker == null) {
+      throw new MedicationManagerException("The MessageServiceTracker is not set");
+    }
+    MessageCreator service = (MessageCreator) messageServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerException("The MessageCreator is missing");
+    }
+
+
+    return service.createMessage(Activator.class.getClassLoader(), "medication-service");
+
+  }
+
+  public static String getMessage(String key, Object... objects) {
+    return message.getMessage(key, objects);
   }
 
 }

@@ -75,12 +75,13 @@ public class DispenserDisplayInstructionsDialog extends UICaller {
 
       Log.info("Request a DispenserDisplayInstructionsDialog for user %s", getClass(), inputUser);
 
-      Form f = Form.newDialog("Medication Manager", new Resource());
+      String formTitle = Activator.getMessage("medication.manager.ui.title");
+      Form f = Form.newDialog(formTitle, new Resource());
       //start of the form model
       String message = getInstructionText(inputUser);
       new SimpleOutput(f.getIOControls(), null, null, message);
       //...
-      new Submit(f.getSubmits(), new Label("Done", null), DISPENSER_DISPLAY_INSTRUCTIONS_FORM);
+      new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.done"), null), DISPENSER_DISPLAY_INSTRUCTIONS_FORM);
       //stop of form model
       //TODO to remove SAIED user and to return inputUser variable
       UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);

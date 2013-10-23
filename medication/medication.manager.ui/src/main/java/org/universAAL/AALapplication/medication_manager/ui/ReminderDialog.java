@@ -52,6 +52,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
+import static org.universAAL.AALapplication.medication_manager.ui.IntakeReviewDialog.*;
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
 
 public class ReminderDialog extends UICaller {
@@ -312,7 +313,7 @@ public class ReminderDialog extends UICaller {
       //start of the form model
 
       String timeText = getTimeText(time);
-      String reminderMessage = getUserfriendlyName(inputUser) + ",\nit is time " + timeText + " to get your medicine.";
+      String reminderMessage = getName(persistentService, inputUser) + ",\nit is time " + timeText + " to get your medicine.";
 
       new SimpleOutput(f.getIOControls(), null, null, reminderMessage);
       //...
@@ -344,17 +345,6 @@ public class ReminderDialog extends UICaller {
     if (dueIntakeTimer == null) {
       throw new MedicationManagerUIException("The DueIntakeTimer has not been set");
     }
-  }
-
-  public static String getUserfriendlyName(User inputUser) {
-    String fullUserUriName = inputUser.toString();
-    int index = fullUserUriName.lastIndexOf('#');
-    if (index == -1) {
-      throw new MedicationManagerUIException("Expected # symbol in the user.getUri() format like: \n" +
-          "urn:org.universAAL.aal_space:test_env#saied");
-    }
-    String firstLetter = fullUserUriName.substring(index + 1).toUpperCase();
-    return firstLetter.charAt(0) + fullUserUriName.substring(index + 2);
   }
 
   public boolean isUserActed() {
