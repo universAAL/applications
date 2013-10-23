@@ -2792,8 +2792,6 @@ ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Activ
 ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitData.java -text svneol=unset#text/plain
 ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/FitbitdataOntology.java -text svneol=unset#text/plain
 ontologies/ont.fitbitdata/src/main/java/org/universAAL/ontology/fitbitdata/Sleep.java -text svneol=unset#text/plain
-ontologies/ont.ltba/.settings/org.eclipse.jdt.core.prefs -text
-ontologies/ont.ltba/.settings/org.maven.ide.eclipse.prefs -text
 ontologies/ont.ltba/ASL2.0.txt -text
 ontologies/ont.ltba/NOTICE -text
 ontologies/ont.ltba/pom.xml -text
