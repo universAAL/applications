@@ -41,7 +41,6 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Group;
 import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
-import org.universAAL.middleware.ui.rdf.Range;
 import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
@@ -198,7 +197,7 @@ public class AgendaWebGUI {
 	    new SimpleOutput(invisiblegroupdate, null, null, Messages
 		    .getString("AgendaWebGUI.SelectDate"));
 	    // Day
-	    new Range(invisiblegroupdate,
+	    new InputField(invisiblegroupdate,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Day"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_DAY }),
@@ -207,7 +206,7 @@ public class AgendaWebGUI {
 		    new Integer(now.get(java.util.Calendar.DAY_OF_MONTH)));
 
 	    // Month
-	    new Range(invisiblegroupdate,
+	    new InputField(invisiblegroupdate,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Month"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_MONTH }),
@@ -228,7 +227,7 @@ public class AgendaWebGUI {
 			(String) null, new Integer(i)));
 	    }
 	    // Hour
-	    new Range(dategroup, new org.universAAL.middleware.ui.rdf.Label(
+	    new InputField(dategroup, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.Hour"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_HOUR }),
 		    MergedRestriction.getAllValuesRestriction(REF_HOUR,
@@ -236,7 +235,7 @@ public class AgendaWebGUI {
 		    new Integer(now.get(java.util.Calendar.HOUR_OF_DAY)));
 
 	    // Minute
-	    new Range(dategroup, new org.universAAL.middleware.ui.rdf.Label(
+	    new InputField(dategroup, new org.universAAL.middleware.ui.rdf.Label(
 		    Messages.getString("AgendaWebGUI.Minute"), (String) null),
 		    new PropertyPath(null, false, new String[] { REF_MIN }),
 		    MergedRestriction.getAllValuesRestriction(REF_MIN,
@@ -296,7 +295,7 @@ public class AgendaWebGUI {
 		    null, (Resource) null);// This group is for ordering inputs
 	    // vertically
 	    // Day
-	    new Range(
+	    new InputField(
 		    remdateinvisiblegroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Day"), (String) null),
@@ -306,7 +305,7 @@ public class AgendaWebGUI {
 		    new Integer(nowrem.get(java.util.Calendar.DAY_OF_MONTH)));
 
 	    // Month
-	    new Range(remdateinvisiblegroup,
+	    new InputField(remdateinvisiblegroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Month"), (String) null),
 		    new PropertyPath(null, false,
@@ -327,7 +326,7 @@ public class AgendaWebGUI {
 			(String) null, new Integer(i)));
 	    }
 	    // Hour
-	    new Range(
+	    new InputField(
 		    remdategroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Hour"), (String) null),
@@ -337,7 +336,7 @@ public class AgendaWebGUI {
 		    new Integer(nowrem.get(java.util.Calendar.HOUR_OF_DAY)));
 
 	    // Minute
-	    new Range(
+	    new InputField(
 		    remdategroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Minute"), (String) null),
