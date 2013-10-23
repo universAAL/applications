@@ -17,6 +17,10 @@
 	 Component. It provides a web interface for external users to view, insert and delete 
 	 Agenda Events</description>
 
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>

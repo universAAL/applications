@@ -31,6 +31,7 @@
 	<properties>
 		<service.name.svn>agenda</service.name.svn>
 		<ignore.dep.conflict>true</ignore.dep.conflict>
+		<uaal.parent.version>2.0.2-SNAPSHOT</uaal.parent.version>
 	</properties>
 
 	<modules>

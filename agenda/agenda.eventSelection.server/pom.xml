@@ -15,6 +15,9 @@
 	<name>Agenda AAL Service Event Selection Tool Server</name>
 	<description>A server based on the domain ontology of event services</description>
 
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
 	<dependencies>
 		<!--		<dependency>-->
 		<!--			<groupId>junit</groupId>-->

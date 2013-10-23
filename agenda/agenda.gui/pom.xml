@@ -12,6 +12,11 @@
 	<artifactId>agenda.gui</artifactId>
 	<packaging>bundle</packaging>
 	<name>Agenda AAL Service GUI</name>
+	
+	<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
