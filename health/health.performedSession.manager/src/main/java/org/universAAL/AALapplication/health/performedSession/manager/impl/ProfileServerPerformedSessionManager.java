@@ -25,9 +25,12 @@ package org.universAAL.AALapplication.health.performedSession.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.universAAL.AALapplication.health.performedSession.manager.PerformedSessionManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
+import org.universAAL.middleware.owl.ManagedIndividual;
 import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
@@ -36,6 +39,7 @@ import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.health.owl.PerformedMeasurementSession;
 import org.universAAL.ontology.health.owl.PerformedSession;
 import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.TreatmentPlanning;
 import org.universAAL.ontology.health.owl.services.ProfileManagementService;
 import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
 import org.universAAL.ontology.profile.User;
@@ -180,20 +184,30 @@ public class ProfileServerPerformedSessionManager
 				HealthMeasurement hm = ((PerformedMeasurementSession) session)
 						.getHealthMeasurement();
 				profile.updateHealthMeasurement(hm);
-				//TODO: check for possible irregularities in the measurements and warn in that case.
 				
 				needsUpdate = true;
 			}
 			treatment = session.getAssociatedTreatment();
-			//TODO find the associated Treatment. if treatment == null or not in the list of treatments.
+			// find the associated Treatment. if treatment == null or not in the list of treatments.
+			if (treatment == null){
+				treatment = findTreatmentFor(profile,session);
+			}
 			
 			if(null == treatment) {
 				 LogUtils.logInfo(mc, ProfileServerPerformedSessionManager.class,
 			    			"sessionPerformed",
-			    			new Object[] { "treatment: " + treatment.getURI() + " does not exist"}, null);
+			    			new Object[] { "Cannot find Treatment for: " + session.getURI()}, null);
 			} else {
+				 LogUtils.logInfo(mc, ProfileServerPerformedSessionManager.class,
+			    			"sessionPerformed",
+			    			new Object[] { "Treatment for: " + session.getURI(), "\n is: " + treatment.getURI()}, null);
 				treatment.addPerformedSession(session);
 				needsUpdate = true;
+				
+				if (session instanceof PerformedMeasurementSession
+						&& treatment.getMeasurementRequirements() != null){
+					//TODO: check for possible irregularities in the measurements and warn in that case.
+				}
 			}
 			if (needsUpdate) {
 				updateHealthProfile(profile);
@@ -201,6 +215,67 @@ public class ProfileServerPerformedSessionManager
 		}
 	}	
 	
+	/**
+	 * will try to locate the treatment most fit that handles the performedsession.
+	 * @param profile
+	 * @param session
+	 * @return
+	 */
+	private Treatment findTreatmentFor(HealthProfile profile,
+			PerformedSession session) {
+		Treatment[] ts = profile.getTreatments();
+		Treatment selected = null;
+		int selectedCalification = 0;
+		for (int i = 0; i < ts.length; i++) {
+			Treatment test = (Treatment) ts[i].deepCopy();
+			PerformedSession[] sessions = test.getPerformedSessions();
+			if (test.addPerformedSession(session)){
+				//it was semantically allowed.
+				int tsiCalification = 0;
+				
+				/*
+				 * Check the session and treatments dates are compatible.
+				 */
+				TreatmentPlanning tp = test.getTreatmentPlanning();
+				if (tp != null){
+					XMLGregorianCalendar sD, teD;
+					teD = tp.getEndDate();
+					sD = session.getSessionEndTime();
+					if (teD != null && sD != null
+							&& teD.compare(sD) <= 0){
+						tsiCalification += 2;
+					}
+				}
+				
+				/*
+				 * check that the set of performed sessions has the same type.
+				 */
+				boolean tsiFitsPerfomedSessions = false;
+				for (int j = 0; j < sessions.length; j++) {
+					tsiFitsPerfomedSessions |= PerformedSession.checkCompatibility(sessions[i].getClassURI(), session.getClassURI());
+				}
+				if (tsiFitsPerfomedSessions){
+					tsiCalification += 1;
+				}
+				if (selected == null
+						&& tsiCalification >0 ){
+					// set Selected
+					selected = ts[i];
+					selectedCalification = tsiCalification;
+				} else if (tsiCalification >= selectedCalification){
+					// check if ts[i] is more specific than selected
+					if (ManagedIndividual.checkCompatibility(selected.getClassURI(),ts[i].getClassURI())){
+						//selected is a super class of ts[i] or is the same class
+						// set Selected
+						selected = ts[i];
+						selectedCalification = tsiCalification;
+					}
+				}
+			}
+		}
+		return selected;
+	}
+
 	/**
 	 * @param profile
 	 */

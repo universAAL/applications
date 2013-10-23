@@ -31,7 +31,13 @@
   </issueManagement>
   <dependencyManagement>
     <dependencies>
-      <dependency>
+    <!--  REMOVE when updated! -->
+    <dependency>
+    	<groupId>org.universAAL.ontology</groupId>
+    	<artifactId>ont.profile.health</artifactId>
+    	<version>2.0.2-SNAPSHOT</version>
+    </dependency>
+    <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.performedSession.manager</artifactId>
         <version>E.0.1-SNAPSHOT</version>
