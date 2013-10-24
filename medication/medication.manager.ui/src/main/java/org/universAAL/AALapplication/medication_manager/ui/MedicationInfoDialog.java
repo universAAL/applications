@@ -72,15 +72,13 @@ public class MedicationInfoDialog extends UICaller {
     try {
       validateParameter(inputUser, "inputUser");
 
-      Form f = Form.newDialog("Medication Manager", new Resource());
+      Form f = Form.newDialog(getMessage("medication.manager.ui.title"), new Resource());
 
       //start of the form model
 
-      String medicationInfoMessage = getTitle() + medicinesInfo.getDetailsInfo();
-
-      new SimpleOutput(f.getIOControls(), null, null, medicationInfoMessage);
+      new SimpleOutput(f.getIOControls(), null, null, medicinesInfo.getDetailsInfo());
       //...
-      new Submit(f.getSubmits(), new Label("Close", null), CLOSE_BUTTON);
+      new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.close"), null), CLOSE_BUTTON);
       //stop of form model
       //TODO to remove SAIED user and to return inputUser variable
       UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
@@ -91,15 +89,12 @@ public class MedicationInfoDialog extends UICaller {
   }
 
   private String getTitle() {
+    StringBuffer sb = new StringBuffer();
+    sb.append("\n\t");
+    sb.append(getMessage("medication.manager.ui.intake.info"));
+    sb.append("\n");
 
-    StringBuilder sb = new StringBuilder();
-
-    sb.append("         Intake info           ");
-    sb.append("\n\n");
-
-
-    return sb.toString();
-
+    return  sb.toString();
   }
 
 }

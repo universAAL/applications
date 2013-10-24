@@ -25,11 +25,15 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 
 import java.util.List;
 
+import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
+
 /**
  * @author George Fournadjiev
  */
 public final class InventoryStatusHelper {
 
+
+  public static final String PILL = "pill";
 
   public String getInventoryStatusText(Person patient, PersistentService persistentService) {
 
@@ -49,8 +53,9 @@ public final class InventoryStatusHelper {
   private String createInventoryText(String name, List<MedicineInventory> medicineInventories, List<Intake> intakes) {
     StringBuffer sb = new StringBuffer();
 
-    sb.append("Medicine inventory for : ");
-    sb.append(name);
+
+    String title = getMessage("medication.manager.ui.inventory.title", name);
+    sb.append(title);
 
     sb.append('\n');
 
@@ -60,13 +65,24 @@ public final class InventoryStatusHelper {
       Log.info("Added single medicineInventory row: %s", getClass(), row);
       sb.append("\n\n\t");
       counter++;
-      sb.append(counter);
-      sb.append(". ");
-      sb.append(row);
+
+      String medicineName = medicineInventory.getMedicine().getMedicineName();
+      int quantity = medicineInventory.getQuantity();
+      String type = medicineInventory.getUnitClass().getType();
+      if (PILL.equalsIgnoreCase(type)) {
+         type = type + 'S';
+
+      }
+      type = type.toUpperCase();
+      String rowMessage = getMessage("medication.manager.ui.inventory.row",
+          counter, medicineName, quantity, type);
+
+      sb.append(rowMessage);
+
     }
 
     if (counter == 0) {
-      sb.append("There is no available medicine inventory");
+      sb.append(getMessage("medication.manager.ui.inventory.no"));
     }
 
     sb.append('\n');

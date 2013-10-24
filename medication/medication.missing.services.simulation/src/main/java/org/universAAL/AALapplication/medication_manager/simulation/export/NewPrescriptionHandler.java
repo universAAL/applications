@@ -81,7 +81,9 @@ public abstract class NewPrescriptionHandler {
 
     try {
       PrescriptionDao prescriptionDao = persistentService.getPrescriptionDao();
+      Log.info("The Medication Manager will try to save prescriptionDTO in the database: ", getClass());
       prescriptionDao.save(prescriptionDTO);
+      Log.info("The Medication Manager successfully saved prescriptionDTO in the database: ", getClass());
       NewPrescription newPrescription = createNewPrescription(prescriptionDTO);
       handleNewPrescription(prescriptionDTO, persistentService, newPrescription);
       newPrescriptionContextProvider.publishNewPrescriptionEvent(newPrescription);

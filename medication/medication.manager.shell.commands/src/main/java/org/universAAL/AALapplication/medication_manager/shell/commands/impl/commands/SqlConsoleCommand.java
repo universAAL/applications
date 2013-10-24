@@ -38,6 +38,7 @@ public final class SqlConsoleCommand extends ConsoleCommand {
   private final File sqlFilesDirectory;
 
   private static final String PRINT = "print";
+  private static final String RENAME = "renameDefaultUserTo";
   private static final String FILE = "file";
   private static final String EXECUTE = "execute";
   private static final String RESET = "reset";
@@ -50,7 +51,8 @@ public final class SqlConsoleCommand extends ConsoleCommand {
           "\n\t \n\t - " + PRINT + " tableName" + " (will print all the records for a particular table)" +
           "\n\t \n\t - " + FILE + " fileName" + " (will execute sql statements from file)" +
           "\n\t \n\t - " + EXECUTE + " sqlStatement (will execute any sql statement)" +
-          "\n\t \n\t - " + RESET + " database (will reset the database)";
+          "\n\t \n\t - " + RESET + " database (will reset the database)" +
+          "\n\t \n\t - " + RENAME + " name (new name)";
 
   public SqlConsoleCommand(String name, String description) {
     super(name, description);
@@ -88,12 +90,12 @@ public final class SqlConsoleCommand extends ConsoleCommand {
     Log.info("Checking the first param %s", getClass(), firstParam);
 
 
-    boolean ok = PRINT.equalsIgnoreCase(firstParam) || RESET.equalsIgnoreCase(firstParam)  ||
-        FILE.equalsIgnoreCase(firstParam) || EXECUTE.equalsIgnoreCase(firstParam);
+    boolean ok = PRINT.equalsIgnoreCase(firstParam) || RESET.equalsIgnoreCase(firstParam) ||
+        FILE.equalsIgnoreCase(firstParam) || EXECUTE.equalsIgnoreCase(firstParam) || RENAME.equalsIgnoreCase(firstParam);
 
     if (!ok) {
       throw new MedicationManagerShellException("The first parameter must be one of the following : " +
-          PRINT + ", " + EXECUTE + ", " + FILE + ", " + RESET);
+          PRINT + ", " + EXECUTE + ", " + FILE + ", " + RESET + ", " + RENAME);
     }
 
   }
@@ -118,6 +120,8 @@ public final class SqlConsoleCommand extends ConsoleCommand {
       sqlUtility.executeSqlStatement(selectStatement);
     } else if (RESET.equalsIgnoreCase(firstParam)) {
       sqlUtility.resetMedicationManagerDB();
+    } else if (RENAME.equalsIgnoreCase(firstParam)) {
+      sqlUtility.renameDefaultUserTo(secondParam);
     } else {
       throw new MedicationManagerShellException("Unexpected pair of parameters");
     }

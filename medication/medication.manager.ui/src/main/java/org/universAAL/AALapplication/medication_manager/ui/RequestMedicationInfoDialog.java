@@ -23,6 +23,7 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
+import org.universAAL.AALapplication.medication_manager.ui.impl.Activator;
 import org.universAAL.AALapplication.medication_manager.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.ui.impl.MedicationManagerUIException;
 import org.universAAL.middleware.container.ModuleContext;
@@ -43,7 +44,6 @@ import org.universAAL.ontology.profile.User;
 import java.util.List;
 import java.util.Locale;
 
-import static org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass.*;
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
 
 public class RequestMedicationInfoDialog extends UICaller {
@@ -55,6 +55,7 @@ public class RequestMedicationInfoDialog extends UICaller {
 
   private static final String CLOSE_BUTTON = "closeButton";
   private static final String INFO_BUTTON = "infoButton";
+  public static final String PILL = "pill";
 
   public RequestMedicationInfoDialog(ModuleContext context, Time time) {
     super(context);
@@ -108,7 +109,7 @@ public class RequestMedicationInfoDialog extends UICaller {
       //TODO to be removed (hack for saied user)
       currentUser = inputUser;
 
-      Form f = Form.newDialog("Medication Manager", new Resource());
+      Form f = Form.newDialog(getMessage("medication.manager.ui.title"), new Resource());
       //start of the form model
 
       createMedicineInfo(inputUser);
@@ -116,8 +117,8 @@ public class RequestMedicationInfoDialog extends UICaller {
 
       new SimpleOutput(f.getIOControls(), null, null, medicinesInfo.getGeneralInfo());
       //...
-      new Submit(f.getSubmits(), new Label("close", null), CLOSE_BUTTON);
-      new Submit(f.getSubmits(), new Label("info", null), INFO_BUTTON);
+      new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.close"), null), CLOSE_BUTTON);
+      new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.info"), null), INFO_BUTTON);
       //stop of form model
       //TODO to remove SAIED user and to return inputUser variable
       UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
@@ -155,9 +156,11 @@ public class RequestMedicationInfoDialog extends UICaller {
   private String getGeneralInfo(List<Intake> intakes) {
     StringBuilder sb = new StringBuilder();
 
-    sb.append("   Intake info for          ");
-    sb.append(time.getDailyTextFormat());
-    sb.append("  o'clock   ");
+    sb.append("\t\t\t");
+    String dailyTextFormat = time.getDailyTextFormat();
+    String title = getMessage("medication.manager.ui.intake.info.for.title", dailyTextFormat);
+    sb.append(title);
+
     sb.append("\n");
     appendQuantityAndUnits(sb, intakes);
 
@@ -169,20 +172,18 @@ public class RequestMedicationInfoDialog extends UICaller {
     for (Intake in : intakes) {
       sb.append('\n');
       count++;
-      sb.append(count);
-      sb.append(". ");
       Treatment treatment = in.getTreatment();
-      sb.append(treatment.getMedicine().getMedicineName());
-      sb.append("  -  ");
-      sb.append(in.getQuantity());
+      String medicineName = treatment.getMedicine().getMedicineName();
       UnitClass unitClass = in.getUnitClass();
-      if (unitClass == PILLS) {
-        sb.append(" pills");
-      } else if (unitClass == DROPS) {
-        sb.append(" drops");
-      } else {
-        throw new MedicationManagerUIException("Unknown UnitClass enum value : " + unitClass);
+      String type = unitClass.getType();
+      if (PILL.equalsIgnoreCase(type)) {
+        type = type + 'S';
+
       }
+      type = type.toUpperCase();
+      String rowMessage = getMessage("medication.manager.ui.intake.info.for.row",
+          count, medicineName, in.getQuantity(), type);
+      sb.append(rowMessage);
     }
 
 
@@ -192,8 +193,10 @@ public class RequestMedicationInfoDialog extends UICaller {
   private String getDetailsInfo(List<Intake> intakes) {
     StringBuilder sb = new StringBuilder();
 
-    sb.append("    Medication info          ");
-    sb.append("\n\n");
+    sb.append("\t\t\t");
+    sb.append(Activator.getMessage("medication.manager.ui.medication.info"));
+    sb.append('\n');
+
 
     int count = 0;
     for (Intake in : intakes) {

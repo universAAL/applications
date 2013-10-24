@@ -71,7 +71,7 @@ public class InventoryStatusDialog extends UICaller {
 
       Log.info("Request a InventoryStatusDialog for user %s", getClass(), inputUser);
 
-      Form f = Form.newDialog("Medication Manager", new Resource());
+      Form f = Form.newDialog(getMessage("medication.manager.ui.title"), new Resource());
       //start of the form model
       PersistentService persistentService = getPersistentService();
       PersonDao personDao = persistentService.getPersonDao();
@@ -79,7 +79,7 @@ public class InventoryStatusDialog extends UICaller {
       String inventoryStatusText = inventoryStatusHelper.getInventoryStatusText(patient, persistentService);
       new SimpleOutput(f.getIOControls(), null, null, inventoryStatusText);
       //...
-      new Submit(f.getSubmits(), new Label("Done", null), INVENTORY_STATUS_FORM);
+      new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.done"), null), INVENTORY_STATUS_FORM);
       //stop of form model
       //TODO to remove SAIED user and to return inputUser variable
       UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
