@@ -1,7 +1,6 @@
 package org.universAAL.AALapplication.health.manager.ui.measurements;
 
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
-import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.ui.UIResponse;
@@ -13,7 +12,6 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.healthmeasurement.owl.PersonWeight;
 import org.universAAL.ontology.measurement.Measurement;
-import org.universAAL.ontology.profile.User;
 
 public class WeigthMeasurement extends AbstractHealthForm{
 
@@ -28,8 +26,8 @@ public class WeigthMeasurement extends AbstractHealthForm{
 		private PersonWeight measurement;
 		
 	
-	public WeigthMeasurement(ModuleContext context, User inpuUser, PersonWeight hm) {
-		super(context,inpuUser);
+	public WeigthMeasurement(AbstractHealthForm ahf, PersonWeight hm) {
+		super(ahf);
 		this.measurement = hm;
 	}
 

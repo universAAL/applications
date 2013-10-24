@@ -30,8 +30,8 @@ public class BloodPreasureMeasurement extends AbstractHealthForm{
 		private BloodPressure measurement;
 		
 	
-	public BloodPreasureMeasurement(ModuleContext context, User inputUser, BloodPressure hm) {
-		super(context, inputUser);
+	public BloodPreasureMeasurement(AbstractHealthForm ahf, BloodPressure hm) {
+		super(ahf);
 		this.measurement = hm;
 	}
 

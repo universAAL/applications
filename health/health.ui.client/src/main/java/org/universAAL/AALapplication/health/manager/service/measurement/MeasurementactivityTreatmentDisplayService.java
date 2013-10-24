@@ -15,7 +15,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universAAL.AALapplication.health.manager.service;
+package org.universAAL.AALapplication.health.manager.service.measurement;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
@@ -23,7 +23,7 @@ import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
-import org.universAAL.ontology.health.owl.Treatment;
+import org.universAAL.ontology.health.owl.TakeMeasurementActivity;
 import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
 import org.universAAL.ontology.profile.AssistedPerson;
 
@@ -31,9 +31,9 @@ import org.universAAL.ontology.profile.AssistedPerson;
  * @author amedrano
  *
  */
-public class GenericTreatmentDisplayService extends DisplayTreatmentService {
+public class MeasurementactivityTreatmentDisplayService extends DisplayTreatmentService {
 	
-	public static final ServiceProfile[] profs = new ServiceProfile[4];
+	public static final ServiceProfile[] profs = new ServiceProfile[2];
 	static final String NAMESPACE = "http://lst.tfo.upm.es/Health.owl#";
 	static final String MY_URI = NAMESPACE + "GenericTreatmentDisplay";
 	
@@ -41,16 +41,14 @@ public class GenericTreatmentDisplayService extends DisplayTreatmentService {
 	 * Inputs.
 	 */
 	public static final String INPUT_TREATMENT      = NAMESPACE + "treatment";
-	public static final String NEW_GENERIC_TREATMENT = NAMESPACE + "showNewGenericTreatment";
-	public static final String EDIT_GENERIC_TREATMENT = NAMESPACE + "editGenericTreatment";
-	public static final String REMOVE_GENERIC_TREATMENT = NAMESPACE + "removeGenericTreatmentDisplay";
-	public static final String SHOW_TREATMENT_LIST = NAMESPACE + "showTreatmentList";
-	public static final String INPUT_TARGET_USER = NAMESPACE + "targetUser";
+	public static final String NEW_MEASURE_ACTIVITY_TREATMENT = NAMESPACE + "showNewMeasurementActivity";
+	public static final String EDIT_MEASURE_ACTIVITY_TREATMENT = NAMESPACE + "editMeasurementActivity";
+	private static final String INPUT_TARGET_USER = NAMESPACE + "targetUser";
 
 	/**
 	 * @param instanceURI
 	 */
-	public GenericTreatmentDisplayService(String instanceURI) {
+	public MeasurementactivityTreatmentDisplayService(String instanceURI) {
 		super(instanceURI);
 	}
 
@@ -62,32 +60,21 @@ public class GenericTreatmentDisplayService extends DisplayTreatmentService {
 
 							public Resource createInstance(String classURI,
 									String instanceURI, int factoryIndex) {
-								return new GenericTreatmentDisplayService(instanceURI);
+								return new MeasurementactivityTreatmentDisplayService(instanceURI);
 							}
 						}));
 
 		// NEW generic TReatment
-		GenericTreatmentDisplayService gNewTreatmentDisplay = new GenericTreatmentDisplayService(NEW_GENERIC_TREATMENT);
+		MeasurementactivityTreatmentDisplayService gNewTreatmentDisplay = new MeasurementactivityTreatmentDisplayService(NEW_MEASURE_ACTIVITY_TREATMENT);
 		gNewTreatmentDisplay.addFilteringInput(INPUT_TARGET_USER, AssistedPerson.MY_URI, 1, 1, new String[]{DisplayTreatmentService.PROP_AFFECTED_USER});
-		gNewTreatmentDisplay.addInputWithAddEffect(INPUT_TREATMENT, Treatment.MY_URI, 1, 1, new String[]{DisplayTreatmentService.PROP_TREATMENT});
+		gNewTreatmentDisplay.addInputWithAddEffect(INPUT_TREATMENT, TakeMeasurementActivity.MY_URI, 1, 1, new String[]{DisplayTreatmentService.PROP_TREATMENT});
 		profs[0] = gNewTreatmentDisplay.myProfile;
 		
 		// EDIT generic Treatment
-		GenericTreatmentDisplayService gEditTreatmentDisplay = new GenericTreatmentDisplayService(EDIT_GENERIC_TREATMENT);
+		MeasurementactivityTreatmentDisplayService gEditTreatmentDisplay = new MeasurementactivityTreatmentDisplayService(EDIT_MEASURE_ACTIVITY_TREATMENT);
 		gEditTreatmentDisplay.addFilteringInput(INPUT_TARGET_USER, AssistedPerson.MY_URI, 1, 1, new String[]{DisplayTreatmentService.PROP_AFFECTED_USER});
-		gEditTreatmentDisplay.addInputWithChangeEffect(INPUT_TREATMENT, Treatment.MY_URI, 1, 1, new String[]{DisplayTreatmentService.PROP_TREATMENT});
+		gEditTreatmentDisplay.addInputWithChangeEffect(INPUT_TREATMENT, TakeMeasurementActivity.MY_URI, 1, 1, new String[]{DisplayTreatmentService.PROP_TREATMENT});
 		profs[1] = gEditTreatmentDisplay.myProfile;
-		
-		// REMOVE generic Treatment
-		GenericTreatmentDisplayService gRemoveTreatmentDisplay = new GenericTreatmentDisplayService(REMOVE_GENERIC_TREATMENT);
-		gRemoveTreatmentDisplay.addFilteringInput(INPUT_TARGET_USER, AssistedPerson.MY_URI, 1, 1, new String[]{DisplayTreatmentService.PROP_AFFECTED_USER});
-		gRemoveTreatmentDisplay.addInputWithRemoveEffect(INPUT_TREATMENT, Treatment.MY_URI, 1, 1, new String[]{DisplayTreatmentService.PROP_TREATMENT});
-		profs[2] = gRemoveTreatmentDisplay.myProfile;
-		
-		// Treatment List Display
-		GenericTreatmentDisplayService treatmentListDisplay = new GenericTreatmentDisplayService(SHOW_TREATMENT_LIST);
-		treatmentListDisplay.addFilteringInput(INPUT_TARGET_USER, AssistedPerson.MY_URI, 1, 1, new String[]{DisplayTreatmentService.PROP_AFFECTED_USER});
-		profs[3] = treatmentListDisplay.myProfile;
 	}
 
 }

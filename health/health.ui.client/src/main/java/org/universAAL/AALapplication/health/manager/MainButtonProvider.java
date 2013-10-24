@@ -24,6 +24,8 @@ import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
+import org.universAAL.ontology.profile.AssistedPerson;
+import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.User;
 
 public class MainButtonProvider extends ServiceCallee {
@@ -63,8 +65,12 @@ public class MainButtonProvider extends ServiceCallee {
 	@Override
 	public ServiceResponse handleCall(ServiceCall call) {
 		Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
-		//new SimpleUI(this.ctxt).showDialog((Resource) inputUser);
-		new MainMenu(ctxt, (User) inputUser).show();
+		if (inputUser instanceof Caregiver){
+			new MainMenu(ctxt, (User) inputUser,null).show();
+		}
+		else if (inputUser instanceof AssistedPerson){
+			new MainMenu(ctxt, (User) inputUser,(AssistedPerson) inputUser).show();
+		}
 		return new ServiceResponse(CallStatus.succeeded);
 	}
 

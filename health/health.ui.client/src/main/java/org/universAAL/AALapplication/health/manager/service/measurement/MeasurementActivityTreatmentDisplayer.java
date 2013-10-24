@@ -15,12 +15,11 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universAAL.AALapplication.health.manager.service;
+package org.universAAL.AALapplication.health.manager.service.measurement;
 
-import org.universAAL.AALapplication.health.manager.service.genericUIs.EditTreatmentForm;
-import org.universAAL.AALapplication.health.manager.service.genericUIs.NewTreatmentForm;
-import org.universAAL.AALapplication.health.manager.service.genericUIs.RemoveConfirmation;
-import org.universAAL.AALapplication.health.manager.ui.TreatmentForm;
+import org.universAAL.AALapplication.health.manager.service.GenericTreatmentDisplayService;
+import org.universAAL.AALapplication.health.manager.service.measurement.ui.EditMeasurementActivityForm;
+import org.universAAL.AALapplication.health.manager.service.measurement.ui.NewMeasurementActivityForm;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.Resource;
@@ -38,7 +37,7 @@ import org.universAAL.ontology.profile.User;
  * @author amedrano
  *
  */
-public class GenericTreatmentDisplayer extends ServiceCallee {
+public class MeasurementActivityTreatmentDisplayer extends ServiceCallee {
 
     // prepare a standard error message for later use
     private static final ServiceResponse invalidInput = new ServiceResponse(
@@ -51,7 +50,7 @@ public class GenericTreatmentDisplayer extends ServiceCallee {
 	 * @param context
 	 * @param realizedServices
 	 */
-	public GenericTreatmentDisplayer(ModuleContext context,
+	public MeasurementActivityTreatmentDisplayer(ModuleContext context,
 			ServiceProfile[] realizedServices) {
 		super(context, realizedServices);
 	}
@@ -72,9 +71,9 @@ public class GenericTreatmentDisplayer extends ServiceCallee {
 		if(operation == null)
 		    return invalidInput;
 		
-		Resource inputUser = call.getInvolvedUser();
+		Resource user = call.getInvolvedUser();
 		
-		if (inputUser == null || ! (inputUser instanceof User)){
+		if (user == null || ! (user instanceof User)){
 			LogUtils.logError(owner, getClass(), "handleCall", "InvolvedUser MUST BE SET!");
 			return invalidInput;
 		}
@@ -84,40 +83,25 @@ public class GenericTreatmentDisplayer extends ServiceCallee {
 			LogUtils.logError(owner, getClass(), "handleCall", "Affected User MUST BE SET! and it must be an AssistedPerson");
 			return invalidInput;
 		}
-		
-		// DO NOT COPY THIS IF IF EXTENDING THE SERVICE
-		// ONLY ONE GENERIC "show Treatment List".
-		if (operation.startsWith(GenericTreatmentDisplayService.SHOW_TREATMENT_LIST)) {
-			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing list of Treatments");
-			new TreatmentForm(owner, (User) inputUser, (AssistedPerson) targetUser).show();
-			return new ServiceResponse(CallStatus.succeeded);
-		}
 			
-		Treatment t = (Treatment) call.getInputValue(GenericTreatmentDisplayService.INPUT_TREATMENT);
+		Treatment t = (Treatment) call.getInputValue(MeasurementactivityTreatmentDisplayService.INPUT_TREATMENT);
 		if (t == null) {
 			LogUtils.logError(owner, getClass(), "handleCall", "Treatment MUST BE SET!");
 			return invalidInput;
 		}
 		
-		if (operation.startsWith(GenericTreatmentDisplayService.NEW_GENERIC_TREATMENT)){
+		if (operation.startsWith(MeasurementactivityTreatmentDisplayService.NEW_MEASURE_ACTIVITY_TREATMENT)){
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for new Treatment");
 			// Form to add Treatment
-			new NewTreatmentForm(owner,(User) inputUser, (AssistedPerson) targetUser).show(t);
+			new NewMeasurementActivityForm(owner,(User) user, (AssistedPerson) targetUser).show(t);
 			return new ServiceResponse(CallStatus.succeeded);
 		}
 		
 
-		if (operation.startsWith(GenericTreatmentDisplayService.EDIT_GENERIC_TREATMENT)){
+		if (operation.startsWith(MeasurementactivityTreatmentDisplayService.EDIT_MEASURE_ACTIVITY_TREATMENT)){
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for Editing Treatment");
 			// Form that updates treatment
-			new EditTreatmentForm(owner, (User) inputUser, (AssistedPerson) targetUser);
-			return new ServiceResponse(CallStatus.succeeded);
-		}
-
-		if (operation.startsWith(GenericTreatmentDisplayService.REMOVE_GENERIC_TREATMENT)){
-			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing confirmation for removing Treatment");
-			// Form that confirms Treatment Remove.
-			new RemoveConfirmation(owner, (User) inputUser, (AssistedPerson) targetUser);
+			new EditMeasurementActivityForm(owner, (User) user, (AssistedPerson) targetUser);
 			return new ServiceResponse(CallStatus.succeeded);
 		}
 		

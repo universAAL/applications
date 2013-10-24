@@ -15,18 +15,16 @@
  * limitations under the License.
  ******************************************************************************/
 
-package org.universAAL.AALapplication.health.manager.service.genericUIs;
+package org.universAAL.AALapplication.health.manager.service.measurement.ui;
 
+import org.universAAL.AALapplication.health.manager.service.genericUIs.NewTreatmentForm;
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.rdf.PropertyPath;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
-import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
@@ -34,67 +32,67 @@ import org.universAAL.ontology.health.owl.services.TreatmentManagementService;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
-/**
- * @author amedrano
- *
- */
-public class RemoveConfirmation extends AbstractHealthForm {
+public class EditMeasurementActivityForm extends AbstractHealthForm{
+	
+	/**
+	 * @param ahf
+	 */
+	protected EditMeasurementActivityForm(AbstractHealthForm ahf) {
+		super(ahf);
+	}
 
 	/**
 	 * @param context
 	 * @param inputUser
 	 * @param targetUser
 	 */
-	public RemoveConfirmation(ModuleContext context, User inputUser,
+	public EditMeasurementActivityForm(ModuleContext context, User inputUser,
 			AssistedPerson targetUser) {
 		super(context, inputUser, targetUser);
 	}
 
-	/**
-	 * @param ahf
-	 */
-	protected RemoveConfirmation(AbstractHealthForm ahf) {
-		super(ahf);
-	}
-
-	/**
-	 * 
-	 */
-	private static final String BACK_CMD = "ups";
-	/**
-	 * 
-	 */
-	private static final String DELETE_CMD = "deleteNow";
+	private static final String EDIT_LABEL = "Update";
+	private static final String BACK_LABEL = "Back";
+	private static final String EDIT_CMD = "updateTreatment";
+	private static final String BACK_CMD = "goBack";
+	private static final String REMOVE_LABEL = "Delete This Treatment";
+	private static final String REM_CMD = "trashTreatment";
 
 
 	/** {@ inheritDoc}	 */
 	@Override
 	public void handleUIResponse(UIResponse uiResponse) {
 		String cmd = uiResponse.getSubmissionID();
-		if (cmd.equals(DELETE_CMD)){
-			// call remove treatment
-			TreatmentManagementService tms = new TreatmentManagementService(null);
-			tms.setProperty(TreatmentManagementService.PROP_MANAGES_TREATMENT, uiResponse.getSubmittedData());
-			ServiceRequest sr = new ServiceRequest(tms, inputUser);
-			sr.addRemoveEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT});
+		if (cmd.startsWith(EDIT_CMD)){
+			// Call edit Treatment
+			ServiceRequest sr = new ServiceRequest(new TreatmentManagementService(null), inputUser);
+			sr.addChangeEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT}, uiResponse.getSubmittedData());
 			sr.addValueFilter(new String[]{TreatmentManagementService.PROP_ASSISTED_USER}, targetUser);
+			new DefaultServiceCaller(owner).call(sr);
+		}
+		if (cmd.startsWith(REM_CMD)){
+			// Call confirmation Service
+			DisplayTreatmentService dts = new DisplayTreatmentService(null);
+			dts.setProperty(DisplayTreatmentService.PROP_TREATMENT, uiResponse.getSubmittedData());
+			ServiceRequest sr = new ServiceRequest(dts,inputUser);
+			sr.addRemoveEffect(new String[]{DisplayTreatmentService.PROP_TREATMENT});
+			sr.addValueFilter(new String[]{DisplayTreatmentService.PROP_AFFECTED_USER}, targetUser);
 			new DefaultServiceCaller(owner).call(sr);
 		}
 		//Call list treatment Service
 		ServiceRequest sr = new ServiceRequest(new DisplayTreatmentService(null), inputUser);
 		sr.addValueFilter(new String[]{DisplayTreatmentService.PROP_AFFECTED_USER}, targetUser);
 		new DefaultServiceCaller(owner).call(sr);
+		
 	}
 	
 	public void show(Treatment t){
-		Form f = Form.newDialog("Treatment Remove Confirmation", t);
-		new SimpleOutput(f.getIOControls(), null, null, "Are you sure you want to remove the treatment with name:");
-		new SimpleOutput(f.getIOControls(), null, new PropertyPath(Resource.generateAnonURI(), true, new String[]{Treatment.PROP_NAME}), null);
-		
-		new Submit(f.getSubmits(), new Label("Yes", null), DELETE_CMD);
-		new Submit(f.getSubmits(), new Label("no",null), BACK_CMD);
-		
+		Form f = NewTreatmentForm.getGenericTreatmentForm(t);
+		new Submit(f.getSubmits(), new Label(EDIT_LABEL, null), EDIT_CMD);
+		new Submit(f.getSubmits(), new Label(REMOVE_LABEL, null), REM_CMD);
+		new Submit(f.getSubmits(), new Label(BACK_LABEL, null), BACK_CMD);
 		sendForm(f);
 	}
-
+	
+	
 }

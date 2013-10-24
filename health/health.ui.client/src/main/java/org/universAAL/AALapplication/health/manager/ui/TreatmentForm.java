@@ -20,6 +20,7 @@ package org.universAAL.AALapplication.health.manager.ui;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.PropertyPath;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
@@ -35,6 +36,7 @@ import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -43,14 +45,27 @@ import org.universAAL.ontology.profile.User;
  */
 public class TreatmentForm extends AbstractHealthForm {
 
+	/**
+	 * @param ahf
+	 */
+	protected TreatmentForm(AbstractHealthForm ahf) {
+		super(ahf);
+	}
+
+	/**
+	 * @param owner
+	 * @param inputUser
+	 * @param targetUser
+	 */
+	public TreatmentForm(ModuleContext owner, User inputUser,
+			AssistedPerson targetUser) {
+		super(owner,inputUser,targetUser);
+	}
+
 	private static final String TREATMENT_EXAPAND = HealthProfileOntology.NAMESPACE + "subdialogTreatmentExpand";
 	private static final String NEW_TREATMENT = HealthProfileOntology.NAMESPACE + "newTreatmentUI";
 	private static final String BACK = HealthProfileOntology.NAMESPACE + "back";
 	private HealthProfile hp;
-
-	public TreatmentForm(ModuleContext context, User inputUser) {
-		super(context, inputUser);
-	}
 
 
 	public void handleUIResponse(UIResponse input) {
@@ -61,19 +76,20 @@ public class TreatmentForm extends AbstractHealthForm {
 			// user has selected a detail Treatment
 			int index = Integer.parseInt(cmd.substring(TREATMENT_EXAPAND.length()));
 			// service call the most specific DisplayTreatmentService available.
-			ServiceCaller sc = new DefaultServiceCaller(context);
+			ServiceCaller sc = new DefaultServiceCaller(owner);
 			ServiceRequest sr = new ServiceRequest(new DisplayTreatmentService(null), inputUser);
 			sr.addChangeEffect(new String[]{DisplayTreatmentService.PROP_TREATMENT}, 
 					hp.getTreatments()[index]);
+			sr.addValueFilter(new String[]{DisplayTreatmentService.PROP_AFFECTED_USER}, targetUser);
 			sc.call(sr);
 		}
 		
 		if (cmd.startsWith(NEW_TREATMENT)){
 			// New Treatment type Select form
-			new TreatmentTypeForm(context, inputUser).show();
+			new TreatmentTypeForm(this).show();
 		}
 		if (cmd.startsWith(BACK)){
-			new MainMenu(context, inputUser).show();
+			new MainMenu(this).show();
 		}
 	}
 	
@@ -81,7 +97,7 @@ public class TreatmentForm extends AbstractHealthForm {
 		hp = getHealthProfile();
 		if (hp == null){
 			//WARN
-			LogUtils.logError(context, getClass(), "show", "No Health Profile Found!!");
+			LogUtils.logError(owner, getClass(), "show", "No Health Profile Found!!");
 			return;
 		}
 		// Create Dialog
