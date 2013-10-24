@@ -73,7 +73,7 @@ public class DispenserUpsideDownDialog extends UICaller {
 
       Log.info("Request a DispenserUpsideDownDialog for user %s", getClass(), inputUser);
 
-      Form f = Form.newDialog("medication.manager.ui.title", new Resource());
+      Form f = Form.newDialog(Activator.getMessage("medication.manager.ui.title"), new Resource());
       //start of the form model
       String message = getMessage(inputUser);
       new SimpleOutput(f.getIOControls(), null, null, message);
