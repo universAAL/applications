@@ -30,16 +30,13 @@ public class ISubscriber extends UICaller{
 	
 	protected ISubscriber(ModuleContext context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void communicationChannelBroken() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void dialogAborted(String dialogID) {
-		// TODO Auto-generated method stub
 	}
 	
 	public void registerUI(String formID, InputListener listener) {

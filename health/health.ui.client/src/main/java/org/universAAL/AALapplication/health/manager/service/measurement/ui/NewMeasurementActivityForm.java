@@ -40,7 +40,6 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 	 */
 	public NewMeasurementActivityForm(AbstractHealthForm ahf) {
 		super(ahf);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -51,7 +50,6 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 	public NewMeasurementActivityForm(ModuleContext context, User inputUser,
 			AssistedPerson targetUser) {
 		super(context, inputUser, targetUser);
-		// TODO Auto-generated constructor stub
 	}
 
 	/** {@ inheritDoc}	 */

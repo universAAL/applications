@@ -41,7 +41,8 @@ public final class HowToBloodPreasure extends AbstractHealthForm {
 		new SimpleOutput(f.getIOControls(), null, null,
 				"Make sure you are relaxed and comfortable and make sure your blood presure is correctly.");
 		new MediaObject(f.getIOControls(), new Label("Image", (String) null),
-				"image", "../Monitor presion.jpg");
+				"image", "../Monitor presion.jpg"); 
+		//TODO set correct URL
 
 		
 		sendForm(f);

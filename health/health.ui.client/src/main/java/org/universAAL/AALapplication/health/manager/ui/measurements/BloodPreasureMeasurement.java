@@ -1,20 +1,22 @@
 package org.universAAL.AALapplication.health.manager.ui.measurements;
 
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
-import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.AALapplication.health.manager.ui.MainMenu;
+import org.universAAL.AALapplication.health.manager.ui.MeasurementTypeForm;
 import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.PropertyPath;
-import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.middleware.service.DefaultServiceCaller;
+import org.universAAL.middleware.service.ServiceCaller;
+import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
-import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universAAL.ontology.healthmeasurement.owl.BloodPressure;
 import org.universAAL.ontology.measurement.Measurement;
-import org.universAAL.ontology.profile.User;
 
 public class BloodPreasureMeasurement extends AbstractHealthForm{
 
@@ -27,6 +29,8 @@ public class BloodPreasureMeasurement extends AbstractHealthForm{
 		private static final String DONE_LABEL = "Done";
 		private static final String CANCEL_LABEL = null;
 		private static final String CANCEL_ICON = "Cancel";
+		private static final String HELP_ICON = null;
+		private static final String HELP_LABEL = "How to";
 		private BloodPressure measurement;
 		
 	
@@ -38,8 +42,24 @@ public class BloodPreasureMeasurement extends AbstractHealthForm{
 	
 
 	public void handleUIResponse(UIResponse input) {
-		// TODO Auto-generated method stub
-		
+		measurement = (BloodPressure) input.getSubmittedData();
+		if (input.getSubmissionID().startsWith(DONE_LABEL)){
+			// service call add Performed Session.
+			ServiceCaller sc = new DefaultServiceCaller(owner);
+			ServiceRequest sr = new ServiceRequest(new PerformedSessionManagementService(null), inputUser);
+			sr.addAddEffect(new String[]{PerformedSessionManagementService.PROP_MANAGES_SESSION}, measurement);
+			sr.addValueFilter(new String[]{PerformedSessionManagementService.PROP_ASSISTED_USER}, targetUser);
+			sc.call(sr);
+			new MainMenu(this).show();
+		}
+		if (input.getSubmissionID().startsWith(CANCEL_LABEL)){
+			//Back
+			new MeasurementTypeForm(this).show();
+		}
+		if (input.getSubmissionID().startsWith(HELP_LABEL)){
+			//show help
+			new HowToBloodPreasure(this).show();
+		}
 	}
 	
 	public void show() {
@@ -63,27 +83,19 @@ public class BloodPreasureMeasurement extends AbstractHealthForm{
 				new Label(DONE_LABEL, DONE_ICON),
 				DONE_LABEL);
 		new Submit(f.getSubmits(), 
+						new Label(HELP_LABEL, HELP_ICON),
+						HELP_LABEL);
+		new Submit(f.getSubmits(), 
 				new Label(CANCEL_LABEL, CANCEL_ICON),
 				CANCEL_LABEL);
-		
 		sendForm(f);
 	}
 	
-	public void ShowIncorrectMessage(){
-		Form f = Form.newMessage("Blood Preasure", null);
-		new SimpleOutput(f.getIOControls(), null, null, "Your Measure is not correct");
-		sendForm(f);
-	}
-
-	
-	public boolean checkUserInput (Resource i){
-		//TODO Check InputField is a correct number
-		while (i.isWellFormed()){
-			return true;
-			}
-		ShowIncorrectMessage();
-		return false;
-		}
+//	public void ShowIncorrectMessage(){
+//		Form f = Form.newMessage("Blood Preasure", null);
+//		new SimpleOutput(f.getIOControls(), null, null, "Your Measure is not correct");
+//		sendForm(f);
+//	}
 	
 }
 
