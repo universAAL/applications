@@ -1980,7 +1980,6 @@ long_term_behav/drools.reasoner/src/main/resources/reasoner_energy.drl -text
 long_term_behav/drools.reasoner/src/main/resources/snippet/Snippet.java -text
 long_term_behav/drools.reasoner/src/main/resources/uAALrules.drl -text
 long_term_behav/drools.reasoner/src/main/resources/users/droolsWorkshop1.drl -text
-long_term_behav/ltba.feature/.classpath -text svneol=unset#text/plain
 long_term_behav/ltba.feature/.project -text svneol=unset#text/plain
 long_term_behav/ltba.feature/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
 long_term_behav/ltba.feature/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
