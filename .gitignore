@@ -171,10 +171,15 @@ long_term_behav/drools.reasoner/.classpath
 long_term_behav/drools.reasoner/.project
 long_term_behav/drools.reasoner/.settings
 long_term_behav/drools.reasoner/target
+long_term_behav/ltba.feature/.classpath
+long_term_behav/ltba.feature/.settings
 long_term_behav/ltba.manager/.classpath
 long_term_behav/ltba.manager/.project
 long_term_behav/ltba.manager/.settings
 long_term_behav/ltba.manager/target
+long_term_behav/ltba.nomhad.gateway/.classpath
+long_term_behav/ltba.nomhad.gateway/.project
+long_term_behav/ltba.nomhad.gateway/target
 long_term_behav/ltba.pom/.project
 long_term_behav/ltba.pom/.settings
 long_term_behav/ltba.publisher/.classpath

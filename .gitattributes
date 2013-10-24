@@ -1985,9 +1985,6 @@ long_term_behav/drools.reasoner/src/main/resources/snippet/Snippet.java -text
 long_term_behav/drools.reasoner/src/main/resources/uAALrules.drl -text
 long_term_behav/drools.reasoner/src/main/resources/users/droolsWorkshop1.drl -text
 long_term_behav/ltba.feature/.project -text svneol=unset#text/plain
-long_term_behav/ltba.feature/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
-long_term_behav/ltba.feature/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
-long_term_behav/ltba.feature/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
 long_term_behav/ltba.feature/ASL2.0.txt -text svneol=unset#text/plain
 long_term_behav/ltba.feature/NOTICE -text
 long_term_behav/ltba.feature/pom.xml -text svneol=unset#text/plain
@@ -1999,20 +1996,11 @@ long_term_behav/ltba.manager/NOTICE.txt -text
 long_term_behav/ltba.manager/pom.xml -text
 long_term_behav/ltba.manager/src/main/java/org/universAAL/ltba/functional/pir/LTBAController.java -text
 long_term_behav/ltba.manager/src/main/java/org/universAAL/ltba/manager/Setup.java -text
-long_term_behav/ltba.nomhad.gateway/.classpath -text
-long_term_behav/ltba.nomhad.gateway/.project -text
 long_term_behav/ltba.nomhad.gateway/.settings/org.eclipse.core.resources.prefs -text
 long_term_behav/ltba.nomhad.gateway/.settings/org.eclipse.jdt.core.prefs -text
 long_term_behav/ltba.nomhad.gateway/.settings/org.eclipse.m2e.core.prefs -text
 long_term_behav/ltba.nomhad.gateway/.settings/org.maven.ide.eclipse.prefs -text
 long_term_behav/ltba.nomhad.gateway/pom.xml -text
-long_term_behav/ltba.nomhad.gateway/target/ltba.nomhad.gateway-0.0.1-SNAPSHOT.jar -text
-long_term_behav/ltba.nomhad.gateway/target/ltba.nomhad.gateway-2.0.0.jar -text
-long_term_behav/ltba.nomhad.gateway/target/ltba.nomhad.gateway-D.0.1-SNAPSHOT.jar -text
-long_term_behav/ltba.nomhad.gateway/target/ltba.nomhad.gateway-D.3.1.jar -text
-long_term_behav/ltba.nomhad.gateway/target/ltba.nomhad.gateway-E.0.1-SNAPSHOT.jar -text
-long_term_behav/ltba.nomhad.gateway/target/ltba.nomhad.gateway-E.1.1-SNAPSHOT.jar -text
-long_term_behav/ltba.nomhad.gateway/target/ltba.nomhad.gateway-E.1.jar -text
 long_term_behav/ltba.pom/Drools_LTBA[!!-~]1.3.0[!!-~]KNX.launch -text
 long_term_behav/ltba.pom/Drools_LTBA[!!-~]2.0.0[!!-~]KNX.launch -text
 long_term_behav/ltba.pom/pom.xml -text
