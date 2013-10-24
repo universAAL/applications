@@ -41,9 +41,9 @@ public final class Medicine extends Entity {
     validate(medicineName, mealRelation, unitClass);
 
     this.medicineName = medicineName;
-    this.medicineInfo = medicineInfo;
-    this.medicineSideEffects = medicineSideEffects;
-    this.incompliances = incompliances;
+    this.medicineInfo = medicineInfo != null ? medicineInfo : "";
+    this.medicineSideEffects = medicineSideEffects != null ? medicineSideEffects : "";
+    this.incompliances = incompliances != null ? incompliances : "";
     this.mealRelation = mealRelation;
     this.unitClass = unitClass;
   }

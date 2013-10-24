@@ -52,8 +52,10 @@ import java.util.List;
 import java.util.Locale;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.getMessage;
 import static org.universAAL.AALapplication.medication_manager.ui.IntakeReviewDialog.*;
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
+import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.getMessage;
 
 public class ReminderDialog extends UICaller {
 
@@ -308,19 +310,20 @@ public class ReminderDialog extends UICaller {
       //TODO to be removed (hack for saied user)
       currentUser = inputUser;
 
-      Form f = Form.newDialog("Medication Manager", new Resource());
+      Form f = Form.newDialog(getMessage("medication.manager.ui.title"), new Resource());
 
       //start of the form model
 
       String timeText = getTimeText(time);
-      String reminderMessage = getName(persistentService, inputUser) + ",\nit is time " + timeText + " to get your medicine.";
+      String name = getName(persistentService, inputUser);
+      String reminderMessage = getMessage("medication.manager.ui.reminder.message", name, timeText);
 
       new SimpleOutput(f.getIOControls(), null, null, reminderMessage);
       //...
-      new Submit(f.getSubmits(), new Label("Taken", null), TAKEN_BUTTON);
-      new Submit(f.getSubmits(), new Label("Missed", null), MISSED_BUTTON);
-      new Submit(f.getSubmits(), new Label("Info", null), INFO_BUTTON);
-      new Submit(f.getSubmits(), new Label("New dose", null), REQUEST_NEW_DOSE_BUTTON);
+      new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.taken"), null), TAKEN_BUTTON);
+      new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.missed"), null), MISSED_BUTTON);
+      new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.info"), null), INFO_BUTTON);
+      new Submit(f.getSubmits(), new Label(getMessage("medication.manager.ui.new.dose"), null), REQUEST_NEW_DOSE_BUTTON);
       //stop of form model
       //TODO to remove SAIED user and to return inputUser variable
       UIRequest req = new UIRequest(SAIED, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);

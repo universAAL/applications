@@ -268,6 +268,28 @@ public final class DerbySqlUtility implements SqlUtility {
     }
   }
 
+  public void renameDefaultUserTo(String newName) {
+
+    boolean autoCommit = true;
+    PreparedStatement statement = null;
+    try {
+      autoCommit = connection.getAutoCommit();
+      connection.setAutoCommit(false);
+      String sql = "UPDATE MEDICATION_MANAGER.PERSON SET NAME = ? WHERE ID = 1";
+      statement = connection.prepareStatement(sql);
+      statement.setString(1, newName);
+      statement.execute();
+      Log.info("Rename the default user in the person table to: %s.", getClass(), newName);
+      connection.commit();
+      Log.info("The name of the default user has been changed successfully.", getClass());
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      handleFinally(connection, statement, null, autoCommit);
+    }
+
+  }
+
   private void dropTables(Statement statement) throws SQLException {
 
     dropTable("PROPERTIES", statement);

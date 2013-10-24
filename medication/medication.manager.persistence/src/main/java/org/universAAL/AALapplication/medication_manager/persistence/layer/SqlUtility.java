@@ -38,4 +38,6 @@ public interface SqlUtility {
   public Set<String> getDBColumns(String tableName) throws SQLException;
 
   void resetMedicationManagerDB();
+
+  void renameDefaultUserTo(String newName);
 }

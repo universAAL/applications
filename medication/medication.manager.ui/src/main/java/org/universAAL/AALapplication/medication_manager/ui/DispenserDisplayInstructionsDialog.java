@@ -99,7 +99,7 @@ public class DispenserDisplayInstructionsDialog extends UICaller {
     Dispenser dispenser = dispenserDao.getDispenserByPerson(patient);
 
     if (dispenser == null) {
-      return "This user does not have pill dispenser. The pill dispenser could be set via the configuration web application";
+      return getMessage("medication.manager.ui.missing.pill.dispenser", patient.getName());
     }
 
     String instructionsFile = dispenser.getInstructionsFileName();
