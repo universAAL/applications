@@ -13,6 +13,7 @@ public class CurrentActivityController extends LTBAController {
 	private final String INDICATOR = "CURRENT_ACTIVITY_LEVEL";
 	// private String serverURL = "192.168.238.40";
 	// private String userCode = "A100";
+	//PILOT OK
 	/**
 	 * The device ID. When the user management be made, the DEVICE_ID must
 	 * content a reference to the user, in orden to not crossing the same device

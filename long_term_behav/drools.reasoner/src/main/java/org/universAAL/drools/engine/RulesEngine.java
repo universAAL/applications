@@ -280,7 +280,6 @@ public final class RulesEngine {
 			// System.out.println(rulesEngineBundleContext.getBundle()
 			// .getResource("reasoner.drl").getPath());
 
-			// SUPERTEST DEL EVEREST
 			// kbuilder.add(ResourceFactory.newUrlResource(rulesEngineBundleContext.getBundle().getResource("uAALrules.drl")),
 			// ResourceType.DRL);
 
@@ -353,7 +352,9 @@ public final class RulesEngine {
 					|| ((ContextEvent) event).getRDFSubject() instanceof Device) {
 				ksession.insert(event);
 			} else {
-				ContextEvent c;
+				ContextEvent c = null;
+				int a = (Integer)c.getRDFObject();
+				
 				// c.setpro
 				// Not a sensor (genius)
 			}

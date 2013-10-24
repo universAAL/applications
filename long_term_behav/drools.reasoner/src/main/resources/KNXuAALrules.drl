@@ -104,7 +104,7 @@ function void showList(PoweredDevice dc){
 	list = dc.getAlist();
 	for (int i = 0 ; i < list.size() ; i++){
 		System.out.print(" "+list.get(i));
-	
+	}
 }
 
 function LinkedList updateElements(PoweredDevice pd, Integer newVal){
@@ -318,7 +318,7 @@ dialect "java"
 no-loop true
 	when
 	    $a:CurrentActivityIndex( $i: index, room matches "KITCHEN" )		
-       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="KITCHEN", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
+       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), getRoom(RDFSubject.getURI())=="KITCHEN", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
 	then
 		System.out.println("Current activity (5 minutes) index in kitchen: "+((float)$i)+" new activity index "+((float)($val)));
 		modify($a){setIndex((float)$val)}
@@ -329,7 +329,7 @@ dialect "java"
 no-loop true
 	when
 	    $a:CurrentActivityIndex( $i: index, room matches "BATHROOM" )		
-       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="BATHROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
+       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), getRoom(RDFSubject.getURI())=="BATHROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
 	then
 		System.out.println("Current activity (5 minutes) index in bathroom: "+((float)$i)+" new activity index "+((float)($val)));
 		modify($a){setIndex((float)$val)}
@@ -340,7 +340,7 @@ dialect "java"
 no-loop true
 	when
 	    $a:CurrentActivityIndex( $i: index, room matches "BEDROOM" )		
-       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="BEDROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
+       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), getRoom(RDFSubject.getURI())=="BEDROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
 	then
 		System.out.println("Current activity (5 minutes) index in bedroom: "+((float)$i)+" new activity index "+((float)($val)));
 		modify($a){setIndex((float)$val)}
@@ -351,7 +351,7 @@ dialect "java"
 no-loop true
 	when
 	    $a:CurrentActivityIndex( $i: index, room matches "LIVING ROOM" )		
-       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="LIVING ROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
+       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), getRoom(RDFSubject.getURI())=="LIVING ROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
 	then
 		System.out.println("Current activity (5 minutes) index in living room: "+((float)$i)+" new activity index "+((float)($val)));
 		modify($a){setIndex((float)$val)}
@@ -362,7 +362,7 @@ dialect "java"
 no-loop true
 	when
 	    $a:CurrentActivityIndex( $i: index, room matches "HALL" )		
-       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="HALL", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
+       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), getRoom(RDFSubject.getURI())=="HALL", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
 	then
 		System.out.println("Current activity (5 minutes) index in hall: "+((float)$i)+" new activity index "+((float)($val)));
 		modify($a){setIndex((float)$val)}
@@ -373,7 +373,7 @@ dialect "java"
 no-loop true
 	when
 	    $a:CurrentActivityIndex( $i: index, room matches "GARDEN" )		
-       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="GARDEN", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
+       and Number($val:floatValue) from accumulate ($c: ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), getRoom(RDFSubject.getURI())=="GARDEN", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" ) over window:time(5m),count($c))       
 	then
 		System.out.println("Current activity (5 minutes) index in garden: "+((float)$i)+" new activity index "+((float)($val)));
 		modify($a){setIndex((float)$val)}
@@ -484,7 +484,7 @@ end
 rule "Awakening"
 	when
 	$uA: UserAsleep()
-		$c:ContextEvent(eval(RDFSubject instanceof ActivityHubSensor),  $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="KITCHEN",((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected"  ,this after $uA)
+		$c:ContextEvent(eval(RDFSubject instanceof ActivityHubSensor),  getRoom(RDFSubject.getURI())=="KITCHEN",((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected"  ,this after $uA)
 		//not ContextEvent( this before [1ms,30s] $c)
 		$n:NullActivity(room == "ALL", this after [1ms, 1h] $c)
 		NullActivity(room == "KITCHEN", this coincides $n)
@@ -517,14 +517,14 @@ end
 
 rule "Presence in kitchen start"
 	when
-		ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="KITCHEN", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" )
+		ContextEvent( getRoom(RDFSubject.getURI())=="KITCHEN", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" )
 	then
 	RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Phase"},new String[]{"PresenceInKitchen","Start"});	
 end
 
 rule "Presence in kitchen stop"
 	when
-		ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="KITCHEN", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#no_condition_detected" )
+		ContextEvent( getRoom(RDFSubject.getURI())=="KITCHEN", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#no_condition_detected" )
 	then
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Phase"},new String[]{"PresenceInKitchen","Stop"});
 		System.out.println("PRESENCE IN KITCHEN STOP");
@@ -532,7 +532,7 @@ end
 
 rule "Presence in bathroom start"
 	when
-		ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="BATHROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" )
+		ContextEvent( getRoom(RDFSubject.getURI())=="BATHROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" )
 	then
 	RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Phase"},new String[]{"PresenceInBath","Start"});
 		System.out.println("PRESENCE IN BATHROOM START");
@@ -540,7 +540,7 @@ end
 
 rule "Presence in bathroom stop"
 	when
-		ContextEvent(eval(RDFSubject instanceof ActivityHubSensor), $s:(((ActivityHubSensor)RDFSubject).getLocation().getProperty(Location.PROP_HAS_NAME))=="BATHROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#no_condition_detected" )
+		ContextEvent( getRoom(RDFSubject.getURI())=="BATHROOM", ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#no_condition_detected" )
 	then
 		System.out.println("PRESENCE IN BATHROOM STOP");
 		RulesEngine.getInstance().publishConsequence(new String("http://www.tsbtecnologias.es/Consequence.owl#"+drools.getRule().getName()), new String[]{"ActivityType","Phase"},new String[]{"PresenceInBath","Stop"});

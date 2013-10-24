@@ -20,8 +20,8 @@ public class GoingToBedController extends LTBAController implements
 	private Timer t;
 
 	/**
-	 * The device ID. When the user management be made, the DEVICE_ID must
-	 * content a reference to the user, in orden to not crossing the same device
+	 * The device ID. When the user management will be implemented, the DEVICE_ID must
+	 * content a reference to the user, in order  not to using the same device
 	 * with different users. (TODO).
 	 */
 	private final String DEVICE_ID = "BEDROOM_DET";
@@ -29,6 +29,7 @@ public class GoingToBedController extends LTBAController implements
 	private GoingToBedController() {
 		super();
 		INSTANCE = this;
+		//CHECK THIS AT 23.45 PM
 		t = new Timer(24 * 60 * 60 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),

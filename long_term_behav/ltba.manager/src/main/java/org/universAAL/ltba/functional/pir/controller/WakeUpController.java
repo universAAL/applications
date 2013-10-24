@@ -3,6 +3,7 @@ package org.universAAL.ltba.functional.pir.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.Timer;
@@ -27,13 +28,28 @@ public class WakeUpController extends LTBAController implements ActionListener {
 
 	private WakeUpController() {
 		super();
-		INSTANCE = this;
+		INSTANCE = this;		
+		
+		// Check the wake up hour at 13.00 PM		
+		Calendar thisTime = Calendar.getInstance();
+		GregorianCalendar thisMorning = new GregorianCalendar(
+				thisTime.get(Calendar.YEAR), thisTime.get(Calendar.MONTH),
+				thisTime.get(Calendar.DAY_OF_MONTH), 13, 00);
 		t = new Timer(24 * 60 * 60 * 1000, this);
-		Calendar today = new GregorianCalendar();
-		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
-				today.get(Calendar.MONTH), today.get(Calendar.DATE), 12, 00);
-		t.setInitialDelay((int) (startTime.getTimeInMillis() - System
-				.currentTimeMillis()));
+		if (thisMorning.getTimeInMillis() < thisTime.getTimeInMillis()) {
+			t.setInitialDelay((24 * 60 * 60 * 1000)
+					- ((int) (thisMorning.getTimeInMillis() - thisTime
+							.getTimeInMillis())));
+		} else {
+			t.setInitialDelay((int) (thisMorning.getTimeInMillis() - thisTime
+					.getTimeInMillis()));
+		}
+
+//		Calendar today = new GregorianCalendar();
+//		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
+//				today.get(Calendar.MONTH), today.get(Calendar.DATE), 12, 00);
+//		t.setInitialDelay((int) (startTime.getTimeInMillis() - System
+//				.currentTimeMillis()));
 		t.start();
 	}
 
@@ -55,7 +71,7 @@ public class WakeUpController extends LTBAController implements ActionListener {
 		System.out.println("Sending to Nomhad time>" + wuTime + " and times>"
 				+ times);
 		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-				"123456", "SLEEPING", "GETTING_UP", new String("" + wuTime),
+				userPassword, "SLEEPING", "GETTING_UP", new String("" + wuTime),
 				DEVICE_ID);
 		TimeSleepingController.getInstance().setWUTime((float) wuTime);
 		wuTime = 0;

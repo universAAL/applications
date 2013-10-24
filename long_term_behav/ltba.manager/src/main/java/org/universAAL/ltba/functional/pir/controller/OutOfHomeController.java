@@ -9,23 +9,17 @@ import javax.swing.Timer;
 
 import org.universAAL.ltba.functional.pir.LTBAController;
 
+import es.tsb.ltba.nomhad.gateway.NomhadGateway;
+
 public class OutOfHomeController extends LTBAController implements ActionListener {
 
 	private static OutOfHomeController INSTANCE;
 	private Timer t;
 	private String serverIp;
 	private String userCode;
-
+	private final String DEVICE_ID = "HALL_DET";
 	private OutOfHomeController() {
 		super();
-		INSTANCE = this;
-		t = new Timer(24 * 60 * 60 * 1000, this);
-		Calendar today = new GregorianCalendar();
-		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
-				today.get(Calendar.MONTH), today.get(Calendar.DATE), 23, 45);
-		t.setInitialDelay((int) (startTime.getTimeInMillis() - System
-				.currentTimeMillis()));
-		t.start();
 	}
 
 	public static OutOfHomeController getInstance() {
@@ -36,11 +30,15 @@ public class OutOfHomeController extends LTBAController implements ActionListene
 	}
 
 	public void outOfHomeStart(float hour) {
-		// TODO
+		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
+				userPassword, "GOING_OUT_INDICATORS_GROUP", "OUT_OF_HOME_START",
+				new String("" + hour), DEVICE_ID);	
 	}
 
 	public void outOfHomeStop(float hour) {
-		// TODO
+		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
+				userPassword, "GOING_OUT_INDICATORS_GROUP", "OUT_OF_HOME_STOP",
+				new String("" + hour), DEVICE_ID);
 	}
 
 	public void actionPerformed(ActionEvent e) {

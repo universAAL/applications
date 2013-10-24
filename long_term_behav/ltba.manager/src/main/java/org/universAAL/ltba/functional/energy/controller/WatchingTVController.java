@@ -55,15 +55,6 @@ public class WatchingTVController extends LTBAController implements
 		return time;
 	}
 
-	private static Date get23pm() {
-		Calendar tomorrow = new GregorianCalendar();
-		tomorrow.add(Calendar.DATE, 0);
-		Calendar result = new GregorianCalendar(tomorrow.get(Calendar.YEAR),
-				tomorrow.get(Calendar.MONTH), tomorrow.get(Calendar.DATE), 23,
-				00);
-		return result.getTime();
-	}
-
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Sending to Nomhad time>" + time + " and times>"
 				+ times);

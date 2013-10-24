@@ -344,7 +344,7 @@ end
 rule "Going to bed"
 salience 1
 	when
-		$a:NullActivity($r:room=="KITCHEN")
+		$a:NullActivity($r:room=="BEDROOM")
 		not ContextEvent( this after [1ms,30s] $a, ((ManagedIndividual)RDFObject).getURI() matches "http://ontology.universAAL.org/ActivityHub.owl#motion_detected" )
 		$uS:UserStatus(awake == true)
 	then		
