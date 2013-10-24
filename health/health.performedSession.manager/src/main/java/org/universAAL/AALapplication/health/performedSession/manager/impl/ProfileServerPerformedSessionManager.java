@@ -204,10 +204,10 @@ public class ProfileServerPerformedSessionManager
 				treatment.addPerformedSession(session);
 				needsUpdate = true;
 				
-				if (session instanceof PerformedMeasurementSession
-						&& treatment.getMeasurementRequirements() != null){
-					//TODO: check for possible irregularities in the measurements and warn in that case.
-				}
+//				if (session instanceof PerformedMeasurementSession
+//						&& treatment.getMeasurementRequirements() != null){
+//					//TODO: check for possible irregularities in the measurements and warn in that case.
+//				}
 			}
 			if (needsUpdate) {
 				updateHealthProfile(profile);
