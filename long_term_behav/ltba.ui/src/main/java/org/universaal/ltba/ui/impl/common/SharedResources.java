@@ -119,14 +119,16 @@ public class SharedResources {
 				if (reconnectToday) {
 					return properties.getProperty("ltba.ui.disconnected.main."
 							+ lan.toLowerCase())
-							+ reconnectHour+" "
+							+ reconnectHour
+							+ " "
 							+ properties
 									.getProperty("ltba.ui.disconnected.today."
 											+ lan.toLowerCase());
 				} else {
 					return properties.getProperty("ltba.ui.disconnected.main."
 							+ lan.toLowerCase())
-							+ reconnectHour+" "
+							+ reconnectHour
+							+ " "
 							+ properties
 									.getProperty("ltba.ui.disconnected.tomorrow."
 											+ lan.toLowerCase());
@@ -136,6 +138,6 @@ public class SharedResources {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return "No message";
 	}
 }
