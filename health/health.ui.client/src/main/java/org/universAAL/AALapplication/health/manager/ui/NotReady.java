@@ -3,7 +3,6 @@
  */
 package org.universAAL.AALapplication.health.manager.ui;
 
-import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIResponse;
@@ -11,7 +10,6 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
-import org.universAAL.ontology.profile.User;
 
 /**
  * @author amedrano
@@ -19,22 +17,22 @@ import org.universAAL.ontology.profile.User;
  */
 public final class NotReady extends AbstractHealthForm {
 
-	private static final String GO_HOME = "goHome";
-
-	/* (non-Javadoc)
-	 * @see org.universAAL.middleware.ui.UICaller#handleUIResponse(org.universAAL.middleware.ui.UIResponse)
+	/**
+	 * @param ahf
 	 */
-	public NotReady(ModuleContext context, User inputUser) {
-		super(context, inputUser);
+	protected NotReady(AbstractHealthForm ahf) {
+		super(ahf);
 	}
+
+	private static final String GO_HOME = "goHome";
 
 	@Override
 	public void handleUIResponse(UIResponse arg0) {
-		new MainMenu(context,inputUser).show();
+		new MainMenu(this).show();
 	}
 	
 	public void show(){
-		LogUtils.logDebug(context, getClass(), "show", "SHOWING: NOT READY");
+		LogUtils.logDebug(owner, getClass(), "show", "SHOWING: NOT READY");
 		
 		Form f = Form.newDialog("Functionality not available", new Resource());
 		

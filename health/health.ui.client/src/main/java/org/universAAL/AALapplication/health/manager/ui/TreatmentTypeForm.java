@@ -5,7 +5,6 @@ package org.universAAL.AALapplication.health.manager.ui;
 
 import java.util.Set;
 
-import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.rdf.Resource;
@@ -21,7 +20,6 @@ import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
-import org.universAAL.ontology.profile.User;
 
 /**
  * @author amedrano
@@ -29,19 +27,18 @@ import org.universAAL.ontology.profile.User;
  */
 public class TreatmentTypeForm extends AbstractHealthForm {
 	
+	/**
+	 * @param ahf
+	 */
+	protected TreatmentTypeForm(AbstractHealthForm ahf) {
+		super(ahf);
+	}
+
 	private static final String CANCEL_LABEL = "Cancel";
 	private static final String SELECTED_TREATMENT = HealthProfileOntology.NAMESPACE + "uiTreatmentSelected";
 	private static final String OK_ICON = null;
 	private static final String OK_LABEL = "Ok";
 	private static final String CANCEL_ICON = null;
-
-	/**
-	 * @param context
-	 * @param inputUser
-	 */
-	public TreatmentTypeForm(ModuleContext context, User inputUser) {
-		super(context, inputUser);
-	}
 
 	/* (non-Javadoc)
 	 * @see org.universAAL.middleware.ui.UICaller#handleUIResponse(org.universAAL.middleware.ui.UIResponse)
@@ -51,15 +48,15 @@ public class TreatmentTypeForm extends AbstractHealthForm {
 		Resource res = (Resource) arg0.getUserInput(new String[]{SELECTED_TREATMENT});
 		if (arg0.getSubmissionID().startsWith(OK_LABEL)){
 			// service call the most specific DisplayTreatmentService available.
-			ServiceCaller sc = new DefaultServiceCaller(context);
+			ServiceCaller sc = new DefaultServiceCaller(owner);
 			ServiceRequest sr = new ServiceRequest(new DisplayTreatmentService(null), inputUser);
-			sr.addAddEffect(new String[]{DisplayTreatmentService.PROP_TREATMENT}, 
-					arg0.getUserInput(new String[]{SELECTED_TREATMENT}));
+			sr.addAddEffect(new String[]{DisplayTreatmentService.PROP_TREATMENT}, res);
+			sr.addValueFilter(new String[]{DisplayTreatmentService.PROP_AFFECTED_USER}, targetUser);
 			sc.call(sr);
 		}
 		if (arg0.getSubmissionID().startsWith(CANCEL_LABEL)){
 			//Back
-			new TreatmentForm(context, inputUser).show();
+			new TreatmentForm(this).show();
 		}
 	}
 	

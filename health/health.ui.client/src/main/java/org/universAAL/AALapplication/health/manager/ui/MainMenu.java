@@ -1,6 +1,5 @@
 package org.universAAL.AALapplication.health.manager.ui;
 
-import org.universAAL.AALapplication.health.manager.ui.measurements.Motivation;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.supply.LevelRating;
@@ -10,12 +9,24 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
 public class MainMenu extends AbstractHealthForm{
 
-	public MainMenu(ModuleContext context, User inputUser) {
-		super(context, inputUser);
+	/**
+	 * @param measurementTypeForm
+	 */
+	public MainMenu(AbstractHealthForm parent) {
+		super(parent);
+	}
+
+		/**
+	 * @param ctxt
+	 * @param inputUser
+	 */
+	public MainMenu(ModuleContext ctxt, User inputUser, AssistedPerson targetUser) {
+		super(ctxt, inputUser,targetUser);
 	}
 
 		//TODO: internationalization!
@@ -43,27 +54,34 @@ public class MainMenu extends AbstractHealthForm{
 		LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling: " + cmd);
 		if (cmd.equalsIgnoreCase(MESSAGE_CMD)){
 			//TODO: message Managing
-//			new NotReady(context,inputUser).show();
-			new NotReady(context, inputUser).show();
+			new NotReady(this).show();
 		}
 		if (cmd.equalsIgnoreCase(MEASUREMENT_CMD)){
-			new MeasurementTypeForm(context, inputUser).show();
+			new MeasurementTypeForm(this).show();
 		}
 		if (cmd.equalsIgnoreCase(TREATMENT_CMD)){
-			new TreatmentForm(context, inputUser).show();
+			new TreatmentForm(this).show();
 		}
 		if (cmd.equalsIgnoreCase(PREFERENCES_CMD)){
 			//TODO: Preferences Managing
-			new NotReady(context, inputUser).show();
+			new NotReady(this).show();
 		}
 	}
 	
 	public void show() {
+		if (targetUser == null){
+			// show AssistedUserProfile Selector
+		} else {
+			showTarget();
+		}
+	}
+	
+	private void showTarget() {
 		//get HealthProfile
 		HealthProfile hp = getHealthProfile();
 		if (hp == null){
 			//WARN
-			LogUtils.logError(context, getClass(), "show", "No Health Profile Found!!");
+			LogUtils.logError(owner, getClass(), "show", "No Health Profile Found!!");
 			return;
 		}
 		// Create Dialog

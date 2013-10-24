@@ -17,7 +17,6 @@
  ******************************************************************************/
 package org.universAAL.AALapplication.health.manager.ui;
 
-import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -29,13 +28,19 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.health.owl.Treatment;
-import org.universAAL.ontology.profile.User;
 
 /**
  * @author amedrano
  *
  */
 public class TreatmentViewForm extends AbstractHealthForm {
+
+	/**
+	 * @param ahf
+	 */
+	protected TreatmentViewForm(AbstractHealthForm ahf) {
+		super(ahf);
+	}
 
 	private static final String DELETE_LABEL = "Delete";
 	private static final String DELETE_ICON = null;
@@ -47,10 +52,6 @@ public class TreatmentViewForm extends AbstractHealthForm {
 	private static final String NEW_ICON = null;
 	private static final String NEW_ID = "addNewTreatment";
 	private boolean newT;
-
-	public TreatmentViewForm(ModuleContext context, User inputUser) {
-		super(context, inputUser);
-	}
 
 	public void show(Treatment treat) {
 		
@@ -119,7 +120,7 @@ public class TreatmentViewForm extends AbstractHealthForm {
 	public void handleUIResponse(UIResponse arg0) {
 		String cmd = arg0.getSubmissionID();
 		if (cmd.equalsIgnoreCase(BACK_ICON)){
-			new TreatmentForm(context, inputUser).show();
+			new TreatmentForm(this).show();
 		}
 		if (cmd.equalsIgnoreCase(DELETE_LABEL)){
 			//TODO: DELETE
@@ -132,7 +133,7 @@ public class TreatmentViewForm extends AbstractHealthForm {
 			//Add new Treatment
 			//TODO: service call
 			
-			new TreatmentForm(context, inputUser).show();
+			new TreatmentForm(this).show();
 		}
 	}
 }

@@ -19,22 +19,23 @@ import org.universAAL.ontology.profile.User;
  */
 public final class HowToBloodPreasure extends AbstractHealthForm {
 
+	/**
+	 * @param ahf
+	 */
+	protected HowToBloodPreasure(AbstractHealthForm ahf) {
+		super(ahf);
+	}
+
 	private static final String GO_HOME = "goHome";
 
-	/* (non-Javadoc)
-	 * @see org.universAAL.middleware.ui.UICaller#handleUIResponse(org.universAAL.middleware.ui.UIResponse)
-	 */
-	public HowToBloodPreasure(ModuleContext context, User inputUser) {
-		super(context, inputUser);
-	}
 
 	@Override
 	public void handleUIResponse(UIResponse arg0) {
-		new MainMenu(context,inputUser).show();
+		new MainMenu(this).show();
 	}
 	
 	public void show(){
-		LogUtils.logDebug(context, getClass(), "show", "SHOWING: WELL DONE");
+		LogUtils.logDebug(owner, getClass(), "show", "SHOWING: WELL DONE");
 		
 		Form f = Form.newMessage("Motivation Message",  GO_HOME);
 		new SimpleOutput(f.getIOControls(), null, null,

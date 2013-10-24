@@ -19,23 +19,38 @@ package org.universAAL.AALapplication.health.manager.service.genericUIs;
 
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.middleware.container.ModuleContext;
-import org.universAAL.middleware.rdf.PropertyPath;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
-import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
-import org.universAAL.middleware.ui.rdf.TextArea;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
 import org.universAAL.ontology.health.owl.services.TreatmentManagementService;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
 public class EditTreatmentForm extends AbstractHealthForm{
 	
+	/**
+	 * @param ahf
+	 */
+	public EditTreatmentForm(AbstractHealthForm ahf) {
+		super(ahf);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param context
+	 * @param inputUser
+	 * @param targetUser
+	 */
+	public EditTreatmentForm(ModuleContext context, User inputUser,
+			AssistedPerson targetUser) {
+		super(context, inputUser, targetUser);
+	}
+
 	private static final String EDIT_LABEL = "Update";
 	private static final String BACK_LABEL = "Back";
 	private static final String EDIT_CMD = "updateTreatment";
@@ -43,13 +58,7 @@ public class EditTreatmentForm extends AbstractHealthForm{
 	private static final String REMOVE_LABEL = "Delete This Treatment";
 	private static final String REM_CMD = "trashTreatment";
 
-	/**
-	 * @param context
-	 * @param inputUser
-	 */
-	public EditTreatmentForm(ModuleContext context, User inputUser) {
-		super(context, inputUser);
-	}
+
 
 	/** {@ inheritDoc}	 */
 	@Override
@@ -59,7 +68,7 @@ public class EditTreatmentForm extends AbstractHealthForm{
 			// Call edit Treatment
 			ServiceRequest sr = new ServiceRequest(new TreatmentManagementService(null), inputUser);
 			sr.addChangeEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT}, uiResponse.getSubmittedData());
-			sr.addValueFilter(new String[]{TreatmentManagementService.PROP_ASSISTED_USER}, inputUser);
+			sr.addValueFilter(new String[]{TreatmentManagementService.PROP_ASSISTED_USER}, targetUser);
 			new DefaultServiceCaller(owner).call(sr);
 		}
 		if (cmd.startsWith(REM_CMD)){
@@ -68,10 +77,12 @@ public class EditTreatmentForm extends AbstractHealthForm{
 			dts.setProperty(DisplayTreatmentService.PROP_TREATMENT, uiResponse.getSubmittedData());
 			ServiceRequest sr = new ServiceRequest(dts,inputUser);
 			sr.addRemoveEffect(new String[]{DisplayTreatmentService.PROP_TREATMENT});
+			sr.addValueFilter(new String[]{DisplayTreatmentService.PROP_AFFECTED_USER}, targetUser);
 			new DefaultServiceCaller(owner).call(sr);
 		}
 		//Call list treatment Service
 		ServiceRequest sr = new ServiceRequest(new DisplayTreatmentService(null), inputUser);
+		sr.addValueFilter(new String[]{DisplayTreatmentService.PROP_AFFECTED_USER}, targetUser);
 		new DefaultServiceCaller(owner).call(sr);
 		
 	}

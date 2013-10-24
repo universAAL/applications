@@ -19,10 +19,8 @@ import java.util.Set;
 
 import org.universAAL.AALapplication.health.manager.ui.measurements.BloodPreasureMeasurement;
 import org.universAAL.AALapplication.health.manager.ui.measurements.HeartRateMeasurement;
-import org.universAAL.AALapplication.health.manager.ui.measurements.HowToBloodPreasure;
 import org.universAAL.AALapplication.health.manager.ui.measurements.Motivation;
 import org.universAAL.AALapplication.health.manager.ui.measurements.WeigthMeasurement;
-import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.rdf.PropertyPath;
@@ -38,7 +36,6 @@ import org.universAAL.ontology.healthmeasurement.owl.BloodPressure;
 import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
 import org.universAAL.ontology.healthmeasurement.owl.HeartRate;
 import org.universAAL.ontology.healthmeasurement.owl.PersonWeight;
-import org.universAAL.ontology.profile.User;
 
 /**
  * @author amedrano
@@ -46,15 +43,19 @@ import org.universAAL.ontology.profile.User;
  */
 public class MeasurementTypeForm extends AbstractHealthForm {
 
+	/**
+	 * @param ahf
+	 */
+	protected MeasurementTypeForm(AbstractHealthForm ahf) {
+		super(ahf);
+	}
+
+
 	private static final String SELECTED_TREATMENT = HealthProfileOntology.NAMESPACE + "uiMeasurementSelected";
 	private static final String OK_LABEL = "Select";
 	private static final String OK_ICON = null;
 	private static final String CANCEL_LABEL = "Cancel";
 	private static final String CANCEL_ICON = null;
-
-	public MeasurementTypeForm(ModuleContext context, User inputUser) {
-		super(context, inputUser);
-	}
 	
 
 	public void show() {
@@ -91,24 +92,24 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 	public void handleUIResponse(UIResponse arg0) {
 		String cmd = arg0.getSubmissionID();
 		if (cmd.equalsIgnoreCase(CANCEL_LABEL)){
-			new MainMenu(context, inputUser).show();
+			new MainMenu(this).show();
 		}
 		if (cmd.equalsIgnoreCase(OK_LABEL)){
 			HealthMeasurement hm = (HealthMeasurement) arg0.getUserInput(new String[]{SELECTED_TREATMENT});
 			// TODO: create a service in ont.health and call the service accordingly
 			LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling Treatment of type:" + hm.getClassURI());
 			if (hm instanceof PersonWeight){
-				new WeigthMeasurement(context, inputUser, (PersonWeight) hm).show();
+				new WeigthMeasurement(this, (PersonWeight) hm).show();
 			}
 			else if (hm instanceof BloodPressure){
-				new Motivation(context, inputUser).show();
-				new BloodPreasureMeasurement(context, inputUser, (BloodPressure) hm).show();
+				new Motivation(this).show();
+				new BloodPreasureMeasurement(this, (BloodPressure) hm).show();
 			}
 			else if (hm instanceof HeartRate){
-				new HeartRateMeasurement(context, inputUser, (HeartRate) hm).show();
+				new HeartRateMeasurement(this, (HeartRate) hm).show();
 			}
 			else {
-				new NotReady(context, inputUser).show();
+				new NotReady(this).show();
 			}
 			
 		}
