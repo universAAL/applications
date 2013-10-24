@@ -119,7 +119,7 @@ public class MainMedicationManagerMenu extends UICaller {
   }
 
   public void showDialog(Resource inputUser) {
-    Form f = Form.newDialog("Medication Manager Main Menu", new Resource());
+    Form f = Form.newDialog(getMessage("medication.manager.ui.main.menu"), new Resource());
     //start of the form model
     new SimpleOutput(f.getIOControls(), null, null, getMessage("medication.manager.ui.welcome"));
     //...

@@ -211,10 +211,6 @@ public class IntakeReviewDialog extends UICaller {
       Log.info("Added single medicineInventory row: %s", getClass(), row);
       sb.append("\n\n\t");
       counter++;
-     /* sb.append(counter);
-      sb.append(". ");
-      sb.append(row);*/
-
 
       Date realDate = intakeInfo.getRealDate();
       String dateFormat = DATE_FORMATTER.format(realDate);
