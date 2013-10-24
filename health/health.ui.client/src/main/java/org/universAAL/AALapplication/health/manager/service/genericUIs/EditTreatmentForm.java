@@ -38,7 +38,6 @@ public class EditTreatmentForm extends AbstractHealthForm{
 	 */
 	public EditTreatmentForm(AbstractHealthForm ahf) {
 		super(ahf);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

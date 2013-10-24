@@ -46,7 +46,7 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 	/**
 	 * @param ahf
 	 */
-	protected MeasurementTypeForm(AbstractHealthForm ahf) {
+	public MeasurementTypeForm(AbstractHealthForm ahf) {
 		super(ahf);
 	}
 
