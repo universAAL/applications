@@ -37,7 +37,7 @@ public class NomhadGateway {
 
 	private static NomhadGateway INSTANCE;
 
-	private static final String NOMHAD_URL_HEADER = "https://localhost:8443/nomhad/rest/2/cmr/patient/";
+	private static final String NOMHAD_URL_HEADER = "https://localhost:8442/nomhad/rest/2/cmr/patient/";
 	private static final String OBSERVATIONS_REQUEST = "/observations";
 	private static final String DEVICE_ID = "\"35-209900-176148-1\"";
 	private ModuleContext moduleContext = null;

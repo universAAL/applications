@@ -11,7 +11,7 @@ import org.universAAL.ltba.functional.pir.LTBAController;
 
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class ShoppingController extends LTBAController implements ActionListener {
+public class ShoppingController extends LTBAController implements ActionListener{
 
 	private int times;
 	private static ShoppingController INSTANCE;
@@ -25,7 +25,7 @@ public class ShoppingController extends LTBAController implements ActionListener
 	 */
 	private final String DEVICE_ID = "ALL_DET";
 
-	private ShoppingController() {
+	private ShoppingController(){
 		super();
 		INSTANCE = this;
 		t = new Timer(24 * 60 * 60 * 1000, this);
@@ -52,7 +52,7 @@ public class ShoppingController extends LTBAController implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Sending to Nomhad awakening times>" + times);
 		NomhadGateway.getInstance().putMeasurement(serverIp, userCode,
-				"123456", "ACTIVITIES", "AWAKENING_COUNT",
+				userPassword, "SHOPPING_INDICATORS_GROUP", "SHOPPING",
 				new String("" + times), DEVICE_ID);
 		times = 0;
 	}

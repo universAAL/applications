@@ -28,6 +28,7 @@ public class TimeSleepingController extends LTBAController implements
 	 */
 	private final String DEVICE_ID = "BEDROOM_DET";
 
+	// PILOT OK
 	private TimeSleepingController() {
 		super();
 		INSTANCE = this;

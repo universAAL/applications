@@ -16,7 +16,12 @@ public class PresenceInKitchenController extends LTBAController implements
 
 	private static PresenceInKitchenController INSTANCE;
 	private Timer t;
-
+	/**
+	 * The device ID. When the user management be made, the DEVICE_ID must
+	 * content a reference to the user, in orden to not crossing the same device
+	 * with different users. (TODO).
+	 */
+	private final String DEVICE_ID = "KITCHEN_DET";
 	private PresenceInKitchenController() {
 		super();
 		INSTANCE = this;
@@ -37,12 +42,14 @@ public class PresenceInKitchenController extends LTBAController implements
 	}
 
 	public void presenceInBathStart(float hour) {
-		// TODO
-	}
+		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
+				userPassword, "PRESENCE_IN_KITCHEN", "PRESENCE_IN_KITCHEN_START",
+				new String("" + hour), DEVICE_ID);	}
 
 	public void presenceInBathStop(float hour) {
-		// TODO
-	}
+		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
+				userPassword, "PRESENCE_IN_KITCHEN", "PRESENCE_IN_KITCHEN_STOP",
+				new String("" + hour), DEVICE_ID);	}
 
 	public void actionPerformed(ActionEvent e) {
 		// NomhadGateway.getInstance().putMeasurement("192.168.238.40", "A100",

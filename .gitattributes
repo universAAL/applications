@@ -1972,6 +1972,7 @@ long_term_behav/drools.reasoner/pom.xml -text
 long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/DevelopingRulesUI.java -text svneol=unset#text/plain
 long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/engine/CustomAgendaEventListener.java -text
 long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/engine/CustomWorkingMemoryEventListener.java -text
+long_term_behav/drools.reasoner/src/main/resources/KNXuAALrules.drl -text
 long_term_behav/drools.reasoner/src/main/resources/droolsWorkshop1.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner.drl -text
 long_term_behav/drools.reasoner/src/main/resources/reasoner2.drl -text
