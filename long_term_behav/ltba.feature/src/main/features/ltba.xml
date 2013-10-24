@@ -35,6 +35,6 @@
 		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.nomhad.gateway/E.1.1-SNAPSHOT</bundle>
 		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.ui/E.1.1-SNAPSHOT</bundle>		
 		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.manager/E.1.1-SNAPSHOT</bundle>
-		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.publisher/E.1.1-SNAPSHOT</bundle>
+<!-- 		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.publisher/E.1.1-SNAPSHOT</bundle> -->
 	</feature>
 </features>
