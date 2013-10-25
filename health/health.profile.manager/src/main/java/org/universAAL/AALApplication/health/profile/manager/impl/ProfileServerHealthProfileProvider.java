@@ -43,115 +43,124 @@ import org.universAAL.ontology.profile.SubProfile;
 import org.universAAL.ontology.profile.service.ProfilingService;
 
 /**
- * This class provides useful methods for accessing the health profile by using 
- * the profiling service.
- * The specific modules extend this class for managing their data through the
- * profiling service.
+ * This class provides useful methods for accessing the health profile by using
+ * the profiling service. The specific modules extend this class for managing
+ * their data through the profiling service.
  * 
  * @author roni
  * @author amedrano
- *
+ * 
  */
-public class ProfileServerHealthProfileProvider implements IHealthProfileProvider {
+public class ProfileServerHealthProfileProvider implements
+	IHealthProfileProvider {
 
-	private static final String ARG_OUT = HealthProfileOntology.NAMESPACE + "argOut";
+    private static final String ARG_OUT = HealthProfileOntology.NAMESPACE
+	    + "argOut";
 
-	/**
-	 * Needed for making service requests
-	 */
-	protected ServiceCaller caller = null;
+    /**
+     * Needed for making service requests
+     */
+    protected ServiceCaller caller = null;
 
-	protected ModuleContext moduleContext = null;
+    protected ModuleContext moduleContext = null;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param context
-	 */
-	public ProfileServerHealthProfileProvider(ModuleContext context) {
+    /**
+     * Constructor.
+     * 
+     * @param context
+     */
+    public ProfileServerHealthProfileProvider(ModuleContext context) {
 
-		moduleContext = context;
+	moduleContext = context;
 
-		// the DefaultServiceCaller will be used to make ServiceRequest
-		caller = new DefaultServiceCaller(context);
-	}
+	// the DefaultServiceCaller will be used to make ServiceRequest
+	caller = new DefaultServiceCaller(context);
+    }
 
-	/** {@inheritDoc} */
-	public HealthProfile getHealthProfile(Resource user) {
+    /** {@inheritDoc} */
+    public HealthProfile getHealthProfile(Resource user) {
 
-		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
-		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, user);
-		req.addRequiredOutput(ARG_OUT, new String[] { 
-				ProfilingService.PROP_CONTROLS, 
-				Profilable.PROP_HAS_PROFILE, 
-				Profile.PROP_HAS_SUB_PROFILE });
+	ServiceRequest req = new ServiceRequest(new ProfilingService(null),
+		null);
+	req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS },
+		user);
+	req.addRequiredOutput(ARG_OUT, new String[] {
+		ProfilingService.PROP_CONTROLS, Profilable.PROP_HAS_PROFILE,
+		Profile.PROP_HAS_SUB_PROFILE });
 
-		ServiceResponse sr = caller.call(req);
-		if(sr.getCallStatus().equals(CallStatus.succeeded)) {
-			try {
-		    	List<?> subProfiles = sr.getOutput(ARG_OUT, true);
-		    	if(subProfiles == null || subProfiles.size() == 0) {
-		    		LogUtils.logInfo(moduleContext, getClass(), "getHealthProfile", "there are no sub profiles, creating default health subprofile");
-		    		return newHealthProfile(user);
-		    	}
-		    	LogUtils.logDebug(moduleContext, getClass(), "getHealthProfile", "searching in " + subProfiles.size() + " suprofiles");
-		    	Iterator<?> iter = subProfiles.iterator();
-		    	while(iter.hasNext()) {
-		    		SubProfile subProfile = (SubProfile)iter.next();
-		    		if(subProfile.getClassURI().equals(HealthProfile.MY_URI)) {
-		    			return (HealthProfile)subProfile;
-		    		}
-		    	}
-		    	LogUtils.logInfo(moduleContext, getClass(), "getHealthProfile", "there is no health profile, creating default one");
-	    		return newHealthProfile(user);
-			} catch(Exception e) {
-				LogUtils.logError(moduleContext, getClass(), "getHealthProfile", new String[]{"Got Exception"}, e);
-	    		return newHealthProfile(user);
+	ServiceResponse sr = caller.call(req);
+	if (sr.getCallStatus().equals(CallStatus.succeeded)) {
+	    try {
+		List<?> subProfiles = sr.getOutput(ARG_OUT, true);
+		if (subProfiles == null || subProfiles.size() == 0) {
+		    LogUtils.logInfo(moduleContext, getClass(),
+			    "getHealthProfile",
+			    "there are no sub profiles, creating default health subprofile");
+		    return newHealthProfile(user);
+		}
+		LogUtils.logDebug(moduleContext, getClass(),
+			"getHealthProfile",
+			"searching in " + subProfiles.size() + " suprofiles");
+		Iterator<?> iter = subProfiles.iterator();
+		while (iter.hasNext()) {
+		    SubProfile subProfile = (SubProfile) iter.next();
+		    if (subProfile.getClassURI().equals(HealthProfile.MY_URI)) {
+			return (HealthProfile) subProfile;
 		    }
-		} else {
-			LogUtils.logWarn(moduleContext, getClass(), "getHealthProfile", "callstatus is not succeeded; creating new profile");
-			return newHealthProfile(user);
 		}
+		LogUtils.logInfo(moduleContext, getClass(), "getHealthProfile",
+			"there is no health profile, creating default one");
+		return newHealthProfile(user);
+	    } catch (Exception e) {
+		LogUtils.logError(moduleContext, getClass(),
+			"getHealthProfile", new String[] { "Got Exception" }, e);
+		return newHealthProfile(user);
+	    }
+	} else {
+	    LogUtils.logWarn(moduleContext, getClass(), "getHealthProfile",
+		    "callstatus is not succeeded; creating new profile");
+	    return newHealthProfile(user);
+	}
+    }
+
+    private HealthProfile newHealthProfile(Resource ap) {
+	HealthProfile hp = new HealthProfile(ap.getURI() + "HealthSubprofile");
+	if (ap instanceof AssistedPerson) {
+	    hp.setAssignedAssistedPerson((AssistedPerson) ap);
+	    // Bug #378
+	    // hp.setAssignedAssistedPerson(new AssistedPerson(ap.getURI()));
 	}
 
-	private HealthProfile newHealthProfile(Resource ap) {
-		HealthProfile hp = new HealthProfile(ap.getURI()+"HealthSubprofile");
-		if (ap instanceof AssistedPerson){
-//			hp.setAssignedAssistedPerson((AssistedPerson) ap);
-			// Bug #378
-			hp.setAssignedAssistedPerson(new AssistedPerson(ap.getURI()));
-		}
-		
-		ServiceRequest req = new ServiceRequest(new ProfilingService(null),
-				null);
-		req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, ap);
-		req.addAddEffect(new String[] { ProfilingService.PROP_CONTROLS,
-				Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE },
-				hp);
-		ServiceResponse resp = caller.call(req);
-		if (resp.getCallStatus().equals(CallStatus.succeeded)) {
-			LogUtils.logDebug(moduleContext, getClass(), "newHealthProfile", "added new HealthProfile");
-			return hp;
-		}
-		else {
-			LogUtils.logWarn(moduleContext, getClass(), "newHealthProfile", "callstatus is not succeeded, subprofile not added");
-			return null;
-		}
+	ServiceRequest req = new ServiceRequest(new ProfilingService(null),
+		null);
+	req.addValueFilter(new String[] { ProfilingService.PROP_CONTROLS }, ap);
+	req.addAddEffect(new String[] { ProfilingService.PROP_CONTROLS,
+		Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE }, hp);
+	ServiceResponse resp = caller.call(req);
+	if (resp.getCallStatus().equals(CallStatus.succeeded)) {
+	    LogUtils.logDebug(moduleContext, getClass(), "newHealthProfile",
+		    "added new HealthProfile");
+	    return hp;
+	} else {
+	    LogUtils.logWarn(moduleContext, getClass(), "newHealthProfile",
+		    "callstatus is not succeeded, subprofile not added");
+	    return null;
 	}
-	
-	/** {@inheritDoc} */
-	public void updateHealthProfile(HealthProfile healthProfile) {
+    }
 
-		ServiceRequest req = new ServiceRequest(new ProfilingService(null), null);
-		req.addAddEffect(new String[] { 
-				ProfilingService.PROP_CONTROLS, 
-				Profilable.PROP_HAS_PROFILE, 
-				Profile.PROP_HAS_SUB_PROFILE }, healthProfile);
+    /** {@inheritDoc} */
+    public void updateHealthProfile(HealthProfile healthProfile) {
+	ServiceRequest req = new ServiceRequest(new ProfilingService(null),
+		null);
+	req.addAddEffect(new String[] { ProfilingService.PROP_CONTROLS,
+		Profilable.PROP_HAS_PROFILE, Profile.PROP_HAS_SUB_PROFILE },
+		healthProfile);
 
-		 ServiceResponse sr = caller.call(req);
-		 if(sr.getCallStatus() != CallStatus.succeeded) {
-			 LogUtils.logWarn(moduleContext, getClass(), "updateHealthProfile", "callstatus is not suceeded, profile not updated.");
-		 }
+	ServiceResponse sr = caller.call(req);
+	if (sr.getCallStatus() != CallStatus.succeeded) {
+	    LogUtils.logWarn(moduleContext, getClass(), "updateHealthProfile",
+		    "callstatus is not suceeded, profile not updated.");
 	}
-	
+    }
+
 }
