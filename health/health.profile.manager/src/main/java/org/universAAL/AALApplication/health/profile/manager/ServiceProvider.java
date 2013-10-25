@@ -84,11 +84,11 @@ public class ServiceProvider extends ServiceCallee {
 				new Object[]{"user Received ", userInput},
 				null);
 		
-		if(userInput == null)
-		    return invalidInput;
-		
-		if(operation.startsWith(HealthProfileService.GET_HEALTH_PROFILE))
+		if(operation.startsWith(HealthProfileService.GET_HEALTH_PROFILE)){
+			if(userInput == null)
+			    return invalidInput;
 			return getProfile(((AssistedPerson)userInput));
+		}
 		
 		HealthProfile profile = (HealthProfile) call.getInputValue(HealthProfileService.INPUT_PROFILE);
 		if(operation.startsWith(HealthProfileService.UPDATE_HEALTH_PROFILE) && profile!= null)
