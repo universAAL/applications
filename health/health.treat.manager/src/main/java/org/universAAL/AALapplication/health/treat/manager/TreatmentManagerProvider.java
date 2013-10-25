@@ -107,10 +107,10 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		if(userInput == null)
 		    return null;
 
-		if(operation.startsWith(ProvidedTreatmentManagerService.MY_URI))
+		if(operation.startsWith(ProvidedTreatmentManagerService.SERVICE_LIST))
 			return getAllTreatments(userInput);
 
-		if(operation.startsWith(ProvidedTreatmentManagerService.MY_URI)) {
+		if(operation.startsWith(ProvidedTreatmentManagerService.SERVICE_LIST_BT)) {
 			Object timestampFromInput = call
 					.getInputValue(ProvidedTreatmentManagerService.INPUT_TIMESTAMP_FROM);
 
@@ -126,7 +126,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 		}
 		    
 
-		if(operation.startsWith(ProvidedTreatmentManagerService.MY_URI)) {
+		if(operation.startsWith(ProvidedTreatmentManagerService.SERVICE_NEW)) {
 			Object treatmentInput = call
 			.getInputValue(ProvidedTreatmentManagerService.INPUT_TREATMENT);
 			if (treatmentInput != null) {
@@ -136,7 +136,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 			}
 		}
 		
-		if(operation.startsWith(ProvidedTreatmentManagerService.MY_URI)) {
+		if(operation.startsWith(ProvidedTreatmentManagerService.SERVICE_REMOVE)) {
 			Object treatmentInput = call.getInputValue(ProvidedTreatmentManagerService.INPUT_TREATMENT);
 			if (treatmentInput != null) {
 				return deleteTreatment(userInput, (Treatment) treatmentInput);
@@ -145,7 +145,7 @@ public class TreatmentManagerProvider extends ServiceCallee {
 			}
 		}
 		
-		if(	operation.startsWith(ProvidedTreatmentManagerService.MY_URI)) {
+		if(	operation.startsWith(ProvidedTreatmentManagerService.SERVICE_EDIT)) {
 			Object treatmentInput = call
 					.getInputValue(ProvidedTreatmentManagerService.INPUT_TREATMENT);
 
