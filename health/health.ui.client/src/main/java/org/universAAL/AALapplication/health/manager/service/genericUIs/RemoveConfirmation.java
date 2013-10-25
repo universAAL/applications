@@ -89,7 +89,7 @@ public class RemoveConfirmation extends AbstractHealthForm {
 	public void show(Treatment t){
 		Form f = Form.newDialog("Treatment Remove Confirmation", t);
 		new SimpleOutput(f.getIOControls(), null, null, "Are you sure you want to remove the treatment with name:");
-		new SimpleOutput(f.getIOControls(), null, new PropertyPath(Resource.generateAnonURI(), true, new String[]{Treatment.PROP_NAME}), null);
+		new SimpleOutput(f.getIOControls(), null, new PropertyPath(null, false, new String[]{Treatment.PROP_NAME}), null);
 		
 		new Submit(f.getSubmits(), new Label("Yes", null), DELETE_CMD);
 		new Submit(f.getSubmits(), new Label("no",null), BACK_CMD);

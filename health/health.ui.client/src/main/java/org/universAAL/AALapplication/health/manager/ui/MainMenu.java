@@ -41,7 +41,7 @@ public class MainMenu extends AbstractHealthForm{
 		private static final String HOME_LABEL = "Go Back";
 		private static final String HOME_ICON = null;
 		private static final String MESSAGE_CMD = "openMessages";
-		private static final String MEASUREMENT_LABEL = "Take a Treatment Now";
+		private static final String MEASUREMENT_LABEL = "Take a Measurement Now";
 		private static final String MEASUREMENT_ICON = null;
 		private static final String MEASUREMENT_CMD = "takeMeasurement";
 		private static final String TREATMENT_CMD = "manageTreatments";

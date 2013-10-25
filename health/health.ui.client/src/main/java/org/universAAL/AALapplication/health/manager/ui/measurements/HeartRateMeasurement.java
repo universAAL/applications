@@ -61,7 +61,7 @@ public class HeartRateMeasurement extends AbstractHealthForm{
 
 		//TODO: add units from actual prefix and unit.
 		InputField i=new InputField(f.getIOControls(), new Label("HeartRate" , null),
-				new PropertyPath(PropertyPath.generateAnonURI(), true, new String[]{Measurement.PROP_VALUE}),null, Integer.valueOf(90));
+				new PropertyPath(null, false, new String[]{Measurement.PROP_VALUE}),null, Integer.valueOf(90));
 		i.setHelpString("Insert Your heart rate in beats per minute.");
 		i.setHintString("90");
 		new Submit(f.getSubmits(), 
