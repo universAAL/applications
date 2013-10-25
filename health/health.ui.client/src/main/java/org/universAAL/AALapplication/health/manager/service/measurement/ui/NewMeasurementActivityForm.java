@@ -89,7 +89,7 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 		}
 		
 		InputField minVal = new InputField(limits, new Label("Max Value", null), 
-				new PropertyPath(PropertyPath.generateAnonURI(), true, new String[] {
+				new PropertyPath(null, false, new String[] {
 					TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 					MeasurementRequirements.PROP_MIN_VALUE_ALLOWED,
 					Measurement.PROP_VALUE,
@@ -98,7 +98,7 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 		//XXX add hints helps and alerts
 		
 		InputField maxVal = new InputField(limits, new Label("Max Value", null), 
-				new PropertyPath(PropertyPath.generateAnonURI(), true, new String[] {
+				new PropertyPath(null, false, new String[] {
 					TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 					MeasurementRequirements.PROP_MAX_VALUE_ALLOWED,
 					Measurement.PROP_VALUE,

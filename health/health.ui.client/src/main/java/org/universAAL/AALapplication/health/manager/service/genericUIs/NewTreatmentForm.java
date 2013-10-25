@@ -108,7 +108,7 @@ public class NewTreatmentForm extends AbstractHealthForm{
 		
 		InputField nf = new InputField(f.getIOControls(), 
 				new Label(NAME_LABEL, null),
-				new PropertyPath(Resource.generateAnonURI(), true, new String[]{Treatment.PROP_NAME}),
+				new PropertyPath(null, false, new String[]{Treatment.PROP_NAME}),
 				null,
 				"");
 		nf.setAlertString("Name must be a valid Aphanumeric Value");
@@ -117,7 +117,7 @@ public class NewTreatmentForm extends AbstractHealthForm{
 		
 		TextArea df = new TextArea(f.getIOControls(), 
 				new Label(DESCR_LABEL, null),
-				new PropertyPath(Resource.generateAnonURI(), true, new String[]{Treatment.PROP_DESCRIPTION}),
+				new PropertyPath(null, false, new String[]{Treatment.PROP_DESCRIPTION}),
 				null,
 				"");
 		df.setAlertString("Description must be a valid Aphanumeric Value");
@@ -143,13 +143,13 @@ public class NewTreatmentForm extends AbstractHealthForm{
 		}
 		
 		InputField start = new InputField(simplePlanning, new Label("Start", null), 
-				new PropertyPath(PropertyPath.generateAnonURI(), true,  new String[]{
+				new PropertyPath(null, false,  new String[]{
 			Treatment.PROP_HAS_TREATMENT_PLANNING,
 			TreatmentPlanning.PROP_START_DATE
 		}), null, date2);
 		
 		InputField end = new InputField(simplePlanning, new Label("End", null), 
-				new PropertyPath(PropertyPath.generateAnonURI(), true,  new String[]{
+				new PropertyPath(null, false,  new String[]{
 			Treatment.PROP_HAS_TREATMENT_PLANNING,
 			TreatmentPlanning.PROP_END_DATE
 		}), null, date2);

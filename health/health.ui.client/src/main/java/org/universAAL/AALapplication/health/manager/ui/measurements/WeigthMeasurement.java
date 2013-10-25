@@ -59,7 +59,7 @@ public class WeigthMeasurement extends AbstractHealthForm{
 		Form f = Form.newDialog("Weight", measurement);
 		//TODO: add units from actual prefix and unit.
 		InputField i = new InputField(f.getIOControls(), new Label("Weight ", null),
-				new PropertyPath(PropertyPath.generateAnonURI(), true, new String[]{Measurement.PROP_VALUE}),null, Float.valueOf(64.5f));
+				new PropertyPath(null, false, new String[]{Measurement.PROP_VALUE}),null, Float.valueOf(64.5f));
 		i.setHelpString("Insert Your Weight in Kg.");
 		i.setHintString("64.5");
 		new Submit(f.getSubmits(), 
