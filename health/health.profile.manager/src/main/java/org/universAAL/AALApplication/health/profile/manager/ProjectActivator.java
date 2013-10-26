@@ -16,10 +16,15 @@
  ******************************************************************************/
 package org.universAAL.AALApplication.health.profile.manager;
 
+import java.io.File;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.universAAL.AALApplication.health.profile.manager.impl.FileHealthProfileManager;
+import org.universAAL.AALApplication.health.profile.manager.impl.ProfileServerHealthProfileProvider;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 
 public class ProjectActivator implements BundleActivator {
 
@@ -34,11 +39,15 @@ public class ProjectActivator implements BundleActivator {
                 .registerModule(new Object[] {arg0});	
 		context.logDebug(MODULE, "Initialising Project", null);
 
+		BundleConfigHome c = new BundleConfigHome(context.getID());
+		
 		/*
 		 * uAAL stuff
 		 */
 		HealthProfileService.initialize(context);
-		sCallee = new ServiceProvider(context,HealthProfileService.profs);
+//		IHealthProfileProvider hpp = new ProfileServerHealthProfileProvider(context);
+		IHealthProfileProvider hpp = new FileHealthProfileManager(context, new File(c.getAbsolutePath()));
+		sCallee = new ServiceProvider(context,HealthProfileService.profs,hpp);
 		context.logInfo(MODULE, "Project started", null);
 	}
 
