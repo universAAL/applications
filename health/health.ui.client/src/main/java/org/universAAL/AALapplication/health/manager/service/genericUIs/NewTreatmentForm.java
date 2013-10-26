@@ -27,7 +27,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.rdf.PropertyPath;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.ui.UIResponse;
@@ -37,10 +36,11 @@ import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.middleware.ui.rdf.TextArea;
+import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.TreatmentPlanning;
 import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
-import org.universAAL.ontology.health.owl.services.TreatmentManagementService;
+import org.universAAL.ontology.health.owl.services.ProfileManagementService;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.Caregiver;
 import org.universAAL.ontology.profile.User;
@@ -84,9 +84,15 @@ public class NewTreatmentForm extends AbstractHealthForm{
 				t.setCaregiver((Caregiver) inputUser);
 			}
 			// Call add Treatment
-			ServiceRequest sr = new ServiceRequest(new TreatmentManagementService(null), inputUser);
-			sr.addAddEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT}, t);
-			sr.addValueFilter(new String[]{TreatmentManagementService.PROP_ASSISTED_USER}, targetUser);
+//			ServiceRequest sr = new ServiceRequest(new TreatmentManagementService(null), inputUser);
+//			sr.addAddEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT}, t);
+////			sr.addValueFilter(new String[]{TreatmentManagementService.PROP_ASSISTED_USER}, targetUser);
+			
+			// alternatively udpate the health profile
+			HealthProfile hp = getHealthProfile();
+			hp.addTreatment(t);
+			ServiceRequest sr = new ServiceRequest(new ProfileManagementService(null), inputUser);
+			sr.addChangeEffect(new String[]{ProfileManagementService.PROP_ASSISTED_USER_PROFILE}, hp);
 			new DefaultServiceCaller(owner).call(sr);
 		}
 		//Call list treatment Service
@@ -105,6 +111,7 @@ public class NewTreatmentForm extends AbstractHealthForm{
 	
 	public static Form getGenericTreatmentForm(Treatment t){
 		Form f = Form.newDialog("New Treatment", t);
+		f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
 		
 		InputField nf = new InputField(f.getIOControls(), 
 				new Label(NAME_LABEL, null),
@@ -155,8 +162,7 @@ public class NewTreatmentForm extends AbstractHealthForm{
 		}), null, date2);
 		
 		//TODO add a selection for the disease this treatment is meant for.
-		
-		f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
+
 		return f;
 	}
 	

@@ -25,9 +25,10 @@ import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
-import org.universAAL.ontology.health.owl.services.TreatmentManagementService;
+import org.universAAL.ontology.health.owl.services.ProfileManagementService;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
@@ -64,10 +65,22 @@ public class EditTreatmentForm extends AbstractHealthForm{
 	public void handleUIResponse(UIResponse uiResponse) {
 		String cmd = uiResponse.getSubmissionID();
 		if (cmd.startsWith(EDIT_CMD)){
-			// Call edit Treatment
-			ServiceRequest sr = new ServiceRequest(new TreatmentManagementService(null), inputUser);
-			sr.addChangeEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT}, uiResponse.getSubmittedData());
-			sr.addValueFilter(new String[]{TreatmentManagementService.PROP_ASSISTED_USER}, targetUser);
+			Treatment t = (Treatment) uiResponse.getSubmittedData();
+			// Call add Treatment
+//			ServiceRequest sr = new ServiceRequest(new TreatmentManagementService(null), inputUser);
+//			sr.addAddEffect(new String[]{TreatmentManagementService.PROP_MANAGES_TREATMENT}, t);
+////			sr.addValueFilter(new String[]{TreatmentManagementService.PROP_ASSISTED_USER}, targetUser);
+			
+			// alternatively udpate the health profile
+			HealthProfile hp = getHealthProfile();
+			Treatment[] tr = hp.getTreatments();
+			for (int i = 0; i <tr.length; i++) {
+			    if (tr[i].getURI().equals(t.getURI())){
+				tr[i]= t;
+			    }
+			}
+			ServiceRequest sr = new ServiceRequest(new ProfileManagementService(null), inputUser);
+			sr.addChangeEffect(new String[]{ProfileManagementService.PROP_ASSISTED_USER_PROFILE}, hp);
 			new DefaultServiceCaller(owner).call(sr);
 		}
 		if (cmd.startsWith(REM_CMD)){
