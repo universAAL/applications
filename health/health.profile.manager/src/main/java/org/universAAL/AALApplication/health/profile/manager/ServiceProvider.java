@@ -55,6 +55,18 @@ public class ServiceProvider extends ServiceCallee {
 		super(context, realizedServices);
 		psm = new ProfileServerHealthProfileProvider(context);
 	}
+	
+	/**
+	 * @param context
+	 * @param realizedServices
+	 * @param psm
+	 */
+	protected ServiceProvider(ModuleContext context,
+		ServiceProfile[] realizedServices,
+		IHealthProfileProvider psm) {
+	super(context, realizedServices);
+	this.psm = psm;
+}
 
 	/* (non-Javadoc)
 	 * @see org.universAAL.middleware.service.ServiceCallee#communicationChannelBroken()
@@ -106,10 +118,14 @@ public class ServiceProvider extends ServiceCallee {
 	private ServiceResponse getProfile(Resource userInput) {
 		LogUtils.logDebug(owner, getClass(), "getProfile", "getting profile");
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
-		sr.addOutput(new ProcessOutput(HealthProfileService.OUTPUT_PROFILE, psm.getHealthProfile(userInput)));
-
-		LogUtils.logDebug(owner, getClass(), "getProfile", "profile gotten");
-		// TODO check get is not null
+		HealthProfile hp = psm.getHealthProfile(userInput);
+		if (hp != null)	{
+		    sr.addOutput(new ProcessOutput(HealthProfileService.OUTPUT_PROFILE, hp));
+		    LogUtils.logDebug(owner, getClass(), "getProfile", "profile gotten");
+		}
+		else {
+		    sr = new ServiceResponse(CallStatus.serviceSpecificFailure);
+		}
 		return sr;
 	}
 
