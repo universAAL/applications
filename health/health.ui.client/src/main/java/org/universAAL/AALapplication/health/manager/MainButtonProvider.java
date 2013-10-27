@@ -15,6 +15,7 @@
  ******************************************************************************/
 package org.universAAL.AALapplication.health.manager;
 
+import org.universAAL.AALapplication.health.manager.ui.AssistedPersonSelector;
 import org.universAAL.AALapplication.health.manager.ui.MainMenu;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.service.CallStatus;
@@ -66,7 +67,7 @@ public class MainButtonProvider extends ServiceCallee {
 	public ServiceResponse handleCall(ServiceCall call) {
 		Object inputUser = call.getProperty(ServiceRequest.PROP_uAAL_INVOLVED_HUMAN_USER);
 		if (inputUser instanceof Caregiver){
-			new MainMenu(ctxt, (User) inputUser,null).show();
+			new AssistedPersonSelector(ctxt, (User) inputUser,null).show();
 		}
 		else if (inputUser instanceof AssistedPerson){
 			new MainMenu(ctxt, (User) inputUser,(AssistedPerson) inputUser).show();
