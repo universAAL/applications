@@ -892,7 +892,10 @@ health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manag
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/measurement/MeasurementActivityTreatmentDisplayer.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/measurement/MeasurementactivityTreatmentDisplayService.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/measurement/ui/EditMeasurementActivityForm.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/measurement/ui/NewBloodPressureMeasurementTreatmentForm.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/measurement/ui/NewHearthRateMeasurementTreatmentForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/measurement/ui/NewMeasurementActivityForm.java -text svneol=unset#text/plain
+health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/service/measurement/ui/NewWeightMeasurementTreatmentForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/AbstractHealthForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/MainMenu.java -text
 health/health.ui.client/src/main/java/org/universAAL/AALapplication/health/manager/ui/MeasurementTypeForm.java -text svneol=unset#text/plain

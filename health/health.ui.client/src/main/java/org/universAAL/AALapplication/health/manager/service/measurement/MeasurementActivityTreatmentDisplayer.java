@@ -19,7 +19,10 @@ package org.universAAL.AALapplication.health.manager.service.measurement;
 
 import org.universAAL.AALapplication.health.manager.service.GenericTreatmentDisplayService;
 import org.universAAL.AALapplication.health.manager.service.measurement.ui.EditMeasurementActivityForm;
+import org.universAAL.AALapplication.health.manager.service.measurement.ui.NewBloodPressureMeasurementTreatmentForm;
+import org.universAAL.AALapplication.health.manager.service.measurement.ui.NewHearthRateMeasurementTreatmentForm;
 import org.universAAL.AALapplication.health.manager.service.measurement.ui.NewMeasurementActivityForm;
+import org.universAAL.AALapplication.health.manager.service.measurement.ui.NewWeightMeasurementTreatmentForm;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.Resource;
@@ -105,6 +108,24 @@ public class MeasurementActivityTreatmentDisplayer extends ServiceCallee {
 			return new ServiceResponse(CallStatus.succeeded);
 		}
 		
+		if (operation.startsWith(MeasurementactivityTreatmentDisplayService.NEW__BP_MEASURE_ACTIVITY_TREATMENT)){
+			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for new BloodPressure Treat.");
+			// Form that updates treatment
+			new NewBloodPressureMeasurementTreatmentForm(owner, (User) user, (AssistedPerson) targetUser);
+			return new ServiceResponse(CallStatus.succeeded);
+		}
+		if (operation.startsWith(MeasurementactivityTreatmentDisplayService.NEW__HR_MEASURE_ACTIVITY_TREATMENT)){
+			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for new HeartRate Treat.");
+			// Form that updates treatment
+			new NewHearthRateMeasurementTreatmentForm(owner, (User) user, (AssistedPerson) targetUser);
+			return new ServiceResponse(CallStatus.succeeded);
+		}
+		if (operation.startsWith(MeasurementactivityTreatmentDisplayService.NEW__WEIGHT_MEASURE_ACTIVITY_TREATMENT)){
+			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for new Weight Treat.");
+			// Form that updates treatment
+			new NewWeightMeasurementTreatmentForm(owner, (User) user, (AssistedPerson) targetUser);
+			return new ServiceResponse(CallStatus.succeeded);
+		}
 		return invalidInput;
 	}
 	
