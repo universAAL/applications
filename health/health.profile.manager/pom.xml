@@ -9,6 +9,7 @@
     <relativePath>../health.pom</relativePath>
   </parent>
   <artifactId>health.profile.manager</artifactId>
+  <name>Health Profile Manager</name>
   <version>E.1.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <dependencies>
