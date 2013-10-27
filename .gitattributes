@@ -926,6 +926,10 @@ health/health.ui.client/src/test/java/deprecated/org/universAAL/AALapplication/h
 health/health.ui.client/src/test/java/deprecated/org/universAAL/AALapplication/health/manager/ui/TreatmentForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/test/java/deprecated/org/universAAL/AALapplication/health/manager/ui/TreatmentNewForm.java -text svneol=unset#text/plain
 health/health.ui.client/src/test/java/deprecated/org/universAAL/AALapplication/health/manager/ui/TreatmentViewForm.java -text svneol=unset#text/plain
+health/health.x73.adapter/pom.xml -text
+health/health.x73.adapter/src/main/java/org/universAAL/Services/health/x73/adapter/EventSubscriber.java -text
+health/health.x73.adapter/src/main/java/org/universAAL/Services/health/x73/adapter/ProjectActivator.java -text
+health/health.x73.adapter/src/test/java/org/universAAL/Services/health/x73/adapter/AppTest.java -text
 help_when_out/hwo.karaf.feature/ASL2.0.txt -text
 help_when_out/hwo.karaf.feature/NOTICE -text
 help_when_out/hwo.karaf.feature/pom.xml -text

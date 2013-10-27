@@ -150,6 +150,10 @@ health/health.ui.client/.classpath
 health/health.ui.client/.project
 health/health.ui.client/.settings
 health/health.ui.client/target
+health/health.x73.adapter/.classpath
+health/health.x73.adapter/.project
+health/health.x73.adapter/.settings
+health/health.x73.adapter/target
 help_when_out/hwo.karaf.feature/.project
 help_when_out/hwo.karaf.feature/.settings
 help_when_out/hwo.karaf.feature/target
