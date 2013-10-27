@@ -17,8 +17,10 @@
 
 package org.universAAL.Services.health.x73.adapter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -26,18 +28,26 @@ import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
+import org.universAAL.middleware.rdf.Resource;
+import org.universAAL.middleware.service.CallStatus;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
+import org.universAAL.middleware.service.ServiceResponse;
+import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.ontology.health.owl.PerformedMeasurementSession;
 import org.universAAL.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
+import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ontology.profile.service.ProfilingService;
 
 /**
  * @author amedrano
  *
  */
 public class EventSubscriber extends ContextSubscriber {
+
+    private static final String USRS = "http://lst.tfo.upm.es/Heatlh.owl#userList";
 
     /**
      * @param connectingModule
@@ -63,7 +73,7 @@ public class EventSubscriber extends ContextSubscriber {
 	HealthMeasurement hm = null;
 	
 	//TODO find the user
-	User u = null;
+	User u = findUser();
 	
 	PerformedMeasurementSession ps = new PerformedMeasurementSession();
 	GregorianCalendar c = new GregorianCalendar();
@@ -77,6 +87,28 @@ public class EventSubscriber extends ContextSubscriber {
 	sr.addAddEffect(new String[]{PerformedSessionManagementService.PROP_MANAGES_SESSION}, ps);
 	sr.addValueFilter(new String[]{PerformedSessionManagementService.PROP_ASSISTED_USER}, u);
 	new DefaultServiceCaller(owner).call(sr);
+    }
+    
+    private User findUser(){
+	ServiceRequest sr = new ServiceRequest(new ProfilingService(null), null);
+	ProcessOutput output0 = new ProcessOutput(null);
+	output0.setParameterType(User.MY_URI);
+	sr.addSimpleOutputBinding(output0, new String[]{ProfilingService.PROP_CONTROLS});
+	sr.addRequiredOutput(USRS, new String[]{ProfilingService.PROP_CONTROLS});
+	ServiceResponse sre = new DefaultServiceCaller(owner).call(sr);
+	if (sre.getCallStatus().equals(CallStatus.succeeded)){
+	    List<Resource> usrs = sre.getOutput(USRS, true);
+	    ArrayList<AssistedPerson> apUsrs = new ArrayList<AssistedPerson>();
+	    for (Resource res : usrs) {
+		if (res instanceof AssistedPerson){
+		    apUsrs.add((AssistedPerson) res);
+		}
+	    }
+	    if (apUsrs.size() == 1){
+		return apUsrs.get(0);
+	    } 
+	}
+	return null;
     }
 
 }
