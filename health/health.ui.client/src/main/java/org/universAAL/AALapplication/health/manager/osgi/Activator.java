@@ -20,6 +20,8 @@ import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.health.manager.MainButtonProvider;
 import org.universAAL.AALapplication.health.manager.service.GenericTreatmentDisplayService;
 import org.universAAL.AALapplication.health.manager.service.GenericTreatmentDisplayer;
+import org.universAAL.AALapplication.health.manager.service.measurement.MeasurementActivityTreatmentDisplayer;
+import org.universAAL.AALapplication.health.manager.service.measurement.MeasurementactivityTreatmentDisplayService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
 import org.universAAL.middleware.container.utils.LogUtils;
@@ -33,6 +35,7 @@ public class Activator implements BundleActivator {
 	static ModuleContext context;
 	public MainButtonProvider service;
 	public GenericTreatmentDisplayer gds;
+	public MeasurementActivityTreatmentDisplayer mads;
 
 	public void start(BundleContext arg0) throws Exception {	
 		context = uAALBundleContainer.THE_CONTAINER
@@ -46,6 +49,9 @@ public class Activator implements BundleActivator {
 		
 		GenericTreatmentDisplayService.initialize(context);
 		gds = new GenericTreatmentDisplayer(context,GenericTreatmentDisplayService.profs);
+		
+		MeasurementactivityTreatmentDisplayService.initialize(context);
+		mads = new MeasurementActivityTreatmentDisplayer(context, MeasurementactivityTreatmentDisplayService.profs);
 		
 		LogUtils.logInfo(context, getClass(), "start", "Health UI started");
 	}

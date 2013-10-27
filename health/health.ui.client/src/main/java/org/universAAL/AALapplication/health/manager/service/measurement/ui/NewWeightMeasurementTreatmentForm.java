@@ -27,21 +27,20 @@ import org.universAAL.middleware.ui.rdf.Group;
 import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
-import org.universAAL.ontology.health.owl.BloodPressureMeasurementTreatment;
-import org.universAAL.ontology.health.owl.BloodPressureRequirement;
 import org.universAAL.ontology.health.owl.MeasurementRequirements;
 import org.universAAL.ontology.health.owl.TakeMeasurementActivity;
-import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
+import org.universAAL.ontology.health.owl.WeightRequirement;
+import org.universAAL.ontology.healthmeasurement.owl.PersonWeight;
 import org.universAAL.ontology.measurement.Measurement;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
-public class NewMeasurementActivityForm extends NewTreatmentForm{
+public class NewWeightMeasurementTreatmentForm extends NewTreatmentForm{
 
 	/**
 	 * @param ahf
 	 */
-	public NewMeasurementActivityForm(AbstractHealthForm ahf) {
+	public NewWeightMeasurementTreatmentForm(AbstractHealthForm ahf) {
 		super(ahf);
 	}
 
@@ -50,7 +49,7 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 	 * @param inputUser
 	 * @param targetUser
 	 */
-	public NewMeasurementActivityForm(ModuleContext context, User inputUser,
+	public NewWeightMeasurementTreatmentForm(ModuleContext context, User inputUser,
 			AssistedPerson targetUser) {
 		super(context, inputUser, targetUser);
 	}
@@ -78,34 +77,36 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 		
 		MeasurementRequirements mr = t.getMeasurementRequirements();
 		
-		if (mr == null
-			&& t instanceof BloodPressureMeasurementTreatment){
-			mr = new BloodPressureRequirement();
+		if (mr == null){
+			mr = new WeightRequirement();
+			t.setMeasurementRequirements(mr);
 			    
 		}
 		
 		if (mr.getMaxValueAllowed() == null){
-			mr.setMaxValueAllowed(new HealthMeasurement());
+			mr.setMaxValueAllowed(new PersonWeight());
 		}
 		if (mr.getMinValueAllowed() == null){
-			mr.setMinValueAllowed(new HealthMeasurement());
+			mr.setMinValueAllowed(new PersonWeight());
 		}
 		
-		InputField minVal = new InputField(limits, new Label("Max Value", null), 
+		InputField minVal = new InputField(limits, new Label("Min HR Value", null), 
 				new PropertyPath(null, false, new String[] {
 					TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 					MeasurementRequirements.PROP_MIN_VALUE_ALLOWED,
-					Measurement.PROP_VALUE,
+					Measurement.PROP_VALUE
 				}), null, null);
-		
 		//XXX add hints helps and alerts
 		
-		InputField maxVal = new InputField(limits, new Label("Max Value", null), 
-				new PropertyPath(null, false, new String[] {
-					TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
-					MeasurementRequirements.PROP_MAX_VALUE_ALLOWED,
-					Measurement.PROP_VALUE,
-				}), null, null);
+
+		InputField maxVal = new InputField(limits, new Label("Max HR Value", null), 
+			new PropertyPath(null, false, new String[] {
+				TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
+				MeasurementRequirements.PROP_MAX_VALUE_ALLOWED,
+				Measurement.PROP_VALUE
+			}), null, null);
+		//XXX add hints helps and alerts
+
 		
 		return f;
 	}

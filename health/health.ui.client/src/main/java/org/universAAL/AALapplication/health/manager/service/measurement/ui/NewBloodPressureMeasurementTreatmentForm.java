@@ -27,21 +27,20 @@ import org.universAAL.middleware.ui.rdf.Group;
 import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
-import org.universAAL.ontology.health.owl.BloodPressureMeasurementTreatment;
-import org.universAAL.ontology.health.owl.BloodPressureRequirement;
+import org.universAAL.ontology.health.owl.HeartRateRequirement;
 import org.universAAL.ontology.health.owl.MeasurementRequirements;
 import org.universAAL.ontology.health.owl.TakeMeasurementActivity;
-import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
+import org.universAAL.ontology.healthmeasurement.owl.BloodPressure;
 import org.universAAL.ontology.measurement.Measurement;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
 
-public class NewMeasurementActivityForm extends NewTreatmentForm{
+public class NewBloodPressureMeasurementTreatmentForm extends NewTreatmentForm{
 
 	/**
 	 * @param ahf
 	 */
-	public NewMeasurementActivityForm(AbstractHealthForm ahf) {
+	public NewBloodPressureMeasurementTreatmentForm(AbstractHealthForm ahf) {
 		super(ahf);
 	}
 
@@ -50,7 +49,7 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 	 * @param inputUser
 	 * @param targetUser
 	 */
-	public NewMeasurementActivityForm(ModuleContext context, User inputUser,
+	public NewBloodPressureMeasurementTreatmentForm(ModuleContext context, User inputUser,
 			AssistedPerson targetUser) {
 		super(context, inputUser, targetUser);
 	}
@@ -78,34 +77,53 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 		
 		MeasurementRequirements mr = t.getMeasurementRequirements();
 		
-		if (mr == null
-			&& t instanceof BloodPressureMeasurementTreatment){
-			mr = new BloodPressureRequirement();
-			    
+		if (mr == null){
+			mr = new HeartRateRequirement();
+			   t.setMeasurementRequirements(mr);
 		}
 		
 		if (mr.getMaxValueAllowed() == null){
-			mr.setMaxValueAllowed(new HealthMeasurement());
+			mr.setMaxValueAllowed(new BloodPressure());
 		}
 		if (mr.getMinValueAllowed() == null){
-			mr.setMinValueAllowed(new HealthMeasurement());
+			mr.setMinValueAllowed(new BloodPressure());
 		}
 		
-		InputField minVal = new InputField(limits, new Label("Max Value", null), 
+		InputField minSysVal = new InputField(limits, new Label("Min Systolic Value", null), 
 				new PropertyPath(null, false, new String[] {
 					TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 					MeasurementRequirements.PROP_MIN_VALUE_ALLOWED,
-					Measurement.PROP_VALUE,
+					BloodPressure.PROP_SYSTOLIC,
+					Measurement.PROP_VALUE
 				}), null, null);
-		
 		//XXX add hints helps and alerts
 		
-		InputField maxVal = new InputField(limits, new Label("Max Value", null), 
-				new PropertyPath(null, false, new String[] {
-					TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
-					MeasurementRequirements.PROP_MAX_VALUE_ALLOWED,
-					Measurement.PROP_VALUE,
-				}), null, null);
+		InputField minDiaVal = new InputField(limits, new Label("Min Diastolic Value", null), 
+			new PropertyPath(null, false, new String[] {
+				TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
+				MeasurementRequirements.PROP_MIN_VALUE_ALLOWED,
+				BloodPressure.PROP_DIASTOLIC,
+				Measurement.PROP_VALUE
+			}), null, null);
+		//XXX add hints helps and alerts
+
+		InputField maxSysVal = new InputField(limits, new Label("Max Systolic Value", null), 
+			new PropertyPath(null, false, new String[] {
+				TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
+				MeasurementRequirements.PROP_MAX_VALUE_ALLOWED,
+				BloodPressure.PROP_SYSTOLIC,
+				Measurement.PROP_VALUE
+			}), null, null);
+		//XXX add hints helps and alerts
+
+		InputField maxDiaVal = new InputField(limits, new Label("Max Diastolic Value", null), 
+			new PropertyPath(null, false, new String[] {
+				TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
+				MeasurementRequirements.PROP_MAX_VALUE_ALLOWED,
+				BloodPressure.PROP_DIASTOLIC,
+				Measurement.PROP_VALUE
+			}), null, null);
+		//XXX add hints helps and alerts
 		
 		return f;
 	}
