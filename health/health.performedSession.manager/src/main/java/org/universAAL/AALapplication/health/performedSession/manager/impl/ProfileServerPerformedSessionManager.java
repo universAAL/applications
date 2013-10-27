@@ -38,10 +38,12 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.health.owl.PerformedMeasurementSession;
 import org.universAAL.ontology.health.owl.PerformedSession;
+import org.universAAL.ontology.health.owl.TakeMeasurementActivity;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.TreatmentPlanning;
 import org.universAAL.ontology.health.owl.services.ProfileManagementService;
 import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
+import org.universAAL.ontology.measurement.Measurement;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -232,7 +234,20 @@ public class ProfileServerPerformedSessionManager
 			if (test.addPerformedSession(session)){
 				//it was semantically allowed.
 				int tsiCalification = 0;
-				
+				/*
+				 * Check the Requirements are of the same type,
+				 * for Measurement Activitues.
+				 */
+				if (test instanceof TakeMeasurementActivity
+					&& session instanceof PerformedMeasurementSession){
+				    TakeMeasurementActivity tma = (TakeMeasurementActivity)test;
+				    HealthMeasurement m = tma.getMeasurementRequirements().getMaxValueAllowed();
+				    HealthMeasurement sm = ((PerformedMeasurementSession) session).getHealthMeasurement();
+				    if (Measurement.checkMembership(m.getClassURI(), sm)){
+					// they are of the same type
+					tsiCalification += 4;
+				    }
+				}
 				/*
 				 * Check the session and treatments dates are compatible.
 				 */
