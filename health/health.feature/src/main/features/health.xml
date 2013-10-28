@@ -12,6 +12,13 @@
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.performedSession.manager/E.1.1-SNAPSHOT</bundle>
 	</feature>
 		
+	<feature name="health.x73" version="${platform.version}">
+		<feature>uAAL-Ont.ContinuaHealth</feature>
+		<feature>uAAL-Ont.personalhealthdevice</feature>
+		<feature>uAAL-Ont.Profile.Health</feature>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.x73.adapter/E.1.1-SNAPSHOT</bundle>
+	</feature>
+		
 	<feature name="health.demo" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.demo.populator/E.1.1-SNAPSHOT</bundle>
