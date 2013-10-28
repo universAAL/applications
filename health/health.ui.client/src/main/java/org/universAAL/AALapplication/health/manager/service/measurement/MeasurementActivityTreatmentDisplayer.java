@@ -104,7 +104,7 @@ public class MeasurementActivityTreatmentDisplayer extends ServiceCallee {
 		if (operation.startsWith(MeasurementactivityTreatmentDisplayService.EDIT_MEASURE_ACTIVITY_TREATMENT)){
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for Editing Treatment");
 			// Form that updates treatment
-			new EditMeasurementActivityForm(owner, (User) user, (AssistedPerson) targetUser);
+			new EditMeasurementActivityForm(owner, (User) user, (AssistedPerson) targetUser).show(t);
 			return new ServiceResponse(CallStatus.succeeded);
 		}
 		
@@ -117,13 +117,13 @@ public class MeasurementActivityTreatmentDisplayer extends ServiceCallee {
 		if (operation.startsWith(MeasurementactivityTreatmentDisplayService.NEW__HR_MEASURE_ACTIVITY_TREATMENT)){
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for new HeartRate Treat.");
 			// Form that updates treatment
-			new NewHearthRateMeasurementTreatmentForm(owner, (User) user, (AssistedPerson) targetUser);
+			new NewHearthRateMeasurementTreatmentForm(owner, (User) user, (AssistedPerson) targetUser).show(t);
 			return new ServiceResponse(CallStatus.succeeded);
 		}
 		if (operation.startsWith(MeasurementactivityTreatmentDisplayService.NEW__WEIGHT_MEASURE_ACTIVITY_TREATMENT)){
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for new Weight Treat.");
 			// Form that updates treatment
-			new NewWeightMeasurementTreatmentForm(owner, (User) user, (AssistedPerson) targetUser);
+			new NewWeightMeasurementTreatmentForm(owner, (User) user, (AssistedPerson) targetUser).show(t);
 			return new ServiceResponse(CallStatus.succeeded);
 		}
 		return invalidInput;

@@ -110,14 +110,14 @@ public class GenericTreatmentDisplayer extends ServiceCallee {
 		if (operation.startsWith(GenericTreatmentDisplayService.EDIT_GENERIC_TREATMENT)){
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing Form for Editing Treatment");
 			// Form that updates treatment
-			new EditTreatmentForm(owner, (User) inputUser, (AssistedPerson) targetUser);
+			new EditTreatmentForm(owner, (User) inputUser, (AssistedPerson) targetUser).show(t);
 			return new ServiceResponse(CallStatus.succeeded);
 		}
 
 		if (operation.startsWith(GenericTreatmentDisplayService.REMOVE_GENERIC_TREATMENT)){
 			LogUtils.logDebug(owner, getClass(), "handleCall", "Showing confirmation for removing Treatment");
 			// Form that confirms Treatment Remove.
-			new RemoveConfirmation(owner, (User) inputUser, (AssistedPerson) targetUser);
+			new RemoveConfirmation(owner, (User) inputUser, (AssistedPerson) targetUser).show(t);
 			return new ServiceResponse(CallStatus.succeeded);
 		}
 		
