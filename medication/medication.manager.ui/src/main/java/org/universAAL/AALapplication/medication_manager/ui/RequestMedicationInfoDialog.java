@@ -193,9 +193,9 @@ public class RequestMedicationInfoDialog extends UICaller {
   private String getDetailsInfo(List<Intake> intakes) {
     StringBuilder sb = new StringBuilder();
 
-    sb.append("\t\t\t");
+    sb.append("\n\t\t\t");
     sb.append(Activator.getMessage("medication.manager.ui.medication.info"));
-    sb.append('\n');
+    sb.append("\n\t\t\t");
 
 
     int count = 0;
