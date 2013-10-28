@@ -11,6 +11,21 @@
   <version>E.1.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>Health X73 adapter</name>
+  
+  <!-- Delete when not needed -->
+  <dependencyManagement>
+  	<dependencies>
+  	<dependency>
+      <groupId>org.universAAL.ontology</groupId>
+      <artifactId>ont.pom</artifactId>
+      <version>2.0.2-SNAPSHOT</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>  	
+  	</dependencies>
+  </dependencyManagement>
+  
+  
   <dependencies>
 	<dependency>
 		<groupId>junit</groupId>
@@ -33,9 +48,13 @@
   		<artifactId>ont.profile.health</artifactId>
   	</dependency>
   	<dependency>
-  		<groupId>org.universAAL.ontology</groupId>
-  		<artifactId>ont.X73</artifactId>
-  	</dependency>
+      <groupId>org.universAAL.ontology</groupId>
+      <artifactId>ont.personalhealthdevice</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.universAAL.ontology</groupId>
+      <artifactId>ont.continuahealthmanager</artifactId>
+    </dependency>
   	<dependency>
   		<groupId>org.universAAL.ontology</groupId>
   		<artifactId>ont.phWorld</artifactId>
