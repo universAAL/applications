@@ -74,7 +74,7 @@ public class TreatmentTypeForm extends AbstractHealthForm {
 		for (String type : typesOfTreatment) {
 			Treatment t = (Treatment) OntologyManagement
 					.getInstance().getResource(type, Resource.generateAnonURI());
-			String name = t.getOrConstructLabel(t.getClassURI());
+			String name = t.getOrConstructLabel(null);
 			s.addChoiceItem(new ChoiceItem(name, null, t));
 		}
 		
