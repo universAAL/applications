@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.universAAL</groupId>
 		<artifactId>uAAL.pom</artifactId>
-		<version>2.0.1-SNAPSHOT</version>
+		<version>2.0.2-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>new_services.pom</artifactId>
-	<version>E.1</version>
+	<version>E.2</version>
 	<packaging>pom</packaging>
 	<name>Parent POM for all AAL services</name>
 	<description>Contains repository, deployment, and other info for all AALapplications</description>
@@ -34,7 +34,7 @@
 		<maven.compile.source>1.5</maven.compile.source>
 		<maven.compile.target>1.5</maven.compile.target>
 		<gforge.project.name>new_services</gforge.project.name>
-		<platform.version>2.0.1-SNAPSHOT</platform.version>
+		<platform.version>2.0.2-SNAPSHOT</platform.version>
 		<service.name.svn></service.name.svn>
 	</properties>
 
