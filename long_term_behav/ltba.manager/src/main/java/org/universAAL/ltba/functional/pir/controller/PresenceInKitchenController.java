@@ -16,12 +16,14 @@ public class PresenceInKitchenController extends LTBAController implements
 
 	private static PresenceInKitchenController INSTANCE;
 	private Timer t;
+	private float start_measurement = -1;
 	/**
 	 * The device ID. When the user management be made, the DEVICE_ID must
 	 * content a reference to the user, in orden to not crossing the same device
 	 * with different users. (TODO).
 	 */
 	private final String DEVICE_ID = "KITCHEN_DET";
+
 	private PresenceInKitchenController() {
 		super();
 		INSTANCE = this;
@@ -41,15 +43,29 @@ public class PresenceInKitchenController extends LTBAController implements
 			return INSTANCE;
 	}
 
-	public void presenceInBathStart(float hour) {
-		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-				userPassword, "PRESENCE_IN_KITCHEN", "PRESENCE_IN_KITCHEN_START",
-				new String("" + hour), DEVICE_ID);	}
+	public void presenceInKitchenStart(float hour) {
+		start_measurement = hour;
+	}
 
-	public void presenceInBathStop(float hour) {
-		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-				userPassword, "PRESENCE_IN_KITCHEN", "PRESENCE_IN_KITCHEN_STOP",
-				new String("" + hour), DEVICE_ID);	}
+	public void presenceInKitchenStop(float hour) {
+		if (start_measurement != -1) {
+			NomhadGateway.getInstance().putMeasurement(serverIP,
+					Calendar.getInstance().get(Calendar.YEAR),
+					Calendar.getInstance().get(Calendar.MONTH),
+					Calendar.getInstance().get(Calendar.DAY_OF_MONTH), 12, 00,
+					userCode, userPassword, "PRESENCE_IN_KITCHEN",
+					"PRESENCE_IN_KITCHEN_START", new String("" + hour),
+					DEVICE_ID);
+			NomhadGateway.getInstance().putMeasurement(serverIP,
+					Calendar.getInstance().get(Calendar.YEAR),
+					Calendar.getInstance().get(Calendar.MONTH),
+					Calendar.getInstance().get(Calendar.DAY_OF_MONTH), 12, 00,
+					userCode, userPassword, "PRESENCE_IN_KITCHEN",
+					"PRESENCE_IN_KITCHEN_STOP", new String("" + hour),
+					DEVICE_ID);
+			start_measurement = -1;
+		}
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		// NomhadGateway.getInstance().putMeasurement("192.168.238.40", "A100",
