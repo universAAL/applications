@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:OWL="http:///schemas/OWL/_8v6kUJ2UEeCA1PJ4jAflww/8" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/OWL/_8v6kUJ2UEeCA1PJ4jAflww/8 pathmap://TwoUse_Profiles/OWL.profile.uml#_8wB5EJ2UEeCA1PJ4jAflww">
+  <uml:Model xmi:id="_IYcwMEUPEeKhdZtCnfvGAw" name="Activity">
+    <packageImport xmi:id="_IYcwMkUPEeKhdZtCnfvGAw">
+      <importedPackage xmi:type="uml:Model" href="pathmap://AAL_ONTOLOGIES/org.universaal.middleware.owl.uml#_0huTAKFGEeCPiYRKlVcMuQ"/>
+    </packageImport>
+    <packageImport xmi:id="_IYcwM0UPEeKhdZtCnfvGAw">
+      <importedPackage xmi:type="uml:Model" href="pathmap://AAL_ONTOLOGIES/org.universaal.ontology.phThing.uml#_INViAKFHEeCPiYRKlVcMuQ"/>
+    </packageImport>
+    <packageImport xmi:id="_IYcwNEUPEeKhdZtCnfvGAw">
+      <importedPackage xmi:type="uml:Model" href="pathmap://AAL_ONTOLOGIES/org.universaal.middleware.service.owl.uml#_ar8DoPqREeCQQaPCMdH-vA"/>
+    </packageImport>
+    <packageImport xmi:id="_IYcwNUUPEeKhdZtCnfvGAw">
+      <importedPackage href="pathmap://AAL_ONTOLOGIES/org.universaal.ontology.datatypes.uml#_U7uacGkcEeGIl7HiYaL9OA"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_IYcwNkUPEeKhdZtCnfvGAw" name="org.universAAL.ontology.activity">
+      <packagedElement xmi:type="uml:Class" xmi:id="_IYcwO0UPEeKhdZtCnfvGAw" name="Activity" isAbstract="true">
+        <generalization xmi:id="_IYcwPEUPEeKhdZtCnfvGAw">
+          <general xmi:type="uml:Class" href="pathmap://AAL_ONTOLOGIES/org.universaal.middleware.owl.uml#_7clzYKFGEeCPiYRKlVcMuQ"/>
+        </generalization>
+        <ownedAttribute xmi:id="_b1YNgEUQEeKhdZtCnfvGAw" name="name"/>
+        <ownedAttribute xmi:id="_dLRCYEUQEeKhdZtCnfvGAw" name="startDate"/>
+        <ownedAttribute xmi:id="_fGL28EUQEeKhdZtCnfvGAw" name="stopDate"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_8wNaYEUREeKhdZtCnfvGAw" name="MedicalComplianceActivity" isAbstract="true">
+        <generalization xmi:id="_Emn9AEUSEeKhdZtCnfvGAw" general="_IYcwO0UPEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-Xln4EUREeKhdZtCnfvGAw" name="PersonalHygeneActivity" isAbstract="true">
+        <generalization xmi:id="_FnY2cEUSEeKhdZtCnfvGAw" general="_IYcwO0UPEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_AqTRYEUSEeKhdZtCnfvGAw" name="HouseHoldActivity" isAbstract="true">
+        <generalization xmi:id="_F9S1AEUSEeKhdZtCnfvGAw" general="_IYcwO0UPEeKhdZtCnfvGAw"/>
+        <generalization xmi:id="_rgL8sEUUEeKhdZtCnfvGAw" general="_ZlppwEUUEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_CKM94EUSEeKhdZtCnfvGAw" name="LeisureActivity" isAbstract="true">
+        <generalization xmi:id="_GWPggEUSEeKhdZtCnfvGAw" general="_IYcwO0UPEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_J0jacEUSEeKhdZtCnfvGAw" name="MedicationIntake">
+        <generalization xmi:id="_OqUPgEUSEeKhdZtCnfvGAw" general="_8wNaYEUREeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_LPHT8EUSEeKhdZtCnfvGAw" name="Monitoring">
+        <generalization xmi:id="_PDfkgEUSEeKhdZtCnfvGAw" general="_8wNaYEUREeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Md_h4EUSEeKhdZtCnfvGAw" name="Eating">
+        <generalization xmi:id="_PdqYAEUSEeKhdZtCnfvGAw" general="_8wNaYEUREeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_NdpBAEUSEeKhdZtCnfvGAw" name="Exercice">
+        <generalization xmi:id="_P6W7EEUSEeKhdZtCnfvGAw" general="_8wNaYEUREeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vTjykEUSEeKhdZtCnfvGAw" name="WakingUp">
+        <generalization xmi:id="_4-aHQEUSEeKhdZtCnfvGAw" general="_-Xln4EUREeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_xBy2AEUSEeKhdZtCnfvGAw" name="Sleep">
+        <generalization xmi:id="_5t3OQEUSEeKhdZtCnfvGAw" general="_-Xln4EUREeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_yjSd8EUSEeKhdZtCnfvGAw" name="BathroomUsage">
+        <generalization xmi:id="_6ORzsEUSEeKhdZtCnfvGAw" general="_-Xln4EUREeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_0EoU4EUSEeKhdZtCnfvGAw" name="Showering">
+        <generalization xmi:id="_6qWEoEUSEeKhdZtCnfvGAw" general="_-Xln4EUREeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1OtiYEUSEeKhdZtCnfvGAw" name="ToothBrushing">
+        <generalization xmi:id="_7B_voEUSEeKhdZtCnfvGAw" general="_-Xln4EUREeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_7iueIEUSEeKhdZtCnfvGAw" name="Cooking">
+        <generalization xmi:id="_A_0Y8EUTEeKhdZtCnfvGAw" general="_AqTRYEUSEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_8mUpIEUSEeKhdZtCnfvGAw" name="DishWashing">
+        <generalization xmi:id="_BYxrgEUTEeKhdZtCnfvGAw" general="_AqTRYEUSEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="__8xAgEUSEeKhdZtCnfvGAw" name="Laundry">
+        <generalization xmi:id="_BuIQcEUTEeKhdZtCnfvGAw" general="_AqTRYEUSEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ZlppwEUUEeKhdZtCnfvGAw" name="IndoorActivity" isAbstract="true">
+        <generalization xmi:id="_eu4NYEUUEeKhdZtCnfvGAw" general="_IYcwO0UPEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dLYaUEUUEeKhdZtCnfvGAw" name="OutdoorActivity" isAbstract="true">
+        <generalization xmi:id="_fKkD0EUUEeKhdZtCnfvGAw" general="_IYcwO0UPEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_fqYMUEUUEeKhdZtCnfvGAw" name="TVViewing">
+        <generalization xmi:id="_im_HYEUUEeKhdZtCnfvGAw" general="_CKM94EUSEeKhdZtCnfvGAw"/>
+        <generalization xmi:id="_i-jS0EUUEeKhdZtCnfvGAw" general="_ZlppwEUUEeKhdZtCnfvGAw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_hJl8UEUUEeKhdZtCnfvGAw" name="RadioListening">
+        <generalization xmi:id="_iTm4YEUUEeKhdZtCnfvGAw" general="_CKM94EUSEeKhdZtCnfvGAw"/>
+        <generalization xmi:id="_jX9RUEUUEeKhdZtCnfvGAw" general="_ZlppwEUUEeKhdZtCnfvGAw"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_IYcwPUUPEeKhdZtCnfvGAw">
+      <eAnnotations xmi:id="_IYcwPkUPEeKhdZtCnfvGAw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://TwoUse_Profiles/OWL.profile.uml#_8wB5EJ2UEeCA1PJ4jAflww"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://TwoUse_Profiles/OWL.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_IYcwP0UPEeKhdZtCnfvGAw">
+      <eAnnotations xmi:id="_IYcwQEUPEeKhdZtCnfvGAw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://TwoUse_Profiles/RDF.profile.uml#_0R89QCqWEd6tAp0dWJ5sSg"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://TwoUse_Profiles/RDF.profile.uml#_TEtTYHGwEdyoJ7Xxsdx7ug"/>
+    </profileApplication>
+  </uml:Model>
+  <OWL:owlOntology xmi:id="_IYcwQUUPEeKhdZtCnfvGAw" defaultNamespace="http://ontology.universAAL.org/Activity" base_Package="_IYcwNkUPEeKhdZtCnfvGAw" versionInfo="0.1.0-SNAPSHOT"/>
+  <OWL:datatypeProperty xmi:id="_b2Di8EUQEeKhdZtCnfvGAw" base_Property="_b1YNgEUQEeKhdZtCnfvGAw" isFunctional="true"/>
+  <OWL:datatypeProperty xmi:id="_dLXwEEUQEeKhdZtCnfvGAw" base_Property="_dLRCYEUQEeKhdZtCnfvGAw" isFunctional="true"/>
+  <OWL:datatypeProperty xmi:id="_fGSkoEUQEeKhdZtCnfvGAw" base_Property="_fGL28EUQEeKhdZtCnfvGAw" isFunctional="true"/>
+</xmi:XMI>
