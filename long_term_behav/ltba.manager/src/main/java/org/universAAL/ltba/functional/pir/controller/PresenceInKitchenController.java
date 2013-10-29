@@ -16,7 +16,7 @@ public class PresenceInKitchenController extends LTBAController implements
 
 	private static PresenceInKitchenController INSTANCE;
 	private Timer t;
-	private float start_measurement = -1;
+	private static float start_measurement = -1;
 	/**
 	 * The device ID. When the user management be made, the DEVICE_ID must
 	 * content a reference to the user, in orden to not crossing the same device

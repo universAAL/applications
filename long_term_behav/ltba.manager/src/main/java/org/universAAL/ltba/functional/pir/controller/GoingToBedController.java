@@ -57,7 +57,7 @@ public class GoingToBedController extends LTBAController implements
 		System.out.println("Sending to Nomhad time>" + gtbTime + " and times>"
 				+ times);
 		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-				"123456", "SLEEPING", "GOING_TO_BED", new String("" + gtbTime),
+				userPassword, "SLEEPING", "GOING_TO_BED", new String("" + gtbTime),
 				DEVICE_ID);
 		TimeSleepingController.setGTBTime((float) gtbTime);
 		gtbTime = 0;

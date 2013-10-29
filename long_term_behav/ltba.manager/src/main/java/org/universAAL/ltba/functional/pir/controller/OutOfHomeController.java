@@ -19,7 +19,7 @@ public class OutOfHomeController extends LTBAController implements
 	private String serverIp;
 	private String userCode;
 	private final String DEVICE_ID = "HALL_DET";
-	private float start_measure;
+	private static float  start_measure;
 
 	private OutOfHomeController() {
 		super();
