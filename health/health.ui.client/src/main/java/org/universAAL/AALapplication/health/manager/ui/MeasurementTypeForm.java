@@ -51,22 +51,21 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 	}
 
 
-	private static final String SELECTED_TREATMENT = HealthProfileOntology.NAMESPACE + "uiMeasurementSelected";
-	private static final String OK_LABEL = "Select";
-	private static final String OK_ICON = null;
-	private static final String CANCEL_LABEL = "Cancel";
-	private static final String CANCEL_ICON = null;
+	private static final String SELECTED_TREATMENT = HealthProfileOntology.NAMESPACE + "uiMeasurementSelected"; 
+	private static final String OK_CMD = "treatmentTypeSelected";
+	private static final String CANCEL_CMD = "cancel";
 	
 
 	public void show() {
 		// Create Dialog
-		Form f = Form.newDialog("Take A Measurement: Which Type?", new Resource());
+		Form f = Form.newDialog(getString("measurementType.title"), new Resource()); 
 		
 		Set<String> typesOfMeasurement = OntologyManagement
 				.getInstance().getNamedSubClasses(HealthMeasurement.MY_URI, true, false);
 		
 		Select1 s = new Select1(f.getIOControls(),
-				new Label("Select Measurement Type", null),
+				new Label(getString("measurementType.select"), 
+					getString("measurementType.select.icon")), 
 				new PropertyPath(null, false, new String[]{SELECTED_TREATMENT}),
 				null, null);
 		
@@ -78,10 +77,11 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 		}
 		
 		new Submit(f.getSubmits(), 
-				new Label(OK_LABEL, OK_ICON),
-				OK_LABEL);
+				new Label(getString("measurementType.ok"),
+					getString("measurementType.ok.icon")),
+				OK_CMD);
 		
-		Submit su = new Submit(f.getSubmits(), new Label(CANCEL_LABEL, CANCEL_ICON), CANCEL_LABEL );
+		Submit su = new Submit(f.getSubmits(), new Label(getString("measurementType.cancel"),getString("measurementType.cancel.icon")), CANCEL_CMD );
 		su.addMandatoryInput(s);
 		
 		sendForm(f);
@@ -91,13 +91,13 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 	@Override
 	public void handleUIResponse(UIResponse arg0) {
 		String cmd = arg0.getSubmissionID();
-		if (cmd.equalsIgnoreCase(CANCEL_LABEL)){
+		if (cmd.equalsIgnoreCase(CANCEL_CMD)){
 			new MainMenu(this).show();
 		}
-		if (cmd.equalsIgnoreCase(OK_LABEL)){
+		if (cmd.equalsIgnoreCase(OK_CMD)){
 			HealthMeasurement hm = (HealthMeasurement) arg0.getUserInput(new String[]{SELECTED_TREATMENT});
 			// TODO: create a service in ont.health and call the service accordingly
-			LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling Treatment of type:" + hm.getClassURI());
+			LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling Treatment of type:" + hm.getClassURI()); //$NON-NLS-1$ //$NON-NLS-2$
 			if (hm instanceof PersonWeight){
 				new WeigthMeasurement(this, (PersonWeight) hm).show();
 			}

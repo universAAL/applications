@@ -51,11 +51,8 @@ public class EditMeasurementActivityForm extends AbstractHealthForm{
 		super(context, inputUser, targetUser);
 	}
 
-	private static final String EDIT_LABEL = "Update";
-	private static final String BACK_LABEL = "Back";
 	private static final String EDIT_CMD = "updateTreatment";
 	private static final String BACK_CMD = "goBack";
-	private static final String REMOVE_LABEL = "Delete This Treatment";
 	private static final String REM_CMD = "trashTreatment";
 
 
@@ -87,10 +84,19 @@ public class EditMeasurementActivityForm extends AbstractHealthForm{
 	}
 	
 	public void show(Treatment t){
-		Form f = NewTreatmentForm.getGenericTreatmentForm(t);
-		new Submit(f.getSubmits(), new Label(EDIT_LABEL, null), EDIT_CMD);
-		new Submit(f.getSubmits(), new Label(REMOVE_LABEL, null), REM_CMD);
-		new Submit(f.getSubmits(), new Label(BACK_LABEL, null), BACK_CMD);
+		Form f = NewTreatmentForm.getGenericTreatmentForm(t, this);
+		new Submit(f.getSubmits(), 
+			new Label(getString("generic.editTreatment.edit"), 
+				getString("generic.editTreatment.edit.icon")),
+				EDIT_CMD); 
+		new Submit(f.getSubmits(), 
+			new Label(getString("generic.editTreatment.remove"), 
+				getString("generic.editTreatment.remove.icon")), 
+				REM_CMD); 
+		new Submit(f.getSubmits(), 
+			new Label(getString("generic.editTreatment.back"), 
+				getString("generic.editTreatment.back.icon")), 
+				BACK_CMD); 
 		sendForm(f);
 	}
 	

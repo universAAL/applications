@@ -59,11 +59,11 @@ public class RemoveConfirmation extends AbstractHealthForm {
 	/**
 	 * 
 	 */
-	private static final String BACK_CMD = "ups";
+	private static final String BACK_CMD = "ups"; 
 	/**
 	 * 
 	 */
-	private static final String DELETE_CMD = "deleteNow";
+	private static final String DELETE_CMD = "deleteNow"; 
 
 
 	/** {@ inheritDoc}	 */
@@ -86,12 +86,12 @@ public class RemoveConfirmation extends AbstractHealthForm {
 	}
 	
 	public void show(Treatment t){
-		Form f = Form.newDialog("Treatment Remove Confirmation", t);
-		new SimpleOutput(f.getIOControls(), null, null, "Are you sure you want to remove the treatment with name:");
+		Form f = Form.newDialog(getString("generic.remove.title"), t); 
+		new SimpleOutput(f.getIOControls(), null, null, getString("generic.remove.text")); 
 		new SimpleOutput(f.getIOControls(), null, new PropertyPath(null, false, new String[]{Treatment.PROP_NAME}), null);
 		
-		new Submit(f.getSubmits(), new Label("Yes", null), DELETE_CMD);
-		new Submit(f.getSubmits(), new Label("no",null), BACK_CMD);
+		new Submit(f.getSubmits(), new Label(getString("generic.remove.yes"), getString("generic.remove.yes.icon")), DELETE_CMD); 
+		new Submit(f.getSubmits(), new Label(getString("generic.remove.no"),getString("generic.remove.no.icon")), BACK_CMD); 
 		
 		sendForm(f);
 	}

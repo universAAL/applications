@@ -20,7 +20,6 @@ package org.universAAL.AALapplication.health.manager.ui;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.rdf.PropertyPath;
-import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
@@ -32,8 +31,8 @@ import org.universAAL.middleware.ui.rdf.Repeat;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.SubdialogTrigger;
 import org.universAAL.middleware.ui.rdf.Submit;
-import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.health.owl.HealthProfile;
+import org.universAAL.ontology.health.owl.HealthProfileOntology;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.services.DisplayTreatmentService;
 import org.universAAL.ontology.profile.AssistedPerson;
@@ -62,9 +61,9 @@ public class TreatmentForm extends AbstractHealthForm {
 		super(owner,inputUser,targetUser);
 	}
 
-	private static final String TREATMENT_EXAPAND = HealthProfileOntology.NAMESPACE + "subdialogTreatmentExpand";
-	private static final String NEW_TREATMENT = HealthProfileOntology.NAMESPACE + "newTreatmentUI";
-	private static final String BACK = HealthProfileOntology.NAMESPACE + "back";
+	private static final String TREATMENT_EXAPAND = HealthProfileOntology.NAMESPACE + "subdialogTreatmentExpand"; 
+	private static final String NEW_TREATMENT = HealthProfileOntology.NAMESPACE + "newTreatmentUI"; 
+	private static final String BACK = HealthProfileOntology.NAMESPACE + "back"; 
 	private HealthProfile hp;
 
 
@@ -97,31 +96,31 @@ public class TreatmentForm extends AbstractHealthForm {
 		hp = getHealthProfile();
 		if (hp == null){
 			//WARN
-			LogUtils.logError(owner, getClass(), "show", "No Health Profile Found!!");
+			LogUtils.logError(owner, getClass(), "show", "No Health Profile Found!!"); 
 			return;
 		}
 		// Create Dialog
-		Form f = Form.newDialog("Treatment List", hp);
+		Form f = Form.newDialog(getString("treatmentList.title"), hp); 
 		
-		Repeat r = new Repeat(f.getIOControls(), new Label("Treatments", null),
+		Repeat r = new Repeat(f.getIOControls(), new Label(getString("treatmentList.repeat"), null), 
 				new PropertyPath(null, false, new String[] {HealthProfile.PROP_HAS_TREATMENT}), null, null);
-		
+		//XXX icons?
 		Group row = new Group(r,
-				new Label("", null), null, null, null);
-		new SimpleOutput(row, new Label("Name", null), 
+				new Label("", null), null, null, null); 
+		new SimpleOutput(row, new Label(getString("treatmentList.colName"), null),  
 				new PropertyPath(null, false, new String[] {Treatment.PROP_NAME}), null);
-		new SimpleOutput(row, new Label("Description", null), 
+		new SimpleOutput(row, new Label(getString("treatmentList.colDescription"), null),  
 				new PropertyPath(null, false, new String[] {Treatment.PROP_DESCRIPTION}), null);
-		SubdialogTrigger sdt = new SubdialogTrigger(row, new Label("Detail", null), TREATMENT_EXAPAND);
+		SubdialogTrigger sdt = new SubdialogTrigger(row, new Label(getString("treatmentList.colDetail"), null), TREATMENT_EXAPAND); 
 		sdt.setRepeatableIDPrefix(TREATMENT_EXAPAND);
 		
 		// TODO add completiviness
 		// TODO add more info. according to user (if Careguiver, then more info...)
 		// Add remove Treatment button?
 		
-		new Submit(f.getSubmits(), new Label("Add New", null), NEW_TREATMENT);
+		new Submit(f.getSubmits(), new Label(getString("treatmentList.addNew"), getString("treatmentList.addNew.icon")), NEW_TREATMENT); 
 	
-		new Submit(f.getSubmits(), new Label("Back", null), BACK);
+		new Submit(f.getSubmits(), new Label(getString("back.toMainMenu"), getString("back.toMainMenu.icon")), BACK); 
 		
 		sendForm(f);
 	}

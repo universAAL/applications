@@ -15,8 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package org.universAAL.AALapplication.health.manager.ui;
+package deprecated;
 
+import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
+import org.universAAL.AALapplication.health.manager.ui.TreatmentForm;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -120,7 +122,7 @@ public class TreatmentViewForm extends AbstractHealthForm {
 	public void handleUIResponse(UIResponse arg0) {
 		String cmd = arg0.getSubmissionID();
 		if (cmd.equalsIgnoreCase(BACK_ICON)){
-			new TreatmentForm(this).show();
+//			new TreatmentForm(this).show();
 		}
 		if (cmd.equalsIgnoreCase(DELETE_LABEL)){
 			//TODO: DELETE
@@ -133,7 +135,7 @@ public class TreatmentViewForm extends AbstractHealthForm {
 			//Add new Treatment
 			//TODO: service call
 			
-			new TreatmentForm(this).show();
+//			new TreatmentForm(this).show();
 		}
 	}
 }

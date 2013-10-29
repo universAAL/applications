@@ -3,6 +3,9 @@
  */
 package org.universAAL.AALapplication.health.manager.ui;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -21,6 +24,7 @@ import org.universAAL.ontology.health.owl.HealthProfile;
 import org.universAAL.ontology.health.owl.services.ProfileManagementService;
 import org.universAAL.ontology.profile.AssistedPerson;
 import org.universAAL.ontology.profile.User;
+import org.universAAL.ui.internationalization.util.MessageLocaleHelper;
 
 /**
  * @author amedrano
@@ -31,6 +35,7 @@ public abstract class AbstractHealthForm extends UICaller {
 	private static final String REQ_OUTPUT_PROFILE = "http://ontologies.universaal.org/TreatmentManager#profile";
 	protected User inputUser;
 	protected User targetUser;
+	private MessageLocaleHelper messageHelper;
 
 	static private Map<User, AbstractHealthForm> currentForm;
 	
@@ -56,9 +61,12 @@ public abstract class AbstractHealthForm extends UICaller {
 	public void dialogAborted(String arg0) {}
 
 	protected void sendForm(Form f){
+	    Locale loc = messageHelper.getSelectedMessageLocale();
+	    if (loc == null)
+		loc = Locale.ENGLISH;
 		sendUIRequest(
 				new UIRequest(inputUser, f,
-						LevelRating.low, Locale.ENGLISH,
+						LevelRating.low, loc,
 						PrivacyLevel.homeMatesOnly));
 	}
 	
@@ -91,4 +99,16 @@ public abstract class AbstractHealthForm extends UICaller {
 		return null;
 	}
 
+	public String getString(String key){
+	    if (messageHelper == null){
+		List<URL> urlList = new ArrayList<URL>();
+		urlList.add(getClass().getClassLoader().getResource("message.properties"));
+		try {
+		    messageHelper = new MessageLocaleHelper(owner, inputUser, urlList);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+	    }
+	    return messageHelper.getString(key);
+	}
 }

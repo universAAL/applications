@@ -69,7 +69,7 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 	}
 	
 	static Form getMeasurementActivityForm(TakeMeasurementActivity t){
-		Form f = NewTreatmentForm.getGenericTreatmentForm(t);
+		Form f = NewTreatmentForm.getGenericTreatmentForm(t, this);
 		
 		//TODO conditional limits group.
 		

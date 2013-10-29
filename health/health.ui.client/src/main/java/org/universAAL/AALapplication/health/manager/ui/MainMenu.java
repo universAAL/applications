@@ -29,29 +29,17 @@ public class MainMenu extends AbstractHealthForm{
 		super(ctxt, inputUser,targetUser);
 	}
 
-		//TODO: internationalization!
-		private static final String MESSAGE_LABEL = "Messages";
-		private static final String MESSAGE_ICON = null;
-		private static final String TREATMENT_LABEL = "Treatment";
-		private static final String TREATMENT_ICON = null;
-		private static final String PREFERENCES_LABEL = "Preferences";
-		private static final String PREFERENCES_ICON = null;
-		static final LevelRating PRIORITY = LevelRating.low;
-		static final PrivacyLevel PRIVACY = PrivacyLevel.insensible;
-		private static final String HOME_LABEL = "Go Back";
-		private static final String HOME_ICON = null;
-		private static final String MESSAGE_CMD = "openMessages";
-		private static final String MEASUREMENT_LABEL = "Take a Measurement Now";
-		private static final String MEASUREMENT_ICON = null;
-		private static final String MEASUREMENT_CMD = "takeMeasurement";
-		private static final String TREATMENT_CMD = "manageTreatments";
-		private static final String PREFERENCES_CMD = "managePrefferences";
+		private static final String MESSAGE_CMD = "openMessages"; 
+		private static final String MEASUREMENT_CMD = "takeMeasurement"; 
+		private static final String TREATMENT_CMD = "manageTreatments"; 
+		private static final String PREFERENCES_CMD = "managePrefferences"; 
+		private static final String HOME_CMD = "goHome"; 
 	
 
 	@Override
 	public void handleUIResponse(UIResponse input) {
 		String cmd = input.getSubmissionID();
-		LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling: " + cmd);
+		LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling: " + cmd); //$NON-NLS-1$ //$NON-NLS-2$
 		if (cmd.equalsIgnoreCase(MESSAGE_CMD)){
 			//TODO: message Managing
 			new NotReady(this).show();
@@ -70,7 +58,7 @@ public class MainMenu extends AbstractHealthForm{
 	
 	public void show() {
 		if (targetUser == null){
-			// show AssistedUserProfile Selector
+			new AssistedPersonSelector(this).show();
 		} else {
 			showTarget();
 		}
@@ -81,25 +69,32 @@ public class MainMenu extends AbstractHealthForm{
 		HealthProfile hp = getHealthProfile();
 		if (hp == null){
 			//WARN
-			LogUtils.logError(owner, getClass(), "show", "No Health Profile Found!!");
+			LogUtils.logError(owner, getClass(), "show", "No Health Profile Found!!"); //$NON-NLS-1$ //$NON-NLS-2$
 			return;
 		}
 		// Create Dialog
-		Form f = Form.newDialog("Health Manager AAL Service", hp);
+		Form f = Form.newDialog(getString("mainmenu.title"), hp); //$NON-NLS-1$
 		new Submit(f.getSubmits(), 
-				new Label(MESSAGE_LABEL, MESSAGE_ICON),
+				new Label(getString("mainmenu.messages"), 
+					getString("mainmenu.messages.icon")),
 				MESSAGE_CMD);
 		new Submit(f.getSubmits(), 
-				new Label(MEASUREMENT_LABEL, MEASUREMENT_ICON),
+				new Label(getString("mainmenu.measurement"),
+					getString("mainmenu.measurement.icon")),
 				MEASUREMENT_CMD);
 		new Submit(f.getSubmits(), 
-				new Label(TREATMENT_LABEL, TREATMENT_ICON),
+				new Label(getString("mainmenu.treatment"),
+					getString("mainmenu.treatment.icon")),
 				TREATMENT_CMD);
 		new Submit(f.getSubmits(), 
-				new Label(PREFERENCES_LABEL, PREFERENCES_ICON),
+				new Label(getString("mainmenu.preferences"),
+					getString("mainmenu.preferences.icon")),
 				PREFERENCES_CMD);
 		// add home submit
-		new Submit(f.getSubmits(), new Label(HOME_LABEL, HOME_ICON), HOME_LABEL );
+		new Submit(f.getSubmits(), 
+			new Label(getString("mainmenu.back"),
+					getString("mainmenu.back.icon")),
+				HOME_CMD );
 		
 		// TODO Welcome Pane in IOControls
 		
