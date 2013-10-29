@@ -15,6 +15,7 @@ import org.universAAL.ltba.functional.pir.controller.ShoppingController;
 import org.universAAL.ltba.functional.pir.controller.WakeUpController;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
@@ -151,19 +152,24 @@ public class PIRConsequenceListener extends ContextSubscriber {
 			ShoppingController.getInstance().addBackFromShopping();
 		} else if (activity == "PresenceInKitchen") {
 			if (phase == "Start") {
-				PresenceInKitchenController.getInstance().presenceInBathStart(
-						longTime);
+				PresenceInKitchenController.getInstance()
+						.presenceInKitchenStart(longTime);
 			} else if (phase == "Stop") {
-				PresenceInKitchenController.getInstance().presenceInBathStop(
-						longTime);
+				PresenceInKitchenController.getInstance()
+						.presenceInKitchenStop(longTime);
 			}
 		} else if (activity == "PresenceInBath") {
 			if (phase == "Start") {
+
+				LogUtils.logDebug(mc, getClass(), "handleOcntextEvent",
+						"StartTime->" + longTime);
 				PresenceInBathController.getInstance().presenceInBathStart(
 						longTime);
 			} else if (phase == "Stop") {
 				PresenceInBathController.getInstance().presenceInBathStop(
 						longTime);
+				LogUtils.logDebug(mc, getClass(), "handleOcntextEvent",
+						"StopTime->" + longTime);
 			}
 		}
 	}

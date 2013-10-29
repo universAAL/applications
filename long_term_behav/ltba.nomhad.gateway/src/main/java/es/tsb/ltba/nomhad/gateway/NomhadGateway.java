@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Properties;
 
 import org.apache.http.client.ClientProtocolException;
@@ -37,7 +38,7 @@ public class NomhadGateway {
 
 	private static NomhadGateway INSTANCE;
 
-	private static final String NOMHAD_URL_HEADER = "https://localhost:8442/nomhad/rest/2/cmr/patient/";
+	private static final String NOMHAD_URL_HEADER = "https://localhost:8443/nomhad/rest/2/cmr/patient/";
 	private static final String OBSERVATIONS_REQUEST = "/observations";
 	private static final String DEVICE_ID = "\"35-209900-176148-1\"";
 	private ModuleContext moduleContext = null;
@@ -139,19 +140,14 @@ public class NomhadGateway {
 		if (server.contains(":")) {
 			header.replace("localhost:8443", server);
 		} else {
-			LogUtils
-					.logDebug(
-							moduleContext,
-							getClass(),
-							"putMeasurement",
-							new String[] { "Replacing 'localhost' by " + server },
-							null);
+			LogUtils.logDebug(moduleContext, getClass(), "putMeasurement",
+					new String[] { "Replacing 'localhost' by " + server }, null);
 			header = header.replace("localhost", server);
 			LogUtils.logDebug(moduleContext, getClass(), "putMeasurement",
 					new String[] { "New header: " + header }, null);
 		}
 		try {
-			properties.load(new FileInputStream(home+"/"+PROPERTIES_FILE));
+			properties.load(new FileInputStream(home + "/" + PROPERTIES_FILE));
 			isDeployed = properties
 					.getProperty("es.tsbtecnologias.nomhad.ltba.deployed");
 		} catch (FileNotFoundException e1) {
@@ -160,13 +156,12 @@ public class NomhadGateway {
 			e1.printStackTrace();
 		}
 		if (isDeployed.equalsIgnoreCase("true")) {
-			LogUtils
-					.logDebug(
-							moduleContext,
-							getClass(),
-							"putMeasurement",
-							new String[] { "Remote server is a deployed server (PRE or PRO but no DEV)" },
-							null);
+			LogUtils.logDebug(
+					moduleContext,
+					getClass(),
+					"putMeasurement",
+					new String[] { "Remote server is a deployed server (PRE or PRO but no DEV)" },
+					null);
 			header = header.replace("nomhad", "ltba");
 		}
 		uri.append(header);
@@ -181,17 +176,16 @@ public class NomhadGateway {
 
 		NomhadHttpClient nhc = new NomhadHttpClient(usr, pwd);
 		try {
-			LogUtils
-					.logInfo(
-							moduleContext,
-							getClass(),
-							"putMeasurement",
-							new String[] { "------<>-------POSTING TO NOMHAD-------------\nURI: "
-									+ uri.toString()
-									+ "\nBODY: "
-									+ body.toString()
-									+ "\nSERVER RESPONSE:"
-									+ nhc.post(uri.toString(), body) }, null);
+			LogUtils.logInfo(
+					moduleContext,
+					getClass(),
+					"putMeasurement",
+					new String[] { "------<>-------POSTING TO NOMHAD-------------\nURI: "
+							+ uri.toString()
+							+ "\nBODY: "
+							+ body.toString()
+							+ "\nSERVER RESPONSE:"
+							+ nhc.post(uri.toString(), body) }, null);
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -229,4 +223,37 @@ public class NomhadGateway {
 				measurement, timestamp, deviceId);
 	}
 
+	/**
+	 * Put measurement with a date without format.
+	 * 
+	 * @param server
+	 * @param day
+	 * @param month
+	 * @param year
+	 * @param hour_of_day
+	 * @param minutes
+	 * @param usr
+	 * @param pwd
+	 * @param indicatorGroup
+	 * @param indicator
+	 * @param measurement
+	 * @param deviceId
+	 * @return
+	 */
+	public String putMeasurement(String server, int day, int month, int year,
+			int hour_of_day, int minutes, String usr, String pwd,
+			String indicatorGroup, String indicator, String measurement,
+			String deviceId) {
+
+		SimpleDateFormat beforeT = new java.text.SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat afterT = new SimpleDateFormat("HHmmss");
+		String date = beforeT.format(Calendar.getInstance().getTime());
+		String hour = afterT.format(new GregorianCalendar(year, month, day,
+				hour_of_day, minutes).getTime());
+		String timestamp = date + "T" + hour + "+0100";
+		LogUtils.logDebug(moduleContext, getClass(), "putMeasurement",
+				new String[] { "Current timestamp: " + timestamp }, null);
+		return putMeasurement(server, usr, pwd, indicatorGroup, indicator,
+				measurement, timestamp, deviceId);
+	}
 }
