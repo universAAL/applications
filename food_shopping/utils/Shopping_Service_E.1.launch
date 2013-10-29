@@ -49,7 +49,7 @@
 <mapEntry key="scan-composite:mvn:org.universAAL.middleware/mw.composite/2.0.1-SNAPSHOT/composite" value="true@true@2@true"/>
 <mapEntry key="scan-composite:mvn:org.universAAL.ontology/ont.composite/2.0.1-SNAPSHOT/composite" value="true@true@3@true"/>
 <mapEntry key="wrap:mvn:axis/axis-wsdl4j" value="true@true@12@true"/>
-<mapEntry key="wrap:mvn:mysql/mysql-connector-java/5.1.17" value="true@true@7@true"/>
+<mapEntry key="wrap:mvn:mysql/mysql-connector-java/5.1.17" value="false@false@7@false"/>
 <mapEntry key="wrap:mvn:org.apache.axis/axis-jaxrpc/1.4" value="true@true@14@true"/>
 <mapEntry key="wrap:mvn:org.apache.axis/axis/1.4" value="true@true@13@true"/>
 <mapEntry key="wrap:mvn:org.apache.derby/derby/10.7.1.1" value="true@true@7@true"/>
@@ -82,7 +82,6 @@
 <listEntry value="mvn:org.universAAL.ui/ui.resource.server/2.0.1-SNAPSHOT@5@update"/>
 <listEntry value="mvn:org.universAAL.context/ctxt.che/2.0.1-SNAPSHOT@6@update"/>
 <listEntry value="mvn:org.universAAL.context/ctxt.prof.server/2.0.1-SNAPSHOT@7@update"/>
-<listEntry value="wrap:mvn:mysql/mysql-connector-java/5.1.17@7@update"/>
 <listEntry value="wrap:mvn:org.apache.derby/derby/10.7.1.1@7@update"/>
 <listEntry value="wrap:mvn:axis/axis-wsdl4j@12@update"/>
 <listEntry value="wrap:mvn:org.apache.axis/axis/1.4@13@update"/>
