@@ -11,13 +11,16 @@ import org.universAAL.ltba.functional.pir.LTBAController;
 
 import es.tsb.ltba.nomhad.gateway.NomhadGateway;
 
-public class OutOfHomeController extends LTBAController implements ActionListener {
+public class OutOfHomeController extends LTBAController implements
+		ActionListener {
 
 	private static OutOfHomeController INSTANCE;
 	private Timer t;
 	private String serverIp;
 	private String userCode;
 	private final String DEVICE_ID = "HALL_DET";
+	private float start_measure;
+
 	private OutOfHomeController() {
 		super();
 	}
@@ -30,15 +33,24 @@ public class OutOfHomeController extends LTBAController implements ActionListene
 	}
 
 	public void outOfHomeStart(float hour) {
-		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-				userPassword, "GOING_OUT_INDICATORS_GROUP", "OUT_OF_HOME_START",
-				new String("" + hour), DEVICE_ID);	
+
+		if (start_measure < 0) {
+			start_measure = hour;
+		}
+
 	}
 
 	public void outOfHomeStop(float hour) {
-		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-				userPassword, "GOING_OUT_INDICATORS_GROUP", "OUT_OF_HOME_STOP",
-				new String("" + hour), DEVICE_ID);
+		if (start_measure != -1) {
+			NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
+					userPassword, "GOING_OUT_INDICATORS_GROUP",
+					"OUT_OF_HOME_START", new String("" + hour), DEVICE_ID);
+
+			NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
+					userPassword, "GOING_OUT_INDICATORS_GROUP",
+					"OUT_OF_HOME_END", new String("" + hour), DEVICE_ID);
+			start_measure = -1;
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {

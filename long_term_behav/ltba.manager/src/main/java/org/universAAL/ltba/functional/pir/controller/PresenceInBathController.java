@@ -36,9 +36,9 @@ public class PresenceInBathController extends LTBAController {
 	}
 
 	public void presenceInBathStart(float hour) {
-		System.out.println("PRESENCEINBATHCONTROLLER->START start_measure: "
-				+ hour);
-		start_measure = hour;
+		if (start_measure < 0) {
+			start_measure = hour;
+		}
 
 	}
 

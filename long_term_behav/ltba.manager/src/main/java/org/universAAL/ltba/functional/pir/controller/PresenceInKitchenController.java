@@ -44,7 +44,9 @@ public class PresenceInKitchenController extends LTBAController implements
 	}
 
 	public void presenceInKitchenStart(float hour) {
-		start_measurement = hour;
+		if (start_measurement < 0) {
+			start_measurement = hour;
+		}
 	}
 
 	public void presenceInKitchenStop(float hour) {
@@ -56,13 +58,14 @@ public class PresenceInKitchenController extends LTBAController implements
 					userCode, userPassword, "PRESENCE_IN_KITCHEN",
 					"PRESENCE_IN_KITCHEN_START", new String("" + hour),
 					DEVICE_ID);
-			NomhadGateway.getInstance().putMeasurement(serverIP,
-					Calendar.getInstance().get(Calendar.YEAR),
-					Calendar.getInstance().get(Calendar.MONTH),
-					Calendar.getInstance().get(Calendar.DAY_OF_MONTH), 12, 00,
-					userCode, userPassword, "PRESENCE_IN_KITCHEN",
-					"PRESENCE_IN_KITCHEN_END", new String("" + hour),
-					DEVICE_ID);
+			NomhadGateway.getInstance()
+					.putMeasurement(serverIP,
+							Calendar.getInstance().get(Calendar.YEAR),
+							Calendar.getInstance().get(Calendar.MONTH),
+							Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+							12, 00, userCode, userPassword,
+							"PRESENCE_IN_KITCHEN", "PRESENCE_IN_KITCHEN_END",
+							new String("" + hour), DEVICE_ID);
 			start_measurement = -1;
 		}
 	}
