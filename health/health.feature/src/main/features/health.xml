@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="uAAL Health Manager - ${pom.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 		<!-- Change version of repository accordingly -->
-	<repository>mvn:org.universAAL.middleware/mw.karaf.feature/2.0.2-SNAPSHOT/xml/features</repository>
-	<repository>mvn:org.universAAL.ontology/ont.karaf.feature/2.0.2-SNAPSHOT/xml/features</repository>
+	<repository>mvn:org.universAAL.middleware/mw.karaf.feature/${mw.karaf.feature.version}/xml/features</repository>
+	<repository>mvn:org.universAAL.ontology/ont.karaf.feature/${ont.karaf.feature.version}/xml/features</repository>
 	
 	<!-- Health Core -->
 	<feature name="health.core" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.profile.manager/E.1.1-SNAPSHOT</bundle>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.treat.manager/E.1.1-SNAPSHOT</bundle>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.performedSession.manager/E.1.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.profile.manager/${health.profile.manager.version}</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.treat.manager/${health.treat.manager.version}</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.performedSession.manager/${health.performedSession.manager.version}</bundle>
 	</feature>
 		
 	<feature name="health.x73" version="${platform.version}">
 		<feature>uAAL-Ont.ContinuaHealth</feature>
 		<feature>uAAL-Ont.personalhealthdevice</feature>
 		<feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.x73.adapter/E.1.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.x73.adapter/${health.x73.adapter.version}</bundle>
 	</feature>
 		
 	<feature name="health.demo" version="${platform.version}">
@@ -29,7 +29,7 @@
 	<feature name="health.ui" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
 		<feature>uAAL-Ont.Recommendation</feature>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/E.1.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/${health.ui.client.version}</bundle>
 	</feature>
 	
 	

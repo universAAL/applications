@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>new_services.pom</artifactId>
-    <version>E.1</version>
+    <version>E.2</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   <artifactId>health.pom</artifactId>
-  <version>E.1.1-SNAPSHOT</version>
+  <version>E.2.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Health Management AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Health_Management_universAAL_service</url>
@@ -20,6 +20,8 @@
     <module>../health.treat.manager</module>
     <!-- <module>../health.motivation</module> -->
     <module>../health.ui.client</module>
+    <module>../health.x73.adapter</module>
+    <module>../health.feature</module>
   </modules>
   <scm>
     <connection>${svn.base}/health/${project.artifactId}</connection>
@@ -32,25 +34,35 @@
   <dependencyManagement>
     <dependencies>
     <!--  REMOVE when updated! -->
-    <dependency>
-    	<groupId>org.universAAL.ontology</groupId>
-    	<artifactId>ont.profile.health</artifactId>
-    	<version>2.0.2-SNAPSHOT</version>
-    </dependency>
+<!--     <dependency> -->
+<!--     	<groupId>org.universAAL.ontology</groupId> -->
+<!--     	<artifactId>ont.profile.health</artifactId> -->
+<!--     	<version>2.0.3-SNAPSHOT</version> -->
+<!--     </dependency> -->
     <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.performedSession.manager</artifactId>
-        <version>E.0.1-SNAPSHOT</version>
+        <version>E.2.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.treat.manager</artifactId>
-        <version>E.1.1-SNAPSHOT</version>
+        <version>E.2.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.profile.manager</artifactId>
-        <version>E.1.1-SNAPSHOT</version>
+        <version>E.2.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.universAAL.AALapplication</groupId>
+        <artifactId>health.ui.client</artifactId>
+        <version>E.2.1-SNAPSHOT</version>
+      </dependency> 
+      <dependency>
+        <groupId>org.universAAL.AALapplication</groupId>
+        <artifactId>health.x73.adapter</artifactId>
+        <version>E.2.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
@@ -61,16 +73,6 @@
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.biomedicalsensors.uiclient</artifactId>
         <version>E.1.1-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.universAAL.middleware</groupId>
-        <artifactId>mw.container.junit</artifactId>
-        <version>2.0.1-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.universAAL.ontology</groupId>
-        <artifactId>ont.health.measurement</artifactId>
-        <version>2.0.1-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
