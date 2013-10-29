@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -17,7 +17,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
  */
-package org.universAAL.AALapplication.ZWaveDataPublisher.Motion;
+package org.universAAL.AALapplication.ZWaveDataPublisher.MotionContact;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -28,10 +28,10 @@ import java.net.Socket;
 
 public class ZWaveEventListener {
 
-	private MotionSensorPublisher mspublisher = null;
+	private MotionContactSensorPublisher mspublisher = null;
 	
 	
-	public ZWaveEventListener(MotionSensorPublisher p) {
+	public ZWaveEventListener(MotionContactSensorPublisher p) {
 		mspublisher = p;
 	}
 	

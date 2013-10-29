@@ -51,7 +51,7 @@ public class PowerPublisher {
 	}
 	
 	public void publishPowerConsumption(String name, int value){
-		DimmerSensor ds = new DimmerSensor(NAMESPACE+name);
+		DimmerSensor ds = new DimmerSensor(NAMESPACE+name);		
 		ds.setValue(value);
 		System.out.print("Publishing Power Values for "+NAMESPACE+name+" = "+ds.getValue()+"\n");
 		LogUtils.logTrace(mc, getClass(), "publishPowerConsumption", "Publishing Power Values for "+NAMESPACE+name+" = "+ds.getValue());
