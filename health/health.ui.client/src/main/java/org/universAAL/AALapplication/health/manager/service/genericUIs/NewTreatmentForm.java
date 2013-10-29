@@ -65,12 +65,8 @@ public class NewTreatmentForm extends AbstractHealthForm{
 		super(context, inputUser, targetUser);
 	}
 
-	protected static final String NAME_LABEL = "Name";
-	protected static final String DESCR_LABEL = "Description";
-	protected static final String NEW_LABEL = "Add";
-	protected static final String BACK_LABEL = "Back";
-	protected static final String NEW_CMD = "addNewTreatment";
-	protected static final String BACK_CMD = "goBack";
+	protected static final String NEW_CMD = "addNewTreatment"; 
+	protected static final String BACK_CMD = "goBack"; 
 
 
 
@@ -103,37 +99,38 @@ public class NewTreatmentForm extends AbstractHealthForm{
 	}
 	
 	public void show(Treatment t){
-		Form f = getGenericTreatmentForm(t);
-		new Submit(f.getSubmits(), new Label(NEW_LABEL, null), NEW_CMD);
-		new Submit(f.getSubmits(), new Label(BACK_LABEL, null), BACK_CMD);
+		Form f = getGenericTreatmentForm(t, this);
+		new Submit(f.getSubmits(), new Label(getString("generic.newTreatmentadd"), null), NEW_CMD); 
+		new Submit(f.getSubmits(), new Label(getString("generic.newTreatmentback"), null), BACK_CMD); 
 		sendForm(f);
 	}
 	
-	public static Form getGenericTreatmentForm(Treatment t){
-		Form f = Form.newDialog("New Treatment", t);
+	public static Form getGenericTreatmentForm(Treatment t, AbstractHealthForm ahf){
+	    //TODO internationalized icons
+		Form f = Form.newDialog(ahf.getString("generic.newTreatmenttitle"), t); 
 		f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
 		
 		InputField nf = new InputField(f.getIOControls(), 
-				new Label(NAME_LABEL, null),
+				new Label(ahf.getString("generic.newTreatmentname"), null), 
 				new PropertyPath(null, false, new String[]{Treatment.PROP_NAME}),
 				null,
-				"");
-		nf.setAlertString("Name must be a valid Aphanumeric Value");
-		nf.setHelpString("set a distinctive name for this treatment");
-		nf.setHintString("take weight measurement");
+				""); 
+		nf.setAlertString(ahf.getString("generic.newTreatmentname.alert")); 
+		nf.setHelpString(ahf.getString("generic.newTreatmentname.help")); 
+		nf.setHintString(ahf.getString("generic.newTreatmentbane.hint")); 
 		
 		TextArea df = new TextArea(f.getIOControls(), 
-				new Label(DESCR_LABEL, null),
+				new Label(ahf.getString("generic.newTreatmentdescription"), null), 
 				new PropertyPath(null, false, new String[]{Treatment.PROP_DESCRIPTION}),
 				null,
-				"");
-		df.setAlertString("Description must be a valid Aphanumeric Value");
-		df.setHelpString("set a description for this treatment");
-		df.setHintString("every day, in the morning climb on the scale and tell the system your weight.");
+				""); 
+		df.setAlertString(ahf.getString("generic.newTreatmentdescription.alert")); 
+		df.setHelpString(ahf.getString("generic.newTreatmentdescription.help")); 
+		df.setHintString(ahf.getString("generic.newTreatmentdescription.hint")); 
 		
 		//TODO conditional Treatment planning
 		//TODO add complex planning subdialogtrigger + subdialog
-		Group simplePlanning = new Group(f.getIOControls(), new Label("Treatment Planning", null), null, null, null);
+		Group simplePlanning = new Group(f.getIOControls(), new Label(ahf.getString("generic.newTreatmentgroup"), null), null, null, null); 
 		
 		GregorianCalendar c = new GregorianCalendar();
 		c.setTime(new Date());
@@ -149,13 +146,13 @@ public class NewTreatmentForm extends AbstractHealthForm{
 			t.setTreatmentPlanning(new TreatmentPlanning(date2, date2));
 		}
 		
-		InputField start = new InputField(simplePlanning, new Label("Start", null), 
+		InputField start = new InputField(simplePlanning, new Label(ahf.getString("generic.newTreatmentstart"), null),  
 				new PropertyPath(null, false,  new String[]{
 			Treatment.PROP_HAS_TREATMENT_PLANNING,
 			TreatmentPlanning.PROP_START_DATE
 		}), null, date2);
 		
-		InputField end = new InputField(simplePlanning, new Label("End", null), 
+		InputField end = new InputField(simplePlanning, new Label(ahf.getString("generic.newTreatmentend"), null),  
 				new PropertyPath(null, false,  new String[]{
 			Treatment.PROP_HAS_TREATMENT_PLANNING,
 			TreatmentPlanning.PROP_END_DATE

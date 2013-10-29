@@ -62,17 +62,17 @@ public class NewBloodPressureMeasurementTreatmentForm extends NewTreatmentForm{
 	
 	public void show(TakeMeasurementActivity t){
 		Form f = getMeasurementActivityForm(t);
-		new Submit(f.getSubmits(), new Label(NEW_LABEL, null), NEW_CMD);
-		new Submit(f.getSubmits(), new Label(BACK_LABEL, null), BACK_CMD);
+		new Submit(f.getSubmits(), new Label(getString("generic.newTreatmentadd"), null), NEW_CMD);  
+		new Submit(f.getSubmits(), new Label(getString("generic.newTreatmentback"), null), BACK_CMD);  
 		sendForm(f);
 	}
 	
-	static Form getMeasurementActivityForm(TakeMeasurementActivity t){
-		Form f = NewTreatmentForm.getGenericTreatmentForm(t);
+	Form getMeasurementActivityForm(TakeMeasurementActivity t){
+		Form f = NewTreatmentForm.getGenericTreatmentForm(t, this);
 		
 		//TODO conditional limits group.
 		
-		Group limits = new Group(f.getIOControls(), new Label("Measurement Requierements", null), null, null, null);
+		Group limits = new Group(f.getIOControls(), new Label(getString("blood.newTreatment.requierements"), null), null, null, null); 
 		
 		
 		MeasurementRequirements mr = t.getMeasurementRequirements();
@@ -89,7 +89,7 @@ public class NewBloodPressureMeasurementTreatmentForm extends NewTreatmentForm{
 			mr.setMinValueAllowed(new BloodPressure());
 		}
 		
-		InputField minSysVal = new InputField(limits, new Label("Min Systolic Value", null), 
+		InputField minSysVal = new InputField(limits, new Label(getString("blood.newTreatment.min.systolic"), null),  
 				new PropertyPath(null, false, new String[] {
 					TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 					MeasurementRequirements.PROP_MIN_VALUE_ALLOWED,
@@ -98,7 +98,7 @@ public class NewBloodPressureMeasurementTreatmentForm extends NewTreatmentForm{
 				}), null, null);
 		//XXX add hints helps and alerts
 		
-		InputField minDiaVal = new InputField(limits, new Label("Min Diastolic Value", null), 
+		InputField minDiaVal = new InputField(limits, new Label(getString("blood.newTreatment.min.diastolic"), null),  
 			new PropertyPath(null, false, new String[] {
 				TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 				MeasurementRequirements.PROP_MIN_VALUE_ALLOWED,
@@ -107,7 +107,7 @@ public class NewBloodPressureMeasurementTreatmentForm extends NewTreatmentForm{
 			}), null, null);
 		//XXX add hints helps and alerts
 
-		InputField maxSysVal = new InputField(limits, new Label("Max Systolic Value", null), 
+		InputField maxSysVal = new InputField(limits, new Label(getString("blood.newTreatment.max.systolic"), null),  
 			new PropertyPath(null, false, new String[] {
 				TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 				MeasurementRequirements.PROP_MAX_VALUE_ALLOWED,
@@ -116,7 +116,7 @@ public class NewBloodPressureMeasurementTreatmentForm extends NewTreatmentForm{
 			}), null, null);
 		//XXX add hints helps and alerts
 
-		InputField maxDiaVal = new InputField(limits, new Label("Max Diastolic Value", null), 
+		InputField maxDiaVal = new InputField(limits, new Label(getString("blood.newTreatment.max.diastolic"), null),  
 			new PropertyPath(null, false, new String[] {
 				TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 				MeasurementRequirements.PROP_MAX_VALUE_ALLOWED,

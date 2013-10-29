@@ -24,7 +24,7 @@ public final class NotReady extends AbstractHealthForm {
 		super(ahf);
 	}
 
-	private static final String GO_HOME = "goHome";
+	private static final String GO_HOME = "goHome"; 
 
 	@Override
 	public void handleUIResponse(UIResponse arg0) {
@@ -32,13 +32,17 @@ public final class NotReady extends AbstractHealthForm {
 	}
 	
 	public void show(){
-		LogUtils.logDebug(owner, getClass(), "show", "SHOWING: NOT READY");
+		LogUtils.logDebug(owner, getClass(), "show", "SHOWING: NOT READY"); 
 		
-		Form f = Form.newDialog("Functionality not available", new Resource());
+		Form f = Form.newDialog(getString("notReady.title"), new Resource()); 
 		
 		new SimpleOutput(f.getIOControls(), null, null,
-				"Sorry this functionality is not yet ready. Press \"Back\" to got to Main menu");
-		new Submit(f.getSubmits(), new Label("Back", null), GO_HOME);
+				getString("notReady.text")); 
+		
+		new Submit(f.getSubmits(), 
+			new Label(getString("back.toMainMenu"), 
+				getString("back.toMainMenu.icon")),
+				GO_HOME); 
 		
 		sendForm(f);
 	}

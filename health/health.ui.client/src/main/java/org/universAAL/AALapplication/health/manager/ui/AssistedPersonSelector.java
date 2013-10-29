@@ -47,11 +47,11 @@ public class AssistedPersonSelector extends AbstractHealthForm {
     /**
      * 
      */
-    private static final String NAMESPACE = "http://lst.tfo.upm.es/Heatlh.owl#";
-    private static final String USRS = NAMESPACE + "userList";
-    private static final String SELECTED = NAMESPACE + "selected";
-    private static final String SELECT_CMD = NAMESPACE + "select";
-    private static final String BACK_CMD = NAMESPACE + "back";
+    private static final String NAMESPACE = "http://lst.tfo.upm.es/Heatlh.owl#"; 
+    private static final String USRS = NAMESPACE + "userList"; 
+    private static final String SELECTED = NAMESPACE + "selected"; 
+    private static final String SELECT_CMD = NAMESPACE + "select"; 
+    private static final String BACK_CMD = NAMESPACE + "back"; 
     
     /**
      * @param context
@@ -87,16 +87,16 @@ public class AssistedPersonSelector extends AbstractHealthForm {
 	Resource r = new Resource();
 	List l = listAssistedPersons();
 	r.changeProperty(USRS, l);
-	Form f = Form.newDialog("Select Assisted Person", new Resource());
+	Form f = Form.newDialog(getString("apSelector.title"), new Resource()); 
 	
-	Select1 s = new Select1(f.getIOControls(), new Label("Assisted Person", null), 
+	Select1 s = new Select1(f.getIOControls(), new Label(getString("apSelector.select"), null),  
 		new PropertyPath(null, false, new String[]{SELECTED}),
 		null, null);
 	//TODO use display names instead of URIs.
 	s.generateChoices(l.toArray());
 	
-	new Submit(f.getSubmits(), new Label("Select",null),  SELECT_CMD);
-	new Submit(f.getSubmits(), new Label("Back", null),  BACK_CMD);
+	new Submit(f.getSubmits(), new Label(getString("apSelector.ok"),getString("apSelector.ok.icon")),  SELECT_CMD); 
+	new Submit(f.getSubmits(), new Label(getString("apSelector.cancel"), getString("apSelector.cancel.icon")),  BACK_CMD); 
 	sendForm(f);
     }
     

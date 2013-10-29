@@ -62,17 +62,17 @@ public class NewWeightMeasurementTreatmentForm extends NewTreatmentForm{
 	
 	public void show(TakeMeasurementActivity t){
 		Form f = getMeasurementActivityForm(t);
-		new Submit(f.getSubmits(), new Label(NEW_LABEL, null), NEW_CMD);
-		new Submit(f.getSubmits(), new Label(BACK_LABEL, null), BACK_CMD);
+		new Submit(f.getSubmits(), new Label(getString("generic.newTreatmentadd"), null), NEW_CMD); 
+		new Submit(f.getSubmits(), new Label(getString("generic.newTreatmentback"), null), BACK_CMD); 
 		sendForm(f);
 	}
 	
-	static Form getMeasurementActivityForm(TakeMeasurementActivity t){
-		Form f = NewTreatmentForm.getGenericTreatmentForm(t);
+	Form getMeasurementActivityForm(TakeMeasurementActivity t){
+		Form f = NewTreatmentForm.getGenericTreatmentForm(t, this);
 		
 		//TODO conditional limits group.
 		
-		Group limits = new Group(f.getIOControls(), new Label("Measurement Requierements", null), null, null, null);
+		Group limits = new Group(f.getIOControls(), new Label(getString("weight.newTreatment.requirements"), null), null, null, null);
 		
 		
 		MeasurementRequirements mr = t.getMeasurementRequirements();
@@ -90,7 +90,7 @@ public class NewWeightMeasurementTreatmentForm extends NewTreatmentForm{
 			mr.setMinValueAllowed(new PersonWeight());
 		}
 		
-		InputField minVal = new InputField(limits, new Label("Min HR Value", null), 
+		InputField minVal = new InputField(limits, new Label(getString("weight.newTreatment.min"), null), 
 				new PropertyPath(null, false, new String[] {
 					TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 					MeasurementRequirements.PROP_MIN_VALUE_ALLOWED,
@@ -99,7 +99,7 @@ public class NewWeightMeasurementTreatmentForm extends NewTreatmentForm{
 		//XXX add hints helps and alerts
 		
 
-		InputField maxVal = new InputField(limits, new Label("Max HR Value", null), 
+		InputField maxVal = new InputField(limits, new Label(getString("weight.newTreatment.max"), null), 
 			new PropertyPath(null, false, new String[] {
 				TakeMeasurementActivity.PROP_HAS_MEASUREMENT_REQUIREMENTS,
 				MeasurementRequirements.PROP_MAX_VALUE_ALLOWED,
