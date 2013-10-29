@@ -138,11 +138,11 @@ public class NomhadGateway {
 		String body = new String(BODY);
 
 		if (server.contains(":")) {
-			header.replace("localhost:8443", server);
+			header = header.replace("localhost:8443", server);
 		} else {
 			LogUtils.logDebug(moduleContext, getClass(), "putMeasurement",
 					new String[] { "Replacing 'localhost' by " + server }, null);
-			header = header.replace("localhost", server);
+			header = header = header.replace("localhost", server);
 			LogUtils.logDebug(moduleContext, getClass(), "putMeasurement",
 					new String[] { "New header: " + header }, null);
 		}

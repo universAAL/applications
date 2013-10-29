@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.1</version>
+		<version>E.2</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 	<artifactId>ltba.pom</artifactId>
-	<version>E.1.1-SNAPSHOT</version>
+	<version>E.2.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>POM file for LTBA project</name>
 	<description>POM file for LTBA project</description>
