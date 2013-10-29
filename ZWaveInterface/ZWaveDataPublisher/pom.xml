@@ -10,7 +10,6 @@
   
   <artifactId>ZWaveDataPublisher</artifactId>
   <name></name>
-  <version>E.1</version>
   <description/>
 	<packaging>bundle</packaging>
 	<dependencies>
@@ -97,4 +96,5 @@
 			</releases>
 		</repository>
 	</repositories>
+	<version>E.1.0-SNAPSHOT</version>
 </project>

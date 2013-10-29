@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -23,15 +23,15 @@ import java.util.Timer;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.universAAL.AALapplication.ZWaveDataPublisher.Motion.MotionSensorPublisher;
-import org.universAAL.AALapplication.ZWaveDataPublisher.Motion.ZWaveEventListener;
+import org.universAAL.AALapplication.ZWaveDataPublisher.MotionContact.MotionContactSensorPublisher;
+import org.universAAL.AALapplication.ZWaveDataPublisher.MotionContact.ZWaveEventListener;
 import org.universAAL.AALapplication.ZWaveDataPublisher.PowerConsumption.PowerReader;
 import org.universAAL.middleware.container.ModuleContext;
 
 public class Activator implements BundleActivator {
 	public static BundleContext osgiContext = null;
 	public static ModuleContext context = null;
-	private MotionSensorPublisher motionPublisher = null;
+	private MotionContactSensorPublisher motionPublisher = null;
 	private BundleContext ctx;
 	private ZWaveEventListener manager;
 
@@ -47,7 +47,7 @@ public class Activator implements BundleActivator {
 		new Thread(){
 			public void run(){   
 				System.out.print("Running movement detector\n");
-				motionPublisher = new MotionSensorPublisher(ctx);
+				motionPublisher = new MotionContactSensorPublisher(ctx);
 				manager = new ZWaveEventListener(motionPublisher);
 				manager.init();
 			}			
