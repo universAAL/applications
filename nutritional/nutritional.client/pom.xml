@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>nutritional.pom</artifactId>
-		<version>E.1</version>
+		<version>E.2</version>
 		<relativePath>../nutritional.pom</relativePath>
 	</parent>
 
 	<artifactId>nutritional.client</artifactId>
-	<version>E.1</version>
+	<version>E.2</version>
 	<packaging>bundle</packaging>
 	<name>Nutritional Advisor Service</name>
 	<!-- changes name description of the service at pom file and updated versions 

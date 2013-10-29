@@ -40,7 +40,7 @@ public class Activator implements BundleActivator/*, ServiceListener */{
 //    private static ConfigurationDefinitionRegistry configReg;
 
     public void start(BundleContext context) throws Exception {
-	Utils.println("STARTING NUTRITIONAL UI");
+	
 //	osgiContext=context;
 	moduleContext = uAALBundleContainer.THE_CONTAINER
 		.registerModule(new Object[] { context });
@@ -63,8 +63,7 @@ public class Activator implements BundleActivator/*, ServiceListener */{
 		sr.start();
 	    }
 	}.start();
-
-	Utils.println("NUTRITIONAL UI STARTED");
+	Utils.println("************** Starting Nutritional Advisor Service **************");
     }
 
     public static ModuleContext getModuleContext() {
@@ -73,7 +72,7 @@ public class Activator implements BundleActivator/*, ServiceListener */{
 
     public void stop(BundleContext context) throws Exception {
 	sr.stop();
-	Utils.println("STOPPING NUTRITIONAL UI");
+	Utils.println("************** Stopping Nutritional Advisor Service **************");
     }
 
 //    public void serviceChanged(ServiceEvent event) {
