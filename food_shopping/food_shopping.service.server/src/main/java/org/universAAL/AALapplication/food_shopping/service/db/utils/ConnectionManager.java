@@ -21,7 +21,7 @@ public class ConnectionManager extends ClassLoader {
 
 	
 	public static synchronized Connection getConnection() throws SQLException {
-		com.mysql.jdbc.Driver d = new com.mysql.jdbc.Driver(); 
+		//com.mysql.jdbc.Driver d = new com.mysql.jdbc.Driver(); 
 		Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 		return con;
 	}
