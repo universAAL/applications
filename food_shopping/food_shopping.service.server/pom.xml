@@ -26,11 +26,13 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.shopping</artifactId>
 		</dependency>
+<!-- 
 		<dependency>
 			<groupId>org.universAAL.food.database</groupId>
 			<artifactId>mysql.connector.java</artifactId>
 			<version>5.1.18</version>
-		</dependency>	
+		</dependency>
+-->			
 		<dependency>
 			<groupId>org.universAAL.control.foodDevices.RFid</groupId>
 			<artifactId>control.foodDevices.MetratecReaderLibrary</artifactId>
