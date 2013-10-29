@@ -61,7 +61,7 @@ public class PresenceInKitchenController extends LTBAController implements
 					Calendar.getInstance().get(Calendar.MONTH),
 					Calendar.getInstance().get(Calendar.DAY_OF_MONTH), 12, 00,
 					userCode, userPassword, "PRESENCE_IN_KITCHEN",
-					"PRESENCE_IN_KITCHEN_STOP", new String("" + hour),
+					"PRESENCE_IN_KITCHEN_END", new String("" + hour),
 					DEVICE_ID);
 			start_measurement = -1;
 		}
