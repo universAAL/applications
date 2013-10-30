@@ -30,8 +30,8 @@ import java.util.List;
 public abstract class ScriptForm {
 
   protected String[] singleJavascriptObjects;
-  private final String functionCallText;
-  private final List<String> pairs = new LinkedList<String>();
+  protected final String functionCallText;
+  protected final List<String> pairs = new LinkedList<String>();
 
   public static final String ID = "id";
   public static final String NAME = "name";

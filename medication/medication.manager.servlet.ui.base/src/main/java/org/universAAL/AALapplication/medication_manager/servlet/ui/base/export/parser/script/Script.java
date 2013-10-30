@@ -21,15 +21,15 @@ package org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.
  */
 public final class Script {
 
-  private static final char NEW_LINE = '\n';
   private final String[] singleJavaScriptObjects;
   private final String functionCallText;
   private final String[] rowsJavaScriptObjects;
 
   public static final String SCRIPT_START = "<script type=\"text/javascript\">\n";
   public static final String SCRIPT_END = "\n</script>";
-  private static final String EMPTY = "";
-  private static final String NEW_LINE_WITH_TAB = "\n\t";
+  public static final String EMPTY = "";
+  public static final String NEW_LINE_WITH_TAB = "\n\t";
+  public static final char NEW_LINE = '\n';
 
   public Script(String[] singleJavaScriptObjects, String functionCallText, String[] rowsJavaScriptObjects) {
 
