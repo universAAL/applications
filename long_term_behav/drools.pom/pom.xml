@@ -22,7 +22,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<modules>
-		<module>../../ontologies/ont.drools</module>
+<!-- 		<module>../../ontologies/ont.drools</module> -->
 		<module>../drools.reasoner</module>
 	</modules>
 	<developers>
