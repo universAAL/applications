@@ -191,6 +191,9 @@ public final class PersonDao extends AbstractDao {
   }
 
   public void savePerson(Person person) {
+
+    Log.info("Trying to insert person: %s", getClass(), person);
+
     String sql = "insert into medication_manager.person " +
         "(id, name, person_uri, role, username, password, caregiver_sms) values (?, ?, ?, ?, ?, ?, ?)";
 
@@ -211,6 +214,7 @@ public final class PersonDao extends AbstractDao {
       setPossibleNullString(ps, gsmNumber, 7);
 
       ps.execute();
+      Log.info("Person was successfully inserted into the Person table", getClass());
     } catch (SQLException e) {
       throw new MedicationManagerPersistenceException(e);
     } finally {
@@ -224,6 +228,28 @@ public final class PersonDao extends AbstractDao {
       ps.setString(index, value);
     } else {
       ps.setNull(index, Types.VARCHAR);
+    }
+  }
+
+
+  public void updateRole(int id, Role role) {
+    Log.info("Setting Role from Role.UNASSIGNED to %s for the person with id : %s",
+        getClass(), role, id);
+
+    String sql = "update MEDICATION_MANAGER.PERSON set ROLE = ? where ID = ?";
+
+    PreparedStatement ps = null;
+
+    try {
+      ps = getPreparedStatement(sql);
+      ps.setString(1, role.getValue());
+      ps.setInt(2, id);
+
+      ps.execute();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
     }
   }
 }

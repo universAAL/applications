@@ -40,6 +40,7 @@ public final class Util {
       CAREGIVER_NOTIFIER_NAMESPACE + "receivedMessage";
   public static final String UNDERSCORE = "_";
 
+  public static final String PASS = "pass";
   private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
 
   private Util() {

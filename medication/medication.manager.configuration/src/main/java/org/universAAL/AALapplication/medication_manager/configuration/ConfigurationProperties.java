@@ -23,6 +23,8 @@ import java.util.Map;
  */
 public interface ConfigurationProperties {
 
+  final String MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE = "medication.manager.insert.dummy.users.into.che";
+
   int getMedicationReminderTimeout();
 
   int getMedicationUpsideDownTimeout();

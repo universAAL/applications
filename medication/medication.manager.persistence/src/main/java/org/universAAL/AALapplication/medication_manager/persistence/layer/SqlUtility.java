@@ -40,4 +40,6 @@ public interface SqlUtility {
   void resetMedicationManagerDB();
 
   void renameDefaultUserTo(String newName);
+
+  boolean checkIfMedicationDatabaseIsEmpty();
 }

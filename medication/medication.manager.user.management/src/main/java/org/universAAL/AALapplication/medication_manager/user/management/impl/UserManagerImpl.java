@@ -21,6 +21,10 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.Assist
 import org.universAAL.AALapplication.medication_manager.persistence.layer.CaregiverUserInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.UserInfo;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.Util;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.PersonDao;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Role;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.AALapplication.medication_manager.user.management.impl.insert.dummy.users.VCardPropertiesParser;
 import org.universAAL.middleware.container.ModuleContext;
@@ -59,23 +63,6 @@ public class UserManagerImpl implements UserManager {
   private static final String OUTPUT_GET_SUBPROFILE = MedicationOntology.NAMESPACE + "out3";
   private final PersistentService persistentService;
   private final ConfigurationProperties configurationProperties;
-
-  private final static String[] DUMMY_USERS_URI = {
-      "urn:org.universAAL.aal_space:user_env#asparuh",
-      "urn:org.universAAL.aal_space:user_env#bill",
-      "urn:org.universAAL.aal_space:user_env#george",
-      "urn:org.universAAL.aal_space:user_env#iren",
-      "urn:org.universAAL.aal_space:user_env#ivailo",
-      "urn:org.universAAL.aal_space:user_env#ivan",
-      "urn:org.universAAL.aal_space:user_env#john",
-      "urn:org.universAAL.aal_space:user_env#maria",
-      "urn:org.universAAL.aal_space:user_env#nik",
-      "urn:org.universAAL.aal_space:user_env#nikola",
-      "urn:org.universAAL.aal_space:user_env#pencho",
-      "urn:org.universAAL.aal_space:test_environment#saied",
-      "urn:org.universAAL.aal_space:user_env#simeon",
-      "urn:org.universAAL.aal_space:user_env#venelin"
-  };
   private final VCardPropertiesParser parser;
 
   public UserManagerImpl(ModuleContext context, PersistentService persistentService,
@@ -91,20 +78,31 @@ public class UserManagerImpl implements UserManager {
 
     for (String propertyFileName : getDummyUsersProperties(configurationProperties)) {
       PersonalInformationSubprofile subprofile = parser.createSubprofile(propertyFileName);
-      insertUserFromVCard(subprofile);
+      insertUserFromVCard(subprofile, false);
     }
 
   }
 
   public void insertUserFromVCard(File propertyFile) {
-    PersonalInformationSubprofile subprofile = parser.createSubprofile(propertyFile);
-    insertUserFromVCard(subprofile);
-  }
+    Log.info("Trying to insert new user to CHE", getClass());
 
-  private void insertUserFromVCard(PersonalInformationSubprofile subprofile) {
+    PersonalInformationSubprofile subprofile = parser.createSubprofile(propertyFile);
 
     Properties properties = parser.getProps();
     String userUri = properties.getProperty(USER_URI);
+    if (SAIED_URI.equalsIgnoreCase(userUri)) {
+      throw new MedicationManagerUserManagementException("This user is the default user and it is inserted " +
+          "in the CHE by UniversAAL platform");
+    }
+    insertUserFromVCard(subprofile, true);
+  }
+
+  private void insertUserFromVCard(PersonalInformationSubprofile subprofile, boolean insertIntoTheDatabase) {
+
+    Properties properties = parser.getProps();
+    String userUri = properties.getProperty(USER_URI);
+    Log.info("The user has the following uri: %s", getClass(), userUri);
+
     if (userUri == null) {
       throw new MedicationManagerUserManagementException("The " + USER_URI + " property is not set " +
           "to the PersonalInformationSubprofile instance");
@@ -117,10 +115,13 @@ public class UserManagerImpl implements UserManager {
     }
 
     User user;
+    Role role;
     if (ASSISTED_PERSON.equals(type)) {
       user = new AssistedPerson(userUri);
+      role = Role.PATIENT;
     } else if (CAREGIVER.equals(type)) {
       user = new Caregiver(userUri);
+      role = Role.UNASSIGNED;
     } else {
       throw new MedicationManagerUserManagementException("Unknown type : " + type);
     }
@@ -132,6 +133,26 @@ public class UserManagerImpl implements UserManager {
     addProfile(user, profile);
     addUserSubprofile(user, subprofile);
 
+    Log.info("Adding user to the CHE wa successful", getClass());
+
+    if (insertIntoTheDatabase && !SAIED_URI.equalsIgnoreCase(userUri)) {
+      addUserToMedicationDatabase(userUri, role);
+    }
+  }
+
+  private void addUserToMedicationDatabase(String userUri, Role role) {
+
+    Log.info("Trying to insert this user: %s to Medication Manager Database", getClass(), userUri);
+
+    int id = persistentService.generateId();
+
+    String password = Util.PASS;
+
+    Person person = new Person(id, parser.getName(), userUri, role, parser.getUsername(), password, parser.getSms());
+
+    PersonDao personDao = persistentService.getPersonDao();
+
+    personDao.savePerson(person);
   }
 
   public List<UserInfo> getAllUsers() {
@@ -167,22 +188,26 @@ public class UserManagerImpl implements UserManager {
     List out = getReturnValue(resp.getOutputs(), OUTPUT_GET_ALL_USERS);
     Log.info("Received List with users object (out) : %s", getClass(), out);
 
+    PersonDao personDao = persistentService.getPersonDao();
+
+    List<Person> allPersons = personDao.getAllPersons();
+
     for (int i = 0; i < out.size(); i++) {
-      UserInfo ur = getUserInfo(out, i);
+      UserInfo ur = getUserInfo(out, i, allPersons);
       if (ur != null) {
         users.add(ur);
       }
     }
   }
 
-  private UserInfo getUserInfo(List out, int i) {
+  private UserInfo getUserInfo(List out, int i, List<Person> allPersons) {
     Log.info("Creating UserInfo object from The User object", getClass());
     Object o = out.get(i);
     User ur = (User) o;
     String uri = ur.getURI();
     Log.info("User object uri is : %s", getClass(), uri);
 
-    if (skipUser(uri)) {
+    if (skipUser(uri, allPersons)) {
       return null;
     }
 
@@ -204,10 +229,10 @@ public class UserManagerImpl implements UserManager {
 
   }
 
-  private boolean skipUser(String uri) {
+  private boolean skipUser(String uri, List<Person> allPersons) {
 
-    for (String dummyUserUri : DUMMY_USERS_URI) {
-      if (dummyUserUri.equalsIgnoreCase(uri)) {
+    for (Person person : allPersons) {
+      if (uri.equalsIgnoreCase(person.getPersonUri())) {
         return false;
       }
     }

@@ -24,6 +24,8 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.entiti
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Medicine;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Treatment;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
+import org.universAAL.AALapplication.medication_manager.ui.impl.Activator;
 import org.universAAL.AALapplication.medication_manager.ui.impl.Log;
 import org.universAAL.AALapplication.medication_manager.ui.impl.MedicationManagerUIException;
 import org.universAAL.middleware.container.ModuleContext;
@@ -44,6 +46,7 @@ import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.medMgr.CaregiverNotifier;
 import org.universAAL.ontology.medMgr.CaregiverNotifierData;
+import org.universAAL.ontology.medMgr.MedicinesInfo;
 import org.universAAL.ontology.medMgr.Time;
 import org.universAAL.ontology.profile.User;
 
@@ -70,11 +73,13 @@ public class ReminderDialog extends UICaller {
   private User currentUser; //TODO to be removed (hack for saied user)
   private boolean userActed;
   private DueIntakeTimer dueIntakeTimer;
+  private MedicinesInfo medicinesInfo;
 
   private static final String TAKEN_BUTTON = "takenButton";
   private static final String MISSED_BUTTON = "missedButton";
   private static final String INFO_BUTTON = "reminderButton";
   private static final String REQUEST_NEW_DOSE_BUTTON = "requestNewDoseButton";
+  public static final String PILL = "pill";
 
   public ReminderDialog(ModuleContext context, Time time, Person patient, List<Intake> intakes,
                         PersistentService persistentService, IntakeDao intakeDao, MedicineInventoryDao medicineInventoryDao) {
@@ -155,7 +160,7 @@ public class ReminderDialog extends UICaller {
   }
 
   private void handleInfoButton(User user) {
-    showRequestMedicationInfoDialog(user);
+    showMedicationInfoDialog(user);
     if (!dueIntakeTimer.isTimeoutExpired()) {
       takenIntakeDatabaseRecords();
       dueIntakeTimer.cancel();
@@ -290,14 +295,14 @@ public class ReminderDialog extends UICaller {
     return sb.toString();
   }
 
-  private void showRequestMedicationInfoDialog(User user) {
+  private void showMedicationInfoDialog(User user) {
 
     if (time == null) {
       throw new MedicationManagerUIException("There are fields in the ReminderDialog class which are null");
     }
 
-    RequestMedicationInfoDialog dialog = new RequestMedicationInfoDialog(moduleContext, time);
-    dialog.showDialog(user);
+    MedicationInfoDialog medicationInfoDialog = new MedicationInfoDialog(moduleContext, time, getMedicinesInfo());
+    medicationInfoDialog.showDialog(user);
 
   }
 
@@ -310,13 +315,13 @@ public class ReminderDialog extends UICaller {
       //TODO to be removed (hack for saied user)
       currentUser = inputUser;
 
+      createMedicineInfo(inputUser);
+
       Form f = Form.newDialog(getMessage("medication.manager.ui.title"), new Resource());
 
       //start of the form model
 
-      String timeText = getTimeText(time);
-      String name = getName(persistentService, inputUser);
-      String reminderMessage = getMessage("medication.manager.ui.reminder.message", name, timeText);
+      String reminderMessage = getReminderMessage(inputUser);
 
       new SimpleOutput(f.getIOControls(), null, null, reminderMessage);
       //...
@@ -332,6 +337,16 @@ public class ReminderDialog extends UICaller {
     } catch (Exception e) {
       Log.error(e, "Error while trying to show dialog", getClass());
     }
+  }
+
+  private String getReminderMessage(User inputUser) {
+    String timeText = getTimeText(time);
+    String name = getName(persistentService, inputUser);
+    String titleMessage = getMessage("medication.manager.ui.reminder.message", name, timeText);
+
+
+
+    return titleMessage + "\n" + medicinesInfo.getGeneralInfo();
   }
 
   private String getTimeText(Time t) {
@@ -357,5 +372,91 @@ public class ReminderDialog extends UICaller {
   public void setDueIntakeTimer(DueIntakeTimer dueIntakeTimer) {
     this.dueIntakeTimer = dueIntakeTimer;
   }
+
+  private void createMedicineInfo(User inputUser) {
+      PersistentService persistentService = getPersistentService();
+
+      IntakeDao intakeDao = persistentService.getIntakeDao();
+
+      List<Intake> intakes = intakeDao.getIntakesByUserAndTime(inputUser, time);
+
+      this.medicinesInfo = createMedicineInfoFromIntakes(intakes);
+    }
+
+    public MedicinesInfo getMedicinesInfo() {
+      if (medicinesInfo == null) {
+        throw new MedicationManagerUIException("The MedicineInfo field is not set");
+      }
+      return medicinesInfo;
+    }
+
+    public MedicinesInfo createMedicineInfoFromIntakes(List<Intake> intakes) {
+      String generalInfo = getGeneralInfo(intakes);
+      String detailsInfo = getDetailsInfo(intakes);
+
+      return new MedicinesInfo(generalInfo, detailsInfo, time);
+    }
+
+    private String getGeneralInfo(List<Intake> intakes) {
+      StringBuilder sb = new StringBuilder();
+
+      sb.append("\t\t\t");
+      String dailyTextFormat = time.getDailyTextFormat();
+      String title = getMessage("medication.manager.ui.intake.info.for.title", dailyTextFormat);
+      sb.append(title);
+
+      sb.append("\n");
+      appendQuantityAndUnits(sb, intakes);
+
+      return sb.toString();
+    }
+
+    private void appendQuantityAndUnits(StringBuilder sb, List<Intake> intakes) {
+      int count = 0;
+      for (Intake in : intakes) {
+        sb.append('\n');
+        count++;
+        Treatment treatment = in.getTreatment();
+        String medicineName = treatment.getMedicine().getMedicineName();
+        UnitClass unitClass = in.getUnitClass();
+        String type = unitClass.getType();
+        if (PILL.equalsIgnoreCase(type)) {
+          type = type + 'S';
+
+        }
+        type = type.toUpperCase();
+        String rowMessage = getMessage("medication.manager.ui.intake.info.for.row",
+            count, medicineName, in.getQuantity(), type);
+        sb.append(rowMessage);
+      }
+
+
+      sb.append('\n');
+    }
+
+    private String getDetailsInfo(List<Intake> intakes) {
+      StringBuilder sb = new StringBuilder();
+
+      sb.append("\n\t\t\t");
+      sb.append(Activator.getMessage("medication.manager.ui.medication.info"));
+      sb.append("\n\t\t\t");
+
+
+      int count = 0;
+      for (Intake in : intakes) {
+        sb.append('\n');
+        count++;
+        sb.append(count);
+        sb.append(". ");
+        Treatment treatment = in.getTreatment();
+        Medicine medicine = treatment.getMedicine();
+        sb.append(medicine.getMedicineName());
+        sb.append('\n');
+        sb.append(medicine.getMedicineInfo());
+      }
+
+      return sb.toString();
+    }
+
 
 }

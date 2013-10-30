@@ -16,11 +16,12 @@
 
 package org.universAAL.AALapplication.medication_manager.persistence.layer;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.Activator;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -34,8 +35,8 @@ public final class Week {
   private final Timestamp now;
   private final Timestamp end;
 
-  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("d.M.yyyy");
-  private static final SimpleDateFormat SIMPLE_DATE_FORMAT_FULL = new SimpleDateFormat("d.M.yyyy HH:mm");
+  private static final DateFormat DATE_FORMATTER = DateFormat.getDateInstance(DateFormat.DEFAULT);
+  private static final DateFormat DATE_FULL_FORMATTER = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT);
 
   private Week(Timestamp begin, Timestamp end, Timestamp now) {
 
@@ -61,35 +62,22 @@ public final class Week {
 
   @Override
   public String toString() {
-    return getFormatedTextWeek(this);
+    return getFormattedTextWeek(this);
   }
 
-  public static String getFormatedTextWeek(Week week) {
+  public static String getFormattedTextWeek(Week week) {
     Date startDate = week.getBegin();
     Date endDate = week.getEnd();
 
 
-    StringBuffer sb = new StringBuffer();
-    sb.append("Start date: Monday ");
-    String startDayText = SIMPLE_DATE_FORMAT.format(startDate);
-    sb.append(startDayText);
-
-    sb.append("; End date: Sunday ");
-    String endDayText = SIMPLE_DATE_FORMAT.format(endDate);
-    sb.append(endDayText);
-
-    sb.append("; Current time: ");
-
+    String startDayText = DATE_FORMATTER.format(startDate);
+    String endDayText = DATE_FORMATTER.format(endDate);
     String dayOfWeek = getCurrentDayOfWeek();
-
-    sb.append(dayOfWeek);
-    sb.append(' ');
-
     Date now = new Date();
 
-    sb.append(SIMPLE_DATE_FORMAT_FULL.format(now));
+    String currentDataFull = DATE_FULL_FORMATTER.format(now);
 
-    return sb.toString();
+    return Activator.getMessage("medication.manager.week.title", startDate, endDate, dayOfWeek, currentDataFull);
 
 
   }

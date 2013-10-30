@@ -36,7 +36,7 @@ public final class Util {
   public static final String USER_URI = "userUri";
   public static final String VCARD_VERSION = "vCardVersion";
   public static final String LAST_REVISION = "lastRevision";
-  public static final String NICKNAME = "nicname";
+  public static final String NICKNAME = "nickname";
   public static final String DISPLAY_NAME = "displayName";
   public static final String UCI_LABEL = "uciLable";
   public static final String UCI_ADDITIONAL_DATA = "uciAdditionalData";

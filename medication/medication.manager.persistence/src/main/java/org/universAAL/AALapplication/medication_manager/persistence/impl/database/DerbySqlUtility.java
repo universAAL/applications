@@ -236,6 +236,15 @@ public final class DerbySqlUtility implements SqlUtility {
     }
   }
 
+  public boolean checkIfMedicationDatabaseIsEmpty() {
+    try {
+      Set<String> tableNames = getDBTables(connection);
+      return tableNames.isEmpty();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
+  }
+
   private void printTable(String tableName) throws SQLException {
     Statement statement =
         connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);

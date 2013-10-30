@@ -23,6 +23,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
+import org.universAAL.AALapplication.medication_manager.configuration.Message;
+import org.universAAL.AALapplication.medication_manager.configuration.MessageCreator;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.Database;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.database.DerbyDatabase;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
@@ -46,6 +48,8 @@ public class Activator implements BundleActivator {
   public static ModuleContext mc;
   public static BundleContext bundleContext;
   private static ServiceTracker tracker;
+  private static ServiceTracker messageServiceTracker;
+  private static Message message;
 
   public void start(final BundleContext context) throws Exception {
     //this method call is used to help maven bnd plugin to generate corrrect import-package statements
@@ -59,8 +63,12 @@ public class Activator implements BundleActivator {
       mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[]{context});
 
       tracker = new ServiceTracker(context, ConfigurationProperties.class.getName(), null);
+      messageServiceTracker = new ServiceTracker(context, MessageCreator.class.getName(), null);
 
       tracker.open();
+      messageServiceTracker.open();
+
+      message = getMessage();
 
       connection = getConnection();
       ServiceReference sr = allServiceReferences[0];
@@ -143,5 +151,23 @@ public class Activator implements BundleActivator {
     }
 
     return service;
+  }
+
+  private static Message getMessage() {
+    if (messageServiceTracker == null) {
+      throw new MedicationManagerPersistenceException("The MessageServiceTracker is not set");
+    }
+    MessageCreator service = (MessageCreator) messageServiceTracker.getService();
+    if (service == null) {
+      throw new MedicationManagerPersistenceException("The MessageCreator is missing");
+    }
+
+
+    return service.createMessage(Activator.class.getClassLoader(), "medication-persistence");
+
+  }
+
+  public static String getMessage(String key, Object... objects) {
+    return message.getMessage(key, objects);
   }
 }
