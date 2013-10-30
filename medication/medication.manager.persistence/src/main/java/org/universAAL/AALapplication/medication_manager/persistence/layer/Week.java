@@ -24,7 +24,6 @@ import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * @author George Fournadjiev
@@ -77,14 +76,14 @@ public final class Week {
 
     String currentDataFull = DATE_FULL_FORMATTER.format(now);
 
-    return Activator.getMessage("medication.manager.week.title", startDate, endDate, dayOfWeek, currentDataFull);
+    return Activator.getMessage("medication.manager.week.title", startDayText, endDayText, dayOfWeek, currentDataFull);
 
 
   }
 
   private static String getCurrentDayOfWeek() {
 
-    DateFormatSymbols dfs = new DateFormatSymbols(Locale.ENGLISH);
+    DateFormatSymbols dfs = DateFormatSymbols.getInstance();
     String weekdays[] = dfs.getWeekdays();
 
     Calendar cal = Calendar.getInstance();
