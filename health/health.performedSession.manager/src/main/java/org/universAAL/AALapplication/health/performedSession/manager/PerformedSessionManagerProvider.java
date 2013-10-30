@@ -93,14 +93,14 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 		if(userInput == null)
 		    return null;
 
-		if(operation.startsWith(ProvidedPerformedSessionManagementService.MY_URI)) {
+		if(operation.startsWith(ProvidedPerformedSessionManagementService.SERVICE_LIST)) {
 			Object treatmentInput = call.getInputValue(ProvidedPerformedSessionManagementService.INPUT_TREATMENT);
 			if(treatmentInput == null)
 				return null;
 			return getAllPerformedsessions(userInput, (Treatment) treatmentInput);
 		}
 		
-		if(operation.startsWith(ProvidedPerformedSessionManagementService.MY_URI)) {
+		if(operation.startsWith(ProvidedPerformedSessionManagementService.SERVICE_LIST_BT)) {
 		Object timestampFromInput = call
 			.getInputValue(ProvidedPerformedSessionManagementService.INPUT_TIMESTAMP_FROM);
 
@@ -122,7 +122,7 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
 
 		
 
-		if(operation.startsWith(ProvidedPerformedSessionManagementService.MY_URI)) {
+		if(operation.startsWith(ProvidedPerformedSessionManagementService.SERVICE_NEW)) {
 			Object performedSessionInput = call
 					.getInputValue(ProvidedPerformedSessionManagementService.INPUT_PERFORMED_SESSION);
 			if (performedSessionInput != null)
