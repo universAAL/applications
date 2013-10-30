@@ -40,6 +40,7 @@ public class WeigthMeasurement extends AbstractHealthForm{
 			sr.addAddEffect(new String[]{PerformedSessionManagementService.PROP_MANAGES_SESSION}, measurement);
 			sr.addValueFilter(new String[]{PerformedSessionManagementService.PROP_ASSISTED_USER}, targetUser);
 			sc.call(sr);
+			new Motivation(this).show();
 			new MainMenu(this).show();
 		}
 		if (input.getSubmissionID().startsWith(CANCEL_CMD)){
