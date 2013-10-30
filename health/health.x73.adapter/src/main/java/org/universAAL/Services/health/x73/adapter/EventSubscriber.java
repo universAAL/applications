@@ -134,29 +134,34 @@ public class EventSubscriber extends ContextSubscriber {
 	}
 	
 	//TODO find the user
-	User u = findUser();
+	AssistedPerson u = findUser();
 	
-	for (HealthMeasurement hm : lhm) {
-	    PerformedMeasurementSession ps = new PerformedMeasurementSession();
-	    GregorianCalendar c = new GregorianCalendar();
-	    c.setTime(new Date(event.getTimestamp()));
-	    XMLGregorianCalendar date2 = null;
-	    ps.setSessionEndTime(date2);
-	    ps.setHealthMeasurement(hm);
-	    //CallService
-	    ServiceRequest sr = new ServiceRequest(
-		    new PerformedSessionManagementService(), null);
-	    sr.addAddEffect(
-		    new String[] { PerformedSessionManagementService.PROP_MANAGES_SESSION },
-		    ps);
-	    sr.addValueFilter(
-		    new String[] { PerformedSessionManagementService.PROP_ASSISTED_USER },
-		    u);
-	    new DefaultServiceCaller(owner).call(sr);
+	if (u != null) {
+	    for (HealthMeasurement hm : lhm) {
+		PerformedMeasurementSession ps = new PerformedMeasurementSession();
+		GregorianCalendar c = new GregorianCalendar();
+		c.setTime(new Date(event.getTimestamp()));
+		XMLGregorianCalendar date2 = null;
+		ps.setSessionEndTime(date2);
+		ps.setHealthMeasurement(hm);
+		//CallService
+		ServiceRequest sr = new ServiceRequest(
+			new PerformedSessionManagementService(), null);
+		sr.addAddEffect(
+			new String[] { PerformedSessionManagementService.PROP_MANAGES_SESSION },
+			ps);
+		sr.addValueFilter(
+			new String[] { PerformedSessionManagementService.PROP_ASSISTED_USER },
+			u);
+		new DefaultServiceCaller(owner).call(sr);
+	    }
+	    if (lhm.size() > 0 ){
+		new AcknowledgeMessage(owner).show(u);
+	    }
 	}
     }
     
-    private User findUser(){
+    private AssistedPerson findUser(){
 	ServiceRequest sr = new ServiceRequest(new ProfilingService(null), null);
 	ProcessOutput output0 = new ProcessOutput(null);
 	output0.setParameterType(User.MY_URI);
