@@ -20,14 +20,8 @@ import org.universAAL.ontology.measurement.Measurement;
 
 public class WeigthMeasurement extends AbstractHealthForm{
 
-	//TODO: internationalization!
-		
-		static final LevelRating PRIORITY = LevelRating.low;
-		static final PrivacyLevel PRIVACY = PrivacyLevel.insensible;
-		private static final String DONE_ICON = null;
-		private static final String DONE_LABEL = "Done";
-		private static final String CANCEL_LABEL = "Cancel";
-		private static final String CANCEL_ICON = null;
+		private static final String DONE_CMD = "done"; 
+		private static final String CANCEL_CMD = "Cancel"; 
 		private PersonWeight measurement;
 		
 	
@@ -39,7 +33,7 @@ public class WeigthMeasurement extends AbstractHealthForm{
 	@Override
 	public void handleUIResponse(UIResponse input) {
 		measurement = (PersonWeight) input.getSubmittedData();
-		if (input.getSubmissionID().startsWith(DONE_LABEL)){
+		if (input.getSubmissionID().startsWith(DONE_CMD)){
 			// service call add Performed Session.
 			ServiceCaller sc = new DefaultServiceCaller(owner);
 			ServiceRequest sr = new ServiceRequest(new PerformedSessionManagementService(null), inputUser);
@@ -48,7 +42,7 @@ public class WeigthMeasurement extends AbstractHealthForm{
 			sc.call(sr);
 			new MainMenu(this).show();
 		}
-		if (input.getSubmissionID().startsWith(CANCEL_LABEL)){
+		if (input.getSubmissionID().startsWith(CANCEL_CMD)){
 			//Back
 			new MeasurementTypeForm(this).show();
 		}
@@ -56,18 +50,18 @@ public class WeigthMeasurement extends AbstractHealthForm{
 	
 	public void show() {
 		// Create Dialog
-		Form f = Form.newDialog("Weight", measurement);
+		Form f = Form.newDialog(getString("weigthMeasurement.title"), measurement); 
 		//TODO: add units from actual prefix and unit.
-		InputField i = new InputField(f.getIOControls(), new Label("Weight ", null),
+		InputField i = new InputField(f.getIOControls(), new Label(getString("weigthMeasurement.input"), null), 
 				new PropertyPath(null, false, new String[]{Measurement.PROP_VALUE}),null, Float.valueOf(64.5f));
-		i.setHelpString("Insert Your Weight in Kg.");
-		i.setHintString("64.5");
+		i.setHelpString(getString("weigthMeasurement.input.help")); 
+		i.setHintString(getString("weigthMeasurement.input.hint")); 
 		new Submit(f.getSubmits(), 
-				new Label(DONE_LABEL, DONE_ICON),
-				DONE_LABEL);
+				new Label(getString("weigthMeasurement.done"), getString("weigthMeasurement.done.icon")),  
+				DONE_CMD);
 		new Submit(f.getSubmits(), 
-				new Label(CANCEL_LABEL, CANCEL_ICON),
-				CANCEL_LABEL);
+				new Label(getString("weigthMeasurement.cancel"), getString("weigthMeasurement.cancel.icon")),  
+				CANCEL_CMD);
 
 		sendForm(f);
 	}
