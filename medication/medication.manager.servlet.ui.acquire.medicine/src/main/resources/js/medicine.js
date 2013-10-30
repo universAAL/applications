@@ -1,7 +1,17 @@
-﻿var medicines = [],
-        spinnerQuantity;
+﻿var medicines = [], available_medicines = [],
+    spinnerQuantity;
 $(function () {
-    var selectSelector = 'select[name="medicine"]';
+    var t = $("table");
+    if (available_medicines && available_medicines.length > 0) {
+        $.each(available_medicines, function (i, m) {
+            var tr = "<tr><td>" + m.name + "</td><td>" + m.qty + "</td><td>" + m.unit + "</td></tr>";
+            t.append(tr);
+        });
+    } else{
+        var tr="<td colspan='3'>No available medicines.</td>";
+        t.append(tr);
+    }
+        var selectSelector = 'select[name="medicine"]';
     var $optionTempl = $(selectSelector + '>option:first');
     var select = $(selectSelector);
     select.empty().change(function () {
@@ -16,8 +26,8 @@ $(function () {
     }
     select.change();
 
-    spinnerQuantity = $('[name="quantity"]').val("1").spinner({min: 1,
-        change: function (event, ui) {
+    spinnerQuantity = $('[name="quantity"]').val("1").spinner({min:1,
+        change:function (event, ui) {
             var el = $('[name="quantity"]');
             if (el.hasClass("error") && spinnerQuantity.spinner("value") > 0) {
                 el.removeClass("error");

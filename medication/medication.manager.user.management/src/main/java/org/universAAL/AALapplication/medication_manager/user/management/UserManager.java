@@ -26,6 +26,8 @@ import java.util.List;
  */
 public interface UserManager {
 
+  String SAIED_URI = "urn:org.universAAL.aal_space:test_environment#saied";
+
   void loadDummyUsersIntoChe(); //temporary method
 
   List<UserInfo> getAllUsers();

@@ -20,7 +20,10 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties;
+import org.universAAL.AALapplication.medication_manager.configuration.Pair;
+import org.universAAL.AALapplication.medication_manager.configuration.PropertyInfo;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.PersistentService;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.MedicationPropertiesDao;
 import org.universAAL.AALapplication.medication_manager.user.management.UserManager;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
@@ -34,6 +37,7 @@ import java.util.TimerTask;
 public final class Activator implements BundleActivator {
 
 
+  public static final String FALSE = "FALSE";
   public static ModuleContext mc;
   public static BundleContext bundleContext;
   static ServiceTracker configurationPropertiesServiceTracker;
@@ -61,11 +65,11 @@ public final class Activator implements BundleActivator {
     context.registerService(UserManager.class.getName(), userManager, null);
 
 
-    insertDummyUsers(userManager);
+    insertDummyUsers(userManager, persistentService);
 
   }
 
-  private void insertDummyUsers(final UserManager userManager) {
+  private void insertDummyUsers(final UserManager userManager, final PersistentService persistentService) {
     Timer timer = new Timer();
 
     timer.schedule(new TimerTask() {
@@ -78,9 +82,25 @@ public final class Activator implements BundleActivator {
         if (insertDummyUsersIntoChe) {
           Log.info("Inserting dummy users into CHE ", getClass());
           userManager.loadDummyUsersIntoChe();
+          setInsertDummyUsersPropertyToFalse(persistentService);
         }
       }
     }, 7 * 1000);
+  }
+
+  private void setInsertDummyUsersPropertyToFalse(PersistentService persistentService) {
+    Log.info("Setting medication.manager.insert.dummy.users.into.che property to false ", getClass());
+    MedicationPropertiesDao medicationPropertiesDao = persistentService.getMedicationPropertiesDao();
+
+    PropertyInfo propertyInfo = medicationPropertiesDao.getProperty(ConfigurationProperties.MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE);
+
+    Pair<Integer, String> pair = new Pair<Integer, String>(propertyInfo.getId(), FALSE);
+    medicationPropertiesDao.updatePropertyValue(pair);
+
+    medicationPropertiesDao.setSystemPropertiesLoadedFromDatabase();
+
+    Log.info("medication.manager.insert.dummy.users.into.che property has been set to false ", getClass());
+
   }
 
   public void stop(BundleContext context) throws Exception {

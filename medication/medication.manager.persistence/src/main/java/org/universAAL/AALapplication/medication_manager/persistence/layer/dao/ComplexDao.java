@@ -116,11 +116,15 @@ public final class ComplexDao extends AbstractDao {
     if (!doctor.isPresentInDatabase()) {
       saveInPersonTable(doctor, Role.PHYSICIAN);
       doctor.setPresentInDatabase(true);
+    } else {
+      setRole(doctor, Role.PHYSICIAN);
     }
 
     if (!caregiver.isPresentInDatabase()) {
       saveInPersonTable(caregiver, Role.CAREGIVER);
       caregiver.setPresentInDatabase(true);
+    } else {
+      setRole(caregiver, Role.CAREGIVER);
     }
 
     if (dispenserId > 0) {
@@ -132,6 +136,13 @@ public final class ComplexDao extends AbstractDao {
 
     updatePatientLinks(patient, doctor, caregiver);
 
+  }
+
+  private void setRole(CaregiverUserInfo caregiverUserInfo, Role role) {
+    Person person = personDao.findPersonByPersonUri(caregiverUserInfo.getUri());
+    int id = person.getId();
+
+    personDao.updateRole(id, role);
   }
 
   private void updatePatientLinks(AssistedPersonUserInfo patient,

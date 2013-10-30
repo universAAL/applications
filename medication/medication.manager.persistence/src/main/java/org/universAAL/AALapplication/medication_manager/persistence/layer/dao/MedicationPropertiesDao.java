@@ -90,6 +90,12 @@ public final class MedicationPropertiesDao extends AbstractDao {
 
   private void addProperty(Map<String, Column> columns, Set<PropertyInfo> propertyInfos) {
 
+    PropertyInfo info = getPropertyInfo(columns);
+
+    propertyInfos.add(info);
+  }
+
+  private PropertyInfo getPropertyInfo(Map<String, Column> columns) {
     Column col = columns.get(ID);
     int id = (Integer) col.getValue();
 
@@ -110,9 +116,7 @@ public final class MedicationPropertiesDao extends AbstractDao {
     col = columns.get(DESCRIPTION);
     String description = (String) col.getValue();
 
-    PropertyInfo info = new PropertyInfo(id, name, value, formatEnum, typeEnum, description);
-
-    propertyInfos.add(info);
+    return new PropertyInfo(id, name, value, formatEnum, typeEnum, description);
   }
 
   private void addProperty(Map<String, Column> columns, Map<String, String> properties) {
@@ -164,13 +168,13 @@ public final class MedicationPropertiesDao extends AbstractDao {
 
   public void updatePropertiesValues(Set<Pair<Integer, String>> propertyValues) {
     for (Pair<Integer, String> pair : propertyValues) {
-      updatePropertyValues(pair);
+      updatePropertyValue(pair);
     }
 
     setSystemPropertiesLoadedFromDatabase();
   }
 
-  private void updatePropertyValues(Pair<Integer, String> pair) {
+  public void updatePropertyValue(Pair<Integer, String> pair) {
     String sql = "UPDATE MEDICATION_MANAGER.PROPERTIES SET VALUE = ? WHERE ID = ?";
 
     PreparedStatement ps = null;
@@ -186,5 +190,28 @@ public final class MedicationPropertiesDao extends AbstractDao {
     } finally {
       closeStatement(ps);
     }
+  }
+
+  public PropertyInfo getProperty(String name) {
+    Log.info("Loading property with name: %s", getClass(), name);
+
+    PreparedStatement ps = null;
+    try {
+      String sql = "select * from MEDICATION_MANAGER.PROPERTIES WHERE NAME = ?";
+
+      ps = getPreparedStatement(sql);
+
+      ps.setString(1, name);
+
+      Map<String, Column> propertyColumnsStrings = executeQueryExpectedSingleRecord(TABLE_NAME, ps);
+
+      return getPropertyInfo(propertyColumnsStrings);
+
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    } finally {
+      closeStatement(ps);
+    }
+
   }
 }

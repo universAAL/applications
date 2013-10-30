@@ -39,7 +39,7 @@ import static org.universAAL.ontology.profile.PersonalInformationSubprofile.*;
 public final class VCardPropertiesParser {
 
 
-  private final Properties props = new Properties();
+  private Properties props = new Properties();
 
   public PersonalInformationSubprofile createSubprofile(String propertyFileName) {
     loadProperties(propertyFileName);
@@ -67,6 +67,7 @@ public final class VCardPropertiesParser {
     try {
       InputStream inputStream =
           VCardPropertiesParser.class.getClassLoader().getResourceAsStream(propertyFileName);
+      props = new Properties();
       props.load(inputStream);
       inputStream.close();
     } catch (IOException e) {
@@ -77,6 +78,7 @@ public final class VCardPropertiesParser {
   private void loadProperties(File propertyFile) {
     try {
       InputStream inputStream = new FileInputStream(propertyFile);
+      props = new Properties();
       props.load(inputStream);
       inputStream.close();
     } catch (IOException e) {
@@ -204,6 +206,18 @@ public final class VCardPropertiesParser {
       personalInformationSubprofile.setProperty(propNameDestination, value);
     }
 
+  }
+
+  public String getName() {
+    return props.getProperty(FN);
+  }
+
+  public String getSms() {
+    return props.getProperty(UCI_ADDITIONAL_DATA);
+  }
+
+  public String getUsername() {
+    return props.getProperty(NICKNAME);
   }
 
 

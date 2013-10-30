@@ -1,2 +1,8 @@
-form input, form select, form button { display: block; margin: 40px auto;}
-form select { width: 100%; }
+table.t1{width: 100%;margin-top: 0 !important;}
+form .button { display: block; margin-top: 20px;}
+form .choose *{float: left;}
+form .choose input{margin-left:10px;}
+.ui-spinner{margin-left:10px}
+form .choose select{width: 60%;}
+label{display: block; margin-bottom: 5px;}
+fieldset{padding: 15px 30px;}

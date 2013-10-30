@@ -26,7 +26,8 @@ public enum Role {
   PATIENT("PATIENT"),
   CAREGIVER("CAREGIVER"),
   ADMIN("ADMIN"),
-  PHYSICIAN("PHYSICIAN");
+  PHYSICIAN("PHYSICIAN"),
+  UNASSIGNED("UNASSIGNED");
 
   private String role;
 

@@ -17,6 +17,7 @@
 package org.universAAL.AALapplication.medication_manager.persistence.layer;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.impl.Activator.*;
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
 
 /**
  * @author George Fournadjiev
@@ -27,8 +28,6 @@ public final class CaregiverUserInfo extends UserInfo {
   private final String username;
   private final String password;
   private final String gsmNumber;
-
-  public static final String PASS = "pass";
 
   public CaregiverUserInfo(int id, String uri, String name, String username, String gsmNumber) {
     super(id, uri, name);

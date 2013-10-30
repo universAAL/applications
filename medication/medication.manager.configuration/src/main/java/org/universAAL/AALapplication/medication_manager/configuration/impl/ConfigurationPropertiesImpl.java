@@ -46,7 +46,6 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   private static final String MEDICATION_MANAGER_ISSUER_INTERVAL_MINUTES = "medication.manager.issuer.interval.minutes";
   private static final String HTTP_SESSION_EXPIRE_TIMEOUT_IN_MINUTES = "medication.manager.http.session.expire.timeout.in.minutes";
   private static final String LOAD_PRESCRIPTIONSDTOS = "medication.manager.load.prescriptionsdtos";
-  private static final String MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE = "medication.manager.insert.dummy.users.into.che";
   private static final String HTTP_SESSION_TIMER_CHECKER_INTERVAL_IN_MINUTES =
       "medication.manager.http.session.timer.checker.interval.in.minutes";
   private final Map<String, PropertyInfo> propertyInfoMap;
