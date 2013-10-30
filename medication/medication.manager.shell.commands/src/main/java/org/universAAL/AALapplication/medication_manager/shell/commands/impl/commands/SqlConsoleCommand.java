@@ -43,11 +43,13 @@ public final class SqlConsoleCommand extends ConsoleCommand {
   private static final String EXECUTE = "execute";
   private static final String RESET = "reset";
   private static final String ALL_TABLES = "allTables";
+  private static final String TABLES_NAMES = "tablesNames";
   private static final String SQL = "sql";
 
   public static final String COMMAND_INFO =
       "The sql command expects the following two parameters pairs, which are:" +
           "\n\t \n\t - " + PRINT + " " + ALL_TABLES + " (will print all tables records sorted by table)" +
+          "\n\t \n\t - " + PRINT + " " + TABLES_NAMES + " (will print all tables names)" +
           "\n\t \n\t - " + PRINT + " tableName" + " (will print all the records for a particular table)" +
           "\n\t \n\t - " + FILE + " fileName" + " (will execute sql statements from file)" +
           "\n\t \n\t - " + EXECUTE + " sqlStatement (will execute any sql statement)" +
@@ -110,6 +112,8 @@ public final class SqlConsoleCommand extends ConsoleCommand {
 
     if (PRINT.equalsIgnoreCase(firstParam) && ALL_TABLES.equalsIgnoreCase(secondParam)) {
       sqlUtility.printTablesData();
+    } else if (PRINT.equalsIgnoreCase(firstParam) && TABLES_NAMES.equalsIgnoreCase(secondParam)) {
+      sqlUtility.printTablesNames();
     } else if (PRINT.equalsIgnoreCase(firstParam)) {
       sqlUtility.printTableData(secondParam);
     } else if (FILE.equalsIgnoreCase(firstParam)) {

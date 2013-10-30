@@ -42,4 +42,6 @@ public interface SqlUtility {
   void renameDefaultUserTo(String newName);
 
   boolean checkIfMedicationDatabaseIsEmpty();
+
+  void printTablesNames();
 }
