@@ -245,6 +245,33 @@ public final class DerbySqlUtility implements SqlUtility {
     }
   }
 
+  public void printTablesNames() {
+
+    Log.info("Printing the medication manager table names", getClass());
+
+    try {
+      printNames();
+    } catch (SQLException e) {
+      throw new MedicationManagerPersistenceException(e);
+    }
+
+
+  }
+
+  private void printNames() throws SQLException {
+    Set<String> tablesNamesSet = getDBTables(connection);
+
+    System.out.println("\n***************** Printing tables names *****************");
+
+    int count = 1;
+    for (String tb : tablesNamesSet) {
+      System.out.println(count + ". " + tb);
+      count++;
+    }
+
+    System.out.println("\n***************** End of printing tables names  *****************");
+  }
+
   private void printTable(String tableName) throws SQLException {
     Statement statement =
         connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
