@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>new_services.pom</artifactId>
-		<version>E.1</version>
+		<version>E.2</version>
 		<relativePath>../../new_services.pom/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>agenda.pom</artifactId>
-	<version>E.1</version>
+	<version>E.2</version>
 	<packaging>pom</packaging>
 
 	<name>Agenda AAL Service Parent POM</name>
@@ -34,15 +34,15 @@
 		<uaal.parent.version>2.0.2-SNAPSHOT</uaal.parent.version>
 	</properties>
 
-	<modules>
-		<module>../agenda.remote</module>
-		<module>../agenda.server</module>
-		<module>../agenda.client</module>
-		<module>../agenda.eventSelection.server</module>
-		<module>../agenda.eventSelection.client</module>
-		<module>../agenda.gui</module>
-		<module>composite</module>
-	</modules>
+<!--	<modules>-->
+<!--		<module>../agenda.remote</module>-->
+<!--		<module>../agenda.server</module>-->
+<!--		<module>../agenda.client</module>-->
+<!--		<module>../agenda.eventSelection.server</module>-->
+<!--		<module>../agenda.eventSelection.client</module>-->
+<!--		<module>../agenda.gui</module>-->
+<!--		<module>composite</module>-->
+<!--	</modules>-->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
