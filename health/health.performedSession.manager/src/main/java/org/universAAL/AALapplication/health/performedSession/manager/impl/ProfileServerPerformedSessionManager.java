@@ -274,7 +274,7 @@ public class ProfileServerPerformedSessionManager
 				 */
 				boolean tsiFitsPerfomedSessions = false;
 				for (int j = 0; j < sessions.length; j++) {
-					tsiFitsPerfomedSessions |= PerformedSession.checkCompatibility(sessions[i].getClassURI(), session.getClassURI());
+					tsiFitsPerfomedSessions |= PerformedSession.checkCompatibility(sessions[j].getClassURI(), session.getClassURI());
 				}
 				if (tsiFitsPerfomedSessions){
 					tsiCalification += 1;
