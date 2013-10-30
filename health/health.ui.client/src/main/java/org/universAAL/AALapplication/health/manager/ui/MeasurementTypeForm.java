@@ -72,6 +72,7 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 		for (String type : typesOfMeasurement) {
 			HealthMeasurement m = (HealthMeasurement) OntologyManagement
 					.getInstance().getResource(type, Resource.generateAnonURI());
+			m.setObtainedBy(inputUser);
 			String name = m.getOrConstructLabel(null);
 			s.addChoiceItem(new ChoiceItem(name, null, m));
 		}
@@ -97,7 +98,7 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 		if (cmd.equalsIgnoreCase(OK_CMD)){
 			HealthMeasurement hm = (HealthMeasurement) arg0.getUserInput(new String[]{SELECTED_TREATMENT});
 			// TODO: create a service in ont.health and call the service accordingly
-			LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling Treatment of type:" + hm.getClassURI()); //$NON-NLS-1$ //$NON-NLS-2$
+			LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling Treatment of type:" + hm.getClassURI()); 
 			if (hm instanceof PersonWeight){
 				new WeigthMeasurement(this, (PersonWeight) hm).show();
 			}

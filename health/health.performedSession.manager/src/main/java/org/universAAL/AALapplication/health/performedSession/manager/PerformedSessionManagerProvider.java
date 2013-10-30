@@ -31,6 +31,7 @@ import org.universAAL.middleware.service.ServiceCall;
 import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
+import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.health.owl.PerformedSession;
 import org.universAAL.ontology.health.owl.Treatment;
 import org.universAAL.ontology.health.owl.services.PerformedSessionManagementService;
@@ -59,17 +60,13 @@ public class PerformedSessionManagerProvider extends ServiceCallee {
      * Constructor.
      * 
      * @param context
+     * @param profiles
      */
-	public PerformedSessionManagerProvider(ModuleContext context) {
-		
-		// as a service providing component, we have to extend ServiceCallee
-    	// this in turn requires that we introduce which services we would like
-    	// to provide to the universAAL-based AAL Space
-		super(context, ProvidedPerformedSessionManagementService.profiles);
-		// the actual implementation of the performed session manager
-		performedSessionManager = new ProfileServerPerformedSessionManager(context);
-		
-	}
+    public PerformedSessionManagerProvider(ModuleContext context,
+	    ServiceProfile[] profiles) {
+	super(context, profiles);
+	performedSessionManager = new ProfileServerPerformedSessionManager(context);
+    }
 
 	public void communicationChannelBroken() {
 		// TODO Auto-generated method stub
