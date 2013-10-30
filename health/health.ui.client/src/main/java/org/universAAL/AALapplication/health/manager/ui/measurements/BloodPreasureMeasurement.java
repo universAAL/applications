@@ -42,6 +42,7 @@ public class BloodPreasureMeasurement extends AbstractHealthForm {
 		    new String[] { PerformedSessionManagementService.PROP_ASSISTED_USER },
 		    targetUser);
 	    sc.call(sr);
+	    new Motivation(this).show();
 	    new MainMenu(this).show();
 	}
 	if (input.getSubmissionID().startsWith(CANCEL_CMD)) {

@@ -102,7 +102,6 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 				new WeigthMeasurement(this, (PersonWeight) hm).show();
 			}
 			else if (hm instanceof BloodPressure){
-				new Motivation(this).show();
 				new BloodPreasureMeasurement(this, (BloodPressure) hm).show();
 			}
 			else if (hm instanceof HeartRate){
