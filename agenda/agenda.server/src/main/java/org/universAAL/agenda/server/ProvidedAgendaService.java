@@ -33,7 +33,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	    + "AgendaService";
 
     // define the uri for each service provided
-    private static final int PROVIDED_SERVICES = 19; // The number of services
+    private static final int PROVIDED_SERVICES = 18; // The number of services
     // provided by this class
     static final String SERVICE_GET_CALENDARS = AGENDA_SERVER_NAMESPACE
 	    + "getControlledCalendars1";
@@ -279,7 +279,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 		.getThePath());
 	profiles[1].addInput(inCalendar);
 
-	// unnecessary
+	// unnecessary. profiles[2] is now the old 18. Notice if uncommented
 	/********************************************************************
 	 * service 3: boolean changeCalendarOwner(Calendar c, User newOwner)*
 	 ********************************************************************/
@@ -534,7 +534,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 
 	getCalendarOwnerName.addOutput(OUTPUT_CALENDAR_OWNER_NAME, TypeMapper
 		.getDatatypeURI(String.class), 1, 1, ppCalendar.getThePath());
-	profiles[18] = getCalendarOwnerName.myProfile; // initialize the service
+	profiles[2] = getCalendarOwnerName.myProfile; // initialize the service
 	// profile
     }
 
