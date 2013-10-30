@@ -29,6 +29,7 @@
 	<feature name="health.ui" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
 		<feature>uAAL-Ont.Recommendation</feature>
+		<feature>uAAL-UI.Internationalization</feature>
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/${health.ui.client.version}</bundle>
 	</feature>
 	

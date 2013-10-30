@@ -4,13 +4,11 @@ import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.AALapplication.health.manager.ui.MainMenu;
 import org.universAAL.AALapplication.health.manager.ui.MeasurementTypeForm;
 import org.universAAL.middleware.container.utils.LogUtils;
-import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.rdf.PropertyPath;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.ui.UIResponse;
-import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
@@ -40,7 +38,7 @@ public class WeigthMeasurement extends AbstractHealthForm{
 		if (input.getSubmissionID().startsWith(DONE_CMD)){
 			// service call add Performed Session.
 		    LogUtils.logDebug(owner, getClass(), "handleResponse", "Calling session.manager");
-		    System.out.println("here");
+
 			ServiceCaller sc = new DefaultServiceCaller(owner);
 			ServiceRequest sr = new ServiceRequest(new PerformedSessionManagementService(null), inputUser);
 			sr.addAddEffect(new String[]{PerformedSessionManagementService.PROP_MANAGES_SESSION}, ps);

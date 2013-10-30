@@ -233,7 +233,7 @@ public class ProfileServerPerformedSessionManager
 			PerformedSession[] sessions = test.getPerformedSessions();
 			if (test.addPerformedSession(session)){
 				//it was semantically allowed.
-				int tsiCalification = 0;
+				int tsiCalification = 1;
 				/*
 				 * Check the Requirements are of the same type,
 				 * for Measurement Activitues.
@@ -241,11 +241,18 @@ public class ProfileServerPerformedSessionManager
 				if (test instanceof TakeMeasurementActivity
 					&& session instanceof PerformedMeasurementSession){
 				    TakeMeasurementActivity tma = (TakeMeasurementActivity)test;
-				    HealthMeasurement m = tma.getMeasurementRequirements().getMaxValueAllowed();
-				    HealthMeasurement sm = ((PerformedMeasurementSession) session).getHealthMeasurement();
-				    if (Measurement.checkMembership(m.getClassURI(), sm)){
-					// they are of the same type
-					tsiCalification += 4;
+				    
+				    if (tma.getMeasurementRequirements() != null) {
+					HealthMeasurement m = tma
+						.getMeasurementRequirements()
+						.getMaxValueAllowed();
+					HealthMeasurement sm = ((PerformedMeasurementSession) session)
+						.getHealthMeasurement();
+					if (Measurement.checkMembership(
+						m.getClassURI(), sm)) {
+					    // they are of the same type
+					    tsiCalification += 4;
+					}
 				    }
 				}
 				/*
@@ -279,7 +286,8 @@ public class ProfileServerPerformedSessionManager
 					selectedCalification = tsiCalification;
 				} else if (tsiCalification >= selectedCalification){
 					// check if ts[i] is more specific than selected
-					if (ManagedIndividual.checkCompatibility(selected.getClassURI(),ts[i].getClassURI())){
+					if (ts[i] != null
+						&& ManagedIndividual.checkCompatibility(selected.getClassURI(),ts[i].getClassURI())){
 						//selected is a super class of ts[i] or is the same class
 						// set Selected
 						selected = ts[i];
