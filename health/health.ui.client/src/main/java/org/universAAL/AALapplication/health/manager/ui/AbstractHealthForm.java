@@ -61,7 +61,7 @@ public abstract class AbstractHealthForm extends UICaller {
 	public void dialogAborted(String arg0) {}
 
 	protected void sendForm(Form f){
-	    Locale loc = messageHelper.getSelectedMessageLocale();
+	    Locale loc = getLocaleHelper().getSelectedMessageLocale();
 	    if (loc == null)
 		loc = Locale.ENGLISH;
 		sendUIRequest(
@@ -99,16 +99,20 @@ public abstract class AbstractHealthForm extends UICaller {
 		return null;
 	}
 
-	public String getString(String key){
+	protected MessageLocaleHelper getLocaleHelper(){
 	    if (messageHelper == null){
 		List<URL> urlList = new ArrayList<URL>();
-		urlList.add(getClass().getClassLoader().getResource("message.properties"));
+		urlList.add(getClass().getClassLoader().getResource("messages.properties"));
 		try {
 		    messageHelper = new MessageLocaleHelper(owner, inputUser, urlList);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
 	    }
-	    return messageHelper.getString(key);
+	    return messageHelper;
+	}
+	
+	public String getString(String key){
+	    return getLocaleHelper().getString(key);
 	}
 }
