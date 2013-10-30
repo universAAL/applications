@@ -49,16 +49,19 @@ public class HeartRateMeasurement extends AbstractHealthForm{
 		// Create Dialog
 		Form f = Form.newDialog(getString("heartRateMeasurement.title"), measurement); 
 
-		//TODO: add units from actual prefix and unit.
-		InputField i=new InputField(f.getIOControls(), new Label(getString("heartRateMeasurement.hr") , null), 
+		String[] subs = new String[]{"bpm"}; //TODO: add units from actual prefix and unit.
+		
+		InputField i=new InputField(f.getIOControls(), 
+			new Label(getLocaleHelper().getString("heartRateMeasurement.hr",subs) , 
+				null), 
 				new PropertyPath(null, false, new String[]{Measurement.PROP_VALUE}),null, Integer.valueOf(90));
 		i.setHelpString(getString("heartRateMeasurement.hr.help")); 
 		i.setHintString(getString("heartRateMeasurement.hr.hint")); 
 		new Submit(f.getSubmits(), 
-				new Label(getString("heartRateMeasurement.done"), getString("heartRateMeasurement.done.icon")),  //$NON-NLS-2$
+				new Label(getString("heartRateMeasurement.done"), getString("heartRateMeasurement.done.icon")), 
 				DONE_CMD);
 		new Submit(f.getSubmits(), 
-				new Label(getString("heartRateMeasurement.cancel"), getString("heartRateMeasurement.cancel.icon")),  //$NON-NLS-2$
+				new Label(getString("heartRateMeasurement.cancel"), getString("heartRateMeasurement.cancel.icon")), 
 				CANCEL_CMD);
 		
 		sendForm(f);

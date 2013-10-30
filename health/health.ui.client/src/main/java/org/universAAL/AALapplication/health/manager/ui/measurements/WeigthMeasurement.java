@@ -51,8 +51,11 @@ public class WeigthMeasurement extends AbstractHealthForm{
 	public void show() {
 		// Create Dialog
 		Form f = Form.newDialog(getString("weigthMeasurement.title"), measurement); 
-		//TODO: add units from actual prefix and unit.
-		InputField i = new InputField(f.getIOControls(), new Label(getString("weigthMeasurement.input"), null), 
+		
+		String[] subs = new String[]{"Kg"}; //TODO: add units from actual prefix and unit.
+		
+		InputField i = new InputField(f.getIOControls(), 
+			new Label(getLocaleHelper().getString("weigthMeasurement.input",subs), null), 
 				new PropertyPath(null, false, new String[]{Measurement.PROP_VALUE}),null, Float.valueOf(64.5f));
 		i.setHelpString(getString("weigthMeasurement.input.help")); 
 		i.setHintString(getString("weigthMeasurement.input.hint")); 

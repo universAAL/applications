@@ -58,15 +58,20 @@ public class BloodPreasureMeasurement extends AbstractHealthForm {
 	// Create Dialog
 	Form f = Form.newDialog(getString("bloodPressureMeasurement.title"), measurement); 
 
+	String[] subs = new String[]{"mmHg"}; //TODO find the units.
+	
 	InputField s = new InputField(f.getIOControls(), new Label(
-		getString("bloodPressureMeasurement.systolic"), null), new PropertyPath(null, 
+		getLocaleHelper().getString("bloodPressureMeasurement.systolic",subs), null),
+		new PropertyPath(null, 
 		false, new String[] { BloodPressure.PROP_SYSTOLIC,
 			Measurement.PROP_VALUE }), null, Integer.valueOf(100));
 	s.setHelpString(getString("bloodPressureMeasurement.systolic.help")); 
 	s.setHintString(getString("bloodPressureMeasurement.systolic.hint")); 
 
+	
 	InputField d = new InputField(f.getIOControls(), new Label(
-		getString("bloodPressureMeasurement.diastolic"), null), new PropertyPath(null, 
+		getLocaleHelper().getString("bloodPressureMeasurement.diastolic",subs),
+		null), new PropertyPath(null, 
 		false, new String[] { BloodPressure.PROP_DIASTOLIC,
 			Measurement.PROP_VALUE }), null, Integer.valueOf(70));
 	d.setHelpString(getString("bloodPressureMeasurement.diastolic.help")); 
