@@ -25,8 +25,10 @@ package org.universAAL.AALapplication.health.performedSession.manager.osgi;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.health.performedSession.manager.PerformedSessionManagerProvider;
+import org.universAAL.AALapplication.health.performedSession.manager.ProvidedPerformedSessionManagementService;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 
 /**
  * @author amedrano
@@ -34,16 +36,21 @@ import org.universAAL.middleware.container.osgi.uAALBundleContainer;
  */
 public class Activator implements BundleActivator {
 
-	public static ModuleContext context = null;
+	ModuleContext context = null;
 	private PerformedSessionManagerProvider provider = null;
 	
 	/* (non-Javadoc)
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
-	public void start(BundleContext context) throws Exception {
-		Activator.context=uAALBundleContainer.THE_CONTAINER
-				.registerModule(new BundleContext[] { context });
-		provider = new PerformedSessionManagerProvider(Activator.context);
+	public void start(BundleContext bcontext) throws Exception {
+		context=uAALBundleContainer.THE_CONTAINER
+				.registerModule(new BundleContext[] { bcontext });
+		
+		LogUtils.logDebug(context, getClass(), "strat", "initialising");
+		
+		ProvidedPerformedSessionManagementService.initialize(context);
+		provider = new PerformedSessionManagerProvider(context,
+			ProvidedPerformedSessionManagementService.profiles);
 	}
 
 	/* (non-Javadoc)

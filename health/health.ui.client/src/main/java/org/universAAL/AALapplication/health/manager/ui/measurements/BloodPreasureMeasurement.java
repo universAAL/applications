@@ -1,5 +1,10 @@
 package org.universAAL.AALapplication.health.manager.ui.measurements;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.AALapplication.health.manager.ui.MainMenu;
 import org.universAAL.AALapplication.health.manager.ui.MeasurementTypeForm;
@@ -12,8 +17,11 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.health.owl.PerformedMeasurementSession;
+import org.universAAL.ontology.health.owl.PerformedSession;
 import org.universAAL.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universAAL.ontology.healthmeasurement.owl.BloodPressure;
+import org.universAAL.ontology.healthmeasurement.owl.HealthMeasurement;
 import org.universAAL.ontology.measurement.Measurement;
 
 public class BloodPreasureMeasurement extends AbstractHealthForm {
@@ -30,6 +38,8 @@ public class BloodPreasureMeasurement extends AbstractHealthForm {
 
     public void handleUIResponse(UIResponse input) {
 	measurement = (BloodPressure) input.getSubmittedData();
+	PerformedSession ps = BloodPreasureMeasurement.getPerformedSession(measurement);
+	
 	if (input.getSubmissionID().startsWith(DONE_CMD)) {
 	    // service call add Performed Session.
 	    ServiceCaller sc = new DefaultServiceCaller(owner);
@@ -37,7 +47,7 @@ public class BloodPreasureMeasurement extends AbstractHealthForm {
 		    new PerformedSessionManagementService(null), inputUser);
 	    sr.addAddEffect(
 		    new String[] { PerformedSessionManagementService.PROP_MANAGES_SESSION },
-		    measurement);
+		    ps);
 	    sr.addValueFilter(
 		    new String[] { PerformedSessionManagementService.PROP_ASSISTED_USER },
 		    targetUser);
@@ -59,6 +69,14 @@ public class BloodPreasureMeasurement extends AbstractHealthForm {
 	// Create Dialog
 	Form f = Form.newDialog(getString("bloodPressureMeasurement.title"), measurement); 
 
+	
+	if (measurement.getSyst()== null){
+	    measurement.setSyst(new Measurement());
+	}
+	if(measurement.getDias() == null){
+	    measurement.setDias(new Measurement());
+	}
+	
 	String[] subs = new String[]{"mmHg"}; //TODO find the units.
 	
 	InputField s = new InputField(f.getIOControls(), new Label(
@@ -98,4 +116,14 @@ public class BloodPreasureMeasurement extends AbstractHealthForm {
     // sendForm(f);
     // }
 
+    static public PerformedMeasurementSession getPerformedSession(HealthMeasurement hm){
+	PerformedMeasurementSession ps = new PerformedMeasurementSession();
+	GregorianCalendar c = new GregorianCalendar();
+	c.setTime(new Date());
+	XMLGregorianCalendar date2 = null;
+	ps.setSessionEndTime(date2);
+	ps.setHealthMeasurement(hm);
+	return ps;
+    }
+    
 }

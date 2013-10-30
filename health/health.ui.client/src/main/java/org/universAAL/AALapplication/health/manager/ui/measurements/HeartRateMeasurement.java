@@ -12,9 +12,14 @@ import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
+import org.universAAL.ontology.health.owl.PerformedSession;
 import org.universAAL.ontology.health.owl.services.PerformedSessionManagementService;
 import org.universAAL.ontology.healthmeasurement.owl.HeartRate;
 import org.universAAL.ontology.measurement.Measurement;
+import org.universAAL.ontology.unit.DividedUnit;
+import org.universAAL.ontology.unit.Unit;
+import org.universAAL.ontology.unit.system.TimeSystem;
+import org.universAAL.ontology.unit.system.Util;
 
 public class HeartRateMeasurement extends AbstractHealthForm{
 
@@ -30,11 +35,17 @@ public class HeartRateMeasurement extends AbstractHealthForm{
 	@Override
 	public void handleUIResponse(UIResponse input) {
 		measurement = (HeartRate) input.getSubmittedData();
+		if (measurement.getProperty(Measurement.PROP_HAS_UNIT) == null){
+			Unit beatsPerMinute = new DividedUnit("BPM", Util.IND_UNIT_UNITY,
+		    		TimeSystem.IND_UNIT_TS_MINUTE);
+			measurement.setProperty(Measurement.PROP_HAS_UNIT, beatsPerMinute);
+		}
+		PerformedSession ps = BloodPreasureMeasurement.getPerformedSession(measurement);
 		if (input.getSubmissionID().startsWith(DONE_CMD)){
 			// service call add Performed Session.
 			ServiceCaller sc = new DefaultServiceCaller(owner);
 			ServiceRequest sr = new ServiceRequest(new PerformedSessionManagementService(null), inputUser);
-			sr.addAddEffect(new String[]{PerformedSessionManagementService.PROP_MANAGES_SESSION}, measurement);
+			sr.addAddEffect(new String[]{PerformedSessionManagementService.PROP_MANAGES_SESSION}, ps);
 			sr.addValueFilter(new String[]{PerformedSessionManagementService.PROP_ASSISTED_USER}, targetUser);
 			sc.call(sr);
 			new Motivation(this).show();
