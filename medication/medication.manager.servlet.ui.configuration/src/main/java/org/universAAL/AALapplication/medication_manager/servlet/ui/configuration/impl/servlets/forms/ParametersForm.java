@@ -28,6 +28,7 @@ import org.universAAL.AALapplication.medication_manager.servlet.ui.configuration
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.universAAL.AALapplication.medication_manager.configuration.ConfigurationProperties.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.base.export.parser.script.Script.*;
 import static org.universAAL.AALapplication.medication_manager.servlet.ui.configuration.impl.Util.*;
 
@@ -79,6 +80,9 @@ public final class ParametersForm extends ScriptForm {
 
     int count = 0;
     for (PropertyInfo info : propertyInfos) {
+      if (MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE.equalsIgnoreCase(info.getName())) {
+         continue;
+      }
       count++;
       sb.append("\n\t\t");
       addProperty(info, sb);

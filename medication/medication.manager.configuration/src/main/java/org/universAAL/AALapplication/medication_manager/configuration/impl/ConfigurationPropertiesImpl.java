@@ -316,7 +316,7 @@ public final class ConfigurationPropertiesImpl implements ConfigurationPropertie
   }
 
   private void addInsertDummyUsersInTheCHE(Map<String, PropertyInfo> propertyInfoMap) {
-    String value = medicationProperties.getProperty(MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE);
+    String value = "true";
     PropertyInfo insertDummyUsers = new PropertyInfo(
         MEDICATION_MANAGER_INSERT_DUMMY_USERS_INTO_CHE,
         value,
