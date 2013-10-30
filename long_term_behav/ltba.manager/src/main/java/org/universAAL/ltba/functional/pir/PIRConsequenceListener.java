@@ -99,7 +99,8 @@ public class PIRConsequenceListener extends ContextSubscriber {
 
 	@Override
 	public void handleContextEvent(ContextEvent event) {
-
+		LogUtils.logDebug(mc, getClass(), "handleContextEvent",
+				"LTBA Manager is handling a context evetnt...");
 		Consequence csq = (Consequence) event.getRDFObject();
 		ConsequenceProperty[] consequenceArray = csq.getProperties();
 
