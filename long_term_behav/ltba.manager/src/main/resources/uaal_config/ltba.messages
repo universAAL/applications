@@ -1,0 +1,13 @@
+ltba.ui.on.es = Conectar
+ltba.ui.off.es = Desconectar
+ltba.ui.disconnected.main.es = LTBA se ha desconectado. Se conectará automáticamente a las
+ltba.ui.disconnected.today.es = de HOY.
+ltba.ui.disconnected.tomorrow.es = de MAÑANA.
+ltba.ui.connected.es = LTBA está conectado
+
+ltba.ui.on.en = ON
+ltba.ui.off.en = OFF
+ltba.ui.disconnected.main.en = LTBA is currently disconnected. It will be automatically reconnected at 
+ltba.ui.disconnected.today.en = of TODAY.
+ltba.ui.disconnected.tomorrow.en = of TOMORROW.
+ltba.ui.connected.main.en = LTBA is connected
