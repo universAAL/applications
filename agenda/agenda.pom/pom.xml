@@ -34,15 +34,15 @@
 		<uaal.parent.version>2.0.2-SNAPSHOT</uaal.parent.version>
 	</properties>
 
-<!--	<modules>-->
-<!--		<module>../agenda.remote</module>-->
-<!--		<module>../agenda.server</module>-->
-<!--		<module>../agenda.client</module>-->
-<!--		<module>../agenda.eventSelection.server</module>-->
-<!--		<module>../agenda.eventSelection.client</module>-->
-<!--		<module>../agenda.gui</module>-->
-<!--		<module>composite</module>-->
-<!--	</modules>-->
+	<modules>
+		<module>../agenda.remote</module>
+		<module>../agenda.server</module>
+		<module>../agenda.client</module>
+		<module>../agenda.eventSelection.server</module>
+		<module>../agenda.eventSelection.client</module>
+		<module>../agenda.gui</module>
+		<module>composite</module>
+	</modules>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
