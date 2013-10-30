@@ -2754,7 +2754,7 @@ ontologies/ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages
 ontologies/ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_hr.properties -text
 ontologies/ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_it.properties -text
 ontologies/ont.agenda/src/main/resources/org/universAAL/ontology/agenda/messages_nl.properties -text
-ontologies/ont.agenda/src/test/java/org/universAAL/ontology/test/ArtifactIntegrationTest.java -text
+ontologies/ont.agenda/src/test/java/org/universAAL/ontology/test/ArtifactIT.java -text
 ontologies/ont.agendaEventSelection/ASL2.0.txt -text
 ontologies/ont.agendaEventSelection/NOTICE.txt -text
 ontologies/ont.agendaEventSelection/pom.xml -text
@@ -2766,7 +2766,7 @@ ontologies/ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agenda
 ontologies/ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/FilterParams.java -text
 ontologies/ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/TimeSearchType.java -text
 ontologies/ont.agendaEventSelection/src/main/java/org/universAAL/ontology/agendaEventSelection/service/EventSelectionToolService.java -text
-ontologies/ont.agendaEventSelection/src/test/java/org/universAAL/ontology/test/ArtifactIntegrationTest.java -text
+ontologies/ont.agendaEventSelection/src/test/java/org/universAAL/ontology/test/ArtifactIT.java -text
 ontologies/ont.biomedicalsensors/ASL2.0 -text
 ontologies/ont.biomedicalsensors/NOTICE -text
 ontologies/ont.biomedicalsensors/pom.xml -text
