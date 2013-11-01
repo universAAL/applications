@@ -353,7 +353,9 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 							droolscp.publish(new ContextEvent(
 									droolscbs,
 									CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS));
-							// System.out.println("SEND DROOLS CP");
+
+							System.out
+									.println("SEND CONTEXT EVENT TO DROOLS...");
 
 							// add this set to the Arraylist
 							last10.add(me);
@@ -434,14 +436,13 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 
 							cs = CallStatus.succeeded;
 
-							/*
-							 * System.out.println("WAITING FOR ALERTS " + j +
-							 * " for local ID: " + bsID);
-							 */
+							System.out.println("WAITING FOR ALERTS " + j
+									+ " FOR LOCAL ID: " + bsID);
+
 						} else {
 							cs = CallStatus.serviceSpecificFailure;
 							System.out
-									.println("FAILED TO START WAITING FOR ALERTS for local ID: "
+									.println("FAILED TO START WAITING FOR ALERTS FOR LOCAL ID: "
 											+ bsID);
 						}
 					}
@@ -529,7 +530,7 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 	// then assign them to the SERVER with setLastMeasurements
 	private ServiceResponse getMeasurements(String bsURI) {
 		int bsID = extractLocalIDfromSensorURI(bsURI);
-		// System.out.println("LOCAL ID: " + bsID);
+		System.out.println("LOCAL ID: " + bsID);
 		SensorType sensorType = theServer.getBioSensorType(bsID);
 		if (sensorType.equals(Zephyr.zephyr)) {
 			try {
@@ -544,16 +545,16 @@ public class BiomedicalSensorsCallee extends ServiceCallee implements
 							.getserviceURL(extractLocalIDfromSensorURI(bsURI)));
 					if (gotres) {
 						ArrayList<MeasuredEntity> al = new ArrayList(2);
-						/*
-						 * System.out.println("Activity level: " +
-						 * zeph.activityLevel);
-						 * System.out.println("Heart Rate: " + zeph.heartRate);
-						 * System.out.println("Posture: " + zeph.posture);
-						 * System.out.println("Breathing Rate: " +
-						 * zeph.breathingRate);
-						 * System.out.println("Date - Time: " +
-						 * zeph.formattedTimeNow);
-						 */
+
+						System.out.println("Activity level: "
+								+ zeph.activityLevel);
+						System.out.println("Heart Rate: " + zeph.heartRate);
+						System.out.println("Posture: " + zeph.posture);
+						System.out.println("Breathing Rate: "
+								+ zeph.breathingRate);
+						System.out.println("Date/Time: "
+								+ zeph.formattedTimeNow);
+
 						ServiceResponse sr = new ServiceResponse(
 								CallStatus.succeeded);
 

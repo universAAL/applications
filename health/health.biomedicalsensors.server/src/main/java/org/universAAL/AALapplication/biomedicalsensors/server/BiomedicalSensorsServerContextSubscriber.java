@@ -78,14 +78,13 @@ public class BiomedicalSensorsServerContextSubscriber extends ContextSubscriber 
 	 */
 	public void handleContextEvent(ContextEvent event) {
 
-		
-		  System.out .println("I got the event " +
-		  event.getRDFObject().toString());
-		  System.out.println("I got the event subject " +
-		  event.getRDFSubject().toString());
-		  System.out.println("I got the event Predicate " +
-		  event.getRDFPredicate().toString());
-		 
+		System.out
+				.println("I got the event " + event.getRDFObject().toString());
+		System.out.println("I got the event subject "
+				+ event.getRDFSubject().toString());
+		System.out.println("I got the event Predicate "
+				+ event.getRDFPredicate().toString());
+
 		Consequence csq = (Consequence) event.getRDFObject();
 
 		ConsequenceProperty[] consequenceArray = csq.getProperties();
@@ -147,11 +146,11 @@ public class BiomedicalSensorsServerContextSubscriber extends ContextSubscriber 
 
 		System.out
 				.println("///////////////////////////////////////////////////////////");
-		System.out.println("hashmap: " + map);
-		System.out.println("lruleExpTime: " + lruleExpTime);
-		System.out.println("nowtime: " + nowtime + " ALERT should print "
+		System.out.println("Hashmap: " + map);
+		System.out.println("Rule Expiration Time(long): " + lruleExpTime);
+		System.out.println("Nowtime: " + nowtime + " ALERT should print "
 				+ pAlert);
-		System.out.println("time difference: "
+		System.out.println("Time difference: "
 				+ (nowtime - ((Long) map.get(BiomedicalSensorsCallee.ruleID))));
 		System.out.println(BiomedicalSensorsCallee.ruleID + ":ruleTitle:"
 				+ BiomedicalSensorsCallee.ruleTitle);
