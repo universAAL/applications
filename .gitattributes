@@ -706,7 +706,6 @@ health/health.biomedicalsensors.uiclient/ASL2.0 -text
 health/health.biomedicalsensors.uiclient/MITX -text
 health/health.biomedicalsensors.uiclient/NOTICE -text
 health/health.biomedicalsensors.uiclient/PhysicalActivityMonitor_UIClient_1.3.0-drools.launch -text
-health/health.biomedicalsensors.uiclient/PhysicalActivityMonitor_UIClient_1.3.3-drools.launch -text
 health/health.biomedicalsensors.uiclient/PhysicalActivityMonitor_UIClient_2.0.0-drools.launch -text
 health/health.biomedicalsensors.uiclient/SIREN.WAV -text
 health/health.biomedicalsensors.uiclient/pom.xml -text
