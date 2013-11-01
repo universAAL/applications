@@ -42,7 +42,7 @@ import org.universAAL.middleware.ui.rdf.Submit;
  * 
  */
 public class AlertUI extends UICaller {
-private static int timessend=0;
+	private static int timessend = 0;
 	private Form mainDialog = null;
 
 	protected AlertUI(ModuleContext context) {
@@ -67,7 +67,7 @@ private static int timessend=0;
 	@Override
 	public void handleUIResponse(UIResponse uir) {
 
-	//	System.out.println("-----DIALOG RESPONSE RECEIVED--------");
+		// System.out.println("-----DIALOG RESPONSE RECEIVED--------");
 		if (uir != null) {
 
 			// button
@@ -127,7 +127,7 @@ private static int timessend=0;
 
 	public Form startOrangeDialog(String alertType, LevelRating lr) {
 		timessend++;
-System.out.println("~"+timessend);
+		System.out.println("~" + timessend);
 		mainDialog = initMainDialog(alertType);
 
 		UIRequest out = new UIRequest(SharedResources.testUser, mainDialog, lr,

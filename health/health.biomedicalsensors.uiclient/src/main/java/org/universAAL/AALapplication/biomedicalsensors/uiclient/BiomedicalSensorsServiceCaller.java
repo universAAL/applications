@@ -52,9 +52,7 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 
 	public static AlertUI al = new AlertUI(SharedResources.moduleContext);
 
-
-
-	public static String alertDesc="";
+	public static String alertDesc = "";
 	private static ServiceCaller caller;
 	private static final String BIOMEDICALSENSORS_CONSUMER_NAMESPACE = "http://ontology.universaal.org/BiomedicalSensorsCaller.owl#";
 	private static final String OUTPUT_LIST_OF_SENSORS = BIOMEDICALSENSORS_CONSUMER_NAMESPACE
@@ -62,7 +60,6 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 	private static final String OUTPUT_SENSOR_TYPE = CompositeBiomedicalSensor.PROP_SENSOR_TYPE;
 	private static final String OUTPUT_SENSOR_BTURL = CompositeBiomedicalSensor.PROP_DISCOVERED_BT_SERVICE;
 	private static final String OUTPUT_SENSOR_MEASUREMENTS = CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS;
-	
 
 	private static ContextEventPattern[] getContextSubscriptionParams() {
 
@@ -106,8 +103,8 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 				CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS },
 				new Boolean(true));
 
-		getMeasSR.addRequiredOutput(OUTPUT_SENSOR_MEASUREMENTS,
-		new String[] { BiomedicalSensorService.PROP_CONTROLS,
+		getMeasSR.addRequiredOutput(OUTPUT_SENSOR_MEASUREMENTS, new String[] {
+				BiomedicalSensorService.PROP_CONTROLS,
 				CompositeBiomedicalSensor.PROP_LAST_MEASUREMENTS });
 		return getMeasSR;
 	}
@@ -347,22 +344,24 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 		String postureValue = "";
 		String tempValue = "";
 		String alertType = "";
-		String measDesc="";
-		
+		String measDesc = "";
+
 		MeasuredEntity me[] = (MeasuredEntity[]) event.getRDFObject();
 		List<Double> posturePlotData = new ArrayList<Double>();
 		List<Double> activityPlotData = new ArrayList<Double>();
 		List<Double> hrPlotData = new ArrayList<Double>();
-	/*	System.out.println("**Received a Context Event containing: "+me.length+" messages");
+
+		System.out.println("Received a Context Event containing: " + me.length
+				+ " messages");
 		for (int i = 0; i < me.length; i++) {
 			measDesc = me[i].getMeasurementName();
-			System.out.println("**Measurement: "
-					+ measDesc + ": "
+			System.out.println("Measurement: " + measDesc + ": "
 					+ me[i].getMeasurementValue() + " "
 					+ me[i].getMeasurementUnit() + " at "
 					+ me[i].getMeasurementTime());
-		}*/
-			for (int i = 0; i < me.length; i++) {
+		}
+
+		for (int i = 0; i < me.length; i++) {
 			if (me[i].getMeasurementName().equals("Posture")) {
 				postureValue = me[i].getMeasurementValue();
 				posturePlotData.add(Double.valueOf(postureValue));
@@ -373,41 +372,43 @@ public class BiomedicalSensorsServiceCaller extends ContextSubscriber {
 				tempValue = me[i].getMeasurementValue();
 				activityPlotData.add(Double.valueOf(tempValue));
 			}
-			
+
 			if (me[i].getMeasurementName().equals("ALERT")) {
-			//	System.out.println("*-*-*ORANGE Context Event containing: "+me.length+" messages "+i);
+				System.out.println("*-*-*ORANGE Context Event containing: "
+						+ me.length + " messages " + i);
 				formatedTime = me[i].getMeasurementTime();
-				alertDesc = me[i+1].getMeasurementValue();
+				alertDesc = me[i + 1].getMeasurementValue();
 				alertType = me[i].getMeasurementValue();
-			
-			double[] ppData = convertDoubles(posturePlotData);
-			double[] alData = convertDoubles(activityPlotData);
-			double[] hrData = convertDoubles(hrPlotData);	
-					new ImagePlot(
-							new File("../../rundir/confadmin/ui.handler.gui.swing/images/Alert_image_")
-									//"C:\\Users\\joemoul\\workspace_uaal_indigo\\rundir\\confadmin\\ui.handler.gui.swing\\images\\Alert_image_").getCanonicalPath()
-									+ alertType + "Posture.png", ppData,
-							"Last Posture Measurements", "Measurement", "Degrees",
-							350, 250);
-					new ImagePlot(
-							new File("../../rundir/confadmin/ui.handler.gui.swing/images/Alert_image_")
-									//"C:\\Users\\joemoul\\workspace_uaal_indigo\\rundir\\confadmin\\ui.handler.gui.swing\\images\\Alert_image_").getCanonicalPath()
-									+ alertType + "Activity.png", alData,
-							"Last Activity Level Measurements", "Measurement", "",
-							350, 250);
-					new ImagePlot(
-							new File("../../rundir/confadmin/ui.handler.gui.swing/images/Alert_image_")
-									//"C:\\Users\\joemoul\\workspace_uaal_indigo\\rundir\\confadmin\\ui.handler.gui.swing\\images\\Alert_image_").getCanonicalPath()
-									+ alertType + "Heartrate.png", hrData,
-							"Last Heart Rate Measurements", "Measurement",
-							"beats/min", 350, 250);
-					Form f = al.startOrangeDialog(alertType, LevelRating.high);
-					
+
+				double[] ppData = convertDoubles(posturePlotData);
+				double[] alData = convertDoubles(activityPlotData);
+				double[] hrData = convertDoubles(hrPlotData);
+				new ImagePlot(
+						new File(
+								"../../rundir/confadmin/ui.handler.gui.swing/images/Alert_image_")
+								// "C:\\Users\\joemoul\\workspace_uaal_indigo\\rundir\\confadmin\\ui.handler.gui.swing\\images\\Alert_image_").getCanonicalPath()
+								+ alertType + "Posture.png", ppData,
+						"Last Posture Measurements", "Measurement", "Degrees",
+						350, 250);
+				new ImagePlot(
+						new File(
+								"../../rundir/confadmin/ui.handler.gui.swing/images/Alert_image_")
+								// "C:\\Users\\joemoul\\workspace_uaal_indigo\\rundir\\confadmin\\ui.handler.gui.swing\\images\\Alert_image_").getCanonicalPath()
+								+ alertType + "Activity.png", alData,
+						"Last Activity Level Measurements", "Measurement", "",
+						350, 250);
+				new ImagePlot(
+						new File(
+								"../../rundir/confadmin/ui.handler.gui.swing/images/Alert_image_")
+								// "C:\\Users\\joemoul\\workspace_uaal_indigo\\rundir\\confadmin\\ui.handler.gui.swing\\images\\Alert_image_").getCanonicalPath()
+								+ alertType + "Heartrate.png", hrData,
+						"Last Heart Rate Measurements", "Measurement",
+						"beats/min", 350, 250);
+				Form f = al.startOrangeDialog(alertType, LevelRating.high);
+
 			}
-			}		
+		}
 	}
-					
-	
 
 	public static double[] convertDoubles(List<Double> integers) {
 		double[] ret = new double[integers.size()];
