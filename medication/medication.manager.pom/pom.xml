@@ -4,11 +4,11 @@
   <parent>
     <artifactId>new_services.pom</artifactId>
     <groupId>org.universAAL.AALapplication</groupId>
-    <version>E.1</version>
+    <version>E.2</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   <artifactId>medication.manager.pom</artifactId>
-  <version>E.1-SNAPSHOT</version>
+  <version>E.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Medication Manager AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Medication_manager_universAAL_service</url>
@@ -57,8 +57,8 @@
   <modules>
     <module>../medication.manager.configuration</module>
     <module>../medication.manager.persistence</module>
-<!--     The following module causes trouble on top level builds, PLEASE KEEP COMMENTED! -->
-<!--     <module>../../ontologies/ont.medication</module> -->
+    <!--     The following module causes trouble on top level builds, PLEASE KEEP COMMENTED! -->
+    <!--<module>../../ontologies/ont.medication</module>-->
     <module>../medication.manager.service</module>
     <module>../medication.manager.shell.commands</module>
     <module>../medication.missing.services.simulation</module>
@@ -70,5 +70,5 @@
     <module>../medication.manager.servlet.ui.configuration</module>
     <module>../medication.manager.event.issuer</module>
     <module>../medication.manager.user.management</module>
- </modules>
+  </modules>
 </project>
