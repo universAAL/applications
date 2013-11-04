@@ -2146,6 +2146,7 @@ medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplic
 medication/medication.manager.persistence/src/main/java/org/universAAL/AALapplication/medication_manager/persistence/layer/entities/UnitClass.java -text
 medication/medication.manager.persistence/src/main/resources/medication-persistence.properties -text
 medication/medication.manager.persistence/src/main/resources/medication-persistence_de.properties -text
+medication/medication.manager.persistence/src/main/resources/medication-persistence_es.properties -text
 medication/medication.manager.pom/ASL2.0 -text
 medication/medication.manager.pom/NOTICE -text
 medication/medication.manager.pom/pom.xml -text
