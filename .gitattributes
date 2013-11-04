@@ -2532,6 +2532,7 @@ medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/med
 medication/medication.manager.ui/src/main/java/org/universAAL/AALapplication/medication_manager/ui/impl/RequestMedicationInfoDialogProvider.java -text
 medication/medication.manager.ui/src/main/resources/medication-ui.properties -text
 medication/medication.manager.ui/src/main/resources/medication-ui_de.properties -text
+medication/medication.manager.ui/src/main/resources/medication-ui_es.properties -text
 medication/medication.manager.user.management/ASL2.0 -text
 medication/medication.manager.user.management/NOTICE -text
 medication/medication.manager.user.management/pom.xml -text
