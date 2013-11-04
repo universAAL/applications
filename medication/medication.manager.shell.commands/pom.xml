@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
-    <version>E.1-SNAPSHOT</version>
+    <version>E.2-SNAPSHOT</version>
     <artifactId>medication.manager.pom</artifactId>
     <relativePath>../medication.manager.pom</relativePath>
   </parent>
@@ -17,7 +17,7 @@
     <dependency>
       <groupId>org.universAAL.ontology</groupId>
       <artifactId>ont.medication</artifactId>
-      <version>2.0.1-SNAPSHOT</version>
+      <version>2.0.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.apache.felix</groupId>
@@ -28,30 +28,30 @@
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
       <artifactId>medication.manager.persistence</artifactId>
-      <version>E.1-SNAPSHOT</version>
+      <version>E.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
       <artifactId>medication.missing.services.simulation</artifactId>
-      <version>E.1-SNAPSHOT</version>
+      <version>E.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
       <artifactId>medication.manager.service</artifactId>
-      <version>E.1-SNAPSHOT</version>
+      <version>E.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>
       <artifactId>medication.manager.ui</artifactId>
-      <version>E.1-SNAPSHOT</version>
+      <version>E.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
-         <groupId>org.universAAL.AALapplication</groupId>
-         <artifactId>medication.manager.user.management</artifactId>
-         <version>E.1-SNAPSHOT</version>
-       </dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>medication.manager.user.management</artifactId>
+      <version>E.2-SNAPSHOT</version>
+    </dependency>
 
   </dependencies>
 
