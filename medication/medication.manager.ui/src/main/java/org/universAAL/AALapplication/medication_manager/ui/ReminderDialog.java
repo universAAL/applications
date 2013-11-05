@@ -56,6 +56,7 @@ import java.util.Locale;
 
 import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.*;
 import static org.universAAL.AALapplication.medication_manager.persistence.layer.Util.getMessage;
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass.*;
 import static org.universAAL.AALapplication.medication_manager.ui.IntakeReviewDialog.*;
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.getMessage;
@@ -345,7 +346,6 @@ public class ReminderDialog extends UICaller {
     String titleMessage = getMessage("medication.manager.ui.reminder.message", name, timeText);
 
 
-
     return titleMessage + "\n" + medicinesInfo.getGeneralInfo();
   }
 
@@ -374,93 +374,97 @@ public class ReminderDialog extends UICaller {
   }
 
   private void createMedicineInfo(User inputUser) {
-      PersistentService persistentService = getPersistentService();
+    PersistentService persistentService = getPersistentService();
 
-      IntakeDao intakeDao = persistentService.getIntakeDao();
+    IntakeDao intakeDao = persistentService.getIntakeDao();
 
-      List<Intake> intakes = intakeDao.getIntakesByUserAndTime(inputUser, time);
+    List<Intake> intakes = intakeDao.getIntakesByUserAndTime(inputUser, time);
 
-      this.medicinesInfo = createMedicineInfoFromIntakes(intakes);
+    this.medicinesInfo = createMedicineInfoFromIntakes(intakes);
+  }
+
+  public MedicinesInfo getMedicinesInfo() {
+    if (medicinesInfo == null) {
+      throw new MedicationManagerUIException("The MedicineInfo field is not set");
     }
+    return medicinesInfo;
+  }
 
-    public MedicinesInfo getMedicinesInfo() {
-      if (medicinesInfo == null) {
-        throw new MedicationManagerUIException("The MedicineInfo field is not set");
-      }
-      return medicinesInfo;
-    }
+  public MedicinesInfo createMedicineInfoFromIntakes(List<Intake> intakes) {
+    String generalInfo = getGeneralInfo(intakes);
+    String detailsInfo = getDetailsInfo(intakes);
 
-    public MedicinesInfo createMedicineInfoFromIntakes(List<Intake> intakes) {
-      String generalInfo = getGeneralInfo(intakes);
-      String detailsInfo = getDetailsInfo(intakes);
+    return new MedicinesInfo(generalInfo, detailsInfo, time);
+  }
 
-      return new MedicinesInfo(generalInfo, detailsInfo, time);
-    }
+  private String getGeneralInfo(List<Intake> intakes) {
+    StringBuilder sb = new StringBuilder();
 
-    private String getGeneralInfo(List<Intake> intakes) {
-      StringBuilder sb = new StringBuilder();
+    sb.append("\t\t\t");
+    String dailyTextFormat = time.getDailyTextFormat();
+    String title = getMessage("medication.manager.ui.intake.info.for.title", dailyTextFormat);
+    sb.append(title);
 
-      sb.append("\t\t\t");
-      String dailyTextFormat = time.getDailyTextFormat();
-      String title = getMessage("medication.manager.ui.intake.info.for.title", dailyTextFormat);
-      sb.append(title);
+    sb.append("\n");
+    appendQuantityAndUnits(sb, intakes);
 
-      sb.append("\n");
-      appendQuantityAndUnits(sb, intakes);
+    return sb.toString();
+  }
 
-      return sb.toString();
-    }
-
-    private void appendQuantityAndUnits(StringBuilder sb, List<Intake> intakes) {
-      int count = 0;
-      for (Intake in : intakes) {
-        sb.append('\n');
-        count++;
-        Treatment treatment = in.getTreatment();
-        String medicineName = treatment.getMedicine().getMedicineName();
-        UnitClass unitClass = in.getUnitClass();
-        String type = unitClass.getType();
-        if (PILL.equalsIgnoreCase(type)) {
-          type = type + 'S';
-
-        }
-        type = type.toUpperCase();
-        String rowMessage = getMessage("medication.manager.ui.intake.info.for.row",
-            count, medicineName, in.getQuantity(), type);
-        sb.append(rowMessage);
-      }
-
-
+  private void appendQuantityAndUnits(StringBuilder sb, List<Intake> intakes) {
+    int count = 0;
+    for (Intake in : intakes) {
       sb.append('\n');
-    }
+      count++;
+      Treatment treatment = in.getTreatment();
+      String medicineName = treatment.getMedicine().getMedicineName();
+      UnitClass unitClass = in.getUnitClass();
+      String type;
 
-    private String getDetailsInfo(List<Intake> intakes) {
-      StringBuilder sb = new StringBuilder();
+      if (DROPS == unitClass) {
+        type = Activator.getMessage("medication.manager.ui.intake.type.drops");
+      } else if (PILLS == unitClass) {
+        type = Activator.getMessage("medication.manager.ui.intake.type.pills");
+      } else {
 
-      sb.append("\n\t\t\t");
-      sb.append(Activator.getMessage("medication.manager.ui.medication.info"));
-      sb.append("\n\t\t\t");
-
-
-      int count = 0;
-      for (Intake in : intakes) {
-        sb.append('\n');
-        count++;
-        sb.append(count);
-        sb.append(". ");
-        Treatment treatment = in.getTreatment();
-        Medicine medicine = treatment.getMedicine();
-        sb.append(medicine.getMedicineName());
-        sb.append("\n\t");
-        String medicineInfo = medicine.getMedicineInfo();
-        if (medicine == null || medicineInfo.trim().isEmpty()) {
-           medicineInfo = Activator.getMessage("medication.manager.ui.missing.medicine.description");
-        }
-        sb.append(medicineInfo);
+        throw new MedicationManagerUIException("Unexpected Enum type for the UnitClass: " + unitClass);
       }
-
-      return sb.toString();
+      String rowMessage = getMessage("medication.manager.ui.intake.info.for.row",
+          count, medicineName, in.getQuantity(), type);
+      sb.append(rowMessage);
     }
+
+
+    sb.append('\n');
+  }
+
+  private String getDetailsInfo(List<Intake> intakes) {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("\n\t\t\t");
+    sb.append(Activator.getMessage("medication.manager.ui.medication.info"));
+    sb.append("\n\t\t\t");
+
+
+    int count = 0;
+    for (Intake in : intakes) {
+      sb.append('\n');
+      count++;
+      sb.append(count);
+      sb.append(". ");
+      Treatment treatment = in.getTreatment();
+      Medicine medicine = treatment.getMedicine();
+      sb.append(medicine.getMedicineName());
+      sb.append("\n\t");
+      String medicineInfo = medicine.getMedicineInfo();
+      if (medicine == null || medicineInfo.trim().isEmpty()) {
+        medicineInfo = Activator.getMessage("medication.manager.ui.missing.medicine.description");
+      }
+      sb.append(medicineInfo);
+    }
+
+    return sb.toString();
+  }
 
 
 }
