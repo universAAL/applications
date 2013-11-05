@@ -16,6 +16,7 @@
 
 package org.universAAL.AALapplication.medication_manager.persistence.layer;
 
+import org.universAAL.AALapplication.medication_manager.persistence.impl.Activator;
 import org.universAAL.AALapplication.medication_manager.persistence.impl.MedicationManagerPersistenceException;
 
 import java.util.Date;
@@ -31,6 +32,7 @@ public final class IntakeInfo {
   private final String time;
   private final String medication;
   private final String status;
+  private final String internationalizationStatus;
   private final Date realDate;
 
   public static final String COMING = "coming";
@@ -46,6 +48,23 @@ public final class IntakeInfo {
     this.medication = medication;
     this.status = status;
     this.realDate = realDate;
+    internationalizationStatus = createInternationalizationStatus(status);
+  }
+
+  private String createInternationalizationStatus(String status) {
+    if (status.equals(COMING)) {
+      return Activator.getMessage("medication.manager.intake.review.coming");
+    }
+
+    if (status.equals(TAKEN)) {
+      return Activator.getMessage("medication.manager.intake.review.taken");
+    }
+
+    if (status.equals(MISSED)) {
+      return Activator.getMessage("medication.manager.intake.review.missed");
+    }
+
+    throw new MedicationManagerPersistenceException("Very strange unexpected exception");
   }
 
   private void validateParameters(String date, String time, String medication, String status, Date realDate) {
@@ -77,6 +96,10 @@ public final class IntakeInfo {
 
   public String getStatus() {
     return status;
+  }
+
+  public String getInternationalizationStatus() {
+    return internationalizationStatus;
   }
 
   public Date getRealDate() {
