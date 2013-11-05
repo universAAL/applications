@@ -22,9 +22,11 @@ import org.universAAL.AALapplication.medication_manager.persistence.layer.dao.Me
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Intake;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.MedicineInventory;
 import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.Person;
+import org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass;
 
 import java.util.List;
 
+import static org.universAAL.AALapplication.medication_manager.persistence.layer.entities.UnitClass.*;
 import static org.universAAL.AALapplication.medication_manager.ui.impl.Activator.*;
 
 /**
@@ -68,12 +70,19 @@ public final class InventoryStatusHelper {
 
       String medicineName = medicineInventory.getMedicine().getMedicineName();
       int quantity = medicineInventory.getQuantity();
-      String type = medicineInventory.getUnitClass().getType();
-      if (PILL.equalsIgnoreCase(type)) {
-         type = type + 'S';
+      UnitClass unitClass = medicineInventory.getUnitClass();
 
+      String type;
+
+      if (DROPS == unitClass) {
+        type = Activator.getMessage("medication.manager.ui.intake.type.drops");
+      } else if (PILLS == unitClass) {
+        type = Activator.getMessage("medication.manager.ui.intake.type.pills");
+      } else {
+
+        throw new MedicationManagerUIException("Unexpected Enum type for the UnitClass: " + unitClass);
       }
-      type = type.toUpperCase();
+
       String rowMessage = getMessage("medication.manager.ui.inventory.row",
           counter, medicineName, quantity, type);
 
