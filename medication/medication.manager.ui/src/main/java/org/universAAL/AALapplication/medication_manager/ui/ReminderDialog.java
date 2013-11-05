@@ -451,7 +451,7 @@ public class ReminderDialog extends UICaller {
         Treatment treatment = in.getTreatment();
         Medicine medicine = treatment.getMedicine();
         sb.append(medicine.getMedicineName());
-        sb.append('\n');
+        sb.append("\n\t");
         String medicineInfo = medicine.getMedicineInfo();
         if (medicine == null || medicineInfo.trim().isEmpty()) {
            medicineInfo = Activator.getMessage("medication.manager.ui.missing.medicine.description");

@@ -216,7 +216,7 @@ public class IntakeReviewDialog extends UICaller {
       String dateFormat = DATE_FORMATTER.format(realDate);
       String timeFormat = TIME_FORMATTER.format(realDate);
       String rowMessage = Activator.getMessage("medication.manager.ui.intake.review.log.row",
-          counter, dateFormat, timeFormat, intakeInfo.getMedication(), intakeInfo.getStatus());
+          counter, dateFormat, timeFormat, intakeInfo.getMedication(), intakeInfo.getInternationalizationStatus());
 
       sb.append(rowMessage);
     }
