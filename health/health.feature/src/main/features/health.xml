@@ -32,7 +32,7 @@
 		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/${health.ui.client.version}</bundle>
 	</feature>
 	
-	<feature name="uAAL-Service-Health" version"${platform.version}">
+	<feature name="uAAL-Service-Health" version="${platform.version}">
 	   <feature>health.core</feature>
 	   <feature>health.x73</feature>
 	   <feature>health.ui</feature>
