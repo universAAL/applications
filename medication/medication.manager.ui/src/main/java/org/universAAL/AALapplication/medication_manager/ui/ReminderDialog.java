@@ -438,6 +438,12 @@ public class ReminderDialog extends UICaller {
     sb.append('\n');
   }
 
+  /*
+  <id>. <medicine_name> \n\n
+  <tab> <subtitle> \n
+  <tab> <text>\n\n
+   */
+
   private String getDetailsInfo(List<Intake> intakes) {
     StringBuilder sb = new StringBuilder();
 
@@ -455,12 +461,33 @@ public class ReminderDialog extends UICaller {
       Treatment treatment = in.getTreatment();
       Medicine medicine = treatment.getMedicine();
       sb.append(medicine.getMedicineName());
+      sb.append("\n\n\t");
+      sb.append(Activator.getMessage("medication.manager.ui.medicine.description"));
       sb.append("\n\t");
       String medicineInfo = medicine.getMedicineInfo();
-      if (medicine == null || medicineInfo.trim().isEmpty()) {
+      if (medicineInfo.trim().isEmpty()) {
         medicineInfo = Activator.getMessage("medication.manager.ui.missing.medicine.description");
       }
       sb.append(medicineInfo);
+      sb.append("\n\n");
+
+      sb.append(Activator.getMessage("medication.manager.ui.medicine.sideeffects"));
+      sb.append("\n\t");
+      String sideeffects = medicine.getMedicineSideEffects();
+      if (sideeffects == null || medicineInfo.trim().isEmpty()) {
+        sideeffects = Activator.getMessage("medication.manager.ui.missing.medicine.sideeffects");
+      }
+      sb.append(sideeffects);
+      sb.append("\n\n");
+
+      sb.append(Activator.getMessage("medication.manager.ui.medicine.incompliances"));
+      sb.append("\n\t");
+      String incompliances = medicine.getIncompliances();
+      if (incompliances == null || medicineInfo.trim().isEmpty()) {
+        incompliances = Activator.getMessage("medication.manager.ui.missing.medicine.incompliances");
+      }
+      sb.append(incompliances);
+      sb.append("\n\n");
     }
 
     return sb.toString();
