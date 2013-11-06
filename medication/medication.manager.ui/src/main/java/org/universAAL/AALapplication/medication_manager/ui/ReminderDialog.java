@@ -469,7 +469,7 @@ public class ReminderDialog extends UICaller {
         medicineInfo = Activator.getMessage("medication.manager.ui.missing.medicine.description");
       }
       sb.append(medicineInfo);
-      sb.append("\n\n");
+      sb.append("\n\n\t");
 
       sb.append(Activator.getMessage("medication.manager.ui.medicine.sideeffects"));
       sb.append("\n\t");
@@ -478,7 +478,7 @@ public class ReminderDialog extends UICaller {
         sideeffects = Activator.getMessage("medication.manager.ui.missing.medicine.sideeffects");
       }
       sb.append(sideeffects);
-      sb.append("\n\n");
+      sb.append("\n\n\t");
 
       sb.append(Activator.getMessage("medication.manager.ui.medicine.incompliances"));
       sb.append("\n\t");
