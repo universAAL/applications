@@ -6,7 +6,7 @@
     <version>E.2.1-SNAPSHOT</version>
     <relativePath>../health.pom/</relativePath>
   </parent>
-  <artifactId>health.feature</artifactId>
+  <artifactId>health.karaf.feature</artifactId>
   <version>E.2.1-SNAPSHOT</version>
   <name>Health Karaf Features</name>
     <dependencies>
