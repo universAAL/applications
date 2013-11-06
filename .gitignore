@@ -122,6 +122,10 @@ health/health.biomedicalsensors.uiclient/.classpath
 health/health.biomedicalsensors.uiclient/.project
 health/health.biomedicalsensors.uiclient/.settings
 health/health.biomedicalsensors.uiclient/target
+health/health.demo.populator/.classpath
+health/health.demo.populator/.project
+health/health.demo.populator/.settings
+health/health.demo.populator/target
 health/health.feature/.classpath
 health/health.feature/.project
 health/health.feature/.settings

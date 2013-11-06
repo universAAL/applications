@@ -773,21 +773,12 @@ health/health.demo.populator.run/runner/configurations/ui.handler.sms/account.pr
 health/health.demo.populator.run/runner/felix/system.properties -text
 health/health.demo.populator.run/runner/remoteDebug.bat -text
 health/health.demo.populator.run/runner/run.bat -text
-health/health.demo.populator/.classpath -text
-health/health.demo.populator/.project -text
-health/health.demo.populator/.settings/org.eclipse.core.resources.prefs -text
-health/health.demo.populator/.settings/org.eclipse.jdt.core.prefs -text
-health/health.demo.populator/.settings/org.eclipse.m2e.core.prefs -text
 health/health.demo.populator/ASL2.0.txt -text
 health/health.demo.populator/NOTICE.txt -text
 health/health.demo.populator/pom.xml -text
 health/health.demo.populator/src/main/java/org/universAAL/samples/simple/ui/DemoPopulatorUI.java -text
 health/health.demo.populator/src/main/java/org/universAAL/samples/simple/ui/MainButtonProvider.java -text
 health/health.demo.populator/src/main/java/org/universAAL/samples/simple/ui/ProjectActivator.java -text
-health/health.demo.populator/target/classes/org/universAAL/samples/simple/ui/DemoPopulatorUI.class -text
-health/health.demo.populator/target/classes/org/universAAL/samples/simple/ui/MainButtonProvider$1.class -text
-health/health.demo.populator/target/classes/org/universAAL/samples/simple/ui/MainButtonProvider.class -text
-health/health.demo.populator/target/classes/org/universAAL/samples/simple/ui/ProjectActivator.class -text
 health/health.feature/pom.xml -text svneol=unset#text/plain
 health/health.feature/src/main/features/health.xml -text svneol=unset#text/plain
 health/health.motivation/ASL2.0 -text
