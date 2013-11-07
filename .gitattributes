@@ -2580,6 +2580,7 @@ new_services.pom/pom.xml -text
 nutritional/nutritional.client/ASL2.0.txt -text
 nutritional/nutritional.client/NA_Service_E.0.1-SNAPSHOT.launch -text
 nutritional/nutritional.client/NA_Service_E.1.launch -text
+nutritional/nutritional.client/NA_Service_E.2.launch -text
 nutritional/nutritional.client/NOTICE.txt -text
 nutritional/nutritional.client/config/nutritional.client.conf.xml -text
 nutritional/nutritional.client/pom.xml -text
