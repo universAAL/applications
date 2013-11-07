@@ -107,8 +107,14 @@ public class UIMenus {
 		    Utils.println("UIMenus: meal is null, index: " + meal_index); //$NON-NLS-1$
 		} else {
 		    String category = meal.getCategory();
+		    String category_lang = "";
+		   
+		    if (category.equalsIgnoreCase("breakfast")) category_lang = Messages.getString("UIMenus.15");
+		    else if (category.equalsIgnoreCase("lunch")) category_lang = Messages.getString("UIMenus.16");
+		    else if (category.equalsIgnoreCase("dinner")) category_lang = Messages.getString("UIMenus.17");
+		    
 		    Group groupMeal = new Group(f.getIOControls(), new Label(
-			    category, null), PROP_PATH_REF1, null, null);
+			    category_lang, null), PROP_PATH_REF1, null, null);
 		    groupMeal.addAppearanceRecommendation(new HorizontalLayout());
 		    groupMeal.addAppearanceRecommendation(HorizontalAlignment.left);
 		    int num_dishes = meal.getDishes().length;
@@ -138,11 +144,17 @@ public class UIMenus {
 			    
 			    if (dish.getImage() != null
 				    && dish.getImage().length() > 0) {
-				new MediaObject(groupDish, new Label(
-					Messages.getString("UIMenus.4"), //$NON-NLS-1$
-					null), "image", //$NON-NLS-1$
-					InterfaceProvider.IMG_URL
-						+ dish.getImage());
+//				new MediaObject(groupDish, new Label(
+//					Messages.getString("UIMenus.4"), //$NON-NLS-1$
+//					" "), " ", //$NON-NLS-1$
+//					InterfaceProvider.IMG_URL
+//						+ dish.getImage());
+			    	
+			    	new MediaObject(groupDish, new Label(
+							"", //$NON-NLS-1$
+							""), "", //$NON-NLS-1$
+							InterfaceProvider.IMG_URL
+								+ dish.getImage());
 			    }
 
 			    if (dish.getRecipeID() != -1) {
@@ -207,7 +219,8 @@ new Submit(f.getSubmits(), new Label(
 		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
 			UIMenus.getForm(true), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+		//	Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -216,7 +229,7 @@ new Submit(f.getSubmits(), new Label(
 		Utils.println("UIMEnus: submit today"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIMenus.getForm(true), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -224,7 +237,7 @@ new Submit(f.getSubmits(), new Label(
 		Utils.println("UImenus: submit tomorrow"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIMenus.getForm(false), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -234,7 +247,7 @@ new Submit(f.getSubmits(), new Label(
 			SharedResources.user,
 			Form.newMessage(Messages.getString("UIMenus.13"), //$NON-NLS-1$
 				Messages.getString("UIMenus.14")), //$NON-NLS-1$
-			LevelRating.middle, Locale.ENGLISH,
+			LevelRating.middle, Locale.getDefault(),
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
@@ -246,7 +259,7 @@ new Submit(f.getSubmits(), new Label(
 			SharedResources.user,
 			Form.newMessage(Messages.getString("UIMenus.13"), //$NON-NLS-1$
 				Messages.getString("UIMenus.14")), //$NON-NLS-1$
-			LevelRating.middle, Locale.ENGLISH,
+			LevelRating.middle, Locale.getDefault(),
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
@@ -258,7 +271,7 @@ new Submit(f.getSubmits(), new Label(
 		Utils.println("UIMenus: submit details: " + idReceta); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIRecipeDetail.getForm(idReceta), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -277,7 +290,7 @@ new Submit(f.getSubmits(), new Label(
 		Utils.println("UIMain submit shopping"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIShopping.getForm(), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -285,14 +298,14 @@ new Submit(f.getSubmits(), new Label(
 		Utils.println("UIMain submit profile"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIProfile.getForm(), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }*/
 	    if (SUBMIT_HELP.equals(id)) {
 		Utils.println("UIMain submit help"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
-			UIHelp.getForm(), LevelRating.middle, Locale.ENGLISH,
+			UIHelp.getForm(), LevelRating.middle, Locale.getDefault(),
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;

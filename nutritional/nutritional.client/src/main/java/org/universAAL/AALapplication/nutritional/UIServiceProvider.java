@@ -33,15 +33,12 @@ public class UIServiceProvider extends ServiceCallee {
 			.createInitialDialogProfile(NutritionService.MY_URI,
 				"http://www.tsb.upv.es/", "Nutrition UI",
 				START_URI) });
-		Utils.println("Registro: " + NutritionService.MY_URI + " web: "
-			+ "http://www.tsb.upv.es/");
     }
 
     /**
      * @see org.persona.middleware.service.ServiceCallee#communicationChannelBroken()
      */
     public void communicationChannelBroken() {
-	Utils.println("communicationChannelBroken en UIServiceProvider!");
     }
 
     /**
@@ -52,10 +49,8 @@ public class UIServiceProvider extends ServiceCallee {
 		
 	    String operation = call.getProcessURI();
 	    if (operation != null && operation.startsWith(START_URI)) {
-		Utils.println("-- New Nutritional Main Menu --");
 		if (SharedResources.user==null) {
 			SharedResources.user = (User)call.getInvolvedUser();
-			System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------   user " + SharedResources.user);
 			if (!done){
 				InitialSetup.initNutriAdvisorFolder();
 				Login login = new Login();
@@ -63,7 +58,6 @@ public class UIServiceProvider extends ServiceCallee {
 				done = true;
 			} 
 		}
-		else Utils.println("[ " + SharedResources.user + " ] user is login in the system.......");
 		
 		SharedResources.uIProvider.startMainDialog();
 		ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);

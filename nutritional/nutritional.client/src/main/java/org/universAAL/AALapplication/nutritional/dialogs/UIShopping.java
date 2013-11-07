@@ -92,7 +92,7 @@ public class UIShopping {
 		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
 			UIMenus.getForm(true), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -103,7 +103,7 @@ public class UIShopping {
 			SharedResources.user,
 			Form.newMessage(Messages.getString("UIShopping.5"), //$NON-NLS-1$
 				Messages.getString("UIShopping.6")), //$NON-NLS-1$
-			LevelRating.middle, Locale.ENGLISH,
+			LevelRating.middle, Locale.getDefault(),
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
@@ -115,7 +115,7 @@ public class UIShopping {
 			SharedResources.user,
 			Form.newMessage(Messages.getString("UIShopping.5"), //$NON-NLS-1$
 				Messages.getString("UIShopping.6")), //$NON-NLS-1$
-			LevelRating.middle, Locale.ENGLISH,
+			LevelRating.middle, Locale.getDefault(),
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
@@ -127,7 +127,7 @@ public class UIShopping {
 			SharedResources.user,
 			Form.newMessage(Messages.getString("UIShopping.5"), //$NON-NLS-1$
 				Messages.getString("UIShopping.6")), //$NON-NLS-1$
-			LevelRating.middle, Locale.ENGLISH,
+			LevelRating.middle, Locale.getDefault(),
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;

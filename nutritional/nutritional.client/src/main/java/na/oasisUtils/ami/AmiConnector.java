@@ -60,7 +60,6 @@ public class AmiConnector {
 	    Object[] input3, boolean forceWebServiceCall)
 	    throws OASIS_ServiceUnavailable {
 	if (Setup.getAvoidOASIS_AMI() || forceWebServiceCall) {
-	    Utils.println("---------------------------------------------------------->AMI:  invoking operation avoiding AMI: " + operationName);
 	    return this.directWSInvokeOperation(domain, operationName, input3);
 	} else {
 	    log.fatal("AMI:  invoking operation through AMI: " + operationName);
