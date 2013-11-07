@@ -167,8 +167,6 @@ public class NutritionalAdvisorWSConnector {
 	    return this.getToken((String) input[0], (String) input[1],
 		    (String) input[2]);
 	} else {
-	    log.error("NutritionalAdvisorWSConnector: Unknown operation: "
-		    + operationName);
 	    return null;
 	}
     }
@@ -543,16 +541,11 @@ public class NutritionalAdvisorWSConnector {
 		    if (result[0].getRecipeID() == -1) {
 			log.info("No recipes in the server");
 			return new na.miniDao.Recipe[0];
-		    } else {
-			log.info("Servidor con 1 receta: "
-				+ result[0].getRecipeID());
-		    }
+		    } 
 		} else {
 		    log.info("result tama�o: " + result.length);
 		}
-	    } else {
-		log.info("result es null");
-	    }
+	    } 
 	    return result;
 	} catch (RemoteException e) {
 	    this.showConnectionError(e);
@@ -568,7 +561,6 @@ public class NutritionalAdvisorWSConnector {
 	} catch (RemoteException e) {
 	    this.showConnectionError(e);
 	}
-	log.info("ha ocurrido un error al a�adir a favoritos...");
 	return null;
     }
 
@@ -654,7 +646,7 @@ public class NutritionalAdvisorWSConnector {
 
     private String getToken(String username, String password,
 	    int preferredLanguage) throws RemoteException {
-	log.info("NutritionalAdvisorWSConnector: getToken for userrr: "
+	log.info("NutritionalAdvisorWSConnector: getToken for user: "
 		+ username + " password: " + password);
 	// try {
 	String res = nm.getToken(username, password, preferredLanguage);
@@ -682,9 +674,7 @@ public class NutritionalAdvisorWSConnector {
 	    log.info("Error: " + e.toString());
 	    log.info("Stack Trace:");
 	    e.printStackTrace();
-	} else {
-	    log.info(" >>> Error al conectar: " + e.getCause());
-	}
+	} 
     }
 
 }
