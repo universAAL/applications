@@ -293,7 +293,7 @@ new Submit(f.getSubmits(), new Label(
 			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
-	    }
+	    }*/
 	    if (SUBMIT_PROFILE.equals(id)) {
 		Utils.println("UIMain submit profile"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
@@ -301,7 +301,7 @@ new Submit(f.getSubmits(), new Label(
 			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
-	    }*/
+	    }
 	    if (SUBMIT_HELP.equals(id)) {
 		Utils.println("UIMain submit help"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
