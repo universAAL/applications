@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
-	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.1-SNAPSHOT/xml/features
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.2-SNAPSHOT/xml/features
 	</repository>
 
 	<feature name="uAAL-Service-NutritionalAdvisor" description="${project.name}"
