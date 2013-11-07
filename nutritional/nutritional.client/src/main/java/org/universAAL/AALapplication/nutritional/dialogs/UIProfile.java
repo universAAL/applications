@@ -28,6 +28,7 @@ import org.universAAL.middleware.ui.rdf.InputField;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Range;
 import org.universAAL.middleware.ui.rdf.Select1;
+import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.nutrition.profile.DietType;
 import org.universAAL.ontology.nutrition.profile.NutritionalHabits;
@@ -119,20 +120,63 @@ public class UIProfile {
     static final PropertyPath PROP_PATH_REF21 = new PropertyPath(null, false,
 	    new String[] { USER_INPUT_REF21 });
 
+    private static boolean stopLoading = false;
+
     /**
      * Compose the form for this dialog.
+     * @param nutrHab 
+     * @param nutrProf 
+     * @param prof 
      * 
      * @return The form.
      */
     public static Form getForm() {
 	Utils.println(Messages.getString("UIProfile.1")); //$NON-NLS-1$
+
+	final Form f = Form.newDialog(Messages.getString("UIProfile.35"), new Resource()); //$NON-NLS-1$
+	 f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
+	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.center);
+	
+	new SimpleOutput(f.getIOControls(), null, null, Messages.getString("UIProfile.36")); //$NON-NLS-1$
+
+	new Submit(f.getSubmits(), new Label(
+		Messages.getString("UIProfile.9"), null), SUBMIT_GOBACK); //$NON-NLS-1$
+	
+	new Thread() {
+	    public void run() {
+		ProfileConnector profConnect = ProfileConnector.getInstance();
+		profConnect.downloadProfileFromServer();
+		UserNutritionalProfile prof = profConnect.getProfile();
+		NutritionalSubProfile nutrProf = OntoFactory.getNutrProfile(prof);
+		NutritionalHabits nutrHab = nutrProf.getNutritionalHabits();
+		if (!stopLoading) {
+		    SharedResources.uIProvider.abortDialog(f.getDialogID());
+		    UIRequest out = new UIRequest(SharedResources.user,
+			    UIProfile.getForm(prof, nutrProf, nutrHab),
+			    LevelRating.middle, Locale.getDefault(),
+			    PrivacyLevel.insensible);
+		    SharedResources.uIProvider.sendUIRequest(out);
+		    stopLoading=false;
+		}
+	    }
+	}.start();
+	
+	return f;
+    }
+    /**
+     * Compose the form for this dialog.
+     * 
+     * @return The form.
+     */
+    public static Form getForm(UserNutritionalProfile prof, NutritionalSubProfile nutrProf, NutritionalHabits nutrHab) {
+	Utils.println(Messages.getString("UIProfile.1")); //$NON-NLS-1$
 	Form f;
 
-	ProfileConnector profConnect = ProfileConnector.getInstance();
-	profConnect.downloadProfileFromServer();
-	UserNutritionalProfile prof = profConnect.getProfile();
-	NutritionalSubProfile nutrProf = OntoFactory.getNutrProfile(prof);
-	NutritionalHabits nutrHab = nutrProf.getNutritionalHabits();
+//	ProfileConnector profConnect = ProfileConnector.getInstance();
+//	profConnect.downloadProfileFromServer();
+//	UserNutritionalProfile prof = profConnect.getProfile();
+//	NutritionalSubProfile nutrProf = OntoFactory.getNutrProfile(prof);
+//	NutritionalHabits nutrHab = nutrProf.getNutritionalHabits();
 	// try {
 	// PatientList[] list = profConnect.getPatientsList();
 	// } catch (OASIS_ServiceUnavailable e) {
@@ -291,6 +335,7 @@ public class UIProfile {
 	if (uir != null) {
 	    String id = uir.getSubmissionID();
 	    if (SUBMIT_GOBACK.equals(id)) {
+		stopLoading =true;
 		Utils.println("UIProfile: submit go back"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
