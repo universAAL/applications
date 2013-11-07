@@ -38,7 +38,6 @@ public class SharedResources {
      * )
      */
     public void start() {
-		Utils.println("SharedResources starts running");
 		SharedResources.serviceProvider = new UIServiceProvider(moduleContext);
 		SharedResources.uIProvider = new InterfaceProvider(moduleContext);
 		SharedResources.serviceGetTodayMenuCallee = new ServiceGetTodayMenuCallee(moduleContext);

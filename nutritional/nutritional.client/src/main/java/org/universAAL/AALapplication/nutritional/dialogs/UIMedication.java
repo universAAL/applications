@@ -123,7 +123,7 @@ public class UIMedication {
 		Utils.println("UIMedication: submit go back"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIProfile.getForm(), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }

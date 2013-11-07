@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 Itaca-TSB, http://www.tsb.upv.es
-	Tecnologías para la Salud y el Bienestar
+	Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -82,7 +82,6 @@ public class OntoFactory {
      * @return the onto recipe
      */
     public static Recipe getRecipe(na.miniDao.Recipe recipe) {
-	Utils.println("getOntoRecipe...");
 	if (recipe == null)
 	    return null;
 	Recipe or = new Recipe();
@@ -264,7 +263,7 @@ public class OntoFactory {
 		}
 		Utils.println("Category not found ID: " + foodCateogoryID);
 	    } catch (OASIS_ServiceUnavailable e) {
-		Utils.println("Error en el servicio :(");
+		Utils.println("Service error :(");
 		e.printStackTrace();
 	    }
 	}
@@ -338,7 +337,7 @@ public class OntoFactory {
 		}
 		Utils.println("SubCategory not found ID: " + foodSubCateogoryID);
 	    } catch (OASIS_ServiceUnavailable e) {
-		Utils.println("Error en el servicio :(");
+		Utils.println("Service error :(");
 		e.printStackTrace();
 	    }
 	}
@@ -439,8 +438,8 @@ public class OntoFactory {
 	NutritionalHabits nhs = new NutritionalHabits();
 	NutritionalPreferences npr = new NutritionalPreferences();
 	HashMap<String, UProperty> map = new HashMap<String, UProperty>();
-	// recorrer todas las propiedades y crear una tabla con sus códigos para
-	// fácil acceso
+	// recorrer todas las propiedades y crear una tabla con sus cï¿½digos para
+	// fï¿½cil acceso
 	if (profile != null && profile.getProperties() != null
 		&& profile.getProperties().length > 0) {
 	    for (UProperty element : profile.getProperties()) {
@@ -544,7 +543,7 @@ public class OntoFactory {
 		    ServiceInterface.OP_GetUserRecipe, input, false);
 	    return OntoFactory.getRecipe(recipe);
 	} catch (OASIS_ServiceUnavailable e) {
-	    Utils.println("Error en el servicio :(");
+	    Utils.println("Service error :(");
 	    e.printStackTrace();
 	}
 

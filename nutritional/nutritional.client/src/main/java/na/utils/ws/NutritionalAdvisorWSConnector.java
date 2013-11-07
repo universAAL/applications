@@ -37,10 +37,6 @@ public class NutritionalAdvisorWSConnector {
 	    Object[] input3) throws RemoteException {
 	Object[] input = input3;
 	
-	for(int i=0; i<input.length; i++)
-		System.out.println("\n\n\n\n\n ------>INPUT i " + i + " = " + input[i].toString());
-	
-	
 	if (operationName.compareTo(ServiceInterface.OP_GetTodayMenu) == 0) {
 	    return this.getTodayMenu((String) input[0]);
 	} else if (operationName.compareTo(ServiceInterface.OP_GetTomorrowMenu) == 0) {
@@ -99,8 +95,6 @@ public class NutritionalAdvisorWSConnector {
 		    Integer.parseInt((String) input[1]),
 		    Integer.parseInt((String) input[2]));
 	} else if (operationName.compareTo(ServiceInterface.OP_GetToken) == 0) {
-		System.out.println("GET TOKENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
-		
 	    return this.getToken((String) input[0], (String) input[1],
 		    Integer.parseInt((String) input[2]));
 	} else if (operationName.compareTo(ServiceInterface.OP_GetMyAdvises) == 0) {
@@ -554,7 +548,7 @@ public class NutritionalAdvisorWSConnector {
 				+ result[0].getRecipeID());
 		    }
 		} else {
-		    log.info("result tamaño: " + result.length);
+		    log.info("result tamaï¿½o: " + result.length);
 		}
 	    } else {
 		log.info("result es null");
@@ -574,7 +568,7 @@ public class NutritionalAdvisorWSConnector {
 	} catch (RemoteException e) {
 	    this.showConnectionError(e);
 	}
-	log.info("ha ocurrido un error al añadir a favoritos...");
+	log.info("ha ocurrido un error al aï¿½adir a favoritos...");
 	return null;
     }
 

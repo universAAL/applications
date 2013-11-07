@@ -115,8 +115,8 @@ public class ProfileConnector {
     // }
 
     public String getScreenLanguage() {
-    	// TODO: Language is hardcoded to "GB because for a strange reason corrupts the database when it is changed to other language
-	this.codeLang = "GB"; // System.getProperty("user.language", "en");
+    	// TODO: Language is hardcoded to "GB because for a strange reason when it is changed to other languages it corrupts the database in the server
+    	this.codeLang = "GB"; // Locale.getDefault(); //System.getProperty("user.language", "en");
 	return this.codeLang;
 	// if (this.codeLang!=null)
 	// return this.codeLang;
@@ -628,8 +628,8 @@ public class ProfileConnector {
 	ProfileConnector.nutritionalProfile = profile;
 	ProfileConnector.map = null;
 	map = new HashMap<String, UProperty>();
-	// recorrer todas las propiedades y crear una tabla con sus códigos para
-	// fácil acceso
+	// recorrer todas las propiedades y crear una tabla con sus cï¿½digos para
+	// fï¿½cil acceso
 	if (nutritionalProfile != null
 		&& nutritionalProfile.getProperties() != null
 		&& nutritionalProfile.getProperties().length > 0) {

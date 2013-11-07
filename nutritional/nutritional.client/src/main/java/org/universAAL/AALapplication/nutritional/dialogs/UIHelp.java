@@ -50,7 +50,6 @@ public class UIHelp {
      * @return The form.
      */
     public static Form getForm() {
-	Utils.println(Messages.getString("UIHelp.0")); //$NON-NLS-1$
 	Form f = Form.newDialog(Messages.getString("UIHelp.1"), new Resource()); //$NON-NLS-1$
 	 f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
 	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.left);
@@ -132,7 +131,7 @@ public class UIHelp {
 		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle,
 			UIMenus.getForm(true), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -140,7 +139,7 @@ public class UIHelp {
 		Utils.println("UIMEnus: submit today"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIMenus.getForm(true), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -150,7 +149,7 @@ public class UIHelp {
 			SharedResources.user,
 			Form.newMessage(Messages.getString("UIMenus.13"), //$NON-NLS-1$
 				Messages.getString("UIMenus.14")), //$NON-NLS-1$
-			LevelRating.middle, Locale.ENGLISH,
+			LevelRating.middle, Locale.getDefault(),
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
@@ -162,7 +161,7 @@ public class UIHelp {
 			SharedResources.user,
 			Form.newMessage(Messages.getString("UIMenus.13"), //$NON-NLS-1$
 				Messages.getString("UIMenus.14")), //$NON-NLS-1$
-			LevelRating.middle, Locale.ENGLISH,
+			LevelRating.middle, Locale.getDefault(),
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
@@ -172,7 +171,7 @@ public class UIHelp {
 		Utils.println("UIMain submit shopping"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIShopping.getForm(), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }*/
@@ -180,7 +179,7 @@ public class UIHelp {
 		Utils.println("UIMain submit profile"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIProfile.getForm(), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }

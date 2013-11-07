@@ -44,7 +44,6 @@ public class InterfaceProvider extends UICaller {
     public void handleUIResponse(UIResponse uir) {
 	// This delivers the UI response to the right class. If you add a new UI
 	// class, add it here!
-	Utils.println("----------------------------------->>>> Received UI Submit ID: " + uir.getSubmissionID());
 	String id = uir.getSubmissionID();
 	if (uir != null) {
 	    if (id.startsWith(UIHelp.PREFIX)) {
@@ -79,7 +78,6 @@ public class InterfaceProvider extends UICaller {
     }
 
     public void startMainDialog() {
-		Utils.println("Start Main Dialog invoked");
 		UIRequest out = new UIRequest(SharedResources.user,
 		UIMenus.getForm(true), LevelRating.middle, Locale.getDefault(),
 		PrivacyLevel.insensible);

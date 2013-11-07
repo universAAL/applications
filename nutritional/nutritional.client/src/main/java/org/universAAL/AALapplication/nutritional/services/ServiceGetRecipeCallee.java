@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 Itaca-TSB, http://www.tsb.upv.es
-	Tecnologías para la Salud y el Bienestar
+	Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -108,7 +108,6 @@ public class ServiceGetRecipeCallee extends ServiceCallee {
     }
 
     private ServiceResponse getRecipe(int recipeID) {
-	Utils.println("Get recipe... ask web service");
 	try {
 	    ServiceResponse sr = new ServiceResponse(CallStatus.succeeded);
 	    String[] input = { TSFConnector.getInstance().getToken(),
@@ -123,7 +122,7 @@ public class ServiceGetRecipeCallee extends ServiceCallee {
 	    // create and add a ProcessOutput-Event that binds the output URI to
 	    // the created list of lamps
 	    // Recipe recipe = new Recipe();
-	    // recipe.setName("La receta de Héctor y Juan");
+	    // recipe.setName("La receta de Hï¿½ctor y Juan");
 	    // recipe.setDishCategory(DishCategory.VALUE_FIRST_COURSE);
 	    // recipe.setFavourite(false);
 	    // List<Ingredient> list = new ArrayList<Ingredient>();

@@ -295,7 +295,7 @@ public class UIProfile {
 		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
 			UIMenus.getForm(true), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -306,7 +306,7 @@ public class UIProfile {
 			SharedResources.user,
 			Form.newMessage("", //$NON-NLS-1$
 				""), //$NON-NLS-1$
-			LevelRating.middle, Locale.ENGLISH,
+			LevelRating.middle, Locale.getDefault(),
 			PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
@@ -316,7 +316,7 @@ public class UIProfile {
 		Utils.println(" TODO UIProfile: submit fooddis"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIItemList.getForm(true), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -324,7 +324,7 @@ public class UIProfile {
 		Utils.println(" TODO UIProfile: submit favrec"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIItemList.getForm(false), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
@@ -332,7 +332,7 @@ public class UIProfile {
 		Utils.println(" TODO UIProfile: submit medinteract"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIMedication.getForm(), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 		// TODO

@@ -43,7 +43,7 @@ public class UIRecipeDetail {
     static final String SUBMIT_TOMORROW = PREFIX + "tomorrow"; //$NON-NLS-1$
    // static final String SUBMIT_WEEK = PREFIX + "week"; //$NON-NLS-1$
    // static final String SUBMIT_TIPS = PREFIX + "tips"; //$NON-NLS-1$
-    static final String SUBMIT_ADDTOFAV = PREFIX + "addToFav"; //$NON-NLS-1$
+  //  static final String SUBMIT_ADDTOFAV = PREFIX + "addToFav"; //$NON-NLS-1$
     static final String SUBMIT_ADDDISLIKE = PREFIX + "rem"; //$NON-NLS-1$
 
     static final String USER_INPUT_REF1 = PREFIX + "ref1"; //$NON-NLS-1$
@@ -97,8 +97,8 @@ public class UIRecipeDetail {
 	    }
 	    if (recipePicture != null && !recipePicture.isEmpty()) {
 		new MediaObject(groupDesc, new Label(
-			Messages.getString("UIRecipeDetail.7"), null), //$NON-NLS-1$
-			"image", InterfaceProvider.IMG_URL + recipePicture); // //$NON-NLS-1$
+			"",""), //$NON-NLS-1$
+			" ", InterfaceProvider.IMG_URL + recipePicture); // //$NON-NLS-1$
 	    }
 
 	    Group groupIngredients = new Group(
@@ -114,12 +114,12 @@ public class UIRecipeDetail {
 			new SimpleOutput(groupIngredients,
 				new Label("�", null), null,
 				ingredient.getDescription());
-			new Submit(groupIngredients, new Label(
-				Messages.getString("UIItemList.3"), null),
-				SUBMIT_ADDDISLIKE + indexIngredient + "@"
-					+ ingredient.getFoodID() + "@"
-					+ ingredient.getDescription() + "@"
-					+ idRecipe);
+//			new Submit(groupIngredients, new Label(
+//				Messages.getString("UIItemList.3"), null),
+//				SUBMIT_ADDDISLIKE + indexIngredient + "@"
+//					+ ingredient.getFoodID() + "@"
+//					+ ingredient.getDescription() + "@"
+//					+ idRecipe);
 		    } else {
 			Utils.println("UIRecipeDetail: Ingredient with index: " //$NON-NLS-1$
 				+ indexIngredient + " is null"); //$NON-NLS-1$
@@ -139,9 +139,9 @@ public class UIRecipeDetail {
 		    (recipeProcedure != null && !recipeProcedure.isEmpty()) ? recipeProcedure
 			    : Messages.getString("UIRecipeDetail.15"));
 
-	    new Submit(f.getSubmits(), new Label(
-		    Messages.getString("UIRecipeDetail.9"), null), //$NON-NLS-1$
-		    SUBMIT_ADDTOFAV + "@" + recipe.getRecipeID());
+//	    new Submit(f.getSubmits(), new Label(
+//		    Messages.getString("UIRecipeDetail.9"), null), //$NON-NLS-1$
+//		    SUBMIT_ADDTOFAV + "@" + recipe.getRecipeID());
 
 	} else {
 	    Utils.println("UIRecipeDetail: Couldn't get recipe"); //$NON-NLS-1$
@@ -173,34 +173,34 @@ public class UIRecipeDetail {
 		UIRequest out = new UIRequest(SharedResources.user,
 			// UIMain.getForm(), LevelRating.middle, Locale.ENGLISH,
 			UIMenus.getForm(true), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
-	    if (id.startsWith(SUBMIT_ADDTOFAV)) {
-		Utils.println("UIRecipeDetail: submit fav"); //$NON-NLS-1$
-		UIRequest out;
-		String[] values = uir.getSubmissionID().split("@"); //$NON-NLS-1$
-		int idItem = Integer.parseInt(values[1]);
-		Business business = new Business();
-		try {
-		    business.addRecipeToFavoritesWebServer(idItem);
-		    out = new UIRequest(SharedResources.user,
-			    UIRecipeDetail.getForm(idItem), LevelRating.middle,
-			    Locale.ENGLISH, PrivacyLevel.insensible);
-		} catch (OASIS_ServiceUnavailable e) {
-		    e.printStackTrace();
-		    out = new UIRequest(
-			    SharedResources.user,
-			    Form.newMessage(
-				    Messages.getString("UIRecipeDetail.13"), //$NON-NLS-1$
-				    Messages.getString("UIRecipeDetail.14")), //$NON-NLS-1$
-			    LevelRating.middle, Locale.ENGLISH,
-			    PrivacyLevel.insensible);
-		}
-		SharedResources.uIProvider.sendUIRequest(out);
-		return;
-	    }
+//	    if (id.startsWith(SUBMIT_ADDTOFAV)) {
+//		Utils.println("UIRecipeDetail: submit fav"); //$NON-NLS-1$
+//		UIRequest out;
+//		String[] values = uir.getSubmissionID().split("@"); //$NON-NLS-1$
+//		int idItem = Integer.parseInt(values[1]);
+//		Business business = new Business();
+//		try {
+//		    business.addRecipeToFavoritesWebServer(idItem);
+//		    out = new UIRequest(SharedResources.user,
+//			    UIRecipeDetail.getForm(idItem), LevelRating.middle,
+//			    Locale.getDefault(), PrivacyLevel.insensible);
+//		} catch (OASIS_ServiceUnavailable e) {
+//		    e.printStackTrace();
+//		    out = new UIRequest(
+//			    SharedResources.user,
+//			    Form.newMessage(
+//				    Messages.getString("UIRecipeDetail.13"), //$NON-NLS-1$
+//				    Messages.getString("UIRecipeDetail.14")), //$NON-NLS-1$
+//			    LevelRating.middle, Locale.getDefault(),
+//			    PrivacyLevel.insensible);
+//		}
+//		SharedResources.uIProvider.sendUIRequest(out);
+//		return;
+//	    }
 	    if (id.startsWith(SUBMIT_ADDDISLIKE)) {
 		Utils.println("UIRecipeDetail: submit dislike"); //$NON-NLS-1$
 		UIRequest out;
@@ -214,7 +214,7 @@ public class UIRecipeDetail {
 		profConnect.addFood_Dislikes(idItem + "@food@" + nameItem);
 		out = new UIRequest(SharedResources.user,
 			UIRecipeDetail.getForm(idRecipe), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 	    }
 	}

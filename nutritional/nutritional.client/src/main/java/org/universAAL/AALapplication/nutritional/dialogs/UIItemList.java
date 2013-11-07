@@ -44,7 +44,7 @@ public class UIItemList {
     public static final String PREFIX = InterfaceProvider.MY_UI_NAMESPACE
 	    + "UIItemList"; //$NON-NLS-1$
     static final String USER_INPUT_REF1 = PREFIX + "ref1"; //$NON-NLS-1$
-    static final String SUBMIT_REMOVE = PREFIX + "rem"; //$NON-NLS-1$
+   // static final String SUBMIT_REMOVE = PREFIX + "rem"; //$NON-NLS-1$
     static final String SUBMIT_GOBACK = PREFIX + "back"; //$NON-NLS-1$
 
     /**
@@ -84,9 +84,9 @@ public class UIItemList {
 		row.addAppearanceRecommendation(new HorizontalLayout());
 		row.addAppearanceRecommendation(HorizontalAlignment.right);
 		new SimpleOutput(row, new Label("", null), null, i.getName());
-		new Submit(row, new Label(Messages.getString("UIItemList.3"),
-			null), SUBMIT_REMOVE + k + "@" + dislikeInsteadOfRecipe
-			+ "@" + i.getID());
+//		new Submit(row, new Label(Messages.getString("UIItemList.3"),
+//			null), SUBMIT_REMOVE + k + "@" + dislikeInsteadOfRecipe
+//			+ "@" + i.getID());
 		k++;
 	    }
 	} else {
@@ -108,10 +108,10 @@ public class UIItemList {
 		    row.addAppearanceRecommendation(HorizontalAlignment.right);
 		    new SimpleOutput(row, new Label("", null), null,
 			    i.getCourse());
-		    new Submit(row, new Label(
-			    Messages.getString("UIItemList.3"), null),
-			    SUBMIT_REMOVE + k + "@" + dislikeInsteadOfRecipe
-				    + "@" + i.getRecipeID());
+//		    new Submit(row, new Label(
+//			    Messages.getString("UIItemList.3"), null),
+//			    SUBMIT_REMOVE + k + "@" + dislikeInsteadOfRecipe
+//				    + "@" + i.getRecipeID());
 		    k++;
 		}
 	    } catch (OASIS_ServiceUnavailable e) {
@@ -144,26 +144,26 @@ public class UIItemList {
 		Utils.println("UIRecipeDetail: submit go back"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIProfile.getForm(), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
+			Locale.getDefault(), PrivacyLevel.insensible);
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
-	    if (id.startsWith(SUBMIT_REMOVE)) {
-		Utils.println("UIRecipeDetail: submit remove"); //$NON-NLS-1$
-		String[] values = uir.getSubmissionID().split("@"); //$NON-NLS-1$
-		int idItem = Integer.parseInt(values[2]);
-		boolean flag = Boolean.parseBoolean(values[1]);
-		if (flag) {
-		    removeDislike(idItem);
-		} else {
-		    removeRecipe(idItem);
-		}
-		UIRequest out = new UIRequest(SharedResources.user,
-			UIItemList.getForm(flag), LevelRating.middle,
-			Locale.ENGLISH, PrivacyLevel.insensible);
-		SharedResources.uIProvider.sendUIRequest(out);
-		return;
-	    }
+//	    if (id.startsWith(SUBMIT_REMOVE)) {
+//		Utils.println("UIRecipeDetail: submit remove"); //$NON-NLS-1$
+//		String[] values = uir.getSubmissionID().split("@"); //$NON-NLS-1$
+//		int idItem = Integer.parseInt(values[2]);
+//		boolean flag = Boolean.parseBoolean(values[1]);
+//		if (flag) {
+//		    removeDislike(idItem);
+//		} else {
+//		    removeRecipe(idItem);
+//		}
+//		UIRequest out = new UIRequest(SharedResources.user,
+//			UIItemList.getForm(flag), LevelRating.middle,
+//			Locale.ENGLISH, PrivacyLevel.insensible);
+//		SharedResources.uIProvider.sendUIRequest(out);
+//		return;
+//	    }
 	}
 	Utils.println("Finished delegation of UI response in UIItemList"); //$NON-NLS-1$
     }
