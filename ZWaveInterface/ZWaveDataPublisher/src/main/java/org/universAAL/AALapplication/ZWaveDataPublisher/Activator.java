@@ -19,13 +19,15 @@
  */
 package org.universAAL.AALapplication.ZWaveDataPublisher;
 
+import java.io.IOException;
 import java.util.Timer;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.universAAL.AALapplication.ZWaveDataPublisher.MotionContact.MotionContactSensorPublisher;
-import org.universAAL.AALapplication.ZWaveDataPublisher.MotionContact.ZWaveEventListener;
 import org.universAAL.AALapplication.ZWaveDataPublisher.PowerConsumption.PowerReader;
+import org.universAAL.AALapplication.ZWaveDataPublisher.Server.MotionDecoderFactory;
+import org.universAAL.AALapplication.ZWaveDataPublisher.Server.MotionServer;
 import org.universAAL.middleware.container.ModuleContext;
 
 public class Activator implements BundleActivator {
@@ -33,8 +35,7 @@ public class Activator implements BundleActivator {
 	public static ModuleContext context = null;
 	private MotionContactSensorPublisher motionPublisher = null;
 	private BundleContext ctx;
-	private ZWaveEventListener manager;
-
+	
 	public void start(BundleContext bcontext) throws Exception {
 		ctx = bcontext;
 		new Thread(){
@@ -48,8 +49,17 @@ public class Activator implements BundleActivator {
 			public void run(){   
 				System.out.print("Running movement detector\n");
 				motionPublisher = new MotionContactSensorPublisher(ctx);
-				manager = new ZWaveEventListener(motionPublisher);
-				manager.init();
+				
+				MotionDecoderFactory factory = new MotionDecoderFactory(motionPublisher);
+				MotionServer motionServer = new MotionServer(factory, 53007);
+				try {
+					System.out.print("STARTING SERVER");
+					motionServer.start();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}			
 		}.start();
 		
