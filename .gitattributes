@@ -26,9 +26,23 @@ ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.pde.core.prefs -text svn
 ZWaveInterface/ZWaveDataPublisher/pom.xml -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Activator.java -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/MotionContact/MotionContactSensorPublisher.java -text svneol=unset#text/plain
-ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/MotionContact/ZWaveEventListener.java -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/PowerConsumption/PowerPublisher.java -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/PowerConsumption/PowerReader.java -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/AbstractProtocolDecoder.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/AbstractSocketServer.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/AbstractSocketServerXSocket.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/ConnectionDataHandler.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/ConnectionLinker.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/ISocketServer.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/ISocketServerConnection.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/ISocketServerConnectionListener.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/ISocketServerProtocolDecoderFactory.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/ISocketServerProtocolDecoderListener.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/ISocketSeverProtocolDecoder.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/MotionDecoder.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/MotionDecoderFactory.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/MotionServer.java -text
+ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Server/TransferRateCalculator.java -text
 ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Setup.java -text svneol=unset#text/plain
 aal_eficiency/AALfficiency.pom/AALfficiency.launch -text svneol=unset#text/plain
 aal_eficiency/AALfficiency.pom/pom.xml -text svneol=unset#text/plain
