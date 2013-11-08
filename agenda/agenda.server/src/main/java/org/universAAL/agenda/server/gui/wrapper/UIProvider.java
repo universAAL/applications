@@ -119,9 +119,13 @@ public class UIProvider extends UICaller {
 		    new Object[] { "no user profile specified." }, null);
 	    return;
 	} else {
-	    LogUtils.logInfo(mcontext, this.getClass(),
-		    "showReminderConfirmationDialog",
-		    new Object[] { "Show reminder confirmation dialog." }, null);
+	    LogUtils
+		    .logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "showReminderConfirmationDialog",
+			    new Object[] { "Show reminder confirmation dialog." },
+			    null);
 	}
 
 	Form form = Form.newMessage(Messages
@@ -151,12 +155,15 @@ public class UIProvider extends UICaller {
 	// EVENT_ID, TypeMapper.getDatatypeURI(Integer.class), 1, 1), new
 	// Integer(eventID)).setSecret();
 
-	new SimpleOutput(
-		g,
-		new Label("", null), new PropertyPath(null, false, new String[] { CALENDAR_URI }), calendarURI); //$NON-NLS-1$
-	new SimpleOutput(
-		g,
-		new Label("", null), new PropertyPath(null, false, new String[] { EVENT_ID }), new Integer(eventID)); //$NON-NLS-1$
+	// calendar URI and event ID were rendered (and shown to a user as e.g.
+	// http://ontology.universAAL.org/PersonalAgenda.owl#Calendar, 9) so
+	// comment this out
+	// new SimpleOutput(
+	// g,
+	//		new Label("", null), new PropertyPath(null, false, new String[] { CALENDAR_URI }), calendarURI); //$NON-NLS-1$
+	// new SimpleOutput(
+	// g,
+	//		new Label("", null), new PropertyPath(null, false, new String[] { EVENT_ID }), new Integer(eventID)); //$NON-NLS-1$
 	UIRequest oe = new UIRequest(user, form, LevelRating.middle,
 		Locale.ENGLISH, PrivacyLevel.personal);
 	// before UIBus
