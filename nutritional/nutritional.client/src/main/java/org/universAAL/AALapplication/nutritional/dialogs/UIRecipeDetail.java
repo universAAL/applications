@@ -97,7 +97,7 @@ public class UIRecipeDetail {
 	    }
 	    if (recipePicture != null && !recipePicture.isEmpty()) {
 		new MediaObject(groupDesc, new Label(
-			"",""), //$NON-NLS-1$
+			Messages.getString("UIMenus.4"),"image"), //$NON-NLS-1$
 			" ", InterfaceProvider.IMG_URL + recipePicture); // //$NON-NLS-1$
 	    }
 

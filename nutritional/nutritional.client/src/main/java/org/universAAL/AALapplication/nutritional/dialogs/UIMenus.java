@@ -144,15 +144,16 @@ public class UIMenus {
 			    
 			    if (dish.getImage() != null
 				    && dish.getImage().length() > 0) {
-//				new MediaObject(groupDish, new Label(
+//					new MediaObject(groupDish, new Label(
 //					Messages.getString("UIMenus.4"), //$NON-NLS-1$
-//					" "), " ", //$NON-NLS-1$
+//					null), "image", //$NON-NLS-1$
 //					InterfaceProvider.IMG_URL
 //						+ dish.getImage());
-			    	
+			    	System.out.println("img - url en uimenus         " + InterfaceProvider.IMG_URL
+								+ dish.getImage());
 			    	new MediaObject(groupDish, new Label(
-							"", //$NON-NLS-1$
-							""), "", //$NON-NLS-1$
+			    			new String(" "), //$NON-NLS-1$
+							new String(" ")), "image", //$NON-NLS-1$
 							InterfaceProvider.IMG_URL
 								+ dish.getImage());
 			    }
