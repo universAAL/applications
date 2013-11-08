@@ -23,6 +23,7 @@ ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.core.resources.prefs -te
 ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/.settings/org.eclipse.pde.core.prefs -text svneol=unset#text/plain
+ZWaveInterface/ZWaveDataPublisher/ZWaveDataPublisher.properties -text
 ZWaveInterface/ZWaveDataPublisher/pom.xml -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/Activator.java -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataPublisher/src/main/java/org/universAAL/AALapplication/ZWaveDataPublisher/MotionContact/MotionContactSensorPublisher.java -text svneol=unset#text/plain
