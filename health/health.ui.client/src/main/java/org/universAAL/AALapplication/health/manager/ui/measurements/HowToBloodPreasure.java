@@ -1,7 +1,6 @@
 package org.universAAL.AALapplication.health.manager.ui.measurements;
 
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
-import org.universAAL.AALapplication.health.manager.ui.MainMenu;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
@@ -24,7 +23,7 @@ public final class HowToBloodPreasure extends AbstractHealthForm {
 
 	@Override
 	public void handleUIResponse(UIResponse arg0) {
-		new MainMenu(this).show();
+//	    nothing to handle
 	}
 	
 	public void show(){
@@ -35,6 +34,7 @@ public final class HowToBloodPreasure extends AbstractHealthForm {
 		new MediaObject(f.getIOControls(), new Label(null, (String) null),
 				getString("howToBloodPreasure.content.type"), getString("howToBloodPreasure.content.url")); 
 		sendForm(f);
+		    close();
 	}
 
 }

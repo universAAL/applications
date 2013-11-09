@@ -69,6 +69,7 @@ public class RemoveConfirmation extends AbstractHealthForm {
 	/** {@ inheritDoc}	 */
 	@Override
 	public void handleUIResponse(UIResponse uiResponse) {
+	    close();
 		String cmd = uiResponse.getSubmissionID();
 		if (cmd.equals(DELETE_CMD)){
 			// call remove treatment

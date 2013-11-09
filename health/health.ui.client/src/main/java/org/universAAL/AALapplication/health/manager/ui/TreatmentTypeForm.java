@@ -43,6 +43,7 @@ public class TreatmentTypeForm extends AbstractHealthForm {
 	 */
 	@Override
 	public void handleUIResponse(UIResponse arg0) {
+	    close();
 		Resource res = (Resource) arg0.getUserInput(new String[]{SELECTED_TREATMENT});
 		if (arg0.getSubmissionID().startsWith(OK_CMD)){
 			// service call the most specific DisplayTreatmentService available.
