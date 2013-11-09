@@ -36,7 +36,7 @@ public class UIHelp {
     static final String SUBMIT_EXIT = PREFIX + "exit"; //$NON-NLS-1$
 //    static final String SUBMIT_SHOPPING = PREFIX + "shopping"; //$NON-NLS-1$
     static final String SUBMIT_PROFILE = PREFIX + "profile"; //$NON-NLS-1$
-    static final String SUBMIT_TODAY = PREFIX + "today"; //$NON-NLS-1$
+//    static final String SUBMIT_TODAY = PREFIX + "today"; //$NON-NLS-1$
 //    static final String SUBMIT_WEEK = PREFIX + "week"; //$NON-NLS-1$
 //    static final String SUBMIT_TIPS = PREFIX + "tips"; //$NON-NLS-1$
     static final String SUBMIT_GOBACK = PREFIX + "back"; //$NON-NLS-1$
@@ -96,9 +96,9 @@ public class UIHelp {
 		Messages.getString("UIHelp.12")); //$NON-NLS-1$
 	// add a go back button for quitting the dialog
 
-	new Submit(f.getSubmits(), new Label(
+	/*	new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIMenus.8"), null), SUBMIT_TODAY); //$NON-NLS-1$
-/*	new Submit(f.getSubmits(), new Label(
+	new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIMenus.10"), null), SUBMIT_WEEK); //$NON-NLS-1$
 	new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIMenus.11"), null), SUBMIT_TIPS); //$NON-NLS-1$
@@ -135,7 +135,7 @@ public class UIHelp {
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
-	    if (SUBMIT_TODAY.equals(id)) {
+	    /*	    if (SUBMIT_TODAY.equals(id)) {
 		Utils.println("UIMEnus: submit today"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(SharedResources.user,
 			UIMenus.getForm(true), LevelRating.middle,
@@ -143,7 +143,7 @@ public class UIHelp {
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
-/*	    if (SUBMIT_WEEK.equals(id)) {
+	    if (SUBMIT_WEEK.equals(id)) {
 		Utils.println(" TODO UIMenus: submit week"); //$NON-NLS-1$
 		UIRequest out = new UIRequest(
 			SharedResources.user,

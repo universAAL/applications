@@ -52,9 +52,9 @@ public class UIProfile {
 
     static final String SUBMIT_GOBACK = PREFIX + "back"; //$NON-NLS-1$
     static final String SUBMIT_SAVEPROFILE = PREFIX + "saveprofile"; //$NON-NLS-1$
-    static final String SUBMIT_FOODDISLIKES = PREFIX + "fooddislikes"; //$NON-NLS-1$
-    static final String SUBMIT_FAVRECIPES = PREFIX + "favrecipes"; //$NON-NLS-1$
-    static final String SUBMIT_MEDINTERACT = PREFIX + "medinteract"; //$NON-NLS-1$
+//    static final String SUBMIT_FOODDISLIKES = PREFIX + "fooddislikes"; //$NON-NLS-1$
+//    static final String SUBMIT_FAVRECIPES = PREFIX + "favrecipes"; //$NON-NLS-1$
+//    static final String SUBMIT_MEDINTERACT = PREFIX + "medinteract"; //$NON-NLS-1$
     static final String USER_INPUT_REF1 = PREFIX + "ref1"; //$NON-NLS-1$
     static final String USER_INPUT_REF2 = PREFIX + "ref2"; //$NON-NLS-1$
     static final String USER_INPUT_REF3 = PREFIX + "ref3"; //$NON-NLS-1$
@@ -302,12 +302,12 @@ public class UIProfile {
 
 	new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIProfile.31"), null), SUBMIT_SAVEPROFILE); //$NON-NLS-1$
-	new Submit(f.getSubmits(), new Label(
-		Messages.getString("UIProfile.32"), null), SUBMIT_FOODDISLIKES); //$NON-NLS-1$
-	new Submit(f.getSubmits(), new Label(
-		Messages.getString("UIProfile.33"), null), SUBMIT_FAVRECIPES); //$NON-NLS-1$
-	new Submit(f.getSubmits(), new Label(
-		Messages.getString("UIProfile.34"), null), SUBMIT_MEDINTERACT); //$NON-NLS-1$
+//	new Submit(f.getSubmits(), new Label(
+//		Messages.getString("UIProfile.32"), null), SUBMIT_FOODDISLIKES); //$NON-NLS-1$
+//	new Submit(f.getSubmits(), new Label(
+//		Messages.getString("UIProfile.33"), null), SUBMIT_FAVRECIPES); //$NON-NLS-1$
+//	new Submit(f.getSubmits(), new Label(
+//		Messages.getString("UIProfile.34"), null), SUBMIT_MEDINTERACT); //$NON-NLS-1$
 	new Submit(f.getSubmits(), new Label(
 		Messages.getString("UIProfile.9"), null), //$NON-NLS-1$
 		SUBMIT_GOBACK);
@@ -350,31 +350,31 @@ public class UIProfile {
 		return;
 		// TODO
 	    }
-	    if (SUBMIT_FOODDISLIKES.equals(id)) {
-		Utils.println(" TODO UIProfile: submit fooddis"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.user,
-			UIItemList.getForm(true), LevelRating.middle,
-			Locale.getDefault(), PrivacyLevel.insensible);
-		SharedResources.uIProvider.sendUIRequest(out);
-		return;
-	    }
-	    if (SUBMIT_FAVRECIPES.equals(id)) {
-		Utils.println(" TODO UIProfile: submit favrec"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.user,
-			UIItemList.getForm(false), LevelRating.middle,
-			Locale.getDefault(), PrivacyLevel.insensible);
-		SharedResources.uIProvider.sendUIRequest(out);
-		return;
-	    }
-	    if (SUBMIT_MEDINTERACT.equals(id)) {
-		Utils.println(" TODO UIProfile: submit medinteract"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(SharedResources.user,
-			UIMedication.getForm(), LevelRating.middle,
-			Locale.getDefault(), PrivacyLevel.insensible);
-		SharedResources.uIProvider.sendUIRequest(out);
-		return;
-		// TODO
-	    }
+//	    if (SUBMIT_FOODDISLIKES.equals(id)) {
+//		Utils.println(" TODO UIProfile: submit fooddis"); //$NON-NLS-1$
+//		UIRequest out = new UIRequest(SharedResources.user,
+//			UIItemList.getForm(true), LevelRating.middle,
+//			Locale.getDefault(), PrivacyLevel.insensible);
+//		SharedResources.uIProvider.sendUIRequest(out);
+//		return;
+//	    }
+//	    if (SUBMIT_FAVRECIPES.equals(id)) {
+//		Utils.println(" TODO UIProfile: submit favrec"); //$NON-NLS-1$
+//		UIRequest out = new UIRequest(SharedResources.user,
+//			UIItemList.getForm(false), LevelRating.middle,
+//			Locale.getDefault(), PrivacyLevel.insensible);
+//		SharedResources.uIProvider.sendUIRequest(out);
+//		return;
+//	    }
+//	    if (SUBMIT_MEDINTERACT.equals(id)) {
+//		Utils.println(" TODO UIProfile: submit medinteract"); //$NON-NLS-1$
+//		UIRequest out = new UIRequest(SharedResources.user,
+//			UIMedication.getForm(), LevelRating.middle,
+//			Locale.getDefault(), PrivacyLevel.insensible);
+//		SharedResources.uIProvider.sendUIRequest(out);
+//		return;
+//		// TODO
+//	    }
 	}
 	Utils.println("Finished delegation of UI response in UIProfile"); //$NON-NLS-1$
     }
