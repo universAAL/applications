@@ -29,7 +29,7 @@ public class Login {
 	String password = ProfileConnector.getInstance()
 		.getNutritionalPassword();
 	String lang = ProfileConnector.getInstance().getScreenLanguage();
-	System.out.println("\n-------------------------------->Language is: " + lang +"\n");
+	
 	int preferredLanguage = ProfileConnector.getInstance().getCodeLang();
 
 	try {
