@@ -149,9 +149,7 @@ public class UIMenus {
 //					null), "image", //$NON-NLS-1$
 //					InterfaceProvider.IMG_URL
 //						+ dish.getImage());
-			    	System.out.println("img - url en uimenus         " + InterfaceProvider.IMG_URL
-								+ dish.getImage());
-			    	new MediaObject(groupDish, new Label(
+			      	new MediaObject(groupDish, new Label(
 			    			new String(" "), //$NON-NLS-1$
 							new String(" ")), "image", //$NON-NLS-1$
 							InterfaceProvider.IMG_URL
