@@ -59,6 +59,7 @@ public class NewMeasurementActivityForm extends NewTreatmentForm{
 	@Override
 	public void handleUIResponse(UIResponse uiResponse) {
 		super.handleUIResponse(uiResponse);
+		    close();
 	}
 	
 	public void show(TakeMeasurementActivity t){

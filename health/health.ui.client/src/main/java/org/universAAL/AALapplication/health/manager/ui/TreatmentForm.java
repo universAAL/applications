@@ -68,6 +68,7 @@ public class TreatmentForm extends AbstractHealthForm {
 
 
 	public void handleUIResponse(UIResponse input) {
+	    close();
 		// TODO Manage Submit Detail
 		String cmd = input.getSubmissionID();
 		

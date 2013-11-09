@@ -28,6 +28,7 @@ public final class NotReady extends AbstractHealthForm {
 
 	@Override
 	public void handleUIResponse(UIResponse arg0) {
+	    close();
 		new MainMenu(this).show();
 	}
 	

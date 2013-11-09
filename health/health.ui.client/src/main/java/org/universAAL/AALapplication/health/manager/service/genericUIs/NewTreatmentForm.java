@@ -73,6 +73,7 @@ public class NewTreatmentForm extends AbstractHealthForm{
 	/** {@ inheritDoc}	 */
 	@Override
 	public void handleUIResponse(UIResponse uiResponse) {
+	    close();
 		String cmd = uiResponse.getSubmissionID();
 		if (cmd.startsWith(NEW_CMD)){
 			Treatment t = (Treatment) uiResponse.getSubmittedData();

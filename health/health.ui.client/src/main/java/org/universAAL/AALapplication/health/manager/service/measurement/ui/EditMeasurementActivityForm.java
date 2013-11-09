@@ -59,6 +59,7 @@ public class EditMeasurementActivityForm extends AbstractHealthForm{
 	/** {@ inheritDoc}	 */
 	@Override
 	public void handleUIResponse(UIResponse uiResponse) {
+	    close();
 		String cmd = uiResponse.getSubmissionID();
 		if (cmd.startsWith(EDIT_CMD)){
 			// Call edit Treatment

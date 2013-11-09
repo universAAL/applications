@@ -2,9 +2,7 @@ package org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
-import org.universAAL.middleware.owl.supply.LevelRating;
 import org.universAAL.middleware.ui.UIResponse;
-import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.Submit;
@@ -38,6 +36,7 @@ public class MainMenu extends AbstractHealthForm{
 
 	@Override
 	public void handleUIResponse(UIResponse input) {
+	    close();
 		String cmd = input.getSubmissionID();
 		LogUtils.logDebug(owner, getClass(), "handleUIResponse", "handling: " + cmd); //$NON-NLS-1$ //$NON-NLS-2$
 		if (cmd.equalsIgnoreCase(MESSAGE_CMD)){

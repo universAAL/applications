@@ -19,7 +19,6 @@ import java.util.Set;
 
 import org.universAAL.AALapplication.health.manager.ui.measurements.BloodPreasureMeasurement;
 import org.universAAL.AALapplication.health.manager.ui.measurements.HeartRateMeasurement;
-import org.universAAL.AALapplication.health.manager.ui.measurements.Motivation;
 import org.universAAL.AALapplication.health.manager.ui.measurements.WeigthMeasurement;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.OntologyManagement;
@@ -91,6 +90,7 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 
 	@Override
 	public void handleUIResponse(UIResponse arg0) {
+	    close();
 		String cmd = arg0.getSubmissionID();
 		if (cmd.equalsIgnoreCase(CANCEL_CMD)){
 			new MainMenu(this).show();

@@ -75,6 +75,7 @@ public class AssistedPersonSelector extends AbstractHealthForm {
     /** {@ inheritDoc}	 */
     @Override
     public void handleUIResponse(UIResponse uiResponse) {
+	    close();
 	String cmd = uiResponse.getSubmissionID();
 	if (cmd.equals(SELECT_CMD)) {
 	    AssistedPerson ap = (AssistedPerson) uiResponse

@@ -33,6 +33,7 @@ public class WeigthMeasurement extends AbstractHealthForm{
 
 	@Override
 	public void handleUIResponse(UIResponse input) {
+	    close();
 		measurement = (PersonWeight) input.getSubmittedData();
 		PerformedSession ps = BloodPreasureMeasurement.getPerformedSession(measurement);
 		if (input.getSubmissionID().startsWith(DONE_CMD)){

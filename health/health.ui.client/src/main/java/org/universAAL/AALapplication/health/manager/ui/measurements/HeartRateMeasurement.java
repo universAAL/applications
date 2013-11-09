@@ -34,6 +34,7 @@ public class HeartRateMeasurement extends AbstractHealthForm{
 	
 	@Override
 	public void handleUIResponse(UIResponse input) {
+	    close();
 		measurement = (HeartRate) input.getSubmittedData();
 		if (measurement.getProperty(Measurement.PROP_HAS_UNIT) == null){
 			Unit beatsPerMinute = new DividedUnit("BPM", Util.IND_UNIT_UNITY,

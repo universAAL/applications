@@ -37,6 +37,7 @@ public class BloodPreasureMeasurement extends AbstractHealthForm {
     }
 
     public void handleUIResponse(UIResponse input) {
+	close();
 	measurement = (BloodPressure) input.getSubmittedData();
 	PerformedSession ps = BloodPreasureMeasurement.getPerformedSession(measurement);
 	
