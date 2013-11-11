@@ -1,9 +1,5 @@
 * text=auto !eol
 ZWaveInterface/README.txt -text
-ZWaveInterface/ZWave.feature/.classpath -text svneol=unset#text/plain
-ZWaveInterface/ZWave.feature/.project -text svneol=unset#text/plain
-ZWaveInterface/ZWave.feature/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
-ZWaveInterface/ZWave.feature/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
 ZWaveInterface/ZWave.feature/pom.xml -text svneol=unset#text/plain
 ZWaveInterface/ZWave.feature/src/main/features/zwave.xml -text svneol=unset#text/plain
 ZWaveInterface/ZWaveDataConsumer/.classpath -text svneol=unset#text/plain
