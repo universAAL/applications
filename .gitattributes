@@ -3052,7 +3052,6 @@ ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/NewMedica
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/NewPrescription.java -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/Precaution.java -text
 ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/Time.java -text
-ontologies/ont.medication/src/main/java/org/universAAL/ontology/medMgr/UserIDs.java -text
 ontologies/ont.message/ASL2.0 -text
 ontologies/ont.message/MessageOntology.di -text
 ontologies/ont.message/MessageOntology.notation -text
