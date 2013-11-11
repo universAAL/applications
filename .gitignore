@@ -1,6 +1,9 @@
 ZWaveInterface/ZWave.feature/.classpath
 ZWaveInterface/ZWave.feature/.project
 ZWaveInterface/ZWave.feature/.settings
+ZWaveInterface/ZWaveDataConsumer/.classpath
+ZWaveInterface/ZWaveDataConsumer/.project
+ZWaveInterface/ZWaveDataConsumer/.settings
 ZWaveInterface/ZWaveDataPublisher/.classpath
 ZWaveInterface/ZWaveDataPublisher/.project
 ZWaveInterface/ZWaveDataPublisher/.settings
