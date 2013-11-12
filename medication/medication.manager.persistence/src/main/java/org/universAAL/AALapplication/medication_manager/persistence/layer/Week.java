@@ -22,8 +22,10 @@ import org.universAAL.AALapplication.medication_manager.persistence.impl.Medicat
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author George Fournadjiev
@@ -34,6 +36,8 @@ public final class Week {
   private final Timestamp now;
   private final Timestamp end;
 
+  private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("d.M.yyyy");
+  private static final SimpleDateFormat SIMPLE_DATE_FORMAT_FULL = new SimpleDateFormat("d.M.yyyy HH:mm");
   private static final DateFormat DATE_FORMATTER = DateFormat.getDateInstance(DateFormat.DEFAULT);
   private static final DateFormat DATE_FULL_FORMATTER = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT);
 
@@ -64,14 +68,15 @@ public final class Week {
     return getFormattedTextWeek(this);
   }
 
-  public static String getFormattedTextWeek(Week week) {
+  private static String getFormattedTextWeek(Week week) {
     Date startDate = week.getBegin();
     Date endDate = week.getEnd();
 
 
     String startDayText = DATE_FORMATTER.format(startDate);
     String endDayText = DATE_FORMATTER.format(endDate);
-    String dayOfWeek = getCurrentDayOfWeek();
+    DateFormatSymbols dfs = DateFormatSymbols.getInstance();
+    String dayOfWeek = getCurrentDayOfWeek(dfs);
     Date now = new Date();
 
     String currentDataFull = DATE_FULL_FORMATTER.format(now);
@@ -81,9 +86,40 @@ public final class Week {
 
   }
 
-  private static String getCurrentDayOfWeek() {
+  public static String getUsLocaleFormattedTextWeek(Week week) {
 
-    DateFormatSymbols dfs = DateFormatSymbols.getInstance();
+    Date startDate = week.getBegin();
+    Date endDate = week.getEnd();
+
+
+    StringBuffer sb = new StringBuffer();
+    sb.append("Start date: Monday ");
+    String startDayText = SIMPLE_DATE_FORMAT.format(startDate);
+    sb.append(startDayText);
+
+    sb.append("; End date: Sunday ");
+    String endDayText = SIMPLE_DATE_FORMAT.format(endDate);
+    sb.append(endDayText);
+
+    sb.append("; Current time: ");
+
+    DateFormatSymbols dfs = DateFormatSymbols.getInstance(Locale.ENGLISH);
+    String dayOfWeek = getCurrentDayOfWeek(dfs);
+
+    sb.append(dayOfWeek);
+    sb.append(' ');
+
+    Date now = new Date();
+
+    sb.append(SIMPLE_DATE_FORMAT_FULL.format(now));
+
+    return sb.toString();
+
+
+  }
+
+  private static String getCurrentDayOfWeek(DateFormatSymbols dfs) {
+
     String weekdays[] = dfs.getWeekdays();
 
     Calendar cal = Calendar.getInstance();
