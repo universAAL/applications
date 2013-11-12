@@ -72,7 +72,7 @@ public final class DisplayIntakesScriptForm extends ScriptForm {
 
     sb.append(patient.getName());
     sb.append("<br> WEEK <br> ");
-    sb.append(Week.getFormattedTextWeek(selectedWeek));
+    sb.append(Week.getUsLocaleFormattedTextWeek(selectedWeek));
     sb.append("\";");
 
     sb.append('\n');
