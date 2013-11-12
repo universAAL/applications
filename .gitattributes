@@ -2057,6 +2057,7 @@ medication/medication.manager.configuration/src/main/resources/medication_manage
 medication/medication.manager.configuration/src/main/resources/medication_manager/dispenser_instructions/instructions_6.txt -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/dispenser_instructions/instructions_7.txt -text
 medication/medication.manager.configuration/src/main/resources/medication_manager/prescriptions/1.xml -text
+medication/medication.manager.configuration/src/main/resources/medication_manager/prescriptions/sample_prescription.xml -text
 medication/medication.manager.event.issuer/ASL2.0 -text
 medication/medication.manager.event.issuer/NOTICE -text
 medication/medication.manager.event.issuer/pom.xml -text
