@@ -21,6 +21,7 @@ package org.universaal.ltba.ui.impl.common;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Properties;
 
 import org.universAAL.middleware.container.ModuleContext;
@@ -83,12 +84,13 @@ public class SharedResources {
 	}
 
 	static public String getLanguage() {
-		Properties properties = new Properties();
+	//	Properties properties = new Properties();
 		try {
-			String home = getSetupFileName();
-			properties.load(new FileInputStream(home + "/" + PROPERTIES_FILE));
-			return properties.getProperty("language");
-		} catch (IOException e) {
+//			String home = getSetupFileName();
+//			properties.load(new FileInputStream(home + "/" + PROPERTIES_FILE));
+//			return properties.getProperty("language");
+			return System.getProperty("user.language", "en");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
