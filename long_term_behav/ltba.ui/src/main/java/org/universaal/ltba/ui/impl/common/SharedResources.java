@@ -89,6 +89,7 @@ public class SharedResources {
 //			String home = getSetupFileName();
 //			properties.load(new FileInputStream(home + "/" + PROPERTIES_FILE));
 //			return properties.getProperty("language");
+			
 			return System.getProperty("user.language", "en");
 		} catch (Exception e) {
 			e.printStackTrace();
