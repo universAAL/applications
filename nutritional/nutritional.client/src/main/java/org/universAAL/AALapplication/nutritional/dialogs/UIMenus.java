@@ -1,7 +1,10 @@
 package org.universAAL.AALapplication.nutritional.dialogs;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Locale;
+import org.universAAL.middleware.xsd.Base64Binary;
 
 import na.miniDao.DayMenu;
 import na.miniDao.Dish;
@@ -149,12 +152,32 @@ public class UIMenus {
 //					null), "image", //$NON-NLS-1$
 //					InterfaceProvider.IMG_URL
 //						+ dish.getImage());
-			      	new MediaObject(groupDish, new Label(
-			    			new String(" "), //$NON-NLS-1$
-							new String(" ")), "image", //$NON-NLS-1$
-							InterfaceProvider.IMG_URL
-								+ dish.getImage());
-			    }
+
+			    	
+					try {
+									int dot_position = dish.getImage()
+											.lastIndexOf(".");
+									String extension = dish.getImage()
+											.substring(
+													dish.getImage()
+															.lastIndexOf("."));
+									String final_name = dish.getImage()
+											.substring(0, dot_position)
+											.replace("_", "").replace(" ", "")
+											.replace("-", "").replace("ñ", "n");
+				
+			      		new MediaObject(groupDish, new Label(
+								new String(" "), //$NON-NLS-1$
+								new String(" ")), "image", //$NON-NLS-1$
+								InterfaceProvider.IMG_URL.concat(final_name.concat(extension)));
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			    } else new MediaObject(groupDish, new Label(
+						new String(" "), //$NON-NLS-1$
+						new String(" ")), "image", //$NON-NLS-1$
+						InterfaceProvider.IMG_URL.concat("default.jpg"));
 
 			    if (dish.getRecipeID() != -1) {
 				new Submit(groupDish, new Label(

@@ -51,7 +51,7 @@ public class UIProfile {
 	    + "UIProfile"; //$NON-NLS-1$
 
     static final String SUBMIT_GOBACK = PREFIX + "back"; //$NON-NLS-1$
-    static final String SUBMIT_SAVEPROFILE = PREFIX + "saveprofile"; //$NON-NLS-1$
+//    static final String SUBMIT_SAVEPROFILE = PREFIX + "saveprofile"; //$NON-NLS-1$
 //    static final String SUBMIT_FOODDISLIKES = PREFIX + "fooddislikes"; //$NON-NLS-1$
 //    static final String SUBMIT_FAVRECIPES = PREFIX + "favrecipes"; //$NON-NLS-1$
 //    static final String SUBMIT_MEDINTERACT = PREFIX + "medinteract"; //$NON-NLS-1$
@@ -300,8 +300,8 @@ public class UIProfile {
 			TypeMapper.getDatatypeURI(Boolean.class), 1, 1),
 		Boolean.valueOf(nutrHab.isSelfShopping()));
 
-	new Submit(f.getSubmits(), new Label(
-		Messages.getString("UIProfile.31"), null), SUBMIT_SAVEPROFILE); //$NON-NLS-1$
+//	new Submit(f.getSubmits(), new Label(
+//		Messages.getString("UIProfile.31"), null), SUBMIT_SAVEPROFILE); //$NON-NLS-1$
 //	new Submit(f.getSubmits(), new Label(
 //		Messages.getString("UIProfile.32"), null), SUBMIT_FOODDISLIKES); //$NON-NLS-1$
 //	new Submit(f.getSubmits(), new Label(
@@ -337,19 +337,19 @@ public class UIProfile {
 		SharedResources.uIProvider.sendUIRequest(out);
 		return;
 	    }
-	    if (SUBMIT_SAVEPROFILE.equals(id)) {
-
-		Utils.println(" TODO UIProfile: submit saveprofile"); //$NON-NLS-1$
-		UIRequest out = new UIRequest(
-			SharedResources.user,
-			Form.newMessage("", //$NON-NLS-1$
-				""), //$NON-NLS-1$
-			LevelRating.middle, Locale.getDefault(),
-			PrivacyLevel.insensible);
-		SharedResources.uIProvider.sendUIRequest(out);
-		return;
-		// TODO
-	    }
+//	    if (SUBMIT_SAVEPROFILE.equals(id)) {
+//
+//		Utils.println(" TODO UIProfile: submit saveprofile"); //$NON-NLS-1$
+//		UIRequest out = new UIRequest(
+//			SharedResources.user,
+//			Form.newMessage("", //$NON-NLS-1$
+//				""), //$NON-NLS-1$
+//			LevelRating.middle, Locale.getDefault(),
+//			PrivacyLevel.insensible);
+//		SharedResources.uIProvider.sendUIRequest(out);
+//		return;
+//		// TODO
+//	    }
 //	    if (SUBMIT_FOODDISLIKES.equals(id)) {
 //		Utils.println(" TODO UIProfile: submit fooddis"); //$NON-NLS-1$
 //		UIRequest out = new UIRequest(SharedResources.user,
