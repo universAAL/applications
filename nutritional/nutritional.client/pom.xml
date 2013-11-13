@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>nutritional.pom</artifactId>
-		<version>E.2</version>
+		<version>E.2.1-SNAPSHOT</version>
 		<relativePath>../nutritional.pom</relativePath>
 	</parent>
 
 	<artifactId>nutritional.client</artifactId>
-	<version>E.2</version>
+	<version>E.2.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>Nutritional Advisor Service</name>
 	<!-- changes name description of the service at pom file and updated versions 
@@ -61,6 +59,7 @@
 			<artifactId>axis</artifactId>
 			<version>1.4</version>
 		</dependency>
+            
 		<!-- Axis has problem with OPS4J logging. Use our axis/axis-pax/1.4 instead 
 			when running -->
 		<dependency>
@@ -101,7 +100,7 @@
 						<Bundle-Activator>org.universAAL.AALapplication.nutritional.osgi.Activator</Bundle-Activator>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Export-Package />
+						<Export-Package/>
 						<Private-Package>
 							na.*,
 							org.universAAL.AALapplication.nutritional.*
@@ -117,6 +116,7 @@
 							org.apache.axis.utils,
 							org.apache.commons.logging,
 							org.osgi.framework, org.universAAL.middleware.container,
+							org.universAAL.middleware.xsd,
 							org.universAAL.middleware.container.osgi,
 							org.universAAL.middleware.container.osgi.util,
 							org.universAAL.middleware.container.utils,
@@ -135,7 +135,7 @@
 							org.universAAL.ontology.nutrition,
 							org.universAAL.ontology.nutrition.profile,
 							org.universAAL.ontology.profile, org.xml.sax,
-							org.universAAL.ontology.recommendations<!-- ,
+							org.universAAL.ontology.recommendations, <!-- ,
 							org.universAAL.ucc.configuration.configdefinitionregistry.interfaces,
 							org.universAAL.ucc.configuration.model.interfaces,
 							org.universAAL.ucc.configuration.model-->
@@ -148,7 +148,7 @@
 				<artifactId>features-maven-plugin</artifactId>
 				<version>2.3.1</version>
 			</plugin>
-		</plugins>
+		<plugin><groupId>org.apache.karaf.tooling</groupId><artifactId>features-maven-plugin</artifactId><version>2.3.1</version></plugin></plugins>
 	</build>
 
 </project>
