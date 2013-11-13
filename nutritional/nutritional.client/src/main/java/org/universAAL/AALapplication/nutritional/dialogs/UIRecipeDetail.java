@@ -1,6 +1,9 @@
 package org.universAAL.AALapplication.nutritional.dialogs;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Locale;
+import org.universAAL.middleware.xsd.Base64Binary;
 
 import na.miniDao.Recipe;
 import na.miniDao.RecipeIngredient;
@@ -96,10 +99,26 @@ public class UIRecipeDetail {
 			PROP_PATH_RECIPE_CATEGORY, dishCategory);
 	    }
 	    if (recipePicture != null && !recipePicture.isEmpty()) {
-		new MediaObject(groupDesc, new Label(
-			new String(" "),new String(" ")), //$NON-NLS-1$
-			"image", InterfaceProvider.IMG_URL + recipePicture); // //$NON-NLS-1$
-	    }
+	    	//byte[] decoded;
+			try {
+				//decoded = Base64Binary.decode(InterfaceProvider.IMG_URL + recipePicture);
+				int dot_position = recipePicture.lastIndexOf(".");
+				String extension= recipePicture.substring(recipePicture.lastIndexOf("."));
+			 	String final_name = recipePicture.substring(0, dot_position)
+						.replace("_", "").replace(" ", "")
+						.replace("-", "").replace("ñ", "n");
+			new MediaObject(groupDesc, new Label(
+				new String(" "),new String(" ")), //$NON-NLS-1$
+				"image", InterfaceProvider.IMG_URL.concat(final_name).concat(extension));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    } else new MediaObject(groupDesc, new Label(
+				new String(" "), //$NON-NLS-1$
+				new String(" ")), "image", //$NON-NLS-1$
+				InterfaceProvider.IMG_URL.concat("default.jpg"));
+
 
 	    Group groupIngredients = new Group(
 		    f.getIOControls(),
