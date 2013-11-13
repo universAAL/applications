@@ -8,7 +8,6 @@
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.manager</artifactId>
-	<version>${parent.version}</version>
 	<packaging>bundle</packaging>
 	<name>LTBA manager</name>
 	<description>LTBA main module for coordinating all the LTBA componentos.</description>
@@ -42,7 +41,6 @@
 		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>ltba.nomhad.gateway</artifactId>
-			<version>${parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -76,7 +74,7 @@
 				<dependency>
 					<groupId>org.universAAL.ui</groupId>
 					<artifactId>ui.handler.gui.swing.bluesteelLAF</artifactId>
-					<version>2.0.1-SNAPSHOT</version>
+<!-- 					<version>2.0.1-SNAPSHOT</version> -->
 				</dependency>
 				<!-- <dependency> -->
 				<!-- <groupId>org.universAAL.AALapplication</groupId> -->
