@@ -20,27 +20,27 @@
 	</modules>
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>org.universAAL.ontology</groupId>
-				<artifactId>ont.activityhub</artifactId>
-				<version>${platform.version}</version>
-			</dependency>
-			<dependency>
-				<artifactId>ont.profile</artifactId>
-				<groupId>org.universAAL.ontology</groupId>
-				<version>${platform.version}</version>
-			</dependency>
-			<dependency>
-				<artifactId>ont.drools</artifactId>
-				<groupId>org.universAAL.ontology</groupId>
-				<version>${platform.version}</version>
+<!-- 			<dependency> -->
+<!-- 				<groupId>org.universAAL.ontology</groupId> -->
+<!-- 				<artifactId>ont.activityhub</artifactId> -->
+<!-- 				<version>${platform.version}</version> -->
+<!-- 			</dependency> -->
+<!-- 			<dependency> -->
+<!-- 				<artifactId>ont.profile</artifactId> -->
+<!-- 				<groupId>org.universAAL.ontology</groupId> -->
+<!-- 				<version>${platform.version}</version> -->
+<!-- 			</dependency> -->
+<!-- 			<dependency> -->
+<!-- 				<artifactId>ont.drools</artifactId> -->
+<!-- 				<groupId>org.universAAL.ontology</groupId> -->
+<!-- 				<version>${platform.version}</version> -->
 
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.ontology</groupId>
-				<artifactId>ont.ltba</artifactId>
-				<version>${platform.version}</version>
-			</dependency>
+<!-- 			</dependency> -->
+<!-- 			<dependency> -->
+<!-- 				<groupId>org.universAAL.ontology</groupId> -->
+<!-- 				<artifactId>ont.ltba</artifactId> -->
+<!-- 				<version>${platform.version}</version> -->
+<!-- 			</dependency> -->
 			<dependency>
 				<artifactId>drools.reasoner</artifactId>
 				<groupId>org.universAAL.AALapplication</groupId>
@@ -51,6 +51,21 @@
 				<artifactId>ltba.ui</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>ltba.manager</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>ltba.publisher</artifactId>
+				<version>${project.version}</version>
+			</dependency>			
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>ltba.nomhad.gateway</artifactId>
+				<version>${project.version}</version>
+			</dependency>			
 			<dependency>
 				<groupId>com.sun.codemodel</groupId>
 				<artifactId>codemodel</artifactId>

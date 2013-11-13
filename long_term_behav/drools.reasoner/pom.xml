@@ -57,20 +57,20 @@
 			<version>5.3.0.Final</version>
 			<!-- <version>6.0.0.CR3</version> -->
 		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.readenergy</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.universAAL.ontology</groupId> -->
+<!-- 			<artifactId>ont.readenergy</artifactId> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.universAAL.ontology</groupId>
-			<artifactId>ont.aalfficiencyscores</artifactId>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.universAAL.ontology</groupId> -->
+<!-- 			<artifactId>ont.aalfficiencyscores</artifactId> -->
 
-		</dependency>
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.activityhub</artifactId>
@@ -85,21 +85,21 @@
 			<version>2.1.0.drools2</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.17</version>
-			<scope>compile</scope>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>mysql</groupId> -->
+<!-- 			<artifactId>mysql-connector-java</artifactId> -->
+<!-- 			<version>5.1.17</version> -->
+<!-- 			<scope>compile</scope> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.12</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>log4j</groupId> -->
+<!-- 			<artifactId>log4j</artifactId> -->
+<!-- 			<version>1.2.12</version> -->
+<!-- 		</dependency> -->
 	</dependencies>
 	<build>
 		<plugins>
