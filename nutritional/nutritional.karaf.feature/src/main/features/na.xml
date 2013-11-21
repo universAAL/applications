@@ -10,7 +10,7 @@
 		<!-- Third party dependency -->
 
 		<bundle>wrap:mvn:axis/axis-pax/1.4</bundle>
-		<bundle>wrap:mvn:axis/axis-wsdl4j</bundle>
+		<bundle>wrap:mvn:axis/axis-wsdl4j/1.5.1</bundle>
 		<bundle>wrap:mvn:commons-discovery/commons-discovery/0.5</bundle>
 		<bundle>wrap:mvn:java3d/j3d-core/1.3.1</bundle>
 		<bundle>wrap:mvn:java3d/vecmath/1.3.1</bundle>
