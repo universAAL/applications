@@ -14,49 +14,49 @@
 	<feature name="uAAL-Ont.Activity" description="Activity of the user Ontology"
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-Ont.Profile</feature>
-		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.activity/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.activity/${ont.activity.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.Agenda" description="Agenda Ontology"
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-Ont.Profile</feature>
-		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.agenda/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.agenda/${ont.agenda.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.BioMedicalSensors" description= "Biomedical sensors Ontology"
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-Ont.PhWorld</feature>
-		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.biomedicalsensors/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.biomedicalsensors/${ont.biomedicalsensors.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.Drools" description="Drools engine Ontology" 
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-MW</feature>
-		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.drools/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.drools/${ont.drools.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.AgendaEventSelection" description="Agenda events Ontology"
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-Ont.Agenda</feature>
-		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.agendaEventSelection/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.agendaEventSelection/${ont.agendaEventSelection.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.FitBitData" description="Activity and sleep data Ontology"
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-MW</feature>
-		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.fitbitdata/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.fitbitdata/${ont.fitbitdata.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.LTBA" description="Long Term Behaviour Analyzer Ontology" 
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-MW</feature>
-		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.ltba/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.ltba/${ont.ltba.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.Medication" description="Medication Ontology" 
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.medication/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.medication/${ont.medication.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.Message" description="Message Ontology" 
@@ -64,38 +64,38 @@
 		<feature>uAAL-Ont.Questionnaire</feature>
 		<feature>uAAL-Ont.Health.Measurement</feature>
 		<feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.message/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='66' start='true'>mvn:org.universAAL.ontology/ont.message/${ont.message.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.Nutrition" description="Nutrition Ontology" 
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-Ont.Profile</feature>
  		<feature>uAAL-Ont.Medication</feature>
-		<bundle start-level='67' start='true'>mvn:org.universAAL.ontology/ont.nutrition/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='67' start='true'>mvn:org.universAAL.ontology/ont.nutrition/${ont.nutrition.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.QuestionnaireStrategy" description="Questionnaire Strategy Ontology" 
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-Ont.Questionnaire</feature>
         <feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='67' start='true'>mvn:org.universAAL.ontology/questionnaireStrategy/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='67' start='true'>mvn:org.universAAL.ontology/ont.questionnaireStrategy/${ont.questionnaireStrategy.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.ReadEnergy" description="Read energy Ontology" 
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-MW</feature>
-		<bundle start-level='67' start='true'>mvn:org.universAAL.ontology/ont.readenergy/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='67' start='true'>mvn:org.universAAL.ontology/ont.readenergy/${ont.readenergy.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.Safety" description="Security and Safety Ontology" 
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-Ont.Profile</feature>
-		<bundle start-level='67' start='true'>mvn:org.universAAL.ontology/ont.safety/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='67' start='true'>mvn:org.universAAL.ontology/ont.safety/${ont.safety.version}</bundle>
 	</feature>
 	
 	<feature name="uAAL-Ont.Shopping" description="Food and Shopping List Ontology" 
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-Ont.Nutrition</feature>
-		<bundle start-level='68' start='true'>mvn:org.universAAL.ontology/ont.shopping/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='68' start='true'>mvn:org.universAAL.ontology/ont.shopping/${ont.shopping.version}</bundle>
 	</feature>
 </features>

@@ -18,19 +18,73 @@
     <felix-version>2.0.1</felix-version>
     <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
   </properties>
-<!--   <dependencies> -->
-<!--     <dependency> -->
-<!--       <groupId>commons-beanutils</groupId> -->
-<!--       <artifactId>commons-beanutils-core</artifactId> -->
-<!--       <version>${commons-beanutils-version}</version> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>commons-codec</groupId> -->
-<!--       <artifactId>commons-codec</artifactId> -->
-<!--       <version>${commons-codec-version}</version> -->
-<!--     </dependency> -->
-<!--   </dependencies> -->
+		<dependencies>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.agenda</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.agendaEventSelection</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.message</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.questionnaireStrategy</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.biomedicalsensors</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.ltba</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.activity</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.aalfficiencyscores</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.drools</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.fitbitdata</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.readenergy</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.medication</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.nutrition</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.safety</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.shopping</artifactId>
+			</dependency>
+		</dependencies>
+
   <build>
+    <filters>
+      <filter>./target/artifacts.versions</filter>
+    </filters>
     <plugins>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
