@@ -362,6 +362,10 @@ ontologies/ont.nutrition/target
 ontologies/ont.pom/.project
 ontologies/ont.pom/.settings
 ontologies/ont.pom/composite/target
+ontologies/ont.pom/karaf.feature/.classpath
+ontologies/ont.pom/karaf.feature/.project
+ontologies/ont.pom/karaf.feature/.settings
+ontologies/ont.pom/karaf.feature/target
 ontologies/ont.pom/target
 ontologies/ont.questionnaireStrategy/.classpath
 ontologies/ont.questionnaireStrategy/.project
