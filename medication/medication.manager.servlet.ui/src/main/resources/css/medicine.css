@@ -1,0 +1,8 @@
+form { text-align: left; padding: 10px 0; }
+form table { width: 100%; }
+form table.t1 th { border-bottom-width: 1px !important; vertical-align: middle; }
+form table:first-child td { min-width: 500px; }
+form table:first-child td textarea.all, form table:first-child td input.all { width: 98%; }
+form table:first-child td textarea#pills, form table:first-child td textarea#drops, form table:first-child td input#pills, form table:first-child td input#drops { margin-left: 10px; }
+form table.days td { cursor: pointer; }
+form table.days td input { display: none; }

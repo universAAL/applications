@@ -1,0 +1,19 @@
+body table.t1 { width: 100%; text-align: left; float: left; }
+body table tr td, table tr th { vertical-align: middle; }
+.red{color:red}
+.green{color:green}
+body .left { float: left; }
+body .right { float: right; }
+body .leftupper { float: left; margin-left: 20%}
+body .rightupper { float: right; margin-right: 20%}
+body .cont .msg {
+    background: none repeat scroll 0 0 #C6D9F1;
+    border: 1px solid #2A4463;
+    color: #2A4463;
+    display: block;
+    float: left;
+    margin: 10px 0;
+    padding: 1em 0;
+    width: 100%;
+    text-align: center;
+}

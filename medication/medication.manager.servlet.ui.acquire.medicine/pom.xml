@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <artifactId>medication.manager.pom</artifactId>
+    <version>E.2-SNAPSHOT</version>
+    <relativePath>../medication.manager.pom</relativePath>
+  </parent>
+
+  <artifactId>medication.manager.servlet.ui.acquire.medicine</artifactId>
+  <packaging>bundle</packaging>
+
+
+  <dependencies>
+    <dependency>
+      <groupId>org.universAAL.middleware</groupId>
+      <artifactId>mw.container.osgi</artifactId>
+    </dependency>
+
+<!--     <dependency> -->
+<!--       <groupId>javax.servlet</groupId> -->
+<!--       <artifactId>servlet-api</artifactId> -->
+<!--       <version>2.5</version> -->
+<!--     </dependency> -->
+
+    <dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>medication.manager.persistence</artifactId>
+      <version>E.2-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.universAAL.AALapplication</groupId>
+      <artifactId>medication.manager.servlet.ui.base</artifactId>
+      <version>E.2-SNAPSHOT</version>
+    </dependency>
+
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-Activator>org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.Activator</Bundle-Activator>
+            <Bundle-Description>${project.description}</Bundle-Description>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Private-Package>org.universAAL.AALapplication.medication_manager.servlet.ui.acquire.medicine.impl.*</Private-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

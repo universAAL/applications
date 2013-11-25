@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>new_services.pom</artifactId>
+    <groupId>org.universAAL.AALapplication</groupId>
+    <version>E.2</version>
+    <relativePath>../../new_services.pom</relativePath>
+  </parent>
+  <artifactId>medication.manager.pom</artifactId>
+  <version>E.2-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Medication Manager AAL Service</name>
+  <url>http://forge.universaal.org/wiki/new_services:Medication_manager_universAAL_service</url>
+
+  <dependencies>
+    <!--
+      The dependency to itests has always come before the dependency to
+      org.osgi.core (groupId:org.apache.felix). The easiest approach is to
+      just put the dependency to itests as the first one.
+     -->
+
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.compendium</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <licenses>
+    <license>
+      <name>Apache 2.0</name>
+      <url>http://www.apache.org/licenses/</url>
+    </license>
+  </licenses>
+  <issueManagement>
+    <system>GForge - Tracker</system>
+    <!--<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=</url>-->
+  </issueManagement>
+  <inceptionYear>2011</inceptionYear>
+  <scm>
+    <connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/medication</connection>
+    <developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/medication</developerConnection>
+  </scm>
+  <modules>
+    <module>../medication.manager.configuration</module>
+    <module>../medication.manager.persistence</module>
+    <!--     The following module causes trouble on top level builds, PLEASE KEEP COMMENTED! -->
+    <!--<module>../../ontologies/ont.medication</module>-->
+    <module>../medication.manager.service</module>
+    <module>../medication.manager.shell.commands</module>
+    <module>../medication.missing.services.simulation</module>
+    <module>../medication.manager.ui</module>
+    <module>../medication.manager.servlet.ui</module>
+    <module>../medication.manager.servlet.ui.acquire.medicine</module>
+    <module>../medication.manager.servlet.ui.review</module>
+    <module>../medication.manager.servlet.ui.base</module>
+    <module>../medication.manager.servlet.ui.configuration</module>
+    <module>../medication.manager.event.issuer</module>
+    <module>../medication.manager.user.management</module>
+  </modules>
+</project>
