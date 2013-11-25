@@ -17,7 +17,7 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.medMgr.Precaution;
-import org.universAAL.ontology.medMgr.UserIDs;
+//import org.universAAL.ontology.medMgr.UserIDs;
 import org.universAAL.ontology.recommendations.HorizontalAlignment;
 import org.universAAL.ontology.recommendations.HorizontalLayout;
 import org.universAAL.ontology.recommendations.VerticalLayout;
@@ -57,7 +57,7 @@ public class UIMedication {
 
 	MedicationConsumer medConsumer = new MedicationConsumer(
 		SharedResources.getMContext());
-	Precaution p = medConsumer.requestDetails(UserIDs.getSaiedUser());
+	Precaution p = null;//medConsumer.requestDetails(UserIDs.getSaiedUser());
 
 	if (p != null) {
 	    f = Form.newDialog(
