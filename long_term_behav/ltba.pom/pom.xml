@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>E.2</version>
+		<relativePath>../../new_services.pom</relativePath>
+	</parent>
+	<artifactId>ltba.pom</artifactId>
+	<version>E.2.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>POM file for LTBA project</name>
+	<description>POM file for LTBA project</description>
+	<modules>
+		<module>../ltba.manager</module>
+		<module>../ltba.publisher</module>
+		<module>../ltba.ui</module>
+		<module>../ltba.nomhad.gateway</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+<!-- 			<dependency> -->
+<!-- 				<groupId>org.universAAL.ontology</groupId> -->
+<!-- 				<artifactId>ont.activityhub</artifactId> -->
+<!-- 				<version>${platform.version}</version> -->
+<!-- 			</dependency> -->
+<!-- 			<dependency> -->
+<!-- 				<artifactId>ont.profile</artifactId> -->
+<!-- 				<groupId>org.universAAL.ontology</groupId> -->
+<!-- 				<version>${platform.version}</version> -->
+<!-- 			</dependency> -->
+<!-- 			<dependency> -->
+<!-- 				<artifactId>ont.drools</artifactId> -->
+<!-- 				<groupId>org.universAAL.ontology</groupId> -->
+<!-- 				<version>${platform.version}</version> -->
+
+<!-- 			</dependency> -->
+<!-- 			<dependency> -->
+<!-- 				<groupId>org.universAAL.ontology</groupId> -->
+<!-- 				<artifactId>ont.ltba</artifactId> -->
+<!-- 				<version>${platform.version}</version> -->
+<!-- 			</dependency> -->
+			<dependency>
+				<artifactId>drools.reasoner</artifactId>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>ltba.ui</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>ltba.manager</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>ltba.publisher</artifactId>
+				<version>${project.version}</version>
+			</dependency>			
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>ltba.nomhad.gateway</artifactId>
+				<version>${project.version}</version>
+			</dependency>			
+			<dependency>
+				<groupId>com.sun.codemodel</groupId>
+				<artifactId>codemodel</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-xjc</artifactId>
+				<version>2.1.6</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<developers>
+		<developer>
+			<id>mllorente</id>
+			<name>Miguel Llorente</name>
+			<email>mllorente@tsbtecnologias.es</email>
+			<organization>TSB Tecnologias</organization>
+			<organizationUrl>http://www.tsbtenologias.es</organizationUrl>
+			<properties>
+				<project>
+					universAAL
+				</project>
+			</properties>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>ASL 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+</project>
