@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>agenda.pom</artifactId>
+		<version>E.2</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>agenda.composite</artifactId>
+	<name>Agenda AAL Service Composite</name>
+	<description>Artifact responsible for generating composite file of Agenda AAL Service</description>
+	<url></url>
+	<dependencies>
+		<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.agenda</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+			<dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.agendaEventSelection</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>agenda.client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>agenda.server</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>agenda.gui</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>agenda.remote</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>agenda.eventSelection.client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.universAAL.AALapplication</groupId>
+			<artifactId>agenda.eventSelection.server</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+</project>

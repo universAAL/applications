@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<artifactId>new_services.pom</artifactId>
+		<version>E.2</version>
+		<relativePath>../../new_services.pom/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>agenda.pom</artifactId>
+	<version>E.2</version>
+	<packaging>pom</packaging>
+
+	<name>Agenda AAL Service Parent POM</name>
+	<description>Contains repository, deployment, and other info for Agenda	AAL Application</description>
+	<url>http://forge.universaal.org/wiki/new_services:Agenda_universAAL_service</url>
+
+	<issueManagement>
+		<system>GForge - Tracker</system>
+		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=226
+		</url>
+	</issueManagement>
+
+	<scm>
+		<connection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda</connection>
+		<developerConnection>scm:svn:http://forge.universaal.org/svn/new_services/trunk/agenda</developerConnection>
+	</scm>
+
+	<properties>
+		<service.name.svn>agenda</service.name.svn>
+		<ignore.dep.conflict>true</ignore.dep.conflict>
+		<uaal.parent.version>2.0.2-SNAPSHOT</uaal.parent.version>
+	</properties>
+
+	<modules>
+		<module>../agenda.remote</module>
+		<module>../agenda.server</module>
+		<module>../agenda.client</module>
+		<module>../agenda.eventSelection.server</module>
+		<module>../agenda.eventSelection.client</module>
+		<module>../agenda.gui</module>
+		<module>composite</module>
+	</modules>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>agenda.server</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>agenda.client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>agenda.gui</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>agenda.remote</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>agenda.eventSelection.server</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.universAAL.AALapplication</groupId>
+				<artifactId>agenda.eventSelection.client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.universAAL.support</groupId>
+				<artifactId>uaal-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
