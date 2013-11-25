@@ -1,0 +1,19 @@
+<universaal:configuration xmlns:universaal="http://universaal.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" author="ITACA-TSB, UPVLC" id="nutritional.client.conf" bundlename="nutritional.client" version="E.1" xsi:schemaLocation="http://universaal.fzi.de universaalconfiguration.xsd">
+  <universaal:category id="server" label="Server">
+    <universaal:SipmleConfigItem cardinality="1..1" id="ip" type="String">
+      <universaal:label>IP</universaal:label>
+      <universaal:description>IP address of server, in URL parseable format (e.g. xxx.xxx.xxx.xxx)</universaal:description>
+      <universaal:defaultValue>158.42.166.200</universaal:defaultValue>
+    </universaal:SipmleConfigItem>
+    <universaal:SipmleConfigItem cardinality="1..1" id="port" type="int">
+      <universaal:label>Port</universaal:label>
+      <universaal:description>Port in which the server is providing the service</universaal:description>
+      <universaal:defaultValue>8080</universaal:defaultValue>
+    </universaal:SipmleConfigItem>
+    <universaal:SipmleConfigItem cardinality="1..1" id="service" type="String">
+      <universaal:label>Service</universaal:label>
+      <universaal:description>Web Service path in the server</universaal:description>
+      <universaal:defaultValue>NutriAdvisor_uAAL/NutritionalAdvisor</universaal:defaultValue>
+    </universaal:SipmleConfigItem>
+  </universaal:category>
+</universaal:configuration>
