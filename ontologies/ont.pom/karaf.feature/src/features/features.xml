@@ -2,13 +2,13 @@
 <features name="universAAL-Service-Ontologies" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
 	<!-- Change version of repository accordingly -->
-	<repository>mvn:org.universAAL.middleware/mw.karaf.feature/2.0.2-SNAPSHOT/xml/features</repository>
-	<repository>mvn:org.universAAL.ontology/ont.karaf.feature/2.0.2-SNAPSHOT/xml/features</repository>
+	<repository>mvn:org.universAAL.middleware/mw.karaf.feature/2.0.3-SNAPSHOT/xml/features</repository>
+	<repository>mvn:org.universAAL.ontology/ont.karaf.feature/2.0.3-SNAPSHOT/xml/features</repository>
 	
 	<feature name="uAAL-Ont.Aalfficiencyscores" description="The AALfficiency Scores Ontology"
 		version="${pom.version}" resolver='(obr)'>
 		<feature>uAAL-MW</feature>
-		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.aalfficiencyscores/2.0.2-SNAPSHOT</bundle>
+		<bundle start-level='65' start='true'>mvn:org.universAAL.ontology/ont.aalfficiencyscores/${ont.aalfficiencyscores.version}</bundle>
 	</feature>
 		
 	<feature name="uAAL-Ont.Activity" description="Activity of the user Ontology"

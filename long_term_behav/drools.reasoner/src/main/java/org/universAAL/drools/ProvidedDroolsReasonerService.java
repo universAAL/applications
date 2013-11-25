@@ -24,7 +24,7 @@ import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.middleware.service.owls.process.ProcessInput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.drools.DroolsReasoning;
@@ -85,7 +85,7 @@ public class ProvidedDroolsReasonerService extends DroolsReasoning {
 	static {
 		OntologyManagement.getInstance().register(Activator.mc,
 				new SimpleOntology(MY_URI, DroolsReasoning.MY_URI,
-						new ResourceFactoryImpl() {
+						new ResourceFactory() {
 							@Override
 							public Resource createInstance(String classURI,
 									String instanceURI, int factoryIndex) {

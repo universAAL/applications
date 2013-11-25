@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>drools.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.2.1-SNAPSHOT</version>
+		<version>E.3.1-SNAPSHOT</version>
 		<relativePath>../drools.pom</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>

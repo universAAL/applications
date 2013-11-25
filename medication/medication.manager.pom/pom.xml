@@ -4,11 +4,11 @@
   <parent>
     <artifactId>new_services.pom</artifactId>
     <groupId>org.universAAL.AALapplication</groupId>
-    <version>E.2</version>
+    <version>E.3</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   <artifactId>medication.manager.pom</artifactId>
-  <version>E.2-SNAPSHOT</version>
+  <version>E.3.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Medication Manager AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Medication_manager_universAAL_service</url>

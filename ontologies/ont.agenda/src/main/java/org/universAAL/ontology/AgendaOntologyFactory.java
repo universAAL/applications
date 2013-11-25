@@ -16,7 +16,7 @@
 package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.ontology.agenda.Calendar;
 import org.universAAL.ontology.agenda.Event;
 import org.universAAL.ontology.agenda.EventDetails;
@@ -31,7 +31,7 @@ import org.universAAL.ontology.agenda.service.CalendarUIService;
  * @author eandgrg
  * 
  */
-public class AgendaOntologyFactory extends ResourceFactoryImpl {
+public class AgendaOntologyFactory implements ResourceFactory {
 
     /*
      * (non-Javadoc)

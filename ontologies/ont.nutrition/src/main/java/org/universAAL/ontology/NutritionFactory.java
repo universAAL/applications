@@ -20,7 +20,7 @@
 package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.ontology.nutrition.Dish;
 import org.universAAL.ontology.nutrition.Food;
 import org.universAAL.ontology.nutrition.FoodCategory;
@@ -38,7 +38,7 @@ import org.universAAL.ontology.nutrition.profile.*;
  * @author hecgamar
  * 
  */
-public class NutritionFactory extends ResourceFactoryImpl {
+public class NutritionFactory implements ResourceFactory {
     // private static final int NAMESPACE_LENGTH = LIGHTING_NAMESPACE.length();
     // private static final String PROP_ORIG_INDIVIDUAL = LIGHTING_NAMESPACE
     // + LightingFactory.class.hashCode();
