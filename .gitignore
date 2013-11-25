@@ -1,3 +1,13 @@
+ZWaveInterface/ZWave.feature/.classpath
+ZWaveInterface/ZWave.feature/.project
+ZWaveInterface/ZWave.feature/.settings
+ZWaveInterface/ZWaveDataConsumer/.classpath
+ZWaveInterface/ZWaveDataConsumer/.project
+ZWaveInterface/ZWaveDataConsumer/.settings
+ZWaveInterface/ZWaveDataPublisher/.classpath
+ZWaveInterface/ZWaveDataPublisher/.project
+ZWaveInterface/ZWaveDataPublisher/.settings
+ZWaveInterface/ZWaveDataPublisher/target
 agenda/agenda.client/.classpath
 agenda/agenda.client/.project
 agenda/agenda.client/.settings
