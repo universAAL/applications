@@ -1,0 +1,2 @@
+form input, form select, form button { display: block; margin: 5px auto 20px; }
+form select { width: 100%; }

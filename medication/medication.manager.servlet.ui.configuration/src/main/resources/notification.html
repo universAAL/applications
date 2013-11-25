@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>universALL - Medication Manager Service: Notification Rules</title>
+
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/notification.js"></script>
+
+    <link href="css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css" type="text/css">
+    <link rel="stylesheet" href="css/notification.css" type="text/css">
+</head>
+
+<body>
+<!--<script type="text/javascript">
+    /*
+     define notification rules, example:
+     */
+    var rules = {
+        '1_12': {//1_12 : 1 is patient id and 12 is other id (to be defined)
+            "patient": "pencho",
+            "medicine": "aspirin",
+            "missed": true,
+            "threshold": 5,
+            "shortage": false,
+            "dose": true
+        },
+
+        '10_15': {
+            "patient": "ivan",
+            "medicine": "analgin",
+            "missed": false,
+            "threshold": 10,
+            "shortage": true,
+            "dose": true
+        }
+    }
+    /* submit pairs:   1_12:missed 1_12:threshold 1_12:shortage 1_12:dose
+    (if is not selected it will not be included in the parameters in the servlet
+     */
+</script>-->
+<div class="cont">
+    <div>
+        <h1>universAAL<br/>Medication Manager Service<br/>
+            Notification Rules</h1>
+        <form name="rules" action="" method="post">
+        <table id="rules" class="t1">
+            <tr>
+                <th width="50%">Patient</th>
+                <th width="30%">Prescribed medicine</th>
+                <th width="5%">Missed intake alert</th>
+                <th width="5%">Shortage threshold (intakes)</th>
+                <th width="5%">Shortage alert</th>
+                <th width="5%">New dose alert</th>
+            </tr>
+            <tr class="odd">
+                <td colspan="6" align="center">No Notification Rules</td>
+            </tr>
+            <tr class="templ">
+                <td nowrap></td>
+                <td nowrap></td>
+                <td><input type="checkbox" value="true" name="missed"/></td>
+                <td><input type="text" class="number" size="3" name="threshold"/></td>
+                <td><input type="checkbox" value="true" name="shortage"/></td>
+                <td><input type="checkbox" value="true" name="dose"/></td>
+            </tr>
+        </table>
+            <input type="submit" class="button" name="save" value="Save"/>
+            <button name="back" class="right">Back</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

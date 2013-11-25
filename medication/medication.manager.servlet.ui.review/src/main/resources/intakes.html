@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml" lang="en-gb">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>universALL - Medication Manager Service: Parameters</title>
+
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/intakes.js"></script>
+
+    <link href="css/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css" type="text/css">
+    <link rel="stylesheet" href="css/intakes.css" type="text/css">
+
+</head>
+
+<body>
+<!--<script type="text/javascript">
+
+    var user = "Saied";
+
+    /*
+     define intakes, example:
+     */
+    intakes = {
+        "id1": {
+            "date": '23.03.2013',
+            "time": '15:30',
+            "medication": "Aspirin Super",
+            "status": "coming"
+        },
+        "id2": {
+            "date": '23.03.2013',
+            "time": '10:00',
+            "medication": "Super pill",
+            "status": "missed"
+        },
+        "id3": {
+            "date": '23.03.2013',
+            "time": '15:30',
+            "medication": "Aspirin Super",
+            "status": "taken"
+        }
+
+    };
+</script>-->
+<div class="cont intakes">
+    <div>
+        <h1>universAAL<br/>Medication Manager Service<br/>
+            Intakes for <span class="name"></span>
+        </h1>
+
+        <button name="prev" class="leftupper">&lt;&lt; week</button>
+        <button name="next" class="rightupper">week &gt;&gt;</button>
+
+        <span class="msg drun">Missing intakes for that week</span>
+
+        <table id="intakes" class="t1">
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Medication</th>
+                <th>Status</th>
+            </tr>
+            <tr class="odd">
+                <td colspan="5" align="center">No Parameters</td>
+            </tr>
+            <tr class="templ">
+                <td nowrap></td>
+                <td></td>
+                <td nowrap></td>
+                <td></td>
+            </tr>
+        </table>
+        <button class="right" name="logout">Logout</button>
+        <button name="back" class="left">Back</button>
+    </div>
+</div>
+
+</body>
+</html>

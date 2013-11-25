@@ -1,0 +1,19 @@
+form { text-align: left; float: left; display: block; width: 100%; }
+
+table { width: 100%; }
+table tr td div { height: 50px; overflow: auto; }
+table tr td, table tr th { vertical-align: middle; }
+
+fieldset { margin-bottom: 20px; }
+fieldset .col { display: inline-block; width: 410px; float: left; }
+fieldset .col select, fieldset .col input { float: left; margin: 0; }
+fieldset .col select { min-width: 140px; max-width: 200px; height: 36px; }
+fieldset .col input { height: 32px; width: 32px; margin-top: -16px; padding: 0; position: absolute; right: 0; top: 50%; }
+fieldset .col2 { width: 250px; float: right; }
+fieldset .col2 span { padding-right: 36px; }
+fieldset span { display: block; position: relative; line-height: 32px; height: 36px; padding: 5px 10px; float: left; clear: both; }
+fieldset label { min-width: 170px; line-height: 32px; float: left; clear: left; }
+
+.templ { display: none; }
+
+button { display: inline-block; }
