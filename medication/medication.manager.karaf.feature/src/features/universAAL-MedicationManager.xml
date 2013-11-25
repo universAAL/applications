@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 	
-	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.2-SNAPSHOT/xml/features</repository>
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.3-SNAPSHOT/xml/features</repository>
 	
 	<feature name="uAAL-Service-MedicationManager"
 		description="The universAAL Medication Manager based on the Middleware 2.0"
@@ -15,55 +15,55 @@
 		</bundle>
 		
 		<bundle start-level='87' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.configuration/E.2-SNAPSHOT</bundle>
+			mvn:org.universAAL.AALapplication/medication.manager.configuration/E.2.2-SNAPSHOT</bundle>
 
 
 		<bundle start-level='89' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.persistence/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.persistence/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='90' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.user.management/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.user.management/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='91' start='true'>
-			mvn:org.universAAL.AALapplication/medication.missing.services.simulation/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.missing.services.simulation/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='92' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.ui/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.ui/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='93' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.service/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.service/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='94' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.shell.commands/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.shell.commands/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='95' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.base/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.base/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='96' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='97' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.acquire.medicine/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.acquire.medicine/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='98' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.configuration/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.configuration/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='99' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.review/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.servlet.ui.review/E.2.2-SNAPSHOT
 		</bundle>
 
 		<bundle start-level='99' start='true'>
-			mvn:org.universAAL.AALapplication/medication.manager.event.issuer/E.2-SNAPSHOT
+			mvn:org.universAAL.AALapplication/medication.manager.event.issuer/E.2.2-SNAPSHOT
 		</bundle>
 
 	</feature>

@@ -21,7 +21,7 @@ package org.universAAL.ontology;
 
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.ontology.drools.Consequence;
 import org.universAAL.ontology.drools.ConsequenceProperty;
 import org.universAAL.ontology.drools.DroolsReasoning;
@@ -29,7 +29,7 @@ import org.universAAL.ontology.drools.Fact;
 import org.universAAL.ontology.drools.FactProperty;
 import org.universAAL.ontology.drools.Rule;
 
-public class DroolsReasoningFactory extends ResourceFactoryImpl {
+public class DroolsReasoningFactory implements ResourceFactory {
 
 	public Resource createInstance(String classURI, String instanceURI,
 			int factoryIndex) {

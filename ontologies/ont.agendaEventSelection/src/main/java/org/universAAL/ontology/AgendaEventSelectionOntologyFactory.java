@@ -16,12 +16,12 @@
 package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.ontology.agendaEventSelection.EventSelectionTool;
 import org.universAAL.ontology.agendaEventSelection.FilterParams;
 import org.universAAL.ontology.agendaEventSelection.service.EventSelectionToolService;
 
-public class AgendaEventSelectionOntologyFactory extends ResourceFactoryImpl {
+public class AgendaEventSelectionOntologyFactory implements ResourceFactory {
 
     /*
      * (non-Javadoc)

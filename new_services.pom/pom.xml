@@ -10,22 +10,23 @@
 
 	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>new_services.pom</artifactId>
-	<version>E.2</version>
+	<version>E.3</version>
 	<packaging>pom</packaging>
 	<name>Parent POM for all AAL services</name>
 	<description>Contains repository, deployment, and other info for all AALapplications</description>
 
 	<modules>
 		<module>../ontologies/ont.pom</module>
+		<module>../agenda/agenda.pom</module>
+		<module>../nutritional/nutritional.pom</module>
+		<module>../medication/medication.manager.pom</module>
+		<module>../long_term_behav/ltba.pom</module>
 		<module>../health/health.pom</module> 
 		<module>../personal_safety/personal_safety.pom</module> 
 		<module>../food_shopping/shopping.pom</module>
 		<module>../safety_home/safety.pom</module>
-		<module>../medication/medication.manager.pom</module>
 		<module>../aal_eficiency/AALfficiency.pom</module>
 		<module>../help_when_out/hwo.pom</module>
-		<module>../agenda/agenda.pom</module>
-		<module>../nutritional/nutritional.pom</module>
 	</modules>
 
 	<properties>
@@ -34,7 +35,7 @@
 		<maven.compile.source>1.5</maven.compile.source>
 		<maven.compile.target>1.5</maven.compile.target>
 		<gforge.project.name>new_services</gforge.project.name>
-		<platform.version>2.0.2-SNAPSHOT</platform.version>
+		<platform.version>2.0.3-SNAPSHOT</platform.version>
 		<service.name.svn></service.name.svn>
 	</properties>
 
@@ -85,7 +86,7 @@
 			<dependency>
 				<groupId>org.universAAL.ontology.services</groupId>
 				<artifactId>ont.pom</artifactId>
-				<version>2.0.2-SNAPSHOT</version>
+				<version>2.0.3-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

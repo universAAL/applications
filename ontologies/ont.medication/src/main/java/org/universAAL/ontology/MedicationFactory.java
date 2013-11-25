@@ -17,7 +17,7 @@
 package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.ontology.medMgr.CaregiverNotifier;
 import org.universAAL.ontology.medMgr.CaregiverNotifierData;
 import org.universAAL.ontology.medMgr.DispenserUpsideDown;
@@ -34,7 +34,7 @@ import org.universAAL.ontology.medMgr.Time;
 /**
  * @author George Fournadjiev
  */
-public final class MedicationFactory extends ResourceFactoryImpl {
+public final class MedicationFactory implements ResourceFactory {
 
     public static final int PRECAUTION_FACTORY_INDEX = 0;
     public static final int TIME_FACTORY_INDEX = 1;

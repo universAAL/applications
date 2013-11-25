@@ -8,7 +8,7 @@ import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.middleware.service.owls.process.ProcessInput;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
@@ -63,7 +63,7 @@ public class ProvidedESTService extends EventSelectionToolService {
 	OntologyManagement.getInstance().register(
 		Activator.getMcontext(),
 		new SimpleOntology(MY_URI, EventSelectionToolService.MY_URI,
-			new ResourceFactoryImpl() {
+			new ResourceFactory() {
 			    @Override
 			    public Resource createInstance(String classURI,
 				    String instanceURI, int factoryIndex) {
