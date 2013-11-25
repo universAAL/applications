@@ -1,0 +1,1 @@
+The right version of the images are the ones at "base4" folder. You must place them into ./CONFIGURATION_FOLDER/ResourceServer/nutritional.client/, where CONFIGURATION_FOLDER is /etc at karaf runner or /confadmin at Eclipse workspace.

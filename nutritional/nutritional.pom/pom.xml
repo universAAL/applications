@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>new_services.pom</artifactId>
+		<groupId>org.universAAL.AALapplication</groupId>
+		<version>E.2</version>
+		<relativePath>../../new_services.pom</relativePath>
+	</parent>
+
+	<artifactId>nutritional.pom</artifactId>
+	<version>E.2.1-SNAPSHOT</version>
+	<name>Nutritional Advisor AAL Service</name>
+	<packaging>pom</packaging>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.universAAL.ontology</groupId>
+				<artifactId>ont.pom</artifactId>
+				<version>2.0.2-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<url>http://forge.universaal.org/wiki/new_services:Nutritional_Advisor_universAAL_service</url>
+
+	<issueManagement>
+		<system>GForge - Tracker</system>
+		<url>http://forge.universaal.org/gf/project/new_services/tracker/?action=TrackerItemBrowse&amp;tracker_id=232</url>
+	</issueManagement>
+	<inceptionYear>2010</inceptionYear>
+
+	<scm>
+		<connection>${svn.base}/nutritional/${project.artifactId}</connection>
+		<developerConnection>${svn.base}/nutritional/${project.artifactId}</developerConnection>
+	</scm>
+
+	<modules>
+		<module>../nutritional.client</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>JBossRepo</id>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+
+</project>
