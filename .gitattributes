@@ -1,4 +1,5 @@
 * text=auto !eol
+new_services.pom/pom.xml -text
 ontologies/ont.aalfficiencyscores/ASL2.0.txt -text svneol=unset#text/plain
 ontologies/ont.aalfficiencyscores/NOTICE -text
 ontologies/ont.aalfficiencyscores/pom.xml -text svneol=unset#text/plain
