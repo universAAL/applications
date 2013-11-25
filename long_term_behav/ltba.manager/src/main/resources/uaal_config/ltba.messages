@@ -1,0 +1,14 @@
+#if you want to implement some other language, just put your translations below and change the language code (es=spanish; en=english). If you want to apply that language to your ltba instance, change the languace in ltba.properties file (property language = YOUR_LANGUAGE_CODE/)
+ltba.ui.on.es = Conectar
+ltba.ui.off.es = Desconectar
+ltba.ui.disconnected.main.es = LTBA se ha desconectado. Se conectara automaticamente a las
+ltba.ui.disconnected.today.es = de HOY.
+ltba.ui.disconnected.tomorrow.es = de MAÑANA.
+ltba.ui.connected.es = LTBA esta conectado
+
+ltba.ui.on.en = ON
+ltba.ui.off.en = OFF
+ltba.ui.disconnected.main.en = LTBA is currently disconnected. It will be automatically reconnected at 
+ltba.ui.disconnected.today.en = of TODAY.
+ltba.ui.disconnected.tomorrow.en = of TOMORROW.
+ltba.ui.connected.main.en = LTBA is connected
