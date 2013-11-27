@@ -4,7 +4,7 @@
   <parent>
   	<groupId>org.universAAL.AALapplication</groupId>
   	<artifactId>safety.pom</artifactId>
-  	<version>E.1</version>
+  	<version>E.3</version>
   	<relativePath>../safety.pom/</relativePath>
   </parent>
   
