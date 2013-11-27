@@ -155,6 +155,8 @@ public class DerbyInterface {
 			connect = DriverManager.getConnection("jdbc:derby:"+DBURL+";create=true;");
 			
 			statement = connect.createStatement();
+			System.out.println("CurrentDate:"+currentDate);
+			System.out.println("CurrentTime:"+currentTime);
 		    res = statement.executeUpdate("insert into "+DBNAME+".notification (message, creation, creationtime, state, category, users_id) values ('"+message+"','"+currentDate+"','"+currentTime+"',"+0+","+category+","+5+")");
 		    statement.close();
 		    

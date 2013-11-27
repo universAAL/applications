@@ -694,8 +694,6 @@ public class EnvironmentalControl extends UICaller {
 				}
 				catch(Exception e){ e.printStackTrace(); }
 			}
-
-			return f;
 		}
 		return null;
 	}
