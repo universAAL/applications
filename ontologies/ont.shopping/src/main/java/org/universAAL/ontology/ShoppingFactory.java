@@ -17,7 +17,8 @@
 package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
+//import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.ontology.Shopping.FoodItem;
 import org.universAAL.ontology.Shopping.FoodManagement;
 import org.universAAL.ontology.Shopping.Refrigerator;
@@ -28,7 +29,7 @@ import org.universAAL.ontology.Shopping.ShoppingList;
  * 
  */
 
-public class ShoppingFactory extends ResourceFactoryImpl {
+public class ShoppingFactory implements ResourceFactory {
 
     public ShoppingFactory() {
     }
