@@ -3,12 +3,12 @@
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>new_services.pom</artifactId>
-    <version>E.1</version>
+    <version>E.3</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   
   <artifactId>shopping.pom</artifactId>
-  <version>E.1</version>  
+  <version>E.3</version>  
   <packaging>pom</packaging>
   <name>Food Shopping AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Food_Shopping_universAAL_service</url>
@@ -31,7 +31,7 @@
   </scm>
   <modules>
   	<module>../../ontologies/ont.shopping</module>
-  	<module>../food_shopping.service.RFidProvider</module>
+  	<!-- <module>../food_shopping.service.RFidProvider</module> -->
   	<module>../food_shopping.service.client</module>
   	<module>../food_shopping.service.server</module>
   </modules>
