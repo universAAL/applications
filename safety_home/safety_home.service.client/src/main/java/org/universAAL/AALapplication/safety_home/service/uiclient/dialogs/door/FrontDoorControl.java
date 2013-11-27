@@ -139,6 +139,7 @@ public class FrontDoorControl extends UICaller {
 	static final String SUBMISSION_GOBACK = MY_UI_NAMESPACE + "back";
     static final String SUBMISSION_OK_DOORBELL = MY_UI_NAMESPACE + "okdoorbell";
     static final String SUBMISSION_OK_DOOROPEN = MY_UI_NAMESPACE + "okdooropen";
+    static final String SUBMISSION_OK_VISITOR = MY_UI_NAMESPACE + "okvisitor";
 
     public static String deviceURI = "http://ontology.universaal.org/SafetyServer.owl#controlledDevice0";
     public boolean unlockDoor = false;
@@ -259,6 +260,9 @@ public class FrontDoorControl extends UICaller {
 				catch(Exception e){ e.printStackTrace(); }
 				startMainDialog();
 			} 
+			else if (SUBMISSION_OK_VISITOR.equals(uir.getSubmissionID())) {
+				startMainDialog();
+			} 
 		}
 		Utils.println(window + " Continues");
 	}
@@ -290,8 +294,7 @@ public class FrontDoorControl extends UICaller {
 			SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null, "Welcome to the Front Door Control application.\n\n");
 		}
 		else if (this.status.equals("unlock")){
-			new MediaObject(f.getIOControls(), new Label("Unlocked Door", null), "image/png",
-				IMG_URL+"door_unlock.png");					
+			new MediaObject(f.getIOControls(), new Label("Unlocked Door", null), "image/png", IMG_URL+"door_unlock.png");					
 				//((java.net.URL)UIProvider.class.getResource("/images/door_unlock.png")).toString());
 
 		}
@@ -581,9 +584,14 @@ public class FrontDoorControl extends UICaller {
 	private Form visitorMainDialog(int status) {
 		Utils.println(window + "createVisitorAlertMainDialog");
 		System.out.println("Visitor Alert Message");
+/*
 		Form f = Form.newMessage("Visitor Alert Message", this.visitorText);
 		new MediaObject(f.getIOControls(), new Label("", null), "image/png", IMG_URL+person+".png");					
-				//((java.net.URL)UIProvider.class.getResource("/images/"+person+".jpg")).toString());
+*/
+
+		Form f = Form.newSubdialog("Visitor Alert Message", null);
+		new MediaObject(f.getIOControls(), new Label("", null), "image/png", IMG_URL+person+".png");					
+		Submit ok = new Submit(f.getSubmits(), new Label("OK", null),SUBMISSION_OK_VISITOR);
 
 		return f;
 	}
