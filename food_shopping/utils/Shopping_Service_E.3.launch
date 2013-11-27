@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.pde.ui.EquinoxLauncher">
+<booleanAttribute key="append.args" value="true"/>
+<booleanAttribute key="automaticAdd" value="true"/>
+<booleanAttribute key="automaticValidate" value="false"/>
+<stringAttribute key="bootstrap" value=""/>
+<stringAttribute key="checked" value="[NONE]"/>
+<booleanAttribute key="clearConfig" value="false"/>
+<stringAttribute key="configLocation" value="${workspace_loc}/rundir/safety"/>
+<booleanAttribute key="default" value="true"/>
+<booleanAttribute key="default_auto_start" value="true"/>
+<intAttribute key="default_start_level" value="100"/>
+<stringAttribute key="deselected_workspace_plugins" value="food_shopping.service.server"/>
+<booleanAttribute key="includeOptional" value="true"/>
+<stringAttribute key="org.eclipse.debug.core.source_locator_id" value="org.eclipse.pde.ui.launcher.PDESourceLookupDirector"/>
+<stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-console --obrRepositories=http://a1gforge.igd.fraunhofer.de/nexus/content/repositories/snapshots/repository.xml,http://a1gforge.igd.fraunhofer.de/nexus/content/repositories/releases/repository.xml,http://bundles.osgi.org/obr/browse?_xml=1&amp;amp;cmd=repository --org.ops4j.pax.url.mvn.repositories=+http://a1gforge.igd.fraunhofer.de/nexus/content/groups/public,http://a1gforge.igd.fraunhofer.de/nexus/content/repositories/snapshots@snapshots@noreleases --log=DEBUG"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dosgi.noShutdown=true -Dfelix.log.level=4 -Dorg.universAAL.middleware.peer.is_coordinator=true -Dbundles.configuration.location=${workspace_loc}/rundir/confadmin  -Djava.net.preferIPv4Stack=true"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc}/rundir/shopping"/>
+<booleanAttribute key="org.ops4j.pax.cursor.hotDeployment" value="false"/>
+<stringAttribute key="org.ops4j.pax.cursor.logLevel" value="INFO"/>
+<booleanAttribute key="org.ops4j.pax.cursor.overwrite" value="false"/>
+<booleanAttribute key="org.ops4j.pax.cursor.overwriteSystemBundles" value="false"/>
+<booleanAttribute key="org.ops4j.pax.cursor.overwriteUserBundles" value="false"/>
+<listAttribute key="org.ops4j.pax.cursor.profiles">
+<listEntry value="config"/>
+<listEntry value="obr"/>
+</listAttribute>
+<mapAttribute key="org.ops4j.pax.cursor.provisionItems">
+<mapEntry key="mvn:commons-discovery/commons-discovery/0.5" value="true@true@19@true"/>
+<mapEntry key="mvn:org.apache.commons/com.springsource.org.apache.commons.logging/1.1.1" value="true@true@3@true"/>
+<mapEntry key="mvn:org.openrdf.sesame/sesame-runtime-osgi/2.6.0" value="true@true@5@true"/>
+<mapEntry key="mvn:org.ops4j.pax.web/pax-web-jetty-bundle/1.0.5" value="true@true@4@true"/>
+<mapEntry key="mvn:org.ufacekit.osgi/swingx.osgi/0.9.2" value="true@true@4@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/food_shopping.service.client/E.3" value="true@true@18@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/food_shopping.service.server/E.3" value="true@true@17@true"/>
+<mapEntry key="mvn:org.universAAL.AALapplication/nutritional.client/E.3" value="true@true@20@true"/>
+<mapEntry key="mvn:org.universAAL.context/ctxt.che/2.0.2-SNAPSHOT" value="true@true@6@true"/>
+<mapEntry key="mvn:org.universAAL.context/ctxt.prof.server/2.0.2-SNAPSHOT" value="true@true@7@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.medication/2.0.3-SNAPSHOT" value="true@true@15@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.nutrition/2.0.3-SNAPSHOT" value="true@true@16@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.recommendations/2.0.2-SNAPSHOT" value="true@true@4@true"/>
+<mapEntry key="mvn:org.universAAL.ontology/ont.shopping/2.0.3-SNAPSHOT" value="true@true@16@true"/>
+<mapEntry key="mvn:org.universAAL.remote/ri.internetgateway/2.0.2-SNAPSHOT" value="true@true@15@true"/>
+<mapEntry key="mvn:org.universAAL.ui/ui.dm/2.0.2-SNAPSHOT" value="true@true@4@true"/>
+<mapEntry key="mvn:org.universAAL.ui/ui.handler.gui.swing/2.0.2-SNAPSHOT" value="true@true@4@true"/>
+<mapEntry key="mvn:org.universAAL.ui/ui.resource.server/2.0.2-SNAPSHOT" value="true@true@5@true"/>
+<mapEntry key="scan-composite:mvn:org.universAAL.middleware/mw.composite/2.0.2-SNAPSHOT/composite" value="true@true@2@true"/>
+<mapEntry key="scan-composite:mvn:org.universAAL.ontology/ont.composite/2.0.2-SNAPSHOT/composite" value="true@true@3@true"/>
+<mapEntry key="wrap:mvn:axis/axis-wsdl4j" value="true@true@12@true"/>
+<mapEntry key="wrap:mvn:org.apache.axis/axis-jaxrpc/1.4" value="true@true@14@true"/>
+<mapEntry key="wrap:mvn:org.apache.axis/axis/1.4" value="true@true@13@true"/>
+<mapEntry key="wrap:mvn:org.apache.derby/derby/10.7.1.1" value="true@true@7@true"/>
+<mapEntry key="wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.MetratecReaderLibrary/1.1" value="true@true@5@true"/>
+<mapEntry key="wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.RXTXcomm/1.1" value="true@true@5@true"/>
+<mapEntry key="wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.jd2xx_20602/1.1" value="true@true@5@true"/>
+<mapEntry key="wrap:mvn:org.universAAL.ui/ui.handler.gui.swing.bluesteelLAF/2.0.2-SNAPSHOT@nostart" value="true@true@4@true"/>
+<mapEntry key="wrap:mvn:org.universAAL.ui/ui.internationalization.util/2.0.2-SNAPSHOT" value="true@true@4@true"/>
+</mapAttribute>
+<listAttribute key="org.ops4j.pax.cursor.runArguments">
+<listEntry value="--overwrite=false"/>
+<listEntry value="--overwriteUserBundles=false"/>
+<listEntry value="--overwriteSystemBundles=false"/>
+<listEntry value="--log=INFO"/>
+<listEntry value="--profiles=config,obr"/>
+<listEntry value="scan-composite:mvn:org.universAAL.middleware/mw.composite/2.0.2-SNAPSHOT/composite@2@update"/>
+<listEntry value="scan-composite:mvn:org.universAAL.ontology/ont.composite/2.0.2-SNAPSHOT/composite@3@update"/>
+<listEntry value="mvn:org.apache.commons/com.springsource.org.apache.commons.logging/1.1.1@3@update"/>
+<listEntry value="mvn:org.ufacekit.osgi/swingx.osgi/0.9.2@4@update"/>
+<listEntry value="mvn:org.ops4j.pax.web/pax-web-jetty-bundle/1.0.5@4@update"/>
+<listEntry value="mvn:org.universAAL.ui/ui.dm/2.0.2-SNAPSHOT@4@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.recommendations/2.0.2-SNAPSHOT@4@update"/>
+<listEntry value="wrap:mvn:org.universAAL.ui/ui.handler.gui.swing.bluesteelLAF/2.0.2-SNAPSHOT@nostart@4@update"/>
+<listEntry value="wrap:mvn:org.universAAL.ui/ui.internationalization.util/2.0.2-SNAPSHOT@4@update"/>
+<listEntry value="mvn:org.universAAL.ui/ui.handler.gui.swing/2.0.2-SNAPSHOT@4@update"/>
+<listEntry value="wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.RXTXcomm/1.1@5@update"/>
+<listEntry value="wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.MetratecReaderLibrary/1.1@5@update"/>
+<listEntry value="mvn:org.universAAL.ui/ui.resource.server/2.0.2-SNAPSHOT@5@update"/>
+<listEntry value="mvn:org.openrdf.sesame/sesame-runtime-osgi/2.6.0@5@update"/>
+<listEntry value="wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.jd2xx_20602/1.1@5@update"/>
+<listEntry value="mvn:org.universAAL.context/ctxt.che/2.0.2-SNAPSHOT@6@update"/>
+<listEntry value="wrap:mvn:org.apache.derby/derby/10.7.1.1@7@update"/>
+<listEntry value="mvn:org.universAAL.context/ctxt.prof.server/2.0.2-SNAPSHOT@7@update"/>
+<listEntry value="wrap:mvn:axis/axis-wsdl4j@12@update"/>
+<listEntry value="wrap:mvn:org.apache.axis/axis/1.4@13@update"/>
+<listEntry value="wrap:mvn:org.apache.axis/axis-jaxrpc/1.4@14@update"/>
+<listEntry value="mvn:org.universAAL.remote/ri.internetgateway/2.0.2-SNAPSHOT@15@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.medication/2.0.3-SNAPSHOT@15@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.nutrition/2.0.3-SNAPSHOT@16@update"/>
+<listEntry value="mvn:org.universAAL.ontology/ont.shopping/2.0.3-SNAPSHOT@16@update"/>
+<listEntry value="mvn:org.universAAL.AALapplication/food_shopping.service.server/E.3@17@update"/>
+<listEntry value="mvn:org.universAAL.AALapplication/food_shopping.service.client/E.3@18@update"/>
+<listEntry value="mvn:commons-discovery/commons-discovery/0.5@19@update"/>
+<listEntry value="mvn:org.universAAL.AALapplication/nutritional.client/E.3@20@update"/>
+</listAttribute>
+<stringAttribute key="osgi_framework_id" value="--platform=felix --version=3.0.2"/>
+<stringAttribute key="pde.version" value="3.3"/>
+<booleanAttribute key="show_selected_only" value="false"/>
+<booleanAttribute key="tracing" value="false"/>
+<booleanAttribute key="useCustomFeatures" value="false"/>
+<booleanAttribute key="useDefaultConfigArea" value="false"/>
+</launchConfiguration>
