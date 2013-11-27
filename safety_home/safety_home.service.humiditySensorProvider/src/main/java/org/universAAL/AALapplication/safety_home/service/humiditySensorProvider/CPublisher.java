@@ -73,10 +73,9 @@ public class CPublisher extends ContextPublisher{
 	}
 	
 	public void invoke() throws InterruptedException{
-		//getUsers();
 		while (true){
+			//Thread.sleep(35000);
 			Thread.sleep(115000);
-			//Thread.sleep(11500);
 			publishHumidity(0);
 		}
 	}
