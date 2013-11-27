@@ -23,7 +23,7 @@ import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.Shopping.FoodItem;
 import org.universAAL.ontology.Shopping.FoodManagement;
@@ -84,8 +84,7 @@ public class ProvidedFoodManagementService extends FoodManagement {
 	// we need to register all classes in the ontology for the serialization of the object
 	OntologyManagement.getInstance().register(Activator.getMc(),
 		new SimpleOntology(MY_URI, FoodManagement.MY_URI,
-			new ResourceFactoryImpl() {
-			    @Override
+			new ResourceFactory() {
 			    public Resource createInstance(String classURI,
 				    String instanceURI, int factoryIndex) {
 				return new ProvidedFoodManagementService(instanceURI);
