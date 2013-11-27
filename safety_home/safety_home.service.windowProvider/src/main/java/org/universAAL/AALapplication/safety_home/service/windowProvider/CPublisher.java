@@ -73,6 +73,7 @@ public class CPublisher extends ContextPublisher{
 	public void invoke() throws InterruptedException{
 		while (true){
 			Thread.sleep(11000);
+			//Thread.sleep(40000);
 			publishWindowStatus(0);
 		}
 	}
