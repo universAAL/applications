@@ -17,7 +17,7 @@
 package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.ontology.Safety.Door;
 import org.universAAL.ontology.Safety.HumiditySensor;
 import org.universAAL.ontology.Safety.LightSensor;
@@ -35,7 +35,7 @@ import org.universAAL.ontology.Safety.DoorBell;
  * 
  */
 
-public class SafetyFactory extends ResourceFactoryImpl {
+public class SafetyFactory implements ResourceFactory {
 
     public SafetyFactory() {
     }
