@@ -92,22 +92,23 @@ public class CPublisher extends ContextPublisher{
 			//e.printStackTrace();
 		}
 	}
-	
+
 	public void invoke() throws InterruptedException{
 		getUserByRFidTag();
 	}
 
 /*	
+	// to be deleted after test
 	public void invoke() throws InterruptedException{
-		while (true){
-			Thread.sleep(15*60000);
-			getRandomUser();
-			publishDoorBell(0);
-		}
+		Thread.sleep(50000);
+		publishDoorBell(0);
+		//Thread.sleep(150000);
+		//publishCaregiver(0);
 	}
 */
 	private void publishDoorBell(int deviceID){
 		Device device=null;
+		//this.user = "Unknown Person"; // to be deleted after test
 		if(deviceID==0){
 			Door door = new Door(CPublisher.DEVICE_URI_PREFIX + deviceID);
 			device=(Device)door;
@@ -119,13 +120,29 @@ public class CPublisher extends ContextPublisher{
 			System.out.println("################################################");
 		}
 	}
-
+/*
+	// delete after test
+	private void publishCaregiver(int deviceID){
+		Device device=null;
+		this.user = "Formal Caregiver: " + "Paulos Spanidis";
+		if(deviceID==0){
+			Door door = new Door(CPublisher.DEVICE_URI_PREFIX + deviceID);
+			device=(Device)door;
+			door.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "front door"));
+			door.setDeviceRfid(this.user);
+			
+			System.out.println("############### PUBLISHING EVENT ###############");
+			cp.publish(new ContextEvent(door, Door.PROP_DEVICE_RFID));
+			System.out.println("################################################");
+		}
+	}
+*/
 	public static int randint(int lb, int hb){
 		int d=hb-lb+1;
 		return ( lb+ (int)( Math.random()*d)) ;		
 	}
 	
-public void getUserByRFidTag(){
+	public void getUserByRFidTag(){
 		
         Socket kkSocket = null;
         PrintWriter out = null;
