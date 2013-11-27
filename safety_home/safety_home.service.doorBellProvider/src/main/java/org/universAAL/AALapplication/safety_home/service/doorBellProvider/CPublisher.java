@@ -42,6 +42,7 @@ public class CPublisher extends ContextPublisher{
 	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
 	
 	private ContextPublisher cp;
+	private int cnt=0;
 	
 	protected CPublisher(ModuleContext context, ContextProvider providerInfo) {
 		super(context, providerInfo);
@@ -70,10 +71,14 @@ public class CPublisher extends ContextPublisher{
 	}
 	
 	public void invoke() throws InterruptedException{
+		//Thread.sleep(80000); // Delete after test
+		//publishDoorBell(0);
+
 		while (true){
 			Thread.sleep(3000);
 			publishDoorBell(0);
 		}
+		
 	}
 	
 	private void publishDoorBell(int deviceID){
@@ -82,13 +87,16 @@ public class CPublisher extends ContextPublisher{
 		if(deviceID==0){
 			DoorBell doorbell = new DoorBell(CPublisher.DEVICE_URI_PREFIX + deviceID);
 			device=(Device)doorbell;
-			//doorbell.setDeviceLocation(new Room(CPublisher.LOCATION_URI_PREFIX + "doorbell"));
-			boolean isEnabled = SOAPClient.isDoorBellEnabled();
+			//boolean isEnabled = SOAPClient.isDoorBellEnabled();
+			boolean isEnabled = true;
 			if (isEnabled){
-				doorbell.setIsEnabled(isEnabled);
-				System.out.println("############### PUBLISHING EVENT ###############");
-				cp.publish(new ContextEvent(doorbell, DoorBell.PROP_IS_ENABLED));
-				System.out.println("################################################");
+				if (cnt==0){
+					doorbell.setIsEnabled(isEnabled);
+					System.out.println("############### PUBLISHING EVENT ###############");
+					cp.publish(new ContextEvent(doorbell, DoorBell.PROP_IS_ENABLED));
+					System.out.println("################################################");
+				}
+				cnt=1;
 			}
 		}
 	}
