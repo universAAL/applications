@@ -451,6 +451,7 @@ common/contact_manager/contact.manager.shell.commands/src/main/java/org/universA
 common/contact_manager/contact.manager.shell.commands/src/main/resources/newVCardBill.properties -text
 common/contact_manager/contact.manager.shell.commands/src/main/resources/newVCardGeorge.properties -text
 common/contact_manager/contact.manager.shell.commands/src/main/resources/newVCardTest.properties -text
+food_shopping/README.txt -text
 food_shopping/food_shopping.service.RFidProvider/pom.xml -text
 food_shopping/food_shopping.service.RFidProvider/src/main/java/org/universAAL/AALapplication/food_shopping/service/RFidProvider/Activator.java -text
 food_shopping/food_shopping.service.RFidProvider/src/main/java/org/universAAL/AALapplication/food_shopping/service/RFidProvider/CPublisher.java -text
