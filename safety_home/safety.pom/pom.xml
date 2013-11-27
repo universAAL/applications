@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>new_services.pom</artifactId>
-		<version>E.1</version>
+		<version>E.3</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 
 	<artifactId>safety.pom</artifactId>
-	<version>E.1</version>
+	<version>E.3</version>
 	<packaging>pom</packaging>
 	<name>Safety Home AAL Service</name>
 	<url>http://forge.universaal.org/wiki/new_services:Safety_Home_universAAL_service</url>
