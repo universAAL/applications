@@ -16,6 +16,10 @@
 
 package org.universAAL.AALapplication.food_shopping.service.uiclient.dialogs.shopping;
 
+import java.awt.Desktop;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -78,6 +82,8 @@ public class Shopping extends UICaller {
 	static final String SUBMISSION_GOBACK_BROWSE_SHOPPING = MY_UI_NAMESPACE + "backbrowse";
 	static final String SUBMISSION_GOBACK_EDIT_SHOPPING = MY_UI_NAMESPACE + "backedit";
 	static final String SUBMISSION_BROWSE_SHOPPING_LIST = MY_UI_NAMESPACE + "browseshoppinglist";
+	static final String SUBMISSION_SEND_SHOPPING_LIST = MY_UI_NAMESPACE + "sendshoppinglist";
+	static final String SUBMISSION_PRINT_SHOPPING_LIST = MY_UI_NAMESPACE + "printshoppinglist";
 	static final String SUBMISSION_REMOVE_SHOPPING_LIST = MY_UI_NAMESPACE + "removeshoppinglist";
 	static final String SUBMISSION_EDIT_SHOPPING_LIST = MY_UI_NAMESPACE + "editshoppinglist";
 	static final String SUBMISSION_ADD_NUTRITION_PRODUCT = MY_UI_NAMESPACE + "addnutritionproduct";
@@ -164,6 +170,28 @@ public class Shopping extends UICaller {
 					this.shoppingListName = o1.toString();
 				}
 		    	this.startBrowseSecondaryDialog(this.shoppingListName);
+			}
+			else if (SUBMISSION_SEND_SHOPPING_LIST.equals(uir.getSubmissionID())) {
+		    	this.active="browse";
+		    	this.shoppingListName = "";
+		    	Object o1 = uir.getUserInput(PROP_PATH_SELECTED_LIST.getThePath());
+				if (o1!=null){
+					System.out.println("sln="+o1.toString());
+					this.shoppingListName = o1.toString();
+				}
+		    	this.sendEmail(this.shoppingListName);
+		    	this.startBrowseMainDialog();
+			}
+			else if (SUBMISSION_PRINT_SHOPPING_LIST.equals(uir.getSubmissionID())) {
+		    	this.active="browse";
+		    	this.shoppingListName = "";
+		    	Object o1 = uir.getUserInput(PROP_PATH_SELECTED_LIST.getThePath());
+				if (o1!=null){
+					System.out.println("sln="+o1.toString());
+					this.shoppingListName = o1.toString();
+				}
+		    	this.printShoppingList(this.shoppingListName);
+		    	this.startBrowseMainDialog();
 			}
 			else if (SUBMISSION_REMOVE_SHOPPING_LIST.equals(uir.getSubmissionID())) {
 				this.active="remove";
@@ -559,6 +587,9 @@ public class Shopping extends UICaller {
 
 		//Submit browse = new Submit(g1, new Label("Browse", null),SUBMISSION_BROWSE_SHOPPING_LIST);
 		Submit browse = new Submit(g1, new Label("", IMG_URL+"icons_browse_small.png"), SUBMISSION_BROWSE_SHOPPING_LIST);
+		Submit send = new Submit(g1, new Label("", IMG_URL+"icons_mail_small.png"), SUBMISSION_SEND_SHOPPING_LIST);
+		Submit print = new Submit(g1, new Label("", IMG_URL+"icons_print_small.png"), SUBMISSION_PRINT_SHOPPING_LIST);
+
 		browse.addMandatoryInput(s1);
 
 		f = submitButtons(f);
@@ -566,6 +597,57 @@ public class Shopping extends UICaller {
 		return f;
 	}
 
+	private void sendEmail(String shoppingListName) {
+		String[] slItems = {""};
+		String body = "Product, Size, Company \n\n";
+		if (this.getShoppingLists().containsKey(shoppingListName)){
+			FoodItem[] fi = (FoodItem[])this.getShoppingLists().get(shoppingListName);
+			slItems = new String[fi.length];
+			for (int i=0; i<fi.length; i++){
+				slItems[i] = fi[i].getName() + ", " + fi[i].getSize() + ", " + fi[i].getCompany();
+				body+=slItems[i]+"\n"; 
+			}
+		}
+		body = body.replaceAll(" ", "%20");
+		body = body.replaceAll("\n", "%0A");
+		shoppingListName = shoppingListName.replaceAll(" ", "%20");
+		try {
+			Desktop.getDesktop().mail( new URI("mailto:myaddress@somewhere.com?subject="+shoppingListName+"&body="+body ) );
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+
+	private void printShoppingList(String shoppingListName) {
+		String[] slItems = {""};
+		String body = "";
+		if (this.getShoppingLists().containsKey(shoppingListName)){
+			FoodItem[] fi = (FoodItem[])this.getShoppingLists().get(shoppingListName);
+			slItems = new String[fi.length];
+			for (int i=0; i<fi.length; i++){
+				slItems[i] = fi[i].getName() + ", " + fi[i].getSize() + ", " + fi[i].getCompany();
+				body+=slItems[i]+" \n"; 
+			}
+		}
+        Printing p = new Printing();
+        p.setData(body);
+		PrinterJob job = PrinterJob.getPrinterJob();
+        job.setPrintable(p);
+        boolean ok = job.printDialog();
+        if (ok) {
+            try {
+                 job.print();
+            } catch (PrinterException ex) {
+             /* The job did not successfully complete */
+            }
+        }
+	}
+
+	
 	public void startBrowseSecondaryDialog(String shoppingListName) {
 		Utils.println(window + "startBrowseSecondaryDialog");
 		browseDialog = browseSecondaryDialog(shoppingListName);
