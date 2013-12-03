@@ -190,8 +190,10 @@ public class NomhadGateway {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			nhc.stopClient();
 		}
-		nhc.stopClient();
+
 		return uri.toString();
 
 	}

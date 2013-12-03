@@ -32,7 +32,8 @@ public class WatchingTVController extends LTBAController implements
 		t = new Timer(10 * 1000, this);
 		Calendar today = new GregorianCalendar();
 		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
-				today.get(Calendar.MONTH), today.get(Calendar.DATE), 14, 33);
+				today.get(Calendar.MONTH), today.get(Calendar.DATE), 3, 00);
+		t.setDelay(24 * 60 * 60 * 1000);
 		t.setInitialDelay((int) (startTime.getTimeInMillis() - System
 				.currentTimeMillis()));
 		t.start();

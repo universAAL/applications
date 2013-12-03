@@ -1,6 +1,6 @@
 /*
 	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -65,7 +65,6 @@ public class ProvidedLTBAService extends LTBAService {
 				Activator.mc,
 				new SimpleOntology(MY_URI, DroolsReasoning.MY_URI,
 						new ResourceFactory() {
-							@Override
 							public Resource createInstance(String classURI,
 									String instanceURI, int factoryIndex) {
 								return new ProvidedLTBAService(instanceURI);

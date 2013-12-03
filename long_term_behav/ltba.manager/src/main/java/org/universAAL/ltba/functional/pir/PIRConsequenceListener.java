@@ -110,6 +110,7 @@ public class PIRConsequenceListener extends ContextSubscriber {
 		String phase = null;
 		String index = null;
 		String room = null;
+		Long delay = new Long(0);
 		for (ConsequenceProperty consequenceProperty : consequenceArray) {
 
 			if (consequenceProperty.getKey() == "Device") {
@@ -125,26 +126,34 @@ public class PIRConsequenceListener extends ContextSubscriber {
 				index = consequenceProperty.getValue();
 			} else if (consequenceProperty.getKey() == "Room") {
 				room = consequenceProperty.getValue();
+			} else if (consequenceProperty.getKey() == "delay") {
+				delay = Long.parseLong(consequenceProperty.getValue());
 			}
 		}
 
 		float h = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 		float m = Calendar.getInstance().get(Calendar.MINUTE);
 		float s = Calendar.getInstance().get(Calendar.SECOND);
-		System.out.println(m / 60);
 		float longTime = h + ((float) (m / 60)) + ((float) (s / 3600));
 
 		if (activity == "WakingUp") {
 			WakeUpController.getInstance().addWakingUpHour(longTime);
 		} else if (activity == "GoingToBed") {
-			GoingToBedController.getInstance().addGoingToBedHour(longTime);
+			GoingToBedController.getInstance().addGoingToBedHour(
+					longTime - delay);
 		} else if (activity == "Awakening") {
 			AwakeningController.getInstance().addAwakening();
 		} else if (activity == "GoingOut") {
-			OutOfHomeController.getInstance().outOfHomeStart(longTime);
+
+			OutOfHomeController.getInstance().outOfHomeStart(longTime - delay);
+
 		} else if (activity == "Current") {
-			CurrentActivityController.getInstance().activityDetected(index,
-					Room.getRoomByString(room));
+			if (room == "ALL") {
+				CurrentActivityController.getInstance().activityDetected(index);
+			} else {
+				CurrentActivityController.getInstance().activityDetected(index,
+						Room.getRoomByString(room));
+			}
 		} else if (activity == "AverageDay") {
 			ActivityIndexController.getInstance().addActivityIndex(index);
 		} else if (activity == "Back") {

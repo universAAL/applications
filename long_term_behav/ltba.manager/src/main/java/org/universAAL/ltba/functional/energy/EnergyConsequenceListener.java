@@ -28,6 +28,7 @@ import org.universAAL.ltba.activity.representation.GraphicReporter;
 import org.universAAL.ltba.functional.energy.controller.WatchingTVController;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.uAALBundleContainer;
+import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
 import org.universAAL.middleware.context.ContextSubscriber;
@@ -148,7 +149,9 @@ public class EnergyConsequenceListener extends ContextSubscriber {
 		}
 
 		if (activity == "WatchingTV") {
-			System.out.println("Watching TV detected in consequence listener");
+			LogUtils.logDebug(mc, getClass(), "handleContextEvent",
+					"Watching TV detected in consequence listener: " + device
+							+ " - " + status + " - " + activity);
 			if (status == "ON") {
 				onTimpestamp = System.currentTimeMillis();
 			} else if (status == "OFF") {

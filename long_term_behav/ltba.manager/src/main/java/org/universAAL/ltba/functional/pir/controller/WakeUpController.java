@@ -28,9 +28,9 @@ public class WakeUpController extends LTBAController implements ActionListener {
 
 	private WakeUpController() {
 		super();
-		INSTANCE = this;		
-		
-		// Check the wake up hour at 13.00 PM		
+		INSTANCE = this;
+
+		// Check the wake up hour at 13.00 PM
 		Calendar thisTime = Calendar.getInstance();
 		GregorianCalendar thisMorning = new GregorianCalendar(
 				thisTime.get(Calendar.YEAR), thisTime.get(Calendar.MONTH),
@@ -45,11 +45,11 @@ public class WakeUpController extends LTBAController implements ActionListener {
 					.getTimeInMillis()));
 		}
 
-//		Calendar today = new GregorianCalendar();
-//		Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
-//				today.get(Calendar.MONTH), today.get(Calendar.DATE), 12, 00);
-//		t.setInitialDelay((int) (startTime.getTimeInMillis() - System
-//				.currentTimeMillis()));
+		// Calendar today = new GregorianCalendar();
+		// Calendar startTime = new GregorianCalendar(today.get(Calendar.YEAR),
+		// today.get(Calendar.MONTH), today.get(Calendar.DATE), 12, 00);
+		// t.setInitialDelay((int) (startTime.getTimeInMillis() - System
+		// .currentTimeMillis()));
 		t.start();
 	}
 
@@ -70,9 +70,15 @@ public class WakeUpController extends LTBAController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Sending to Nomhad time>" + wuTime + " and times>"
 				+ times);
-		NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
-				userPassword, "SLEEPING", "GETTING_UP", new String("" + wuTime),
-				DEVICE_ID);
+		// NomhadGateway.getInstance().putMeasurement(serverIP, userCode,
+		// userPassword, "SLEEPING", "GETTING_UP", new String("" + wuTime),
+		// DEVICE_ID);
+		NomhadGateway.getInstance().putMeasurement(serverIP,
+				Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+				Calendar.getInstance().get(Calendar.MONTH),
+				Calendar.getInstance().get(Calendar.YEAR), 12, 00, userCode,
+				userPassword, "SLEEPING", "GETTING_UP",
+				new String("" + wuTime), DEVICE_ID);
 		TimeSleepingController.getInstance().setWUTime((float) wuTime);
 		wuTime = 0;
 	}
