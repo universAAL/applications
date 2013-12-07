@@ -65,6 +65,11 @@ agenda/agenda.server/.classpath
 agenda/agenda.server/.project
 agenda/agenda.server/.settings
 agenda/agenda.server/target
+help_when_out/hwo.mobile/.classpath
+help_when_out/hwo.mobile/.project
+help_when_out/hwo.mobile/.settings
+help_when_out/hwo.mobile/bin
+help_when_out/hwo.mobile/target
 new_services.pom/.project
 new_services.pom/.settings
 new_services.pom/target
