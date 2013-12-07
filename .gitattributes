@@ -941,6 +941,7 @@ help_when_out/hwo.android/res/drawable-mdpi/ic_launcher.png -text
 help_when_out/hwo.android/res/drawable-xhdpi/ic_launcher.png -text
 help_when_out/hwo.android/res/drawable-xxhdpi/ic_launcher.png -text
 help_when_out/hwo.android/res/layout/activity_startup.xml -text
+help_when_out/hwo.android/res/layout/contacts.xml -text
 help_when_out/hwo.android/res/menu/startup.xml -text
 help_when_out/hwo.android/res/raw/uaal.xml -text
 help_when_out/hwo.android/res/values-sw600dp/dimens.xml -text
@@ -964,6 +965,8 @@ help_when_out/hwo.android/src/org/universAAL/AALapplication/hwo/engine/POI_UAAL.
 help_when_out/hwo.android/src/org/universAAL/AALapplication/hwo/engine/SCallee.java -text
 help_when_out/hwo.android/src/org/universAAL/AALapplication/hwo/engine/UImanager.java -text
 help_when_out/hwo.android/src/org/universAAL/AALapplication/hwo/engine/WanderingDetector.java -text
+help_when_out/hwo.android/src/org/universAAL/AALapplication/hwo/engine/contacts/ContactScreen.java -text
+help_when_out/hwo.android/src/org/universAAL/AALapplication/hwo/engine/contacts/DBManager.java -text
 help_when_out/hwo.android/src/org/universAAL/AALapplication/hwo/model/AssistedPerson.java -text
 help_when_out/hwo.android/src/org/universAAL/AALapplication/hwo/model/CoordinateSystem.java -text
 help_when_out/hwo.android/src/org/universAAL/AALapplication/hwo/model/OriginedMetric.java -text

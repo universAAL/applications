@@ -5,25 +5,35 @@ package org.universAAL.AALapplication.hwo.engine;
 // Point(double x, double y, double z, CoordinateSystem system)
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
 import org.universAAL.AALapplication.hwo.BackgroundService;
 import org.universAAL.AALapplication.hwo.R;
+import org.universAAL.AALapplication.hwo.engine.contacts.DBManager;
 import org.universAAL.AALapplication.hwo.model.AssistedPerson;
 import org.universAAL.AALapplication.hwo.model.CoordinateSystem;
 import org.universAAL.AALapplication.hwo.model.Point;
 import org.universAAL.AALapplication.hwo.model.User;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.telephony.SmsManager;
+import android.telephony.SmsMessage;
+import android.text.format.DateFormat;
 import android.util.Log;
+import android.widget.Toast;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
+import android.provider.ContactsContract;
 
 public class SCallee {
 	private static final String TAG = "SCallee";
@@ -117,14 +127,15 @@ public class SCallee {
 		return true;
 	}
 
-	public List<POI> GetPOIs() {
+	public static List<POI> GetPOIs() {
 		List<POI> POIs = new ArrayList<POI>();
 		Log.d(TAG, "Accediendo a la lista de POIs");
-		Vector poilist = dataStorage.getPOIList();
+		Vector poilist = DataStorage.getInstance().getPOIList();
 		POI_UAAL auxpoi = null;
 		int index = 0;
-		POIs.add(new POI("Home", Double.toString(homeLocation[0]) + ","
-				+ Double.toString(homeLocation[1]))); // el hogar
+		double[] homeLoc = DataStorage.getInstance().getHomePosition();
+		POIs.add(new POI("Home", Double.toString(homeLoc[0]) + ","
+				+ Double.toString(homeLoc[1]))); // el hogar
 
 		for (index = 0; index < poilist.size(); index++) { // Conversion between
 															// POI_UAAL class
@@ -137,8 +148,32 @@ public class SCallee {
 		return POIs;
 
 	}
+	
+	public static List<String> GetPOIStrings() {
+		List<String> POIs = new ArrayList<String>();
+		Log.d(TAG, "Accediendo a la lista de POIs");
+		Vector poilist = DataStorage.getInstance().getPOIList();
+		POI_UAAL auxpoi = null;
+		int index = 0;
+		double[] homeLoc = DataStorage.getInstance().getHomePosition();
+		POI home=new POI("Home", Double.toString(homeLoc[0]) + ","
+				+ Double.toString(homeLoc[1]));
+		POIs.add(home.getName()); // el hogar
 
-	public boolean GuideTo(String destiny) { // Launches Google Navigation
+		for (index = 0; index < poilist.size(); index++) { // Conversion between
+															// POI_UAAL class
+															// and our own.
+			auxpoi = (POI_UAAL) poilist.get(index);
+			POI aux=new POI(auxpoi.getName(), auxpoi.getCoordinates());
+			POIs.add(aux.getName());
+
+		}
+
+		return POIs;
+
+	}
+
+	public static boolean GuideTo(String destiny) { // Launches Google Navigation
 
 		Intent i = new Intent(Intent.ACTION_VIEW,
 				Uri.parse("google.navigation:q=" + destiny.replace(" ", "+")
@@ -150,7 +185,7 @@ public class SCallee {
 
 	// Panic Button
 
-	public boolean Panic(User user) {
+	public static boolean Panic(User user) {
 
 		String txt = BackgroundService.activityHandle.getString(R.string.PANIC_BUTTON_PRESSED);//PANIC_BUTTON_PRESSED
 		boolean sent = AlertCareGivers(user, txt);
@@ -159,36 +194,75 @@ public class SCallee {
 
 	// Alert Caregivers
 
-	public boolean AlertCareGivers(User user, String txt) {
+	public static boolean AlertCareGivers(User user, String txt) {
 
-		List<Caregiver> Caregivers = GetCareGivers(); //
+//		List<Caregiver> Caregivers = GetCareGivers(); //
 		boolean alerted = false;
-		int index = 0;
-		do {
+//		int index = 0;
+//		do {
 
-			alerted = SendSMS(txt, Caregivers.get(index).getNumber());
-			index++;
-
-		} while ((alerted != true) & (index < Caregivers.size()));
-		BackgroundService.uimanager.showSMSForm(user, alerted);
+			alerted = SendSMS(txt/*, Caregivers.get(index).getNumber()*/);
+//			index++;
+//
+//		} while ((alerted != true) & (index < Caregivers.size()));
+//		BackgroundService.uimanager.showSMSForm(user, alerted);
 		return alerted;
 	}
 
-	public List<Caregiver> GetCareGivers() { // TODO: Get the CareGivers list
-												// from proper location
-		List<Caregiver> Caregivers = new ArrayList<Caregiver>();
-		Caregivers.add(new Caregiver("Arturo", "34620486483"));
-		return Caregivers;
-
-	}
+//	public static List<Caregiver> GetCareGivers() { // TODO: Get the CareGivers list
+//												// from proper location
+//		List<Caregiver> Caregivers = new ArrayList<Caregiver>();
+//		Caregivers.add(new Caregiver("Arturo", "34620486483"));
+//		return Caregivers;
+//
+//	}
 
 	// SMS
-	public boolean SendSMS(String txt, String number) {
+	public static boolean SendSMS(String txt) {
 
 		Log.d(TAG, "Llamando a funcion sendSMS");
 //		ServiceResponse sr = BackgroundService.caller
 //				.call(sendSMS(txt, number));
-		// TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		SmsManager sms=SmsManager.getDefault();
+		PendingIntent sentIntent = PendingIntent.getBroadcast(BackgroundService.activityHandle, 0,new Intent("es.tsbtecnologias.falldetector.SMS_SENT"), 0);
+		PendingIntent delivIntent = PendingIntent.getBroadcast(BackgroundService.activityHandle, 0,new Intent("es.tsbtecnologias.falldetector.SMS_DELIVERED"), 0);
+		//get list of recipients
+		DBManager mDBmgmt = new DBManager(BackgroundService.activityHandle);
+        mDBmgmt.open();
+        Cursor c=mDBmgmt.getAllSMSRecipients();
+        //send to everyone in list
+        int safe=0;//TODO WARNING: SAFELOCK TO AVOID INFINITE SMS SENT WHEN DEBUGGING!!!!!!!!!!REMOVE!!!!!!!!!!
+        if(c.getCount()<1){
+        	mDBmgmt.close();
+        	Toast.makeText(BackgroundService.activityHandle, "No contacts configured to send SMS!", Toast.LENGTH_LONG).show();
+        	return false;
+        }
+        while(c.moveToNext() && safe<2){
+        	safe++;
+        	String uri=c.getString(c.getColumnIndexOrThrow(DBManager.KEY_URI));
+        	Uri contactData = Uri.parse(uri); 
+        	String number=null;
+        	//Get phone data for this user in the list
+        	Cursor c2 =  BackgroundService.activityHandle.getContentResolver().query(contactData, null, null, null, null); 
+			if (c2.moveToFirst())
+				number = c2.getString(c2.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
+			if(number!=null){
+				//Build the message to send
+				String finMsg=txt+" ("+DateFormat.format("hh:mmaa", Calendar.getInstance())+")";
+				//If too long, we trim the message (if preference mgmt was ok, it shouldnt happen)
+				if(SmsMessage.calculateLength(finMsg, false)[0]>1){
+					ArrayList<String> messages = sms.divideMessage(finMsg);
+					finMsg=messages.get(0);
+				}
+				sms.sendTextMessage(number, null, finMsg, sentIntent, delivIntent); //!!!debugrealphone
+			}else{
+				//Notify of error at recipient info
+				Toast.makeText(BackgroundService.activityHandle, "Could not send alert SMS!", Toast.LENGTH_LONG).show();
+				 mDBmgmt.close();
+				 return false;
+			}
+        }
+        mDBmgmt.close();
 		return true;
 	}
 

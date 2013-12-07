@@ -2,13 +2,31 @@
 <resources>
 
     <string name="app_name">Help when Outdoor</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Contacts</string>
     <string name="hello_world">Hello world!</string>
     <string name="startup_button">Start</string>
     <string name="stop_button">Stop</string>
+    <string name="panic_button">Panic button</string>
+    <string name="poi_title">Points of Interest</string>
+    
+    <string name="layout_contactHint">Choose a contact</string>
+    <string name="layout_addContactButton">Choose</string>
+    <string name="layout_contactHintEmpty">No contact added</string>
+    <string name="layout_yes">Yes</string>
+    <string name="layout_no">No</string>
+    <string name="layout_presentdialog">Already in the list. Pick another?</string>
+    <string name="layout_confirmdialog">Remove from list?</string>
+    
     <string name="PANIC_BUTTON_PRESSED">Panic button pressed</string>
     <string name="ALERT_CG_WANDERING">Wandering</string>
     <string name="ALERT_CG_STOPPED">Stopped</string>
     <string name="ALERT_CG_OUT">Out of safe area</string>
+    
+    <!-- System references. DO NOT CHANGE, DO NOT TRANSLATE!!! -->
+	<string name="ref_notification">FallNotification (system reference)</string>
+	<string name="ref_pickintent">PickContactNotification (system reference)</string>
+	<string name="ref_confirmdialog">ConfirmDialog (system reference)</string>
+	<string name="ref_presentdialog">PresentDialog (system reference)</string>
+	<string name="ref_messagedialog">MessageDialog (system reference)</string>
 
 </resources>
