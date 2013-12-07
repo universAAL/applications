@@ -168,6 +168,9 @@ health/health.x73.adapter/.classpath
 health/health.x73.adapter/.project
 health/health.x73.adapter/.settings
 health/health.x73.adapter/target
+help_when_out/hwo.android/.classpath
+help_when_out/hwo.android/bin
+help_when_out/hwo.android/gen
 help_when_out/hwo.karaf.feature/.project
 help_when_out/hwo.karaf.feature/.settings
 help_when_out/hwo.karaf.feature/target
