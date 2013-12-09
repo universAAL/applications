@@ -714,6 +714,7 @@ health/health.biomedicalsensors.uiclient/NOTICE -text
 health/health.biomedicalsensors.uiclient/PhysicalActivityMonitor_UIClient_1.3.0-drools.launch -text
 health/health.biomedicalsensors.uiclient/PhysicalActivityMonitor_UIClient_2.0.0-drools.launch -text
 health/health.biomedicalsensors.uiclient/PhysicalActivityMonitor_UIClient_2.0.2-SNAPSHOT-drools.launch -text
+health/health.biomedicalsensors.uiclient/PhysicalActivityMonitor_UIClient_2.0.3-SNAPSHOT-drools.launch -text
 health/health.biomedicalsensors.uiclient/SIREN.WAV -text
 health/health.biomedicalsensors.uiclient/pom.xml -text
 health/health.biomedicalsensors.uiclient/src/main/java/org/universAAL/AALapplication/biomedicalsensors/uiclient/AePlayWave.java -text
