@@ -677,6 +677,7 @@ health/health.biomedicalsensors.run/eclipse.launchers/PhysicalActivityMonitor_UI
 health/health.biomedicalsensors.run/eclipse.launchers/PhysicalActivityMonitor_UIClient_2.0.0-drools.launch -text
 health/health.biomedicalsensors.run/eclipse.launchers/PhysicalActivityMonitor_UIClient_2.0.1-SNAPSHOT-drools.launch -text
 health/health.biomedicalsensors.run/eclipse.launchers/PhysicalActivityMonitor_UIClient_2.0.2-SNAPSHOT-drools.launch -text
+health/health.biomedicalsensors.run/eclipse.launchers/PhysicalActivityMonitor_UIClient_2.0.3-SNAPSHOT-drools.launch -text
 health/health.biomedicalsensors.run/ui.dm.mobile/main_menu.txt -text
 health/health.biomedicalsensors.run/ui.dm.mobile/main_menu_el.txt -text
 health/health.biomedicalsensors.run/ui.dm.mobile/main_menu_en.txt -text
