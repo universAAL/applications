@@ -20,8 +20,8 @@ public class WanderingDetector { // despite its name, this class check all the
 		Point RP;
 		long timestamp;
 
-		protected RoutePoint() {
-			RP = new Point(200, 200, 0.0, CoordinateSystem.WGS84);
+		protected RoutePoint(double x, double y) {
+			RP = new Point(x, y, 0.0, CoordinateSystem.WGS84);
 			timestamp = -1;
 		}
 	}
@@ -127,8 +127,8 @@ public class WanderingDetector { // despite its name, this class check all the
 			throw new IllegalArgumentException();
 
 		// Adding the point to the Route
-		RoutePoint currentRoute = new RoutePoint();
-		currentRoute.RP.set2DCoordinates(p.getX(), p.getY());
+		RoutePoint currentRoute = new RoutePoint(p.getX(),p.getY());
+//		currentRoute.RP.set2DCoordinates(p.getX(), p.getY());
 		Log.d(TAG, "debug, las coordenadas son " + Double.toString(p.getX())
 				+ ", " + Double.toString(p.getY()));
 		currentRoute.timestamp = timestamp;
