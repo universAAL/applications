@@ -17,7 +17,6 @@
 	<modules>
 		<module>../ont.agenda</module>
 		<module>../ont.agendaEventSelection</module>
-		<module>../ont.drools</module>
 		<module>../ont.ltba</module>
 		<module>../ont.nutrition</module>
 		<module>../ont.medication</module>
@@ -98,11 +97,6 @@
 			<dependency>
 				<groupId>org.universAAL.ontology</groupId>
 				<artifactId>ont.aalfficiencyscores</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.universAAL.ontology</groupId>
-				<artifactId>ont.drools</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
