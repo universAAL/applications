@@ -2010,35 +2010,6 @@ long_term_behav/drools.event.publisher/target/drools.event.publisher-C.0.1-SNAPS
 long_term_behav/drools.event.publisher/target/drools.event.publisher-D.0.1-SNAPSHOT.jar -text
 long_term_behav/drools.event.publisher/target/drools.event.publisher-D.3.1.jar -text
 long_term_behav/drools.pom/pom.xml -text
-long_term_behav/drools.reasoner/ASL2.0.txt -text
-long_term_behav/drools.reasoner/META-INF/persistence.xml -text
-long_term_behav/drools.reasoner/NOTICE.txt -text
-long_term_behav/drools.reasoner/artifact.composite -text
-long_term_behav/drools.reasoner/paxLaunchers/DroolsSafetyHome.launch -text
-long_term_behav/drools.reasoner/paxLaunchers/Drools_basic_step_by_step.launch -text
-long_term_behav/drools.reasoner/paxLaunchers/LTBA_Publisher_B.0.1_OSGI_enterprise.launch -text
-long_term_behav/drools.reasoner/paxLaunchers/OSGi_Enterprise.launch -text
-long_term_behav/drools.reasoner/paxLaunchers/PROTOTYPE_VERSION.launch -text
-long_term_behav/drools.reasoner/paxLaunchers/PhysicalActivityMonitor_UIClient_1.2.1-SNAPSHOT.launch -text
-long_term_behav/drools.reasoner/pom.xml -text
-long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/DevelopingRulesUI.java -text svneol=unset#text/plain
-long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/engine/CustomAgendaEventListener.java -text
-long_term_behav/drools.reasoner/src/main/java/org/universAAL/drools/engine/CustomWorkingMemoryEventListener.java -text
-long_term_behav/drools.reasoner/src/main/resources/KNXuAALrules.drl -text
-long_term_behav/drools.reasoner/src/main/resources/droolsWorkshop1.drl -text
-long_term_behav/drools.reasoner/src/main/resources/reasoner.drl -text
-long_term_behav/drools.reasoner/src/main/resources/reasoner2.drl -text
-long_term_behav/drools.reasoner/src/main/resources/reasonerAuxClasses.drl -text
-long_term_behav/drools.reasoner/src/main/resources/reasonerRaw.drl -text
-long_term_behav/drools.reasoner/src/main/resources/reasoner_PIR.drl -text
-long_term_behav/drools.reasoner/src/main/resources/reasoner_PIR_Energy.drl -text
-long_term_behav/drools.reasoner/src/main/resources/reasoner_e.drl -text
-long_term_behav/drools.reasoner/src/main/resources/reasoner_energy.drl -text
-long_term_behav/drools.reasoner/src/main/resources/snippet/Snippet.java -text
-long_term_behav/drools.reasoner/src/main/resources/uAALrules.drl -text
-long_term_behav/drools.reasoner/src/main/resources/uaal_config/reasoner.properties -text svneol=unset#text/plain
-long_term_behav/drools.reasoner/src/main/resources/uaal_config/uAALrules.drl -text
-long_term_behav/drools.reasoner/src/main/resources/users/droolsWorkshop1.drl -text
 long_term_behav/ltba.feature/.project -text svneol=unset#text/plain
 long_term_behav/ltba.feature/ASL2.0.txt -text svneol=unset#text/plain
 long_term_behav/ltba.feature/NOTICE -text

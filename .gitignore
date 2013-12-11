@@ -188,10 +188,6 @@ help_when_out/hwo.servlet/.settings
 help_when_out/hwo.servlet/target
 long_term_behav/drools.pom/.project
 long_term_behav/drools.pom/.settings
-long_term_behav/drools.reasoner/.classpath
-long_term_behav/drools.reasoner/.project
-long_term_behav/drools.reasoner/.settings
-long_term_behav/drools.reasoner/target
 long_term_behav/ltba.feature/.classpath
 long_term_behav/ltba.feature/.settings
 long_term_behav/ltba.manager/.classpath
