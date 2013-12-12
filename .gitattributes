@@ -8,6 +8,15 @@ FollowMeExamples/FollowMeExampleGUI/pom.xml -text svneol=unset#text/plain
 FollowMeExamples/FollowMeExampleGUI/src/main/java/org/universAAL/AALapplication/FollowMeExampleGUI/Activator.java -text svneol=unset#text/plain
 FollowMeExamples/FollowMeExampleGUI/src/main/java/org/universAAL/AALapplication/FollowMeExampleGUI/LocationSubscriber.java -text svneol=unset#text/plain
 FollowMeExamples/FollowMeExampleGUI/src/main/java/org/universAAL/AALapplication/FollowMeExampleGUI/PopUp.java -text svneol=unset#text/plain
+FollowMeExamples/FollowMeHall/.classpath -text svneol=unset#text/plain
+FollowMeExamples/FollowMeHall/.project -text svneol=unset#text/plain
+FollowMeExamples/FollowMeHall/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+FollowMeExamples/FollowMeHall/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+FollowMeExamples/FollowMeHall/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+FollowMeExamples/FollowMeHall/pom.xml -text svneol=unset#text/plain
+FollowMeExamples/FollowMeHall/src/main/java/org/universAAL/AALapplication/FollowMeHall/Activator.java -text svneol=unset#text/plain
+FollowMeExamples/FollowMeHall/src/main/java/org/universAAL/AALapplication/FollowMeHall/LocationSubscriber.java -text svneol=unset#text/plain
+FollowMeExamples/FollowMeHall/src/main/java/org/universAAL/AALapplication/FollowMeHall/PopUp.java -text svneol=unset#text/plain
 ZWaveInterface/README.txt -text
 ZWaveInterface/ZWave.feature/pom.xml -text svneol=unset#text/plain
 ZWaveInterface/ZWave.feature/src/main/features/zwave.xml -text svneol=unset#text/plain
