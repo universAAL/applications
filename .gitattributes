@@ -1,4 +1,13 @@
 * text=auto !eol
+FollowMeExamples/FollowMeExampleGUI/.classpath -text svneol=unset#text/plain
+FollowMeExamples/FollowMeExampleGUI/.project -text svneol=unset#text/plain
+FollowMeExamples/FollowMeExampleGUI/.settings/org.eclipse.core.resources.prefs -text svneol=unset#text/plain
+FollowMeExamples/FollowMeExampleGUI/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+FollowMeExamples/FollowMeExampleGUI/.settings/org.eclipse.m2e.core.prefs -text svneol=unset#text/plain
+FollowMeExamples/FollowMeExampleGUI/pom.xml -text svneol=unset#text/plain
+FollowMeExamples/FollowMeExampleGUI/src/main/java/org/universAAL/AALapplication/FollowMeExampleGUI/Activator.java -text svneol=unset#text/plain
+FollowMeExamples/FollowMeExampleGUI/src/main/java/org/universAAL/AALapplication/FollowMeExampleGUI/LocationSubscriber.java -text svneol=unset#text/plain
+FollowMeExamples/FollowMeExampleGUI/src/main/java/org/universAAL/AALapplication/FollowMeExampleGUI/PopUp.java -text svneol=unset#text/plain
 ZWaveInterface/README.txt -text
 ZWaveInterface/ZWave.feature/pom.xml -text svneol=unset#text/plain
 ZWaveInterface/ZWave.feature/src/main/features/zwave.xml -text svneol=unset#text/plain
