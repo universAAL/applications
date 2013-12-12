@@ -251,7 +251,6 @@ public boolean checkSafeArea(Point p) {
 		 double yyB = R*Math.cos(xB*PI/180)*Math.sin(yB*PI/180);
 		 Line2D.Double AB = new Line2D.Double(xxA, yyA, xxB, yyB);
 		 Line2D.Double LineaPos = new Line2D.Double(xxPos, yyPos, VectorXsafearea[safearea.size()-1]+100, yyPos); //linea paralela al eje X que va de Xpos a un extremo (y un poco mas lejos para comprobar la interseccion)
-		 System.out.println("CHEKLINE: ("+xxA+","+yyA+")---("+xxB+","+yyB+")   crosses with    ("+xxPos+","+yyPos+")---("+VectorXsafearea[safearea.size()-1]+100+","+yyPos+")");
 		 boolean intersectan = LineaPos.intersectsLine(AB);
 		 if(intersectan) contador++;
 		}
