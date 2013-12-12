@@ -228,10 +228,10 @@ public class WanderingDetector { // despite its name, this class check all the
 		xPos = p.getX();
 		yPos = p.getY();
 
-		xPos = R * Math.cos(xPos * PI / 180) * Math.cos(yPos * PI / 180); // Conversion
+		double xxPos = R * Math.cos(xPos * PI / 180) * Math.cos(yPos * PI / 180); // Conversion
 																			// to
 																			// Cartesian
-		yPos = R * Math.cos(xPos * PI / 180) * Math.sin(yPos * PI / 180);
+		double yyPos = R * Math.cos(xPos * PI / 180) * Math.sin(yPos * PI / 180);
 
 		// *** Step 1: Order Safe Area points to get the max and min values. If
 		// user is further than the min or max value, its out of the safe Area
@@ -246,8 +246,8 @@ public class WanderingDetector { // despite its name, this class check all the
 
 		}
 		Arrays.sort(VectorXsafearea);
-		if (xPos < VectorXsafearea[1]
-				|| xPos > VectorXsafearea[safearea.size() - 1]) {
+		if (xxPos < VectorXsafearea[1]
+				|| xxPos > VectorXsafearea[safearea.size() - 1]) {
 			System.out.println("User out of safe area");
 			return true;
 		}
@@ -265,13 +265,13 @@ public class WanderingDetector { // despite its name, this class check all the
 			yA = A.getY();
 			xB = B.getX();
 			yB = B.getY();
-			xA = R * Math.cos(xA * PI / 180) * Math.cos(yA * PI / 180);
-			yA = R * Math.cos(xA * PI / 180) * Math.sin(yA * PI / 180);
-			xB = R * Math.cos(xB * PI / 180) * Math.cos(yB * PI / 180);
-			yB = R * Math.cos(xB * PI / 180) * Math.sin(yB * PI / 180);
-			Line2DDouble AB = new Line2DDouble(xA, yA, xB, yB);
-			Line2DDouble LineaPos = new Line2DDouble(xPos, yPos,
-					VectorXsafearea[safearea.size() - 1] + 100, yPos); // linea
+			double xxA = R * Math.cos(xA * PI / 180) * Math.cos(yA * PI / 180);
+			double yyA = R * Math.cos(xA * PI / 180) * Math.sin(yA * PI / 180);
+			double xxB = R * Math.cos(xB * PI / 180) * Math.cos(yB * PI / 180);
+			double yyB = R * Math.cos(xB * PI / 180) * Math.sin(yB * PI / 180);
+			Line2DDouble AB = new Line2DDouble(xxA, yyA, xxB, yyB);
+			Line2DDouble LineaPos = new Line2DDouble(xxPos, yyPos,
+					VectorXsafearea[safearea.size() - 1] + 100, yyPos); // linea
 																		// paralela
 																		// al
 																		// eje X
