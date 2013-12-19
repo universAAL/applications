@@ -15,13 +15,13 @@
 		<bundle>wrap:mvn:java3d/j3d-core/1.3.1</bundle>
 		<bundle>wrap:mvn:java3d/vecmath/1.3.1</bundle>
 		<bundle>wrap:mvn:javax.mail/mail/1.4.1</bundle>
-		<bundle>wrap:mvn:org.apache.axis/axis-jaxrpc/1.4</bundle>
+ 		<bundle>wrap:mvn:org.apache.axis/axis-jaxrpc/1.4</bundle>  
 
 		<!-- Ontologies -->
 		<feature>uAAL-Ont.Nutrition</feature>
 
 		<!-- Service -->
-		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/nutritional.client/E.2.2-SNAPSHOT
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/nutritional.client/E.3.1-SNAPSHOT
 		</bundle>
 	</feature>
 </features>

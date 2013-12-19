@@ -17,7 +17,6 @@ import org.universAAL.middleware.ui.rdf.Label;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.medMgr.Precaution;
-import org.universAAL.ontology.medMgr.UserIDs;
 import org.universAAL.ontology.recommendations.HorizontalAlignment;
 import org.universAAL.ontology.recommendations.HorizontalLayout;
 import org.universAAL.ontology.recommendations.VerticalLayout;
@@ -53,56 +52,56 @@ public class UIMedication {
      */
     public static Form getForm() {
 	Utils.println(Messages.getString("UIProfile.1")); //$NON-NLS-1$
-	Form f;
-
-	MedicationConsumer medConsumer = new MedicationConsumer(
-		SharedResources.getMContext());
-	Precaution p = medConsumer.requestDetails(UserIDs.getSaiedUser());
-
-	if (p != null) {
-	    f = Form.newDialog(
-		    Messages.getString("UIProfile.2"), new Resource()); //$NON-NLS-1$
-	    f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
-	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.left);
-//	    f.setProperty(
-//		    "http://ontology.itaca.es/ClassicGUI.owl#layout", "constant,vertical,left"); //$NON-NLS-1$ //$NON-NLS-2$
-
-	    Group medications = new Group(
-		    f.getIOControls(),
-		    new Label(Messages.getString("UIProfile.3"), null), PROP_PATH_REF1, null, null); //$NON-NLS-1$
-	    medications.addAppearanceRecommendation(new VerticalLayout());
-	    medications.addAppearanceRecommendation(HorizontalAlignment.left);
-
-	    Utils.println("Tester: sideeffect: " + p.getSideEffect() //$NON-NLS-1$
-		    + " incompliance: " + p.getIncompliance()); //$NON-NLS-1$
-
-	    Group sideeffects = new Group(
-		    medications,
-		    new Label(Messages.getString("UIProfile.4"), null), PROP_PATH_REF2, null, null); //$NON-NLS-1$
-	    sideeffects.addAppearanceRecommendation(new VerticalLayout());
-	    sideeffects.addAppearanceRecommendation(HorizontalAlignment.left);
-	    new SimpleOutput(sideeffects, new Label("", null), null, //$NON-NLS-1$
-		    p.getSideEffect());
-
-	    String incompliance = Messages.getString("UIProfile.5"); //$NON-NLS-1$
-	    if (p.getIncompliance() != null)
-		incompliance = p.getIncompliance();
-
-	    Group incompl = new Group(
-		    medications,
-		    new Label(Messages.getString("UIProfile.6"), null), PROP_PATH_REF3, null, null); //$NON-NLS-1$
-	    incompl.addAppearanceRecommendation(new VerticalLayout());
-	    incompl.addAppearanceRecommendation(HorizontalAlignment.left);
-	    new SimpleOutput(incompl, new Label("", null), //$NON-NLS-1$
-		    null, incompliance);
-	    // add an exit button for quitting the dialog
-	    new Submit(f.getSubmits(), new Label(
-		    Messages.getString("UIProfile.9"), null), //$NON-NLS-1$
-		    SUBMIT_GOBACK);
-	} else {
-	    f = Form.newMessage(Messages.getString("UIProfile.10"), //$NON-NLS-1$
-		    Messages.getString("UIProfile.11")); //$NON-NLS-1$
-	}
+	Form f = null;
+//
+//	MedicationConsumer medConsumer = new MedicationConsumer(
+//		SharedResources.getMContext());
+//	Precaution p = medConsumer.requestDetails(UserIDs.getSaiedUser());
+//
+//	if (p != null) {
+//	    f = Form.newDialog(
+//		    Messages.getString("UIProfile.2"), new Resource()); //$NON-NLS-1$
+//	    f.getIOControls().addAppearanceRecommendation(new VerticalLayout());
+//	    f.getIOControls().addAppearanceRecommendation(HorizontalAlignment.left);
+////	    f.setProperty(
+////		    "http://ontology.itaca.es/ClassicGUI.owl#layout", "constant,vertical,left"); //$NON-NLS-1$ //$NON-NLS-2$
+//
+//	    Group medications = new Group(
+//		    f.getIOControls(),
+//		    new Label(Messages.getString("UIProfile.3"), null), PROP_PATH_REF1, null, null); //$NON-NLS-1$
+//	    medications.addAppearanceRecommendation(new VerticalLayout());
+//	    medications.addAppearanceRecommendation(HorizontalAlignment.left);
+//
+//	    Utils.println("Tester: sideeffect: " + p.getSideEffect() //$NON-NLS-1$
+//		    + " incompliance: " + p.getIncompliance()); //$NON-NLS-1$
+//
+//	    Group sideeffects = new Group(
+//		    medications,
+//		    new Label(Messages.getString("UIProfile.4"), null), PROP_PATH_REF2, null, null); //$NON-NLS-1$
+//	    sideeffects.addAppearanceRecommendation(new VerticalLayout());
+//	    sideeffects.addAppearanceRecommendation(HorizontalAlignment.left);
+//	    new SimpleOutput(sideeffects, new Label("", null), null, //$NON-NLS-1$
+//		    p.getSideEffect());
+//
+//	    String incompliance = Messages.getString("UIProfile.5"); //$NON-NLS-1$
+//	    if (p.getIncompliance() != null)
+//		incompliance = p.getIncompliance();
+//
+//	    Group incompl = new Group(
+//		    medications,
+//		    new Label(Messages.getString("UIProfile.6"), null), PROP_PATH_REF3, null, null); //$NON-NLS-1$
+//	    incompl.addAppearanceRecommendation(new VerticalLayout());
+//	    incompl.addAppearanceRecommendation(HorizontalAlignment.left);
+//	    new SimpleOutput(incompl, new Label("", null), //$NON-NLS-1$
+//		    null, incompliance);
+//	    // add an exit button for quitting the dialog
+//	    new Submit(f.getSubmits(), new Label(
+//		    Messages.getString("UIProfile.9"), null), //$NON-NLS-1$
+//		    SUBMIT_GOBACK);
+//	} else {
+//	    f = Form.newMessage(Messages.getString("UIProfile.10"), //$NON-NLS-1$
+//		    Messages.getString("UIProfile.11")); //$NON-NLS-1$
+//	}
 
 	return f;
     }
