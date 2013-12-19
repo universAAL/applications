@@ -2,8 +2,8 @@
 <features name="universAAL-Service-Ontologies" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
 	<!-- Change version of repository accordingly -->
-	<repository>mvn:org.universAAL.middleware/mw.karaf.feature/2.0.3-SNAPSHOT/xml/features</repository>
-	<repository>mvn:org.universAAL.ontology/ont.karaf.feature/2.0.3-SNAPSHOT/xml/features</repository>
+	<repository>mvn:org.universAAL.middleware/mw.karaf.feature/2.0.4-SNAPSHOT/xml/features</repository>
+	<repository>mvn:org.universAAL.ontology/ont.karaf.feature/2.0.4-SNAPSHOT/xml/features</repository>
 	
 	<feature name="uAAL-Ont.Aalfficiencyscores" description="The AALfficiency Scores Ontology"
 		version="${pom.version}" resolver='(obr)'>
