@@ -913,7 +913,7 @@ public class Shopping extends UICaller {
 		"- Press the button \"Create Shopping List\" to create a shopping list.\n"+
 		"- Press the button \"Browse Shopping List\" to browse or remove a shopping list.\n"+
 		"- Press the button \"Edit Shopping List\" to edit a shopping list.\n"+
-		"- Press the button \"Today Shopping List\" to create a shopping list based on today menu.\n"+
+		"- Press the button \"Today Shopping List\" to create a shopping list based on today menu from Nutritional Advisor.\n"+
 		"- Press the button \"Back\" to return to previous page.\n");		
 		
 		f = submitButtons(f);
@@ -925,7 +925,7 @@ public class Shopping extends UICaller {
 		new Submit(f.getSubmits(), new Label("Create Shopping List", null),SUBMISSION_CREATE);
 		new Submit(f.getSubmits(), new Label("Browse Shopping List", null), SUBMISSION_BROWSE);
 		new Submit(f.getSubmits(), new Label("Edit Shopping List", null), SUBMISSION_EDIT);
-		new Submit(f.getSubmits(), new Label("Today's Shopping List", null), SUBMISSION_TODAY_SHOPPING_LIST);
+		new Submit(f.getSubmits(), new Label("Today Shopping List", null), SUBMISSION_TODAY_SHOPPING_LIST);
 		new Submit(f.getSubmits(), new Label("Go Back", null), SUBMISSION_GOBACK);
 		
 /*
