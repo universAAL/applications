@@ -135,7 +135,22 @@ public class Repository extends UICaller {
 		
 		return f;
 	}
+	
+	public void startMainDialog(FoodItem[] lfi) {
+		Utils.println(window + "updateMainDialog");
 
+		updateMainDialog(lfi);
+	}
+	
+	private void updateMainDialog(FoodItem[] lfi) {
+		Utils.println(window + "createMenusUpdateDialog");
+		Form f = Form.newDialog("Update Repository", new Resource());
+
+		this.fooditems = new FoodItem[lfi.length];
+		this.fooditems = lfi;
+	}
+
+/*
 	public void startMainDialog(FoodItem[] lfi) {
 		Utils.println(window + "updateMainDialog");
 
@@ -186,7 +201,7 @@ public class Repository extends UICaller {
 		
 		return f;
 	}
-
+*/
 /*	
 	private Form updateMainDialog(FoodItem[] lfi) {
 		Utils.println(window + "createMenusUpdateDialog");
@@ -217,9 +232,9 @@ public class Repository extends UICaller {
 */
 	
 	private Form submitButtons(Form f){
-		//new Submit(f.getSubmits(), new Label("Go back", null), SUBMISSION_GOBACK);
-		new Submit(f.getSubmits(), new Label("", IMG_URL + "icons_back_small.png"), SUBMISSION_GOBACK);
-		
+		new Submit(f.getSubmits(), new Label("Go back", null), SUBMISSION_GOBACK);
+		//new Submit(f.getSubmits(), new Label("", IMG_URL + "icons_back_small.png"), SUBMISSION_GOBACK);
+				
 		return f;
 	}
 

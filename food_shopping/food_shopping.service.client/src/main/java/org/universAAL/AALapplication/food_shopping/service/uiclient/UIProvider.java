@@ -62,24 +62,15 @@ public class UIProvider extends UICaller {
 	private Form initMainDialog() {
 		Form f = Form.newDialog("Food and Shopping",	new Resource());
 		new SimpleOutput(f.getIOControls(), null, null,"Welcome to Food and Shopping service.");
-
+/*
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shopList_small.png"), SUBMIT_SHOPPING);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodRepos_small.png"), SUBMIT_REPOSITORY);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_help_small.png"), SUBMIT_HELP);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_exit_small.png"), SUBMIT_EXIT);
-
-/*
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_shopList_small.png")).toString()), SUBMIT_SHOPPING);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodRepos_small.png")).toString()), SUBMIT_REPOSITORY);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_help_small.png")).toString()), SUBMIT_HELP);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_exit_small.png")).toString()), SUBMIT_EXIT);
 */
-/*
 		new Submit(f.getSubmits(), new Label("Shopping List", null), SUBMIT_SHOPPING);
 		new Submit(f.getSubmits(), new Label("Food Repository", null), SUBMIT_REPOSITORY);
-		new Submit(f.getSubmits(), new Label("Help", null), SUBMIT_HELP);
 		new Submit(f.getSubmits(), new Label("Exit", null), SUBMIT_EXIT);
-*/
 		return f;
 	}
 
