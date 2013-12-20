@@ -538,7 +538,8 @@ public class Shopping extends UICaller {
 		ms1.generateChoices(this.getCreateShoppingListItems());
 		InputField in1 = new InputField(g1, new Label("Shopping List Name",null), PROP_PATH_SHOPPING_LIST_NAME, null, (Resource) null);
 		
-		Submit save = new Submit(g1, new Label("", IMG_URL+"icons_save_small.png"), SUBMISSION_SAVE);
+		//Submit save = new Submit(g1, new Label("", IMG_URL+"icons_save_small.png"), SUBMISSION_SAVE);
+		Submit save = new Submit(g1, new Label("Save", null), SUBMISSION_SAVE);
 		save.addMandatoryInput(in1);
 		save.addMandatoryInput(ms1);
 /*
@@ -585,10 +586,13 @@ public class Shopping extends UICaller {
 		}
 		s1.generateChoices(sl);
 
-		//Submit browse = new Submit(g1, new Label("Browse", null),SUBMISSION_BROWSE_SHOPPING_LIST);
-		Submit browse = new Submit(g1, new Label("", IMG_URL+"icons_browse_small.png"), SUBMISSION_BROWSE_SHOPPING_LIST);
-		Submit send = new Submit(g1, new Label("", IMG_URL+"icons_mail_small.png"), SUBMISSION_SEND_SHOPPING_LIST);
-		Submit print = new Submit(g1, new Label("", IMG_URL+"icons_print_small.png"), SUBMISSION_PRINT_SHOPPING_LIST);
+		Submit browse = new Submit(g1, new Label("Browse", null),SUBMISSION_BROWSE_SHOPPING_LIST);
+		Submit send = new Submit(g1, new Label("Send Email", null), SUBMISSION_SEND_SHOPPING_LIST);
+		Submit print = new Submit(g1, new Label("Print", null), SUBMISSION_PRINT_SHOPPING_LIST);
+
+		//Submit browse = new Submit(g1, new Label("", IMG_URL+"icons_browse_small.png"), SUBMISSION_BROWSE_SHOPPING_LIST);
+		//Submit send = new Submit(g1, new Label("", IMG_URL+"icons_mail_small.png"), SUBMISSION_SEND_SHOPPING_LIST);
+		//Submit print = new Submit(g1, new Label("", IMG_URL+"icons_print_small.png"), SUBMISSION_PRINT_SHOPPING_LIST);
 
 		browse.addMandatoryInput(s1);
 
@@ -674,11 +678,11 @@ public class Shopping extends UICaller {
 		}
 		ms1.generateChoices(slItems);
 
-		//Submit remove = new Submit(g1, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_remove_small.png")).toString()), SUBMISSION_REMOVE_SHOPPING_LIST);
-		Submit remove = new Submit(g1, new Label("", IMG_URL+"icons_remove_small.png"), SUBMISSION_REMOVE_SHOPPING_LIST);
-
-		//new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_back_small.png")).toString()), SUBMISSION_GOBACK_BROWSE_SHOPPING);
-		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_back_small.png"), SUBMISSION_GOBACK_BROWSE_SHOPPING);
+		//Submit remove = new Submit(g1, new Label("", IMG_URL+"icons_remove_small.png"), SUBMISSION_REMOVE_SHOPPING_LIST);
+		Submit remove = new Submit(g1, new Label("Remove", null), SUBMISSION_REMOVE_SHOPPING_LIST);
+		
+		//new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_back_small.png"), SUBMISSION_GOBACK_BROWSE_SHOPPING);
+		new Submit(f.getSubmits(), new Label("Go Back", null), SUBMISSION_GOBACK_BROWSE_SHOPPING);
 		
 		return f;
 	}
@@ -712,7 +716,8 @@ public class Shopping extends UICaller {
 		}
 		s1.generateChoices(sl);
 
-		Submit select = new Submit(g1, new Label("", IMG_URL+"icons_select_small.png"),SUBMISSION_EDIT_SHOPPING_LIST);
+		//Submit select = new Submit(g1, new Label("", IMG_URL+"icons_select_small.png"),SUBMISSION_EDIT_SHOPPING_LIST);
+		Submit select = new Submit(g1, new Label("Edit Shopping List", null),SUBMISSION_EDIT_SHOPPING_LIST);
 		select.addMandatoryInput(s1);
 
 		f = submitButtons(f);
@@ -746,15 +751,15 @@ public class Shopping extends UICaller {
 		}
 		ms1.generateChoices(slItems);
 /*
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodAdd_small.png")).toString()), SUBMISSION_ADD_NUTRITION_PRODUCT);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodRemove_small.png")).toString()), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_shLstName_small.png")).toString()), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_back_small.png")).toString()), SUBMISSION_GOBACK_EDIT_SHOPPING);
-*/
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodAdd_small.png"), SUBMISSION_ADD_NUTRITION_PRODUCT);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodRemove_small.png"), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstName_small.png"), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_back_small.png"), SUBMISSION_GOBACK_EDIT_SHOPPING);
+*/
+		new Submit(f.getSubmits(), new Label("Add Food Item", null), SUBMISSION_ADD_NUTRITION_PRODUCT);
+		new Submit(f.getSubmits(), new Label("Remove Food Item", null), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
+		new Submit(f.getSubmits(), new Label("Shopping List Name", null), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
+		new Submit(f.getSubmits(), new Label("Go Back", null), SUBMISSION_GOBACK_EDIT_SHOPPING);
 
 		return f;
 	}
@@ -785,20 +790,19 @@ public class Shopping extends UICaller {
 		}
 		ms1.generateChoices(slItems);
 
-		//Submit remove = new Submit(g1, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_remove_small.png")).toString()), SUBMISSION_REMOVE_NUTRITION_PRODUCT_FROM_LIST);
-		Submit remove = new Submit(g1, new Label("", IMG_URL+"icons_remove_small.png"), SUBMISSION_REMOVE_NUTRITION_PRODUCT_FROM_LIST);
+		//Submit remove = new Submit(g1, new Label("", IMG_URL+"icons_remove_small.png"), SUBMISSION_REMOVE_NUTRITION_PRODUCT_FROM_LIST);
+		Submit remove = new Submit(g1, new Label("Remove", null), SUBMISSION_REMOVE_NUTRITION_PRODUCT_FROM_LIST);
 		remove.addMandatoryInput(ms1);
 		
+		new Submit(f.getSubmits(), new Label("Add Food Item", null), SUBMISSION_ADD_NUTRITION_PRODUCT);
+		new Submit(f.getSubmits(), new Label("Remove Food Item", null), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
+		new Submit(f.getSubmits(), new Label("Shopping List Name", null), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
+		new Submit(f.getSubmits(), new Label("Go Back", null), SUBMISSION_GOBACK_EDIT_SHOPPING);
+/*
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodAdd_small.png"), SUBMISSION_ADD_NUTRITION_PRODUCT);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodRemove_small.png"), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstName_small.png"), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_back_small.png"), SUBMISSION_GOBACK_EDIT_SHOPPING);
-
-/*
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodAdd_small.png")).toString()), SUBMISSION_ADD_NUTRITION_PRODUCT);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodRemove_small.png")).toString()), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_shLstName_small.png")).toString()), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_back_small.png")).toString()), SUBMISSION_GOBACK_EDIT_SHOPPING);
 */
 		return f;
 	}
@@ -821,20 +825,20 @@ public class Shopping extends UICaller {
 
 		InputField in1 = new InputField(g1, new Label("Shopping List Name: ",null), PROP_PATH_SHOPPING_LIST_NAME, null, (Resource) null);
 		
-		//Submit save = new Submit(g1, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_save_small.png")).toString()), SUBMISSION_NEW_SHOPPINGLIST_NAME);
-		Submit save = new Submit(g1, new Label("", IMG_URL+"icons_save_small.png"), SUBMISSION_NEW_SHOPPINGLIST_NAME);
+		//Submit save = new Submit(g1, new Label("", IMG_URL+"icons_save_small.png"), SUBMISSION_NEW_SHOPPINGLIST_NAME);
+		Submit save = new Submit(g1, new Label("Save", null), SUBMISSION_NEW_SHOPPINGLIST_NAME);
 		save.addMandatoryInput(in1);
 
+		new Submit(f.getSubmits(), new Label("Add Food Item", null), SUBMISSION_ADD_NUTRITION_PRODUCT);
+		new Submit(f.getSubmits(), new Label("Remove Food Item", null), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
+		new Submit(f.getSubmits(), new Label("Shopping List Name", null), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
+		new Submit(f.getSubmits(), new Label("Go Back", null), SUBMISSION_GOBACK_EDIT_SHOPPING);
+
+/*
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodAdd_small.png"), SUBMISSION_ADD_NUTRITION_PRODUCT);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodRemove_small.png"), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstName_small.png"), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_back_small.png"), SUBMISSION_GOBACK_EDIT_SHOPPING);
-
-/*
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodAdd_small.png")).toString()), SUBMISSION_ADD_NUTRITION_PRODUCT);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodRemove_small.png")).toString()), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_shLstName_small.png")).toString()), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_back_small.png")).toString()), SUBMISSION_GOBACK_EDIT_SHOPPING);
 */
 		return f;
 	}
@@ -865,19 +869,20 @@ public class Shopping extends UICaller {
 		}
 		ms1.generateChoices(fItems);
 
-		//Submit add = new Submit(g1, new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_add_small.png")).toString()), SUBMISSION_ADD_NUTRITION_PRODUCT_TO_LIST);
-		Submit add = new Submit(g1, new Label("", IMG_URL+"icons_add_small.png"), SUBMISSION_ADD_NUTRITION_PRODUCT_TO_LIST);		
+		//Submit add = new Submit(g1, new Label("", IMG_URL+"icons_add_small.png"), SUBMISSION_ADD_NUTRITION_PRODUCT_TO_LIST);		
+		Submit add = new Submit(g1, new Label("Add", null), SUBMISSION_ADD_NUTRITION_PRODUCT_TO_LIST);		
 		add.addMandatoryInput(ms1);
-	
+
+		new Submit(f.getSubmits(), new Label("Add Food Item", null), SUBMISSION_ADD_NUTRITION_PRODUCT);
+		new Submit(f.getSubmits(), new Label("Remove Food Item", null), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
+		new Submit(f.getSubmits(), new Label("Shopping List Name", null), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
+		new Submit(f.getSubmits(), new Label("Go Back", null), SUBMISSION_GOBACK_EDIT_SHOPPING);
+
+/*
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodAdd_small.png"), SUBMISSION_ADD_NUTRITION_PRODUCT);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodRemove_small.png"), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstName_small.png"), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_back_small.png"), SUBMISSION_GOBACK_EDIT_SHOPPING);
-
-/*		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodAdd_small.png")).toString()), SUBMISSION_ADD_NUTRITION_PRODUCT);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_foodRemove_small.png")).toString()), SUBMISSION_REMOVE_NUTRITION_PRODUCT);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_shLstName_small.png")).toString()), SUBMISSION_CHANGE_SHOPPINGLIST_NAME);
-		new Submit(f.getSubmits(), new Label("", ((java.net.URL)UIProvider.class.getResource("/images/icons_back_small.png")).toString()), SUBMISSION_GOBACK_EDIT_SHOPPING);
 */
 		return f;
 	}
@@ -917,14 +922,19 @@ public class Shopping extends UICaller {
 	}
 
 	private Form submitButtons(Form f){
+		new Submit(f.getSubmits(), new Label("Create Shopping List", null),SUBMISSION_CREATE);
+		new Submit(f.getSubmits(), new Label("Browse Shopping List", null), SUBMISSION_BROWSE);
+		new Submit(f.getSubmits(), new Label("Edit Shopping List", null), SUBMISSION_EDIT);
+		new Submit(f.getSubmits(), new Label("Today's Shopping List", null), SUBMISSION_TODAY_SHOPPING_LIST);
+		new Submit(f.getSubmits(), new Label("Go Back", null), SUBMISSION_GOBACK);
 		
+/*
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstCreate_small.png"),SUBMISSION_CREATE);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstBrowse_small.png"), SUBMISSION_BROWSE);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shLstEdit_small.png"), SUBMISSION_EDIT);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icon_list_today.png"), SUBMISSION_TODAY_SHOPPING_LIST);
-		//new Submit(f.getSubmits(), new Label("", IMG_URL+"icon_list_week.png"), SUBMISSION_WEEKLY_SHOPPING_LIST);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_back_small.png"), SUBMISSION_GOBACK);
-
+*/
 		return f;
 	}
 
