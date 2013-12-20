@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.4-SNAPSHOT/xml/features
+	</repository>
+	
+	<feature name="uAAL-Service-FoodAndShopping" description="${project.name}"
+		version="${platform.version}" resolver='(obr)'>
+
+
+		<!-- Third party dependency -->
+		<bundle>wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.jd2xx_20602/1.1</bundle>
+		<bundle>wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.MetratecReaderLibrary/1.1</bundle>
+		<bundle>wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.RXTXcomm/1.1</bundle>
+		
+		<bundle>wrap:mvn:org.apache.derby/derby/10.7.1.1</bundle>
+
+		<!-- Ontologies -->
+		<feature>uAAL-Ont.Shopping</feature>
+
+		<!-- Service -->
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/food_shopping.service.server/E.4.1-SNAPSHOT
+		</bundle>
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/food_shopping.service.client/E.4.1-SNAPSHOT
+		</bundle>
+	</feature>		
+</features>

@@ -106,6 +106,10 @@ food_shopping/food_shopping.service.server/.classpath
 food_shopping/food_shopping.service.server/.project
 food_shopping/food_shopping.service.server/.settings
 food_shopping/food_shopping.service.server/target
+food_shopping/shopping.karaf.feature/.classpath
+food_shopping/shopping.karaf.feature/.project
+food_shopping/shopping.karaf.feature/.settings
+food_shopping/shopping.karaf.feature/target
 food_shopping/shopping.pom/.project
 food_shopping/shopping.pom/.settings
 health/PhysicalActivityMonitorModule/app.biomedicalsensors.server/.classpath

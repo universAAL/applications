@@ -549,6 +549,10 @@ food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALappli
 food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALapplication/food_shopping/service/server/unit_impl/DeviceFoodItem.java -text
 food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALapplication/food_shopping/service/server/unit_impl/DeviceStateListener.java -text
 food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALapplication/food_shopping/service/server/unit_impl/MyDevices.java -text
+food_shopping/shopping.karaf.feature/ASL2.0.txt -text
+food_shopping/shopping.karaf.feature/NOTICE.txt -text
+food_shopping/shopping.karaf.feature/pom.xml -text
+food_shopping/shopping.karaf.feature/src/features/features.xml -text
 food_shopping/shopping.pom/ASL2.0 -text
 food_shopping/shopping.pom/NOTICE -text
 food_shopping/shopping.pom/pom.xml -text
