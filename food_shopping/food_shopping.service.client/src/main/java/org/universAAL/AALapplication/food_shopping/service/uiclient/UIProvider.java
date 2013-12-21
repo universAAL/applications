@@ -108,9 +108,14 @@ public class UIProvider extends UICaller {
 		FoodManagementClient.repository.startMainDialog();
 	}
 
-	@Override
 	public void dialogAborted(String dialogID) {
 		Utils.println(window + " dialogAborted: " + dialogID);
+	}
+
+	@Override
+	public void dialogAborted(String arg0, Resource arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
