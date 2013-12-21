@@ -942,7 +942,6 @@ public class Shopping extends UICaller {
 		Utils.println(window + " communicationChannelBroken");
 	}
 
-	@Override
 	public void dialogAborted(String dialogID) {
 		Utils.println(window + " dialogAborted: " + dialogID);
 	}
@@ -982,6 +981,12 @@ public class Shopping extends UICaller {
 
 	public static void setNutritionProducts(FoodItem[] nutritionProducts) {
 		Shopping.nutritionProducts = nutritionProducts;
+	}
+
+	@Override
+	public void dialogAborted(String arg0, Resource arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -4,7 +4,7 @@
    <parent>
   	<groupId>org.universAAL.AALapplication</groupId>
   	<artifactId>shopping.pom</artifactId>
-  	<version>E.3</version>
+  	<version>E.4.1-SNAPSHOT</version>
   	<relativePath>../shopping.pom/</relativePath>
   </parent>
  
@@ -15,7 +15,7 @@
   <inceptionYear>2011</inceptionYear>  
     <dependencies>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
+			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
@@ -61,22 +61,22 @@
 					<groupId>org.universAAL.AALapplication</groupId>
 					<artifactId>food_shopping.service.server</artifactId>
 				</dependency>
-				<dependency>
-					<groupId>org.universAAL.ui</groupId>
-					<artifactId>ui.dm</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>org.universAAL.ui</groupId>
-					<artifactId>ui.handler.gui.swing</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>org.universAAL.ui</groupId>
-					<artifactId>ui.handler.gui.swing.classicLAF</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>org.universAAL.ui</groupId>
-					<artifactId>ui.handler.gui.swing.bluesteelLAF</artifactId>
-				</dependency>
+<!-- 				<dependency> -->
+<!-- 					<groupId>org.universAAL.ui</groupId> -->
+<!-- 					<artifactId>ui.dm</artifactId> -->
+<!-- 				</dependency> -->
+<!-- 				<dependency> -->
+<!-- 					<groupId>org.universAAL.ui</groupId> -->
+<!-- 					<artifactId>ui.handler.gui.swing</artifactId> -->
+<!-- 				</dependency> -->
+<!-- 				<dependency> -->
+<!-- 					<groupId>org.universAAL.ui</groupId> -->
+<!-- 					<artifactId>ui.handler.gui.swing.classicLAF</artifactId> -->
+<!-- 				</dependency> -->
+<!-- 				<dependency> -->
+<!-- 					<groupId>org.universAAL.ui</groupId> -->
+<!-- 					<artifactId>ui.handler.gui.swing.bluesteelLAF</artifactId> -->
+<!-- 				</dependency> -->
 			</dependencies>
 		</profile>
 	</profiles>
