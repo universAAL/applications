@@ -34,7 +34,7 @@ public class ProvidedCalendarUIService extends CalendarUIService {
 	OntologyManagement.getInstance().register(Activator.getMcontext(),
 		new SimpleOntology(MY_URI, CalendarUIService.MY_URI,
 			new ResourceFactory() {
-			    @Override
+			    
 			    public Resource createInstance(String classURI,
 				    String instanceURI, int factoryIndex) {
 				return new ProvidedCalendarUIService(instanceURI);

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>E.3</version>
+		<version>E.4</version>
 		<relativePath>../agenda.pom/pom.xml</relativePath>
 	</parent>
 	
@@ -27,12 +27,8 @@
 		<!--			<artifactId>junit</artifactId>-->
 		<!--		</dependency>-->
 		<dependency>
-			<groupId>org.apache.felix</groupId>
+			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>
