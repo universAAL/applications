@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>new_services.pom</artifactId>
-		<version>E.3</version>
+		<version>E.4</version>
 		<relativePath>../../new_services.pom/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>agenda.pom</artifactId>
-	<version>E.3</version>
+	<version>E.4</version>
 	<packaging>pom</packaging>
 
 	<name>Agenda AAL Service Parent POM</name>
@@ -31,7 +31,7 @@
 	<properties>
 		<service.name.svn>agenda</service.name.svn>
 		<ignore.dep.conflict>true</ignore.dep.conflict>
-		<uaal.parent.version>2.0.3-SNAPSHOT</uaal.parent.version>
+		<uaal.parent.version>2.0.4-SNAPSHOT</uaal.parent.version>
 	</properties>
 
 	<modules>

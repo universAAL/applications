@@ -191,4 +191,10 @@ public class UIProvider extends UICaller {
 	// TODO Auto-generated method stub
     }
 
+	@Override
+	public void dialogAborted(String arg0, Resource arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

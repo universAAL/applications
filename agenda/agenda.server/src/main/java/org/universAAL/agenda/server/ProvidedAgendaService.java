@@ -129,7 +129,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 		Activator.getMcontext(),
 		new SimpleOntology(MY_URI, CalendarAgenda.MY_URI,
 			new ResourceFactory() {
-			    @Override
+			    
 			    public Resource createInstance(String classURI,
 				    String instanceURI, int factoryIndex) {
 				return new ProvidedAgendaService(instanceURI);

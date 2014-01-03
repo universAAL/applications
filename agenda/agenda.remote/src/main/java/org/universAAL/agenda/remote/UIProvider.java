@@ -39,6 +39,7 @@ import org.universAAL.agenda.remote.osgi.Activator;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
 import org.universAAL.middleware.owl.supply.LevelRating;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
 import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIRequest;
@@ -436,6 +437,12 @@ public class UIProvider extends UICaller {
 		.getDefault(), PrivacyLevel.insensible);
 	sendUIRequest(oe);
     }
+
+	@Override
+	public void dialogAborted(String arg0, Resource arg1) {
+		// TODO Auto-generated method stub
+		
+	}
 
     // showGoogleScreen
     // public void showGoogleScreen(User user, Calendar cal) {

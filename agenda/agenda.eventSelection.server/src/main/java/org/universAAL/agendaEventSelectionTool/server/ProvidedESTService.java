@@ -64,7 +64,7 @@ public class ProvidedESTService extends EventSelectionToolService {
 		Activator.getMcontext(),
 		new SimpleOntology(MY_URI, EventSelectionToolService.MY_URI,
 			new ResourceFactory() {
-			    @Override
+			    
 			    public Resource createInstance(String classURI,
 				    String instanceURI, int factoryIndex) {
 				return new ProvidedESTService(instanceURI);
