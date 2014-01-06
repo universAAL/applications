@@ -21,12 +21,11 @@
 		<module>../ont.nutrition</module>
 		<module>../ont.medication</module>
 		<module>../ont.shopping</module>
-		
-	<!--	<module>../ont.message</module>
+		<module>../ont.message</module>
 		<module>../ont.questionnaireStrategy</module>
 		<module>../ont.activity</module>
 		<module>../ont.biomedicalsensors</module>
-		<module>../ont.aalfficiencyscores</module>
+		<!--<module>../ont.aalfficiencyscores</module>
 		<module>../ont.fitbitdata</module>
 		<module>../ont.readenergy</module>
 		<module>../ont.safety</module>
