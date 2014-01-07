@@ -1,20 +1,21 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.2</version>
+		<version>E.4</version>
 		<relativePath>../new_services.pom/pom.xml</relativePath>
 	</parent>
-  
-  <artifactId>FollowMeHall</artifactId>
-  <name></name>
-  <description/>
+
+	<artifactId>FollowMeHall</artifactId>
+	<name></name>
+	<description />
 	<packaging>bundle</packaging>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
+			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
@@ -38,9 +39,9 @@
 			<artifactId>mw.bus.context.osgi</artifactId>
 		</dependency>
 		<dependency>
-      		<groupId>org.universAAL.ontology</groupId>
-      		<artifactId>ont.profile</artifactId>
-    	</dependency>
+			<groupId>org.universAAL.ontology</groupId>
+			<artifactId>ont.profile</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
