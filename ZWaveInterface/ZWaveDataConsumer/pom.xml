@@ -4,7 +4,7 @@
   <parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.2</version>
+		<version>E.3</version>
 		<relativePath>../../new_services.pom/pom.xml</relativePath>
 	</parent>
   
