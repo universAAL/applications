@@ -267,6 +267,7 @@ agenda/agenda.runner/runner/configurations/ctxt.che/CHe.properties -text
 agenda/agenda.runner/runner/configurations/etc/Home.space -text
 agenda/agenda.runner/runner/configurations/etc/aalspace.xsd -text
 agenda/agenda.runner/runner/configurations/mw.bus.model.osgi/sodapop.key -text
+agenda/agenda.runner/runner/configurations/services/Readme-absoluth[!!-~]path[!!-~]in[!!-~]aalspace.core[!!-~]is[!!-~]necessary.txt -text
 agenda/agenda.runner/runner/configurations/services/mw.connectors.communication.jgroups.core.properties -text
 agenda/agenda.runner/runner/configurations/services/mw.connectors.discovery.slp.core.properties -text
 agenda/agenda.runner/runner/configurations/services/mw.managers.aalspace.core.properties -text
