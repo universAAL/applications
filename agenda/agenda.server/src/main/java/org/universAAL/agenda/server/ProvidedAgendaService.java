@@ -31,7 +31,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
     public static final String AGENDA_SERVER_NAMESPACE = "http://ontology.universAAL.org/AgendaServer.owl#";
     public static final String MY_URI = AGENDA_SERVER_NAMESPACE
 	    + "AgendaService";
-
+    
     // define the uri for each service provided
     private static final int PROVIDED_SERVICES = 18; // The number of services
     // provided by this class
@@ -125,6 +125,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
     }
 
     static {
+    	
 	OntologyManagement.getInstance().register(
 		Activator.getMcontext(),
 		new SimpleOntology(MY_URI, CalendarAgenda.MY_URI,
@@ -217,7 +218,6 @@ public class ProvidedAgendaService extends CalendarAgenda {
 
 	PropertyPath ppCalendar = new PropertyPath(null, true,
 		new String[] { CalendarAgenda.PROP_CONTROLS });
-	// String[] ppCalendar = new String[] {CalendarAgenda.PROP_CONTROLS};
 	PropertyPath ppCalendarName = new PropertyPath(
 		null,
 		true,
@@ -248,7 +248,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	MergedRestriction resEventID = MergedRestriction
 		.getFixedValueRestriction(Event.PROP_ID, inEventId
 			.asVariableReference());
-
+	
 	/*********************************************
 	 * service 1: List<Calendar> getCalendars() *
 	 *********************************************/
@@ -294,7 +294,19 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	 * inOwnerName.setParameterType(TypeMapper
 	 * .getDatatypeURI(String.class));
 	 */
+	/***************************************************************************
+	 * service 19: String getCalendarOwnerName (String calendarName)
+	 ***************************************************************************/
+	ProvidedAgendaService getCalendarOwnerName = new ProvidedAgendaService(
+			SERVICE_GET_CALENDAR_OWNER_NAME);
+		getCalendarOwnerName.addFilteringInput(INPUT_CALENDAR_NAME, TypeMapper
+			.getDatatypeURI(String.class), 1, 1, ppCalendarName
+			.getThePath());
 
+		getCalendarOwnerName.addOutput(OUTPUT_CALENDAR_OWNER_NAME, TypeMapper
+			.getDatatypeURI(String.class), 1, 1, ppCalendar.getThePath());
+		profiles[2] = getCalendarOwnerName.myProfile; // initialize the service
+		// profile
 	/***********************************************************
 	 * service 4: int addEvent(Calendar calendar, Event event) *
 	 ***********************************************************/
@@ -509,6 +521,7 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	profiles[16].addInput(inCalendar);
 	profiles[16].addRemoveEffect(ppCalendar.getThePath());
 
+
 	/********************************************************
 	 * service 18: List<Calendar> getCalendars(User owner) *
 	 ********************************************************/
@@ -518,24 +531,13 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	getCalendarsByOwner.addFilteringInput(INPUT_CALENDAR_OWNER,
 		User.MY_URI, 1, 1, ppCalendarOwner.getThePath());
 	getCalendarsByOwner.addOutput(OUTPUT_CONTROLLED_CALENDARS,
-		Calendar.MY_URI, 1, 0, ppCalendar.getThePath());
+		Calendar.MY_URI, 0, 1, ppCalendar.getThePath());
 
 	// initialize the service profile
 	profiles[17] = getCalendarsByOwner.myProfile;
 
-	/***************************************************************************
-	 * service 19: String getCalendarOwnerName (String calendarName)
-	 ***************************************************************************/
-	ProvidedAgendaService getCalendarOwnerName = new ProvidedAgendaService(
-		SERVICE_GET_CALENDAR_OWNER_NAME);
-	getCalendarOwnerName.addFilteringInput(INPUT_CALENDAR_NAME, TypeMapper
-		.getDatatypeURI(String.class), 1, 1, ppCalendarName
-		.getThePath());
 
-	getCalendarOwnerName.addOutput(OUTPUT_CALENDAR_OWNER_NAME, TypeMapper
-		.getDatatypeURI(String.class), 1, 1, ppCalendar.getThePath());
-	profiles[2] = getCalendarOwnerName.myProfile; // initialize the service
-	// profile
+	
     }
 
 }
