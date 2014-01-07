@@ -4,7 +4,7 @@
   <parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.2</version>
+		<version>E.4</version>
 		<relativePath>../new_services.pom/pom.xml</relativePath>
 	</parent>
   
@@ -14,7 +14,7 @@
 	<packaging>bundle</packaging>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
+			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>
