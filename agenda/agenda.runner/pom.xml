@@ -21,7 +21,7 @@
 
 						<provision>scan-composite:mvn:org.universAAL.middleware/mw.composite/2.0.4-SNAPSHOT/composite</provision>
 						<provision>scan-composite:mvn:org.universAAL.ontology/ont.composite/2.0.4-SNAPSHOT/composite</provision>
-						<provision>scan-composite:mvn:org.universAAL.context/ctxt.che/2.0.4-SNAPSHOT/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.context/ctxt.che/2.0.5-SNAPSHOT/composite</provision>
 
 						<provision>scan-composite:mvn:org.universAAL.context/ctxt.prof.server/2.0.4-SNAPSHOT/composite</provision>
 						<provision>scan-composite:mvn:org.universAAL.security/security.authenticator.userPassword.client/2.0.4-SNAPSHOT/composite</provision>
