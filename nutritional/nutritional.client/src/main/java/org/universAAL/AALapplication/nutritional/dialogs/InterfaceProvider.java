@@ -7,6 +7,7 @@ import org.universAAL.AALapplication.nutritional.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.owl.supply.LevelRating;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIRequest;
 import org.universAAL.middleware.ui.UIResponse;
@@ -34,10 +35,6 @@ public class InterfaceProvider extends UICaller {
 
     @Override
     public void communicationChannelBroken() {
-    }
-
-    @Override
-    public void dialogAborted(String arg0) {
     }
 
     @Override
@@ -82,6 +79,12 @@ public class InterfaceProvider extends UICaller {
 		UIMenus.getForm(true), LevelRating.middle, Locale.getDefault(),
 		PrivacyLevel.insensible);
 		sendUIRequest(out);
+    }
+
+    @Override
+    public void dialogAborted(String arg0, Resource arg1) {
+	// TODO Auto-generated method stub
+	
     }
 
 }

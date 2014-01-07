@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
-	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.3-SNAPSHOT/xml/features
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.4-SNAPSHOT/xml/features
 	</repository>
 
 	<feature name="uAAL-Service-NutritionalAdvisor" description="${project.name}"
@@ -21,7 +21,7 @@
 		<feature>uAAL-Ont.Nutrition</feature>
 
 		<!-- Service -->
-		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/nutritional.client/E.3.1-SNAPSHOT
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/nutritional.client/E.4
 		</bundle>
 	</feature>
 </features>
