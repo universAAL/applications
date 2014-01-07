@@ -19,14 +19,14 @@
 	as it sends queries to the DBMS and returns results to all other components.  
 	It communicates with Agenda Remote Service and Agenda GUI Service.
 	</description>
-<properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-</properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
-		<!--		<dependency>-->
-		<!--			<groupId>junit</groupId>-->
-		<!--			<artifactId>junit</artifactId>-->
-		<!--		</dependency>-->
+		<!-- <dependency> -->
+		<!-- <groupId>junit</groupId> -->
+		<!-- <artifactId>junit</artifactId> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -55,12 +55,12 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.agenda</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>mysql</groupId>-->
-<!--			<artifactId>mysql-connector-java</artifactId>-->
-<!--			<version>5.1.17</version>-->
-<!--		</dependency>-->
-		<!--		dependency for javax.xml.datatype-->
+		<!-- <dependency> -->
+		<!-- <groupId>mysql</groupId> -->
+		<!-- <artifactId>mysql-connector-java</artifactId> -->
+		<!-- <version>5.1.17</version> -->
+		<!-- </dependency> -->
+		<!-- dependency for javax.xml.datatype -->
 		<dependency>
 			<groupId>activesoap</groupId>
 			<artifactId>jaxp-api</artifactId>
@@ -70,15 +70,15 @@
 
 	<build>
 		<plugins>
-			<!--			<plugin>-->
-			<!--				<groupId>org.apache.maven.plugins</groupId>-->
-			<!--				<artifactId>maven-compiler-plugin</artifactId>-->
-			<!--				<configuration>-->
-			<!--					<compilerArguments>-->
-			<!--						<bootclasspath>${java.home}\lib\rt.jar</bootclasspath>-->
-			<!--					</compilerArguments>-->
-			<!--				</configuration>-->
-			<!--			</plugin>-->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-compiler-plugin</artifactId> -->
+			<!-- <configuration> -->
+			<!-- <compilerArguments> -->
+			<!-- <bootclasspath>${java.home}\lib\rt.jar</bootclasspath> -->
+			<!-- </compilerArguments> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
 
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -95,37 +95,22 @@
 							org.universAAL.agenda.server.osgi</Export-Package>
 						<Private-Package>org.universAAL.agenda.server.unit_impl,
 							org.universAAL.agenda.server.database,org.universAAL.agenda.server.gui.wrapper</Private-Package>
-						<Import-Package>com.mysql.jdbc,*</Import-Package>
-						<!--					<Import-Package>-->
-						<!--						org.universAAL.middleware.container,-->
-						<!--						org.universAAL.agenda.server.osgi,-->
-						<!--						org.universAAL.middleware.container.osgi,-->
-						<!--						org.universAAL.middleware.container.osgi.util,-->
-						<!--						org.universAAL.middleware.container.utils,-->
-						<!--						org.universAAL.middleware.context,-->
-						<!--						org.universAAL.middleware.context.owl,-->
-						<!--						org.universAAL.middleware.ui,-->
-						<!--						org.universAAL.middleware.ui.owl,-->
-						<!--						org.universAAL.middleware.ui.rdf,-->
-						<!--						org.universAAL.middleware.output,-->
-						<!--						org.universAAL.middleware.owl,-->
-						<!--						org.universAAL.middleware.owl.supply,-->
-						<!--						org.universAAL.middleware.rdf,-->
-						<!--						org.universAAL.middleware.rdf.impl,-->
-						<!--						org.universAAL.middleware.service,-->
-						<!--						org.universAAL.middleware.service.owls.process,-->
-						<!--						org.universAAL.middleware.service.owls.profile,-->
-						<!--						org.universAAL.middleware.util,-->
-<!---->
-						<!--						org.universAAL.ontology.profile,-->
-<!---->
-						<!--						org.universAAL.ontology.agenda,-->
-						<!--						org.universAAL.ontology.agenda.service,-->
-<!---->
-						<!--						java.sql.*, javax.swing,-->
-						<!--						org.osgi.service.*, org.osgi.framework,-->
-						<!--						javax.xml.*,-->
-						<!--						com.mysql.jdbc, org.slf4j</Import-Package>-->
+						<Import-Package>com.mysql.jdbc, javax.xml.datatype,
+							org.osgi.framework, org.universAAL.middleware.container,
+							org.universAAL.middleware.container.osgi,
+							org.universAAL.middleware.container.utils,
+							org.universAAL.middleware.context,
+							org.universAAL.middleware.owl.supply,
+							org.universAAL.middleware.rdf, org.universAAL.middleware.service,
+							org.universAAL.middleware.service.owls.profile,
+							org.universAAL.middleware.ui, org.universAAL.middleware.ui.owl,
+							org.universAAL.middleware.ui.rdf,
+							org.universAAL.ontology.profile,org.universAAL.middleware.container.osgi.util,
+							org.universAAL.middleware.context.owl,
+							org.universAAL.middleware.owl,
+							org.universAAL.middleware.service.owls.process,
+							org.universAAL.middleware.util, org.universAAL.ontology.agenda,
+							org.universAAL.ontology.agenda.service</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>

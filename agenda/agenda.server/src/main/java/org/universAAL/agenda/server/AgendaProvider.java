@@ -11,20 +11,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-
-import org.universAAL.ontology.agenda.CEType;
-import org.universAAL.ontology.agenda.Calendar;
-import org.universAAL.ontology.agenda.Event;
-import org.universAAL.ontology.agenda.Reminder;
-import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.agenda.server.database.Scheduler;
 import org.universAAL.agenda.server.gui.wrapper.WrapperActivator;
-import org.universAAL.agenda.server.unit_impl.AgendaStateListener;
 import org.universAAL.agenda.server.unit_impl.AgendaDB;
+import org.universAAL.agenda.server.unit_impl.AgendaStateListener;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.osgi.util.BundleConfigHome;
 import org.universAAL.middleware.container.utils.LogUtils;
@@ -41,6 +31,11 @@ import org.universAAL.middleware.service.ServiceCallee;
 import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.util.Constants;
+import org.universAAL.ontology.agenda.CEType;
+import org.universAAL.ontology.agenda.Calendar;
+import org.universAAL.ontology.agenda.Event;
+import org.universAAL.ontology.agenda.Reminder;
+import org.universAAL.ontology.agenda.ReminderType;
 import org.universAAL.ontology.profile.User;
 
 /**
@@ -166,7 +161,9 @@ public class AgendaProvider extends ServiceCallee implements
      */
     public AgendaProvider(ModuleContext moduleContext)
 	    throws FileNotFoundException, IOException {
-	super(moduleContext, ProvidedAgendaService.profiles);
+    	super(moduleContext, ProvidedAgendaService.profiles);
+    	
+//	super(moduleContext, ProvidedAgendaService.profiles);
 	mcontext = moduleContext;
 	// prepare for context publishing
 	ContextProvider info = new ContextProvider(
@@ -1201,20 +1198,20 @@ public class AgendaProvider extends ServiceCallee implements
      * 
      * @param str
      */
-    public static void main(String[] str) {
-	// JOptionPane.showMessageDialog(null,
-	// "AgendaProvider: publishing a context event (event ended)");
-	JTextArea area = new JTextArea();
-	area.setText(Messages.getString("AgendaProvider.33")); //$NON-NLS-1$
-	area.setRows(5);
-	area.setColumns(10);
-	area.setEditable(true);
-	JScrollPane scrollpane = new JScrollPane(area);
-
-	Object[] array = {
-		new JLabel(Messages.getString("AgendaProvider.EnterSomeText")), //$NON-NLS-1$
-		scrollpane, };
-	JOptionPane.showConfirmDialog(null, array, Messages
-		.getString("AgendaProvider.Reminder"), JOptionPane.OK_OPTION); //$NON-NLS-1$
-    }
+//    public static void main(String[] str) {
+//	// JOptionPane.showMessageDialog(null,
+//	// "AgendaProvider: publishing a context event (event ended)");
+//	JTextArea area = new JTextArea();
+//	area.setText(Messages.getString("AgendaProvider.33")); //$NON-NLS-1$
+//	area.setRows(5);
+//	area.setColumns(10);
+//	area.setEditable(true);
+//	JScrollPane scrollpane = new JScrollPane(area);
+//
+//	Object[] array = {
+//		new JLabel(Messages.getString("AgendaProvider.EnterSomeText")), //$NON-NLS-1$
+//		scrollpane, };
+//	JOptionPane.showConfirmDialog(null, array, Messages
+//		.getString("AgendaProvider.Reminder"), JOptionPane.OK_OPTION); //$NON-NLS-1$
+//    }
 }
