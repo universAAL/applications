@@ -361,6 +361,7 @@ agenda/agenda.runner/runner/felix/config.ini -text
 agenda/agenda.runner/runner/felix/system.properties -text
 agenda/agenda.runner/runner/remoteDebug.bat -text
 agenda/agenda.runner/runner/run.bat -text
+agenda/agenda.runner/vE.1of[!!-~]pom.xml -text
 agenda/agenda.server/ASL2.0.txt -text
 agenda/agenda.server/NOTICE.txt -text
 agenda/agenda.server/documentation/agenda.server.PNG -text

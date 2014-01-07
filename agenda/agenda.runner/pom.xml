@@ -30,7 +30,7 @@
 
 						<!-- UIFW -->
 						<provision>scan-composite:mvn:org.universAAL.ui/ui.dm/2.0.4-SNAPSHOT/composite</provision>
-						<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/2.0.4-SNAPSHOT/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web.html/2.0.4-SNAPSHOT/composite</provision>
 						<!-- fragments like ui.handler.gui.swing.bluesteelLAF cannot be started 
 							so leaving them in resolved state is enough -->
 						<!-- <provision>wrap:mvn:org.universAAL.ui/ui.handler.gui.swing.bluesteelLAF/2.0.4-SNAPSHOT@nostart</provision> -->
