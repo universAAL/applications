@@ -21,26 +21,22 @@
 
 						<provision>scan-composite:mvn:org.universAAL.middleware/mw.composite/2.0.4-SNAPSHOT/composite</provision>
 						<provision>scan-composite:mvn:org.universAAL.ontology/ont.composite/2.0.4-SNAPSHOT/composite</provision>
-						<provision>scan-composite:mvn:org.universAAL.context/ctxt.che.composite/2.0.4-SNAPSHOT/composite</provision>
-						
-							<!-- Context -->				
-						<provision>mvn:org.universAAL.context/ctxt.che/2.0.4-SNAPSHOT</provision>
-						<provision>mvn:org.universAAL.context/ctxt.prof.server/2.0.4-SNAPSHOT</provision>
-					<!-- Security -->
-						<provision>mvn:org.universAAL.security/security.authenticator.userPassword.client/2.0.4-SNAPSHOT</provision>
-					<!-- RI -->
-					<provision>mvn:org.universAAL.remote/ri.servicegateway/2.0.4-SNAPSHOT</provision>
+						<provision>scan-composite:mvn:org.universAAL.context/ctxt.che/2.0.4-SNAPSHOT/composite</provision>
 
-					
-					<!-- UIFW -->
+						<provision>scan-composite:mvn:org.universAAL.context/ctxt.prof.server/2.0.4-SNAPSHOT/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.security/security.authenticator.userPassword.client/2.0.4-SNAPSHOT/composite</provision>
+						<provision>scan-composite:mvn:org.universAAL.remote/ri.servicegateway/2.0.4-SNAPSHOT/composite</provision>
+
+
+						<!-- UIFW -->
 						<provision>scan-composite:mvn:org.universAAL.ui/ui.dm/2.0.4-SNAPSHOT/composite</provision>
 						<provision>scan-composite:mvn:org.universAAL.ui/ui.handler.web/2.0.4-SNAPSHOT/composite</provision>
-<!--						fragments like ui.handler.gui.swing.bluesteelLAF cannot be started so leaving them in resolved state is enough-->
-<!-- 						<provision>wrap:mvn:org.universAAL.ui/ui.handler.gui.swing.bluesteelLAF/2.0.4-SNAPSHOT@nostart</provision> -->
-<!-- 						<provision>mvn:org.universAAL.ui/ui.handler.gui.swing/2.0.4-SNAPSHOT@nostart</provision>				 -->
-						
-						
-						
+						<!-- fragments like ui.handler.gui.swing.bluesteelLAF cannot be started 
+							so leaving them in resolved state is enough -->
+						<!-- <provision>wrap:mvn:org.universAAL.ui/ui.handler.gui.swing.bluesteelLAF/2.0.4-SNAPSHOT@nostart</provision> -->
+						<!-- <provision>mvn:org.universAAL.ui/ui.handler.gui.swing/2.0.4-SNAPSHOT@nostart</provision> -->
+
+
 						<provision>scan-composite:mvn:org.universAAL.AALapplication/agenda.composite/E.4/composite</provision>
 
 
