@@ -200,7 +200,7 @@ public class AgendaWebGUI {
 	    new InputField(invisiblegroupdate,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Day"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_DAY }),
+		    new PropertyPath(null, true, new String[] { REF_DAY }),
 		    MergedRestriction.getAllValuesRestriction(REF_DAY,
 			    new IntRestriction(1, true, 31, true)),
 		    new Integer(now.get(java.util.Calendar.DAY_OF_MONTH)));
@@ -209,7 +209,7 @@ public class AgendaWebGUI {
 	    new InputField(invisiblegroupdate,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Month"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_MONTH }),
+		    new PropertyPath(null, true, new String[] { REF_MONTH }),
 		    MergedRestriction.getAllValuesRestriction(REF_MONTH,
 			    new IntRestriction(1, true, 12, true)),
 		    new Integer(now.get(java.util.Calendar.MONTH) + 1));
@@ -218,7 +218,7 @@ public class AgendaWebGUI {
 	    Select1 yearselect = new Select1(invisiblegroupdate,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Year"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_YEAR }),
+		    new PropertyPath(null, true, new String[] { REF_YEAR }),
 		    null, null);
 	    int currentYear = java.util.Calendar.getInstance().get(
 		    java.util.Calendar.YEAR);
@@ -230,7 +230,7 @@ public class AgendaWebGUI {
 	    new InputField(dategroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Hour"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_HOUR }),
+		    new PropertyPath(null, true, new String[] { REF_HOUR }),
 		    MergedRestriction.getAllValuesRestriction(REF_HOUR,
 			    new IntRestriction(0, true, 23, true)),
 		    new Integer(now.get(java.util.Calendar.HOUR_OF_DAY)));
@@ -239,7 +239,7 @@ public class AgendaWebGUI {
 	    new InputField(dategroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Minute"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_MIN }),
+		    new PropertyPath(null, true, new String[] { REF_MIN }),
 		    MergedRestriction.getAllValuesRestriction(REF_MIN,
 			    new IntRestriction(0, true, 59, true)),
 		    new Integer(now.get(java.util.Calendar.MINUTE)));
@@ -256,15 +256,15 @@ public class AgendaWebGUI {
 		    .getString("AgendaWebGUI.Details"), (String) null);
 	    new InputField(invisiblegroup, new Label(Messages
 		    .getString("AgendaWebGUI.Type"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_TYPE }),
+		    new PropertyPath(null, true, new String[] { REF_TYPE }),
 		    null, "");
 	    new InputField(invisiblegroup, new Label(Messages
 		    .getString("AgendaWebGUI.Place"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_PLACE }),
+		    new PropertyPath(null, true, new String[] { REF_PLACE }),
 		    null, "");
 	    new TextArea(invisiblegroup, new Label(Messages
 		    .getString("AgendaWebGUI.Desc"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_DESC }),
+		    new PropertyPath(null, true, new String[] { REF_DESC }),
 		    null, "");
 
 	    // ////////////////////////////////////
@@ -287,7 +287,7 @@ public class AgendaWebGUI {
 		    invisiblegroup2,
 		    new Label(Messages.getString("AgendaWebGUI.Message"),
 			    (String) null),
-		    new PropertyPath(null, false, new String[] { REF_REM_MSG }),
+		    new PropertyPath(null, true, new String[] { REF_REM_MSG }),
 		    null, "");
 	    Group remdategroup = new Group(invisiblegroup2,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
@@ -301,7 +301,7 @@ public class AgendaWebGUI {
 		    remdateinvisiblegroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Day"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_REM_DAY }),
+		    new PropertyPath(null, true, new String[] { REF_REM_DAY }),
 		    MergedRestriction.getAllValuesRestriction(REF_REM_DAY,
 			    new IntRestriction(1, true, 31, true)),
 		    new Integer(nowrem.get(java.util.Calendar.DAY_OF_MONTH)));
@@ -321,7 +321,7 @@ public class AgendaWebGUI {
 		    remdateinvisiblegroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Year"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_REM_YEAR }),
+		    new PropertyPath(null, true, new String[] { REF_REM_YEAR }),
 		    null, null);
 	    for (int i = currentYear; i < currentYear + 10; i++) {
 		remyearselect.addChoiceItem(new ChoiceItem(Integer.toString(i),
@@ -332,7 +332,7 @@ public class AgendaWebGUI {
 		    remdategroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Hour"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_REM_HOUR }),
+		    new PropertyPath(null, true, new String[] { REF_REM_HOUR }),
 		    MergedRestriction.getAllValuesRestriction(REF_REM_HOUR,
 			    new IntRestriction(0, true, 23, true)),
 		    new Integer(nowrem.get(java.util.Calendar.HOUR_OF_DAY)));
@@ -342,7 +342,7 @@ public class AgendaWebGUI {
 		    remdategroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Minute"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_REM_MIN }),
+		    new PropertyPath(null, true, new String[] { REF_REM_MIN }),
 		    MergedRestriction.getAllValuesRestriction(REF_REM_MIN,
 			    new IntRestriction(0, true, 59, true)),
 		    new Integer(nowrem.get(java.util.Calendar.MINUTE)));
@@ -364,7 +364,7 @@ public class AgendaWebGUI {
 		    remrepeatgroup,
 		    new org.universAAL.middleware.ui.rdf.Label(Messages
 			    .getString("AgendaWebGUI.Interval"), (String) null),
-		    new PropertyPath(null, false, new String[] { REF_REM_INT }),
+		    new PropertyPath(null, true, new String[] { REF_REM_INT }),
 		    null, null);
 	    for (int i = 1; i <= 4; i++) {
 		remintervalselect.addChoiceItem(new ChoiceItem(Integer
