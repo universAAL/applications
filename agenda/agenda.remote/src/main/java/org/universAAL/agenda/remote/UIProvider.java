@@ -109,7 +109,7 @@ public class UIProvider extends UICaller {
 	remoteLoggedUser = (User) uiresponse.getUser();
 
 	LogUtils.logInfo(mcontext, this.getClass(), "handleUIResponse",
-		new Object[] { "Received an Input Event from user {}",
+		new Object[] { "Received an Input Event from user: ",
 			remoteLoggedUser.getURI() }, null);
 	dialogs.put(uiresponse.getDialogID(), remoteLoggedUser.getURI());
 	String submit = null;
@@ -285,7 +285,7 @@ public class UIProvider extends UICaller {
 				    System.currentTimeMillis()) / 60000);
 
 	    LogUtils.logDebug(mcontext, this.getClass(), "handleSubmit",
-		    new Object[] { "event date: {}", evDate }, null);
+		    new Object[] { "event date: ", evDate }, null);
 
 	    TimeInterval ti = new TimeInterval();
 	    ti.setStartTime(evDate);
@@ -405,7 +405,7 @@ public class UIProvider extends UICaller {
 			this.getClass(),
 			"showMainScreen",
 			new Object[] {
-				"Sending UI Request: showMainScreen for adding event and reminder for user {}",
+				"Sending UI Request: showMainScreen for adding event and reminder for user: ",
 				remoteLoggedUser.getURI() }, null);
 
 	Form f = webUI.getMainScreenMenuForm(calOwner);
@@ -418,7 +418,7 @@ public class UIProvider extends UICaller {
 	LogUtils.logInfo(mcontext, this.getClass(), "showMessageScreen",
 		new Object[] {
 			"Sending UI Request with info message: " + msg
-				+ " screen for user {}", user.getURI() }, null);
+				+ " screen for user: ", user.getURI() }, null);
 	Form f = webUI.getMessageForm(msg);
 	UIRequest oe = new UIRequest(user, f, LevelRating.middle, Locale
 		.getDefault(), PrivacyLevel.insensible);
@@ -428,7 +428,7 @@ public class UIProvider extends UICaller {
     public void showEventsScreen(User user, User calOwner) {
 	LogUtils.logInfo(mcontext, this.getClass(), "showEventsScreen",
 		new Object[] {
-			"Sending UI Request: showEventsScreen for user {}",
+			"Sending UI Request: showEventsScreen for user: ",
 			user.getURI() + " for calendar owner: "
 				+ calOwner.getURI() }, null);
 
@@ -448,7 +448,7 @@ public class UIProvider extends UICaller {
     // public void showGoogleScreen(User user, Calendar cal) {
     // LogUtils.logInfo(mcontext, this.getClass(), "showEventsScreen",
     // new Object[] {
-    // "Sending UI Request: showGoogleScreen for user {}",
+    // "Sending UI Request: showGoogleScreen for user: ",
     // user.getURI() }, null);
     //
     // Form f = webUI.getGoogleForm(cal);
