@@ -389,7 +389,7 @@ public class UIProvider extends UICaller {
 			this.getClass(),
 			"showInitialScreen",
 			new Object[] {
-				"Sending UI Request: showInitial Screen for selecting calendar owner {}",
+				"Sending UI Request: showInitial Screen for selecting calendar owner: ",
 				remoteLoggedUser.getURI() }, null);
 
 	Form f = webUI.getSelectUserMenuForm();
