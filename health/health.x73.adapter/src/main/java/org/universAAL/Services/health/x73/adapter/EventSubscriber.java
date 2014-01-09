@@ -90,14 +90,14 @@ public class EventSubscriber extends ContextSubscriber {
     public void handleContextEvent(ContextEvent event) {
 	
 	List<HealthMeasurement> lhm = new ArrayList<HealthMeasurement>();
-	
+	String msg="";
 	// Blood pressure monitor event
 	if (event.getRDFObject() instanceof BloodPressureMeasurement) {
 		BloodPressureMeasurement bpme = (BloodPressureMeasurement) event.getRDFObject();
 		String sysMeasuredValue = bpme.getMeasuredBPSys().getValue().toString();
 		String diaMeasuredValue = bpme.getMeasuredBPDia().getValue().toString();
 		String hrMeasuredValue = bpme.getMeasuredHeartRate().getValue().toString();
-		
+		msg="Systolic pressure is "+sysMeasuredValue+", Diastolic pressure is "+diaMeasuredValue+", Heart Rate is "+hrMeasuredValue;
 		BloodPressure bpm = new BloodPressure();
 		Measurement m = new Measurement();
 		//TODO set units?
@@ -115,6 +115,7 @@ public class EventSubscriber extends ContextSubscriber {
 		hr.changeProperty(Measurement.PROP_VALUE, Double.valueOf(hrMeasuredValue));
 		lhm.add(hr);
 		
+		
 	// Weighing scale event	
 	} else if (event.getRDFSubject() instanceof WeighingScale) {
 		double temp = -1;
@@ -125,7 +126,7 @@ public class EventSubscriber extends ContextSubscriber {
 			weightMeasuredValue = ""+ (temp/1000);
 		else
 			weightMeasuredValue = ws.getMeasuredWeight().getValue().toString();
-		
+		msg="Weigth is "+weightMeasuredValue;
 		PersonWeight pw = new PersonWeight();
 		//TODO set units?
 		pw.setMeasuredFrom((Device) event.getRDFSubject());
@@ -156,7 +157,7 @@ public class EventSubscriber extends ContextSubscriber {
 		new DefaultServiceCaller(owner).call(sr);
 	    }
 	    if (lhm.size() > 0 ){
-		new AcknowledgeMessage(owner).show(u);
+		new AcknowledgeMessage(owner).show(u,msg);
 	    }
 	}
     }
@@ -176,7 +177,7 @@ public class EventSubscriber extends ContextSubscriber {
 		    apUsrs.add((AssistedPerson) res);
 		}
 	    }
-	    if (apUsrs.size() == 1){
+	    if (apUsrs.size() >= 1){
 		return apUsrs.get(0);
 	    } 
 	}
