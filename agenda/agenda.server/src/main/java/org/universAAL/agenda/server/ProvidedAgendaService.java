@@ -312,16 +312,18 @@ public class ProvidedAgendaService extends CalendarAgenda {
 	 ***********************************************************/
 	ProvidedAgendaService addEvent = new ProvidedAgendaService(
 		SERVICE_ADD_EVENT_TO_CALENDAR);
-	addEvent.addInstanceLevelRestriction(resCalendar, ppCalendar
-		.getThePath());
+	
+	//fix for mw 2.0.4-S
+//	addEvent.addInstanceLevelRestriction(resCalendar,
+//				ppCalendar.getThePath());
 
 	profiles[3] = addEvent.getProfile();
-	profiles[3].addOutput(outEventId);
-	profiles[3].addSimpleOutputBinding(outEventId, ppEventId.getThePath());
 	profiles[3].addInput(inCalendar);
 	profiles[3].addInput(inEvent);
 	profiles[3].addAddEffect(ppEvent.getThePath(), inEvent
 		.asVariableReference());
+	profiles[3].addOutput(outEventId);
+	profiles[3].addSimpleOutputBinding(outEventId, ppEventId.getThePath());
 
 	/******************************************************************
 	 * service 5: List<Event> getCalendarEventList(Calendar calendar) *
