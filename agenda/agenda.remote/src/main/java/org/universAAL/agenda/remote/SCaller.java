@@ -102,13 +102,8 @@ public class SCaller {
 
 	    }
 	} else
-	    LogUtils
-		    .logError(
-			    mcontext,
-			    this.getClass(),
-			    "getUserProfiles",
-			    new Object[] { "Call failed: " + sr.getCallStatus() },
-			    null);
+	    LogUtils.logError(mcontext, this.getClass(), "getUserProfiles",
+		    new Object[] { "Call failed: " + sr.getCallStatus() }, null);
 
 	return users;
     }
@@ -138,21 +133,20 @@ public class SCaller {
 	ServiceResponse sr = this.caller
 		.call(getCalendarOwnerNameRequest(calendarName));
 	long endTime = System.currentTimeMillis();
-	LogUtils
-		.logInfo(
-			mcontext,
-			this.getClass(),
-			"getCalendarOwnerNameService",
-			new Object[] { "Agenda\tService called: \'get calendar owner\' ("
-				+ startTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tService returned: \'get calendar owner\' ("
-				+ endTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tTime delay: "
-				+ (endTime - startTime) }, null);
+	LogUtils.logInfo(
+		mcontext,
+		this.getClass(),
+		"getCalendarOwnerNameService",
+		new Object[] { "Agenda\tService called: \'get calendar owner\' ("
+			+ startTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tService returned: \'get calendar owner\' ("
+			+ endTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tTime delay: "
+			+ (endTime - startTime) }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -169,13 +163,12 @@ public class SCaller {
 
 		}
 		if (o == null)
-		    LogUtils
-			    .logInfo(
-				    mcontext,
-				    this.getClass(),
-				    "getCalendarOwnerNameService",
-				    new Object[] { "Calendar owner was not retrieved" },
-				    null);
+		    LogUtils.logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getCalendarOwnerNameService",
+			    new Object[] { "Calendar owner was not retrieved" },
+			    null);
 
 	    } catch (Exception e) {
 		LogUtils.logError(mcontext, this.getClass(),
@@ -212,7 +205,7 @@ public class SCaller {
 				Calendar.PROP_NAME });
 
 	getOwner.addSimpleOutputBinding(new ProcessOutput(
-		OUTPUT_CALENDAR_OWNER_NAME), (new PropertyPath(null, true,
+		OUTPUT_CALENDAR_OWNER_NAME), (new PropertyPath(null, false,
 		new String[] { CalendarAgenda.PROP_CONTROLS }).getThePath()));
 	// System.err.println("getCalendarOwnerServiceRequest: "+
 	// getOwner.toStringRecursive());
@@ -233,21 +226,20 @@ public class SCaller {
 	ServiceResponse sr = this.caller
 		.call(getCalendarsByOwnerRequest(owner));
 	long endTime = System.currentTimeMillis();
-	LogUtils
-		.logInfo(
-			mcontext,
-			this.getClass(),
-			"getCalendarsByOwnerService",
-			new Object[] { "Agenda\tService called: \'get calendars by owner\' ("
-				+ startTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tService returned: \'get calendars by owner\' ("
-				+ endTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tTime delay: "
-				+ (endTime - startTime) }, null);
+	LogUtils.logInfo(
+		mcontext,
+		this.getClass(),
+		"getCalendarsByOwnerService",
+		new Object[] { "Agenda\tService called: \'get calendars by owner\' ("
+			+ startTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tService returned: \'get calendars by owner\' ("
+			+ endTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tTime delay: "
+			+ (endTime - startTime) }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -265,13 +257,12 @@ public class SCaller {
 			    null);
 
 		else
-		    LogUtils
-			    .logInfo(
-				    mcontext,
-				    this.getClass(),
-				    "getCalendarsByOwnerService",
-				    new Object[] { "Calendar List was retrieved. Size = : "
-					    + allCalendars.size() }, null);
+		    LogUtils.logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getCalendarsByOwnerService",
+			    new Object[] { "Calendar List was retrieved. Size = : "
+				    + allCalendars.size() }, null);
 
 	    } catch (Exception e) {
 		LogUtils.logError(mcontext, this.getClass(),
@@ -308,7 +299,7 @@ public class SCaller {
 			Calendar.PROP_HAS_OWNER });
 
 	listCalendars.addSimpleOutputBinding(new ProcessOutput(
-		OUTPUT_LIST_OF_CALENDARS), (new PropertyPath(null, true,
+		OUTPUT_LIST_OF_CALENDARS), (new PropertyPath(null, false,
 		new String[] { CalendarAgenda.PROP_CONTROLS }).getThePath()));
 	return listCalendars;
     }
@@ -343,13 +334,12 @@ public class SCaller {
 		    eventId = ((Integer) o).intValue();
 
 		if (eventId <= 0) {
-		    LogUtils
-			    .logInfo(
-				    mcontext,
-				    this.getClass(),
-				    "addEventToCalendarService",
-				    new Object[] { "Event was not added to calendar for unknown reason" },
-				    null);
+		    LogUtils.logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "addEventToCalendarService",
+			    new Object[] { "Event was not added to calendar for unknown reason" },
+			    null);
 
 		} else {
 		    LogUtils.logInfo(mcontext, this.getClass(),
@@ -381,21 +371,50 @@ public class SCaller {
 	if (c == null) {
 	    c = new Calendar();
 	}
-	MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
-		CalendarAgenda.PROP_CONTROLS, c);
-	addEventToCalendar.getRequestedService().addInstanceLevelRestriction(
-		r1, new String[] { CalendarAgenda.PROP_CONTROLS });
 
-	PropertyPath ppEvent = new PropertyPath(null, true, new String[] {
-		CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT });
-	addEventToCalendar.addAddEffect(ppEvent.getThePath(), event);
+	// before adapting to mw 2.0.4-S below worked, but with2.0.4-S it
+	// returned no matching service found (fix worked when changing
+	// commented lines with below ones and removing restrictions from
+	// agenda.server ProvidedAgendaService profile 3
+	// MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
+	// CalendarAgenda.PROP_CONTROLS, c);
+	// addEventToCalendar.getRequestedService().addInstanceLevelRestriction(
+	// r1, new String[] { CalendarAgenda.PROP_CONTROLS });
+	//
+	// PropertyPath ppEvent = new PropertyPath(null, false, new String[] {
+	// CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT });
+	// addEventToCalendar.addAddEffect(ppEvent.getThePath(), event);
+	// ProcessOutput output = new ProcessOutput(OUTPUT_ADDED_EVENT_ID);
+	// PropertyPath ppEventID = new PropertyPath(null, false, new String[] {
+	// CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT,
+	// Event.PROP_ID });
+	//
+	// addEventToCalendar.addSimpleOutputBinding(output, ppEventID
+	// .getThePath());
+
+	addEventToCalendar.addValueFilter(
+		new String[] { CalendarAgenda.PROP_CONTROLS }, c);
+	addEventToCalendar.addAddEffect(new String[] {
+		CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT }, event);
+	addEventToCalendar.addRequiredOutput(OUTPUT_ADDED_EVENT_ID,
+		new String[] { CalendarAgenda.PROP_CONTROLS,
+			Calendar.PROP_HAS_EVENT, Event.PROP_ID });
+
 	ProcessOutput output = new ProcessOutput(OUTPUT_ADDED_EVENT_ID);
-	PropertyPath ppEventID = new PropertyPath(null, true, new String[] {
+	PropertyPath ppEventID = new PropertyPath(null, false, new String[] {
 		CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT,
 		Event.PROP_ID });
 
-	addEventToCalendar.addSimpleOutputBinding(output, ppEventID
-		.getThePath());
+	addEventToCalendar.addSimpleOutputBinding(output,
+		ppEventID.getThePath());
+
+	LogUtils.logDebug(
+		mcontext,
+		this.getClass(),
+		"getAddEventToCalendar",
+		new Object[] { "Service request for adding new event in calendar: "
+			+ addEventToCalendar.toStringRecursive() }, null);
+
 	return addEventToCalendar;
     }
 
@@ -406,21 +425,20 @@ public class SCaller {
 	ServiceResponse sr = this.caller.call(getCalendarByNameAndOwner(
 		calendarName, owner));
 	long endTime = System.currentTimeMillis();
-	LogUtils
-		.logInfo(
-			mcontext,
-			this.getClass(),
-			"getCalendarByNameAndOwnerService",
-			new Object[] { "Agenda\tService called: \'get calendar by name and owner\' ("
-				+ startTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tService returned: \'get calendar by name and owner\' ("
-				+ endTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tTime delay: "
-				+ (endTime - startTime) }, null);
+	LogUtils.logInfo(
+		mcontext,
+		this.getClass(),
+		"getCalendarByNameAndOwnerService",
+		new Object[] { "Agenda\tService called: \'get calendar by name and owner\' ("
+			+ startTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tService returned: \'get calendar by name and owner\' ("
+			+ endTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tTime delay: "
+			+ (endTime - startTime) }, null);
 
 	Calendar calendar = null;
 	if (sr.getCallStatus() == CallStatus.succeeded) {
@@ -467,9 +485,9 @@ public class SCaller {
 		null,
 		true,
 		new String[] { CalendarAgenda.PROP_CONTROLS, Calendar.PROP_NAME });
-	PropertyPath ppCalendar = new PropertyPath(null, true,
+	PropertyPath ppCalendar = new PropertyPath(null, false,
 		new String[] { CalendarAgenda.PROP_CONTROLS });
-	PropertyPath ppCalendarOwner = new PropertyPath(null, true,
+	PropertyPath ppCalendarOwner = new PropertyPath(null, false,
 		new String[] { CalendarAgenda.PROP_CONTROLS,
 			Calendar.PROP_HAS_OWNER });
 	CalendarAgenda ca = new CalendarAgenda(null);
@@ -505,13 +523,12 @@ public class SCaller {
 
 		    return (Calendar) o;
 		} else {
-		    LogUtils
-			    .logInfo(
-				    mcontext,
-				    this.getClass(),
-				    "addNewCalendarService",
-				    new Object[] { "Calendar may not have been added - Wrong service output" },
-				    null);
+		    LogUtils.logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "addNewCalendarService",
+			    new Object[] { "Calendar may not have been added - Wrong service output" },
+			    null);
 
 		}
 	    } catch (Exception e) {
@@ -535,17 +552,21 @@ public class SCaller {
     private ServiceRequest getAddNewCalendar(Calendar calendar, User owner) {
 	ServiceRequest addNewcalendar = new ServiceRequest(new CalendarAgenda(
 		null), null);
-	PropertyPath ppCalendar = new PropertyPath(null, true,
+	PropertyPath ppCalendar = new PropertyPath(null, false,
 		new String[] { CalendarAgenda.PROP_CONTROLS });
-	PropertyPath ppCalendarOwner = new PropertyPath(null, true,
+	PropertyPath ppCalendarOwner = new PropertyPath(null, false,
 		new String[] { CalendarAgenda.PROP_CONTROLS,
 			Calendar.PROP_HAS_OWNER });
 
 	addNewcalendar.addAddEffect(ppCalendar.getThePath(), calendar);
 	addNewcalendar.addAddEffect(ppCalendarOwner.getThePath(), owner);
 	ProcessOutput outCalendar = new ProcessOutput(OUTPUT_CALENDAR);
-	addNewcalendar.addSimpleOutputBinding(outCalendar, ppCalendar
-		.getThePath());
+	addNewcalendar.addSimpleOutputBinding(outCalendar,
+		ppCalendar.getThePath());
+
+	LogUtils.logDebug(mcontext, this.getClass(), "getAddNewCalendar",
+		new Object[] { "Service request for adding new calendar: "
+			+ addNewcalendar.toStringRecursive() }, null);
 
 	return addNewcalendar;
     }
@@ -553,7 +574,7 @@ public class SCaller {
     public List<Event> requestEventListService(Calendar cal) {
 	// if method don't have argument calendar
 	// List<Calendar> calendars = getCalendarsByOwnerService(owner);
-	//	
+	//
 	// Calendar c= calendars.get(0);
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getGetCalendarEventList(cal));
@@ -570,13 +591,12 @@ public class SCaller {
 		List events = (List) getReturnValue(sr.getOutputs(),
 			OUTPUT_CALENDAR_EVENT_LIST);
 		if (events == null || events.size() == 0) {
-		    LogUtils
-			    .logInfo(
-				    mcontext,
-				    this.getClass(),
-				    "requestEventListService",
-				    new Object[] { "Event List has been retreived, but it's empty or NULL" },
-				    null);
+		    LogUtils.logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "requestEventListService",
+			    new Object[] { "Event List has been retreived, but it's empty or NULL" },
+			    null);
 
 		    return new ArrayList();
 		}
@@ -616,27 +636,27 @@ public class SCaller {
 	ProcessOutput po = new ProcessOutput(OUTPUT_CALENDAR_EVENT_LIST);
 	po.setParameterType(Event.MY_URI);
 	getCalendarEventList.addSimpleOutputBinding(po, (new PropertyPath(null,
-		true, new String[] { CalendarAgenda.PROP_CONTROLS,
+		false, new String[] { CalendarAgenda.PROP_CONTROLS,
 			Calendar.PROP_HAS_EVENT }).getThePath()));
 	return getCalendarEventList;
     }
 
-    private ServiceRequest getGetUser(User user) {
-	ServiceRequest getuser = new ServiceRequest(new ProfilingService(null),
-		null);
-	MergedRestriction res = MergedRestriction.getFixedValueRestriction(
-		ProfilingService.PROP_CONTROLS, user);
-	getuser.getRequestedService().addInstanceLevelRestriction(res,
-		new String[] { ProfilingService.PROP_CONTROLS });
-
-	ProcessOutput outUserProfile = new ProcessOutput(OUTPUT_USER);
-	PropertyPath ppUserProfile = new PropertyPath(null, true,
-		new String[] { ProfilingService.PROP_CONTROLS });
-	getuser.addSimpleOutputBinding(outUserProfile, ppUserProfile
-		.getThePath());
-
-	return getuser;
-    }
+    // private ServiceRequest getGetUser(User user) {
+    // ServiceRequest getuser = new ServiceRequest(new ProfilingService(null),
+    // null);
+    // MergedRestriction res = MergedRestriction.getFixedValueRestriction(
+    // ProfilingService.PROP_CONTROLS, user);
+    // getuser.getRequestedService().addInstanceLevelRestriction(res,
+    // new String[] { ProfilingService.PROP_CONTROLS });
+    //
+    // ProcessOutput outUserProfile = new ProcessOutput(OUTPUT_USER);
+    // PropertyPath ppUserProfile = new PropertyPath(null, false,
+    // new String[] { ProfilingService.PROP_CONTROLS });
+    // getuser.addSimpleOutputBinding(outUserProfile, ppUserProfile
+    // .getThePath());
+    //
+    // return getuser;
+    // }
 
     // public int removeEventFromCalendarService(Calendar c, Event event) {
     //
@@ -678,7 +698,7 @@ public class SCaller {
     // log.info(sr.getCallStatus().toString());
     // return -1;
     // }
-    //	
+    //
     // private ServiceRequest getRemoveEventFromCalendar(Calendar c, Event
     // event) {
     // ServiceRequest deleteEvent = new ServiceRequest(
@@ -686,47 +706,46 @@ public class SCaller {
     // if (c == null) {
     // c = new Calendar();
     // }
-    //		
-    //		
+    //
+    //
     // MergedRestriction r1 = MergedRestriction.getFixedValueRestriction(
     // CalendarAgenda.PROP_CONTROLS, c);
     // deleteEvent.getRequestedService().addInstanceLevelRestriction(
     // r1, new String[] { CalendarAgenda.PROP_CONTROLS });
     //
-    // PropertyPath ppEvent = new PropertyPath(null, true, new String[] {
+    // PropertyPath ppEvent = new PropertyPath(null, false, new String[] {
     // CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT });
     // //deleteEvent.addAddEffect(ppEvent.getThePath(), event);
-    //		
+    //
     // deleteEvent.addRemoveEffect(ppEvent.getThePath());
     // ProcessOutput output = new ProcessOutput(OUTPUT_REMOVED_EVENT_ID);
-    // PropertyPath ppEventID = new PropertyPath(null, true, new String[] {
+    // PropertyPath ppEventID = new PropertyPath(null, false, new String[] {
     // CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT,
     // Event.PROP_ID });
     //
     // deleteEvent.addSimpleOutputBinding(output, ppEventID
     // .getThePath());
-    //		
+    //
     // return deleteEvent;
     // }
     public boolean deleteCalendarEventService(Calendar c, int eventId) {
 	long startTime = System.currentTimeMillis();
 	ServiceResponse sr = caller.call(getDeleteCalendarEvent(c, eventId));
 	long endTime = System.currentTimeMillis();
-	LogUtils
-		.logInfo(
-			mcontext,
-			this.getClass(),
-			"deleteCalendarEventService",
-			new Object[] { "Agenda\tService called: \'delete calendar event\' ("
-				+ startTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tService returned: \'delete calendar event\' ("
-				+ endTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tTime delay: "
-				+ (endTime - startTime) }, null);
+	LogUtils.logInfo(
+		mcontext,
+		this.getClass(),
+		"deleteCalendarEventService",
+		new Object[] { "Agenda\tService called: \'delete calendar event\' ("
+			+ startTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tService returned: \'delete calendar event\' ("
+			+ endTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tTime delay: "
+			+ (endTime - startTime) }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -772,7 +791,7 @@ public class SCaller {
 			Calendar.PROP_HAS_EVENT, Event.PROP_ID });
 	Event e = new Event();
 	e.setEventID(eventId);
-	PropertyPath ppEvent = new PropertyPath(null, true, new String[] {
+	PropertyPath ppEvent = new PropertyPath(null, false, new String[] {
 		CalendarAgenda.PROP_CONTROLS, Calendar.PROP_HAS_EVENT });
 
 	deleteCalendarEvent.addRemoveEffect(ppEvent.getThePath());
@@ -785,21 +804,20 @@ public class SCaller {
 	long endTime = System.currentTimeMillis();
 	ServiceResponse sr = this.caller.call(getAllCalendarsRequest());
 	long startTime = System.currentTimeMillis();
-	LogUtils
-		.logInfo(
-			mcontext,
-			this.getClass(),
-			"getAllCalendarsService",
-			new Object[] { "Agenda\tService called: \'get all Calendars\' ("
-				+ startTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tService returned: \'get all Calendars\' ("
-				+ endTime
-				+ ")"
-				+ "\n"
-				+ "Agenda\tTime delay: "
-				+ (endTime - startTime) }, null);
+	LogUtils.logInfo(
+		mcontext,
+		this.getClass(),
+		"getAllCalendarsService",
+		new Object[] { "Agenda\tService called: \'get all Calendars\' ("
+			+ startTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tService returned: \'get all Calendars\' ("
+			+ endTime
+			+ ")"
+			+ "\n"
+			+ "Agenda\tTime delay: "
+			+ (endTime - startTime) }, null);
 
 	if (sr.getCallStatus() == CallStatus.succeeded) {
 	    try {
@@ -811,30 +829,27 @@ public class SCaller {
 		    allCalendars.add((Calendar) o);
 		}
 		if (o == null)
-		    LogUtils
-			    .logInfo(
-				    mcontext,
-				    this.getClass(),
-				    "getAllCalendarsService",
-				    new Object[] { "Calendar List was not retrieved!" },
-				    null);
+		    LogUtils.logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getAllCalendarsService",
+			    new Object[] { "Calendar List was not retrieved!" },
+			    null);
 		else
-		    LogUtils
-			    .logInfo(
-				    mcontext,
-				    this.getClass(),
-				    "getAllCalendarsService",
-				    new Object[] { "Calendar List was retrieved! Size = "
-					    + allCalendars.size() }, null);
+		    LogUtils.logInfo(
+			    mcontext,
+			    this.getClass(),
+			    "getAllCalendarsService",
+			    new Object[] { "Calendar List was retrieved! Size = "
+				    + allCalendars.size() }, null);
 
 	    } catch (Exception e) {
-		LogUtils
-			.logError(
-				mcontext,
-				this.getClass(),
-				"getAllCalendarsService",
-				new Object[] { "Exception while getting all calendars." },
-				e);
+		LogUtils.logError(
+			mcontext,
+			this.getClass(),
+			"getAllCalendarsService",
+			new Object[] { "Exception while getting all calendars." },
+			e);
 
 		return null;
 	    }
@@ -852,7 +867,7 @@ public class SCaller {
 	ServiceRequest listCalendars = new ServiceRequest(new CalendarAgenda(
 		null), null); // need a service from Calendar/Agenda
 	listCalendars.addSimpleOutputBinding(new ProcessOutput(
-		OUTPUT_LIST_OF_CALENDARS), (new PropertyPath(null, true,
+		OUTPUT_LIST_OF_CALENDARS), (new PropertyPath(null, false,
 		new String[] { CalendarAgenda.PROP_CONTROLS }).getThePath()));
 	return listCalendars;
     }
@@ -877,8 +892,8 @@ public class SCaller {
 
 		else
 		    LogUtils.logError(mcontext, this.getClass(),
-			    "getReturnValue", new Object[] {
-				    "SCaller - output ignored: {}",
+			    "getReturnValue",
+			    new Object[] { "SCaller - output ignored: {}",
 				    output.getURI() }, null);
 
 	    }
