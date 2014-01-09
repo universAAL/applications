@@ -21,8 +21,9 @@ public class EventSelectionToolService extends Service {
      * (java.lang.String)
      */
     public int getPropSerializationType(String propURI) {
-	return PROP_CONTROLS.equals(propURI) ? PROP_SERIALIZATION_FULL
-		: PROP_SERIALIZATION_OPTIONAL;
+    	return PROP_SERIALIZATION_FULL;
+//	return PROP_CONTROLS.equals(propURI) ? PROP_SERIALIZATION_FULL
+//		: PROP_SERIALIZATION_OPTIONAL;
     }
 
     /*
