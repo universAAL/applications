@@ -137,7 +137,6 @@ public class UIProvider extends UICaller {
 	    }
 
 	    else if (submit.equals("get_event_list")) {
-		readAndSetCurrentlySelectedCalendarOwner(uiresponse);
 		LogUtils.logInfo(mcontext, this.getClass(), "handleUIResponse",
 			new Object[] { "Processing Input: Go to Events List" },
 			null);
@@ -148,14 +147,12 @@ public class UIProvider extends UICaller {
 	    } else if (submit.equals("add")) {
 		// get cal owner when selecting from initial screen, before
 		// going to main screen for editing events
-		LogUtils
-			.logInfo(
-				mcontext,
-				this.getClass(),
-				"handleUIResponse",
-				new Object[] { "Processing Input: add event for user" },
-				null);
-		readAndSetCurrentlySelectedCalendarOwner(uiresponse);
+		LogUtils.logInfo(
+			mcontext,
+			this.getClass(),
+			"handleUIResponse",
+			new Object[] { "Processing Input: add event for user" },
+			null);
 
 		showMainScreen(remoteLoggedUser, currentlySelectedCalOwner);
 		// takes events from specific calendar
@@ -165,27 +162,20 @@ public class UIProvider extends UICaller {
 		Calendar cal = new Calendar(Calendar.MY_URI);
 		Event ev = AgendaWebGUI.map.get(Integer.parseInt(submit
 			.toString().substring(6)));
-		if (Activator.sCaller.deleteCalendarEventService(cal, ev
-			.getEventID())) {
-		    LogUtils
-			    .logInfo(
-				    mcontext,
-				    this.getClass(),
-				    "handleUIResponse",
-				    new Object[] { "Event successfully removed" },
-				    null);
-		    showMessageScreen(remoteLoggedUser, Messages
-			    .getString("UIProvider.EventSucessfullyRemoved"));
+		if (Activator.sCaller.deleteCalendarEventService(cal,
+			ev.getEventID())) {
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "handleUIResponse",
+			    new Object[] { "Event successfully removed" }, null);
+		    showMessageScreen(
+			    remoteLoggedUser,
+			    Messages.getString("UIProvider.EventSucessfullyRemoved"));
 		} else {
-		    LogUtils
-			    .logInfo(
-				    mcontext,
-				    this.getClass(),
-				    "handleUIResponse",
-				    new Object[] { "Event could not be removed" },
-				    null);
-		    showMessageScreen(remoteLoggedUser, Messages
-			    .getString("UIProvider.ErrorRemovingEvent"));
+		    LogUtils.logInfo(mcontext, this.getClass(),
+			    "handleUIResponse",
+			    new Object[] { "Event could not be removed" }, null);
+		    showMessageScreen(remoteLoggedUser,
+			    Messages.getString("UIProvider.ErrorRemovingEvent"));
 		}
 
 		submit = null;
@@ -212,8 +202,8 @@ public class UIProvider extends UICaller {
 	    LogUtils.logError(mcontext, this.getClass(), "handleUIResponse",
 		    new Object[] { "Error while processing the user input.",
 			    submit }, e);
-	    showMessageScreen(remoteLoggedUser, Messages
-		    .getString("UIProvider.UnknownServiceError"));
+	    showMessageScreen(remoteLoggedUser,
+		    Messages.getString("UIProvider.UnknownServiceError"));
 	}
 
     }// end handle UI Response
@@ -323,47 +313,44 @@ public class UIProvider extends UICaller {
 		LogUtils.logInfo(mcontext, this.getClass(), "handleSubmit",
 			new Object[] { "Event successfully added" }, null);
 
-		showMessageScreen(remoteLoggedUser, Messages
-			.getString("UIProvider.EventSuccessfullyAdded"));
+		showMessageScreen(remoteLoggedUser,
+			Messages.getString("UIProvider.EventSuccessfullyAdded"));
 	    } else {
 		LogUtils.logWarn(mcontext, this.getClass(), "handleSubmit",
 			new Object[] { "Event could not be added." }, null);
 
-		showMessageScreen(remoteLoggedUser, Messages
-			.getString("UIProvider.ErrorAddingEvent"));
+		showMessageScreen(remoteLoggedUser,
+			Messages.getString("UIProvider.ErrorAddingEvent"));
 	    }
 	} catch (IllegalArgumentException e) {
-	    LogUtils
-		    .logError(
-			    mcontext,
-			    this.getClass(),
-			    "handleSubmit",
-			    new Object[] { "Error processing the event input: Probably a bad formatted date" },
-			    e);
+	    LogUtils.logError(
+		    mcontext,
+		    this.getClass(),
+		    "handleSubmit",
+		    new Object[] { "Error processing the event input: Probably a bad formatted date" },
+		    e);
 
-	    showMessageScreen(remoteLoggedUser, Messages
-		    .getString("UIProvider.InvalidInputDate"));
+	    showMessageScreen(remoteLoggedUser,
+		    Messages.getString("UIProvider.InvalidInputDate"));
 	} catch (NullPointerException e) {
-	    LogUtils
-		    .logError(
-			    mcontext,
-			    this.getClass(),
-			    "handleSubmit",
-			    new Object[] { "Error processing the event input: Probably missing input" },
-			    e);
+	    LogUtils.logError(
+		    mcontext,
+		    this.getClass(),
+		    "handleSubmit",
+		    new Object[] { "Error processing the event input: Probably missing input" },
+		    e);
 
-	    showMessageScreen(remoteLoggedUser, Messages
-		    .getString("UIProvider.InvalidInputMissing"));
+	    showMessageScreen(remoteLoggedUser,
+		    Messages.getString("UIProvider.InvalidInputMissing"));
 	} catch (Exception e) {
-	    LogUtils
-		    .logError(
-			    mcontext,
-			    this.getClass(),
-			    "handleSubmit",
-			    new Object[] { "Unknown error processing the event input" },
-			    e);
-	    showMessageScreen(remoteLoggedUser, Messages
-		    .getString("UIProvider.InvalidInputUnknown"));
+	    LogUtils.logError(
+		    mcontext,
+		    this.getClass(),
+		    "handleSubmit",
+		    new Object[] { "Unknown error processing the event input" },
+		    e);
+	    showMessageScreen(remoteLoggedUser,
+		    Messages.getString("UIProvider.InvalidInputUnknown"));
 	}
 
     }
@@ -383,14 +370,14 @@ public class UIProvider extends UICaller {
      *            {@link User} accessing the service
      */
     public void showInitialScreen(User remoteLoggedUser) {
-	LogUtils
-		.logInfo(
-			mcontext,
-			this.getClass(),
-			"showInitialScreen",
-			new Object[] {
-				"Sending UI Request: showInitial Screen for selecting calendar owner: ",
-				remoteLoggedUser.getURI() }, null);
+
+	LogUtils.logInfo(
+		mcontext,
+		this.getClass(),
+		"showInitialScreen",
+		new Object[] {
+			"Sending UI Request: showInitial Screen for selecting calendar owner: ",
+			remoteLoggedUser.getURI() }, null);
 
 	Form f = webUI.getSelectUserMenuForm();
 	UIRequest oe = new UIRequest(remoteLoggedUser, f, LevelRating.middle,
@@ -399,14 +386,13 @@ public class UIProvider extends UICaller {
     }
 
     public void showMainScreen(User remoteLoggedUser, User calOwner) {
-	LogUtils
-		.logInfo(
-			mcontext,
-			this.getClass(),
-			"showMainScreen",
-			new Object[] {
-				"Sending UI Request: showMainScreen for adding event and reminder for user: ",
-				remoteLoggedUser.getURI() }, null);
+	LogUtils.logInfo(
+		mcontext,
+		this.getClass(),
+		"showMainScreen",
+		new Object[] {
+			"Sending UI Request: showMainScreen for adding event and reminder for user: ",
+			remoteLoggedUser.getURI() }, null);
 
 	Form f = webUI.getMainScreenMenuForm(calOwner);
 	UIRequest oe = new UIRequest(remoteLoggedUser, f, LevelRating.middle,
@@ -420,29 +406,32 @@ public class UIProvider extends UICaller {
 			"Sending UI Request with info message: " + msg
 				+ " screen for user: ", user.getURI() }, null);
 	Form f = webUI.getMessageForm(msg);
-	UIRequest oe = new UIRequest(user, f, LevelRating.middle, Locale
-		.getDefault(), PrivacyLevel.insensible);
+	UIRequest oe = new UIRequest(user, f, LevelRating.middle,
+		Locale.getDefault(), PrivacyLevel.insensible);
 	sendUIRequest(oe);
     }
 
     public void showEventsScreen(User user, User calOwner) {
-	LogUtils.logInfo(mcontext, this.getClass(), "showEventsScreen",
+	LogUtils.logInfo(
+		mcontext,
+		this.getClass(),
+		"showEventsScreen",
 		new Object[] {
 			"Sending UI Request: showEventsScreen for user: ",
 			user.getURI() + " for calendar owner: "
 				+ calOwner.getURI() }, null);
 
 	Form f = webUI.getEventsForm(currentlySelectedCalOwner);
-	UIRequest oe = new UIRequest(user, f, LevelRating.middle, Locale
-		.getDefault(), PrivacyLevel.insensible);
+	UIRequest oe = new UIRequest(user, f, LevelRating.middle,
+		Locale.getDefault(), PrivacyLevel.insensible);
 	sendUIRequest(oe);
     }
 
-	@Override
-	public void dialogAborted(String arg0, Resource arg1) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void dialogAborted(String arg0, Resource arg1) {
+	// TODO Auto-generated method stub
+
+    }
 
     // showGoogleScreen
     // public void showGoogleScreen(User user, Calendar cal) {
