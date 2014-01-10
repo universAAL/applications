@@ -37,16 +37,16 @@
 		<developerConnection>${svn.base}/${project.artifactId}</developerConnection>
 		<url>${svn.base.url}%2Fontologies%2F${project.artifactId}</url>
 	</scm>
-	<distributionManagement>
-		<repository>
-			<id>uaal-wp4-release</id>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-release/</url>
-		</repository>
-		<snapshotRepository>
-			<id>uaal-wp4-private</id>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4/</url>
-		</snapshotRepository>
-	</distributionManagement>
+<!-- 	<distributionManagement> -->
+<!-- 		<repository> -->
+<!-- 			<id>uaal-wp4-release</id> -->
+<!-- 			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-release/</url> -->
+<!-- 		</repository> -->
+<!-- 		<snapshotRepository> -->
+<!-- 			<id>uaal-wp4-private</id> -->
+<!-- 			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4/</url> -->
+<!-- 		</snapshotRepository> -->
+<!-- 	</distributionManagement> -->
 	<properties>
 		<remoteOBR></remoteOBR>
 		<svn.base.url>${gforge.project.url}/scmsvn/?path=%2Fnew_services%2Ftrunk%2F</svn.base.url>
@@ -161,30 +161,30 @@
 			<name>universAAL ThirdParty Repositories</name>
 			<url>http://depot.universaal.org/maven-repo/thirdparty-snapshots/</url>
 		</repository>
-		<repository>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<id>uaal-wp4-private</id>
-			<name>WP4 services private repo</name>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4/</url>
-		</repository>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>uaal-wp4-release</id>
-			<name>WP4 Services Release repo</name>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-release/</url>
-		</repository>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>uaal-wp4-thridparty</id>
-			<name>WP4 Services Release repo</name>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-thirdparty/</url>
-		</repository>
+<!-- 		<repository> -->
+<!-- 			<releases> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</releases> -->
+<!-- 			<id>uaal-wp4-private</id> -->
+<!-- 			<name>WP4 services private repo</name> -->
+<!-- 			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4/</url> -->
+<!-- 		</repository> -->
+<!-- 		<repository> -->
+<!-- 			<snapshots> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</snapshots> -->
+<!-- 			<id>uaal-wp4-release</id> -->
+<!-- 			<name>WP4 Services Release repo</name> -->
+<!-- 			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-release/</url> -->
+<!-- 		</repository> -->
+<!-- 		<repository> -->
+<!-- 			<snapshots> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</snapshots> -->
+<!-- 			<id>uaal-wp4-thridparty</id> -->
+<!-- 			<name>WP4 Services Release repo</name> -->
+<!-- 			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-thirdparty/</url> -->
+<!-- 		</repository> -->
 	</repositories>
 	<build>
 		<plugins>
