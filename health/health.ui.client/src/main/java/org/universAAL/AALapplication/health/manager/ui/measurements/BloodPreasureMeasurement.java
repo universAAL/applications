@@ -9,6 +9,7 @@ import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.AALapplication.health.manager.ui.MainMenu;
 import org.universAAL.AALapplication.health.manager.ui.MeasurementTypeForm;
 import org.universAAL.middleware.rdf.PropertyPath;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
@@ -126,5 +127,11 @@ public class BloodPreasureMeasurement extends AbstractHealthForm {
 	ps.setHealthMeasurement(hm);
 	return ps;
     }
+
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

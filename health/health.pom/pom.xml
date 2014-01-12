@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>new_services.pom</artifactId>
-    <version>E.2</version>
+    <version>E.4</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   <artifactId>health.pom</artifactId>
-  <version>E.2.1-SNAPSHOT</version>
+  <version>E.4.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Health Management AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Health_Management_universAAL_service</url>
@@ -42,37 +42,37 @@
     <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.performedSession.manager</artifactId>
-        <version>E.2.1-SNAPSHOT</version>
+        <version>E.4.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.treat.manager</artifactId>
-        <version>E.2.1-SNAPSHOT</version>
+        <version>E.4.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.profile.manager</artifactId>
-        <version>E.2.1-SNAPSHOT</version>
+        <version>E.4.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.ui.client</artifactId>
-        <version>E.2.1-SNAPSHOT</version>
+        <version>E.4.1-SNAPSHOT</version>
       </dependency> 
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.x73.adapter</artifactId>
-        <version>E.2.1-SNAPSHOT</version>
+        <version>E.4.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.biomedicalsensors.server</artifactId>
-        <version>E.1.1-SNAPSHOT</version>
+        <version>E.4.1-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.biomedicalsensors.uiclient</artifactId>
-        <version>E.1.1-SNAPSHOT</version>
+        <version>E.4.1-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

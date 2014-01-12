@@ -122,4 +122,10 @@ public class AssistedPersonSelector extends AbstractHealthForm {
  	return new ArrayList<AssistedPerson>();
      }
 
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

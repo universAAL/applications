@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>health.pom</artifactId>
-    <version>E.1.1-SNAPSHOT</version>
+    <version>E.4.1-SNAPSHOT</version>
     <relativePath>../health.pom/</relativePath>
   </parent>
   <artifactId>health.motivation</artifactId>
-  <version>E.1.1-SNAPSHOT</version>
+  <version>E.4.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>Motivation Service</name>
   <properties>
@@ -26,10 +26,10 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.apache.felix</groupId>
-      <artifactId>org.osgi.core</artifactId>
-    </dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
     <dependency>
       <groupId>org.universAAL.middleware</groupId>
       <artifactId>mw.container.osgi</artifactId>

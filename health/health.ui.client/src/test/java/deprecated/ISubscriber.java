@@ -19,6 +19,7 @@ package deprecated;
 import java.util.TreeMap;
 
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UICaller;
 import org.universAAL.middleware.ui.UIResponse;
 
@@ -35,9 +36,6 @@ public class ISubscriber extends UICaller{
 	public void communicationChannelBroken() {
 		
 	}
-
-	public void dialogAborted(String dialogID) {
-	}
 	
 	public void registerUI(String formID, InputListener listener) {
 		inputMapper.put(formID, listener);
@@ -50,5 +48,11 @@ public class ISubscriber extends UICaller{
 	@Override
 	public void handleUIResponse(UIResponse event) {
 		inputMapper.get(event.getDialogID()).handleEvent(event);
+	}
+
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -57,7 +57,6 @@ public abstract class AbstractHealthForm extends UICaller {
 	@Override
 	public void communicationChannelBroken() {}
 
-	@Override
 	public void dialogAborted(String arg0) {}
 
 	protected void sendForm(Form f){

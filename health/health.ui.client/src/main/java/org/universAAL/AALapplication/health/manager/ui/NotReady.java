@@ -48,4 +48,10 @@ public final class NotReady extends AbstractHealthForm {
 		sendForm(f);
 	}
 
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

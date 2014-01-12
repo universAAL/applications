@@ -20,6 +20,7 @@ package deprecated;
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.AALapplication.health.manager.ui.TreatmentForm;
 import org.universAAL.middleware.rdf.PropertyPath;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Group;
@@ -137,5 +138,11 @@ public class TreatmentViewForm extends AbstractHealthForm {
 			
 //			new TreatmentForm(this).show();
 		}
+	}
+
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
 	}
 }

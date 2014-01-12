@@ -19,6 +19,7 @@ package org.universAAL.AALapplication.health.manager.service.genericUIs;
 
 import org.universAAL.AALapplication.health.manager.ui.AbstractHealthForm;
 import org.universAAL.middleware.container.ModuleContext;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.service.DefaultServiceCaller;
 import org.universAAL.middleware.service.ServiceRequest;
 import org.universAAL.middleware.ui.UIResponse;
@@ -112,6 +113,12 @@ public class EditTreatmentForm extends AbstractHealthForm{
 				getString("generic.editTreatment.back.icon")), 
 				BACK_CMD); 
 		sendForm(f);
+	}
+
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
