@@ -54,7 +54,6 @@ public class AcknowledgeMessage extends UICaller {
     }
 
     /** {@ inheritDoc}	 */
-    @Override
     public void dialogAborted(String dialogID) {
 
     }
@@ -75,4 +74,10 @@ public class AcknowledgeMessage extends UICaller {
 	
 	sendUIRequest(new UIRequest(ap, f, LevelRating.low, Locale.ENGLISH, PrivacyLevel.insensible));
     }
+
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
+	}
 }

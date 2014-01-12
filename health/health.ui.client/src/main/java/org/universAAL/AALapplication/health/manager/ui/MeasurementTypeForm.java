@@ -115,4 +115,11 @@ public class MeasurementTypeForm extends AbstractHealthForm {
 		}
 	}
 
+
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -90,4 +90,10 @@ public class TreatmentTypeForm extends AbstractHealthForm {
 		sendForm(f);
 	}
 
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

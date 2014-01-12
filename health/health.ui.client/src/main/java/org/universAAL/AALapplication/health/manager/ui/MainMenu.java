@@ -2,6 +2,7 @@ package org.universAAL.AALapplication.health.manager.ui;
 
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.LogUtils;
+import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.ui.UIResponse;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Label;
@@ -98,6 +99,12 @@ public class MainMenu extends AbstractHealthForm{
 		// TODO Welcome Pane in IOControls
 		
 		sendForm(f);
+	}
+
+	@Override
+	public void dialogAborted(String dialogID, Resource data) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
