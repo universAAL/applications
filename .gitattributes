@@ -519,8 +519,8 @@ food_shopping/food_shopping.service.client/src/main/resources/images/icons_shLst
 food_shopping/food_shopping.service.client/src/main/resources/images/icons_shLstEdit_small.png -text
 food_shopping/food_shopping.service.client/src/main/resources/images/icons_shLstName_small.png -text
 food_shopping/food_shopping.service.client/src/main/resources/images/icons_shopList_small.png -text
-food_shopping/food_shopping.service.server/ASL2.0 -text
-food_shopping/food_shopping.service.server/NOTICE -text
+food_shopping/food_shopping.service.server/ASL2.0.txt -text
+food_shopping/food_shopping.service.server/NOTICE.txt -text
 food_shopping/food_shopping.service.server/pom.xml -text
 food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALapplication/food_shopping/service/RFidProvider/CPublisher.java -text
 food_shopping/food_shopping.service.server/src/main/java/org/universAAL/AALapplication/food_shopping/service/db/Derby/DerbyInterface.java -text
