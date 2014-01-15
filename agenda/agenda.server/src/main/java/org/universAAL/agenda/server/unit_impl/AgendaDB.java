@@ -915,7 +915,7 @@ public class AgendaDB implements AgendaDBInterface {
 		GregorianCalendar gc = new GregorianCalendar();
 		Event e = new Event();
 		int eID = rs.getInt("idEvent");
-		Calendar c = new Calendar(Calendar.MY_URI, rs
+		Calendar c = new Calendar(Calendar.MY_URI+"5", rs
 			.getString("CalendarType"));
 		String title = rs.getString("Title");
 		String desc = rs.getString("Description");

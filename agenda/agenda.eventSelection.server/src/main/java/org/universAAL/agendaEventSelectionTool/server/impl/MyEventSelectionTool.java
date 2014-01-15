@@ -140,8 +140,8 @@ public class MyEventSelectionTool implements EventSelectionToolDBInterface {
 
 		ResultSet rsr;
 		int eID = rs.getInt("idEvent");
-		Calendar c = new Calendar(Calendar.MY_URI, rs
-			.getString("CalendarType"));
+		Calendar c = new Calendar(Calendar.MY_URI+"5", rs
+			.getString("CalendarType"));//TODO Id
 		String title = rs.getString("Title");
 		String desc = rs.getString("Description");
 		long eStart = rs.getLong("StartTime");
