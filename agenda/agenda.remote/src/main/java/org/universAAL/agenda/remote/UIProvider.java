@@ -137,6 +137,7 @@ public class UIProvider extends UICaller {
 	    }
 
 	    else if (submit.equals("get_event_list")) {
+	    	readAndSetCurrentlySelectedCalendarOwner(uiresponse);
 		LogUtils.logInfo(mcontext, this.getClass(), "handleUIResponse",
 			new Object[] { "Processing Input: Go to Events List" },
 			null);
@@ -153,13 +154,13 @@ public class UIProvider extends UICaller {
 			"handleUIResponse",
 			new Object[] { "Processing Input: add event for user" },
 			null);
-
+		readAndSetCurrentlySelectedCalendarOwner(uiresponse);
 		showMainScreen(remoteLoggedUser, currentlySelectedCalOwner);
 		// takes events from specific calendar
 		submit = null;
 
 	    } else if (submit.toString().startsWith("delete")) {
-		Calendar cal = new Calendar(Calendar.MY_URI);
+		Calendar cal = new Calendar(Calendar.MY_URI+"5");
 		Event ev = AgendaWebGUI.map.get(Integer.parseInt(submit
 			.toString().substring(6)));
 		if (Activator.sCaller.deleteCalendarEventService(cal,
