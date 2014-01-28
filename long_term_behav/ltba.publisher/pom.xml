@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>ltba.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.3.1-SNAPSHOT</version>
+		<version>F.0</version>
 		<relativePath>../ltba.pom</relativePath>
 	</parent>
 	<artifactId>ltba.publisher</artifactId>
@@ -30,9 +30,8 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
+			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
-<!-- 			<version>1.4.0</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.universAAL.middleware</groupId>

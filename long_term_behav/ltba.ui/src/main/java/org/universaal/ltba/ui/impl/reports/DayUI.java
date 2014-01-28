@@ -1,6 +1,6 @@
 /*
 	Copyright 2008-2014 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -51,7 +51,6 @@ public class DayUI extends UICaller {
 	public void communicationChannelBroken() {
 	}
 
-	@Override
 	public void dialogAborted(String dialogID) {
 	}
 
@@ -89,6 +88,12 @@ public class DayUI extends UICaller {
 				Locale.ENGLISH, PrivacyLevel.insensible);
 		this.sendUIRequest(req);
 		return f;
+	}
+
+	@Override
+	public void dialogAborted(String arg0, Resource arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

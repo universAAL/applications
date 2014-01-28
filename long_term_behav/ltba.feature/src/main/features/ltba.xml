@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
-	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.3-SNAPSHOT/xml/features
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/3.0.0/xml/features
 	</repository>
 
 	<feature name="uAAL-Service-LTBA" description="${project.name}"
@@ -31,10 +31,10 @@
 		<feature>uAAL-Service-ZWAVE</feature>
 
 		<!-- Service -->
-		<bundle start-level='79' start='true'>mvn:org.universAAL.AALapplication/drools.reasoner/E.2.2-SNAPSHOT</bundle>
-		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.nomhad.gateway/E.2.2-SNAPSHOT</bundle>
-		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.ui/E.2.2-SNAPSHOT</bundle>		
-		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.manager/E.2.2-SNAPSHOT</bundle>
+		<bundle start-level='79' start='true'>mvn:org.universAAL.AALapplication/drools.reasoner/3.0.0</bundle>
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.nomhad.gateway/3.0.0</bundle>
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.ui/3.0.0</bundle>		
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.manager/3.0.0</bundle>
 <!-- 		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/ltba.publisher/E.2.1-SNAPSHOT</bundle> -->
 	</feature>
 </features>

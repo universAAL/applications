@@ -89,7 +89,6 @@ public class MainLTBAUIProvider extends UICaller {
 
 	}
 
-	@Override
 	public void dialogAborted(String dialogID) {
 
 	}
@@ -272,5 +271,11 @@ public class MainLTBAUIProvider extends UICaller {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public void dialogAborted(String arg0, Resource arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 }
