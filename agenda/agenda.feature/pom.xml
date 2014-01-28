@@ -5,11 +5,11 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>agenda.pom</artifactId>
-		<version>E.4</version>
+		<version>F.0</version>
 		<relativePath>../agenda.pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>agenda.karaf.feature</artifactId>
-		<version>E.4</version>
+		<version>F.0</version>
 	<name>Agenda AAL Service Karaf Feature</name>
 	<description>Artifact representing represeting the Karaf feature for the Agenda AAL Service</description>
 
