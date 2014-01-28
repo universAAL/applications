@@ -41,6 +41,8 @@ public class Setup /*implements OnConfigurationChangedListener*/{
     private static int wait_to_download_advices = -1;
 
     static private String getSetupFileName() {
+    	System.out.println("------------------------- " +ServiceInterface.DIR_NUTRITIONAL_ROOT + "\\"
+		+ ServiceInterface.SETUP_FILENAME);
 	File file = new File(ServiceInterface.DIR_NUTRITIONAL_ROOT + "\\"
 		+ ServiceInterface.SETUP_FILENAME);
 	// String setupFileName = file.getAbsolutePath() + "\\"+
