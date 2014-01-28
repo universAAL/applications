@@ -7,6 +7,10 @@
 	<feature name="uAAL-Service-FoodAndShopping" description="${project.name}"
 		version="${platform.version}" resolver='(obr)'>
 
+		<bundle>wrap:mvn:axis/axis-pax/1.4</bundle>
+		<bundle>wrap:mvn:axis/axis-wsdl4j/1.5.1</bundle>
+		<bundle>wrap:mvn:commons-discovery/commons-discovery/0.5</bundle>
+ 		<bundle>wrap:mvn:org.apache.axis/axis-jaxrpc/1.4</bundle>  
 
 		<!-- Third party dependency -->
 		<bundle>wrap:mvn:org.universAAL.control.foodDevices.RFid/control.foodDevices.jd2xx_20602/1.1</bundle>
