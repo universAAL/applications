@@ -3,18 +3,18 @@
 		<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>E.1</version>
+		<version>F.0</version>
 		<relativePath>../hwo.pom</relativePath>
 	</parent>
 
 	<packaging>bundle</packaging>
 	<artifactId>hwo.servlet</artifactId>
-	<version>E.1</version>
+	<version>F.0</version>
 	<name>Help When Outdoor Servlet Service</name>
 	<description/>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
+            <groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>

@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>hwo.pom</artifactId>
-		<version>E.1</version>
+		<version>F.0</version>
 		<relativePath>../hwo.pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>hwo.karaf.feature</artifactId>
 	<name>Help When Outdoor Service Karaf Feature</name>
 	<description>Artifact representing representing the Karaf feature for the Help When Outdoor AAL Service</description>
-    <version>E.1</version>
+    <version>F.0</version>
   <build>
    <plugins>
       <plugin>
