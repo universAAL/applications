@@ -4,7 +4,7 @@
   <parent>
   	<groupId>org.universAAL.AALapplication</groupId>
   	<artifactId>shopping.pom</artifactId>
-  	<version>E.4.1-SNAPSHOT</version>
+  	<version>F.0</version>
   	<relativePath>../shopping.pom/</relativePath>
   </parent>
   
