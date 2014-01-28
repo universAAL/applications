@@ -5,11 +5,11 @@
   <parent>
     <groupId>org.universAAL.AALapplication</groupId>
     <artifactId>health.pom</artifactId>
-    <version>E.4.1-SNAPSHOT</version>
+    <version>F.0</version>
     <relativePath>../health.pom</relativePath>
   </parent>
   <artifactId>health.performedSession.manager</artifactId>
-  <version>E.4.1-SNAPSHOT</version>
+  <version>F.0</version>
   <packaging>bundle</packaging>
   <name>Health Performed Session Mananger</name>
   <description>Enables Storage, and Listing of sessions that the assisted person has performed</description>
