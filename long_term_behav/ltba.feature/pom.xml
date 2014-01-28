@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>ltba.pom</artifactId>
-		<version>E.2.1-SNAPSHOT</version>
+		<version>F.0</version>
 		<relativePath>../ltba.pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>ltba.feature</artifactId>
 	<name>LTBA AAL Service Karaf Feature</name>
 	<description>Artifact representing representing the Karaf feature for the LTBA AAL Service</description>
-	<version>E.3.1-SNAPSHOT</version>
+	<version>F.0</version>
   <build>
     <!--resources>
        <resource>
