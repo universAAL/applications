@@ -6,7 +6,7 @@
 	<groupId>org.universAAL.AALapplication</groupId>
 	<artifactId>agenda.runner</artifactId>
 	<packaging>jar</packaging>
-	<version>E.4</version>
+	<version>F.0</version>
 	<name>Agenda AAL Service Runner</name>
 
 	<build>
