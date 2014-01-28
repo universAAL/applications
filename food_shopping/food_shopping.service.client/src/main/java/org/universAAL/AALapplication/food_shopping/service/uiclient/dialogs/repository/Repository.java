@@ -58,7 +58,7 @@ import org.universAAL.ontology.profile.User;
  */
 public class Repository extends UICaller {
 
-    public final static String IMG_URL = "http://127.0.0.1:8080/resources/shopping/images/";
+    public final static String IMG_URL = "http://127.0.0.1:8181/resources/shopping/images/";
 	private final static String window = "UIRepository#";
 	static final String MY_UI_NAMESPACE = SharedResources.CLIENT_SHOPPING_UI_NAMESPACE + window;
 	static final String SUBMISSION_GOBACK = MY_UI_NAMESPACE + "back";
