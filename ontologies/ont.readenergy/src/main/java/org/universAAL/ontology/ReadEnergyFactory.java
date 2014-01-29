@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -20,10 +20,10 @@
 package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.ontology.energy.reader.*;
 
-public class ReadEnergyFactory extends ResourceFactoryImpl {
+public class ReadEnergyFactory implements ResourceFactory {
 
     public static final int EnergyReader = 0;
     public static final int EnergyReaderDevice = 1;

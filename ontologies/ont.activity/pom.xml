@@ -5,12 +5,12 @@
   <parent>
     <artifactId>ont.pom</artifactId>
     <groupId>org.universAAL.ontology.services</groupId>
-    <version>2.0.2-SNAPSHOT</version>
+    <version>3.0.0</version>
     <relativePath>../ont.pom</relativePath>
   </parent>
   <groupId>org.universAAL.ontology</groupId>
   <artifactId>ont.activity</artifactId>
-  <version>2.0.2-SNAPSHOT</version>
+  <version>3.0.0</version>
   <packaging>bundle</packaging>
   <name>Personal Safety Service - Activity Ontology</name>
   <dependencies>

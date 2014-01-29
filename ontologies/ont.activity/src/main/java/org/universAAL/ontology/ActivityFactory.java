@@ -2,7 +2,7 @@
 package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.ontology.activity.BathroomUsage;
 import org.universAAL.ontology.activity.Cooking;
 import org.universAAL.ontology.activity.DishWashing;
@@ -18,7 +18,7 @@ import org.universAAL.ontology.activity.TVViewing;
 import org.universAAL.ontology.activity.ToothBrushing;
 import org.universAAL.ontology.activity.WakingUp;
 
-public class ActivityFactory extends ResourceFactoryImpl {
+public class ActivityFactory implements ResourceFactory {
 
 
   public Resource createInstance(String classURI, String instanceURI, int factoryIndex) {

@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -20,10 +20,10 @@
 package org.universAAL.ontology;
 
 import org.universAAL.middleware.rdf.Resource;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
+import org.universAAL.middleware.rdf.ResourceFactory;
 import org.universAAL.ontology.aalfficiency.scores.*;
 
-public class AalfficiencyScoresFactory extends ResourceFactoryImpl {
+public class AalfficiencyScoresFactory implements ResourceFactory {
 
     public static final int Advice = 0;
     public static final int AalfficiencyAdvices = 1;
