@@ -7,12 +7,12 @@
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.4</version>
+		<version>F.0</version>
 		<relativePath>../../new_services.pom</relativePath>
 	</parent>
 
 	<artifactId>nutritional.pom</artifactId>
-	<version>E.4</version>
+	<version>F.0</version>
 	<name>Nutritional Advisor AAL Service</name>
 	<packaging>pom</packaging>
 
