@@ -37,6 +37,7 @@
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.safety</artifactId>
+			<version>3.0.0</version>
 		</dependency>		
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
