@@ -16,9 +16,24 @@
 
 package org.universAAL.AALapplication.safety_home.service.smartCardProvider;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Vector;
+
 import org.universAAL.AALapplication.db.Derby.DerbyInterface;
 import org.universAAL.AALapplication.db.manager.entitymanagers.UserManager;
+import org.universAAL.AALapplication.db.utils.Column;
+import org.universAAL.AALapplication.db.utils.ConnectionManager;
+import org.universAAL.AALapplication.db.utils.ResultRow;
 import org.universAAL.AALapplication.db.utils.Value;
+import org.universAAL.AALapplication.db.utils.criteria.ArithmeticCriterion;
+import org.universAAL.AALapplication.db.utils.criteria.Criterion;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.context.ContextEvent;
 import org.universAAL.middleware.context.ContextEventPattern;
@@ -27,27 +42,9 @@ import org.universAAL.middleware.context.DefaultContextPublisher;
 import org.universAAL.middleware.context.owl.ContextProvider;
 import org.universAAL.middleware.context.owl.ContextProviderType;
 import org.universAAL.middleware.owl.MergedRestriction;
+import org.universAAL.ontology.Safety.Door;
 import org.universAAL.ontology.location.indoor.Room;
 import org.universAAL.ontology.phThing.Device;
-import org.universAAL.ontology.Safety.Door;
-import org.universAAL.ontology.Safety.HumiditySensor;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.sql.*;
-import javax.sql.*;
-import java.util.Vector;
-import org.universAAL.AALapplication.db.utils.criteria.ArithmeticCriterion;
-import org.universAAL.AALapplication.db.utils.criteria.Criterion;
-import org.universAAL.AALapplication.db.utils.Column;
-import org.universAAL.AALapplication.db.utils.ConnectionManager;
-import org.universAAL.AALapplication.db.utils.ResultRow;
-import org.universAAL.AALapplication.db.utils.Value;
-import java.net.*;
 
 /**
  * @author dimokas
