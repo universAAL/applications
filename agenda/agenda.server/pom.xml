@@ -55,12 +55,6 @@
 			<groupId>org.universAAL.ontology</groupId>
 			<artifactId>ont.agenda</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>mysql</groupId> -->
-		<!-- <artifactId>mysql-connector-java</artifactId> -->
-		<!-- <version>5.1.17</version> -->
-		<!-- </dependency> -->
-		<!-- dependency for javax.xml.datatype -->
 		<dependency>
 			<groupId>activesoap</groupId>
 			<artifactId>jaxp-api</artifactId>
