@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>medication.manager.pom</artifactId>
-		<version>E.3.1-SNAPSHOT</version>
+		<version>F.0</version>
 		<relativePath>../medication.manager.pom/pom.xml</relativePath>
 	</parent>
   <artifactId>medication.karaf.feature</artifactId>
   <packaging>jar</packaging>
-  <version>2.0.3-SNAPSHOT</version>
+  <version>F.0</version>
   <name>Medication Manager Karaf Feature</name>
   <build>
   <plugins>

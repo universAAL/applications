@@ -75,7 +75,6 @@ public class RequestMedicationInfoDialog extends UICaller {
   public void communicationChannelBroken() {
   }
 
-  @Override
   public void dialogAborted(String dialogID) {
   }
 
@@ -213,5 +212,11 @@ public class RequestMedicationInfoDialog extends UICaller {
 
     return sb.toString();
   }
+
+@Override
+public void dialogAborted(String arg0, Resource arg1) {
+	// TODO Auto-generated method stub
+	
+}
 
 }

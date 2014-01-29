@@ -56,7 +56,6 @@ public class DispenserUpsideDownDialog extends UICaller {
   public void communicationChannelBroken() {
   }
 
-  @Override
   public void dialogAborted(String dialogID) {
   }
 
@@ -96,5 +95,11 @@ public class DispenserUpsideDownDialog extends UICaller {
 
     return Activator.getMessage("medication.manager.ui.upside.down", name);
   }
+
+@Override
+public void dialogAborted(String arg0, Resource arg1) {
+	// TODO Auto-generated method stub
+	
+}
 
 }
