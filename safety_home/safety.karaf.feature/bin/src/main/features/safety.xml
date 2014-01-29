@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/3.0.0/xml/features
+	</repository>
+
+	<feature name="uAAL-Service-NutritionalAdvisor" description="${project.name}"
+		version="${platform.version}" resolver='(obr)'>
+
+
+		<!-- Third party dependency -->
+		<bundle>wrap:mvn:org.apache.derby/derby/10.7.1.1</bundle>
+
+		<!-- Ontologies -->
+		<feature>uAAL-Ont.Safety</feature>
+
+		<!-- Service -->
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.server/F.0</bundle>bundle>		
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.client/F.0</bundle>bundle>
+		
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.smartCardProvider/F.0</bundle>bundle>
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.lightSensorProvider/F.0</bundle>bundle>
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.temperatureSensorProvider/F.0</bundle>bundle>
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.humiditySensorProvider/F.0</bundle>bundle>
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.smokeDetectionProvider/F.0</bundle>bundle>
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.doorBellProvider/F.0</bundle>bundle>
+		
+	</feature>
+</features>

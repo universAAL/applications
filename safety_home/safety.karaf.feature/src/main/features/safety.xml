@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/3.0.0/xml/features
+	</repository>
+
+	<feature name="uAAL-Service-Safety" description="${project.name}"
+		version="${platform.version}" resolver='(obr)'>
+
+
+		<!-- Third party dependency -->
+
+		<bundle>wrap:mvn:axis/axis-pax/1.4</bundle>
+		<bundle>wrap:mvn:axis/axis-wsdl4j/1.5.1</bundle>
+		<bundle>wrap:mvn:commons-discovery/commons-discovery/0.5</bundle>
+ 		<bundle>wrap:mvn:org.apache.axis/axis-jaxrpc/1.4</bundle>  
+
+		<!-- Ontologies -->
+		<feature>uAAL-Ont.Safety</feature>
+
+		<!-- Service -->
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/.client/F.0
+		</bundle>
+	</feature>
+</features>

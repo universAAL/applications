@@ -3690,6 +3690,14 @@ personal_safety/smp.test-location.publisher/pom.xml -text
 personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/Activator.java -text
 personal_safety/smp.test-location.publisher/src/main/java/org/universAAL/samples/testlocation/GUIPanel.java -text
 safety_home/README.txt -text
+safety_home/safety.karaf.feature/ASL2.0.txt -text
+safety_home/safety.karaf.feature/NOTICE -text
+safety_home/safety.karaf.feature/bin/ASL2.0.txt -text
+safety_home/safety.karaf.feature/bin/NOTICE -text
+safety_home/safety.karaf.feature/bin/pom.xml -text
+safety_home/safety.karaf.feature/bin/src/main/features/safety.xml -text
+safety_home/safety.karaf.feature/pom.xml -text
+safety_home/safety.karaf.feature/src/main/features/safety.xml -text
 safety_home/safety.pom/ASL2.0 -text
 safety_home/safety.pom/NOTICE -text
 safety_home/safety.pom/pom.xml -text
