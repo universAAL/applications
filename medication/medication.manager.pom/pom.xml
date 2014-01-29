@@ -4,27 +4,20 @@
   <parent>
     <artifactId>new_services.pom</artifactId>
     <groupId>org.universAAL.AALapplication</groupId>
-    <version>E.3</version>
+    <version>F.0</version>
     <relativePath>../../new_services.pom</relativePath>
   </parent>
   <artifactId>medication.manager.pom</artifactId>
-  <version>E.3.1-SNAPSHOT</version>
+  <version>F.0</version>
   <packaging>pom</packaging>
   <name>Medication Manager AAL Service</name>
   <url>http://forge.universaal.org/wiki/new_services:Medication_manager_universAAL_service</url>
 
   <dependencies>
-    <!--
-      The dependency to itests has always come before the dependency to
-      org.osgi.core (groupId:org.apache.felix). The easiest approach is to
-      just put the dependency to itests as the first one.
-     -->
-
-    <dependency>
-      <groupId>org.apache.felix</groupId>
-      <artifactId>org.osgi.core</artifactId>
-      <scope>provided</scope>
-    </dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+		</dependency>
 
     <dependency>
       <groupId>org.apache.felix</groupId>

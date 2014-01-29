@@ -55,7 +55,6 @@ public class InventoryStatusDialog extends UICaller {
   public void communicationChannelBroken() {
   }
 
-  @Override
   public void dialogAborted(String dialogID) {
   }
 
@@ -88,6 +87,12 @@ public class InventoryStatusDialog extends UICaller {
       Log.error(e, "Error while trying to show dialog", getClass());
     }
   }
+
+@Override
+public void dialogAborted(String arg0, Resource arg1) {
+	// TODO Auto-generated method stub
+	
+}
 
 
 }

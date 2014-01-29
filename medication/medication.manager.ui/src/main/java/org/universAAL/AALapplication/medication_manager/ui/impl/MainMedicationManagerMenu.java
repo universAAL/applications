@@ -57,7 +57,6 @@ public class MainMedicationManagerMenu extends UICaller {
   public void communicationChannelBroken() {
   }
 
-  @Override
   public void dialogAborted(String dialogID) {
   }
 
@@ -131,5 +130,11 @@ public class MainMedicationManagerMenu extends UICaller {
     UIRequest req = new UIRequest(inputUser, f, LevelRating.none, Locale.ENGLISH, PrivacyLevel.insensible);
     this.sendUIRequest(req);
   }
+
+@Override
+public void dialogAborted(String arg0, Resource arg1) {
+	// TODO Auto-generated method stub
+	
+}
 
 }
