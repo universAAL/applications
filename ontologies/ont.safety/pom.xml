@@ -8,18 +8,15 @@
     <version>3.0.0</version>
     <relativePath>../ont.pom</relativePath>
   </parent>
+
   <groupId>org.universAAL.ontology</groupId>
   <artifactId>ont.safety</artifactId>
-  <version>3.0.0</version>
   <packaging>bundle</packaging>
   <name>Safety and Security Service - Ontology</name>
   <description>An ontology defining the most general concepts for Safety and Security at home</description>
   <inceptionYear>2012</inceptionYear>
+
   <dependencies>
-    <dependency>
-      <groupId>org.universAAL.support</groupId>
-      <artifactId>itests</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.universAAL.ontology</groupId>
       <artifactId>ont.phWorld</artifactId>
@@ -33,6 +30,7 @@
       <artifactId>ont.lighting</artifactId>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
