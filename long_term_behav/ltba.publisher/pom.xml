@@ -42,10 +42,6 @@
 			<artifactId>ont.activityhub</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.universAAL.middleware</groupId>
-			<artifactId>mw.bus.context.osgi</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.universAAL.AALapplication</groupId>
 			<artifactId>ltba.manager</artifactId>
 			<version>${project.version}</version>

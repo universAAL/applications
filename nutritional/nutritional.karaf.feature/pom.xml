@@ -8,21 +8,13 @@
 		<version>F.0</version>
 		<relativePath>../nutritional.pom/pom.xml</relativePath>
 	</parent>
+	
 	<artifactId>nutritional.karaf.feature</artifactId>
 	<name>Nutritional Advisor AAL Service Karaf Feature</name>
 	<description>Artifact representing representing the Karaf feature for the Nutritional Advisor AAL Service</description>
 	<version>3.0.0</version>
+	
   <build>
-    <!--resources>
-       <resource>
-        <directory>src/main/features</directory>
-        <filtering>true</filtering>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-       </resource>
-    </resources-->
-
     <plugins>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>

@@ -11,12 +11,11 @@
 	
 	<groupId>org.universAAL.ontology</groupId>
 	<artifactId>ont.shopping</artifactId>
-	
 	<packaging>bundle</packaging>
+	<version>3.0.0</version>
 	<name>Food and Shopping Service - Ontology</name>
 	<description>Food Shopping Ontology</description>
-	<inceptionYear>2012</inceptionYear>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.universAAL.ontology</groupId>
@@ -42,17 +41,6 @@
 						<Export-Package>org.universAAL.ontology.Shopping</Export-Package>
 						<Private-Package>org.universAAL.ontology;-split-package:=first</Private-Package>
 					</instructions>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.universAAL.support</groupId>
-				<artifactId>uaal-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<configuration>
-					<skipAttach>false</skipAttach>
 				</configuration>
 			</plugin>
 			<plugin>
