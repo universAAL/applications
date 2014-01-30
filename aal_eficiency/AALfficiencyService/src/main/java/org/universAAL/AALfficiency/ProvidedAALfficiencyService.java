@@ -1,6 +1,6 @@
 /*
 	Copyright 2011-2012 TSB, http://www.tsbtecnologias.es
-	TSB - Tecnologías para la Salud y el Bienestar
+	TSB - Tecnologï¿½as para la Salud y el Bienestar
 	
 	See the NOTICE file distributed with this work for additional 
 	information regarding copyright ownership
@@ -25,7 +25,6 @@ import org.universAAL.middleware.owl.OntologyManagement;
 import org.universAAL.middleware.owl.SimpleOntology;
 import org.universAAL.middleware.rdf.Resource;
 import org.universAAL.middleware.rdf.TypeMapper;
-import org.universAAL.middleware.rdf.impl.ResourceFactoryImpl;
 import org.universAAL.middleware.service.owls.process.ProcessInput;
 import org.universAAL.middleware.service.owls.process.ProcessOutput;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
@@ -70,15 +69,7 @@ public class ProvidedAALfficiencyService extends AalfficiencyScores{
  	
  	static{
  		OntologyManagement.getInstance().register(Activator.getMcontext(),
-				new SimpleOntology(MY_URI, AalfficiencyScores.MY_URI,
-						new ResourceFactoryImpl() {
-							@Override
-							public Resource createInstance(String classURI,
-									String instanceURI, int factoryIndex) {
-								return new ProvidedAALfficiencyService(
-										instanceURI);
-							}
-						}));
+				new SimpleOntology(MY_URI, AalfficiencyScores.MY_URI));
  		
  		ProvidedAALfficiencyService getActivityData = new ProvidedAALfficiencyService(SERVICE_GET_ACTIVITY_DATA);
  		getActivityData.addOutput(OUTPUT_ACTIVITY_DATA, ActivityScore.MY_URI,1, 1, new String[]{AalfficiencyScores.PROP_ACTIVITY_SCORE});

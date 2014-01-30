@@ -4,7 +4,7 @@
   <parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.1</version>
+		<version>F.0</version>
 		<relativePath>../../new_services.pom/pom.xml</relativePath>
 	</parent>
   
@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 	<name>The AAlfficiency POM file</name>
 	<description>The AAlfficiency POM file</description>
-	<version>E.0.1-SNAPSHOT</version>
+	<version>F.0</version>
 	<modules>
 		<module>../FitbitPublisher</module>
 		<module>../EnergyReaderPublisher</module>
