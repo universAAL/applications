@@ -25,7 +25,7 @@
 		<module>../personal_safety/personal_safety.pom</module> 
 		<module>../food_shopping/shopping.pom</module>
 		<module>../safety_home/safety.pom</module>
-		<module>../aal_eficiency/AALfficiency.pom</module>
+		<module>../aal_eficiency/AAlfficiency.pom</module>
 		<module>../help_when_out/hwo.pom</module>
 	</modules>
 
@@ -149,41 +149,5 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
-<!-- 	 	<repository>
-			<id>uaal-wp4-private</id>
-			<name>WP4 services private repo</name>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>uaal-wp4-release</id>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-release/</url>
-			<name>WP4 Services Release repo</name>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>uaal-wp4-thridparty</id>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-thirdparty/</url>
-			<name>WP4 Services Release repo</name>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>  -->
 	</repositories>
-	
-<!-- 	<distributionManagement>
-		<snapshotRepository>
-			<id>uaal-wp4-private</id>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4/</url>
-		</snapshotRepository>
-		<repository>
-			<id>uaal-wp4-release</id>
-			<url>http://nexus.lst.tfo.upm.es/content/repositories/private-uAAL-WP4-release/</url>
-		</repository>
-	</distributionManagement> -->
-	
 </project>

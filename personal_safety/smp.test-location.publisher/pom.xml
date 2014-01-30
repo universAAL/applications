@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>personal_safety.pom</artifactId>
-		<version>D.0.1-SNAPSHOT</version>
+		<version>F.0</version>
 		<relativePath>../personal_safety.pom</relativePath>
 	</parent>
 
@@ -16,7 +16,7 @@
   
   <dependencies>
 		<dependency>
-			<groupId>org.apache.felix</groupId>
+			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
 		<dependency>

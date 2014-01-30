@@ -6,9 +6,11 @@
     <version>F.0</version>
     <relativePath>../health.pom/</relativePath>
   </parent>
+  
   <artifactId>health.karaf.feature</artifactId>
   <version>F.0</version>
   <name>Health Karaf Features</name>
+  
     <dependencies>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
@@ -39,15 +41,18 @@
       	<artifactId>ont.karaf.feature</artifactId>
       </dependency>
     </dependencies>
+    
   <build>
   <filters>
   	<filter>./target/artifacts.versions</filter>
   </filters>
+   
     <plugins>
       <plugin>
         <groupId>org.universAAL.support</groupId>
         <artifactId>uaal-maven-plugin</artifactId>
       </plugin>
+      
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
@@ -69,6 +74,7 @@
           </execution>
         </executions>
       </plugin>
+      
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
