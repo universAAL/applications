@@ -4,12 +4,12 @@
   <parent>
 		<groupId>org.universAAL.AALapplication</groupId>
 		<artifactId>shopping.pom</artifactId>
-		<version>E.4.1-SNAPSHOT</version>
+		<version>F.0</version>
 	    <relativePath>../shopping.pom/pom.xml</relativePath>
   </parent>
   <artifactId>shopping.karaf.feature</artifactId>
   <groupId>org.universAAL.AALapplication</groupId>
-  <version>2.0.4-SNAPSHOT</version>
+  <version>F.0</version>
   <name>Food and Shopping AAL Service Karaf Feature</name>
   <properties>
     <commons-beanutils-version>1.8.3</commons-beanutils-version>
@@ -20,6 +20,27 @@
 
   <build>
     <plugins>
+        <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-features</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>target/features</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/features</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
