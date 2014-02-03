@@ -8,7 +8,7 @@
 		<version>F.0</version>
 		<relativePath>../ltba.pom/pom.xml</relativePath>
 	</parent>
-	<artifactId>ltba.feature</artifactId>
+	<artifactId>ltba.karaf.feature</artifactId>
 	<name>LTBA AAL Service Karaf Feature</name>
 	<description>Artifact representing representing the Karaf feature for the LTBA AAL Service</description>
 	<version>3.0.0</version>
