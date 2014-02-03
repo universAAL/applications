@@ -20,12 +20,12 @@
 <feature>uAAL-Ont.AgendaEventSelection</feature>
 
 <!-- Service -->
-<bundle>mvn:org.universAAL.AALapplication/agenda.client/${project.version}</bundle>
-<bundle>mvn:org.universAAL.AALapplication/agenda.server/${project.version}</bundle>
-<bundle>mvn:org.universAAL.AALapplication/agenda.eventSelection.client/${project.version}</bundle>
-<bundle>mvn:org.universAAL.AALapplication/agenda.gui/${project.version}</bundle>
-<bundle>mvn:org.universAAL.AALapplication/agenda.remote/${project.version}</bundle>
-<bundle>mvn:org.universAAL.AALapplication/agenda.eventSelection.server/${project.version}</bundle>
+<bundle>mvn:org.universAAL.AALapplication/agenda.client/F.0</bundle>
+<bundle>mvn:org.universAAL.AALapplication/agenda.server/F.0</bundle>
+<bundle>mvn:org.universAAL.AALapplication/agenda.eventSelection.client/F.0</bundle>
+<bundle>mvn:org.universAAL.AALapplication/agenda.gui/F.0</bundle>
+<bundle>mvn:org.universAAL.AALapplication/agenda.remote/F.0</bundle>
+<bundle>mvn:org.universAAL.AALapplication/agenda.eventSelection.server/F.0</bundle>
 
 	</feature>
 </features>
