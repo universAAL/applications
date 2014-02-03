@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
-	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.4-SNAPSHOT/xml/features
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/3.0.0/xml/features
 	</repository>
 	
 	<feature name="uAAL-Service-FoodAndShopping" description="${project.name}"
@@ -23,9 +23,9 @@
 		<feature>uAAL-Ont.Shopping</feature>
 
 		<!-- Service -->
-		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/food_shopping.service.server/E.4.1-SNAPSHOT
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/food_shopping.service.server/F.0
 		</bundle>
-		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/food_shopping.service.client/E.4.1-SNAPSHOT
+		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/food_shopping.service.client/F.0
 		</bundle>
 	</feature>		
 </features>
