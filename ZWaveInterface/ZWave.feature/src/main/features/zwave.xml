@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="universAAL-Service" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
-	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/2.0.3-SNAPSHOT/xml/features
+	<repository>mvn:org.universAAL.ontology/ontS.karaf.feature/3.0.0/xml/features
 	</repository>
 
 	<feature name="uAAL-Service-ZWAVE" description="${project.name}"
@@ -14,6 +14,6 @@
 
 		<!-- Service -->
 <!-- 		<bundle start-level='79' start='true'>mvn:org.universAAL.AALapplication/ZWaveDataConsumer/E.2</bundle> -->
-		<bundle start-level='79' start='true'>mvn:org.universAAL.AALapplication/ZWaveDataPublisher/E.2</bundle>
+		<bundle start-level='79' start='true'>mvn:org.universAAL.AALapplication/ZWaveDataPublisher/F.0</bundle>
 	</feature>
 </features>
