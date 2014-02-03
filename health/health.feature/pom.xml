@@ -8,7 +8,7 @@
   </parent>
   
   <artifactId>health.karaf.feature</artifactId>
-  <version>F.0</version>
+  <version>3.0.0</version>
   <name>Health Karaf Features</name>
   
     <dependencies>

@@ -7,29 +7,29 @@
 	<!-- Health Core -->
 	<feature name="health.core" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.profile.manager/${health.profile.manager.version}</bundle>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.treat.manager/${health.treat.manager.version}</bundle>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.performedSession.manager/${health.performedSession.manager.version}</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.profile.manager/F.0</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.treat.manager/F.0</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.performedSession.manager/F.0</bundle>
 	</feature>
 		
 	<feature name="health.x73" version="${platform.version}">
 		<feature>uAAL-Ont.ContinuaHealth</feature>
 		<feature>uAAL-Ont.personalhealthdevice</feature>
 		<feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.x73.adapter/${health.x73.adapter.version}</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.x73.adapter/F.0</bundle>
 	</feature>
 		
 	<feature name="health.demo" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.demo.populator/E.1.1-SNAPSHOT</bundle>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.demo.populator.run/E.1.1-SNAPSHOT</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.demo.populator/F.0</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.demo.populator.run/F.0</bundle>
 	</feature>
 	
 	<!-- Health UI -->
 	<feature name="health.ui" version="${platform.version}">
 		<feature>uAAL-Ont.Profile.Health</feature>
 		<feature>uAAL-Ont.Recommendation</feature>
-		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/${health.ui.client.version}</bundle>
+		<bundle start-level='96'>mvn:org.universAAL.AALapplication/health.ui.client/F.0</bundle>
 	</feature>
 	
 	<feature name="uAAL-Service-Health" version="${platform.version}">
