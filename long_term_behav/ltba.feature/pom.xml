@@ -11,7 +11,7 @@
 	<artifactId>ltba.feature</artifactId>
 	<name>LTBA AAL Service Karaf Feature</name>
 	<description>Artifact representing representing the Karaf feature for the LTBA AAL Service</description>
-	<version>F.0</version>
+	<version>3.0.0</version>
   <build>
     <!--resources>
        <resource>
