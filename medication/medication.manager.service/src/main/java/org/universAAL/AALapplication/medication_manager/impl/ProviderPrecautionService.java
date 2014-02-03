@@ -48,7 +48,6 @@ public final class ProviderPrecautionService extends Precaution {
     OntologyManagement.getInstance().register(Activator.mc,
         new SimpleOntology(MY_URI, Precaution.MY_URI,
             new ResourceFactory() {
-              @Override
               public Resource createInstance(String classURI,
                                              String instanceURI, int factoryIndex) {
                 return new ProviderPrecautionService(instanceURI);

@@ -25,6 +25,7 @@
     <dependency>
       <groupId>org.universAAL.ontology</groupId>
       <artifactId>ont.medication</artifactId>
+      <version>3.0.0</version>
     </dependency>
 
     <dependency>
