@@ -5,13 +5,13 @@
 	<parent>
 		<artifactId>new_services.pom</artifactId>
 		<groupId>org.universAAL.AALapplication</groupId>
-		<version>E.3</version>
+		<version>F.0</version>
 		<relativePath>../../new_services.pom/pom.xml</relativePath>
 	</parent>
-	<artifactId>ZWave.feature</artifactId>
+	<artifactId>ZWave.karaf.feature</artifactId>
 	<name>ZWave AAL Service Karaf Feature</name>
 	<description>Artifact representing representing the Karaf feature for the LTBA AAL Service</description>
-	<version>E.3.1-SNAPSHOT</version>
+	<version>3.0.0</version>
   <build>
     <plugins>
       <plugin>
