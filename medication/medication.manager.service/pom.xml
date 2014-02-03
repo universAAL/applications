@@ -17,7 +17,7 @@
     <dependency>
       <groupId>org.universAAL.ontology</groupId>
       <artifactId>ont.medication</artifactId>
-      <version>F.0</version>
+      <version>3.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.universAAL.AALapplication</groupId>

@@ -10,7 +10,7 @@
 	</parent>
   <artifactId>medication.karaf.feature</artifactId>
   <packaging>jar</packaging>
-  <version>F.0</version>
+  <version>3.0.0</version>
   <name>Medication Manager Karaf Feature</name>
   <build>
   <plugins>

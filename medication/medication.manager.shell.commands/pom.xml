@@ -7,6 +7,7 @@
     <artifactId>medication.manager.pom</artifactId>
     <relativePath>../medication.manager.pom</relativePath>
   </parent>
+  
   <artifactId>medication.manager.shell.commands</artifactId>
   <name>Medication Manager shell commands</name>
   <description>Medication Manager shell commands</description>
