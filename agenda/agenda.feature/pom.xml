@@ -8,21 +8,13 @@
 		<version>F.0</version>
 		<relativePath>../agenda.pom/pom.xml</relativePath>
 	</parent>
+	
 	<artifactId>agenda.karaf.feature</artifactId>
-		<version>F.0</version>
+	<version>3.0.0</version>
 	<name>Agenda AAL Service Karaf Feature</name>
-	<description>Artifact representing represeting the Karaf feature for the Agenda AAL Service</description>
+	<description>Artifact representing representing the Karaf feature for the Agenda AAL Service</description>
 
   <build>
-    <!--resources>
-       <resource>
-        <directory>src/main/features</directory>
-        <filtering>true</filtering>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-       </resource>
-    </resources-->
 
     <plugins>
       <plugin>
