@@ -42,37 +42,37 @@
     <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.performedSession.manager</artifactId>
-        <version>E.4.1-SNAPSHOT</version>
+        <version>F.0</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.treat.manager</artifactId>
-        <version>E.4.1-SNAPSHOT</version>
+        <version>F.0</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.profile.manager</artifactId>
-        <version>E.4.1-SNAPSHOT</version>
+        <version>F.0</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.ui.client</artifactId>
-        <version>E.4.1-SNAPSHOT</version>
+        <version>F.0</version>
       </dependency> 
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.x73.adapter</artifactId>
-        <version>E.4.1-SNAPSHOT</version>
+        <version>F.0</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.biomedicalsensors.server</artifactId>
-        <version>E.4.1-SNAPSHOT</version>
+        <version>F.0</version>
       </dependency>
       <dependency>
         <groupId>org.universAAL.AALapplication</groupId>
         <artifactId>health.biomedicalsensors.uiclient</artifactId>
-        <version>E.4.1-SNAPSHOT</version>
+        <version>F.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
