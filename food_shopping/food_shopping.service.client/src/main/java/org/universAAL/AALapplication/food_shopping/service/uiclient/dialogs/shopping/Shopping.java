@@ -70,7 +70,7 @@ import org.universAAL.ontology.nutrition.Ingredient;
 public class Shopping extends UICaller {
 
 	// NA server location - http://158.42.166.200:8080/
-    public final static String IMG_URL = "http://127.0.0.1:8080/resources/shopping/images/";
+    public final static String IMG_URL = "http://127.0.0.1:8181/resources/shopping/images/";
 	private final static String window = "UIShopping#";
 
     static final String MY_UI_NAMESPACE = SharedResources.CLIENT_SHOPPING_UI_NAMESPACE + window;

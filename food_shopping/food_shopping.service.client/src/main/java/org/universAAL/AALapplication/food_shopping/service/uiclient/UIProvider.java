@@ -41,7 +41,7 @@ import org.universAAL.ontology.phThing.Device;
  */
 public class UIProvider extends UICaller {
 
-    public final static String IMG_URL = "http://127.0.0.1:8080/resources/shopping/images/";
+    public final static String IMG_URL = "http://127.0.0.1:8181/resources/shopping/images/";
 	private final static String window = "UIProvider#";
 	static final String MY_UI_NAMESPACE = SharedResources.CLIENT_SHOPPING_UI_NAMESPACE + window;
     static final String SUBMIT_SHOPPING = MY_UI_NAMESPACE + "shopping";
