@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features name="universAAL-${platform.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
+<repository>mvn:org.universAAL.remote/ri.karaf.feature/${ri.karaf.feature.version}/xml/features</repository>
+
 	<feature name="uAAL-Service-HelpWhenOutdoor" description="${project.name}"
 		version="${platform.version}" resolver='(obr)'>
 	
 		<!-- Remote Interoperability -->
-		<bundle>mvn:org.universAAL.middleware/mw.bus.tracker.osgi/2.0.1-SNAPSHOT</bundle>	
-		<bundle>mvn:org.universAAL.remote/ri.servicegateway/2.0.1-SNAPSHOT</bundle>
-		<bundle>mvn:org.universAAL.remote/ri.gateway.communicator/2.0.1-SNAPSHOT</bundle>
+		<feature>uAAL-RI.Service.Gateway</feature>
+		<feature>uAAL-RI.Gateway.Communicator</feature>
 		
 		<!-- Service -->
-		<bundle>mvn:org.universAAL.AALapplication/hwo.servlet/${project.version}</bundle>
+		<bundle>mvn:org.universAAL.AALapplication/hwo.servlet/F.0</bundle>
 	</feature>
 </features>
