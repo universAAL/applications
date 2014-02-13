@@ -70,7 +70,7 @@ import org.universAAL.ontology.nutrition.Ingredient;
 public class Shopping extends UICaller {
 
 	// NA server location - http://158.42.166.200:8080/
-    public final static String IMG_URL = "http://127.0.0.1:8181/resources/shopping/images/";
+    public static String IMG_URL = "http://127.0.0.1:8181/resources/shopping/images/";
 	private final static String window = "UIShopping#";
 
     static final String MY_UI_NAMESPACE = SharedResources.CLIENT_SHOPPING_UI_NAMESPACE + window;
@@ -134,6 +134,11 @@ public class Shopping extends UICaller {
 
 	public Shopping(ModuleContext context) {
 		super(context);
+		String port = System.getProperty("org.osgi.service.http.port");  
+		String ip = System.getProperty("resource.server.ip");
+	 	if ((port!=null) && (ip!=null)) IMG_URL = "http://"+ ip +":" + port + "/resources/shopping/images/";
+	 	else if (port!=null) IMG_URL = "http://127.0.0.1:" + port + "/resources/shopping/images/";
+	 	else if (ip!=null) IMG_URL = "http://"+ ip +":8181/resources/shopping/images/";
 	}
 
 	public void handleUIResponse(UIResponse uir) {

@@ -25,12 +25,15 @@ public class InterfaceProvider extends UICaller {
 
     public static final String MY_UI_NAMESPACE = SharedResources.CLIENT_NUTRITIONAL_UI_NAMESPACE
 	    + "UIProvider#";
-    public static String IMG_URL = "http://127.0.0.1:8080/resources/nutritional.client/";
+    public static String IMG_URL = "http://127.0.0.1:8181/resources/nutritional.client/";
   
     public InterfaceProvider(ModuleContext context) {
 		super(context);
-		String port = System.getProperty("org.osgi.service.http.port");                                   
-		if (port!=null) IMG_URL = "http://127.0.0.1:" + port + "/resources/nutritional.client/"; 
+		String port = System.getProperty("org.osgi.service.http.port");  
+		String ip = System.getProperty("resource.server.ip");		
+	 	if ((port!=null) && (ip!=null)) IMG_URL = "http://"+ ip +":" + port + "/resources/nutritional.client/";
+	 	else if (port!=null) IMG_URL = "http://127.0.0.1:" + port + "/resources/nutritional.client/";
+	 	else if (ip!=null) IMG_URL = "http://"+ ip +":8181/resources/nutritional.client/";
     }
 
     @Override

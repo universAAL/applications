@@ -48,6 +48,8 @@ public class Activator implements BundleActivator {
      * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
     public void stop(BundleContext context) throws Exception {
+    	provider.close();
+    	
 	LogUtils.logInfo(mcontext, this.getClass(), "stop",
 		new Object[] { "agenda.server bundle has stopped." }, null);
     }

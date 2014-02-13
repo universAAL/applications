@@ -50,6 +50,8 @@ public class Activator implements BundleActivator {
      * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
      */
     public void stop(BundleContext context) throws Exception {
+    	ac.close();
+    	
 	LogUtils.logInfo(mcontext, this.getClass(), "stop",
 		new Object[] { "Agenda client consumer stopped." }, null);
     }

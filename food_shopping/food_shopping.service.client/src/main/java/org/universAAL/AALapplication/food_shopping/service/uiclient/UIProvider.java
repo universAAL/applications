@@ -41,7 +41,7 @@ import org.universAAL.ontology.phThing.Device;
  */
 public class UIProvider extends UICaller {
 
-    public final static String IMG_URL = "http://127.0.0.1:8181/resources/shopping/images/";
+    public static String IMG_URL = "http://127.0.0.1:8181/resources/shopping/images/";
 	private final static String window = "UIProvider#";
 	static final String MY_UI_NAMESPACE = SharedResources.CLIENT_SHOPPING_UI_NAMESPACE + window;
     static final String SUBMIT_SHOPPING = MY_UI_NAMESPACE + "shopping";
@@ -55,13 +55,18 @@ public class UIProvider extends UICaller {
 	
 	protected UIProvider(ModuleContext context) {
 		super(context);
+	    String port = System.getProperty("org.osgi.service.http.port");  
+		String ip = System.getProperty("resource.server.ip");
+	 	if ((port!=null) && (ip!=null)) IMG_URL = "http://"+ ip +":" + port + "/resources/shopping/images/";
+	 	else if (port!=null) IMG_URL = "http://127.0.0.1:" + port + "/resources/shopping/images/";
+	 	else if (ip!=null) IMG_URL = "http://"+ ip +":8181/resources/shopping/images/";
 	}
 
     public void communicationChannelBroken() { }
 
 	private Form initMainDialog() {
 		Form f = Form.newDialog("Food and Shopping",	new Resource());
-		new SimpleOutput(f.getIOControls(), null, null,"Welcome to Food and Shopping service.");
+		new SimpleOutput(f.getIOControls(), null, null,"Welcome to Food and Shopping service");
 /*
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_shopList_small.png"), SUBMIT_SHOPPING);
 		new Submit(f.getSubmits(), new Label("", IMG_URL+"icons_foodRepos_small.png"), SUBMIT_REPOSITORY);
