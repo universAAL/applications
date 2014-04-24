@@ -13,12 +13,26 @@
 		<bundle>wrap:mvn:axis/axis-wsdl4j/1.5.1</bundle>
 		<bundle>wrap:mvn:commons-discovery/commons-discovery/0.5</bundle>
  		<bundle>wrap:mvn:org.apache.axis/axis-jaxrpc/1.4</bundle>  
+		<bundle>wrap:mvn:org.universAAL.control.safetyDevices/control.safetyDevices/5.0</bundle>
+		<bundle>wrap:mvn:org.apache.derby/derby/10.7.1.1</bundle>
 
 		<!-- Ontologies -->
 		<feature>uAAL-Ont.Safety</feature>
 
 		<!-- Service -->
-		<bundle start-level='80' start='true'>mvn:org.universAAL.AALapplication/.client/F.0
+		<bundle start-level='101' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.server/F.0
 		</bundle>
-	</feature>
+		<bundle start-level='102' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.client/F.0
+		</bundle>
+		<bundle start-level='103' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.lightSensorProvider/F.0
+		</bundle>
+		<bundle start-level='104' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.humiditySensorProvider/F.0
+		</bundle>
+		<bundle start-level='105' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.windowProvider/F.0
+		</bundle>
+		<bundle start-level='106' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.temperatureSensorProvider/F.0
+		</bundle>
+		<bundle start-level='107' start='true'>mvn:org.universAAL.AALapplication/safety_home.service.motionSensorProvider/F.0
+		</bundle>
+ 	</feature>
 </features>
