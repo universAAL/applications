@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<application>
+   <permissions>
+      <mw.bus.context>
+         <advertisement>
+            <title>User location</title>
+            <description>CONTEXT PUBLISHER EVENT: Changes in the location of a user.</description>
+            <action>org.universAAL.AALapplication.hwo.ACTION_LOCATION</action>
+            <category>android.intent.category.DEFAULT</category>
+            <input>
+                <key>varS</key>
+                <value>subjectSuffix</value>
+            </input>
+            <input>
+                <key>varX</key>
+                <value>objectLocationX</value>
+            </input>
+            <input>
+                <key>varY</key>
+                <value>objectLocationY</value>
+            </input>
+            <input>
+                <key>varZ</key>
+                <value>objectLocationZ</value>
+            </input>
+            <serialization>
+               <![CDATA[
+@prefix ns: <http://ontology.universaal.org/PhThing.owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns1: <http://ontology.itaca.upv.es/Test.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ns2: <http://ontology.universAAL.org/Location.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://ontology.universAAL.org/Context.owl#> .
+
+<urn:org.universAAL.middleware.context.rdf:ContextEvent#_:c043cf9ed363d301:c0a> :hasProvider ns1:LocationContextProvider ;
+  a :ContextEvent ;
+  :hasConfidence "90"^^xsd:int ;
+  rdf:subject ns1:&varS;user1&varS; ;
+  :hasTimestamp "1386166870184"^^xsd:long ;
+  rdf:predicate ns:hasLocation ;
+  rdf:object _:BN000000 .
+_:BN000000 ns2:coordianteSystem ns2:WGS84 ;
+  ns2:xPosition "&varX;1.11111&varX;"^^xsd:double ;
+  ns2:zPosition "&varZ;3.33333&varZ;"^^xsd:double ;
+  a ns2:Point ,
+    ns2:Location ;
+  ns2:yPosition "&varY;2.22222&varY;"^^xsd:double .
+ns2:WGS84 a ns2:CoordinateSystem .
+:gauge a :ContextProviderType .
+ns1:&varS;user1&varS; a <http://ontology.universAAL.org/Profile.owl#AssistedPerson> ,
+    ns:PhysicalThing ;
+  ns:hasLocation _:BN000000 .
+ns1:LocationContextProvider a :ContextProvider ;
+  :hasType :gauge ;
+  :myClassesOfEvents [
+      a :ContextEventPattern ;
+      <http://www.w3.org/2000/01/rdf-schema#subClassOf> [
+          a owl:Restriction ;
+          owl:allValuesFrom <http://ontology.universAAL.org/Profile.owl#AssistedPerson> ;
+          owl:onProperty rdf:subject
+        ]
+    ] .
+]]>
+            </serialization>
+         </advertisement>
+      </mw.bus.context>
+   </permissions>
+</application>
