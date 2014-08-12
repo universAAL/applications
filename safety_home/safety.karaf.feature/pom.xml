@@ -8,12 +8,14 @@
 		<version>F.0</version>
 		<relativePath>../safety.pom/pom.xml</relativePath>
 	</parent>
+	
 	<artifactId>safety.karaf.feature</artifactId>
 	<name>Safety at Home AAL Service Karaf Feature</name>
 	<description>Artifact representing representing the Karaf feature for the Safety at Home AAL Service</description>
 	<version>3.0.0</version>
+	
   <build>
-     <plugins>
+    <plugins>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>

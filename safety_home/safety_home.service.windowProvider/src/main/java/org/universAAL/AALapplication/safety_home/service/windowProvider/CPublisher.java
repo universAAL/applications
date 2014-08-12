@@ -38,7 +38,7 @@ public class CPublisher extends ContextPublisher{
 	public static final String SAFETY_WINDOW_PROVIDER_NAMESPACE = "http://ontology.universaal.org/SafetyWindowProvider.owl#";
 	public static final String MY_URI = SAFETY_WINDOW_PROVIDER_NAMESPACE + "Window";
 	static final String DEVICE_URI_PREFIX = CPublisher.SAFETY_WINDOW_PROVIDER_NAMESPACE	+ "controlledDevice";
-	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
+	static final String LOCATION_URI_PREFIX = "urn:aal_space:test_environment#";
 	
 	private ContextPublisher cp;
 	private int previousState = -1;

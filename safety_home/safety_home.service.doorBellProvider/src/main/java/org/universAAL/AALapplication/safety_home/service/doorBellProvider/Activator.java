@@ -32,7 +32,7 @@ public class Activator implements BundleActivator{
 
     public void start(final BundleContext context) throws Exception {
 		mc = uAALBundleContainer.THE_CONTAINER.registerModule(new Object[] { context });
-		System.out.println("Humidity Sensor Provider started ...");
+		System.out.println("Door Bell Sensor Provider started ...");
 		new Thread() {
 			public void run() {
 				new CPublisher(mc);

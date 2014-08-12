@@ -23,8 +23,6 @@ import java.util.Vector;
 
 
 import org.universAAL.AALapplication.safety_home.service.uiclient.db.DerbyInterface;
-import org.universAAL.AALapplication.safety_home.service.uiclient.dialogs.door.FrontDoorControl;
-import org.universAAL.AALapplication.safety_home.service.uiclient.dialogs.environmental.EnvironmentalControl;
 import org.universAAL.AALapplication.safety_home.service.uiclient.utils.Utils;
 import org.universAAL.middleware.container.ModuleContext;
 import org.universAAL.middleware.container.utils.StringUtils;
@@ -38,9 +36,7 @@ import org.universAAL.middleware.ui.owl.PrivacyLevel;
 import org.universAAL.middleware.ui.rdf.Form;
 import org.universAAL.middleware.ui.rdf.Group;
 import org.universAAL.middleware.ui.rdf.Label;
-import org.universAAL.middleware.ui.rdf.MediaObject;
 import org.universAAL.middleware.ui.rdf.Repeat;
-import org.universAAL.middleware.ui.rdf.Select1;
 import org.universAAL.middleware.ui.rdf.SimpleOutput;
 import org.universAAL.middleware.ui.rdf.Submit;
 import org.universAAL.ontology.Safety.Notification;
@@ -80,6 +76,7 @@ public class UIProvider extends UICaller {
 	protected UIProvider(ModuleContext context) {
 		super(context);
 		devices = SafetyClient.getControlledDevices();
+		
 		for (int i = 0; i < devices.length; i++) {
 			String label = devices[i].getResourceLabel();
 			if (label == null) {
@@ -96,8 +93,7 @@ public class UIProvider extends UICaller {
 
 	private Form initMainDialog() {
 		Form f = Form.newDialog("Safety and Security",	new Resource());
-		//SimpleOutput welcome = new SimpleOutput(f.getIOControls(), null, null, "Welcome to the Safety and Security service.");
-		new SimpleOutput(f.getIOControls(), null, null,"Safety and Secutiry in my Space");
+		new SimpleOutput(f.getIOControls(), null, null,"Welcome to Safety and Secutiry Service");
 
 		new Submit(f.getSubmits(), new Label("Front Door Control", null), SUBMIT_DOOR);
 		new Submit(f.getSubmits(), new Label("Environmental Control", null), SUBMIT_ENVIRONMENTAL);
@@ -110,6 +106,10 @@ public class UIProvider extends UICaller {
 		return f;
 	}
 
+	
+	
+	
+	
     String getDeviceURI(int index) {
 		if (index < devices.length)
 		    return devices[index].getURI();
@@ -128,6 +128,8 @@ public class UIProvider extends UICaller {
     
 	public void handleUIResponse(UIResponse uir) {
 		User user = (User) uir.getUser();
+		System.out.println("\n\n\n\nSharedResources.testUser.getURI()" + SharedResources.testUser.getURI()+ " \n\n\n\n");
+		
 		if (user.getURI().equals(SharedResources.testUser.getURI())){
 			Utils.println("Assisted Person is using the service");
 			SharedResources.currentUser = SharedResources.testUser;

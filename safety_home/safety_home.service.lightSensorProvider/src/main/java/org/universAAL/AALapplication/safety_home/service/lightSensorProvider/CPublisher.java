@@ -40,7 +40,7 @@ public class CPublisher extends ContextPublisher{
 	public static final String MY_URI = SAFETY_LIGHT_PROVIDER_NAMESPACE + "Light";
 	static final String DEVICE_URI_PREFIX = CPublisher.SAFETY_LIGHT_PROVIDER_NAMESPACE
 			+ "controlledDevice";
-	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
+	static final String LOCATION_URI_PREFIX = "urn:aal_space:test_environment#";
 	
 	private ContextPublisher cp;
 	private int previousState = -1;

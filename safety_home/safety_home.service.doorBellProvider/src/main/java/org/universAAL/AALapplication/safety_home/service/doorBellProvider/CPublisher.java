@@ -39,7 +39,7 @@ public class CPublisher extends ContextPublisher{
 	public static final String SAFETY_DOORBELL_PROVIDER_NAMESPACE = "http://ontology.universaal.org/SafetyDoorBellProvider.owl#";
 	public static final String MY_URI = SAFETY_DOORBELL_PROVIDER_NAMESPACE + "DoorBell";
 	static final String DEVICE_URI_PREFIX = CPublisher.SAFETY_DOORBELL_PROVIDER_NAMESPACE + "controlledDevice";
-	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
+	static final String LOCATION_URI_PREFIX = "urn:aal_space:test_environment#";
 	
 	private ContextPublisher cp;
 	private int cnt=0;
@@ -87,8 +87,9 @@ public class CPublisher extends ContextPublisher{
 		if(deviceID==0){
 			DoorBell doorbell = new DoorBell(CPublisher.DEVICE_URI_PREFIX + deviceID);
 			device=(Device)doorbell;
-			//boolean isEnabled = SOAPClient.isDoorBellEnabled();
-			boolean isEnabled = true;
+			boolean isEnabled = SOAPClient.isDoorBellEnabled();
+			System.out.println("---------------------------------------------------------------->>>>>> IS ENABLED " + isEnabled);
+			//boolean isEnabled = true;
 			if (isEnabled){
 				if (cnt==0){
 					doorbell.setIsEnabled(isEnabled);

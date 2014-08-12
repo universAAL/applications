@@ -19,6 +19,7 @@ package org.universAAL.AALapplication.safety_home.service.uiclient;
 import org.universAAL.ontology.lighting.LightSource;
 import org.universAAL.ontology.lighting.Lighting;
 import org.universAAL.ontology.phThing.Device;
+import org.universAAL.ontology.profile.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -121,7 +122,7 @@ public class SafetyClient extends ContextSubscriber {
 	}
 
 	SafetyClient(ModuleContext context) {
-		super(context, getContextSubscriptionParams());
+		super(context, getContextSubscriptionParams());		
 		caller = new DefaultServiceCaller(context);
 		fdc = new FrontDoorControl(context);
 		ec = new EnvironmentalControl(context);
