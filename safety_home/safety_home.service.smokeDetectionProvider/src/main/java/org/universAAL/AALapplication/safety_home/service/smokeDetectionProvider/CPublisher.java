@@ -39,7 +39,7 @@ public class CPublisher extends ContextPublisher{
 	public static final String SAFETY_SMOKE_PROVIDER_NAMESPACE = "http://ontology.universaal.org/SafetySmokeProvider.owl#";
 	public static final String MY_URI = SAFETY_SMOKE_PROVIDER_NAMESPACE + "Smoke";
 	static final String DEVICE_URI_PREFIX = CPublisher.SAFETY_SMOKE_PROVIDER_NAMESPACE + "controlledDevice";
-	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
+	static final String LOCATION_URI_PREFIX = "urn:aal_space:test_environment#";
 	
 	private ContextPublisher cp;
 	

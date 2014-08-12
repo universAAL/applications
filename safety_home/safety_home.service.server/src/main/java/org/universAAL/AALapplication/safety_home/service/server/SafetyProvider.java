@@ -58,7 +58,7 @@ public class SafetyProvider extends ServiceCallee implements DeviceStateListener
 	}
 
 	static final String DEVICE_URI_PREFIX = SafetyService.SAFETY_SERVER_NAMESPACE + "controlledDevice";
-	static final String LOCATION_URI_PREFIX = "urn:aal_space:myHome#";
+	static final String LOCATION_URI_PREFIX = "urn:aal_space:test_environment#";
     static final String LAMP_URI_PREFIX = SafetyService.SAFETY_SERVER_NAMESPACE + "controlledLamp";
     static final String HEATING_URI_PREFIX = SafetyService.SAFETY_SERVER_NAMESPACE + "controlledHeating";
 

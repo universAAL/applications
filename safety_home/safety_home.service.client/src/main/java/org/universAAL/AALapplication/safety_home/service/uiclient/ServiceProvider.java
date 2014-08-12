@@ -25,6 +25,7 @@ import org.universAAL.middleware.service.ServiceResponse;
 import org.universAAL.middleware.service.owl.InitialServiceDialog;
 import org.universAAL.middleware.service.owls.profile.ServiceProfile;
 import org.universAAL.ontology.Safety.SafetyManagement;
+import org.universAAL.ontology.profile.User;
 
 /**
  * @author dimokas
@@ -42,7 +43,7 @@ public class ServiceProvider extends ServiceCallee {
 		.createInitialDialogProfile(SafetyManagement.MY_URI,
 				"http://www.certh.gr",
 				"Safety and Security UI Client", START_URI) });
-    }
+   }
 
     public void communicationChannelBroken() {
     }
@@ -50,6 +51,7 @@ public class ServiceProvider extends ServiceCallee {
     public ServiceResponse handleCall(ServiceCall call) {
 		if (call != null) {
 		    String operation = call.getProcessURI();
+
 		    if ((call.getInvolvedUser()).getURI().equals(SharedResources.testUser.getURI())){
 				Utils.println("Assisted Person is using the service");
 				SharedResources.currentUser = SharedResources.testUser;
@@ -58,7 +60,11 @@ public class ServiceProvider extends ServiceCallee {
 				Utils.println("Caregiver is using the service");
 				SharedResources.currentUser = SharedResources.caregiver;
 		    }
+		    
+		    if (call.getInvolvedUser()!=null) SharedResources.currentUser = (User)call.getInvolvedUser();
+			System.out.println("------ >>>>>>>  ---- <<<<<< SHARED RESOURCES " + SharedResources.currentUser);
 
+		    
 		    if (operation != null && operation.startsWith(START_URI)) {
 				Utils.println("Safety and Security UI Client Main Menu");
 				SharedResources.uIProvider.startMainDialog();

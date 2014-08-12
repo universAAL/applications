@@ -75,7 +75,7 @@ enum SoundEffect {
 	   }
 	   
 	   public static Volume volume = Volume.LOW;
-	   public String SOUND_URL = "http://127.0.0.1:8080/resources/safety/sounds/";
+	   public String SOUND_URL = "http://127.0.0.1:8181/resources/safety/sounds/";
 	   // Each sound effect has its own clip, loaded with its own sound file.
 	   private Clip clip;
 	   
@@ -91,6 +91,12 @@ enum SoundEffect {
 	    	  String filePath = confHome.getAbsolutePath() + File.separator + "sounds" + File.separator + soundFileName;
 	    	  File soundFile = new 	File(filePath);
 */	    	  
+	  		  String port = System.getProperty("org.osgi.service.http.port");  
+			  String ip = System.getProperty("resource.server.ip");
+		 	  if ((port!=null) && (ip!=null)) SOUND_URL = "http://"+ ip +":" + port + "/resources/safety/sounds/";
+		 	  else if (port!=null) SOUND_URL = "http://127.0.0.1:" + port + "/resources/safety/sounds/";
+		 	  else if (ip!=null) SOUND_URL = "http://"+ ip +":8181/resources/safety/sounds/";
+	 
 	    	  URL soundFile = new URL(SOUND_URL+soundFileName);
 	    	  AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
 
@@ -126,7 +132,7 @@ enum SoundEffect {
 
 public class FrontDoorControl extends UICaller {
 
-    public final static String IMG_URL = "http://127.0.0.1:8080/resources/safety/images/";
+    public static String IMG_URL = "http://127.0.0.1:8181/resources/safety/images/";
 	private final static String window = "UIDoor#";
 
 	static final String MY_UI_NAMESPACE = SharedResources.CLIENT_SAFETY_UI_NAMESPACE + window;
@@ -168,6 +174,11 @@ public class FrontDoorControl extends UICaller {
 	
 	public FrontDoorControl(ModuleContext context) {
 		super(context);
+		String port = System.getProperty("org.osgi.service.http.port");  
+		String ip = System.getProperty("resource.server.ip");
+	 	if ((port!=null) && (ip!=null)) IMG_URL = "http://"+ ip +":" + port + "/resources/safety/images/";
+	 	else if (port!=null) IMG_URL = "http://127.0.0.1:" + port + "/resources/safety/images/";
+	 	else if (ip!=null) IMG_URL = "http://"+ ip +":8181/resources/safety/images/";
 	}
 
 	public void handleUIResponse(UIResponse uir) {
@@ -175,6 +186,7 @@ public class FrontDoorControl extends UICaller {
 		if (uir != null) {
 			if (SUBMISSION_GOBACK.equals(uir.getSubmissionID())) {
 				Utils.println(window+"  go back to previous screen");
+				System.out.println("--------------------------------------------------->>>>>>>   ui PROVIDER " + SharedResources.uIProvider);
 				SharedResources.uIProvider.startMainDialog();
 				return; 
 			}
@@ -515,6 +527,8 @@ public class FrontDoorControl extends UICaller {
 					SoundEffect.DOORBELL.play();
 				}
 			}.start();
+			
+			System.out.println("------>>>>>>> SHARED RESOURCES " + SharedResources.currentUser);
 			
 			UIRequest out = new UIRequest(SharedResources.currentUser, doorBellDialog,
 					LevelRating.high, Locale.ENGLISH, PrivacyLevel.insensible);

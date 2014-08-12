@@ -29,18 +29,17 @@ import org.universAAL.ontology.profile.User;
  */
 public class SharedResources {
 
-    //public static final String CLIENT_SAFETY_UI_NAMESPACE = "urn:samples.safety.uiclient:";
-	public static final String CLIENT_SAFETY_UI_NAMESPACE = "urn:safety:";
+	public static final String CLIENT_SAFETY_UI_NAMESPACE = "urn:safety";
 	
     public static ModuleContext moduleContext;
 
+    public static SafetyClient safetyClient;
     public static ServiceProvider serviceProvider;
     public static UIProvider uIProvider;
 
-    //public static final AssistedPerson testUser = new AssistedPerson(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
     public static User testUser = new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "saied");
     public static User caregiver = new User(Constants.uAAL_MIDDLEWARE_LOCAL_ID_PREFIX + "caregiver");
-    public static User currentUser = null;
+    public static User currentUser = testUser;
     
     public SharedResources(ModuleContext context) {
     	moduleContext = context;
@@ -49,13 +48,18 @@ public class SharedResources {
     public void start() throws Exception {
 	new Thread() {
 	    public void run() {
-			new SafetyClient(moduleContext);
-	
+			SharedResources.safetyClient = new SafetyClient(moduleContext);
 			SharedResources.serviceProvider = new ServiceProvider(moduleContext);
 			SharedResources.uIProvider = new UIProvider(moduleContext);
 			//SharedResources.fdc = new FrontDoorControl(SharedResources.moduleContext);
 			//SharedResources.ec = new EnvironmentalControl(SharedResources.moduleContext);
 	    }
 	}.start();
+    }
+    
+    public void stop(){
+    	SharedResources.safetyClient.close();
+    	SharedResources.serviceProvider.close();
+		SharedResources.uIProvider.close();
     }
 }
