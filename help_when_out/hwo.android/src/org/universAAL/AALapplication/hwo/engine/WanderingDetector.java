@@ -1,7 +1,6 @@
 package org.universAAL.AALapplication.hwo.engine;
 
 // TODO: replace the Wandering Detector Class in the servlet with this one
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Vector;
 
@@ -10,12 +9,20 @@ import org.universAAL.AALapplication.hwo.R;
 import org.universAAL.AALapplication.hwo.model.CoordinateSystem;
 import org.universAAL.AALapplication.hwo.model.Point;
 import org.universAAL.AALapplication.hwo.model.User;
-
+import android.location.Location;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
-public class WanderingDetector { // despite its name, this class check all the
+public class WanderingDetector {  // despite its name, this class check all the
 									// possible risk situations.
 
+	
+
+	
 	protected class RoutePoint {
 		Point RP;
 		long timestamp;
@@ -33,6 +40,7 @@ public class WanderingDetector { // despite its name, this class check all the
 	private int lastSegmentIntersections;
 	private int routeIntersections;
 	private int lastSegmentIntersectionThreshold;
+	private static int distance;
 	private int routeIntersectionsThreshold;
 	private final long POSITION_SAMPLING_MSECS = 60000; // time between checks
 														// on the user condition
@@ -63,8 +71,11 @@ public class WanderingDetector { // despite its name, this class check all the
 	private long oldTimestamp = -1;
 	private DataStorage dataStorage;
 
+
 	public WanderingDetector(int lastSegmentIntersectionThreshold,
 			int routeIntersectionsThreshold) {
+		//this.distance = 0;
+		//Log.e("WanderingDetector - Constructor", "1");
 		routeHistory = new Vector();
 		routeIntersections = 0;
 		lastSegmentIntersections = 0;
@@ -74,8 +85,14 @@ public class WanderingDetector { // despite its name, this class check all the
 		this.dataStorage = DataStorage.getInstance();
 		Log.d(TAG, "buscando Safe Area");
 		safearea = dataStorage.getArea("safeArea");
-		Log.d(TAG, "La Safe Area es");
-		Log.d(TAG, safearea.toString());
+		//Log.e("WanderingDetector - Constructor", "2 después de get area");
+		//Log.d(TAG, "La Safe Area es");
+		//Log.d(TAG, safearea.toString());
+	}
+	
+	public static String getDistance(){
+		String aux = Integer.toString(distance);
+		return aux;
 	}
 
 	/**
@@ -88,11 +105,10 @@ public class WanderingDetector { // despite its name, this class check all the
 	 *            . The timestamp of the detected position
 	 */
 
-	public String isWandering(Point p, long timestamp) { // despite its name,
-															// this method check
-															// all the possible
-															// risk situations.
-
+	public String isWandering(Point p, long timestamp) {
+		// despite its name, this method check all the possible risk situations.
+		Log.d("WanderingDetector - isWandering" , " wandering ");
+		
 		User dummyuser;
 
 		if (BackgroundService.scallee.user == null)
@@ -129,7 +145,7 @@ public class WanderingDetector { // despite its name, this class check all the
 		// Adding the point to the Route
 		RoutePoint currentRoute = new RoutePoint(p.getX(),p.getY());
 //		currentRoute.RP.set2DCoordinates(p.getX(), p.getY());
-		Log.d(TAG, "debug, las coordenadas son " + Double.toString(p.getX())
+		Log.d(TAG, "debug, las coordenadas son: " + Double.toString(p.getX())
 				+ ", " + Double.toString(p.getY()));
 		currentRoute.timestamp = timestamp;
 		routeHistory.add(currentRoute);
@@ -142,7 +158,6 @@ public class WanderingDetector { // despite its name, this class check all the
 		// ¿Is the user out of Safe Area?
 		boolean resultSafeArea = checkSafeArea(p);
 		if (resultSafeArea == true && mask[0] == false) {
-			Log.i(TAG, "The user is out of safe Area");
 			clearRouteHistory();
 			flags[0] = true;
 			flags[1] = false;
@@ -166,14 +181,13 @@ public class WanderingDetector { // despite its name, this class check all the
 		}
 		resultStopped = stopped(last5points);
 		if (resultStopped == true && mask[1] == false) {
-			Log.i(TAG, "The user has stopped");
+			Log.i(TAG, "The user has stopped (Checkpoint beta)");
 
 			clearRouteHistory();
 			flags[0] = false;
 			flags[1] = true;
 			flags[2] = false;
 			alerthasbeensent = true;
-			Log.d(TAG, "debug devolviendo stopped");
 			return "STOPPED";
 		}
 
@@ -186,7 +200,7 @@ public class WanderingDetector { // despite its name, this class check all the
 		boolean resultIntersections = lastSegmentIntersections > lastSegmentIntersectionThreshold
 				|| routeIntersections > routeIntersectionsThreshold;
 		if (resultIntersections == true && mask[2] == false) {
-			Log.i(TAG, "The user is wandering");
+			Log.i(TAG, "The user is wandering (Checkpoint alfa)");
 			clearRouteHistory();
 			flags[0] = false;
 			flags[1] = false;
@@ -213,10 +227,43 @@ public class WanderingDetector { // despite its name, this class check all the
 	 */
 
 	public boolean checkSafeArea(Point p) {
-
+		Log.w(TAG, "checkSafeArea-> Comprobar distancia, ver si causa error");
 		System.out.println("***Testeando la funcion checkSafeArea***");
+		
+		DataStorageJson aux = new DataStorageJson();
+		Points[] points = aux.getArrayPoi();
+		int safeAreaRad = points[0].getBigRadius();
+		Double[] homeCoords = points[0].getCoordinates();
+		//Point home = new Point(homeCoords[0], homeCoords[1], CoordinateSystem.WGS84);
+		
+		Location home = new Location("");
+		home.setAltitude(homeCoords[1]);
+		home.setLatitude(homeCoords[0]);
+		
+		Location actualLocation = new Location("");
+		actualLocation.setLatitude(p.getY());
+		actualLocation.setAltitude(p.getX());
+		
+		distance = (int) home.distanceTo(actualLocation);
+		/*
+		 * Solo para debug
+		 * 
+		 */
+		
+		/*
+		 * End debug, eliminar import button
+		 */
+		
+		System.out.println("********************************************");
+		System.out.println("El usuario está a "+distance+" m del centro");
+		System.out.println("********************************************");
+		
+		if(distance > safeAreaRad)	
+			return true;
+		else return false;
 
-		Point A;
+		
+		/*Point A;
 		Point B;
 		double xA, xB, yA, yB; // Segment of Safe Area that we are checking
 		double xPos, yPos; // User Position
@@ -300,7 +347,7 @@ public class WanderingDetector { // despite its name, this class check all the
 		// Algorithm (in Spanish)
 		// http://jsbsan.blogspot.com.es/2011/01/saber-si-un-punto-esta-dentro-o-fuera.html
 
-		return false;
+		return false;*/
 	}
 
 	private boolean stopped(Vector last5points) {
@@ -326,7 +373,7 @@ public class WanderingDetector { // despite its name, this class check all the
 	 * intersections of the last segment.
 	 */
 	private void updateSegmentIntersections() { // Vector calculus
-		Log.i(TAG, "Comprobando intersecciones * * * * * * ");
+		Log.d(TAG, "Comprobando intersecciones * * * * * * ");
 		int intersections = 0;
 		int routeSize = routeHistory.size();
 

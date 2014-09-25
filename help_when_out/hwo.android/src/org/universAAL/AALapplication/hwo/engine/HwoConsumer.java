@@ -31,7 +31,7 @@ public class HwoConsumer {
 
 		prevtime = new Date().getTime();
 		User dummyuser;
-		Log.i(TAG,  "Received context event:\n"
+		Log.d(TAG,  "----------------------------------------Received context event:\n"
 						+ "    Subject     =" + subj.MY_URI + "\n"
 						+ "    Subject type=" + subj.getClassURI()
 						+ "\n" + "    Predicate   =" + pred
@@ -39,7 +39,7 @@ public class HwoConsumer {
 
 		System.out.println("Las coordenadas del evento son " + p.getX() + ", "
 				+ p.getY() + " Y el tiempo: " + new Date().getTime());
-		Log.i(TAG, "enviando al Wandering detector");
+		//Log.i(TAG, "enviando al Wandering detector");
 		prevpoint = p;
 		String wd = BackgroundService.wanderingdetector.isWandering(p,
 				new Date().getTime());
@@ -86,7 +86,7 @@ public class HwoConsumer {
 		prevpoint = null;
 
 		CheckThread checklauncher = new CheckThread();
-		Log.d(TAG, "lanzando checklauncher");
+
 		checklauncher.start();
 
 	}
@@ -95,25 +95,29 @@ public class HwoConsumer {
 
 	}
 
-	public class CheckThread extends Thread {
+	 public class CheckThread extends Thread {
 
 		public void run() {
 			long thistime;
+			Log.d("Thread", "Inside the thread");
 
 			while (true) {
 				try {
-					Log.d(TAG, "going into sleep");
-					sleep(60000);
-					Log.d(TAG, "going out of sleep");
+
+					//sleep(60000);
+					sleep(1000);
+
 				} catch (InterruptedException e) {
 
 				}
 				thistime = new Date().getTime();
-				if (((thistime - prevtime) > 60000) && (prevpoint != null)) {
-					Log.d(TAG,
-							"A minute has passed without GPS events, sending again last known position.");
-					BackgroundService.wanderingdetector
-							.isWandering(prevpoint, thistime);
+				Log.d("HwoConsumer - CheckThread", "3 prevtime " + new Date(prevtime) + " prevpoint " + prevpoint);
+				
+				//if (((thistime - prevtime) > 60000) && (prevpoint != null)) {
+				if (((thistime - prevtime) > 1000) && (prevpoint != null)) {
+					Log.d(TAG, "A minute (5second) has passed without GPS events, sending again last known position.");
+					Log.d("Thread", "Checking .inwandering. Point: "+prevpoint.getX()+","+prevpoint.getY());
+					BackgroundService.wanderingdetector.isWandering(prevpoint, thistime);
 				}
 
 			}

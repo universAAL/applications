@@ -79,7 +79,10 @@ public class StartupActivity extends ListActivity implements OnTouchListener{
 				buttonPanic1.setEnabled(false);
 				break;
 			case R.id.panic:
-				SCallee.Panic(null);
+				//SCallee.Panic(null);
+				//TODO: In fact, we are usint this button to know the distance between our position and home.
+				Intent panicServiceIntent = new Intent(this, BackgroundService.class);
+				this.startService(panicServiceIntent);
 				break;
 			default:
 				break;
