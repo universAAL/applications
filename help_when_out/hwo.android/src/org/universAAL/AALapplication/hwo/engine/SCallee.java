@@ -7,8 +7,6 @@ package org.universAAL.AALapplication.hwo.engine;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Vector;
-
 import org.universAAL.AALapplication.hwo.BackgroundService;
 import org.universAAL.AALapplication.hwo.R;
 import org.universAAL.AALapplication.hwo.engine.contacts.DBManager;
@@ -17,7 +15,6 @@ import org.universAAL.AALapplication.hwo.model.CoordinateSystem;
 import org.universAAL.AALapplication.hwo.model.Point;
 import org.universAAL.AALapplication.hwo.model.User;
 
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -41,15 +38,16 @@ public class SCallee {
 	User dummyuser = null;
 
 	private double[] homeLocation;
-	private boolean sent; // SMS
-	private boolean delivered; // SMS
+	private boolean sent; //SMS
+	private boolean delivered; //SMS
 
-	private DataStorage dataStorage;
+	private DataStorageJson DataStorageJson;
+	private static DataStorageJson dataStorageJson = new DataStorageJson();
 
 	public SCallee() {
 		Log.d(TAG, "SCallee construct 0");
-		dataStorage = DataStorage.getInstance();
-		homeLocation = dataStorage.getHomePosition();
+		DataStorageJson = DataStorageJson.getInstance();
+		homeLocation = dataStorageJson.getHomePosition();
 	}
 
 	// Handle Calls.
@@ -126,48 +124,58 @@ public class SCallee {
 		BackgroundService.uimanager.showAvailablePOIForm(user, POIs);
 		return true;
 	}
-
+	// TODO: getPOIs
 	public static List<POI> GetPOIs() {
 		List<POI> POIs = new ArrayList<POI>();
 		Log.d(TAG, "Accediendo a la lista de POIs");
-		Vector poilist = DataStorage.getInstance().getPOIList();
-		POI_UAAL auxpoi = null;
+		//Vector poilist = DataStorageJson.getInstance().getPOIList();
+		Points[] poilist = dataStorageJson.getArrayPoi();
+		//POI_UAAL auxpoi = null;
 		int index = 0;
-		double[] homeLoc = DataStorage.getInstance().getHomePosition();
+		double[] homeLoc = dataStorageJson.getHomePosition();
 		POIs.add(new POI("Home", Double.toString(homeLoc[0]) + ","
 				+ Double.toString(homeLoc[1]))); // el hogar
 
-		for (index = 0; index < poilist.size(); index++) { // Conversion between
+		for(int i = 1;i<poilist.length; i++){
+			POIs.add(new POI(poilist[i].getName(), poilist[i].getStringCoordinates()));
+		}
+		/*for (index = 0; index < poilist.size(); index++) { // Conversion between
 															// POI_UAAL class
 															// and our own.
 			auxpoi = (POI_UAAL) poilist.get(index);
 			POIs.add(new POI(auxpoi.getName(), auxpoi.getCoordinates()));
-
-		}
+		}*/
 
 		return POIs;
 
 	}
-	
+	// TODO: getPOIs
 	public static List<String> GetPOIStrings() {
 		List<String> POIs = new ArrayList<String>();
 		Log.d(TAG, "Accediendo a la lista de POIs");
-		Vector poilist = DataStorage.getInstance().getPOIList();
-		POI_UAAL auxpoi = null;
+		//Vector poilist = DataStorageJson.getInstance().getPOIList();
+		Points[] poilist = dataStorageJson.getArrayPoi();
+		//Vector poilist = null;
+		//POI_UAAL auxpoi = null;
 		int index = 0;
-		double[] homeLoc = DataStorage.getInstance().getHomePosition();
+		double[] homeLoc = dataStorageJson.getHomePosition();
 		POI home=new POI("Home", Double.toString(homeLoc[0]) + ","
 				+ Double.toString(homeLoc[1]));
 		POIs.add(home.getName()); // el hogar
+		
+		for(int i = 1;i<poilist.length; i++){
+			POI aux = new POI(poilist[i].getName(), poilist[i].getStringCoordinates());
+			POIs.add(aux.getName());
+		}
 
-		for (index = 0; index < poilist.size(); index++) { // Conversion between
+		/*for (index = 0; index < poilist.size(); index++) { // Conversion between
 															// POI_UAAL class
 															// and our own.
 			auxpoi = (POI_UAAL) poilist.get(index);
 			POI aux=new POI(auxpoi.getName(), auxpoi.getCoordinates());
 			POIs.add(aux.getName());
 
-		}
+		}*/
 
 		return POIs;
 
@@ -216,7 +224,9 @@ public class SCallee {
 //		return Caregivers;
 //
 //	}
-
+	
+	
+	
 	// SMS
 	public static boolean SendSMS(String txt) {
 
@@ -271,6 +281,7 @@ public class SCallee {
 	public boolean Location(User user) {
 		Log.d(TAG, "Entering Location");
 		GPSThread gpslauncher = new GPSThread();
+		gpslauncher.setUncaughtExceptionHandler(h);
 		Log.d(TAG, "Launching gpslauncher");
 		gpslauncher.start();
 		return true;
@@ -313,9 +324,12 @@ public class SCallee {
 		public void onProviderEnabled(String s) {
 		}
 	}
-
+	/*
+	 * GPSThread es el que falla
+	 */
 	public class GPSThread extends Thread {
-		public void run() {
+		public void run(){
+		 while(true){	
 			LocationManager mLocationManager;
 			MyLocationListener mLocationListener;
 			mLocationManager = (LocationManager) BackgroundService.activityHandle
@@ -326,13 +340,22 @@ public class SCallee {
 				mLocationListener = new MyLocationListener();
 				mLocationManager.requestLocationUpdates(
 						LocationManager.GPS_PROVIDER, 0, 0, mLocationListener);
+				//Se para aquí
+				Log.wtf(TAG, "SCallee - Inside GPSThread");
 				Looper.loop();
 				Looper.myLooper().quit();
 			} else {
-				Log.e(TAG, "Location function in SCallee failed");
+				Log.e(TAG, "SCallee Thread -- Location function failed. Thread is dead");
 			}
-
+		 }
 		}
 	}
+	Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
+	    public void uncaughtException(Thread th, Throwable ex) {
+	        System.out.println("Uncaught exception: " + ex);
+	        Log.wtf(TAG, "Why does GPSThread fails?");
+	        Log.wtf(TAG, "Uncaught exception: " + ex);
+	    }
+	};
 
 }

@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class BackgroundService extends Service {
 
@@ -27,32 +29,39 @@ public class BackgroundService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Check! Supposedly, this starts as foreground but without
 		// notification. Not on 4.0 anymore
+		@SuppressWarnings("deprecation")
 		Notification notif = new Notification(0, null,
 				System.currentTimeMillis());
 		notif.flags |= Notification.FLAG_NO_CLEAR;
 		startForeground(ONGOING_NOTIFICATION, notif);
 
-		Log.i(TAG, "Starting Help when Outside Mobile Module");
+		//Log.i(TAG, "1 Starting Help when Outside Mobile Module");
 		activityHandle = this;
 		uimanager = new UImanager();
 		scallee = new SCallee();
-		Log.d(TAG, "ACT: SCallee started");
+		//Log.d(TAG, "2 ACT: SCallee started");
 		hwoconsumer = new HwoConsumer();
-		Log.d(TAG, "ACT:  hwoconsumer created");
+		//Log.d(TAG, "3 ACT:  hwoconsumer created");
 		DataStorage dataStorage = DataStorage.getInstance();
-		Log.d(TAG, "ACT: dataStorage created");
+		//Log.d(TAG, "4 ACT: dataStorage created");
 		wanderingdetector = new WanderingDetector(5, 5); // This has to be put
 															// in the servlet
-		Log.d(TAG, "ACT: wandering created");
+		//Log.d(TAG, "5 ACT: wandering created");
 
-		Log.i(TAG, "ACT: Started Help when Outside Mobile Module");
+		//Log.i(TAG, "6 ACT: Started Help when Outside Mobile Module");
 		scallee.Location(null); // desactivado GPS mientras pruebas con SMS
-		Log.d(TAG, " ACT: GPS thread launched");
+		//Log.d(TAG, "7 ACT: GPS thread launched");
 		hwoconsumer.startWanderingThread();
-		Log.d(TAG, "ACT: check GPS thread launched  ");
+		//Log.d(TAG, "8 ACT: check GPS thread launched  ");
+		//Log.i(TAG, "9 ACT: All classes initialized");
 
-		Log.i(TAG, "ACT: All classes initialized");
+		Toast.makeText(getApplicationContext(), wanderingdetector.getDistance(), Toast.LENGTH_LONG).show();
+		//Button p1_button = (Button)findViewById(R.id.panic);
+		//p1_button.setText("Some text");
+		
 		return START_STICKY;
+		
+		
 	}
 
 	@Override

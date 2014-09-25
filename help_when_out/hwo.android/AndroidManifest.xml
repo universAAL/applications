@@ -12,6 +12,14 @@
     <uses-sdk
         android:minSdkVersion="9"
         android:targetSdkVersion="18" />
+    
+    <instrumentation
+    android:name="android.test.InstrumentationTestRunner"
+    android:targetPackage="org.universAAL.AALapplication" />
+
+	<instrumentation
+    android:name=".HelpWhenOutdoor"
+    android:targetPackage="org.universAAL.AALapplication" />
 
     <application
         android:allowBackup="true"
